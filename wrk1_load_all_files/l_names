@@ -1,0 +1,2601 @@
+|REAL BEST_OBJECT_FUNCTION_VALUE|
+|READY TO TEST A PLAN_BEING_TEST|
+|DO UNTIL OUT OF COMBINATIONS OR TARGET_MET|
+|LAST OPTION_DEPTH WAS EVEN|
+|REAL OBJECTIVE_FUNCTION_VALUE|
+|REAL PLAN_OBJECT_FUNCTION_VALUE|
+|MODULE ABB_CapMarketRptData|
+|CAPEX EXPANSION FUTURE ASSETS|
+|CAPEX EXPANSION FUTURE ASSETS|
+|T coefficient in objective function|
+|MegaT annual limit on SO2 emissions|
+|MODULE COAL_INPUT_FILE_MANAGEMENT|
+|MODULE COAL_INPUT_FILE_MANAGEMENT|
+|ALLOCATABLE ACTIVE_OPTIONS|
+|FILLER UNITS FOR THIS TYPE ARE FOUND|
+|FIND NEXT ADDITION OF SAME LOADING TYPE|
+|ADD THIS UNIT TYPE TO THE PLAN|
+|WHILE TARGET NOT MET AND CONTINUE ADDING UNITS|
+|REAL COST_LEVEL_TO_COMPLETE|
+|REAL PERCENT_TO_COMPLETION|
+|FIND NEXT ADDITION OF SAME LOADING TYPE|
+|ADD THIS UNIT TYPE TO THE PLAN|
+|WHILE TARGET NOT MET AND CONTINUE ADDING UNITS|
+|REAL R_COST_LEVEL_TO_COMPLETE|
+|SAVE NOT_DENOMINATOR_REDUCTION|
+|VARIABLE USED IN CLREPORT AND HERE|
+|CapOptionsFileResourceIndexes|
+|INDEX FROM THE CAPACITY OPTIONS FILE|
+|DERIVATIVE OR TRANSMISSION|
+|INDEX FROM THE CAPACITY OPTIONS FILE|
+|CHECK FOR IMPROVED SOLUTION|
+|PROPAGATE SOLUTION TO OTHER INSTANCES OF SAME CN|
+|IF REPORT AND OPTIMAL_ORDER|
+|ITERATE ON ACTIVE INSTANCE SOLUTION|
+|ADD UNITS WHILE STILL MAKING MONEY|
+|MAIN ADD_THIS_UNIT LOOP WITH CONSTRAINTS|
+|CHECK FOR IMPROVED SOLUTION|
+|MOVED INTO MX_USER_PRICE_CURVE|
+|HardWiredRetrofitProjectThisYear|
+|SAVE PLANNING_RESERVE_MARGIN|
+|INDEX FROM THE CAPACITY OPTIONS FILE|
+|INDEX FROM THE CAPACITY OPTIONS FILE|
+|INDEX FROM THE CAPACITY OPTIONS FILE|
+|STARTS CO2 REDUCTION CURVE ROUTINES|
+|RESOURCE DOES NOT FALL WITHIN THE PRICE DURATION CURVE|
+|to remove market from abatement using units|
+|ASSUMES 8784 HOURS PER YEAR|
+|ASSUMES 8784 HOURS PER YEAR|
+|replaced to trap for no options|
+|IMPLICITLY USE_MINIMUM_RM_LOGIC|
+|BEST RESOURCE IN EACH MARKET|
+|STARTS CO2 REDUCTION CURVE ROUTINES|
+|to remove market from abatement using units|
+|UNTIL ADDED TO DETAILED REPORTS|
+|UNTIL ADDED TO DETAILED REPORTS|
+|LAST ENERGY SOURCE IN CL FILE|
+|POSITION OF PA UNIT INSIDE PA ARRAY|
+|THIS USED BUT NEVER SET TO A VALUE|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|NET UNUSED AGAINST SUPPLEMENTAL|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|NET UNUSED AGAINST SUPPLEMENTAL|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|NET UNUSED AGAINST SUPPLEMENTAL|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CALLED ANNUALLY IN PROCOST BEFORE DR_BOOTH|
+|CALLED ANNUALLY AFTER MONTH LOOP IN PROCOST|
+|REAL CALCULATED_SECTION_82_CAP_RATE|
+|REAL MCGUIRE_2_CATAWBA_ENRG_RATIO|
+|of EQUIVALENCE here and below|
+|of EQUIVALENCE here and below|
+|of EQUIVALENCE here and above|
+|of EQUIVALENCE here and below|
+|REAL STORE_ANNUAL_PEAK_AND_MONTH|
+|period may be split in two|
+|declarations for GET_MONTHS_EQ_AV|
+|declarations for WRITE_YEARS_CMD_FILE|
+|FUNCTION THAT GETS A UNIQUE ID FOR THE UNIT|
+|declarations for SW_MAINT_DERATING|
+|declarations for INCREMENT_EVENTS_OF_SO|
+|declarations for COUNT_EVENTS_OF_SCHED_OUTAGE|
+|declarations for COUNT_EVENTS_OF_FORCED_OUTAGE|
+|declarations for GET_FO_HRS_RANGE|
+|declarations for GET_PD_HRS_RANGE|
+|declarations for REVISE_FO_SEED|
+|declarations for GET_FO_HRS1|
+|declarations for GET_FO_HRS2|
+|declarations for GET_FO_HRS_BLOCK arguments|
+|declarations for GET_FO_HRS_TLINE arguments|
+|assume MAX_TL_FO_PER_MONTH is 1|
+|declarations for GET_FO_HRS_BLOCK local vars unused elsewhere|
+|declarations for GET_PD_HRS1|
+|declarations for GET_MAINT_DATE_RANGE|
+|each calendar week covers 7 calendar days|
+|days remaining unallocated in calendar month J|
+|indicating not yet assigned|
+|entire week indexed JMO lies within month J|
+|interpolation weight for calendar month J|
+|the earlier in the pair of adjacent months|
+|accumulate days in calendar months|
+|into LOAD_ACCUM before optimizing|
+|active items in input arrays are contiguous|
+|indicating not yet assigned|
+|maintenance was intended for whole days|
+|assume maintenance begins on 1st of calendar month|
+|default valid for daily resolution|
+|perhaps not fully contained by month J|
+|round up to whole weeks for sake of optimization|
+|retain the longest contiguous segment available for optimization|
+|default above for DAY0 is valid|
+|consider the last day of the year as contiguous with the first|
+|day and length of the optimization range|
+|consider instead Z2 as the sum of Z1 above|
+|up here may overallocate maintenance and upset the order so|
+|the only way to preschedule maintenance is GET_ANNUAL_OUTAGE_DATES|
+|some of which is implicitly in MAINT_SCHEDULED_FRACT when called|
+|with contiguous index of plant I|
+|convert from MMDD to Julian day|
+|allow for the possibility of more than one outage per unit per month|
+|consider the last day of the year as contiguous with the first|
+|based offset for comparison below|
+|day and length of the optimization range|
+|store the offset and duration of the period above|
+|retain the longer of the 2 optimization periods|
+|the amount to be optimally scheduled below|
+|step through divisible requirement by whole weeks|
+|active items in input arrays are contiguous|
+|sum excludes the J0 result|
+|retain the min for reference|
+|opt day1 for part having multiple of 7 days|
+|opt day1 for part having remainder of days|
+|maintenance was split for this unit|
+|net increase due to optimized SO|
+|re prescheduled maintenance|
+|assign dates to unscheduled maintenance|
+|useful for debugging display only|
+|close a maintenance interval|
+|both pair of assigned dates are full|
+|close a maintenance interval toward beginning of month JCM|
+|both pair of assigned dates are full|
+|needed in case of prescheduled|
+|th column has units of days|
+|caller must close this file|
+|month on outage across all types|
+|normalize to the fraction of time not on SO|
+|must be called once for every|
+|before MAINT_SCHEDULER begins|
+|set the date and time of forced outages so that|
+|allowing at most 1 FO per month|
+|difference in I4ST from F77L3 to LF95|
+|short index after 20031126 per GAT|
+|identical initial vals from sequence|
+|no forced outage can occur|
+|retain in AVAIL_DA the longest run|
+|swap order to simplify code below|
+|based index of first day in the run|
+|re determination of longest run of available days|
+|there was only 1 scheduled outage this month|
+|no forced outage can occur|
+|scheduled outages this month|
+|no maintenance was scheduled herein for month JCM|
+|duration of single FO is limited to longest run of UNSCH_DA contiguous|
+|so that HR1 can be scheduled below even if|
+|best we can do is fill the larger void|
+|such that difference is duration|
+|set the date and time of forced outages so|
+|that they meet the annual targets for FO_FREQ and FO_DURA|
+|difference in I4ST from F77L3 to LF95|
+|short index after 20031126 per GAT|
+|identical initial vals from sequence|
+|the entire year is devoid of scheduled maintenance|
+|based day index of 1st segment of available days|
+|swap order to simplify code below|
+|based day index of 1st segment of available days|
+|of forced outages per year|
+|allocate proportional to segment length|
+|minimal portions are not ignored|
+|violates reporting assumptions|
+|assign month and hour at beginning of forced outage|
+|BEG is duration after 20010806|
+|based day index of 2nd segment of available days|
+|FO event ends in a later month|
+|are for distinct FO events|
+|set the date and hour of forced outages of a|
+|random number generator has been used previously during|
+|out hours on scheduled maint|
+|unit is down for maint during month JCM|
+|st index of 1 assumes GET_FO_HRS1 was used|
+|find the longest run of consecutive hours the block is available|
+|default implying there is no hour available|
+|reset the gate to allow later segments to be compared|
+|month as if the following hour were not available|
+|so that HR1 can be scheduled below even if|
+|best we can do is fill the larger void|
+|such that difference is duration|
+|assume MAX_TL_FO_PER_MONTH is 1|
+|set the date and hour of forced outages of a|
+|so that they meet the monthly|
+|allowing at most 1 FO per month|
+|location in random sequence|
+|difference in I4ST from F77L3 to LF95|
+|restore GFHT location in random sequence|
+|so that HR1 can be scheduled below even if|
+|preserve GFHT location in random sequence|
+|best we can do is fill the void|
+|such that difference is duration|
+|location in random sequence|
+|retain in AVAIL_DA the longest run|
+|swap order to simplify code below|
+|based index of first day in the run|
+|re determination of longest run of available days|
+|there was only 1 scheduled outage this month|
+|scheduled outages this month|
+|no maintenance was scheduled herein for month JCM|
+|mark DA_AVAIL false for days in JCM on SO or FO|
+|is default for initial day of longest block|
+|default final day such that default length is 0|
+|forced derated outage can occur|
+|so that HR1 can be scheduled below even if|
+|best we can do is fill the larger void|
+|implying no partial forced outage this month|
+|such that difference is duration|
+|return hours for 1 month for 1 unit|
+|indicating request for GFHR_INDEX outage hours is invalid|
+|return hours for 1 month for 1 unit|
+|indicating request for GPHR_INDEX outage hours is invalid|
+|outage dates within GMDR_MO|
+|valid only after looping on GET_FO_HRS|
+|valid only after looping on GET_PD_HRS|
+|copy parameter value into common var|
+|unit index for later seeding|
+|based indexing assumed herein|
+|interchange the indexing array values|
+|based indexing assumed herein|
+|interchange the indexing array values|
+|s schedule to default of zeroes|
+|zero all 16 bits of each word|
+|based for speed advantage below|
+|JMO is held and passed in common block|
+|the earlier in the pair of adjacent months|
+|JMO is held and passed in common block|
+|calendar month JCM lags pseudo_mo JMO by at most 1|
+|begins in the next calendar month|
+|total allocation in calendar days|
+|prior allocations were not all in whole days|
+|the WHILE loop should eventually be broken|
+|later passes may fill entire month JCM|
+|s days to the pair of spanning months|
+|put DAYS_ALLOC days into this month|
+|to the pair of spanning months|
+|to 3 possible spanning months|
+|wrap around to the beginning of the year|
+|is not sufficient for cases that have EoY wrap|
+|model load as constant throughout the month|
+|form the cumulative load array|
+|period is contiguous without EoY wrap|
+|period would wrap around into January|
+|retain the current min value|
+|retain the index of current min value|
+|recursive needed only for LF95|
+|lower limit on nSkips that imply a problem|
+|entries cannot access arguments|
+|declarations for GetTimesToState|
+|because recursive makes a separate copy of local vars on the|
+|giving one more degree of freedom to compensate for that|
+|extra randomizing cycle is not needed for final TTR|
+|Mean for an exponential distribution|
+|too many draws rejected for randomness|
+|dist deviates are obtainted by taking logs of uniform deviates|
+|mean of sum of RV grows linearly with n|
+|variance of sum grows linearly with n|
+|check feasibility of TTF draws|
+|later addition of TTR makes the test above conservative|
+|save confirmed accum at iFRC for reference above at later iFRC|
+|mean of sum of RV grows linearly with n|
+|variance of sum grows linearly with n|
+|corrected path is implausible|
+|check feasibility of TTF draws|
+|later addition of TTR makes the test above conservative|
+|corrected path is infeasible|
+|more width to preclude overflow|
+|allows removal of obsolescent calls to WriteStrAt|
+|Guarded Quotient of presumed positive args|
+|caller must decide how to handle the case of index not found|
+|Feasible was inaccurate description|
+|increase and decrease fraction allowed by node|
+|following uses iYr only for Plant_Annual_Demand_By_Year|
+|s invocations for reporting to DbgU|
+|and WARN of infeasible conditions removed|
+|GAT hopes that 5 iterations suffice to FocusScrubbing|
+|above escalates cVect for Supply not Focussed|
+|above spreads cVect for Demand not Focussed|
+|consolidate confirmed optimal values|
+|consolidate confirmed optimal values|
+|fraction unscrubbed to match that obtained for previous iYr|
+|nCoalDemand before 20110411|
+|allocate room sufficient for expansion|
+|nTransportLinks prior to 20110411|
+|needed if TestFParam is not a local argument|
+|allow changing costs of SO2 to focus scrubbing|
+|allocate arrays for output results|
+|allocated sizes for assignment loops|
+|target fraction of Demand not usin|
+|annual fractional decrease or increase allowed|
+|is for the average across nSNod suppliers|
+|needed when some nodes are not active|
+|cdefine ignore_plant_SO2UB|
+|cdefine RUB_mult 1e3 disabled 20110428 per GT and GH request|
+|declarations for interface variables|
+|declarations for internal variables and arrays|
+|nPlnt are local vars unknown to caller|
+|okay to pass allocatables even if never allocated|
+|the PCX default to MINimize its objective|
+|okay to pass even if never allocated|
+|highest rate of production allowed|
+|zero UB for segment capacity|
+|merge CoalType with BasnID in j|
+|revised in AssignCostCurve|
+|save in a more precisely named var|
+|log the instance of an unprecedented ID|
+|useful in allocating contracts|
+|KLUDGE used to have slack to gain feasibility during testing|
+|convert from percentage to fraction|
+|as multiple of HeatConLB and UB|
+|bit unsigned integers impose limit|
+|escalated by MSG after 20110630|
+|index in SO2MarketCodes active|
+|these arrays are from COAL_TRANSPORTATION_LINKS_INPUT|
+|augment count of max CoalTypeToUnit contracts|
+|in case Cost Curve was truncated|
+|allow for nPlnt increase over prior pruned value|
+|base plus uncompounded increase|
+|counts Supply nodes serving iPlnt|
+|of iSNod is not acceptable|
+|but it cannot be determined earlier|
+|counts parallel links from iSNod to all units in iPlnt|
+|used to distinguish parallel links|
+|reduce range of later loops|
+|prune Supply nodes untouched by active links|
+|NOT if indices must be kept unchanged|
+|prune Demand nodes untouched by active links or with no Demand|
+|reverse order was useful when decrementing nDNod|
+|per MSG request re retired units|
+|should be faster than above|
+|iDNod may be for a future plant|
+|NOT if indices must be kept unchanged|
+|since DNodQty is later overwritten in UpdateCNWDemandData|
+|for some debugging details|
+|set target fUnscNode for Demand Nodes|
+|iDNod is inactive or unreachable during iYr|
+|year results to modify OptUnscrubbedFrac|
+|retain f4 as the nominal target|
+|leave no room for LP to reduce it|
+|should preclude units with 0 Demand|
+|NA price and limit are in effect for iYr|
+|separated from ShCst 20110107|
+|excluding emissions and coal FOB|
+|this section now should be moved above to just after pruning|
+|assign fraction of MBtu demand to fPlntUnit|
+|count members in each group of states|
+|StGroupUB is computed later|
+|not final before DefineCNWSO2Options|
+|reading lines of Contract data|
+|OpenFmFile caller will handle absence|
+|fraction of MineQty alloc to Units|
+|OpenFmFile caller will handle absence|
+|OpenFmFile caller will handle absence|
+|OpenFmFile caller will handle absence|
+|OpenFmFile caller will handle absence|
+|OpenFmFile caller will handle absence|
+|kT shipped from Mines to Units|
+|OpenFmFile caller will handle absence|
+|ReAllocateCNWOptimizingArrays|
+|valued subscript covers for unexpected voids|
+|ReAllocateCNWOptimizingArrays|
+|kTn shipped via nominal and overage segments|
+|KLUDGE during debugging 20110730|
+|nStUbUsd ignored 20110730 per Garrick Hoops|
+|default until revised lower|
+|below which fBtu is considered negligible wrt count|
+|count of elements used in above arrays|
+|these may have been modified below in prior iYr|
+|sizes of the LP arrays can vary|
+|default to catch logic errors|
+|PCX infers that UbValu is zero when LbValu is specified above|
+|each Demand Node has nVpDN variables|
+|warn of INFEASIBLE link constraints at iDNod|
+|count of distinct links to iDNod|
+|link kTn received at iDNod from iSNod|
+|count of LB_infeasible links to iDNod|
+|count of UB_infeasible links to iDNod|
+|so the aggregate with any set of weights is also|
+|which is imposed in iRqWSC|
+|note that the UB above applies to the unscrubbed blend of coals used|
+|each of nContLoB generates bounds on 1 fBtu variable|
+|unreachable plants have 0 Demand|
+|count only contracts used this year|
+|SNod under contract to iPlnt|
+|bound can be met with or without scrubbers|
+|PCX infers that UbValu is zero when LbValu is specified above|
+|expedite execution by reducing size of the LP|
+|above loop did not IncrVar|
+|suffices to imply not void|
+|EmCst affect usage of jVar|
+|Ton surcharge for overuse of route per GAT|
+|Garrick Hoops 20110730 denied need for LB on state emissions|
+|group limit is sum of nominals|
+|default LB valid in case state is not in a trading group|
+|KLUDGE to cover MSG problem|
+|ignore both bounds on this basin|
+|for the quantity below the nominal_UB|
+|for the quantity above the nominal_UB|
+|large surcharge to penalize violation of UB|
+|after possible changes above|
+|failed to regain feasibility 20110731|
+|sum in kT supplied by iSNod|
+|sum of kT supplied at iSNod equals kT shipped via links|
+|bounded by Btu requirements|
+|sum across links the kTn received at iDNod|
+|sum across links the fBtu received at iDNod|
+|mnemnic WeightedSulfurContent in blend of coals used|
+|sum across links the kTn of SO2 emitted by iDNod|
+|same units as SO2BlndUB above|
+|link kTn received at iDNod|
+|link fBtu received at iDNod|
+|link kTn shipped via iRout|
+|kTn shipped via iRout in bounds|
+|kTn shipped via iRout above UB|
+|nGpUBUsd constraints limit aggregate SO2 emissions|
+|index of fBtu shipped via iLink|
+|ignore both bounds on this basin|
+|iSNod kT supplied from basin|
+|sort to facilitate search within ReturnCNWAMtx and for order within PCX|
+|display entire constraint matrix|
+|ConsMtxNze was sorted such that jVar varies slower than iReq|
+|each jVar with LB must also have UB|
+|language routines begin writing without CrLf|
+|was determined within ReportCNWSolutionDetails|
+|this LbValue is not of interest|
+|preclude attempt to divide by 0|
+|this UbValu was a dummy to keep PCX happy|
+|flag the final vars for aggregate SO2|
+|skip column of excess after 20120215|
+|is a link quantity in fBtu from iSNod to iDNod|
+|search until matching count is found|
+|fractional usage of retrofit scrubbers|
+|fraction of Btu at iDNod supplied by iLink|
+|but not all links to iDNod are contiguous|
+|weighted average RetroWt by DNod|
+|weighted average fRetrofLk|
+|save weighted average RetroWt|
+|binary decisions for units|
+|perturb costs in LP to make scrubbing decision more binary at each iDNod|
+|scrubber retrofit decision was not binary|
+|encourage usage of SO2 credits|
+|discourage usage of SO2 credits|
+|and marginal cost at each Mine|
+|with jVar beyond last segment used|
+|loop exited with f4 nearly zero|
+|index of the marginal segment|
+|unclear whether ContraCost excludes SO2 penalties|
+|presumes these unit numbers are contiguous|
+|header line is invariant with iYr|
+|default implying link was unused|
+|specific quantity shipped and cost to iDNod|
+|write common prefix for each record|
+|kT allocation of iPlnt to iDNod|
+|not accumulated since iSNod is unique|
+|report only additional costs NEC|
+|sum of kT across iSNod for iDNod|
+|accumulate statistics for display only|
+|count significant suppliers|
+|write common prefix for each record|
+|this is the final output to MnvU for iYr|
+|added min0 for case of INFEASIBLE|
+|sum should match that written 11 lines above|
+|check for problem MSG noted|
+|this ReqDesc is yet undefined|
+|this VarDesc is yet undefined|
+|contents into larger space|
+|save copies of full vectors in Hold|
+|restore saved values from Hold vectors|
+|major arrays for zbCol and zbRow|
+|Nze for this column are contiguous|
+|since loop has passed all possible matches|
+|START AT NEXT I AFTER R_POINTR|
+|START WITH THE NEXT VALUE OF R_POINTR|
+|IMPOSES SPECIFIC PLANNING METHOD|
+|DEFINES THIS AS A DEPENDENT UNIT|
+|DEFINES THIS AS AN INDEPENDENT UNIT|
+|NOT A THRESHOLD CONSTRAINT|
+|VARIABLE USED IN CLREPORT AND HERE|
+|INDEX ON THE FIRST ENCOUNTER|
+|INDEX ON THE FIRST ENCOUNTER|
+|ASSUME CALCULATE BASED ON MRX PRICE|
+|MODULE COAL_ESCALATIONS_MAKEBIN_INPUTS|
+|MODULE COAL_ESCALATIONS_MAKEBIN_INPUTS|
+|MODULE COAL_ESCALATION_VECTORS_DATA|
+|REAL CONTRACT_PEAK_ADJUSTMENT|
+|MODULE CapOptionsFileResourceIndexes|
+|MODULE CapOptionsFileResourceIndexes|
+|note file 24 is for SPCapEx|
+|Prevent spurious Lahey compiler warning about|
+|ASSUMES NO MORE THAN 1000 CM|
+|REAL CL_CAPACITY_PLANNING_ADJUSTMENTS|
+|REAL CL_PLANNING_LOAD_REDUCTION|
+|REAL RETURN_ECITIES_OBJ_VARS|
+|Filenames agree between reference and current|
+|OWNERSHIP APPEARS TO BE ACCOUNTED FOR|
+|CONTRIBUTES TO CAPACITY PLANNING|
+|RESETS THE UNITS RETIRED IN THE LOOP|
+|RESETS THE UNITS RETIRED IN THE LOOP|
+|ASSUMES THE CORRECT COUNTER IS PASSED IN|
+|MODEL DETERMINED IF ONLY ONE FUEL ELSE USER OPTION|
+|extra comment is for the comment space|
+|MODEL DETERMINED IF ONLY ONE FUEL ELSE USER OPTION|
+|CALCULATE CAPACITIES FOR ALL MONTHS|
+|K COUNTER FOR ACTIVE UNITS|
+|THIS WILL INVOKE THE IPL FAC|
+|character 20 used in margnobj and catawba|
+|character 20 used in margnobj and catawba|
+|MODEL DETERMINED IF ONLY ONE FUEL ELSE USER OPTION|
+|added to get proper unit reference|
+|INCLUDES CO2 SCENARIO MULT|
+|move out of loop since loop doesnt execute for units retiring in first year|
+|VARIABLE USED IN CLREPORT AND HERE|
+|TYPE MARKETSYM_TRANSFER_STRUCTURE|
+|TYPE MARKETSYM_TRANSFER_STRUCTURE|
+|ACCUMULATE BY TRANSACTION GROUP AND FUEL TYPE|
+|ACCUMULATE BY TRANSACTION GROUP AND FUEL TYPE|
+|ACCUMULATE BY TRANSACTION GROUP AND FUEL TYPE|
+|ACCUMULATE BY TRANSACTION GROUP AND PROD TYPE|
+|ACCUMULATE BY TRANSACTION GROUP AND FUEL TYPE|
+|ACCUMULATE BY TRANSACTION GROUP AND FUEL TYPE|
+|ACCUMULATE BY TRANSACTION GROUP AND PROD TYPE|
+|ACCUMULATE BY TRANSACTION GROUP AND PROD TYPE|
+|THAT GETS A UNIQUE ID FOR THE UNIT|
+|Secondary Fuel Consumption|
+|TOOK OUT QUOTES FOR UNIT NAME PER EMBREY|
+|TOOK OUT QUOTES PER EMBREY|
+|Fifth assignment of Unitno|
+|WRITE THE ANNUAL THERMAL UNITS REPORT|
+|WRITE THE ANNUAL NEW UNITS REPORT|
+|REAL   ENERGY_EXCHANGE_ADJUSTMENT|
+|ANNUAL OUTPUT REPORT AND  NOT POOLING_TRANSACTIONS|
+|TYPE MARKETSYM_TRANSFER_STRUCTURE|
+|TYPE MARKETSYM_TRANSFER_STRUCTURE|
+|MODULE FINANCIAL_RUN_SWITCHES|
+|MODULE FINANCIAL_RUN_SWITCHES|
+|Turn OFF Environmental Tax|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|SAVE USE_APPRAISED_PROP_VALUES|
+|Transport Quantity Escalaation|
+|Transport Quantity Escalaation|
+|CoalModelVectorFileInterface|
+|CoalModelVectorFileInterface|
+|condition added 20110719 by AGT|
+|allow change to unscrubbed fraction|
+|A VECTOR OF ESCALATION RATES IS BEING USED|
+|has been added to the percentage|
+|has been added to the percnetage|
+|CoalModelVectorFileInterface|
+|MODULE COAL_MODEL_INPUT_TO_cnw|
+|size of both transport link files|
+|number of transaction transport links|
+|coal units inthe generic coal file|
+|number of potential coal units in the expansion plan|
+|fraction allocated to each year|
+|Minimum Quantity Current Yr|
+|Maximum Quantity Current Yr|
+|MODULE COAL_MODEL_INPUT_TO_cnw|
+|MODULE COAL_cnw_FILES_READ_INPUT|
+|MODULE COAL_cnw_FILES_READ_INPUT|
+|module CoalModelOutputsFromCNW|
+|module CoalModelOutputsFromCNW|
+|MODULE CoalModelVectorFileInterface|
+|MODULE CoalModelVectorFileInterface|
+|MODULE CONVERT_TO_ANNUAL_VALUES|
+|INTERFACE FILL_ANNUAL_ARRAYS|
+|MODULE CONVERT_TO_ANNUAL_VALUES|
+|MODULE ArrayAllocationInterface|
+|MODULE ArrayAllocationInterface|
+|MODULE COAL_BASIN_MAKEBIN_INPUTS|
+|MODULE COAL_BASIN_MAKEBIN_INPUTS|
+|MODULE COAL_TRANSPORT_MAKE_INPUTS|
+|MODULE COAL_TRANSPORT_MAKE_INPUTS|
+|MODULE  PLANT_DEMAND_MAKEBIN_INPUTS|
+|MODULE PLANT_DEMAND_MAKEBIN_INPUTS|
+|MODULE  GENERIC_DEMAND_MAKEBIN_INPUTS|
+|MODULE GENERIC_DEMAND_MAKEBIN_INPUTS|
+|MODULE COAL_CONTRACTS_MAKEBIN_INPUTS|
+|MODULE COAL_CONTRACTS_MAKEBIN_INPUTS|
+|MODULE COAL_SO2_INFO_MAKEBIN_INPUTS|
+|MODULE COAL_SO2_INFO_MAKEBIN_INPUTS|
+|MODULE SO2_Scrubber_COAL_MODEL_DATA|
+|MODULE SO2_Scrubber_COAL_MODEL_DATA|
+|READ RECORDS IN BINARY FILES|
+|Transport Quantity Escalaation|
+|Transport Quantity Escalaation|
+|Transport Quantity Escalaation|
+|nTransportLinksExistingUnits|
+|push naional price which is assumed to be table 1|
+|number of active states in LP|
+|nTransportLinksExistingUnits|
+|in RPTtoCSV per TS 20060227|
+|preclude problems with rOrg near overflow in magnitude|
+|note wasteful decimal point as requested|
+|SAVE DISPATCH_RPT_TYPE_STR|
+|SAVE           MONTHLY_GROUP_REPORT|
+|with ENERGY normalized to SEAS_HOURS|
+|STOPS CONVOLUTION FOR WOLF CREEK|
+|IF THERE WAS TRANSACTION ENERGY|
+|TO ELIMINATE FROM P_PUR_ENRG|
+|ASSUMES MONTHLY PRODUCTION|
+|CALCULATE TOTAL GIBSON ENERGY|
+|SAVE F_MONTHLY_GROUP_REPORT|
+|ADDED SIX VARIABLES FOR BURESH|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|REAL PRODUCTION_COST_PERIODS|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|REAL PRODUCTION_COST_PERIODS|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|REAL PRODUCTION_COST_PERIODS|
+|INSIDE INITIALIZE CONTRACTS|
+|SAVE R_LAST_ENERGY_ONLY_PRICE|
+|MONTHLY UPDATE FOR RESPONSE CURVES|
+|SECTION FOR TEMP UPDATE TO THE ADJ FACTORS|
+|Read TEMP_BASE_FAMILY_NAME from command line|
+|REAL SET_HEAT_FACTORS_CLASS_GROWTH|
+|John did that last time but|
+|SET TO THE MAXIMUM TRANSACTION GROUPS|
+|SET TO THE MAXIMUM TRANSACTION GROUPS|
+|Year                        S|
+|Financial                     E|
+|Year                        S|
+|Markets                       O|
+|Resources                   |
+|Operations                  |
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|NEED TO MAKE THE NAME GENERAL|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|APPEARS TO BE ACCOUNTED FOR|
+|ADDED TO REMOVE THE I VARIABLE FORM THE HERE|
+|SAVE THIS YEAR FOR ESCALATIONS|
+|CALCULATE IMPLIED ESCALATIONS|
+|whether VECTOR_PERIOD_IS_ANNUAL|
+|Return value is meaningless and ignored everywhere|
+|set to R_Value at the beginning of the routine so that|
+|whether VECTOR_PERIOD_IS_ANNUAL|
+|MONTHLY REPRESENTATION ALWAYS REPLACES VARIABLE VALUE|
+|MONTHLY REPRESENTATION ALWAYS REPLACES VARIABLE VALUE|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|RUN OF RIVER OR AVERAGE SALE|
+|iAuxOrg is before compression|
+|Need a better way to determine whether to access|
+|ASSUME THAT THIS IS RECEIVED FOR SEPA|
+|ENERGY CONTRAINT WITHIN THE CURVE|
+|args to external GET_TRANS_LOAD_PROB|
+|penultimate of kind 1 to allow one larger|
+|Fortran has no enumerated types|
+|protect comparisons from corruption by noise|
+|system load in units consistent with Capacity|
+|duration of system load in units of time|
+|Fortran has no enumerated types|
+|protect comparisons from corruption by noise|
+|items assumed to be known or declared by the caller of OptimizedCost|
+|system load in units consistent with Capacity|
+|duration of system load in units of time|
+|upper bound on number of arguments of interest to caller|
+|needed in case nOfInt is not fully used|
+|do not retain any AQuote characters|
+|ignore trailing parameters not of interest|
+|if only blanks delimit parameters|
+|test was strict inequality before 20061113|
+|needed since embedded blanks are allowed after 20060705|
+|weak attempt to emulate SpinDrift routine|
+|where character length cannot be zero|
+|cover the case of missing path terminator|
+|expect Target to already be in UpperCase|
+|convert ith char to blank if its ASCII is below 32|
+|discount the terminating comma as a delimiter|
+|discount those within strings|
+|useful on lines of DSF files|
+|one more than necessary on 20060908|
+|jOfs is the number of leading fields to skip in the count|
+|to force reading beyond the last field of possible interest|
+|we determine the feasible limit on readable fields by experimentation|
+|interchange the pair of iOrgs|
+|interchange the pair of iOrgs|
+|but note that leading blanks are not discounted|
+|breaking the above into two suffices to solve the stack exhaustion|
+|offset position of the target field|
+|assume none is embedded inside a string|
+|no commas follow in the source|
+|overflow here of length of s seems not to be a problem|
+|blank the string beyond nMaxCommas so trim can truncate|
+|blank excess commas inserted by ExpleteWithCommas|
+|assume none is embedded inside a string|
+|adapted 20031011 from OpenFmFile|
+|else caller will inspect iStat|
+|default valid if path is extant|
+|current path is always available|
+|root directory is always available|
+|truncate the trailing backslash|
+|begin replacement for inquire|
+|max allowed under F77 is 32767|
+|cannot pass literal constant below|
+|Replace is same as Unknown|
+|else caller will inspect iStat|
+|default valid if file is extant|
+|from concatenation may contain garbage bytes|
+|look next in directory specified|
+|same as OpenFmFile with iAM added|
+|Replace is same as Unknown|
+|else caller will inspect iStat|
+|default valid if file is extant|
+|from concatenation may contain garbage bytes|
+|look next in directory specified|
+|obsolete line below presumed that all nCol values were contiguous|
+|skip over Description and Comment fields following first 30 values|
+|round upward per TS request 20030602|
+|adapted from AppendFixed8 below|
+|round upward per TS request 20030602|
+|shrink magnitude of iMant to fit the sign in 6 chars|
+|shrink magnitude of iMant to fit in 4 chars|
+|shrink magnitude of iMant to fit in 4 chars|
+|round upward per TS request 20030602|
+|shrink magnitude of iMant to fit the sign in 6 chars|
+|shrink magnitude of iMant to fit in 4 chars|
+|shrink magnitude of iMant to fit in 4 chars|
+|in RPTtoCSV per TS 20060227|
+|preclude problems with rOrg near overflow in magnitude|
+|note wasteful decimal point as requested|
+|ps is a mnemonic for Print and Stop|
+|allow operator to read the diagnostic message|
+|SAVE ELIMINATION_FILE_EXISTS|
+|SAVE YEARLY_ELIMINATIONS_VALUES|
+|ADDITIONS ON THE INCOME STATEMENT|
+|BALANCE LIABILIITES SHEET ITEMS|
+|CASH ITEMS ON THE INCOME STATEMENT|
+|SAVE WORKING_CAPITIAL_LAST_YEAR|
+|ALLOCATABLE ASSET_CLASS_LIST|
+|SUB OR PARENT NEED DIVIDENDS AND RETAINED EARNINGS|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|HEADER IGNORING NUMBER_OF_DEFINITIIONS|
+|SECOND THROUGH N DEFINITION|
+|Apparently affects only Canada|
+|needed to get fuel values into extension period|
+|DELIVERY COST ALREADY INCLUDED|
+|AT LEAST ONE OVERLAY FIEL WAS USED|
+|CREATE INDIVIDUAL BINARY OVERLAY FILE AND ADD TO MASTER OL FILE|
+|WRITE TO BINARY FILES LOOP|
+|WHICH ASSET CLASSES BELONG TO A TRANSACTION GROUP|
+|HOW MANY ASSET CLASSES BELONG TO THE TRANSACTION GROUP|
+|THIS SHOULD BE AFTER HYDRO|
+|THIS SHOULD BE FIRST GAS YEAR|
+|IT IS NOT AN ACTIVE TRANSACTION GROUP|
+|FOR PEAK AND ENERGY FORECAST|
+|NEED TO COUNT HYDRO GROUPS|
+|NEED TO COUNT HYDRO GROUPS|
+|DOES NOT CONTRIBUTE TO TRANSACTION LOADS|
+|DOES NOT CONTRIBUTE TO TRANSACTION LOADS|
+|IT IS NOT AN ACTIVE TRANSACTION GROUP|
+|The section below requires|
+|The section below requires|
+|SUM OF TABLE CONTRIBUTIONS FOR A TG|
+|SUM OF TABLE CONTRIBUTIONS FOR A TG|
+|REVENUE FROM FIXED ENERGY PRICING|
+|REVENUE FROM DEMAND PRICING|
+|REVENUE FROM CUSTOMER PRICING|
+|REVENUE FROM FIXED ENERGY PRICING|
+|REVENUE FROM DEMAND PRICING|
+|REVENUE FROM CUSTOMER PRICING|
+|ASSUMES JANUARY SYSTEM PEAK|
+|DETERMINES POSITION OF SUPPLY INTERVAL|
+|NUMBER OF SUPPLY GROUPS ACROSS ALL REGIONS|
+|K 25 POINT GAS_GROUP CURVE|
+|ASSUME CONSTANT ESCALATION|
+|ASSUME POSITIVE ESCALATION|
+|ASSUME CONSTANT ESCALATION|
+|ASSUME POSITIVE ESCALATION|
+|interchange the indexing array values|
+|NUMBER OF CONGESTION POINTS|
+|NEED TO KNOW THE MAX VALUE|
+|NEED TO KNOW THE MAX VALUE|
+|THIS IS USED FOR REPORTING PURPOSES|
+|NEED TO MAKE THIS A VARAIBLE|
+|FOR MONOTONIC INCREASING PERCENT|
+|interchange the indexing array values|
+|price at all demand nodes of Supply of Last Resort|
+|price at all supply nodes of Demand of Last Resort|
+|listed in order of declaration|
+|listed in order of declaration|
+|unit 4 must be open for error reporting|
+|needed since PCX begins without a LineFeed|
+|optimize network usage for one day per iteration|
+|error or EoF reading demand data into NodeQty|
+|using only internal variables and arrays|
+|always expect Feasible when using AmortizeUE|
+|using only internal variables and arrays|
+|always expect Feasible when using AmortizeUE|
+|unit 4 must be open for error reporting|
+|needed since PCX begins without a LineFeed|
+|fractional retention of inlet quantity|
+|B quantity at inlet in MMCF|
+|limit quantity at inlet in MMCF|
+|economic expansion quantity|
+|allow room for the leading sign|
+|overwrite m to show the number is negative|
+|exponent has at most 1 NZ digit|
+|prefix the mantissa digit m|
+|multiply each value in array a by constant c|
+|multiply each value in array a by corresponding value in array b|
+|caller must decide how to handle the case of index not found|
+|back through the recursive callers to CallerDapth 0|
+|prices by the net Qty into the node at iDNod|
+|ignore noisy nodes causing cycling|
+|weight by inlet Qty net of losses|
+|this is the second pass through iNode|
+|preclude zeroing LinkQty if only 1 Source node is active|
+|retain minimum for the cycle|
+|preclude cycling through iLink at later calls|
+|weight by inlet Qty net of losses|
+|but NodePri is the outlet price into iLink before losses|
+|scrutiny for cycling through iDNod|
+|declarations for interface variables and arrays|
+|declarations for internal variables and arrays|
+|fails under F77L3 if placed much lower|
+|rejected by LF95 for unknown reason|
+|okay to pass even if never allocated|
+|okay to pass even if never allocated|
+|open CSV files for reading|
+|OpenFmFile caller will handle absence|
+|OpenFmFile caller will handle absence|
+|volume from each Supply node|
+|OpenFmFile caller will handle absence|
+|OpenFmFile caller will handle absence|
+|weighted average cost at each node|
+|OpenFmFile caller will handle absence|
+|marginal cost at each node|
+|OpenFmFile caller will handle absence|
+|inform caller of array sizes|
+|after 20070830 bidirectional links occupy 2 records|
+|skip header line of column titles|
+|FwdSlash in 5th label may have caused cDummy to fail above|
+|restore condition when called|
+|assign the order in which NodeID is expected|
+|default indicating undefined|
+|index of tentative assignments before iLink is advanced|
+|assign at most once per iLink|
+|to count nZcpLink only once|
+|kludge for B0 while testing|
+|aftet 20070830 bidirectional links occupy 2 records|
+|eliminate dysfunctional nodes from the problem|
+|NodeQty is not yet available for testing|
+|iNode cannot function as a Demand node|
+|iNode cannot function as a Supply node|
+|verify that links exist to this node|
+|all links were either From or Into iNode|
+|node is useless as a pricing point|
+|out the dysfunctional node with SN iNode|
+|else skip the above loop as ineffective|
+|inform caller of the revised useful limits|
+|list all nodes connected by a single link|
+|write one line for each link|
+|A so Bidir links can be netted|
+|except to gain feasibility|
+|sufficient to alter usage per GT 20080606|
+|write one line of NodeType headings|
+|write one line of NodeSN headings|
+|write one line for each node|
+|write one line of NodeType headings|
+|write one line of NodeSN headings|
+|write one line of NodeSN headings|
+|write one line of NodeSN headings|
+|write one line for each node|
+|show matrix of iLink directions|
+|for normal operation of the model by a customer|
+|the PCX default to MINimize its objective|
+|if the last segment is unbounded|
+|count of useful Terminal vars|
+|line of Demand for one day|
+|if this Demand node was pruned out|
+|else ignore the DFValue read|
+|AllocateGNWOptimizingArrays|
+|number of source paths in cost pool for iNode with iSNod as Supply|
+|count of elements used in above arrays|
+|PCX infers that UbValu is zero when LbValu is specified above|
+|treat the node price as a commodity charge|
+|possibly due to artificial|
+|manipulation of LinkChg and LinkFunc|
+|NodeQtyOfLR is the slack var if AmortizeUE|
+|net sum of Qty piped out of node|
+|allow Supplier of Last Resort to offload Demand|
+|these slack variables allow feasibility at high price|
+|Qty in MMCF supplied by iNode|
+|allow Demander of Last Resort to dump Supply|
+|these surplus variables allow feasibility at high price|
+|enter coefficient in matrix for each link touching iNode|
+|must advance before possible cycle below|
+|times Qty in MMCF into iNode|
+|decrementing from nSegUsd down to 1|
+|allow PCX preprocessor to eliminate iReq row in ConsMtx|
+|sort to facilitate search within ReturnGNWAMtx|
+|display entire constraint matrix|
+|contents into larger space|
+|save copies of full vectors in Hold|
+|restore saved values from Hold vectors|
+|major arrays for zbCol and zbRow|
+|Nze for this column are contiguous|
+|since loop has passed all possible matches|
+|relax the upper bound on the last segment of each cost curve|
+|each of nLbV was assigned an upper bound|
+|allow caller to handle the problem|
+|presumes they are contiguous and ascending in order|
+|presumes they are contiguous and ascending in order|
+|should be a Supply or Demand node|
+|conclude nominal Supply vars|
+|deduct following vars from their AccumOfDir|
+|preclude attempt to divide by 0|
+|presumes they are contiguous and ascending in order|
+|pricing due to numerical noise|
+|these comprise a bidirectional pair|
+|problematic if above Near0Qty|
+|presumed same as for PreviLink|
+|save starting index in xVect|
+|j indexes the Lesser  LinkQty|
+|k indexes the Greater LinkQty|
+|index of Seg1 of the Lesser|
+|index of Seg1 of the Greater|
+|Qty remaining to be amortized in descending order|
+|Qty net after the amortization|
+|to maintain monotonic price logic|
+|carry excess in f4 to lower segs|
+|added 20070830 to catch discontiguous iLink|
+|cannot assign without domain specified|
+|in case iNode neither S nor D|
+|branch is entered only if AmortizeUE|
+|is quantity amortized by DoLR|
+|is quantity amortized by SoLR|
+|is inlet quantity before losses|
+|latter added 20070702 per GAT|
+|allow for some numerical slop|
+|line inlet quantity before losses|
+|preclude cycling on closed paths due to numerical noise|
+|without affecting LinkQty reported to caller|
+|restore nodal and link prices for Supply nodes|
+|default for nodes with zero NodePri|
+|assign marginal cost to nominal price|
+|recursively trace paths to all sources for each Demand node|
+|abort loop after mLink Cyclic conditions|
+|these two arrays are filled for iNode sources|
+|adjust reported prices just before writing them|
+|incorporate OfLR into array prices|
+|iDNod nodes are far from Supply|
+|average price logic as used in DerivePriceFromSources|
+|iNode is possibly an Interm node|
+|base costs on those at source node|
+|Qty are the first nSNod variables|
+|to exclude LnkQ from the allocation of DmdQ|
+|explete the cumulative arrays|
+|segment costs because DemandPri did|
+|enforce payment for services|
+|to include LnkC in the allocation of DmdC|
+|should match the reported objective value|
+|DP should be 0 if prices are correct|
+|presumes they are contiguous and ascending in order|
+|NEED to incorporate LinkExpLim below|
+|valid for the final segment|
+|before offloading of peak segments|
+|limit ThisQtySeg to that of the|
+|next lower segment as prorated by the segment capacities|
+|high cost of offloaded segment|
+|reduce savings by cost of lower segments|
+|lower cost of segment being loaded|
+|ReportGNWEconomicExpansion|
+|Replace is same as Unknown|
+|else caller will inspect iStat|
+|default valid if file is extant|
+|from concatenation may contain garbage bytes|
+|look next in directory specified|
+|ps is a mnemonic for Print and Stop|
+|allow operator to read the diagnostic message|
+|but note that leading blanks are not discounted|
+|breaking the above into two suffices to solve the stack exhaustion|
+|interchange the pair of iOrgs|
+|invert the index array iOrg to assign sorted position sPos|
+|useful on lines of DSF files|
+|one more than necessary on 20060908|
+|jOfs is the number of leading fields to skip in the count|
+|to force reading beyond the last field of possible interest|
+|we determine the feasible limit on readable fields by experimentation|
+|REAL GRX_CO2_ABATEMENTS_AVAILABLE|
+|should be a valid year ie 2028|
+|should be a valid year ie 2028|
+|RB INCLUDE Deferred Revenues|
+|RB EXCLUDED Pension Liability|
+|RB EXCLUDED Accrued Vacation Pay|
+|ARO NUC DECOM ASSET BALANCE THE OUC COUNT IS OFF ONE|
+|PROPERTY TAX BASIS BASE YEAR|
+|TO BE CONSISTENT WITH CLASS POSITIONS|
+|MODULE ArrayAllocationInterface|
+|MODULE ArrayAllocationInterface|
+|MODULE CoalModelVectorFileInterface|
+|MODULE CoalModelVectorFileInterface|
+|MODULE CONVERSTION_ROUTINES|
+|MODULE PROCEDURE INT2_CONVER_2_STR|
+|MODULE PROCEDURE STR_CONVER_2_STR|
+|MODULE PROCEDURE INT4_CONVER_2_STR|
+|MODULE PROCEDURE INT8_CONVER_2_STR|
+|MODULE PROCEDURE REAL_CONVER_2_STR|
+|MODULE PROCEDURE INT2_CONVER_2_STR_W_LEN|
+|MODULE CONVERSTION_ROUTINES|
+|REAL THREE_DAY_CLASS_LOADS|
+|variables assumed to be known by the LPdriver|
+|dubious whether result survives long enough on stack|
+|various subroutines to solve a system of linear equations|
+|precision without having to|
+|routine solves following equation for|
+|LU will overwrite the values in the incoming array|
+|first column of LU remains equal to first column of the input array|
+|precision without having to|
+|routine solves following equation for|
+|Permutation vector PivotRow|
+|LU will overwrite the values in the incoming array|
+|s Method using permutation vector|
+|first column of LU remains equal to first column of input A|
+|find row weights and first pivotal row|
+|save index of row with largest ratio|
+|PivotRow to track row interchanges|
+|subscript reversal is proper|
+|for method without partial pivoting|
+|whose first subscript is row|
+|Simplex method to drive an infeasible optimal solution into|
+|mhos or Siemens on admittance|
+|of active and passive nodes|
+|for consistency in changing basis vectors|
+|common upper bound on solution variables|
+|locates column j of B in A|
+|locates column j of A in B|
+|locates row    j of LU in original A|
+|this may be reduced to the level of overloads|
+|fractional nominal overload tolerated in final solution|
+|cost multiplier for currents above the nominal limit|
+|common nominal input voltage of the transmission network|
+|declarations of common functions called|
+|InitiatePrecomputedSolution|
+|assume initial solution is Feasible and not Optimal|
+|the caller now must perform disposal|
+|excluding BMatInv and SwapVector|
+|StdOut is always available on unit 6|
+|HARD WIRED UNTIL MORE INFORMATION|
+|HARD WIRED UNTIL MORE INFORMATION|
+|HARD WIRED UNTIL MORE INFORMATION|
+|weight to and above breakpoint|
+|preclude node voltages from entering the basis|
+|node voltages in equations defining weights|
+|exclude the redundant constraint|
+|allocatable arrays may not be passed via common blocks|
+|zero the sparse constraint and admittance matrices|
+|mhos or Siemens on admittance|
+|INFORMATION PASSED FROM SIMULATE_MULTI_PARTY|
+|values assigned for siNode may be ignored below|
+|INFORMATION FROM THE PATHS FILE|
+|iNode and jNode are distinct|
+|proportional to voltage squared|
+|power limits as current limits|
+|fill in coefficients in the constraints|
+|for current from iNode to jNode|
+|i to derive the initial BFS for the linear system|
+|G is used here for admittance in lieu of Y to avoid confusion of this|
+|allows deletion of column siNode from GMatrix|
+|dim G is likely Singular due to redundant loops|
+|computed GMatLUF is still valid|
+|show the product of GMatrix and NodeVoltage|
+|last nNodes entries are node voltages|
+|SegWeights are limited to unity|
+|node voltages are unlimited|
+|node voltages are not subject to optimization|
+|preserve the original RHS for verification of results|
+|all lines must be checked re upper bounds for a complete solution|
+|limit positive current from iNode to jNode|
+|limit negative current from iNode to jNode|
+|the last basis vars are the node voltages|
+|show the product of AMatrix and SegWeight|
+|last nNodes elements of SegWeight are still zero|
+|compute a fresh version of BMatInv|
+|assign basic columns of AMatrix to BMatrix|
+|deallocated about 30 lines below|
+|deallocated about 30 lines below|
+|deallocated a few lines below|
+|B is generally not diagonally dominant|
+|check whether basis satisfies constraints|
+|reinstate the original BMatInv|
+|corresponding to the precomputed xB|
+|loop across columns of AMatrix|
+|GMatrix and BMatrix need not be inverted again|
+|preserve the original vector|
+|preserve the original vector|
+|assume cost vector does not change until NewStructure is true again|
+|recall the original vector|
+|recall the original vector|
+|InitiatePrecomputedSolution|
+|BInv column rDel for column kIns of A|
+|capture row r of BInv before modification|
+|rRow to BInv as if Eta in col r of Im|
+|tolerate a small excess due to numeric errors|
+|else var j is unrestricted in sign and magnitude|
+|indicating not yet assigned|
+|the current case of dependent columns of A located in contiguous groups|
+|be that basis vector with the same group index as that deleted|
+|restrict comparison to negative yrj|
+|to keep later branches happy|
+|can never find a basic solution|
+|rejected below if zO is improvable|
+|indicating not yet assigned|
+|selection of vector to be inserted|
+|phase to even indices kIns|
+|selection of vector to be inserted|
+|j is limited since unrestricted variables never leave the basis|
+|assign kIns to that j not in basis with the most favorable z_c|
+|make next comparison harder to pass|
+|make next comparison harder to pass|
+|column of A to be inserted into basis|
+|if solution is not Optimal|
+|check only the inserted vector|
+|quit loop at first positive yik|
+|infimum across positive elements of yk|
+|infimum across negative elements of yk|
+|possibly reassigned to Ratio for iDel|
+|indicating not yet assigned|
+|indicating not yet assigned|
+|the current case of dependent columns of A located in contiguous groups|
+|be that basis vector with the same group index as that inserted|
+|restrict comparison to positive yik|
+|nonsensical solutions were reached|
+|above caused some negative x|
+|make next comparison harder to pass|
+|restrict comparison to negative yik|
+|unrestricted vars have no upper bound|
+|the effect of InfRatio upon xB would be insignificant|
+|BasisCol and BasisPos remain as before|
+|BasisCol and BasisPos remain as before|
+|uses matrix Y via BInv before transformation|
+|negating column rDel of BMatrix requires|
+|negating row    rDel of BMatInv to maintain Identity as product|
+|adjust for the inserted UB slack|
+|BasisCol and BasisPos remain as before|
+|solution reporting of results|
+|check whether constraints are met by xB|
+|obtain values of original vars|
+|retain these until caller is done looping|
+|these were REAL before 20030429|
+|FOR OUTAGES HANDLED ELSEWHERE|
+|value allowing entre below|
+|value allowing entre below|
+|CAPACITY IS AVAILABLE FOR ACCUMULATION|
+|ASSIGNMENT OF VALUES AT NEW_POINT|
+|ALL DATABASES ARE ACTIVE BY DEFINITION|
+|THIS DATABASE HAS NO INFORMATION FOR THIS DISPATCH POINT|
+|LATER FIND EXACT STARTING POSITION|
+|SEARCH FOR THE BUYER AND SELLER INTERVALS THAT SATISFY CONSTRAINTS|
+|FROM GET_AVERAGE_COST ABOVE|
+|NOTE MIN BLOCK SUBTRACTED BELOW|
+|ASSUMES SIMULATION AFTER 2000 AND BEFORE 2100|
+|TO AVOID CREATING A LARGER REPORT|
+|EACH DAY TYPE HAS CENTRAL DISPATCH|
+|THIS DATABASE HAS NO INFORMATION FOR THIS DISPATCH POINT|
+|EVENT CALENDAR CALCULATIONS|
+|TRANSACTION GROUP IS ABOVE MARKET FOR ALL PROB STATES|
+|SAVE THESE TWO VALUES FOR LATER|
+|OPENS THE BINARY HOURLY FILE AS UNIT 29|
+|as a multiple of its density|
+|adapted from the source on page 110 of|
+|interchange values in both arrays|
+|accumulate values of b over indices for which values of a are identical|
+|loop downward to minimize total bytes moved|
+|assign values for a single pair of branches|
+|needed if binary tree has been compressed|
+|if binary tree has been compressed|
+|loop downward for speed advantage|
+|true if any later kFNV in the tree has same capacity|
+|scan for pairs of equal cap|
+|the first block loaded sees LDC with probability 1|
+|else Accum retains its initial value of 0|
+|function NodeProbWeightedLDC|
+|beyond which no significant change occurs|
+|INTERCHANGE THE ARRAY VALUES|
+|MODULE DRILLING_REPT_PARAMETERS|
+|FUNCTION WVPA_REPORTING_NAME|
+|FUNCTION WVPA_DEPART_EXP_REPORT_NAME|
+|FUNCTION WVPA_WORK_ORDER_REPORT_NAME|
+|MODULE DRILLING_REPT_PARAMETERS|
+|very slow routine NEED ELIMINATION CLASS B4 ASSET ANALYSIS|
+|SAVE VALUE_OF_LAST_VARIABLE|
+|THIS MUST STAY IN FRONT OF CL_MAKEBIN|
+|THIS MUST STAY IN FRONT OF CL_MAKEBIN|
+|THE ACTUAL DATA HAS BEEN READ|
+|Data for the base year or the first year|
+|PROVIDES FOR RIPPLE OF INPUT|
+|REAL GET_ENERGY_EXCHANGE_ADJUSTMENT|
+|Opens the Detailed Reports file|
+|lumps all BTL cash in one line|
+|PROXIE FOR CALCULATING A PATTERN|
+|LOGICAL THIS_IS_A_PAY_MONTH|
+|REAL RETURN_NF_DEFERRED_TAXES|
+|due to debit file amortizations|
+|Interest from Expense File|
+|lagged cash interest from expense file|
+|USING TAX PAYMENT FROM TAX REPORT|
+|Mortgage Principal Payments|
+|Mortgage Principal Payments|
+|Do monthly distribution on cash|
+|CAPITAL ISSUES WERE REFUNDS|
+|NEED CASH FROM STD OR CASH BALANCES|
+|CHANGE IN FUNDS IS NEGATIVE|
+|CAPITAL ISSUES WERE REFUNDS NEED CASH|
+|privious EOY value makes this BOY|
+|ADD A RETAIN EARNINGS SWITCH HERE|
+|ADD A RETAIN EARNINGS SWITCH HERE|
+|NEED THIS VALUE WITHOUT AMORT|
+|Tax Interest to Associated Comp|
+|CONSOLIDATED OR REGULAR CLASS|
+|SAVE MONTHLY_PRIOR_OPT_METHOD_REVS|
+|LOGICAL THIS_IS_A_PAY_MONTH|
+|REAL R_NF_DEFERRED_TAXES_CR|
+|Average Shares Outstanding|
+|WVPA PROPERTY TAXES IN POWER COSTS|
+|Operating Method Adjustment|
+|Operating Method Adjustment|
+|Post Retirement Medical Fund Payment|
+|SEC 29 FED_TAX_CREDIT_PASSED_UP|
+|SEC 42 FED_TAX_CREDIT_PASSED_UP|
+|INCLUDED Deferred Revenues|
+|POST RETIREMENT MEDICAL FUND|
+|Contributions for Construction|
+|POST RETIREMENT MEDICAL PAYABLE|
+|Service Transaction Expense|
+|Lease Expenses ADD THIS TO MAIN|
+|DSM Program Rebate Expense|
+|Construction Tax Expenses ADD|
+|State Taxable Income after NOLs|
+|Federal Taxable Income before Credit|
+|Federal Taxable Income after NOLs|
+|Nuclear Decommissioning Fund Payments|
+|Preferred Stock Retirements|
+|Preferred Stock Retirements|
+|Total Construction Expenditures and Net Investment|
+|Investment in Working Capital|
+|EXTERNAL FINANCING PERFORMED|
+|New Plant Construction Expenditures|
+|Nuclear Fuel Fabrication Expenditure|
+|Contributions in Aid of Construction|
+|CHANGE IN FUNDS BEFORE FINANCING|
+|INCOME BEFORE CAPITAL SERVICE|
+|CHANGE IN FUNDS BEFORE FINANCING|
+|Preferred Stock Retirements|
+|TAXABLE INCOME BEFORE DEDUCTIONS|
+|TOTAL DEDUCTIBLE EXPENSES FROM BOOK|
+|Preferred Stock Retirements|
+|LTD BOOKED INTEREST WITH AMORT|
+|New Plant Construction Expenditures|
+|Nuclear Fuel Fabrication Expenditure|
+|Contributions in Aid of Construction|
+|Total Construction Expenditures and Net Investment|
+|Nuclear Decommissioning Fund Payments|
+|Investment in Working Capital|
+|Preferred Stock Retirements|
+|Interest on Long Term Debt was 39|
+|Interest on Short Term Debt|
+|Preferred Dividends was 46|
+|ATL Federal Income Taxes Paid|
+|ATL State Income Taxes Paid|
+|BTL Federal and State Income Taxes|
+|Preferred Dividends plus interest|
+|ATL Federal Income Taxes Paid|
+|ATL State Income Taxes Paid|
+|BTL Federal and State Income Taxes|
+|Preferred Dividends plus interest|
+|Preferred Stock Retirements|
+|Preferred Stock Retirements|
+|LTD BOOKED INTEREST WITH AMORT|
+|LTD AND MGT PRINCIPAL PAYMENTS|
+|Lease Payment in Tier Calculation as input in Financial Parameters file|
+|Lease Payment in Tier Calculation|
+|mmMWh PURCHASES ABOVE RESOURCES|
+|mmMWh OPPORTUNITY PURCHASES|
+|FIXED PURCHASED POWER EXPENSE|
+|OPPORTUNITY PURCHASED POWER EXPENSE|
+|OUT OF RESOURCES PURCHASED POWER EXPENSE|
+|AND 530 FOR NEW REVENUE SOURCES|
+|ARE AVAIALBE FOR NEW GERNERATIN SOURCES|
+|AND 542 ARE AVAIALBE FOR NEW SALES SOURCES|
+|SAVE MAX_COST_CLASS_NUMBER|
+|COST ALLOCATION TO CLASSES|
+|Preferred Stock Retirements|
+|LTD BOOKED INTEREST WITH AMORT|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|IF MUNI ELSE OTHER TYPE OF UTILITY|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|SAVE ADD_2_INCOME_STATEMENT|
+|CAPACITY INSTALLED AFTER PEAK|
+|CAPACITY INSTALLED AFTER PEAK|
+|CAPACITY INSTALLED AFTER PEAK|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|provides for miss match of run years|
+|provides for miss match of run years|
+|FIRST RECORD IS NOT NEEDED|
+|Cash to Post Retirement Fund|
+|Cash to Accrued Member Revenue|
+|Earnings Decommissioning Fund|
+|Earnings Post Retirement Fund|
+|Post Retirement Medical Bal|
+|ADDED TO KEEP THE ANNUAL AS A ONE YEAR ADJUSTMENT|
+|CASH TO ACCRUED MEMBER BAL|
+|CASH TO RETIREMENT PAYMENTS|
+|FUEL INVENTORY AMORTIZATION|
+|FUEL INVENTORY AMORTIZATION|
+|PAYMENTS AND FUND EARNINGS|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|skip from class name and number|
+|not allowed in parameter file|
+|Service Transaction Expense|
+|DSM Program Rebate Expense|
+|Retirement Medical Expense|
+|TOTAL DEDUCTIBLE TAX EXPENSES FROM BOOK|
+|Service Transaction Expense|
+|DSM Program Rebate Expense|
+|Retirement Medical Expense|
+|TOTAL DEDUCTIBLE TAX EXPENSES FROM BOOK|
+|TOTAL DEDUCTIBLE TAX EXPENSES FROM BOOK|
+|READS VARIABLES 4 THROUGH 44|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|RESOURCE IS LESS THAN ST REQUIREMENT|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|NUMBER OF CONGESTION POINTS|
+|NEED TO KNOW THE MAX VALUE|
+|NEED TO KNOW THE MAX VALUE|
+|ONLY GRABS THEN FIRST VALUE|
+|REAL GET_ENERGY_EXCHANGE_ADJUSTMENT|
+|NEED ELIMINATION CLASS B4 ASSET ANALYSIS|
+|WRITE THE BASE YEAR TO THE BIP FILE|
+|UPDATE ALL START REC POSITIONS|
+|RESET ALL START REC POSITIONS|
+|RESETS THE AVAILABLE ANNUAL UNITS|
+|PRODUCTION PARAMETERS FILE|
+|Next Fix monthly output if changing BAL_SHEET_VARS|
+|Next available income item|
+|EXCEEDING ENERGY OF THE CONTRACT|
+|cC        C SHOULD ALWAYS BE NEGATIVE|
+|ALLOWS FOR DOUBLE CHECK OF CAPACITY|
+|CAPACITY OR ENERGY EXCEEDED|
+|THIS IS THE SAME AS MAKEBIN SYSTEM FORCASTS|
+|SAME REC LENGHT AT CLASS FORCAST MAKEBIN|
+|REAL GET_AREA1_PEAK_BEFORE_DSM|
+|MAX ST INVESTMENTS ITEM 133|
+|MAX LT INVESTMENTS ITEM 135|
+|THIS AND NEXT TWO PLACE HOLDERS|
+|THIS AND NEXT TWO PLACE HOLDERS|
+|THIS AND NEXT TWO PLACE HOLDERS|
+|SAVE FACET_IS_PRODUCTION_METHOD|
+|SAVE OFFSET_MAINTENANCE_ACTIVE|
+|HardWiredRetrofitProjectThisYear|
+|MAY NEED TO MAKE ALLOCATABLE|
+|THIS MAY NEED TO BE ACCUMULATED TO SEASON|
+|THIS MEANS TO PRODUCE AN ANNUAL REPORT|
+|MUST RUN B4 LP because LP generates new scrubber list|
+|SAVE           MAX_BLOCKS_PER_TRANS|
+|sorts nItems items into ascending order|
+|sorts nItems items into ascending order|
+|sorts nItems items into ascending order|
+|ADDED FOR MARKETSYM REPORTING|
+|MODEL DETERMINED IF ONLY ONE FUEL ELSE USER OPTION|
+|HERE AND BELOW MAY NEED TO BE ADJUST FOR ANNUALS|
+|HERE AND BELOW MAY NEED TO BE ADJUST FOR ANNUALS|
+|SAVE  SUM_ANNUAL_REPORT_ITEMS|
+|WRITE ANNUAL RESOURCE REPORT|
+|NOT TESTING PLAN AND WRITE THE REPORT|
+|SAVE WABASH_REPORT_UNIT_REC|
+|MODULE ReadEnergyProductsData|
+|MODULE ReadEnergyProductsData|
+|RESET all report start RECORDS|
+|UPDATE  START RECORDS FOR ALL REPTS|
+|allow sharing in case this process fails|
+|ignored when OPEN_EXISTING|
+|MARKET PRICES AT SYSTEM LEVEL MSG|
+|REAL SAVE_DSM_ADJUSTED_PLANNING_PEAK|
+|ASSUME NOT USING ECONOMY_INTERCHANGE MODULE|
+|this is adopted from facalg with a sort index|
+|Fix this if statement so that this empty|
+|ONLY STORE VALUES IF TRANSACTION TYPE FOUND|
+|KEEP A RUNNING ANNUAL TOTAL|
+|OF PRODUCTION LOOP IN PROCOST|
+|TMS 20071002 SCENARIO_INDEX 52 AND 53 ARE FINANCIAL VARIABLES 24 AND 25|
+|FUNCTION GET_SCENARIO_INDEX|
+|ONLY FINDS THE FIRST OCCURANCE|
+|ONLY FINDS THE FIRST OCCURANCE|
+|CHANGE STATE IS IN NEXT HOUR|
+|PRODUCT NOT ACTIVE THIS DAY|
+|CHANGE STATE IS IN NEXT HOUR|
+|GO TO NEXT UNIT IN THE MONTH|
+|ONLY FINDS THE FIRST OCCURANCE|
+|POSITION WITHIN EACH TYPE OF RESOURCE|
+|POSITION WITHIN EACH TYPE OF RESOURCE|
+|TMS 20041129 NUM_PRODUCTS increased by 2 to 15|
+|TMS added 20041129 for TVA|
+|Eventually add 6x24 and 5x25 for Completeness|
+|Eventually add Sax24 and Sux24 for Completness|
+|TMS added 20041129 for TVA|
+|Eventually add Sax8 and Sux8 for Completness|
+|COLLAPSED LIST IN MARGNOBJ|
+|COLLAPSED LIST IN MARGNOBJ|
+|MAX OF MARGIN FOR HOURS_FOR_ECON_TEST|
+|MIN OF MARGIN FOR HOURS_FOR_ECON_TEST|
+|MAX OF MARGIN FOR MIN_UP_TIME_INT|
+|MIN OF MARGIN FOR MIN_UP_TIME_INT|
+|I need a single dimension 801 values|
+|I need a single dimension 801 values|
+|AND DEPTH OF MARKET DATABASE|
+|NEXT ALL RESOURCE POSITION|
+|BLOCK IS SERVING WHOLESALE ONLY|
+|BLOCK IS SERVING WHOLESALE ONLY|
+|BLOCK IS SERVING WHOLESALE ONLY|
+|RESOURCES IS ABOVE NATIVES WITHOUT TIE LINE CONSTRAINTS|
+|NOTE MIN BLOCK SUBTRACTED BELOW|
+|YES HOURLY COMMITMENT REPORT|
+|YES HOURLY COMMITMENT REPORT OR FUEL REPORT|
+|AVAILABLE GEN TO MEET LOAD|
+|REMAINING MARKET PURCHASES|
+|TO CAPTURE ENERGY AND HEAT|
+|GENERATION FOR RETAIL SALE OR WHOLESALE SALE|
+|NOTE MIN BLOCK SUBTRACTED BELOW|
+|INCREMENT TO NEXT GENERATION BLOCK AS NEEDED|
+|TRANSACTION GROUP FOR PURCHASES|
+|interchange the array values|
+|interchange the array values|
+|interchange the indexing array values|
+|interchange the indexing array values|
+|MAX OF MARGIN ONLY IN ECON TEST PERIOD|
+|MAX OF MARGIN FOR HOURS_FOR_ECON_TEST|
+|MIN OF MARGIN FOR HOURS_FOR_ECON_TEST|
+|MAX OF MARGIN FOR MIN_UP_TIME_INT|
+|MIN OF MARGIN FOR MIN_UP_TIME_INT|
+|AI HOURLY COMMITMENT SCHEDULE FOR UNIT|
+|DailyStorageDischargeLimit|
+|FOR CAPACITY PLANNING PURPOSES|
+|WHICH ASSET CLASSES BELONG TO A TRANSACTION GROUP|
+|HOW MANY ASSET CLASSES BELONG TO THE TRANSACTION GROUP|
+|THE TRANSACTION DOES NOT HAVE AN ACTIVE TRANSACTION GROUP|
+|If hybrid battery index is assigned at this location|
+|and that value is the inverse of the value found in the|
+|point the hybrid battery index of J to I|
+|s okay to overwrite array MONTHLY_2ND_ENERGY_PRICE|
+|MONTHLY SUM FROM THE CLREPORT FILE|
+|SINGLE OR MULTIPLE CONTINGENT|
+|VALID PRODUCT FOR THE HOUR|
+|SINGLE OR MULTIPLE CONTINGENT|
+|PURPOSELY ZERO TO CALCULATE REVENUE|
+|SINGLE OR MULTIPLE CONTINGENT|
+|prepare the hourly array of product applicability|
+|AGT would duplicate code from DAILY_CALL_PUT_CAPACITY if applicable to monthly|
+|find index of applicable product|
+|prepare the hourly array of product applicability|
+|sum of DAILY_MW across hours and days|
+|accumulate regardless of sign|
+|augment accums by IND_HRLY_CAPACITY|
+|s sorted best values for annual review|
+|prepare the hourly array of product applicability|
+|AGT would duplicate code from DAILY_CALL_PUT_CAPACITY if applicable to monthly|
+|find index of applicable product|
+|prepare the hourly array of product applicability|
+|sum of DAILY_MW across hours and days|
+|index of first hour this DAY|
+|accumulate regardless of sign|
+|index of last hour this DAY|
+|augment accums by IND_ANNL_HRLY_CAP|
+|s sorted best values for review|
+|build and maintain a list of the best values for this month|
+|store the strike value in a list of best values|
+|conditionally replace the smallest of BEST_VALUES|
+|retain index and value of the smaller|
+|index of strikes eligible for annual list|
+|count of values on annual list|
+|increment count of items on annual list|
+|increment index of strikes eligible for MO|
+|save count of items on annual list|
+|hours prices to same hours in current day|
+|INCLUDING FRACTIONAL HOURS|
+|added 20080924 per GAT request|
+|increment in hours at current costs|
+|this loop must complete before the next is begun|
+|hours capacity to same hours in prior day of month|
+|save the nPreMidnHr values of the first day|
+|hours prices to same hours in current day|
+|INCLUDING FRACTIONAL HOURS|
+|added 20080924 per GAT request|
+|increment in hours at current costs|
+|this loop must complete before the next is begun|
+|hours capacity to same hours in prior day of month|
+|save the nPreMidnHr values of the first day|
+|hours prices to same hours in current day|
+|INCLUDING FRACTIONAL HOURS|
+|added 20080924 per GAT request|
+|increment in hours at current costs|
+|this loop must complete before the next is begun|
+|hours capacity to same hours in prior day of month|
+|save the nPreMidnHr values of the first day|
+|SOMEBODY HAS DEFINED THE PRODUCT|
+|function get_daily_option_value|
+|interchange the index values|
+|SOMEBODY HAS DEFINED THE PRODUCT|
+|AVAILABLE MW RESET TO USED MW|
+|ASSUMES Daily_Option FOR NOW|
+|TMS added 20041129 for TVA|
+|TMS added 20041129 for TVA|
+|caller is responsible for initializing ACCUM|
+|NAME IN OVERLAY OR BASE FILE|
+|NAME IN OVERLAY OR BASE FILE|
+|NAME IN OVERLAY OR BASE FILE|
+|MULTIPLE INTERVALS BETWEEN TWO PRICE POINTS|
+|SEARCHING FOR PRICE_POINTS CROSSOVER|
+|MULTIPLE INTERVALS BETWEEN TWO PRICE POINTS|
+|SEARCHING FOR PRICE_POINTS CROSSOVER|
+|SEARCH FOR THE CF INTERVAL|
+|THIS NEED TO BE ALLOCATABLE|
+|THIS NEED TO BE ALLOCATABLE|
+|UP TO TEN LONG PATHS PER HOUR|
+|NUMBER OF PATHS WITH AVAILABLE CAPACITY|
+|NUMBER OF PATHS WITH AVAILABLE CAPACITY|
+|NUMBER OF PATHS WITH AVAILABLE CAPACITY|
+|cC     SAVE TRANS_CONSTRAINT_DATA|
+|CALLED FROM SIMULATE_MULTI_PARTY EVERY HOUR|
+|same structure loops not needed|
+|MODULE ReadEnergyProductsData|
+|MODULE ReadEnergyProductsData|
+|MODULE UNIT_PARAMETER_FILE_VARIABLES|
+|ALLOCATABLE ASSET_CLASS_POINTER|
+|THE 30 IS AN OFFSET TO THE INCOME POSITIONS|
+|THE 30 IS AN OFFSET TO THE INCOME POSITIONS|
+|REAL SAVE_NEW_PSCR_ADJ_RATE|
+|LTD BOOKED INTEREST WITH AMORT|
+|Steam Production LTD Depre|
+|Other Production LTD Depre|
+|Load Mgmt Central LTD Depre|
+|Structures and Improvements|
+|and Ash Handling Equipment|
+|Residual Refining Equipment|
+|module cal_marginal_interface|
+|function CAL_MAR_MONTHLY_ENERGY_routine|
+|module cal_marginal_interface|
+|ALLOCATABLE ACTIVE_OPTIONS|
+|FILLER UNITS FOR THIS TYPE ARE FOUND|
+|FIND NEXT ADDITION OF SAME LOADING TYPE|
+|ADD THIS UNIT TYPE TO THE PLAN|
+|WHILE TARGET NOT MET AND CONTINUE ADDING UNITS|
+|REAL COST_LEVEL_TO_COMPLETE|
+|REAL PERCENT_TO_COMPLETION|
+|FIND NEXT ADDITION OF SAME LOADING TYPE|
+|ADD THIS UNIT TYPE TO THE PLAN|
+|WHILE TARGET NOT MET AND CONTINUE ADDING UNITS|
+|REAL R_COST_LEVEL_TO_COMPLETE|
+|SAVE NOT_DENOMINATOR_REDUCTION|
+|VARIABLE USED IN CLREPORT AND HERE|
+|CapOptionsFileResourceIndexes|
+|INDEX FROM THE CAPACITY OPTIONS FILE|
+|DERIVATIVE OR TRANSMISSION|
+|INDEX FROM THE CAPACITY OPTIONS FILE|
+|CHECK FOR IMPROVED SOLUTION|
+|PROPAGATE SOLUTION TO OTHER INSTANCES OF SAME CN|
+|IF REPORT AND OPTIMAL_ORDER|
+|ITERATE ON ACTIVE INSTANCE SOLUTION|
+|ADD UNITS WHILE STILL MAKING MONEY|
+|MAIN ADD_THIS_UNIT LOOP WITH CONSTRAINTS|
+|CHECK FOR IMPROVED SOLUTION|
+|MOVED INTO MX_USER_PRICE_CURVE|
+|HardWiredRetrofitProjectThisYear|
+|SAVE PLANNING_RESERVE_MARGIN|
+|INDEX FROM THE CAPACITY OPTIONS FILE|
+|INDEX FROM THE CAPACITY OPTIONS FILE|
+|INDEX FROM THE CAPACITY OPTIONS FILE|
+|STARTS CO2 REDUCTION CURVE ROUTINES|
+|RESOURCE DOES NOT FALL WITHIN THE PRICE DURATION CURVE|
+|to remove market from abatement using units|
+|ASSUMES 8784 HOURS PER YEAR|
+|ASSUMES 8784 HOURS PER YEAR|
+|replaced to trap for no options|
+|IMPLICITLY USE_MINIMUM_RM_LOGIC|
+|BEST RESOURCE IN EACH MARKET|
+|STARTS CO2 REDUCTION CURVE ROUTINES|
+|to remove market from abatement using units|
+|ACCUMULATE BY TRANSACTION GROUP AND PROD TYPE|
+|ACCUMULATE BY TRANSACTION GROUP AND FUEL TYPE|
+|ACCUMULATE BY TRANSACTION GROUP AND FUEL TYPE|
+|MODULE CapOptionsFileResourceIndexes|
+|MODULE CapOptionsFileResourceIndexes|
+|MODULE CAPACITY_OPTIONS_ALLOC_VARS|
+|function UPDATE_SCREEN_CAP_COSTS|
+|MODULE CAPACITY_OPTIONS_ALLOC_VARS|
+|MODULE CAPACITY_OPTIONS_FIXED_VARS|
+|MODULE CAPACITY_OPTIONS_FIXED_VARS|
+|MODULE co2_market_abatement_curves|
+|MODULE co2_market_abatement_curves|
+|AT LEAST ONE OVERLAY FIEL WAS USED|
+|CREATE INDIVIDUAL BINARY OVERLAY FILE AND ADD TO MASTER OL FILE|
+|WRITE TO BINARY FILES LOOP|
+|WHICH ASSET CLASSES BELONG TO A TRANSACTION GROUP|
+|HOW MANY ASSET CLASSES BELONG TO THE TRANSACTION GROUP|
+|THIS SHOULD BE AFTER HYDRO|
+|IT IS NOT AN ACTIVE TRANSACTION GROUP|
+|FOR PEAK AND ENERGY FORECAST|
+|NEED TO COUNT HYDRO GROUPS|
+|NEED TO COUNT HYDRO GROUPS|
+|DOES NOT CONTRIBUTE TO TRANSACTION LOADS|
+|DOES NOT CONTRIBUTE TO TRANSACTION LOADS|
+|IT IS NOT AN ACTIVE TRANSACTION GROUP|
+|The section below requires|
+|The section below requires|
+|SUM OF TABLE CONTRIBUTIONS FOR A TG|
+|SUM OF TABLE CONTRIBUTIONS FOR A TG|
+|REVENUE FROM FIXED ENERGY PRICING|
+|REVENUE FROM DEMAND PRICING|
+|REVENUE FROM CUSTOMER PRICING|
+|REVENUE FROM FIXED ENERGY PRICING|
+|REVENUE FROM DEMAND PRICING|
+|REVENUE FROM CUSTOMER PRICING|
+|ASSUMES JANUARY SYSTEM PEAK|
+|NUMBER OF SUPPLY GROUPS ACROSS ALL REGIONS|
+|K 25 POINT COAL_GROUP CURVE|
+|ASSUME POSITIVE ESCALATION|
+|ASSUME CONSTANT ESCALATION|
+|ASSUME POSITIVE ESCALATION|
+|interchange the indexing array values|
+|NUMBER OF CONGESTION POINTS|
+|NEED TO KNOW THE MAX VALUE|
+|NEED TO KNOW THE MAX VALUE|
+|THIS IS USED FOR REPORTING PURPOSES|
+|FOR MONOTONIC INCREASING PERCENT|
+|UNTIL DEFINED IN PROD PARAM|
+|ASSUME THAT IT IS A TRANSPORT CONSTRAINT|
+|SET OF PATHS WITH COMMON LINK|
+|IF LP COAL MODEL OR PATHS ALGORITHM|
+|interchange the indexing array values|
+|price at all demand nodes of Supply of Last Resort|
+|price at all supply nodes of Demand of Last Resort|
+|listed in order of declaration|
+|listed in order of declaration|
+|unit 4 must be open for error reporting|
+|needed since PCX begins without a LineFeed|
+|optimize network usage for one day per iteration|
+|error or EoF reading demand data into NodeQty|
+|using only internal variables and arrays|
+|always expect Feasible when using AmortizeUE|
+|using only internal variables and arrays|
+|always expect Feasible when using AmortizeUE|
+|unit 4 must be open for error reporting|
+|needed since PCX begins without a LineFeed|
+|fractional retention of inlet quantity|
+|B quantity at inlet in MMCF|
+|limit quantity at inlet in MMCF|
+|economic expansion quantity|
+|allow room for the leading sign|
+|overwrite m to show the number is negative|
+|exponent has at most 1 NZ digit|
+|prefix the mantissa digit m|
+|multiply each value in array a by constant c|
+|multiply each value in array a by corresponding value in array b|
+|caller must decide how to handle the case of index not found|
+|back through the recursive callers to CallerDapth 0|
+|prices by the net Qty into the node at iDNod|
+|ignore noisy nodes causing cycling|
+|weight by inlet Qty net of losses|
+|this is the second pass through iNode|
+|preclude zeroing LinkQty if only 1 Source node is active|
+|retain minimum for the cycle|
+|preclude cycling through iLink at later calls|
+|weight by inlet Qty net of losses|
+|but NodePri is the outlet price into iLink before losses|
+|scrutiny for cycling through iDNod|
+|declarations for interface variables and arrays|
+|declarations for internal variables and arrays|
+|fails under F77L3 if placed much lower|
+|rejected by LF95 for unknown reason|
+|okay to pass even if never allocated|
+|okay to pass even if never allocated|
+|open CSV files for reading|
+|OpenFmFile caller will handle absence|
+|OpenFmFile caller will handle absence|
+|volume from each Supply node|
+|OpenFmFile caller will handle absence|
+|OpenFmFile caller will handle absence|
+|weighted average cost at each node|
+|OpenFmFile caller will handle absence|
+|marginal cost at each node|
+|OpenFmFile caller will handle absence|
+|inform caller of array sizes|
+|after 20070830 bidirectional links occupy 2 records|
+|skip header line of column titles|
+|FwdSlash in 5th label may have caused cDummy to fail above|
+|restore condition when called|
+|assign the order in which NodeID is expected|
+|default indicating undefined|
+|index of tentative assignments before iLink is advanced|
+|assign at most once per iLink|
+|to count nZcpLink only once|
+|kludge for B0 while testing|
+|aftet 20070830 bidirectional links occupy 2 records|
+|eliminate dysfunctional nodes from the problem|
+|NodeQty is not yet available for testing|
+|iNode cannot function as a Demand node|
+|iNode cannot function as a Supply node|
+|verify that links exist to this node|
+|all links were either From or Into iNode|
+|node is useless as a pricing point|
+|out the dysfunctional node with SN iNode|
+|else skip the above loop as ineffective|
+|inform caller of the revised useful limits|
+|list all nodes connected by a single link|
+|write one line for each link|
+|A so Bidir links can be netted|
+|except to gain feasibility|
+|sufficient to alter usage per GT 20080606|
+|write one line of NodeType headings|
+|write one line of NodeSN headings|
+|write one line for each node|
+|write one line of NodeType headings|
+|write one line of NodeSN headings|
+|write one line of NodeSN headings|
+|write one line of NodeSN headings|
+|write one line for each node|
+|show matrix of iLink directions|
+|for normal operation of the model by a customer|
+|the PCX default to MINimize its objective|
+|if the last segment is unbounded|
+|count of useful Terminal vars|
+|line of Demand for one day|
+|if this Demand node was pruned out|
+|else ignore the DFValue read|
+|AllocateGNWOptimizingArrays|
+|number of source paths in cost pool for iNode with iSNod as Supply|
+|count of elements used in above arrays|
+|PCX infers that UbValu is zero when LbValu is specified above|
+|treat the node price as a commodity charge|
+|possibly due to artificial|
+|manipulation of LinkChg and LinkFunc|
+|NodeQtyOfLR is the slack var if AmortizeUE|
+|net sum of Qty piped out of node|
+|allow Supplier of Last Resort to offload Demand|
+|these slack variables allow feasibility at high price|
+|Qty in MMCF supplied by iNode|
+|allow Demander of Last Resort to dump Supply|
+|these surplus variables allow feasibility at high price|
+|enter coefficient in matrix for each link touching iNode|
+|must advance before possible cycle below|
+|times Qty in MMCF into iNode|
+|decrementing from nSegUsd down to 1|
+|sort to facilitate search within ReturnGNWAMtx|
+|display entire constraint matrix|
+|contents into larger space|
+|save copies of full vectors in Hold|
+|restore saved values from Hold vectors|
+|major arrays for zbCol and zbRow|
+|Nze for this column are contiguous|
+|since loop has passed all possible matches|
+|relax the upper bound on the last segment of each cost curve|
+|each of nLbV was assigned an upper bound|
+|allow caller to handle the problem|
+|presumes they are contiguous and ascending in order|
+|presumes they are contiguous and ascending in order|
+|should be a Supply or Demand node|
+|conclude nominal Supply vars|
+|deduct following vars from their AccumOfDir|
+|preclude attempt to divide by 0|
+|presumes they are contiguous and ascending in order|
+|pricing due to numerical noise|
+|these comprise a bidirectional pair|
+|problematic if above Near0Qty|
+|presumed same as for PreviLink|
+|save starting index in xVect|
+|j indexes the Lesser  LinkQty|
+|k indexes the Greater LinkQty|
+|index of Seg1 of the Lesser|
+|index of Seg1 of the Greater|
+|Qty remaining to be amortized in descending order|
+|Qty net after the amortization|
+|to maintain monotonic price logic|
+|carry excess in f4 to lower segs|
+|added 20070830 to catch discontiguous iLink|
+|cannot assign without domain specified|
+|in case iNode neither S nor D|
+|branch is entered only if AmortizeUE|
+|is quantity amortized by DoLR|
+|is quantity amortized by SoLR|
+|is inlet quantity before losses|
+|latter added 20070702 per GAT|
+|allow for some numerical slop|
+|line inlet quantity before losses|
+|preclude cycling on closed paths due to numerical noise|
+|without affecting LinkQty reported to caller|
+|restore nodal and link prices for Supply nodes|
+|default for nodes with zero NodePri|
+|assign marginal cost to nominal price|
+|recursively trace paths to all sources for each Demand node|
+|abort loop after mLink Cyclic conditions|
+|these two arrays are filled for iNode sources|
+|adjust reported prices just before writing them|
+|incorporate OfLR into array prices|
+|iDNod nodes are far from Supply|
+|average price logic as used in DerivePriceFromSources|
+|iNode is possibly an Interm node|
+|base costs on those at source node|
+|Qty are the first nSNod variables|
+|to exclude LnkQ from the allocation of DmdQ|
+|explete the cumulative arrays|
+|segment costs because DemandPri did|
+|enforce payment for services|
+|to include LnkC in the allocation of DmdC|
+|should match the reported objective value|
+|DP should be 0 if prices are correct|
+|presumes they are contiguous and ascending in order|
+|NEED to incorporate LinkExpLim below|
+|valid for the final segment|
+|before offloading of peak segments|
+|limit ThisQtySeg to that of the|
+|next lower segment as prorated by the segment capacities|
+|high cost of offloaded segment|
+|reduce savings by cost of lower segments|
+|lower cost of segment being loaded|
+|ReportGNWEconomicExpansion|
+|Replace is same as Unknown|
+|else caller will inspect iStat|
+|default valid if file is extant|
+|from concatenation may contain garbage bytes|
+|look next in directory specified|
+|ps is a mnemonic for Print and Stop|
+|allow operator to read the diagnostic message|
+|above disabled 20060717 to allow the ExitCode assigned above to be useful|
+|but note that leading blanks are not discounted|
+|breaking the above into two suffices to solve the stack exhaustion|
+|interchange the pair of iOrgs|
+|invert the index array iOrg to assign sorted position sPos|
+|useful on lines of DSF files|
+|one more than necessary on 20060908|
+|jOfs is the number of leading fields to skip in the count|
+|to force reading beyond the last field of possible interest|
+|we determine the feasible limit on readable fields by experimentation|
+|MODULE DRILLING_REPT_PARAMETERS|
+|FUNCTION WVPA_REPORTING_NAME|
+|FUNCTION WVPA_DEPART_EXP_REPORT_NAME|
+|FUNCTION WVPA_WORK_ORDER_REPORT_NAME|
+|MODULE DRILLING_REPT_PARAMETERS|
+|Bypass spurious lahey warning|
+|function get_end_message_filename|
+|MODULE ESCALATION_VARIABLES|
+|function get_escalated_value|
+|preclude further attempt at writing to PrtUni by CkAllocSt|
+|vars allocated in StorePlantData|
+|parameter would pad with trailing blanks|
+|the caller may want to abort|
+|screen corruption okay here|
+|interchange the indexing array values|
+|write s to StdOut without advancing record|
+|useful only during debugging|
+|useful only during testing|
+|for normal operation of the model by a customer|
+|StdOut handle is always available on unit 6|
+|vars allocated in StorePlantData|
+|returns the integral power of a real base|
+|perhaps more accurate than exponentiation|
+|prevent divide overflows by restricting GaussianDen|
+|to inhibit extraction of abnormal modes from load curve|
+|load ordinates with 0 outages included|
+|s index i for local var index j|
+|is the local var index j in dispatch position i|
+|is the index of first constraint covering var j|
+|var has previously entered basis from BoundNBA|
+|lower bounds on variable quantity|
+|upper bounds on variable quantity|
+|unknown quantities of interest|
+|indexes the old DInvRow location of BasicNKy vars|
+|indexes the     DInvRow location of BasicNKy vars|
+|indexes the old KeyVar  related  to BasicNKy vars|
+|indexes the     KeyVar  related  to BasicNKy vars|
+|is the VarInFctOrder index of first var in facet k|
+|is vector for pair of blocks within same unit|
+|used only locally in InvertMatrix|
+|used only in StorePlantData|
+|used in FindMostRestrictive|
+|coefficient of var j in the current aux constraint|
+|lower bounds on capacity factor for var j|
+|upper bounds on capacity factor for var j|
+|which may not yet be known|
+|which may not yet be known|
+|s duration excluding outages of Capac|
+|s duration including outages of Capac|
+|may grow as large as LimFacetSize|
+|used to break pathological cycling|
+|data varies 1st across rows|
+|allows room for InvalidFacet|
+|area under curve has same units as EqLoad|
+|adjust one or both to conform to a CDF|
+|extend the base duration to negative loads|
+|as EqLDn0 has load probabilities|
+|delete array elements indexed jD|
+|j index of var containing merger of jM and jD|
+|jD in arrays that return j|
+|count those with positive lower bounds on capacity factor|
+|each storage equation must involve exactly 2 vars|
+|limit the memory allocated|
+|most of the allocatable arrays are needed before nVar is finally known|
+|AuxiCovers here for convenience|
+|default implying var is not an aux slack|
+|preclude comparison with a prior block|
+|compressed index of return var at Multiplicity of 1|
+|compressed index of dischg var at Multiplicity of 1|
+|indices are separated by 2|
+|index of first array position to be overwritten|
+|shift data for storage vars following|
+|index the beginning of a new run|
+|compressed index of return var at Multiplicity of 1|
+|compressed index of dischg var at Multiplicity of 1|
+|limited data into local arrays|
+|until parameters are displayed|
+|The reduction of EA to the lesser of the pair is required for convolution|
+|ignore vars with capacity on outage|
+|since no results can be reported|
+|limit CFUB to availability|
+|prior extant block 2 is disallowed|
+|above bias confounds the ability to merge blocks of equal cost in same unit|
+|distinguish blocks by availability|
+|load larger blocks before smaller|
+|before addition of aux slacks or UQ server|
+|merge economically reversed blocks within a single unit|
+|blocks from consideration here|
+|CFUB are identical for both blocks|
+|some economically reversed pairs were merged|
+|before resorting required by change of costs above|
+|after merging reversed blocks|
+|return vars are aggregated above|
+|preclude comparison with a prior block|
+|perturbing cMod failed when Sort reordered too many|
+|index of var at Multiplicity of 1|
+|sequence index of var with next higher Multiplicity index|
+|index the beginning of a new run|
+|allow var j to begin a new group|
+|order loop in ObtainBasicFeasibleSolution|
+|make thresholds relate to the data|
+|index of the discharge var in the pair|
+|storage locations are not adjacent here|
+|for the artificial var to cover the Unserved Quantity|
+|word var for passing to Spindrift routines|
+|nVar is possibly not unique|
+|translate CF limits into quantity limits|
+|scan the negative coefficients|
+|save the largest magnitude|
+|ObtainBasicFeasibleSolution|
+|i and j are in the system of compressed indices|
+|index of the discharge unit in the pair|
+|iBlk is in the system of uncompressed indices|
+|report only generation to caller|
+|var j was the merger of n identical blocks|
+|var j was the merger of 2 economically reversed blocks|
+|write iVal to StdOut without advancing record|
+|write fVal to StdOut without advancing record|
+|extract the mean of abscissas|
+|else retain the prior value of Slop2|
+|display weight and cumulants for this mode|
+|weight modes before ranking|
+|ModeYDecr must be positive|
+|order model for the residual|
+|s ordinates decline monotonically|
+|block units is taken later|
+|infer that multiple identical blocks were merged|
+|generating function for a binomial|
+|the first 4 derivatives of G are thus|
+|denoting such Sterling numbers|
+|Since these results agree with those derived from the primitive|
+|we proceed with confidence using|
+|central moments of capacity on outage|
+|if ordinates are of interest|
+|each jFTA term of y above is the product of a coefficient|
+|order Hermite polynomial times the density equals|
+|the integral from a to infinity of|
+|only if ordinate is of interest|
+|tail area from 0 to infinity equals the mean|
+|area is no less than if prior yPrb were always 1|
+|a Normal approximation for each component|
+|only if ordinate is of interest|
+|preserve the Org data from corruption|
+|adjoin the identity matrix in ArrayInv|
+|k for maximum pivotal element|
+|PivotRow in ArrayOld and ArrayInv|
+|zero out elements below it in column k|
+|casting half of PrevCap using a linear model|
+|the leading 1 and trailing zeroes will be retained|
+|the leading 1 and trailing zeroes will be retained|
+|apply deconvolution to increasing abscissas|
+|interpolation on EDExcl is impossible|
+|apply deconvolution to decreasing abscissas|
+|whose EDExcl need not be modified|
+|copy from the captured array|
+|define booleans tested below|
+|jPrBk is always loaded before jCPB|
+|needed in case not InclThisFct|
+|cumulants are proportional to the kth power of capacity|
+|one must view outages as having|
+|the decrease in UQ after convolution of just var jLA|
+|nActiveFacets is misleading as a surrogate|
+|place blocks of same unit together in attempt to keep facet kInf small|
+|if storage vars appear in only 1 aux constraint|
+|treat return var as if loaded first|
+|treat discharge var as initially minimally used at the peak|
+|default implying need for later assignment|
+|force initial degeneracy in discharge vars|
+|preclude noise implying it is aux slack|
+|after loading only the key var|
+|discharge vars can be treated as an increasingly large|
+|default valid when not InPriorFct|
+|whose index is just one greater|
+|UQ just before probing jDis|
+|decrease in unserved quantity after loading|
+|before possible reduction to meet needs of jDis|
+|to fit jDis under the curve|
+|as computed by CommitStgPair|
+|xLoadPoint for jDis remains as after jKey|
+|assuming none but jKey in facet|
+|restore prior TailUQ assuming none but jKey exists in prior facet|
+|after loading only the key var|
+|but indicates need for reassignment|
+|assign no further than the current var|
+|start over with the incoming values|
+|inform caller of regression|
+|commit var jDis to this facet|
+|economic storage var to be considered|
+|as it allows more than one regression|
+|loaded discharge vars have lower CF|
+|make var jMKV key in facet nActiveFacets|
+|ObtainBasicFeasibleSolution|
+|with 0 outages included by convolution|
+|for abnormal modes and the residual|
+|to report correct cost in tables and InnerProduct|
+|assume storage vars appear in only 1 aux constraint|
+|valid if no var can a priori be excluded from optimization|
+|retain TailUQ for LimitAccum|
+|initially embracing at least the UQ server|
+|storage vars will be dispatched later|
+|cannot ignore effects of constraints|
+|the starting load point for optimizations in kInf|
+|so DualVar will show vars are in economic order|
+|storage vars will be dispatched later|
+|values prior to assigning var j to base load|
+|discharge vars have 0 outages|
+|restoring values prior to loading var j|
+|least index of firmly committed facets|
+|VarOfDispRank index of last return var committed|
+|order dispatch of BoundNB0 vars|
+|least index of firmly committed facets|
+|put var j in separate facet|
+|increase BoundNB0 vars to GLB|
+|to be deducted from the UQ server generation|
+|place the last discharge vars|
+|cover rare case of discharge var being zero|
+|dubious deduction of x at GLB from tail quantity|
+|offload the penultimate var by the UQ server|
+|the UQ server may not be an aux slack|
+|aux slack vars are in no facet|
+|since the other vars in constraint are Bound|
+|ObtainBasicFeasibleSolution|
+|changed if any BasicNKy cannot be placed|
+|else the defaults for BNKinRow are appropriate|
+|row kMI must be changed first|
+|check whether each BasicNKy var has a DOrgRow|
+|InvalidIndex for vars leaving basis|
+|the last facet includes UQ server|
+|put reduced cost into DualVar|
+|scan for largest positive DualVar|
+|index was assigned to kLvg above|
+|scan at the first qualifying BoundNBa|
+|would limit entering var to 0|
+|tentatively assign BoundNB1 vars to BindSet|
+|index of the first bound NB1 var|
+|move as many as BindSetLim BoundNB1 vars to BindSet|
+|need to count even if FctVoidOfDj|
+|subject to upward revision in AugmentOrderGray|
+|the most restrictive potential set|
+|the most restrictive potential set|
+|index of most restrictive Psik|
+|abscissa of first var to be considered in facet kInf|
+|save initial values for later reference|
+|not all ordinary vars enter from final facet|
+|RHS of final facet needs to be computed|
+|avoid reallocating GrayOrder if FctVoidOfDj|
+|RHS of various facets needs be computed|
+|inline to allow reallocation|
+|fill the array GrayOrder with indices that differ in only 1 bit|
+|hold the prior array data until space is allocated|
+|s paper in using the Gray order to exhaustively|
+|determine TestSetOwns using the fact that the final marginal facet|
+|and all other vars as BoundNBa at their GLB|
+|find area from PrevCapac to infinity|
+|first remove effects of its outages|
+|no need to find area for every load point|
+|find final area to infinity|
+|find area from PrevCapac to infinity|
+|first remove effects of its outages|
+|restore effects of its outages|
+|retain the bit for var j deleted|
+|index of MSb of largest possible BitPattern|
+|index of MSb of InclBitPattern|
+|loaded in order of increasing j|
+|first remove effects of its outages|
+|above allows degeneracy but not regression|
+|index of facet to be merged or split|
+|display vars in order of loading during probing|
+|outages must be incorporated in equivalent load for next iteration on k|
+|first remove effects of its outages|
+|interpret small negative noise as zero|
+|default valid for jOrdEnt in Psi0|
+|default valid for jOrdEnt in Psi0|
+|default valid for jOrdEnt in Psi0|
+|valid state before any changes were made|
+|a complement in same constraint as jOrg|
+|move former key to the new kLvg union|
+|make former key newly BasicNKy|
+|preclude later attempts to juggle aux vars|
+|perhaps redundant to jBind|
+|perhaps redundant to jBind|
+|eventually assigned to BoundNBa|
+|KeyVar is as yet indeterminate for these two facets|
+|split union of facets into two|
+|nVar iff BkOwns some var other than jSkip|
+|search for a BasicNKy in same aux constraint as jNKyToBe|
+|BasicNKy in same constraint as jNKyToBe|
+|allow any BasicNKy in kFctNKAI to become key|
+|insist that jNKyToBe and a BasicNKy be in the same aux constraint|
+|kFctNKAI key is reassigned below to jAux|
+|enkey another var within facet|
+|prefer to enkey a BasicNKy var|
+|search for a swappable BoundNBa var|
+|check whether each BasicNKy var has a DOrgRow|
+|InvalidFacet for jNKyAAR in Psi0|
+|check all facets for possible swaps|
+|former BasicNKy becomes BoundNBa|
+|assumption resolved by AlignAuxRows|
+|formerly key in the entire kBind facet|
+|jOrdEnt replaces jKeyOE as KeyVar|
+|formerly key in the entire kBind facet|
+|casting its key into BoundNBa|
+|remove ineligibility for ChooseDescentDirection|
+|do not count this as an iteration|
+|refresh the criteria for AuxComplement|
+|refresh the criteria for AuxComplement|
+|until ChkUnplacedBNK is called|
+|but perhaps in a subset different from before|
+|each remains key in same subset order as before|
+|kBind is neither kLvg nor kLp1|
+|jOrdEnt replaces the BasicNKy in the split|
+|the corresponding var jBind leaves the basis|
+|search for its BasicNKy complement|
+|to allow proper computation of dual|
+|becomes newly key in some cases below|
+|BasicNKy state is possible|
+|jBind is either BasicNKy or BasicKey|
+|kBind owns aux jNewlyNKy and BasicNKy j|
+|room for xn to be BasicNKy|
+|the final facet is not likely to be singular|
+|no lower facet has a KeyVar with lesser CF|
+|energy from being offloaded|
+|above allowed premature exit on condition of jOrdEnt cycling|
+|function get_mrx_full_filename|
+|function get_project_filename|
+|function get_coal_qq_filename|
+|function get_scn_ovl_filename|
+|function get_dfb_filename_ii|
+|function get_overlay_filename|
+|function get_makebin_filename|
+|function get_makeovl_filename|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|SAVE EXTERNAL_PRODUCTION_NUM|
+|CHECK FOR LAST FORECAST YEAR|
+|CALCULATE SYSTEM PRICE FEEDBACK|
+|function get_prosym_interface_file|
+|function get_catawba2_contract_file|
+|function get_base_file_directory|
+|function get_OUTPUT_DIRECTORY|
+|function get_scenario_name|
+|function get_cpl_deferred_fuel_file|
+|function GetFuelCategoryName|
+|MODULE GRX_PLANNING_ROUTINES|
+|positive term when bank purchases offsets|
+|positive term when bank purchases offsets|
+|THEN MARKET WAS THEN LAST POINT USED|
+|THEN MARKET WAS THEN LAST POINT USED|
+|PRICE ABOVE LAST MARKET PRICE WERE ALL THEN LAST PURCHASES USED|
+|THEN MARKET WAS THEN LAST POINT USED|
+|PRICE NOT HIGH ENOUGHT LOOK FOR NEXT MARKET POINT AS NEW PRICE|
+|THEN MARKET WAS THEN LAST POINT USED|
+|positive term when bank purchases offsets|
+|MODULE GRX_PLANNING_ROUTINES|
+|VARIABLE USED IN CLREPORT AND HERE|
+|function remove_null_characters|
+|function are_strings_equal|
+|function get_filename_from_unit|
+|function just_the_filename|
+|MODULE  CONVERSTION_ROUTINES|
+|MODULE PROCEDURE INT2_CONVER_2_STR|
+|MODULE PROCEDURE STR_CONVER_2_STR|
+|MODULE PROCEDURE INT4_CONVER_2_STR|
+|MODULE PROCEDURE INT8_CONVER_2_STR|
+|MODULE PROCEDURE REAL_CONVER_2_STR|
+|MODULE PROCEDURE REAL8_CONVER_2_STR|
+|MODULE PROCEDURE INT2_CONVER_2_STR_W_LEN|
+|MODULE PROCEDURE REAL_CONVER_2_STR_W_DEC|
+|MODULE CONVERSTION_ROUTINES|
+|MODULE INTERNAL_OPERATION_SWITCHES|
+|MODULE BASE_FILE_NAMES_FROM_BFIL_OBJ|
+|MODULE IREC_ENDPOINT_CONTROL|
+|MODULE SIZE_ARRAY_DIMENSIONS|
+|MODULE SIZE_ARRAY_DIMENSIONS|
+|MODULE FINANCIAL_SWITCHES_COMMON|
+|MODULE FINANCIAL_SWITCHES_COMMON|
+|MODULE LH_GLOBAL_VARIABLES|
+|MODULE LH_GLOBAL_VARIABLES|
+|MODULE TRANS_GROUP_VARIABLES|
+|MOVED FROM READ_TRANS_GROUPS_DATA|
+|MODULE TRANS_GROUP_VARIABLES|
+|MODULE ANNUAL_MARG_COSTS_ALLOCAT_ARRAYS|
+|MODULE ANNUAL_MARG_COSTS_ALLOCAT_ARRAYS|
+|fill array DaysInPriorMonths for cYear|
+|fill array DaysInPriorMonths for cYear|
+|ACTIVATED SWITCH IN RUN SWITCHES|
+|LARGE ENOUGHT PROJECT TO CAP INTEREST|
+|LOGICAL THIS_IS_A_PAY_MONTH|
+|VECTOR IN THE ASSET VECTOR FILE|
+|INTEREST VECTOR AND NOT MONTHLY|
+|FIRST PAYMENT INTEREST ONLY|
+|CURRENT MONTH INTEREST INCLUDED|
+|used for elimination purposes|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|GET VECTOR OF CASH ADDITIONS|
+|Unamortized Interest Balance|
+|Unamortized Issue Expense Balance|
+|THIS IS AN ARRAY WITH BALANCE SHEET DETAIL|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|These arrays are 0 based in the main routine|
+|SAVE OPTIONS_FINANCIAL_FILE_EXISTS|
+|SAVE ASSET_REPORTING_LEVEL|
+|SAVE FIRST_PASS_NEW_ADDITIONS|
+|off adjustment to cumulative book depreciaton|
+|ALLOCATION 0 IS USED TWICE|
+|off adjustment to cumulative book depreciaton|
+|off adjustment to cumulative book depreciaton|
+|off adjustment to cumulative book depreciaton|
+|off adjustment to cumulative book depreciaton|
+|SAVE CUMULATIVE_CASH_ADJUSTMENT|
+|SAVE FINANCIAL_SIMULATION_YEARS|
+|off adjustment to cumulative book depreciaton|
+|off adjustment to cumulative book depreciaton|
+|SAVE BASE_YEAR_VECTOR_VALUE|
+|SAVE CAPITAL_RATES_FILE_ACTIVE|
+|SAVE BASE_YEAR_VECTOR_VALUE|
+|Cash Operating Revenue Tax|
+|Cash State Income Taxes Paid|
+|Cash Federal Income Taxes Paid|
+|Cash Federal Tax on Capital|
+|off adjustment to cumulative book depreciaton|
+|THIS IS THE BALANCE CAUSED BY ACTIVITY ONLY AT THE CLASS LEVEL|
+|REAL FASB_87_DEFERRED_TAX_ADJ_DR|
+|ZERO BALANCES OF SUBS INITIALIZATION FILE|
+|IF ONLY ONE CLASS THE PARENT GETS OUTPUTTED|
+|ONLY THE PARENT GETS OUTPUTTED|
+|RESET CLASS_UNAMORTIZED_INTEREST_BAL|
+|NOT 2 UNTIL DB ELIM EXISTS|
+|IF ONLY ONE CLASS THE PARENT GETS OUTPUTTED|
+|Earnings available to common|
+|RESET THE SBU ELIMINATIONS|
+|is shown as an interest or dividends|
+|These are net balances which are|
+|off adjustment to cumulative book depreciaton|
+|off adjustment to cumulative book depreciaton|
+|THIS IS THE BALANCE CAUSED BY ACTIVITY ONLY AT THE CLASS LEVEL|
+|IncentiveCompensationNonCash|
+|operating method adjustment|
+|prior year captured revenues|
+|IncentiveCompensationNonCash|
+|ADD A RETAIN EARNINGS SWITCH HERE|
+|IncentiveCompensationNonCash|
+|PLACE HOLDER FOR A NEW SWITCH|
+|MONTHLY ACTIVE OR SHARES ISSUED|
+|PASS DECOM RETURN THROUGH INCOME|
+|LET SBU HAVE NEGATIVE TAXES|
+|set this adj to match to actual|
+|LET SBU HAVE NEGATIVE TAXES|
+|of monthly not active taxes|
+|CON SOLD_FED_DEF_TAXES_FROM_NOL|
+|place holder for LTI earnings stays in the fund|
+|keeps the balance sheet balanced|
+|passing tax credits to parent|
+|DR SPECIFIED AT CONSOLD IN TAX FILE|
+|to pension liability on BS|
+|PASS DECOM RETURN THROUGH INCOME|
+|off adjustment to cumulative book depreciaton|
+|IncentiveCompensationNonCash|
+|State BTL taxes are pass through|
+|Federal BTL Taxes passes Sub BTL and Parent|
+|IncentiveCompensationNonCash|
+|Contributions in Aid of Construction|
+|Subsidiary equity additions|
+|Leased Nuclear Fuel Payments|
+|Nuclear Decommissioning Fund Payment|
+|need to add to the base year|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|the 15 is for lose carry forwards|
+|LOGICAL DELETE OR NOT ACTIVE|
+|Apply only to the Consolidated|
+|Taxable Income Deductions Rate|
+|TO MAKE A BLANK PRODUCE INPUT|
+|SAVE FED_CONSOLIDATED_NOLS_GENERATED|
+|RealWin knows how to process this command|
+|Let RealWin know we handled it already|
+|CAPEX EXPANSION FUTURE ASSETS|
+|module variable working_folder not|
+|function PRIMARY_MOVER_INDEX_DB|
+|Legacy Nuclear Fuel Category|
+|DSM AND ENERGY EFFICIENCY STANDARDS|
+|function FUEL_TYPE_2_PRIM_MOVER|
+|Communications of the ACM vol 31 no 10|
+|allow caller to specify seed by parts|
+|of arguments above to make W14b dominant|
+|merely return current seed if all 3 args are zero|
+|allow caller to specify seed explicitly|
+|merely return current seed if arg is zero|
+|MODULE PROD_ARRAYS_DIMENSIONS|
+|MODULE PROD_ARRAYS_DIMENSIONS|
+|module screen_initialization|
+|module screen_initialization|
+|to match Spindrift arguments|
+|to match Spindrift arguments|
+|to match Spindrift arguments|
+|to match Spindrift arguments|
+|bytes per various documents|
+|blinking yellow on black background|
+|based to match SpinDrift cls arguments|
+|if only blanks delimit parameters|
+|wait for any alphanumeric key to be struck|
+|flush the keystroke buffer|
+|in Hz and hundredths of a second|
+|sorts nItems items into ascending order|
+|assume that the caller has not initialized the index array|
+|interchange the indexing array values|
+|sorts nItems items into ascending order|
+|assume that the caller has not initialized the index array|
+|interchange the indexing array values|
+|sorts nItems items into ascending order|
+|assume that the caller has not initialized the index array|
+|interchange the indexing array values|
+|to match Spindrift arguments|
+|to match Spindrift arguments|
+|to match Spindrift arguments|
+|to match Spindrift arguments|
+|the problem of only the LSB of RecordLeng being retained|
+|language underpinnings of LF95|
+|words when executing the close statement|
+|function get_base_family_name|
+|function real_array_to_string|
+|C is treated the same as M|
+|AT LEAST ONE OVERLAY FIEL WAS USED|
+|CREATE INDIVIDUAL BINARY OVERLAY FILE AND ADD TO MASTER OL FILE|
+|C is treated the same as M|
+|WRITE TO BINARY FILES LOOP|
+|CALCULATE IMPLIED ESCALATION RATES|
+|WHICH ASSET CLASSES BELONG TO A TRANSACTION GROUP|
+|HOW MANY ASSET CLASSES BELONG TO THE TRANSACTION GROUP|
+|THIS SHOULD BE AFTER HYDRO|
+|IT IS NOT AN ACTIVE TRANSACTION GROUP|
+|FOR PEAK AND ENERGY FORECAST|
+|CALCULATE IMPLIED ESCALATION RATES|
+|NEED TO COUNT HYDRO GROUPS|
+|NEED TO COUNT HYDRO GROUPS|
+|DOES NOT CONTRIBUTE TO TRANSACTION LOADS|
+|DOES NOT CONTRIBUTE TO TRANSACTION LOADS|
+|IT IS NOT AN ACTIVE TRANSACTION GROUP|
+|The section below requires|
+|The section below requires|
+|SUM OF TABLE CONTRIBUTIONS FOR A TG|
+|SUM OF TABLE CONTRIBUTIONS FOR A TG|
+|REVENUE FROM FIXED ENERGY PRICING|
+|REVENUE FROM DEMAND PRICING|
+|REVENUE FROM CUSTOMER PRICING|
+|REVENUE FROM FIXED ENERGY PRICING|
+|REVENUE FROM DEMAND PRICING|
+|REVENUE FROM CUSTOMER PRICING|
+|FIND THE TOTAL COST OF SERVING THE INTERVAL|
+|REPORT INTERRUPTIBLE REVENUE|
+|CUSTOMER IS ON INTERRUPTIBLE CONTRACT|
+|INTERRUPTIBLE REVENUE LOGIC|
+|across the three revenue sources|
+|across the four revenue sources|
+|across the four revenue sources|
+|Prevent uninitialized values|
+|REPLACES COMMENT which holds full name|
+|Collect list of Transaction Group Names and IDs|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
+|args to external GET_TRANS_LOAD_PROB|
+|SO THAT IT PROCESSES THE FIRST RECORD OF NEXT VARIABLE|
+|TMS 20041129 NUM_PRODUCTS increased by 2 to 15|
+|TMS added 20041129 for TVA|
+|TMS added 20041129 for TVA|
+|current value of global HOUR_IN_DAY|
+|BACK TO THE MIDAS GOLD SIMULATION SYSTEM|
+|THIS RESETS THE POINT IN THE COST CURVE|
+|DATA BASE NOT DEFINED IN THIS HOUR|
+|I need a single dimension 801 values|
+|I need a single dimension 801 values|
+|THIS RESETS THE POINT IN THE COST CURVE|
+|NATIVE LOOSING MONEY ON THE TRANSACTION|
+|MARKET LOOSING MONEY ON THE TRANSACTION|
+|DATA BASE NOT DEFINED IN THIS HOUR|
+|write hourly transfer price|
+|write hourly transfer system price|
+|WRITE DAILY REPORTS FOR ANNUAL|
+|time inversion of LP matrices|
+|DO UNTIL TRANSACTIONS ARE NO LONGER ECONOMIC OR PHYICALLY POSSIBLE|
+|MAX TRANSACTIONS AND OTHER DIAGNOSTICS|
+|NEGATIVE MARGIN MEANS I AM BETTER OFF SELLING TO MYSELF|
+|DOES THE OTHER SIDE OF THE DIAGONAL|
+|NEGATIVE MARGIN MEANS I AM BETTER OFF SELLING TO MYSELFI|
+|DELIVERED COSTS TO ALL TRANSACTION GROUPS|
+|DO UNTIL TRANSACTIONS ARE NO LONGER ECONOMIC OR PHYICALLY POSSIBLE|
+|LAST TRANSACTION WAS A BUY|
+|LAST TRANSACTION WAS A BUY|
+|BOUGHT LESS THAN THE IMPORT CONSTRAINT|
+|THIS RESETS THE POINT IN THE COST CURVE|
+|THIS RESETS THE POINT IN THE COST CURVE|
+|LAST TRANSACTION WAS A SELL|
+|WRITE DAILY REPORTS FOR ANNUAL|
+|TRANSACT GROUPS LOOP FOR ANNUAL|
+|PEAK CLIPPING AND PUMPED STORAGE|
+|A NEW WEEK OR FIRST DAY OF THE MONTH|
+|for all 168 hours of the week|
+|cannot be inferred from efficiency|
+|for all hours of the MONTH|
+|for all hours of the MONTH|
+|Using a transformation form of|
+|s Method to converge on exponent b which makes|
+|and assuming the sequence in array x is monotonic|
+|begin with an exponent whose effects are simple|
+|indicating loop not entered|
+|perturb PrevExponent slightly to get an initial slope|
+|implying no alterations made below|
+|force all but 1st value to the max|
+|Using a transformation form of|
+|s Method to converge on exponent b which makes|
+|and assuming the sequence in array x is monotonic|
+|begin with an exponent whose effects are simple|
+|indicating loop not entered|
+|perturb PrevExponent slightly to get an initial slope|
+|implying no alterations made below|
+|force all but 1st value to the max|
+|Using a transformation form of|
+|s Method to converge on exponent b which makes|
+|begin with an exponent whose effects are simple|
+|variables to a revised maximum|
+|variables to a revised minimum|
+|indicating loop not entered|
+|perturb PrevExponent slightly to get an initial slope|
+|preclude div 0 attempt below|
+|force all but 1st value to the max|
+|Move the nearest intermediate values to either extreme to make|
+|no transformation is possible|
+|only y at this rank will not be at yMin or yMax|
+|exponential transformation of interpolates|
+|the only difference from Indexed_Sort_Ascending|
+|interchange the index values|
+|REAL ESCALATED_MONTHLY_VALUE|
+|UNLESS A TABLE MARKER THIS IS THE DAY 1 RECORD|
+|for all 168 hours of the week|
+|used only if CountStartsOnly|
+|refresh indices before sorting|
+|costs above affects only the ordering|
+|exclude iHr without disturbing ContigPrices or HrInYr|
+|as ordered by decreasing ContigGain|
+|user mandated more strikes than were economic|
+|useful only for display during debugging|
+|s marg cost per GAT 20031031|
+|first for Block1 then for Block2|
+|s marg cost per GAT 20031031|
+|of second block does not increment NumStrikes for iUnit|
+|prices further down the sorted list do not get any better|
+|then retain the existing StrikeMMHHH array|
+|retain the MMHHH at the beginning of the run of contiguous hours|
+|search the list of prior runs for SuccHr|
+|only one instance indexed i2 need be matched|
+|annual value of option due to this iUnit|
+|indexed MMHHH is either same or 0|
+|useful only for examples of calls|
+|generate values for testing|
+|to get LDC before and after PS mods|
+|relative threshold for completion|
+|cannot be inferred from efficiency|
+|zero minimum required generation|
+|no loads lie above the shoulder|
+|find the ShoulderLoad which meets the TgtGenMWH|
+|or the target energy is met|
+|cannot pump and gen in same hour|
+|target generation attained|
+|probe an increment during current hour|
+|this loop must complete before the next is begun|
+|prorate generation and pump capacities to levelize shoulder loads|
+|of full nominal capacities|
+|OptimizeWeeksPumpedStorage|
+|useful only to test OptimizeWeeksPumpedStorage|
+|generate a plausible load pattern for testing|
+|TMS 20041129 NUM_PRODUCTS increased by 2 to 15|
+|TMS added 20041129 for TVA|
+|Eventually add 6x24 and 5x25 for Completeness|
+|Eventually add Sax24 and Sux24 for Completness|
+|TMS added 20041129 for TVA|
+|Eventually add Sax8 and Sux8 for Completness|
+|LINEARLY INTERPOLATE BETWEEN POINTS|
+|s okay to overwrite array MONTHLY_2ND_ENERGY_PRICE|
+|PHYSICAL AS DEFAULT FOR NOW|
+|SO THAT IT PROCESSES THE FIRST RECORD OF NEXT VARIABLE|

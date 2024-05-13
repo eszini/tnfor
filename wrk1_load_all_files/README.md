@@ -1,0 +1,32 @@
+/*
+ *
+ *	Prueba de tfor ...
+ *	parte de carga de todos los archivos del repo de fortran a memoria
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */

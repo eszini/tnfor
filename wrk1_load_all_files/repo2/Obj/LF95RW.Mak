@@ -1,0 +1,512 @@
+#THE VPATH directive indicates directories to search for source code in
+#usage of the VPATH directive will mean that some of the DIR variables will no longer be needed ...
+VPATH = c:\mdsgold\abbicap
+
+.SUFFIXES:
+
+COM1DIR  = c:\mdsgold\ABBIcap
+FOR1DIR  = c:\mdsgold\ABBIcap
+FOR2DIR  = c:\mdsgold\ABBIcap
+FOR3DIR  = c:\mdsgold\ABBIcap
+FOR4DIR  = c:\mdsgold\ABBIcap
+FOR5DIR  = c:\mdsgold\ABBIcap
+FOR6DIR  = c:\mdsgold\ABBIcap
+FOR7DIR  = c:\mdsgold\ABBIcap
+FOR8DIR  = c:\mdsgold\ABBIcap
+FOR9DIR  = c:\mdsgold\ABBIcap
+FOR10DIR  = c:\mdsgold\ABBIcap
+OBJ1DIR  = c:\MDSGOLD\ABBIcapObj
+LINK_DIR = c:\MDSGOLD\ABBIcapObj
+FOREXT = FOR
+FOR95 = FOR
+FOR90 = FOR
+F95EXE = lf95     -fix
+F95EXEnf = lf95   -nfix
+F95EXEMod = lf95  -nfix
+F95EXE90 = lf95   -fix
+F95EXExp = lf95   -fix
+
+#TRUE = .TRUE.
+
+FINAS =  $(COM1DIR)\FINASCOM.MON 
+LAM   =  $(COM1DIR)\LAMCOM.MON   
+DREPT =  $(COM1DIR)\DREPTCOM.MON 
+ENVIR =  $(COM1DIR)\ENVIRCOM.MON 
+DSMFR =  $(COM1DIR)\DSMFRCOM.MON
+DSMFN =  $(COM1DIR)\DSMFNCOM.MON
+DSM   =  $(COM1DIR)\DSMCOM.MON
+ELRPT =  $(COM1DIR)\ELRPTCOM.MON 
+8800  =  $(COM1DIR)\8800COM.MON
+RATES =  $(COM1DIR)\RATESCOM.MON
+ACRSL =  $(COM1DIR)\ACRSLCOM.MON
+
+KEPCO =  $(COM1DIR)\KEPCOCOM.MON
+OVLY  =  $(COM1DIR)\OVLYCOM.MON
+CNTR  =  $(COM1DIR)\CNTRCOM.MON
+ANNL  =  $(COM1DIR)\ANNLCOM.MON
+PALTO =  $(COM1DIR)\PALTOCOM.MON
+POOL  =  $(COM1DIR)\POOLCOM.MON
+SHRT  =  $(COM1DIR)\SHRTFORM.MON
+PROD  =  $(COM1DIR)\PRODCOM.MON  
+PROD2 =  $(COM1DIR)\PROD2COM.MON 
+PROD3 =  $(COM1DIR)\PROD3COM.MON 
+RETLS =  $(COM1DIR)\RETLSCOM.MON 
+LMGRP =  $(COM1DIR)\LMGRPCOM.MON 
+FINAN =  $(COM1DIR)\FINANCOM.MON 
+FINAC =  $(COM1DIR)\FINACCOM.MON 
+ACSTW =  $(COM1DIR)\FINACSTW.MON 
+SIZE  =  $(COM1DIR)\Modules.F95
+GLOBE =  $(COM1DIR)\GLOBECOM.MON 
+SERV  =  $(COM1DIR)\SERVCOM.MON 
+TRAN  =  $(COM1DIR)\TRANCOM.MON 
+FACET =  $(COM1DIR)\FAINTCOM.MON
+MC	  =  $(COM1DIR)\mcBTNCom.mon
+AC_EQUIV = $(COM1DIR)\AC_EQUIV.FOR
+AC_ELMEQ = $(COM1DIR)\AC_ELMEQ.FOR
+NAMES = $(COM1DIR)\NAMESCOM.MON
+MTHNM = $(COM1DIR)\MTHNMCOM.MON
+M3_ACTIVE = $(COM1DIR)\M3ACTIVE.FOR
+LPCOM =  $(COM1DIR)\LPINTCOM.MON
+SPINFUNC = $(FOR8DIR)\SpinFunc.For
+MSGINDEX = $(FOR8DIR)\MSGINDEX.FOR
+SPINLIB = $(OBJ1DIR)\SpinDriftLib.mod
+DRILLING_MOD = $(OBJ1DIR)\drilling_rept_parameters.mod
+GRXMod = $(COM1DIR)\GRXModules.F95
+RPTMod = $(COM1DIR)\RptRecControl.F95
+FigFile = $(OBJ1DIR)\LF95.FIG
+
+          
+all: COPY MSGOLDRW.exe COPYEXE
+
+COPY:
+#     COPY $(COM1DIR)\LF95SPIN $(COM1DIR)\SPINLIB.MON
+#     COPY $(COM1DIR)\MSG95RWINDEX.FOR $(COM1DIR)\MSGINDEX.FOR
+#     DEL MSGINDEX.OBJ
+
+OBJS: MODS1 OBJS3 OBJS18 OBJS16 COALOBJ  WVPA OBJS1 OBJS2  OBJS4 OBJS5 OBJS6 OBJS7 OBJS8 OBJS9 OBJS10 OBJS11 OBJS12 OBJS13 OBJS14 OBJS15  OBJS17  OBJS19  LMPOBJS
+
+MODS1:  Modules.OBJ GRXModules.OBJ RptRecControl.obj  SpinFunc.OBJ MSGProSymRevExp.obj MIDASMOD.OBJ MIDASFileIndexingRoutines.obj ABBCapacityMarketRept.obj
+
+Modules.OBJ:   $(FOR1DIR)\Modules.F95
+               $(F95EXEMod) $(FOR1DIR)\Modules.F95
+
+GRXModules.OBJ:   $(FOR1DIR)\GRXModules.F95 $(SIZE) $(RPTMod)
+                  $(F95EXEMod) $(FOR1DIR)\GRXModules.F95
+
+RptRecControl.OBJ:   $(FOR1DIR)\RptRecControl.F95 $(SIZE) $(GRXMod)
+                  $(F95EXEMod) $(FOR1DIR)\RptRecControl.F95
+
+MIDASFileIndexingRoutines.obj:   $(FOR8DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE)
+                                 $(F95EXExp) $(FOR8DIR)\$*.$(FOR95)
+
+ABBCapacityMarketRept.OBJ:   $(FOR1DIR)\ABBCapacityMarketRept.F95
+               $(F95EXE) $(FOR1DIR)\ABBCapacityMarketRept.F95
+
+SpinFunc.OBJ:   $(FOR8DIR)\$*.FOR $(SIZE)
+              $(F95EXEnf) $(FOR8DIR)\SpinFunc.FOR
+
+MSGProSymRevExp.obj:   $(FOR8DIR)\$*.$(FOR95) $(SIZE)
+                       $(F95EXExp) $(FOR8DIR)\$*.$(FOR95)
+
+MIDASMOD.OBJ:   $(FOR8DIR)\$*.$(FOR95)  $(SPINLIB) $(ANNL) $(FINAS) $(OVLY) $(PROD) $(FINAN) $(PROD2) $(LAM) $(DREPT) $(ENVIR) $(LMGRP) $(SHRT) $(SIZE) $(CNTR) $(DSM) $(DSMFR) $(TRAN) $(M3_ACTIVE) $(GLOBE) $(NAMES) $(SPINFUNC) $(MSGINDEX) $(MTHNM)
+               $(F95EXE) $(FOR8DIR)\$*.for
+
+
+WVPA:  wvpartrk.obj WVPACoopRevenueCals.obj wvpa_data_bases.obj
+
+wvpartrk.obj:   $(FOR8DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE)
+              $(F95EXExp) $(FOR8DIR)\$*.$(FOR95)
+
+WVPACoopRevenueCals.obj:   $(FOR8DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE)
+                           $(F95EXExp) $(FOR8DIR)\$*.$(FOR95)
+
+WVPA_DATA_BASES.obj:   $(FOR8DIR)\$*.$(FOR95) $(SIZE)
+                       $(F95EXExp) $(FOR8DIR)\$*.$(FOR95)
+
+OBJS1:  MIDASXP.OBJ MSGINDEX.OBJ REAENRG.OBJ MSGOLD95RW.OBJ
+
+MSGINDEX.OBJ:   $(FOR8DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE)
+              $(F95EXExp) -nsav -nchk $(FOR8DIR)\$*.$(FOR95)
+
+MIDASXP.OBJ:   $(FOR8DIR)\$*.$(FOR95)  $(SPINLIB) $(ANNL) $(FINAS) $(OVLY) $(PROD) $(FINAN) $(PROD2) $(LAM) $(DREPT) $(ENVIR) $(LMGRP) $(SHRT) $(SIZE) $(CNTR) $(DSM) $(DSMFR) $(TRAN) $(M3_ACTIVE) $(GLOBE) $(NAMES) $(SPINFUNC) $(MSGINDEX) $(MTHNM)
+               $(F95EXE) $(FOR8DIR)\$*.for
+
+MSGOLD95RW.OBJ:   $(FOR8DIR)\$*.$(FOR95) $(SIZE)
+              $(F95EXE) $(FOR8DIR)\$*.for
+
+REAENRG.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(KEPCO) $(LAM) $(SIZE) $(CNTR) $(KEPCO) $(PROD) $(TRAN)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+
+OBJS2: MUNIREV.OBJ STARTOVL.OBJ DSSCREEN.OBJ ECONINTR.OBJ INTERG82.OBJ
+
+MUNIREV.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SIZE) $(PALTO) $(OVLY) $(SERV) $(DSMFR) $(RETLS)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+STARTOVL.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(OVLY) $(SIZE)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+DSSCREEN.OBJ: $(FOR5DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(SPINFUNC)
+              $(F95EXE) $(FOR5DIR)\$*.$(FOR95)
+
+ECONINTR.OBJ: $(FOR5DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(GLOBE) $(ANNL) $(POOL)
+              $(F95EXE) $(FOR5DIR)\$*.$(FOR95)
+
+INTERG82.OBJ: $(FOR3DIR)\$*.$(FOR95) $(SIZE) $(KEPCO)
+              $(F95EXE) $(FOR3DIR)\$*.$(FOR95)
+
+
+OBJS3: CLS_RUNS.OBJ NEWPKSHF.OBJ MSGOUTPT.OBJ MSGMMPYB.OBJ FINANBSE.OBJ
+	
+NEWPKSHF.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SIZE)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+MSGOUTPT.OBJ: $(FOR3DIR)\$*.$(FOR95)  $(SPINLIB) $(KEPCO) $(SERV) $(PALTO) $(FINAN) $(PROD2) $(ENVIR) $(DSMFR) $(SHRT) $(SIZE) $(KEPCO) $(M3_ACTIVE) $(RPTMod)
+              $(F95EXE) -nchk -nchkglobal $(FOR3DIR)\$*.$(FOR95)
+
+MSGMMPYB.OBJ: $(FOR5DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(MTHNM)
+	      $(F95EXE) $(FOR5DIR)\$*.$(FOR95)
+
+FINANBSE.OBJ: $(FOR4DIR)\$*.$(FOR95) $(SPINLIB) $(PROD2) $(FINAN) $(LAM) $(DSMFR) $(ENVIR) $(SHRT) $(RETLS) $(SIZE) $(KEPCO) $(TRAN)
+              $(F95EXE) $(FOR4DIR)\$*.$(FOR95)
+
+CLS_RUNS.OBJ: $(FOR5DIR)\$*.$(FOR95) $(SPINLIB) $(FINAC) $(SIZE)
+              $(F95EXE) $(FOR5DIR)\$*.$(FOR95)
+
+
+OBJS4: MSGMMINP.OBJ FINACELM.OBJ ERRORMSG.OBJ SNSZMDS.OBJ
+
+MSGMMINP.OBJ: $(FOR3DIR)\$*.$(FOR95) $(SPINLIB) $(FINAC) $(SIZE) $(ACSTW) $(KEPCO)
+              $(F95EXE) $(FOR3DIR)\$*.$(FOR95)
+
+FINACELM.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(FINAC) $(SIZE) $(GLOBE) $(AC_ELMEQ)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+ERRORMSG.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(SPINFUNC) $(SIZE)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+SNSZMDS.OBJ:  $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(LAM) $(OVLY) $(DSM) $(8800) $(RETLS) $(SIZE) $(KEPCO) $(TRAN)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+
+OBJS5: DSSLAM.OBJ LDPROB01.OBJ ELREPORT.OBJ CF_OBJT.OBJ FP_OBJT.OBJ
+
+DSSLAM.OBJ:   $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(PROD) $(LAM) $(OVLY) $(8800) $(SIZE) $(TRAN) $(RETLS)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+LDPROB01.OBJ: $(FOR2DIR)\$*.$(FOR95) $(8800) $(PROD) $(SIZE)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+ELREPORT.OBJ: $(FOR5DIR)\$*.$(FOR95) $(PROD) $(PROD2) $(PROD3) $(ELRPT) $(SIZE)
+              $(F95EXE) $(FOR5DIR)\$*.$(FOR95)
+
+CF_OBJT.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(KEPCO)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+FP_OBJT.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(LAM) $(RETLS) $(TRAN)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+
+OBJS6: CATAWBA.OBJ CPL_OBJT.OBJ UP_OBJT.OBJ RPTH_OBJ.OBJ LMG_OBJT.OBJ
+
+CATAWBA.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SIZE) 
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+CPL_OBJT.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(GLOBE)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+UP_OBJT.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+RPTH_OBJ.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SIZE)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+LMG_OBJT.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+
+OBJS7: MSGMMASB.OBJ MSGMMCOM.OBJ TRNSFRM3.OBJ MAINOVL.OBJ CLOSFILE.OBJ
+
+MSGMMASB.OBJ: $(FOR4DIR)\$*.$(FOR95) $(SPINLIB) $(FINAS) $(OVLY) $(SIZE) $(MTHNM)
+              $(F95EXE) $(FOR4DIR)\$*.$(FOR95)
+
+MSGMMCOM.OBJ: $(FOR4DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(GLOBE)
+              $(F95EXE) $(FOR4DIR)\$*.$(FOR95)
+
+TRNSFRM3.OBJ: $(FOR2DIR)\$*.$(FOR95) $(OVLY) $(LAM) $(SIZE) $(TRAN)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+MAINOVL.OBJ:  $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(SPINFUNC)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95) -nsav
+
+CLOSFILE.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SIZE) $(DREPT)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+
+OBJS8: EC_OBJT.OBJ FN_OBJT.OBJ MSGMMFV.OBJ POSTFIX.OBJ IN_OBJT.OBJ
+
+EC_OBJT.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+FN_OBJT.OBJ: $(FOR3DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE)
+              $(F95EXE) $(FOR3DIR)\$*.$(FOR95)
+
+MSGMMFV.OBJ: $(FOR4DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE)
+              $(F95EXE) $(FOR4DIR)\$*.$(FOR95)
+
+POSTFIX.OBJ: $(FOR5DIR)\$*.$(FOR95) $(SPINLIB) $(GLOBE) $(SIZE)
+              $(F95EXE) $(FOR5DIR)\$*.$(FOR95)
+
+IN_OBJT.OBJ: $(FOR3DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE)
+              $(F95EXE) $(FOR3DIR)\$*.$(FOR95)
+
+
+OBJS9: PF_OBJT.OBJ MSGNORM.OBJ MSGANDEC.OBJ AA_OBJT.OBJ FI_OBJT.OBJ
+
+PF_OBJT.OBJ: $(FOR5DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE)
+              $(F95EXE) $(FOR5DIR)\$*.$(FOR95)
+
+MSGNORM.OBJ: $(FOR3DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(PROD) $(FINAN) $(CNTR) $(ANNL) $(DSM) $(LAM) $(DSMFR) $(ENVIR) $(TRAN) $(PROD2) $(DREPT) $(GRXMod) $(RPTMod)
+              $(F95EXE) $(FOR3DIR)\$*.$(FOR95)
+
+MSGANDEC.OBJ: $(FOR3DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(PROD) $(FINAN) $(CNTR) $(ANNL) $(DSM) $(LAM) $(DSMFR) $(ENVIR) $(TRAN) $(PROD2) $(DREPT) $(SPINFUNC)
+              $(F95EXE) $(FOR3DIR)\$*.$(FOR95)
+
+AA_OBJT.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(KEPCO) $(SIZE)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+FI_OBJT.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+
+OBJS10: FC_OBJT.OBJ FE_OBJT.OBJ DE_OBJT.OBJ FUELUSED.OBJ CLREPORT.OBJ 
+
+FC_OBJT.OBJ: $(FOR5DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE)
+              $(F95EXE) $(FOR5DIR)\$*.$(FOR95)
+
+FE_OBJT.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(PROD) $(SIZE)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+DE_OBJT.OBJ: $(FOR5DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(ANNL)
+              $(F95EXE) $(FOR5DIR)\$*.$(FOR95)
+
+FUELUSED.OBJ: $(FOR5DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE)
+              $(F95EXE) $(FOR5DIR)\$*.$(FOR95)
+
+CLREPORT.OBJ: $(FOR7DIR)\$*.$(FOR95) $(SPINLIB) $(CNTR) $(ANNL) $(PROD) $(LAM) $(PROD2) $(ENVIR) $(POOL) $(PROD3) $(SIZE) $(TRAN) $(RPTMod)
+              $(F95EXE) $(FOR7DIR)\$*.$(FOR95)
+
+
+OBJS11: PICADISP.OBJ PN_OBJT.OBJ ENRGLIMT.OBJ EN_OBJT.OBJ DR_BOTH2.OBJ
+
+PICADISP.OBJ: $(FOR7DIR)\$*.$(FOR95) $(SPINLIB) $(PROD) $(PROD3) $(PROD2) $(SIZE) $(RPTMod)
+              $(F95EXE) $(FOR7DIR)\$*.$(FOR95)
+
+PN_OBJT.OBJ: $(FOR7DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE)
+              $(F95EXE) $(FOR7DIR)\$*.$(FOR95)
+
+ENRGLIMT.OBJ: $(FOR7DIR)\$*.$(FOR95) $(SPINLIB) $(PROD) $(PROD2) $(POOL) $(ELRPT) $(SIZE) $(NAMES) $(MTHNM)
+              $(F95EXE) $(FOR7DIR)\$*.$(FOR95)
+
+EN_OBJT.OBJ: $(FOR7DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(ENVIR)
+              $(F95EXE) $(FOR7DIR)\$*.$(FOR95)
+
+DR_BOTH2.OBJ: $(FOR7DIR)\$*.$(FOR95) $(SPINLIB) $(CNTR) $(ANNL) $(PROD) $(PROD2) $(ENVIR) $(POOL) $(PROD3) $(KEPCO) $(SIZE)
+              $(F95EXE) $(FOR7DIR)\$*.$(FOR95)
+
+
+OBJS12: DSEX_OBJ.OBJ BFIL_OBJ.OBJ FINDOVLS.OBJ FINACLP2.OBJ msgmmrev.OBJ
+
+DSEX_OBJ.OBJ: $(FOR7DIR)\$*.$(FOR95) $(SIZE) $(KEPCO) $(SPINFUNC) $(RPTMod)
+              $(F95EXE) $(FOR7DIR)\$*.$(FOR95)
+
+BFIL_OBJ.OBJ: $(FOR7DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE)
+              $(F95EXE) $(FOR7DIR)\$*.$(FOR95) -nsav
+
+FINDOVLS.OBJ: $(FOR7DIR)\$*.$(FOR95) $(SPINLIB) $(OVLY) $(SIZE) $(SPINFUNC)
+              $(F95EXE) $(FOR7DIR)\$*.$(FOR95)
+
+FINACLP2.OBJ: $(FOR3DIR)\$*.$(FOR95) $(FINAC) $(SIZE) $(ACRSL)
+              $(F95EXE) $(FOR6DIR)\$*.$(FOR95)
+
+msgmmrev.OBJ: $(FOR5DIR)\$*.$(FOR95) $(SPINLIB) $(FINAC) $(SIZE) $(ACSTW) $(NAMES)  $(MTHNM) $(GRXMod)
+              $(F95EXE) $(FOR5DIR)\$*.$(FOR95)
+
+
+OBJS13: MSGMMDBT.OBJ MSGMMEA.OBJ MSGMMExpRevCash.OBJ msgmmadm.OBJ msgmmfa.OBJ 
+
+MSGMMDBT.OBJ:  $(FOR4DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(NAMES) $(GLOBE) $(MTHNM) $(ACRSL) $(M3_ACTIVE) $(DRILLING_MOD)
+              $(F95EXE) $(FOR4DIR)\$*.$(FOR95)
+
+MSGMMEA.OBJ:  $(FOR4DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(GLOBE) $(MTHNM) $(M3_ACTIVE) $(DRILLING_MOD)
+              $(F95EXE) $(FOR4DIR)\$*.$(FOR95)
+
+MSGMMExpRevCash.OBJ: $(FOR4DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(NAMES)  $(GLOBE) $(MTHNM) $(ACSTW) $(M3_ACTIVE) $(DRILLING_MOD)
+                     $(F95EXE) $(FOR4DIR)\$*.$(FOR95)
+
+msgmmadm.OBJ: $(FOR4DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(NAMES) $(GLOBE) $(MTHNM) $(M3_ACTIVE)
+              $(F95EXE) $(FOR4DIR)\$*.$(FOR95)
+
+msgmmfa.OBJ: $(FOR4DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(MTHNM) $(DRILLING_MOD)
+              $(F95EXE) $(FOR4DIR)\$*.$(FOR95) -nsav
+
+OBJS14: FINNUCFL.OBJ msgmmDfD.OBJ MSGMMTAX.OBJ SERVICAC.OBJ DSM_OBJT.OBJ
+
+FINNUCFL.OBJ:  $(FOR3DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE)
+              $(F95EXE) $(FOR3DIR)\$*.$(FOR95)
+
+msgmmDfD.OBJ: $(FOR4DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(M3_ACTIVE)
+              $(F95EXE) $(FOR4DIR)\$*.$(FOR95)
+
+MSGMMTAX.OBJ: $(FOR4DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(MTHNM)
+              $(F95EXE) $(FOR4DIR)\$*.$(FOR95)
+
+SERVICAC.OBJ: $(FOR4DIR)\$*.$(FOR95) $(SPINLIB) $(GLOBE) $(LAM) $(SIZE) $(SERV) $(NAMES) $(TRAN)
+              $(F95EXE) $(FOR4DIR)\$*.$(FOR95)
+
+DSM_OBJT.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(DSM) $(RETLS) $(SIZE) $(LAM) $(DSMFN) $(GLOBE) $(KEPCO) $(TRAN)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+
+OBJS15: MSGMMout.OBJ PP_OBJT.OBJ ESRN_OBJ.OBJ SF_OBJT.OBJ CO_OBJT.OBJ
+
+MSGMMout.OBJ:  $(FOR4DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(NAMES) $(GLOBE) $(MTHNM)
+              $(F95EXE) $(FOR4DIR)\$*.$(FOR95)
+
+PP_OBJT.OBJ: $(FOR7DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE)
+              $(F95EXE) $(FOR7DIR)\$*.$(FOR95)
+
+ESRN_OBJ.OBJ: $(FOR3DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(GRXMod)
+              $(F95EXE) $(FOR3DIR)\$*.$(FOR95)
+
+SF_OBJT.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(GLOBE)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+CO_OBJT.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(FINAN) $(RETLS) $(LAM) $(TRAN)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+
+OBJS15: CAT2OBJT.OBJ NEWFRED2.OBJ EL_OBJT.OBJ CT_OBJT.OBJ OBJTFUNC.OBJ
+
+CAT2OBJT.OBJ: $(FOR5DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(GLOBE)
+              $(F95EXE) $(FOR5DIR)\$*.$(FOR95)
+
+NEWFRED2.OBJ: $(FOR3DIR)\$*.$(FOR95) $(SPINLIB) $(LAM) $(SIZE) $(KEPCO) $(TRAN)
+              $(F95EXE) $(FOR3DIR)\$*.$(FOR95)
+
+EL_OBJT.OBJ: $(FOR7DIR)\$*.$(FOR95) $(SPINLIB) $(PROD) $(PROD2) $(SIZE) $(GLOBE)
+              $(F95EXE) $(FOR7DIR)\$*.$(FOR95)
+
+CT_OBJT.OBJ: $(FOR3DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(CNTR) $(ANNL) $(GLOBE)
+              $(F95EXE) $(FOR3DIR)\$*.$(FOR95)
+
+OBJTFUNC.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SIZE)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+
+OBJS16: ANDECOMP.OBJ RDI_OBJT.OBJ CAP_OBJT.OBJ CN_OBJT.OBJ LPMatinv.OBJ
+
+ANDECOMP.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+RDI_OBJT.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+              
+CAP_OBJT.OBJ: $(FOR7DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(GLOBE) $(GRXMod)
+              $(F95EXE) $(FOR7DIR)\$*.$(FOR95)
+
+CN_OBJT.OBJ: $(FOR7DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE)
+              $(F95EXE) $(FOR7DIR)\$*.$(FOR95)
+
+LPMatinv.OBJ: $(FOR1DIR)\$*.$(FOR90) $(SIZE) $(LPCOM)
+	      $(F95EXE90) $(FOR1DIR)\$*.$(FOR90)
+
+
+OBJS17: FACALG.OBJ LPSolver.OBJ DR_BOOTH.OBJ TF_OBJT.OBJ GAS_OBJT.OBJ TF_OBJT2.OBJ WH_OBJT.OBJ
+	
+FACALG.OBJ: $(FOR1DIR)\$*.$(FOR90) $(SPINLIB) $(FACET) $(SIZE)
+              $(F95EXE90) $(FOR1DIR)\$*.$(FOR90)
+
+LPSolver.OBJ: $(FOR1DIR)\$*.$(FOR90) $(SIZE) $(LPCOM)
+	  $(F95EXE90) $(FOR1DIR)\$*.$(FOR90)
+              
+DR_BOOTH.OBJ: $(FOR7DIR)\$*.$(FOR95) $(SPINLIB) $(CNTR) $(ANNL) $(PROD) $(PROD2) $(ENVIR) $(POOL) $(PROD3) $(KEPCO) $(SIZE) $(LAM) $(TRAN)
+              $(F95EXE) $(FOR7DIR)\$*.$(FOR95)
+
+TF_OBJT.obj: $(FOR7DIR)\$*.$(FOR95) $(SPINLIB) $(TRAN) $(SIZE) $(GRXMod) $(RPTMod)
+              $(F95EXE)  $(FOR7DIR)\$*.$(FOR95)
+              
+GAS_OBJT.obj: $(FOR7DIR)\$*.$(FOR95) $(SPINLIB) $(TRAN) $(SIZE) $(RPTMod)
+              $(F95EXE)  $(FOR7DIR)\$*.$(FOR95)
+              
+TF_OBJT2.obj: $(FOR7DIR)\$*.$(FOR95) $(SPINLIB) $(TRAN) $(SIZE)
+              $(F95EXE)  $(FOR7DIR)\$*.$(FOR95)
+              
+WH_OBJT.OBJ: $(FOR7DIR)\$*.$(FOR95) $(SPINLIB) $(TRAN) $(SIZE)
+              $(F95EXE)  $(FOR7DIR)\$*.$(FOR95)
+
+
+OBJS18: CLA_OBJT.OBJ CLM_OBJT.OBJ MSGMMSB6.OBJ MSGMMSB6B.OBJ PRO_COST.OBJ MARGNOBJ.OBJ
+	
+CLA_OBJT.OBJ: $(FOR7DIR)\$*.$(FOR95) $(SPINLIB) $(PROD) $(SIZE) $(KEPCO) $(PROD2) $(ANNL) $(GLOBE) $(GRXMod) $(RPTMod)
+              $(F95EXE)  $(FOR7DIR)\$*.$(FOR95)
+
+CLM_OBJT.OBJ: $(FOR2DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(TRAN)
+              $(F95EXE) $(FOR2DIR)\$*.$(FOR95)
+
+MSGMMSB6.OBJ: $(FOR6DIR)\$*.$(FOR95) $(SPINLIB) $(KEPCO) $(FINAC) $(SIZE) $(GLOBE) $(ACSTW) $(ACRSL) $(AC_EQUIV) $(M3_ACTIVE)
+              $(F95EXE) $(FOR6DIR)\$*.$(FOR95)
+
+MSGMMSB6B.OBJ: $(FOR6DIR)\$*.$(FOR95) $(SPINLIB) $(KEPCO) $(FINAC) $(SIZE) $(GLOBE) $(ACSTW) $(ACRSL) $(AC_EQUIV) $(M3_ACTIVE)
+               $(F95EXE) $(FOR6DIR)\$*.$(FOR95)
+
+PRO_COST.OBJ: $(FOR7DIR)\$*.$(FOR95) $(SPINLIB) $(CNTR) $(ANNL) $(PROD) $(PROD2) $(LAM) $(ENVIR) $(POOL) $(PROD3) $(ELRPT) $(KEPCO) $(SIZE) $(OVLY) $(TRAN) $(SPINFUNC) $(GRXMod)
+              $(F95EXE)  $(FOR7DIR)\$*.$(FOR95)
+
+MARGNOBJ.OBJ: $(FOR7DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(GLOBE) $(KEPCO) $(MC) $(RPTMod)
+              $(F95EXE)  $(FOR7DIR)\$*.$(FOR95)
+
+
+OBJS19: TRANSOBJ.obj 
+
+TRANSOBJ.OBJ: $(FOR7DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(GLOBE) $(KEPCO) $(MC) $(RPTMod)
+              $(F95EXE)  $(FOR7DIR)\$*.$(FOR95)
+
+COALOBJ: Coal_Model_Modules.OBJ CNWMSUBS.OBJ Coal_Main_Prg.OBJ Coal_Vector_Obj.OBJ coal_modules_makeovl.obj
+
+Coal_Model_Modules.OBJ: $(FOR7DIR)\$*.F90
+              $(F95EXE) -fix $(FOR7DIR)\$*.F90 -chk
+
+CNWMSUBS.OBJ: $(FOR7DIR)\$*.F90 $(FOR7DIR)\Coal_Model_Modules.F90 $(FOR7DIR)\Coal_Main_Prg.f90
+              $(F95EXE) -fix $(FOR7DIR)\$*.F90 -chk
+
+Coal_Main_Prg.OBJ: $(FOR7DIR)\$*.F90   $(FOR7DIR)\CNWMSUBS.F90 $(FOR7DIR)\Coal_Model_Modules.F90
+              $(F95EXE) -fix $(FOR7DIR)\$*.F90 -chk
+
+Coal_modules_makeovl.OBJ: $(FOR7DIR)\$*.F90 $(FOR7DIR)\Coal_Model_Modules.F90 $(FOR7DIR)\Coal_Model_Modules.F90
+              $(F95EXE) -fix $(FOR7DIR)\$*.F90 -chk
+
+Coal_Vector_Obj.OBJ: $(FOR7DIR)\$*.F90 $(FOR7DIR)\Coal_Model_Modules.F90 $(FOR7DIR)\Coal_Model_Modules.F90
+              $(F95EXE) -fix $(FOR7DIR)\$*.F90 -chk
+
+LMPOBJS: TRANSOBJ2.OBJ  # LMPModules.OBJ LMP_Routines.OBJ
+
+#LMPModules.OBJ:   $(FOR10DIR)\LMPModules.F95
+#               $(F95EXEMod) $(FOR10DIR)\LMPModules.F95
+
+#LMP_Routines.OBJ:   $(FOR10DIR)\LMP_Routines.F95
+#               $(F95EXEMod) $(FOR10DIR)\LMP_Routines.F95
+
+TRANSOBJ2.OBJ: $(FOR10DIR)\$*.$(FOR95) $(SPINLIB) $(SIZE) $(GLOBE) $(KEPCO) $(MC) $(RPTMod)
+               $(F95EXE)  $(FOR10DIR)\$*.$(FOR95)
+
+############################
+##That wraps up the objects
+############################
+
+MSGOLDRW.exe: OBJS
+   lf95 -nc  -stack 1000000  -EXE MSGOLDRW  @LF95RW.lnk
+
+COPYEXE:
+   echo Done!
+

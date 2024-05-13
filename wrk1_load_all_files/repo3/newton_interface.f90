@@ -1,0 +1,42 @@
+!     ******************************************************************
+      MODULE NEWTON_INTERFACE
+       USE IREC_ENDPOINT_CONTROL
+       INTERFACE 
+         REAL FUNCTION NEWTON_MRKT_PRICE_SEARCH(MIN_POINT,MAX_POINT, &
+                                             MIN_CO2,MAX_CO2,CO2_CAP) &
+                                                                RESULT(NEW_PRICE)
+            REAL (KIND=4), OPTIONAL :: MIN_POINT,MAX_POINT,MIN_CO2,MAX_CO2,CO2_CAP
+         END FUNCTION
+!--------
+         LOGICAL FUNCTION ABS_ERROR(A,B,DELTA) RESULT(ARE_EQUAL)
+            REAL (KIND=4) :: A,B
+            REAL (KIND=4), OPTIONAL :: DELTA
+         END FUNCTION
+!--------
+         REAL FUNCTION NEWTON_ABAT_PRICE_SEARCH(MIN_POINT,MAX_POINT, &
+                                             MIN_CO2,MAX_CO2,CO2_CAP) &
+                                                                RESULT(NEW_PRICE)
+            REAL (KIND=4), OPTIONAL :: MIN_POINT,MAX_POINT,MIN_CO2,MAX_CO2,CO2_CAP
+         END FUNCTION
+!--------
+         REAL FUNCTION GRX_CO2_OTHER_ABATEMENTS_AV(YEAR,CO2_PRICE,CO2_CREDITS)
+            REAL (KIND=4), OPTIONAL :: CO2_PRICE,CO2_CREDITS
+            INTEGER (KIND=2) :: YEAR
+         END FUNCTION
+!--------
+         REAL FUNCTION GRX_CO2_INTRL_ABATEMENTS_AV(YEAR,CO2_PRICE,CO2_CREDITS)
+            REAL (KIND=4), OPTIONAL :: CO2_PRICE,CO2_CREDITS
+            INTEGER (KIND=2) :: YEAR
+         END FUNCTION
+!--------
+         REAL FUNCTION GRX_CO2_DOMISIC_ABATEMENTS_AV(YEAR,CO2_PRICE,CO2_CREDITS)
+            REAL (KIND=4), OPTIONAL :: CO2_PRICE,CO2_CREDITS
+            INTEGER (KIND=2) :: YEAR
+         END FUNCTION
+!--------
+!         SUBROUTINE GRX_ITER_RESULTS(TG,CONVER_CREDITS_USED,CONVER_CREDITS_COST)
+!          INTEGER (KIND=2) :: TG
+!          REAL (KIND=4), OPTIONAL :: CONVER_CREDITS_USED,CONVER_CREDITS_COST
+!         END SUBROUTINE
+        END INTERFACE
+      END MODULE

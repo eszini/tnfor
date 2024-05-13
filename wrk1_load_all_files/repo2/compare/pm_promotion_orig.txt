@@ -1,0 +1,55 @@
+        module pm_promotion
+            use prim_mover_idx
+            implicit none
+            contains
+              function promote_pm(pm)
+              integer*2 :: promote_pm
+              integer*2, intent(in) :: pm
+              promote_pm=pm
+              
+!             ISSUE: promoting pm to pm used by OW - definitely wrong
+              ! Incrementing PM by two for Battery and DG
+                   IF(PM == 16) THEN
+                      promote_pm = 18
+                   ELSEIF(PM == 17) THEN ! What is DG being promoted to?
+                      promote_pm = 19 ! DG
+                   ENDIF
+                   
+
+              end function promote_pm
+			  
+			  function promote_tft_for_trid(FT, PM)
+			  integer*2 :: FT, PM, promote_tft_for_trid, TFT
+			    TFT=FT
+				
+				! Only valid if FT==6. Checking to ensure it wasn't
+				! called accidentally.
+				if(FT/=pm_ic) THEN ! 6
+					stop ! TODO: Add STOP write
+				ENDIF
+				
+				IF(PM == pm_fc) THEN ! 2
+				   TFT = pm_na
+				ELSEIF(PM == pm_ge) THEN !3
+				   TFT = pm_nu
+				ELSEIF(PM == pm_na) THEN !7
+				   TFT = pm_sl           !9
+				ELSEIF(PM == pm_sl) THEN !9 - Promotes to 10
+				   TFT = pm_st           !10
+				ELSEIF(PM == pm_wt) THEN !11
+				   TFT = pm_wt           !11
+				ELSEIF(PM == pm_zz) THEN !12
+				   TFT = pm_zz           !12
+				ELSEIF(pm == pm_ba) THEN !16
+				   TFT = pm_bi ! BATTERY (14 isn't "battery" - it's pm_bi)
+				ELSEIF(pm == pm_dg) THEN
+				   TFT = pm_lf ! DG 
+				ELSE
+				   TFT = pm_default ! Default
+				ENDIF
+
+				
+				promote_tft_for_trid=TFT
+			  end function promote_tft_for_trid
+			  
+        end module pm_promotion

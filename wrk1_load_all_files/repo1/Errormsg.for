@@ -1,0 +1,290 @@
+C     Last change: MSG 9/23/2009 2:02:46 PM
+C***********************************************************************
+C
+C     SUBROUTINE TO PRINT ABNORMAL PROGRAM EXIT
+C
+C***********************************************************************
+C
+      SUBROUTINE ERROR_MESSAGE
+      USE REALWIN
+      INCLUDE 'SPINLIB.MON'
+      INCLUDE 'SIZECOM.MON'
+      CHARACTER*256 FILE_IN,FILE_SEARCH,CURRENT_DIRECTORY*256
+      INTEGER*4 FILSIZ,IOS
+      INTEGER*2 START_LINE,ISERROR
+      INTEGER*2 ROW,COL
+      INTEGER*4 CURRENT_SCREEN(1024)
+      LOGICAL*1 MESSAGE,DEBUG_ON,NO_WARNING_WINDOW,WARNING_MESSAGES
+      INTEGER*2 INVERSE_VIDEO,I
+      LOGICAL*1 USER_TERMINATED
+      COMMON /ERRORS/ INVERSE_VIDEO,MESSAGE,DEBUG_ON,USER_TERMINATED
+      INTEGER*2 BASE_YEAR,MAX_YEARS
+      CHARACTER*2  DATA_DRIVE
+      COMMON /WORLD/ BASE_YEAR,MAX_YEARS
+      COMMON /DATA_DRIVE_LOCATION/ DATA_DRIVE
+      INTEGER*2 RETURN_DRILLING_REPORT_STATUS,VOID_INT2
+      LOGICAL*1 DATA_NOT_IN_CASH_DRILLING,
+     +          DATA_NOT_IN_BALANCE_DRILLING,
+     +          DATA_NOT_IN_INCOME_DRILLING,
+     +          DATA_NOT_IN_TAX_DRILLING,
+     +          SP_CAPEX_ACTIVE
+      LOGICAL*4 OPEN_LOGICAL
+      CHARACTER*5 GET_SCENAME
+      INTEGER*4 SIMDONE_HANDLE,NUMBER_OF_BYTES
+      CHARACTER*15 EXIT_CODE
+      LOGICAL*4 SIMDONE_DELETED
+
+      VOID_INT2=RETURN_DRILLING_REPORT_STATUS(DATA_NOT_IN_CASH_DRILLING,
+     +                                     DATA_NOT_IN_BALANCE_DRILLING,
+     +                                     DATA_NOT_IN_INCOME_DRILLING,
+     +                                     DATA_NOT_IN_TAX_DRILLING)
+      IF(DATA_NOT_IN_TAX_DRILLING) THEN
+         CALL ERASE('MSG'//TRIM(GET_SCENAME())//'.XDD')
+         CALL ERASE('MSGTXDRL.RPT')
+      ENDIF
+      IF(DATA_NOT_IN_CASH_DRILLING) THEN
+         CALL ERASE('MSG'//TRIM(GET_SCENAME())//'.CDD')
+         CALL ERASE('MSGCHDRL.RPT')
+      ENDIF
+      IF(DATA_NOT_IN_BALANCE_DRILLING) THEN
+         CALL ERASE('MSG'//TRIM(GET_SCENAME())//'.BDD')
+         CALL ERASE('MSGBLDRL.RPT')
+      ENDIF
+      IF(DATA_NOT_IN_INCOME_DRILLING) THEN
+         CALL ERASE('MSG'//TRIM(GET_SCENAME())//'.DID')
+         CALL ERASE('MSGINDRL.RPT')
+      ENDIF
+
+      IF(MESSAGE .AND. .NOT. USER_TERMINATED) THEN
+      CALL CAPTSCN(CURRENT_SCREEN)
+      CALL SETATTRW(int2(4),INVERSE_VIDEO)
+
+      ROW = 8
+      CALL LOCATEW(4,ROW,14)
+      CALL PRINTW(4,"ษอออออออออออออออออออออออออออออออออออออออออออออออป")
+      CALL LOCATEW(4,ROW+1,14)
+      CALL PRINTW(4,"บ           MIDAS GOLD ended abnormally!        บ")
+      CALL LOCATEW(4,ROW+2,14)
+      CALL PRINTW(4,"บ  Press any key.  Then use Print Screen to     บ")
+      CALL LOCATEW(4,ROW+3,14)
+      CALL PRINTW(4,"บ  record the problem.  Call M.S. Gerber &      บ")
+      CALL LOCATEW(4,ROW+4,14)
+      CALL PRINTW(4,"บ  Associates at (614) 486-6711 to report it.   บ")
+      CALL LOCATEW(4,ROW+5,14)
+      CALL PRINTW(4,"บ  Once recorded, press any key to continue.    บ")
+      CALL LOCATEW(4,ROW+6,14)
+      CALL PRINTW(4,"ศอออออออออออออออออออออออออออออออออออออออออออออออผ")
+      CALL ANYKEY
+      CALL DISPSCN(CURRENT_SCREEN)
+      CALL ANYKEY
+      CALL LOCATEW(4,ROW+7,0)
+      ENDIF
+      WARNING_MESSAGES = FILSIZ(DATA_DRIVE//'MIDAS.ERR') > 10
+      IF(WARNING_MESSAGES .AND. .NOT. MESSAGE .AND. .NOT.USER_TERMINATED 
+     +                                   .AND. NO_WARNING_WINDOW()) THEN
+         START_LINE = 8
+         COL = 14
+         CALL SETATTRW(int2(4),INVERSE_VIDEO)
+         CALL LOCATEW(4,START_LINE,COL)
+         CALL PRINTW(4,"ษอออออออออออออออออออออออออออออออออออออออออป")
+         CALL LOCATEW(4,START_LINE+1,COL)
+         IF(DEBUG_ON) THEN
+            CALL PRINTW(4,"บ    Debug information was generated.     บ")
+         ELSE
+            CALL PRINTW(4,"บ    Warning messages were generated.     บ")
+         ENDIF
+         CALL LOCATEW(4,START_LINE+2,COL)
+         CALL PRINTW(4,"บ    Select Warning Messages in the       บ")
+         CALL LOCATEW(4,START_LINE+3,COL)
+         IF(DEBUG_ON) THEN
+            CALL PRINTW(4,"บ    Simulation sub-menu to review it.    บ")
+         ELSE
+            CALL PRINTW(4,"บ    Simulation sub-menu to review them.  บ")
+         ENDIF
+         CALL LOCATEW(4,START_LINE+4,COL)
+         CALL PRINTW(4,"บ        Press any key to continue.       บ")
+         CALL LOCATEW(4,START_LINE+5,COL)
+         CALL PRINTW(4,"ศอออออออออออออออออออออออออออออออออออออออออผ")
+         CALL ANYKEY
+         CALL LOCATE(START_LINE+6,0)
+      ENDIF
+C 
+C ERASE OVERLAY BINARY FILES
+C
+C
+C IN LAHEY 3.x THE ARGUMENT LIST IS AS BELOW
+      CALL CURDIR(DATA_DRIVE(1:1),CURRENT_DIRECTORY)
+      IF(LEN(TRIM(CURRENT_DIRECTORY)) .GT. 3) CURRENT_DIRECTORY = 
+     +                                    TRIM(CURRENT_DIRECTORY)//'\'
+      FILE_SEARCH = TRIM(CURRENT_DIRECTORY)//"OL*.BIN"
+      CALL ERASEWC(FILE_SEARCH)
+C 
+C ERASE BASE BINARY FILES
+C
+      FILE_SEARCH = TRIM(CURRENT_DIRECTORY)//"BC*.BIN"
+      CALL ERASEWC(FILE_SEARCH)
+C 
+C ERASE BASE BINARY FILES
+C
+      CLOSE(8800,STATUS='DELETE',IOSTAT=IOS)
+      FILE_SEARCH = TRIM(CURRENT_DIRECTORY)//"MSGFUAST.BIN"
+      CALL ERASE(FILE_SEARCH)
+      FILE_SEARCH = TRIM(CURRENT_DIRECTORY)//"SIMSTART"
+      CALL ERASE(FILE_SEARCH)
+      IF(SP_CAPEX_ACTIVE()) CALL EXIT(17)
+
+      INQUIRE(UNIT=10,OPENED=OPEN_LOGICAL) 
+      IF(OPEN_LOGICAL) CLOSE(10)
+      FILE_SEARCH = TRIM(CURRENT_DIRECTORY)//"SIMDONE.LOG"
+      CALL ERASE(FILE_SEARCH)
+      OPEN(10,FILE=FILE_SEARCH,STATUS='NEW')
+     
+
+      SCREEN_MESSAGES = "SIMDONE DELETED"
+      CALL MG_LOCATE_WRITE(18,70,TRIM(SCREEN_MESSAGES),3,2)
+      CALL RW_PROCESS_MESSAGES()
+
+      CALL MG_LOCATE_WRITE(18,70,TRIM(SCREEN_MESSAGES),3,2)
+      CALL RW_PROCESS_MESSAGES()
+
+      SCREEN_MESSAGES = "Writing Log File"
+      CALL MG_LOCATE_WRITE(18,70,TRIM(SCREEN_MESSAGES),3,2)
+      CALL RW_PROCESS_MESSAGES()
+
+      
+      IF(USER_TERMINATED) THEN
+         WRITE(10,*) '14 Exit Code'
+         CLOSE(10)
+          EXIT_CODE = '14 Exit Code'
+
+         CALL EXIT(14)
+      ELSEIF(MESSAGE) THEN
+         IF(WARNING_MESSAGES) THEN
+           WRITE(10,*) '15 Exit Code'
+           CLOSE(10)
+            EXIT_CODE = "15 Exit Code"
+
+            CALL EXIT(15)
+         ELSE   
+           WRITE(10,*) '16 Exit Code'
+           CLOSE(10)
+            EXIT_CODE = "16 Exit Code"
+
+            CALL EXIT(16)
+         ENDIF
+      ELSE
+         IF(WARNING_MESSAGES) THEN
+           WRITE(10,*) '18 Exit Code'
+           CLOSE(10)
+            EXIT_CODE = "18 Exit Code"
+ 
+            CALL EXIT(18)
+         ELSE   
+           WRITE(10,'(A)') '17 Exit Code'
+           CLOSE(10)
+
+            SCREEN_MESSAGES = "Log File is Written"
+            CALL MG_LOCATE_WRITE(18,70,TRIM(SCREEN_MESSAGES),3,2)
+            CALL RW_PROCESS_MESSAGES()
+            CALL EXIT(17)
+         ENDIF
+      ENDIF
+
+      RETURN
+      END
+	  
+	  
+	  
+	  
+	  
+      SUBROUTINE CRITICAL_ERROR_MSG(ERR_NUM)
+      use end_routine, only: end_program, er_message
+
+      INCLUDE 'SPINLIB.MON'
+      INCLUDE 'SIZECOM.MON'
+      CHARACTER*(*) FILE_NAME, base_file_definition 
+      character*(*) :: base_file_family
+      CHARACTER*152 ISO_ERR_MESSAGE
+      INTEGER*2 ENDYR,BASE_YEAR,NBLANK
+      INTEGER ERR_NUM
+      INTEGER IOS
+      SELECT CASE(ERR_NUM)
+      CASE (1)
+            WRITE(4,1010) 'No study name was specified.'
+      CASE (2)
+            WRITE(4,1010) 'File MSGPARM.VAL was not found.'
+            WRITE(4,1010) 'Select View/Set Parameters'
+            WRITE(4,1010) 'to create this file.'
+      CASE (4)
+            WRITE(4,1010) 'The MSGPARM.VAL file is empty or bad.'
+      CASE (5)
+            WRITE(4,'(A,I4,A,I4)') ' Last forecast year, ',ENDYR(),
+     +           ' is less than or equal to base year, ',BASE_YEAR(),'.'
+            WRITE(4,'(A)') ' Last forecast year '//
+     +                             'MUST be greater than the base year.'
+      CASE DEFAULT
+            WRITE(4,1010) 'Unidentified critical error.'
+      END SELECT
+      er_message='See WARNING MESSAGES -Errormsg.for-1'
+      call end_program(er_message)
+  
+  
+! function critical_error_msg6
+      ENTRY CRITICAL_ERROR_MSG6(base_file_definition, 
+     + base_file_family,FILE_NAME)
+
+       
+      er_message="errormsg-2: File " //
+     +  TRIM(FILE_NAME) // " for " //
+     + "base file family=" // trim(base_file_family) //
+     + " does not exist."
+       
+	   WRITE(4,1010) trim(er_message)
+
+      call end_program(er_message)
+      ENTRY CRITICAL_ERROR_MSG7
+         WRITE(4,1010) 'System forecast chosen.  '//
+     +                                     'No forecast file specified.'
+      er_message='See WARNING MESSAGES -Errormsg.for-3'
+      call end_program(er_message)
+      ENTRY CRITICAL_ERROR_MSG8
+         WRITE(4,1010) 'A Run Specs file for this version of MIDAS'//
+     +                 ' Gold was not specified. Version'
+         WRITE(4,1010) '4A2 and later has split the Run Specs and '//
+     +                 'Detail Reports file of earlier'
+         WRITE(4,1010) 'versions into separate files and moved other'//
+     +                 ' items to the Production'
+         WRITE(4,1010) 'Parameters file. Creating these new files '//
+     +                 'takes 15-20 minutes.'
+         WRITE(4,1010) 'Call for help when doing this. Thank you.'
+
+      er_message='See WARNING MESSAGES -Errormsg.for-4'
+      call end_program(er_message)
+      ENTRY CRITICAL_ERROR_FORECAST_FILE(FILE_NAME,IOS)
+         CALL IOSTAT_MSG(IOS,ISO_ERR_MESSAGE)
+
+         WRITE(4,1010) 'There is a problem reading file: '//
+     +                   TRIM(FILE_NAME)//'.'
+         WRITE(4,'(A,I3,A)')' The run-time error code is ',MOD(IOS,246),
+     +                      '.  The run-time error message is:'
+         IF(NBLANK(ISO_ERR_MESSAGE) <= 76) THEN
+            WRITE(4,1010) TRIM(ISO_ERR_MESSAGE)
+         ELSE
+            WRITE(4,1010) ISO_ERR_MESSAGE(1:76)
+
+            WRITE(4,1010) TRIM(ISO_ERR_MESSAGE(76:))
+         ENDIF
+         CALL LOCATE(3,50)
+
+      er_message='See WARNING MESSAGES -Errormsg.for-5'
+      call end_program(er_message)
+ 1010 FORMAT(1X,A,I8,A)
+      END
+      SUBROUTINE SEE_WARNING_MESSAGES()
+         CHARACTER (LEN=30) :: ERROR_MESSAGE
+         CALL FLUSH(9)
+         CALL FLUSH(4)
+         ERROR_MESSAGE = "See Warning Messages"
+         CALL ERROR(ERROR_MESSAGE)
+      END SUBROUTINE
+

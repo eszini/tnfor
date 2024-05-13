@@ -1,0 +1,2025 @@
+Compiler: lf95.exe
+Compiler arguments: -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib 
+SOURCEDIR:  ../ABBICAP
+F95EXE:   lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib 
+F95EXEnf:   lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib 
+F95EXEMod:  lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib 
+F95EXE90:   lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib 
+F95EXExp:   lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib 
+LF_PATH:   C:\LF9573\Bin
+- selected COMPILER_ARGS: -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib 
+LIBS: -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib 
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/Coal_Model_Modules.F90
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/params.f90
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/prod_arrays_dimensions.f90
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/spindriftlib.f90
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/filemod.f90
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/logging_decs.f90
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/string.f90
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/ft_interfaces.f90
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/Abb_CapMarketRptData.f90
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/CapacityOptionsFileResourceIndexes.f90
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/esrn_decs.f90
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/capacity_options_fixed_variables.f90
+Compiling program unit PROD_ARRAYS_DIMENSIONS at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/prod_arrays_dimensions.f90.
+Compiling file ../ABBICAP/prod_arrays_dimensions.f90.
+Compiling program unit filemod at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/filemod.f90.
+Compiling file ../ABBICAP/filemod.f90.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/co2_cap_n_trade.f90
+Compiling program unit params at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/params.f90.
+Compiling program unit STATE_POSTAL_CODES at line 1:
+Compiling program unit COAL_MODEL_INPUT_TO_cnw at line 20:
+Compiling program unit COAL_cnw_FILES_READ_INPUT at line 219:
+Compiling program unit CoalModelOutputsFromCNW at line 291:
+Compiling program unit CoalModelVectorFileInterface at line 308:
+Compiling file ../ABBICAP/params.f90.
+Compiling program unit CONVERT_TO_ANNUAL_VALUES at line 364:
+Compiling program unit ArrayAllocationInterface at line 438:
+Compiling program unit COAL_SUPPLY_INPUTS at line 807:
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit ft_interfaces at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/ft_interfaces.f90.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/co2_market_abatement_curves.f90
+Compiling file ../ABBICAP/ft_interfaces.f90.
+Compiling program unit logging_decs at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/logging_decs.f90.
+Compiling file ../ABBICAP/logging_decs.f90.
+Compiling program unit SpinDriftLib at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/spindriftlib.f90.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit string at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/string.f90.
+Compiling file ../ABBICAP/spindriftlib.f90.
+Compiling file ../ABBICAP/string.f90.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  -c ../ABBICAP/icap_results.f90
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit ABB_CapMarketRptData at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/Abb_CapMarketRptData.f90.
+Compiling file ../ABBICAP/Abb_CapMarketRptData.f90.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit CapOptionsFileResourceIndexes at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/CapacityOptionsFileResourceIndexes.f90.
+Compiling file ../ABBICAP/CapacityOptionsFileResourceIndexes.f90.
+Compiling program unit CAPACITY_OPTIONS_FIXED_VARS at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/capacity_options_fixed_variables.f90.
+Compiling file ../ABBICAP/capacity_options_fixed_variables.f90.
+Compiling program unit CO2_CAP_N_TRADE at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/co2_cap_n_trade.f90.
+Compiling program unit COAL_BASIN_MAKEBIN_INPUTS at line 823:
+Compiling program unit COAL_TRANSPORT_MAKE_INPUTS at line 840:
+Compiling program unit PLANT_DEMAND_MAKEBIN_INPUTS at line 852:
+Compiling program unit GENERIC_DEMAND_MAKEBIN_INPUTS at line 895:
+Compiling program unit COAL_CONTRACTS_MAKEBIN_INPUTS at line 917:
+Compiling program unit COAL_SO2_INFO_MAKEBIN_INPUTS at line 942:
+Compiling file ../ABBICAP/co2_cap_n_trade.f90.
+Compiling program unit SO2_Scrubber_COAL_MODEL_DATA at line 959:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/Coal_Model_Modules.F90.
+Compiling file ../ABBICAP/Coal_Model_Modules.F90.
+Compiling program unit co2_market_abatement_curves at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/co2_market_abatement_curves.f90.
+Compiling file ../ABBICAP/co2_market_abatement_curves.f90.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/WinFileFindData.for
+cp ../realwin/Realwin/*.mod .
+Compiling program unit ICAP_RESULTS at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/icap_results.f90.
+Compiling file ../ABBICAP/icap_results.f90.
+Compiling program unit esrn_decs at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/esrn_decs.f90.
+Compiling file ../ABBICAP/esrn_decs.f90.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/pms.f90
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/drilling_rept_params.f90
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/cla_decs.f90
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/midas_decs.f90
+Compiling program unit WinFileFindData at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/WinFileFindData.for.
+Compiling file ../ABBICAP/WinFileFindData.for.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  -f95 ../ABBICAP/procost_data.f90
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit pms at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/pms.f90.
+Compiling file ../ABBICAP/pms.f90.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/clreport_routines.f90
+Compiling program unit cla_decs at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/cla_decs.f90.
+Compiling file ../ABBICAP/cla_decs.f90.
+Compiling program unit DRILLING_REPT_PARAMETERS at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/drilling_rept_params.f90.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/clreport_decs.f90
+Compiling file ../ABBICAP/drilling_rept_params.f90.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit midas_decs at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/midas_decs.f90.
+Compiling file ../ABBICAP/midas_decs.f90.
+Compiling program unit procost_data at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/procost_data.f90.
+Compiling file ../ABBICAP/procost_data.f90.
+Compiling program unit clreport_decs at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/clreport_decs.f90.
+Compiling file ../ABBICAP/clreport_decs.f90.
+Compiling program unit clreport_routines at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/clreport_routines.f90.
+Compiling file ../ABBICAP/clreport_routines.f90.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/escalation_variables.f90
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit ESCALATION_VARIABLES at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/escalation_variables.f90.
+Compiling file ../ABBICAP/escalation_variables.f90.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  -f95 ../ABBICAP/mmrev_decs.f90
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/tran_c_variables.f90
+Compiling program unit mmrev_decs at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/mmrev_decs.f90.
+Compiling file ../ABBICAP/mmrev_decs.f90.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  -fix ../ABBICAP/MIDASFileIndexingRoutines.FOR
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit TRAN_C_VARIABLES at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/tran_c_variables.f90.
+Compiling file ../ABBICAP/tran_c_variables.f90.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/end_routine.f90
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/kepcocom.f90
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  -fix ../ABBICAP/ABBCapacityMarketRept.f90
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/capacity_arrays.f90
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/capacity_options_alloc_vars.f90
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit INDEX_THIS_DETAILED_REPORT at line 1:
+Compiling program unit CAL_BYTE_POSITION at line 834:
+Compiling program unit INDEXING_FILE_HEADER_INFO at line 846:
+Compiling program unit INT_INDEX_SORT at line 877:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/MIDASFileIndexingRoutines.FOR.
+Compiling file ../ABBICAP/MIDASFileIndexingRoutines.FOR.
+Compiling program unit end_routine at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/end_routine.f90.
+Compiling file ../ABBICAP/end_routine.f90.
+Compiling program unit ABB_CapacityMarketReport at line 1:
+Compiling program unit ABB_CapacityMarketReptHeader at line 91:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/ABBCapacityMarketRept.f90.
+Compiling program unit capacity_arrays at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/capacity_arrays.f90.
+Compiling file ../ABBICAP/ABBCapacityMarketRept.f90.
+Compiling file ../ABBICAP/capacity_arrays.f90.
+Compiling program unit kepcocom at line 1:
+  1061-W: "../ABBICAP/kepcocom.f90", line 41, column 23: Name 'EL_ALLOCATE_POINTR' already specified in a type declaration statement.
+Encountered 0 errors, 1 warning in file ../ABBICAP/kepcocom.f90.
+Compiling program unit CAPACITY_OPTIONS_ALLOC_VARS at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/capacity_options_alloc_vars.f90.
+Compiling file ../ABBICAP/kepcocom.f90.
+Compiling file ../ABBICAP/capacity_options_alloc_vars.f90.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/modules.f95
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/logging.f90
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/COAL_VECTOR_OBJ.F90
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit CONVERSTION_ROUTINES at line 1:
+Compiling program unit logging at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/logging.f90.
+Compiling program unit INTERNAL_OPERATION_SWITCHES at line 193:
+Compiling program unit BASE_FILE_NAMES_FROM_BFIL_OBJ at line 198:
+Compiling program unit IREC_ENDPOINT_CONTROL at line 210:
+Compiling program unit SIZE_ARRAY_DIMENSIONS at line 239:
+Compiling program unit PROCSAVE_COMMON at line 249:
+Compiling file ../ABBICAP/logging.f90.
+Compiling program unit FINANCIAL_SWITCHES_COMMON at line 259:
+Compiling program unit SPCapExVariables at line 271:
+Compiling program unit LH_GLOBAL_VARIABLES at line 304:
+Compiling program unit TRANS_GROUP_VARIABLES at line 310:
+Compiling program unit COAL_ESCALATIONS_MAKEBIN_INPUTS at line 1:
+Compiling program unit ANNUAL_MARG_COSTS_ALLOCAT_ARRAYS at line 321:
+Compiling program unit HourlyProductsData at line 420:
+Compiling program unit StoreHourlyProductFiles at line 455:
+Compiling program unit COAL_ESCALATION_VECTORS_DATA at line 33:
+Compiling program unit READ_HOURLY_PRODUCT_FILES at line 510:
+Compiling program unit MakingCalendarAdjustments at line 670:
+Compiling program unit GET_HOURLY_PRODUTION_DATA at line 753:
+Compiling program unit GET_DAILY_PRODUTION_DATA at line 769:
+Compiling program unit COAL_ESCALATIONS_MAKEBIN at line 40:
+Compiling program unit READ_COAL_ESCALATION_FILE at line 133:
+Compiling program unit RETURN_COAL_VECTOR at line 219:
+Compiling program unit COAL_ESCALATIONS_MAKEOVL at line 244:
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/miscmod.f90
+Compiling program unit RESET_VECTORS_OL at line 327:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/COAL_VECTOR_OBJ.F90.
+Compiling program unit ResetActiveHourlyProducts at line 794:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/modules.f95.
+Compiling file ../ABBICAP/COAL_VECTOR_OBJ.F90.
+Compiling file ../ABBICAP/modules.f95.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/filename_tracker.f90
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/DE_OBJT.FOR
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/newton_interface.f90
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/cla_objt_arrays.f90
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/FN_OBJT.FOR
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  -f95 ../ABBICAP/spinfunc.for
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  -nsav -nchk  ../ABBICAP/msgindex.for
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/msgmmdfd.for
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/msgmmdbt.for
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/WVPARTRK.FOR
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/CATAWBA.FOR
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/CF_OBJT.FOR
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/CLM_OBJT.FOR
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/Cls_runs.for
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/enrglimt.for
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  -fix ../ABBICAP/Coal_Main_Prg.F90
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/annlcommon.f90
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/CO_OBJT.FOR
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/NEWPKSHF.FOR
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/cal_marginal_interface.f90
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/ECONINTR.FOR
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/dr_both2.for
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/DSM_OBJT.FOR
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/DSSLAM.FOR
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/EC_OBJT.FOR
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/ELREPORT.FOR
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/facalg.for
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/FINACELM.FOR
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/finaclp2.for
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/FP_OBJT.FOR
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/interg82.for
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit INDEX_RESULT_FILES at line 1:
+Compiling program unit FILE_INQUIRE_95 at line 262:
+Compiling program unit FILE_INQUIRE at line 284:
+Compiling program unit LAHEY_LF95 at line 308:
+Compiling program unit ERASEWC at line 316:
+Compiling program unit Sec2Date at line 346:
+Compiling program unit StoreWINDOWS_Info at line 420:
+Compiling program unit MyName at line 445:
+Compiling program unit ERROR_BOX at line 454:
+Compiling program unit WRITE_CONSOL_LINE at line 464:
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit WRITE_LF77_SCREEN at line 468:
+Compiling program unit WRITE_INVERSE_VIDEO at line 472:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/msgindex.for.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/LDPROB01.FOR
+Compiling file ../ABBICAP/msgindex.for.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit SpinFuncLocals at line 1:
+  3101-W: "../ABBICAP/spinfunc.for", line 9, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 14, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 18, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 77, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 78, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 79, column 10: Length selector of type specifier is not standard-conforming.
+  3204-W: "../ABBICAP/spinfunc.for", line 80: Type of equivalence object is not standard-conforming.
+  3204-W: "../ABBICAP/spinfunc.for", line 81: Type of equivalence object is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 87, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit cls at line 91:
+Compiling program unit cls4 at line 107:
+Compiling program unit cls3 at line 124:
+Compiling program unit cls2 at line 136:
+Compiling program unit cls1 at line 150:
+Compiling program unit cls0 at line 166:
+Compiling program unit IsError at line 182:
+  3101-W: "../ABBICAP/spinfunc.for", line 183, column 8: Length selector of type specifier is not standard-conforming.
+Compiling program unit GetDrive at line 188:
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/LMG_OBJT.FOR
+Compiling program unit CurDir at line 201:
+Compiling program unit GetArgs at line 219:
+  3101-W: "../ABBICAP/spinfunc.for", line 225, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 230, column 10: Length selector of type specifier is not standard-conforming.
+  3205-W: "../ABBICAP/spinfunc.for", line 234, column 8: Intrinsic procedure 'GETCL' is not standard-conforming.
+Compiling program unit iScroll at line 253:
+  3101-W: "../ABBICAP/spinfunc.for", line 255, column 8: Length selector of type specifier is not standard-conforming.
+Compiling program unit KeyAvail at line 263:
+  3101-W: "../ABBICAP/spinfunc.for", line 265, column 8: Length selector of type specifier is not standard-conforming.
+Compiling program unit ClrKb at line 274:
+  3205-W: "../ABBICAP/spinfunc.for", line 281, column 8: Intrinsic procedure 'FLUSH' is not standard-conforming.
+Compiling program unit ReadKey at line 283:
+  3101-W: "../ABBICAP/spinfunc.for", line 287, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 288, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit AnyKey at line 299:
+  3101-W: "../ABBICAP/spinfunc.for", line 303, column 10: Length selector of type specifier is not standard-conforming.
+  3205-W: "../ABBICAP/spinfunc.for", line 305, column 8: Intrinsic procedure 'FLUSH' is not standard-conforming.
+Compiling program unit GetCh at line 317:
+  3101-W: "../ABBICAP/spinfunc.for", line 321, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 323, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit escape at line 384:
+  3101-W: "../ABBICAP/spinfunc.for", line 386, column 8: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 388, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 389, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit AppendNullTerm at line 399:
+Compiling program unit TrapDosError at line 408:
+  3101-W: "../ABBICAP/spinfunc.for", line 413, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit DisplayCString at line 417:
+  3101-W: "../ABBICAP/spinfunc.for", line 422, column 11: Length selector of type specifier is not standard-conforming.
+Compiling program unit erase at line 430:
+Compiling program unit SetChr at line 442:
+  3101-W: "../ABBICAP/spinfunc.for", line 446, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit copy at line 450:
+  3205-W: "../ABBICAP/spinfunc.for", line 464, column 8: Intrinsic procedure 'SYSTEM' is not standard-conforming.
+Compiling program unit FilSiz at line 467:
+  3101-W: "../ABBICAP/spinfunc.for", line 469, column 8: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 472, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 473, column 10: Length selector of type specifier is not standard-conforming.
+  3109-W: "../ABBICAP/spinfunc.for", line 475, column 41: FLEN specifier is not standard-conforming.
+Compiling program unit Clk at line 484:
+Compiling program unit Dat at line 492:
+Compiling program unit Tone2 at line 500:
+  3101-W: "../ABBICAP/spinfunc.for", line 503, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit QuickR at line 507:
+  3101-W: "../ABBICAP/spinfunc.for", line 513, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 514, column 7: Length selector of type specifier is not standard-conforming.
+Compiling program unit QuickI at line 541:
+  3101-W: "../ABBICAP/spinfunc.for", line 546, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 547, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit ConditionalQuickI at line 574:
+  3101-W: "../ABBICAP/spinfunc.for", line 579, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 580, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit VideoTyp at line 607:
+  3101-W: "../ABBICAP/spinfunc.for", line 609, column 8: Length selector of type specifier is not standard-conforming.
+Compiling program unit VideoMod at line 618:
+  3101-W: "../ABBICAP/spinfunc.for", line 622, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit CaptScn at line 627:
+  3101-W: "../ABBICAP/spinfunc.for", line 632, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit DispScn at line 641:
+  3101-W: "../ABBICAP/spinfunc.for", line 646, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit CurOn at line 654:
+Compiling program unit locate_22 at line 668:
+  3101-W: "../ABBICAP/spinfunc.for", line 674, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 675, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit locate_24 at line 681:
+  3101-W: "../ABBICAP/spinfunc.for", line 682, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 683, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 684, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit locate_42 at line 690:
+  3101-W: "../ABBICAP/spinfunc.for", line 691, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 692, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 693, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit locate_44 at line 699:
+  3101-W: "../ABBICAP/spinfunc.for", line 700, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 701, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit ClrScr at line 707:
+Compiling program unit SetAttr at line 714:
+  3101-W: "../ABBICAP/spinfunc.for", line 717, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit PrintS at line 722:
+Compiling program unit UpCase at line 758:
+Compiling program unit LowCase at line 769:
+Compiling program unit UpC at line 779:
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit LwC at line 795:
+Compiling program unit WINDBUF at line 810:
+  3101-W: "../ABBICAP/spinfunc.for", line 819, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 820, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit OPENWIND at line 823:
+  3101-W: "../ABBICAP/spinfunc.for", line 827, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit SETATTRW at line 829:
+  3101-W: "../ABBICAP/spinfunc.for", line 832, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit FILLB at line 834:
+  3101-W: "../ABBICAP/spinfunc.for", line 838, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit BLDB at line 841:
+  3101-W: "../ABBICAP/spinfunc.for", line 845, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit CLRW at line 848:
+  3101-W: "../ABBICAP/spinfunc.for", line 851, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit LOCATEW_444 at line 853:
+  3101-W: "../ABBICAP/spinfunc.for", line 855, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit LOCATEW_442 at line 857:
+  3101-W: "../ABBICAP/spinfunc.for", line 859, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 860, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit LOCATEW_424 at line 862:
+  3101-W: "../ABBICAP/spinfunc.for", line 864, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 865, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit LOCATEW_422 at line 867:
+  3101-W: "../ABBICAP/spinfunc.for", line 869, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 870, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit LOCATEW_244 at line 872:
+  3101-W: "../ABBICAP/spinfunc.for", line 874, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 875, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit LOCATEW_242 at line 877:
+  3101-W: "../ABBICAP/spinfunc.for", line 879, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 880, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit LOCATEW_224 at line 882:
+  3101-W: "../ABBICAP/spinfunc.for", line 884, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 885, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit LOCATEW_222 at line 887:
+  3101-W: "../ABBICAP/spinfunc.for", line 889, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit PRINTW at line 891:
+Compiling program unit OPENVS at line 896:
+  3101-W: "../ABBICAP/spinfunc.for", line 899, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit CLSVS at line 901:
+  3101-W: "../ABBICAP/spinfunc.for", line 904, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit LOCVS at line 906:
+  3101-W: "../ABBICAP/spinfunc.for", line 909, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit PRINTV at line 911:
+  3101-W: "../ABBICAP/spinfunc.for", line 914, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit VIEW at line 917:
+  3101-W: "../ABBICAP/spinfunc.for", line 920, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit InitDAFile at line 922:
+  3101-W: "../ABBICAP/spinfunc.for", line 931, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 933, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit GetDAFileRecLen at line 952:
+  3101-W: "../ABBICAP/spinfunc.for", line 955, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit NextRecord at line 964:
+  3101-W: "../ABBICAP/spinfunc.for", line 966, column 8: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 967, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 968, column 10: Length selector of type specifier is not standard-conforming.
+  3101-W: "../ABBICAP/spinfunc.for", line 969, column 10: Length selector of type specifier is not standard-conforming.
+Compiling program unit WriteStarNA at line 978:
+Encountered 0 errors, 88 warnings in file ../ABBICAP/spinfunc.for.
+Compiling file ../ABBICAP/spinfunc.for.
+Compiling program unit FN_OBJECT at line 1:
+Compiling program unit OPTIONS_FIN_CHECK at line 286:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/FN_OBJT.FOR.
+Compiling program unit filename_tracker at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/filename_tracker.f90.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/LPMatinv.for
+Compiling file ../ABBICAP/FN_OBJT.FOR.
+Compiling file ../ABBICAP/filename_tracker.f90.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/lpsolver.for\
+
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit DE_OBJECT at line 1:
+Compiling program unit DETAILED_REPORTS_OBJECT at line 961:
+Compiling program unit SAVE_CHR_DETAILED_RPT_SWITCHES at line 2198:
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/mainovl.for -nsav
+Compiling program unit DUKE_TOTAL_CAPACITY_CHARGES at line 1:
+Compiling program unit DUKE_CAPACITY_CHARGES at line 127:
+Compiling program unit DUKE_RELIABILITY_EXCHANGE at line 324:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/CATAWBA.FOR.
+Compiling program unit REPORTING_ASSET_CLASS at line 2285:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/DE_OBJT.FOR.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/msgmmadm.for
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling file ../ABBICAP/CATAWBA.FOR.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/msgmmasb.for
+Compiling file ../ABBICAP/DE_OBJT.FOR.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/msgmmcom.for
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/Msgmminp.for
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  -fix ../ABBICAP/MSGMMOUT.for
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/msgmmpyb.for
+Compiling program unit WVPA_RATE_STRUCTURE_OBJECT at line 1:
+Compiling program unit WVPA_PROCESS_RATE_STRUCTURES at line 177:
+Compiling program unit DD_OBJECT at line 1:
+Compiling program unit WVPA_COOP_SALES_FORECAST at line 421:
+Compiling program unit WVPA_RATES_TRACKER_OBJECT at line 707:
+Compiling program unit WVPA_TRACKING_TYPE at line 2117:
+Compiling program unit WVPA_RESOURCE_TRACKING_TYPE at line 2141:
+Compiling program unit WVPA_FUEL_TRACKING_TYPE at line 2164:
+Compiling program unit WVPA_MEM_TRACKING_TYPE at line 2186:
+Compiling program unit WVPA_PROCESS_ACTUAL_PURCHASED_POWER at line 2206:
+Compiling program unit WVPA_SPECIAL_REPORT_VARIABLES at line 2779:
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  -fix ../ABBICAP/MSGMMSB6B.FOR
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/newfred2.for
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/OBJTFUNC.FOR
+Compiling program unit DEFERRED_DEBITS at line 358:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/msgmmdfd.for.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/PF_OBJT.FOR
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/PN_OBJT.FOR
+Compiling file ../ABBICAP/msgmmdfd.for.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit WVPA_TRACKER_DATA_BASE at line 2933:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/WVPARTRK.FOR.
+Compiling program unit CF_OBJECT at line 1:
+Compiling program unit CS_OBJECT at line 446:
+Compiling program unit CH_OBJECT at line 588:
+Compiling program unit CALCULATE_CLASS_PEAKS at line 714:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/CF_OBJT.FOR.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling file ../ABBICAP/WVPARTRK.FOR.
+Compiling file ../ABBICAP/CF_OBJT.FOR.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit FINANCIAL_RUN_SWITCHES at line 1:
+Compiling program unit CLASS_RUN_SWITCHES_OBJECT at line 5:
+Compiling program unit INIT_CLASS_RUN_SWITCH_FILE at line 442:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/Cls_runs.for.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/POSTFIX.FOR
+Compiling file ../ABBICAP/Cls_runs.for.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/pp_objt.for
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/RDI_OBJT.FOR
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/REAENRG.FOR
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/RPTH_OBJ.FOR
+Compiling program unit ENRGLIMT at line 1:
+Compiling program unit HYDRIN at line 773:
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/Servicac.for
+Compiling program unit PKSHIF at line 1456:
+Compiling program unit MAINT_SCHEDULER at line 1:
+Compiling program unit IRSORT1 at line 1595:
+Compiling program unit I2SORT1 at line 1625:
+Compiling program unit CHECK_ALLOC_STATUS at line 1654:
+Compiling program unit INCORPORATE_MAINT at line 1670:
+Compiling program unit UPDATE_LIB_MS at line 1705:
+Compiling program unit ALLOC_WEEKS_MAINT at line 1737:
+Compiling program unit ALLOC_MONTHS_MAINT at line 1758:
+Compiling program unit ALLOC_MAINT_BYMO at line 1787:
+Compiling program unit MMDD_AT at line 1841:
+Compiling program unit RANGE_COVERS at line 1850:
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/SF_OBJT.FOR
+Compiling program unit GET_DAY_RANGE_THISMO at line 1861:
+Compiling program unit ACCUMULATE_LOADS at line 1872:
+Compiling program unit OPTIMAL_DAY1 at line 1889:
+Compiling program unit GetFailRepTimes at line 1937:
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit MixRand32 at line 2087:
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/SNSZMDS.FOR
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit OFPEAK at line 1729:
+Compiling program unit EL_POOL_COSTS_AND_UNIT_REPORTS at line 1897:
+Compiling program unit PEAK_SALE at line 4533:
+Compiling program unit WKP_BFP_PURCHASE at line 4587:
+Compiling program unit WRITE_ASSET_PROD_REPORT at line 4888:
+Compiling program unit Integrate at line 5013:
+Compiling program unit iRan32 at line 20:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/CLM_OBJT.FOR.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/transobj.for
+Compiling file ../ABBICAP/CLM_OBJT.FOR.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/TRNSFRM3.FOR
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/wh_objt.for
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/WVPACoopRevenueCals.FOR
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/WVPA_DATA_BASES.FOR
+Compiling program unit LDC_2_HOURS at line 5030:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/enrglimt.for.
+Compiling program unit COAL_SUPPLY_MAKEBIN at line 1:
+Compiling program unit NEW_ECONOMY_INTERCHANGE at line 1:
+Compiling program unit COAL_BASIN_MAKEBIN at line 123:
+Compiling program unit COAL_TRANSPORTATION_LINKS_MAKEBIN at line 219:
+Compiling program unit PLANT_DEMAND_MAKEBIN at line 329:
+Compiling program unit GENERIC_DEMAND_MAKEBIN at line 470:
+Compiling program unit COAL_CONTRACTS_MAKEBIN at line 580:
+Compiling program unit COAL_SO2_INFO_MAKEBIN at line 679:
+Compiling file ../ABBICAP/enrglimt.for.
+Compiling program unit SRP_NEW_ECONOMY_INTERCHANGE at line 791:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/ECONINTR.FOR.
+Compiling program unit RESET_COAL_PRICE_MODEL_OL_CODES at line 780:
+Compiling program unit READ_BASIN_SUPPLY_SO2_DATA at line 804:
+Compiling program unit READ_PLANT_CONTRACT_DEMAND_LINK_DATA at line 962:
+Compiling program unit READ_GENERIC_PLANT_DEMAND_LINK_DATA at line 1605:
+Compiling program unit ROUTE_ESCALATIONS at line 1819:
+Compiling program unit COAL_MODEL_REPORTS at line 1845:
+Compiling program unit SO2_MARKETS_YR_BASED_VALUES at line 2145:
+Compiling program unit COAL_REPORT_CZ at line 2272:
+Compiling program unit COAL_REPORT_FS at line 2286:
+Compiling program unit COAL_REPORT_SS at line 2297:
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit cal_marginal_interface at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/cal_marginal_interface.f90.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling file ../ABBICAP/ECONINTR.FOR.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling file ../ABBICAP/cal_marginal_interface.f90.
+Compiling program unit COAL_REPORT_HEADER at line 2309:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/Coal_Main_Prg.F90.
+Compiling file ../ABBICAP/Coal_Main_Prg.F90.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit LODANAL at line 1:
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit TYPLOT at line 234:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/DSSLAM.FOR.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling file ../ABBICAP/DSSLAM.FOR.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit CONVOL at line 1:
+Compiling program unit ELDC_Y_AXIS_VALUE at line 90:
+Compiling program unit LOLP_ANALYSIS at line 128:
+Compiling program unit COLAPSE at line 239:
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit MOVE_UNIT at line 268:
+Compiling program unit INITIALIZE_CONTRACTS_WKP at line 297:
+Compiling program unit INITIALIZE_CONTRACTS at line 1117:
+Compiling program unit CONTRACTS at line 1691:
+Compiling program unit TIER_2_OBJECT at line 2293:
+Compiling program unit SURPLUS_CAP_OBJECT at line 2312:
+Compiling program unit ENERGY_ONLY_PRICE_OBJECT at line 2671:
+Compiling program unit ELIMINATIONS_OBJECT at line 1:
+Compiling program unit FIND_CLASSIFICATION at line 297:
+Compiling program unit NON_CASH_ITEM at line 455:
+Compiling program unit COMPLETE_STATEMENTS at line 470:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/FINACELM.FOR.
+Compiling program unit ENRG_LIMITED_REPORT at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/ELREPORT.FOR.
+Compiling program unit CONTRACT_3808 at line 2691:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/dr_both2.for.
+Compiling program unit HaltWith at line 1:
+Compiling program unit CkAllocSt at line 55:
+Compiling program unit ChkReLim at line 72:
+Compiling program unit Sort at line 81:
+Compiling program unit wnaa at line 114:
+Compiling program unit GetOneDigit at line 122:
+Compiling program unit FindOptCostByFacets at line 135:
+Compiling program unit Nearly0 at line 224:
+Compiling program unit IntegralPower at line 242:
+Compiling program unit InnerProduct at line 258:
+Compiling program unit yInterpolate at line 270:
+Compiling program unit GaussianDen at line 278:
+Compiling program unit CCNFmd at line 305:
+Compiling file ../ABBICAP/FINACELM.FOR.
+Compiling file ../ABBICAP/dr_both2.for.
+Compiling file ../ABBICAP/ELREPORT.FOR.
+Compiling program unit ASSET_FINANCING at line 1:
+Compiling program unit DIVIDENDS_CONVERGED at line 1703:
+Compiling program unit miscmod at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/miscmod.f90.
+Compiling program unit EC_OBJECT at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/EC_OBJT.FOR.
+Compiling program unit RAMORT at line 1783:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/finaclp2.for.
+Compiling file ../ABBICAP/finaclp2.for.
+Compiling file ../ABBICAP/EC_OBJT.FOR.
+Compiling file ../ABBICAP/miscmod.f90.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit CO_OBJECT at line 1:
+Compiling program unit LOADPROB at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/LDPROB01.FOR.
+Compiling program unit COST_OF_SERVICE at line 190:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/CO_OBJT.FOR.
+Compiling file ../ABBICAP/LDPROB01.FOR.
+Compiling file ../ABBICAP/CO_OBJT.FOR.
+Compiling program unit CALC_CONTRACT_ENERGY at line 1:
+Compiling program unit FIND_MAXIMUM_ENERGY at line 288:
+Compiling program unit NEW_PEAK_SHIFT at line 398:
+Compiling program unit TWO_AREAS at line 688:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/NEWPKSHF.FOR.
+Compiling program unit FP_OBJECT at line 1:
+Compiling program unit PRICE_FEEDBACK_OBJECT at line 157:
+Compiling program unit SAVE_SURPLUS_DELTA at line 399:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/FP_OBJT.FOR.
+Compiling file ../ABBICAP/NEWPKSHF.FOR.
+Compiling file ../ABBICAP/FP_OBJT.FOR.
+Compiling program unit NormalOrd at line 316:
+Compiling program unit MDSLDCAP at line 1:
+Compiling program unit DSM_CAPITAL_ITEMS at line 2583:
+Compiling program unit DSM_BOOK_DEP_CAL at line 2740:
+Compiling program unit GET_DSM_VAR at line 2843:
+Compiling program unit DSM_TAX_DEP_CAL at line 2873:
+Compiling program unit ZERO_DSM_RESULTS at line 2985:
+Compiling program unit DSM_DATA_CALLS at line 3011:
+Compiling program unit ANNLCOMMON at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/annlcommon.f90.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/AA_OBJT.FOR
+Compiling file ../ABBICAP/annlcommon.f90.
+Compiling program unit LPsolver at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/lpsolver.for.
+Compiling file ../ABBICAP/lpsolver.for.
+Compiling program unit DSM_ASSET_ALLOCATION at line 3037:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/DSM_OBJT.FOR.
+Compiling file ../ABBICAP/DSM_OBJT.FOR.
+Compiling program unit CALENRG at line 1:
+Compiling program unit START_DISPLAY_TIME at line 1:
+Compiling program unit STRING_JUSTIFICATION_LIB at line 105:
+Compiling program unit LEFT_JUSTIFY at line 126:
+Compiling program unit CALHEAT at line 89:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/mainovl.for.
+Encountered 0 errors, 0 warnings in file ../ABBICAP/interg82.for.
+Compiling program unit initb1 at line 1:
+Compiling program unit initw1 at line 11:
+Compiling program unit initd1 at line 20:
+Compiling program unit initd0 at line 30:
+Compiling program unit CopySqRMat0 at line 40:
+Compiling program unit CopyLinRVec0 at line 52:
+Compiling program unit CopyLinRVec1 at line 62:
+Compiling program unit CopyLinIVec1 at line 72:
+Compiling program unit CopyLinLVec1 at line 81:
+Compiling program unit Char4Eqv at line 91:
+Compiling program unit ShowSquare at line 110:
+Compiling program unit CheckDiagonal at line 130:
+Compiling program unit LUFactorByCroutsMM at line 144:
+Compiling program unit SolveByCroutsMM at line 196:
+Compiling file ../ABBICAP/interg82.for.
+Compiling program unit LUFactorByCroutsMMwPP at line 222:
+Compiling program unit SolveByCroutsMMwPP at line 326:
+Compiling program unit ContInnerProduct at line 353:
+Compiling program unit DiscInnerProduct at line 366:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/LPMatinv.for.
+Compiling file ../ABBICAP/LPMatinv.for.
+Compiling file ../ABBICAP/mainovl.for.
+Compiling program unit INIT_READING_CLASS_PARAMETERS at line 1:
+Compiling program unit FacetAlgorithm at line 328:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/facalg.for.
+Compiling program unit LOAD_ANALYSIS_OBJECT at line 1:
+Compiling program unit FEDERAL_INCOME_TAX_RATE at line 912:
+Compiling program unit SET_HOURLY_LOAD_OUT at line 76:
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/ANDECOMP.FOR
+Compiling program unit SET_HOURLY_LOAD_IN at line 102:
+Compiling program unit CHECK_WHETHER_TO_RUN_FRED at line 130:
+Compiling program unit CLASS_SHAREHOLDER_VALUE at line 950:
+Compiling program unit NEWFRED at line 254:
+Compiling program unit CREATE_DAY_TYPES at line 326:
+Compiling program unit SORT_R4ARRAY_FOR_POINTERS at line 545:
+Compiling program unit READ_REFERENCE_LOAD_DATA at line 576:
+Compiling program unit NET_DEFERRED_CASH_VALUE at line 1302:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/Msgmminp.for.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/cl_data.f90
+Compiling file ../ABBICAP/facalg.for.
+Compiling program unit LOAD_FORECAST_AT_SYSTEM_LEVEL at line 814:
+Compiling program unit LOAD_FORECAST_AT_CLASS_LEVEL at line 1123:
+Compiling program unit GET_CLASS_PEAK_NET_DSM_FOR_CAP at line 2107:
+Compiling program unit STORE_MONTHLY_CLASS_FORECASTS at line 2134:
+Compiling program unit CURRENT_YEAR_SYSTEM_STUFF at line 2281:
+Compiling program unit STORE_CLASS_DATA_INTO_LAMCOM at line 2385:
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/fuel_types.f90
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  -f95 ../ABBICAP/prim_mover_idx.f90
+Compiling file ../ABBICAP/Msgmminp.for.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/MSGProSymRevExp.for
+Compiling program unit GET_PEAK_ENERGY_AFTER_LOSSES at line 2430:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/newfred2.for.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/fuelused_decs.f90
+Compiling file ../ABBICAP/newfred2.for.
+Compiling program unit NEWTON_INTERFACE at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/newton_interface.f90.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/Errormsg.for
+Compiling file ../ABBICAP/newton_interface.f90.
+Compiling program unit CLA_OBJT_ARRAYS at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/cla_objt_arrays.f90.
+Compiling program unit RECEIVE_POSTFIX_INFO at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/OBJTFUNC.FOR.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/CAT2OBJT.for
+Compiling file ../ABBICAP/cla_objt_arrays.f90.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  -fix ../ABBICAP/CNWMSUBS.F90
+Compiling program unit DB_OBJECT at line 1:
+Compiling program unit ADDENDUMS_OBJECT at line 1:
+Compiling program unit ADDENDUMS at line 525:
+Compiling program unit DEBT at line 432:
+Compiling program unit FRACTN at line 4978:
+Compiling program unit PN_OBJECT at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/PN_OBJT.FOR.
+Compiling program unit DAYS_IN_MONTH at line 5062:
+Compiling program unit REMORT at line 5080:
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/CPL_OBJT.FOR
+Compiling program unit LTD_BOOK_2_CASH at line 5245:
+Compiling program unit CLASS_INTEREST_PS_DIVIDENDS at line 5402:
+Compiling program unit MGT_DEBT_PandI_PAYMENTS at line 5601:
+Compiling file ../ABBICAP/PN_OBJT.FOR.
+Compiling file ../ABBICAP/OBJTFUNC.FOR.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/FE_OBJT.FOR
+Compiling program unit ZERO_REMAINING_MONTHS at line 5672:
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit RDI_OBJECT at line 1:
+Compiling program unit POSTFIX_NOTATION_OBJECT at line 1:
+Compiling program unit INIT_POSTFIX_FORM at line 200:
+Compiling program unit ADDENDUM_POSITION at line 3158:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/msgmmadm.for.
+Compiling program unit PRECEDENCE at line 327:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/POSTFIX.FOR.
+Compiling program unit RBC_OBJECT at line 1227:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/RDI_OBJT.FOR.
+Compiling file ../ABBICAP/POSTFIX.FOR.
+Compiling file ../ABBICAP/msgmmadm.for.
+Compiling program unit TALLY_RESULTS_INFO at line 1:
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit LOAD_MASTER_CLASS_LIST at line 52:
+Compiling program unit SET_NOT_AVAILABLE_VALUES at line 70:
+Compiling program unit ADD_SBU_REVENUES_AND_EXPENSES at line 129:
+Compiling program unit ASSET_CLASS_LINKAGES at line 358:
+Compiling program unit CURRENT_COVERAGE_RATIO at line 470:
+Compiling program unit REVENUE_TAX_BASIS at line 505:
+Compiling program unit INIT_REPORTING_VALUE_ARRAY at line 513:
+Compiling program unit LAG_CASH_USING_PATTERN_ALL_YRS at line 1714:
+Compiling program unit CONSOLIDATING_ADJS_NA at line 1753:
+Compiling program unit FEDERAL_TAX_TABLE at line 1793:
+Compiling file ../ABBICAP/RDI_OBJT.FOR.
+Compiling program unit GRE_DSC_REPORT at line 1818:
+Compiling program unit EBITDA_REPORT at line 1880:
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit RATING_AGENCY_RATIOS at line 2079:
+Compiling program unit FIRST_ENERGY_PandL_REPORT at line 2125:
+Compiling program unit SETUP_TRANSACT_TRANSFERS at line 2497:
+Compiling program unit THE_RATIO_OF_A_TO_B at line 2879:
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit CREATE_REPORT_HEADER at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/RPTH_OBJ.FOR.
+Compiling program unit CLASS_FINANCE_DETAIL_RPT at line 5688:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/msgmmdbt.for.
+Compiling program unit AFUDC_MONTHLY at line 1:
+Compiling program unit AFUDC at line 669:
+Compiling program unit WRITE_OFF at line 1072:
+Compiling file ../ABBICAP/RPTH_OBJ.FOR.
+Compiling program unit INTEREST_CAP at line 1246:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/msgmmcom.for.
+Compiling file ../ABBICAP/msgmmdbt.for.
+Compiling program unit MONTHLY_FINANCIAL_ANALYSIS at line 1:
+Compiling program unit PP_OBJECT at line 1:
+Compiling program unit PF_OBJECT at line 1:
+Compiling program unit ALLOCATE_ACCOUNT_BALANCE at line 7402:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/PF_OBJT.FOR.
+Compiling program unit MONTHLY_NON_INCOME_TAX_PROCS at line 7422:
+Compiling program unit LAG_VALUES_ONE_MONTH at line 7800:
+Compiling program unit NEW_COVERAGE_RATIO_RPT at line 2912:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/MSGMMSB6B.FOR.
+Compiling file ../ABBICAP/msgmmcom.for.
+Compiling program unit SYNSIZ at line 1:
+Compiling program unit READ_CALENDAR_FROM_REF_FILE at line 801:
+Compiling program unit DSM_WARN at line 864:
+Compiling program unit DAYWEEK at line 895:
+Compiling program unit CALENDER_DAY_OF_WEEK at line 910:
+Compiling program unit SETUP_DAY_OF_WEEK_4 at line 1038:
+Compiling program unit DAYS_BY_DAY_TYPE at line 1076:
+Compiling program unit WEEKEND_DAYS at line 1090:
+Compiling program unit TRANSACT_ACTIVE_IN_ENDPOINT at line 1330:
+Compiling program unit PRODUCTION_PARAMETERS_OBJECT at line 1340:
+Compiling file ../ABBICAP/PF_OBJT.FOR.
+Compiling program unit SortIncrPos at line 1105:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/SNSZMDS.FOR.
+Compiling file ../ABBICAP/MSGMMSB6B.FOR.
+Compiling file ../ABBICAP/SNSZMDS.FOR.
+Compiling program unit LAG_CASH_VALUES at line 7822:
+Compiling program unit SUM_MONTHLY_INCOME_STATEMENT at line 7912:
+Compiling program unit INCOME_BEFORE_INTEREST at line 9056:
+Compiling program unit MONTHLY_ATL_INCOME_STATEMENT_TAX_DEDUCTIONS at line 9220:
+Compiling program unit SAVE_CHR_PP_VALUES at line 3198:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/pp_objt.for.
+Compiling program unit SUM_MONTHLY_BALANCE_STATEMENT at line 9273:
+Compiling program unit SUM_MONTHLY_ASSETS at line 9287:
+Compiling program unit INIT_WVPA_SALES_REVENUE_BY_COOP at line 1:
+Compiling file ../ABBICAP/pp_objt.for.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit MONTHLY_CLASS_OPERATION_REVS at line 9395:
+Compiling program unit SUM_CASH_RECEIPTS at line 9429:
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit THIS_IS_A_PAY_MONTH at line 9583:
+Compiling program unit MONTHLY_FASB87_CALCULATIONS at line 9614:
+Compiling program unit SYSTEM_PEAK_FORECAST at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/TRNSFRM3.FOR.
+Compiling program unit MONTHLY_CAP_X_ADJUSTMENTS at line 9684:
+Compiling program unit REVENUE_FORECAST_DATABASE at line 936:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/WVPACoopRevenueCals.FOR.
+Compiling program unit MONTHLY_NF_DEFERRED_TAXES_CR at line 9703:
+Compiling file ../ABBICAP/TRNSFRM3.FOR.
+Compiling program unit MONTHLY_SUMMARY_INCOME_CALCULATIONS at line 9813:
+Compiling file ../ABBICAP/WVPACoopRevenueCals.FOR.
+Compiling program unit TR_OBJECT at line 1:
+Compiling program unit READ_SERVICE_TRANS at line 387:
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit ALLOCATE_SERVICE_COSTS at line 2733:
+Compiling program unit SF_OBJECT at line 1:
+Compiling program unit STORE_ANNUAL_PEAK_AND_MONTH at line 239:
+Compiling program unit GET_SYSTEM_LOAD_FORECAST at line 470:
+Compiling program unit ENERGY_AND_PEAK_SPLIT at line 524:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/SF_OBJT.FOR.
+Compiling program unit WEEKLY_HYDRO_OBJECT at line 1:
+Compiling program unit MANAGE_WEEKLY_HYDRO_FORECASTS at line 634:
+Compiling program unit CONVERT_MONTHLY_NONLIN_LOADS at line 1194:
+Compiling program unit NonlinearlyMap at line 1308:
+Compiling program unit NonlinearlyMap_R4 at line 1435:
+Compiling program unit MonthNonlinearlyMap at line 1565:
+Compiling program unit SquareUpPattern at line 1794:
+Compiling program unit Indexed_SortR8_Ascending at line 1849:
+Compiling program unit WEATHER_DEMAND_OBJECT at line 1880:
+Compiling program unit MANAGE_WEATHER_DEMAND_FORECASTS at line 2319:
+Compiling program unit STATE_NAME_LOOKUP at line 2627:
+Compiling program unit STATE_ID_LOOKUP at line 2761:
+Compiling program unit CHECK_NEW_STATE_IDS at line 3380:
+Compiling program unit STATE_2_GAS_REGION_LOOKUP at line 3403:
+Compiling file ../ABBICAP/SF_OBJT.FOR.
+Compiling program unit MARKET_AREA_LOOKUP at line 4067:
+Compiling program unit TRANSACTION_MANAGER at line 2802:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/Servicac.for.
+Compiling program unit MK_OBJECT at line 4086:
+Compiling program unit READ_MARKET_GROUPS_DATA at line 4430:
+Compiling program unit SUM_24_I4 at line 4844:
+Compiling program unit PEAK_24_I4 at line 4879:
+Compiling program unit PEAK_24_R4 at line 4913:
+Compiling program unit BASE_24_I4 at line 4948:
+Compiling program unit SUM_24_R4 at line 4982:
+Compiling program unit BASE_24_R4 at line 5016:
+Compiling program unit GET_SCARCITY_INFO at line 5050:
+Compiling program unit REGIONAL_OUTAGES_OBJECT at line 5354:
+Compiling program unit READ_REGIONAL_OUTAGES_DATA at line 5651:
+Compiling program unit REA_ENRG_CAP at line 1:
+Compiling program unit REA_LAST_RESOURCE at line 350:
+Compiling program unit ANNUAL_AREA_REPORT at line 1348:
+Compiling program unit KEPCO_DEFERRED_MAINTENANCE at line 1672:
+Compiling program unit WABASH_LOSSES at line 1732:
+Compiling program unit USER_DAY_OBJECT at line 5838:
+Compiling file ../ABBICAP/Servicac.for.
+Compiling program unit WABASH_CT_LOSSES at line 1839:
+Compiling program unit WABASH_POWER_COST_REPORT at line 1887:
+Compiling program unit READ_USER_DAY_DATA at line 6111:
+Compiling program unit KEPCO_ENRG_CAP at line 3997:
+Compiling program unit REGIONAL_PARAMETER_OBJECT at line 6679:
+Compiling program unit PickHourlyStrikes at line 6979:
+Compiling program unit annual_thermal_call at line 7507:
+Compiling program unit WeeklyPumpStorage at line 7555:
+Compiling program unit CallWeeklyPumpStorge at line 7764:
+Compiling program unit GET_DEPTH_OF_MARKET_QUANTITY at line 7800:
+Compiling program unit LG_OBJECT at line 1:
+Compiling program unit LS_OBJECT at line 234:
+Compiling program unit LF_OBJECT at line 394:
+Compiling program unit KEPCO_LAST_RESOURCE at line 4258:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/REAENRG.FOR.
+Compiling program unit FINASSET at line 1:
+Compiling program unit STORE_PROPERTY_ESCALATION at line 254:
+Compiling program unit STORE_AI_AFUDC_RATES at line 291:
+Compiling file ../ABBICAP/REAENRG.FOR.
+Compiling program unit DSM_IMPORTANT_STUFF at line 798:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/LMG_OBJT.FOR.
+Compiling program unit WVPA_DATA_BASES at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/WVPA_DATA_BASES.FOR.
+Compiling program unit MACRS_TABLE at line 348:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/msgmmasb.for.
+Compiling program unit FUEL_DERIVATIVES_OBJECT at line 8604:
+Compiling program unit READ_FUEL_DERIVATIVES_DATA at line 9161:
+Compiling program unit CREATE_LONG_PATHS_LOADINGS at line 11190:
+Compiling file ../ABBICAP/LMG_OBJT.FOR.
+Compiling program unit REG_OUT_PARAM_OBJECT at line 11265:
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/FC_OBJT.FOR
+Compiling program unit READ_REGIONAL_PARAMS_DATA at line 11756:
+Compiling file ../ABBICAP/msgmmasb.for.
+Compiling file ../ABBICAP/WVPA_DATA_BASES.FOR.
+Compiling program unit GET_REGIONAL_SCENARIO_INDEX at line 12162:
+Compiling program unit LH_GLOBAL_OBJECT at line 12216:
+Compiling program unit READ_LH_GLOBAL_FILE at line 12476:
+Compiling program unit FIND_PRICE_AND_QUANT at line 12617:
+Compiling program unit AOD_THERMAL_UNIT_VALUE_LIST at line 12879:
+Compiling program unit RPS_REQUIREMENTS_OBJECT at line 12951:
+Compiling program unit MONTHLY_PAYABLE_OBJECT at line 1:
+Compiling program unit MONTHLY_PAYABLES at line 326:
+Compiling program unit GET_ACCUMULATION_PERIOD_INFO at line 801:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/msgmmpyb.for.
+Compiling file ../ABBICAP/msgmmpyb.for.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/FI_OBJT.FOR
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/IN_OBJT.FOR
+Compiling program unit cl_data at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/cl_data.f90.
+Compiling file ../ABBICAP/cl_data.f90.
+Compiling program unit prim_mover_idx at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/prim_mover_idx.f90.
+Compiling file ../ABBICAP/prim_mover_idx.f90.
+Compiling program unit REGIONAL_TRANSACTION_ANALYSIS at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/transobj.for.
+Compiling file ../ABBICAP/transobj.for.
+Compiling program unit MANAGE_RPS_REQUIREMENTS at line 13277:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/wh_objt.for.
+Compiling file ../ABBICAP/wh_objt.for.
+Compiling program unit AA_OBJECT at line 1:
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit READ_AREA_ALLOCATORS at line 208:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/AA_OBJT.FOR.
+Compiling file ../ABBICAP/AA_OBJT.FOR.
+Compiling program unit ProSymModule at line 1:
+Compiling program unit mod_fuel_types at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/fuel_types.f90.
+Compiling program unit ProSymInputData at line 34:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/MSGProSymRevExp.for.
+Compiling file ../ABBICAP/fuel_types.f90.
+Compiling file ../ABBICAP/MSGProSymRevExp.for.
+Compiling program unit CAT2_OBJECT at line 1:
+Compiling program unit ANNUAL_DECOMPOSITION_START_UP at line 1:
+Compiling program unit STORE_DEPTH_BEST_PLANSx at line 1170:
+Compiling program unit VALID_PLAN_TO_TESTX at line 1179:
+Compiling program unit NOT_REDUNDENT_COMBOX at line 1186:
+Compiling program unit UPDATE_CATAWBA_CONTRACT_DATA at line 361:
+Compiling program unit OPTION_DEPTH_CONTINUE_ANALYSIS at line 1193:
+Compiling program unit READ_CPL_DATA at line 806:
+Compiling program unit CREATE_ANN_DECOMP_COMBINATIONS at line 1274:
+Compiling program unit WRITE_SELECTED_OPTION at line 1347:
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit SAVE_CPL_READ_VARIABLES at line 1112:
+Compiling program unit GET_CPL_EMC_CAP_REVS at line 1163:
+Compiling program unit DISPLAY_PLAN_YEAR_OBJ_FUNC at line 1392:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/ANDECOMP.FOR.
+Compiling file ../ABBICAP/ANDECOMP.FOR.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit CPL_ACTIVE at line 1561:
+Compiling program unit ShowStatus at line 1:
+Compiling program unit CPL_PA_DISPATCH at line 1573:
+Compiling program unit AppendI2w5 at line 24:
+Compiling program unit AppendF8p2 at line 43:
+Compiling program unit AsteriskIf at line 64:
+Compiling program unit DeleteUS at line 73:
+Compiling program unit DulyNote at line 90:
+Compiling program unit FuncCNWAMtx at line 98:
+Compiling program unit GQ at line 106:
+Compiling program unit IdxInI4 at line 117:
+Compiling program unit MilliFrac at line 130:
+Compiling program unit CREATE_CPL_LDC at line 4410:
+Compiling program unit GENERIC_LOAD_PROB at line 4583:
+Compiling program unit CPL_PA_CAP_CALCS at line 4798:
+Compiling program unit GET_PA_RETAINED_CAPACITY at line 4924:
+Compiling program unit zbiSum at line 141:
+Compiling program unit CNW_main at line 151:
+Compiling program unit GregsCNWRoutine at line 278:
+Compiling program unit FE_OBJECT at line 1:
+Compiling program unit ERROR_MESSAGE at line 1:
+Compiling program unit CRITICAL_ERROR_MSG at line 195:
+Compiling program unit SEE_WARNING_MESSAGES at line 301:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/Errormsg.for.
+Compiling program unit SET_EMISSIONS_RATES at line 215:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/FE_OBJT.FOR.
+Compiling file ../ABBICAP/Errormsg.for.
+Compiling program unit fuelused_decs at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/fuelused_decs.f90.
+Compiling file ../ABBICAP/FE_OBJT.FOR.
+Compiling program unit CPL_OBJECT at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/CPL_OBJT.FOR.
+Compiling file ../ABBICAP/fuelused_decs.f90.
+Compiling file ../ABBICAP/CPL_OBJT.FOR.
+Compiling program unit CPL_MON_SALE_AND_GEN_REPORT at line 4987:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/CAT2OBJT.for.
+Compiling file ../ABBICAP/CAT2OBJT.for.
+Compiling program unit InitCNWOutputsModule at line 564:
+Compiling program unit FC_OBJECT at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/FC_OBJT.FOR.
+Compiling file ../ABBICAP/FC_OBJT.FOR.
+Compiling program unit CoalNtwkMain at line 587:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/CNWMSUBS.F90.
+Compiling program unit FI_OBJECT at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/FI_OBJT.FOR.
+Compiling file ../ABBICAP/CNWMSUBS.F90.
+Compiling file ../ABBICAP/FI_OBJT.FOR.
+Compiling program unit IN_OBJECT at line 1:
+Compiling program unit INIT_FILE_IS_ACTIVE at line 1086:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/IN_OBJT.FOR.
+Compiling file ../ABBICAP/IN_OBJT.FOR.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/msgmmfv.for
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/screen_initialization.f90
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/TF_OBJT2.FOR
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/UP_OBJT.FOR
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit IMPA_REPORT_VALUES at line 9840:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/MSGMMOUT.for.
+Compiling file ../ABBICAP/MSGMMOUT.for.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/bfil_obj.for -nsav
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/grx_planning_routines.f90
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/STARTOVL.FOR
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/dsex_data.f90
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/PICADISP.FOR
+Compiling program unit UNIT_PARAMETER_FILE_VARIABLES at line 1:
+Compiling program unit UP_OBJECT at line 30:
+Compiling program unit OPEN_VAR_UNITS_FILE at line 224:
+Compiling program unit VARIABLE_UNITS_OBJECT at line 235:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/UP_OBJT.FOR.
+Compiling program unit FV_OBJECT at line 1:
+Compiling file ../ABBICAP/UP_OBJT.FOR.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/MARGNOBJ.FOR
+Compiling program unit screen_initialization at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/screen_initialization.f90.
+Compiling file ../ABBICAP/screen_initialization.f90.
+Compiling program unit AR_OBJECT at line 613:
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/Dsscreen.for
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit GET_SCENARIO_INDEX at line 1:
+Compiling program unit MR_OBJECT at line 784:
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/findovls.for
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/FUELUSED.FOR
+Compiling program unit UNIT_OUTAGES_OBJECT at line 176:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/msgmmfv.for.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling file ../ABBICAP/msgmmfv.for.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/startup_tasks.f90
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit READ_TRANS_OUTAGE_DATA at line 461:
+Compiling program unit DAILY_OPTION_OBJECT at line 2037:
+Compiling program unit INT_Sort at line 16451:
+Compiling program unit INT_Sort_4_I4 at line 16481:
+Compiling program unit INT2_Sort at line 16509:
+Compiling program unit INT4_Sort at line 16544:
+Compiling program unit TRANS_GROUP_SCARCITY_VALUE at line 16579:
+Compiling program unit dsex_data at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/dsex_data.f90.
+Compiling file ../ABBICAP/dsex_data.f90.
+Compiling program unit STARTOVL at line 1:
+Compiling program unit FROM_TREE at line 222:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/STARTOVL.FOR.
+Compiling file ../ABBICAP/STARTOVL.FOR.
+Compiling program unit BASE_CASE_FILES at line 1:
+Compiling program unit startup_tasks at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/startup_tasks.f90.
+Compiling program unit FUEL_INVENTORY at line 1:
+Compiling program unit BUILD_FUEL_INVENTORIES at line 46:
+Compiling program unit DSSCREEN at line 1:
+Compiling file ../ABBICAP/startup_tasks.f90.
+Compiling program unit GET_CONVERSION_FACTOR at line 420:
+Compiling program unit MG_SCREEN_WRITE_FUNCTIONS at line 484:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/Dsscreen.for.
+Compiling file ../ABBICAP/Dsscreen.for.
+Compiling program unit RUN_FINASSET at line 1347:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/bfil_obj.for.
+Compiling file ../ABBICAP/bfil_obj.for.
+Compiling program unit BUILD_FUEL_PRICE_INFO at line 458:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/FUELUSED.FOR.
+Compiling file ../ABBICAP/FUELUSED.FOR.
+Compiling program unit DISPAT at line 1:
+Compiling program unit DISPATCH_SORT at line 1638:
+Compiling program unit UZ_PRIMARY_MOVER at line 1743:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/PICADISP.FOR.
+Compiling file ../ABBICAP/PICADISP.FOR.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/CLOSFILE.FOR
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/MIDASXP.for
+Compiling program unit GRX_PLANNING_ROUTINES at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/grx_planning_routines.f90.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/msgold95RW.for
+Compiling file ../ABBICAP/grx_planning_routines.f90.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/GRXModules.F95
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit CX_UNIT at line 16660:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/TF_OBJT2.FOR.
+Compiling file ../ABBICAP/TF_OBJT2.FOR.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit CAL_MARGINAL_COST at line 1:
+Compiling program unit CAL_HOURLY_MC_BEFORE_EL at line 5899:
+Compiling program unit CAL_HOURLY_MC_AFTER_EL at line 6074:
+Compiling program unit DGauss at line 6366:
+Compiling program unit FillTableCCN at line 6389:
+Compiling program unit CCNormOrd at line 6419:
+Compiling program unit SortIncr at line 6437:
+Compiling program unit MergeDups at line 6469:
+Compiling program unit InitNodeValues at line 6517:
+Compiling program unit FillNodeValues at line 6533:
+Compiling program unit MIDAS_XP at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/MIDASXP.for.
+Compiling file ../ABBICAP/MIDASXP.for.
+Compiling program unit CLOSE_FILES at line 1:
+  1603-W: "../ABBICAP/CLOSFILE.FOR", line 20, column 4: IMPLICIT statement cannot appear after a derived type definition, interface block, type declaration statement or specification statement.
+Compiling program unit CLOCK_TIME at line 158:
+Encountered 0 errors, 1 warning in file ../ABBICAP/CLOSFILE.FOR.
+Compiling file ../ABBICAP/CLOSFILE.FOR.
+Compiling program unit NodeProbWeightedLDC at line 6593:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/MARGNOBJ.FOR.
+Compiling file ../ABBICAP/MARGNOBJ.FOR.
+Compiling program unit rw_main at line 1:
+Compiling program unit RW_control at line 28:
+Compiling program unit STATUS_BAR_FUNCTIONS at line 74:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/msgold95RW.for.
+Compiling file ../ABBICAP/msgold95RW.for.
+Compiling program unit GRX_CO2_OTHER_ABATEMENTS_AV at line 1:
+Compiling program unit GRX_CO2_DOMISIC_ABATEMENTS_AV at line 85:
+Compiling program unit GRX_CO2_INTRL_ABATEMENTS_AV at line 161:
+Compiling program unit GRX_NON_ELECTRIC_SECTOR_CO2_EMISSIONS at line 237:
+Compiling program unit GRX_CO2_BANK_DELTA at line 251:
+Compiling program unit CO2_BANKED_BALANCE at line 261:
+Compiling program unit GRX_ALL_SECTOR_CO2_EMISSIONS_CAP at line 269:
+Compiling program unit GRX_CO2_ABATEMENTS_AVAILABLE at line 279:
+Compiling program unit GRX_ABATEMENT_PRICE at line 294:
+Compiling program unit UNITS_BEFORE_ADDITIONS at line 346:
+Compiling program unit GRX_RETROFIT_UNIT_LIST at line 355:
+Compiling program unit GRX_RETROFITED_UNIT at line 370:
+Compiling program unit GRX_RETIREMENT_RETROFIT_RPT at line 392:
+Compiling program unit CO2_MARKET_REDUCTION at line 583:
+Compiling program unit ABS_ERROR at line 607:
+Compiling program unit NEWTON_MRKT_PRICE_SEARCH at line 618:
+Compiling program unit NEWTON_ABAT_PRICE_SEARCH at line 637:
+Compiling program unit GRX_NEWTON_CONVERGENCE at line 656:
+Compiling program unit CALCULATE_CO2_EMISS_FOR_SYSTEM at line 675:
+Compiling program unit GET_CO2_EMISS_FOR_SYSTEM at line 685:
+Compiling program unit GRX_WITH_MRX_PLANNING at line 689:
+Compiling program unit HardWiredRetrofitProject at line 693:
+Compiling program unit HardWiredRetrofitProjectThisYear at line 711:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/GRXModules.F95.
+Compiling file ../ABBICAP/GRXModules.F95.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/CN_OBJT.FOR
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/gas_objt.for
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  -nchk -nchkglobal ../ABBICAP/MSGOUTPT.FOR
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  -varheap ../ABBICAP/TRANSOBJ2.for
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/Cla_objt.for
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/Clreport.for
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/en_objt.for
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/esrn_obj.for
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/Msgmmrev.for
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/RptRecControl.F95
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/tf_objt.for
+Compiling program unit FINDOVLS at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/findovls.for.
+Compiling file ../ABBICAP/findovls.for.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit OUTPUT at line 1:
+Compiling program unit MUNICIPAL_OUTPUT at line 990:
+Compiling program unit WKP_OBJECT at line 1148:
+Compiling program unit OUTPUT_RESULTS at line 1282:
+Compiling program unit SET_SHORT_FORM_VARIABLES at line 1339:
+Compiling program unit SET_AN_DECOMP_VARIABLES at line 1383:
+Compiling program unit WRITE_RESULTS at line 1461:
+Compiling program unit OUTPUT_RECORD at line 1504:
+Compiling program unit ES_OBJECT at line 1:
+Compiling program unit RESET_ESCAL_OL at line 315:
+Compiling program unit TRANSACT_GROUP_RESERVE at line 1542:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/MSGOUTPT.FOR.
+Compiling program unit GET_ESCAL_OL at line 324:
+Compiling program unit READ_ESCALATION_FILE at line 340:
+Compiling file ../ABBICAP/MSGOUTPT.FOR.
+Compiling program unit BAD_ESC_VECTOR_NUMBER at line 1285:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/esrn_obj.for.
+Compiling program unit CN_OBJECT at line 1:
+Compiling program unit CAPACITY_OPTIONS_OBJECT at line 527:
+Compiling program unit GET_OPTIONS at line 2323:
+Compiling file ../ABBICAP/esrn_obj.for.
+Compiling program unit CR_OBJECT at line 2361:
+Compiling program unit READ_CAP_RATIOS_FILE at line 2508:
+Compiling program unit ICAP_OBJECT at line 2670:
+Compiling program unit READ_ICAP_FILE at line 2892:
+Compiling program unit ADD_THIS_UNIT at line 3585:
+Compiling program unit RESET_NUMBER_OF_OPTIONS_TO_BC at line 3851:
+Compiling program unit STORE_BC_BCPL_OPTIONS at line 3877:
+Compiling program unit STORE_BCPL_OPTIONS at line 3900:
+Compiling program unit NUMBER_OF_ACTIVE_OPTIONS at line 3938:
+Compiling program unit NUMBER_OF_POSSIBLE_OPTIONS at line 3946:
+Compiling program unit NUMBER_OF_ACTIVE_BASE_OPTIONS at line 3954:
+Compiling program unit NUMBER_OF_ACTIVE_CYCL_OPTIONS at line 3962:
+Compiling program unit NUMBER_OF_ACTIVE_PEAK_OPTIONS at line 3970:
+Compiling program unit NUMBER_OF_ACTIVE_FILL_OPTIONS at line 3978:
+Compiling program unit NUMBER_OF_ACTIVE_PEAK_REDUCS at line 3986:
+Compiling program unit NUMBER_OF_HARD_WIRED_OPTIONS at line 3994:
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/ct_objt.for
+Compiling program unit EN_OBJECT at line 1:
+Compiling program unit ENVIR_DATA_READ at line 307:
+Compiling program unit CAL_SUMMED_VALUES at line 1376:
+Compiling program unit STOP_NO_BASE_FILE at line 1434:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/en_objt.for.
+Compiling file ../ABBICAP/en_objt.for.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/finanbse.for
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/MSGANDEC.FOR
+Compiling program unit CL_UNITS_READ_DATA at line 1:
+Compiling program unit OPTIONS_MAX_RESOURCE_ID at line 4002:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/CN_OBJT.FOR.
+Compiling program unit CLASS_SALES_OBJECT at line 1:
+Compiling program unit TF_OBJECT at line 1:
+Compiling program unit MANAGE_TRANSACTION_FORECASTS at line 1340:
+Compiling program unit OPEN_TRANS_HOURLY_LOAD_FILE at line 7587:
+Compiling program unit INIT_SALES_REVENUE_BY_CLASS at line 569:
+Compiling program unit CPL_SALES_CLASS at line 2903:
+Compiling program unit CPL_JURIS_CALCULATIONS at line 2930:
+Compiling program unit AVERAGE_ALLOC_FACTOR at line 3367:
+Compiling program unit CO_IN_ALLOC_FACTOR at line 3465:
+Compiling program unit OPEN_SCEN_HOURLY_LOAD_FILE at line 7701:
+Compiling program unit WHOLE_ALLOC_FACTOR at line 3548:
+Compiling program unit LOAD_FACTOR_CALCU at line 3609:
+Compiling program unit MANAGE_ASSET_ALLOCATIONS at line 3654:
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/msgmmsb6.for
+Compiling program unit LEAP_YEAR_CALCULATION at line 3683:
+Compiling file ../ABBICAP/CN_OBJT.FOR.
+Compiling program unit RPS_STATE_DEMAND_OBJECT at line 3721:
+Compiling program unit MANAGE_RPS_STATE_DEMAND at line 3990:
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit TG_OBJECT at line 7776:
+Compiling program unit READ_TRANS_GROUPS_DATA at line 8457:
+Compiling program unit SINGLE_AREA_EXTENTION_PERIOD_PRICE_ESCALATION at line 10425:
+Compiling program unit MULTI_AREA_EXTENTION_PERIOD_PRICE_ESCALATION at line 10436:
+Compiling program unit RETROFIT_OBJECT at line 4451:
+Compiling program unit SAVE_TF_CHAR_VARIABLES at line 10449:
+Compiling program unit MANAGE_THERMAL_RETROFIT at line 4873:
+Compiling program unit TRANSACT_LOAD_PROB at line 10497:
+Compiling program unit TRAN_EXP_OBJECT at line 5311:
+Compiling program unit MANAGE_TRAN_EXP_FORECASTS at line 5717:
+Compiling program unit HYDRO_LOAD_PROB at line 10847:
+Compiling program unit MANAGE_RPS_SUPPLY_CURVES at line 6258:
+Compiling program unit TRANS_LOAD_PROB_2_HOURS at line 11217:
+Compiling program unit CO2_PARAM_OBJECT at line 6404:
+Compiling program unit MANAGE_CO2_PARAM_FORECASTS at line 6895:
+Compiling program unit GAS_DEMAND_OBJECT at line 1:
+Compiling program unit SCENARIO_MAKER_OBJECT at line 12085:
+Compiling program unit MANAGE_GAS_DEMAND_FORECASTS at line 1233:
+Compiling program unit RPS_PROGRAM_OBJECT at line 7057:
+Compiling program unit write_unique_msgmtrcl_log_entry at line 1:
+Compiling program unit OPEN_GAS_HOURLY_LOAD_FILE at line 5562:
+Compiling program unit PERIOD_CL_REPORT at line 33:
+Compiling program unit ANNUAL_REPORT at line 6802:
+Compiling program unit POOLING at line 7634:
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit LPPLOT at line 7812:
+Compiling program unit REPORT_FUEL_INVENTORIES at line 7848:
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit GS_OBJECT at line 5704:
+Compiling program unit MANAGE_GAS_SUPPLY_FORECASTS at line 6634:
+Compiling program unit REAL4_Sort at line 9041:
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit GRX_HORIZON_REPORTING at line 1:
+Compiling program unit MSG_WIN_API_CALLS at line 23:
+Compiling program unit GAS_STORAGE_OBJECT at line 9077:
+Compiling program unit MANAGE_GAS_STORAGE_FORECASTS at line 9388:
+Compiling program unit PRT_ENDPOINT at line 37:
+Compiling program unit RPTREC at line 43:
+Compiling program unit GAS_LINK_OBJECT at line 10019:
+Compiling program unit MANAGE_GAS_LINK_FORECASTS at line 10425:
+Compiling program unit FILE_SIZE_ADJ at line 128:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/RptRecControl.F95.
+Compiling program unit GN_OBJECT at line 11799:
+Compiling program unit MANAGE_GAS_NODE_FORECASTS at line 12464:
+Compiling program unit GET_COUNTRY_INDEX at line 13651:
+Compiling program unit SAVE_GN_CHAR_VARIABLES at line 13668:
+Compiling program unit MONTHLY_HH_BASIS at line 13724:
+Compiling file ../ABBICAP/RptRecControl.F95.
+Compiling program unit CALC_ANNUAL_GAS_EPUC at line 14017:
+Compiling program unit GAS_PRICING_ROUTINE at line 14050:
+Compiling program unit REAL4_CUSTOM_Sort at line 15954:
+Compiling program unit GAS_WEATHER_DEMAND_OBJECT at line 15991:
+Compiling program unit MANAGE_GAS_WEATHER_DEMAND_FORECASTS at line 16433:
+Compiling program unit MANAGE_RPS_PROGRAM_FORECASTS at line 7341:
+Compiling program unit GregsRoutine at line 16687:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/Msgmmrev.for.
+Compiling program unit R4toA4 at line 17089:
+Compiling program unit AppendFixed9 at line 17121:
+Compiling program unit AppendInt9 at line 17135:
+Compiling program unit AppendF9p3 at line 17159:
+Compiling program unit AssignR4Array at line 17172:
+Compiling program unit SkipLines at line 17179:
+Compiling program unit ScaleBy at line 17189:
+Compiling program unit PairwiseMult at line 17199:
+Compiling program unit IndexIn at line 17209:
+Compiling program unit FuncGNWAMtx at line 17233:
+Compiling program unit Negat at line 17241:
+Compiling program unit SortByAscendingKey at line 17251:
+Compiling program unit DotProd8 at line 17304:
+Compiling program unit QuestionIf at line 17316:
+Compiling program unit CharIsNumeric at line 17325:
+Compiling file ../ABBICAP/Msgmmrev.for.
+Compiling program unit CL_OBJECT at line 7:
+Compiling program unit CL_UNITS_READ at line 1819:
+Compiling program unit GET_CL_POOL_FRAC_OWN at line 12066:
+Compiling program unit GET_P_FUEL_DELIVERY at line 12073:
+Compiling program unit GET_P_FUEL_DELIVERY_2 at line 12080:
+Compiling program unit GET_P_FUEL_DELIVERY_3 at line 12087:
+Compiling program unit SPECIAL_ID_NAME at line 12094:
+Compiling program unit MARKETSYM_REPORT at line 7913:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/Clreport.for.
+Compiling file ../ABBICAP/Clreport.for.
+Compiling program unit CL_UNIQUE_RPT_STR at line 12111:
+Compiling program unit CL_SCREEN_DATA at line 12131:
+Compiling program unit CAP_MARKET_MONTH_NO_INDEX at line 13678:
+Compiling program unit TIE_OBJECT at line 1:
+Compiling program unit ALINE_LOAD_DATA at line 193:
+Compiling program unit READ_TRANSACT_TIE_DATA at line 220:
+Compiling program unit DAY_TYPE_OBJECT at line 548:
+Compiling program unit CheckO3P at line 13716:
+Compiling program unit READ_DAY_TYPE_DATA at line 738:
+Compiling program unit DerivePriceFromSources at line 17333:
+Compiling program unit GasNetwk at line 17451:
+Compiling program unit OpenFmFile at line 19677:
+Compiling program unit AppendStr at line 19720:
+Compiling program unit WriteStrAt at line 19727:
+Compiling program unit ps at line 19735:
+Compiling program unit LengNB at line 19779:
+Compiling program unit IndexedSortAlphaOrder at line 19794:
+Compiling program unit EnumerateFields at line 19830:
+Compiling program unit CI_index at line 19865:
+Compiling program unit READ_SCENARIO_MAKER_DATA at line 12586:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/tf_objt.for.
+Compiling file ../ABBICAP/tf_objt.for.
+Compiling program unit MIDAS_ANN_DECOMP_SIMULATION at line 1:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/MSGANDEC.FOR.
+Compiling file ../ABBICAP/MSGANDEC.FOR.
+Compiling program unit FINANCE at line 1:
+Compiling program unit AI_ANALYSIS at line 174:
+Compiling program unit CT_OBJECT at line 1:
+Compiling program unit AI_DEP_AFUDC at line 440:
+Compiling program unit AI_TAX_CALCULATIONS at line 687:
+Compiling program unit EXTERNAL_AI at line 855:
+Compiling program unit DEFERRED_EXPENSES at line 1052:
+Compiling program unit CONTRACTS_READ at line 320:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/ct_objt.for.
+Compiling file ../ABBICAP/ct_objt.for.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/DR_BOOTH.FOR
+Compiling program unit EXTERNAL_PRODUCTION_RESULTS at line 1119:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/finanbse.for.
+Compiling file ../ABBICAP/finanbse.for.
+Compiling program unit ENERGY_PRODUCTS_OBJECT at line 802:
+Compiling program unit READ_ENERGY_PRODUCTS_DATA at line 2046:
+Compiling program unit GET_DAILY_OPTION_VALUE at line 11530:
+Compiling program unit INDEXED_SORT_ASCENDING at line 11624:
+Compiling program unit GET_HOURLY_OPTION_VALUE at line 11657:
+Compiling program unit GET_HOUR_DAY_OPTION_VALUE at line 11693:
+Compiling program unit APPLY_ENERGY_PRODUCT at line 11787:
+Compiling program unit AccumVector at line 11932:
+Compiling program unit AugmentVectByProductOf at line 11943:
+Compiling program unit MARKET_PRICE_OBJECT at line 11957:
+Compiling program unit NEW_MARKET_PRICE_OBJECT at line 12052:
+Compiling program unit ELECT_HOUR_MULT_OBJECT at line 12143:
+Compiling program unit MANAGE_ELECT_HOUR_MULT at line 12232:
+Compiling program unit MANAGE_ELECT_HOUR_TG_MULT at line 12307:
+Compiling program unit MANAGE_GAS_HOUR_MULT at line 12395:
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit MANAGE_OIL_HOUR_MULT at line 12470:
+Compiling program unit GAS_HOUR_MULT_OBJECT at line 12545:
+Compiling program unit OIL_HOUR_MULT_OBJECT at line 12634:
+Compiling program unit SCENARIO_HOURLY_OBJECT at line 12724:
+Compiling program unit REFERENCE_LOAD_OBJECT at line 12816:
+Compiling program unit BSYRLOAD at line 12917:
+Compiling program unit USER_MARKET_PRICE_PROB at line 12948:
+Compiling program unit MARKET_PRICE_PROB at line 13577:
+Compiling program unit PATH_OBJECT at line 14035:
+Compiling program unit READ_TRANS_PATH_DATA at line 14394:
+Compiling program unit CONSTRAINT_OBJECT at line 16494:
+Compiling program unit READ_TRANS_CONSTRAINT_DATA at line 16842:
+Compiling program unit CX_ALTER_MX_CHRONO_PRICES at line 17506:
+Compiling program unit CX_DailyOperAnPS3 at line 17563:
+Compiling program unit ReadEnergyProductsData at line 17964:
+Compiling program unit DR_BOOTH at line 1:
+Compiling program unit SHADOW_FUEL_INVENTORY at line 2580:
+Compiling program unit FIND_ENRGY_CROSSOVER at line 2634:
+Compiling program unit DO_EMISSIONS_BY_FUEL_TYPE at line 2685:
+Compiling program unit GET_GIBSON5_ENERGY at line 3000:
+Compiling program unit WRITE_LAST_ELDC at line 3060:
+Compiling program unit PSI_LAST_RESOURCE_CALC at line 3091:
+Compiling program unit WRITE_MONTHLY_GROUP_REPORT at line 3138:
+Compiling program unit RPS_INDEX_TRANSLATE at line 3567:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/DR_BOOTH.FOR.
+Compiling file ../ABBICAP/DR_BOOTH.FOR.
+Compiling program unit MakeUpper at line 19878:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/gas_objt.for.
+Compiling file ../ABBICAP/gas_objt.for.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/PRO_COST.FOR
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit EXISTING_STORAGE_N_HYBRID at line 18003:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/TRANSOBJ2.for.
+Compiling file ../ABBICAP/TRANSOBJ2.for.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  -varheap  ../ABBICAP/msgnorm.for
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit PROCOST at line 1:
+Compiling program unit HR_CALC at line 3682:
+Compiling program unit CREATE_EMISS_BY_UNIT_BY_FUEL at line 3759:
+Compiling program unit UPDATE_PRODUCTION_SWITCHES at line 3943:
+Compiling program unit UPDATE_SEASON_FOR_REPORTS at line 3953:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/PRO_COST.FOR.
+Compiling file ../ABBICAP/PRO_COST.FOR.
+Compiling program unit MIDAS_NORMAL_SIMULATION at line 1:
+Compiling program unit CL_CAPACITY_PLANNING_ADJUSTMENTS at line 13748:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/Cla_objt.for.
+Compiling file ../ABBICAP/Cla_objt.for.
+Compiling program unit INIT_ENDPT_SWITCHES at line 1062:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/msgnorm.for.
+Compiling file ../ABBICAP/msgnorm.for.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/el_objt.for
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/Coal_modules_makeovl.F90
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit COAL_CONTRACTS_MAKEOVL at line 1:
+Compiling program unit COAL_SUPPLY_MAKEOVL at line 127:
+Compiling program unit PLANT_DEMAND_MAKEOVL at line 254:
+Compiling program unit GENERIC_DEMAND_MAKEOVL at line 423:
+Compiling program unit COAL_TRANSPORTATION_LINKS_MAKEOVL at line 548:
+Compiling program unit COAL_BASIN_MAKEOVL at line 660:
+Compiling program unit COAL_SO2_INFO_MAKEOVL at line 750:
+Compiling program unit EL_OBJECT at line 1:
+Compiling program unit COAL_DEMAND_LINK at line 861:
+Compiling program unit EL_UNITS_READ at line 634:
+Compiling program unit EL_UNIQUE_RPT_STR at line 1834:
+Compiling program unit COAL_HARDWRIED_DEMAND_LINK at line 885:
+Compiling program unit COAL_DEMAND_TRANSFERRED_FROM_MIDAS at line 981:
+Compiling program unit SET_SCRUBBERS_FROM_COAL_LP at line 1086:
+Compiling program unit RESET_SCRUBBERS_FROM_COAL_LP at line 1105:
+Compiling program unit COAL_PRICES_TRANSFERRED_TO_MIDAS at line 1121:
+Compiling program unit COAL_DEMAND_EXPANSION_UNITS at line 1394:
+Compiling program unit COAL_REPORT_UP at line 1495:
+Compiling program unit PLANT_ACTIVE_IN_IM at line 1519:
+Compiling program unit EL_UNIT_LIMIT_EXCEEDED at line 1849:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/el_objt.for.
+Compiling file ../ABBICAP/el_objt.for.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/MIDASMOD.FOR
+Compiling program unit init_asset_class_info at line 1:
+Compiling program unit IMPA_ANNUAL_RATIOS at line 14125:
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit AppendFloat9 at line 1527:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/Coal_modules_makeovl.F90.
+Compiling file ../ABBICAP/Coal_modules_makeovl.F90.
+Compiling program unit DRILLING_REPT_PARAMETERS at line 1:
+Compiling program unit BUILD_NUM at line 98:
+Compiling program unit MIDAS_ROOT_PROGRAM at line 118:
+Compiling program unit END_OF_STUDY_FLAG at line 371:
+Compiling program unit END_OF_PLAN_FLAG at line 390:
+Compiling program unit ASSET_ANALYST_ONLY at line 409:
+Compiling program unit TRANSACT_ANALYST_ONLY at line 451:
+Compiling program unit BC_RESET at line 474:
+Compiling program unit INTEG8 at line 581:
+Compiling program unit STORED_SYSTEM_VARIABLES at line 599:
+Compiling program unit SET_DELTA_X_VALUE at line 674:
+Compiling program unit VERSION at line 705:
+Compiling program unit SET_VIDEO_SYSTEM at line 742:
+Compiling program unit SET_CHARACTER_DATA at line 782:
+Compiling program unit SET_CALENDAR_INFORMATION at line 801:
+Compiling program unit SET_CHARACTER_CALENDAR_INFO at line 865:
+Compiling program unit GET_MONTH_NUMBER at line 1012:
+Compiling program unit MAKE_ALL_BINARY at line 1036:
+Compiling program unit MAKE_CAPEX_BINARY at line 1438:
+Compiling program unit DELETE_RESULTS_OF_PREVIOUS_RUN at line 1695:
+Compiling program unit SET_ASSET_CLASSES at line 1727:
+Compiling program unit SET_INIT_CLASSES at line 1851:
+Compiling program unit INIT_CREATE_CLASS_LIST at line 1923:
+Compiling program unit ERROR_AND_WARNING_MSG at line 1995:
+Compiling program unit LOAD_FILE_CHAR_EXT at line 2017:
+Compiling program unit AREA_CHAR_EXT at line 2032:
+Compiling program unit GET_PTCs_TEST at line 14162:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/msgmmsb6.for.
+Compiling file ../ABBICAP/msgmmsb6.for.
+Compiling program unit SCEN_FILE_CHAR_EXT at line 2047:
+Compiling program unit FINANCIAL_DRILLING_HEADER at line 2073:
+Compiling program unit ESTABLISH_DRILLING_REPORT_FILE at line 2663:
+Compiling program unit CREATE_DOLLAR_STREAM at line 2714:
+Compiling program unit MONTHLY_FINANCIAL_DATABASE at line 2871:
+Compiling program unit IPALCO_ELECT_COSTUMER_COSTS at line 3004:
+Compiling program unit IPALCO_BASE_YEAR_ACTUAL_INCOME_DATA at line 3033:
+Compiling program unit IMPLIED_ESC at line 3273:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/MIDASMOD.FOR.
+Compiling file ../ABBICAP/MIDASMOD.FOR.
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/msgmmfa.for  -nsav
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/msgmmea.for
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/MSGMMExpRevCash.for
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib   ../ABBICAP/msgmmtax.for
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/Dsex_obj.for
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit START_UP at line 1:
+Compiling program unit EA_OBJECT at line 1:
+Compiling program unit DSEXEC_OBJECT at line 305:
+Compiling program unit DATE_TIME at line 758:
+Compiling program unit EXASST at line 349:
+Compiling program unit EXE_DATE at line 865:
+Compiling program unit CHECK_CAP_PLANNING_SWTCHES at line 925:
+Compiling program unit SET_INTEGER_PLANNING_SWITCHES at line 1099:
+Compiling program unit SET_STUDY_PARAMS_LOGICAL at line 1167:
+Compiling program unit SET_HEAT_FACTORS_CLASS_GROWTH at line 1285:
+Compiling program unit SET_UTILITY_IDENTIFIER at line 1349:
+Compiling program unit EDPBOK at line 926:
+Compiling program unit SET_UP_EA_ARRAYS at line 1234:
+Compiling program unit EDPTAX at line 1852:
+Compiling program unit TX_OBJECT at line 1:
+Compiling program unit TAX_INFORMATION at line 417:
+Compiling program unit TAX_POSITION at line 2519:
+Compiling program unit FA_OBJT at line 1:
+Compiling program unit ETXBOK at line 2042:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/msgmmea.for.
+Compiling file ../ABBICAP/msgmmea.for.
+Compiling program unit FUASST at line 1116:
+Compiling program unit SET_UP_FA_ARRAYS at line 3062:
+Compiling program unit REAL_PROPERTY_VALUES at line 3878:
+Compiling program unit TAXVALUE at line 4114:
+Compiling program unit DEPTAX at line 4246:
+Compiling program unit DEFTAX at line 4645:
+Compiling program unit EX_OBJECT at line 1:
+Compiling program unit ACE_DEP at line 4691:
+Compiling program unit CCA_TAX_DEP at line 4762:
+Compiling program unit VERIFY_BASE_FILE_DIRECTORY at line 1595:
+Compiling program unit NEW_DETAILED_REPORTS at line 1860:
+Compiling program unit ESTABLISH_DETAIL_REPORT_FILE at line 7541:
+Compiling program unit FAST_TAX_RATE_34 at line 4912:
+Compiling program unit DEPBOK at line 4971:
+Compiling program unit EXPENSE at line 655:
+Compiling program unit READ_TAX_LOSSES at line 2725:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/msgmmtax.for.
+Compiling program unit INCOME_STATEMENT_POSITION at line 4728:
+Compiling program unit CASH_STATEMENT_POSITION at line 4954:
+Compiling program unit CASH_POSITION at line 5163:
+Compiling file ../ABBICAP/msgmmtax.for.
+Compiling program unit ACCOUNT_SUB_CLASSIFICATION at line 5187:
+Compiling program unit FA_STZERO at line 5335:
+Compiling program unit SET_UP_MODEL_ASSET_ARRAYS at line 5348:
+Compiling program unit MONTHLY_BOOK_VALUES_NO_ADD at line 5210:
+Compiling program unit MONTHLY_CASH_VALUES_IN_DOLLARS at line 5482:
+Compiling program unit TREND_MONTHLY_INPUT at line 6044:
+Compiling program unit MAP_LAST_MONTH at line 5689:
+Compiling program unit LAG_PRODUCTION_CASH_EXPENSES at line 5707:
+Compiling program unit MONTHLY_FUTURE_ASSETS_OBJECT at line 6268:
+Compiling program unit FE_PCA_LEGAL_REPORTS at line 6070:
+Compiling program unit CHECK_CASH_LAG_PATTERN at line 6598:
+Compiling program unit FE_MONTHLY_PCA_LEGAL_REPORTS at line 6079:
+Compiling program unit S_CURVE_2_DOLLARS at line 6626:
+Compiling program unit S_CURVE_2_DOLLARS_VECTOR_RATE at line 6674:
+Compiling program unit MONTHLY_BOOK_VALUES_4_YEAR at line 6716:
+Compiling program unit FE_ZERO_PCA_LEGAL_RPTS at line 6093:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/MSGMMExpRevCash.for.
+Compiling file ../ABBICAP/MSGMMExpRevCash.for.
+Compiling program unit DISTRIBUTE_MONTHLY_TAX_DEP at line 6825:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/msgmmfa.for.
+Compiling file ../ABBICAP/msgmmfa.for.
+lf95.exe -nfix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  -fix -c ../ABBICAP/CAP_OBJT.FOR
+lf95.exe -fix -g -chk   -dal -npca -nstchk -trace -ap -tpp -sav  -c -npause -in -zero -win -ml winapi  -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  /link:verbose -O1 -maxfatals 10 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  ../ABBICAP/FINNUCFL.for
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Compiling program unit ESTABLISH_DETAIL_REPORT_FILE_WO at line 7605:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/Dsex_obj.for.
+Compiling file ../ABBICAP/Dsex_obj.for.
+Compiling program unit CAPACITY_PLANNING_OBJECT at line 1:
+Compiling program unit COMPUTE_OBJECTIVE_FUNCTION at line 161:
+Compiling program unit AUTO_OPTIM at line 177:
+Compiling program unit RETURN_OPTIM_ACTIVE_OPTIONS at line 320:
+Compiling program unit MIX_RATIOS at line 389:
+Compiling program unit NEXT_DECISION_MIX_RATIOS at line 751:
+Compiling program unit PLANNING_DECISIONS at line 1572:
+Compiling program unit RESORT_CAPACITY_ORDER at line 1861:
+Compiling program unit UPDATE_ANN_CAP at line 1900:
+Compiling program unit NF_OBJT at line 1:
+Compiling program unit NUFUEL at line 419:
+Compiling program unit MARCS_TAX_DEPRECIATION at line 2101:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/FINNUCFL.for.
+Compiling file ../ABBICAP/FINNUCFL.for.
+Compiling program unit SAVE_CT_LOAD_REDUCTION at line 1919:
+Compiling program unit SCREENING_OBJECT at line 1942:
+Compiling program unit CALCULATE_NOX_SOX_VOM at line 9709:
+Compiling program unit ALTER_MX_PRICE_CURVE at line 9988:
+Compiling program unit MRX_GREEN_OBJECT at line 10095:
+Encountered 0 errors, 0 warnings in file ../ABBICAP/CAP_OBJT.FOR.
+Compiling file ../ABBICAP/CAP_OBJT.FOR.
+lf95.exe -g -co -nc -stack 1000000 -lib ../ABBICAP/RealWin/realwin.lib ../ABBICAP/RealWin/comctl32.lib comdlg32.lib KERNEL32.LIB pcx_objs.lib PCX_OBJS.LIB ws2_32.lib wsock32.lib  -EXE MSGOLDRW ../ABBICAP/addl_obj/MIDASRES.OBJ AA_OBJT.obj ABBCapacityMarketRept.obj Abb_CapMarketRptData.obj ANDECOMP.obj bfil_obj.obj CapacityOptionsFileResourceIndexes.obj capacity_arrays.obj capacity_options_alloc_vars.obj capacity_options_fixed_variables.obj CAP_OBJT.obj CAT2OBJT.obj CATAWBA.obj CF_OBJT.obj Cla_objt.obj cla_objt_arrays.obj CLM_OBJT.obj CLOSFILE.obj Clreport.obj clreport_routines.obj Cls_runs.obj CNWMSUBS.obj CN_OBJT.obj co2_cap_n_trade.obj co2_market_abatement_curves.obj Coal_Main_Prg.obj Coal_Model_Modules.obj Coal_modules_makeovl.obj COAL_VECTOR_OBJ.obj CO_OBJT.obj CPL_OBJT.obj ct_objt.obj DE_OBJT.obj DR_BOOTH.obj dr_both2.obj DSM_OBJT.obj Dsscreen.obj DSSLAM.obj ECONINTR.obj EC_OBJT.obj ELREPORT.obj el_objt.obj end_routine.obj enrglimt.obj en_objt.obj Errormsg.obj esrn_obj.obj facalg.obj FC_OBJT.obj FE_OBJT.obj filemod.obj filename_tracker.obj FINACELM.obj finaclp2.obj finanbse.obj findovls.obj FINNUCFL.obj FI_OBJT.obj FN_OBJT.obj FP_OBJT.obj ft_interfaces.obj FUELUSED.obj gas_objt.obj GRXModules.obj grx_planning_routines.obj icap_results.obj interg82.obj IN_OBJT.obj LDPROB01.obj LMG_OBJT.obj logging.obj LPMatinv.obj lpsolver.obj mainovl.obj MARGNOBJ.obj MIDASMOD.obj MIDASXP.obj miscmod.obj modules.obj MSGANDEC.obj msgindex.obj msgmmadm.obj msgmmasb.obj msgmmcom.obj msgmmdbt.obj msgmmdfd.obj msgmmea.obj MSGMMExpRevCash.obj msgmmfa.obj msgmmfv.obj Msgmminp.obj MSGMMOUT.obj msgmmpyb.obj Msgmmrev.obj msgmmsb6.obj MSGMMSB6B.obj msgmmtax.obj msgnorm.obj msgold95RW.obj MSGOUTPT.obj MSGProSymRevExp.obj newfred2.obj NEWPKSHF.obj newton_interface.obj OBJTFUNC.obj params.obj PF_OBJT.obj PICADISP.obj PN_OBJT.obj POSTFIX.obj pp_objt.obj prim_mover_idx.obj PRO_COST.obj RDI_OBJT.obj REAENRG.obj  RPTH_OBJ.obj RptRecControl.obj Servicac.obj SF_OBJT.obj SNSZMDS.obj spindriftlib.obj spinfunc.obj STARTOVL.obj tf_objt.obj TF_OBJT2.obj transobj.obj TRANSOBJ2.obj TRNSFRM3.obj UP_OBJT.obj wh_objt.obj WVPACoopRevenueCals.obj WVPARTRK.obj WVPA_DATA_BASES.obj Dsex_obj.obj MIDASFileIndexingRoutines.obj procost_data.obj escalation_variables.obj screen_initialization.obj clreport_decs.obj fuel_types.obj pms.obj startup_tasks.obj logging_decs.obj annlcommon.obj midas_decs.obj cl_data.obj mmrev_decs.obj esrn_decs.obj tran_c_variables.obj cla_decs.obj fuelused_decs.obj dsex_data.obj kepcocom.obj string.obj  
+Lahey/Fujitsu Fortran 95 Express Release 7.30.00  S/N: 99999990000000000
+Copyright (C) 1994-2011 Lahey Computer Systems.  All rights reserved.
+Copyright (C) 1998-2011 FUJITSU LIMITED. All rights reserved.
+Options:
+-nap           -nc            -nchk          -nchkglobal    -concc 
+-ndal          -ndbl          -ndll          -exe MSGOLDRW  -nf95 
+-nfix          -g             -nin           -ninfo         -ninline 
+-li            -nlst          -nlong         -maxfatals 50 
+-mod .;C:\realwin\LF7.1       -o0            -out MSGOLDRW.exe 
+-npause        -nprefetch     -nprivate      -npca          -nquad 
+-nsav          -nsse2         -stack 1000000 -staticlib     -nstaticlink 
+-stchk         -tpp           -trace         -ntrap         -nunroll 
+-nvarheap      -w             -nwide         -win           -nwo 
+-nxref         -zero          -nzfm 
+
+Microsoft (R) Incremental Linker Version 6.00.8447
+Copyright (C) Microsoft Corp 1992-1998. All rights reserved.
+
+-rwxr-xr-x 1 expuser Administrators 46M Apr 30 14:03 MSGOLDRW.exe

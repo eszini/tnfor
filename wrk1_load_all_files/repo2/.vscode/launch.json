@@ -1,0 +1,14 @@
+{
+
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug",
+            "type": "windbg",
+            "request": "launch",
+            "args": "DEBUGDIR=C:\\Spring2021_02092021_exetesting, greg rcs21 ercot /OVLBOOK /BAT /DF /Wl",
+            "target": "C:\\john\\MDSGOLD\\ABBICAPOBJ73\\MSGOLDRW.exe",
+            "windbgpath": "C:\\LF9573\\Bin\\winfdb.exe"
+        }
+    ]
+}

@@ -1,0 +1,69 @@
+C     Last change: GT 5/29/2008 2:09:39 PM
+C***********************************************************************
+C
+C        COPYRIGHT (C) 1982-2003 M.S. GERBER & ASSOCIATES, INC.
+C                         ALL RIGHTS RESERVED
+C***********************************************************************
+C
+      SUBROUTINE MIDAS_XP()
+      use end_routine, only: end_program, er_message
+      USE realwin
+      INCLUDE 'SIZECOM.MON'
+      CHARACTER*256 CURRENT_DIRECTORY,FILE_SEARCH
+      INTEGER IY,CHDIR
+      logical*1 LAHEY_LF95,SET_LAHEY_LF95
+      CHARACTER*255 COMMAND_LINE,UC_COMMAND_LINE
+      CHARACTER*25 BUILD_STR,BUILD_NUM
+      LOGICAL*1 PAUSE_ACTIVE
+      LOGICAL*4 STATUS_FILE_EXISTS,STATUS_FILE_OPEN
+      SAVE PAUSE_ACTIVE,COMMAND_LINE
+      CHARACTER*(*) R_COMMAND_LINE
+C
+      CALL MG_SCREEN_WRITE_FUNCTIONS()
+      CALL get_environment_variable("DEBUGDIR",CURRENT_DIRECTORY)
+      IF(LEN(TRIM(CURRENT_DIRECTORY))<= 1) THEN
+         CALL GETCL(COMMAND_LINE)
+
+         CALL UPC(COMMAND_LINE,UC_COMMAND_LINE)
+         PAUSE_ACTIVE = .NOT. (INDEX(UC_COMMAND_LINE,'/BAT') /= 0 .OR.
+     +                          INDEX(COMMAND_LINE,'/QUICKSILVER') /= 0)
+      ELSE
+c         CALL MG_LOCATE_WRITE(6,26,TRIM(CURRENT_DIRECTORY),
+c     +                                                   ALL_VERSIONS,1)
+         READ(CURRENT_DIRECTORY,*) UC_COMMAND_LINE,
+     +                             COMMAND_LINE 
+         IY = CHDIR(UC_COMMAND_LINE)
+         PAUSE_ACTIVE = .TRUE.
+      ENDIF
+      CALL CURDIR(" ",CURRENT_DIRECTORY)
+      FILE_SEARCH = TRIM(CURRENT_DIRECTORY)//"\SIMSTART"
+      OPEN(10,FILE=FILE_SEARCH,STATUS='REPLACE')
+      CLOSE(10)              
+      FILE_SEARCH = TRIM(CURRENT_DIRECTORY)//"\SIMDONE"
+      CALL ERASE(FILE_SEARCH)
+      CALL MIDAS_ROOT_PROGRAM
+      FILE_SEARCH = TRIM(CURRENT_DIRECTORY)//"\SIMSTART"
+      CALL ERASE(FILE_SEARCH)
+!
+      FILE_SEARCH = TRIM(CURRENT_DIRECTORY)//"\SIMSTATUS.LOG"
+      INQUIRE(FILE=FILE_SEARCH,EXIST=STATUS_FILE_EXISTS)
+      IF(STATUS_FILE_EXISTS) THEN
+         INQUIRE(UNIT=7101,OPENED=STATUS_FILE_OPEN)
+         IF(STATUS_FILE_OPEN) CLOSE(7101)
+         CALL ERASE(FILE_SEARCH)
+      ENDIF
+!      
+      IF(PAUSE_ACTIVE) PAUSE 'The simulation has finished.'
+      IF(LAHEY_LF95()) THEN
+         CALL ERROR_MESSAGE
+      ENDIF
+      RETURN ! STOP
+      ENTRY GET_MIDAS_COMMAND_LINE(R_COMMAND_LINE)
+         IF(PAUSE_ACTIVE) THEN
+            R_COMMAND_LINE = COMMAND_LINE
+         ELSE
+            CALL GETCL(R_COMMAND_LINE)
+         ENDIF
+      RETURN
+      END
+      

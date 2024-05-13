@@ -1,0 +1,6 @@
+# archivo de configuracion
+#
+	InputFile   pepito.doc
+	List		rec
+	ChangeLines	yes
+

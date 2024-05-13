@@ -1,0 +1,43 @@
+!     ******************************************************************
+!     Sizecom.mon
+!     Copyright(c) Microsoft 2000
+!
+!     Created: 3/6/2011 2:07:09 PM
+!     Author : Mark S GErber
+!     Last change: MSG 3/6/2011 2:07:09 PM
+!     ******************************************************************
+
+C       USE SIZE_ARRAY_DIMENSIONS  ! makes MAX_SIMULATION_YEARS dynamic 11/08/06 Dr. G
+C      MOVED TO SPINLIB.MON
+C      INTEGER (KIND=2), PARAMETER :: MAX_SIMULATION_YEARS = 30,
+C     +          SYSTEM_CLASS_NUM = 7
+C     +          MAX_CL_UNITS,MAX_EL_UNITS,
+C
+C
+C THE PARAMETER SIZES ARE USED FOR STATIC SIZING OF ARRAYS
+C   THESE ARE SET AT COMPILE TIME
+C
+C
+C THE FOLLOWING ARE USED FOR THE FINANCOM.MON BLOCK SIZING
+C
+C
+C      INTEGER (KIND=2), PARAMETER :: PARMS_COMMON_BLOCK_ITEMS=87,
+C     +          ARRAYS1_COMMON_BLOCK_ITEMS = 2*54,
+C     +          AMT1_COMMON_BLOCK_ITEMS = 12,
+C     +          AMT2_COMMON_BLOCK_ITEMS = 2*3,
+C     +          FIN_RESULTS_COMMON_BLOCK_ITEMS = 17,
+C     +          CTAXES_COMMON_BLOCK_ITEMS = 23
+C     +          TXLOSS_COMMON_BLOCK_ITEMS= 10 *
+C     +                               (MAX_FINANCIAL_SIMULATION_YEARS+17)
+C
+C THE FOLLOWING SIZE VARIABLE ARE USE FOR DYNAMIC ALLOCATION OF
+C   ARRAYS WHICH ARE SET AT RUN TIME
+C
+c      LOGICAL*1 TESTING_PLAN
+c      COMMON /GLOBAL_TESTING_SWITCHES/TESTING_PLAN
+C
+      CHARACTER*136 SCREEN_MESSAGES
+      INTEGER (KIND=4), PARAMETER :: ALL_VERSIONS=0,
+     +                               LF77_VERSION=1,
+     +                               LF95_VERSION=2,
+     +                               WIN95_VERSION=3

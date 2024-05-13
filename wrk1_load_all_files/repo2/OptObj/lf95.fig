@@ -1,0 +1,31 @@
+#    For production code, we recommend the following switch settings:
+#        -nap -nchk -nchkglobal -ncover -ng -o1 -npca -nsav -nstchk -ntrace
+#
+#    Note that -stchk may improve execution speed in some applications.
+#
+#-info
+-nco
+-nchk
+-nchkglobal
+-dal
+-o1
+-ng
+-npca
+-nstchk
+-trace
+-ap
+-fix
+-tpp
+-sav 
+-c
+-npause
+-in
+-zero
+-i .;c:\mdsgold\abbicap;c:\RealWin
+-mod .;c:\mdsgold\abbicap;c:\RealWin
+-lib c:\RealWin\realwin.lib
+     c:\RealWin\comctl32.lib
+     comdlg32.lib ws2_32.lib wsock32.lib
+-win
+-ml winapi
+#-ml bd "C:\Program Files\Lahey-Fujitsu Fortran\v7.2\Win32\Lib\trunc_fs.lib"

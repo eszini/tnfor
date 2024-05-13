@@ -1,0 +1,57 @@
+    ! parameter constants
+      integer*2
+     +  LimGroups,
+     +  LimBlocks,
+     +  LimBTBlks,
+     +  SupDepth,
+     +  LimNodes,
+     +  LimCentiSD
+      parameter(
+     +  LimGroups =   60, ! see SizeCom.mon for MAX_DATA_BASES
+     +  LimBlocks = 1200,
+     +  LimBTBlks =    9, ! LimBlocks if they were to use only binary-tree probs
+     +  SupDepth  =    8, ! max number of branches to any end-point; LimBTBlks-1
+     +  LimNodes  =  255, ! (2^SupDepth)-1
+     +  LimCentiSD=  400) ! beyond which no significant change occurs
+
+    ! shared variables
+      real*4
+     +  BlockC(LimBlocks),
+     +  BlockP(LimBlocks),
+     +  BlockQ(LimBlocks),
+     +  BlockIncrCost(LimBlocks),
+     +  CCNormOrdinate(-LimCentiSD:LimCentiSD),
+     +  NodeProb(0:LimNodes), ! product of branch-probabilites of capacity-outage
+     +  PrevProb(0:LimNodes),
+     +  NodeCOut(0:LimNodes), ! sum of branch-specific capacity-outage
+     +  PrevCOut(0:LimNodes),
+     +  COutMean(0:LimGroups),
+     +  COutVari(0:LimGroups),
+     +  NDMean,StdDev,HundSD,MeanM3s,MeanP3s
+      integer*4 VectSizeByte
+      integer*2 VectSizeElem,nAugmLDC,nEvalLDC,PrtDetail,
+     +  kLoaded(0:SupDepth,0:LimGroups),
+     +  nLoadedBlocks(0:LimGroups)
+      logical*1 UsingMoments
+
+      common /mcBinary/
+     +  BlockC,
+     +  BlockP,
+     +  BlockQ,
+     +  BlockIncrCost,
+     +  CCNormOrdinate,
+     +  NodeProb,
+     +  PrevProb,
+     +  NodeCOut,
+     +  PrevCOut,
+     +  COutMean,
+     +  COutVari,
+     +  NDMean,StdDev,HundSD,MeanM3s,MeanP3s
+      common /mcBinaryI4/
+     +  VectSizeByte
+      common /mcBinaryI2/
+     +  VectSizeElem,nAugmLDC,nEvalLDC,PrtDetail,kLoaded,nLoadedBlocks
+      common /mcBinaryL1/
+     +  UsingMoments
+
+
