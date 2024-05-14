@@ -461,6 +461,16 @@ int	flag_before_exit;
 
 
 /*
+ * 	algunos settings especificos de tfor - conv de for files 
+ *
+ */
+
+int	ffchg_com  = 0;		/* cambia caracter de comentario */
+int	ffchg_typ  = 0;		/* cambia type selectors */
+int	ffchg_lco  = 0;		/* cambia lineas de continuacion */
+
+
+/*
  *	Estructuras y variables para tokens de las lineas procesadas
  *	en este caso, estan defindas localmente en proc parser
  *	de ser necesario acceder globalmente, definir aca
@@ -577,6 +587,7 @@ int	check_fnames();
 char	*extract_fname(char *);
 
 int	linea_vacia_for(char *);
+int	cfor_comm(int *,int *);
 int	cfor_vars(int *,int *);
 int	cfor_lcon(int *,int *);
 int	l_pars(int, int *);
@@ -587,6 +598,7 @@ int	fix_dec_var2();
 int	p_src();
 int	es_cadena_valida(int,char *);
 int	tiene_coment_intermedio (char *);
+int	es_linea_comentario(char *);
 
 
 
@@ -4630,7 +4642,10 @@ int	*ql_f;
 			{
 				/* si no lo pude arreglar, encontre un caso no contemplado !!*/
 				if (! fix_dec_var1 () )
+					printf ("CASO NO CONTEMPLADO \n");
+#if 0
 					error(701);
+#endif
 				else
 				{
 					if (gp_fverbose("d3"))
@@ -5524,10 +5539,17 @@ int	pro_tool6()
 	ql_fin=ql_ini;
 
 	
-#if 1
-	/* 2 - cambio las lineas de continuacion   */
-	cfor_lcon(&ql_ini,&ql_fin);
-#endif
+	/* 1 - pidio cambiar comentarios */
+	if ( ffchg_com )
+		cfor_comm(&ql_ini,&ql_fin);
+
+	/* 2 - pidio cambiar type selectors */
+	if ( ffchg_typ )
+		cfor_vars(&ql_ini,&ql_fin);
+
+	/* 3 - pidio cambiar lineas de continuacion */
+	if ( ffchg_lco )
+		cfor_lcon(&ql_ini,&ql_fin);
 
 
 	/* grabo file */
@@ -5552,6 +5574,126 @@ int	pro_tool6()
 
 #endif
 
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	cfor_comm
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+
+#if 1
+
+int	cfor_comm(ql_i,ql_f)
+int	*ql_i;
+int	*ql_f;
+{
+
+	int	i,j,k;
+	int	p1,p2;
+	int	f1,f2,f3,f4;
+	int	qi,qf;
+
+	char	b1[MAXB];
+	char	b2[MAXB];
+	char	b3[MAXB];
+	char	b4[MAXB];
+	char	b5[MAXB];
+
+
+	qi = *ql_i;
+	qf = *ql_f;
+	memset(b4,' ',MAXB);
+
+	/* ultima linea -1, la ultima linea no puede tener continuacion ... */
+	for (i=0; i< qi - 1; i++)
+	{
+		/* copio linea y linea siguiente */
+		strcpy(b1, (*fnp[i]).l );
+
+		l_pars(i,&q_tk);
+
+		if(gp_fverbose("d4"))
+		{
+			for (j=0; j<q_tk; j++)
+			{
+				printf ("TK: %3d %3d |%s|\n",j,strlen(tk[j]),tk[j]);
+			}
+			printf ("voy b1: |%s| \n",b1);
+		}
+
+		if ( es_linea_comentario(b1))
+		{
+			if (gp_fverbose("d3"))
+			{
+				printf ("cfor: com detectado \n");
+				printf ("cfor: %4d #tk %4d |%s|\n",i,q_tk,b1);
+			}
+
+			/* pongo comentario  */
+			strcpy (tk[0],"!");
+		}
+
+		/* armo la linea de nuevo con todos los tokens */
+		memset (b3,0,MAXB);
+		for (j=0; j< q_tk; j++)
+			strcat (b3,tk[j]);
+
+		strcpy ( (*fnp[i]).l, b3);
+
+		if (gp_fverbose("d2"))
+			printf ("fix: |%s|\n",b3);
+
+	}
+}
+
+
+
+
+#endif
+
+
+
+int	es_linea_comentario(s)
+char	*s;
+{
+
+	int	i,j,k;
+	int	f1,f2,f3;
+
+	char	b1[MAXB];
+
+	strcpy(b1,s);
+
+	f1 = 1;		/* sigo verificando */
+	f2 = 1;		/* es comentario */
+	i  = 0;
+	
+	if ( b1[0] == 'c' || b1[0] == 'C' || b1[0] == '!' )
+		f1 = 0;
+	else	
+		f2 = 0;
+
+
+
+	while (f1 && i< strlen(b1) )
+	{
+		if (b1[i] == '!')
+			f1 = 0, f2 = 1;
+
+		if ( b1[i] != ' ' && b1[i] != '!' )
+			f1 = 0, f2 = 0;
+
+		i++;
+	}
+
+	return f2;
+}
 
 
 
@@ -6958,6 +7100,23 @@ int	gp_parser()
 			{
 				strcpy(var1, gp_fp(GP_GET,i,(char **)0) + 2);
 			}
+
+			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+2,"chgcom",6) )
+			{	
+				ffchg_com = 1;
+			}
+
+			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+2,"chgtyp",6) )
+			{	
+				ffchg_typ = 1;
+			}
+
+			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+2,"chglco",6) )
+			{	
+				ffchg_lco = 1;
+			}
+
+
 
 			if (gp_fverbose("d5"))
 			{
