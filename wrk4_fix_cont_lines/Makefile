@@ -2,6 +2,9 @@
 all:		tfor
 
 
+clean:
+		rm *.exe log *.log *.err
+
 ppg_prg01:	ppg_prg01.c
 		gcc -o ppg_prg01 ppg_prg01.c
 
