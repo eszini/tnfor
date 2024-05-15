@@ -1,5 +1,0 @@
-# Configuration options for RealWin
--win -mod .;D:\PROGRA~1\RealWin\REALWI~1
-D:\PROGRA~1\RealWin\REALWI~1\realwin.lib
-D:\PROGRA~1\RealWin\REALWI~1\comctl32.lib
-comdlg32.lib ws2_32.lib wsock32.lib

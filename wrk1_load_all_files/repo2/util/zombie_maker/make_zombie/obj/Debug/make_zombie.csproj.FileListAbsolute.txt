@@ -1,8 +1,0 @@
-C:\john\repos\repo_current\ABBICAP\util\zombie_maker\make_zombie\bin\Debug\make_zombie.exe.config
-C:\john\repos\repo_current\ABBICAP\util\zombie_maker\make_zombie\bin\Debug\make_zombie.exe
-C:\john\repos\repo_current\ABBICAP\util\zombie_maker\make_zombie\bin\Debug\make_zombie.pdb
-C:\john\repos\repo_current\ABBICAP\util\zombie_maker\make_zombie\obj\Debug\make_zombie.csproj.AssemblyReference.cache
-C:\john\repos\repo_current\ABBICAP\util\zombie_maker\make_zombie\obj\Debug\make_zombie.csproj.SuggestedBindingRedirects.cache
-C:\john\repos\repo_current\ABBICAP\util\zombie_maker\make_zombie\obj\Debug\make_zombie.csproj.CoreCompileInputs.cache
-C:\john\repos\repo_current\ABBICAP\util\zombie_maker\make_zombie\obj\Debug\make_zombie.exe
-C:\john\repos\repo_current\ABBICAP\util\zombie_maker\make_zombie\obj\Debug\make_zombie.pdb
