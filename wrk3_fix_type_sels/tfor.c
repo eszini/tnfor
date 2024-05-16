@@ -7922,7 +7922,8 @@ int	x;
 		printf ("\n\n");
 	}
 
-	exit(x);
+	if (x)
+		exit(x);
 }
 
 
