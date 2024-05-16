@@ -315,6 +315,8 @@ int	gp_niveldes=0;		/* nivel de descripcion que se vuelca en archivo de salida (
 				/* 0 normal 1 sentencia y numero de token 2 .... agrego cosas del diccionario si se usa */
 
 int	gp_help=0;		/* help 0 no 1 si */
+int	gp_vers=0;		/* version 0 no 1 si */
+int	gp_version(int);		/* version del fuente */
 int	gp_uso(int);		/* usage */
 				/* 0 normal 1 sentencia y numero de token 2 .... agrego cosas del diccionario si se usa */
 
@@ -723,6 +725,7 @@ char	**argv;
 	gp_default();
 	gp_init(argc,argv);
 	gp_parser();
+	gp_version(gp_vers);
 
 	char	z[MAXV];
 	sprintf (z,"proceso main");
@@ -7274,6 +7277,11 @@ int	gp_parser()
 				strcpy(var1, gp_fp(GP_GET,i,(char **)0) + 2);
 			}
 
+			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+2,"version",7) )
+			{	
+				gp_vers = 1;
+			}
+
 			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+2,"chgcom",6) )
 			{	
 				ffchg_com = 1;
@@ -7793,7 +7801,6 @@ char	c;
  *
  *	texto para describir el uso de la herramienta
  *
- *
  * -----------------------------------------------------------------------------------
  */
 
@@ -7829,6 +7836,9 @@ int	x;
 	printf ("                                                                                                  \n");
 	printf ("tool6:         carga un fuente - arregla lineas de con fortran - genera nuevo fuente              \n");
 	printf ("%s -v -opciones=d5 -tool=6 -inp=f_org -out=f_new -aux=parser.err                                  \n",z);
+	printf ("      --chgcom  convierte lineas comentadas                                                       \n");
+	printf ("      --chgtyp  arregla especificacion de variables (kind,len) pone los :: en int log real char   \n");
+	printf ("      --chglcp  arregla lineas de continuacion ... reemplaza + por &                              \n");
 	printf ("                                                                                                  \n");
 
 
@@ -7854,6 +7864,7 @@ int	x;
 int	gp_default()
 {
 	gp_help=0;
+	gp_vers=0;
 	gp_verbose=0;
 
 	ffcfg=0;
@@ -7878,6 +7889,40 @@ int	gp_default()
 
 	memset(gp_tpar,0,sizeof(gp_tpar));
 
+}
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ * 	version
+ *
+ *	version del codigo
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+int	gp_version(x)
+int	x;
+{
+	static	char	ver[MAXB];
+	char	w[MAXV];
+	char	z[MAXV];
+
+	strcpy (ver,"0015");
+	
+	sprintf (z,"%s -- (%s) ", gp_fp(GP_GET,0,(char **)0), ver  );
+	memset (w,0,MAXV);
+	strncpy (w,"                                        ",strlen(z));
+
+	if (x)
+	{
+		printf ("%s\n",z);
+		printf ("\n\n");
+	}
+
+	exit(x);
 }
 
 

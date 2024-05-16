@@ -149,7 +149,7 @@
         include 'FAIntCom.mon'
         integer (kind=2) ::   CallCount,CallsSkipped ! useful only during testing
         data CallCount/0/,CallsSkipped/0/
-!       real (kind=4) ::   Time0,Time1,bclk
+!       real*4 Time0,Time1,bclk
         character (len=11) ::   clk
 
         if(CallCount==0) then
@@ -159,7 +159,7 @@
 !       2 for output of tables of plant-specific CF at each iteration also
 !       3 for output of input load and plant data also
 !       4 for maximal debugging output
-!       5 for additional option of keying in an integer :: number of calls to skip,
+!       5 for additional option of keying in an integer number of calls to skip,
 !         after which the tone prompts for a 1-digit keystroke on [0,4] re above
 !      $IF FAPrompt==1
 !         call GetOneDigit(PrtDetail,0,5) ! 0 => no details, larger => more
@@ -241,7 +241,7 @@
       end
 
 
-      real*4 function IntegralPower(x,n) ! returns the integral power of a real (kind=4) base
+      real (kind=4)   function IntegralPower(x,n) ! returns the integral power of a real base
         real (kind=4) ::   x
         integer (kind=2) ::   n
 
@@ -261,7 +261,7 @@
         real (kind=4) ::   s,x(*),y(*)
         integer (kind=2) ::   n,i
 
-        s=0.0 ! consider use of real (kind=8) ::
+        s=0.0 ! consider use of real*8
         do i=1,n
           s=s+x(i)*y(i)
         end do
@@ -287,7 +287,7 @@
           MaxLn,                                                                          &
           HalfMaxLn
         parameter(                                                                        &
-          MaxReal=9.0e37, & !  a bit conservative for real (kind=4) ::  , but sufficient
+          MaxReal=9.0e37, & !  a bit conservative for real*4, but sufficient
           MinReal=1.1e-38,                                                                &
           SqrtMinReal=1.04e-19,                                                           &
           MaxLn=87.39, & !  alog(MaxReal)
@@ -352,7 +352,7 @@
           DistrWeight(0:LimAbnModes),                                                     &
           BinCoeff(0:LimCumulants,0:LimCumulants)
         integer (kind=4) ::   I4_4LCmBnM,I4_4nEqPtsp1,I4_4nKappa,I4_nKappa,I4_SupiHP
-        integer*2 nEqPoints ! integer (kind=1) ::   suffices for magnitude of those below:
+        integer (kind=2) ::   nEqPoints ! integer*1 suffices for magnitude of those below:
         integer (kind=2) ::   jOrdEnt,jKey,jBind,jPrBk,jBlkPair,                          &
           kLvg,kLp1,kInf,kBind,Base2LogSize,nActiveFacets,                                &
           LimitCondit,iOVE,nGamma,SupiHP,nStgEqn
@@ -650,7 +650,7 @@
           DiffBitPattern,                                                                 &
           InclBitPattern
 !         FullBitPattern ! large enough for 32 vars
-!       real (kind=4) ::   PrevCapac,CapIncr,AccumArea,AccumXInSet,AccumDj
+!       real*4 PrevCapac,CapIncr,AccumArea,AccumXInSet,AccumDj
         real (kind=8) ::   PrevCapac,AccumArea,AccumXInSet,AccumDj
         real (kind=4) ::   CapIncr
         integer (kind=2) ::   kLFS,nVarsInFct,nNB1sInFct,nVarsIFLim,BindSetLim,           &
@@ -660,7 +660,7 @@
 
 
       entry AllocFAInt(nVr)
-!       integer (kind=2) ::   nVr ! possibly larger than nVar, which may not yet be known
+!       integer*2 nVr ! possibly larger than nVar, which may not yet be known
 
         allocate(iOfFacAlgs(nVr),stat=AS)
         call CkAllocSt('iOfC',0)
@@ -700,7 +700,7 @@
 
 
       entry AllocAuxes(nVrAux)
-!       integer (kind=2) ::   nVrAux ! possibly larger than nVar, which may not yet be known
+!       integer*2 nVrAux ! possibly larger than nVar, which may not yet be known
 
         allocate(AuxRHS    (nAux),stat=AS)
         call CkAllocSt('ARHS',0)
@@ -874,9 +874,9 @@
 
 
       entry StoreLoadCurve(LAST_POINT,LPROB,LODDUR)
-!       integer (kind=2) ::   LAST_POINT,iPoint
-!       logical (kind=1) ::   NonzeroPeak,NoniX,IncrY
-!       real (kind=4) ::   LPROB(*),LODDUR(*)
+!       integer*2 LAST_POINT,iPoint
+!       logical*1 NonzeroPeak,NoniX,IncrY
+!       real*4 LPROB(*),LODDUR(*)
 
         nPoints=LAST_POINT
 !      $IF ReadLoad==1
@@ -941,9 +941,9 @@
 
 
       entry CompressElement(jD,jM,CELB,CEUB) ! delete array elements indexed jD
-!       integer (kind=2) ::   jD,jM,iCE  ! ,jAux,iAux
-!       integer (kind=4) ::   I4_2nRem,I4_4nRem
-!       real (kind=4) ::   CELB(*),CEUB(*)
+!       integer*2 jD,jM,iCE  ! ,jAux,iAux
+!       integer*4 I4_2nRem,I4_4nRem
+!       real*4 CELB(*),CEUB(*)
 
         iCE=iOfFacAlgs(jD) ! save i index of M>1 before overwriting iOfFacAlgs(jD)
 !       iOfFacAlgs(jM)=iCE ! overwriting former value; needed(?) to maintain above
@@ -1021,7 +1021,7 @@
 
 
       entry ShowRank
-!       integer (kind=2) ::   jSR,iSR
+!       integer*2 jSR,iSR
 
         write(PrtUni,'(1x,26i3)')(jOfCallers   (jSR),jSR=1,nDisp)
         write(PrtUni,'(1x,26i3)')(iOfFacAlgs   (jSR),jSR=1,nVar)
@@ -1052,20 +1052,20 @@
         UPPER_BOUND_CAP_FACTOR,MWBLOK,                                                    &
         EAVAIL,MAINTENANCE_RATE,NUNITS)
 
-!       logical (kind=1) ::   EcoReversed
-!       integer (kind=2) ::   NBLOK2,NUM_ARB_CONSTRAINTS,NUM_CUMULANTS,NUNITS,UNIT(*),BLKNO(*)
-!       real (kind=4) ::
+!       logical*1 EcoReversed
+!       integer*2 NBLOK2,NUM_ARB_CONSTRAINTS,NUM_CUMULANTS,NUNITS,UNIT(*),BLKNO(*)
+!       real*4
 !         LOWER_BOUND_CAP_FACTOR(*),
 !         UPPER_BOUND_CAP_FACTOR(*),MWBLOK(*),
 !         EAVAIL(*),MAINTENANCE_RATE(*)
-!       integer (kind=2) ::   i1,i2,i3,iMinJ,iUnit,j0,j1,j2,j3,jRet,jDis,iAux,jAux,iAuxOrg,
+!       integer*2 i1,i2,i3,iMinJ,iUnit,j0,j1,j2,j3,jRet,jDis,iAux,jAux,iAuxOrg,
 !         nVarInAux,nVarUB,Multiplicity,nDSERed,nCFLBVar
-!       integer (kind=4) ::   I4_nVUB,I4_BRem
-!       character (len=1) ::   ConstraintUnits ! Energy, Heat, Fuel, Pollutant emissions
-!       character (len=9) ::   VarString
-!       character (len=35) ::   Fmt8f
+!       integer*4 I4_nVUB,I4_BRem
+!       character*1 ConstraintUnits ! Energy, Heat, Fuel, Pollutant emissions
+!       character*9 VarString
+!       character*35 Fmt8f
 !       parameter(VarString='variables',Fmt8f='(1x,i3,i4,i2,4f7.4,f9.3,2f9.3,f9.1)')
-!       real (kind=4) ::   CostUQ,CapacUQ,RHS,SupRHS,SupCost,SysCap,Capaci,BlkCoeff,SlackCoeff,
+!       real*4 CostUQ,CapacUQ,RHS,SupRHS,SupCost,SysCap,Capaci,BlkCoeff,SlackCoeff,
 !         SupcModBP0,  ! largest modified cost assigned to any var with BlockPos=0
 !         AuxCoeff(:), ! (j) = coefficient of var j in the current aux constraint
 !         CFLB    (:), ! (j) = lower bounds on capacity factor for var j
@@ -1197,7 +1197,7 @@
             BlockPos(j2)=-Multiplicity
             Capacity(j1)=real :: Multiplicity)*Capacity(j1)
             Capacity(j2)=real :: Multiplicity)*Capacity(j2)
-!           I4_BRem=int4(4*((nStgEqn-nDSERed)-(i-1))) ! for integer (kind=2) ::   arrays
+!           I4_BRem=int4(4*((nStgEqn-nDSERed)-(i-1))) ! for integer*2 arrays
 !           20001121 AGT sees above use of 4* as dubious, thinks 2* is correct; needs verification
             I4_BRem=int4(2*((nStgEqn-nDSERed)-(i-1))-1) ! #-1 of elements to be moved
             if(PrtDetail>2) write(PrtUni,'(1x,6i3,2f11.3,a)')                             &
@@ -1208,7 +1208,7 @@
               j0=j1+Multiplicity*2
 !             UnitOwning(j3:j3+I4_BRem)=UnitOwning(j0:j0+I4_BRem) ! call cmove(UnitOwning(j0),UnitOwning(j3),I4_BRem/2)
 !             BlockPos  (j3:j3+I4_BRem)=BlockPos  (j0:j0+I4_BRem) ! call cmove(BlockPos  (j0),BlockPos  (j3),I4_BRem)
-!!            I4_BRem=I4_BRem*2 ! for real (kind=4) ::   arrays [valid when calling cmove]
+!!            I4_BRem=I4_BRem*2 ! for real*4 arrays [valid when calling cmove]
 !             CFLB      (j3:j3+I4_BRem)=CFLB      (j0:j0+I4_BRem) ! call cmove(CFLB      (j0),CFLB      (j3),I4_BRem)
 !             CFUB      (j3:j3+I4_BRem)=CFUB      (j0:j0+I4_BRem) ! call cmove(CFUB      (j0),CFUB      (j3),I4_BRem)
 !             EquivAvail(j3:j3+I4_BRem)=EquivAvail(j0:j0+I4_BRem) ! call cmove(EquivAvail(j0),EquivAvail(j3),I4_BRem)
@@ -1650,7 +1650,7 @@
 !           2/8/95 circumvention requires (currently manual) insertion of a
 !           dummy variable in the data-file, having small (e.g. 0.001) capacity
 !           and 0 cost, and using it to split the CF constraint into two; although
-!           the 0 cost does not match the cost of either real :: var, the dummy
+!           the 0 cost does not match the cost of either real var, the dummy
 !           var does 'split' either var's resultant facet, hence serves to
 !           separate the vars having CF1 and CF2 into distinct facets; the
 !           energy absorbed by this dummy var could later be assigned to its
@@ -1689,9 +1689,9 @@
 
       entry MinimizeCost(NBLOK2,UNIT,BLKNO,MWBLOK,MAINTENANCE_RATE,                       &
         ENERGY,UnservedQ,xDynStg)
-!       logical (kind=1) ::   Nearly0
-!       integer (kind=2) ::   iBlk,iMult,PrevIter !,NBLOK2,UNIT(*),BLKNO(*) (previous declarations suffice)
-!       real (kind=4) ::   InnerProduct,CallersQ,ENERGY(2,*), ! ,MWBLOK(*),MAINTENANCE_RATE(*)
+!       logical*1 Nearly0
+!       integer*2 iBlk,iMult,PrevIter !,NBLOK2,UNIT(*),BLKNO(*) (previous declarations suffice)
+!       real*4 InnerProduct,CallersQ,ENERGY(2,*), ! ,MWBLOK(*),MAINTENANCE_RATE(*)
 !      +  UnservedQ,xDynStg,xAccum
 
         call AllocOCost
@@ -1782,7 +1782,7 @@
 
 
       entry wnai(nLeadingBlanks,iVal) ! write iVal to StdOut without advancing record
-!       integer (kind=2) ::   nLeadingBlanks,iVal,jWNAI ! iVal is assumed non-negative
+!       integer*2 nLeadingBlanks,iVal,jWNAI ! iVal is assumed non-negative
 
         do jWNAI=1,nLeadingBlanks
           call wnaa(' ')
@@ -1798,8 +1798,8 @@
 
 
       entry wnaf(Fmt,fVal) ! write fVal to StdOut without advancing record
-!       character (len=*) ::   Fmt
-!       real (kind=4) ::   fVal
+!       character*(*) Fmt
+!       real*4 fVal
 
         write(PrtUni,Fmt)fVal
       return
@@ -1808,7 +1808,7 @@
       entry FillPascalTriangle(Order) ! Order<=LimCumulants
 !       routine to generate the binomial coefficients:  combinatorial j,k
 !       BinCoeff(j,k) is the combinatorial of j objects taken k at a time, k<=j
-!       integer (kind=2) ::   Order,jm1
+!       integer*2 Order,jm1
 
         jm1=0
         do j=0,Order
@@ -1915,8 +1915,8 @@
 !       concise statements.  Its development was largely dependent on the
 !       mathematical insight provided by ODOE Senior Analyst Tom Wilson.
 
-!       integer (kind=2) ::   jMN,n
-!       real (kind=4) ::   SigMN
+!       integer*2 jMN,n
+!       real*4 SigMN
 
         do k=1,nKappa
           VarCumul(k,jMN)=NCMoment(k)
@@ -1947,7 +1947,7 @@
 
       entry SaveEndPoints(iPt,iBM,ModXBeg,ModXEnd,ModOrder)
 !       var names necessarily differ from caller's
-!       integer (kind=2) ::   iPt,iBM,ModXBeg(*),ModXEnd(*),ModOrder(*)
+!       integer*2 iPt,iBM,ModXBeg(*),ModXEnd(*),ModOrder(*)
 
         nAbnormalModes=nAbnormalModes+1
         ModXBeg(nAbnormalModes)=iBM
@@ -1962,11 +1962,11 @@
       entry GetModeCumulants(jMode,ModelOrder,iPtInf,iPtSup,iBgMode,                      &
         ModeXBg,ModeXEd,ModeOrd,DistrMean,Bracketing)
 !       var names necessarily differ from caller's
-!       real (kind=4) ::   x1,x2,y1,y2,DeltaX,DeltaY,DistrMean,TermsOfOrderK,
+!       real*4 x1,x2,y1,y2,DeltaX,DeltaY,DistrMean,TermsOfOrderK,
 !      +  Slope,SloPr,Slop2,Sl2Pr,IntegralPower
-!       integer (kind=2) ::   jMode,ModelOrder,iPtInf,iPtSup,iBgMode,iGMC,kGMC,
+!       integer*2 jMode,ModelOrder,iPtInf,iPtSup,iBgMode,iGMC,kGMC,
 !      +  iPtGMC,ModeXBg(*),ModeXEd(*),ModeOrd(*)
-!       logical (kind=1) ::   Bracketing
+!       logical*1 Bracketing
 
         DistrMean=0.0
         do iPtGMC=iPtInf,iPtSup ! extract the mean of abscissas
@@ -2008,8 +2008,8 @@
               if(PrtDetail>3) write(PrtUni,'(1x,i2,f10.3,f9.6\)')                         &
                 iPtGMC,x2,y2
             end if
-!           do k=2,nKappa+1 CtMoment[k-1]=CtMoment[k-1]+Slope*(x2^k-x1^k)/real :: k)
-!           do k=1,nKappa   CtMoment[k  ]=CtMoment[k  ]+Slope*(x2^k+1-x1^k+1)/real :: k+1)
+!           do k=2,nKappa+1 CtMoment[k-1]=CtMoment[k-1]+Slope*(x2^k-x1^k)/real(k)
+!           do k=1,nKappa   CtMoment[k  ]=CtMoment[k  ]+Slope*(x2^k+1-x1^k+1)/real(k+1)
 !           The above formulation, involving differences of powers of small
 !           numbers, is prone to numerical error; the error may be avoided
 !           by taking advantage of the identity
@@ -2064,11 +2064,11 @@
 
 
       entry GetLoadCumulants
-!       real (kind=4) ::   yDecrement,yDecNormal,LocalMean,ResidSlope,
+!       real*4 yDecrement,yDecNormal,LocalMean,ResidSlope,
 !      +  SumWeights,ModeYDecr(LimPoints),NormalOrd
-!       integer (kind=2) ::   iMode,iGLC,iPtGLC,iBegMode,iEndMode,ModeTrimmed,
+!       integer*2 iMode,iGLC,iPtGLC,iBegMode,iEndMode,ModeTrimmed,
 !      +  ModeXBeg(LimPoints),ModeXEnd(LimPoints),ModeOrder(LimPoints)
-!       logical (kind=1) ::   OneTruncated
+!       logical*1 OneTruncated
 
 !       extract abnormal modes from EqLDn0
         iBegMode=1
@@ -2219,9 +2219,9 @@
 
 
       entry ChkLoadModel(MonotCLM) ! test if model's ordinates decline monotonically
-!       logical (kind=1) ::   MonotCLM
-!       real (kind=4) ::   LoadStepSize,LoadProbed,AvgOrdinate,PriorAvgOrd
-!       real (kind=8) ::   OrigUQ
+!       logical*1 MonotCLM
+!       real*4 LoadStepSize,LoadProbed,AvgOrdinate,PriorAvgOrd
+!       real*8 OrigUQ
 
         LoadProbed=BaseLoad
         LoadStepSize=0.01*(EqLoad(nPoints)-LoadProbed)
@@ -2249,8 +2249,8 @@
 
 
       entry GetPlantCumulants
-!       integer (kind=2) ::   km1,m,nIdent,Sterling(LimCumulants,LimCumulants)
-!       real (kind=4) ::   CapOutage,PrOutage,nmFactor
+!       integer*2 km1,m,nIdent,Sterling(LimCumulants,LimCumulants)
+!       real*4 CapOutage,PrOutage,nmFactor
 
         do j=1,nVar
           PrOutage=1.0-EquivAvail(j)
@@ -2530,17 +2530,17 @@
 !     Handbook of Mathematical Functions.
 !     nGamma is the highest order of GammaNorm (dimensionless cumulant).
 
-!       integer (kind=2) ::   jFTA,kFTA
-!       character (len=11) ::   Truncation
-!       real (kind=8) ::   MinArea
-!       real (kind=4) ::   StdDev,Density,c1,c2,z,xLod,yPrb,ySum,GaussianDen,CCNFmd,
+!       integer*2 jFTA,kFTA
+!       character*11 Truncation
+!       real*8 MinArea
+!       real*4 StdDev,Density,c1,c2,z,xLod,yPrb,ySum,GaussianDen,CCNFmd,
 !    +    GammaNorm(2),Factorial(4),Hermite(0:LimiHP),HPcoef(0:LimiHP)
 !       equivalence (z,Hermite(1)),(c1,GammaNorm(1)),(c2,GammaNorm(2))
 !       data Hermite(0)/1./
 !       data Factorial/1.,2.,6.,24./ ! the value of n-factorial
 
         StdDev=sqrt(EqLCumul(2,0))
-!       StdDev=dsqrt(dble(EqLCumul(2,0))) ! need EqLCumul to be real (kind=8) ::   for improvement
+!       StdDev=dsqrt(dble(EqLCumul(2,0))) ! need EqLCumul to be real*8 for improvement
 !       transform the higher-order cumulants into non-dimensional GammaNorm
 !       z=0.5/EqLCumul(2,0)
         do kFTA=3,nKappa
@@ -2549,7 +2549,7 @@
 !         can expedite the computations by incorporating the i-factorials
 !         that appear in the denominators of the HPcoef's below; note that
 !         GammaNorm(kFTA) incorporates factorial(kFTA+2) in its denominator
-!         z=z/(real :: kFTA)*StdDev) ! perhaps slower than the one-line assignment below
+!         z=z/(real(kFTA)*StdDev) ! perhaps slower than the one-line assignment below
 !         GammaNorm(kFTA-2)=EqLCumul(kFTA,0)*z
           GammaNorm(kFTA-2)=EqLCumul(kFTA,0)/                                             &
             (Factorial(kFTA)*StdDev**kFTA)
@@ -2586,9 +2586,9 @@
 !       ! generate the Hermite polynomial values by recursion; note that
 !       ! here Hermite(jFTA) is the Hermite polynomial of order jFTA:
 !       ! Hermite(0)=1, Hermite(1)=z, Hermite(2)=z**2-1, Hermite(3)=z**3-3*z...
-!       ! Hermite(jFTA+1)=z*Hermite(jFTA)-real :: jFTA  )*Hermite(jFTA-1)
+!       ! Hermite(jFTA+1)=z*Hermite(jFTA)-real(jFTA  )*Hermite(jFTA-1)
           Hermite(jFTA)=z*Hermite(jFTA-1)-real :: jFTA-1)*Hermite(jFTA-2) ! needed for yPrb
-!       ! if(jFTA<SupiHP) Hermite(jFTA)=z*Hermite(jFTA-1)-real :: jFTA-1)*Hermite(jFTA-2) ! suffices for TailUQ
+!       ! if(jFTA<SupiHP) Hermite(jFTA)=z*Hermite(jFTA-1)-real(jFTA-1)*Hermite(jFTA-2) ! suffices for TailUQ
 !       ! augment y by the contribution of each higher-order term in
 !       ! the Edgeworth expansion (factored by the density function):
           if(PrtDetail>2) yPrb=yPrb+HPcoef(jFTA)*Hermite(jFTA) ! ordinate is of interest
@@ -2646,9 +2646,9 @@
 
 
       entry FindAreaBetween(xOrg,xWidth) ! allows for variable xStep
-!       real (kind=4) ::   xOrg,xWidth,xDomain(0:1),xGrid(0:1),yGrid(0:1)
-!       integer (kind=2) ::   iBegPt,iEndPt
-!       logical (kind=1) ::   NegativeArea
+!       real*4 xOrg,xWidth,xDomain(0:1),xGrid(0:1),yGrid(0:1)
+!       integer*2 iBegPt,iEndPt
+!       logical*1 NegativeArea
 
         if(xWidth<0.0) then ! enforce xDomain(0)<xDomain(1) ordering
           NegativeArea=.true.
@@ -2701,9 +2701,9 @@
 !     pivoting, elimination, and triangular back-substitution.  The
 !     order of both ArrayOrg and ArrayInv (both assumed square) is nRows.
 !     The logic below assumes the second subscript indexes rows.
-!       integer (kind=2) ::   nRows,PivotRow
-!       integer (kind=4) ::   I4_nBinRow,I4_n
-!       real (kind=4) ::   HeldElement,PivotElement,Factor,ArrayOrg(nRows,nRows),
+!       integer*2 nRows,PivotRow
+!       integer*4 I4_nBinRow,I4_n
+!       real*4 HeldElement,PivotElement,Factor,ArrayOrg(nRows,nRows),
 !    +    ArrayInv(nRows,nRows),ArrayOld(:,:),HeldRow(LimUnknowns)
 
         allocate(ArrayOld(nRows,nRows),stat=AS)
@@ -2781,12 +2781,12 @@
 
 
       entry ShowVectors ! in order of Bloom's tables
-!       character (len=47) ::   FmtNoPhi1,FmtNoPhi2
+!       character*47 FmtNoPhi1,FmtNoPhi2
 !       parameter(FmtNoPhi1='(1x,2i3,a,f8.2 ,f12.5,f9.3,f19.2,f9.3,f10.6)',
 !    +            FmtNoPhi2='(1x,2i3,a,i5,i3,f12.5,f9.3,f19.2,f9.3,f10.6)')
-!       real (kind=4) ::   AvgDurat(LimUnknowns),PrevAvg,Avg2ndP,PrevCap,Cap2ndP
-!       character (len=4) ::   ChrVS(LimUnknowns),ChrState(0:3)
-!       character (len=2) ::   Warning
+!       real*4 AvgDurat(LimUnknowns),PrevAvg,Avg2ndP,PrevCap,Cap2ndP
+!       character*4 ChrVS(LimUnknowns),ChrState(0:3)
+!       character*2 Warning
 !       data ChrState/' nB0',' nB1',' Key',' BnK'/
 
         write(PrtUni,Fmt1a) ' jV kF Sta RHS/U&B'//                                        &
@@ -2863,8 +2863,8 @@
 
 
       entry ShowStates
-!       integer (kind=2) ::   k2
-!       logical (kind=1) ::   FirstItem
+!       integer*2 k2
+!       logical*1 FirstItem
 
         if(PrtDetail>3) then
           k2=0
@@ -2932,7 +2932,7 @@
 
 
       entry ShowCostAtIter(UnsvdQ)
-!       real (kind=4) ::   UnsvdQ
+!       real*4 UnsvdQ
 
         xAccum=0.0
         do j=1,nVar
@@ -2955,7 +2955,7 @@
 
 
       entry ShowLDC(yOrg,yNow)
-!       real (kind=4) ::   yOrg(0:*),yNow(0:*)
+!       real*4 yOrg(0:*),yNow(0:*)
 
         do j2=0,nEqPoints
           write(PrtUni,'(1x,i3,3f11.6)')j2,EqLoad(j2),yOrg(j2),yNow(j2)
@@ -2964,15 +2964,15 @@
 
 
       entry IncludeOutages(Capac,jB,jC) ! assumes variable DxLoad
-!       integer (kind=2) ::   jB,jC,jGLB
-!       character (len=14) ::   Fmt6e
-!       character (len=16) ::   Fmtf68
-!       character (len=28) ::   Fmtf10
+!       integer*2 jB,jC,jGLB
+!       character*14 Fmt6e
+!       character*16 Fmtf68
+!       character*28 Fmtf10
 !       parameter(
 !    +    Fmt6e ='(1x,i3,6e11.4)',
 !    +    Fmtf68='(1x,f6.3,f8.3,a)',
 !    +    Fmtf10='(1x,i3,i3,i2,f10.3,a,3f11.4)')
-!       real (kind=4) ::   Capac,EFOR,EqAv,xShifted,yAtxShifted,yInterpolate,
+!       real*4 Capac,EFOR,EqAv,xShifted,yAtxShifted,yInterpolate,
 !    +    EDIncl(0:LimEqPoints) ! eq-load's duration including outages of Capac
 
         if(UsingCumul) then
@@ -3023,8 +3023,8 @@
 
 
       entry ExcludeOutages(Capac,jB,jC) ! assumes variable DxLoad
-!       integer (kind=2) ::   jLUB,jFirst0
-!       real (kind=4) ::   xZero,FracStep,
+!       integer*2 jLUB,jFirst0
+!       real*4 xZero,FracStep,
 ! !  +    yAtxShifted,yExAtxShifted,
 !    +    EDExcl(0:LimEqPoints) ! eq-load's duration excluding outages of Capac
 
@@ -3134,7 +3134,7 @@
 
 
       entry CopyEqLoad(FromHold)
-!       logical (kind=1) ::   FromHold
+!       logical*1 FromHold
 
         if(UsingCumul) then
           if(FromHold) then ! copy from the captured array
@@ -3157,7 +3157,7 @@
 
 
       entry CopyEqLoad0(FromHold0)
-!       logical (kind=1) ::   FromHold0
+!       logical*1 FromHold0
 
         if(UsingCumul) then
           if(FromHold0) then ! copy from the array including outages for kInf-1
@@ -3180,12 +3180,12 @@
 
 
       entry ChkPriorBlock(PrBkPos,jCPB,kFct,InclThisFct,PreTestSet)
-!       character (len=19) ::   Fmtf8p2,Fmtf8p5
+!       character*19 Fmtf8p2,Fmtf8p5
 !       parameter(Fmtf8p2='(1x,i3,f8.2,6e11.4)',
 !    +            Fmtf8p5='(1x,i3,f8.5,6e11.4)')
-!       logical (kind=1) ::   InclThisFct,PreTestSet
-!       integer (kind=2) ::   PrBkPos,jCPB,kCPB,kFct
-!       real (kind=4) ::   EscalationFactor,FactorToKthPower
+!       logical*1 InclThisFct,PreTestSet
+!       integer*2 PrBkPos,jCPB,kCPB,kFct
+!       real*4 EscalationFactor,FactorToKthPower
 
         jBlkPair=jCPB ! default: cumulants use incoming block index
         PriorBlockLoaded=max(BlockPos(jCPB),1)/=PrBkPos
@@ -3233,14 +3233,14 @@
 
 
       entry LimitAccum(jLA,xAccumLA)
-!       integer (kind=2) ::   jLA ! ,kLA
-!       real (kind=4) ::   xAccumLA
+!       integer*2 jLA ! ,kLA
+!       real*4 xAccumLA
 
         CapConv=Capacity(jLA)
         call ChkPriorBlock(One2,jLA,nActiveFacets,FalseByte,True_Byte) ! remove effects of its outages:
         if(PriorBlockLoaded)                                                              &
           call ExcludeOutages(Capacity(jPrBk),jPrBk,jPrBk)
-        if(UsingCumul) then ! avoid prior logical :: error when UsingCumul:
+        if(UsingCumul) then ! avoid prior logical error when UsingCumul:
 !       ! multiplication of TailUQ by a fixed probability treats outages as 2-state;
 !       ! to keep the treatment logically consistent, one must view outages as having
 !       ! a continuous distribution of values, as defined by VarCumul(j) above; the
@@ -3273,8 +3273,8 @@
 
 
       entry ShowItem(jSI,xAccumSI)
-!       integer (kind=2) ::   jSI
-!       real (kind=4) ::   xAccumSI
+!       integer*2 jSI
+!       real*4 xAccumSI
 
         write(PrtUni,                                                                     &
           '(1x,2i3,i2,L2,f10.1,f9.3,2f10.3,f7.4,f13.6,f10.3)')                            &
@@ -3285,7 +3285,7 @@
 
 
       entry MakeBound(jMB)
-!       integer (kind=2) ::   jMB,kPrBk
+!       integer*2 jMB,kPrBk
 
         if(x(jMB)-GLB(jMB)<LUB(jMB)-x(jMB)) then
           VarState(jMB)=BoundNB0
@@ -3323,9 +3323,9 @@
 
 
       entry CommitStgPair(jCSV,xAcCSV,UnityRetCF)
-!       logical (kind=1) ::   UnityRetCF
-!       integer (kind=2) ::   jCSV
-!       real (kind=4) ::   xAcCSV
+!       logical*1 UnityRetCF
+!       integer*2 jCSV
+!       real*4 xAcCSV
 
 !       commit the return vars and their discharge complements;
 !       employ a fictitious 'return' plant to offset the assumption of CF=1
@@ -3376,7 +3376,7 @@
 
 
       entry DeleteFacet(kDel)
-!       integer (kind=2) ::   kDel
+!       integer*2 kDel
 
         nActiveFacets=nActiveFacets-1
         do k=kDel,nActiveFacets ! shift to compress
@@ -3389,11 +3389,11 @@
 
 
       entry ChkAreaOfBNK(iLastRetVar,iDisp,kFrm,xAccumCAB,xDischgRem)
-!       integer (kind=2) ::   iLastRetVar,iLastRetVarInit,iLRVInf,iDisp,kFrm
-!       logical (kind=1) ::   InPriorFct,SameStgEqn,jDisFits
-!       real (kind=4) ::   xAccumCAB,xAccumInit,xKeyPrev,xDisPrev,xAggNoSplit,xAggPrev,xKeyDecr,
+!       integer*2 iLastRetVar,iLastRetVarInit,iLRVInf,iDisp,kFrm
+!       logical*1 InPriorFct,SameStgEqn,jDisFits
+!       real*4 xAccumCAB,xAccumInit,xKeyPrev,xDisPrev,xAggNoSplit,xAggPrev,xKeyDecr,
 !    +    xDischgRem,xDischgInit,xDischgUsed,CDischgUsed,PairsQ
-!       real (kind=8) ::   PrevUQ,FirmUQ
+!       real*8 PrevUQ,FirmUQ
 
         InPriorFct=.false.
         iLastRetVarInit=iLastRetVar
@@ -3530,8 +3530,8 @@
 
 
       entry MakeKeyVar(jMKV,xAcMKV) ! make var jMKV key in facet nActiveFacets
-!       integer (kind=2) ::   jMKV
-!       real (kind=4) ::   xAcMKV
+!       integer*2 jMKV
+!       real*4 xAcMKV
 
         VarState(jMKV)=BasicKey
         FctOwning(jMKV)=nActiveFacets
@@ -3556,11 +3556,11 @@
 
 
       entry ObtainBasicFeasibleSolution
-!       integer (kind=2) ::   jPt,jBFS,nStgVar,iLastRetVoDR,kFirm
-!       logical (kind=1) ::   Monotonic
-!       real (kind=4) ::   bAccum,xAHold,xjHold,DisCapac,ChgQ,DisQ,SumStgRHS,
+!       integer*2 jPt,jBFS,nStgVar,iLastRetVoDR,kFirm
+!       logical*1 Monotonic
+!       real*4 bAccum,xAHold,xjHold,DisCapac,ChgQ,DisQ,SumStgRHS,
 !      +  Efficiency,InfEfficiency
-!       real (kind=8) ::   ThisUQ,ChgUQ
+!       real*8 ThisUQ,ChgUQ
 
         if(PrtDetail>2) write(PrtUni,Fmt1a)'ObtainBasicFeasibleSolution'
 !       call cinitw(PrevBDIRow,I4_nVar,InvalidIndex)
@@ -3835,7 +3835,7 @@
 !       the loop for Bk is entered; the order implied in associating var j
 !       with column i of DColumn (and therefore with row i of DInvRow) must
 !       match that implied by the coefficients of the AColumn matrix
-!       integer (kind=2) ::   jCU,kCU,UnplacedBNK
+!       integer*2 jCU,kCU,UnplacedBNK
 
 !       if(nAux>0) call cinitw(BNKinRow,I4_nAux,InvalidIndex)
         if(nAux>0) call initw1(BNKinRow,nAux,InvalidIndex)
@@ -3875,8 +3875,8 @@
 
       entry SubtractColumn(jSC,AColumnSC,AccumColumnSC)
 !       subtract column jSC of AColumnSC from AccumColumnSC
-!       integer (kind=2) ::   jSC
-!       real (kind=4) ::   AColumnSC(nAux,*),AccumColumnSC(*)
+!       integer*2 jSC
+!       real*4 AColumnSC(nAux,*),AccumColumnSC(*)
 
         do iAux=1,nAux
           AccumColumnSC(iAux)=AccumColumnSC(iAux)-AColumnSC(iAux,jSC)
@@ -3888,8 +3888,8 @@
 
 
       entry AddScalarMult(Scalar,RowVect,v,nASM) ! augment v by Scalar*RowVect
-!       integer (kind=2) ::   jASM,nASM
-!       real (kind=4) ::   Scalar,RowVect(*),v(*)
+!       integer*2 jASM,nASM
+!       real*4 Scalar,RowVect(*),v(*)
 
         do jASM=1,nASM
           v(jASM)=v(jASM)+Scalar*RowVect(jASM)
@@ -3906,8 +3906,8 @@
 !       must be appropriate to the basis just before the vector insertion;
 !       source:  Best & Ritter, Linear Programming, Prentice-Hall, p. 23
 !       (and obscurely Hadley, Linear Programming, Addison-Wesley, p. 49)
-!       integer (kind=2) ::   kMI,nMI
-!       real (kind=4) ::   kDotProd,RowPrimary(nMI,nMI),NewCol(nMI)
+!       integer*2 kMI,nMI
+!       real*4 kDotProd,RowPrimary(nMI,nMI),NewCol(nMI)
 
         kDotProd=InnerProduct(RowPrimary(1,kMI),NewCol,nMI)
         if(Nearly0(kDotProd,0)) call HaltWith(nMI,kMI,                                    &
@@ -3935,10 +3935,10 @@
 
 
       entry ShowMat(PreInv,FullInv)
-!       logical (kind=1) ::   PreInv,FullInv
-!       character (len=12) ::   MethodGJ
-!       character (len=10) ::   MethodSR
-!       character (len=22) ::   PostInv
+!       logical*1 PreInv,FullInv
+!       character*12 MethodGJ
+!       character*10 MethodSR
+!       character*22 PostInv
 !       parameter(MethodGJ='Gauss-Jordan',
 !    +            MethodSR='Single-Row',
 !    +            PostInv =' post-inversion using ')
@@ -3963,9 +3963,9 @@
 
 
       entry CheckProduct
-!       integer (kind=2) ::   iPass
-!       logical (kind=1) ::   Errant
-!       real (kind=4) ::   sCP
+!       integer*2 iPass
+!       logical*1 Errant
+!       real*4 sCP
 
         Errant=.false.
         do iPass=1,2
@@ -3995,8 +3995,8 @@
 
 
       entry InvertAuxBasis
-!       integer (kind=2) ::   jPrev,PrevKey,ThisKey,nDifferent,RowChanged
-!       logical (kind=1) ::   InvObsolete
+!       integer*2 jPrev,PrevKey,ThisKey,nDifferent,RowChanged
+!       logical*1 InvObsolete
 
 !       call cinitw(BasisDIRow,I4_nVar,InvalidIndex)
 !       call cinitw(BasisKyVar,I4_nVar,InvalidIndex)
@@ -4218,8 +4218,8 @@
 
 
       entry ChooseDescentDirection
-!       integer (kind=2) ::   jPrevOE ! used to break pathological cycling
-!       real (kind=4) ::   OptDual
+!       integer*2 jPrevOE ! used to break pathological cycling
+!       real*4 OptDual
 
         if(PrtDetail>2) write(PrtUni,Fmt1a)                                               &
           'Step1:  choose pivot variable having a cost-reducing dual'
@@ -4286,7 +4286,7 @@
 
 
       entry LimitFacetSize
-!       integer (kind=2) ::   kLFS,nVarsInFct,nNB1sInFct,nVarsIFLim,BindSetLim,
+!       integer*2 kLFS,nVarsInFct,nNB1sInFct,nVarsIFLim,BindSetLim,
 !    +    BindSetVar(6)
 
 !       nVarsIFLim=max0(6,nStgEqn+1) ! limit on # vars in 1 facet; no need for more
@@ -4332,15 +4332,15 @@
       return ! entry LimitFacetSize
 
       entry FindMostRestrictive
-!       character :: InfChr ! useful only if PrtDetail>0
-!       character (len=10) ::   StrRHS ! internal file useful only if PrtDetail>0
+!       character InfChr ! useful only if PrtDetail>0
+!       character*10 StrRHS ! internal file useful only if PrtDetail>0
 !       ! index number of the limiting inequality, according to Bloom's paper
-!       integer (kind=2) ::   LimitingIneq(0:2,0:1)
+!       integer*2 LimitingIneq(0:2,0:1)
 !       data LimitingIneq/18,19,0,24,25,27/
-!       logical (kind=1) ::   OrdVarFinalFct,FctVoidOfDj
-!       integer (kind=2) ::   jLoadedLast,kPrior0,kPrior1,iMSb,iMarginal,nMarginal,
+!       logical*1 OrdVarFinalFct,FctVoidOfDj
+!       integer*2 jLoadedLast,kPrior0,kPrior1,iMSb,iMarginal,nMarginal,
 !    +    jMarginal(:)
-!       integer (kind=4) ::   HalfSize,GrayOrder(:),HoldOrder(:), ! temporary storage
+!       integer*4 HalfSize,GrayOrder(:),HoldOrder(:), ! temporary storage
 !    +    SupiGr, ! may grow as large as LimFacetSize
 !    +    iGray,fGray,
 !    +    PrevBitPattern,
@@ -4348,9 +4348,9 @@
 !    +    DiffBitPattern,
 !    +    InclBitPattern ! ,
 !     !   FullBitPattern ! large enough for 32 vars
-!      !real (kind=4) ::   PrevCapac,CapIncr,AccumArea,AccumXInSet,AccumDj
-!       real (kind=8) ::   PrevCapac,AccumArea,AccumXInSet,AccumDj
-!       real (kind=4) ::   CapIncr
+!      !real*4 PrevCapac,CapIncr,AccumArea,AccumXInSet,AccumDj
+!       real*8 PrevCapac,AccumArea,AccumXInSet,AccumDj
+!       real*4 CapIncr
 
         if(.not.allocated(jMarginal)) then
 !       ! allocate(jMarginal(SupB2LogSize),stat=AS)
@@ -4434,7 +4434,7 @@
                   allocate(HoldOrder(0:SupiGr),stat=AS)
                   call CkAllocSt('Hold',0)
 !               ! HoldOrder=GrayOrder ! call cmove(GrayOrder,HoldOrder,4*(1+SupiGr))
-                  call CopyLinRVec0(GrayOrder,HoldOrder,1+SupiGr) ! copy as if real (kind=4) ::
+                  call CopyLinRVec0(GrayOrder,HoldOrder,1+SupiGr) ! copy as if real*4
 !               ! hold the prior array data until space is allocated
                   HalfSize=ishft(1,Base2LogSize)
                   SupiGr=HalfSize+HalfSize-1
@@ -4443,7 +4443,7 @@
                   allocate(GrayOrder(0:SupiGr),stat=AS)
                   call CkAllocSt('Gray',0)
 !               ! GrayOrder(0:HalfSize-1)=HoldOrder ! call cmove(HoldOrder,GrayOrder,4*HalfSize)
-                  call CopyLinRVec0(HoldOrder,GrayOrder,HalfSize) ! copy as if real (kind=4) ::
+                  call CopyLinRVec0(HoldOrder,GrayOrder,HalfSize) ! copy as if real*4
                   deallocate(HoldOrder,stat=AS)
                   call CkAllocSt('Hold',1)
                   do iGray=1,HalfSize
@@ -4767,7 +4767,7 @@
 
 
       entry FigureDescentExtent
-!       real (kind=4) ::   Alpha
+!       real*4 Alpha
 
 !       get d(j), the 1st derivative of x(j) with respect to x(jOrdEnt or jKey);
 !       any motion within basis is linear, so all higher-order derivatives vanish
@@ -4893,8 +4893,8 @@
       entry FindAuxComplement(jOrg,jCompl)
 !       return the index of the first non-jOrg var in one of the aux constraints
 !       covering jOrg, having PrevState unequal that of jOrg
-!       integer (kind=2) ::   jOrg,jCompl,PrStjOrg
-!       character (len=46) ::   NoCompl
+!       integer*2 jOrg,jCompl,PrStjOrg
+!       character*46 NoCompl
 !       parameter(NoCompl='var has no aux complement in state unequal to')
 
         if(AuxiCovers(jOrg).eqv..true.) then
@@ -4921,7 +4921,7 @@
 
 
       entry MergeLeavingFacet
-!       integer (kind=2) ::   jUnionKey
+!       integer*2 jUnionKey
 
 !       decision re k is not arbitrary, as a non-aux var cannot be BasicNKy
         k=0
@@ -4968,7 +4968,7 @@
 
       entry PartReBindSetFacets(k0,k1) ! assumes k1=k0+1
 !       exclude BindSet from union (k1) of 2 facets, placing it into k0
-!       integer (kind=2) ::   k0,k1
+!       integer*2 k0,k1
 
         do j=1,nVar
           if((k0==FctOwning(j)).or.(FctOwning(j)==k1)) then
@@ -4986,7 +4986,7 @@
 
 
       entry SplitBindingFacet(Partition)
-!       logical (kind=1) ::   Partition
+!       logical*1 Partition
 
         if(PrtDetail>2) write(PrtUni,'(1x,a,3i4)')                                        &
           'SBF ',jBind,kBind,nActiveFacets
@@ -5002,7 +5002,7 @@
 
 
       entry IntersectWithBNK(kIWBnk)
-!       integer (kind=2) ::   kIWBnk,jIWB
+!       integer*2 kIWBnk,jIWB
 
 !       BkOwns(jIWB) iff FctOwning(jIWB)==kIWBnk and VarState(jIWB)==BasicNKy
 !     ! BkOwns=.false. ! call cinitb(BkOwns,I4_nVar,.false.)
@@ -5019,7 +5019,7 @@
 
       entry FindFirstBNKnot(jSkip,jBnk)
 !       return the index of the first var (not jSkip) that BkOwns
-!       integer (kind=2) ::   jSkip,jBnk
+!       integer*2 jSkip,jBnk
 
         jBnk=1
         do while                                                                          &
@@ -5032,9 +5032,9 @@
       entry FindNewlyKeyAuxIn(kFctNKAI,jNKyToBe,AnyConstr)
 !       return the index of a basic non-key var in facet kFctNKAI,
 !       insisting on one which complements var jNKyToBe (if not AnyConstr)
-!       integer (kind=2) ::   kFctNKAI,jNKyToBe,kNKyToBe
-!       logical (kind=1) ::   AnyConstr
-!       character (len=36) ::   NoBNK
+!       integer*2 kFctNKAI,jNKyToBe,kNKyToBe
+!       logical*1 AnyConstr
+!       character*36 NoBNK
 !       parameter(NoBNK='facet contains no basic non-key var')
 
         call IntersectWithBNK(kFctNKAI)
@@ -5107,8 +5107,8 @@
 
 
       entry SwapStates(jAlt,jNBa,jNKy,kFctSS,AlignedSS) ! execute intra-facet swap
-!       integer (kind=2) ::   kFctSS,jAlt,jNBa,jNKy
-!       logical (kind=1) ::   AlignedSS
+!       integer*2 kFctSS,jAlt,jNBa,jNKy
+!       logical*1 AlignedSS
 
         if(kFctSS==InvalidFacet) then
           call MakeBound(jAlt)    ! formerly in B0
@@ -5135,8 +5135,8 @@
 
 
       entry FindRelatedBNK(jNBa,jNKy,kFctFR,AlignedFR)
-!       integer (kind=2) ::   kFctFR
-!       logical (kind=1) ::   AlignedFR
+!       integer*2 kFctFR
+!       logical*1 AlignedFR
 
         call IntersectWithBNK(kFctFR)
         iAux=1
@@ -5166,8 +5166,8 @@
 
 
       entry AlignAuxRows
-!       integer (kind=2) ::   jNKyAAR,jNBaAAR,kAAR
-!       logical (kind=1) ::   Aligned
+!       integer*2 jNKyAAR,jNBaAAR,kAAR
+!       logical*1 Aligned
 
         call ChkUnplacedBNK(jNKyAAR) ! check whether each BasicNKy var has a DOrgRow
         Aligned=jNKyAAR==InvalidIndex
@@ -5206,7 +5206,7 @@
 
 
       entry SplitAndRevise ! OrdVarEntering <=> (LimitCondit==24)
-!       integer (kind=2) ::   jKeyOE,kOE,kOfs
+!       integer*2 jKeyOE,kOE,kOfs
 
         jKey=KeyVar(kBind)
         if(BindSetOwns(jKey)) then
@@ -5262,8 +5262,8 @@
 
 
       entry CastAsBoundIfSingular(jCIS,NBaState)
-!       integer (kind=2) ::   jCIS,NBaState
-!       logical (kind=1) ::   Singular
+!       integer*2 jCIS,NBaState
+!       logical*1 Singular
 
         Singular=.not.AuxiCovers(jCIS)
         j2=1
@@ -5283,7 +5283,7 @@
 
 
       entry ReviseBasisVectors
-!       logical (kind=1) ::   SameSubset
+!       logical*1 SameSubset
 
         if(PrtDetail>1) then
           call wnaa(' Step3:  revise facet constraints')
