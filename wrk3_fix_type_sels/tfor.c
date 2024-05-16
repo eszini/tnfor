@@ -36,6 +36,15 @@
  *	-v		verbose
  *	-opciones=Xi	X = (D)ebug, (I)nformative, (E)xtra (user def)
  *
+ *	para ponernos de acuerdo:
+ *	0 - no muestra nada
+ *	1 - solo informacion resultado que deba mostrarse
+ *	2 - un poco de debug, 
+ *          x que rutinas paso
+ *          lineas cargadas 
+ *          alguna info de control util
+ *      3 - mas nivel de debug
+ *
  *
  *	Changes pending...
  *	
@@ -306,6 +315,8 @@ int	gp_niveldes=0;		/* nivel de descripcion que se vuelca en archivo de salida (
 				/* 0 normal 1 sentencia y numero de token 2 .... agrego cosas del diccionario si se usa */
 
 int	gp_help=0;		/* help 0 no 1 si */
+int	gp_vers=0;		/* version 0 no 1 si */
+int	gp_version(int);		/* version del fuente */
 int	gp_uso(int);		/* usage */
 				/* 0 normal 1 sentencia y numero de token 2 .... agrego cosas del diccionario si se usa */
 
@@ -461,6 +472,16 @@ int	flag_before_exit;
 
 
 /*
+ * 	algunos settings especificos de tfor - conv de for files 
+ *
+ */
+
+int	ffchg_com  = 0;		/* cambia caracter de comentario */
+int	ffchg_typ  = 0;		/* cambia type selectors */
+int	ffchg_lco  = 0;		/* cambia lineas de continuacion */
+
+
+/*
  *	Estructuras y variables para tokens de las lineas procesadas
  *	en este caso, estan defindas localmente en proc parser
  *	de ser necesario acceder globalmente, definir aca
@@ -577,6 +598,7 @@ int	check_fnames();
 char	*extract_fname(char *);
 
 int	linea_vacia_for(char *);
+int	cfor_comm(int *,int *);
 int	cfor_vars(int *,int *);
 int	cfor_lcon(int *,int *);
 int	l_pars(int, int *);
@@ -587,6 +609,8 @@ int	fix_dec_var2();
 int	p_src();
 int	es_cadena_valida(int,char *);
 int	tiene_coment_intermedio (char *);
+int	es_linea_comentario(char *);
+int	es_linea_comentario2(char *);
 
 
 
@@ -701,6 +725,7 @@ char	**argv;
 	gp_default();
 	gp_init(argc,argv);
 	gp_parser();
+	gp_version(gp_vers);
 
 	char	z[MAXV];
 	sprintf (z,"proceso main");
@@ -869,6 +894,8 @@ int	proceso_principal()
 			pro_tool5();
 		if (fftoo == 6)
 			pro_tool6();
+		if (fftoo == 7)
+			pro_tool7();
 	}
 
 
@@ -978,10 +1005,9 @@ int	proc_principal()
 					flag_caracteres=1;
 					if (gp_fverbose("d1"))
 					{
-						printf ("Caracter no definido para parser: %c %d\n",b1[p1],b1[p1]);
+						printf ("Caracter no definido en parser: %03d \n",(unsigned int)b1[p1]);
 						if (ffaux)
-							fprintf (hfaux,"Caracter no definido %d %c\n",b1[p1],b1[p1]);
-							
+							fprintf (hfaux,"Caracter no definido en parser: %03d \n",(unsigned int)b1[p1]);
 					}
 					p1++; 
 					break; 
@@ -4630,7 +4656,10 @@ int	*ql_f;
 			{
 				/* si no lo pude arreglar, encontre un caso no contemplado !!*/
 				if (! fix_dec_var1 () )
+					printf ("CASO NO CONTEMPLADO \n");
+#if 0
 					error(701);
+#endif
 				else
 				{
 					if (gp_fverbose("d3"))
@@ -4687,50 +4716,58 @@ int	*ql_f;
 int	fix_dec_var1()
 {
 	int	i,j,k,i1;
-	int	f1;
+	int	f1,f2,f3;
 	int	minus, aster, kind, opt, inten, alloca, save, func, cont;
 	int	n_minus, n_aster, n_kind, n_opt, n_inten, n_alloca, n_save, n_func, n_cont;
 	int	ult, n_type;
 	int	f_aster;
 
+	int	f_int,f_rea,f_log,f_cha;
+
 	char	ca;
 	char	varb[MAXB];
 
+	f3     = 1;	/* f3 true es GO ... si por alguna condicion paramos, f3 false */
 
 	alloca = 0;
-	func  = 0;
-	inten = 0;
-	aster = 0;
-	save  = 0;
-	kind  = 0;
-	ult   = 0;
-	func  = 0;
-	opt   = 0;
-	cont  = 0;
+	func   = 0;
+	inten  = 0;
+	aster  = 0;
+	save   = 0;
+	kind   = 0;
+	ult    = 0;
+	func   = 0;
+	opt    = 0;
+	cont   = 0;
 	n_type = 0;
+	
+	f_int  = 0;
+	f_rea  = 0;
+	f_log  = 0;
+	f_cha  = 0;
 
 
 	f_aster = 1;
 
 	for (i=0; i< q_tk; i++)
 	{	
-		if (!strcmp("integer",tk[i]) )
-			minus = 1, n_type = i;
+		if (!f_int && !strcmp("integer",tk[i]) )
+			f_int = 1, minus = 1, n_type = i;
 
-		if (!strcmp("INTEGER",tk[i]) )
-			minus = 0, n_type = i;
+		if (!f_int && !strcmp("INTEGER",tk[i]) )
+			f_int = 1, minus = 0, n_type = i;
 
-		if (!strcmp("logical",tk[i]) )
-			minus = 1, n_type = i;
+		if (!f_log && !strcmp("logical",tk[i]) )
+			f_log = 1, minus = 1, n_type = i;
 
-		if (!strcmp("LOGICAL",tk[i]) )
-			minus = 0, n_type = i;
+		if (!f_log && !strcmp("LOGICAL",tk[i]) )
+			f_log = 1, minus = 0, n_type = i;
 
-		if (!strcmp("real",tk[i]) )
-			minus = 1, n_type = i;
+		if (!f_rea && !strcmp("real",tk[i]) )
+			f_rea = 1, minus = 1, n_type = i;
 
-		if (!strcmp("REAL",tk[i]) )
-			minus = 0, n_type = i;
+		if (!f_rea && !strcmp("REAL",tk[i]) )
+			f_rea = 1, minus = 0, n_type = i;
 
 		if (!kind && !strcmp(":",tk[i]) && !strcmp(":",tk[i+1]) )
 			kind=1,n_kind = i;
@@ -4780,7 +4817,7 @@ int	fix_dec_var1()
 	f1=0;
 
 	/* esta en minuscula y tiene asterisco valor  */
-	if ( !f1 && aster )
+	if ( f3 && !f1 && aster )
 	{
 
 		ca = tk[n_aster+1][0];
@@ -4817,7 +4854,7 @@ int	fix_dec_var1()
 
 
 	/* esta en minuscula y no tiene asterisco valor */
-	if ( !f1 && !aster)
+	if ( f3 && !f1 && !aster)
 	{
 		if (!kind)
 		{
@@ -5034,6 +5071,8 @@ int	tiene_dec_var1()
 	int	i,j;
 	int	f1,f2;
 
+	int	f_comm, n_comm;
+
 	f1=0;
 	
 #if 0
@@ -5041,8 +5080,11 @@ int	tiene_dec_var1()
 		f1 = 1;
 #endif
 
+	f_comm	= 0;
+	n_comm  = 0;
+	f2      = 1;
 
-	for (i=0; !f1 && i<q_tk; i++)
+	for (i=0; !f1 && f2 && i<q_tk; i++)
 	{
 		if ( !strcmp("integer", pasar_a_minusc( tk[i] )) )
 			f1 = 1;
@@ -5052,6 +5094,11 @@ int	tiene_dec_var1()
 			f1 = 3;
 		if ( !strcmp("character", pasar_a_minusc( tk[i] )) )
 			f1 = 4;
+
+		if (!strcmp("&",tk[i]))
+			f2 = 0;
+		if (!strcmp("!",tk[i]))
+			f2 = 0;
 	}
 
 	return f1;
@@ -5211,9 +5258,9 @@ int	pro_tool5()
 					flag_caracteres=1;
 					if (gp_fverbose("d1"))
 					{
-						printf ("Caracter no definido para parser: |%c| |%d|\n",b1[p1],b1[p1]);
+						printf ("Caracter no definido en parser: %03d \n",(unsigned int)b1[p1]);
 						if (ffaux)
-							fprintf (hfaux,"Caracter no definido %d %c\n",b1[p1],b1[p1]);
+							fprintf (hfaux,"Caracter no definido en parser: %03d \n",(unsigned int)b1[p1]);
 							
 					}
 					p1++; 
@@ -5524,10 +5571,17 @@ int	pro_tool6()
 	ql_fin=ql_ini;
 
 	
-#if 1
-	/* 2 - cambio las lineas de continuacion   */
-	cfor_lcon(&ql_ini,&ql_fin);
-#endif
+	/* 1 - pidio cambiar comentarios */
+	if ( ffchg_com )
+		cfor_comm(&ql_ini,&ql_fin);
+
+	/* 2 - pidio cambiar type selectors */
+	if ( ffchg_typ )
+		cfor_vars(&ql_ini,&ql_fin);
+
+	/* 3 - pidio cambiar lineas de continuacion */
+	if ( ffchg_lco )
+		cfor_lcon(&ql_ini,&ql_fin);
 
 
 	/* grabo file */
@@ -5552,6 +5606,172 @@ int	pro_tool6()
 
 #endif
 
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	cfor_comm
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+
+#if 1
+
+int	cfor_comm(ql_i,ql_f)
+int	*ql_i;
+int	*ql_f;
+{
+
+	int	i,j,k;
+	int	p1,p2;
+	int	f1,f2,f3,f4;
+	int	qi,qf;
+
+	char	b1[MAXB];
+	char	b2[MAXB];
+	char	b3[MAXB];
+	char	b4[MAXB];
+	char	b5[MAXB];
+
+
+	qi = *ql_i;
+	qf = *ql_f;
+	memset(b4,' ',MAXB);
+
+	/* ultima linea -1, la ultima linea no puede tener continuacion ... */
+	for (i=0; i< qi - 1; i++)
+	{
+		/* copio linea y linea siguiente */
+		strcpy(b1, (*fnp[i]).l );
+
+		l_pars(i,&q_tk);
+
+		if(gp_fverbose("d4"))
+		{
+			for (j=0; j<q_tk; j++)
+			{
+				printf ("TK: %3d %3d |%s|\n",j,strlen(tk[j]),tk[j]);
+			}
+			printf ("voy b1: |%s| \n",b1);
+		}
+
+		if ( es_linea_comentario(b1))
+		{
+			if (gp_fverbose("d3"))
+			{
+				printf ("cfor: com detectado \n");
+				printf ("cfor: %4d #tk %4d |%s|\n",i,q_tk,b1);
+			}
+
+			/* pongo comentario  */
+			strcpy (tk[0],"!");
+		}
+
+		/* armo la linea de nuevo con todos los tokens */
+		memset (b3,0,MAXB);
+		for (j=0; j< q_tk; j++)
+			strcat (b3,tk[j]);
+
+		strcpy ( (*fnp[i]).l, b3);
+
+		if (gp_fverbose("d2"))
+			printf ("fix: |%s|\n",b3);
+
+	}
+}
+
+
+
+
+#endif
+
+
+
+int	es_linea_comentario(s)
+char	*s;
+{
+
+	int	i,j,k;
+	int	f1,f2,f3;
+
+	char	b1[MAXB];
+
+	strcpy(b1,s);
+
+	f1 = 1;		/* sigo verificando */
+	f2 = 1;		/* es comentario */
+	i  = 0;
+	
+	if ( b1[0] == 'c' || b1[0] == 'C' || b1[0] == '!' )
+		f1 = 0;
+	else	
+		f2 = 0;
+
+
+
+	while (f1 && i< strlen(b1) )
+	{
+		if (b1[i] == '!')
+			f1 = 0, f2 = 1;
+
+		if ( b1[i] != ' ' && b1[i] != '!' )
+			f1 = 0, f2 = 0;
+
+		i++;
+	}
+
+	return f2;
+}
+
+
+
+int	es_linea_comentario2(s)
+char	*s;
+{
+
+	int	i,j,k;
+	int	f1,f2,f3;
+
+	char	b1[MAXB];
+
+	strcpy(b1,s);
+
+	f1 = 1;		/* sigo verificando */
+	f2 = 1;		/* es comentario */
+	i  = 0;
+	
+
+	if ( b1[5] == '+' || b1[6] == '+')
+	{
+		f1=0;
+	}
+	else
+	{
+
+	if ( b1[0] == 'c' || b1[0] == 'C' || b1[0] == '!' )
+		f1 = 0;
+	else	
+		f2 = 0;
+
+
+	while (f1 && i< strlen(b1) )
+	{
+		if (b1[i] == '!')
+			f1 = 0, f2 = 1;
+
+		if ( b1[i] != ' ' && b1[i] != '!' )
+			f1 = 0, f2 = 0;
+
+		i++;
+	}
+	}
+
+	return f2;
+}
 
 
 
@@ -5626,39 +5846,26 @@ int	*ql_f;
 			}
 
 			/* tengo que arreglar ambas lineas */
-printf (" / / / / b3:1  |%s| q_tk: %d \n",b3,q_tk);
 			memset (b3,0,MAXB);
 			for (j=0; j< q_tk; j++)
 				strcat (b3,tk[j]);
-printf (" / / / / b3:2  |%s| q_tk: %d \n",b3,q_tk);
 
 			if (tiene_coment_intermedio (b3) )
 			{
-printf ("tiene ! intermedio ! |%s| \n",b3);
-
 				for (j=2, f4=1; f4 && j<q_tk; j++)
 				{
 					if (!strcmp(tk[j],"!"))
 					{
 						sprintf (tk[j],"& ! ");
-printf ("quedo: |%s| \n",tk[j]);
 						f4=0;
 					}
 				}
 			}
 			else
 			{
-/* EEE */
-							
-			memset(tk[q_tk],0,MAXB);
-printf (" / / / / b3:3  |%s| q_tk: %d \n",b3,q_tk);
-printf ("strelen(b3) : %d\n",strlen(b3));
-
-			strncpy(tk[q_tk++],b4,90-strlen(b3));
-printf (" / / / / tk sig1;  |%s| \n",tk[q_tk-1]);
-			sprintf (tk[q_tk++],"&");
-printf (" / / / / tk sig2;  |%s| \n",tk[q_tk-1]);
-			
+				memset(tk[q_tk],0,MAXB);
+				strncpy(tk[q_tk++],b4,90-strlen(b3));
+				sprintf (tk[q_tk++],"&");
 			}
 
 
@@ -5673,21 +5880,16 @@ printf (" / / / / tk sig2;  |%s| \n",tk[q_tk-1]);
 					f1=0;
 				}
 			}
-
-				
 		}
 
 
 		/* armo la linea de nuevo con todos los tokens */
-printf (" / / / / b3:3  |%s| \n",b3);
 		memset (b3,0,MAXB);
 		for (j=0; j< q_tk; j++)
 			strcat (b3,tk[j]);
 		strcpy ( (*fnp[i]).l, b3);
 		if (gp_fverbose("d2"))
 			printf ("fix: |%s|\n",b3);
-
-printf (" / / / / b3:4  |%s| \n",b3);
 
 		/* copio la segunda linea, sin el mas */
 		strcpy ( (*fnp[i+1]).l, b2);
@@ -5737,6 +5939,122 @@ char	*s;
 	return f1;
 }
 
+
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	pro_tool 7 
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ *
+ *	tool7
+ *
+ *	Devuelve linea mas larga en file
+ *	Esto es fundamental para luego saber como procesar
+ *	archivos con la opcion --chglcon
+ *	(lineas de continuacion )
+ *
+ */
+
+
+/* bloque */
+#if 1
+
+
+int	pro_tool7()
+{
+	int	i,j,k;
+	int	f1,f2,f3;
+	char	b1[MAXB];
+	char	b2[MAXB];
+	FILE	*hwi;
+
+	int	lml;
+	int	n_lml;
+	
+	int	lml2;
+	int	n_lml2;
+	
+	int	ql_ini;
+
+
+
+	char	z[MAXV];
+	sprintf (z,"tool7");
+
+	/* proceso */
+	if (gp_fverbose("d2"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
+	}
+
+	if (!ffinp )
+		gp_uso(11);
+
+	/* bloque */
+	/* cargamos file en memo */
+	fnq1 = &fnp[0];
+	qf_load(hfinp,fnq1,&ql_ini);
+
+	lml    = 0;
+	n_lml  = 0;
+	lml2   = 0;
+	n_lml2 = 0;
+
+	for (i=0, f1 = 0; i<ql_ini; i++)
+	{
+		strcpy(b1,(*fnp[i]).l);
+
+
+		if (!es_linea_comentario2 (b1))
+		{
+			if ( (k = strlen( b1) ) > lml)
+				lml = k, n_lml = i;
+
+		}
+
+		if (es_linea_comentario2 (b1) )
+		{	f1++;
+			if ( (k = strlen( b1 )) > lml2)
+				lml2 = k, n_lml2 = i;
+		}
+
+	}
+
+	if (gp_fverbose("d1"))
+	{
+		
+		printf ("\n\n");
+		printf ("Cantidad de lineas %7s : %d %s\n"," ",ql_ini," s/com");
+		printf ("Linea mas larga   (%5d): %d \n",n_lml+1,lml);
+		printf ("|%s|\n\n",(*fnp[n_lml]).l );
+		if (f1)
+		{
+		printf ("Cantidad de lineas %7s : %d %s\n"," ",f1," c/com");
+		printf ("Linea mas larga   (%5d): %d \n",n_lml2+1,lml2);
+		printf ("|%s|\n\n",(*fnp[n_lml2]).l );
+		printf ("\n\n");
+		}
+			
+	
+	}
+
+
+	/* proceso */
+	if (gp_fverbose("d2"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[1],z);
+	}
+}
+
+
+#endif
+/* bloque */
 
 
 
@@ -6117,7 +6435,7 @@ int	*qt;
 	sprintf (z,"l_pars");
 
 	/* proceso */
-	if (gp_fverbose("d1"))
+	if (gp_fverbose("d3"))
 	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
 	}
 
@@ -6176,9 +6494,9 @@ int	*qt;
 					flag_caracteres=1;
 					if (gp_fverbose("d1"))
 					{
-						printf ("Caracter no definido para parser: |%c| |%d|\n",b1[p1],b1[p1]);
+						printf ("Caracter no definido en parser: %03d \n",(unsigned int)b1[p1]);
 						if (ffaux)
-							fprintf (hfaux,"Caracter no definido %d %c\n",b1[p1],b1[p1]);
+							fprintf (hfaux,"Caracter no definido en parser: %03d \n",(unsigned int)b1[p1]);
 					}
 					p1++; 
 					break; 
@@ -6332,7 +6650,7 @@ int	*qt;
 
 
 	/* proceso */
-	if (gp_fverbose("d1"))
+	if (gp_fverbose("d3"))
 	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[1],z);
 	}
 
@@ -6959,6 +7277,28 @@ int	gp_parser()
 				strcpy(var1, gp_fp(GP_GET,i,(char **)0) + 2);
 			}
 
+			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+2,"version",7) )
+			{	
+				gp_vers = 1;
+			}
+
+			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+2,"chgcom",6) )
+			{	
+				ffchg_com = 1;
+			}
+
+			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+2,"chgtyp",6) )
+			{	
+				ffchg_typ = 1;
+			}
+
+			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+2,"chglco",6) )
+			{	
+				ffchg_lco = 1;
+			}
+
+
+
 			if (gp_fverbose("d5"))
 			{
 				printf ("Param tipo 4: %s\n", gp_fp(GP_GET,i,(char **)0 ) );
@@ -7461,7 +7801,6 @@ char	c;
  *
  *	texto para describir el uso de la herramienta
  *
- *
  * -----------------------------------------------------------------------------------
  */
 
@@ -7497,6 +7836,9 @@ int	x;
 	printf ("                                                                                                  \n");
 	printf ("tool6:         carga un fuente - arregla lineas de con fortran - genera nuevo fuente              \n");
 	printf ("%s -v -opciones=d5 -tool=6 -inp=f_org -out=f_new -aux=parser.err                                  \n",z);
+	printf ("      --chgcom  convierte lineas comentadas                                                       \n");
+	printf ("      --chgtyp  arregla especificacion de variables (kind,len) pone los :: en int log real char   \n");
+	printf ("      --chglcp  arregla lineas de continuacion ... reemplaza + por &                              \n");
 	printf ("                                                                                                  \n");
 
 
@@ -7522,6 +7864,7 @@ int	x;
 int	gp_default()
 {
 	gp_help=0;
+	gp_vers=0;
 	gp_verbose=0;
 
 	ffcfg=0;
@@ -7546,6 +7889,40 @@ int	gp_default()
 
 	memset(gp_tpar,0,sizeof(gp_tpar));
 
+}
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ * 	version
+ *
+ *	version del codigo
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+int	gp_version(x)
+int	x;
+{
+	static	char	ver[MAXB];
+	char	w[MAXV];
+	char	z[MAXV];
+
+	strcpy (ver,"0015");
+	
+	sprintf (z,"%s -- (%s) ", gp_fp(GP_GET,0,(char **)0), ver  );
+	memset (w,0,MAXV);
+	strncpy (w,"                                        ",strlen(z));
+
+	if (x)
+	{
+		printf ("%s\n",z);
+		printf ("\n\n");
+	}
+
+	exit(x);
 }
 
 
