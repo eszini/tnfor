@@ -18,6 +18,9 @@
  *	tfor.c
  *	
  *
+ *	Sat May 18 05:11:54 -03 2024
+ *	en algunas lineas de fortran77, si primer car de lin es '*' no chilla !!
+ *
  * 	Sat May 11 06:59:21 -03 2024
  *	agregue que funcione con logical real y character
  *
@@ -479,6 +482,7 @@ int	flag_before_exit;
 int	ffchg_com  = 0;		/* cambia caracter de comentario */
 int	ffchg_typ  = 0;		/* cambia type selectors */
 int	ffchg_lco  = 0;		/* cambia lineas de continuacion */
+int	ffchg_mas  = 0;		/* saca la continuacion de linea con mas */
 
 
 /*
@@ -525,6 +529,8 @@ fnptr	fnf[MAX_FSRC];			/* vector de punteros a lineas de archivos encontrados */
 
 int	pf_load();			/* proceso de carga del file */
 int	qf_load(FILE *,fnptr *,int *);	/* proceso de carga del file */
+int	qf_addline(fnptr *,int );	/* agrega una linea */
+int	qf_move(fnptr *, int);		/* hace un  'lugar' en el vector */
 int	pf_write();			/* proceso de write del file */
 
 
@@ -601,9 +607,11 @@ int	linea_vacia_for(char *);
 int	cfor_comm(int *,int *);
 int	cfor_vars(int *,int *);
 int	cfor_lcon(int *,int *);
+int	cfor_mas(int *,int *);
 int	l_pars(int, int *);
 int	tiene_dec_var1();
 int	tiene_mas(char *);
+int	def_var_continua(char *s);
 int	fix_dec_var1();
 int	fix_dec_var2();
 int	p_src();
@@ -611,6 +619,8 @@ int	es_cadena_valida(int,char *);
 int	tiene_coment_intermedio (char *);
 int	es_linea_comentario(char *);
 int	es_linea_comentario2(char *);
+int	armame_dos_lineas(char *, char *, char *);
+int	correme_una_linea(int, int);
 
 
 
@@ -3209,6 +3219,29 @@ int	*l1;
 /* qf_load */
 
 
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	arega una estructura al vector de estructuras (qf_load)
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+
+
+int	qf_addline(q1,nl)
+fnptr	*q1;
+int	nl;
+{
+	q1[nl] = (fnptr  ) malloc (sizeof (node));
+	if ( q1[nl] == NULL)
+		error(903);
+
+	(*q1[nl]).l[0] = 0;
+	(*q1[nl]).f1 = 0;
+	(*q1[nl]).f2 = 0;
+	(*q1[nl]).f3 = 0;
+}
 
 
 
@@ -4608,6 +4641,174 @@ int	pro_tool4()
 #endif
 
 
+
+
+
+
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	cfor_mas
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ *	f1
+ *	1 - integer
+ *	2 - logical
+ * 	3 - real
+ *	4 - character
+ *
+ *	Si hay que desdoblar lineas, ql_f vuelve con nueva ultima linea
+ *
+ */
+
+#if 0
+int	cfor_mas(ql_i,ql_f)
+int	*ql_i;
+int	*ql_f;
+{
+
+
+}
+
+#endif
+
+
+#if 1
+
+int	cfor_mas(ql_i,ql_f)
+int	*ql_i;
+int	*ql_f;
+{
+
+	int	i,j,k;
+	int	p1,p2;
+	int	f1,f2,f3,f4;
+	int	qi,qf;
+	int	d1;
+
+	char	b1[MAXB];
+	char	b2[MAXB];
+	char	b3[MAXB];
+	char	b4[MAXB];
+
+
+	d1 = 0;		/* lineas agregadas ! */
+	qi = *ql_i;
+	qf = *ql_f;
+	f4 = 0;		/* modifico linea con kind o len */
+
+
+
+	for (i=0; i< qf; i++)
+	{
+		f4 = 0;
+
+		strcpy(b1, (*fnp[i]).l );
+
+		l_pars(i,&q_tk);
+
+		if ( f1=tiene_dec_var1() )
+		{
+			f4 = 1;
+
+			/* caso int, log, real */
+			if (f1 )
+			{
+				if (gp_fverbose("d3"))
+				{	printf ("fixed %d ! \ncfor:  linea %4d #tk %4d |%s|\n",f1,i,q_tk,b1);
+					for (j=0; j<q_tk; j++)
+					{
+						printf ("TK: %3d %3d f1: %d |%s|\n",j,strlen(tk[j]),f1,tk[j]);
+					}
+				}
+			}
+
+				
+		} /* tiene_dec_var */
+
+
+		if (gp_fverbose("d4"))
+		{
+			printf ("cfor:  linea %4d #tk %4d |%s|\n",i,q_tk,b1);
+			for (j=0; j<q_tk; j++)
+			{
+				printf ("TK: %3d %3d f1: %d |%s|\n",j,strlen(tk[j]),f1,tk[j]);
+			}
+		}
+
+		/* armo la linea de nuevo con todos los tokens */
+		memset (b2,0,MAXB);
+		for (j=0; j< q_tk; j++)
+			strcat (b2,tk[j]);
+
+
+		/* la linea no tenia dec de variables */
+		if ( f4 == 0)
+		{
+			strcpy ( (*fnp[i]).l, b2);
+		}
+
+
+		/* la linea tenia dec de variables */
+		if (f4 == 1)
+		{
+
+			if ( def_var_continua(b2))
+			{
+#if 0
+				memset (b3,0,MAXB);
+				memset (b4,0,MAXB);
+
+				armame_dos_lineas(b2,b3,b4);
+				if (gp_fverbose("d3"))
+				{	printf ("dos lineas: 1  |%s| \n",b3);
+					printf ("dos lineas: 2  |%s| \n",b4);
+				}
+
+				/* correr todas las lineas ... */
+				correme_una_linea(i+1,qf);
+
+				/* grabar ambas lineas */
+				strcpy ( (*fnp[i]).l, b3);
+				strcpy ( (*fnp[i+1]).l, b4);
+			
+				/* agregar una linea mas al count */
+				qf++;
+#endif
+
+#if 1
+				/* no es linea larga, guardar una sola linea*/
+				strcpy ( (*fnp[i]).l, b2);
+#endif
+			}
+			else
+			{	/* no es linea larga, guardar una sola linea*/
+				strcpy ( (*fnp[i]).l, b2);
+			}
+		}
+	}
+
+	/* actualizo la cantidad de lineas del source para proximos cambios */
+	*ql_f = qf;
+}
+
+
+#endif
+
+
+int	def_var_continua(s)
+char	*s;
+{
+
+}
+
 /*
  * -----------------------------------------------------------------------------------
  *
@@ -4621,6 +4822,9 @@ int	pro_tool4()
  *	1 - integer
  *	2 - logical
  * 	3 - real
+ *	4 - character
+ *
+ *	Si hay que desdoblar lineas, ql_f vuelve con nueva ultima linea
  *
  */
 
@@ -4632,25 +4836,35 @@ int	*ql_f;
 
 	int	i,j,k;
 	int	p1,p2;
-	int	f1,f2,f3;
+	int	f1,f2,f3,f4;
 	int	qi,qf;
+	int	d1;
 
 	char	b1[MAXB];
 	char	b2[MAXB];
+	char	b3[MAXB];
+	char	b4[MAXB];
 
 
-
+	d1 = 0;		/* lineas agregadas ! */
 	qi = *ql_i;
 	qf = *ql_f;
+	f4 = 0;		/* modifico linea con kind o len */
 
-	for (i=0; i< qi; i++)
+
+
+	for (i=0; i< qf; i++)
 	{
+		f4 = 0;
+
 		strcpy(b1, (*fnp[i]).l );
 
 		l_pars(i,&q_tk);
 
 		if ( f1=tiene_dec_var1() )
 		{
+			f4 = 1;
+
 			/* caso int, log, real */
 			if (f1 == 1 || f1 == 2 || f1 == 3)
 			{
@@ -4690,7 +4904,8 @@ int	*ql_f;
 				}
 			}
 				
-		}
+		} /* tiene_dec_var */
+
 
 		if (gp_fverbose("d4"))
 		{
@@ -4705,11 +4920,138 @@ int	*ql_f;
 		memset (b2,0,MAXB);
 		for (j=0; j< q_tk; j++)
 			strcat (b2,tk[j]);
-		strcpy ( (*fnp[i]).l, b2);
 
+
+		/* la linea no tenia dec de variables */
+		if ( f4 == 0)
+		{
+			strcpy ( (*fnp[i]).l, b2);
+		}
+
+
+		/* la linea tenia dec de variables */
+		if (f4 == 1)
+		{
+			/* en el caso de fix format ... si tiene mas de 72 chars ... problemas */
+			if (strlen(b2) > 72 )
+			{
+				if (gp_fverbose("d3"))
+				{	printf ("Atencion! -- linea larga %5d %3d |%s|\n",i,strlen(b2),b2);
+				}
+
+				memset (b3,0,MAXB);
+				memset (b4,0,MAXB);
+
+				armame_dos_lineas(b2,b3,b4);
+				if (gp_fverbose("d3"))
+				{	printf ("dos lineas: 1  |%s| \n",b3);
+					printf ("dos lineas: 2  |%s| \n",b4);
+				}
+
+				/* correr todas las lineas ... */
+				correme_una_linea(i+1,qf);
+
+#if 1
+				/* grabar ambas lineas */
+				strcpy ( (*fnp[i]).l, b3);
+				strcpy ( (*fnp[i+1]).l, b4);
+			
+				/* agregar una linea mas al count */
+				qf++;
+#endif
+
+#if 0
+				strcpy ( (*fnp[i]).l, b2);
+#endif
+			}
+			else
+			{	/* no es linea larga, guardar una sola linea*/
+				strcpy ( (*fnp[i]).l, b2);
+			}
+		}
 	}
 
+	/* actualizo la cantidad de lineas del source para proximos cambios */
+	*ql_f = qf;
 }
+
+
+
+
+
+/*
+ *	correr todas las lineas en el vector
+ *	desde la l1 al final
+ *	hay que agregar una al final para hacer lugar 
+ */
+
+int	correme_una_linea(l1,ql)
+int	l1;
+int	ql;
+{
+
+	int	i,j,k;
+
+
+	/* agrego una linea al final */
+	fnp[ql] = (fnptr  ) malloc (sizeof (node));
+	if ( fnp[ql] == NULL)
+		error(904);
+
+	(*fnp[ql]).l[0] = 0;
+	(*fnp[ql]).f1 = 0;
+	(*fnp[ql]).f2 = 0;
+	(*fnp[ql]).f3 = 0;
+
+
+	for (j=ql; j>l1; j--)
+	{
+		memcpy ( fnp[j],fnp[j-1], sizeof (node) );
+	}
+}
+
+
+int	armame_dos_lineas(s,l1,l2)
+char	*s;
+char	*l1;
+char	*l2;
+{
+	int	i,j,k;
+	int	c1;
+	int	f1,f2,f3;
+	int	p1,p2,p3;
+	char	b1[MAXB];
+
+	memset(b1,' ',MAXB);
+
+	for (i=0, f1=1; f1 && i<strlen(s); i++)
+		if (s[i] == ':' && s[i+1] == ':' )
+			f1 = 0, p1 = i+2;
+
+	for (i=0, c1=0, f1=1; f1 && i<strlen(s); i++)
+		if (s[i+p1] == ' ')
+			c1++;
+		else
+			f1=0;
+
+	for (i=0, f1=1, f2=1; f1 && i<strlen(s); i++)
+	{	if (f2 && s[i+p1] == '(')
+			f2 = 0;
+		if (!f2 && s[i+p1] == ')' )
+			f2 = 1;
+		if (f2 && s[i+p1] == ',')
+			f1 = 0, p2 = p1+i;
+	}
+
+	strncpy(l1,s,p2);
+	l1[p2]=0;
+
+	strncpy(l2,s,p1);
+	strncat(l2,b1,c1);
+	strcat(l2,s+p2+1);
+}
+
+
 
 
 
@@ -5583,6 +5925,12 @@ int	pro_tool6()
 	if ( ffchg_lco )
 		cfor_lcon(&ql_ini,&ql_fin);
 
+#if 0
+	/* 4 - pidio sacar las lineas de continuacion */
+	if ( ffchg_mas )
+		cfor_mas(&ql_ini,&ql_fin);
+#endif
+
 
 	/* grabo file */
 	for (i=0; i< ql_fin; i++)
@@ -5642,8 +5990,8 @@ int	*ql_f;
 	qf = *ql_f;
 	memset(b4,' ',MAXB);
 
-	/* ultima linea -1, la ultima linea no puede tener continuacion ... */
-	for (i=0; i< qi - 1; i++)
+	/* recorro todas las lineas */
+	for (i=0; i< qi ; i++)
 	{
 		/* copio linea y linea siguiente */
 		strcpy(b1, (*fnp[i]).l );
@@ -5691,6 +6039,12 @@ int	*ql_f;
 
 
 
+/*
+ *	recibe una linea completa
+ *	revisa condiciones para determinar si
+ *	la linea entera es un comentario
+ */
+
 int	es_linea_comentario(s)
 char	*s;
 {
@@ -5706,13 +6060,17 @@ char	*s;
 	f2 = 1;		/* es comentario */
 	i  = 0;
 	
+	
 	if ( b1[0] == 'c' || b1[0] == 'C' || b1[0] == '!' )
 		f1 = 0;
 	else	
 		f2 = 0;
 
+	/* caso especial encontrado */
+	if ( !strncmp(b1,"***",3))
+		f2 = 1, f1 = 0;
 
-
+	/* hay casos en los que la linea es '    !' */
 	while (f1 && i< strlen(b1) )
 	{
 		if (b1[i] == '!')
@@ -7297,6 +7655,11 @@ int	gp_parser()
 				ffchg_lco = 1;
 			}
 
+			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+2,"chgmas",6) )
+			{	
+				ffchg_mas = 1;
+			}
+
 
 
 			if (gp_fverbose("d5"))
@@ -7834,7 +8197,7 @@ int	x;
 	printf ("%s -v -opciones=d5 -tool=5 -inp=f_org -out=f_new -aux=parser.err -f                               \n",z);
 	printf ("%s -v -opciones=d5 -tool=5 -inp=f_org -out=f_new -aux=parser.err     (version graba tokens )      \n",z);
 	printf ("                                                                                                  \n");
-	printf ("tool6:         carga un fuente - arregla lineas de con fortran - genera nuevo fuente              \n");
+	printf ("tool6:         carga un fuente - opciones para arreglos varios - genera nuevo fuente              \n");
 	printf ("%s -v -opciones=d5 -tool=6 -inp=f_org -out=f_new -aux=parser.err                                  \n",z);
 	printf ("      --chgcom  convierte lineas comentadas                                                       \n");
 	printf ("      --chgtyp  arregla especificacion de variables (kind,len) pone los :: en int log real char   \n");
@@ -7910,7 +8273,7 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0015");
+	strcpy (ver,"0019");
 	
 	sprintf (z,"%s -- (%s) ", gp_fp(GP_GET,0,(char **)0), ver  );
 	memset (w,0,MAXV);
