@@ -1,16 +1,22 @@
 !     ******************************************************************
 !     DR_BOOTH.FOR
 !     Created: 10/29/02 2:44:52 PM
-************************************
+!***********************************
 
-C**********************************************************************
-C
+!
+!	aca habia una linea
+!
+!
+!
+
+!**********************************************************************
+!
 !             ONE WAY BOOTH-BALERIAUX METHOD FOR DSS
 !                   COPYRIGHT (C) 1985, 1991, 1992
 !               M.S. GERBER & ASSOCIATES, INC.
 !                   ALL RIGHTS RESERVED
-C
-C**********************************************************************
+!
+!**********************************************************************
       SUBROUTINE DR_BOOTH(YR,ISEAS,FUELCOST,TENRG,TMMBTUS,VARCOST,
      +                 HOURS_INCREMENT,LPROB2,LODDUR,PEAK,DEMAND,
      +                 DX,MAINTENANCE_RATE,HEAT_RATE_FACTOR,
@@ -34,7 +40,7 @@ C**********************************************************************
      +                 ANNUAL_BTUS_FOR_BTU_TAX_GOCN12,
      +                 BTU_TAX_ACTIVE,
      +                 TIE_GROUP_LIMIT)
-C
+!
 	use shared_vars_interg82
 	use interg82
 
@@ -47,12 +53,13 @@ C
 
       INCLUDE 'SpinLib.MON'
       INCLUDE 'SIZECOM.MON'
-C
+!
 ! SERVICE TRANSACTIONS ADDED 10/18/92
-C
-      character*6 DZ
-      LOGICAL*4 SERVICE_TRANSACTIONS_ACTIVE
-      LOGICAL*1 LOLP_REPORT_ACTIVE,LOLP_REPORT,FACTORS_FOUND,
+!
+      character (len=6) ::   DZ
+      LOGICAL (kind=4) ::   SERVICE_TRANSACTIONS_ACTIVE
+      LOGICAL (kind=1) ::   LOLP_REPORT_ACTIVE
+      LOGICAL (kind=1) ::   LOLP_REPORT,FACTORS_FOUND,
      +          GET_BLOCK_CAP_FACTORS,CPL_ACTIVE,CAL_MARGINAL_COST,
      +          UPDATE_OUTAGE_DATA,
      +          COMPUTED_MARGINAL_COSTS,YES_RUN_TRANSACT,
@@ -65,10 +72,11 @@ C
      +          YES_DAILY_THERMAL_RPT_ACTIVE,
      +          TEMP_L1,GET_THERMAL_RPS_DATA,
      +          PUT_THERMAL_RPS_ENRG_CAP
-      REAL HEAT_CONVERSION,TONS_CONVERSION,COST_CONVERSION,
+      REAL :: HEAT_CONVERSION,TONS_CONVERSION,COST_CONVERSION,
      +     MONTHS_ON_LINE,POOLING_VARIABLE_COST_SWITCH
-      REAL GET_COST_CONVERSION,GET_HEAT_CONVERSION,GET_TONS_CONVERSION
-      REAL REMAINING_ENERGY,ENERGY(2,MAX_CL_UNITS),
+      REAL :: GET_COST_CONVERSION
+      REAL :: GET_HEAT_CONVERSION,GET_TONS_CONVERSION
+      REAL :: REMAINING_ENERGY,ENERGY(2,MAX_CL_UNITS),
      +     LEFT_SAVE(MAX_DISPATCH_BLOCKS),
      +     RIGHT_SAVE(MAX_DISPATCH_BLOCKS),
      +     RR_OBS(LOAD_CURVE_POINTS),SEGMENT_COST(MAX_DISPATCH_BLOCKS),
@@ -84,19 +92,19 @@ C
      +     REVENUE_GENERATING_CAPACITY(MAX_CL_UNITS),
      +     NUC_UNIT_FUEL_ADDER_COST
 ! FACET ALGORITHM VARIABLES
-      LOGICAL*1 FACET_ACTIVE,FACET_IS_ACTIVE
-      INTEGER*2 INT2_ZERO/0/,PM,ST_TG,ST,R_MONTH,R_ST_TG,
+      LOGICAL (kind=1) ::   FACET_ACTIVE,FACET_IS_ACTIVE
+      INTEGER (kind=2) ::   INT2_ZERO/0/,PM,ST_TG,ST,R_MONTH,R_ST_TG,
      +          RPS_INDEX_TRANSLATE
-      INTEGER*4 START_DATE,END_DATE
-      REAL*4 LOWER_BOUND_CAP_FACTOR(MAX_DISPATCH_BLOCKS),
+      INTEGER (kind=4) ::   START_DATE,END_DATE
+      REAL (kind=4) ::   LOWER_BOUND_CAP_FACTOR(MAX_DISPATCH_BLOCKS),
      +       UPPER_BOUND_CAP_FACTOR(MAX_DISPATCH_BLOCKS),
      +       FACET_MAINTENANCE_RATE(MAX_CL_UNITS),
      +       AHR,RPS_CONTRIB,TEMP_R4,R_RESOURCE_RPS_VARS(16)
-      REAL PRIM_HEAT,SEC_HEAT,EMIS_HEAT
+      REAL :: PRIM_HEAT,SEC_HEAT,EMIS_HEAT
 !     REAL FUEL_MIX_P,FUEL_MIX_S    ! REMOVED 4/28/93
-      REAL FUEL_MIX_PRIM(MAX_CL_UNITS)
-      INTEGER*2 FUEL_INVENTORY_ID(0:*)
-      INTEGER*2 ISEAS,CURRENT,UNITNO,HOURS_INCREMENT,YR,
+      REAL :: FUEL_MIX_PRIM(MAX_CL_UNITS)
+      INTEGER (kind=2) ::   FUEL_INVENTORY_ID(0:*)
+      INTEGER (kind=2) ::   ISEAS,CURRENT,UNITNO,HOURS_INCREMENT,YR,
      +          GGI,NBLOK2,I,J,UNIT2(MAX_DISPATCH_BLOCKS),
      +          BLKNO2(MAX_DISPATCH_BLOCKS),
      +          BLKNUM,PRODUCTION_PERIODS,GROUP,
@@ -112,15 +120,17 @@ C
      +          R_UNIT,
      +          R_BLOCK_NO
       PARAMETER(D_RATE=2)
-      INTEGER*2 PROD_METHOD,PROCMETH,ARRAY_POINTR,HOURLY_LOAD_OUT
-      REAL INHEAT2(MAX_DISPATCH_BLOCKS),BLK_MW,
+      INTEGER (kind=2) ::   PROD_METHOD
+      INTEGER (kind=2) ::   PROCMETH,ARRAY_POINTR,HOURLY_LOAD_OUT
+      REAL :: INHEAT2(MAX_DISPATCH_BLOCKS),BLK_MW,
      +     MWBLK2(MAX_DISPATCH_BLOCKS),
      +     UNITCAP(MAX_CL_UNITS),UNIT_CAP_AFTER_LOSSES(MAX_CL_UNITS),
      +     CL_UNIT_MONTHLY_FIXED_COST(MAX_CL_UNITS),
      +     SEASON_CAPACITY(0:MAX_REPORTING_GROUPS),
      +     R1_OPTION_MWH,R2_OPTION_MWH
-      INTEGER*2 HOURS_IN_MONTH
-      INTEGER*2 MAX_MONTHLY_GROUPS,MAX_MONTHLY_GROUP_VARIABLES,MGI,
+      INTEGER (kind=2) ::   HOURS_IN_MONTH
+      INTEGER (kind=2) ::   MAX_MONTHLY_GROUPS
+      INTEGER (kind=2) ::   MAX_MONTHLY_GROUP_VARIABLES,MGI,
      +         Capacity,
      +         Fixed OM,
      +         Generation,
@@ -154,17 +164,18 @@ C
      +         Wholesale Exp= 14,
      +         Wholesale Buy= 15,
      +         Equivalent Capacity = 16)
-      REAL  CL_LOSSES(:),CT_LOSSES(:),BLK1_LOSSES,
+      REAL ::  CL_LOSSES(:),CT_LOSSES(:),BLK1_LOSSES,
      +      MONTHLY_GROUP_REPORT(0:12,0:99,17)
       ALLOCATABLE :: CL_LOSSES,CT_LOSSES !,MONTHLY_GROUP_REPORT
       SAVE           MONTHLY_GROUP_REPORT
-C
+!
 ! CHANGED TO REAL 5/14/92
-C
-      REAL*4 SEASONAL_SYSTEM_CAP
-      REAL*4 CL_P_CLASS_ASSIGNED_ENERGY(2),CL_P_CLASS_ASSIGNED_COST(2)
-C
-      REAL LPROB2(CONVOLUTION_POINTS),CUMCAP,CAPSYS,CAPBLK,
+!
+      REAL (kind=4) ::   SEASONAL_SYSTEM_CAP
+      REAL (kind=4) ::   CL_P_CLASS_ASSIGNED_ENERGY(2)
+      REAL (kind=4) ::   CL_P_CLASS_ASSIGNED_COST(2)
+!
+      REAL :: LPROB2(CONVOLUTION_POINTS),CUMCAP,CAPSYS,CAPBLK,
      +     CAPON,SEAS_HOURS,UNIT_ENRG,
      +     LPROB(CONVOLUTION_POINTS,2),LODDUR(CONVOLUTION_POINTS),
      +     DX,EA,A,B,ENRG,BASE,PEAK,LIMR,
@@ -187,36 +198,37 @@ C
      +     BC_BLK1_COST(3),TOTAL_MIN_RATCHET_CAPACITY,
      +     CHECK_MAX_SURPLUS,EXCESS_ENERGY,
      +     FUEL_DERIVATIVE_PRICE
-C
+!
 ! TIE CONSTRAINTS 5/3/93 MSG COPYRIGHT M.S. GERBER & ASSOCIATES, INC
-C
-      REAL TIE_GROUP_LIMIT(3),CURRENT_TIE_LEVEL(3),TIE_CAPACITY
-      INTEGER*1 TIE_GROUP
-      LOGICAL*1 ALLOCATE_FUEL_RIGHT_TO_LEFT,
+!
+      REAL :: TIE_GROUP_LIMIT(3),CURRENT_TIE_LEVEL(3),TIE_CAPACITY
+      INTEGER (kind=1) ::   TIE_GROUP
+      LOGICAL (kind=1) ::   ALLOCATE_FUEL_RIGHT_TO_LEFT,
      +          RETURN_FUEL_ALLOCATION_SWITCH,
      +          UNIT_HAS_FUEL_DERIVATIVE,
      +          FUEL_DERIVATIVE_ACTIVE,
      +          FUEL_DERIVATIVES_FILE_STATUS
 
-C
+!
 ! BTU TAX STUFF
-C
-      INTEGER*1 L
-      CHARACTER*6 CAP_LIMIT_FUEL_TYPES
+!
+      INTEGER (kind=1) ::   L
+      CHARACTER (len=6) ::   CAP_LIMIT_FUEL_TYPES
       PARAMETER(CAP_LIMIT_FUEL_TYPES='GOCN12')
-      REAL*8 ANNUAL_BTUS_GOCN12(0:6),
+      REAL (kind=8) ::   ANNUAL_BTUS_GOCN12(0:6),
      +       ANNUAL_BTUS_FOR_BTU_TAX_GOCN12(0:6)
-      REAL*8  MONTH_BTUS_GOCN12(0:6)
-      LOGICAL*1 BTU_TAX_ACTIVE,ECON_SWITCH,WEST_KOOTENAY_POWER,
+      REAL (kind=8) ::    MONTH_BTUS_GOCN12(0:6)
+      LOGICAL (kind=1) ::   BTU_TAX_ACTIVE
+      LOGICAL (kind=1) ::   ECON_SWITCH,WEST_KOOTENAY_POWER,
      +          WKP_ACTIVE,SALT_RIVER_PROJECT,ECON_SALES
-      CHARACTER*1 CONTRACT_REPORT
-      INTEGER*2   X_CONTRACT,Y_CONTRACT,Z_CONTRACT
-      REAL*4   TEMP_ENERGY
-C
+      CHARACTER (len=1) ::   CONTRACT_REPORT
+      INTEGER (kind=2) ::     X_CONTRACT,Y_CONTRACT,Z_CONTRACT
+      REAL (kind=4) ::     TEMP_ENERGY
+!
 ! RATCHET BASIS ADDED 6/16/92
-C
-      REAL RATCHET_CAPACITY_BASIS(MAX_CONTRACTS)
-      REAL*8 DEMAND,TENRG,TMMBTUS,FUELCOST,VARCOST,
+!
+      REAL :: RATCHET_CAPACITY_BASIS(MAX_CONTRACTS)
+      REAL (kind=8) ::   DEMAND,TENRG,TMMBTUS,FUELCOST,VARCOST,
      +       PENRG,PMMBTUS,PFUELCST,PVARCOST,P_PUR_POWER_COST,
      +       PFIXCOST,P_PUR_ENRG,MMBTUS,
      +       UTILITY_PORTION,POOL_PORTION,
@@ -224,25 +236,26 @@ C
      +       P_PUR_POWER_COST_VAR,P_PUR_POWER_COST_FIXED,
      +       PUR_ENRG_FROM_TRANSACT,
      +       MONTHLY_UNIT_FUEL_DERIV_HEAT
-      REAL RCOST
-      REAL TEMP_SNGL,TEMP_SNGL2
-      REAL*8 TEMP_DBLE
-      LOGICAL*1 UNIT_OUTPUT_REPORT,ANNUAL_UNIT_OUTPUT_REPORT,
+      REAL :: RCOST
+      REAL :: TEMP_SNGL,TEMP_SNGL2
+      REAL (kind=8) ::   TEMP_DBLE
+      LOGICAL (kind=1) ::   UNIT_OUTPUT_REPORT
+      LOGICAL (kind=1) ::   ANNUAL_UNIT_OUTPUT_REPORT,
      +          SPREAD_SHEET,MONTHLY_UNIT_REPORT
-      REAL*4  UNIT_FIXED_COST
-      REAL UNIT_EMISS_CONTRIB(5)
-C
+      REAL (kind=4) ::    UNIT_FIXED_COST
+      REAL :: UNIT_EMISS_CONTRIB(5)
+!
 ! ENERGY ONLY CONTRACT VARIABLES
-C
-      REAL ENRG_FROM_ENRG_ONLY_CONTRACTS,REMAINING_ENRG_ONLY_ENRG,
+!
+      REAL :: ENRG_FROM_ENRG_ONLY_CONTRACTS,REMAINING_ENRG_ONLY_ENRG,
      +     MIN_ENRG_FROM_ENRG_ONLY_ENRG,USED_ENRG_ONLY_ENERGY,
      +     TOTAL_CONTRACT_ENRG
-C
+!
 !     DECLARE PUCHASE CONTRACT VARIABLES
-C
-      REAL CONTRACT_DISPATCH_COST,CONTRACT_ENERGY(MAX_CONTRACTS),
+!
+      REAL :: CONTRACT_DISPATCH_COST,CONTRACT_ENERGY(MAX_CONTRACTS),
      +     CONTRACT_CAPACITY(MAX_CONTRACTS)
-      LOGICAL*1 CONTRACTS_ACTIVE,CL_UNITS_ACTIVE,
+      LOGICAL (kind=1) ::   CONTRACTS_ACTIVE,CL_UNITS_ACTIVE,
      +          AVAILABLE_CONTRACT(MAX_CONTRACTS),CONTRACTS_IN_PERIOD,
      +          ACTIVE_3808,IS_3808_ACTIVE,CLASS_6_AND_WABASH_VALLEY
 
@@ -253,68 +266,70 @@ C
       INCLUDE 'CNTRCOM.MON'
       INCLUDE 'ANNLCOM.MON'
       INCLUDE 'LAMCOM.MON'
-C
+!
 ! USED IN ECONOMY INTERCHANGE
-C
-      REAL TRANSACTION_BUY_SPREAD,TRANSACTION_SELL_SPREAD
-C
+!
+      REAL :: TRANSACTION_BUY_SPREAD,TRANSACTION_SELL_SPREAD
+!
 ! KEPCO STUFF
-C
-      INTEGER*1 AREA
-      REAL CONTRACT_BILLING_CAPACITY,WOLF_CREEK_ENRG_COST,
+!
+      INTEGER (kind=1) ::   AREA
+      REAL :: CONTRACT_BILLING_CAPACITY,WOLF_CREEK_ENRG_COST,
      +     CURRENT_MAINTENANCE_EXPENSE
-      REAL P_SALES_REVENUE,P_SALES_ENERGY,
+      REAL :: P_SALES_REVENUE,P_SALES_ENERGY,
      +     R_CNTR_SALES_REVENUE,R_CNTR_SALES_ENERGY,
      +     ANNUAL_CNTR_SALES_REVENUE/0./,ANNUAL_CNTR_SALES_ENERGY/0./,
      +     WC_PERIOD_MAINTENANCE_ENERGY,
      +     WC_PERIOD_EMERGENCY_ENERGY,
      +     CAPACITY_BILLED_AT_MIN,
      +     CAPACITY_BILLED_AT_MAX
-      INTEGER*2 WC_UNIT_NO
-      LOGICAL*1 CONTROL_AREA_REPORT
-      CHARACTER*1 KEPCO_REPORTS,WABASH_POWER_COST_RPT
-      CHARACTER*20 MONTH_NAME
-      
-C
-      REAL GIBSON_BLOCK1_ENERGY,GIBSON_BLOCK2_ENERGY
-C
+      INTEGER (kind=2) ::   WC_UNIT_NO
+      LOGICAL (kind=1) ::   CONTROL_AREA_REPORT
+      CHARACTER (len=1) ::   KEPCO_REPORTS,WABASH_POWER_COST_RPT
+      CHARACTER (len=20) ::   MONTH_NAME
+
+!
+      REAL :: GIBSON_BLOCK1_ENERGY,GIBSON_BLOCK2_ENERGY
+!
 ! FUEL INVENTORY VARIABLES 6/18/92
-C
-      REAL*8 MMBTU_FUEL_BALANCE(0:*),DEMAND_AFTER_DSM_AFTER_EL,
+!
+      REAL (kind=8) ::   MMBTU_FUEL_BALANCE(0:*)
+      REAL (kind=8) ::   DEMAND_AFTER_DSM_AFTER_EL,
      +       TRANSACTION_ENERGY
-      LOGICAL*4 FUEL_INVENTORY_ACTIVE
-      REAL BLOCK_FUEL_COST(2,MAX_CL_UNITS),DISP_BTU_COST(MAX_CL_UNITS)
-      LOGICAL*1 USE_SECONDARY_FUEL(MAX_CL_UNITS), ignoreit
-      REAL AVAILABLE_SHADOW_CAPACITY(:)
+      LOGICAL (kind=4) ::   FUEL_INVENTORY_ACTIVE
+      REAL :: BLOCK_FUEL_COST(2,MAX_CL_UNITS)
+      REAL :: DISP_BTU_COST(MAX_CL_UNITS)
+      LOGICAL (kind=1) ::   USE_SECONDARY_FUEL(MAX_CL_UNITS), ignoreit
+      REAL :: AVAILABLE_SHADOW_CAPACITY(:)
       ALLOCATABLE :: AVAILABLE_SHADOW_CAPACITY
-C
+!
 ! FUEL BLENDING VARIABLES
-C
-      REAL BLENDED_BTU_COST(*)
-      LOGICAL*1 FUEL_USAGE_REPORT,FUEL_USAGE_REPORT_ACTIVE
+!
+      REAL :: BLENDED_BTU_COST(*)
+      LOGICAL (kind=1) ::   FUEL_USAGE_REPORT,FUEL_USAGE_REPORT_ACTIVE
 ! MARGINAL COST DECLARATION
-      LOGICAL*1 MARGINAL_COST_SWITCH,LAST_ELDC_REPORT
-C
+      LOGICAL (kind=1) ::   MARGINAL_COST_SWITCH,LAST_ELDC_REPORT
+!
 !     MOVED CLASS ASSIGNED VARIABLES INTO COMMON BLOCK 6/5/91.
-C
+!
       INCLUDE 'POOLCOM.MON'
       EQUIVALENCE (LEFT(1),BLK1_HEAT(1)),(RIGHT(1),BLK2_HEAT(1))
       SAVE MAX_RATCHET_CAPACITY,MIN_RATCHET_CAPACITY,MIN_BC_FIXED_COST,
      +      BCM_NO,ACTIVE_3808,FUEL_USAGE_REPORT_ACTIVE
-C
+!
 ! DUKE CATAWBA
-      LOGICAL*1 DUKE_IS_ACTIVE,INITIALIZE_DUKE_ROUTINES
+      LOGICAL (kind=1) ::   DUKE_IS_ACTIVE,INITIALIZE_DUKE_ROUTINES
       SAVE DUKE_IS_ACTIVE
-      LOGICAL*1   VOID_LOGICAL,DUKE_CATAWBA_MCGUIRE_RESULTS,
+      LOGICAL (kind=1) ::     VOID_LOGICAL,DUKE_CATAWBA_MCGUIRE_RESULTS,
      +            MON_MDS_CL_FIXED,
      +            MON_MDS_NUC_ADDER,
      +            CALCULATE_MONTHLY_TRANS_GROUP
-      LOGICAL*1 LAHEY_LF95
-      CHARACTER*11 CLK
+      LOGICAL (kind=1) ::   LAHEY_LF95
+      CHARACTER (len=11) ::   CLK
 !
-C
+!
 ! END OF DATA DECLARATIONS
-C
+!
 !
 !
 ! 090706. TEST.
@@ -336,8 +351,8 @@ C
      +                                                .NOT. TESTING_PLAN
 !      IF(FUEL_USAGE_REPORT_ACTIVE .AND. FUEL_INVENTORY_ACTIVE)
 !     +                                  CALL INITIALIZE_INVENTORY_REPORT
-C
-C
+!
+!
       IF(PERIOD_COUNTER == 1) THEN
 
          MAX_MONTHLY_GROUPS = 99
@@ -418,15 +433,15 @@ C
       P_CLASS_ASS_ECON_BUY (2) = 0.
       P_CLASS_ASS_ECON_COST(2) = 0.
       P_CLASS_ASS_ECON_REV(2) = 0.
-C
+!
 ! TIE VARIABLES
-C
+!
       CURRENT_TIE_LEVEL(1) = 0.
       CURRENT_TIE_LEVEL(2) = 0.
       CURRENT_TIE_LEVEL(3) = 0.
-C
+!
 ! ITEMS USED IN BOOTH
-C
+!
 !      IF(PROD_METHOD /= D_RATE .OR. FACET_ACTIVE .OR.
 !     +                                          YES_RUN_TRANSACT()) THEN
       IF( (PROD_METHOD /= D_RATE .OR. FACET_ACTIVE) .AND. .NOT.
@@ -453,10 +468,10 @@ C
       B = 0.
       REMAINING_ENERGY = SNGL(DEMAND)/SEAS_HOURS
       CL_UNITS_ACTIVE = .FALSE.
-C
+!
 !     IF THERE ARE ANY CONTRACTS LOADED, CHECK FOR ACTIVE CONTRACTS
 !     AND INITIALIZE FOR PURCHASING
-C
+!
       CONTRACTS_ACTIVE = .FALSE.
       CONTRACTS_IN_PERIOD = .FALSE.
       CONTRACT_DISPATCH_COST = 999999.
@@ -522,9 +537,9 @@ C
      +                             CONTRACTS_IN_PERIOD)
          ENDIF
       ENDIF
-C
+!
       CL_UNITS_ACTIVE = (REMAINING_ENERGY > 0.) .AND. (NBLOK2 > 0)
-C
+!
       IF(FACET_ACTIVE .AND. .NOT. TRANSACT_ACTIVE_THIS_MONTH) THEN
 !
 
@@ -554,9 +569,9 @@ C
             ENDIF
          ENDDO
       ENDIF
-C
+!
       PUR_ENRG_FROM_TRANSACT = 0.
-C
+!
       IF(MARGINAL_COST_SWITCH() .OR. (YES_RUN_TRANSACT() .AND.
      +                                 TRANSACT_ACTIVE_THIS_MONTH)) THEN
          IF( .NOT. FACET_ACTIVE)
@@ -610,7 +625,7 @@ C
          ENDIF ! YES RUN TRANSACT
 !
       ENDIF ! MARGINAL_COST_SWITCH() .OR. YES_RUN_TRANSACT()
-C
+!
 !
 ! 090706. TEST.
 !
@@ -619,10 +634,10 @@ C
 !
 !
 !
-C
-C
+!
+!
 ! LAST_POINT CALCULATIONS MOVED FROM PRO_COST AND CONTRACT INIT 3/4/92
-C
+!
       CAPSYS = SEASONAL_SYSTEM_CAP + SEASONAL_CONTRACT_CAPACITY
       OLD_LAST_POINT = LAST_POINT
       IF(CAPSYS > LODDUR(LAST_POINT)) THEN
@@ -637,7 +652,7 @@ C
          LPROB2(I) = 0.
          LODDUR(I) = LODDUR(I-1) + DX
       ENDDO
-C
+!
       IF(PROD_METHOD /= D_RATE .OR. CONTRACTS_ACTIVE) THEN
          DO J = 1, LAST_POINT
             LPROB(J,1) = LPROB2(J)
@@ -646,7 +661,7 @@ C
          LPROB(1,2) = 1.
       ENDIF
       CURRENT = 1
-C
+!
       I = 0
       DOWHILE(.NOT. FACET_ACTIVE .AND. .NOT.
      +       (YES_RUN_TRANSACT() .AND. TRANSACT_ACTIVE_THIS_MONTH) .AND.
@@ -707,13 +722,13 @@ C
 !                        ENRG = EAVAIL(GIBSON_BACKUP_POINTER) * BLK_MW *
 !     +                      (1.-MAINTENANCE_RATE(GIBSON_BACKUP_POINTER))
                         IF(BLKNO(I) <= 1) THEN
-C
+!
                            CALL GET_GIBSON5_ENERGY(GIBSON_BLOCK1_ENERGY,
      +                                             GIBSON_BLOCK2_ENERGY,
      +                                                 SEAS_HOURS,ISEAS,
      +                                                    UNITNO,BLK_MW,
      +                                                     ARRAY_POINTR)
-C
+!
                            ENRG = GIBSON_BLOCK1_ENERGY *
      +                        EAVAIL(GIBSON_BACKUP_POINTER) * (1.-
      +                          MAINTENANCE_RATE(GIBSON_BACKUP_POINTER))
@@ -722,7 +737,7 @@ C
      +                           MAINTENANCE_RATE(GIBSON_BACKUP_POINTER)
                            EFFECTIVE_CAPACITY(1,UNITNO) =
      +                                                  ENERGY(1,UNITNO)
-C
+!
                            ENERGY(1,GIBSON_BACKUP_POINTER) = ENRG
                            EFFECTIVE_CAPACITY(1,GIBSON_BACKUP_POINTER) =
      +                                                              ENRG
@@ -735,7 +750,7 @@ C
      +                           MAINTENANCE_RATE(GIBSON_BACKUP_POINTER)
                            EFFECTIVE_CAPACITY(2,UNITNO) =
      +                                                  ENERGY(2,UNITNO)
-C
+!
                            ENERGY(2,GIBSON_BACKUP_POINTER) = ENRG
                            EFFECTIVE_CAPACITY(2,GIBSON_BACKUP_POINTER) =
      +                                                              ENRG
@@ -764,9 +779,9 @@ C
      +                                     UNIT_CAP_AFTER_LOSSES(UNITNO)
             ENDIF
          ENDIF
-C
+!
 !        CONTRACTS SECTION
-C
+!
          IF(CONTRACTS_ACTIVE .AND.
      +                (.NOT. CL_UNITS_ACTIVE .OR. BLKNO(I) > 0)) THEN
             IF(CL_UNITS_ACTIVE) THEN
@@ -796,11 +811,11 @@ C
                CUMCAP = CUMCAP + CUM_CONTRACT_CAP
             ENDIF
          ENDIF
-C
+!
 !        IF THE NEXT UNIT BLOCK IS THE LAST ENERGY SOURCE,
 !        THEN ASSIGN REMAINING ENERGY TO THE FIRST CAPACITY
 !        SEGMENT, AND STOP DISPATCHING THE SYSTEM.
-C
+!
          IF(CL_UNITS_ACTIVE) THEN
             IF(LDTYPE(UNITNO)=='L') THEN
                ENERGY(1,UNITNO) = MAX(0.,REMAINING_ENERGY)
@@ -808,10 +823,10 @@ C
                CONTRACTS_ACTIVE = .FALSE.
                EXIT
             ENDIF
-C
+!
 ! 1/20/93 THE FOLLOWING CAUSES FIRST UNITS OR THE SHADOW UNIT TO BE
 ! SKIPPED IN THE DISPATCH ORDER
-C
+!
             IF(FUEL_INVENTORY_ACTIVE .AND.
      +                             SHADOW_UNIT_NUMBER(UNITNO) /= 0) THEN
                FUEL_ID = FUEL_INVENTORY_ID(FUEL_SUPPLY_ID(UNITNO))
@@ -841,9 +856,9 @@ C
             A = B
             IF(BLK_MW == 0.0) CYCLE
             IF(PROD_METHOD == D_RATE) THEN
-C
+!
 ! NEED TO LIMIT UNIT CAPACITY IF ON A TIE
-C
+!
                TIE_CAPACITY = EAVAIL(UNITNO) *
      +                              (1.-MAINTENANCE_RATE(UNITNO))*BLK_MW
                IF(TIE_CONSTRAINT_GROUP(UNITNO) /= 0) THEN
@@ -969,9 +984,9 @@ C
                ELSE
                   EA = TEMPEA(BLKNUM,UNITNO)
                ENDIF
-C
+!
 ! NEED TO LIMIT UNIT CAPACITY IF ON A TIE
-C
+!
                IF(TIE_CONSTRAINT_GROUP(UNITNO) /= 0) THEN
                   TIE_GROUP = TIE_CONSTRAINT_GROUP(UNITNO)
                   TIE_CAPACITY = MIN(TIE_GROUP_LIMIT(TIE_GROUP)-
@@ -1050,10 +1065,10 @@ C
                      ELSE
                         CALL CALENRG(LODDUR,LPROB(1,CURRENT),A,B,ENRG,
      +                     CAPSYS,DX,LEFT(UNITNO),RIGHT(UNITNO),ISTART)
-C
+!
 ! ATTEMPT TO TRANSACT STARTING AT THE POINT ON THE ELDC WHERE
 ! THE UNIT IS LOADED.
-C
+!
                         LEFT_SAVE(I) = LEFT(UNITNO)
                         RIGHT_SAVE(I) = RIGHT(UNITNO)
                         IF(SHADOW_UNIT_NUMBER(UNITNO) > UNITNO) THEN
@@ -1138,14 +1153,14 @@ C
          ENDIF   ! END THE CL_UNITS_ACTIVE IF
       ENDDO ! DISPATCHING LOOP (CONTRACTS OR CL UNITS ACTIVE)
       IF(WABASH_VALLEY) THEN
-C
+!
 !        WABASH 4 AREA ALLOCATION OF PSI SEASONAL ENERGY
 !        1/17/95. GAT. MODIFIED AND MOVED INTO SUBROUTINE.
-C
+!
          CALL PSI_LAST_RESOURCE_CALC(ISEAS,SEAS_HOURS,ENERGY)
-C
+!
 !        CALL WABASH_LOSSES
-C
+!
          IF(NUNITS > 0) THEN
             ALLOCATE(CL_LOSSES(NUNITS))
             CL_LOSSES = 0.
@@ -1210,9 +1225,9 @@ C
          ENDIF
       ENDIF ! WABASH VALLEY
 
-C
+!
 ! ALLOCATE REMAINING ENERGY ONLY CONTRACTS AND PRICE THAT ENERGY
-C
+!
       IF(ENRG_FROM_ENRG_ONLY_CONTRACTS > 0.) THEN
          IF(REALLY_KEPCO) THEN
             USED_ENRG_ONLY_ENERGY =
@@ -1344,10 +1359,10 @@ C
      +         TEMPEA,GENGRP)
          ENDIF
       ENDIF
-c
+!
 ! Used to check the optimization of fuel switching going from right to
 ! left.  4/26/93 MSG
-c
+!
       IF(ALLOCATE_FUEL_RIGHT_TO_LEFT) THEN
          DISPATCH_BLOCK = NBLOK + 1
       ELSE
@@ -1381,13 +1396,13 @@ c
          ENDIF
          IF(WABASH_VALLEY) UNIT_ENRG = UNIT_ENRG + CL_LOSSES(I)
          UNIT_ENRG = UNIT_ENRG * SEAS_HOURS
-C
+!
          J = 2      !IF(EXPENSE_COLLECTION(I) == 'B') J = 2
          IF(EXPENSE_COLLECTION(I) == 'A') J = 1
          IF(EXPENSE_COLLECTION(I) == 'N') J = 3
-C
+!
 ! ACCOUNT FOR FIXED COSTS
-C
+!
          IF (ONLINE(I) <= DATE2 .AND. OFLINE(I) >= DATE1) THEN
             SEASON_CAPACITY(GGI) = SEASON_CAPACITY(GGI)+UNITCAP(I)
             MONTHLY_GROUP_REPORT(ISEAS,MGI,Capacity) =
@@ -1514,9 +1529,9 @@ C
             MMBTUS = DBLE(TEMP_SNGL) * MMBTUS
             BLK1_HEAT(I) = BLK1_HEAT(I) * TEMP_SNGL
             BLK2_HEAT(I) = BLK2_HEAT(I) * TEMP_SNGL
-C
+!
 ! ADD CIPSCO FUEL USAGE 6/16/92 COPYRIGHT (C) M.S. GERBER & ASSOCIATES
-C
+!
             VAR_COST = VCPMWH(I)
             FUEL_MIX_PRIM(I) = ABS(FUELMX(I))
             IF(FUEL_DERIVATIVE_ACTIVE .AND.
@@ -1528,7 +1543,7 @@ C
 !                  FUEL_MIX_PRIM(I) = 0.
 !                  CALL EMISSIONS_BY_SEC_FUEL(I,BLK1_HEAT(I),
 !     +                                                     BLK2_HEAT(I))
-C
+!
 !               ELSE
 !                  FUEL_ID = FUEL_INVENTORY_ID(FUEL_SUPPLY_ID(I))
 !                  CALL FUEL_INVENTORY(MMBTUS,MMBTUS_USED,
@@ -1596,7 +1611,7 @@ C
                   FUEL_MIX_PRIM(I) = 0.
                   CALL EMISSIONS_BY_SEC_FUEL(I,BLK1_HEAT(I),
      +                                                     BLK2_HEAT(I))
-C
+!
                ELSE
                   FUEL_ID = FUEL_INVENTORY_ID(FUEL_SUPPLY_ID(I))
                   CALL FUEL_INVENTORY(MMBTUS,MMBTUS_USED,
@@ -1655,7 +1670,7 @@ C
                CALL EMISSIONS_BY_ALL_FUELS(I,BLK1_HEAT(I),BLK2_HEAT(I))
             ENDIF
             RCOST = RCOST + UNIT_ENRG * FUEL_ADDER_ADJUSTMENT(I)
-C
+!
             GROUP_ENERGY(GGI) = GROUP_ENERGY(GGI) + UNIT_ENRG
             GROUP_MMBTUS(GGI) = GROUP_MMBTUS(GGI) + MMBTUS
             GROUP_FUEL(GGI)   = GROUP_FUEL(GGI) + RCOST
@@ -1677,9 +1692,9 @@ C
 !    +                                               VAR_COST*UNIT_ENRG,
 !    +                                               UNIT_FIXED_COST)
 !           ENDIF
-C
+!
 ! BTU BY FUEL TYPE AND BY BTUS TAXED--ADDED 3/12/93 MODIFIED 4/28/93
-C
+!
             CALL RETURN_HEAT_BY_FUEL(I,PRIM_HEAT,SEC_HEAT,EMIS_HEAT)
 ! 11/10/94. GAT. MOVED FOR TVA. ! 11/6/97. GAT. CREATED MONTHLY EMISSIONS FOR TVA.
             CALL CALC_EMISSION_REPORT_GROUPS(ISEAS,I,PRIM_HEAT,SEC_HEAT,
@@ -1705,13 +1720,13 @@ C
      +                                   TEMP_HEAT,
      +                                   MMBTU_FUEL_BALANCE(FUEL_ID),3)
             ENDIF
-C
+!
             CALL RETURN_UNIT_EMISSIONS(I,UNIT_EMISS_CONTRIB(1),
      +                                 UNIT_EMISS_CONTRIB(2),
      +                                 UNIT_EMISS_CONTRIB(3),
      +                                 UNIT_EMISS_CONTRIB(4),
      +                                 UNIT_EMISS_CONTRIB(5))
-C
+!
             DO EM = 1, NUMBER_OF_EMISSION_TYPES
                GROUP_EMISSIONS(EM,GGI) = GROUP_EMISSIONS(EM,GGI) +
      +                                            UNIT_EMISS_CONTRIB(EM)
@@ -1770,17 +1785,17 @@ C
      +                            RPS_THERMAL_DB(2,ST_TG,PM,0) + TEMP_R4
             ENDIF
 !
-C
+!
 ! NOTE: WHEN ENERGY COMES OUT OF CALHEAT THE VALUES HAVE BEEN MULTIPILED
 !       BY THE APPROPRIATE EA's
-C
+!
             UNIT_ENRG = ENERGY(1,I) + ENERGY(2,I)
             IF(WABASH_VALLEY) THEN
                UNIT_ENRG = UNIT_ENRG + CL_LOSSES(I)
             ENDIF
-C
+!
 !           ADD NEW POOLING LOGIC FOR IP, 6/4/91.
-C
+!
             IF(CL_POOL_FRAC_OWN(I) < 100) THEN
                GROUP = 2
                UTILITY_PORTION = CL_POOL_FRAC_OWN(I) / 100.
@@ -2042,10 +2057,10 @@ C
          DO I = 1 , NUMBER_OF_CONTRACTS
             IF(CNTR_ON_LI(I) <= DATE2 .AND.
      +                                 CNTR_OFF_LI(I) >= DATE1) THEN
-C
+!
 ! 5/13/92 SURPLUS SALE LOGIC: AFTER CONTRACT LOOP FOR P_PUR_ENRG
 ! 5/22/92 MOVED INTO CONTRACT LOOP
-C
+!
                IF(EXCESS_ENERGY > 0.0 .AND.
      +                          CNTR_ENERGY_SWITCH(I) == 'O' .AND.
      +                                         CNTRTYPE(I) /= 'X' ) THEN
@@ -2070,7 +2085,7 @@ C
      +                  CONTRACT_ENERGY(I)
                   ENDIF
                ENDIF ! PALO ALTO 2 TIER
-C
+!
                IF(.NOT.(CNTRTYPE(I) == 'F'.OR.
      +                  CNTRTYPE(I) == 'G'.OR.
      +                  CNTRTYPE(I) == 'H'.OR.
@@ -2108,7 +2123,7 @@ C
                      WRITE(4,*) " "
                   ENDIF
                ENDIF
-C
+!
                GGI = CNTR_GROUP(I)
                CNTR_ENRG = CONTRACT_ENERGY(I) * SEAS_HOURS
                REMAIN_ANN_ENRG(I) =
@@ -2223,9 +2238,9 @@ C
                   P_CLASS_ASSIGNED_COST(GROUP) =
      +               P_CLASS_ASSIGNED_COST(GROUP) +
      +               TEMP_CNTR_VAR_COST * POOL_PORTION * SEAS_HOURS
-C
+!
 ! ALTERED 9/22/92
-C
+!
                   IF(CNTR_EXP_ASSIGN(I) /= 'P') THEN
                      CLASS_ASSIGNED_VARIABLE_COST(GROUP) =
      +                  CLASS_ASSIGNED_VARIABLE_COST(GROUP) +
@@ -2243,16 +2258,16 @@ C
      +               CLASS_ASSIGNED_EMISS(1,GROUP) +
      +               CNTR_SO2(I)*CNTR_ENRG*POOL_PORTION/TONS_CONVERSION
                   CNTR_ENRG = CNTR_ENRG * UTILITY_PORTION
-C
+!
                   TEMP_CNTR_VAR_COST =
      +                       TEMP_CNTR_VAR_COST * UTILITY_PORTION
                   TEMP_CNTR_FIXED_COST =
      +               TEMP_CNTR_FIXED_COST * UTILITY_PORTION
                ENDIF
-C
+!
 ! ADDED 12/8/92 FOR KEPCO DEFERRED WC MAINTENACNE EXPENSE
 !  THESE CASH EXPENSES ARE NOT INCLUDED IN THE INCOME STATEMENT
-C
+!
                CURRENT_MAINTENANCE_EXPENSE = 0.
                IF(REALLY_KEPCO .AND. INDEX(CNTRTYPE(I),'M') /= 0) THEN
                   IF(SEAS_HOURS*CONTRACT_ENERGY(I) > .1) THEN
@@ -2280,7 +2295,7 @@ C
                   PVARCOST = PVARCOST + TEMP_CNTR_VAR_COST
                   PFIXCOST = PFIXCOST + TEMP_CNTR_FIXED_COST*1000.
                ENDIF
-C
+!
                IF(.NOT. KEPCO .OR. INDEX('SX',CNTRTYPE(I)) == 0) THEN
                   P_PUR_ENRG = P_PUR_ENRG + CNTR_ENRG/SEAS_HOURS
                ENDIF
@@ -2289,9 +2304,9 @@ C
      +                                     PEAK_MONTH == ISEAS)
      +             MAX_RATCHET_CAPACITY(I) = CONTRACT_CAPACITY(I)
          ENDDO !END CONTRACTS COUNTER
-C
+!
 !        5/13/92 ADDED SURPLUS SALE LOGIC
-C
+!
         IF(.NOT. WKP_ACTIVE .AND. .NOT. REALLY_KEPCO) THEN
          IF(DEMAND - SEAS_HOURS*(P_PUR_ENRG) < -0.00001
      +                                 .AND. SUR_SALE_NO > 0) THEN
@@ -2315,7 +2330,7 @@ C
          ENDIF !END SURPLUS SALE
         ENDIF
       ENDIF !END CONTRACTS
-C
+!
       DO I = 0, MAX_REPORTING_GROUPS
          ANN_CL_CAPACITY(I) = MAX(ANN_CL_CAPACITY(I),SEASON_CAPACITY(I))
       ENDDO
@@ -2347,9 +2362,9 @@ C
      +                                           PVARCOST * SEAS_HOURS +
      +                    P_PUR_POWER_COST_VAR +
      +                    P_NUCLEAR_FUEL_COST
-C
+!
 ! REMOVED 6/10/92 COST(1) EXCLUDES COST(2)
-C
+!
 !    +       - CL_P_CLASS_ASSIGNED_COST(2)
       P_CLASS_ASSIGNED_COST(1) =
      +      CL_P_CLASS_ASSIGNED_COST(1) + P_CLASS_ASSIGNED_COST(1)
@@ -2375,7 +2390,7 @@ C
       ENDIF
 !
       VOID_LOGICAL = CALCULATE_MONTHLY_TRANS_GROUP(ISEAS,YR)
-C
+!
       IF(MONTHLY_UNIT_REPORT .OR. CONTRACT_REPORT() /= 'F' .OR.
      +      ANNUAL_UNIT_OUTPUT_REPORT() .OR. SPREAD_SHEET() .OR.
      +      .TRUE. .OR.             ! ADD FOR ASSET CLASS WORK 3/31/95
@@ -2410,12 +2425,12 @@ C
       ENDIF
 
 ! mark for winmerge
-C
+!
       CALL WRITE_MONTHLY_GROUP_REPORT(ISEAS,YR,
      +                                 MAX_MONTHLY_GROUPS,
      +                                 MAX_MONTHLY_GROUP_VARIABLES,
      +                                 MONTHLY_GROUP_REPORT,PEAK_MONTH)
-C
+!
       IF(KEPCO .AND.
      +         INDEX('B,A',KEPCO_REPORTS()) /= 0 .AND.
      +                      PERIOD_COUNTER == PRODUCTION_PERIODS()) THEN
@@ -2478,9 +2493,9 @@ C
          CALL WABASH_MD_POWER_COST_REPORT(ISEAS,YR,
      +                                  SEAS_HOURS)
       ENDIF
-C
+!
 ! SERVICE TRANSACTION ADDED 10/18/92 MSG
-C
+!
       IF(SERVICE_TRANSACTIONS_ACTIVE) THEN
          IF(NUNITS > 0)
      +                 CALL CL_SERVICE_TRANS_CALCULATIONS(NUNITS,ENERGY,
@@ -2501,9 +2516,9 @@ C
       IF(ALLOCATED(CT_LOSSES)) DEALLOCATE(CT_LOSSES)
       IF(ALLOCATED(CL_LOSSES)) DEALLOCATE(CL_LOSSES)
       RETURN
-C**********************************************************************
+!**********************************************************************
       ENTRY GET_THERMAL_RPS_SUM(R_MONTH,R_ST_TG,R_RESOURCE_RPS_VARS)
-C**********************************************************************
+!**********************************************************************
          DO PM = 2, 8 ! 7
             I = RPS_INDEX_TRANSLATE(PM)
             R_RESOURCE_RPS_VARS(PM) = R_RESOURCE_RPS_VARS(PM) +
@@ -2517,10 +2532,10 @@ C**********************************************************************
      +                               RPS_THERMAL_DB(1,R_ST_TG,I,R_MONTH)
          END DO
       RETURN
-C***********************************************************************
+!***********************************************************************
       ENTRY GET_MWBLOK_FOR_UNIT(R_I,R1_OPTION_MWH,R2_OPTION_MWH)
-C***********************************************************************
-C
+!***********************************************************************
+!
          TEMP_I2 = GET_TRANS_UNIT_TO_BLOCK(R_I,INT2(1))
          IF(TEMP_I2 > 0) THEN
             R1_OPTION_MWH = MWBLOK(TEMP_I2)
@@ -2535,19 +2550,19 @@ C
          ENDIF
 !
       RETURN
-C***********************************************************************
+!***********************************************************************
       ENTRY PUT_TRANS_C_ENERGY(R_I,R1_OPTION_MWH,
      +                         R2_OPTION_MWH,HOURS_IN_MONTH)
-C***********************************************************************
-C
+!***********************************************************************
+!
          ENERGY(1,R_I) = R1_OPTION_MWH/FLOAT(HOURS_IN_MONTH)
          ENERGY(2,R_I) = R2_OPTION_MWH/FLOAT(HOURS_IN_MONTH)
 !
       RETURN
-C***********************************************************************
+!***********************************************************************
       ENTRY PUT_TRANS_C_HEAT(R_I,R1_OPTION_MWH,R2_OPTION_MWH)
-C***********************************************************************
-C
+!***********************************************************************
+!
 !
 ! 01/30/02. PUT MMBTUS DIRECTLY INTO THE EQUATION. IF AROUND CALHEAT ABOVE.
 !
@@ -2557,38 +2572,38 @@ C
          RIGHT(R_I) = R2_OPTION_MWH
 !
       RETURN
-C***********************************************************************
+!***********************************************************************
       ENTRY RETURN_P_SALES_REVENUE_ENERGY(R_CNTR_SALES_REVENUE,
      +                                    R_CNTR_SALES_ENERGY)
-C***********************************************************************
-C
+!***********************************************************************
+!
          R_CNTR_SALES_REVENUE = ANNUAL_CNTR_SALES_REVENUE
          R_CNTR_SALES_ENERGY = ANNUAL_CNTR_SALES_ENERGY
          ANNUAL_CNTR_SALES_ENERGY = 0.
          ANNUAL_CNTR_SALES_REVENUE = 0.
       RETURN
-C***********************************************************************
+!***********************************************************************
 !      ENTRY DEALLOCATE_DR_BOOTH_ARRAYS()
-C***********************************************************************
-C
+!***********************************************************************
+!
 !         IF(ALLOCATED(MONTHLY_GROUP_REPORT))
 !     +                                  DEALLOCATE(MONTHLY_GROUP_REPORT)
 !      RETURN
-C***********************************************************************
+!***********************************************************************
       ENTRY GET_UNIT_FROM_BLOCK(R_UNIT,R_BLOCK_NO)
-C***********************************************************************
+!***********************************************************************
          R_UNIT = UNIT(R_BLOCK_NO)
       RETURN
       END
-C**********************************************************************
-C
+!**********************************************************************
+!
 !   USED FOR FUEL SWITCHING IF THE PRIM FUEL IS THE DISPATCHING FUEL
 !                   COPYRIGHT (C) 1993
 !               M.S. GERBER & ASSOCIATES, INC.
 !                   ALL RIGHTS RESERVED
-C
-C**********************************************************************
-C
+!
+!**********************************************************************
+!
       SUBROUTINE SHADOW_FUEL_INVENTORY(ENERGY,MMBTU_FUEL_BALANCE,
      +                                 EA,COEFF,HEAT_RATE_FACTOR,
      +                                 SEAS_HOURS,B,A,
@@ -2597,13 +2612,13 @@ C
      +                                 MWBLOK,LODDUR,LPROB,
      +                                 BLENDING_RATE,
      +                                 SEC_BTU_COST)
-C
-      REAL EA,COEFF,HEAT_RATE_FACTOR,SEAS_HOURS,GET_HEAT_CONVERSION,
+!
+      REAL :: EA,COEFF,HEAT_RATE_FACTOR,SEAS_HOURS,GET_HEAT_CONVERSION,
      +     ENERGY,B,A,LEFT,RIGHT,AVAILABLE_SHADOW_CAPACITY
-      REAL ADJUSTED_ENERGY,B_ADJUSTED,MWBLOK,SEC_BTU_COST
-      REAL LODDUR(*),LPROB(*),BLENDING_RATE
-      REAL*8 DBLE_TEMP,HEAT,MMBTU_FUEL_BALANCE
-C
+      REAL :: ADJUSTED_ENERGY,B_ADJUSTED,MWBLOK,SEC_BTU_COST
+      REAL :: LODDUR(*),LPROB(*),BLENDING_RATE
+      REAL (kind=8) ::   DBLE_TEMP,HEAT,MMBTU_FUEL_BALANCE
+!
       DBLE_TEMP = DBLE((EA * COEFF * HEAT_RATE_FACTOR * SEAS_HOURS)/
      +                         GET_HEAT_CONVERSION())
       HEAT = DBLE_TEMP * DBLE(ENERGY * (1. - BLENDING_RATE))
@@ -2619,9 +2634,9 @@ C
          ELSEIF(ABS(LEFT - RIGHT) < .0001) THEN
             B_ADJUSTED = A + ADJUSTED_ENERGY/LEFT
          ELSE
-C
+!
 ! FIND THE INCREMENT THAT HAS THE ENERGY CROSS-OVER
-C
+!
             CALL FIND_ENRGY_CROSSOVER(A,LEFT,ADJUSTED_ENERGY,LODDUR,
      +                                LPROB,B_ADJUSTED,RIGHT)
          ENDIF
@@ -2634,30 +2649,30 @@ C
       ENDIF
       RETURN
       END
-C
-C**********************************************************************
-C
+!
+!**********************************************************************
+!
 !       FINDS THE COST CROSSING POINT FOR A CONTRACT AND A CL UNIT
 !                   COPYRIGHT (C) 1992
 !               M.S. GERBER & ASSOCIATES, INC.
 !                   ALL RIGHTS RESERVED
-C
-C**********************************************************************
-C
+!
+!**********************************************************************
+!
       SUBROUTINE FIND_ENRGY_CROSSOVER(A,LEFT,TARGET_ENERGY,
      +                                 LODDUR,LPROB,B_ADJUSTED,RIGHT)
-C
+!
       use shared_vars_interg82
       use interg82
 
-      LOGICAL*1 ENERGY_EXCEEDED_AT_FIRST_PASS
-C      INTEGER*2 ISTART,ISTOP,I
-      INTEGER*2 ISTART,I
-      REAL A,LEFT,TARGET_ENERGY,LODDUR(*),LPROB(*),B_ADJUSTED,RIGHT
-      REAL INTPL8,X1,Y1,X3,Y2,X2,ENERGY,INCREMENTAL_ENERGY,BASE
-C
+      LOGICAL (kind=1) ::   ENERGY_EXCEEDED_AT_FIRST_PASS
+!      INTEGER*2 ISTART,ISTOP,I
+      INTEGER (kind=2) ::   ISTART,I
+      REAL :: A,LEFT,TARGET_ENERGY,LODDUR(*),LPROB(*),B_ADJUSTED,RIGHT
+      REAL :: INTPL8,X1,Y1,X3,Y2,X2,ENERGY,INCREMENTAL_ENERGY,BASE
+!
       INTPL8(X1,Y1,X3,Y2,X2) = Y1 + (Y2-Y1) * (X3-X1)/(X2-X1)
-C
+!
       CALL RETURN_ISTART_ISTOP(ISTART,ISTOP)
       BASE = LODDUR(1)
       ENERGY = MAX(BASE-A,0.0)
@@ -2689,37 +2704,39 @@ C
       ENDIF
       RETURN
       END
-C**********************************************************************
-C
+!**********************************************************************
+!
 !             OBJECT BASED FORTRAN FOR UNIT EMISSIONS AND HEAT DATA
 !                   COPYRIGHT (C) 1993
 !               M.S. GERBER & ASSOCIATES, INC.
 !                   ALL RIGHTS RESERVED
-C
-C**********************************************************************
-C
+!
+!**********************************************************************
+!
       RECURSIVE SUBROUTINE DO_EMISSIONS_BY_FUEL_TYPE
-C
+!
       SAVE
-      CHARACTER*6 CAP_LIMIT_FUEL_TYPES
+      CHARACTER (len=6) ::   CAP_LIMIT_FUEL_TYPES
       PARAMETER(CAP_LIMIT_FUEL_TYPES='GOCN12')
-      INTEGER*2 UNIT_NO,I,R_CL_UNITS,LOCAL_MAX_CL_UNITS,J,BLK_NO,L
-      CHARACTER*1 PRIM_FUEL_TYPE,SEC_FUEL_TYPE,EMISS_FUEL_TYPE
-      LOGICAL*1 BTU_TAX_ACTIVE
-      REAL*8 ANNUAL_BTUS_GOCN12(0:6),
+      INTEGER (kind=2) ::   UNIT_NO
+      INTEGER (kind=2) ::   I,R_CL_UNITS,LOCAL_MAX_CL_UNITS,J,BLK_NO,L
+      CHARACTER (len=1) ::   PRIM_FUEL_TYPE
+      CHARACTER (len=1) ::   SEC_FUEL_TYPE,EMISS_FUEL_TYPE
+      LOGICAL (kind=1) ::   BTU_TAX_ACTIVE
+      REAL (kind=8) ::   ANNUAL_BTUS_GOCN12(0:6),
      +       ANNUAL_BTUS_FOR_BTU_TAX_GOCN12(0:6)
-      REAL*8 MONTH_BTUS_GOCN12(0:6)
-C
-      REAL SEC_HEAT
-      REAL BLK1_HEAT,BLK2_HEAT,BLENDING_RATE,
+      REAL (kind=8) ::   MONTH_BTUS_GOCN12(0:6)
+!
+      REAL :: SEC_HEAT
+      REAL :: BLK1_HEAT,BLK2_HEAT,BLENDING_RATE,
      +     BLEND_HEAT,PRIM_HEAT,FUEL_MIX_RATE
-C
-      REAL SOX/-99./,CO2/-99./,OTH3/-99./,OTH2/-99./,
+!
+      REAL :: SOX/-99./,CO2/-99./,OTH3/-99./,OTH2/-99./,
      +     NOX1/-99./,NOX2/-99./
-      REAL R_SOX,R_NOX,R_CO2,R_OTH2,R_OTH3
-      REAL BLOCK1_HEAT/0./,BLOCK2_HEAT/0./
-C
-      REAL           SOX_BY_FUEL_TYPE(:,:),
+      REAL :: R_SOX,R_NOX,R_CO2,R_OTH2,R_OTH3
+      REAL :: BLOCK1_HEAT/0./,BLOCK2_HEAT/0./
+!
+      REAL ::           SOX_BY_FUEL_TYPE(:,:),
      +               NOX_BY_FUEL_TYPE(:,:),
      +               CO2_BY_FUEL_TYPE(:,:),
      +               OTH2_BY_FUEL_TYPE(:,:),
@@ -2730,7 +2747,7 @@ C
      +               CO2_BY_BLOCK(:,:),
      +               OTH2_BY_BLOCK(:,:),
      +               OTH3_BY_BLOCK(:,:)
-      REAL           R_PRIM_HEAT,R_SEC_HEAT,R_EMIS_HEAT
+      REAL ::           R_PRIM_HEAT,R_SEC_HEAT,R_EMIS_HEAT
       ALLOCATABLE :: SOX_BY_FUEL_TYPE,NOX_BY_FUEL_TYPE,
      +               CO2_BY_FUEL_TYPE,OTH2_BY_FUEL_TYPE,
      +               OTH3_BY_FUEL_TYPE,
@@ -2750,10 +2767,10 @@ C
 !    +     OTH3_BY_BLOCK,
 !    +     LOCAL_MAX_CL_UNITS,
 !    +     UNIT_HEAT_BY_FUEL
-C
-C**********************************************************************
+!
+!**********************************************************************
       ENTRY EMISSIONS_BY_BLENDED_FUEL(UNIT_NO,BLK1_HEAT,BLK2_HEAT)
-C**********************************************************************
+!**********************************************************************
          I = UNIT_NO
          CALL RETURN_BLENDING_MIX(I,BLENDING_RATE)
          IF(BLENDING_RATE > 0.) THEN
@@ -2771,9 +2788,9 @@ C**********************************************************************
             UNIT_HEAT_BY_FUEL(3,I) = UNIT_HEAT_BY_FUEL(3,I) + BLEND_HEAT
             CALL SAVE_EMISSIONS_BY_BLOCK(UNIT_NO)
 !            CALL CALC_EMISSION_REPORT_GROUPS(UNIT_NO,BLEND_HEAT,'E')
-C
+!
 ! DO PRIM FUEL PROTION
-C
+!
             PRIM_HEAT = BLK1_HEAT + BLK2_HEAT - BLEND_HEAT
             BLOCK1_HEAT = BLK1_HEAT - BLOCK1_HEAT
             BLOCK2_HEAT = BLK2_HEAT - BLOCK2_HEAT
@@ -2794,9 +2811,9 @@ C
          OTH3_BY_FUEL_TYPE(1,I) = PRIM_HEAT * OTH3
          UNIT_HEAT_BY_FUEL(1,I) = UNIT_HEAT_BY_FUEL(1,I) + PRIM_HEAT
       RETURN
-C**********************************************************************
+!**********************************************************************
       ENTRY EMISSIONS_BY_SEC_FUEL(UNIT_NO,BLK1_HEAT,BLK2_HEAT)
-C**********************************************************************
+!**********************************************************************
          I = UNIT_NO
          SEC_HEAT = BLK1_HEAT + BLK2_HEAT
          IF(SEC_HEAT /= 0.) THEN
@@ -2814,9 +2831,9 @@ C**********************************************************************
 !            CALL CALC_EMISSION_REPORT_GROUPS(UNIT_NO,SEC_HEAT,'S')
          ENDIF
       RETURN
-C**********************************************************************
+!**********************************************************************
       ENTRY EMISSIONS_BY_ALL_FUELS(UNIT_NO,BLK1_HEAT,BLK2_HEAT)
-C**********************************************************************
+!**********************************************************************
          I = UNIT_NO
          CALL RETURN_FUEL_MIX(I,FUEL_MIX_RATE)
          IF(FUEL_MIX_RATE < 1.) THEN
@@ -2828,9 +2845,9 @@ C**********************************************************************
          CALL EMISSIONS_BY_BLENDED_FUEL(I,FUEL_MIX_RATE*BLK1_HEAT,
      +                                    FUEL_MIX_RATE*BLK2_HEAT)
       RETURN
-C**********************************************************************
+!**********************************************************************
       ENTRY CREATE_EMISSIONS_BY_FUEL_TYPE(R_CL_UNITS)
-C**********************************************************************
+!**********************************************************************
          LOCAL_MAX_CL_UNITS = MAX(1,R_CL_UNITS)
          IF(ALLOCATED(SOX_BY_BLOCK)) THEN
             DEALLOCATE(SOX_BY_BLOCK)
@@ -2857,9 +2874,9 @@ C**********************************************************************
      +               OTH3_BY_BLOCK(2,LOCAL_MAX_CL_UNITS),
      +               UNIT_HEAT_BY_FUEL(3,LOCAL_MAX_CL_UNITS))
       RETURN
-C**********************************************************************
+!**********************************************************************
       ENTRY DEALLOCATE_EMISSIONS_BY_FUEL()
-C**********************************************************************
+!**********************************************************************
          IF(ALLOCATED(SOX_BY_BLOCK)) THEN
             DEALLOCATE(SOX_BY_BLOCK)
             DEALLOCATE(NOX_BY_BLOCK)
@@ -2874,9 +2891,9 @@ C**********************************************************************
      +                                              OTH2_BY_FUEL_TYPE,
      +                                              OTH3_BY_FUEL_TYPE)
       RETURN
-C**********************************************************************
+!**********************************************************************
       ENTRY CLEAR_EMISSIONS_BY_FUEL_TYPE
-C**********************************************************************
+!**********************************************************************
          SOX_BY_FUEL_TYPE = 0.
          NOX_BY_FUEL_TYPE = 0.
          CO2_BY_FUEL_TYPE = 0.
@@ -2903,7 +2920,7 @@ C**********************************************************************
                OTH2_BY_FUEL_TYPE(J,I) = 0.
                OTH3_BY_FUEL_TYPE(J,I) = 0.
                UNIT_HEAT_BY_FUEL(J,I) = 0.
-C
+!
                SOX_BY_BLOCK(J,I) = 0.
                NOX_BY_BLOCK(J,I) = 0.
                CO2_BY_BLOCK(J,I) = 0.
@@ -2913,10 +2930,10 @@ C
          ENDDO
       ENDIF
       RETURN
-C**********************************************************************
+!**********************************************************************
       ENTRY RETURN_UNIT_EMISSIONS(UNIT_NO,R_SOX,R_NOX,R_CO2,
      +                            R_OTH2,R_OTH3)
-C**********************************************************************
+!**********************************************************************
          I = UNIT_NO
          R_SOX = 0.
          R_NOX = 0.
@@ -2936,18 +2953,18 @@ C**********************************************************************
          R_OTH2 = R_OTH2/2000.
          R_OTH3 = R_OTH3/2000.
       RETURN
-C**********************************************************************
+!**********************************************************************
       ENTRY RETURN_HEAT_BY_FUEL(UNIT_NO,R_PRIM_HEAT,
      +                                           R_SEC_HEAT,R_EMIS_HEAT)
-C**********************************************************************
+!**********************************************************************
          R_PRIM_HEAT = UNIT_HEAT_BY_FUEL(1,UNIT_NO)
          R_SEC_HEAT = UNIT_HEAT_BY_FUEL(2,UNIT_NO)
          R_EMIS_HEAT = UNIT_HEAT_BY_FUEL(3,UNIT_NO)
       RETURN
-C**********************************************************************
+!**********************************************************************
       ENTRY RETURN_EMISSIONS_BY_BLOCK(UNIT_NO,BLK_NO,R_SOX,R_NOX,R_CO2,
      +                                R_OTH2,R_OTH3)
-C**********************************************************************
+!**********************************************************************
          I = UNIT_NO
          J = BLK_NO
          R_SOX = SOX_BY_BLOCK(J,I)
@@ -2956,9 +2973,9 @@ C**********************************************************************
          R_OTH2 = OTH2_BY_BLOCK(J,I)
          R_OTH3 = OTH3_BY_BLOCK(J,I)
       RETURN
-C**********************************************************************
+!**********************************************************************
       ENTRY SAVE_EMISSIONS_BY_BLOCK(UNIT_NO)
-C**********************************************************************
+!**********************************************************************
          I = UNIT_NO
          IF(BLOCK1_HEAT /= 0.) THEN
             SOX_BY_BLOCK(1,I) = SOX_BY_BLOCK(1,I) + BLOCK1_HEAT * SOX
@@ -2975,7 +2992,7 @@ C**********************************************************************
             OTH3_BY_BLOCK(2,I) = OTH3_BY_BLOCK(2,I) + BLOCK2_HEAT*OTH3
          ENDIF
       RETURN
-C**********************************************************************
+!**********************************************************************
       ENTRY SUM_HEAT_BY_FUEL_TYPE(R_PRIM_HEAT,PRIM_FUEL_TYPE,
      +                            R_SEC_HEAT,SEC_FUEL_TYPE,
      +                            R_EMIS_HEAT,EMISS_FUEL_TYPE,
@@ -2983,7 +3000,7 @@ C**********************************************************************
      +                            MONTH_BTUS_GOCN12,
      +                            ANNUAL_BTUS_FOR_BTU_TAX_GOCN12,
      +                            BTU_TAX_ACTIVE)
-C**********************************************************************
+!**********************************************************************
          L = INDEX(CAP_LIMIT_FUEL_TYPES,PRIM_FUEL_TYPE)
          ANNUAL_BTUS_GOCN12(L) = ANNUAL_BTUS_GOCN12(L) + R_PRIM_HEAT
          MONTH_BTUS_GOCN12(L) = MONTH_BTUS_GOCN12(L) + R_PRIM_HEAT
@@ -3004,35 +3021,37 @@ C**********************************************************************
      +                                                      R_EMIS_HEAT
       RETURN
       END
-C**********************************************************************
+!**********************************************************************
       SUBROUTINE GET_GIBSON5_ENERGY(GIBSON_BLOCK1_ENERGY,
      +                              GIBSON_BLOCK2_ENERGY,SEAS_HOURS,
      +                              ISEAS,UNITNO,BLK_MW,ARRAY_POINTR)
-C**********************************************************************
+!**********************************************************************
       INCLUDE 'SpinLib.MON'
       use kepcocom
       INCLUDE 'SIZECOM.MON'
       INCLUDE 'LAMCOM.MON'
       INCLUDE 'PRODCOM.MON'
-      
-      LOGICAL*1 FOUND_THIS_MONTH_FORECAST,GET_THIS_MONTH_CLASS_FORECAST
-      INTEGER*2 GIB,ISEAS,UNITNO,ARRAY_POINTR,PSI_CLASS_NUMBER
-      REAL  PSI_LDC,PSI_ENERGY_DEMAND,PSI_PEAK_DEMAND,
+
+      LOGICAL (kind=1) ::   FOUND_THIS_MONTH_FORECAST
+      LOGICAL (kind=1) ::   GET_THIS_MONTH_CLASS_FORECAST
+      INTEGER (kind=2) ::   GIB
+      INTEGER (kind=2) ::   ISEAS,UNITNO,ARRAY_POINTR,PSI_CLASS_NUMBER
+      REAL ::  PSI_LDC,PSI_ENERGY_DEMAND,PSI_PEAK_DEMAND,
      +      PSI_BASE_DEMAND,GIB5_CAP,GIB5_ENERGY,GIBSON_BLOCK1_ENERGY,
      +      GIBSON_BLOCK2_ENERGY,GIBSON_TOTAL_ENERGY,BLK_MW,SEAS_HOURS,
      +      FORECAST_DSM_ENERGY(MAX_LOAD_CLASSES),THIS_MONTH_ENERGY,
      +      THIS_MONTH_PEAK
 ! ADDED 9/1/94. GAT.
-C
+!
          CALL GET_CLASS_DSM_ENERGY_ALLOC(ISEAS,FORECAST_DSM_ENERGY)
-C
+!
          PSI_CLASS_NUMBER = 3
          FOUND_THIS_MONTH_FORECAST = GET_THIS_MONTH_CLASS_FORECAST(
      +                                    ISEAS,
      +                                    PSI_CLASS_NUMBER,
      +                                    THIS_MONTH_ENERGY,
      +                                    THIS_MONTH_PEAK)
-C
+!
          PSI_ENERGY_DEMAND =(THIS_MONTH_ENERGY +
      +                       FORECAST_DSM_ENERGY(PSI_CLASS_NUMBER))/
      +                                                        SEAS_HOURS
@@ -3064,18 +3083,19 @@ C
          GIBSON_BLOCK2_ENERGY = GIBSON_TOTAL_ENERGY-GIBSON_BLOCK1_ENERGY
       RETURN
       END
-C***********************************************************************
-C
+!***********************************************************************
+!
       SUBROUTINE WRITE_LAST_ELDC(LODDUR,LPROB,LAST_POINT,CURRENT,
      +                                END_POINT,YEAR,ISEAS,
      +                                REMAINING_ENERGY_FOR_BLOCK,NBLOK2,
      +                                LAST_B_FOR_BLOCK)
-C
-C***********************************************************************
-      LOGICAL*1 WRITE_LAST_ELDC_NOT_OPEN/.TRUE./
-      INTEGER*2   LAST_POINT,CURRENT,END_POINT,YEAR,ISEAS,
+!
+!***********************************************************************
+      LOGICAL (kind=1) ::   WRITE_LAST_ELDC_NOT_OPEN/.TRUE./
+      INTEGER (kind=2) ::     LAST_POINT,CURRENT,END_POINT,YEAR,ISEAS,
      +            LAST_ELDC_NO/0/,LAST_ELDC_HEADER,I,NBLOK2
-      REAL*4 LODDUR(1000), LPROB(1000,2),REMAINING_ENERGY_FOR_BLOCK(*),
+      REAL (kind=4) ::   LODDUR(1000)
+      REAL (kind=4) ::    LPROB(1000,2),REMAINING_ENERGY_FOR_BLOCK(*),
      +         LAST_B_FOR_BLOCK(*)
 ! END DATA DECLARATIONS
          IF(WRITE_LAST_ELDC_NOT_OPEN) THEN
@@ -3095,25 +3115,27 @@ C***********************************************************************
  1000 FORMAT(I4,A,I4,A,I2,A,I4,A,F8.1,A,F8.6)
  2000 FORMAT(I4,A,I4,A,I2,A,I4,A,F8.1,A,F8.1)
       END
-C***********************************************************************
-C
+!***********************************************************************
+!
       SUBROUTINE PSI_LAST_RESOURCE_CALC(ISEAS,SEAS_HOURS,ENERGY)
-C
-C***********************************************************************
-C
+!
+!***********************************************************************
+!
       INCLUDE 'SpinLib.MON'
       use kepcocom
       INCLUDE 'SIZECOM.MON'
-C
-      LOGICAL*1 FOUND_THIS_MONTH_FORECAST,GET_THIS_MONTH_CLASS_FORECAST
-      INTEGER*2 PSI_CLASS_NUMBER,ISEAS
-      REAL*4   ENERGY(2,MAX_CL_UNITS),SEAS_HOURS
-      REAL*4   ENERGY_FROM_GIBSON,FORECAST_DSM_ENERGY(MAX_LOAD_CLASSES)
-      REAL*4   THIS_MONTH_ENERGY,THIS_MONTH_PEAK
-C
-C
+!
+      LOGICAL (kind=1) ::   FOUND_THIS_MONTH_FORECAST
+      LOGICAL (kind=1) ::   GET_THIS_MONTH_CLASS_FORECAST
+      INTEGER (kind=2) ::   PSI_CLASS_NUMBER,ISEAS
+      REAL (kind=4) ::     ENERGY(2,MAX_CL_UNITS),SEAS_HOURS
+      REAL (kind=4) ::     ENERGY_FROM_GIBSON
+      REAL (kind=4) ::     FORECAST_DSM_ENERGY(MAX_LOAD_CLASSES)
+      REAL (kind=4) ::     THIS_MONTH_ENERGY,THIS_MONTH_PEAK
+!
+!
 ! END DATA DECLARATIONS
-C
+!
          IF(WABASH_IM_NIPSCO .AND. GIBSON_POINTER /= 0 .AND.
      +                         PSI_AREA_LAST_RESOURCE_POINTER /= 0) THEN
             ENERGY_FROM_GIBSON = ENERGY(1,GIBSON_POINTER) +
@@ -3123,39 +3145,39 @@ C
      +                                 ENERGY(1,GIBSON_BACKUP_POINTER) +
      +                                   ENERGY(2,GIBSON_BACKUP_POINTER)
             ENDIF
-C
+!
             CALL GET_CLASS_DSM_ENERGY_ALLOC(ISEAS,FORECAST_DSM_ENERGY)
-C
+!
             PSI_CLASS_NUMBER = 3
             FOUND_THIS_MONTH_FORECAST = GET_THIS_MONTH_CLASS_FORECAST(
      +                                                ISEAS,
      +                                                PSI_CLASS_NUMBER,
      +                                                THIS_MONTH_ENERGY,
      +                                                THIS_MONTH_PEAK)
-C
+!
             ENERGY(2,PSI_AREA_LAST_RESOURCE_POINTER) =
      +            MAX(0.,(THIS_MONTH_ENERGY +
      +               FORECAST_DSM_ENERGY(PSI_CLASS_NUMBER))/SEAS_HOURS -
      +                                               ENERGY_FROM_GIBSON)
             ENERGY(1,PSI_AREA_LAST_RESOURCE_POINTER) = 0.
          ENDIF
-C
+!
       RETURN
       END
-C**********************************************************************
-C
+!**********************************************************************
+!
       SUBROUTINE WRITE_MONTHLY_GROUP_REPORT(R_ISEAS,R_YEAR,
      +                                 R_MAX_MONTHLY_GROUPS,
      +                                 R_MAX_MONTHLY_GROUP_VARIABLES,
      +                                 R_MONTHLY_GROUP_REPORT,
      +                                 R_PEAK_MONTH)
-C
-C**********************************************************************
+!
+!**********************************************************************
       USE IREC_ENDPOINT_CONTROL
       INCLUDE 'SpinLib.MON'
       INCLUDE 'SIZECOM.MON'
       INCLUDE 'GLOBECOM.MON'
-      INTEGER*2   R_ISEAS,R_YEAR,
+      INTEGER (kind=2) ::     R_ISEAS,R_YEAR,
      +            LOCAL_YEAR,
      +            R_MAX_MONTHLY_GROUPS,
      +            R_MAX_MONTHLY_GROUP_VARIABLES,
@@ -3171,16 +3193,16 @@ C**********************************************************************
      +            FISCAL_SEASON,
      +            LAST_SEASON/12/,
      +            FISCAL_YEAR
-      INTEGER MONTH_GROUP_REC
+      INTEGER :: MONTH_GROUP_REC
       SAVE MONTH_GROUP_REC,MONTH_GROUP_UNIT
-      REAL*4      F_MONTHLY_GROUP_REPORT(0:12,0:99,17),
+      REAL (kind=4) ::        F_MONTHLY_GROUP_REPORT(0:12,0:99,17),
      +            R_MONTHLY_GROUP_REPORT(0:12,0:99,17),
 !     +            R_MONTHLY_GROUP_REPORT(0:12,0:R_MAX_MONTHLY_GROUPS,
 !     +                                   R_MAX_MONTHLY_GROUP_VARIABLES),
      +            EV_DATA_SOURCE/2./,
      +            ENVIRONMENTAL_RATE(5),
      +            TEMP_MMBTUS
-      LOGICAL*1   MONTHLY_GROUP_NOT_OPEN/.TRUE./,
+      LOGICAL (kind=1) ::     MONTHLY_GROUP_NOT_OPEN/.TRUE./,
      +            MONTHLY_GROUP_REPORT,
      +            GET_MONTHLY_CT_GROUP_REPORT,
      +            VOID_L,
@@ -3189,9 +3211,9 @@ C**********************************************************************
      +            IS_FISCAL_YEAR_ACTIVE,
      +            FISCAL_RESET_PEAK_MONTH,
      +            FISCAL_RESET_DATA
-      CHARACTER*2 LOAD_FILE_CHAR_EXT
-      CHARACTER*9 CL_MONTH_NAME(0:13)
-      CHARACTER*20 GROUP_NAME
+      CHARACTER (len=2) ::   LOAD_FILE_CHAR_EXT
+      CHARACTER (len=9) ::   CL_MONTH_NAME(0:13)
+      CHARACTER (len=20) ::   GROUP_NAME
       SAVE F_MONTHLY_GROUP_REPORT
 !
 ! END DATA DECLARATIONS
@@ -3564,30 +3586,30 @@ C**********************************************************************
             F_MONTHLY_GROUP_REPORT = 0.
          ENDIF ! ISEAS == FISCAL_SEASON
       RETURN
-C**********************************************************************
+!**********************************************************************
       ENTRY RESET_FISCAL_MONTHLY_GROUP()
-C**********************************************************************
+!**********************************************************************
          FISCAL_RESET_DATA = .TRUE.
          FISCAL_RESET_PEAK_MONTH = .TRUE.
       RETURN
       END
-C**********************************************************************
+!**********************************************************************
       FUNCTION RPS_INDEX_TRANSLATE(R_PM)
-C**********************************************************************
-         LOGICAL*1 IS_A_VALID_RPS_PM
-         INTEGER*2 RPS_INDEX_TRANSLATE,R_PM,
+!**********************************************************************
+         LOGICAL (kind=1) ::   IS_A_VALID_RPS_PM
+         INTEGER (kind=2) ::   RPS_INDEX_TRANSLATE,R_PM,
      +              LOCAL_INDEX(8)/0,11,9,2,12,3,5,16/
 ! END DATA DEFINITIONS
          RPS_INDEX_TRANSLATE = LOCAL_INDEX(R_PM)
       RETURN
-C**********************************************************************
+!**********************************************************************
       ENTRY IS_A_VALID_RPS_PM(R_PM)
-C**********************************************************************
+!**********************************************************************
       IS_A_VALID_RPS_PM = .FALSE.
       IF(R_PM == 2 .OR. R_PM == 3 .OR. R_PM == 5 .OR. R_PM == 9 .OR.
      +             R_PM == 11 .OR. R_PM == 12 .OR.
      +                            R_PM == 16) IS_A_VALID_RPS_PM = .TRUE.
       RETURN
       END
-C
-C     ultima fila
+!
+!
