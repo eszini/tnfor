@@ -18,6 +18,12 @@
  *	tfor.c
  *	
  *
+ *	Mon May 20 00:41:05 -03 2024
+ *	agregue --chgmas .. saca los + de las declaraciones de variables
+ *	con esto, se puede llevar un f77 a que compile como f95
+ *	sin salir del fixed form
+ *
+ *
  *	Sat May 18 05:11:54 -03 2024
  *	en algunas lineas de fortran77, si primer car de lin es '*' no chilla !!
  *
@@ -96,19 +102,32 @@
  *
  * - - - - - - - - - - - - - - - - - - - - - - - - 
  *
- *	xx) Muestra por pantalla, 14 ejercicios de como manejar estructuras
+ *	exec1
+ *
+ *	Toma archivo de input y genera tabla con cantidad de caraceres
+ *	en todos el file
+ *
+ * - - - - - - - - - - - - - - - - - - - - - - - - 
+ *
+ *	prue1:
+ *
+ *	Conjunto de 14 ejercicios sobre manejo de estructuras
  *
  *	./prog  -v -f -opciones=d5 -prue=1
  *
- *	prue1: 
- *	prueba de manejo de estructuras y punteros a estructuras
- *	Distintas formas de referenciar a strcturas a traves 
- *	de punteros .
- *	funciones de ejemplo para pasarles punteros a punteros y mas ...
  *
+ * - - - - - - - - - - - - - - - - - - - - - - - - 
  *
+ *	prue2:
  *
+ *	./tfor -v -opciones=d5 -prue=2 -inp=list_src -out=l_names -aux=p.err -dato=new_repo 
  *
+ * 	Carga todos los archivos indicados en list_src, los carga en memoria
+ * 	(como vector a punteros de estructuras)
+ *	permite procesos varios, y vuelve a generar con cabios en el directorio new_repo
+ *
+ *	en p.err pone caracteres que no reconoce el parser de lineas
+ *	en l_names (testing) pone nombres largos 
  *
  *
  * - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -620,7 +639,9 @@ int	tiene_coment_intermedio (char *);
 int	es_linea_comentario(char *);
 int	es_linea_comentario2(char *);
 int	armame_dos_lineas(char *, char *, char *);
+int	preparame_dos_lineas(char *, char *, char *);
 int	correme_una_linea(int, int);
+char	*limpiar_mas(char *);
 
 
 
@@ -1296,8 +1317,6 @@ int	proc_principal()
 /*
  * -----------------------------------------------------------------------------------
  *
- *	(MMM)
- *
  *	pro_exec 1
  *
  *	exec aparte ...
@@ -1309,7 +1328,7 @@ int	proc_principal()
 /* 
  *	pro_exec1
  *
- *	cuenta caracteres
+ *	cuenta caracteres de un archivo
  *
  */
 
@@ -1336,6 +1355,9 @@ int	pro_exec1()
 	{	printf ("%s Entra proceso exec 1 \n\n",gp_tm());
 	}
 		
+
+	if (!ffinp || !ffout) 
+		gp_uso(101);
 
 
 	/* init de valores */
@@ -2545,7 +2567,7 @@ int	pro_prue2()
 	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
 	}
 
-	if (!ffinp || !ffdat )
+	if (!ffinp || !ffout || !ffdat )
 		gp_uso(11);
 
 
@@ -3171,6 +3193,9 @@ int	*l1;
 #endif
 		if ( 1 )
 		{
+
+			if (b1[strlen(b1)-1] == '\r' )
+				b1[strlen(b1)-1] = 0;
 
 			/* saco el fin de linea - contemplo 13 x fuentes fortran */
 			for ( flag=0, j=strlen(b1); !flag && j; j--)
@@ -4692,11 +4717,16 @@ int	*ql_f;
 	int	f1,f2,f3,f4;
 	int	qi,qf;
 	int	d1;
+	int	delta1,delta2;
 
 	char	b1[MAXB];
 	char	b2[MAXB];
 	char	b3[MAXB];
 	char	b4[MAXB];
+	char	b5[MAXB];
+	char	b6[MAXB];
+
+	char	*tok;
 
 
 	d1 = 0;		/* lineas agregadas ! */
@@ -4714,6 +4744,16 @@ int	*ql_f;
 
 		l_pars(i,&q_tk);
 
+		if (gp_fverbose("d4"))
+		{
+			printf ("Vengo de l_pars\n");
+			printf ("cfor_mas1:  linea %4d #tk %4d |%s|\n",i,q_tk,b1);
+			for (j=0; j<q_tk; j++)
+			{
+				printf ("TK: %3d %3d f1: %d |%s|\n",j,strlen(tk[j]),f1,tk[j]);
+			}
+		}
+
 		if ( f1=tiene_dec_var1() )
 		{
 			f4 = 1;
@@ -4722,32 +4762,17 @@ int	*ql_f;
 			if (f1 )
 			{
 				if (gp_fverbose("d3"))
-				{	printf ("fixed %d ! \ncfor:  linea %4d #tk %4d |%s|\n",f1,i,q_tk,b1);
-					for (j=0; j<q_tk; j++)
-					{
-						printf ("TK: %3d %3d f1: %d |%s|\n",j,strlen(tk[j]),f1,tk[j]);
-					}
+				{	printf ("fixed %d ! \ncfor_mas2:  linea %4d #tk %4d |%s|\n",f1,i,q_tk,b1);
 				}
 			}
-
 				
 		} /* tiene_dec_var */
 
-
-		if (gp_fverbose("d4"))
-		{
-			printf ("cfor:  linea %4d #tk %4d |%s|\n",i,q_tk,b1);
-			for (j=0; j<q_tk; j++)
-			{
-				printf ("TK: %3d %3d f1: %d |%s|\n",j,strlen(tk[j]),f1,tk[j]);
-			}
-		}
 
 		/* armo la linea de nuevo con todos los tokens */
 		memset (b2,0,MAXB);
 		for (j=0; j< q_tk; j++)
 			strcat (b2,tk[j]);
-
 
 		/* la linea no tenia dec de variables */
 		if ( f4 == 0)
@@ -4755,41 +4780,125 @@ int	*ql_f;
 			strcpy ( (*fnp[i]).l, b2);
 		}
 
-
 		/* la linea tenia dec de variables */
 		if (f4 == 1)
 		{
-
 			if ( def_var_continua(b2))
 			{
-#if 0
 				memset (b3,0,MAXB);
-				memset (b4,0,MAXB);
 
-				armame_dos_lineas(b2,b3,b4);
+				delta1 = 0;
+				do
+				{
+					strcat (b3, limpiar_mas ( (*fnp[i+delta1]).l )  );
+					delta1++;
+				}
+				while ( def_var_continua (  (*fnp[i+delta1]).l) ) ;
+				strcat (b3, limpiar_mas ( (*fnp[i+delta1]).l) );
+
 				if (gp_fverbose("d3"))
-				{	printf ("dos lineas: 1  |%s| \n",b3);
-					printf ("dos lineas: 2  |%s| \n",b4);
+				{
+					printf ("\n\n\n");
+					printf ("concatena trucha: ((%d)) l: %d |%s| \n\n\n",delta1,strlen(b3),b3); 
+				}
+
+				
+				memset (b4,0,MAXB);
+				memset (b5,0,MAXB);
+
+				preparame_dos_lineas(b3,b4,b5);
+				strcpy(b6,b5);
+
+				if (gp_fverbose("d3"))
+				{	printf ("dos lineas: 1  |%s| \n",b4);
+					printf ("dos lineas: 2  |%s| \n",b5);
+					printf ("dos lineas: B  |%s| \n",b6);
+				}
+
+				delta2 = 0;
+				tok = strtok(b5,",");
+				while ( tok != NULL )
+				{
+					sprintf (b3,"      %s  %s",b4,tok);
+					tok = strtok(NULL,",");
+
+					if (gp_fverbose("d3"))
+					{
+						printf ("strtok: |%s| \n",b3);
+					}
+					delta2++;
+
+				}
+				
+				if (gp_fverbose("d3"))
+				{
+					printf ("ZZZ delta1                   :   %4d        \n",delta1);
+					printf ("ZZZ delta2                   :   %4d        \n",delta2);
+					printf ("ZZZ qf qf-1  s(qf-1)         :   %4d %4d |%s|  \n", qf, qf-1, (*fnp[qf-1]).l );
+					printf ("ZZZ i   s(i)                 :   %4d  |%s|  \n", i , (*fnp[i]).l );
+					printf ("ZZZ Debo correr lineas desde :   %4d  |%s|  \n",
+								 (qf-1)+(delta2-delta1-1) , (*fnp[(qf-1)+(delta2-delta1-1)]).l );
+					printf ("ZZZ Hasta linea              :   %4d  |%s|  \n", i+delta2 , (*fnp[i+delta2]).l );
+					printf ("\n\n");
 				}
 
 				/* correr todas las lineas ... */
-				correme_una_linea(i+1,qf);
+				for ( k = (qf-1)+(delta2-delta1-1); k >= i + delta2  ; k-- )
+				{
+					if ( k >= qf )
+					{
+						/* agrego lineas al final */ 
+						fnp[k] = (fnptr  ) malloc (sizeof (node));
+						if ( fnp[k] == NULL)
+							error(904);
+						(*fnp[k]).l[0] = 0;
+						(*fnp[k]).f1 = 0;
+						(*fnp[k]).f2 = 0;
+						(*fnp[k]).f3 = 0;
+					}
 
-				/* grabar ambas lineas */
-				strcpy ( (*fnp[i]).l, b3);
-				strcpy ( (*fnp[i+1]).l, b4);
-			
-				/* agregar una linea mas al count */
-				qf++;
-#endif
+					if (gp_fverbose("d3"))
+					{
+						printf ("KKK  a k: %4d   desde: %4d  f(k): |%s|    \n\n",
+							k, k-(delta2-delta1-1), (*fnp[k-(delta2-delta1-1)]).l );
+					}
+
+					memcpy ( fnp[k],fnp[k-(delta2-delta1-1)], sizeof (node) );
+				}
+/* KKK */
+
 
 #if 1
+
+
+				/* grabar ambas lineas */
+				delta2 = 0;
+				tok = strtok(b6,",");
+				while ( tok != NULL )
+				{	
+					sprintf (b3,"      %s  %s",b4,tok);
+					strcpy ( (*fnp[i+delta2]).l, b3);
+					if (gp_fverbose("d3"))
+					{
+						printf ("GRABO: %4d |%s| \n", i+delta2, (*fnp[i+delta2]).l );
+					}
+
+					tok = strtok(NULL,",");
+					delta2++;
+				}
+
+			
+				/* agregar una linea mas al count */
+				qf = qf + delta2 - delta1 - 1;
+#endif
+
+#if 0
 				/* no es linea larga, guardar una sola linea*/
 				strcpy ( (*fnp[i]).l, b2);
 #endif
 			}
 			else
-			{	/* no es linea larga, guardar una sola linea*/
+			{	/* no es linea con continuacion */
 				strcpy ( (*fnp[i]).l, b2);
 			}
 		}
@@ -4802,11 +4911,86 @@ int	*ql_f;
 
 #endif
 
+char	*limpiar_mas(s)
+char	*s;
+{
+	int	i,j,k;
+	int	f1,f2,f3;
+	int	p1;
+
+	static char	b1[MAXB];
+
+	for (i=0, f1=1, p1=0; f1 && i<strlen(s); i++)
+		if (s[i] != ' ' && s[i] != '+')
+			p1 = i, f1 = 0;
+
+	strcpy(b1,s+p1);
+
+	return b1;
+
+}
+
+
 
 int	def_var_continua(s)
 char	*s;
 {
+	int	i,j,k;
+	int	f1,f2,f3;
+	int	p1,p2;
 
+	
+	f1 = 1;		/* seguimos verificando */
+	f2 = 0;		/* default, no tiene char de continua */
+	f3 = 0;		/* la linea no tiene comentario al final */
+
+	if (gp_fverbose("d3"))
+	{
+		printf ("def_var_continua - - - - 1 |%s| \n",s);
+	}
+
+	
+	p1 = strlen(s);
+
+	/* busco el ultimoo caracter valido en la linea, descartando que haya comentario */
+	for (i=0 , f1=1; i < p1; i++)
+		if (s[i] == '!')
+		{	f3 = 1;
+			/* codigo,codigo[,][   ]! texto */
+			for (j=i-1; f1 && j; j--)
+				if (s[j] != ' ')
+					f1=0, p1 = j;
+		}
+
+	if (!f3)
+		p1--;
+			
+	if (gp_fverbose("d3"))
+	{
+		printf ("def_var_continua - - - - 2 strlen(s) : %d p1: %d f2: %d s(p1): %c  s(p1-1): %c |%s| \n",
+			strlen(s),p1,f2,s[p1],s[p1-1],s);
+	}
+
+	if (s[p1] == ',')
+		f1 = 0, f2 = 1;
+
+#if 0
+	for ( i=0, f3 = 0; f1 && !f3 && i< strlen(s); i++)
+		if (s[i] == '!' )
+			p1 = i, f1 = 0, f3 = 1;
+
+	for ( i=p1; f1 && i; i--)
+		if (s[i] == ',')
+			f2 = 1, f1 = 0;
+#endif
+
+
+	if (gp_fverbose("d3"))
+	{
+		printf ("def_var_continua - - - - 3 |%s| (%d) \n\n",s,f2);
+	}
+
+	return f2;
 }
 
 /*
@@ -4979,6 +5163,7 @@ int	*ql_f;
 
 
 
+
 /*
  *	correr todas las lineas en el vector
  *	desde la l1 al final
@@ -5010,6 +5195,50 @@ int	ql;
 	}
 }
 
+
+
+
+
+#if 0
+
+/*	NO ANDA - dejo aca para revisar en otro momento ....
+ *	correr todas las lineas en el vector
+ *	desde la l1 al final
+ *	hay que agregar una al final para hacer lugar 
+ */
+
+int	correme_una_linea(l1,ql)
+int	l1;
+int	ql;
+{
+
+	int	i,j,k;
+
+
+
+	for (j=ql; j>l1; j--)
+	{
+
+		/* agrego una linea al final */
+		fnp[j] = (fnptr  ) malloc (sizeof (node));
+		if ( fnp[j] == NULL)
+			error(904);
+
+		(*fnp[j]).l[0] = 0;
+		(*fnp[j]).f1 = 0;
+		(*fnp[j]).f2 = 0;
+		(*fnp[j]).f3 = 0;
+
+printf (" - - - - 3 l1: %4d ql: %4d j-1: %4d j: %4d  s[j-1]: |%s|  s[j]: |%s| \n", l1,ql,j-1,j, (*fnp[j-1]).l,(*fnp[j]).l );
+
+		memcpy ( fnp[j],fnp[j-1], sizeof (node) );
+
+printf (" - - - - 4 l1: %4d ql: %4d j-1: %4d j: %4d  s[j-1]: |%s|  s[j]: |%s| \n\n\n", l1,ql,j-1,j, (*fnp[j-1]).l,(*fnp[j]).l );
+
+	}
+}
+
+#endif
 
 int	armame_dos_lineas(s,l1,l2)
 char	*s;
@@ -5049,6 +5278,47 @@ char	*l2;
 	strncpy(l2,s,p1);
 	strncat(l2,b1,c1);
 	strcat(l2,s+p2+1);
+}
+
+
+
+
+
+int	preparame_dos_lineas(s,l1,l2)
+char	*s;
+char	*l1;
+char	*l2;
+{
+	int	i,j,k;
+	int	c1;
+	int	f1,f2,f3;
+	int	p1,p2,p3;
+
+
+	if (gp_fverbose("d3"))
+	{
+		printf ("- -- - preparame 1 |%s| \n",s);
+	}
+
+	for (i=0, f1=1, p1=0; f1 && i<strlen(s); i++)
+		if (s[i] == ':' && s[i+1] == ':' )
+			f1 = 0, p1 = i+2;
+
+	for (i=p1, f1=1, p2=0; f1 && i<strlen(s); i++)
+		if (s[i] != ' ')
+			f1 = 0, p2 = i;
+
+	strncpy(l1,s,p1);
+	l1[p1]=0;
+
+	strcpy(l2,s+p2);
+
+	if (gp_fverbose("d3"))
+	{
+		printf ("- -- - preparame 2 |%s| \n",l1);
+		printf ("- -- - preparame 2 |%s| \n",l2);
+	}
+
 }
 
 
@@ -5588,7 +5858,7 @@ int	pro_tool5()
 		{
 			/* controlamos cantidad de tokens ... */
 			if (q_tk > MAXT-10)
-			{	error(501);
+			{	error(503);
 			} 
 
 			j=tipo_char(b1[p1]);
@@ -5904,7 +6174,7 @@ int	pro_tool6()
 				lml = k;
 		}
 	}
-	if (gp_fverbose("d1"))
+	if (gp_fverbose("d2"))
 	{
 		printf ("Linea mas larga: %4d\n\n",lml);
 	}
@@ -5925,7 +6195,7 @@ int	pro_tool6()
 	if ( ffchg_lco )
 		cfor_lcon(&ql_ini,&ql_fin);
 
-#if 0
+#if 1
 	/* 4 - pidio sacar las lineas de continuacion */
 	if ( ffchg_mas )
 		cfor_mas(&ql_ini,&ql_fin);
@@ -6026,7 +6296,7 @@ int	*ql_f;
 
 		strcpy ( (*fnp[i]).l, b3);
 
-		if (gp_fverbose("d2"))
+		if (gp_fverbose("d3"))
 			printf ("fix: |%s|\n",b3);
 
 	}
@@ -6246,7 +6516,7 @@ int	*ql_f;
 		for (j=0; j< q_tk; j++)
 			strcat (b3,tk[j]);
 		strcpy ( (*fnp[i]).l, b3);
-		if (gp_fverbose("d2"))
+		if (gp_fverbose("d3"))
 			printf ("fix: |%s|\n",b3);
 
 		/* copio la segunda linea, sin el mas */
@@ -6840,7 +7110,7 @@ int	*qt;
 		{
 			/* controlamos cantidad de tokens ... */
 			if (q_tk > MAXT-10)
-			{	error(501);
+			{	error(504);
 			} 
 
 			j=tipo_char(b1[p1]);
@@ -8179,6 +8449,7 @@ int	x;
 
 	printf ("Usage: \n\n");
 	printf ("                                                                                                  \n");
+	printf ("%s --version                           numero de version  / compilacion                           \n",z);
 	printf ("%s -h                                  help                                                       \n",z);
 	printf ("%s -v                                  verbose ... muestra cierta informacion de proceso          \n",z);
 	printf ("%s -v -opciones=AxByCz...              info: A,B,C = (D)ebug, (I)nformative, (E) extra x=(0-5)    \n",z);
@@ -8203,6 +8474,11 @@ int	x;
 	printf ("      --chgtyp  arregla especificacion de variables (kind,len) pone los :: en int log real char   \n");
 	printf ("      --chglcp  arregla lineas de continuacion ... reemplaza + por &                              \n");
 	printf ("                                                                                                  \n");
+	printf ("prue2:         carga todos los archivos en list_src a  memo y los genera en new_repo              \n");
+ 	printf ("%s -v -opciones=d5 -prue=2 -inp=list_src -out=l_names -aux=p.err -dato=new_repo                   \n");
+	printf ("                                                                                                  \n");
+	printf ("                                                                                                  \n");
+
 
 
 	if (gp_fverbose("d1"))
@@ -8273,7 +8549,7 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0019");
+	strcpy (ver,"0022");
 	
 	sprintf (z,"%s -- (%s) ", gp_fp(GP_GET,0,(char **)0), ver  );
 	memset (w,0,MAXV);
@@ -8552,3 +8828,24 @@ int	pro_prue3()
 
 
 
+
+
+#if 0
+
+#include<stdio.h>
+#include <string.h>
+
+int main() {
+   char string[50] = "Hello! We are learning about strtok";
+   // Extract the first token
+   char * token = strtok(string, " ");
+   // loop through the string to extract all other tokens
+   while( token != NULL ) {
+      printf( " %s\n", token ); //printing each token
+      token = strtok(NULL, " ");
+   }
+   return 0;
+}
+
+
+#endif

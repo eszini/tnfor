@@ -3,6 +3,7 @@
 !     Created: 10/29/02 2:44:52 PM
 ************************************
 
+
 C**********************************************************************
 C
 !             ONE WAY BOOTH-BALERIAUX METHOD FOR DSS
@@ -38,12 +39,14 @@ C
 	use shared_vars_interg82
 	use interg82
 
+
         use logging
         use miscmod
         use cal_marginal_interface
         use capacity_arrays
         use kepcocom
 		use cal_marginal_interface
+
 
       INCLUDE 'SpinLib.MON'
       INCLUDE 'SIZECOM.MON'
@@ -198,6 +201,7 @@ C
      +          FUEL_DERIVATIVE_ACTIVE,
      +          FUEL_DERIVATIVES_FILE_STATUS
 
+
 C
 ! BTU TAX STUFF
 C
@@ -245,6 +249,7 @@ C
       LOGICAL*1 CONTRACTS_ACTIVE,CL_UNITS_ACTIVE,
      +          AVAILABLE_CONTRACT(MAX_CONTRACTS),CONTRACTS_IN_PERIOD,
      +          ACTIVE_3808,IS_3808_ACTIVE,CLASS_6_AND_WABASH_VALLEY
+
 
       INCLUDE 'PRODCOM.MON'
       INCLUDE 'PROD2COM.MON'
@@ -325,6 +330,7 @@ C
 !
       FUEL_DERIVATIVE_ACTIVE = FUEL_DERIVATIVES_FILE_STATUS()
 
+
 !
       TRANSACT_ACTIVE_THIS_MONTH = RUN_TRANSACT_THIS_MONTH(ISEAS) .AND.
      +                                                YES_RUN_TRANSACT()
@@ -340,11 +346,14 @@ C
 C
       IF(PERIOD_COUNTER == 1) THEN
 
+
          MAX_MONTHLY_GROUPS = 99
          MAX_MONTHLY_GROUP_VARIABLES = 17
 
+
          MONTHLY_GROUP_REPORT = 0.
          RPS_THERMAL_DB = 0.
+
 
       ENDIF
       LOLP_REPORT_ACTIVE = LOLP_REPORT()
@@ -528,6 +537,7 @@ C
       IF(FACET_ACTIVE .AND. .NOT. TRANSACT_ACTIVE_THIS_MONTH) THEN
 !
 
+
          FACTORS_FOUND =  GET_BLOCK_CAP_FACTORS(LOWER_BOUND_CAP_FACTOR,
      +                              UPPER_BOUND_CAP_FACTOR,NBLOK2,
      +                              FACET_MAINTENANCE_RATE,
@@ -568,6 +578,7 @@ C
      +                              MMBTU_FUEL_BALANCE,
      +                              MAINTENANCE_RATE)
 
+
          IF(.NOT. LAHEY_LF95())
      +                 CALL MG_LOCATE_WRITE(11,9,'TRANS',ALL_VERSIONS,0)
 !
@@ -580,9 +591,15 @@ C
 
 
 
+
+
+
+
          IF(YES_RUN_TRANSACT() .AND. TRANSACT_ACTIVE_THIS_MONTH) THEN
 
+
             CALL REGIONAL_TRANSACTION_ANALYSIS(ISEAS,DEMAND)
+
 
         ignoreit = CAL_MAR_MONTHLY_ENERGY_routine(
      + ENERGY,BLKNO, UNIT,LEFT,RIGHT, REMAINING_ENERGY)
@@ -590,7 +607,9 @@ C
             IF(.NOT. YES_RUN_MULTIAREA_TRANSACT()) THEN
 !
 
+
             ENDIF
+
 
             DO I = 1, NBLOK2
                UNITNO = UNIT(I)
@@ -855,6 +874,7 @@ C
      +                                     CURRENT_TIE_LEVEL(TIE_GROUP),
      +                                     TIE_GROUP_LIMIT(TIE_GROUP))
 
+
                   IF(TIE_CAPACITY < 0.0001) CYCLE
                ENDIF
                B = A + TIE_CAPACITY
@@ -980,6 +1000,7 @@ C
                   CURRENT_TIE_LEVEL(TIE_GROUP) = MIN(TIE_CAPACITY +
      +                                     CURRENT_TIE_LEVEL(TIE_GROUP),
      +                                     TIE_GROUP_LIMIT(TIE_GROUP))
+
 
                   IF(TIE_CAPACITY < 0.0001) CYCLE
                   CAPBLK = TIE_CAPACITY
@@ -1210,6 +1231,7 @@ C
          ENDIF
       ENDIF ! WABASH VALLEY
 
+
 C
 ! ALLOCATE REMAINING ENERGY ONLY CONTRACTS AND PRICE THAT ENERGY
 C
@@ -1327,6 +1349,7 @@ C
      +         MWBLOK,EXCESS_ENERGY_SALES,TEMPEA,NUNITS,EAVAIL,
      +         SRP_SEGMENT_COST,ISEAS)
          ELSE
+
 
             CALL NEW_ECONOMY_INTERCHANGE(AVE_RUNNING_RATE,
      +         RR_OBS,NBLOK2,ENERGY,EAVAIL,
@@ -1470,12 +1493,14 @@ C
          IF(UNIT_ENRG > 0.) THEN
 !
 
+
             IF(MW(1,I) == MW(2,I) .AND. ENERGY(2,I) > .0001) THEN
                WRITE(4,*) "NON PHYSICAL ENERGY IN TOP BLOCK"
                WRITE(4,*) "FOR THERMAL UNIT ",UNITNM(I)
                WRITE(4,*) "ENERGY = ",ENERGY(2,I)
                WRITE(4,*) "UNIT POSITION ",I
                WRITE(4,*) '*** line 1463 DR_BOOTH.FOR ***'
+
 
             ENDIF
 !
@@ -1561,6 +1586,7 @@ C
 ! 042506. MAJOR CHANGE. ASSUMES NO SECONDARY FUEL WITH FUEL DERIVATIVES.
 !                  IF(MMBTUS_USED >= DBLE(BLK1_HEAT(I))) THEN
 
+
                      BLOCK_FUEL_COST(1,I) = BLK1_HEAT(I) *
      +                                             FUEL_DERIVATIVE_PRICE
                      TEMP_SNGL = MMBTUS_USED - DBLE(BLK1_HEAT(I))
@@ -1608,6 +1634,7 @@ C
                   RCOST = SNGL(MMBTUS_USED * DBLE(BLENDED_BTU_COST(I)) +
      +                         (MMBTUS - MMBTUS_USED) * DBLE(SBTUCT(I)))
                   IF(MMBTUS_USED >= DBLE(BLK1_HEAT(I))) THEN
+
 
                      BLOCK_FUEL_COST(1,I) = BLK1_HEAT(I) *
      +                                               BLENDED_BTU_COST(I)
@@ -2409,6 +2436,7 @@ C
      +         CL_UNIT_MONTHLY_FIXED_COST)
       ENDIF
 
+
 ! mark for winmerge
 C
       CALL WRITE_MONTHLY_GROUP_REPORT(ISEAS,YR,
@@ -2649,6 +2677,7 @@ C
 C
       use shared_vars_interg82
       use interg82
+
 
       LOGICAL*1 ENERGY_EXCEEDED_AT_FIRST_PASS
 C      INTEGER*2 ISTART,ISTOP,I
@@ -3359,6 +3388,7 @@ C**********************************************************************
             F_MONTHLY_GROUP_REPORT(ANNUAL,MGI,15) =
      +            F_MONTHLY_GROUP_REPORT(ANNUAL,MGI,15) +
      +                      R_MONTHLY_GROUP_REPORT(R_ISEAS,MGI,15)
+
 
             IF(R_ISEAS == R_PEAK_MONTH .OR.
      +                                     FISCAL_RESET_PEAK_MONTH) THEN
