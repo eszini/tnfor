@@ -288,211 +288,6 @@
 |check feasibility of TTF draws|
 |later addition of TTR makes the test above conservative|
 |corrected path is infeasible|
-|more width to preclude overflow|
-|allows removal of obsolescent calls to WriteStrAt|
-|Guarded Quotient of presumed positive args|
-|caller must decide how to handle the case of index not found|
-|Feasible was inaccurate description|
-|increase and decrease fraction allowed by node|
-|following uses iYr only for Plant_Annual_Demand_By_Year|
-|s invocations for reporting to DbgU|
-|and WARN of infeasible conditions removed|
-|GAT hopes that 5 iterations suffice to FocusScrubbing|
-|above escalates cVect for Supply not Focussed|
-|above spreads cVect for Demand not Focussed|
-|consolidate confirmed optimal values|
-|consolidate confirmed optimal values|
-|fraction unscrubbed to match that obtained for previous iYr|
-|nCoalDemand before 20110411|
-|allocate room sufficient for expansion|
-|nTransportLinks prior to 20110411|
-|needed if TestFParam is not a local argument|
-|allow changing costs of SO2 to focus scrubbing|
-|allocate arrays for output results|
-|allocated sizes for assignment loops|
-|target fraction of Demand not usin|
-|annual fractional decrease or increase allowed|
-|is for the average across nSNod suppliers|
-|needed when some nodes are not active|
-|cdefine ignore_plant_SO2UB|
-|cdefine RUB_mult 1e3 disabled 20110428 per GT and GH request|
-|declarations for interface variables|
-|declarations for internal variables and arrays|
-|nPlnt are local vars unknown to caller|
-|okay to pass allocatables even if never allocated|
-|the PCX default to MINimize its objective|
-|okay to pass even if never allocated|
-|highest rate of production allowed|
-|zero UB for segment capacity|
-|merge CoalType with BasnID in j|
-|revised in AssignCostCurve|
-|save in a more precisely named var|
-|log the instance of an unprecedented ID|
-|useful in allocating contracts|
-|KLUDGE used to have slack to gain feasibility during testing|
-|convert from percentage to fraction|
-|as multiple of HeatConLB and UB|
-|bit unsigned integers impose limit|
-|escalated by MSG after 20110630|
-|index in SO2MarketCodes active|
-|these arrays are from COAL_TRANSPORTATION_LINKS_INPUT|
-|augment count of max CoalTypeToUnit contracts|
-|in case Cost Curve was truncated|
-|allow for nPlnt increase over prior pruned value|
-|base plus uncompounded increase|
-|counts Supply nodes serving iPlnt|
-|of iSNod is not acceptable|
-|but it cannot be determined earlier|
-|counts parallel links from iSNod to all units in iPlnt|
-|used to distinguish parallel links|
-|reduce range of later loops|
-|prune Supply nodes untouched by active links|
-|NOT if indices must be kept unchanged|
-|prune Demand nodes untouched by active links or with no Demand|
-|reverse order was useful when decrementing nDNod|
-|per MSG request re retired units|
-|should be faster than above|
-|iDNod may be for a future plant|
-|NOT if indices must be kept unchanged|
-|since DNodQty is later overwritten in UpdateCNWDemandData|
-|for some debugging details|
-|set target fUnscNode for Demand Nodes|
-|iDNod is inactive or unreachable during iYr|
-|year results to modify OptUnscrubbedFrac|
-|retain f4 as the nominal target|
-|leave no room for LP to reduce it|
-|should preclude units with 0 Demand|
-|NA price and limit are in effect for iYr|
-|separated from ShCst 20110107|
-|excluding emissions and coal FOB|
-|this section now should be moved above to just after pruning|
-|assign fraction of MBtu demand to fPlntUnit|
-|count members in each group of states|
-|StGroupUB is computed later|
-|not final before DefineCNWSO2Options|
-|reading lines of Contract data|
-|OpenFmFile caller will handle absence|
-|fraction of MineQty alloc to Units|
-|OpenFmFile caller will handle absence|
-|OpenFmFile caller will handle absence|
-|OpenFmFile caller will handle absence|
-|OpenFmFile caller will handle absence|
-|OpenFmFile caller will handle absence|
-|kT shipped from Mines to Units|
-|OpenFmFile caller will handle absence|
-|ReAllocateCNWOptimizingArrays|
-|valued subscript covers for unexpected voids|
-|ReAllocateCNWOptimizingArrays|
-|kTn shipped via nominal and overage segments|
-|KLUDGE during debugging 20110730|
-|nStUbUsd ignored 20110730 per Garrick Hoops|
-|default until revised lower|
-|below which fBtu is considered negligible wrt count|
-|count of elements used in above arrays|
-|these may have been modified below in prior iYr|
-|sizes of the LP arrays can vary|
-|default to catch logic errors|
-|PCX infers that UbValu is zero when LbValu is specified above|
-|each Demand Node has nVpDN variables|
-|warn of INFEASIBLE link constraints at iDNod|
-|count of distinct links to iDNod|
-|link kTn received at iDNod from iSNod|
-|count of LB_infeasible links to iDNod|
-|count of UB_infeasible links to iDNod|
-|so the aggregate with any set of weights is also|
-|which is imposed in iRqWSC|
-|note that the UB above applies to the unscrubbed blend of coals used|
-|each of nContLoB generates bounds on 1 fBtu variable|
-|unreachable plants have 0 Demand|
-|count only contracts used this year|
-|SNod under contract to iPlnt|
-|bound can be met with or without scrubbers|
-|PCX infers that UbValu is zero when LbValu is specified above|
-|expedite execution by reducing size of the LP|
-|above loop did not IncrVar|
-|suffices to imply not void|
-|EmCst affect usage of jVar|
-|Ton surcharge for overuse of route per GAT|
-|Garrick Hoops 20110730 denied need for LB on state emissions|
-|group limit is sum of nominals|
-|default LB valid in case state is not in a trading group|
-|KLUDGE to cover MSG problem|
-|ignore both bounds on this basin|
-|for the quantity below the nominal_UB|
-|for the quantity above the nominal_UB|
-|large surcharge to penalize violation of UB|
-|after possible changes above|
-|failed to regain feasibility 20110731|
-|sum in kT supplied by iSNod|
-|sum of kT supplied at iSNod equals kT shipped via links|
-|bounded by Btu requirements|
-|sum across links the kTn received at iDNod|
-|sum across links the fBtu received at iDNod|
-|mnemnic WeightedSulfurContent in blend of coals used|
-|sum across links the kTn of SO2 emitted by iDNod|
-|same units as SO2BlndUB above|
-|link kTn received at iDNod|
-|link fBtu received at iDNod|
-|link kTn shipped via iRout|
-|kTn shipped via iRout in bounds|
-|kTn shipped via iRout above UB|
-|nGpUBUsd constraints limit aggregate SO2 emissions|
-|index of fBtu shipped via iLink|
-|ignore both bounds on this basin|
-|iSNod kT supplied from basin|
-|sort to facilitate search within ReturnCNWAMtx and for order within PCX|
-|display entire constraint matrix|
-|ConsMtxNze was sorted such that jVar varies slower than iReq|
-|each jVar with LB must also have UB|
-|language routines begin writing without CrLf|
-|was determined within ReportCNWSolutionDetails|
-|this LbValue is not of interest|
-|preclude attempt to divide by 0|
-|this UbValu was a dummy to keep PCX happy|
-|flag the final vars for aggregate SO2|
-|skip column of excess after 20120215|
-|is a link quantity in fBtu from iSNod to iDNod|
-|search until matching count is found|
-|fractional usage of retrofit scrubbers|
-|fraction of Btu at iDNod supplied by iLink|
-|but not all links to iDNod are contiguous|
-|weighted average RetroWt by DNod|
-|weighted average fRetrofLk|
-|save weighted average RetroWt|
-|binary decisions for units|
-|perturb costs in LP to make scrubbing decision more binary at each iDNod|
-|scrubber retrofit decision was not binary|
-|encourage usage of SO2 credits|
-|discourage usage of SO2 credits|
-|and marginal cost at each Mine|
-|with jVar beyond last segment used|
-|loop exited with f4 nearly zero|
-|index of the marginal segment|
-|unclear whether ContraCost excludes SO2 penalties|
-|presumes these unit numbers are contiguous|
-|header line is invariant with iYr|
-|default implying link was unused|
-|specific quantity shipped and cost to iDNod|
-|write common prefix for each record|
-|kT allocation of iPlnt to iDNod|
-|not accumulated since iSNod is unique|
-|report only additional costs NEC|
-|sum of kT across iSNod for iDNod|
-|accumulate statistics for display only|
-|count significant suppliers|
-|write common prefix for each record|
-|this is the final output to MnvU for iYr|
-|added min0 for case of INFEASIBLE|
-|sum should match that written 11 lines above|
-|check for problem MSG noted|
-|this ReqDesc is yet undefined|
-|this VarDesc is yet undefined|
-|contents into larger space|
-|save copies of full vectors in Hold|
-|restore saved values from Hold vectors|
-|major arrays for zbCol and zbRow|
-|Nze for this column are contiguous|
-|since loop has passed all possible matches|
 |START AT NEXT I AFTER R_POINTR|
 |START WITH THE NEXT VALUE OF R_POINTR|
 |IMPOSES SPECIFIC PLANNING METHOD|
@@ -562,24 +357,7 @@
 |CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
 |CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC|
 |SAVE USE_APPRAISED_PROP_VALUES|
-|Transport Quantity Escalaation|
-|Transport Quantity Escalaation|
-|CoalModelVectorFileInterface|
-|CoalModelVectorFileInterface|
-|condition added 20110719 by AGT|
-|allow change to unscrubbed fraction|
-|A VECTOR OF ESCALATION RATES IS BEING USED|
-|has been added to the percentage|
-|has been added to the percnetage|
-|CoalModelVectorFileInterface|
 |MODULE COAL_MODEL_INPUT_TO_cnw|
-|size of both transport link files|
-|number of transaction transport links|
-|coal units inthe generic coal file|
-|number of potential coal units in the expansion plan|
-|fraction allocated to each year|
-|Minimum Quantity Current Yr|
-|Maximum Quantity Current Yr|
 |MODULE COAL_MODEL_INPUT_TO_cnw|
 |MODULE COAL_cnw_FILES_READ_INPUT|
 |MODULE COAL_cnw_FILES_READ_INPUT|
@@ -607,9 +385,9 @@
 |MODULE SO2_Scrubber_COAL_MODEL_DATA|
 |MODULE SO2_Scrubber_COAL_MODEL_DATA|
 |READ RECORDS IN BINARY FILES|
-|Transport Quantity Escalaation|
-|Transport Quantity Escalaation|
-|Transport Quantity Escalaation|
+|TransportQuantityEscalation|
+|TransportQuantityEscalation|
+|TransportQuantityEscalation|
 |nTransportLinksExistingUnits|
 |push naional price which is assumed to be table 1|
 |number of active states in LP|
@@ -701,73 +479,6 @@
 |items assumed to be known or declared by the caller of OptimizedCost|
 |system load in units consistent with Capacity|
 |duration of system load in units of time|
-|upper bound on number of arguments of interest to caller|
-|needed in case nOfInt is not fully used|
-|do not retain any AQuote characters|
-|ignore trailing parameters not of interest|
-|if only blanks delimit parameters|
-|test was strict inequality before 20061113|
-|needed since embedded blanks are allowed after 20060705|
-|weak attempt to emulate SpinDrift routine|
-|where character length cannot be zero|
-|cover the case of missing path terminator|
-|expect Target to already be in UpperCase|
-|convert ith char to blank if its ASCII is below 32|
-|discount the terminating comma as a delimiter|
-|discount those within strings|
-|useful on lines of DSF files|
-|one more than necessary on 20060908|
-|jOfs is the number of leading fields to skip in the count|
-|to force reading beyond the last field of possible interest|
-|we determine the feasible limit on readable fields by experimentation|
-|interchange the pair of iOrgs|
-|interchange the pair of iOrgs|
-|but note that leading blanks are not discounted|
-|breaking the above into two suffices to solve the stack exhaustion|
-|offset position of the target field|
-|assume none is embedded inside a string|
-|no commas follow in the source|
-|overflow here of length of s seems not to be a problem|
-|blank the string beyond nMaxCommas so trim can truncate|
-|blank excess commas inserted by ExpleteWithCommas|
-|assume none is embedded inside a string|
-|adapted 20031011 from OpenFmFile|
-|else caller will inspect iStat|
-|default valid if path is extant|
-|current path is always available|
-|root directory is always available|
-|truncate the trailing backslash|
-|begin replacement for inquire|
-|max allowed under F77 is 32767|
-|cannot pass literal constant below|
-|Replace is same as Unknown|
-|else caller will inspect iStat|
-|default valid if file is extant|
-|from concatenation may contain garbage bytes|
-|look next in directory specified|
-|same as OpenFmFile with iAM added|
-|Replace is same as Unknown|
-|else caller will inspect iStat|
-|default valid if file is extant|
-|from concatenation may contain garbage bytes|
-|look next in directory specified|
-|obsolete line below presumed that all nCol values were contiguous|
-|skip over Description and Comment fields following first 30 values|
-|round upward per TS request 20030602|
-|adapted from AppendFixed8 below|
-|round upward per TS request 20030602|
-|shrink magnitude of iMant to fit the sign in 6 chars|
-|shrink magnitude of iMant to fit in 4 chars|
-|shrink magnitude of iMant to fit in 4 chars|
-|round upward per TS request 20030602|
-|shrink magnitude of iMant to fit the sign in 6 chars|
-|shrink magnitude of iMant to fit in 4 chars|
-|shrink magnitude of iMant to fit in 4 chars|
-|in RPTtoCSV per TS 20060227|
-|preclude problems with rOrg near overflow in magnitude|
-|note wasteful decimal point as requested|
-|ps is a mnemonic for Print and Stop|
-|allow operator to read the diagnostic message|
 |SAVE ELIMINATION_FILE_EXISTS|
 |SAVE YEARLY_ELIMINATIONS_VALUES|
 |ADDITIONS ON THE INCOME STATEMENT|
@@ -1612,58 +1323,202 @@
 |module cal_marginal_interface|
 |function CAL_MAR_MONTHLY_ENERGY_routine|
 |module cal_marginal_interface|
-|ALLOCATABLE ACTIVE_OPTIONS|
-|FILLER UNITS FOR THIS TYPE ARE FOUND|
-|FIND NEXT ADDITION OF SAME LOADING TYPE|
-|ADD THIS UNIT TYPE TO THE PLAN|
-|WHILE TARGET NOT MET AND CONTINUE ADDING UNITS|
-|REAL COST_LEVEL_TO_COMPLETE|
-|REAL PERCENT_TO_COMPLETION|
-|FIND NEXT ADDITION OF SAME LOADING TYPE|
-|ADD THIS UNIT TYPE TO THE PLAN|
-|WHILE TARGET NOT MET AND CONTINUE ADDING UNITS|
-|REAL R_COST_LEVEL_TO_COMPLETE|
-|SAVE NOT_DENOMINATOR_REDUCTION|
-|VARIABLE USED IN CLREPORT AND HERE|
-|CapOptionsFileResourceIndexes|
-|INDEX FROM THE CAPACITY OPTIONS FILE|
-|DERIVATIVE OR TRANSMISSION|
-|INDEX FROM THE CAPACITY OPTIONS FILE|
-|CHECK FOR IMPROVED SOLUTION|
-|PROPAGATE SOLUTION TO OTHER INSTANCES OF SAME CN|
-|IF REPORT AND OPTIMAL_ORDER|
-|ITERATE ON ACTIVE INSTANCE SOLUTION|
-|ADD UNITS WHILE STILL MAKING MONEY|
-|MAIN ADD_THIS_UNIT LOOP WITH CONSTRAINTS|
-|CHECK FOR IMPROVED SOLUTION|
-|MOVED INTO MX_USER_PRICE_CURVE|
-|HardWiredRetrofitProjectThisYear|
-|SAVE PLANNING_RESERVE_MARGIN|
-|INDEX FROM THE CAPACITY OPTIONS FILE|
-|INDEX FROM THE CAPACITY OPTIONS FILE|
-|INDEX FROM THE CAPACITY OPTIONS FILE|
-|STARTS CO2 REDUCTION CURVE ROUTINES|
-|RESOURCE DOES NOT FALL WITHIN THE PRICE DURATION CURVE|
-|to remove market from abatement using units|
-|ASSUMES 8784 HOURS PER YEAR|
-|ASSUMES 8784 HOURS PER YEAR|
-|replaced to trap for no options|
-|IMPLICITLY USE_MINIMUM_RM_LOGIC|
-|BEST RESOURCE IN EACH MARKET|
-|STARTS CO2 REDUCTION CURVE ROUTINES|
-|to remove market from abatement using units|
 |ACCUMULATE BY TRANSACTION GROUP AND PROD TYPE|
 |ACCUMULATE BY TRANSACTION GROUP AND FUEL TYPE|
 |ACCUMULATE BY TRANSACTION GROUP AND FUEL TYPE|
-|MODULE CapOptionsFileResourceIndexes|
-|MODULE CapOptionsFileResourceIndexes|
 |MODULE CAPACITY_OPTIONS_ALLOC_VARS|
 |function UPDATE_SCREEN_CAP_COSTS|
 |MODULE CAPACITY_OPTIONS_ALLOC_VARS|
 |MODULE CAPACITY_OPTIONS_FIXED_VARS|
 |MODULE CAPACITY_OPTIONS_FIXED_VARS|
+|more width to preclude overflow|
+|allows removal of obsolescent calls to WriteStrAt|
+|Guarded Quotient of presumed positive args|
+|caller must decide how to handle the case of index not found|
+|Feasible was inaccurate description|
+|increase and decrease fraction allowed by node|
+|following uses iYr only for Plant_Annual_Demand_By_Year|
+|s invocations for reporting to DbgU|
+|and WARN of infeasible conditions removed|
+|GAT hopes that 5 iterations suffice to FocusScrubbing|
+|consolidate confirmed optimal values|
+|nCoalDemand before 20110411|
+|allocate room sufficient for expansion|
+|nTransportLinks prior to 20110411|
+|allocate arrays for output results|
+|allocated sizes for assignment loops|
+|target fraction of Demand not usin|
+|annual fractional decrease or increase allowed|
+|is for the average across nSNod suppliers|
+|needed when some nodes are not active|
+|declarations for interface variables|
+|declarations for internal variables and arrays|
+|nPlnt are local vars unknown to caller|
+|okay to pass allocatables even if never allocated|
+|the PCX default to MINimize its objective|
+|okay to pass even if never allocated|
+|highest rate of production allowed|
+|zero UB for segment capacity|
+|merge CoalType with BasnID in j|
+|revised in AssignCostCurve|
+|save in a more precisely named var|
+|log the instance of an unprecedented ID|
+|useful in allocating contracts|
+|convert from percentage to fraction|
+|bit unsigned integers impose limit|
+|index in SO2MarketCodes active|
+|these arrays are from COAL_TRANSPORTATION_LINKS_INPUT|
+|augment count of max CoalTypeToUnit contracts|
+|in case Cost Curve was truncated|
+|allow for nPlnt increase over prior pruned value|
+|counts Supply nodes serving iPlnt|
+|of iSNod is not acceptable|
+|but it cannot be determined earlier|
+|counts parallel links from iSNod to all units in iPlnt|
+|used to distinguish parallel links|
+|reduce range of later loops|
+|prune Supply nodes untouched by active links|
+|prune Demand nodes untouched by active links or with no Demand|
+|reverse order was useful when decrementing nDNod|
+|per MSG request re retired units|
+|should be faster than above|
+|iDNod may be for a future plant|
+|for some debugging details|
+|set target fUnscNode for Demand Nodes|
+|iDNod is inactive or unreachable during iYr|
+|year results to modify OptUnscrubbedFrac|
+|retain f4 as the nominal target|
+|leave no room for LP to reduce it|
+|should preclude units with 0 Demand|
+|NA price and limit are in effect for iYr|
+|separated from ShCst 20110107|
+|excluding emissions and coal FOB|
+|this section now should be moved above to just after pruning|
+|assign fraction of MBtu demand to fPlntUnit|
+|count members in each group of states|
+|StGroupUB is computed later|
+|not final before DefineCNWSO2Options|
+|reading lines of Contract data|
+|OpenFmFile caller will handle absence|
+|fraction of MineQty alloc to Units|
+|OpenFmFile caller will handle absence|
+|OpenFmFile caller will handle absence|
+|OpenFmFile caller will handle absence|
+|OpenFmFile caller will handle absence|
+|OpenFmFile caller will handle absence|
+|kT shipped from Mines to Units|
+|OpenFmFile caller will handle absence|
+|ReAllocateCNWOptimizingArrays|
+|valued subscript covers for unexpected voids|
+|ReAllocateCNWOptimizingArrays|
+|kTn shipped via nominal and overage segments|
+|default until revised lower|
+|below which fBtu is considered negligible wrt count|
+|count of elements used in above arrays|
+|these may have been modified below in prior iYr|
+|sizes of the LP arrays can vary|
+|default to catch logic errors|
+|PCX infers that UbValu is zero when LbValu is specified above|
+|each Demand Node has nVpDN variables|
+|warn of INFEASIBLE link constraints at iDNod|
+|count of distinct links to iDNod|
+|link kTn received at iDNod from iSNod|
+|count of LB_infeasible links to iDNod|
+|count of UB_infeasible links to iDNod|
+|so the aggregate with any set of weights is also|
+|which is imposed in iRqWSC|
+|each of nContLoB generates bounds on 1 fBtu variable|
+|unreachable plants have 0 Demand|
+|count only contracts used this year|
+|bound can be met with or without scrubbers|
+|PCX infers that UbValu is zero when LbValu is specified above|
+|expedite execution by reducing size of the LP|
+|above loop did not IncrVar|
+|suffices to imply not void|
+|EmCst affect usage of jVar|
+|Ton surcharge for overuse of route per GAT|
+|group limit is sum of nominals|
+|KLUDGE to cover MSG problem|
+|for the quantity below the nominal_UB|
+|for the quantity above the nominal_UB|
+|large surcharge to penalize violation of UB|
+|after possible changes above|
+|sum in kT supplied by iSNod|
+|sum of kT supplied at iSNod equals kT shipped via links|
+|bounded by Btu requirements|
+|sum across links the kTn received at iDNod|
+|sum across links the fBtu received at iDNod|
+|mnemnic WeightedSulfurContent in blend of coals used|
+|sum across links the kTn of SO2 emitted by iDNod|
+|same units as SO2BlndUB above|
+|link kTn received at iDNod|
+|link fBtu received at iDNod|
+|link kTn shipped via iRout|
+|kTn shipped via iRout in bounds|
+|kTn shipped via iRout above UB|
+|nGpUBUsd constraints limit aggregate SO2 emissions|
+|index of fBtu shipped via iLink|
+|iSNod kT supplied from basin|
+|sort to facilitate search within ReturnCNWAMtx and for order within PCX|
+|display entire constraint matrix|
+|ConsMtxNze was sorted such that jVar varies slower than iReq|
+|each jVar with LB must also have UB|
+|language routines begin writing without CrLf|
+|this LbValue is not of interest|
+|preclude attempt to divide by 0|
+|this UbValu was a dummy to keep PCX hap|
+|flag the final vars for aggregate SO2|
+|skip column of excess after 20120215|
+|is a link quantity in fBtu from iSNod to iDNod|
+|search until matching count is found|
+|fractional usage of retrofit scrubbers|
+|fraction of Btu at iDNod supplied by iLink|
+|but not all links to iDNod are contiguous|
+|weighted average RetroWt by DNod|
+|weighted average fRetrofLk|
+|save weighted average RetroWt|
+|binary decisions for units|
+|perturb costs in LP to make scrubbing decision more binary at each iDNod|
+|scrubber retrofit decision was not binary|
+|encourage usage of SO2 credits|
+|discourage usage of SO2 credits|
+|and marginal cost at each Mine|
+|with jVar beyond last segment used|
+|loop exited with f4 nearly zero|
+|index of the marginal segment|
+|unclear whether ContraCost excludes SO2 penalties|
+|presumes these unit numbers are contiguous|
+|header line is invariant with iYr|
+|specific quantity shipped and cost to iDNod|
+|write common prefix for each record|
+|kT allocation of iPlnt to iDNod|
+|report only additional costs NEC|
+|sum of kT across iSNod for iDNod|
+|accumulate statistics for display only|
+|count significant suppliers|
+|write common prefix for each record|
+|this is the final output to MnvU for iYr|
+|added min0 for case of INFEASIBLE|
+|sum should match that written 11 lines above|
+|check for problem MSG noted|
+|this ReqDesc is yet undefined|
+|this VarDesc is yet undefined|
+|contents into larger space|
+|save copies of full vectors in Hold|
+|restore saved values from Hold vectors|
+|major arrays for zbCol and zbRow|
+|Nze for this column are contiguous|
+|since loop has passed all possible matches|
 |MODULE co2_market_abatement_curves|
 |MODULE co2_market_abatement_curves|
+|TransportQuantityEscalation|
+|TransportQuantityEscalation|
+|CoalModelVectorFileInterface|
+|CoalModelVectorFileInterface|
+|condition added 20110719 by AGT|
+|allow change to unscrubbed fraction|
+|A VECTOR OF ESCALATION RATES IS BEING USED|
+|CoalModelVectorFileInterface|
 |AT LEAST ONE OVERLAY FIEL WAS USED|
 |CREATE INDIVIDUAL BINARY OVERLAY FILE AND ADD TO MASTER OL FILE|
 |WRITE TO BINARY FILES LOOP|
@@ -2294,7 +2149,6 @@
 |MODULE ANNUAL_MARG_COSTS_ALLOCAT_ARRAYS|
 |MODULE ANNUAL_MARG_COSTS_ALLOCAT_ARRAYS|
 |fill array DaysInPriorMonths for cYear|
-|fill array DaysInPriorMonths for cYear|
 |ACTIVATED SWITCH IN RUN SWITCHES|
 |LARGE ENOUGHT PROJECT TO CAP INTEREST|
 |LOGICAL THIS_IS_A_PAY_MONTH|
@@ -2395,7 +2249,6 @@
 |SAVE FED_CONSOLIDATED_NOLS_GENERATED|
 |RealWin knows how to process this command|
 |Let RealWin know we handled it already|
-|CAPEX EXPANSION FUTURE ASSETS|
 |module variable working_folder not|
 |function PRIMARY_MOVER_INDEX_DB|
 |Legacy Nuclear Fuel Category|
@@ -2411,6 +2264,8 @@
 |MODULE PROD_ARRAYS_DIMENSIONS|
 |module screen_initialization|
 |module screen_initialization|
+|module shared_vars_interg82|
+|module shared_vars_interg82|
 |to match Spindrift arguments|
 |to match Spindrift arguments|
 |to match Spindrift arguments|

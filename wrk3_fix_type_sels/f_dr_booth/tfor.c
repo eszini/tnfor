@@ -102,18 +102,18 @@
  *
  * - - - - - - - - - - - - - - - - - - - - - - - - 
  *
- *	xx) Muestra por pantalla, 14 ejercicios de como manejar estructuras
+ *	exec1
+ *
+ *	Toma archivo de input y genera tabla con cantidad de caraceres
+ *	en todos el file
+ *
+ * - - - - - - - - - - - - - - - - - - - - - - - - 
+ *
+ *	prue1:
+ *
+ *	Conjunto de 14 ejercicios sobre manejo de estructuras
  *
  *	./prog  -v -f -opciones=d5 -prue=1
- *
- *	prue1: 
- *	prueba de manejo de estructuras y punteros a estructuras
- *	Distintas formas de referenciar a strcturas a traves 
- *	de punteros .
- *	funciones de ejemplo para pasarles punteros a punteros y mas ...
- *
- *
- *
  *
  *
  *
@@ -1304,8 +1304,6 @@ int	proc_principal()
 /*
  * -----------------------------------------------------------------------------------
  *
- *	(MMM)
- *
  *	pro_exec 1
  *
  *	exec aparte ...
@@ -1317,7 +1315,7 @@ int	proc_principal()
 /* 
  *	pro_exec1
  *
- *	cuenta caracteres
+ *	cuenta caracteres de un archivo
  *
  */
 
@@ -1344,6 +1342,9 @@ int	pro_exec1()
 	{	printf ("%s Entra proceso exec 1 \n\n",gp_tm());
 	}
 		
+
+	if (!ffinp || !ffout) 
+		gp_uso(101);
 
 
 	/* init de valores */
@@ -4782,9 +4783,11 @@ int	*ql_f;
 				while ( def_var_continua (  (*fnp[i+delta1]).l) ) ;
 				strcat (b3, limpiar_mas ( (*fnp[i+delta1]).l) );
 
-				printf ("\n\n\n");
-				printf ("concatena trucha: ((%d)) l: %d |%s| \n\n\n",delta1,strlen(b3),b3); 
-
+				if (gp_fverbose("d3"))
+				{
+					printf ("\n\n\n");
+					printf ("concatena trucha: ((%d)) l: %d |%s| \n\n\n",delta1,strlen(b3),b3); 
+				}
 
 				
 				memset (b4,0,MAXB);
@@ -4806,20 +4809,25 @@ int	*ql_f;
 					sprintf (b3,"      %s  %s",b4,tok);
 					tok = strtok(NULL,",");
 
-					printf ("strtok: |%s| \n",b3);
+					if (gp_fverbose("d3"))
+					{
+						printf ("strtok: |%s| \n",b3);
+					}
 					delta2++;
 
 				}
-				printf ("\n\n");	
 				
-				printf ("ZZZ delta1                   :   %4d        \n",delta1);
-				printf ("ZZZ delta2                   :   %4d        \n",delta2);
-				printf ("ZZZ qf qf-1  s(qf-1)         :   %4d %4d |%s|  \n", qf, qf-1, (*fnp[qf-1]).l );
-				printf ("ZZZ i   s(i)                 :   %4d  |%s|  \n", i , (*fnp[i]).l );
-				printf ("ZZZ Debo correr lineas desde :   %4d  |%s|  \n", (qf-1)+(delta2-delta1-1) , (*fnp[(qf-1)+(delta2-delta1-1)]).l );
-				printf ("ZZZ Hasta linea              :   %4d  |%s|  \n", i+delta2 , (*fnp[i+delta2]).l );
-
-				printf ("\n\n");
+				if (gp_fverbose("d3"))
+				{
+					printf ("ZZZ delta1                   :   %4d        \n",delta1);
+					printf ("ZZZ delta2                   :   %4d        \n",delta2);
+					printf ("ZZZ qf qf-1  s(qf-1)         :   %4d %4d |%s|  \n", qf, qf-1, (*fnp[qf-1]).l );
+					printf ("ZZZ i   s(i)                 :   %4d  |%s|  \n", i , (*fnp[i]).l );
+					printf ("ZZZ Debo correr lineas desde :   %4d  |%s|  \n",
+								 (qf-1)+(delta2-delta1-1) , (*fnp[(qf-1)+(delta2-delta1-1)]).l );
+					printf ("ZZZ Hasta linea              :   %4d  |%s|  \n", i+delta2 , (*fnp[i+delta2]).l );
+					printf ("\n\n");
+				}
 
 				/* correr todas las lineas ... */
 				for ( k = (qf-1)+(delta2-delta1-1); k >= i + delta2  ; k-- )
@@ -4836,7 +4844,11 @@ int	*ql_f;
 						(*fnp[k]).f3 = 0;
 					}
 
-printf ("KKK  a k: %4d   desde: %4d  f(k): |%s|    \n\n",k, k-(delta2-delta1-1), (*fnp[k-(delta2-delta1-1)]).l );
+					if (gp_fverbose("d3"))
+					{
+						printf ("KKK  a k: %4d   desde: %4d  f(k): |%s|    \n\n",
+							k, k-(delta2-delta1-1), (*fnp[k-(delta2-delta1-1)]).l );
+					}
 
 					memcpy ( fnp[k],fnp[k-(delta2-delta1-1)], sizeof (node) );
 				}
@@ -4853,7 +4865,10 @@ printf ("KKK  a k: %4d   desde: %4d  f(k): |%s|    \n\n",k, k-(delta2-delta1-1),
 				{	
 					sprintf (b3,"      %s  %s",b4,tok);
 					strcpy ( (*fnp[i+delta2]).l, b3);
-		printf ("GRABO: %4d |%s| \n", i+delta2, (*fnp[i+delta2]).l );
+					if (gp_fverbose("d3"))
+					{
+						printf ("GRABO: %4d |%s| \n", i+delta2, (*fnp[i+delta2]).l );
+					}
 
 					tok = strtok(NULL,",");
 					delta2++;
@@ -4916,7 +4931,10 @@ char	*s;
 	f2 = 0;		/* default, no tiene char de continua */
 	f3 = 0;		/* la linea no tiene comentario al final */
 
-printf ("def_var_continua - - - - 1 |%s| \n",s);
+	if (gp_fverbose("d3"))
+	{
+		printf ("def_var_continua - - - - 1 |%s| \n",s);
+	}
 
 	
 	p1 = strlen(s);
@@ -4934,8 +4952,11 @@ printf ("def_var_continua - - - - 1 |%s| \n",s);
 	if (!f3)
 		p1--;
 			
-printf ("def_var_continua - - - - 2 strlen(s) : %d p1: %d f2: %d s(p1): %c  s(p1-1): %c |%s| \n",strlen(s),p1,f2,s[p1],s[p1-1],s);
-
+	if (gp_fverbose("d3"))
+	{
+		printf ("def_var_continua - - - - 2 strlen(s) : %d p1: %d f2: %d s(p1): %c  s(p1-1): %c |%s| \n",
+			strlen(s),p1,f2,s[p1],s[p1-1],s);
+	}
 
 	if (s[p1] == ',')
 		f1 = 0, f2 = 1;
@@ -4951,7 +4972,11 @@ printf ("def_var_continua - - - - 2 strlen(s) : %d p1: %d f2: %d s(p1): %c  s(p1
 #endif
 
 
-printf ("def_var_continua - - - - 3 |%s| (%d) \n\n",s,f2);
+	if (gp_fverbose("d3"))
+	{
+		printf ("def_var_continua - - - - 3 |%s| (%d) \n\n",s,f2);
+	}
+
 	return f2;
 }
 
@@ -5257,7 +5282,10 @@ char	*l2;
 	int	p1,p2,p3;
 
 
-printf ("- -- - preparame 1 |%s| \n",s);
+	if (gp_fverbose("d3"))
+	{
+		printf ("- -- - preparame 1 |%s| \n",s);
+	}
 
 	for (i=0, f1=1, p1=0; f1 && i<strlen(s); i++)
 		if (s[i] == ':' && s[i+1] == ':' )
@@ -5272,8 +5300,11 @@ printf ("- -- - preparame 1 |%s| \n",s);
 
 	strcpy(l2,s+p2);
 
-printf ("- -- - preparame 2 |%s| \n",l1);
-printf ("- -- - preparame 2 |%s| \n",l2);
+	if (gp_fverbose("d3"))
+	{
+		printf ("- -- - preparame 2 |%s| \n",l1);
+		printf ("- -- - preparame 2 |%s| \n",l2);
+	}
 
 }
 
@@ -6130,7 +6161,7 @@ int	pro_tool6()
 				lml = k;
 		}
 	}
-	if (gp_fverbose("d1"))
+	if (gp_fverbose("d2"))
 	{
 		printf ("Linea mas larga: %4d\n\n",lml);
 	}
@@ -6252,7 +6283,7 @@ int	*ql_f;
 
 		strcpy ( (*fnp[i]).l, b3);
 
-		if (gp_fverbose("d2"))
+		if (gp_fverbose("d3"))
 			printf ("fix: |%s|\n",b3);
 
 	}
@@ -6472,7 +6503,7 @@ int	*ql_f;
 		for (j=0; j< q_tk; j++)
 			strcat (b3,tk[j]);
 		strcpy ( (*fnp[i]).l, b3);
-		if (gp_fverbose("d2"))
+		if (gp_fverbose("d3"))
 			printf ("fix: |%s|\n",b3);
 
 		/* copio la segunda linea, sin el mas */
@@ -8405,6 +8436,7 @@ int	x;
 
 	printf ("Usage: \n\n");
 	printf ("                                                                                                  \n");
+	printf ("%s --version                           numero de version  / compilacion                           \n",z);
 	printf ("%s -h                                  help                                                       \n",z);
 	printf ("%s -v                                  verbose ... muestra cierta informacion de proceso          \n",z);
 	printf ("%s -v -opciones=AxByCz...              info: A,B,C = (D)ebug, (I)nformative, (E) extra x=(0-5)    \n",z);
