@@ -116,6 +116,19 @@
  *	./prog  -v -f -opciones=d5 -prue=1
  *
  *
+ * - - - - - - - - - - - - - - - - - - - - - - - - 
+ *
+ *	prue2:
+ *
+ *	./tfor -v -opciones=d5 -prue=2 -inp=list_src -out=l_names -aux=p.err -dato=new_repo 
+ *
+ * 	Carga todos los archivos indicados en list_src, los carga en memoria
+ * 	(como vector a punteros de estructuras)
+ *	permite procesos varios, y vuelve a generar con cabios en el directorio new_repo
+ *
+ *	en p.err pone caracteres que no reconoce el parser de lineas
+ *	en l_names (testing) pone nombres largos 
+ *
  *
  * - - - - - - - - - - - - - - - - - - - - - - - - 
  *
@@ -2554,7 +2567,7 @@ int	pro_prue2()
 	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
 	}
 
-	if (!ffinp || !ffdat )
+	if (!ffinp || !ffout || !ffdat )
 		gp_uso(11);
 
 
@@ -8461,6 +8474,11 @@ int	x;
 	printf ("      --chgtyp  arregla especificacion de variables (kind,len) pone los :: en int log real char   \n");
 	printf ("      --chglcp  arregla lineas de continuacion ... reemplaza + por &                              \n");
 	printf ("                                                                                                  \n");
+	printf ("prue2:         carga todos los archivos en list_src a  memo y los genera en new_repo              \n");
+ 	printf ("%s -v -opciones=d5 -prue=2 -inp=list_src -out=l_names -aux=p.err -dato=new_repo                   \n");
+	printf ("                                                                                                  \n");
+	printf ("                                                                                                  \n");
+
 
 
 	if (gp_fverbose("d1"))
@@ -8531,7 +8549,7 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0021");
+	strcpy (ver,"0022");
 	
 	sprintf (z,"%s -- (%s) ", gp_fp(GP_GET,0,(char **)0), ver  );
 	memset (w,0,MAXV);
