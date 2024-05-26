@@ -5,27 +5,36 @@ COMPILER  = gcc
 CFLAGS    = -w
 COPY     ?= 1  # Por defecto, copiar archivos (1 = copiar, 0 = no copiar)
 
+BIN_DIR := $(HOME)/bin
+SRC_DIR := $(HOME)/wrk/tnfor/A_src
+
+# Objetivo setup para crear directorios si no existen
+setup:
+	@echo "Checking and creating directories if they do not exist..."
+	@[ -d $(BIN_DIR) ] || (mkdir -p $(BIN_DIR) && echo "Created directory: $(BIN_DIR)")
+	@[ -d $(SRC_DIR) ] || (mkdir -p $(SRC_DIR) && echo "Created directory: $(SRC_DIR)")
+
 # Regla para construir el ejecutable "tfor"
 tfor: tfor.c
 	@echo "Compilando tfor.c..."
 	@${COMPILER} ${CFLAGS} -o tfor tfor.c 2> errors.log
 	@if [ ! -s errors.log ]; then \
-		echo "CompilaciÃ³n ok."; \
+		echo "Compilación ok."; \
 		if [ "$(COPY)" -eq "1" ]; then \
 			echo "Copiando tfor.c a src..."; \
-			cp tfor.c ~/wrk/tnfor/A_src; \
+			cp tfor.c $(SRC_DIR); \
 			echo "Copiando Makefile a src..."; \
-			cp Makefile ~/wrk/tnfor/A_src; \
+			cp Makefile $(SRC_DIR); \
 			echo "Copiando ejecutables a bin..."; \
 			if [ -e tfor ]; then \
-				cp tfor ~/bin; \
-				echo "Executable tfor copied to ~/bin"; \
+				cp tfor $(BIN_DIR); \
+				echo "Executable tfor copied to $(BIN_DIR)"; \
 			else \
 				echo "Executable tfor not found."; \
 			fi; \
 			if [ -e tfor.exe ]; then \
-				cp tfor.exe ~/bin; \
-				echo "Executable tfor.exe copied to ~/bin"; \
+				cp tfor.exe $(BIN_DIR); \
+				echo "Executable tfor.exe copied to $(BIN_DIR)"; \
 			else \
 				echo "Executable tfor.exe not found."; \
 			fi; \
@@ -33,7 +42,7 @@ tfor: tfor.c
 			echo "Skipping file copy"; \
 		fi; \
 	else \
-		echo "Errores encontrados durante la compilaciÃ³n:"; \
+		echo "Errores encontrados durante la compilación:"; \
 		cat errors.log; \
 	fi
 	@rm -f errors.log
@@ -46,4 +55,9 @@ vi: tfor.c
 clean:
 	@echo "Haciendo limpieza ... "
 	@rm -f *.exe *.log log *.err tfor
+
+
+
+
+
 
