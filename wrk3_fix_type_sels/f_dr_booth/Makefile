@@ -2,10 +2,13 @@
 all:	tfor
 
 
+COMPILER  = gcc
+CFLAGS    = -w
+
 # Regla para construir el ejecutable "tfor"
 tfor:	tfor.c
 	@echo "Compilando tfor.c..."
-	@gcc -o tfor tfor.c 2> errors.log
+	@${COMPILER} ${CFLAGS} -o tfor tfor.c 2> errors.log
 	@if [ ! -s errors.log ]; then \
 		echo "Compilación ok. "; \
 		echo "copiando tfor.c a src..."; \
@@ -14,6 +17,7 @@ tfor:	tfor.c
 		cp tfor.c ~/wrk/tnfor/A_src; \
 		cp Makefile ~/wrk/tnfor/A_src; \
 		cp tfor.exe ~/bin; \
+		cp tfor ~/bin; \
 	else \
 		echo "Errores encontrados durante la compilación:"; \
 		cat errors.log; \
@@ -27,4 +31,10 @@ vi:	tfor.c
 # Regla para hace limpieza 
 clean:	
 	@echo "Haciendo limpieza ... "
-	@rm -f *.exe *.log log *.err
+	@rm -f *.exe *.log log *.err tfor
+
+
+#
+# se incluse tfor a secar en clean para compatibilidad 
+# con wsl - ubuntu
+#
