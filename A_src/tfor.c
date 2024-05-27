@@ -12,11 +12,17 @@
 
 
 
+
 /*
  *	//header//
  *
  *	tfor.c
  *	
+ *	Sun May 26 23:41:27 -03 2024
+ *	mejore prue2 ... procesa todos los files en list_src, genera nueva
+ *	version en new_repo, y tiene infraestructura armada para ...
+ *	- sacar long names (l_names )
+ *	- otras cosas que se quieran agregar a p_src2
  *
  *	Mon May 20 00:41:05 -03 2024
  *	agregue --chgmas .. saca los + de las declaraciones de variables
@@ -633,8 +639,10 @@ int	tiene_mas(char *);
 int	def_var_continua(char *s);
 int	fix_dec_var1();
 int	fix_dec_var2();
-int	p_src();
+int	p_src1();
+int	p_src2();
 int	es_cadena_valida(int,char *);
+int	es_cadena_interesante(char *);
 int	tiene_coment_intermedio (char *);
 int	es_linea_comentario(char *);
 int	es_linea_comentario2(char *);
@@ -642,7 +650,8 @@ int	armame_dos_lineas(char *, char *, char *);
 int	preparame_dos_lineas(char *, char *, char *);
 int	correme_una_linea(int, int);
 char	*limpiar_mas(char *);
-
+int	pasa_filtro(char *);
+char	*trim_blanks(char *);
 
 
 
@@ -2654,7 +2663,10 @@ int	pro_prue2()
 #endif
 
 	/* proceso todos los files */
-	p_src();
+#if 0
+	p_src1();
+#endif
+	p_src2();
 
 
 
@@ -2688,7 +2700,321 @@ int	pro_prue2()
 
 
 
-int	p_src()
+
+
+/*
+ *	una forma de encontrar long names ...
+ *
+ */
+
+
+int	p_src2()
+{
+
+	int	i,j,k,l;
+	int	f1,f2,f3,f4;
+	int	pf,uf;
+	int	m1,m2;
+	int	l1;
+
+	char	b1[MAXB];
+	char	b2[MAXB];
+
+
+	printf ("proceso file ... \n");
+
+	/* por cada uno de los fuentes cargados */
+	for (i=0; i< qf_ff; i++)
+	{
+		if (gp_fverbose("d1"))
+		{
+			printf ("proceso: %6d %6d |%s|\n",
+				(*tb[i]).pf,(*tb[i]).uf,(*tb[i]).n);
+
+		}
+
+
+		/* primera y ultima fila del source */
+		pf = (*tb[i]).pf;
+		uf = (*tb[i]).uf;
+
+		/* reviso cada linea */
+		for (j = pf; j <= uf; j++)
+		{
+			/* la linea j */
+			strcpy (b1, (*fnp[ j ]).l );
+
+			/* parseo fila a tokens ... si tiene sentido  */
+			l_pars(j,&q_tk);
+
+
+			/*
+			 * detectar si la linea es comentarios ...
+			 * falta mas ... chequear si no puso ! o c en otra posicion que no sea 0
+			 */
+
+			f4 = 1;
+			if (es_linea_comentario(b1))
+				f4 = 0;
+	
+/* EEE1 */
+			/* solo proceso lineas que no son comentario */
+			if (f4)
+			{	
+				k = 0;
+
+				while ( f4 && k < strlen(b1) )
+				{
+
+					m1 = es_cadena_interesante(b1+k);
+
+	
+					if (m1)
+					{	memset(b2,0,MAXB);
+						strncpy(b2,b1+k,m1);
+	
+						printf ("TTT k: %2d %2d |%s| \n",k,m1,b2);
+
+						strcpy(b2,trim_blanks(b2));
+						m2 = pasa_filtro(b2);
+						l1 = strlen(b2);
+
+						if (1)
+						{
+							fprintf (hfout,"%-36.36s %06d (%02d)|F%02d|%s| \n",
+								(*tb[i]).n,j,l1,m2,b2 );
+						}
+					}
+
+					if (m1)
+						k += m1;
+					else	
+						k++;
+
+
+					/* comentario al fin de la linea */
+					if (b1[k] == '!')
+						f4=0;
+				}
+			}
+
+		}
+	}
+}
+
+
+
+char	*trim_blanks(s)
+char	*s;
+{
+	static	char	b[MAXB];
+	int	i;
+	int	f4;
+	
+	strcpy(b,s);
+
+	/* blancos al final */
+	for (i=strlen(b)-1, f4=1 ; i && f4 ; i-- )
+		if (b[i] == ' '  )
+			b[i]=0;
+		else
+			f4=0;
+
+	return (b);
+}
+
+ 
+
+
+int	pasa_filtro(s)
+char	*s;
+{
+	int	i,j,k;
+	int	f1,f2,f3;
+	char	b1[MAXB];
+	char	b2[MAXB];
+
+	int	target;
+
+
+	target = 20;	/* por ahora dejasmos este largo ... */
+
+
+	strcpy(b1,s);
+	f1 = 0;
+	f2 = 1;
+
+
+	if (f2 && !strncmp("real",pasar_a_minusc(b1),4))
+		f2 = 1, f1 = 31;
+	
+	if (f2 && !strncmp("integer",pasar_a_minusc(b1),7))
+		f2 = 1, f1 = 32;
+	
+	if (f2 && !strncmp("logical",pasar_a_minusc(b1),7))
+		f2 = 1, f1 = 33;
+	
+	if (f2 && !strncmp("character",pasar_a_minusc(b1),9))
+		f2 = 1, f1 = 34;
+	
+	if (f2 && !strncmp("if",pasar_a_minusc(b1),2))
+		f2 = 1, f1 = 35;
+	
+	if (f2 && !strncmp("use",pasar_a_minusc(b1),3))
+		f2 = 1, f1 = 21;
+	
+	if (f2 && !strncmp("call",pasar_a_minusc(b1),4))
+		f2 = 1, f1 = 22;
+	
+	if (f2 && !strncmp("subroutine",pasar_a_minusc(b1),10))
+		f2 = 1, f1 = 23;
+
+	if (f2 && !strncmp("include",pasar_a_minusc(b1),7))
+		f2 = 1, f1 = 24;
+	
+
+
+
+	return (f1);
+
+}
+
+
+
+
+/*
+ *	es_cadena_intersante
+ *
+ *	busca en un string (linea de source)
+ *	nombres 'largos' (pongamos, mayor a 30 chars )
+ *	
+ */
+
+int	es_cadena_interesante(s)
+char	*s;
+{
+	int	i,j,k;
+	int	l1;
+	int	p1,p2,p3;
+	int	f1,f2,f3;
+	int	f9;
+	int	target;
+	char	c;
+	char	b1[MAXB];
+	char	b2[MAXB];
+
+
+
+	target = 10;	/* miremos cadenasde mas de 10 caracteres por ahora */
+	f9 = 1;		/* cadena interesante 0 no 1 si */
+
+	strcpy(b1,s);
+
+#if 1
+
+/* EEE2 */
+
+	p1 = 0;
+	f1 = 1;
+	f2 = 1;
+	f3 = 1;
+	l1 = 0;
+	i  = 0;
+
+
+	while ( f2 )
+	{
+		c = b1[p1 + i];
+		k = 0;
+			
+		if ( c >= 'a' && c <= 'z' )
+			k = 1;
+
+		if ( c >= 'A' && c <= 'Z' )
+			k = 1;
+
+		if ( c >= '0' && c <= '9' )
+			k = 2;
+
+		if ( c == ' ' )
+			k = 3;
+
+		if ( c == '_' )
+			k = 4;
+
+		switch (k)
+		{
+				/* no es caracter valido en la cadena, terminamos */
+			case	0:
+				f2 = 0;
+				if (f1 == 0)
+					f9 = i;
+				else
+					f9 = 0;
+				break;
+
+				/* es letra */
+			case	1:
+				if (f1)
+					f1=0;
+				i++;
+				break;
+
+				/* es numero , solo si hubo una letra antes */
+			case	2:
+				if (f1)
+				{
+					f9 = 0;
+					f2 = 0;
+				}
+				else
+					i++;
+				break;
+
+
+				/* aceptamos casos en los que hay blancos como parte del nombre !! */
+			case 	3:
+				if (f1)
+				{
+					f9 = 0;
+					f2 = 0;
+				}
+				else
+					i++;
+				break;
+
+				/* aceptamos casos en los que hay _ como parte del nombre !! */
+			case 	4:
+				if (f1)
+				{
+					f9 = 0;
+					f2 = 0;
+				}
+				else
+					i++;
+				break;
+		}			
+	}
+
+
+#endif
+
+
+
+	return (f9);
+
+}
+
+
+
+
+/*
+ *	una forma de encontrar long names ...
+ *
+ */
+
+
+int	p_src1()
 {
 
 	int	i,j,k,l;
@@ -8546,12 +8872,15 @@ int	gp_version(x)
 int	x;
 {
 	static	char	ver[MAXB];
+	char	d[MAXV];
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0024 - Sat May 25 07:35:14 -03 2024");
+	strcpy (ver,"0026");
+	strcpy (d,"Sun May 26 20:31:09 -03 2024");
+
 	
-	sprintf (z,"%s -- (%s) ", gp_fp(GP_GET,0,(char **)0), ver  );
+	sprintf (z,"%s -- (%s)  %s", gp_fp(GP_GET,0,(char **)0), ver, d  );
 	memset (w,0,MAXV);
 	strncpy (w,"                                        ",strlen(z));
 
