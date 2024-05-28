@@ -27,7 +27,7 @@ tfor: tfor.c
 	@echo "Compilando tfor.c..."
 	@${COMPILER} ${CFLAGS} -o tfor tfor.c 2> errors.log
 	@if [ ! -s errors.log ]; then \
-		echo "Compilación ok."; \
+		echo "Compilacion ok."; \
 		if [ "$(COPY)" -eq "1" ]; then \
 			echo "Copiando tfor.c a src..."; \
 			cp tfor.c $(SRC_DIR); \

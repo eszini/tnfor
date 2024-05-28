@@ -5524,16 +5524,19 @@ int	*ql_f;
 
 				memset (b3,0,MAXB);
 				memset (b4,0,MAXB);
+printf ("- - - - 1 \n");
 
 				armame_dos_lineas(b2,b3,b4);
 				if (gp_fverbose("d3"))
 				{	printf ("dos lineas: 1  |%s| \n",b3);
 					printf ("dos lineas: 2  |%s| \n",b4);
 				}
+printf ("- - - - 2 \n");
 
 				/* correr todas las lineas ... */
 				correme_una_linea(i+1,qf);
 
+printf ("- - - - 3 \n");
 #if 1
 				/* grabar ambas lineas */
 				strcpy ( (*fnp[i]).l, b3);

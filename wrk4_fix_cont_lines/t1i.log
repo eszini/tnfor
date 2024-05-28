@@ -1,0 +1,131 @@
+        integer*2 Prefix,Suffix
+        integer*4 iDealloc
+        integer*2 n,Limit
+        integer*2 iSup,i,j,k,p,q,Gap,iPos(*)
+        integer*2 i,i0,i1,i2 ! i0,i1 are lower and upper bounds on i, respectively
+        integer*2 LAST_POINT,NUNITS,NBLOK2,
+        integer*2 CallCount,CallsSkipped ! useful only during testing
+!       5 for additional option of keying in an integer number of calls to skip,
+        integer*4 VarType
+        integer*2 n
+        integer*2 n,i
+        integer*2 i,j,k
+        integer*2 LimAbnModes
+        integer*4 I4_4LCmBnM,I4_4nEqPtsp1,I4_4nKappa,I4_nKappa,I4_SupiHP
+        integer*2 nEqPoints ! integer*1 suffices for magnitude of those below:
+        integer*2 jOrdEnt,jKey,jBind,jPrBk,jBlkPair,
+        integer*2
+        integer*2
+        integer*2 jLvg,jLp1,jNewlyNKy,FinalState
+        integer*2 NBLOK2,NUM_ARB_CONSTRAINTS,NUM_CUMULANTS,NUNITS,
+        integer*2 i1,i2,i3,iMinJ,iUnit,j0,j1,j2,j3,jRet,jDis,
+        integer*4 I4_nVUB,I4_BRem
+        integer*2 jSR,iSR
+        integer*2 jD,jM,iCE  ! ,jAux,iAux
+        integer*4 I4_2nRem,I4_4nRem
+        integer*2 LAST_POINT,iPoint
+        integer*2 nVrAux ! possibly larger than nVar, which may not yet be known
+        integer*2 nVr ! possibly larger than nVar, which may not yet be known
+        integer*2 iBegPt,iEndPt
+        integer*2 jFTA,kFTA
+        integer*2 km1,m,nIdent,Sterling(LimCumulants,LimCumulants)
+        integer*2 iMode,iGLC,iPtGLC,iBegMode,iEndMode,ModeTrimmed,
+        integer*2 jMode,ModelOrder,iPtInf,iPtSup,iBgMode,iGMC,kGMC,
+        integer*2 iPt,iBM,ModXBeg(*),ModXEnd(*),ModOrder(*)
+        integer*2 jMN,n
+        integer*2 Order,jm1
+        integer*2 nLeadingBlanks,iVal,jWNAI ! iVal is assumed non-negative
+        integer*2 iBlk,iMult,PrevIter !,NBLOK2,UNIT(*),BLKNO(*) (previous declarations suffice)
+        integer*2 jPrev,PrevKey,ThisKey,nDifferent,RowChanged
+        integer*2 iPass
+        integer*2 kMI,nMI
+        integer*2 jASM,nASM
+        integer*2 jSC
+        integer*2 jCU,kCU,UnplacedBNK
+        integer*2 jPt,jBFS,nStgVar,iLastRetVoDR,kFirm
+        integer*2 jMKV
+        integer*2 iLastRetVar,iLastRetVarInit,iLRVInf,iDisp,kFrm
+        integer*2 kDel
+        integer*2 jCSV
+        integer*2 jMB,kPrBk
+        integer*2 jSI
+        integer*2 jLA ! ,kLA
+        integer*2 PrBkPos,jCPB,kCPB,kFct
+        integer*2 jLUB,jFirst0
+        integer*2 jB,jC,jGLB
+        integer*2 k2
+        integer*2 nRows,PivotRow
+        integer*4 I4_nBinRow,I4_n
+        integer*2 jCIS,NBaState
+        integer*2 jKeyOE,kOE,kOfs
+        integer*2 jNKyAAR,jNBaAAR,kAAR
+        integer*2 kFctFR
+        integer*2 kFctSS,jAlt,jNBa,jNKy
+        integer*2 kFctNKAI,jNKyToBe,kNKyToBe
+        integer*2 jSkip,jBnk
+        integer*2 kIWBnk,jIWB
+        integer*2 k0,k1
+        integer*2 jUnionKey
+        integer*2 jOrg,jCompl,PrStjOrg
+        integer*2 LimitingIneq(0:2,0:1)
+        integer*2 jLoadedLast,kPrior0,kPrior1,iMSb,iMarginal,nMarginal,
+        integer*4 HalfSize,GrayOrder(:),HoldOrder(:), ! temporary storage
+        integer*2 kLFS,nVarsInFct,nNB1sInFct,nVarsIFLim,BindSetLim,
+        integer*2 jPrevOE ! used to break pathological cycling
+!       integer*2 nVr ! possibly larger than nVar, which may not yet be known
+!       integer*2 nVrAux ! possibly larger than nVar, which may not yet be known
+!       integer*2 LAST_POINT,iPoint
+!       integer*2 jD,jM,iCE  ! ,jAux,iAux
+!       integer*4 I4_2nRem,I4_4nRem
+!       integer*2 jSR,iSR
+!       integer*2 NBLOK2,NUM_ARB_CONSTRAINTS,NUM_CUMULANTS,NUNITS,UNIT(*),BLKNO(*)
+!       integer*2 i1,i2,i3,iMinJ,iUnit,j0,j1,j2,j3,jRet,jDis,iAux,jAux,iAuxOrg,
+!       integer*4 I4_nVUB,I4_BRem
+!           I4_BRem=int4(4*((nStgEqn-nDSERed)-(i-1))) ! for integer*2 arrays
+!       integer*2 iBlk,iMult,PrevIter !,NBLOK2,UNIT(*),BLKNO(*) (previous declarations suffice)
+!       integer*2 nLeadingBlanks,iVal,jWNAI ! iVal is assumed non-negative
+!       integer*2 Order,jm1
+!       integer*2 jMN,n
+!       integer*2 iPt,iBM,ModXBeg(*),ModXEnd(*),ModOrder(*)
+!       integer*2 jMode,ModelOrder,iPtInf,iPtSup,iBgMode,iGMC,kGMC,
+!       integer*2 iMode,iGLC,iPtGLC,iBegMode,iEndMode,ModeTrimmed,
+!       integer*2 km1,m,nIdent,Sterling(LimCumulants,LimCumulants)
+!       integer*2 jFTA,kFTA
+!       integer*2 iBegPt,iEndPt
+!       integer*2 nRows,PivotRow
+!       integer*4 I4_nBinRow,I4_n
+!       integer*2 k2
+!       integer*2 jB,jC,jGLB
+!       integer*2 jLUB,jFirst0
+!       integer*2 PrBkPos,jCPB,kCPB,kFct
+!       integer*2 jLA ! ,kLA
+!       integer*2 jSI
+!       integer*2 jMB,kPrBk
+!       integer*2 jCSV
+!       integer*2 kDel
+!       integer*2 iLastRetVar,iLastRetVarInit,iLRVInf,iDisp,kFrm
+!       integer*2 jMKV
+!       integer*2 jPt,jBFS,nStgVar,iLastRetVoDR,kFirm
+!       integer*2 jCU,kCU,UnplacedBNK
+!       integer*2 jSC
+!       integer*2 jASM,nASM
+!       integer*2 kMI,nMI
+!       integer*2 iPass
+!       integer*2 jPrev,PrevKey,ThisKey,nDifferent,RowChanged
+!       integer*2 jPrevOE ! used to break pathological cycling
+          iOVE=1 ! Fortran requires array subscripts to be integer, not logical
+!       integer*2 kLFS,nVarsInFct,nNB1sInFct,nVarsIFLim,BindSetLim,
+!       integer*2 LimitingIneq(0:2,0:1)
+!       integer*2 jLoadedLast,kPrior0,kPrior1,iMSb,iMarginal,nMarginal,
+!       integer*4 HalfSize,GrayOrder(:),HoldOrder(:), ! temporary storage
+!       integer*2 jOrg,jCompl,PrStjOrg
+!       integer*2 jUnionKey
+!       integer*2 k0,k1
+!       integer*2 kIWBnk,jIWB
+!       integer*2 jSkip,jBnk
+!       integer*2 kFctNKAI,jNKyToBe,kNKyToBe
+!       integer*2 kFctSS,jAlt,jNBa,jNKy
+!       integer*2 kFctFR
+!       integer*2 jNKyAAR,jNBaAAR,kAAR
+!       integer*2 jKeyOE,kOE,kOfs
+!       integer*2 jCIS,NBaState
