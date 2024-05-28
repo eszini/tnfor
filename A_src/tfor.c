@@ -18,6 +18,9 @@
  *
  *	tfor.c
  *	
+ *	Mon May 27 22:07:23 -03 2024
+ *	agregue sort a la lista de archivos de salida
+ *
  *	Sun May 26 23:41:27 -03 2024
  *	mejore prue2 ... procesa todos los files en list_src, genera nueva
  *	version en new_repo, y tiene infraestructura armada para ...
@@ -652,6 +655,7 @@ int	correme_una_linea(int, int);
 char	*limpiar_mas(char *);
 int	pasa_filtro(char *);
 char	*trim_blanks(char *);
+int	ordenar_makefile();
 
 
 
@@ -2781,8 +2785,16 @@ int	p_src2()
 
 						if (1)
 						{
+#if 0
 							fprintf (hfout,"%-36.36s %06d (%02d)|F%02d|%s| \n",
 								(*tb[i]).n,j,l1,m2,b2 );
+#endif
+							if (strlen(b2) > 15 )
+							{
+							fprintf (hfout,"F%02d|%-36.36s| %s\n",
+								m2,b2,(*tb[i]).n );
+							}
+
 						}
 					}
 
@@ -4268,6 +4280,9 @@ int	pro_tool2()
 	/* elimino dups */
 	filter_makefile();
 
+	/* ordeno */
+	ordenar_makefile();
+
 	/* pidio minusculas */
 	if (gp_minusculas)
 		to_min();
@@ -4283,8 +4298,60 @@ int	pro_tool2()
 }
 
 
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	make_cmp
+ *	compara dos elementos del vector de estrcturas para el qsort 
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+int	make_cmp(fnp1,fnp2)
+fnptr	*fnp1;
+fnptr	*fnp2;
+{
+	static	char	b1[MAXB];
+	static	char	b2[MAXB];
+	int	k;
+
+	sprintf (b1,"%2d%-40-40s", (*fnp1)->f1, (*fnp1)->l );
+	sprintf (b2,"%2d%-40-40s", (*fnp2)->f1, (*fnp2)->l );
+
+	k = strcmp(b1,b2);
+
+	if (gp_fverbose("d4"))
+	{
+		printf ("SSS make_cmp %s %s %d !! \n",b1,b2,k);
+	}
+
+	return k;
+}
 
 
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	ordenar_makefile
+ *	ordena alfabeticamente los nombres que encontro en el makefile
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ *	le estamos pasando a qsort
+ *	vector de punteros a estructuras
+ *	cantidad de elementos en el vector (que hay que ordenar)
+ *	tamano de cada elemento (es un puntero a estructura)
+ *	la funcion de comparacion
+ *
+ */
+
+
+int	ordenar_makefile()
+{
+	qsort ( &fnf[0],qf_fen,sizeof( fnptr) ,make_cmp );
+}
 
 
 
@@ -4673,6 +4740,12 @@ int	filter_makefile()
 	}
 
 #endif
+
+	for (i=0; i<qf_fen; i++)
+	{
+		printf ("RRR: %4d %2d |%-40.40s| \n",i, (*fnf[i]).f1, (*fnf[i]).l );
+	}
+
 
 
 	/* proceso */
@@ -8876,9 +8949,8 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0026");
-	strcpy (d,"Sun May 26 20:31:09 -03 2024");
-
+	strcpy (ver,"0028");
+	strcpy (d,"Mon May 27 18:05:17 -03 2024");
 	
 	sprintf (z,"%s -- (%s)  %s", gp_fp(GP_GET,0,(char **)0), ver, d  );
 	memset (w,0,MAXV);
