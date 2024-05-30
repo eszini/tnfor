@@ -1,6 +1,6 @@
 COMPILER=lf95.exe
 
-OBJS = ABBCapacityMarketRept.obj Abb_CapMarketRptData.obj ANDECOMP.obj bfil_obj.obj CapacityOptionsFileResourceIndexes.obj capacity_arrays.obj capacity_options_alloc_vars.obj capacity_options_fixed_variables.obj CAP_OBJT.obj CAT2OBJT.obj CATAWBA.obj CF_OBJT.obj Cla_objt.obj cla_objt_arrays.obj CLM_OBJT.obj CLOSFILE.obj Clreport.obj clreport_routines.obj Cls_runs.obj cnwmsubs.obj CN_OBJT.obj co2_cap_n_trade.obj co2_market_abatement_curves.obj coal_main_prg.obj Coal_Model_Modules.obj coal_modules_makeovl.obj COAL_VECTOR_OBJ.obj CO_OBJT.obj CPL_OBJT.obj ct_objt.obj DE_OBJT.obj DR_BOOTH.obj dr_both2.obj DSM_OBJT.obj Dsscreen.obj DSSLAM.obj ECONINTR.obj EC_OBJT.obj ELREPORT.obj el_objt.obj end_routine.obj Enrglimt.obj en_objt.obj Errormsg.obj esrn_obj.obj facalg.obj FC_OBJT.obj FE_OBJT.obj filemod.obj filename_tracker.obj FINACELM.obj finaclp2.obj finanbse.obj findovls.obj FINNUCFL.obj FI_OBJT.obj FN_OBJT.obj FP_OBJT.obj ft_interfaces.obj FUELUSED.obj gas_objt.obj GRXModules.obj grx_planning_routines.obj icap_results.obj interg82.obj IN_OBJT.obj LDPROB01.obj LMG_OBJT.obj logging.obj LPMatinv.obj lpsolver.obj mainovl.obj MARGNOBJ.obj MIDASMOD.obj MIDASXP.obj miscmod.obj modules.obj MSGANDEC.obj msgindex.obj msgmmadm.obj msgmmasb.obj msgmmcom.obj msgmmdbt.obj msgmmdfd.obj msgmmea.obj MSGMMExpRevCash.obj msgmmfa.obj msgmmfv.obj Msgmminp.obj MSGMMOUT.obj msgmmpyb.obj Msgmmrev.obj msgmmsb6.obj MSGMMSB6B.obj msgmmtax.obj msgnorm.obj msgold95rw.obj MSGOUTPT.obj MSGProSymRevExp.obj newfred2.obj NEWPKSHF.obj  OBJTFUNC.obj params.obj PF_OBJT.obj Picadisp.obj PN_OBJT.obj POSTFIX.obj pp_objt.obj prim_mover_idx.obj PRO_COST.obj RDI_OBJT.obj REAENRG.obj  RPTH_OBJ.obj RptRecControl.obj Servicac.obj SF_OBJT.obj SNSZMDS.obj spindriftlib.obj spinfunc.obj STARTOVL.obj tf_objt.obj TF_OBJT2.obj transobj.obj TRANSOBJ2.obj TRNSFRM3.obj UP_OBJT.obj wh_objt.obj WVPACoopRevenueCals.obj WVPARTRK.obj WVPA_DATA_BASES.obj Dsex_obj.obj MIDASFileIndexingRoutines.obj procost_data.obj escalation_variables.obj screen_initialization.obj clreport_decs.obj fuel_types.obj pms.obj startup_tasks.obj logging_decs.obj  midas_decs.obj cl_data.obj mmrev_decs.obj esrn_decs.obj tran_c_variables.obj cla_decs.obj fuelused_decs.obj dsex_data.obj kepcocom.obj string.obj file_existence.obj expansion.obj shared_vars_interg82.obj irec_endpoint_control.obj p_fuel.obj hesi.obj msg_win_api_calls.obj hesi_i4.obj conversion_routines.obj grx_captrade.obj grx_extend.obj grx_electric.obj hesi_el.obj csvdat.obj eco.obj grx_data.obj annual_contracts.obj co2_data.obj monthly_icap.obj annl_nuc.obj annual_cl_unit.obj rps_data.obj endpoint.obj prod_arrays_dimensions.obj AA_OBJT.obj cla_fuel.obj cl_units_read_data.obj cl_screen_data.obj faintcom.obj flusher.obj calendar.obj hourlyproductsdata.obj
+OBJS = ABBCapacityMarketRept.obj Abb_CapMarketRptData.obj ANDECOMP.obj bfil_obj.obj CapacityOptionsFileResourceIndexes.obj capacity_arrays.obj capacity_options_alloc_vars.obj capacity_options_fixed_variables.obj CAP_OBJT.obj CAT2OBJT.obj CATAWBA.obj CF_OBJT.obj Cla_objt.obj cla_objt_arrays.obj CLM_OBJT.obj CLOSFILE.obj Clreport.obj clreport_routines.obj Cls_runs.obj cnwmsubs.obj CN_OBJT.obj co2_cap_n_trade.obj co2_market_abatement_curves.obj coal_main_prg.obj Coal_Model_Modules.obj coal_modules_makeovl.obj COAL_VECTOR_OBJ.obj CO_OBJT.obj CPL_OBJT.obj ct_objt.obj DE_OBJT.obj DR_BOOTH.obj dr_both2.obj DSM_OBJT.obj Dsscreen.obj DSSLAM.obj ECONINTR.obj ec_objt.obj ELREPORT.obj el_objt.obj end_routine.obj Enrglimt.obj en_objt.obj Errormsg.obj esrn_obj.obj facalg.obj FC_OBJT.obj FE_OBJT.obj filemod.obj filename_tracker.obj FINACELM.obj finaclp2.obj finanbse.obj findovls.obj FINNUCFL.obj FI_OBJT.obj FN_OBJT.obj FP_OBJT.obj ft_interfaces.obj FUELUSED.obj gas_objt.obj GRXModules.obj grx_planning_routines.obj icap_results.obj interg82.obj IN_OBJT.obj LDPROB01.obj LMG_OBJT.obj logging.obj LPMatinv.obj lpsolver.obj mainovl.obj MARGNOBJ.obj MIDASMOD.obj MIDASXP.obj miscmod.obj modules.obj MSGANDEC.obj msgindex.obj msgmmadm.obj msgmmasb.obj msgmmcom.obj msgmmdbt.obj msgmmdfd.obj msgmmea.obj MSGMMExpRevCash.obj msgmmfa.obj msgmmfv.obj Msgmminp.obj MSGMMOUT.obj msgmmpyb.obj Msgmmrev.obj msgmmsb6.obj MSGMMSB6B.obj msgmmtax.obj msgnorm.obj msgold95rw.obj MSGOUTPT.obj MSGProSymRevExp.obj newfred2.obj NEWPKSHF.obj  OBJTFUNC.obj params.obj PF_OBJT.obj Picadisp.obj PN_OBJT.obj POSTFIX.obj pp_objt.obj prim_mover_idx.obj PRO_COST.obj RDI_OBJT.obj REAENRG.obj  RPTH_OBJ.obj RptRecControl.obj Servicac.obj SF_OBJT.obj SNSZMDS.obj spindriftlib.obj spinfunc.obj STARTOVL.obj tf_objt.obj TF_OBJT2.obj transobj.obj TRANSOBJ2.obj TRNSFRM3.obj UP_OBJT.obj wh_objt.obj WVPACoopRevenueCals.obj WVPARTRK.obj WVPA_DATA_BASES.obj Dsex_obj.obj MIDASFileIndexingRoutines.obj procost_data.obj escalation_variables.obj screen_initialization.obj clreport_decs.obj fuel_types.obj pms.obj startup_tasks.obj logging_decs.obj  midas_decs.obj cl_data.obj mmrev_decs.obj esrn_decs.obj tran_c_variables.obj cla_decs.obj fuelused_decs.obj dsex_data.obj kepcocom.obj string.obj file_existence.obj expansion.obj shared_vars_interg82.obj irec_endpoint_control.obj p_fuel.obj hesi.obj msg_win_api_calls.obj hesi_i4.obj conversion_routines.obj grx_captrade.obj grx_extend.obj grx_electric.obj hesi_el.obj csvdat.obj eco.obj grx_data.obj annual_contracts.obj co2_data.obj monthly_icap.obj annl_nuc.obj annual_cl_unit.obj rps_data.obj endpoint.obj prod_arrays_dimensions.obj AA_OBJT.obj cla_fuel.obj cl_units_read_data.obj cl_screen_data.obj faintcom.obj flusher.obj hourlyproductsdata.obj calendar.obj ../ABBICAP/addl_obj/MIDASRES.obj
 
 SOURCEDIR  = ../ABBICAP
 
@@ -150,14 +150,8 @@ MODS1:  modules.obj GRXModules.obj RptRecControl.obj  spinfunc.obj MSGProSymRevE
 shared_vars_interg82.obj:	$(SOURCEDIR)/shared_vars_interg82.f90
 	$(F95EXEMod) $(SOURCEDIR)/shared_vars_interg82.f90
 
-calendar.obj:   $(SOURCEDIR)/calendar.f90 hourlyproductsdata.obj
-	$(F95EXEMod) -F95 $(SOURCEDIR)/calendar.f90
-	
-hourlyproductsdata.obj:   $(SOURCEDIR)/hourlyproductsdata.f90
-	$(F95EXEMod) -F95 $(SOURCEDIR)/hourlyproductsdata.f90
-
-modules.obj:   $(SOURCEDIR)/modules.f95 Coal_Model_Modules.obj end_routine.obj prod_arrays_dimensions.obj calendar.obj
-	$(F95EXEMod) -F95 $(SOURCEDIR)/modules.f95
+modules.obj:   $(SOURCEDIR)/modules.f95 Coal_Model_Modules.obj end_routine.obj prod_arrays_dimensions.obj hourlyproductsdata.obj calendar.obj
+	$(F95EXEMod) $(SOURCEDIR)/modules.f95
 	
 RptRecControl.obj: $(SOURCEDIR)/RptRecControl.F95 GRXModules.obj  msg_win_api_calls.obj irec_endpoint_control.obj grx_data.obj
 	$(F95EXEMod) $(SOURCEDIR)/RptRecControl.F95
@@ -303,16 +297,16 @@ msgmmcom.obj:   modules.obj $(GLOBE) $(SOURCEDIR)/msgmmcom.for
 TRNSFRM3.obj:   $(OVLY) $(LAM) modules.obj $(TRAN) $(SOURCEDIR)/TRNSFRM3.FOR 
 	$(F95EXE) $(SOURCEDIR)/TRNSFRM3.FOR
 
-mainovl.obj:   modules.obj spinfunc.obj $(SOURCEDIR)/mainovl.f90
+mainovl.obj:   modules.obj spinfunc.obj $(SOURCEDIR)/mainovl.f90 
 	$(F95EXEMod) $(SOURCEDIR)/mainovl.f90
 
 CLOSFILE.obj:   modules.obj $(DREPT)  $(SOURCEDIR)/CLOSFILE.FOR dsex_data.obj
 	$(F95EXE) $(SOURCEDIR)/CLOSFILE.FOR
 
-OBJS8: EC_OBJT.obj FN_OBJT.obj msgmmfv.obj POSTFIX.obj IN_OBJT.obj
+OBJS8: ec_objt.obj FN_OBJT.obj msgmmfv.obj POSTFIX.obj IN_OBJT.obj
 
-EC_OBJT.obj:   modules.obj $(SOURCEDIR)/EC_OBJT.FOR 
-	$(F95EXE) $(SOURCEDIR)/EC_OBJT.FOR
+ec_objt.obj:   modules.obj spindriftlib.obj $(SOURCEDIR)/ec_objt.f90 
+	$(F95EXEMod) $(SOURCEDIR)/ec_objt.f90
 
 FN_OBJT.obj:   modules.obj $(SOURCEDIR)/FN_OBJT.FOR  spindriftlib.obj
 	$(F95EXE)  $(SOURCEDIR)/FN_OBJT.FOR
@@ -531,7 +525,7 @@ wh_objt.obj:   $(TRAN) modules.obj $(SOURCEDIR)/wh_objt.for  end_routine.obj fil
 
 OBJS18: Cla_objt.obj CLM_OBJT.obj msgmmsb6.obj MSGMMSB6B.obj PRO_COST.obj MARGNOBJ.obj
 
-Cla_objt.obj: $(SOURCEDIR)/Cla_objt.for prim_mover_idx.obj   cla_decs.obj cla_objt_arrays.obj conversion_routines.obj end_routine.obj esrn_decs.obj grx_planning_routines.obj  internal_operation_switches.obj grx_data.obj GRXModules.obj rps_data.obj eco.obj monthly_icap.obj fuelused_decs.obj annl_nuc.obj cla_fuel.obj cl_units_read_data.obj p_fuel.obj RptRecControl.obj
+Cla_objt.obj: $(SOURCEDIR)/Cla_objt.for prim_mover_idx.obj   cla_decs.obj cla_objt_arrays.obj conversion_routines.obj end_routine.obj esrn_decs.obj grx_planning_routines.obj  internal_operation_switches.obj grx_data.obj GRXModules.obj rps_data.obj eco.obj monthly_icap.obj fuelused_decs.obj annl_nuc.obj cla_fuel.obj cl_units_read_data.obj p_fuel.obj
 	$(F95EXE)  $(SOURCEDIR)/Cla_objt.for
 
 
@@ -558,10 +552,10 @@ COALOBJ: Coal_Model_Modules.obj cnwmsubs.obj coal_main_prg.obj COAL_VECTOR_OBJ.o
 transobj.obj:   modules.obj $(GLOBE)  $(MC) $(RPTMod) $(SOURCEDIR)/transobj.for Abb_CapMarketRptData.obj kepcocom.obj grx_planning_routines.obj RptRecControl.obj
 	$(F95EXE)  $(SOURCEDIR)/transobj.for
 
-Coal_Model_Modules.obj: $(SOURCEDIR)/Coal_Model_Modules.f90
-	$(F95EXEMod) $(SOURCEDIR)/Coal_Model_Modules.f90
+Coal_Model_Modules.obj: $(SOURCEDIR)/Coal_Model_Modules.F90 $(SOURCEDIR)/Coal_Model_Modules.F90
+	$(F95EXEMod) $(SOURCEDIR)/Coal_Model_Modules.F90
 
-cnwmsubs.obj:   $(SOURCEDIR)/cnwmsubs.f90 Coal_Model_Modules.obj Enrglimt.obj file_existence.obj miscmod.obj flusher.obj
+cnwmsubs.obj:   $(SOURCEDIR)/cnwmsubs.f90 Coal_Model_Modules.obj Enrglimt.obj file_existence.obj miscmod.obj
 	$(F95EXEMod) $(SOURCEDIR)/cnwmsubs.f90
 
 coal_main_prg.obj:   $(SOURCEDIR)/cnwmsubs.F90 $(SOURCEDIR)/Coal_Model_Modules.F90  modules.obj $(SOURCEDIR)/coal_main_prg.f90  COAL_VECTOR_OBJ.obj spindriftlib.obj
@@ -570,10 +564,11 @@ coal_main_prg.obj:   $(SOURCEDIR)/cnwmsubs.F90 $(SOURCEDIR)/Coal_Model_Modules.F
 coal_modules_makeovl.obj: $(SOURCEDIR)/Coal_Model_Modules.F90 GRXModules.obj Cla_objt.obj  $(SOURCEDIR)/Coal_modules_makeovl.F90 cla_objt_arrays.obj expansion.obj conversion_routines.obj p_fuel.obj eco.obj cl_units_read_data.obj
 	$(F95EXEMod)  $(SOURCEDIR)/coal_modules_makeovl.f90
 
+
 COAL_VECTOR_OBJ.obj:  $(SOURCEDIR)/COAL_VECTOR_OBJ.F90 end_routine.obj
 	$(F95EXEMod) $(SOURCEDIR)/COAL_VECTOR_OBJ.F90
 
-TRANSOBJ2.obj: modules.obj $(GLOBE)  $(MC) $(RPTMod) $(SOURCEDIR)/TRANSOBJ2.for  GRXModules.obj DE_OBJT.obj  capacity_arrays.obj prim_mover_idx.obj filename_tracker.obj string.obj grx_planning_routines.obj RptRecControl.obj grx_data.obj rps_data.obj
+TRANSOBJ2.obj: modules.obj $(GLOBE)  $(MC) $(RPTMod) $(SOURCEDIR)/TRANSOBJ2.for  GRXModules.obj DE_OBJT.obj  capacity_arrays.obj prim_mover_idx.obj filename_tracker.obj string.obj grx_planning_routines.obj RptRecControl.obj grx_data.obj rps_data.obj hourlyproductsdata.obj
 	$(F95EXE) -varheap $(SOURCEDIR)/TRANSOBJ2.for
 
 Enrglimt.obj: $(SOURCEDIR)/Enrglimt.for spindriftlib.obj modules.obj capacity_arrays.obj RptRecControl.obj
@@ -617,7 +612,7 @@ filename_tracker.obj: $(SOURCEDIR)/filename_tracker.f90 ft_interfaces.obj loggin
 	$(F95EXEMod) $(SOURCEDIR)/filename_tracker.f90
 
 logging.obj: $(SOURCEDIR)/logging.f90 filemod.obj logging_decs.obj end_routine.obj string.obj string.obj flusher.obj
-	$(F95EXEMod) -f95 $(SOURCEDIR)/logging.f90
+	$(F95EXEMod) $(SOURCEDIR)/logging.f90
 
 miscmod.obj: $(SOURCEDIR)/miscmod.f90 end_routine.obj logging.obj string.obj
 	$(F95EXEMod) $(SOURCEDIR)/miscmod.f90
@@ -637,7 +632,7 @@ co2_market_abatement_curves.obj: $(SOURCEDIR)/co2_market_abatement_curves.f90
 co2_cap_n_trade.obj: $(SOURCEDIR)/co2_cap_n_trade.f90
 	$(F95EXEMod) $(SOURCEDIR)/co2_cap_n_trade.f90
 	
-grx_planning_routines.obj: $(SOURCEDIR)/grx_planning_routines.f90 co2_market_abatement_curves.obj capacity_options_fixed_variables.obj cla_objt_arrays.obj capacity_options_alloc_vars.obj prod_arrays_dimensions.obj grx_electric.obj grx_extend.obj grx_data.obj co2_data.obj miscmod.obj flusher.obj
+grx_planning_routines.obj: $(SOURCEDIR)/grx_planning_routines.f90 co2_market_abatement_curves.obj capacity_options_fixed_variables.obj cla_objt_arrays.obj capacity_options_alloc_vars.obj prod_arrays_dimensions.obj grx_electric.obj grx_extend.obj grx_data.obj co2_data.obj miscmod.obj
 	$(F95EXEMod) $(SOURCEDIR)/grx_planning_routines.f90
 	
 MIDASFileIndexingRoutines.obj: $(SOURCEDIR)/MIDASFileIndexingRoutines.f90
@@ -788,14 +783,18 @@ cl_units_read_data.obj: $(SOURCEDIR)/cl_units_read_data.f90 prod_arrays_dimensio
 	$(F95EXEMod) $(SOURCEDIR)/cl_units_read_data.f90
 cl_screen_data.obj: $(SOURCEDIR)/cl_screen_data.for prim_mover_idx.obj esrn_decs.obj miscmod.obj cla_decs.obj cla_fuel.obj
 	$(F95EXE90) $(SOURCEDIR)/cl_screen_data.for
-
 flusher.obj: $(SOURCEDIR)/flusher.f90
 	$(F95EXEMod) $(SOURCEDIR)/flusher.f90
-
+    
+hourlyproductsdata.obj: $(SOURCEDIR)/hourlyproductsdata.f90
+	$(F95EXEMod) $(SOURCEDIR)/hourlyproductsdata.f90
+calendar.obj: $(SOURCEDIR)/calendar.f90 hourlyproductsdata.obj
+	$(F95EXEMod) $(SOURCEDIR)/calendar.f90
+    
 MSGOLDRW.exe:  $(OBJS) realwin.lib $(OBJS)
 	@sleep 1
 	@dir *.obj
-	$(COMPILER) -g -co -nc -stack 1000000 $(LIBS) -EXE MSGOLDRW $(SOURCEDIR)/addl_obj/MIDASRES.OBJ $(OBJS)  
+	$(COMPILER) -g -co -nc -stack 1000000 $(LIBS) -EXE MSGOLDRW $(OBJS)  
 	@sleep 1 # give time for other compiler output messages in parallel build to come back so that directory listing is always shown last.
 	@ls *.exe -lh
 

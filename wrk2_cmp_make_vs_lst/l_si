@@ -35,7 +35,6 @@ DSSLAM.FOR
 Dsex_obj.for
 Dsscreen.for
 ECONINTR.FOR
-EC_OBJT.FOR
 ELREPORT.FOR
 ELRPTCOM.MON
 EL_OBJT.FOR
@@ -81,7 +80,6 @@ MSGOUTPT.FOR
 MSGProSymRevExp.for
 MSGmmadm.FOR
 MUNIREV.FOR
-Mainovl.f90
 Msgmminp.for
 Msgmmrev.for
 Msgnorm.for
@@ -151,6 +149,7 @@ conversion_routines.f90
 csvdat.f90
 drilling_rept_params.f90
 dsex_data.f90
+ec_objt.f90
 eco.f90
 end_routine.f90
 endpoint.f90
@@ -186,6 +185,7 @@ irec_endpoint_control.f90
 kepcocom.f90
 logging.f90
 logging_decs.f90
+mainovl.f90
 midas_decs.f90
 miscmod.f90
 mmrev_decs.f90
