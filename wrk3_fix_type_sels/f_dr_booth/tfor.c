@@ -8952,9 +8952,9 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0028");
-	strcpy (d,"Mon May 27 18:05:17 -03 2024");
-	
+	strcpy (ver,"0029");
+	strcpy (d," Tue May 28 19:46:49 EDT 2024");
+
 	sprintf (z,"%s -- (%s)  %s", gp_fp(GP_GET,0,(char **)0), ver, d  );
 	memset (w,0,MAXV);
 	strncpy (w,"                                        ",strlen(z));

@@ -21,7 +21,6 @@ Cla_objt.for
 Clreport.for
 Cls_runs.for
 Coal_Model_Modules.F90
-Coal_Model_Modules.f90
 Coal_modules_makeovl.F90
 DE_OBJT.FOR
 DREPTCOM.MON
@@ -34,7 +33,6 @@ DSSLAM.FOR
 Dsex_obj.for
 Dsscreen.for
 ECONINTR.FOR
-EC_OBJT.FOR
 ELREPORT.FOR
 ELRPTCOM.MON
 ENVIRCOM.MON
@@ -142,6 +140,7 @@ ct_objt.for
 dr_both2.for
 drilling_rept_params.f90
 dsex_data.f90
+ec_objt.f90
 eco.f90
 el_objt.for
 en_objt.for
