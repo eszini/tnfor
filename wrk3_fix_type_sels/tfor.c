@@ -12,12 +12,17 @@
 
 
 
-
 /*
  *	//header//
  *
  *	tfor.c
  *	
+ *	
+ *	Fri May 31 04:32:58 -03 2024
+ *	agregue proc4 - lee todo el conjunto de fuentes, pero sobre cadenas de structs
+ *	lo que necesito, es poder extender el largo de un archivo sin correr
+ *	mas de 500,000 lines de codigo en un vector 
+ *
  *	Mon May 27 22:07:23 -03 2024
  *	agregue sort a la lista de archivos de salida
  *
@@ -227,16 +232,21 @@
  *	./tfor -v -opciones=d5 -tool=6 -inp=t1.for -out=t2.for > log
  *
  *
+ * - - - - - - - - - - - - - - - - - - - - - - - - 
  *
+ *	proc4:
  *
+ *	Carga todos los sources en memo
+ *	Utiliza cadenas de structs
+ *	De esta manera, si tengo que extender un file por cambios
+ *	no tengo que estar moviendo las mas de 500,000 lineas de codigo
  *
- *
- *
- *
- *
+ *	./tfor -v -opciones=d5 -proc=4 -inp=l1 -out=l_names -aux=run.log -dato=repo2  > log
  *
  *
  */
+
+
 
 
 /*
@@ -307,7 +317,8 @@
 #define	MAXT	256 	/* maximo de tokens en tabla */
 #define	MAXF	64	/* largo de archivos de input - output - marcas etc */
 #define	MAXP	128	/* maximo de palabras en general */
-#define	HUGE	4096	/* huge buffer */
+#define	HUG1	2048	/* huge buffer */
+#define	HUG2	4096	/* huge buffer */
 
 
 /*
@@ -419,6 +430,8 @@ int	proc_principal();
 int	pro_prue1();
 int	pro_prue2();
 int	pro_prue3();
+int	pro_prue4();
+int	pro_prue5();
 
 int	pro_exec1();
 int	pro_exec2();
@@ -427,6 +440,7 @@ int	pro_exec3();
 int	pro_proc1();
 int	pro_proc2();
 int	pro_proc3();
+int	pro_proc4();
 
 int	pro_tool1();
 int	pro_tool2();
@@ -501,6 +515,8 @@ FILE	**fptr;
 int	flag_caracteres;
 int	flag_before_exit;
 
+int	agregar_ffaux(char *);
+
 
 /*
  * 	algunos settings especificos de tfor - conv de for files 
@@ -530,11 +546,36 @@ char	tk[MAXT][MAXB];
 #endif
 
 
+/*
+ * 	Variables y estructs para cargar todo un archivo en memoria
+ *	const y estructs especificas para todo el tema de estabilizacion de fortran
+ *	(version cadena de structs )
+ *
+ *	ldf	linea de file
+ */
+
+#define	MAX_QSRC	500   		/* cantidad de files ... 500  */
+
+typedef	struct	ldf	*ldf_ptr;
+typedef	struct	ldf
+{	char	l[HUG1];		/* por ahora, despues malloc */
+	int	f1;			/* usos varios */
+	int	f2;
+	int	f3;
+	struct	ldf	*nx;
+}	ldf_node;
+
+ldf_ptr	ldfp1,ldfp2,*ldfq1,*ldfq2;
+
+ldf_ptr	vldf[MAX_QSRC];			/* vector a punteros primer struct de c fuente */
+
+
+
 
 /*
  * 	Variables y estructs para cargar todo un archivo en memoria
  *	const y estructs especificas para todo el tema de estabilizacion de fortran
- *
+ *	(version vector de punteros a structs )
  */
 
 
@@ -544,7 +585,7 @@ int	qf_fen;				/* strings con nombre de archivos validos encontrados */
 
 typedef	struct	tfn	*fnptr;
 typedef	struct	tfn
-{	char	l[HUGE];		/* por ahora, despues malloc */
+{	char	l[HUG2];		/* por ahora, despues malloc */
 	int	f1;			/* usos varios */
 	int	f2;
 	int	f3;
@@ -556,26 +597,31 @@ fnptr	fnp[MAX_FSRC];			/* vector de punteros a lineas de source */
 fnptr	fnf[MAX_FSRC];			/* vector de punteros a lineas de archivos encontrados */
 
 int	pf_load();			/* proceso de carga del file */
-int	qf_load(FILE *,fnptr *,int *);	/* proceso de carga del file */
+int	qfv_load(FILE *,fnptr *,int *);	/* proceso de carga del file - como vector de ptrs a struct */
 int	qf_addline(fnptr *,int );	/* agrega una linea */
 int	qf_move(fnptr *, int);		/* hace un  'lugar' en el vector */
 int	pf_write();			/* proceso de write del file */
 
+int	qfc_load(FILE *,int,int *);	/* proceso de carga del file - como cadena de ptrs a struct */
+int	qfc_write(FILE *,int);
 
 
-#define	MAX_FF		500		/* cant max de archivos fuentes a manejar */
+/*
+ * 	MAX_QSRC		500		
+ */
+
 int	qf_ff;
 
 typedef	struct tff	*ffptr;
 typedef	struct tff
 {	char	n[MAXB];		/* nombre de file */
-	int	pf,uf;			/* primera - ultima fila */
+	int	pf,uf,ql;		/* primera - ultima fila, q lineas */
 	int	f1,f2,f3;		/* flags prop general */
 }	ff;
 
 ffptr	ffp1,ffp2,*ffq1,*ffq2;		/* punteros varios */
 
-ffptr	tb[MAX_FF];
+ffptr	tb[MAX_QSRC];
 
 
 /*
@@ -656,7 +702,7 @@ char	*limpiar_mas(char *);
 int	pasa_filtro(char *);
 char	*trim_blanks(char *);
 int	ordenar_makefile();
-
+int	ps_src1();
 
 
 /*
@@ -904,6 +950,10 @@ int	proceso_principal()
 			pro_prue2();
 		if (ffprb == 3)
 			pro_prue3();
+		if (ffprb == 4)
+			pro_prue4();
+		if (ffprb == 5)
+			pro_prue5();
 	}	
 
 	if ( ffexc)
@@ -912,6 +962,8 @@ int	proceso_principal()
 			pro_exec1();
 		if (ffexc == 2)
 			pro_exec2();
+		if (ffexc == 3)
+			pro_exec3();
 	}
 
 	if ( ffpro)
@@ -922,6 +974,8 @@ int	proceso_principal()
 			pro_proc2();
 		if (ffpro == 3)
 			pro_proc3();
+		if (ffpro == 4)
+			pro_proc4();
 	}
 
 	if ( fftoo)
@@ -1135,291 +1189,347 @@ int	proc_principal()
 					p1++;
 					f1=0;
 					break;
-
-				/* caracteres varios */
-				case TC_CVR:
-					tk[q_tk][0]=b1[p1];
-					tk[q_tk][1]=0;
-					q_tk++;
-					p1++;
-					break;
-
-				/* fin de linea */
-				default:
-					printf ("Default, algo salio mal  !!!\n\n");
-					f1=0;
-					break;
-			}
-
-		} /* while */
-
-
-
-		if (gp_fverbose("d3"))
-			printf ("termine de parsear file \n");
-
-
-		/* verifico si hay que sacar output  en minusculas */
-		if (gp_minusculas)
-		{
-			for (j=0; j< q_tk; j++)
-				strcpy(tk[j],pasar_a_minusc(tk[j]));
-		}
-
-#if 0
-		/* si esta usando tabla de marcas ... verificar si hay que taggear */
-		if (gp_tabmrk)
-		{
-			for (j=0; j< q_tk; j++)
-				if (es_word(tk[j]) || es_puntuacion(tk[j]) )
-					strcpy(tk[j],bm_tag(tk[j]));
-		}
-#endif
-
-
-
-		/* hay que forzar  string EOL al final de la linea */
-		if (gp_eol)
-			strcpy(tk[q_tk++],"EOL");
-
-
-		/* salida en formato token columnar */
-		if (gp_fsentencia == 0)
-		{
-
-
-			/* pidio nivel de descripcion en salida ... agrego la sentencia */
-			if (gp_niveldes)
-				fprintf (hfout,"%s\n",b1);
-
-
-			/* grabo los tokens encontrados */
-			for (j=0; j< q_tk; j++)
-			{
-				switch (gp_niveldes)
-				{
-
-					case 0:
-						fprintf (hfout,"%s\n",tk[j]);
+	
+					/* caracteres varios */
+					case TC_CVR:
+						tk[q_tk][0]=b1[p1];
+						tk[q_tk][1]=0;
+						q_tk++;
+						p1++;
 						break;
-
-					case 1:
-						fprintf (hfout,"%3d,%s\n",j,tk[j]);
-						break;
-
+	
+					/* fin de linea */
 					default:
-						fprintf (hfout,"%s\n",tk[j]);
+						printf ("Default, algo salio mal  !!!\n\n");
+						f1=0;
 						break;
 				}
-
-
-				if (gp_fverbose("d1"))
-					printf ("%3d,%s\n",j,tk[j]);
-
-			}
-
-
-
-#if 0
-			/* agrego termino EOL para indentificar donde termino
-			 * esto ya que tal vez haya un . en mitad de linea 
-			 */
-			if (gp_eol)
-				fprintf (hfout,"%s\n","EOL");
-
-#endif
-		}
-
-
-
-		/* salida en formato sentencia */
-		if (gp_fsentencia == 1)
-		{
-
-
-			/* grabo los tokens encontrados */
-#if 0
-			fprintf (hfout,"%s\n",b1);
-#endif
-
-			for (j=0; j< q_tk; j++)
+	
+			} /* while */
+	
+	
+	
+			if (gp_fverbose("d3"))
+				printf ("termine de parsear file \n");
+	
+	
+			/* verifico si hay que sacar output  en minusculas */
+			if (gp_minusculas)
 			{
-#if 0
-				fprintf (hfout,"%3d,%s\n",j,tk[j]);
-#endif
-				fprintf (hfout,"%s",tk[j]);
-
-				if (gp_fverbose("d1"))
-					printf ("%3d,%s\n",j,tk[j]);
-
+				for (j=0; j< q_tk; j++)
+					strcpy(tk[j],pasar_a_minusc(tk[j]));
 			}
-
-#if 0
-			/* agrego termino EOL para indentificar donde termino
-			 * esto ya que tal vez haya un . en mitad de linea 
-			 */
+	
+	#if 0
+			/* si esta usando tabla de marcas ... verificar si hay que taggear */
+			if (gp_tabmrk)
+			{
+				for (j=0; j< q_tk; j++)
+					if (es_word(tk[j]) || es_puntuacion(tk[j]) )
+						strcpy(tk[j],bm_tag(tk[j]));
+			}
+	#endif
+	
+	
+	
+			/* hay que forzar  string EOL al final de la linea */
 			if (gp_eol)
-				fprintf (hfout,"%s\n","EOL");
-			else
+				strcpy(tk[q_tk++],"EOL");
+	
+	
+			/* salida en formato token columnar */
+			if (gp_fsentencia == 0)
+			{
+	
+	
+				/* pidio nivel de descripcion en salida ... agrego la sentencia */
+				if (gp_niveldes)
+					fprintf (hfout,"%s\n",b1);
+	
+	
+				/* grabo los tokens encontrados */
+				for (j=0; j< q_tk; j++)
+				{
+					switch (gp_niveldes)
+					{
+	
+						case 0:
+							fprintf (hfout,"%s\n",tk[j]);
+							break;
+	
+						case 1:
+							fprintf (hfout,"%3d,%s\n",j,tk[j]);
+							break;
+	
+						default:
+							fprintf (hfout,"%s\n",tk[j]);
+							break;
+					}
+	
+	
+					if (gp_fverbose("d1"))
+						printf ("%3d,%s\n",j,tk[j]);
+	
+				}
+	
+	
+	
+	#if 0
+				/* agrego termino EOL para indentificar donde termino
+				 * esto ya que tal vez haya un . en mitad de linea 
+				 */
+				if (gp_eol)
+					fprintf (hfout,"%s\n","EOL");
+	
+	#endif
+			}
+	
+	
+	
+			/* salida en formato sentencia */
+			if (gp_fsentencia == 1)
+			{
+	
+	
+				/* grabo los tokens encontrados */
+	#if 0
+				fprintf (hfout,"%s\n",b1);
+	#endif
+	
+				for (j=0; j< q_tk; j++)
+				{
+	#if 0
+					fprintf (hfout,"%3d,%s\n",j,tk[j]);
+	#endif
+					fprintf (hfout,"%s",tk[j]);
+	
+					if (gp_fverbose("d1"))
+						printf ("%3d,%s\n",j,tk[j]);
+	
+				}
+	
+	#if 0
+				/* agrego termino EOL para indentificar donde termino
+				 * esto ya que tal vez haya un . en mitad de linea 
+				 */
+				if (gp_eol)
+					fprintf (hfout,"%s\n","EOL");
+				else
+					fprintf (hfout,"\n");
+	#endif
+	
+	
+				/* se termino la linea */
 				fprintf (hfout,"\n");
-#endif
-
-
-			/* se termino la linea */
-			fprintf (hfout,"\n");
-
-		}
-
-
-		if (gp_niveldes)
-			fprintf (hfout,"\n\n");
-
-
+	
+			}
+	
+	
+			if (gp_niveldes)
+				fprintf (hfout,"\n\n");
+	
+	
+			if (gp_fverbose("d1"))
+			{
+				printf ("\n");
+			}
+	
+	
+	
+	
+			/* 
+			 * Termine todo lo que tenia que hacer con esta linea,
+			 * sumo lineas 
+			 *
+			 */
+	
+			q_lin++;
+	
+	
+		    } /* if ... no esta vacia la linea */
+	
+		}  /* while fgets ... */
+	
+	
+		
 		if (gp_fverbose("d1"))
 		{
-			printf ("\n");
+			printf ("Cant de lineas procesadas %d\n",q_lin);
+			printf ("\n\n\n");
 		}
-
-
-
-
-		/* 
-		 * Termine todo lo que tenia que hacer con esta linea,
-		 * sumo lineas 
-		 *
-		 */
-
-		q_lin++;
-
-
-	    } /* if ... no esta vacia la linea */
-
-	}  /* while fgets ... */
-
-
 	
-	if (gp_fverbose("d1"))
+	
+		/* parser1 */
+	
+	
+	
+	
+	#endif
+	/* parser */
+	/* parser */
+	
+	
+	
+	
+		/* proceso */
+		if (gp_fverbose("d1"))
+		{	printf ("%s Sale de proc principal \n\n",gp_tm());
+		}
+	
+	}
+	
+	
+	
+	
+	/*
+	 * -----------------------------------------------------------------------------------
+	 *
+	 *	pro_exec 1
+	 *
+	 *	exec aparte ...
+	 *
+	 * -----------------------------------------------------------------------------------
+	 */
+	
+	
+	/* 
+	 *	pro_exec1
+	 *
+	 *	cuenta caracteres de un archivo
+	 *
+	 */
+	
+	
+	int	pro_exec1()
 	{
-		printf ("Cant de lineas procesadas %d\n",q_lin);
-		printf ("\n\n\n");
-	}
-
-
-	/* parser1 */
-
-
-
-
-#endif
-/* parser */
-/* parser */
-
-
-
-
-	/* proceso */
-	if (gp_fverbose("d1"))
-	{	printf ("%s Sale de proc principal \n\n",gp_tm());
-	}
-
-}
-
-
-
-
-/*
- * -----------------------------------------------------------------------------------
- *
- *	pro_exec 1
- *
- *	exec aparte ...
- *
- * -----------------------------------------------------------------------------------
- */
-
-
-/* 
- *	pro_exec1
- *
- *	cuenta caracteres de un archivo
- *
- */
-
-
-int	pro_exec1()
-{
-	int	px,py;
-	int	i,j,k;
-	int	m1,m2,m3;
-	int	f1,f2,f3,f4;
-	int	q_lin;
-	int	q_tk;
-	int	p1,p2,p3,p4;
-	
-	int	tabla[256];
-
-	char	b1[MAXB];
-	char	b2[MAXB];
-	char	b3[MAXB];
-	char	tk[MAXT][MAXB];
-
-	/* proceso */
-	if (gp_fverbose("d1"))
-	{	printf ("%s Entra proceso exec 1 \n\n",gp_tm());
-	}
+		int	px,py;
+		int	i,j,k;
+		int	m1,m2,m3;
+		int	f1,f2,f3,f4;
+		int	q_lin;
+		int	q_tk;
+		int	p1,p2,p3,p4;
 		
-
-	if (!ffinp || !ffout) 
-		gp_uso(101);
-
-
-	/* init de valores */
-	for (i=0; i<256; i++)
-		tabla[i]=0;
-
-	/* si encuentro caracteres no considerados para el parser, avisar al final de todo el proceso */
-	flag_caracteres = 0;
-
-
-	q_lin=0;
-	while (fgets(b1, MAXB, hfinp) != NULL)
-	{
-
-	    /* opcion - proceso lineas vacias */
-	    if ( 1 )
-	    {
- 
-		if (gp_fverbose("d3"))
-		{
-			printf ("Linea  : %d \n\n",q_lin);
-			printf ("Buffer :|%s|\n\n",b1);
+		int	tabla1[256];
+		int	tabla2[256];
+	
+		char	b1[MAXB];
+		char	b2[MAXB];
+		char	b3[MAXB];
+		char	tk[MAXT][MAXB];
+	
+		/* proceso */
+		if (gp_fverbose("d1"))
+		{	printf ("%s Entra proceso exec 1 \n\n",gp_tm());
 		}
-
-		f1=1;
-
-
-		/* comienzo parser de tokens */
-		p1=0;
-		q_tk=0;
-
-		while ( f1 )
-		{
-			j=tipo_char(b1[p1]);
-			tabla[b1[p1]]++;
 			
-			if (b1[p1] == 0)
-				f1=0;
-			else
-				p1++;
-
-		} /* while */
-
-
-		if (gp_fverbose("d3"))
-			printf ("termine de parsear fila \n");
-	   }
-
-	   q_lin++;
+	
+		if (!ffinp || !ffout) 
+			gp_uso(101);
+	
+	
+		/* es uno o dos archivos */
+		f4 = 0;
+		if (ffin2)
+			f4 = 1;
+	
+		/* init de valores */
+		for (i=0; i<256; i++)
+		{	tabla1[i]=0;
+			tabla2[i]=0;
+		}
+		
+	
+		/* si encuentro caracteres no considerados para el parser, avisar al final de todo el proceso */
+		flag_caracteres = 0;
+	
+	
+		q_lin=0;
+		while (fgets(b1, MAXB, hfinp) != NULL)
+		{
+	
+		    /* opcion - proceso lineas vacias */
+		    if ( 1 )
+		    {
+	 
+			if (gp_fverbose("d3"))
+			{
+				printf ("Linea  : %d \n\n",q_lin);
+				printf ("Buffer :|%s|\n\n",b1);
+			}
+	
+			f1=1;
+	
+	
+			/* comienzo parser de tokens */
+			p1=0;
+			q_tk=0;
+	
+			while ( f1 )
+			{
+				j=tipo_char(b1[p1]);
+				tabla1[b1[p1]]++;
+				
+				if (b1[p1] == 0)
+					f1=0;
+				else
+					p1++;
+	
+			} /* while */
+	
+	
+			if (gp_fverbose("d3"))
+				printf ("termine de parsear fila \n");
+		   }
+	
+		   q_lin++;
+		}
+	
+	
+	
+	/* cuento chars de segundo archivo */
+	if (f4)
+	{
+		q_lin=0;
+		while (fgets(b1, MAXB, hfin2) != NULL)
+		{
+	
+		    /* opcion - proceso lineas vacias */
+		    if ( 1 )
+		    {
+	 
+			if (gp_fverbose("d3"))
+			{
+				printf ("Linea  : %d \n\n",q_lin);
+				printf ("Buffer :|%s|\n\n",b1);
+			}
+	
+			f1=1;
+	
+	
+			/* comienzo parser de tokens */
+			p1=0;
+			q_tk=0;
+	
+			while ( f1 )
+			{
+				j=tipo_char(b1[p1]);
+				tabla2[b1[p1]]++;
+				
+				if (b1[p1] == 0)
+					f1=0;
+				else
+					p1++;
+	
+			} /* while */
+	
+	
+			if (gp_fverbose("d3"))
+				printf ("termine de parsear fila \n");
+		   }
+	
+		   q_lin++;
+		}
 	}
 
 
@@ -1427,10 +1537,16 @@ int	pro_exec1()
 
 	for (j=0; j< 256; j++)
 	{
-		fprintf (hfout,"Char %3d %5d \n",j,tabla[j]);
+		if (!f4)
+			sprintf (b1,"Char %3d %5d \n",j,tabla1[j]);
+		else
+			sprintf (b1,"%sChar %3d %5d %5d \n", (abs(tabla1[j]-tabla2[j]) ? "X " : "  "),j,tabla1[j],tabla2[j] );
+
+
+		fprintf (hfout,"%s",b1);
 
 		if (gp_fverbose("d1"))
-			printf ("Char %3d %5d \n",j,tabla[j]);
+			printf ("%s",b1);
 	}
 
 
@@ -1448,34 +1564,250 @@ int	pro_exec1()
 /*
  * -----------------------------------------------------------------------------------
  *
- *	(MMM)
- *
  *	pro_exec 2
  *
- *	exec aparte ...
+ *	proceso de series de archivos indicados por lista 
  *
  * -----------------------------------------------------------------------------------
  */
 
 
 
+#if 0
 
 int	pro_exec2()
 {
 
-	/* prueba */
+	/* exec */
 	if (gp_fverbose("d1"))
 	{	printf ("%s Entra a proceso exec 2 \n\n",gp_tm());
 	}
 		
 
-
-	/* prueba */
+	/* exec */
 	if (gp_fverbose("d1"))
 	{	printf ("%s Sale de proceso exec 2 \n\n",gp_tm());
 	}
 
 }
+
+#endif
+
+
+
+
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	pro_exec 2
+ *
+ *	proceso de series de archivos indicados por lista 
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+#if 1
+
+/*
+ *
+ *	viene de prue2
+ *
+ *	abre archivo con lista de archivos a procesar (fuentes fortran)
+ *	x cada archivo, abre y carga a memoria en vector de estructuras
+ */
+
+
+#if 0
+
+#define	MAX_QSRC		500		* cant max de archivos fuentes a manejar */
+int	qf_ff;
+
+typedef	struct tff	*ffptr;
+typedef	struct tff
+{	char	n[MAXB];		/* nombre de file */
+	int	pf,uf;			/* primera - ultima fila */
+	int	f1,f2,f3;		/* flags prop general */
+}	ff;
+
+ffptr	ffp1,ffp2,*ffq1,*ffq2;		/* punteros varios */
+
+ffptr	tb[MAX_QSRC];
+
+#endif
+
+
+int	pro_exec2()
+{
+
+	int	i,j,k;
+	char	d1[MAXB];
+	char	d2[MAXB];
+	int	ql,qlf;
+	int	flag;
+	int	q_ptr;
+
+	FILE	*hwi,*hwo;
+
+
+	char	z[MAXV];
+	sprintf (z,"prue2");
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
+	}
+
+	if (!ffinp || !ffout || !ffdat )
+		gp_uso(12);
+
+
+
+	/* cantidad de lineas en el archivo  */
+	qf_ff = 0;
+	q_ptr = 0;
+	ql=0;
+
+	while (fgets(d1,MAXB,hfinp) != NULL)
+	{
+		if (!linea_vacia(d1)  && d1[0] != '#' )
+		{
+			/* saco el fin de linea - contemplo 13 x fuentes fortran */
+			for ( flag=0, j=strlen(d1); !flag && j; j--)
+				if (d1[j] == '\n' )
+				{	
+					flag=1;
+					if ( j && d1[j-1] == 13)
+						d1[j-1]=0;
+					else
+						d1[j]=0;
+				}
+
+			/* proceso file */
+			if (gp_fverbose("d3"))
+				printf ("Archivo a cargar:  |%s|\n",d1);
+
+			if ( 1 && ((hwi = fopen (d1,"r")) == NULL) )
+				error(601);
+
+			fnq1 = &fnp[q_ptr];
+			qfv_load(hwi,fnq1,&qlf);
+
+			fclose (hwi);
+
+			/* procese file */
+			if (gp_fverbose("d3"))
+				printf ("Archivo cargado:  %5d |%s|\n\n",qlf,d1);
+
+			/* registro datos del archivo */
+			tb[qf_ff] = (ffptr ) malloc (sizeof (ff));
+			if ( tb[qf_ff] == NULL )
+				error(903);
+
+			strcpy ( (*tb[qf_ff]).n, extract_fname(d1));
+			(*tb[qf_ff]).pf = q_ptr;
+			(*tb[qf_ff]).uf = q_ptr+qlf-1;
+
+			if (gp_fverbose("d1"))
+			{
+				printf ("load: %5d %5d |%s|\n",
+					(*tb[qf_ff]).pf,(*tb[qf_ff]).uf,(*tb[qf_ff]).n);
+			}
+
+			qf_ff++;
+			q_ptr += qlf;
+			ql++;
+		}
+	}
+
+
+	if (gp_fverbose("d3"))
+	{
+		printf ("Cantidad de lineas cargadas:  %5d \n",ql);
+		printf ("\n");
+	}
+
+#if 1
+	if (gp_fverbose("d3"))
+	{
+		printf ("\n\nComprobando integridad de la carga: \n\n");
+	
+		for ( i=0; i< q_ptr; i++)
+		{
+			printf ("i: %5d  |%s| \n",
+				i,(*fnp[i]).l );
+		}
+	}
+
+	printf ("\n");
+
+#endif
+
+	/* proceso todos los files */
+#if 1
+	ps_src1();
+#endif
+
+
+	/* grabo new file */
+	for (i = 0; i < qf_ff; i++)
+	{
+		/* nombre del archivo de salida */
+		sprintf (d2,"%s/%s",gp_dato,extract_fname( (*tb[i]).n));
+
+		if ( 1 && ((hwo = fopen (d2,"w")) == NULL) )
+			error(604);
+
+		for (j = (*tb[i]).pf ; j<= (*tb[i]).uf; j++)
+		{
+			fprintf (hwo,"%s\n", (*fnp[j]).l );
+		}
+	}
+
+	fclose(hwo);
+
+		
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[1],z);
+	}
+}
+
+
+
+#endif
+
+
+
+/*
+ *	procesar todos los fuentes
+ */
+
+
+int	ps_src1()
+{
+
+	int	ql_ini,ql_fin;
+	int	i,j,k,l;
+	int	f1,f2,f3,f4;
+	int	pf,uf;
+
+	char	b1[MAXB];
+
+
+	printf ("\n\n\n");
+
+	for (i=0; i< qf_ff; i++)
+	{
+		printf ("FF: %3d  %5d  |%s|\n", i, (*tb[i]).ql, (*tb[i]).n );
+	}
+
+	printf ("\n\n\n");
+}
+
 
 
 
@@ -1487,6 +1819,41 @@ int	pro_exec2()
  * -----------------------------------------------------------------------------------
  *
  *	(MMM)
+ *
+ *	pro_exec 3
+ *
+ *	exec aparte ...
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+
+
+
+int	pro_exec3()
+{
+
+	/* prueba */
+	if (gp_fverbose("d1"))
+	{	printf ("%s Entra a proceso exec 3 \n\n",gp_tm());
+	}
+		
+
+
+	/* prueba */
+	if (gp_fverbose("d1"))
+	{	printf ("%s Sale de proceso exec 3 \n\n",gp_tm());
+	}
+
+}
+
+
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
  *
  *	pro_prueba 1
  *
@@ -2542,7 +2909,7 @@ stptr	*q1;
 
 #if 0
 
-#define	MAX_FF		500		* cant max de archivos fuentes a manejar */
+#define	MAX_QSRC		500		* cant max de archivos fuentes a manejar */
 int	qf_ff;
 
 typedef	struct tff	*ffptr;
@@ -2554,7 +2921,7 @@ typedef	struct tff
 
 ffptr	ffp1,ffp2,*ffq1,*ffq2;		/* punteros varios */
 
-ffptr	tb[MAX_FF];
+ffptr	tb[MAX_QSRC];
 
 #endif
 
@@ -2613,7 +2980,7 @@ int	pro_prue2()
 				error(601);
 
 			fnq1 = &fnp[q_ptr];
-			qf_load(hwi,fnq1,&qlf);
+			qfv_load(hwi,fnq1,&qlf);
 
 			fclose (hwi);
 
@@ -2723,9 +3090,9 @@ int	p_src2()
 
 	char	b1[MAXB];
 	char	b2[MAXB];
+	char	b3[MAXB];
 
 
-	printf ("proceso file ... \n");
 
 	/* por cada uno de los fuentes cargados */
 	for (i=0; i< qf_ff; i++)
@@ -2777,7 +3144,18 @@ int	p_src2()
 					{	memset(b2,0,MAXB);
 						strncpy(b2,b1+k,m1);
 	
-						printf ("TTT k: %2d %2d |%s| \n",k,m1,b2);
+						sprintf (b3,"TTT k: %2d %2d |%s| ",k,m1,b2);
+
+						if (gp_fverbose("d2"))
+						{
+							printf ("%s\n",b3);
+						}
+
+						if (ffaux)
+						{
+							fprintf (hfaux,"%s\n",b3);
+						}
+
 
 						strcpy(b2,trim_blanks(b2));
 						m2 = pasa_filtro(b2);
@@ -2895,7 +3273,7 @@ char	*s;
 
 
 /*
- *	es_cadena_intersante
+ *	es_cadena_interesante
  *
  *	busca en un string (linea de source)
  *	nombres 'largos' (pongamos, mayor a 30 chars )
@@ -3244,6 +3622,260 @@ int	pro_prue3()
 
 
 
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	pro_prue 4
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ *	prue4
+ *
+ *	hago un malloc de un espacio y lo convierto en vector de punteros 
+ *	a estructuras.
+ */
+
+
+#if 0
+typedef	struct	tfn	*fnptr;
+typedef	struct	tfn
+{	char	l[HUG2];		/* por ahora, despues malloc */
+	int	f1;			/* usos varios */
+	int	f2;
+	int	f3;
+}	node;
+#endif
+
+
+/* bloque */
+#if 1
+
+int	pro_prue4()
+{
+	int	i,j,k;
+	int	f1,f2,f3;
+	int	x1,x2;
+	char	b1[MAXB];
+	char	b2[MAXB];
+	FILE	*hwi;
+
+	fnptr	*pp;
+
+	char	z[MAXV];
+	sprintf (z,"prue4");
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
+	}
+
+	if (!1 || !2 )
+		gp_uso(11);
+
+
+	x1 = 200;
+
+	pp = (void *) malloc( x1 * sizeof (fnptr) );
+	if ( pp == NULL )
+		error(333);
+	printf ("malloc ok !! \n");
+
+
+
+	for (i=0; i<x1; i++)
+	{
+		pp[i] = (fnptr ) malloc ( sizeof (node) );
+		if ( pp[i] == NULL )
+			error(334);
+	}
+
+	for (i=0; i<x1; i++)
+	{
+		(*pp[i]).f1 = 1000 + i;
+		(*pp[i]).f2 = 2000 + i;
+	}
+ 
+	for (i=0; i<x1; i++)
+	{
+		printf ("%3d %5d %5d \n",i,(*pp[i]).f1 , (*pp[i]).f2 );
+	}
+ 
+		
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[1],z);
+	}
+}
+
+
+#endif
+/* bloque */
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	pro_prue 5
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ *	prue5
+ *
+ *	carga un fuente fortran entero sobre estuctura de cadena de estrcts 
+ *	si queremos cargar toda la base en memoria, y queremos extender 
+ *	un programa, tendriamos que estar moviendo 500,000 lineas a cada rato !
+ */
+
+/*
+ *	2018-04-21 
+ *
+ *	bd_load
+ *	carga la base de datos del diccionario
+ *	diccio base: diccio01.txt
+ *
+ */
+
+
+
+/* bloque */
+#if 1
+
+int	pro_prue5()
+{
+	int	flag;
+	int	ql;
+
+	int	i,j,k;
+	int	f1,f2,f3;
+	int	x1,x2;
+	char	b1[MAXB];
+	char	b2[MAXB];
+	FILE	*hwi;
+
+
+	char	z[MAXV];
+	sprintf (z,"prue5");
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
+	}
+
+	if (!1 || !2 )
+		gp_uso(11);
+
+#if 1
+
+/* EE4 */
+
+
+	/* cantidad de palabras en el diccionario */
+	q_wrd = 0;
+
+	/* ptr al contenedor de direccion del ultimo nodo de la cadena */
+	npa = (pnodeptr *) &np1;
+
+	ql=0;
+	while (fgets(b1,MAXB,hfinp) != NULL)
+	{
+		if (!linea_vacia(b1) )
+		{
+			/* saco el fin de linea - contemplo 13 x fuentes fortran */
+			for ( flag=0, j=strlen(b1); !flag && j; j--)
+				if (b1[j] == '\n' )
+				{	
+					flag=1;
+
+					if ( j && b1[j-1] == 13)
+						b1[j-1]=0;
+					else
+						b1[j]=0;
+				}
+
+
+			if (gp_fverbose("d3"))
+			{
+				printf ("%3d |%s|\n",ql,b1);
+			}
+
+			*npa = (pnodeptr ) malloc ( sizeof (knode));
+			(**npa).wrd = ( char *) malloc(strlen(b1)+1);
+			sprintf ( (**npa).wrd,"%s",b1);
+			(**npa).num = q_wrd+1;
+			(**npa).nx = (pnodeptr) NULL;
+			npa = (pnodeptr *) & (*npa)->nx;
+
+			q_wrd++;
+			ql++;
+		}
+	}
+
+	if (gp_fverbose("d1"))
+	{
+		printf ("Cantidad de palabras en diccionario  : %6d\n",q_wrd);
+	}
+
+
+	if (gp_fverbose("d3"))
+	{
+		printf ("\n\nComprobando integridad del diccionario : \n\n");
+	
+		i=0;
+		npa = (pnodeptr *) &np1;
+
+		while ( (*npa) != (pnodeptr) NULL )
+		{
+			printf ("i: %3d  (**npa).num: %3d  (**npa).wrd: |%s|\n",i,(**npa).num,(**npa).wrd);
+			npa = (pnodeptr *) & (*npa)->nx;
+			i++;
+		}
+
+		printf ("\n");
+	}
+
+#endif
+
+		
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[1],z);
+	}
+}
+
+
+#endif
+/* bloque */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
  * -----------------------------------------------------------------------------------
  *
@@ -3269,7 +3901,7 @@ int	pro_prue3()
 int	pro_proc1()
 {
 	char	z[MAXV];
-	sprintf (z,"proc2");
+	sprintf (z,"proc1");
 
 	/* proceso */
 	if (gp_fverbose("d1"))
@@ -3487,6 +4119,170 @@ int	pro_proc3()
 
 
 
+/*
+ * -----------------------------------------------------------------------------------
+ *          
+ *
+ *	pro_proc 4 
+ *
+ *	carga un conjunto de fuentes sobre nodos estruct encadenados
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ *
+ *	proc 4
+ *
+ *	carga todos los fuentes en archivo lista
+ *	
+ *
+ */ 
+
+
+int	pro_proc4()
+{
+	int	i,j,k;
+	int	flag;
+	int	ql,qlf;
+	int	q_ptr;
+	char	d1[MAXB];
+	char	d2[MAXB];
+	FILE	*hwi,*hwo;
+
+
+	char	z[MAXV];
+	sprintf (z,"proc4");
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
+	}
+
+/* proc4 */
+#if 1
+
+	if (!ffinp || !ffout || !ffdat )
+		gp_uso(12);
+
+
+	/* cantidad de lineas en el archivo  */
+	qf_ff = 0;
+	q_ptr = 0;
+	ql=0;
+
+	while (fgets(d1,MAXB,hfinp) != NULL)
+	{
+		if (!linea_vacia(d1)  && d1[0] != '#' )
+		{
+			/* saco el fin de linea - contemplo 13 x fuentes fortran */
+			for ( flag=0, j=strlen(d1); !flag && j; j--)
+				if (d1[j] == '\n' )
+				{	
+					flag=1;
+					if ( j && d1[j-1] == 13)
+						d1[j-1]=0;
+					else
+						d1[j]=0;
+				}
+
+			/* proceso file */
+			if (gp_fverbose("d3"))
+				printf ("Archivo a cargar:  |%s|\n",d1);
+
+			if ( 1 && ((hwi = fopen (d1,"r")) == NULL) )
+				error(601);
+
+			qfc_load(hwi,ql,&qlf);
+
+			fclose (hwi);
+
+			/* procese file */
+			if (gp_fverbose("d3"))
+				printf ("Archivo cargado:  %5d |%s|\n",qlf,d1);
+
+			/* registro datos del archivo */
+			tb[qf_ff] = (ffptr ) malloc (sizeof (ff));
+			if ( tb[qf_ff] == NULL )
+				error(903);
+
+			strcpy ( (*tb[qf_ff]).n, extract_fname(d1));
+			(*tb[qf_ff]).ql = qlf;
+			(*tb[qf_ff]).pf = 0;
+			(*tb[qf_ff]).uf = qlf-1;
+
+			if (gp_fverbose("d1"))
+			{
+				printf ("load: %5d %5d %5d |%s|\n\n",
+					(*tb[qf_ff]).ql,(*tb[qf_ff]).pf,(*tb[qf_ff]).uf,(*tb[qf_ff]).n);
+			}
+
+			qf_ff++;
+			q_ptr += qlf;
+			ql++;
+		}
+	}
+
+
+	if (gp_fverbose("d3"))
+	{
+		printf ("Cantidad de files/lineas cargados:  %5d %5d \n",ql,q_ptr);
+		printf ("\n");
+	}
+
+	if (gp_fverbose("d3"))
+	{
+		printf ("\n\nComprobando integridad de la carga: \n\n");
+	
+		for ( i=0; i< qf_ff; i++)
+		{
+			printf ("i: %5d  %5d |%s| \n",
+				i,(*tb[i]).ql,(*tb[i]).n );
+		}
+	}
+
+	printf ("\n");
+
+
+	/* proceso todos los files */
+#if 1
+	ps_src1();
+#endif
+
+
+	/* grabo new file */
+	for (i = 0; i < qf_ff; i++)
+	{
+		/* nombre del archivo de salida */
+		sprintf (d2,"%s/%s",gp_dato,extract_fname( (*tb[i]).n));
+
+
+		if ( 1 && ((hwo = fopen (d2,"w")) == NULL) )
+			error(604);
+
+#if 1
+		qfc_write(hwo,i);
+#endif
+	}
+
+	fclose(hwo);
+		
+
+
+#endif
+/* proc4 */
+
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[1],z);
+	}
+
+}
+
+
+
+
 
 
 /*
@@ -3499,10 +4295,10 @@ int	pro_proc3()
 
 
 
-/* qf_load */
+/* qfv_load */
 #if 1
 
-int	qf_load(pfr,q1,l1)
+int	qfv_load(pfr,q1,l1)
 FILE	*pfr;
 fnptr	*q1;
 int	*l1;
@@ -3513,7 +4309,7 @@ int	*l1;
 	int	ql;
 
 	char	z[MAXV];
-	sprintf (z,"qf_load");
+	sprintf (z,"qfv_load");
 
 	/* proceso */
 	if (gp_fverbose("d1"))
@@ -3579,13 +4375,207 @@ int	*l1;
 }
 
 #endif
-/* qf_load */
+/* qfv_load */
+
+
+
+
 
 
 /*
  * -----------------------------------------------------------------------------------
  *
- *	arega una estructura al vector de estructuras (qf_load)
+ *	carga un archivo a cadena de estructuras
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+
+
+/* qfc_load */
+#if 1
+
+int	qfc_load(pfr,q1,l1)
+FILE	*pfr;
+int	q1;
+int	*l1;
+{
+	char	b1[MAXB];
+	int	flag,f1;
+	int	i,j,k;
+	int	ql;
+
+	char	z[MAXV];
+	sprintf (z,"qfc_load");
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
+	}
+
+	/* cantidad de lineas en el archivo  */
+	ql=0;
+
+
+
+/* EE6 */
+
+
+	ldfq1 = (ldf_ptr *) &vldf[q1];
+
+
+
+	while (fgets(b1,MAXB,pfr) != NULL)
+	{
+
+#if 0
+		if (!linea_vacia(b1)  && b1[0] != '#' )
+#endif
+		if ( 1 )
+		{
+
+			if (b1[strlen(b1)-1] == '\r' )
+				b1[strlen(b1)-1] = 0;
+
+			/* saco el fin de linea - contemplo 13 x fuentes fortran */
+			for ( flag=0, j=strlen(b1); !flag && j; j--)
+				if (b1[j] == '\n' )
+				{	
+					flag=1;
+
+					if ( j && b1[j-1] == 13)
+						b1[j-1]=0;
+					else
+						b1[j]=0;
+				}
+
+
+			if (gp_fverbose("d3"))
+				printf ("%3d |%s|\n",ql,b1);
+
+			*ldfq1 = (ldf_ptr  ) malloc (sizeof (ldf_node));
+			if ( *ldfq1 == NULL)
+				error(909);
+
+			sprintf ( (**ldfq1).l,"%s",b1);
+			(**ldfq1).f1 = 0;
+			(**ldfq1).f2 = 0;
+			(**ldfq1).f3 = ql;
+			(**ldfq1).nx = (ldf_ptr) NULL;
+			ldfq1 = (ldf_ptr *) & (*ldfq1)->nx;
+
+			ql++;
+		}
+	}
+
+	*l1 = ql;
+
+	if (gp_fverbose("d2"))
+	{
+		printf ("Cantidad de lineas en source ql       : %6d\n",ql);
+	}
+
+	if (gp_fverbose("d4"))
+	{
+
+		i=0;
+		ldfq1 = (ldf_ptr *) &vldf[q1];
+
+		while ( (*ldfq1) != (ldf_ptr) NULL )
+		{
+			printf ("i: %3d  (**ldfq1).f3: %3d  (**ldfq1).l: |%s|\n",i,(**ldfq1).f3,(**ldfq1).l);
+			ldfq1 = (ldf_ptr *) & (*ldfq1)->nx;
+			i++;
+		}
+
+
+	}
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[1],z);
+	}
+
+}
+
+#endif
+/* qfc_load */
+
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	graba un fuente en cadena de structs a file 
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+
+
+/* qfc_write */
+#if 1
+
+int	qfc_write(pfr,q1)
+FILE	*pfr;
+int	q1;
+{
+	char	b1[MAXB];
+	int	flag,f1;
+	int	i,j,k;
+	int	ql;
+
+	char	z[MAXV];
+	sprintf (z,"qfc_write");
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
+	}
+
+
+	i=0;
+	ldfq1 = (ldf_ptr *) &vldf[q1];
+
+	while ( (*ldfq1) != (ldf_ptr) NULL )
+	{
+		fprintf (pfr,"%s\n", (**ldfq1).l );
+
+		if (gp_fverbose("d4"))
+		{
+			if (i == 0)
+				printf ("Grabo fuente nro: %5d\n",q1);
+
+
+			printf ("GRA: i: %3d  (**ldfq1).f3: %3d  (**ldfq1).l: |%s|\n",i,(**ldfq1).f3,(**ldfq1).l);
+		}
+
+		ldfq1 = (ldf_ptr *) & (*ldfq1)->nx;
+		i++;
+	}
+
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[1],z);
+	}
+
+}
+
+#endif
+/* qfc_write */
+
+
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	agrega una estructura al vector de estructuras (qfv_load)
  *
  * -----------------------------------------------------------------------------------
  */
@@ -4006,7 +4996,7 @@ int	pro_tool1()
 
 	/* cargo lista l1 */
 	fnq1 = &fnp[0];
-	qf_load(hfinp,fnq1,&qf_lin);
+	qfv_load(hfinp,fnq1,&qf_lin);
 
 	if (gp_fverbose("d3") )
 	{
@@ -4016,7 +5006,7 @@ int	pro_tool1()
 
 	/* cargo lista l2 */
 	fnq2 = &fnf[0];
-	qf_load(hfin2,fnq2,&qf_fen);
+	qfv_load(hfin2,fnq2,&qf_fen);
 
 	if (gp_fverbose("d3") )
 	{
@@ -4206,12 +5196,14 @@ int	check_c1()
 				strcpy(b2, (*fnf[i]).l );
 			}
 
-	printf ("cmp: |%s| |%s| \n",b1,b2);
+			if (gp_fverbose("d4"))
+			{
+				printf ("cmp: |%s| |%s| \n",b1,b2);
+			}
 
 
 			if (!strcmp ( b1 , b2 ) )
 			{
-printf ("--- 1\n");
 				(*fnf[i]).f1 = 1;
 				f1 = 0;
 
@@ -4404,7 +5396,7 @@ fnptr	fnp[MAX_FSRC];			/* vector de punteros a lineas de source */
 int	load_makefile(fpr)
 FILE	*fpr;
 {
-	char	b1[HUGE];
+	char	b1[HUG2];
 	int	flag,f1;
 	int	i,j,k;
 	int	q_mk;
@@ -4430,7 +5422,7 @@ FILE	*fpr;
 
 	qf_lin=0;
 
-	while (fgets(b1,HUGE,fpr) != NULL)
+	while (fgets(b1,HUG2,fpr) != NULL)
 	{
 
 		/* temita de los archivos con line feed */
@@ -4527,7 +5519,7 @@ int	proc_makefile()
 	int	f1,f2,f3;
 	int	p1,p2,p3;
 	int	mx;
-	char	b1[HUGE];
+	char	b1[HUG2];
 	char	b2[MAXB];
 
 
@@ -4741,9 +5733,12 @@ int	filter_makefile()
 
 #endif
 
-	for (i=0; i<qf_fen; i++)
+	if (gp_fverbose("d4"))
 	{
-		printf ("RRR: %4d %2d |%-40.40s| \n",i, (*fnf[i]).f1, (*fnf[i]).l );
+		for (i=0; i<qf_fen; i++)
+		{
+			printf ("RRR: %4d %2d |%-40.40s| \n",i, (*fnf[i]).f1, (*fnf[i]).l );
+		}
 	}
 
 
@@ -4966,7 +5961,7 @@ int	pro_tool3()
 	}
 
 	fnq1 = &fnp[0];
-	qf_load(hfinp,fnq1,&qf_lin);
+	qfv_load(hfinp,fnq1,&qf_lin);
 
 
 	for (i=0; i< qf_lin; i++)
@@ -5025,21 +6020,27 @@ int	pro_tool4()
 	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
 	}
 
+	/* que la vida sea mas leve */
+	if (!ffaux)
+		agregar_ffaux("parser.err");
+
 	/* chequeamos reqs */
 	if (!ffinp || !ffout || !ffaux )
 		gp_uso(11);
 
 	/* cargamos file en memo */
 	fnq1 = &fnp[0];
-	qf_load(hfinp,fnq1,&ql_ini);
+	qfv_load(hfinp,fnq1,&ql_ini);
 
 
 	/* mientras que no cambie la cant de lineas !!! */
 	ql_fin=ql_ini;
 
 	
+#if 0
 	/* 1 - cambio los formatos de declaracion de variables */
 	cfor_vars(&ql_ini,&ql_fin);
+#endif
 
 
 	/* grabo file */
@@ -5524,19 +6525,16 @@ int	*ql_f;
 
 				memset (b3,0,MAXB);
 				memset (b4,0,MAXB);
-printf ("- - - - 1 \n");
 
 				armame_dos_lineas(b2,b3,b4);
 				if (gp_fverbose("d3"))
 				{	printf ("dos lineas: 1  |%s| \n",b3);
 					printf ("dos lineas: 2  |%s| \n",b4);
 				}
-printf ("- - - - 2 \n");
 
 				/* correr todas las lineas ... */
 				correme_una_linea(i+1,qf);
 
-printf ("- - - - 3 \n");
 #if 1
 				/* grabar ambas lineas */
 				strcpy ( (*fnp[i]).l, b3);
@@ -6557,14 +7555,18 @@ int	pro_tool6()
 
 	/*
 	 * en aux graba caracteres no contemplados por el parser
-	 *
 	 */
+
+	/* que la vida sea mas leve */
+	if (!ffaux)
+		agregar_ffaux("parser.err");
+
 	if (!ffinp || !ffout || !ffaux)
 		gp_uso(12);
 
 	/* cargamos file en memo */
 	fnq1 = &fnp[0];
-	qf_load(hfinp,fnq1,&ql_ini);
+	qfv_load(hfinp,fnq1,&ql_ini);
 
 	lml=0;
 	for (i=0; i<ql_ini; i++)
@@ -6598,7 +7600,7 @@ int	pro_tool6()
 		cfor_lcon(&ql_ini,&ql_fin);
 
 #if 1
-	/* 4 - pidio sacar las lineas de continuacion */
+	/* 4 - pidio sacar las lineas de cont. replicar declaracion */
 	if ( ffchg_mas )
 		cfor_mas(&ql_ini,&ql_fin);
 #endif
@@ -7030,7 +8032,7 @@ int	pro_tool7()
 	/* bloque */
 	/* cargamos file en memo */
 	fnq1 = &fnp[0];
-	qf_load(hfinp,fnq1,&ql_ini);
+	qfv_load(hfinp,fnq1,&ql_ini);
 
 	lml    = 0;
 	n_lml  = 0;
@@ -7978,9 +8980,26 @@ int	(*fx)(int,int,char *);
 }
 
 
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	agrego un archivo aux ...
+ *
+ * -----------------------------------------------------------------------------------
+ */
 
 
+int	agregar_ffaux(s)
+char	*s;
+{
+	ffaux = 1;
+	strcpy(faux,s);
 
+	if ( ffaux && ((hfaux = fopen (faux,"w")) == NULL) )
+	{
+		error(105);
+	}
+}
 
 
 
@@ -8097,7 +9116,7 @@ int	gp_parser()
 				error(999);
 
 			fnq1 = &fnp[0];
-			qf_load(hwi,fnq1,&qf_lin);
+			qfv_load(hwi,fnq1,&qf_lin);
 			
 			printf ("Cant pars %d\n",qf_lin);
 			for (j=0; j< qf_lin; j++)
@@ -8877,7 +9896,7 @@ int	x;
 	printf ("      --chglcp  arregla lineas de continuacion ... reemplaza + por &                              \n");
 	printf ("                                                                                                  \n");
 	printf ("prue2:         carga todos los archivos en list_src a  memo y los genera en new_repo              \n");
- 	printf ("%s -v -opciones=d5 -prue=2 -inp=list_src -out=l_names -aux=p.err -dato=new_repo                   \n");
+ 	printf ("%s -v -opciones=d5 -prue=2 -inp=list_src -out=l_names -aux=p.err -dato=new_repo                   \n",z);
 	printf ("                                                                                                  \n");
 	printf ("                                                                                                  \n");
 
@@ -8952,9 +9971,9 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0028");
-	strcpy (d,"Mon May 27 18:05:17 -03 2024");
-	
+	strcpy (ver,"0032");
+	strcpy (d," Thu May 30 04:16:22 EDT 2024");
+
 	sprintf (z,"%s -- (%s)  %s", gp_fp(GP_GET,0,(char **)0), ver, d  );
 	memset (w,0,MAXV);
 	strncpy (w,"                                        ",strlen(z));
@@ -9253,3 +10272,14 @@ int main() {
 
 
 #endif
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *	end of source  ( I hope)
+ *	end of source
+ *	end of source
+ * -----------------------------------------------------------------------------------
+ */
+
+
