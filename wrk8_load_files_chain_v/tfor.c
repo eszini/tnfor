@@ -1798,30 +1798,14 @@ int	ps_src1()
 	char	b1[MAXB];
 
 
+	printf ("\n\n\n");
+
 	for (i=0; i< qf_ff; i++)
 	{
-		if (gp_fverbose("d1"))
-		{
-			printf ("proceso: %6d %6d |%s|\n",
-				(*tb[i]).pf,(*tb[i]).uf,(*tb[i]).n);
-
-		}
-
-
-		/* primera y ultima fila del fuente */
-		pf = (*tb[i]).pf;
-		uf = (*tb[i]).uf;
-
-/* mmm
- * no es compatible esta llamada !!
- * cfor_comm comienza desde 0 hasta ql_ini (cantidad de lineas del fuebte)
- * hay que modificar eso !!!
- */
-
-		/* 1 - pidio cambiar comentarios */
-		if ( ffchg_com )
-			cfor_comm(&ql_ini,&ql_fin);
+		printf ("FF: %3d  %5d  |%s|\n", i, (*tb[i]).ql, (*tb[i]).n );
 	}
+
+	printf ("\n\n\n");
 }
 
 
@@ -4209,11 +4193,7 @@ int	pro_proc4()
 			if ( 1 && ((hwi = fopen (d1,"r")) == NULL) )
 				error(601);
 
-#if 1
 			qfc_load(hwi,ql,&qlf);
-#endif
-
-/* EE5 */
 
 			fclose (hwi);
 
@@ -4250,7 +4230,6 @@ int	pro_proc4()
 		printf ("\n");
 	}
 
-#if 1
 	if (gp_fverbose("d3"))
 	{
 		printf ("\n\nComprobando integridad de la carga: \n\n");
@@ -4264,10 +4243,9 @@ int	pro_proc4()
 
 	printf ("\n");
 
-#endif
 
 	/* proceso todos los files */
-#if 0
+#if 1
 	ps_src1();
 #endif
 
@@ -9993,7 +9971,7 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0031");
+	strcpy (ver,"0032");
 	strcpy (d," Thu May 30 04:16:22 EDT 2024");
 
 	sprintf (z,"%s -- (%s)  %s", gp_fp(GP_GET,0,(char **)0), ver, d  );
