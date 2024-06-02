@@ -1,5 +1,0 @@
-      INTEGER (kind=4) ::   ERROR
-      INTEGER (kind=2) ::   LAST_VARIABLE,RUN_YEARS
-      INTEGER (kind=2) ::   RUN_YEAR,BASE_YEAR
-      INTEGER (kind=2) ::   YEAR,DELETE
-      INTEGER (kind=2) ::   CURRENT_YEAR,I,PARM_UNIT,ASSET_UNIT
