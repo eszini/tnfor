@@ -1,2 +1,0 @@
-      CHARACTER (len=1) ::   OPMETH
-      CHARACTER (len=256) ::   FILE_NAME,OUTPUT_DIRECTORY
