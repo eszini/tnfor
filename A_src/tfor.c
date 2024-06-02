@@ -6420,7 +6420,7 @@ int	*ql_f;
 
 	int	i,j,k;
 	int	p1,p2;
-	int	f1,f2,f3,f4;
+	int	f1,f2,f3,f4,f5;
 	int	qi,qf;
 	int	d1;
 
@@ -6526,14 +6526,18 @@ int	*ql_f;
 				memset (b3,0,MAXB);
 				memset (b4,0,MAXB);
 
+printf ("- - - - 1\n");
+
 				armame_dos_lineas(b2,b3,b4);
 				if (gp_fverbose("d3"))
 				{	printf ("dos lineas: 1  |%s| \n",b3);
 					printf ("dos lineas: 2  |%s| \n",b4);
 				}
 
+printf ("- - - - 2\n");
 				/* correr todas las lineas ... */
 				correme_una_linea(i+1,qf);
+printf ("- - - - 3\n");
 
 #if 1
 				/* grabar ambas lineas */
@@ -6640,6 +6644,10 @@ printf (" - - - - 4 l1: %4d ql: %4d j-1: %4d j: %4d  s[j-1]: |%s|  s[j]: |%s| \n
 
 #endif
 
+/*
+ *	s  ... linea de entrada a separar 
+ */
+
 int	armame_dos_lineas(s,l1,l2)
 char	*s;
 char	*l1;
@@ -6653,16 +6661,19 @@ char	*l2;
 
 	memset(b1,' ',MAXB);
 
+	/* busco el :: - como estoy convirtiendo ... la linea ya lo tiene que tener ! */
 	for (i=0, f1=1; f1 && i<strlen(s); i++)
 		if (s[i] == ':' && s[i+1] == ':' )
 			f1 = 0, p1 = i+2;
 
+	/* busco donde empieza el resto, despues de :: y blancos */
 	for (i=0, c1=0, f1=1; f1 && i<strlen(s); i++)
 		if (s[i+p1] == ' ')
 			c1++;
 		else
 			f1=0;
 
+	/* busco una coma que separe campos, que no este dentro de parentesis ! */
 	for (i=0, f1=1, f2=1; f1 && i<strlen(s); i++)
 	{	if (f2 && s[i+p1] == '(')
 			f2 = 0;
@@ -6672,12 +6683,29 @@ char	*l2;
 			f1 = 0, p2 = p1+i;
 	}
 
-	strncpy(l1,s,p2);
-	l1[p2]=0;
+	/* f1 1, encontro la , para separar 
+	 * f1 0, es un solo campo con parentesis enorme !
+	 *       por ahora, asumimos que esta en f77 y agrego una linea con + 
+	 */
 
-	strncpy(l2,s,p1);
-	strncat(l2,b1,c1);
-	strcat(l2,s+p2+1);
+		strncpy(l1,s,p2);
+		l1[p2]=0;
+
+		strncpy(l2,s,p1);
+		strncat(l2,b1,c1);
+		strcat(l2,s+p2+1);
+#if 0
+		strncpy(l1,s,p1);
+		
+		strcpy(l2,"     +   ");
+		strcat(l2,s+p2+1);
+#endif
+
+printf ("SALGO de armame_dos_lineas \n");
+printf ("l1: |%s| \n",l1);
+printf ("l2: |%s| \n",l2);
+
+
 }
 
 
@@ -7081,11 +7109,12 @@ int	fix_dec_var2()
 int	tiene_dec_var1()
 {
 	int	i,j;
-	int	f1,f2;
+	int	f1,f2,f3;
+	char	b1[MAXV];
 
 	int	f_comm, n_comm;
 
-	f1=0;
+	f1=0;	/* f1 0 indica que no encontro declaracion de variable */
 	
 #if 0
 	if (tk[0][0] == '!')
@@ -7095,6 +7124,8 @@ int	tiene_dec_var1()
 	f_comm	= 0;
 	n_comm  = 0;
 	f2      = 1;
+	memset (b1,0,MAXV);
+
 
 	for (i=0; !f1 && f2 && i<q_tk; i++)
 	{
@@ -7107,10 +7138,17 @@ int	tiene_dec_var1()
 		if ( !strcmp("character", pasar_a_minusc( tk[i] )) )
 			f1 = 4;
 
+		/* vuelvo a armar la linea a partir de los tokens */
+		strcat(b1,tk[i]);
+
+		/* condiciones para terminar de buscar */
 		if (!strcmp("&",tk[i]))
 			f2 = 0;
 		if (!strcmp("!",tk[i]))
 			f2 = 0;
+		if (strlen(b1) > 12)
+			f2 = 0;
+			
 	}
 
 	return f1;
