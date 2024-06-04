@@ -1,0 +1,7 @@
+Enrglimt.for:      integer (kind=2) HESI_UNIT_ID_NUM_ord
+GAS_objt.for:      INTEGER (KIND=2) GAS_NODE_TYPE_INDEX(:),GET_GAS_NODE_TYPE_INDEX,
+Mthnmcom.mon:      integer (kind=2) PAYMENT_VARS
+TRANSOBJ2.FOR:         INTEGER (KIND=2), STORAGE_TRANS_HOURS(12),INDEP_POINTER
+coal_obj.for:      INTEGER (KIND=2) COAL_NODE_TYPE_INDEX(:),GET_COAL_NODE_TYPE_INDEX,
+grx_planning_routines.f90:        INTEGER(KIND=2) BASE_YEAR,YEAR,END_POINT,STUDY_PERIOD,ENDYR, &
+msgmmdbt.for:      INTEGER (KIND=2) OVERHEAD_LENGTH,
