@@ -17892,7 +17892,7 @@ C***********************************************************************
      +                                    END_EP(:),
      +                                    BEGIN_DAY(:),
      +                                    END_DAY(:)
-         INTEGER (KIND=2), STORAGE_TRANS_HOURS(12),INDEP_POINTER
+         INTEGER (KIND=2) ::  STORAGE_TRANS_HOURS(12),INDEP_POINTER
          REAL (KIND=4), ALLOCATABLE :: MONTHLY_ENERGY_MULT(:),
      +                                 ENERGY_PRICE(:),
      +                                 MONTHLY_ENERGY_PRICE(:),

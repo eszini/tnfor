@@ -16,6 +16,10 @@
  *	//header//
  *
  *	tfor.c
+ *
+ *
+ *	Mon Jun  3 19:23:14 -03 2024
+ *	mejore que contemple integer *2, intent(int)
  *	
  *	
  *	Fri May 31 04:32:58 -03 2024
@@ -6447,6 +6451,8 @@ int	*ql_f;
 
 		if ( f1=tiene_dec_var1() )
 		{
+printf ("CCC despues de tiene_dec_var1 q_tk: %d\n",q_tk);
+
 			f4 = 1;
 
 			/* caso int, log, real */
@@ -6454,7 +6460,11 @@ int	*ql_f;
 			{
 				/* si no lo pude arreglar, encontre un caso no contemplado !!*/
 				if (! fix_dec_var1 () )
+				{	
+printf ("DDD despues de fix_dec_var1 q_tk: %d\n",q_tk);
+
 					printf ("CASO NO CONTEMPLADO \n");
+				}
 #if 0
 					error(701);
 #endif
@@ -6491,6 +6501,8 @@ int	*ql_f;
 		} /* tiene_dec_var */
 
 
+printf ("AA1 q_tk: %d\n",q_tk);
+
 		if (gp_fverbose("d4"))
 		{
 			printf ("cfor:  linea %4d #tk %4d |%s|\n",i,q_tk,b1);
@@ -6500,6 +6512,7 @@ int	*ql_f;
 			}
 		}
 
+printf ("AA2 q_tk: %d\n",q_tk);
 		/* armo la linea de nuevo con todos los tokens */
 		memset (b2,0,MAXB);
 		for (j=0; j< q_tk; j++)
@@ -6664,7 +6677,7 @@ char	*l2;
 	/* busco el :: - como estoy convirtiendo ... la linea ya lo tiene que tener ! */
 	for (i=0, f1=1; f1 && i<strlen(s); i++)
 		if (s[i] == ':' && s[i+1] == ':' )
-			f1 = 0, p1 = i+2;
+			f1 = 0, p1 = i+2, p2 = i+2;
 
 	/* busco donde empieza el resto, despues de :: y blancos */
 	for (i=0, c1=0, f1=1; f1 && i<strlen(s); i++)
@@ -6683,27 +6696,35 @@ char	*l2;
 			f1 = 0, p2 = p1+i;
 	}
 
-	/* f1 1, encontro la , para separar 
-	 * f1 0, es un solo campo con parentesis enorme !
-	 *       por ahora, asumimos que esta en f77 y agrego una linea con + 
+	/* 
+	 * si encontro la ',' puede separar campos
+	 * si no la encontro, es el caso de una sola variable con
+	 * sub indices largos , y llego al fin de linea !
 	 */
-
-		strncpy(l1,s,p2);
+	
+	if (p1 != p2)
+	{	strncpy(l1,s,p2);
 		l1[p2]=0;
 
 		strncpy(l2,s,p1);
 		strncat(l2,b1,c1);
 		strcat(l2,s+p2+1);
-#if 0
+	}
+#if 1
+	else
+	{
 		strncpy(l1,s,p1);
-		
-		strcpy(l2,"     +   ");
-		strcat(l2,s+p2+1);
+		strcpy(l2,"     +  ");
+		strcat(l2,s+p1);
+	}
 #endif
 
+if ( p1 == p2)
+{
 printf ("SALGO de armame_dos_lineas \n");
 printf ("l1: |%s| \n",l1);
 printf ("l2: |%s| \n",l2);
+}
 
 
 }
@@ -6755,17 +6776,25 @@ char	*l2;
 
 int	fix_dec_var1()
 {
-	int	i,j,k,i1;
-	int	f1,f2,f3;
+	int	i,j,k,i1,m;
+	int	f1,f2,f3,f4;
 	int	minus, aster, kind, opt, inten, alloca, save, func, cont;
 	int	n_minus, n_aster, n_kind, n_opt, n_inten, n_alloca, n_save, n_func, n_cont;
 	int	ult, n_type;
 	int	f_aster;
+	char	b1[MAXB];
 
 	int	f_int,f_rea,f_log,f_cha;
 
 	char	ca;
-	char	varb[MAXB];
+	char	s_varb[MAXB];
+	char	s_inte[MAXB];
+
+
+	memset(b1,0,MAXB);
+	memset(s_varb,0,MAXB);
+	memset(s_inte,0,MAXB);
+
 
 	f3     = 1;	/* f3 true es GO ... si por alguna condicion paramos, f3 false */
 
@@ -6785,7 +6814,6 @@ int	fix_dec_var1()
 	f_rea  = 0;
 	f_log  = 0;
 	f_cha  = 0;
-
 
 	f_aster = 1;
 
@@ -6820,7 +6848,7 @@ int	fix_dec_var1()
 
 		if (!strcmp("intent",tk[i]) || !strcmp("INTENT",tk[i]) )
 		{	inten = 1, n_inten = i, ult=i;
-			for (k=i+1; k< i+8; i++)
+			for (k=i+1; k< i+8; k++)
 				if (tk[k][0] == ')')
 					ult=k;
 		}
@@ -6840,16 +6868,54 @@ int	fix_dec_var1()
 	}
 
 
-	strcpy(varb,tk[n_type]);
+
+	strcpy(s_varb,tk[n_type]);
 	if (minus)
-		strcpy(varb,pasar_a_minusc(tk[n_type]));
+		strcpy(s_varb,pasar_a_minusc(tk[n_type]));
 
 
+	if (inten)
+	{
 
+		/* condiciones para que este todo bien */
+		f4=1;
+printf ("INTE0: f4; %d    n_inten: %2d |%s| |%s| |%s| |%s| \n",f4,n_inten,tk[n_inten],tk[n_inten+1],tk[n_inten+2],tk[n_inten+3]);
+		if (f4 && strcmp(tk[n_inten+1],"("))
+			f4 = 0;
+printf ("INTE1: f4; %d    n_inten: %2d |%s| \n",f4,n_inten,tk[n_inten]);
+		if (f4 && strcmp(tk[n_inten+3],")"))
+			f4 = 0;
+printf ("INTE2: f4; %d    n_inten: %2d |%s| \n",f4,n_inten,tk[n_inten]);
+		if (f4 && 
+			( strcmp("in",pasar_a_minusc(tk[n_inten+2]))  &&
+			  strcmp("out",pasar_a_minusc(tk[n_inten+2])) &&
+			  strcmp("inout",pasar_a_minusc(tk[n_inten+2]))  )
+		   )
+			f4 = 0;
+printf ("INTE3: f4; %d    n_inten: %2d |%s| \n",f4,n_inten,tk[n_inten]);
+
+		if (f4)
+		{
+			sprintf (s_inte,"%s%s%s%s",tk[n_inten],tk[n_inten+1],tk[n_inten+2],tk[n_inten+3]);
+			tk[n_inten+0][0] = 0;
+			tk[n_inten+1][0] = 0;
+			tk[n_inten+2][0] = 0;
+			tk[n_inten+3][0] = 0;
+			printf ("INTE: |%s|\n",s_inte);
+		}
+		else
+			error(1001);
+	}
+			
+
+printf ("EE3 - - - q_tk: %d \n",q_tk);
 		
 	if (gp_fverbose("d4"))
 	{
-		for ( i1 = 0 ; i1< 8; i1++)
+		printf ("RR1 n_type:   %d \n",n_type);
+		printf ("RR1 n_inten:  %d \n",n_inten);
+
+		for ( i1 = 0 ; i1< 15 && i1 < q_tk; i1++)
 			printf ("Token-1-  %d |%s| \n",i1,tk[i1]);
 	}
 
@@ -6864,9 +6930,34 @@ int	fix_dec_var1()
 
 		if (ca == '1' || ca == '2' || ca == '4' || ca == '8' )
 		{
-			sprintf (tk[i] , "%s (kind=%c)",varb,ca);
-			sprintf (tk[i+1]," ");
+			sprintf (tk[i] , "%s (kind=%c)",s_varb,ca);
+			tk[i+1][0]=0;
+			tk[i+2][0]=0;
+
+	memset(b1,0,MAXB);
+	for (m=0; m<q_tk; m++)
+		strcat(b1,tk[m]);
+	printf ("QUEDO2 |%s| \n\n",b1);
+
+
+	printf ("ZZZ1 |%s| \n",tk[i+2]);
+			if (inten)
+			{
+	printf ("ZZZ2 |%s| \n",tk[i+2]);
+				sprintf (tk[i+2]," ,%s ",s_inte);
+				if (tk[i+3][0] == ',')
+					tk[i+3][0] = ' ';
+				if (tk[i+4][0] == ',')
+					tk[i+4][0] = ' ';
+	printf ("ZZZ3 |%s| \n",tk[i+2]);
+			}
 					
+
+	memset(b1,0,MAXB);
+	for (m=0; m<q_tk; m++)
+		strcat(b1,tk[m]);
+	printf ("QUEDO3 |%s| \n\n",b1);
+
 			if (!kind)
 			{
 				if (ult == 0)
@@ -6878,6 +6969,8 @@ int	fix_dec_var1()
 					ca = tk[ult+1][0];
 					if (ca == '1' || ca == '2' || ca == '4' || ca == '8' )
 						sprintf (tk[ult+1]," ");
+printf ("PP5: i: %2d tk[i+1] |%s| \n",i,tk[i+1]);
+printf ("PP6: i: %2d tk[i+2] |%s| \n",i,tk[i+2]);
 				}
 
 				if (func)
@@ -6885,6 +6978,8 @@ int	fix_dec_var1()
 					ca = tk[ult+1][0];
 					if (ca == '1' || ca == '2' || ca == '4' || ca == '8' )
 						sprintf (tk[ult+1]," ");
+printf ("PP7: i: %2d tk[i+1] |%s| \n",i,tk[i+1]);
+printf ("PP8: i: %2d tk[i+2] |%s| \n",i,tk[i+2]);
 				}
 			}
 
@@ -6892,6 +6987,10 @@ int	fix_dec_var1()
 		}
 	}
 
+	memset(b1,0,MAXB);
+	for (m=0; m<q_tk; m++)
+		strcat(b1,tk[m]);
+	printf ("QUEDO4: |%s| \n\n",b1);
 
 	/* esta en minuscula y no tiene asterisco valor */
 	if ( f3 && !f1 && !aster)
@@ -6907,6 +7006,25 @@ int	fix_dec_var1()
 
 		f1 = 1;
 	}
+
+printf ("PP9: i: %2d tk[i+1] |%s| \n",i,tk[i+1]);
+printf ("PPA: i: %2d tk[i+2] |%s| \n",i,tk[i+2]);
+	if (gp_fverbose("d4"))
+	{
+		for ( i1 = 0 ; i1< 15 && i1 < q_tk; i1++)
+			printf ("EEE0 Token-1-  %d |%s| \n",i1,tk[i1]);
+	}
+
+	memset(b1,0,MAXB);
+	for (m=0; m<q_tk; m++)
+		strcat(b1,tk[m]);
+	printf ("QUEDO5: |%s| \n\n",b1);
+
+
+	/* esto es una chanchada ... hay que hacer otra cosa.
+	 * pero por ahora ... arreglo a lo choto ... 
+	 */
+
 
 	return(f1);
 }
@@ -8724,6 +8842,8 @@ int	*qt;
 	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[1],z);
 	}
 
+printf ("BBB volviendo de l_pars ! q_tk: %d \n",q_tk);
+
 }
 
 
@@ -10009,8 +10129,8 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0032");
-	strcpy (d," Thu May 30 04:16:22 EDT 2024");
+	strcpy (ver,"0033");
+	strcpy (d,"Mon Jun  3 19:24:07 -03 2024");
 
 	sprintf (z,"%s -- (%s)  %s", gp_fp(GP_GET,0,(char **)0), ver, d  );
 	memset (w,0,MAXV);
