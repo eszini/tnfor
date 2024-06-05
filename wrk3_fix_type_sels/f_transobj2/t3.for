@@ -3074,7 +3074,7 @@
      +     yr_element_failed
          integer ::  tg_ubound, ft_index, ft_ubound,
      +     yr_ubound
-         character*32 :: bad_vector_name
+         character (len=32) :: bad_vector_name
 
 !
 !
