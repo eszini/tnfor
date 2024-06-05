@@ -231,9 +231,15 @@
  *	Carga como vector de punteros a estructuras lineas completa
  *	Parsea cada linea a token
  *	
+ *	Arregla las lineas de comentarios
+ *	el -t cambia tabs por 4 blancos
+ *
+ *	./tfor -v -opciones=d5 -tool=6 -t -inp=t1.for -out=t2.for --chgcomm
+ *
  *	Arregla las lineas de continuacion en fortran
  *
- *	./tfor -v -opciones=d5 -tool=6 -inp=t1.for -out=t2.for > log
+ *	./tfor -v -opciones=d5 -tool=6 -inp=t1.for -out=t2.for --chglco > log
+ *
  *
  *
  * - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -353,6 +359,7 @@ int	gp_q_partype4=0;	/* parametero tipo "--someoption" */
 int	gp_verbose=0;		/* verbose 0 no 1 si */
 
 int	gp_minusculas=0;	/* output en minuscula 0 no 1 si */
+int	gp_tabs=0;		/* reemplazar tabs x 4 blancos si no */
 int	gp_fsentencia=0;	/* archivo de salida en formato sentencias 0 no 1 si */
 int	gp_eol=0;		/* fuerzo string EOL al final de la linea ... a veces hay . en medio de la linea */
 int	gp_reidx;		/* re indexar archivo de transacciones */
@@ -1422,6 +1429,8 @@ int	proc_principal()
 		char	b3[MAXB];
 		char	tk[MAXT][MAXB];
 	
+		char	mostrar[16];
+
 		/* proceso */
 		if (gp_fverbose("d1"))
 		{	printf ("%s Entra proceso exec 1 \n\n",gp_tm());
@@ -1541,10 +1550,20 @@ int	proc_principal()
 
 	for (j=0; j< 256; j++)
 	{
+		memset (mostrar,0,16);
+		sprintf (mostrar,"%c",j);
+		if (j == 9)
+			sprintf (mostrar,"%s","TAB");
+		if (j == 10)
+			sprintf (mostrar,"%s","Line Feed");
+		if (j == 13)
+			sprintf (mostrar,"%s","Carriage Return");
+
+
 		if (!f4)
-			sprintf (b1,"Char %3d %5d \n",j,tabla1[j]);
+			sprintf (b1,"Char %3d %7d   |%s|\n",j,tabla1[j],mostrar);
 		else
-			sprintf (b1,"%sChar %3d %5d %5d \n", (abs(tabla1[j]-tabla2[j]) ? "X " : "  "),j,tabla1[j],tabla2[j] );
+			sprintf (b1,"%sChar %3d %7d %7d     |%s| \n", (abs(tabla1[j]-tabla2[j]) ? "X " : "  "),j,tabla1[j],tabla2[j] ,mostrar);
 
 
 		fprintf (hfout,"%s",b1);
@@ -3132,7 +3151,6 @@ int	p_src2()
 			if (es_linea_comentario(b1))
 				f4 = 0;
 	
-/* EEE1 */
 			/* solo proceso lineas que no son comentario */
 			if (f4)
 			{	
@@ -3306,7 +3324,6 @@ char	*s;
 
 #if 1
 
-/* EEE2 */
 
 	p1 = 0;
 	f1 = 1;
@@ -6908,7 +6925,6 @@ printf ("INTE3: f4; %d    n_inten: %2d |%s| \n",f4,n_inten,tk[n_inten]);
 	}
 			
 
-printf ("EE3 - - - q_tk: %d \n",q_tk);
 		
 	if (gp_fverbose("d4"))
 	{
@@ -7012,7 +7028,7 @@ printf ("PPA: i: %2d tk[i+2] |%s| \n",i,tk[i+2]);
 	if (gp_fverbose("d4"))
 	{
 		for ( i1 = 0 ; i1< 15 && i1 < q_tk; i1++)
-			printf ("EEE0 Token-1-  %d |%s| \n",i1,tk[i1]);
+			printf ("EER0 Token-1-  %d |%s| \n",i1,tk[i1]);
 	}
 
 	memset(b1,0,MAXB);
@@ -7038,31 +7054,42 @@ printf ("PPA: i: %2d tk[i+2] |%s| \n",i,tk[i+2]);
 int	fix_dec_var2()
 {
 	int	i,j,k,i1;
-	int	f1;
-	int	minus, aster, kind, opt, inten, alloca, save, func, cont;
-	int	n_minus, n_aster, n_kind, n_opt, n_inten, n_alloca, n_save, n_func, n_cont;
+	int	minus, aster, len, opt, inten, alloca, save, func, cont, dbl;
+	int	n_minus, n_aster, n_kind, n_opt, n_len;
+	int	n_inten, n_alloca, n_save, n_func, n_cont, n_dbl;
 	int	ult, n_type;
-	int	f_aster;
+	int	f_aster,f_len;
 
 	char	ca;
 	char	nr[16];
-	char	varb[MAXB];
+	char	s_varb[MAXB];
+	char	b1[MAXB];
+
+	int	f1;	/* resolvio si no */
+
+	memset(s_varb,0,MAXB);
+	memset(b1,0,MAXB);
 
 
-	alloca = 0;
-	func  = 0;
-	inten = 0;
-	aster = 0;
-	save  = 0;
-	kind  = 0;
-	ult   = 0;
-	func  = 0;
-	opt   = 0;
-	cont  = 0;
-	n_type = 0;
+	alloca  = 0;
+	func    = 0;
+	inten   = 0;
+	aster   = 0;
+	save    = 0;
+	len     = 0;
+	dbl     = 0;
+	ult     = 0;
+	func    = 0;
+	opt     = 0;
+	cont    = 0;
+	n_len   = 0;
+	n_type  = 0;
+	n_aster = 0;
+	n_dbl   = 0;
 
 
-	f_aster = 1;
+	f_aster = 0;
+	f_len   = 0;
 
 	for (i=0; i< q_tk; i++)
 	{	
@@ -7072,18 +7099,25 @@ int	fix_dec_var2()
 		if (!strcmp("CHARACTER",tk[i]) )
 			minus = 0, n_type = i;
 
-		if (!kind && !strcmp(":",tk[i]) && !strcmp(":",tk[i+1]) )
-			kind=1,n_kind = i;
+		if (!dbl && !strcmp(":",tk[i]) && !strcmp(":",tk[i+1]) )
+			dbl=1,n_dbl = i;
 
-		if (!n_aster && !strcmp("*",tk[i]) && ( i - n_type < 4 ) )
-			aster = 1, n_aster=i;
+		if (!f_aster && !strcmp("*",tk[i]) && ( i - n_type < 4 ) )
+			f_aster= 1, aster = 1, n_aster=i;
+
+		if (!f_len && !strcmp("len",tk[i]) || !strcmp("LEN",tk[i]) )
+		{	f_len=1, len = 1, n_len = i, ult=i;
+			for (k=i+1; k<i+8; k++)
+				if (tk[k][0] == ')')
+					ult=k;
+		}
 
 		if (!strcmp("optional",tk[i]) || !strcmp("OPTIONAL",tk[i]) )
 			opt = 1, n_opt = i, ult=i;
 
 		if (!strcmp("intent",tk[i]) || !strcmp("INTENT",tk[i]) )
 		{	inten = 1, n_inten = i, ult=i;
-			for (k=i+1; k< i+8; i++)
+			for (k=i+1; k< i+8; k++)
 				if (tk[k][0] == ')')
 					ult=k;
 		}
@@ -7102,56 +7136,140 @@ int	fix_dec_var2()
 			cont = 1, n_cont = i;
 	}
 
+/* EEE */
 
-	strcpy(varb,tk[n_type]);
+	strcpy(s_varb,tk[n_type]);
 	if (minus)
-		strcpy(varb,pasar_a_minusc(tk[n_type]));
+		strcpy(s_varb,pasar_a_minusc(tk[n_type]));
 
 		
 	if (gp_fverbose("d3"))
 	{
-		for ( i1 = 0 ; i1< 8; i1++)
+		for ( i1 = 0 ; i1< 15 && i1<q_tk ; i1++)
 			printf ("Token-1-  %d |%s| \n",i1,tk[i1]);
 	}
 
 	i = n_type;
 	f1=0;
 
-	/* esta en minuscula y tiene asterisco valor  */
-	if ( !f1 && aster )
-	{
+printf ("FIX0:n_type: %d  n_aster: %d dbl: %d ult: %d \n",n_type,n_aster,dbl,ult);
+
+	if (aster)
+	{	
 		strcpy(nr,tk[n_aster+1]);
-
-		if (es_num_tk(nr) )
+		if (!es_num_tk(nr))
 		{
-			sprintf (tk[i] , "%s (len=%s)",varb,nr);
-			sprintf (tk[i+1]," ");
-					
-			if (!kind)
-			{
-				if (ult == 0)
-					ult = i+1;
+			if (tk[n_aster+1][0] != '(' ) 
+				error(2001);
+		}
+	}
+ 
+	/* caso 1
+	 * no tiene asterisco
+	 * no tiene numero
+	 * no tiene dbl
+	 * no tiene len
+	 * no es funcion 
+	 * character esta solo en la linea (variables siguen en otra linea)
+	 */
 
-				if (!func)
-				{	
-					sprintf (tk[ult],"%s"," :: ");
-					ca = tk[ult+1][0];
-					if (es_num_tk(nr))
-						sprintf (tk[ult+1]," ");
-				}
+	if ( !f1 && !aster && !dbl && !len && !func  )
+	{
+printf ("FIX: - 1 n_type: %d  n_aster: %d  ult: %d \n",n_type,n_aster,ult);
 
-				if (func)
-				{
-					ca = tk[ult+1][0];
-					if (es_num_tk(nr))
-						sprintf (tk[ult+1]," ");
-				}
-			}
+		if (ult == 0)
+			ult = i+1;
 
-			f1 = 1;
+		if (ult == q_tk)
+			q_tk++;
+
+		sprintf (tk[ult],"%s"," :: ");
+		f1 = 1;
+	}
+
+
+	/* caso 2 
+	 * tiene asteristco
+	 * tiene numero
+	 * no tiene dbl
+	 * no es funcion
+	 */
+	
+	if ( !f1 && aster && es_num_tk(nr) && !dbl && !func  )
+	{
+printf ("FIX: - - - 2 n_type: %d  n_aster: %d  ult: %d \n",n_type,n_aster,ult);
+		strcpy(nr,tk[n_aster+1]);
+		tk[n_aster+1][0] = 0;
+
+		sprintf (tk[i],"%s (len=%s) ",s_varb,nr);
+	
+		if (ult == 0)
+			ult = i+1;
+
+		sprintf (tk[ult],"%s",":: ");
+		f1 = 1;
+	}
+
+	/* caso 3 
+	 * no tiene asteristco
+	 * tiene len
+	 * no tiene dbl
+	 * no es funcion
+	 * character esta solo en la linea (variables siguen en otra linea)
+	 */
+
+	if ( !f1 && !aster && !dbl && len && !func  )
+	{
+printf ("FIX: - 3 n_type: %d  n_aster: %d  ult: %d \n",n_type,n_aster,ult);
+
+		if (ult == 0)
+			ult = i+1;
+
+		if (ult != 0)
+			ult++;
+
+		if (ult == q_tk)
+			q_tk++;
+
+		sprintf (tk[ult],"%s"," :: ");
+		f1 = 1;
+	}
+
+
+	/* caso 4 
+	 * tiene asteristco
+	 * tiene (*)
+	 * no tiene dbl
+	 * no es funcion
+	 */
+	
+	if (!f1 && aster && !es_num_tk(tk[aster+1]) && !dbl && !func )
+	{
+printf ("FIX: - 4 n_type: %d  n_aster: %d  ult: %d \n",n_type,n_aster,ult);
+		if (ult == 0)
+		{	k=0;
+			while (tk[n_aster+k][0] != ')')
+				k++;
+			ult = n_aster+k+1;
+
+			if (ult == q_tk)
+				q_tk++; 
+printf ("Q_TK: %d \n",q_tk);
+
 		}
 
+		sprintf (tk[n_aster+0],"%s"," ");
+		sprintf (tk[n_aster+2],"%s","len=*");
+		sprintf (tk[n_aster+4],"%s"," :: ");
+		f1 = 1;
+	}
 
+
+
+
+
+
+#if 0
 		if (tk[n_aster+1][0] == '(' && tk[n_aster+2][0] == '*' && tk[n_aster+3][0] == ')' )
 		{
 			sprintf (tk[n_aster+1]," ");
@@ -7160,7 +7278,7 @@ int	fix_dec_var2()
 	
 
 			/* es de la forma character*(*) ... */
-			sprintf (tk[i] , "%s (len=*)",varb);
+			sprintf (tk[i] , "%s (len=*)",s_varb);
 			sprintf (tk[i+1]," ");
 
 			if (!kind)
@@ -7171,14 +7289,12 @@ int	fix_dec_var2()
 				if (!func)
 				{	
 					sprintf (tk[ult],"%s"," :: ");
-					ca = tk[ult+1][0];
 					if (es_num_tk(nr))
 						sprintf (tk[ult+1]," ");
 				}
 
 				if (func)
 				{
-					ca = tk[ult+1][0];
 					if (es_num_tk(nr))
 						sprintf (tk[ult+1]," ");
 				}
@@ -7189,7 +7305,7 @@ int	fix_dec_var2()
 	}
 
 
-	/* esta en minuscula y no tiene asterisco valor */
+	/* no tiene asterisco valor */
 	if ( !f1 && !aster)
 	{
 		if (!kind)
@@ -7204,6 +7320,8 @@ int	fix_dec_var2()
 		f1 = 1;
 	}
 
+#endif
+	f1 = 1;
 
 	return(f1);
 }
@@ -7833,6 +7951,8 @@ int	*ql_f;
 			for (j=0; j<q_tk; j++)
 			{
 				printf ("TK: %3d %3d |%s|\n",j,strlen(tk[j]),tk[j]);
+				if (tk[j][0] == 9)
+					printf ("TAB: !!!! en linea %5d |%s| \n",i,b1);
 			}
 			printf ("voy b1: |%s| \n",b1);
 		}
@@ -8594,8 +8714,10 @@ int	mostrar_cargas()
 /*
  *	line parser
  *	parsea una linea de src en un char ... a un vector de tokens
- * 
  *
+ *	atenti:
+ * 	agregamos para l_pars (que lo usamos mucho para el proyecto fortran)
+ *	que cambie tab TC_BLA ... (cuando es 9), por 4 blancos 
  */
 
 /* line parser */
@@ -8639,6 +8761,7 @@ int	*qt;
 	strcpy (b1, (*fnp[ line_number ]).l );
 
 	/* si no hay tokens ... devuelvo cant de tokens en 0 */
+	q_tk=0;
 	*qt=0;
 
 	if (!linea_vacia(b1))
@@ -8817,7 +8940,25 @@ int	*qt;
 		}
 
 
+
+
+	/* solo para l_pars version proyecto fortran !! - tabs x 4 blancos 
+	 * en caso de usar tipo_char para parser
+	 * TC_BLA viene definido true si es blanco o tab
+	 * y esta seteado en guardar 1 solo x token
+	 */
+
+		if (gp_tabs)
+		{
+			for (j=0; j< q_tk; j++)
+			{
+				if (tk[j][0] == 9)
+					sprintf (tk[j],"%s","    ");
+			}
+		}
+
 #if 0
+		/* verificamos si quedo bien la linea !! */
 		for (j=0; j< q_tk; j++)
 		{
 			strcat (b2,tk[j]);
@@ -8828,13 +8969,12 @@ int	*qt;
 			printf ("strcat: |%s| \n",b2);
 #endif
 
+
 		/* Termine todo lo que tenia que hacer con esta line */
-
-
 		*qt = q_tk;
 
-
 	} /* if linea vacia */
+
 
 
 	/* proceso */
@@ -9349,6 +9489,9 @@ int	gp_parser()
 			if ( *( gp_fp(GP_GET,i,(char **)0) + 1) == 'e'  )
 				gp_eol = 1;
 
+			if ( *( gp_fp(GP_GET,i,(char **)0) + 1) == 't'  )
+				gp_tabs = 1;
+
 			if ( *( gp_fp(GP_GET,i,(char **)0) + 1) == 'i'  )
 				gp_reidx = 1;
 
@@ -9843,6 +9986,10 @@ char	c;
 
 	/* agrego los que vienen de analizar fuentes fortran */
 	if (c == '$' || c == '#' || c == '^' || c == '@' )
+		x = TC_CVR;
+
+	/* encontrado en UN fuente fortran ....  */
+	if (c == '|'  )
 		x = TC_CVR;
 
 
