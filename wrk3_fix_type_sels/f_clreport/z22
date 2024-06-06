@@ -1,0 +1,117 @@
+     +                                  ANNUAL_MW_BY_TG_BY_FUEL(I,5)
+     +                              + PROD_BY_TG_BY_MW(I,5)
+     +                              + PROD_BY_TG_BY_MW(I,15)
+               IF(ENRG > 0.45) THEN
+                  UNIT_EMISSIONS(5) = FISCAL_CL_UNIT_EMISSIONS(5,UNITNO)
+                  UNIT_EMISSIONS_COST(5) =
+     +                              FISCAL_UNIT_EMISSIONS_COST(UNITNO,5)
+                  UNIT_EMISSIONS(5) = 0.
+                  UNIT_EMISSIONS_COST(5) = 0.
+                  IF(ENRG > 0.45) THEN
+     +                                             AVERAGE_HEATRATE + .5
+                  MONTHLY_UNIT_EMISSIONS(5) =
+     +                           MONTHLY_UNIT_EMISSIONS(5) +
+     +                                                 UNIT_EMISSIONS(5)
+                  MONTHLY_UNIT_EMISSIONS_COST(5,I) =
+     +               MONTHLY_UNIT_EMISSIONS_COST(5,I) +
+     +                                            UNIT_EMISSIONS_COST(5)
+                  MK = MARKET_AREA_LOOKUP(MARKET_ID(1:5))
+               UNIT_EMISSIONS(5) = 0.
+               UNIT_EMISSIONS_COST(5) = 0.
+                  IF(ABS(ENRG) > 0.45) THEN
+                  MK = MARKET_AREA_LOOKUP(MARKET_ID(1:5))
+     +                              MARKET_AREA_LOOKUP(MARKET_ID(1:5))))
+                   call write_unique_msgmtrcl_log_entry(5)
+            IF(MONTHLY_TRANS_ENERGY > 0.45) THEN
+               IF(.NOT. CANADA) AVERAGE_HEATRATE = AVERAGE_HEATRATE + .5
+                  DO J = 1, 5
+     +               (ANNUAL_EMISSIONS_COST_BY_SP(I,J),J=1,5),
+               IF(ENRG > 0.45) THEN
+                  UNIT_EMISSIONS(5) = ANNUAL_CL_UNIT_EMISSIONS(5,UNITNO)
+                  UNIT_EMISSIONS_COST(5) =
+     +                              ANNUAL_UNIT_EMISSIONS_COST(UNITNO,5)
+                  UNIT_EMISSIONS(5) = 0.
+                  UNIT_EMISSIONS_COST(5) = 0.
+                  IF(ENRG > 0.45) THEN
+     +                                             AVERAGE_HEATRATE + .5
+                  MONTHLY_UNIT_EMISSIONS(5) =
+     +                           MONTHLY_UNIT_EMISSIONS(5) +
+     +                                                 UNIT_EMISSIONS(5)
+                  ANNUAL_LOCAL_EMIS_COST(5) =
+     +               ANNUAL_LOCAL_EMIS_COST(5) +
+     +                                            UNIT_EMISSIONS_COST(5)
+                  MK = MARKET_AREA_LOOKUP(MARKET_ID(1:5))
+                     TEMP_R4 = ANNUAL_EBITDA(UNITNO) ! 102509.
+! 050519.
+                  UNIT_EMISSIONS(5) = 0.
+                  UNIT_EMISSIONS_COST(5) = 0.
+                  IF(ABS(ENRG) > 0.45) THEN
+                  MK = MARKET_AREA_LOOKUP(MARKET_ID(1:5))
+     +                      MIN(600,MARKET_AREA_LOOKUP(MARKET_ID(1:5))))
+! 050519.
+            IF(MONTHLY_TRANS_ENERGY > 0.45) THEN
+               IF(.NOT. CANADA) AVERAGE_HEATRATE = AVERAGE_HEATRATE + .5
+               IF(INDEX('1,2,3,4,5,6',CNTRTYPE(I)) .NE. 0) THEN
+            IF(ENRG > 0.5 .OR. ENRG < -.5) THEN
+     +              (ENRG > .0001 .OR.  ENRG < -.05 .OR.
+               IF( ENRG .LT. .5 .AND. ENRG .GT. -.5) THEN
+                  DIVIDE_BY_ENRG = 1E-15
+            IF( ANNUAL_CONTRACT_ENERGY(I) .LT. .5 .AND.
+     +                       ANNUAL_CONTRACT_ENERGY(I) .GT. -.5) THEN
+               DIVIDE_BY_ENRG = 1E-15
+     +                      MONTHLY_TOTAL_EMISSIONS(I)*TEMP_SNGL,I=1,5),
+     +               (MONTHLY_TOTAL_EMISSIONS(I),N_A,I=1,5),
+ 1005 FORMAT(1X,I3,1X,A20,3F7.1,23X,3F6.2,F8.2)
+ 1100 FORMAT(4X,A,A,I4,A,I3,5X,A/)
+     +                           MONTHLY_UNIT_EMISSIONS_COST(5,R_UNIT) )
+      CHARACTER*255 PRODUCTION_METHOD,RECORD,
+! 7/17/95. GAT.
+!     ADDED FOR MIDAS GOLD 6/5/91.
+                  WRITE(97,"(A,I5,',')",REC=IREC) NEW_LINE,J+BASE_YEAR
+                  WRITE(97,"(A,I5,',')",REC=IREC) NEW_LINE,J+BASE_YEAR
+      EMISSIONS_TITLES(5) = 'Other 2 Emissions (tons)  '
+      EMISSIONS_CAP_TITLES(5) = 'Other 2 Emissions Cap (tons)'
+               IF(.NOT. CANADA) AVERAGE_HEATRATE = AVERAGE_HEATRATE + .5
+                        WRITE(RECORD,1052) YR+BASE_YEAR,
+                        WRITE(RECORD,1052) YR+BASE_YEAR,
+                        WRITE(96,1051) trim(UNIT_NAME),MW(2,I),
+                        WRITE(96,1051) trim(UNIT_NAME),MW(2,I),
+                     WRITE(RECORD,3015) YR+BASE_YEAR,
+! ADDED 9/5/97 FOR GETTING TOTAL COST CONSISTENT WITH THE INDIVIDUAL
+            IF(ABS(TOTAL_NUCLEAR_FUEL_EXPENSE/1000000.) > .005)
+            IF(ABS(TOTAL_NUCLEAR_FUEL_EXPENSE/1000000.) >  .005)
+ 1017 FORMAT(1X,I3,1X,A20,F5.1,F5.1,F8.1,4X,A,F7.2,4X,A,F6.2,
+ 1014 FORMAT(1X,I3,1X,A20,F5.1,I5,35X,F7.2,F8.2)
+ 1035 FORMAT('&',4X,A,3I12)
+ 1050 FORMAT(1X,I3,1X,A20,F5.1,I5,F8.1,11X,16X,F7.2,F8.2,A)
+ 1250 FORMAT(1X,I3,1X,A20,I5,I5,F8.1,11X,16X,F7.2,F8.2,A)
+ 2015 FORMAT (3(1X,'mmBTUs                    ',I13:,5X))
+ 2016 FORMAT (3(1X,'GigaJoules                ',I13:,5X))
+ 2020 FORMAT (3(1X,'Generation (GWh)          ',F13.1,5X))
+ 2030 FORMAT (3(1X,'Fuel Cost (M$)            ',F13.2,5X))
+ 2031 FORMAT (3(1X,'Nuclear Fuel Cost (M$)    ',F13.2,5X))
+ 2032 FORMAT (3(1X,'Variable Costs (M$)       ',F13.2,5X))
+ 2033 FORMAT (3(1X,'Fixed Costs (M$)          ',F13.2,5X))
+ 2034 FORMAT (3(1X,'Purchase Power Costs (M$) ',F13.2,5X))
+ 2035 FORMAT (3(1X,'SO2 Emissions (tons)      ',F13.1,5X))
+ 2036 FORMAT (3(1X,'NOx Emissions (tons)      ',F13.1,5X))
+ 2037 FORMAT (3(1X,'CO2 Emissions (tons)      ',F13.1,5X))
+ 2038 FORMAT (3(1X,'Other 1 Emissions (tons)  ',F13.1,5X))
+ 2039 FORMAT (3(1X,'Other 2 Emissions (tons)  ',F13.1,5X))
+     +                  ,5(',',F11.1),3(',',F7.2),',')
+     +                   5(',',F11.1),3(',',F7.2),',')
+ 1051 FORMAT(1X,'"',A,'",',F6.1,',',A,2(F8.2,','),A,F8.2,A)
+ 1052 FORMAT(1X,I4,',',F6.1,',',A,2(F8.2,','),A,F8.2,A)
+ 3014 FORMAT(1X,'"',A,'",',F5.1,',,,,',F7.2,',',F8.2,',')
+ 3015 FORMAT(1X,I4,',',F5.1,',,,,',F7.2,',',F8.2,',')
+ 3017 FORMAT(1X,'"',A,'",',F5.1,',',F8.1,',,',F7.2,',,',
+ 3018 FORMAT(1X,I4,',',F5.1,',',F8.1,',',F7.2,',',
+!     ALTERED FOR IP, 6/5/91.
+         CALL GET_CLASS_DSM_ENERGY(I,5,NATIVE_LOAD_MANAGEMENT)
+     +      (FORECAST_ENERGY(1,I,5) + FORECAST_ENERGY(2,I,5)) /
+     +         (1 - CLASS_LOSSES(5))
+!     5/15/92 ENHANCED PRICING STRUCTURE TO ACCOMODATE IE, IP, CIPS
+! ADDED 10/5/92 TO TRAP FOR TRANSACTION DIFFERENCES
+      CHARACTER (LEN=256) :: FILE_NAME
+      CHARACTER (LEN=5) :: GET_SCENAME
+      CHARACTER (LEN=35) :: GET_GROUP_NAME
