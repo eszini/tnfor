@@ -29,7 +29,7 @@
       SAVE
 !!! RECORD LENGTH UPDATED WITH VARIABLE CHANGES
       INTEGER (kind=2) ::  DELETE,INUNIT,IREC,LRECL/117/,DAY
-      INTEGER :: IOS
+      INTEGER ::  IOS
 !
       INTEGER (kind=2) ::  UNIT_NUM/10/,GENCO,MAX_GENCO
       PARAMETER (MAX_GENCO = 25)
@@ -282,7 +282,7 @@
 !
 
       CHARACTER (len=9) ::  CL_MONTH_NAME(13),MONTH_NAME*20
-      INTEGER :: TRANS_TRM_REC
+      INTEGER ::  TRANS_TRM_REC
 !
 !
 ! END DATA DECLARATIONS
@@ -569,7 +569,7 @@
       SAVE
 !!! RECORD LENGTH UPDATED WITH VARIABLE CHANGES
       INTEGER (kind=2) ::  DELETE,INUNIT,IREC,LRECL/100/
-      INTEGER :: IOS
+      INTEGER ::  IOS
 !
       INTEGER (kind=2) ::    UNIT_NUM/10/,HOURS_PER_DAY,
      +            DAY_TYPES_IN_MONTH,BIN_TABLES_IN_FILE/0/,
@@ -830,7 +830,7 @@
       INTEGER (kind=2) ::  IREC
       INTEGER (kind=2) ::
      +    LRECL/1048/ ! 082221 ! 081521 ! 062621 ! 120218 ! 080117! 120412 ! 051112! 022810 ! 072009 ADDED GRX ID ! 042609 ADDED 15 VARIABLES FOR SUPER MRX !090706.
-      INTEGER :: IOS
+      INTEGER ::  IOS
       INTEGER (kind=2) ::    UNIT_NUM/10/
       CHARACTER (len=1) ::  WVPA_RATE_TRACKER,WVPA_MEM_TRACKER
       CHARACTER (len=5) ::  BASE_FILE_NAME,OVERLAY_FAMILY_NAME,
@@ -973,7 +973,7 @@
       CHARACTER (LEN=5) :: BASE_FILE_NAMES(0:MAX_PRODUCTS_FILES-1)
       CHARACTER (LEN=2) ::  ENERGY_PRODUCTS_OL(0:MAX_PRODUCTS_FILES-1)
      +                                         /MAX_PRODUCTS_FILES*'BC'/
-      LOGICAL :: ACTIVE_BASE_FILES(0:MAX_PRODUCTS_FILES-1)/
+      LOGICAL ::  ACTIVE_BASE_FILES(0:MAX_PRODUCTS_FILES-1)/
      +                                      MAX_PRODUCTS_FILES*.FALSE./,
      +        ACTIVE_OVERLAY_FILES(0:MAX_PRODUCTS_FILES-1)/
      +                                      MAX_PRODUCTS_FILES*.FALSE./,
@@ -2846,11 +2846,11 @@
      +          R_TOTAL_REV,
      +          R_TOTAL_EXP
 !
-      INTEGER :: VALUES_2_ZERO
+      INTEGER ::  VALUES_2_ZERO
 !
 ! INTERRUPTIBLE
 !
-      INTEGER (kind=2) ::  SEVEN_I2=7
+      INTEGER (kind=2) ::  ::  SEVEN_I2=7
       REAL (kind=4) ::       R_HOURLY_PRICE,
      +            R_WHOLESALE_DEMAND,
      +            R_WHOLESALE_PURCHASE,
@@ -12247,7 +12247,7 @@
       INTEGER (kind=2) ::  TIMZON,TEMPER,DELTMP,
      +          LDE_YEAR,LDE_DAY,LDE_MONTH,
      +          DAY_WEEK
-      INTEGER ::  VALUES_2_ZERO
+      INTEGER ::   VALUES_2_ZERO
       REAL (kind=4) ::    HRLY_TG_SCEN_ELECT_MULT(:,:,:),
      +         GET_HRLY_TG_SCEN_ELECT_MULT
       ALLOCATABLE :: HRLY_TG_SCEN_ELECT_MULT
@@ -12913,9 +12913,9 @@
      +            TG,
      +            R_MAX_TRANS_GROUPS
       CHARACTER (len=*) :: R_TRANS_GROUP_NAME
-      REAL :: PEAK,BASE,OBS(:,:),DELTA_PROB,AREA,
+      REAL ::  PEAK,BASE,OBS(:,:),DELTA_PROB,AREA,
      +     MIN_LPROB,OBSERVATIONS
-      REAL :: LPROB(:,:),
+      REAL ::  LPROB(:,:),
      +     DX,
      +     LODDUR(:,:,:),
      +     CUM_HOURS(:,:,:),
@@ -12968,7 +12968,7 @@
       INTEGER (kind=2) ::  INTERVALS_1,INTERVALS_2,
      +            PRICE_POINTS_1,PRICE_POINTS_2
       LOGICAL (kind=1) ::  TWO_CURVES
-      INTEGER :: USER_DURATION_REC
+      INTEGER ::  USER_DURATION_REC
 !
 ! SAVE ARRAY 8/15/01
 !
@@ -13537,9 +13537,9 @@
      +            INTERVALS,COUNTER,POINTS_IN_CURVE,ISEAS,R_ISEAS
       INTEGER (kind=2) ::    IPNT,STORE_IPNT,HALF_POINT,START,END,
      +            R_HIGHEST_INTERVAL,MX_INTERVAL
-      REAL :: PEAK,BASE,OBS(PRICE_POINTS,13),DELTA_PROB,AREA,
+      REAL ::  PEAK,BASE,OBS(PRICE_POINTS,13),DELTA_PROB,AREA,
      +     MIN_LPROB,OBSERVATIONS
-      REAL :: LPROB(PRICE_POINTS,13),
+      REAL ::  LPROB(PRICE_POINTS,13),
      +     DX,
      +     LODDUR(PRICE_POINTS,13),
      +     CUM_HOURS(PRICE_POINTS,13),
@@ -13569,7 +13569,7 @@
      +            LAST_SEASON/0/,PRODUCTION_PERIODS,CURRENT_YEAR
       CHARACTER (len=9) ::  CL_MONTH_NAME(13)
       CHARACTER (len=20) ::  MONTH_NAME,R_UNIT_NAME
-      INTEGER :: MARKET_DURATION_REC
+      INTEGER ::  MARKET_DURATION_REC
 !
 ! SAVE ARRAY 8/15/01 MSG
 !
@@ -13988,7 +13988,7 @@
       INCLUDE 'SPINLIB.MON'
       USE SIZECOM
       INTEGER (kind=2) ::  DELETE,INUNIT,IREC,LRECL/146/
-      INTEGER :: IOS
+      INTEGER ::  IOS
 !
       INTEGER (kind=2) ::    UNIT_NUM/10/,MAX_WHEELS,
      +            SELLER_TRANSACTION_GROUP,
@@ -14405,7 +14405,7 @@
      +            GET_TG_FOR_TRANSMISSION_BUY,
      +            GET_TG_FOR_TRANSMISSION_SELL
       INTEGER (kind=2) ::  R_SELLER_PATH,R_BUYER_PATH
-      INTEGER (kind=2) ,INTENT(IN)    :: R_SELLER,R_BUYER
+      INTEGER (kind=2) :: , INTENT(IN) :: R_SELLER,R_BUYER
       PARAMETER   (MAX_PATHS_PER_PAIR = 75) ! 091604. CHANGED FROM 12
       INTEGER (kind=2) ::    NUMBER_OF_WHEELS(MAX_PATHS_PER_PAIR),
      +            GET_HOUR_PATHS_INDEX,
@@ -16451,7 +16451,7 @@
       INCLUDE 'SPINLIB.MON'
       USE SIZECOM
       INTEGER (kind=2) ::  DELETE,INUNIT,IREC,LRECL/100/ ! 052712 KCPL
-      INTEGER :: IOS
+      INTEGER ::  IOS
 !
       INTEGER (kind=2) ::    UNIT_NUM/10/
       CHARACTER (len=8) ::  CONSTRAINT_ID*20,SOURCE
@@ -16909,7 +16909,7 @@
      +            HOUR_CONSTRAINT_LIMIT,
      +            HOUR_TIE_LOADING,
      +            TRANS_GROUP_POSITION
-      REAL :: REAL_ARGUMENT
+      REAL ::  REAL_ARGUMENT
       INTEGER (kind=2) ::  INT2_ARGUMENT
 !
 ! SAVE ARRAY 8/15/01 MSG
@@ -16921,7 +16921,7 @@
 !     +     OFF_PEAK_MULT,
 !     +     FROM_AREA,
 !     +     TO_AREA
-!     SAVE TRANS_CONSTRAINT_DATA
+!C     SAVE TRANS_CONSTRAINT_DATA
 !      SAVE CONSTRAINT_PERCENT,
 !     +     CONSTRAINTS_PER_PAIR,
 !     +     CONSTRAINTS_INDEX,
@@ -17937,7 +17937,7 @@
      +                                 MONTHLY_ENERGY_REVENUE(:,:),
      +                                 MONTHLY_ENERGY_COST(:,:),
      +                                 RenewableEnergyPercent(:)
-         REAL :: (KIND=4),
+         REAL (KIND=4) :: 
      +                                 STORAGE_ENERGY(12),
      +                                 STORAGE_CHARGE(12),
      +                                 STORAGE_ENERGY_COST(12),

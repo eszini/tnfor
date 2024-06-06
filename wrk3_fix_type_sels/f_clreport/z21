@@ -1,0 +1,130 @@
+      CHARACTER*5 CL_UNIQUE_RPT_STR !  THAT GETS A UNIQUE ID FOR THE UNIT
+     +                  GET_MIN_UP_TIME,                         !TMS 30/23/05 ADDED FOR EXELON
+     +                  GET_MIN_DOWN_TIME,                        !TMS 30/23/05 ADDED FOR EXELON
+!      CHARACTER*35      GET_GROUP_NAME
+! 031005
+               WRITE(4444,4445,REC=1)
+            WRITE(4444,4445,REC=2)
+4445        FORMAT(4A)
+         TRANS_FUEL_VARIABLES = 3*max_fuel_types_clr+1 ! 09/09/05 ! 4/30/02 FOR LGE
+     +                    0:MAX_STATE_PROVINCE_NO,5),
+     +                    0:MAX_STATE_PROVINCE_NO,5),
+! 040905. NUNITS MAY BE TOO SHORT IF WE INCLUDE DERIVATIVES
+      ALLOCATE(MONTHLY_UNIT_EMISSIONS_COST(5,NUNITS))
+         IF(ENRG > .45) THEN
+         UNIT_EMISSIONS(5) = R_OTH3/TONS_CONVERSION
+            IF(ENRG > 0.45) THEN
+               IF(.NOT. CANADA) AVERAGE_HEATRATE = AVERAGE_HEATRATE + .5
+               IF(ENRG > 0.45 .AND. TEMP_POINTER > 0) THEN
+!                 ! TODO: Unit Emissions 1..5 should be named constants.
+                  UNIT_EMISSIONS(5) = R_OTH3/TONS_CONVERSION
+                  UNIT_EMISSIONS(5) = UNIT_EMISSIONS(5) +
+                  EMIS_DISPATCH_5 = 0.002*
+     +                     TRANS_DISPATCH_EMIS_ADDER(5,ISEAS,YR,UNITNO)
+                  UNIT_EMISSIONS_COST(5) =
+     +                               UNIT_EMISSIONS(5) * EMIS_DISPATCH_5
+                  UNIT_EMISSIONS(1:5) = 0.
+                  UNIT_EMISSIONS_COST(1:5) = 0.
+! 03/16/05. FOR BURESH/ONDEMAND ASP.
+     +                  ICAP_EAS_REVENUE_OFFSET, ! 15 EAS OFFSET
+     +                  ICAP_EAS_REVENUE_OFFSET, ! 15
+! 5/6/00. ADDED FOR ECITIES.
+            IF(ENRG > 0.45) THEN
+               UNIT_EMISSIONS(5) = R_OTH3/TONS_CONVERSION
+               UNIT_EMISSIONS(5) = UNIT_EMISSIONS(5) +
+               EMIS_DISPATCH_5 = 0.002*
+     +                     TRANS_DISPATCH_EMIS_ADDER(5,ISEAS,YR,UNITNO)
+               UNIT_EMISSIONS_COST(5) =
+     +                               UNIT_EMISSIONS(5) * EMIS_DISPATCH_5
+               UNIT_EMISSIONS(5) = 0.
+               UNIT_EMISSIONS_COST(5) = 0.
+! 091307. CAPACITY MARKETS. ! 092507. UPDATED
+               IF(ENRG > 0.45) THEN
+     +                                             AVERAGE_HEATRATE + .5
+! 050519.
+               MONTHLY_UNIT_EMISSIONS(5) = MONTHLY_UNIT_EMISSIONS(5) +
+     +                                                 UNIT_EMISSIONS(5)
+               MONTHLY_UNIT_EMISSIONS_COST(5,UNITNO) =
+     +               MONTHLY_UNIT_EMISSIONS_COST(5,UNITNO) +
+     +                                            UNIT_EMISSIONS_COST(5)
+               ANNUAL_UNIT_EMISSIONS_COST(I,5) =
+     +               ANNUAL_UNIT_EMISSIONS_COST(I,5) +
+     +                                            UNIT_EMISSIONS_COST(5)
+               MK = MARKET_AREA_LOOKUP(MARKET_ID(1:5))
+                  MK =MAX(0,MIN(600,MARKET_AREA_LOOKUP(MARKET_ID(1:5))))
+                        ELSEIF(PM == 15) THEN
+                           TFT = 15
+                     if(LM>15 .and. lm<18) then
+               FISCAL_UNIT_EMISSIONS_COST(I,5) =
+     +               FISCAL_UNIT_EMISSIONS_COST(I,5) +
+     +                                            UNIT_EMISSIONS_COST(5)
+               EMISSIONS_COST_BY_SP(SP,5) =
+     +             EMISSIONS_COST_BY_SP(SP,5) + UNIT_EMISSIONS_COST(5)
+               GROUP_VAR_BY_SP(SP,5) = GROUP_VAR_BY_SP(SP,5) +
+               ANNUAL_GROUP_VAR_BY_SP(SP,5) =
+     +                                 ANNUAL_GROUP_VAR_BY_SP(SP,5) +
+               DO EM = 1, 5
+               GROUP_VAR_BY_SP(SP,15) = GROUP_VAR_BY_SP(SP,15) +
+               ANNUAL_GROUP_VAR_BY_SP(SP,15) =
+     +                                 ANNUAL_GROUP_VAR_BY_SP(SP,15) +
+     +               ENRG/1000., ! 5 - Unit Generation (GWh)
+!                     ! 15: Other Emissions (Tons)
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES), !11-15
+     +               S_FUEL_CONSUMPTION, ! 25 - Secondary Fuel Consumption
+!                     ! 35 - Other emissions cost
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES), !31-35
+     +               MONTH_UNIT_START_COSTS(UNITNO)/1000000., ! 45 - Start-up costs
+     +               NEWGEN_UNIT_STATUS, ! 50 - New entrants unit status
+     +               ONLINE_DATE, ! 51 - online date
+     +               OFLINE_DATE, ! 52 - offline date
+     +               RPM, ! 53 - Prime Mover
+     +               HESI_SECOND_UNIT_ID_NUM, ! 54 - Second unit id
+     +               EV_DATA_SOURCE, ! 55 - EV Data Source
+     +               EV_PLANNING_AREA, ! 56 - EV Planning Area
+     +               CAP_MARKET_REVENUE, ! 57 - Capacity Revenue ($/MMW)
+     +               CAPITAL_COST_OF_BUILD, ! 58 - Capital Cost (MRX units) ($/MMW)
+     +               UNIT_EBITDA,   ! 59 - EBITDA ($/MMW)
+!         !TMS 03/23/05 ADDED FOR EXELON
+!                       ! TMS 3/01/05 INCREASED SIZE TO 8:16
+     +                                                .1 * AVE_FUEL_MULT ! TMS added 2/6/2005 for c/MMBtu
+     +                               - AINT(ONLINE_DATE/100.)*100         ! TMS ADDED 3/15/05 EXTRACTS ONLINE MONTH
+     +                  EV_TRANS_AREA_NAME,                    ',', ! A 01/31/05. FLIPPED POSITION
+     +                  TRIM(SAC_STATION_GROUP),               ',', ! A   ! TMS 03/01/05 - ADDED FOR EXELON
+     +                  MIN_UPTIME,                            ',', ! I4  ! TMS 03/23/05  - ADDED FOR EXELON
+     +                  MIN_DOWNTIME,                          ',', ! I4  ! TMS 03/23/05  - ADDED FOR EXELON
+                      WRITE(4444,4445,REC=MON_PW_TRANS_UNIT_REC)
+     +                                          '/01/',YEAR+BASE_YEAR   ! TMS 03/15/05 MODIFIED TO ALLOW USER SELECTABLE ON-LINE MO
+     +                  EV_TRANS_AREA_NAME,                    ',', ! A 01/31/05. FLIPPED POSITION
+                     WRITE(4444,4445,REC=MON_PW_TRANS_UNIT_REC)
+     +                   1X,F5.0,   A,
+     +                   1X,F5.0,   A,
+     +                   1X,A,        A, ! SAC_STATION_GROUP    ! TMS 03/01/05 - ADDED FOR EXELON
+     +                   1X,I4,       A, ! MIN_UPTIME           ! TMS 03/23/05  - ADDED FOR EXELON
+     +                   1X,I4        A,  ! MIN_DOWNTIME         ! TMS 03/23/05  - ADDED FOR EXELON
+                           TFT = 15 ! DG
+               MK = MARKET_AREA_LOOKUP(MARKET_ID(1:5))
+                  MK =MAX(0,MIN(600,MARKET_AREA_LOOKUP(MARKET_ID(1:5))))
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES), ! 10-15
+         IF(MONTHLY_TRANS_ENERGY > 0.45) THEN
+            IF(.NOT. CANADA) AVERAGE_HEATRATE = AVERAGE_HEATRATE + .5
+               DO J = 1, 5
+     +               (EMISSIONS_COST_BY_SP(I,J),J=1,5),
+! 031005. HYDRO SECTION. ADDED FOR DOUG
+               PROD_BY_TG_BY_MWH(I,5) =
+     +                        PROD_BY_TG_BY_MWH(I,5) +
+               ANNUAL_PROD_BY_TG_BY_MWH(I,5) =
+     +                  ANNUAL_PROD_BY_TG_BY_MWH(I,5) +
+               PROD_BY_TG_BY_MW(I,5) =
+     +                  PROD_BY_TG_BY_MW(I,5) + TEMP_TL_HYDRO_MW
+               ANNUAL_PROD_BY_TG_BY_MW(I,5) = ! 080608
+     +                MAX(ANNUAL_PROD_BY_TG_BY_MW(I,5),
+     +                                            PROD_BY_TG_BY_MW(I,5))
+!     +                MAX(ANNUAL_PROD_BY_TG_BY_MW(I,5),TEMP_TL_HYDRO_MW)
+               MW_BY_TG_BY_FUEL(I,5) =
+     +                  MW_BY_TG_BY_FUEL(I,5) + TEMP_TL_HYDRO_MW
+               ANNUAL_MW_BY_TG_BY_FUEL(I,5) =
+     +                MAX(ANNUAL_MW_BY_TG_BY_FUEL(I,5),TEMP_TL_HYDRO_MW)
+               MWH_BY_TG_BY_FUEL(I,5) =
+     +                  MWH_BY_TG_BY_FUEL(I,5) + TEMP_TL_MWH
+               ANNUAL_MWH_BY_TG_BY_FUEL(I,5) =
+     +            ANNUAL_MWH_BY_TG_BY_FUEL(I,5) + TEMP_TL_MWH
