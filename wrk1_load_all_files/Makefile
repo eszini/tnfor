@@ -19,9 +19,6 @@ setup:
 version:
 	@echo "Makefile - version $(VERSION)"
 
-
-
-
 # Regla para construir el ejecutable "tfor"
 tfor: tfor.c
 	@echo "Compilando tfor.c..."
@@ -50,10 +47,19 @@ tfor: tfor.c
 			echo "Skipping file copy"; \
 		fi; \
 	else \
-		echo "Errores encontrados durante la compilación:"; \
+		echo "Errores encontrados durante la compilaciÃ³n:"; \
 		cat errors.log; \
 	fi
 	@rm -f errors.log
+
+# Regla para copiar archivos desde A_src
+get:
+	@if [ "$(file)" ]; then \
+		echo "Copiando $(file) desde $(SRC_DIR) a $(CURDIR)..."; \
+		cp $(SRC_DIR)/$(file) .; \
+	else \
+		echo "Por favor, especifica el archivo a copiar. Ejemplo: make get file=tfor.c"; \
+	fi
 
 # Regla para editar tfor.c
 vi: tfor.c
@@ -63,9 +69,4 @@ vi: tfor.c
 clean:
 	@echo "Haciendo limpieza ... "
 	@rm -f *.exe *.log log *.err tfor
-
-
-
-
-
 
