@@ -7096,19 +7096,19 @@ int	fix_dec_var1()
 
 	if ( !f1 && ((kind && dbl) || (kind && dbl && inten))  )
 	{
-printf ("fix_dec_var2: entro caso 1a \n");
+printf ("fix_dec_var1: entro caso 1a \n");
 		f1 = 1;
 	}
 
 	if ( !f1 && kind && func )
 	{
-printf ("fix_dec_var2: entro caso 1b \n");
+printf ("fix_dec_var1: entro caso 1b \n");
 		f1 = 1;
 	}
 
 	if ( !f1 && !aster && !kind && dbl && !func )
 	{
-printf ("fix_dec_var2: entro caso 1c \n");
+printf ("fix_dec_var1: entro caso 1c \n");
 		f1 = 1;
 	}
 
@@ -7140,7 +7140,7 @@ printf ("fix_dec_var2: entro caso 1c \n");
 
 	if ( !f1 && aster && !kind && !dbl && !func )
 	{
-printf ("fix_dec_var2: entro caso 2a \n");
+printf ("fix_dec_var1: entro caso 2a \n");
 		ca = tk[n_aster+1][0];
 		if (ca != '1' && ca != '2' && ca != '4' && ca != '8' )
 			error(1002);
@@ -7155,7 +7155,7 @@ printf ("fix_dec_var2: entro caso 2a \n");
 
 	if ( !f1 && !kind && !dbl && !func )
 	{
-printf ("fix_dec_var2: entro caso 2b \n");
+printf ("fix_dec_var1: entro caso 2b \n");
 
 		sprintf (tk[i] , "%s :: ",s_varb);
 		
@@ -7166,12 +7166,12 @@ printf ("fix_dec_var2: entro caso 2b \n");
 #if 1
 	if ( !f1 && aster && !kind && dbl && !func )
 	{
-printf ("fix_dec_var2: entro caso 2c \n");
+printf ("fix_dec_var1: entro caso 2c \n");
 		ca = tk[n_aster+1][0];
 		if (ca != '1' && ca != '2' && ca != '4' && ca != '8' )
 			error(1003);
 
-		sprintf (tk[i] , "%s (kind=%c) :: ",s_varb,ca);
+		sprintf (tk[i] , "%s (kind=%c) ",s_varb,ca);
 		tk[i+1][0]=0;
 		tk[i+2][0]=0;
 		
@@ -7222,7 +7222,7 @@ printf ("fix_dec_var2: entro caso 2c \n");
 
 	if ( !f1 && aster && !kind && !dbl && func )
 	{
-printf ("fix_dec_var2: entro caso 4 \n");
+printf ("fix_dec_var1: entro caso 4 \n");
 		ca = tk[n_aster+1][0];
 		if (ca != '1' && ca != '2' && ca != '4' && ca != '8' )
 			error(1002);
@@ -7249,7 +7249,7 @@ printf ("fix_dec_var2: entro caso 4 \n");
 
 	if ( !f1 && aster && !kind && !dbl && inten && !func )
 	{
-printf ("fix_dec_var2: entro caso 4 \n");
+printf ("fix_dec_var1: entro caso 4 \n");
 		ca = tk[n_aster+1][0];
 		if (ca != '1' && ca != '2' && ca != '4' && ca != '8' )
 			error(1003);
@@ -7276,7 +7276,7 @@ printf ("fix_dec_var2: entro caso 4 \n");
 #if 1
 	if ( !f1 && !aster && kind && !dbl && !inten && !alloca && !func )
 	{
-printf ("fix_dec_var2: EEE entro caso transobj2 \n");
+printf ("fix_dec_var1: EEE entro caso transobj2 \n");
 printf ("EE1|%s| %c \n",tk[n_type],tk[n_kind+5][0]);
 		/* caso especifico */
 		if (!strcmp(tk[n_type],"REAL") && tk[n_kind+5][0]==','  )
@@ -7335,7 +7335,8 @@ printf ("EE2|%s| %c \n",tk[n_type],tk[n_kind+5][0]);
 
 int	fix_dec_var2()
 {
-	int	i,j,k,i1;
+	int	f2;
+	int	i,j,k,l,i1;
 	int	minus, aster, len, opt, inten, alloca, save, func, cont, dbl;
 	int	n_minus, n_aster, n_kind, n_opt, n_len;
 	int	n_inten, n_alloca, n_save, n_func, n_cont, n_dbl;
@@ -7426,6 +7427,27 @@ int	fix_dec_var2()
 		strcpy(s_varb,pasar_a_minusc(tk[n_type]));
 
 		
+	/* algunos casos excepcionales ...  len=4)varible ... */
+	if (len)
+	{	
+printf ("ZZZfix_dec_var2: arregle el len=4)var ... \n");
+
+		for (f2=1, k=n_len+1; k< n_len+8; k++)
+			if (tk[k][0] == ')' && tk[k+1][0] != ' ')
+			{
+				q_tk++;
+				for (l=q_tk-1; l>= k+1 && l; l--)
+				{	strcpy(tk[l],tk[l-1]);
+				}
+				strcpy (tk[k+1]," ");	
+				f2 = 0;
+			}
+	}
+
+
+
+
+
 	if (gp_fverbose("d3"))
 	{
 		for ( i1 = 0 ; i1< 15 && i1<q_tk ; i1++)
@@ -7434,6 +7456,7 @@ int	fix_dec_var2()
 
 	i = n_type;
 	f1=0;
+
 
 
 	if (aster)
