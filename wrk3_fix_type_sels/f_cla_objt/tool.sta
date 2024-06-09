@@ -1,6 +1,8 @@
-Cantidad de lineas divididas         20 
-Cantidad de integer cambiados        97 
-Cantidad de real cambiados           57 
-Cantidad de logical cambiados        50 
-Cantidad de character cambiados      85 
-variables_no_convertidas              1 
+
+File: t2.for
+Cantidad de lineas divididas         17 
+Cantidad de integer cambiados        91 
+Cantidad de real cambiados           58 
+Cantidad de logical cambiados        44 
+Cantidad de character cambiados      81 
+variables_no_convertidas              0 

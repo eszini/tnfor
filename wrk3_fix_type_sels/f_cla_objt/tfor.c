@@ -959,6 +959,8 @@ char	*s;
 
 	if (n == 10 )
 	{
+		printf ("\n");
+		printf ("File: %s\n",finp);
 		printf ("Cantidad de lineas divididas     %6d \n", sq_lineas_desdobladas);
 		printf ("Cantidad de integer cambiados    %6d \n", sq_integer);
 		printf ("Cantidad de real cambiados       %6d \n", sq_real);
@@ -968,6 +970,8 @@ char	*s;
 
 		if (ffsta)
 		{
+		fprintf (hfsta,"%s","\n");
+		fprintf (hfsta,"File: %s\n",finp);
 		fprintf (hfsta,"Cantidad de lineas divididas     %6d \n", sq_lineas_desdobladas);
 		fprintf (hfsta,"Cantidad de integer cambiados    %6d \n", sq_integer);
 		fprintf (hfsta,"Cantidad de real cambiados       %6d \n", sq_real);
@@ -6802,7 +6806,27 @@ printf (" - - - - 4 l1: %4d ql: %4d j-1: %4d j: %4d  s[j-1]: |%s|  s[j]: |%s| \n
 #endif
 
 /*
+ * -----------------------------------------------------------------------------------
+ *
+ *	armame dos lineas
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
  *	s  ... linea de entrada a separar 
+ *	
+ *	separa en dos lineas l1 y l2 
+ *	algunos considerandos !
+ *
+ *	si es del tipo x ej
+ *	integer (kind=4) :: variable(subindice1,subindice2) ....
+ *	entonces, la ',' esa no sirve!! tengo que estar seguro
+ *	que cerro el parentesis !!
+ *
+ *	idem si es x ej
+ *	character (len=40000) :: variable_super_largar / cosa ,
+ *	esa ',' tampoco me sirve, tiene que cerrar la '/'
  */
 
 int	armame_dos_lineas(s,l1,l2)
@@ -6831,21 +6855,39 @@ char	*l2;
 			f1=0;
 
 	/* busco una coma que separe campos, que no este dentro de parentesis ! */
-	for (i=0, f1=1, f2=1; f1 && i<strlen(s); i++)
+	for (i=0, f1=1, f2=1, f3=1; f1 && i<strlen(s); i++)
 	{	if (f2 && s[i+p1] == '(')
 			f2 = 0;
 		if (!f2 && s[i+p1] == ')' )
 			f2 = 1;
-		if (f2 && s[i+p1] == ',')
+
+		if (f3 && s[i+p1] == '/')
+			f3 = 0;
+		if (!f3 && s[i+p1] == '/' )
+			f3 = 1;
+
+		if (f2 && f3 && s[i+p1] == ',')
 			f1 = 0, p2 = p1+i;
+
+
 	}
+
+
+/* EEE */
 
 	/* 
 	 * si encontro la ',' puede separar campos
 	 * si no la encontro, es el caso de una sola variable con
 	 * sub indices largos , y llego al fin de linea !
+	 * caso en que  hay:
+	 *     ... (   ,   ) , 
+	 *     ... /       /,
 	 */
 	
+	/* si no hubo caso de barra comenzando a inicializar vector ... */
+	if ( f3 == 0)
+	{
+
 	if (p1 != p2)
 	{	strncpy(l1,s,p2);
 		l1[p2]=0;
@@ -6854,14 +6896,36 @@ char	*l2;
 		strncat(l2,b1,c1);
 		strcat(l2,s+p2+1);
 	}
-#if 1
 	else
 	{
 		strncpy(l1,s,p1);
 		strcpy(l2,"     +  ");
 		strcat(l2,s+p1);
 	}
-#endif
+
+	}
+
+
+	/* 
+	 * si no encontro la ',' desdoblar sin duplicar el type !!!
+	 * caso en que  hay ... /xxxxxx   , 
+	 */
+
+	if ( f3 == 1)
+	{
+
+	if (p1 != p2)
+	{	
+		strncpy(l1,s,p1);
+		strcpy(l2,"     +  ");
+		strcat(l2,s+p1);
+
+	}
+
+
+
+	}
+
 
 	if ( p1 == p2)
 	{
@@ -7077,7 +7141,6 @@ int	fix_dec_var1()
 			printf ("Token-1-  %d |%s| \n",i1,tk[i1]);
 	}
 
-/* EEE */
 
 	i = n_type;
 	f1=0;
@@ -7089,6 +7152,7 @@ int	fix_dec_var1()
 	 * type (kind= nn ), intent(rr) :: pepe
 	 * type (kind= nn )  function      pepe
 	 * type                         :: pepe
+	 * type              function      pepe 
 	 *	
 	 * tiene kind y dbl  o  tiene kind inten y dbl
 	 *
@@ -7109,6 +7173,11 @@ printf ("fix_dec_var1: entro caso 1b \n");
 	if ( !f1 && !aster && !kind && dbl && !func )
 	{
 printf ("fix_dec_var1: entro caso 1c \n");
+		f1 = 1;
+	}
+	if ( !f1 && !aster && !kind && !dbl && func )
+	{
+printf ("fix_dec_var1: entro caso 1d \n");
 		f1 = 1;
 	}
 
@@ -7276,7 +7345,7 @@ printf ("fix_dec_var1: entro caso 4 \n");
 #if 1
 	if ( !f1 && !aster && kind && !dbl && !inten && !alloca && !func )
 	{
-printf ("fix_dec_var1: EEE entro caso transobj2 \n");
+printf ("fix_dec_var1: FFF entro caso transobj2 \n");
 printf ("EE1|%s| %c \n",tk[n_type],tk[n_kind+5][0]);
 		/* caso especifico */
 		if (!strcmp(tk[n_type],"REAL") && tk[n_kind+5][0]==','  )
@@ -7440,6 +7509,7 @@ printf ("ZZZfix_dec_var2: arregle el len=4)var ... \n");
 				{	strcpy(tk[l],tk[l-1]);
 				}
 				strcpy (tk[k+1]," ");	
+				ult = k;
 				f2 = 0;
 			}
 	}
@@ -7613,6 +7683,9 @@ printf ("ZZZfix_dec_var2: arregle el len=4)var ... \n");
 
 		printf ("No hubo caso para .... |%s| \n",b2);
 	}
+
+
+
 
 	/* f1 1, resolvio f1 0, no pudo cambiar formato !! */
 	if (f1)
