@@ -13,8 +13,11 @@
       INCLUDE 'SPINLIB.MON'
       implicit none
 
-      INTEGER (kind=2) ::
-     +    IREC,INUNIT,DELETE,LRECL/1159/ ! 120218 ! 081818 ! 022510 ! 052609 1068 ! 011809 1041! 091107 ! 1033! 100506 for KCPL ! 080906 ! /961/
+ X1   INTEGER (kind=2) ::  IREC
+ X1   INTEGER (kind=2) ::  INUNIT
+ X1   INTEGER (kind=2) ::  DELETE
+ X1   INTEGER (kind=2) ::
+ X2  +    LRECL/1159/ ! 120218 ! 081818 ! 022510 ! 052609 1068 ! 011809 1041! 091107 ! 1033! 100506 for KCPL ! 080906 ! /961/
       INTEGER (kind=2) ::  UNIT_NO,R_ACTIVE_CL_RECORDS,
      +          MONTHLY_CAPACITY_POINTER,I,
      +          MONTHLY_FUEL_INDEX,
@@ -180,16 +183,16 @@
       INTEGER ::  FILE_NUMBER,FILE_ID
       INTEGER ::  MAX_CL_FILES,R_MAX_CL_FILES
       PARAMETER (MAX_CL_FILES=36) ! note file 24 is for SPCapEx
-
-
-
-
+ X1   INTEGER (kind=2) ::
+ X2  +    ACTIVE_CL_RECORDS(0:MAX_CL_FILES-1)/MAX_CL_FILES*0/
+ X1   INTEGER (kind=2) ::
+ X2  +    NUC_UNITS_IN_FILE(0:MAX_CL_FILES-1)/MAX_CL_FILES*0/
       INTEGER (kind=2) ::  NUC_UNITS_IN_OL_FILE(0:MAX_CL_FILES-1)
      +  /MAX_CL_FILES*0/
-
-
-      INTEGER (kind=2) ::
-     +    NUC_RECORD_POSITION(200,0:MAX_CL_FILES-1),ONLINE,OFLINE ! 2/19/98. GAT. CHANGED FROM 50
+ X1   CHARACTER (len=2) ::
+ X2  +    FOSSILOL(0:MAX_CL_FILES-1)/MAX_CL_FILES*'BC'/
+ X1   INTEGER (kind=2) ::  NUC_RECORD_POSITION(200,0:MAX_CL_FILES-1)
+ X2   INTEGER (kind=2) ::  ONLINE,OFLINE ! 2/19/98. GAT. CHANGED FROM 50
       CHARACTER (len=5) ::  CL_FILE_BASE_NAMES(0:MAX_CL_FILES-1),
      +            VOID_CHR,BASE_FILE_NAME
       CHARACTER (len=2) ::  CL_FILE_CODES(0:MAX_CL_FILES-1)/
@@ -209,8 +212,8 @@
      +               CAPACITY_MARKET_MONTH,
      +               CAPACITY_MARKET_EXP_COLLECT
       CHARACTER (len=20) ::    CAPACITY_MARKET_COST_ASSIGN
-      CHARACTER (len=6) ::
-     +    CL_FILE_BINARY_NAMES(0:MAX_CL_FILES-1)/'FOSIL ',
+ X1   CHARACTER (len=6) ::
+ X2  +    CL_FILE_BINARY_NAMES(0:MAX_CL_FILES-1)/'FOSIL ',
      +                                       'FOSIL1',
      +                                       'FOSIL2',
      +                                       'FOSIL3',
@@ -251,8 +254,8 @@
      +                                            MAX_CL_FILES*.FALSE./,
      +        ACTIVE_OVERLAY_CL_FILES(0:MAX_CL_FILES-1)/
      +                                            MAX_CL_FILES*.FALSE./
-      LOGICAL (kind=1) ::
-     +    CL_FILES_ARE_ACTIVE/.FALSE./,R_CL_FILES_ARE_ACTIVE
+ X1   LOGICAL (kind=1) ::  CL_FILES_ARE_ACTIVE/.FALSE./
+ X2   LOGICAL (kind=1) ::  R_CL_FILES_ARE_ACTIVE
       CHARACTER (len=256) ::  COMMAND1,COMMAND2
       LOGICAL (kind=1) ::  LAHEY_LF95
       CHARACTER (len=30) ::  SCREEN_OUTPUT
@@ -2021,8 +2024,8 @@
      +     R_MONTHLY_DOE_DECOMMISSIONING(0:12)
 
       REAL (KIND=4) :: RETRO_CAP_CO2_MULT
-      LOGICAL (kind=1) ::
-     +      RETURN_CL_INTRA_CLASS_REVENUES,INIT_MON_MDS_CL_UNITS,
+ X1   LOGICAL (kind=1) ::    RETURN_CL_INTRA_CLASS_REVENUES
+ X2   LOGICAL (kind=1) ::    INIT_MON_MDS_CL_UNITS,
      +            MON_MDS_CL_VAR,MON_MDS_CL_FIXED,MON_MDS_NUC_ADDER,
      +            STRATEGIC_RETIRMENTS_LOGIC/.FALSE./,
      +            GET_STRATEGIC_RETIRMENTS_LOGIC,
@@ -2283,8 +2286,8 @@
       CHARACTER (len=2) ::  LOAD_FILE_CHAR_EXT
       CHARACTER (len=3) ::  GET_HOURLY_PRICE_NAME
       CHARACTER (len=5) ::  MARKET_PRICE_NAME
-      CHARACTER (len=256) ::
-     +    FILE_NAME,PRB_FILE_DIRECTORY,OUTPUT_DIRECTORY
+ X1   CHARACTER (len=256) ::  FILE_NAME
+ X2   CHARACTER (len=256) ::  PRB_FILE_DIRECTORY,OUTPUT_DIRECTORY
       CHARACTER (len=20) ::  RETURN_UNITNM,MONTH_NAME,LOCAL_NAME
       CHARACTER (len=4) ::  YEAR_CHR
       CHARACTER (len=5) ::  NUNITS_CHR
@@ -2410,8 +2413,8 @@
      +           RESURRECT_RETROFIT_UNIT,
      +           ADJUST_CO2_RETRO_PLAN_CAP,
      +           ADJUST_GRX_CO2_RETRO_PLAN_CAP
-      LOGICAL (kind=1) ::
-     +    RETURN_ASSET_CLASS_LISTS,PICK_FOR_SEED_OPTIONS,
+ X1   LOGICAL (kind=1) ::  RETURN_ASSET_CLASS_LISTS
+ X2   LOGICAL (kind=1) ::  PICK_FOR_SEED_OPTIONS,
      +          OLD_ADJ_LOGIC/.TRUE./
       CHARACTER (len=6) ::     BASECASE_PLANT_ID(MAX_CL_UNITS),
      +               R_EIA_PLANT_CODE,
@@ -2445,8 +2448,8 @@
      +               CAPACITY_MARKET_TYPE(MAX_CL_UNITS),
      +               CAPACITY_MARKET_MONTH(MAX_CL_UNITS),
      +               CAPACITY_MARKET_EXP_COLLECT(MAX_CL_UNITS)
-      CHARACTER (len=20) ::
-     +      CAPACITY_MARKET_COST_ASSIGN(MAX_CL_UNITS),
+ X1   CHARACTER (len=20) ::    CAPACITY_MARKET_COST_ASSIGN(MAX_CL_UNITS)
+ X2   CHARACTER (len=20) ::
      +               STATE_PROV_NAME
       CHARACTER (len=36) ::  THERMAL_GUID
       REAL (kind=4) :: 
@@ -2621,8 +2624,8 @@
      +     MARKET_COUNT/0/,
      +     TWO_BLOCK(2)
 !
-      LOGICAL (kind=1) ::
-     +    OFFSET_MAINTENANCE_VECTORS,OFFSET_MAINTENANCE_ACTIVE,
+ X1   LOGICAL (kind=1) ::  OFFSET_MAINTENANCE_VECTORS
+ X2   LOGICAL (kind=1) ::  OFFSET_MAINTENANCE_ACTIVE,
      +         CALC_ANNUAL_CAP_AND_MAINT,
      +         SAVE_DETAILED_MAINTENANCE,DETAILED_MAINTENANCE_IS_ACTIVE,
      +         DETAIL_MAINTENANCE_NOT_ACTIVE,UPDATE_PERIOD_CAPACITY,
@@ -2771,13 +2774,13 @@
       LOGICAL (kind=1) ::  SHADOW_UNITS_ACTIVE
       INTEGER (kind=2) ::  MO,MY_SHADOW,NUM_OF_NUCLEAR_UNITS
 !
-      LOGICAL (kind=1) ::
-     +    ACCUMULATE_MAINTENANCE,MAINTENANCE_IS_ACCUMULATED
+ X1   LOGICAL (kind=1) ::  ACCUMULATE_MAINTENANCE
+ X2   LOGICAL (kind=1) ::  MAINTENANCE_IS_ACCUMULATED
       REAL (kind=4) ::  TEMP_CL_MAINTENANCE,MAINTENANCE_CAPACITY
       INTEGER (kind=2) ::  MW_MAINT_NO
       INTEGER ::  MW_MAINT_REC
-      CHARACTER (len=9) ::
-     +    GROUP_NAME(0:MAX_REPORTING_GROUPS)/'Group 0',
+ X1   CHARACTER (len=9) ::  GROUP_NAME(0:MAX_REPORTING_GROUPS)/'Group 0'
+ X2   CHARACTER (len=9) ::
      +           'Group 1','Group 2','Group 3','Group 4','Group 5',
      +           'Group 6','Group 7','Group 8','Group 9','Group 10',
      +           'Group 11','Group 12','Group 13','Group 14',
@@ -2824,8 +2827,8 @@
 !
 ! GADS DATA BASE FOR FOR'S AND MOR'S
 !
-      INTEGER (kind=2) ::
-     +    RDI_SIZE_INDEX,RDI_FUEL_INDEX,GET_PRIMARY_MOVER
+ X1   INTEGER (kind=2) ::  RDI_SIZE_INDEX
+ X2   INTEGER (kind=2) ::  RDI_FUEL_INDEX,GET_PRIMARY_MOVER
       REAL (kind=4) ::  GADS_FOR(8,5), GADS_MOR(8,5)
 !
 ! UNIT SIZES (MW) 1-99 100-199 200-299 300-399 400-599 600-799 800-1000 1000+
@@ -2886,8 +2889,8 @@
       LOGICAL (kind=1) ::  PROCESSING_FIRST_DATA_FILE
       INTEGER (kind=2) ::  MAX_CL_FILES/36/
       INTEGER ::    FILE_ID
-      INTEGER (kind=4) ::
-     +    UNIQUE_ID_NUM,CL_UNIT_UNIQUE_RPT_ID(MAX_CL_UNITS)
+ X1   INTEGER (kind=4) ::  UNIQUE_ID_NUM
+ X2   INTEGER (kind=4) ::  CL_UNIT_UNIQUE_RPT_ID(MAX_CL_UNITS)
       INTEGER (kind=4) ::  UNIQUE_REPORT_VALUE_FOR_CL_UNIT
       LOGICAL (kind=1) ::  TRANSACT_ACTIVE_IN_ENDPOINT
       INTEGER (kind=2) ::  RETURN_MONTHLY_CL_CASH_EXPENSES
@@ -12076,8 +12079,8 @@
 !***********************************************************************
 !
       CHARACTER (len=20) ::  SPECIAL_ID_NAME,RETURN_UNITNM,R_NAME
-      LOGICAL (kind=1) ::
-     +    VOID_LOGICAL,CLA_SPECIAL_ID_NAME,CLA_RETURN_UNITNM
+ X1   LOGICAL (kind=1) ::  VOID_LOGICAL
+ X2   LOGICAL (kind=1) ::  CLA_SPECIAL_ID_NAME,CLA_RETURN_UNITNM
       INTEGER (kind=2) ::  R_NUNITS
          VOID_LOGICAL = CLA_SPECIAL_ID_NAME(R_NUNITS,R_NAME)  ! character 20 used in margnobj and catawba
          SPECIAL_ID_NAME = R_NAME
