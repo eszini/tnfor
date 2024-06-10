@@ -17,6 +17,9 @@
  *
  *	tfor.c
  *
+ *	Mon Jun 10 01:30:37 -03 2024
+ *	ajustes a armame_dos_lineas para separar lineas largas
+ *
  *	Thu Jun  6 03:13:28 -03 2024
  *	mas mejoras en chgtyp
  *	agregue estadisticas para saber que cambios hizo
@@ -6920,12 +6923,14 @@ char	*l2;
 
 
 
+#if 0
 	if ( p1 == p2)
 	{
 		printf ("SALGO de armame_dos_lineas \n");
 		printf ("l1: |%s| \n",l1);
 		printf ("l2: |%s| \n",l2);
 	}
+#endif
 
 
 	sq_lineas_desdobladas++;	
@@ -10698,8 +10703,9 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0034");
-	strcpy (d,"Thu Jun  6 03:12:28 -03 2024");
+	strcpy (ver,"0035");
+	strcpy (d,"Mon Jun 10 01:30:03 -03 2024");
+
 
 	sprintf (z,"%s -- (%s)  %s", gp_fp(GP_GET,0,(char **)0), ver, d  );
 	memset (w,0,MAXV);
