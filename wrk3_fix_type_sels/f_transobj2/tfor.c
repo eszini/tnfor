@@ -828,7 +828,7 @@ Además, declara variables de tipos `nodeptr` y un puntero a `nodeptr`.
 
 
 
-
+#define	LF77	72			/* maximo de caracteres en una lunia de F77 */
 
 
 
@@ -959,6 +959,8 @@ char	*s;
 
 	if (n == 10 )
 	{
+		printf ("\n");
+		printf ("File: %s\n",finp);
 		printf ("Cantidad de lineas divididas     %6d \n", sq_lineas_desdobladas);
 		printf ("Cantidad de integer cambiados    %6d \n", sq_integer);
 		printf ("Cantidad de real cambiados       %6d \n", sq_real);
@@ -968,6 +970,8 @@ char	*s;
 
 		if (ffsta)
 		{
+		fprintf (hfsta,"%s","\n");
+		fprintf (hfsta,"File: %s\n",finp);
 		fprintf (hfsta,"Cantidad de lineas divididas     %6d \n", sq_lineas_desdobladas);
 		fprintf (hfsta,"Cantidad de integer cambiados    %6d \n", sq_integer);
 		fprintf (hfsta,"Cantidad de real cambiados       %6d \n", sq_real);
@@ -6675,7 +6679,7 @@ printf ("DDD despues de fix_dec_var1 q_tk: %d\n",q_tk);
 		if (f4 == 1)
 		{
 			/* en el caso de fix format ... si tiene mas de 72 chars ... problemas */
-			if (strlen(b2) > 72 )
+			if (strlen(b2) > LF77 )
 			{
 				if (gp_fverbose("d3"))
 				{	
@@ -6802,7 +6806,27 @@ printf (" - - - - 4 l1: %4d ql: %4d j-1: %4d j: %4d  s[j-1]: |%s|  s[j]: |%s| \n
 #endif
 
 /*
+ * -----------------------------------------------------------------------------------
+ *
+ *	armame dos lineas
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
  *	s  ... linea de entrada a separar 
+ *	
+ *	separa en dos lineas l1 y l2 
+ *	algunos considerandos !
+ *
+ *	si es del tipo x ej
+ *	integer (kind=4) :: variable(subindice1,subindice2) ....
+ *	entonces, la ',' esa no sirve!! tengo que estar seguro
+ *	que cerro el parentesis !!
+ *
+ *	idem si es x ej
+ *	character (len=40000) :: variable_super_largar / cosa ,
+ *	esa ',' tampoco me sirve, tiene que cerrar la '/'
  */
 
 int	armame_dos_lineas(s,l1,l2)
@@ -6814,9 +6838,13 @@ char	*l2;
 	int	c1;
 	int	f1,f2,f3;
 	int	p1,p2,p3;
+	int	f_fix;
 	char	b1[MAXB];
 
 	memset(b1,' ',MAXB);
+
+	f_fix = 0;		/* f_fix 0, aun no se soluciono */
+
 
 	/* busco el :: - como estoy convirtiendo ... la linea ya lo tiene que tener ! */
 	for (i=0, f1=1; f1 && i<strlen(s); i++)
@@ -6831,37 +6859,66 @@ char	*l2;
 			f1=0;
 
 	/* busco una coma que separe campos, que no este dentro de parentesis ! */
-	for (i=0, f1=1, f2=1; f1 && i<strlen(s); i++)
+	for (i=0, f1=1, f2=1, f3=1; f1 && i<strlen(s); i++)
 	{	if (f2 && s[i+p1] == '(')
 			f2 = 0;
 		if (!f2 && s[i+p1] == ')' )
 			f2 = 1;
-		if (f2 && s[i+p1] == ',')
+
+		if (f3 && s[i+p1] == '/')
+			f3 = 0;
+		if (!f3 && s[i+p1] == '/' )
+			f3 = 1;
+
+		if (f2 && f3 && s[i+p1] == ',')
 			f1 = 0, p2 = p1+i;
 	}
+
+
+/* EEE */
 
 	/* 
 	 * si encontro la ',' puede separar campos
 	 * si no la encontro, es el caso de una sola variable con
 	 * sub indices largos , y llego al fin de linea !
+	 * caso en que  hay:
+	 *     ... (   ,   ) , 
+	 *     ... /       /,
 	 */
 	
-	if (p1 != p2)
-	{	strncpy(l1,s,p2);
-		l1[p2]=0;
 
-		strncpy(l2,s,p1);
-		strncat(l2,b1,c1);
-		strcat(l2,s+p2+1);
+	if (p1 != p2)
+	{	
+		if (p2 > LF77 )
+		{
+			strncpy(l1,s,p1);
+			strcpy(l2,"    +  ");
+			strcat(l2,s+p1);
+			f_fix = 1;
+		}
+		else
+		{
+			strncpy(l1,s,p2);
+			l1[p2]=0;
+
+			strncpy(l2,s,p1);
+			strncat(l2,b1,c1);
+			strcat(l2,s+p2+1);
+
+			f_fix = 1;
+		}
+
 	}
-#if 1
 	else
 	{
 		strncpy(l1,s,p1);
 		strcpy(l2,"     +  ");
 		strcat(l2,s+p1);
+
+		f_fix = 1;
 	}
-#endif
+
+
 
 	if ( p1 == p2)
 	{
@@ -6869,6 +6926,7 @@ char	*l2;
 		printf ("l1: |%s| \n",l1);
 		printf ("l2: |%s| \n",l2);
 	}
+
 
 	sq_lineas_desdobladas++;	
 
@@ -7077,7 +7135,6 @@ int	fix_dec_var1()
 			printf ("Token-1-  %d |%s| \n",i1,tk[i1]);
 	}
 
-/* EEE */
 
 	i = n_type;
 	f1=0;
@@ -7089,6 +7146,7 @@ int	fix_dec_var1()
 	 * type (kind= nn ), intent(rr) :: pepe
 	 * type (kind= nn )  function      pepe
 	 * type                         :: pepe
+	 * type              function      pepe 
 	 *	
 	 * tiene kind y dbl  o  tiene kind inten y dbl
 	 *
@@ -7096,19 +7154,20 @@ int	fix_dec_var1()
 
 	if ( !f1 && ((kind && dbl) || (kind && dbl && inten))  )
 	{
-printf ("fix_dec_var2: entro caso 1a \n");
 		f1 = 1;
 	}
 
 	if ( !f1 && kind && func )
 	{
-printf ("fix_dec_var2: entro caso 1b \n");
 		f1 = 1;
 	}
 
 	if ( !f1 && !aster && !kind && dbl && !func )
 	{
-printf ("fix_dec_var2: entro caso 1c \n");
+		f1 = 1;
+	}
+	if ( !f1 && !aster && !kind && !dbl && func )
+	{
 		f1 = 1;
 	}
 
@@ -7140,7 +7199,6 @@ printf ("fix_dec_var2: entro caso 1c \n");
 
 	if ( !f1 && aster && !kind && !dbl && !func )
 	{
-printf ("fix_dec_var2: entro caso 2a \n");
 		ca = tk[n_aster+1][0];
 		if (ca != '1' && ca != '2' && ca != '4' && ca != '8' )
 			error(1002);
@@ -7155,7 +7213,6 @@ printf ("fix_dec_var2: entro caso 2a \n");
 
 	if ( !f1 && !kind && !dbl && !func )
 	{
-printf ("fix_dec_var2: entro caso 2b \n");
 
 		sprintf (tk[i] , "%s :: ",s_varb);
 		
@@ -7166,12 +7223,11 @@ printf ("fix_dec_var2: entro caso 2b \n");
 #if 1
 	if ( !f1 && aster && !kind && dbl && !func )
 	{
-printf ("fix_dec_var2: entro caso 2c \n");
 		ca = tk[n_aster+1][0];
 		if (ca != '1' && ca != '2' && ca != '4' && ca != '8' )
 			error(1003);
 
-		sprintf (tk[i] , "%s (kind=%c) :: ",s_varb,ca);
+		sprintf (tk[i] , "%s (kind=%c) ",s_varb,ca);
 		tk[i+1][0]=0;
 		tk[i+2][0]=0;
 		
@@ -7222,7 +7278,6 @@ printf ("fix_dec_var2: entro caso 2c \n");
 
 	if ( !f1 && aster && !kind && !dbl && func )
 	{
-printf ("fix_dec_var2: entro caso 4 \n");
 		ca = tk[n_aster+1][0];
 		if (ca != '1' && ca != '2' && ca != '4' && ca != '8' )
 			error(1002);
@@ -7249,7 +7304,6 @@ printf ("fix_dec_var2: entro caso 4 \n");
 
 	if ( !f1 && aster && !kind && !dbl && inten && !func )
 	{
-printf ("fix_dec_var2: entro caso 4 \n");
 		ca = tk[n_aster+1][0];
 		if (ca != '1' && ca != '2' && ca != '4' && ca != '8' )
 			error(1003);
@@ -7276,7 +7330,7 @@ printf ("fix_dec_var2: entro caso 4 \n");
 #if 1
 	if ( !f1 && !aster && kind && !dbl && !inten && !alloca && !func )
 	{
-printf ("fix_dec_var2: EEE entro caso transobj2 \n");
+printf ("fix_dec_var1: FFF entro caso transobj2 \n");
 printf ("EE1|%s| %c \n",tk[n_type],tk[n_kind+5][0]);
 		/* caso especifico */
 		if (!strcmp(tk[n_type],"REAL") && tk[n_kind+5][0]==','  )
@@ -7335,7 +7389,8 @@ printf ("EE2|%s| %c \n",tk[n_type],tk[n_kind+5][0]);
 
 int	fix_dec_var2()
 {
-	int	i,j,k,i1;
+	int	f2;
+	int	i,j,k,l,i1;
 	int	minus, aster, len, opt, inten, alloca, save, func, cont, dbl;
 	int	n_minus, n_aster, n_kind, n_opt, n_len;
 	int	n_inten, n_alloca, n_save, n_func, n_cont, n_dbl;
@@ -7426,6 +7481,28 @@ int	fix_dec_var2()
 		strcpy(s_varb,pasar_a_minusc(tk[n_type]));
 
 		
+	/* algunos casos excepcionales ...  len=4)varible ... */
+	if (len)
+	{	
+printf ("ZZZfix_dec_var2: arregle el len=4)var ... \n");
+
+		for (f2=1, k=n_len+1; k< n_len+8; k++)
+			if (tk[k][0] == ')' && tk[k+1][0] != ' ')
+			{
+				q_tk++;
+				for (l=q_tk-1; l>= k+1 && l; l--)
+				{	strcpy(tk[l],tk[l-1]);
+				}
+				strcpy (tk[k+1]," ");	
+				ult = k;
+				f2 = 0;
+			}
+	}
+
+
+
+
+
 	if (gp_fverbose("d3"))
 	{
 		for ( i1 = 0 ; i1< 15 && i1<q_tk ; i1++)
@@ -7434,6 +7511,7 @@ int	fix_dec_var2()
 
 	i = n_type;
 	f1=0;
+
 
 
 	if (aster)
@@ -7590,6 +7668,9 @@ int	fix_dec_var2()
 
 		printf ("No hubo caso para .... |%s| \n",b2);
 	}
+
+
+
 
 	/* f1 1, resolvio f1 0, no pudo cambiar formato !! */
 	if (f1)
@@ -9591,6 +9672,48 @@ char	*s;
 
 
 
+char	*fname(bname) 
+char	*bname;
+{
+    static char 	nombre_completo[MAXP];
+    char 		fecha_hora[MAXF];
+
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+
+    /* Formatear la fecha y hora */
+    snprintf(fecha_hora, sizeof(fecha_hora), "_%02d%02d%02d_%02d%02d",
+		tm.tm_year % 100, 
+		tm.tm_mon + 1, 
+		tm.tm_mday,
+		tm.tm_hour,
+		tm.tm_min);
+
+    /* Crear el nombre completo */
+    snprintf(nombre_completo, sizeof(nombre_completo), "%s%s", bname, fecha_hora);
+
+    return nombre_completo;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
  * -----------------------------------------------------------------------------------
@@ -10878,6 +11001,50 @@ int main() {
 #endif
 
 
+
+#if 0
+
+
+
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+
+char* archivo_log(char *nombre_log) 
+{
+    static char nombre_completo[256];
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+
+    // Formatear la fecha y hora
+    char fecha_hora[20];
+    snprintf(fecha_hora, sizeof(fecha_hora), "_%02d%02d%02d_%02d%02d",
+             tm.tm_year % 100, tm.tm_mon + 1, tm.tm_mday,
+             tm.tm_hour, tm.tm_min);
+
+    // Crear el nombre completo
+    snprintf(nombre_completo, sizeof(nombre_completo), "%s%s", nombre_log, fecha_hora);
+
+    return nombre_completo;
+}
+
+int main()
+{
+    char nombre_log[256];
+    strcpy(nombre_log, "prueba");
+
+    strcpy(nombre_log, archivo_log(nombre_log));
+    printf("Nombre del archivo: %s\n", nombre_log);
+
+    return 0;
+}
+
+
+
+
+#endif
+
+
 /*
  * -----------------------------------------------------------------------------------
  *	end of source  ( I hope)
@@ -10885,5 +11052,8 @@ int main() {
  *	end of source
  * -----------------------------------------------------------------------------------
  */
+
+
+
 
 

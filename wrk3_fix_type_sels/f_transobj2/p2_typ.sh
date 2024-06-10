@@ -1,3 +1,4 @@
+#!/bin/bash
 
 
 ./tfor -v -opciones=d5 -tool=6 -inp=t2.for -out=t3.for --chgtyp  > log2
@@ -17,4 +18,12 @@ grep -i character t2.for > t2c.log
 grep -i character t3.for > t3c.log
 
 
+
+
+# Verificar si el archivo tool.sta existe 
+if [ -f "tool.sta" ]; then
+    cat tool.sta
+else
+    echo "El archivo tool.sta no existe."
+fi
 

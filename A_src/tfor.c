@@ -828,7 +828,7 @@ Además, declara variables de tipos `nodeptr` y un puntero a `nodeptr`.
 
 
 
-
+#define	LF77	72			/* maximo de caracteres en una lunia de F77 */
 
 
 
@@ -6679,7 +6679,7 @@ printf ("DDD despues de fix_dec_var1 q_tk: %d\n",q_tk);
 		if (f4 == 1)
 		{
 			/* en el caso de fix format ... si tiene mas de 72 chars ... problemas */
-			if (strlen(b2) > 72 )
+			if (strlen(b2) > LF77 )
 			{
 				if (gp_fverbose("d3"))
 				{	
@@ -6838,9 +6838,13 @@ char	*l2;
 	int	c1;
 	int	f1,f2,f3;
 	int	p1,p2,p3;
+	int	f_fix;
 	char	b1[MAXB];
 
 	memset(b1,' ',MAXB);
+
+	f_fix = 0;		/* f_fix 0, aun no se soluciono */
+
 
 	/* busco el :: - como estoy convirtiendo ... la linea ya lo tiene que tener ! */
 	for (i=0, f1=1; f1 && i<strlen(s); i++)
@@ -6868,8 +6872,6 @@ char	*l2;
 
 		if (f2 && f3 && s[i+p1] == ',')
 			f1 = 0, p2 = p1+i;
-
-
 	}
 
 
@@ -6884,55 +6886,51 @@ char	*l2;
 	 *     ... /       /,
 	 */
 	
-	/* si no hubo caso de barra comenzando a inicializar vector ... */
-	if ( f3 == 0)
-	{
 
 	if (p1 != p2)
-	{	strncpy(l1,s,p2);
-		l1[p2]=0;
+	{	
+		if (p2 > LF77 )
+		{
+			strncpy(l1,s,p1);
+			strcpy(l2,"    +  ");
+			strcat(l2,s+p1);
+			f_fix = 1;
+		}
+		else
+		{
+			strncpy(l1,s,p2);
+			l1[p2]=0;
 
-		strncpy(l2,s,p1);
-		strncat(l2,b1,c1);
-		strcat(l2,s+p2+1);
+			strncpy(l2,s,p1);
+			strncat(l2,b1,c1);
+			strcat(l2,s+p2+1);
+
+			f_fix = 1;
+		}
+
 	}
 	else
 	{
 		strncpy(l1,s,p1);
 		strcpy(l2,"     +  ");
 		strcat(l2,s+p1);
-	}
 
-	}
-
-
-	/* 
-	 * si no encontro la ',' desdoblar sin duplicar el type !!!
-	 * caso en que  hay ... /xxxxxx   , 
-	 */
-
-	if ( f3 == 1)
-	{
-
-	if (p1 != p2)
-	{	
-		strncpy(l1,s,p1);
-		strcpy(l2,"     +  ");
-		strcat(l2,s+p1);
-
+		f_fix = 1;
 	}
 
 
 
-	}
 
 
+#if 0
 	if ( p1 == p2)
 	{
 		printf ("SALGO de armame_dos_lineas \n");
 		printf ("l1: |%s| \n",l1);
 		printf ("l2: |%s| \n",l2);
 	}
+#endif
+
 
 	sq_lineas_desdobladas++;	
 
@@ -7160,24 +7158,20 @@ int	fix_dec_var1()
 
 	if ( !f1 && ((kind && dbl) || (kind && dbl && inten))  )
 	{
-printf ("fix_dec_var1: entro caso 1a \n");
 		f1 = 1;
 	}
 
 	if ( !f1 && kind && func )
 	{
-printf ("fix_dec_var1: entro caso 1b \n");
 		f1 = 1;
 	}
 
 	if ( !f1 && !aster && !kind && dbl && !func )
 	{
-printf ("fix_dec_var1: entro caso 1c \n");
 		f1 = 1;
 	}
 	if ( !f1 && !aster && !kind && !dbl && func )
 	{
-printf ("fix_dec_var1: entro caso 1d \n");
 		f1 = 1;
 	}
 
@@ -7209,7 +7203,6 @@ printf ("fix_dec_var1: entro caso 1d \n");
 
 	if ( !f1 && aster && !kind && !dbl && !func )
 	{
-printf ("fix_dec_var1: entro caso 2a \n");
 		ca = tk[n_aster+1][0];
 		if (ca != '1' && ca != '2' && ca != '4' && ca != '8' )
 			error(1002);
@@ -7224,7 +7217,6 @@ printf ("fix_dec_var1: entro caso 2a \n");
 
 	if ( !f1 && !kind && !dbl && !func )
 	{
-printf ("fix_dec_var1: entro caso 2b \n");
 
 		sprintf (tk[i] , "%s :: ",s_varb);
 		
@@ -7235,7 +7227,6 @@ printf ("fix_dec_var1: entro caso 2b \n");
 #if 1
 	if ( !f1 && aster && !kind && dbl && !func )
 	{
-printf ("fix_dec_var1: entro caso 2c \n");
 		ca = tk[n_aster+1][0];
 		if (ca != '1' && ca != '2' && ca != '4' && ca != '8' )
 			error(1003);
@@ -7291,7 +7282,6 @@ printf ("fix_dec_var1: entro caso 2c \n");
 
 	if ( !f1 && aster && !kind && !dbl && func )
 	{
-printf ("fix_dec_var1: entro caso 4 \n");
 		ca = tk[n_aster+1][0];
 		if (ca != '1' && ca != '2' && ca != '4' && ca != '8' )
 			error(1002);
@@ -7318,7 +7308,6 @@ printf ("fix_dec_var1: entro caso 4 \n");
 
 	if ( !f1 && aster && !kind && !dbl && inten && !func )
 	{
-printf ("fix_dec_var1: entro caso 4 \n");
 		ca = tk[n_aster+1][0];
 		if (ca != '1' && ca != '2' && ca != '4' && ca != '8' )
 			error(1003);
