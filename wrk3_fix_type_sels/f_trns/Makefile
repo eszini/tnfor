@@ -7,6 +7,7 @@ COPY     ?= 1  # Por defecto, copiar archivos (1 = copiar, 0 = no copiar)
 VERSION   =  10001
 
 BIN_DIR := $(HOME)/bin
+SRC_BCK := $(HOME)/bck1
 SRC_DIR := $(HOME)/wrk/tnfor/A_src
 
 # Objetivo setup para crear directorios si no existen
@@ -29,6 +30,8 @@ tfor: tfor.c
 			echo "Copiando tfor.c a src..."; \
 			cp tfor.c $(SRC_DIR); \
 			echo "Copiando Makefile a src..."; \
+			cp tfor.c $(SRC_BCK); \
+			echo "Copiando Makefile a backup..."; \
 			cp Makefile $(SRC_DIR); \
 			echo "Copiando ejecutables a bin..."; \
 			if [ -e tfor ]; then \
