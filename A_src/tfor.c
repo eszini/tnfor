@@ -725,7 +725,7 @@ int	pasa_filtro(char *);
 char	*trim_blanks(char *);
 int	ordenar_makefile();
 int	ps_src1();
-
+int	largo_linea(char *);
 
 int	borrar_stats();
 
@@ -743,6 +743,7 @@ int	sq_real;			/* q de real cambiados */
 int	sq_logical;			/* q de logical cambiados */
 int	sq_character;			/* q de character cambiados */
 int	sq_variables_no_convertidas;	/* importante ! variables que no se pud convertir */
+int	sq_lcont;			/* lineas de continuacion modificadas */
 
 
 
@@ -977,6 +978,7 @@ char	*s;
 		printf ("Cantidad de real cambiados       %6d \n", sq_real);
 		printf ("Cantidad de logical cambiados    %6d \n", sq_logical);
 		printf ("Cantidad de character cambiados  %6d \n", sq_character);
+		printf ("Cantidad de lin cont cambiadas   %6d \n", sq_lcont);
 		printf ("variables_no_convertidas         %6d \n", sq_variables_no_convertidas);
 
 		if (ffsta)
@@ -988,6 +990,7 @@ char	*s;
 		fprintf (hfsta,"Cantidad de real cambiados       %6d \n", sq_real);
 		fprintf (hfsta,"Cantidad de logical cambiados    %6d \n", sq_logical);
 		fprintf (hfsta,"Cantidad de character cambiados  %6d \n", sq_character);
+		fprintf (hfsta,"Cantidad de lin cont cambiadas   %6d \n", sq_lcont);
 		fprintf (hfsta,"variables_no_convertidas         %6d \n", sq_variables_no_convertidas);
 
 
@@ -1033,6 +1036,7 @@ int	borrar_stats()
 	sq_real	                 = 0;	
 	sq_logical	         = 0;
 	sq_character             = 0;
+	sq_lcont                 = 0;
 
 }
 
@@ -6586,7 +6590,7 @@ int	*ql_i;
 int	*ql_f;
 {
 
-	int	i,j,k;
+	int	i,j,k,l1;
 	int	p1,p2;
 	int	f1,f2,f3,f4,f5;
 	int	qi,qf;
@@ -6690,12 +6694,12 @@ printf ("DDD despues de fix_dec_var1 q_tk: %d\n",q_tk);
 		if (f4 == 1)
 		{
 			/* en el caso de fix format ... si tiene mas de 72 chars ... problemas */
-			if (strlen(b2) > LF77 )
+			if ( (l1=largo_linea(b2)) > LF77 )
 			{
 				if (gp_fverbose("d3"))
 				{	
 					printf ("ACA algo no anda carajo !!!! \n");
-					printf ("Atencion! -- linea larga %5d %3d |%s|\n",i,strlen(b2),b2);
+					printf ("Atencion! -- linea larga %5d %3d |%s|\n",i,l1,b2);
 				}
 
 				memset (b3,0,MAXB);
@@ -7835,8 +7839,38 @@ int	tiene_dec_var1()
 
 
 
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	largo_linea
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ * devuelve el largo de linea real de una sentencia fortran
+ * sin tener en cuenta si puso un chorro de comentarios al final
+ *
+ */
 
 
+int	largo_linea(s)
+char	*s;
+{
+	int	i,j,k;
+	int	f1;
+
+
+	k=0;
+	for (i=0,f1=1; f1; i++)
+		if (s[i] == 0 || ( i> 10 && s[i] == '!') )
+			f1=0, k = i;
+
+printf ("LLL: calculado  %3d |%s| \n",k,s);
+printf ("LLL: strlen     %3d |%s| \n",strlen(s),s);
+
+	return k;
+}
 
 
 /*
@@ -8642,6 +8676,9 @@ int	*ql_f;
 					f1=0;
 				}
 			}
+
+
+			sq_lcont++;
 		}
 
 
@@ -10495,6 +10532,10 @@ char	c;
 	if (c == '|'  )
 		x = TC_CVR;
 
+	/* encontrado en UN fuente fortran ....  */
+	if (c == '~'  )
+		x = TC_CVR;
+
 
 
 
@@ -10782,7 +10823,7 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0035");
+	strcpy (ver,"0036");
 	strcpy (d,"Mon Jun 10 01:30:03 -03 2024");
 
 

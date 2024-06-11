@@ -1,4 +1,5 @@
 Makefile
 tfor.c
 p1_com.sh
-p2_com.sh
+p2_typ.sh
+p3_lco.sh

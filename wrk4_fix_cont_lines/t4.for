@@ -28,91 +28,96 @@
 !                                                                      *
 !***********************************************************************
 !
-      SUBROUTINE AFUDC_MONTHLY(AFUDC1,CWIPRB,AFDCB1,AFDCFC,CWIP1,
-     +   AFDCSW,AFDCPERIODS,CE,CEP,AFDC1,AFDC2,CWIP,RBCWIP,
-     +   AFDC1B,AFDC2B,
-     +   SERVICEMO,CAPINRST,DEPMET,PCAPINRST,AFDC_CAP_VECTOR,
-     +   FIRSTYR,CURRENT_INTEREST_CAP,WHO_CALLED,
-     +   FINANCIAL_SIMULATION_YEARS,CLASS_TAX_LIFE,AFUDC_IN_CWIP,
-     +                 BOOK_EXPEN,
-     +                 PLANT_2_SERVICE,
-     +                 MONTHLY_AFUDC_ON_CASH,
-     +                 MONTHLY_AFUDC_ON_PLANT,
-     +                 MONTHLY_CWIP,
-     +                 MONTHLY_AFUDC_IN_CWIP,
-     +                 MONTHLY_CWIP_IN_RATEBASE,
-     +                 MONTHLY_CAPITALIZED_INTEREST,
-     +                 MONTHLY_CURRENT_INTEREST,
-     +                 MONTHLY_INTEREST_TO_TAX_VALUE,
-     +                 MONTHLY_CURRENT_INTEREST_CAP,
-     +                 USE_PLANT_PERCENTAGE,
-     +                 PERCENT_PLANT_2_SERVICE)
+      SUBROUTINE AFUDC_MONTHLY(AFUDC1,CWIPRB,AFDCB1,AFDCFC,CWIP1,                         &
+         AFDCSW,AFDCPERIODS,CE,CEP,AFDC1,AFDC2,CWIP,RBCWIP,                               &
+         AFDC1B,AFDC2B,                                                                   &
+         SERVICEMO,CAPINRST,DEPMET,PCAPINRST,AFDC_CAP_VECTOR,                             &
+         FIRSTYR,CURRENT_INTEREST_CAP,WHO_CALLED,                                         &
+         FINANCIAL_SIMULATION_YEARS,CLASS_TAX_LIFE,AFUDC_IN_CWIP,                         &
+                       BOOK_EXPEN,                                                        &
+                       PLANT_2_SERVICE,                                                   &
+                       MONTHLY_AFUDC_ON_CASH,                                             &
+                       MONTHLY_AFUDC_ON_PLANT,                                            &
+                       MONTHLY_CWIP,                                                      &
+                       MONTHLY_AFUDC_IN_CWIP,                                             &
+                       MONTHLY_CWIP_IN_RATEBASE,                                          &
+                       MONTHLY_CAPITALIZED_INTEREST,                                      &
+                       MONTHLY_CURRENT_INTEREST,                                          &
+                       MONTHLY_INTEREST_TO_TAX_VALUE,                                     &
+                       MONTHLY_CURRENT_INTEREST_CAP,                                      &
+                       USE_PLANT_PERCENTAGE,                                              &
+                       PERCENT_PLANT_2_SERVICE)
 !
       INCLUDE 'SpinLib.MON'
       INCLUDE 'SIZECOM.MON'
       INCLUDE 'GLOBECOM.MON'
 !
-      CHARACTER*2 WHO_CALLED
-      INTEGER*2 FINANCIAL_SIMULATION_YEARS
-      REAL*4 BOOK_EXPEN(0:12,0:*),
-     +       PLANT_2_SERVICE(0:12,0:*),
-     +       MONTHLY_AFUDC_ON_CASH(0:12,0:*),
-     +       MONTHLY_AFUDC_ON_PLANT(0:12,0:*),
-     +       MONTHLY_CWIP(0:12,0:*),
-     +       MONTHLY_AFUDC_IN_CWIP(0:12,0:*),
-     +       MONTHLY_CWIP_IN_RATEBASE(0:12,0:*),
-     +       MONTHLY_CAPITALIZED_INTEREST(0:12,0:*),
-     +       MONTHLY_CURRENT_INTEREST(0:12,0:*),
-     +       MONTHLY_INTEREST_TO_TAX_VALUE(0:12,0:*),
-     +       MONTHLY_CURRENT_INTEREST_CAP(0:12,0:*),
-     +       PERCENT_PLANT_2_SERVICE(0:12,0:*)
-      LOGICAL*1 USE_PLANT_PERCENTAGE
-      CHARACTER*1 RIPPLE_ZERO,RIPPLE_AVERAGE
+      CHARACTER (len=2) ::  WHO_CALLED
+      INTEGER (kind=2) ::  FINANCIAL_SIMULATION_YEARS
+      REAL (kind=4) ::  BOOK_EXPEN(0:12,0:*),                                             &
+             PLANT_2_SERVICE(0:12,0:*),                                                   &
+             MONTHLY_AFUDC_ON_CASH(0:12,0:*),                                             &
+             MONTHLY_AFUDC_ON_PLANT(0:12,0:*),                                            &
+             MONTHLY_CWIP(0:12,0:*),                                                      &
+             MONTHLY_AFUDC_IN_CWIP(0:12,0:*),                                             &
+             MONTHLY_CWIP_IN_RATEBASE(0:12,0:*),                                          &
+             MONTHLY_CAPITALIZED_INTEREST(0:12,0:*),                                      &
+             MONTHLY_CURRENT_INTEREST(0:12,0:*),                                          &
+             MONTHLY_INTEREST_TO_TAX_VALUE(0:12,0:*),                                     &
+             MONTHLY_CURRENT_INTEREST_CAP(0:12,0:*),                                      &
+             PERCENT_PLANT_2_SERVICE(0:12,0:*)
+      LOGICAL (kind=1) ::  USE_PLANT_PERCENTAGE
+      CHARACTER (len=1) ::  RIPPLE_ZERO,RIPPLE_AVERAGE
       PARAMETER(RIPPLE_ZERO='Z',RIPPLE_AVERAGE='A')
-      REAL*4 CLASS_TAX_LIFE,AFUDC_CASH_IN_CWIP,
-     +     AFUDC_IN_CWIP(MAX_FINANCIAL_SIMULATION_YEARS)
-      REAL*4 AFDCRT,AFDCBR,INTEREST_CAP_RATE,CURRENT_INTEREST_CAP_RATE,
-     +     PROPERTY_ESCALATION,
-     +     AFUDC_NF_RATE
-      COMMON/AFUDC_STUFF/ AFDCRT(MAX_FINANCIAL_SIMULATION_YEARS),
-     +        AFDCBR(MAX_FINANCIAL_SIMULATION_YEARS),
-     +        INTEREST_CAP_RATE(MAX_FINANCIAL_SIMULATION_YEARS),
-     +        PROPERTY_ESCALATION(MAX_FINANCIAL_SIMULATION_YEARS),
-     +        CURRENT_INTEREST_CAP_RATE(MAX_FINANCIAL_SIMULATION_YEARS),
-     +        AFUDC_NF_RATE(MAX_FINANCIAL_SIMULATION_YEARS)
+      REAL (kind=4) ::  CLASS_TAX_LIFE,AFUDC_CASH_IN_CWIP,                                &
+           AFUDC_IN_CWIP(MAX_FINANCIAL_SIMULATION_YEARS)
+      REAL (kind=4) ::  AFDCRT
+      REAL (kind=4) ::  AFDCBR
+      REAL (kind=4) ::  INTEREST_CAP_RATE,CURRENT_INTEREST_CAP_RATE,                      &
+           PROPERTY_ESCALATION,                                                           &
+           AFUDC_NF_RATE
+      COMMON/AFUDC_STUFF/ AFDCRT(MAX_FINANCIAL_SIMULATION_YEARS),                         &
+              AFDCBR(MAX_FINANCIAL_SIMULATION_YEARS),                                     &
+              INTEREST_CAP_RATE(MAX_FINANCIAL_SIMULATION_YEARS),                          &
+              PROPERTY_ESCALATION(MAX_FINANCIAL_SIMULATION_YEARS),                        &
+              CURRENT_INTEREST_CAP_RATE(MAX_FINANCIAL_SIMULATION_YEARS),                  &
+              AFUDC_NF_RATE(MAX_FINANCIAL_SIMULATION_YEARS)
 !
-      INTEGER*2 LAST_CAP_YEAR,YR,MO
-      REAL*4 TOTAL_2_J,AFDC1_BALANCE,MONTHLY_AFUDC_RATE,
-     +       ADJUST_FACTOR(MAX_FINANCIAL_SIMULATION_YEARS),
-     +       ANNUAL_MONTHLY_AFDC1(MAX_FINANCIAL_SIMULATION_YEARS)
-      INTEGER*2 I,J,IVEC,AFDCSW,AFDC_CAP_VECTOR
-      INTEGER*2 AFDCPERIODS,SERVICEMO
-      INTEGER*2 IOFFSET,FIRSTYR
-      CHARACTER*4 DEPMET
-      CHARACTER*1 DATA_TYPE
-      REAL*4 OUTSERVICE,INSERVICE,AF1C,AF1CBAL,AF1BAL,RTEMP,AF2C
-      REAL*4 CWIP1,RCWIP,CWIPRB,AFUDC1,AFDCFC,AFDCB1,TOTCEP,
-     +     TAFDC1,TAFDC2,RATIO,BORAFDC,
-     +     CE(*),CEP(*),AFDC1(*),AFDC2(*),CWIP(*),RBCWIP(*),
-     +     AFDC1B(*),AFDC2B(*),
-     +     CAPINRST(*),PCAPINRST(*),AFC1BOR,CURRENT_INTEREST_CAP(*)
-      REAL*4 EFFAFDCRATE(MAX_FINANCIAL_SIMULATION_YEARS),
-     +     EFFBRAFDC(MAX_FINANCIAL_SIMULATION_YEARS)
-      REAL*4 TOTAL_INTEREST_CAP,
-     +     TOTAL_CURRENT_INTEREST
-      REAL*4 VECTOR_DATA(AVAIL_DATA_YEARS)
-      LOGICAL*1 AFDCON,USED_ALL_VECTORS
-      INTEGER*2 SAVE_NYRS
-      CHARACTER*20 VECTOR_TYPE
-      LOGICAL*1 USE_AFUDC_VECTOR_AS_RATES
-      REAL*4 SUM_OF_MONTHLY_AFUDC_ON_CASH
+      INTEGER (kind=2) ::  LAST_CAP_YEAR,YR,MO
+      REAL (kind=4) ::  TOTAL_2_J,AFDC1_BALANCE,MONTHLY_AFUDC_RATE,                       &
+             ADJUST_FACTOR(MAX_FINANCIAL_SIMULATION_YEARS),                               &
+             ANNUAL_MONTHLY_AFDC1(MAX_FINANCIAL_SIMULATION_YEARS)
+      INTEGER (kind=2) ::  I,J,IVEC,AFDCSW,AFDC_CAP_VECTOR
+      INTEGER (kind=2) ::  AFDCPERIODS,SERVICEMO
+      INTEGER (kind=2) ::  IOFFSET,FIRSTYR
+      CHARACTER (len=4) ::  DEPMET
+      CHARACTER (len=1) ::  DATA_TYPE
+      REAL (kind=4) ::  OUTSERVICE
+      REAL (kind=4) ::  INSERVICE,AF1C,AF1CBAL,AF1BAL,RTEMP,AF2C
+      REAL (kind=4) ::  CWIP1,RCWIP,CWIPRB,AFUDC1,AFDCFC,AFDCB1,TOTCEP,                   &
+           TAFDC1,TAFDC2,RATIO,BORAFDC,                                                   &
+           CE(*),CEP(*),AFDC1(*),AFDC2(*),CWIP(*),RBCWIP(*),                              &
+           AFDC1B(*),AFDC2B(*),                                                           &
+           CAPINRST(*),PCAPINRST(*),AFC1BOR,CURRENT_INTEREST_CAP(*)
+      REAL (kind=4) ::  EFFAFDCRATE(MAX_FINANCIAL_SIMULATION_YEARS),                      &
+           EFFBRAFDC(MAX_FINANCIAL_SIMULATION_YEARS)
+      REAL (kind=4) ::  TOTAL_INTEREST_CAP,                                               &
+           TOTAL_CURRENT_INTEREST
+      REAL (kind=4) ::  VECTOR_DATA(AVAIL_DATA_YEARS)
+      LOGICAL (kind=1) ::  AFDCON,USED_ALL_VECTORS
+      INTEGER (kind=2) ::  SAVE_NYRS
+      CHARACTER (len=20) ::  VECTOR_TYPE
+      LOGICAL (kind=1) ::  USE_AFUDC_VECTOR_AS_RATES
+      REAL (kind=4) ::  SUM_OF_MONTHLY_AFUDC_ON_CASH
 !
-      CHARACTER*1 MONTHLY_DATA_UNITS(LAST_AVAILABLE_MONTHLY_YEAR)
-      REAL*4 MONTHLY_VECTOR_DATA(12,LAST_AVAILABLE_MONTHLY_YEAR)
-      INTEGER*2 MONTH_ENDING(LAST_AVAILABLE_MONTHLY_YEAR)
+      CHARACTER (len=1) ::                                                                &
+          MONTHLY_DATA_UNITS(LAST_AVAILABLE_MONTHLY_YEAR)
+      REAL (kind=4) ::                                                                    &
+          MONTHLY_VECTOR_DATA(12,LAST_AVAILABLE_MONTHLY_YEAR)
+      INTEGER (kind=2) ::  MONTH_ENDING(LAST_AVAILABLE_MONTHLY_YEAR)
 !     DECLARATION FOR WORLD VARIABLES FOR FUTURE ASSETS
-      CHARACTER*2 DATDRIVE
-      INTEGER*2 BASEYR,NYRS
+      CHARACTER (len=2) ::  DATDRIVE
+      INTEGER (kind=2) ::  BASEYR,NYRS
       COMMON /WORLD/BASEYR,NYRS
       COMMON /DATA_DRIVE_LOCATION/ DATDRIVE
 !
@@ -146,24 +151,24 @@
       MONTHLY_AFUDC_IN_CWIP(0,1) = AFUDC1
       DO YR = 1, FINANCIAL_SIMULATION_YEARS-1
          MONTHLY_CWIP(0,YR) = MONTHLY_CWIP(12,YR-1)
-         MONTHLY_CWIP_IN_RATEBASE(0,YR) =
-     +                                 MONTHLY_CWIP_IN_RATEBASE(12,YR-1)
+         MONTHLY_CWIP_IN_RATEBASE(0,YR) =                                                 &
+                                       MONTHLY_CWIP_IN_RATEBASE(12,YR-1)
          DO MO = 1, 12
-            MONTHLY_CWIP(MO,YR) = MONTHLY_CWIP(MO-1,YR) +
-     +                            BOOK_EXPEN(MO,YR) -
-     +                            PLANT_2_SERVICE(MO,YR)
+            MONTHLY_CWIP(MO,YR) = MONTHLY_CWIP(MO-1,YR) +                                 &
+                                  BOOK_EXPEN(MO,YR) -                                     &
+                                  PLANT_2_SERVICE(MO,YR)
             IF(ABS(MONTHLY_CWIP(MO,YR)) < .0001) MONTHLY_CWIP(MO,YR)=0.
             MONTHLY_CWIP_IN_RATEBASE(MO,YR) = RCWIP*MONTHLY_CWIP(MO,YR)
          ENDDO
       ENDDO
       LAST_CAP_YEAR = FINANCIAL_SIMULATION_YEARS-1
       IF(MONTHLY_CWIP(12,LAST_CAP_YEAR) /= 0.) THEN
-         PLANT_2_SERVICE(12,LAST_CAP_YEAR) =
-     +                                 PLANT_2_SERVICE(12,LAST_CAP_YEAR)
-     +                                 + MONTHLY_CWIP(12,LAST_CAP_YEAR)
-         PLANT_2_SERVICE(0,LAST_CAP_YEAR) =
-     +                                  PLANT_2_SERVICE(0,LAST_CAP_YEAR)
-     +                                  + MONTHLY_CWIP(12,LAST_CAP_YEAR)
+         PLANT_2_SERVICE(12,LAST_CAP_YEAR) =                                              &
+                                       PLANT_2_SERVICE(12,LAST_CAP_YEAR)                  &
+                                       + MONTHLY_CWIP(12,LAST_CAP_YEAR)
+         PLANT_2_SERVICE(0,LAST_CAP_YEAR) =                                               &
+                                        PLANT_2_SERVICE(0,LAST_CAP_YEAR)                  &
+                                        + MONTHLY_CWIP(12,LAST_CAP_YEAR)
          MONTHLY_CWIP(12,LAST_CAP_YEAR) = 0.
       ENDIF
 !
@@ -180,9 +185,9 @@
          AFUDC_IN_CWIP(J) = AFUDC1
       ENDDO
       IF(CWIP(FINANCIAL_SIMULATION_YEARS) /= 0.) THEN
-         CEP(FINANCIAL_SIMULATION_YEARS) =
-     +                                CEP(FINANCIAL_SIMULATION_YEARS)
-     +                                + CWIP(FINANCIAL_SIMULATION_YEARS)
+         CEP(FINANCIAL_SIMULATION_YEARS) =                                                &
+                                      CEP(FINANCIAL_SIMULATION_YEARS)                     &
+                                      + CWIP(FINANCIAL_SIMULATION_YEARS)
          TOTCEP = TOTCEP + CWIP(FINANCIAL_SIMULATION_YEARS)
          CWIP(FINANCIAL_SIMULATION_YEARS) = 0.
       ENDIF
@@ -197,8 +202,8 @@
                   AFDC2(YR) = CEP(YR)/TOTCEP*AFUDC1
                   DO MO = 1, 12
                      IF(PLANT_2_SERVICE(MO,YR-1) /= 0.) THEN
-                        MONTHLY_AFUDC_ON_PLANT(MO,YR-1) = AFUDC1 *
-     +                                   PLANT_2_SERVICE(MO,YR-1)/TOTCEP
+                        MONTHLY_AFUDC_ON_PLANT(MO,YR-1) = AFUDC1 *                        &
+                                         PLANT_2_SERVICE(MO,YR-1)/TOTCEP
                      ENDIF
                   ENDDO
                ENDIF
@@ -226,8 +231,8 @@
                ELSE
                   EFFAFDCRATE(J) = VECTOR_DATA(AVAIL_DATA_YEARS)/100.
                ENDIF
-               IF(AFDCON) EFFAFDCRATE(J) = -1. + ((1. + EFFAFDCRATE(J)/
-     +                                 FLOAT(AFDCPERIODS))**AFDCPERIODS)
+               IF(AFDCON) EFFAFDCRATE(J) = -1. + ((1. + EFFAFDCRATE(J)/                   &
+                                       FLOAT(AFDCPERIODS))**AFDCPERIODS)
             ENDDO
          ENDIF
       ENDIF
@@ -238,8 +243,8 @@
             ELSE
                EFFAFDCRATE(J) = AFDCRT(J)
             ENDIF
-            IF(AFDCON) EFFAFDCRATE(J) = -1. + ((1. + EFFAFDCRATE(J)/
-     +                                 FLOAT(AFDCPERIODS))**AFDCPERIODS)
+            IF(AFDCON) EFFAFDCRATE(J) = -1. + ((1. + EFFAFDCRATE(J)/                      &
+                                       FLOAT(AFDCPERIODS))**AFDCPERIODS)
          ENDDO
       ENDIF
       IF(CWIPRB == 100.) THEN
@@ -252,33 +257,33 @@
       TAFDC2 = 0.0
 ! ELSE THE USER PROVIDED THE INFORMATION
       IF(AFDCSW < 0 .AND. .NOT. USE_AFUDC_VECTOR_AS_RATES) THEN
-         IOFFSET = MIN(FINANCIAL_SIMULATION_YEARS,
-     +                 MAX(FIRSTYR - BASEYR,1))
+         IOFFSET = MIN(FINANCIAL_SIMULATION_YEARS,                                        &
+                       MAX(FIRSTYR - BASEYR,1))
          IVEC = ABS(AFDCSW)
-         CALL GET_MONTHLY_ANNUAL_VALUES(IVEC,
-     +                                  DATA_TYPE,
-     +                                  VECTOR_TYPE,
-     +                                  VECTOR_DATA,
-     +                                  MONTHLY_VECTOR_DATA(1,1),
-     +                                  MONTHLY_DATA_UNITS,
-     +                                  MONTH_ENDING)
-         CALL MOVE_ANNUAL_INPUT(MONTHLY_AFUDC_ON_CASH,
-     +                          VECTOR_DATA,
-     +                          IOFFSET,
-     +                          FINANCIAL_SIMULATION_YEARS)
+         CALL GET_MONTHLY_ANNUAL_VALUES(IVEC,                                             &
+                                        DATA_TYPE,                                        &
+                                        VECTOR_TYPE,                                      &
+                                        VECTOR_DATA,                                      &
+                                        MONTHLY_VECTOR_DATA(1,1),                         &
+                                        MONTHLY_DATA_UNITS,                               &
+                                        MONTH_ENDING)
+         CALL MOVE_ANNUAL_INPUT(MONTHLY_AFUDC_ON_CASH,                                    &
+                                VECTOR_DATA,                                              &
+                                IOFFSET,                                                  &
+                                FINANCIAL_SIMULATION_YEARS)
 !         IF(MONTHLY_MIDAS_ACTIVE) THEN
 !
-            CALL RIPPLE_MOVE_MONTHLY_DATA(MONTHLY_AFUDC_ON_CASH,
-     +                                    MONTHLY_VECTOR_DATA,
-     +                                    IOFFSET,
-     +                                    FINANCIAL_SIMULATION_YEARS,
-     +                                    RIPPLE_AVERAGE)
-            CALL TREND_MONTHLY_INPUT(MONTHLY_AFUDC_ON_CASH,
-     +                               MONTHLY_DATA_UNITS,
-     +                               MONTH_ENDING,
-     +                               IOFFSET,
-     +                               SERVICEMO,
-     +                               FINANCIAL_SIMULATION_YEARS)
+            CALL RIPPLE_MOVE_MONTHLY_DATA(MONTHLY_AFUDC_ON_CASH,                          &
+                                          MONTHLY_VECTOR_DATA,                            &
+                                          IOFFSET,                                        &
+                                          FINANCIAL_SIMULATION_YEARS,                     &
+                                          RIPPLE_AVERAGE)
+            CALL TREND_MONTHLY_INPUT(MONTHLY_AFUDC_ON_CASH,                               &
+                                     MONTHLY_DATA_UNITS,                                  &
+                                     MONTH_ENDING,                                        &
+                                     IOFFSET,                                             &
+                                     SERVICEMO,                                           &
+                                     FINANCIAL_SIMULATION_YEARS)
 !         ENDIF
          DO YR = 2, NYRS
             AFDC1(YR) = MONTHLY_AFUDC_ON_CASH(0,YR-1)
@@ -301,15 +306,15 @@
          DO YR = 2, NYRS
             MONTHLY_AFUDC_RATE = RCWIP * EFFAFDCRATE(YR)/12.
             DO MO = 1, 12
-               MONTHLY_AFUDC_ON_CASH(MO,YR-1) = MONTHLY_AFUDC_RATE *
-     +              (MONTHLY_CWIP(MO-1,YR-1) + MONTHLY_CWIP(MO,YR-1))/2.
-               MONTHLY_AFUDC_ON_CASH(MO,YR-1) = MONTHLY_AFUDC_RATE *
-     +                                             MONTHLY_CWIP(MO,YR-1)
-               MONTHLY_AFUDC_ON_CASH(MO,YR-1) = MONTHLY_AFUDC_RATE *
-     +                (MONTHLY_CWIP(MO-1,YR-1) + BOOK_EXPEN(MO,YR-1)/2.)
+               MONTHLY_AFUDC_ON_CASH(MO,YR-1) = MONTHLY_AFUDC_RATE *                      &
+                    (MONTHLY_CWIP(MO-1,YR-1) + MONTHLY_CWIP(MO,YR-1))/2.
+               MONTHLY_AFUDC_ON_CASH(MO,YR-1) = MONTHLY_AFUDC_RATE *                      &
+                                                   MONTHLY_CWIP(MO,YR-1)
+               MONTHLY_AFUDC_ON_CASH(MO,YR-1) = MONTHLY_AFUDC_RATE *                      &
+                      (MONTHLY_CWIP(MO-1,YR-1) + BOOK_EXPEN(MO,YR-1)/2.)
             ENDDO
-            SUM_OF_MONTHLY_AFUDC_ON_CASH =
-     +                             SUM(MONTHLY_AFUDC_ON_CASH(1:12,YR-1))
+            SUM_OF_MONTHLY_AFUDC_ON_CASH =                                                &
+                                   SUM(MONTHLY_AFUDC_ON_CASH(1:12,YR-1))
             ANNUAL_MONTHLY_AFDC1(YR) = SUM_OF_MONTHLY_AFUDC_ON_CASH
             MONTHLY_AFUDC_ON_CASH(0,YR-1) = SUM_OF_MONTHLY_AFUDC_ON_CASH
          ENDDO
@@ -319,22 +324,22 @@
          DO YR = 2, NYRS
             IF(AFDCSW == 2) THEN
                IF(CE(YR) == CEP(YR)) THEN
-                  AFDC1(YR) = RCWIP * EFFAFDCRATE(YR) *
-     +                       (OUTSERVICE*CE(YR)/2.+CWIP(YR-1))
+                  AFDC1(YR) = RCWIP * EFFAFDCRATE(YR) *                                   &
+                             (OUTSERVICE*CE(YR)/2.+CWIP(YR-1))
                ELSEIF(CEP(YR) == 0.) THEN
-                  AFDC1(YR) = RCWIP * EFFAFDCRATE(YR) * (CE(YR)/2. +
-     +                                                       CWIP(YR-1))
+                  AFDC1(YR) = RCWIP * EFFAFDCRATE(YR) * (CE(YR)/2. +                      &
+                                                             CWIP(YR-1))
                ELSE
                   IF(CWIP(YR-1)+OUTSERVICE*CE(YR) >= CEP(YR)) THEN
-                     AFDC1(YR) = RCWIP * EFFAFDCRATE(YR) * (CE(YR)/2. +
-     +                          OUTSERVICE*CWIP(YR-1) +
-     +                          INSERVICE*(MAX((CWIP(YR-1)-CEP(YR)),0.)-
-     +                          MAX((CEP(YR)-CWIP(YR-1)),0.)/2.))
+                     AFDC1(YR) = RCWIP * EFFAFDCRATE(YR) * (CE(YR)/2. +                   &
+                                OUTSERVICE*CWIP(YR-1) +                                   &
+                                INSERVICE*(MAX((CWIP(YR-1)-CEP(YR)),0.)-                  &
+                                MAX((CEP(YR)-CWIP(YR-1)),0.)/2.))
                   ELSE
-                     AFDC1(YR) = RCWIP * EFFAFDCRATE(YR) * (OUTSERVICE*
-     +                       (CWIP(YR-1) + (CEP(YR) - CWIP(YR-1))/2.) +
-     +                  INSERVICE*((CE(YR) - (CEP(YR) - CWIP(YR-1)))/2.+
-     +                          CWIP(YR)))
+                     AFDC1(YR) = RCWIP * EFFAFDCRATE(YR) * (OUTSERVICE*                   &
+                             (CWIP(YR-1) + (CEP(YR) - CWIP(YR-1))/2.) +                   &
+                        INSERVICE*((CE(YR) - (CEP(YR) - CWIP(YR-1)))/2.+                  &
+                                CWIP(YR)))
                   ENDIF
                ENDIF
             ELSEIF(AFDCSW == 1) THEN
@@ -370,40 +375,40 @@
 !$endif
          IF(CWIP(NYRS) /= 0.) THEN
             IF(AFDCSW == 2) THEN
-               TAFDC1  = TAFDC1  +
-     +               RCWIP * EFFAFDCRATE(NYRS) * CWIP(NYRS) * OUTSERVICE
+               TAFDC1  = TAFDC1  +                                                        &
+                     RCWIP * EFFAFDCRATE(NYRS) * CWIP(NYRS) * OUTSERVICE
             ELSE
                TAFDC1  = TAFDC1 + RCWIP * EFFAFDCRATE(NYRS) * CWIP(NYRS)
             ENDIF
          ENDIF
       ENDIF
       IF(AFDC_CAP_VECTOR /= 0) THEN
-         IOFFSET = MIN(FINANCIAL_SIMULATION_YEARS,
-     +                 MAX(FIRSTYR - BASEYR,1))
+         IOFFSET = MIN(FINANCIAL_SIMULATION_YEARS,                                        &
+                       MAX(FIRSTYR - BASEYR,1))
          IVEC = ABS(AFDC_CAP_VECTOR)
-         CALL GET_MONTHLY_ANNUAL_VALUES(IVEC,
-     +                                  DATA_TYPE,
-     +                                  VECTOR_TYPE,
-     +                                  VECTOR_DATA,
-     +                                  MONTHLY_VECTOR_DATA(1,1),
-     +                                  MONTHLY_DATA_UNITS,
-     +                                  MONTH_ENDING)
-         CALL MOVE_ANNUAL_INPUT(MONTHLY_AFUDC_ON_PLANT,
-     +                          VECTOR_DATA,
-     +                          IOFFSET,
-     +                          FINANCIAL_SIMULATION_YEARS)
+         CALL GET_MONTHLY_ANNUAL_VALUES(IVEC,                                             &
+                                        DATA_TYPE,                                        &
+                                        VECTOR_TYPE,                                      &
+                                        VECTOR_DATA,                                      &
+                                        MONTHLY_VECTOR_DATA(1,1),                         &
+                                        MONTHLY_DATA_UNITS,                               &
+                                        MONTH_ENDING)
+         CALL MOVE_ANNUAL_INPUT(MONTHLY_AFUDC_ON_PLANT,                                   &
+                                VECTOR_DATA,                                              &
+                                IOFFSET,                                                  &
+                                FINANCIAL_SIMULATION_YEARS)
 !
-         CALL RIPPLE_MOVE_MONTHLY_DATA(MONTHLY_AFUDC_ON_PLANT,
-     +                                    MONTHLY_VECTOR_DATA,
-     +                                    IOFFSET,
-     +                                    FINANCIAL_SIMULATION_YEARS,
-     +                                    RIPPLE_AVERAGE)
-         CALL TREND_MONTHLY_INPUT(MONTHLY_AFUDC_ON_PLANT,
-     +                               MONTHLY_DATA_UNITS,
-     +                               MONTH_ENDING,
-     +                               IOFFSET,
-     +                               SERVICEMO,
-     +                               FINANCIAL_SIMULATION_YEARS)
+         CALL RIPPLE_MOVE_MONTHLY_DATA(MONTHLY_AFUDC_ON_PLANT,                            &
+                                          MONTHLY_VECTOR_DATA,                            &
+                                          IOFFSET,                                        &
+                                          FINANCIAL_SIMULATION_YEARS,                     &
+                                          RIPPLE_AVERAGE)
+         CALL TREND_MONTHLY_INPUT(MONTHLY_AFUDC_ON_PLANT,                                 &
+                                     MONTHLY_DATA_UNITS,                                  &
+                                     MONTH_ENDING,                                        &
+                                     IOFFSET,                                             &
+                                     SERVICEMO,                                           &
+                                     FINANCIAL_SIMULATION_YEARS)
          DO YR = 2, NYRS
 
             AFDC2(YR) = MONTHLY_AFUDC_ON_PLANT(0,YR-1)
@@ -434,8 +439,8 @@
          ENDDO
          IF(CWIP(NYRS) /= 0.) THEN
             IF(AFDCSW == 1) THEN
-               TAFDC2  = TAFDC2  +
-     +               RCWIP * EFFAFDCRATE(NYRS) * CWIP(NYRS) * AFDCFC
+               TAFDC2  = TAFDC2  +                                                        &
+                     RCWIP * EFFAFDCRATE(NYRS) * CWIP(NYRS) * AFDCFC
             ELSE
                TAFDC2 = TAFDC2 + RCWIP * EFFAFDCRATE(NYRS) * CWIP(NYRS)
             ENDIF
@@ -449,13 +454,13 @@
          AFUDC_CASH_IN_CWIP = AFDC1(1)
          DO YR = 1, NYRS-1
             DO MO = 1, 12
-               AFUDC_CASH_IN_CWIP  = AFUDC_CASH_IN_CWIP
-     +                               + MONTHLY_AFUDC_ON_CASH(MO,YR)
-               MONTHLY_AFUDC_ON_PLANT(MO,YR) = AFUDC_CASH_IN_CWIP *
-     +                               PERCENT_PLANT_2_SERVICE(MO,YR)/100.
+               AFUDC_CASH_IN_CWIP  = AFUDC_CASH_IN_CWIP                                   &
+                                     + MONTHLY_AFUDC_ON_CASH(MO,YR)
+               MONTHLY_AFUDC_ON_PLANT(MO,YR) = AFUDC_CASH_IN_CWIP *                       &
+                                     PERCENT_PLANT_2_SERVICE(MO,YR)/100.
 
-               AFUDC_CASH_IN_CWIP  = AFUDC_CASH_IN_CWIP
-     +                               - MONTHLY_AFUDC_ON_PLANT(MO,YR)
+               AFUDC_CASH_IN_CWIP  = AFUDC_CASH_IN_CWIP                                   &
+                                     - MONTHLY_AFUDC_ON_PLANT(MO,YR)
             ENDDO
             AFDC2(YR+1) = SUM(MONTHLY_AFUDC_ON_PLANT(1:12,YR))
          ENDDO
@@ -487,15 +492,15 @@
 !                       AFDC2(J) = AFDC2(J) * RATIO
                         AFDC1_BALANCE = AFDC1_BALANCE + AFDC1(J)/2.
                         IF(AFDC2(J) /= 0.) THEN
-                           AFDC2(J) = MIN(ADJUST_FACTOR(J)*TAFDC1,
-     +                                                    AFDC1_BALANCE)
+                           AFDC2(J) = MIN(ADJUST_FACTOR(J)*TAFDC1,                        &
+                                                          AFDC1_BALANCE)
                         ENDIF
-                        AFDC1_BALANCE = AFDC1_BALANCE + AFDC1(J)/2. -
-     +                                                          AFDC2(J)
+                        AFDC1_BALANCE = AFDC1_BALANCE + AFDC1(J)/2. -                     &
+                                                                AFDC2(J)
                      ENDDO
                      LAST_CAP_YEAR = MIN(LAST_CAP_YEAR,NYRS)
-                     AFDC2(LAST_CAP_YEAR) = AFDC1_BALANCE +
-     +                                              AFDC1(LAST_CAP_YEAR)
+                     AFDC2(LAST_CAP_YEAR) = AFDC1_BALANCE +                               &
+                                                    AFDC1(LAST_CAP_YEAR)
                   ENDIF
                ENDIF
             ENDIF
@@ -514,11 +519,11 @@
                   ELSE
                      RTEMP = AFDC2(J)
                   ENDIF
-                  AF1C = AFDC1(J) + EFFAFDCRATE(J) * (OUTSERVICE*AF1CBAL
-     +                   + INSERVICE*MAX((AF1CBAL - RTEMP),0.))
+                  AF1C = AFDC1(J) + EFFAFDCRATE(J) * (OUTSERVICE*AF1CBAL                  &
+                         + INSERVICE*MAX((AF1CBAL - RTEMP),0.))
                   IF((AF1BAL + AFDC1(J)) /= 0.) THEN
-                     AF2C = AFDC2(J) * (AF1CBAL + AF1C)/
-     +                                 (AF1BAL + AFDC1(J))
+                     AF2C = AFDC2(J) * (AF1CBAL + AF1C)/                                  &
+                                       (AF1BAL + AFDC1(J))
                   ELSE
                      AF2C = AFDC2(J)
                   ENDIF
@@ -536,23 +541,23 @@
             MONTHLY_AFUDC_ON_PLANT(0,YR) = 0.
             IF(CEP(J) /= 0.) THEN
                DO MO = 1, 12
-                  MONTHLY_AFUDC_ON_PLANT(MO,YR) = AFDC2(J)/CEP(J) *
-     +                                            PLANT_2_SERVICE(MO,YR)
+                  MONTHLY_AFUDC_ON_PLANT(MO,YR) = AFDC2(J)/CEP(J) *                       &
+                                                  PLANT_2_SERVICE(MO,YR)
                ENDDO
-               MONTHLY_AFUDC_ON_PLANT(0,YR) =
-     +                              SUM(MONTHLY_AFUDC_ON_PLANT(1:12,YR))
+               MONTHLY_AFUDC_ON_PLANT(0,YR) =                                             &
+                                    SUM(MONTHLY_AFUDC_ON_PLANT(1:12,YR))
             ENDIF
             MONTHLY_AFUDC_ON_CASH(0,YR) = AFDC1(J)
             IF(AFDC1(J) /= ANNUAL_MONTHLY_AFDC1(J)) THEN
                IF(ANNUAL_MONTHLY_AFDC1(J) /= 0.) THEN
                   MONTHLY_AFUDC_ON_CASH(0,YR) = 0.
                   DO MO = 1, 12
-                     MONTHLY_AFUDC_ON_CASH(MO,YR) = AFDC1(J) *
-     +                                   MONTHLY_AFUDC_ON_CASH(MO,YR)/
-     +                                     ANNUAL_MONTHLY_AFDC1(J)
+                     MONTHLY_AFUDC_ON_CASH(MO,YR) = AFDC1(J) *                            &
+                                         MONTHLY_AFUDC_ON_CASH(MO,YR)/                    &
+                                           ANNUAL_MONTHLY_AFDC1(J)
                   ENDDO
-                  MONTHLY_AFUDC_ON_CASH(0,YR) =
-     +                               SUM(MONTHLY_AFUDC_ON_CASH(1:12,YR))
+                  MONTHLY_AFUDC_ON_CASH(0,YR) =                                           &
+                                     SUM(MONTHLY_AFUDC_ON_CASH(1:12,YR))
                ENDIF
             ENDIF
          ENDDO
@@ -573,20 +578,20 @@
          AFC1BOR   = AFC1BOR + AFDC1B(J) - AFDC2B(J-1)
          AF1BAL    = AF1BAL  + AFDC1(J)  - AFDC2(J-1)
          AFDC2B(J) = 0.0
-         IF(((DEPMET /= 'ACRS' .AND.
-     +             AFDCFC >= .5)) .AND. AF1BAL /= 0.) AFDC2B(J) =
-     +                                         AFDC2(J) * AFC1BOR/AF1BAL
+         IF(((DEPMET /= 'ACRS' .AND.                                                      &
+                   AFDCFC >= .5)) .AND. AF1BAL /= 0.) AFDC2B(J) =                         &
+                                               AFDC2(J) * AFC1BOR/AF1BAL
       ENDDO
 !
 ! FOR MIDAS GOLD ADDED MAY 25, 1991
 ! COPYRIGHT (C) M.S. GERBER & ASSOCIATES, INC
 ! ALL RIGHTS RESERVED
 !
-      IF(DEPMET /= 'ACRS' .AND.
-     +                  (AFDCFC >= .5 .OR. CLASS_TAX_LIFE >=20.)) THEN
+      IF(DEPMET /= 'ACRS' .AND.                                                           &
+                        (AFDCFC >= .5 .OR. CLASS_TAX_LIFE >=20.)) THEN
          TOTAL_INTEREST_CAP = AFDC1(1) * INTEREST_CAP_RATE(2)
-         TOTAL_CURRENT_INTEREST = TOTAL_INTEREST_CAP *
-     +                                 (1.-CURRENT_INTEREST_CAP_RATE(1))
+         TOTAL_CURRENT_INTEREST = TOTAL_INTEREST_CAP *                                    &
+                                       (1.-CURRENT_INTEREST_CAP_RATE(1))
          MONTHLY_CAPITALIZED_INTEREST(12,0) = TOTAL_INTEREST_CAP
          MONTHLY_CURRENT_INTEREST(12,0) = TOTAL_CURRENT_INTEREST
          BORAFDC = AFDC1(1)
@@ -596,34 +601,34 @@
          DO YR = 2, NYRS
             PCAPINRST(YR) = AFDC1(YR) * INTEREST_CAP_RATE(YR)
             TOTAL_INTEREST_CAP = TOTAL_INTEREST_CAP + PCAPINRST(YR)
-            TOTAL_CURRENT_INTEREST = TOTAL_CURRENT_INTEREST
-     +              + PCAPINRST(YR) * (1.-CURRENT_INTEREST_CAP_RATE(YR))
+            TOTAL_CURRENT_INTEREST = TOTAL_CURRENT_INTEREST                               &
+                    + PCAPINRST(YR) * (1.-CURRENT_INTEREST_CAP_RATE(YR))
             BORAFDC = BORAFDC + AFDC1(YR)
             IF(BORAFDC /= 0.) THEN
                CAPINRST(YR) = TOTAL_INTEREST_CAP/BORAFDC * AFDC2(YR)
-               CURRENT_INTEREST_CAP(YR) = TOTAL_CURRENT_INTEREST/
-     +                                         BORAFDC * AFDC2(YR)
-               TOTAL_INTEREST_CAP = MAX(0.,
-     +                                TOTAL_INTEREST_CAP-CAPINRST(YR))
-               TOTAL_CURRENT_INTEREST = MAX(0.,
-     +                  TOTAL_CURRENT_INTEREST-CURRENT_INTEREST_CAP(YR))
+               CURRENT_INTEREST_CAP(YR) = TOTAL_CURRENT_INTEREST/                         &
+                                               BORAFDC * AFDC2(YR)
+               TOTAL_INTEREST_CAP = MAX(0.,                                               &
+                                      TOTAL_INTEREST_CAP-CAPINRST(YR))
+               TOTAL_CURRENT_INTEREST = MAX(0.,                                           &
+                        TOTAL_CURRENT_INTEREST-CURRENT_INTEREST_CAP(YR))
                BORAFDC = MAX(0.,BORAFDC-AFDC2(YR))
             ENDIF
             DO MO = 0, 12
                IF(AFDC2(YR) /= 0.) THEN
-                  MONTHLY_INTEREST_TO_TAX_VALUE(MO,YR-1) =
-     +                                   MONTHLY_AFUDC_ON_PLANT(MO,YR-1)
-     +                                   * CAPINRST(YR)/AFDC2(YR)
-                  MONTHLY_CURRENT_INTEREST_CAP(MO,YR-1) =
-     +                              MONTHLY_AFUDC_ON_PLANT(MO,YR-1)
-     +                              * CURRENT_INTEREST_CAP(YR)/AFDC2(YR)
+                  MONTHLY_INTEREST_TO_TAX_VALUE(MO,YR-1) =                                &
+                                         MONTHLY_AFUDC_ON_PLANT(MO,YR-1)                  &
+                                         * CAPINRST(YR)/AFDC2(YR)
+                  MONTHLY_CURRENT_INTEREST_CAP(MO,YR-1) =                                 &
+                                    MONTHLY_AFUDC_ON_PLANT(MO,YR-1)                       &
+                                    * CURRENT_INTEREST_CAP(YR)/AFDC2(YR)
                ENDIF
-               MONTHLY_CAPITALIZED_INTEREST(MO,YR-1) =
-     +                                  INTEREST_CAP_RATE(YR)
-     +                                  * MONTHLY_AFUDC_ON_CASH(MO,YR-1)
-               MONTHLY_CURRENT_INTEREST(MO,YR-1) =
-     +                           (1.-CURRENT_INTEREST_CAP_RATE(YR))
-     +                           * MONTHLY_CAPITALIZED_INTEREST(MO,YR-1)
+               MONTHLY_CAPITALIZED_INTEREST(MO,YR-1) =                                    &
+                                        INTEREST_CAP_RATE(YR)                             &
+                                        * MONTHLY_AFUDC_ON_CASH(MO,YR-1)
+               MONTHLY_CURRENT_INTEREST(MO,YR-1) =                                        &
+                                 (1.-CURRENT_INTEREST_CAP_RATE(YR))                       &
+                                 * MONTHLY_CAPITALIZED_INTEREST(MO,YR-1)
             ENDDO
          ENDDO
       ENDIF
@@ -641,10 +646,10 @@
          ENDDO
          DO YR = 1, NYRS-1
             DO MO = 0, 12
-               MONTHLY_AFUDC_ON_CASH(MO,YR) = RCWIP
-     +                                    * MONTHLY_AFUDC_ON_CASH(MO,YR)
-               MONTHLY_AFUDC_ON_PLANT(MO,YR) = RCWIP
-     +                                   * MONTHLY_AFUDC_ON_PLANT(MO,YR)
+               MONTHLY_AFUDC_ON_CASH(MO,YR) = RCWIP                                       &
+                                          * MONTHLY_AFUDC_ON_CASH(MO,YR)
+               MONTHLY_AFUDC_ON_PLANT(MO,YR) = RCWIP                                      &
+                                         * MONTHLY_AFUDC_ON_PLANT(MO,YR)
             ENDDO
          ENDDO
       ENDIF
@@ -653,12 +658,12 @@
 !
       DO YR = 1, NYRS-1
          DO MO = 1, 12
-            MONTHLY_AFUDC_IN_CWIP(MO,YR) =
-     +                                   MONTHLY_AFUDC_IN_CWIP(MO-1,YR)
-     +                                   + MONTHLY_AFUDC_ON_CASH(MO,YR)
-     +                                   - MONTHLY_AFUDC_ON_PLANT(MO,YR)
-            IF(ABS(MONTHLY_AFUDC_IN_CWIP(MO,YR)) < .00001)
-     +                                MONTHLY_AFUDC_IN_CWIP(MO,YR) = 0.0
+            MONTHLY_AFUDC_IN_CWIP(MO,YR) =                                                &
+                                         MONTHLY_AFUDC_IN_CWIP(MO-1,YR)                   &
+                                         + MONTHLY_AFUDC_ON_CASH(MO,YR)                   &
+                                         - MONTHLY_AFUDC_ON_PLANT(MO,YR)
+            IF(ABS(MONTHLY_AFUDC_IN_CWIP(MO,YR)) < .00001)                                &
+                                      MONTHLY_AFUDC_IN_CWIP(MO,YR) = 0.0
          ENDDO
          MONTHLY_AFUDC_IN_CWIP(0,YR+1) = MONTHLY_AFUDC_IN_CWIP(12,YR)
       ENDDO
@@ -687,56 +692,59 @@
 !                                                                      *
 !***********************************************************************
 !
-      SUBROUTINE AFUDC(AFUDC1,CWIPRB,AFDCB1,AFDCFC,CWIP1,
-     +   AFDCSW,AFDCPERIODS,CE,CEP,AFDC1,AFDC2,CWIP,RBCWIP,
-     +   AFDC1B,AFDC2B,
-     +   SERVICEMO,CAPINRST,DEPMET,PCAPINRST,AFDC_CAP_VECTOR,
-     +   FIRSTYR,CURRENT_INTEREST_CAP,WHO_CALLED,
-     +   FINANCIAL_SIMULATION_YEARS,CLASS_TAX_LIFE,AFUDC_IN_CWIP)
+      SUBROUTINE AFUDC(AFUDC1,CWIPRB,AFDCB1,AFDCFC,CWIP1,                                 &
+         AFDCSW,AFDCPERIODS,CE,CEP,AFDC1,AFDC2,CWIP,RBCWIP,                               &
+         AFDC1B,AFDC2B,                                                                   &
+         SERVICEMO,CAPINRST,DEPMET,PCAPINRST,AFDC_CAP_VECTOR,                             &
+         FIRSTYR,CURRENT_INTEREST_CAP,WHO_CALLED,                                         &
+         FINANCIAL_SIMULATION_YEARS,CLASS_TAX_LIFE,AFUDC_IN_CWIP)
 !
       INCLUDE 'SpinLib.MON'
       INCLUDE 'SIZECOM.MON'
 !
-      CHARACTER*2 WHO_CALLED
-      INTEGER*2 FINANCIAL_SIMULATION_YEARS,YR
-      REAL*4 CLASS_TAX_LIFE,
-     +     AFUDC_IN_CWIP(MAX_FINANCIAL_SIMULATION_YEARS)
-      REAL*4 AFDCRT,AFDCBR,INTEREST_CAP_RATE,CURRENT_INTEREST_CAP_RATE,
-     +     PROPERTY_ESCALATION,
-     +     AFUDC_NF_RATE
-      COMMON/AFUDC_STUFF/ AFDCRT(MAX_FINANCIAL_SIMULATION_YEARS),
-     +        AFDCBR(MAX_FINANCIAL_SIMULATION_YEARS),
-     +        INTEREST_CAP_RATE(MAX_FINANCIAL_SIMULATION_YEARS),
-     +        PROPERTY_ESCALATION(MAX_FINANCIAL_SIMULATION_YEARS),
-     +        CURRENT_INTEREST_CAP_RATE(MAX_FINANCIAL_SIMULATION_YEARS),
-     +        AFUDC_NF_RATE(MAX_FINANCIAL_SIMULATION_YEARS)
+      CHARACTER (len=2) ::  WHO_CALLED
+      INTEGER (kind=2) ::  FINANCIAL_SIMULATION_YEARS,YR
+      REAL (kind=4) ::  CLASS_TAX_LIFE,                                                   &
+           AFUDC_IN_CWIP(MAX_FINANCIAL_SIMULATION_YEARS)
+      REAL (kind=4) ::  AFDCRT
+      REAL (kind=4) ::  AFDCBR
+      REAL (kind=4) ::  INTEREST_CAP_RATE,CURRENT_INTEREST_CAP_RATE,                      &
+           PROPERTY_ESCALATION,                                                           &
+           AFUDC_NF_RATE
+      COMMON/AFUDC_STUFF/ AFDCRT(MAX_FINANCIAL_SIMULATION_YEARS),                         &
+              AFDCBR(MAX_FINANCIAL_SIMULATION_YEARS),                                     &
+              INTEREST_CAP_RATE(MAX_FINANCIAL_SIMULATION_YEARS),                          &
+              PROPERTY_ESCALATION(MAX_FINANCIAL_SIMULATION_YEARS),                        &
+              CURRENT_INTEREST_CAP_RATE(MAX_FINANCIAL_SIMULATION_YEARS),                  &
+              AFUDC_NF_RATE(MAX_FINANCIAL_SIMULATION_YEARS)
 !
-      INTEGER*2 LAST_CAP_YEAR
-      REAL*4 TOTAL_2_J,AFDC1_BALANCE,
-     +       ADJUST_FACTOR(MAX_FINANCIAL_SIMULATION_YEARS)
-      INTEGER*2 I,J,IVEC,AFDCSW,AFDC_CAP_VECTOR
-      INTEGER*2 AFDCPERIODS,SERVICEMO
-      INTEGER*2 IOFFSET,FIRSTYR
-      CHARACTER*4 DEPMET
-      CHARACTER*1 DATA_TYPE
-      REAL*4 OUTSERVICE,INSERVICE,AF1C,AF1CBAL,AF1BAL,RTEMP,AF2C
-      REAL*4 CWIP1,RCWIP,CWIPRB,AFUDC1,AFDCFC,AFDCB1,TOTCEP,
-     +     TAFDC1,TAFDC2,RATIO,BORAFDC,
-     +     CE(*),CEP(*),AFDC1(*),AFDC2(*),CWIP(*),RBCWIP(*),
-     +     AFDC1B(*),AFDC2B(*),
-     +     CAPINRST(*),PCAPINRST(*),AFC1BOR,CURRENT_INTEREST_CAP(*)
-      REAL*4 EFFAFDCRATE(MAX_FINANCIAL_SIMULATION_YEARS),
-     +     EFFBRAFDC(MAX_FINANCIAL_SIMULATION_YEARS)
-      REAL*4 TOTAL_INTEREST_CAP,
-     +     TOTAL_CURRENT_INTEREST
-      REAL*4 VECTOR_DATA(AVAIL_DATA_YEARS)
-      LOGICAL*1 AFDCON,USED_ALL_VECTORS
-      INTEGER*2 SAVE_NYRS
-      CHARACTER*20 VECTOR_TYPE
-      LOGICAL*1 USE_AFUDC_VECTOR_AS_RATES
+      INTEGER (kind=2) ::  LAST_CAP_YEAR
+      REAL (kind=4) ::  TOTAL_2_J,AFDC1_BALANCE,                                          &
+             ADJUST_FACTOR(MAX_FINANCIAL_SIMULATION_YEARS)
+      INTEGER (kind=2) ::  I,J,IVEC,AFDCSW,AFDC_CAP_VECTOR
+      INTEGER (kind=2) ::  AFDCPERIODS,SERVICEMO
+      INTEGER (kind=2) ::  IOFFSET,FIRSTYR
+      CHARACTER (len=4) ::  DEPMET
+      CHARACTER (len=1) ::  DATA_TYPE
+      REAL (kind=4) ::  OUTSERVICE
+      REAL (kind=4) ::  INSERVICE,AF1C,AF1CBAL,AF1BAL,RTEMP,AF2C
+      REAL (kind=4) ::  CWIP1,RCWIP,CWIPRB,AFUDC1,AFDCFC,AFDCB1,TOTCEP,                   &
+           TAFDC1,TAFDC2,RATIO,BORAFDC,                                                   &
+           CE(*),CEP(*),AFDC1(*),AFDC2(*),CWIP(*),RBCWIP(*),                              &
+           AFDC1B(*),AFDC2B(*),                                                           &
+           CAPINRST(*),PCAPINRST(*),AFC1BOR,CURRENT_INTEREST_CAP(*)
+      REAL (kind=4) ::  EFFAFDCRATE(MAX_FINANCIAL_SIMULATION_YEARS),                      &
+           EFFBRAFDC(MAX_FINANCIAL_SIMULATION_YEARS)
+      REAL (kind=4) ::  TOTAL_INTEREST_CAP,                                               &
+           TOTAL_CURRENT_INTEREST
+      REAL (kind=4) ::  VECTOR_DATA(AVAIL_DATA_YEARS)
+      LOGICAL (kind=1) ::  AFDCON,USED_ALL_VECTORS
+      INTEGER (kind=2) ::  SAVE_NYRS
+      CHARACTER (len=20) ::  VECTOR_TYPE
+      LOGICAL (kind=1) ::  USE_AFUDC_VECTOR_AS_RATES
 !     DECLARATION FOR WORLD VARIABLES FOR FUTURE ASSETS
-      CHARACTER*2 DATDRIVE
-      INTEGER*2 BASEYR,NYRS
+      CHARACTER (len=2) ::  DATDRIVE
+      INTEGER (kind=2) ::  BASEYR,NYRS
       COMMON /WORLD/BASEYR,NYRS
       COMMON /DATA_DRIVE_LOCATION/ DATDRIVE
 !
@@ -818,8 +826,8 @@
                ELSE
                   EFFAFDCRATE(J) = VECTOR_DATA(AVAIL_DATA_YEARS)/100.
                ENDIF
-               IF(AFDCON) EFFAFDCRATE(J) = -1. + ((1. + EFFAFDCRATE(J)/
-     +                                 FLOAT(AFDCPERIODS))**AFDCPERIODS)
+               IF(AFDCON) EFFAFDCRATE(J) = -1. + ((1. + EFFAFDCRATE(J)/                   &
+                                       FLOAT(AFDCPERIODS))**AFDCPERIODS)
             ENDDO
          ENDIF
       ENDIF
@@ -830,8 +838,8 @@
             ELSE
                EFFAFDCRATE(J) = AFDCRT(J)
             ENDIF
-            IF(AFDCON) EFFAFDCRATE(J) = -1. + ((1. + EFFAFDCRATE(J)/
-     +                                 FLOAT(AFDCPERIODS))**AFDCPERIODS)
+            IF(AFDCON) EFFAFDCRATE(J) = -1. + ((1. + EFFAFDCRATE(J)/                      &
+                                       FLOAT(AFDCPERIODS))**AFDCPERIODS)
          ENDDO
       ENDIF
       RCWIP = 1. - RCWIP
@@ -841,11 +849,11 @@
       IF(AFDCSW < 0 .AND. .NOT. USE_AFUDC_VECTOR_AS_RATES) THEN
          IVEC = ABS(AFDCSW)
          CALL GET_ASSET_VAR(IVEC,DATA_TYPE,VECTOR_DATA)
-         IOFFSET = MIN(FINANCIAL_SIMULATION_YEARS,
-     +                 MAX(FIRSTYR - BASEYR,1))
+         IOFFSET = MIN(FINANCIAL_SIMULATION_YEARS,                                        &
+                       MAX(FIRSTYR - BASEYR,1))
          I = 1
-         DO WHILE ((I+IOFFSET) <= FINANCIAL_SIMULATION_YEARS .AND.
-     +                                          (I <= AVAIL_DATA_YEARS))
+         DO WHILE ((I+IOFFSET) <= FINANCIAL_SIMULATION_YEARS .AND.                        &
+                                                (I <= AVAIL_DATA_YEARS))
             AFDC1(I+IOFFSET) = VECTOR_DATA(I)
             TAFDC1  = TAFDC1 + VECTOR_DATA(I)
             I = I + 1
@@ -859,31 +867,31 @@
 !
             IF(AFDCSW == 2) THEN
                IF(CE(J) == CEP(J)) THEN
-                  AFDC1(J) = RCWIP * EFFAFDCRATE(J) *
-     +                       (OUTSERVICE*CE(J)/2.+CWIP(J-1))
+                  AFDC1(J) = RCWIP * EFFAFDCRATE(J) *                                     &
+                             (OUTSERVICE*CE(J)/2.+CWIP(J-1))
                ELSE
-                  AFDC1(J) = RCWIP * EFFAFDCRATE(J) * (CE(J)/2. +
-     +                         OUTSERVICE*CWIP(J-1) +
-     +                         INSERVICE*(MAX((CWIP(J-1)-CEP(J)),0.) -
-     +                         MAX((CEP(J)-CWIP(J-1)),0.)/2.))
+                  AFDC1(J) = RCWIP * EFFAFDCRATE(J) * (CE(J)/2. +                         &
+                               OUTSERVICE*CWIP(J-1) +                                     &
+                               INSERVICE*(MAX((CWIP(J-1)-CEP(J)),0.) -                    &
+                               MAX((CEP(J)-CWIP(J-1)),0.)/2.))
                ENDIF
                IF(CE(J) == CEP(J)) THEN
-                  AFDC1(J) = RCWIP * EFFAFDCRATE(J) *
-     +                       (OUTSERVICE*CE(J)/2.+CWIP(J-1))
+                  AFDC1(J) = RCWIP * EFFAFDCRATE(J) *                                     &
+                             (OUTSERVICE*CE(J)/2.+CWIP(J-1))
                ELSEIF(CEP(J) == 0.) THEN
-                  AFDC1(J) = RCWIP * EFFAFDCRATE(J) * (CE(J)/2. +
-     +                                                       CWIP(J-1))
+                  AFDC1(J) = RCWIP * EFFAFDCRATE(J) * (CE(J)/2. +                         &
+                                                             CWIP(J-1))
                ELSE
                   IF(CWIP(J-1)+OUTSERVICE*CE(J) >= CEP(J)) THEN
-                     AFDC1(J) = RCWIP * EFFAFDCRATE(J) * (CE(J)/2. +
-     +                          OUTSERVICE*CWIP(J-1) +
-     +                          INSERVICE*(MAX((CWIP(J-1)-CEP(J)),0.)-
-     +                          MAX((CEP(J)-CWIP(J-1)),0.)/2.))
+                     AFDC1(J) = RCWIP * EFFAFDCRATE(J) * (CE(J)/2. +                      &
+                                OUTSERVICE*CWIP(J-1) +                                    &
+                                INSERVICE*(MAX((CWIP(J-1)-CEP(J)),0.)-                    &
+                                MAX((CEP(J)-CWIP(J-1)),0.)/2.))
                   ELSE
-                     AFDC1(J) = RCWIP * EFFAFDCRATE(J) * (OUTSERVICE*
-     +                       (CWIP(J-1) + (CEP(J) - CWIP(J-1))/2.) +
-     +                  INSERVICE*((CE(J) - (CEP(J) - CWIP(J-1)))/2.+
-     +                          CWIP(J)))
+                     AFDC1(J) = RCWIP * EFFAFDCRATE(J) * (OUTSERVICE*                     &
+                             (CWIP(J-1) + (CEP(J) - CWIP(J-1))/2.) +                      &
+                        INSERVICE*((CE(J) - (CEP(J) - CWIP(J-1)))/2.+                     &
+                                CWIP(J)))
                   ENDIF
                ENDIF
             ELSE IF(AFDCSW == 1) THEN
@@ -893,8 +901,8 @@
          ENDDO
          IF(CWIP(NYRS) /= 0.) THEN
             IF(AFDCSW == 2) THEN
-               TAFDC1  = TAFDC1  +
-     +               RCWIP * EFFAFDCRATE(NYRS) * CWIP(NYRS) * OUTSERVICE
+               TAFDC1  = TAFDC1  +                                                        &
+                     RCWIP * EFFAFDCRATE(NYRS) * CWIP(NYRS) * OUTSERVICE
             ELSE
                TAFDC1  = TAFDC1 + RCWIP * EFFAFDCRATE(NYRS) * CWIP(NYRS)
             ENDIF
@@ -903,11 +911,11 @@
       IF(AFDC_CAP_VECTOR /= 0) THEN
          IVEC = ABS(AFDC_CAP_VECTOR)
          CALL GET_ASSET_VAR(IVEC,DATA_TYPE,VECTOR_DATA)
-         IOFFSET = MIN(FINANCIAL_SIMULATION_YEARS,
-     +                 MAX(FIRSTYR - BASEYR,1))
+         IOFFSET = MIN(FINANCIAL_SIMULATION_YEARS,                                        &
+                       MAX(FIRSTYR - BASEYR,1))
          I = 1
-         DO WHILE ((I+IOFFSET) <= FINANCIAL_SIMULATION_YEARS .AND.
-     +                                          (I <= AVAIL_DATA_YEARS))
+         DO WHILE ((I+IOFFSET) <= FINANCIAL_SIMULATION_YEARS .AND.                        &
+                                                (I <= AVAIL_DATA_YEARS))
             AFDC2(I+IOFFSET) = VECTOR_DATA(I)
             TAFDC2  = TAFDC2 + VECTOR_DATA(I)
             I = I + 1
@@ -926,8 +934,8 @@
          ENDDO
          IF(CWIP(NYRS) /= 0.) THEN
             IF(AFDCSW == 1) THEN
-               TAFDC2  = TAFDC2  +
-     +               RCWIP * EFFAFDCRATE(NYRS) * CWIP(NYRS) * AFDCFC
+               TAFDC2  = TAFDC2  +                                                        &
+                     RCWIP * EFFAFDCRATE(NYRS) * CWIP(NYRS) * AFDCFC
             ELSE
                TAFDC2 = TAFDC2 + RCWIP * EFFAFDCRATE(NYRS) * CWIP(NYRS)
             ENDIF
@@ -965,14 +973,14 @@
 !                       AFDC2(J) = AFDC2(J) * RATIO
                         AFDC1_BALANCE = AFDC1_BALANCE + AFDC1(J)/2.
                         IF(AFDC2(J) /= 0.) THEN
-                           AFDC2(J) = MIN(ADJUST_FACTOR(J)*TAFDC1,
-     +                                                    AFDC1_BALANCE)
+                           AFDC2(J) = MIN(ADJUST_FACTOR(J)*TAFDC1,                        &
+                                                          AFDC1_BALANCE)
                         ENDIF
-                        AFDC1_BALANCE = AFDC1_BALANCE + AFDC1(J)/2. -
-     +                                                          AFDC2(J)
+                        AFDC1_BALANCE = AFDC1_BALANCE + AFDC1(J)/2. -                     &
+                                                                AFDC2(J)
                      ENDDO
-                     AFDC2(LAST_CAP_YEAR) = AFDC1_BALANCE +
-     +                                              AFDC1(LAST_CAP_YEAR)
+                     AFDC2(LAST_CAP_YEAR) = AFDC1_BALANCE +                               &
+                                                    AFDC1(LAST_CAP_YEAR)
                   ENDIF
                ENDIF
             ENDIF
@@ -992,11 +1000,11 @@
                ELSE
                   RTEMP = AFDC2(J)
                ENDIF
-               AF1C = AFDC1(J) + EFFAFDCRATE(J) * (OUTSERVICE*AF1CBAL +
-     +                           INSERVICE*MAX((AF1CBAL - RTEMP),0.))
+               AF1C = AFDC1(J) + EFFAFDCRATE(J) * (OUTSERVICE*AF1CBAL +                   &
+                                 INSERVICE*MAX((AF1CBAL - RTEMP),0.))
                IF((AF1BAL + AFDC1(J)) /= 0.) THEN
-                  AF2C = AFDC2(J) * (AF1CBAL + AF1C)/
-     +                              (AF1BAL + AFDC1(J))
+                  AF2C = AFDC2(J) * (AF1CBAL + AF1C)/                                     &
+                                    (AF1BAL + AFDC1(J))
                ELSE
                   AF2C = AFDC2(J)
                ENDIF
@@ -1023,21 +1031,21 @@
          AFC1BOR   = AFC1BOR + AFDC1B(J) - AFDC2B(J-1)
          AF1BAL    = AF1BAL  + AFDC1(J)  - AFDC2(J-1)
          AFDC2B(J) = 0.0
-         IF(((DEPMET /= 'ACRS' .AND.
-     +             AFDCFC >= .5)) .AND. AF1BAL /= 0.) AFDC2B(J) =
-     +                                         AFDC2(J) * AFC1BOR/AF1BAL
+         IF(((DEPMET /= 'ACRS' .AND.                                                      &
+                   AFDCFC >= .5)) .AND. AF1BAL /= 0.) AFDC2B(J) =                         &
+                                               AFDC2(J) * AFC1BOR/AF1BAL
       ENDDO
 !
 ! FOR MIDAS GOLD ADDED MAY 25, 1991
 ! COPYRIGHT (C) M.S. GERBER & ASSOCIATES, INC
 ! ALL RIGHTS RESERVED
 !
-      IF(DEPMET /= 'ACRS' .AND.
-     +                  (AFDCFC >= .5 .OR. CLASS_TAX_LIFE >=20.)) THEN
+      IF(DEPMET /= 'ACRS' .AND.                                                           &
+                        (AFDCFC >= .5 .OR. CLASS_TAX_LIFE >=20.)) THEN
          IF(BASEYR > 1986) THEN
             TOTAL_INTEREST_CAP = AFDC1(1) * INTEREST_CAP_RATE(2)
-            TOTAL_CURRENT_INTEREST = TOTAL_INTEREST_CAP *
-     +                                      CURRENT_INTEREST_CAP_RATE(1)
+            TOTAL_CURRENT_INTEREST = TOTAL_INTEREST_CAP *                                 &
+                                            CURRENT_INTEREST_CAP_RATE(1)
             BORAFDC = AFDC1(1)
          ELSE
             TOTAL_INTEREST_CAP = 0.
@@ -1050,17 +1058,17 @@
             IF(BASEYR + J - 1 >= 1987) THEN
                PCAPINRST(J) = AFDC1(J) * INTEREST_CAP_RATE(J)
                TOTAL_INTEREST_CAP = TOTAL_INTEREST_CAP + PCAPINRST(J)
-               TOTAL_CURRENT_INTEREST = TOTAL_CURRENT_INTEREST +
-     +                       PCAPINRST(J) * CURRENT_INTEREST_CAP_RATE(J)
+               TOTAL_CURRENT_INTEREST = TOTAL_CURRENT_INTEREST +                          &
+                             PCAPINRST(J) * CURRENT_INTEREST_CAP_RATE(J)
                BORAFDC = BORAFDC + AFDC1(J)
                IF(BORAFDC /= 0.) THEN
                   CAPINRST(J) = TOTAL_INTEREST_CAP/BORAFDC * AFDC2(J)
-                  CURRENT_INTEREST_CAP(J) = TOTAL_CURRENT_INTEREST/
-     +                                         BORAFDC * AFDC2(J)
-                  TOTAL_INTEREST_CAP = MAX(0.,
-     +                                TOTAL_INTEREST_CAP-CAPINRST(J))
-                  TOTAL_CURRENT_INTEREST = MAX(0.,
-     +                   TOTAL_CURRENT_INTEREST-CURRENT_INTEREST_CAP(J))
+                  CURRENT_INTEREST_CAP(J) = TOTAL_CURRENT_INTEREST/                       &
+                                               BORAFDC * AFDC2(J)
+                  TOTAL_INTEREST_CAP = MAX(0.,                                            &
+                                      TOTAL_INTEREST_CAP-CAPINRST(J))
+                  TOTAL_CURRENT_INTEREST = MAX(0.,                                        &
+                         TOTAL_CURRENT_INTEREST-CURRENT_INTEREST_CAP(J))
                   BORAFDC = MAX(0.,BORAFDC-AFDC2(J))
                ENDIF
             ENDIF
@@ -1078,20 +1086,20 @@
 !*                                                                     *
 !***********************************************************************
 !                                                                      *
-      SUBROUTINE WRITE_OFF(ABYEAR,ABMETH,WOYRS,DDB,RBDDB,AFCEXP,AJAFDC,
-     +                     EXEXP,AMORTE,BOKBL,BOKDAL,BOKWO,AFCBL,AFCDAL,
-     +                     AFCWO,ABACCT,WODFTX,NRTXWO,NYRS)
+      SUBROUTINE WRITE_OFF(ABYEAR,ABMETH,WOYRS,DDB,RBDDB,AFCEXP,AJAFDC,                   &
+                           EXEXP,AMORTE,BOKBL,BOKDAL,BOKWO,AFCBL,AFCDAL,                  &
+                           AFCWO,ABACCT,WODFTX,NRTXWO,NYRS)
 !
       INCLUDE 'SpinLib.MON'
       INCLUDE 'SIZECOM.MON'
-      INTEGER*2 NYRS
-      INTEGER*2 J,T,ABYEAR,ABMETH,LASTYR
-      CHARACTER*1 ABACCT
-      REAL*4 DDB(NYRS),RBDDB(NYRS),AJAFDC(NYRS),EXEXP(NYRS),
-     +       AMORTE(NYRS),
-     +       AFCEXP(NYRS),WODFTX(NYRS),NRTXWO,BOKBL,BOKWO,BOKDAL,AMORT,
-     +       AMTWO,AFCWO,AFCBL,AFCDAL,WOYRS
-      INTEGER*2 BASE_YEAR
+      INTEGER (kind=2) ::  NYRS
+      INTEGER (kind=2) ::  J,T,ABYEAR,ABMETH,LASTYR
+      CHARACTER (len=1) ::  ABACCT
+      REAL (kind=4) ::  DDB(NYRS),RBDDB(NYRS),AJAFDC(NYRS),EXEXP(NYRS),                   &
+             AMORTE(NYRS),                                                                &
+             AFCEXP(NYRS),WODFTX(NYRS),NRTXWO,BOKBL,BOKWO,BOKDAL,AMORT,                   &
+             AMTWO,AFCWO,AFCBL,AFCDAL,WOYRS
+      INTEGER (kind=2) ::  BASE_YEAR
 !
       LASTYR = ABYEAR - BASE_YEAR()
       IF(LASTYR >= AVAIL_DATA_YEARS+1 .OR. LASTYR < 1) THEN
@@ -1266,23 +1274,23 @@
 !                                                                      *
 !***********************************************************************
 !
-      SUBROUTINE INTEREST_CAP(CE,CEP,CWIP,DEPMET,AFDCFC,
-     +                        SERVICEMO,CAPINRST,
-     +                        PCAPINRST,
-     +                        INTEREST_CAPITALIZATION_RATE,
-     +                        STARTING_INTEREST_BALANCE,
-     +                        FINANCIAL_SIMULATION_YEARS)
+      SUBROUTINE INTEREST_CAP(CE,CEP,CWIP,DEPMET,AFDCFC,                                  &
+                              SERVICEMO,CAPINRST,                                         &
+                              PCAPINRST,                                                  &
+                              INTEREST_CAPITALIZATION_RATE,                               &
+                              STARTING_INTEREST_BALANCE,                                  &
+                              FINANCIAL_SIMULATION_YEARS)
 !
       INCLUDE 'SIZECOM.MON'
-      REAL*4 INTEREST_CAPITALIZATION_RATE(*),TOTAL_CEP,
-     +     INTEREST_BALANCE,STARTING_INTEREST_BALANCE
+      REAL (kind=4) ::  INTEREST_CAPITALIZATION_RATE(*),TOTAL_CEP,                        &
+           INTEREST_BALANCE,STARTING_INTEREST_BALANCE
 !
-      CHARACTER*4 DEPMET
-      INTEGER*1 J,FINANCIAL_SIMULATION_YEARS
-      REAL*4 CE(*),CEP(*),CWIP(*),AFDCFC,CWIP_BAL
-      REAL*4 OUTSERVICE,INSERVICE,
-     +     CAPINRST(*),PCAPINRST(*)
-      INTEGER*2 SERVICEMO
+      CHARACTER (len=4) ::  DEPMET
+      INTEGER (kind=1) ::  J,FINANCIAL_SIMULATION_YEARS
+      REAL (kind=4) ::  CE(*),CEP(*),CWIP(*),AFDCFC,CWIP_BAL
+      REAL (kind=4) ::  OUTSERVICE,INSERVICE,                                             &
+           CAPINRST(*),PCAPINRST(*)
+      INTEGER (kind=2) ::  SERVICEMO
 !
       IF(INDEX(DEPMET,'ACRS') /= 0 .OR. AFDCFC < .5) THEN
          DO J = 1, FINANCIAL_SIMULATION_YEARS
@@ -1300,13 +1308,13 @@
 ! CALCULATE ANNUAL INTEREST
 !
             IF(CE(J) == CEP(J)) THEN
-               PCAPINRST(J) = INTEREST_CAPITALIZATION_RATE(J) *
-     +                           (OUTSERVICE*CE(J)/2.+CWIP(J-1))
+               PCAPINRST(J) = INTEREST_CAPITALIZATION_RATE(J) *                           &
+                                 (OUTSERVICE*CE(J)/2.+CWIP(J-1))
             ELSE
-               PCAPINRST(J) = INTEREST_CAPITALIZATION_RATE(J) *
-     +                           (CE(J)/2. + OUTSERVICE*CWIP(J-1) +
-     +                           INSERVICE*(MAX((CWIP(J-1)-CEP(J)),0.) -
-     +                           MAX((CEP(J)-CWIP(J-1)),0.)/2.))
+               PCAPINRST(J) = INTEREST_CAPITALIZATION_RATE(J) *                           &
+                                 (CE(J)/2. + OUTSERVICE*CWIP(J-1) +                       &
+                                 INSERVICE*(MAX((CWIP(J-1)-CEP(J)),0.) -                  &
+                                 MAX((CEP(J)-CWIP(J-1)),0.)/2.))
             ENDIF
             TOTAL_CEP   = TOTAL_CEP + CEP(J)
          ENDDO
