@@ -335,7 +335,7 @@
 #define	MAXP	128	/* maximo de palabras en general */
 #define	HUG1	2048	/* huge buffer */
 #define	HUG2	4096	/* huge buffer */
-#define MSTR	24000	/* monster buffer */
+
 
 /*
  *
@@ -726,8 +726,6 @@ char	*trim_blanks(char *);
 int	ordenar_makefile();
 int	ps_src1();
 int	largo_linea(char *);
-int	tiene_include_valido(char *,char *,char *);
-int	es_nombre_de_include(char *s);
 
 int	borrar_stats();
 
@@ -1830,7 +1828,7 @@ int	pro_exec2()
 
 
 	char	z[MAXV];
-	sprintf (z,"exec2");
+	sprintf (z,"prue2");
 
 	/* proceso */
 	if (gp_fverbose("d1"))
@@ -1886,7 +1884,6 @@ int	pro_exec2()
 			strcpy ( (*tb[qf_ff]).n, extract_fname(d1));
 			(*tb[qf_ff]).pf = q_ptr;
 			(*tb[qf_ff]).uf = q_ptr+qlf-1;
-			(*tb[qf_ff]).ql = qlf;
 
 			if (gp_fverbose("d1"))
 			{
@@ -1960,16 +1957,6 @@ int	pro_exec2()
 
 
 /*
- * -----------------------------------------------------------------------------------
- *
- *	ps_src1  
- *
- *	proceso un file
- *
- * -----------------------------------------------------------------------------------
- */
-
-/*
  *	procesar todos los fuentes
  */
 
@@ -1980,163 +1967,25 @@ int	ps_src1()
 	int	ql_ini,ql_fin;
 	int	i,j,k,l;
 	int	f1,f2,f3,f4;
-	int	pf,uf,ln;
+	int	pf,uf;
 
 	char	b1[MAXB];
-	char	b2[MAXB];
-
-	char	s1[MAXB];
-	char	s2[MAXB];
-
-	/* chequeo que esta todo bien */
-	if (gp_fverbose("d3"))
-	{
-		printf ("\n\n\n");
-	
-		for (i=0; i< qf_ff; i++)
-		{
-			printf ("FF: %3d  %5d  |%s|\n", i, (*tb[i]).ql, (*tb[i]).n );
-		}
-
-		printf ("\n\n\n");
-	}
 
 
-/* EEE */
-
+	printf ("\n\n\n");
 
 	for (i=0; i< qf_ff; i++)
 	{
-		strcpy(b1, (*tb[i]).n);
-		pf = (*tb[i]).pf;
-		uf = (*tb[i]).uf;
-
-		for (ln=pf; ln<=uf; ln++)
-		{
-			l_pars(ln,&q_tk );
-			strcpy (b2, (*fnp[ln]).l );
-
-			if (tiene_include_valido(b2,s1,s2))
-			{
-#if 0
-				fprintf (hfout,"%-30.30s %-30.30s \n",b1,s1  );
-#endif
-				fprintf (hfout,"%-30.30s %-30.30s \n",s1,b1  );
-
-			}
-
-		}
-
+		printf ("FF: %3d  %5d  |%s|\n", i, (*tb[i]).ql, (*tb[i]).n );
 	}
 
+	printf ("\n\n\n");
 }
 
 
 
-int	tiene_include_valido(s,l1,l2)
-char	*s;
-char	*l1;
-char	*l2;
-{
-	int	i,j,k;
-	int	f1,f2,f3;
-	int	n_inc;
-	int	n_ap1,n_ap2;
-	char	b1[MAXB];
 
 
-	/* mientras true, hay esperanza */
-	f1 = 1;
-
-	/* si es comentario, no va */
-	if (f1)
-	{
-		if (es_linea_comentario(s))
-			f1 = 0;
-	}
-
-	/* si no figura la palabra include, no va */
-	if (f1)
-	{
-		for (i=0, f2=0; !f2 && i<q_tk; i++)
-		{
-			if (!strcmp("include",pasar_a_minusc(tk[i])))
-				f2 = 1, n_inc=i;
-		}
-
-		if (!f2)
-			f1 = 0;	
-	}
-
-	/* si antes del include hay algo distinto a blancos, no va */
-	if (f1)
-	{
-		for (i=0; f1 && i< n_inc && i< q_tk; i++)
-			if (strcmp(" ",tk[i]))
-				f1 = 0;
-
-	}
-
-
-	/* si despues del include, no hay blancos y un "'",  no va */
-	if (f1)
-	{	
-		i = n_inc+1;
-		while (tk[i][0] == ' ' && i< q_tk )
-			i++;
-
-		if (tk[i][0] == '\'')
-			n_ap1 = i;
-		else	
-			f1 = 0;
-
-	}
-
-
-	/* si encontro un "'" ... veamos */
-	if (f1)
-	{
-		if (tk[n_ap1+2][0] == '.')
-			sprintf (b1,"%s.%s",tk[n_ap1+1],tk[n_ap1+3]);
-		else
-			f1 = 0;
-	}
-
-
-	if (f1)
-	{
-		if (es_nombre_de_include(b1) )
-			strcpy(l1,b1);
-		else
-			f1 = 0;
-	}
-
-
-	return (f1);
-}
-
-
-int	es_nombre_de_include(s)
-char	*s;
-{
-
-	int	i,j,k;
-	int	f1,f2;
-	char	c;
-
-
-	f1 = 1;
-
-	for (i=0; f1 && i<strlen(s); i++)
-	{
-		c = s[i];
-
-		if (! ( c == '.' || c == '_' || ( c >= 'A' && c <= 'Z' ) || ( c >= 'a' && c <= 'z' ) || ( c >= '0' && c <= '9') ))
-			f1 = 0;
-	}
-
-	return (f1);
-}
 
 
 
@@ -4688,7 +4537,6 @@ int	*l1;
 	if (gp_fverbose("d2"))
 	{
 		printf ("Cantidad de lineas en source ql       : %6d\n",ql);
-		printf ("\n\n");
 	}
 
 	/* proceso */
@@ -5623,11 +5471,6 @@ int	pro_tool2()
  * -----------------------------------------------------------------------------------
  */
 
-/*
- * lo que esta en el sprintf anda ??????
- */
-
-
 int	make_cmp(fnp1,fnp2)
 fnptr	*fnp1;
 fnptr	*fnp2;
@@ -5636,14 +5479,8 @@ fnptr	*fnp2;
 	static	char	b2[MAXB];
 	int	k;
 
-#if 0
 	sprintf (b1,"%2d%-40-40s", (*fnp1)->f1, (*fnp1)->l );
 	sprintf (b2,"%2d%-40-40s", (*fnp2)->f1, (*fnp2)->l );
-#endif
-	sprintf (b1,"%2d%-40.40s", (*fnp1)->f1, (*fnp1)->l );
-	sprintf (b2,"%2d%-40.40s", (*fnp2)->f1, (*fnp2)->l );
-
-
 
 	k = strcmp(b1,b2);
 
@@ -6449,17 +6286,17 @@ int	*ql_f;
 
 	int	i,j,k;
 	int	p1,p2;
-	int	f1,f2,f3,f4,f5;
+	int	f1,f2,f3,f4;
 	int	qi,qf;
 	int	d1;
 	int	delta1,delta2;
 
-	char	b1[MSTR];
-	char	b2[MSTR];
-	char	b3[MSTR];
-	char	b4[MSTR];
-	char	b5[MSTR];
-	char	b6[MSTR];
+	char	b1[MAXB];
+	char	b2[MAXB];
+	char	b3[MAXB];
+	char	b4[MAXB];
+	char	b5[MAXB];
+	char	b6[MAXB];
 
 	char	*tok;
 
@@ -6469,27 +6306,23 @@ int	*ql_f;
 	qf = *ql_f;
 	f4 = 0;		/* modifico linea con kind o len */
 
-/* EEE */
-
-
 
 
 	for (i=0; i< qf; i++)
 	{
 		f4 = 0;
 
-		memset(b1,0,MSTR);
 		strcpy(b1, (*fnp[i]).l );
 
 		l_pars(i,&q_tk);
 
 		if (gp_fverbose("d4"))
 		{
-			printf ("cfor_mas:  Vengo de l_pars\n");
-			printf ("cfor_mas:  Linea %4d #tk %4d |%s|\n",i,q_tk,b1);
+			printf ("Vengo de l_pars\n");
+			printf ("cfor_mas1:  linea %4d #tk %4d |%s|\n",i,q_tk,b1);
 			for (j=0; j<q_tk; j++)
 			{
-				printf ("cfor_mas: TK: %3d %3d f1: %d |%s|\n",j,strlen(tk[j]),f1,tk[j]);
+				printf ("TK: %3d %3d f1: %d |%s|\n",j,strlen(tk[j]),f1,tk[j]);
 			}
 		}
 
@@ -6501,20 +6334,16 @@ int	*ql_f;
 			if (f1 )
 			{
 				if (gp_fverbose("d3"))
-				{	printf ("cfor_mas: fixed !  f1: %d \n",f1);
-					printf ("cfor_mas: Linea %4d q_tk %4d lin |%s|\n",i,q_tk,b1);
+				{	printf ("fixed %d ! \ncfor_mas2:  linea %4d #tk %4d |%s|\n",f1,i,q_tk,b1);
 				}
 			}
 				
 		} /* tiene_dec_var */
 
 
-
-		/* armo la linea de nuevo con todos los tokens
-		 * solucion por ahora ... dejo los comentarios al final, afuera
-		 */
-		memset(b2,0,MSTR);
-		for (j=0, f5=1; j< q_tk; j++)
+		/* armo la linea de nuevo con todos los tokens */
+		memset (b2,0,MAXB);
+		for (j=0; j< q_tk; j++)
 			strcat (b2,tk[j]);
 
 		/* la linea no tenia dec de variables */
@@ -6528,7 +6357,7 @@ int	*ql_f;
 		{
 			if ( def_var_continua(b2))
 			{
-				memset (b3,0,MSTR);
+				memset (b3,0,MAXB);
 
 				delta1 = 0;
 				do
@@ -6537,39 +6366,32 @@ int	*ql_f;
 					delta1++;
 				}
 				while ( def_var_continua (  (*fnp[i+delta1]).l) ) ;
-
 				strcat (b3, limpiar_mas ( (*fnp[i+delta1]).l) );
-
 
 				if (gp_fverbose("d3"))
 				{
-					printf ("\n\n");
-					printf ("concatenada (%d) l: %d |%s| \n\n\n",delta1,strlen(b3),b3); 
+					printf ("\n\n\n");
+					printf ("concatena trucha: ((%d)) l: %d |%s| \n\n\n",delta1,strlen(b3),b3); 
 				}
 
 				
-				memset (b4,0,MSTR);
-				memset (b5,0,MSTR);
+				memset (b4,0,MAXB);
+				memset (b5,0,MAXB);
 
 				preparame_dos_lineas(b3,b4,b5);
 				strcpy(b6,b5);
 
 				if (gp_fverbose("d3"))
-				{	printf ("Vengo de preparame_dos_lineas \n");
-					printf ("l1 |%s| \n",b4);
-					printf ("l2 |%s| \n",b5);
-					printf ("l3 |%s| \n",b6);
+				{	printf ("dos lineas: 1  |%s| \n",b4);
+					printf ("dos lineas: 2  |%s| \n",b5);
+					printf ("dos lineas: B  |%s| \n",b6);
 				}
 
 				delta2 = 0;
 				tok = strtok(b5,",");
-printf ("CFMAS 5 : 1er strtok  |%s|  \n",tok);
-#if 0
-				tok = strtok(b5,",");
-#endif
 				while ( tok != NULL )
 				{
-					sprintf (b3,"      %s  %s",b4,tok); 
+					sprintf (b3,"      %s  %s",b4,tok);
 					tok = strtok(NULL,",");
 
 					if (gp_fverbose("d3"))
@@ -6673,11 +6495,6 @@ char	*s;
 	for (i=0, f1=1, p1=0; f1 && i<strlen(s); i++)
 		if (s[i] != ' ' && s[i] != '+')
 			p1 = i, f1 = 0;
-
-	/* por ahora .. si hay comentarios al final, fuera */
-	for (i=strlen(s)-1, f1=1; f1 && i; i--)
-		if (s[i] == ',')
-			s[i+1] = 0, f1 = 0;
 
 	strcpy(b1,s+p1);
 
@@ -7161,7 +6978,7 @@ char	*l2;
 
 	if (gp_fverbose("d3"))
 	{
-		printf ("- preparame s  |%s| \n",s);
+		printf ("- -- - preparame 1 |%s| \n",s);
 	}
 
 	for (i=0, f1=1, p1=0; f1 && i<strlen(s); i++)
@@ -7179,8 +6996,8 @@ char	*l2;
 
 	if (gp_fverbose("d3"))
 	{
-		printf ("- preparame l1 |%s| \n",l1);
-		printf ("- preparame l2 |%s| \n",l2);
+		printf ("- -- - preparame 2 |%s| \n",l1);
+		printf ("- -- - preparame 2 |%s| \n",l2);
 	}
 
 }
@@ -9447,8 +9264,8 @@ int	*qt;
 
 		if (gp_fverbose("d3"))
 		{
-			printf ("l_pars: Linea  : %d \n",line_number);
-			printf ("l_pars: Buffer :|%s|\n",  b1);
+			printf ("Linea  : %d \n\n",line_number);
+			printf ("Buffer :|%s|\n",  b1);
 		}
 
 
@@ -9596,7 +9413,7 @@ int	*qt;
 
 
 		if (gp_fverbose("d3"))
-			printf ("l_pars: Termine de parsear linea (%d tokens) \n",q_tk);
+			printf ("termine de parsear linea \n");
 
 
 		/* verifico si hay que sacar output  en minusculas */
