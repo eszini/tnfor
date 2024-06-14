@@ -7,6 +7,7 @@ COPY     ?= 1  # Por defecto, copiar archivos (1 = copiar, 0 = no copiar)
 VERSION   =  10001
 
 BIN_DIR := $(HOME)/bin
+SRC_BCK := $(HOME)/bck1
 SRC_DIR := $(HOME)/wrk/tnfor/A_src
 
 # Objetivo setup para crear directorios si no existen
@@ -19,9 +20,6 @@ setup:
 version:
 	@echo "Makefile - version $(VERSION)"
 
-
-
-
 # Regla para construir el ejecutable "tfor"
 tfor: tfor.c
 	@echo "Compilando tfor.c..."
@@ -32,6 +30,8 @@ tfor: tfor.c
 			echo "Copiando tfor.c a src..."; \
 			cp tfor.c $(SRC_DIR); \
 			echo "Copiando Makefile a src..."; \
+			cp tfor.c $(SRC_BCK); \
+			echo "Copiando Makefile a backup..."; \
 			cp Makefile $(SRC_DIR); \
 			echo "Copiando ejecutables a bin..."; \
 			if [ -e tfor ]; then \
@@ -50,10 +50,19 @@ tfor: tfor.c
 			echo "Skipping file copy"; \
 		fi; \
 	else \
-		echo "Errores encontrados durante la compilación:"; \
+		echo "Errores encontrados durante la compilaciÃ³n:"; \
 		cat errors.log; \
 	fi
 	@rm -f errors.log
+
+# Regla para copiar archivos desde A_src
+get:
+	@if [ "$(file)" ]; then \
+		echo "Copiando $(file) desde $(SRC_DIR) a $(CURDIR)..."; \
+		cp $(SRC_DIR)/$(file) .; \
+	else \
+		echo "Por favor, especifica el archivo a copiar. Ejemplo: make get file=tfor.c"; \
+	fi
 
 # Regla para editar tfor.c
 vi: tfor.c
@@ -63,9 +72,4 @@ vi: tfor.c
 clean:
 	@echo "Haciendo limpieza ... "
 	@rm -f *.exe *.log log *.err tfor
-
-
-
-
-
 
