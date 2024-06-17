@@ -8,9 +8,6 @@ parser_log="parser.err"
 
 ./tfor -exec=1 -inp=t1.for -in2=t2.for -out=d1.chr
 
-
-wc -l t1.for t2.for
-
 grep ^X d1.chr
 
 

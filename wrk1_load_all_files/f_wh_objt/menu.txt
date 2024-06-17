@@ -1,15 +1,28 @@
 #
 #
-#
 # Opcion 1 - Compara la cantidad de caracteres de dos archivos
 
-opcion 1
+opcion=1
 -v
 -opciones=d5
 -exec=1
 -inp=t1,for
 -in2=t2.for
 -out=d1.chr
+end
+
+#
+#
+# Opcion 2 - Simple parser
+opcion=2
+-v
+-opciones=d5
+-inp=menu.txt
+end
+
+
+
+
 
 
 
