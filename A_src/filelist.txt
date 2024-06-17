@@ -4,3 +4,4 @@ p1_com.sh
 p2_typ.sh
 p3_lco.sh
 p4_mas.sh
+p5_ini.sh
