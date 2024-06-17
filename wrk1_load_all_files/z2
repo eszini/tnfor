@@ -1,0 +1,124 @@
+
+/*
+ *	es_cadena_interesante
+ *
+ *	busca en un string (linea de source)
+ *	nombres 'largos' (pongamos, mayor a 30 chars )
+ *	
+ */
+
+int	es_cadena_interesante(s)
+char	*s;
+{
+	int	i,j,k;
+	int	l1;
+	int	p1,p2,p3;
+	int	f1,f2,f3;
+	int	f9;
+	int	target;
+	char	c;
+	char	b1[MAXB];
+	char	b2[MAXB];
+
+
+
+	target = 10;	/* miremos cadenasde mas de 10 caracteres por ahora */
+	f9 = 1;		/* cadena interesante 0 no 1 si */
+
+	strcpy(b1,s);
+
+#if 1
+
+
+	p1 = 0;
+	f1 = 1;
+	f2 = 1;
+	f3 = 1;
+	l1 = 0;
+	i  = 0;
+
+
+	while ( f2 )
+	{
+		c = b1[p1 + i];
+		k = 0;
+			
+		if ( c >= 'a' && c <= 'z' )
+			k = 1;
+
+		if ( c >= 'A' && c <= 'Z' )
+			k = 1;
+
+		if ( c >= '0' && c <= '9' )
+			k = 2;
+
+		if ( c == ' ' )
+			k = 3;
+
+		if ( c == '_' )
+			k = 4;
+
+		switch (k)
+		{
+				/* no es caracter valido en la cadena, terminamos */
+			case	0:
+				f2 = 0;
+				if (f1 == 0)
+					f9 = i;
+				else
+					f9 = 0;
+				break;
+
+				/* es letra */
+			case	1:
+				if (f1)
+					f1=0;
+				i++;
+				break;
+
+				/* es numero , solo si hubo una letra antes */
+			case	2:
+				if (f1)
+				{
+					f9 = 0;
+					f2 = 0;
+				}
+				else
+					i++;
+				break;
+
+
+				/* aceptamos casos en los que hay blancos como parte del nombre !! */
+			case 	3:
+				if (f1)
+				{
+					f9 = 0;
+					f2 = 0;
+				}
+				else
+					i++;
+				break;
+
+				/* aceptamos casos en los que hay _ como parte del nombre !! */
+			case 	4:
+				if (f1)
+				{
+					f9 = 0;
+					f2 = 0;
+				}
+				else
+					i++;
+				break;
+		}			
+	}
+
+
+#endif
+
+
+
+	return (f9);
+
+}
+
+

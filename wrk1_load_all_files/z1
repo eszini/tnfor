@@ -1,0 +1,120 @@
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	p_src3         
+ *
+ *	busca patrones de la forma   var = / xxxxxx /
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ *	busca patrones de inicializacion vieja de variables
+ *	de la forma var = / xxxx /
+ *
+ */
+
+
+int	p_src3()
+{
+
+	int	i,j,k,k1,l;
+	int	f1,f2,f3,f4,f5;
+	int	pf,uf;
+	int	m1,m2;
+	int	l1;
+	int	p1;
+
+	char	b1[MAXB];
+	char	b2[MAXB];
+	char	b3[MAXB];
+	char	b4[MAXB];
+	char	b5[MAXB];
+
+
+	memset (b3,'X',MAXB);
+
+	/* por cada uno de los fuentes cargados */
+	for (i=0; i< qf_ff; i++)
+	{
+		if (gp_fverbose("d1"))
+		{
+			printf ("proceso: %6d %6d |%s|\n",
+				(*tb[i]).pf,(*tb[i]).uf,(*tb[i]).n);
+
+		}
+
+
+		/* primera y ultima fila del source */
+		pf = (*tb[i]).pf;
+		uf = (*tb[i]).uf;
+
+		/* reviso cada linea */
+		for (j = pf; j <= uf; j++)
+		{
+			/* la linea j */
+			strcpy (b1, (*fnp[ j ]).l );
+
+			/* parseo fila a tokens ... si tiene sentido  */
+			l_pars(j,&q_tk);
+
+
+			/*
+			 * detectar si la linea es comentarios ...
+			 * falta mas ... chequear si no puso ! o c en otra posicion que no sea 0
+			 */
+
+			f4 = 1;
+			if (es_linea_comentario(b1))
+				f4 = 0;
+	
+			/* solo proceso lineas que no son comentario */
+			if (f4)
+			{	
+				f5 = 1;
+				while ( f5 )
+				{
+
+					strcpy(b2,b1);
+
+					f5 = 0;
+					if (p1 = es_cadena_int_src3(b1,&m1))
+					{	f5 = 1;
+
+						strncpy(b1+p1,b3,m1);
+
+						sprintf (b4,"f:%-30.30s l:%06d |%s| \n", (*tb[i]).n,j,b2 );
+						sprintf (b5,"f:%-30.30s l:%06d |%s| \n", (*tb[i]).n,j,b1 );
+						
+						if (gp_fverbose("d3"))
+						{
+							printf ("TT1%s",b4);
+							printf ("TT2%s",b5);
+							printf ("TT3\n");
+						}
+
+						if (ffout)
+						{
+							fprintf (hfout,"%s",b4);
+							fprintf (hfout,"%s",b5);
+							fprintf (hfout,"%s","\n");
+						}
+
+					}
+				}
+
+			}	
+
+
+			/* grabo la linea */
+			if ( 1 )
+			{
+				strcpy ((*fnp[ j ]).l, b1 );
+			}
+		}
+	}
+}
+
+

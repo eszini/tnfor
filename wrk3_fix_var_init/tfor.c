@@ -17,9 +17,6 @@
  *
  *	tfor.c
  *
- *	Sun Jun 16 19:20:43 -03 2024
- *	agregue que pueda cambiar inicializaciones tipo var/xxx/ por var = xxx
- *
  *	Mon Jun 10 01:30:37 -03 2024
  *	ajustes a armame_dos_lineas para separar lineas largas
  *
@@ -552,7 +549,6 @@ int	ffchg_com  = 0;		/* cambia caracter de comentario */
 int	ffchg_typ  = 0;		/* cambia type selectors */
 int	ffchg_lco  = 0;		/* cambia lineas de continuacion */
 int	ffchg_mas  = 0;		/* saca la continuacion de linea con mas */
-int	ffchg_ini  = 0;		/* cambia el tipo de init de vars        */
 
 
 /*
@@ -708,7 +704,6 @@ int	cfor_comm(int *,int *);
 int	cfor_vars(int *,int *);
 int	cfor_lcon(int *,int *);
 int	cfor_mas(int *,int *);
-int	cfor_ini(int *,int *);
 int	l_pars(int, int *);
 int	tiene_dec_var1();
 int	tiene_mas(char *);
@@ -717,10 +712,8 @@ int	fix_dec_var1();
 int	fix_dec_var2();
 int	p_src1();
 int	p_src2();
-int	p_src3();
 int	es_cadena_valida(int,char *);
 int	es_cadena_interesante(char *);
-int	es_cadena_int_src3(char *,int *);
 int	tiene_coment_intermedio (char *);
 int	es_linea_comentario(char *);
 int	es_linea_comentario2(char *);
@@ -2009,6 +2002,7 @@ int	ps_src1()
 	}
 
 
+/* EEE */
 
 
 	for (i=0; i< qf_ff; i++)
@@ -3367,9 +3361,8 @@ int	pro_prue2()
 	/* proceso todos los files */
 #if 0
 	p_src1();
-	p_src2();
 #endif
-	p_src3();
+	p_src2();
 
 
 
@@ -3401,41 +3394,30 @@ int	pro_prue2()
 
 
 
-/*
- * -----------------------------------------------------------------------------------
- *
- *	p_src3         
- *
- *	busca patrones de la forma   var = / xxxxxx /
- *
- * -----------------------------------------------------------------------------------
- */
+
+
+
 
 /*
- *	busca patrones de inicializacion vieja de variables
- *	de la forma var = / xxxx /
+ *	una forma de encontrar long names ...
  *
  */
 
 
-int	p_src3()
+int	p_src2()
 {
 
-	int	i,j,k,k1,l;
-	int	f1,f2,f3,f4,f5;
+	int	i,j,k,l;
+	int	f1,f2,f3,f4;
 	int	pf,uf;
 	int	m1,m2;
 	int	l1;
-	int	p1;
 
 	char	b1[MAXB];
 	char	b2[MAXB];
 	char	b3[MAXB];
-	char	b4[MAXB];
-	char	b5[MAXB];
 
 
-	memset (b3,'X',MAXB);
 
 	/* por cada uno de los fuentes cargados */
 	for (i=0; i< qf_ff; i++)
@@ -3474,316 +3456,66 @@ int	p_src3()
 			/* solo proceso lineas que no son comentario */
 			if (f4)
 			{	
-				f5 = 1;
-				while ( f5 )
+				k = 0;
+
+				while ( f4 && k < strlen(b1) )
 				{
 
-					strcpy(b2,b1);
+					m1 = es_cadena_interesante(b1+k);
 
-					f5 = 0;
-					if (p1 = es_cadena_int_src3(b1,&m1))
-					{	f5 = 1;
-
-						strncpy(b1+p1,b3,m1);
-
-						sprintf (b4,"f:%-30.30s l:%06d |%s| \n", (*tb[i]).n,j,b2 );
-						sprintf (b5,"f:%-30.30s l:%06d |%s| \n", (*tb[i]).n,j,b1 );
-						
-						if (gp_fverbose("d3"))
-						{
-							printf ("TT1%s",b4);
-							printf ("TT2%s",b5);
-							printf ("TT3\n");
-						}
-
-						if (ffout)
-						{
-							fprintf (hfout,"%s",b4);
-							fprintf (hfout,"%s",b5);
-							fprintf (hfout,"%s","\n");
-						}
-
-					}
-				}
-
-			}	
-
-
-			/* grabo la linea */
-			if ( 1 )
-			{
-				strcpy ((*fnp[ j ]).l, b1 );
-			}
-		}
-	}
-}
-
-
-/*
- * -----------------------------------------------------------------------------------
- *
- *	es_cadena_int_src3  
- *
- *	es cadena interesante para sub p_src3  - busca var = / xxxx /
- *
- * -----------------------------------------------------------------------------------
- */
-
-
-int	es_cadena_int_src3(s,largo)
-char	*s;
-int 	*largo;
-{
-
-	char	c,d;
-	int	i,j,k;
-	int	l1;
-	int	p1,p2,p3;
-	int	f1,f2,f3,f5;
-	int	m1;
-
-
-
-/* variable=/.false./    */
-
-#if 0
-printf ("TTR1 |%s| \n",s);
-#endif
-
-	m1 = 0;
-	f5 = 0;
-	l1 = 0;
-	p1 = 0;
 	
-	for (i=0, f1 = 1, f2 = 0;  f1 && s[i]; i++)
-	{
-		c = s[i];
-		d = s[i+1];
+					if (m1)
+					{	memset(b2,0,MAXB);
+						strncpy(b2,b1+k,m1);
+	
+						sprintf (b3,"TTT k: %2d %2d |%s| ",k,m1,b2);
 
-		if ( !f2 && i > 10 && c == '!')
-			f1 = 0;
+						if (gp_fverbose("d2"))
+						{
+							printf ("%s\n",b3);
+						}
 
-		if ( !f2 && c == '/' && d == '/')
-			f1 = 0;
-
-		if ( !f2 && c == '/' )
-			f2 = 1, p1 = i;
-
-		if ( f2 && l1 && c != '/' )
-		{
-			f3 = 0;
-
-			if ( c >= 'A' && c <= 'Z' ) 
-				f3 = 1;
-			if ( c >= 'a' && c <= 'z' ) 
-				f3 = 1;
-			if ( c >= '0' && c <= '9' ) 
-				f3 = 1;
-			if ( c == '_' || c == '.' )
-				f3 = 1;
-
-			if (!f3)
-				f1 = 0;
-		}
-
-		if ( f2 && l1 && c == '/' )
-		{
-			l1++;
-			f1 = 0;
-			f2 = 0;
-			f5 = p1;
-		}
-
-		if ( f2 )
-			l1++;
-	}	
-			
-	printf ("SRC4: l1:%2d |%s| \n",m1,s);
+						if (ffaux)
+						{
+							fprintf (hfaux,"%s\n",b3);
+						}
 
 
+						strcpy(b2,trim_blanks(b2));
+						m2 = pasa_filtro(b2);
+						l1 = strlen(b2);
+
+						if (1)
+						{
 #if 0
-printf ("TTR2 f5: %2d largo: %2d \n",f5,l1);
+							fprintf (hfout,"%-36.36s %06d (%02d)|F%02d|%s| \n",
+								(*tb[i]).n,j,l1,m2,b2 );
 #endif
+							if (strlen(b2) > 15 )
+							{
+							fprintf (hfout,"F%02d|%-36.36s| %s\n",
+								m2,b2,(*tb[i]).n );
+							}
 
-	*largo = l1;
-	return (f5);
-}
+						}
+					}
 
-
-
-#if 0
-
-/*
- *	es_cadena_interesante
- *
- *	busca en un string (linea de source)
- *	inicializacion de variables formato antiguo  
- *	var = / xxxx /
- *	
- */
-
-int	es_cadena_int_src3(s)
-char	*s;
-{
-	char	c;
-	int	i,j,k;
-	int	l1;
-	int	p1,p2,p3;
-	int	f1,f2,f3;
-	int	f9;
-	int	target;
-	int	s_count;
-	char	b1[MAXB];
-	char	b2[MAXB];
+					if (m1)
+						k += m1;
+					else	
+						k++;
 
 
-
-	target = 10;	/* miremos cadenasde mas de 10 caracteres por ahora */
-	f9 = 0;		/* cadena interesante 0 no 1 si */
-
-	strcpy(b1,s);
-
-
-	s_count = 0;
-
-	p1 = 0;
-	f1 = 1;
-	f2 = 1;
-	f3 = 1;
-	l1 = 0;
-	i  = 0;
-
-printf ("es_cadena: |%s| \n",s);
-
-	while ( f2 )
-	{
-		c = b1[p1 + i];
-		k = 0;
-			
-		if ( c >= 'a' && c <= 'z' )
-			k = 1;
-
-		if ( c >= 'A' && c <= 'Z' )
-			k = 1;
-
-		if ( c >= '0' && c <= '9' )
-			k = 2;
-
-		if ( c == ' ' )
-			k = 3;
-
-		if ( c == '_' )
-			k = 4;
-
-		if ( c == '.' )
-			k = 5;
-
-		if ( c == '/' )
-			k = 6;
-
-printf ("while: i: %d f9: %d k/c: %c%c |%s| \n",i,f9,c,b1[1+i+1],s);
-
-/* EEE */
-		switch (k)
-		{
-			case 	6:
-				if ( !f9 && i == 0 )
-					f9 = 1, i++;
-
-				if ( !f9 && i )
-					i++;
-
-				if ( f9 && i > 0 )
-					f2 = 0;
-
-				break;
-
-			default:
-				if ( c == 0 )
-					f2 = 0;
-				i++;
-				break;
-					
-
-#if 0
-				/* no es caracter valido en la cadena, terminamos */
-			case	0:
-				f2 = 0;
-				if (f1 == 0)
-					f9 = i;
-				else
-					f9 = 0;
-				break;
-
-				/* es letra */
-			case	1:
-				if (f1)
-					f1=0;
-				i++;
-				break;
-
-				/* es numero , solo si hubo una letra antes */
-			case	2:
-				if (f1)
-				{
-					f9 = 0;
-					f2 = 0;
+					/* comentario al fin de la linea */
+					if (b1[k] == '!')
+						f4=0;
 				}
-				else
-					i++;
-				break;
+			}
 
-
-				/* aceptamos casos en los que hay blancos como parte del nombre !! */
-			case 	3:
-				if (f1)
-				{
-					f9 = 0;
-					f2 = 0;
-				}
-				else
-					i++;
-				break;
-
-				/* aceptamos casos en los que hay _ como parte del nombre !! */
-			case 	4:
-				if (f1)
-				{
-					f9 = 0;
-					f2 = 0;
-				}
-				else
-					i++;
-				break;
-#endif
-		}			
+		}
 	}
-
-
-
-	return (f9);
-
 }
 
-
-
-#endif
-
-
-
-
-
-
-
-/*
- * -----------------------------------------------------------------------------------
- *
- *	trim_blanks         
- *
- *	elimina blancos al final de una linea
- *
- * -----------------------------------------------------------------------------------
- */
 
 
 char	*trim_blanks(s)
@@ -3805,18 +3537,7 @@ char	*s;
 	return (b);
 }
 
-
  
-/*
- * -----------------------------------------------------------------------------------
- *
- *	pasa_filtro         
- *
- *	verifica si es palabra reservada del lenguaje
- *
- * -----------------------------------------------------------------------------------
- */
-
 
 
 int	pasa_filtro(s)
@@ -6681,176 +6402,6 @@ int	pro_tool4()
 
 
 
-/*
- * -----------------------------------------------------------------------------------
- *
- *	cfor_init
- *
- * -----------------------------------------------------------------------------------
- */
-
-/*
- *	cambia el tipo de inicializacion de var /xxx/ a var = xxx
- *	Si hay que desdoblar lineas, ql_f vuelve con nueva ultima linea
- *
- */
-
-
-int	cfor_ini(ql_i,ql_f)
-int	*ql_i;
-int	*ql_f;
-{
-
-	int	i,j,k,l1;
-	int	p1,p2;
-	int	f1,f2,f3,f4,f5;
-	int	qi,qf;
-	int	d1;
-
-	char	b1[MAXB];
-	char	b2[MAXB];
-	char	b3[MAXB];
-	char	b4[MAXB];
-
-
-	d1 = 0;		/* lineas agregadas ! */
-	qi = *ql_i;
-	qf = *ql_f;
-	f4 = 0;		/* modifico linea con kind o len */
-
-
-
-	for (i=0; i< qf; i++)
-	{
-		f4 = 0;
-
-		strcpy(b1, (*fnp[i]).l );
-
-		l_pars(i,&q_tk);
-
-		if ( f1=tiene_dec_var1() )
-		{
-			f4 = 1;
-
-			/* caso int, log, real */
-			if (f1 == 1 || f1 == 2 || f1 == 3)
-			{
-				/* si no lo pude arreglar, encontre un caso no contemplado !!*/
-				if (! fix_dec_var1 () )
-				{	
-					printf ("DDD despues de fix_dec_var1 q_tk: %d\n",q_tk);
-					printf ("CASO NO CONTEMPLADO: (%5d) len: %2d |%s| \n",i,strlen(b1),b1);
-				}
-#if 0
-					error(701);
-#endif
-				else
-				{
-					if (gp_fverbose("d3"))
-					{	printf ("fixed %d ! \ncfor:  linea %4d #tk %4d |%s|\n",f1,i,q_tk,b1);
-						for (j=0; j<q_tk; j++)
-						{
-							printf ("TK: %3d %3d f1: %d |%s|\n",j,strlen(tk[j]),f1,tk[j]);
-						}
-					}
-				}
-			}
-
-			/* caso character */
-			if (f1 == 4 )
-			{
-				/* si no lo pude arreglar, encontre un caso no contemplado !!*/
-				if (! fix_dec_var2 () )
-					error(702);
-				else
-				{
-					if (gp_fverbose("d3"))
-					{	printf ("fixed %d! \ncfor:  linea %4d #tk %4d |%s|\n",f1,i,q_tk,b1);
-						for (j=0; j<q_tk; j++)
-						{
-							printf ("TK: %3d %3d f1: %d |%s|\n",j,strlen(tk[j]),f1,tk[j]);
-						}
-					}
-				}
-			}
-				
-		} /* tiene_dec_var */
-
-
-
-		if (gp_fverbose("d4"))
-		{
-			printf ("cfor:  linea %4d #tk %4d |%s|\n",i,q_tk,b1);
-			for (j=0; j<q_tk; j++)
-			{
-				printf ("TK: %3d %3d f1: %d |%s|\n",j,strlen(tk[j]),f1,tk[j]);
-			}
-		}
-
-		/* armo la linea de nuevo con todos los tokens */
-		memset (b2,0,MAXB);
-		for (j=0; j< q_tk; j++)
-			strcat (b2,tk[j]);
-
-
-		/* la linea no tenia dec de variables */
-		if ( f4 == 0)
-		{
-			strcpy ( (*fnp[i]).l, b2);
-		}
-
-
-		/* la linea tenia dec de variables */
-		if (f4 == 1)
-		{
-			/* en el caso de fix format ... si tiene mas de 72 chars ... problemas */
-			if ( (l1=largo_linea(b2)) > LF77 )
-			{
-				if (gp_fverbose("d3"))
-				{	
-					printf ("ACA algo no anda carajo !!!! \n");
-					printf ("Atencion! -- linea larga %5d %3d |%s|\n",i,l1,b2);
-				}
-
-				memset (b3,0,MAXB);
-				memset (b4,0,MAXB);
-
-
-				armame_dos_lineas(b2,b3,b4);
-				if (gp_fverbose("d3"))
-				{	printf ("dos lineas: 1  |%s| \n",b3);
-					printf ("dos lineas: 2  |%s| \n",b4);
-				}
-
-				/* correr todas las lineas ... */
-				correme_una_linea(i+1,qf);
-
-#if 1
-				/* grabar ambas lineas */
-				strcpy ( (*fnp[i]).l, b3);
-				strcpy ( (*fnp[i+1]).l, b4);
-			
-				/* agregar una linea mas al count */
-				qf++;
-#endif
-
-#if 0
-				strcpy ( (*fnp[i]).l, b2);
-#endif
-			}
-			else
-			{	/* no es linea larga, guardar una sola linea*/
-				strcpy ( (*fnp[i]).l, b2);
-			}
-		}
-	}
-
-	/* actualizo la cantidad de lineas del source para proximos cambios */
-	*ql_f = qf;
-}
-
-
-
 
 
 
@@ -8991,10 +8542,6 @@ int	pro_tool6()
 		cfor_mas(&ql_ini,&ql_fin);
 #endif
 
-	/* 5 - pidio convertir formato var/xx/ por var = xx         */
-	if ( ffchg_ini )
-		cfor_ini(&ql_ini,&ql_fin);
-
 
 	/* grabo file */
 	for (i=0; i< ql_fin; i++)
@@ -10828,11 +10375,6 @@ int	gp_parser()
 				ffchg_mas = 1;
 			}
 
-			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+2,"chgini",6) )
-			{	
-				ffchg_ini = 1;
-			}
-
 
 
 			if (gp_fverbose("d5"))
@@ -11464,8 +11006,8 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0037");
-	strcpy (d,"Sun Jun 16 19:22:22 -03 2024");
+	strcpy (ver,"0036");
+	strcpy (d,"Mon Jun 10 01:30:03 -03 2024");
 
 
 	sprintf (z,"%s -- (%s)  %s", gp_fp(GP_GET,0,(char **)0), ver, d  );
