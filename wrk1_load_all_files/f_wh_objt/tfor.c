@@ -6775,7 +6775,6 @@ int	*ql_f;
 	char	b5[MAXB];
 	
 	char	d1[MAXR];
-	char	d2[MAXR];
 
 
 	memset (b3,'X',MAXB);
@@ -6820,14 +6819,9 @@ int	*ql_f;
 					strncpy(d1,b1+p1,m1);
 
 		printf ("XXX: |%s| \n",d1);
-						memset (d2,0,MAXR);
-						strcpy(d2,d1);
-						d2[0] = '=';
-						d2[m1-1] = ' ';
-		printf ("XXX: |%s| \n",d2);
 
 
-					strncpy(b1+p1,d2,m1);
+					strncpy(b1+p1,b3,m1);
 
 					sprintf (b4,"f:%-30.30s l:%06d |%s| \n", (*tb[i]).n,j,b2 );
 					sprintf (b5,"f:%-30.30s l:%06d |%s| \n", (*tb[i]).n,j,b1 );
