@@ -4,6 +4,7 @@
  *	"header"		header del programa
  *	"ejemplos"		ejemplos de uso (lineas de comando )
  *	"documentacion" 	alguna documentacion
+ *	"to do"			pendings ...
  *	"ojo"			cosas a tener en cuenta !!!!!
  *	"programa"		programa
  *
@@ -266,6 +267,9 @@
  */
 
 
+/*
+ *	//documentacion //
+ */
 
 
 /*
@@ -293,6 +297,21 @@
  */
 
 
+
+/*
+ *	//to do //
+ */
+
+
+/*
+ *	errores
+ *	manejar mejor, permitir imprimir algun string, 
+ *      rutina en la que estaba etc
+ *
+ *	bulk process
+ *	compatilizar las corridas individuales via 
+ *	tool6, y las de tod el conjunto via prue2 
+ */
 
 
 /*
@@ -876,19 +895,13 @@ char	**argv;
 
 	/* init varios */
 	gp_default();
-#if 1
 	gp_init(argc,argv);
-#endif
-#if 0
-	gp_init(mi_argc,mi_argv);
-#endif
 
 	gp_parser();
 	gp_version(gp_vers);
 
 	char	z[MAXV];
 	sprintf (z,"proceso main");
-
 
 
 	/* shit finger ? */
@@ -1719,12 +1732,22 @@ int	pro_exec1()
 	{
 		memset (mostrar,0,16);
 		sprintf (mostrar,"%c",j);
+		if (j == 8)
+			sprintf (mostrar,"%s","Backspace");
 		if (j == 9)
 			sprintf (mostrar,"%s","TAB");
 		if (j == 10)
 			sprintf (mostrar,"%s","Line Feed");
+		if (j == 11)
+			sprintf (mostrar,"%s","Vertical Tab");
+		if (j == 12)
+			sprintf (mostrar,"%s","Form Feed");
 		if (j == 13)
 			sprintf (mostrar,"%s","Carriage Return");
+		if (j == 27)
+			sprintf (mostrar,"%s","Escape");
+		if (j ==127)
+			sprintf (mostrar,"%s","Delete");
 
 
 		if (!f4)
@@ -3720,7 +3743,6 @@ printf ("es_cadena: |%s| \n",s);
 
 printf ("while: i: %d f9: %d k/c: %c%c |%s| \n",i,f9,c,b1[1+i+1],s);
 
-/* EEE */
 		switch (k)
 		{
 			case 	6:
@@ -4971,7 +4993,7 @@ int	*l1;
 				b1[strlen(b1)-1] = 0;
 
 			/* saco el fin de linea - contemplo 13 x fuentes fortran */
-			for ( flag=0, j=strlen(b1); !flag && j; j--)
+			for ( flag=0, j=strlen(b1); !flag && j >= 0; j--)
 				if (b1[j] == '\n' )
 				{	
 					flag=1;
@@ -6650,7 +6672,7 @@ int	pro_tool3()
  *
  * 	carga un src en memoria, en vector a pnt de esctructs
  *
- *	- cambia el formato de declaracion de variables
+ *	- cambia el formato de declaracion de variables (migro a tool6)
  *
  */
 
@@ -6732,7 +6754,6 @@ int	pro_tool4()
  *
  */
 
-/* EEE */
 
 
 int	cfor_ini(ql_i,ql_f)
@@ -6909,7 +6930,6 @@ int	*ql_f;
 	qf = *ql_f;
 	f4 = 0;		/* modifico linea con kind o len */
 
-/* EEE */
 
 
 
@@ -7513,7 +7533,6 @@ char	*l2;
 	}
 
 
-/* EEE */
 
 	/* 
 	 * si encontro la ',' puede separar campos
@@ -10492,6 +10511,7 @@ int	gp_print()
 	int i;
 
 	printf ("\n");
+	printf ("Uso cfg arc       : %2d\n",ffcfg);
 	printf ("Cantidad de par   : %2d\n",gp_fq(GP_GET,0) - 1 );
 	for (i=0; i<4; i++)
 		printf ("Cantidad de par %d : %2d\n",i+1,gp_tpar[i]);
@@ -10514,17 +10534,23 @@ int	gp_print()
 int	gp_parser()
 {
 
-	int	opcion = 0;	/* opcion menu x defecto */
+/* EEE */
+
+
+	char	s_opcion[MAXR];	/* opcion menu ... en str */
 	int	f1,f2,fg;
 	char	b1[MAXB];
 	int	k_cnt;
  
 	int 	i,j,fl;
 	char	prm[MAXV];
+	char	exe[MAXV];
 
 	char	var1[MAXB];	/* provisorio !! */
 	FILE	*hwi;
 
+
+	strcpy(s_opcion,"0");
 
 
 	/* excepcion con verbose, por si lo pusieron al final de la linea, por defecto d5 !!! */
@@ -10534,10 +10560,29 @@ int	gp_parser()
 		if ( *( gp_fp(GP_GET,i,(char **)0) + 1) == 'v' && !tiene_igual( gp_fp(GP_GET,i,(char **)0) ) )
 		{	gp_verbose = 1;
 			strcpy(gp_opciones,"d5");
+
+			if (gp_fverbose("d3"))
+				printf ("Parametro encontrado: -v \n");
 		}
 
 		if (!strncmp(gp_fp(GP_GET,i,(char **)0)+1,"opciones",6) )
 		{	strcpy(gp_opciones,desde_igual( gp_fp(GP_GET,i,(char **)0)));
+
+			if (gp_fverbose("d3"))
+				printf ("Parametro encontrado: -opciones \n");
+		}
+
+		if ( *( gp_fp(GP_GET,i,(char **)0) + 1) == 'x' && !tiene_igual( gp_fp(GP_GET,i,(char **)0) ) )
+		{	
+			strcpy (exe, ( gp_fp(GP_GET,i,(char **)0) + 2 ));
+			strcpy(s_opcion,exe);
+
+			/* pongo defaults si no quiere usar -cfg=archio ... */
+			ffcfg=1;
+			strcpy(var1,"menu.txt");
+
+			if (gp_fverbose("d3"))
+				printf ("Parametro encontrado: -x |%s| \n",s_opcion);
 		}
 
 	}
@@ -10553,7 +10598,9 @@ int	gp_parser()
 	/* si selecciono archivo de configuracion */
 	for (i=0, fl=1; fl && i < gp_fq(GP_GET,0); i++)
 	{
-		printf ("arg %2d |%s| \n", i, gp_fp(GP_GET,i,(char **) 0 ));
+		if (gp_fverbose("d3"))
+			printf ("Arg: %2d  s:|%s| \n", i, gp_fp(GP_GET,i,(char **) 0 ));
+
 		/* parameter type 3 ... "-someoption=somename" */
 		if ( i && fl && *( gp_fp(GP_GET,i,(char **)0) + 0) == '-' && 
 		                *( gp_fp(GP_GET,i,(char **)0) + 1) != '-' && tiene_igual( gp_fp(GP_GET,i,(char **)0) ) )
@@ -10574,11 +10621,10 @@ int	gp_parser()
 			fnq1 = &fnp[0];
 			qfv_load(hwi,fnq1,&qf_lin);
 			
-			printf ("Cant pars %d\n",qf_lin);
-			for (j=0; j< qf_lin; j++)
-			{	
-				printf ("Par %2d |%s| \n",j,(*fnp[j]).l);
-
+			if (gp_fverbose("d3"))
+			{	printf ("Cant lineas arc de configuracion: %d\n",qf_lin);
+				for (j=0; j< qf_lin; j++)
+					printf ("Par %2d |%s| \n",j,(*fnp[j]).l);
 			}
 
 			fclose(hwi);
@@ -10587,37 +10633,37 @@ int	gp_parser()
 
 			for (j=0, f2=1, fg=0; f2 && j<qf_lin; j++)
 			{
-				f1 = 1;
 
+				f1 = 1;
 				if ( (*fnp[j]).l[0] == '#')
+					f1 = 0;
+				if ( (*fnp[j]).l[0] == ' ')
+					f1 = 0;
+				if ( (*fnp[j]).l[0] ==  0 )
 					f1 = 0;
 
 
+				/* revisar !!!! aca deberiamos elegir la opcion a ejecutar  */
 				if (f1)
 				{		
-					if ( !strncmp( (*fnp[j]).l,"opcion",6) ) 
+
+					if ( !strncmp( pasar_a_minusc( (*fnp[j]).l ),"opcion",6) ) 
 					{
 						strcpy(b1, desde_igual( (*fnp[j]).l ));
-						printf ("opcion: %s\n",b1);
 
-						if ( !strncmp(b1,"2",1))
-							fg = 1;
-							
 
+						if ( !strcmp(b1,s_opcion))
+						{	fg = 1;
+						}
 					}
 
 					if ( strncmp( (*fnp[j]).l,"opcion",6) && strncmp( (*fnp[j]).l,"end",3 ) )
 					{
-						printf ("arg: %s\n", (*fnp[j]).l );
 						if (fg)
-						{	printf ("----- se guarda ! \n");
+						{	
 							mis_argv = &mis_args[0];
 							mis_args[ mis_argc ] = malloc ( strlen( (*fnp[j]).l ) + 2 );
 							strcpy ( mis_args[mis_argc] , ( *fnp[j]).l );
-#if 0
-
-							strcpy( mis_argv, ( *fnp[j]).l );
-#endif
 
 							mis_argv++;
 							mis_argc++;
@@ -10628,60 +10674,66 @@ int	gp_parser()
 
 					if ( !strncmp( (*fnp[j]).l,"end",3) ) 
 					{
-						if ( !strncmp(b1,"2",1))
+						if ( !strcmp(b1,s_opcion))
 						{
-							printf ("termino ! \n");
 							fl = 0;
 							f2 = 0;
 						}
 					}
-				}
-			}
+				} /* if (f1) */
+			} /* for (j=0 ... */
+		} /* if (ffcfg ... */
+	} /* for (i=0 ... analisis si selecciono archivo de conf */
 
-			
 
+	mis_argv = &mis_args[0];
+	if (gp_fverbose("d3"))
+	{
+		printf ("Arch de config solicit : %2d (ffcfg)  \n",ffcfg);
+		printf ("Cantidad de argumentos : %2d          \n",mis_argc);
+		printf ("\n");
+
+		for (j=0; j<mis_argc; j++)
+			printf ("Arg nro: %2d  str: |%-20.20s|  ptr: |%-20-20s|  \n",j,mis_args[j], *mis_argv++);
+	}
+
+
+	mis_argv = &mis_args[0];
+	/* si pidio usar archivo de configuracion, reseteo pointers a args */
+	if (ffcfg)
+	{
+		mis_argv = &mis_args[0];
+		gp_init(mis_argc,mis_argv);
+	}
+
+
+
+
+	if (gp_fverbose("d3"))
+	{
+		printf ("\n");
+		printf ("Argumentos despues de correspondientes gp_init ... \n");
+		printf ("\n");
+		printf ("cantidad de args : %d  \n",   gp_fq(GP_GET,0) );
+		for (i=0; i < gp_fq(GP_GET,0); i++  )
+		{
+			printf ("arg(%2d) |%s| \n",i,  gp_fp(GP_GET,i,(char **)0)   );
 		}
+
 	}
 
 #endif
 
-	printf ("voy a imprimir los parametros que tenemos. ffcgp: %d \n",ffcfg);
-	printf ("Cantidad : %d \n\n",mis_argc);
+	/* Seguimos con el proceso normal de analisis de parametros ingresados 
+	 * ffcfg 0 - parametros tomados de linea de comando 
+	 * ffcfg 1 - pidio usar archivo de configuracion - parametros tomados del archivo
+	 *
+	 */
+	
 
-
-	for (j=0; j<mis_argc; j++)
-	{
-		printf ("va el nro %d \n",j);
-		printf ("prueba: |%s| \n", mis_args[j]);
-	}
-
-	printf ("- - \n");
-
-	printf ("va con ptr \n");
-
-	mis_argv = &mis_args[0];
-
-	printf (" *mis_argv ..  |%s| \n", *mis_argv );  mis_argv++;
-	printf (" *mis_argv ..  |%s| \n", *mis_argv );  mis_argv++;
-	printf (" *mis_argv ..  |%s| \n", *mis_argv );  mis_argv++;
-
-	printf ("- - salimos !!  \n");
-
-	if (ffcfg)
-	{
-		printf ("- - - - - - - - n");
-		for (j=0, mis_argv = &mis_args[0] ; j< mis_argc; j++)
-		{	printf ("arg(%02d) : |%s| \n",j,**mis_argv++ );
-
-		}
-		printf ("- - - - - - - - n");
-		printf ("\n");
-	}
-
-
+	/* procesamos todos los parametros existentes */
 	for (i=0; i < gp_fq(GP_GET,0);  )
 	{
-
 		fl = 1;
 
 		/* parameter type 1 ... "name" */
@@ -10708,9 +10760,6 @@ int	gp_parser()
 				printf ("Param tipo 1: %s\n", gp_fp(GP_GET,i,(char **)0 ) );
 			}
 		}
-
-
-
 
 
 		/* parameter type 2 ... "-something" */
@@ -10750,6 +10799,7 @@ int	gp_parser()
 				printf ("Param tipo 2: %s\n", gp_fp(GP_GET,i,(char **)0 ) );
 			}
 		}
+
 
 		/* parameter type 3 ... "-someoption=somename" */
 		if ( i && fl && *( gp_fp(GP_GET,i,(char **)0) + 0) == '-' && 
@@ -10816,9 +10866,9 @@ int	gp_parser()
 
 
 
-
 			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+1,"nvd",3) )
-			{	gp_niveldes = *desde_igual( gp_fp(GP_GET,i,(char **)0)) - '0';
+			{	
+				gp_niveldes = *desde_igual( gp_fp(GP_GET,i,(char **)0)) - '0';
 			}
 
 
@@ -11105,6 +11155,8 @@ int	value;
 int	gp_test()
 {
 	int i;
+
+	printf ("Uso cfg arc       : %2d\n",ffcfg);
 
 	printf ("Cantidad de par   : %2d\n",gp_fq(GP_GET,0) - 1 );
 	for (i=0; i<4; i++)
@@ -11442,6 +11494,7 @@ int	x;
 	printf ("%s -v                                  verbose ... muestra cierta informacion de proceso          \n",z);
 	printf ("%s -v -opciones=AxByCz...              info: A,B,C = (D)ebug, (I)nformative, (E) extra x=(0-5)    \n",z);
 	printf ("%s                                     no imprime, 1 basico, 2 y 3 debug, 4 full debug        \n",w);
+	printf ("%s -cfg=archivo.txt -xN                utiliza un archivo de config para pars ... opcion N        \n",z);
 	printf ("                                                                                                  \n");
 	printf ("Tools:                                                                                            \n");
 	printf ("                                                                                                  \n");
@@ -11541,8 +11594,8 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0037");
-	strcpy (d,"Sun Jun 16 19:22:22 -03 2024");
+	strcpy (ver,"0038");
+	strcpy (d,"Mon Jun 17 21:19:22 -03 2024");
 
 
 	sprintf (z,"%s -- (%s)  %s", gp_fp(GP_GET,0,(char **)0), ver, d  );
