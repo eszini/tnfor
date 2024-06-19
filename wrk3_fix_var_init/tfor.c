@@ -304,6 +304,8 @@
 
 
 /*
+ *	poner en orden los codigos de error !!!
+ *
  *	errores
  *	manejar mejor, permitir imprimir algun string, 
  *      rutina en la que estaba etc
@@ -6768,6 +6770,7 @@ int	*ql_f;
 	int	l1;
 	int	p1;
 
+	char	b0[MAXB];
 	char	b1[MAXB];
 	char	b2[MAXB];
 	char	b3[MAXB];
@@ -6775,13 +6778,16 @@ int	*ql_f;
 	char	b5[MAXB];
 	
 	char	d1[MAXR];
+	char	d2[MAXR];
+
+
 
 
 	memset (b3,'X',MAXB);
 
 	/* primera y ultima fila del source (compatibilidad con cfor_vars) */
 	pf = 0;
-	uf = ql_i - 1;
+	uf = *ql_i - 1;
 
 
 	/* reviso cada linea */
@@ -6789,6 +6795,7 @@ int	*ql_f;
 	{
 		/* la linea j */
 		strcpy (b1, (*fnp[ j ]).l );
+		strcpy (b0, (*fnp[ j ]).l );
 
 		/* parseo fila a tokens ... si tiene sentido  */
 		l_pars(j,&q_tk);
@@ -6819,9 +6826,14 @@ int	*ql_f;
 					strncpy(d1,b1+p1,m1);
 
 		printf ("XXX: |%s| \n",d1);
+						memset (d2,0,MAXR);
+						strcpy(d2,d1);
+						d2[0] = '=';
+						d2[m1-1] = ' ';
+		printf ("XXX: |%s| \n",d2);
 
 
-					strncpy(b1+p1,b3,m1);
+					strncpy(b1+p1,d2,m1);
 
 					sprintf (b4,"f:%-30.30s l:%06d |%s| \n", (*tb[i]).n,j,b2 );
 					sprintf (b5,"f:%-30.30s l:%06d |%s| \n", (*tb[i]).n,j,b1 );
@@ -9001,9 +9013,11 @@ int	pro_tool6()
 		cfor_mas(&ql_ini,&ql_fin);
 #endif
 
+
 	/* 5 - pidio convertir formato var/xx/ por var = xx         */
 	if ( ffchg_ini )
 		cfor_ini(&ql_ini,&ql_fin);
+	
 
 
 	/* grabo file */
@@ -11594,8 +11608,8 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0038");
-	strcpy (d,"Mon Jun 17 21:19:22 -03 2024");
+	strcpy (ver,"0039");
+	strcpy (d," Tue Jun 18 21:23:33 -03 2024");
 
 
 	sprintf (z,"%s -- (%s)  %s", gp_fp(GP_GET,0,(char **)0), ver, d  );

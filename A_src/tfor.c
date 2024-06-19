@@ -304,6 +304,8 @@
 
 
 /*
+ *	poner en orden los codigos de error !!!
+ *
  *	errores
  *	manejar mejor, permitir imprimir algun string, 
  *      rutina en la que estaba etc
@@ -6768,6 +6770,7 @@ int	*ql_f;
 	int	l1;
 	int	p1;
 
+	char	b0[MAXB];
 	char	b1[MAXB];
 	char	b2[MAXB];
 	char	b3[MAXB];
@@ -6778,11 +6781,13 @@ int	*ql_f;
 	char	d2[MAXR];
 
 
+
+
 	memset (b3,'X',MAXB);
 
 	/* primera y ultima fila del source (compatibilidad con cfor_vars) */
 	pf = 0;
-	uf = ql_i - 1;
+	uf = *ql_i - 1;
 
 
 	/* reviso cada linea */
@@ -6790,6 +6795,7 @@ int	*ql_f;
 	{
 		/* la linea j */
 		strcpy (b1, (*fnp[ j ]).l );
+		strcpy (b0, (*fnp[ j ]).l );
 
 		/* parseo fila a tokens ... si tiene sentido  */
 		l_pars(j,&q_tk);
@@ -9007,9 +9013,11 @@ int	pro_tool6()
 		cfor_mas(&ql_ini,&ql_fin);
 #endif
 
+
 	/* 5 - pidio convertir formato var/xx/ por var = xx         */
 	if ( ffchg_ini )
 		cfor_ini(&ql_ini,&ql_fin);
+	
 
 
 	/* grabo file */
@@ -11600,8 +11608,8 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0038");
-	strcpy (d,"Mon Jun 17 21:19:22 -03 2024");
+	strcpy (ver,"0039");
+	strcpy (d," Tue Jun 18 21:23:33 -03 2024");
 
 
 	sprintf (z,"%s -- (%s)  %s", gp_fp(GP_GET,0,(char **)0), ver, d  );
