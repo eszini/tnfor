@@ -756,6 +756,7 @@ int	ps_src1();
 int	largo_linea(char *);
 int	tiene_include_valido(char *,char *,char *);
 int	es_nombre_de_include(char *s);
+int	lne(int );
 
 int	borrar_stats();
 
@@ -774,7 +775,7 @@ int	sq_logical;			/* q de logical cambiados */
 int	sq_character;			/* q de character cambiados */
 int	sq_variables_no_convertidas;	/* importante ! variables que no se pud convertir */
 int	sq_lcont;			/* lineas de continuacion modificadas */
-
+int	sq_vinit_simple;		/* var inits cambiados - simple ...en una linea */
 
 
 
@@ -1011,6 +1012,7 @@ char	*s;
 		printf ("Cantidad de character cambiados  %6d \n", sq_character);
 		printf ("Cantidad de lin cont cambiadas   %6d \n", sq_lcont);
 		printf ("variables_no_convertidas         %6d \n", sq_variables_no_convertidas);
+		printf ("var inits simples convertidos    %6d \n", sq_vinit_simple);
 
 		if (ffsta)
 		{
@@ -1023,6 +1025,7 @@ char	*s;
 		fprintf (hfsta,"Cantidad de character cambiados  %6d \n", sq_character);
 		fprintf (hfsta,"Cantidad de lin cont cambiadas   %6d \n", sq_lcont);
 		fprintf (hfsta,"variables_no_convertidas         %6d \n", sq_variables_no_convertidas);
+		fprintf (hfsta,"var inits simples convertidos    %6d \n", sq_vinit_simple);
 
 
 
@@ -1068,6 +1071,7 @@ int	borrar_stats()
 	sq_logical	         = 0;
 	sq_character             = 0;
 	sq_lcont                 = 0;
+	sq_vinit_simple          = 0;
 
 }
 
@@ -2010,6 +2014,12 @@ int	pro_exec2()
 
 /*
  *	procesar todos los fuentes
+ *
+ *	OJO: esto quedo trunco ...
+ *	proc4 ... carga todos los files como cadenas a estructuras ...
+ *	y despues, vimos que procesar archivos con esa estructura ...
+ *	se torna muy complicado...
+ *	no es facil acceder a lin[var] ... lin[var+1] etc 
  */
 
 
@@ -2051,6 +2061,7 @@ int	ps_src1()
 
 		for (ln=pf; ln<=uf; ln++)
 		{
+
 			l_pars(ln,&q_tk );
 			strcpy (b2, (*fnp[ln]).l );
 
@@ -3459,6 +3470,7 @@ int	p_src3()
 	int	m1,m2;
 	int	l1;
 	int	p1;
+	int	fl_n;
 
 	char	b0[MAXB];
 	char	b1[MAXB];
@@ -3474,19 +3486,19 @@ int	p_src3()
 	memset (b3,'X',MAXB);
 
 	/* por cada uno de los fuentes cargados */
-	for (i=0; i< qf_ff; i++)
+	for (fl_n=0; fl_n< qf_ff; fl_n++)
 	{
 		if (gp_fverbose("d1"))
 		{
 			printf ("proceso: %6d %6d |%s|\n",
-				(*tb[i]).pf,(*tb[i]).uf,(*tb[i]).n);
+				(*tb[fl_n]).pf,(*tb[fl_n]).uf,(*tb[fl_n]).n);
 
 		}
 
 
 		/* primera y ultima fila del source */
-		pf = (*tb[i]).pf;
-		uf = (*tb[i]).uf;
+		pf = (*tb[fl_n]).pf;
+		uf = (*tb[fl_n]).uf;
 
 		/* reviso cada linea */
 		for (j = pf; j <= uf; j++)
@@ -3523,25 +3535,26 @@ int	p_src3()
 
 						memset (d1,0,MAXR);
 						strncpy (d1,b1+p1,m1);
-		printf ("XXX: |%s| \n",d1);
+		printf ("YYY: |%s| \n",d1);
 						memset (d2,0,MAXR);
 						strcpy(d2,d1);
 						d2[0] = '=';
 						d2[m1-1] = ' ';
-		printf ("XXX: |%s| \n",d2);
+		printf ("YYY: |%s| \n",d2);
 
 
 						strncpy(b1+p1,b3,m1);
 						strncpy(b1+p1,d2,m1);
 
-						sprintf (b4,"f:%-30.30s l:%06d |%s| \n", (*tb[i]).n,j,b2 );
-						sprintf (b5,"f:%-30.30s l:%06d |%s| \n", (*tb[i]).n,j,b1 );
+						sprintf (b4,"f:%-30.30s l:%06d |%s| \n", (*tb[fl_n]).n,j,b2 );
+						sprintf (b5,"f:%-30.30s l:%06d |%s| \n", (*tb[fl_n]).n,j,b1 );
 						
 						if (gp_fverbose("d3"))
 						{
-							printf ("TTX1%s",b4);
-							printf ("TTX2%s",b5);
-							printf ("TTX3\n");
+							printf ("TTX1\n");
+							printf ("TTX2%s",b4);
+							printf ("TTX3%s",b5);
+							printf ("TTX4\n");
 						}
 
 						if (ffout)
@@ -3596,7 +3609,6 @@ int	es_cadena_int_src3(s,largo)
 char	*s;
 int 	*largo;
 {
-
 	char	c,d;
 	int	i,j,k;
 	int	l1;
@@ -3605,12 +3617,9 @@ int 	*largo;
 	int	m1;
 
 
+	/* ej. log  variable=/.false./    */
+	/* ej. char variable=/'X'/        */
 
-/* variable=/.false./    */
-
-#if 0
-printf ("TTR1 |%s| \n",s);
-#endif
 
 	m1 = 0;
 	f5 = 0;
@@ -3643,6 +3652,8 @@ printf ("TTR1 |%s| \n",s);
 				f3 = 1;
 			if ( c == '_' || c == '.' )
 				f3 = 1;
+			if ( c == '\'' )
+				f3 = 1;
 
 			if (!f3)
 				f1 = 0;
@@ -3660,12 +3671,7 @@ printf ("TTR1 |%s| \n",s);
 			l1++;
 	}	
 			
-	printf ("SRC4: l1:%2d |%s| \n",m1,s);
-
-
-#if 0
-printf ("TTR2 f5: %2d largo: %2d \n",f5,l1);
-#endif
+	printf ("TTT5:es_cadena_int_src3:          l1:%2d f5:%2d |%s| \n",l1,f5,s);
 
 	*largo = l1;
 	return (f5);
@@ -4839,7 +4845,7 @@ int	pro_proc4()
 		if (!linea_vacia(d1)  && d1[0] != '#' )
 		{
 			/* saco el fin de linea - contemplo 13 x fuentes fortran */
-			for ( flag=0, j=strlen(d1); !flag && j; j--)
+			for ( flag=0, j=strlen(d1); !flag && j >= 0; j--)
 				if (d1[j] == '\n' )
 				{	
 					flag=1;
@@ -6770,6 +6776,8 @@ int	*ql_f;
 	int	l1;
 	int	p1;
 
+	int	fl_n;
+
 	char	b0[MAXB];
 	char	b1[MAXB];
 	char	b2[MAXB];
@@ -6785,9 +6793,30 @@ int	*ql_f;
 
 	memset (b3,'X',MAXB);
 
-	/* primera y ultima fila del source (compatibilidad con cfor_vars) */
+	/* compatibilidad con cfor_vars / p_src3 etc
+	 *
+	 * primera y ultima fila del source 
+	 * poner nombre del file en table de files
+	 */
+
 	pf = 0;
 	uf = *ql_i - 1;
+
+	fl_n = 0;
+
+#if 1
+	/* registro datos del archivo */
+	tb[fl_n] = (ffptr ) malloc (sizeof (ff));
+	if ( tb[fl_n] == NULL )
+		error(906);
+
+	strcpy ( (*tb[fl_n]).n, extract_fname(fout));
+	(*tb[fl_n]).pf = pf; 
+	(*tb[fl_n]).uf = uf; 
+	(*tb[fl_n]).ql = uf - pf + 1;
+
+#endif
+
 
 
 	/* reviso cada linea */
@@ -6825,32 +6854,35 @@ int	*ql_f;
 					memset(d1,0,MAXR);
 					strncpy(d1,b1+p1,m1);
 
-		printf ("XXX: |%s| \n",d1);
+		printf ("XXX1: |%s| \n",d1);
 						memset (d2,0,MAXR);
 						strcpy(d2,d1);
 						d2[0] = '=';
 						d2[m1-1] = ' ';
-		printf ("XXX: |%s| \n",d2);
+						sq_vinit_simple++;
+		printf ("XXX2: |%s| \n",d2);
 
 
 					strncpy(b1+p1,d2,m1);
 
-					sprintf (b4,"f:%-30.30s l:%06d |%s| \n", (*tb[i]).n,j,b2 );
-					sprintf (b5,"f:%-30.30s l:%06d |%s| \n", (*tb[i]).n,j,b1 );
+
+					sprintf (b4,"f:%-30.30s l:%06d c:%4d|%s| \n", (*tb[fl_n]).n,lne(j),sq_vinit_simple,b2 );
+					sprintf (b5,"f:%-30.30s l:%06d c:%4d|%s| \n", (*tb[fl_n]).n,lne(j),sq_vinit_simple,b1 );
 					
 					if (gp_fverbose("d3"))
 					{
-						printf ("TTT1%s",b4);
-						printf ("TTT2%s",b5);
-						printf ("TTT3\n");
+						printf ("TTTX\n");
+						printf ("TTTX%s",b4);
+						printf ("TTTX%s",b5);
+						printf ("TTTX\n");
 					}
 
-#if 0
-					if (ffout)
+#if 1
+					if (fflog)
 					{
-						fprintf (hfout,"%s",b4);
-						fprintf (hfout,"%s",b5);
-						fprintf (hfout,"%s","\n");
+						fprintf (hflog,"%s",b4);
+						fprintf (hflog,"%s",b5);
+						fprintf (hflog,"%s","\n");
 					}
 #endif
 				}
@@ -9516,8 +9548,25 @@ int	pro_tool7()
 /* bloque */
 
 
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	lne (line)
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ * para que las lineas que imprimo de los vectores (que empiezan en cero)
+ * coincidan con las lineas en los archivos al verlos con vi (que empieza en  1)
+ */
 
 
+int	lne(l)
+int	l;
+{
+	return (l+1);
+}
 
 
 
@@ -11963,133 +12012,6 @@ int main()
  *	end of source
  * -----------------------------------------------------------------------------------
  */
-
-
-
-
-
-#if 0
-
-/*
- * -----------------------------------------------------------------------------------
- *
- *	p_src3         
- *
- *	busca patrones de la forma   var = / xxxxxx /
- *
- * -----------------------------------------------------------------------------------
- */
-
-/*
- *	busca patrones de inicializacion vieja de variables
- *	de la forma var = / xxxx /
- *
- */
-
-
-int	p_src3()
-{
-
-	int	i,j,k,k1,l;
-	int	f1,f2,f3,f4,f5;
-	int	pf,uf;
-	int	m1,m2;
-	int	l1;
-	int	p1;
-
-	char	b1[MAXB];
-	char	b2[MAXB];
-	char	b3[MAXB];
-	char	b4[MAXB];
-	char	b5[MAXB];
-
-
-	memset (b3,'X',MAXB);
-
-	/* por cada uno de los fuentes cargados */
-	for (i=0; i< qf_ff; i++)
-	{
-		if (gp_fverbose("d1"))
-		{
-			printf ("proceso: %6d %6d |%s|\n",
-				(*tb[i]).pf,(*tb[i]).uf,(*tb[i]).n);
-
-		}
-
-
-		/* primera y ultima fila del source */
-		pf = (*tb[i]).pf;
-		uf = (*tb[i]).uf;
-
-		/* reviso cada linea */
-		for (j = pf; j <= uf; j++)
-		{
-			/* la linea j */
-			strcpy (b1, (*fnp[ j ]).l );
-
-			/* parseo fila a tokens ... si tiene sentido  */
-			l_pars(j,&q_tk);
-
-
-			/*
-			 * detectar si la linea es comentarios ...
-			 * falta mas ... chequear si no puso ! o c en otra posicion que no sea 0
-			 */
-
-			f4 = 1;
-			if (es_linea_comentario(b1))
-				f4 = 0;
-	
-			/* solo proceso lineas que no son comentario */
-			if (f4)
-			{	
-				f5 = 1;
-				while ( f5 )
-				{
-
-					strcpy(b2,b1);
-
-					f5 = 0;
-					if (p1 = es_cadena_int_src3(b1,&m1))
-					{	f5 = 1;
-
-						strncpy(b1+p1,b3,m1);
-
-						sprintf (b4,"f:%-30.30s l:%06d |%s| \n", (*tb[i]).n,j,b2 );
-						sprintf (b5,"f:%-30.30s l:%06d |%s| \n", (*tb[i]).n,j,b1 );
-						
-						if (gp_fverbose("d3"))
-						{
-							printf ("TT1%s",b4);
-							printf ("TT2%s",b5);
-							printf ("TT3\n");
-						}
-
-						if (ffout)
-						{
-							fprintf (hfout,"%s",b4);
-							fprintf (hfout,"%s",b5);
-							fprintf (hfout,"%s","\n");
-						}
-
-					}
-				}
-
-			}	
-
-
-			/* grabo la linea */
-			if ( 1 )
-			{
-				strcpy ((*fnp[ j ]).l, b1 );
-			}
-		}
-	}
-}
-
-
-#endif 
-
 
 
 
