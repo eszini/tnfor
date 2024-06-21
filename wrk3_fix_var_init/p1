@@ -1,0 +1,644 @@
+TTTX
+TTTXf:wh_objt.for                    l:000017 c:   1|      INTEGER*1 FORECAST_GROWTH_YEARS/AVAIL_DATA_YEARS/| 
+TTTXf:wh_objt.for                    l:000017 c:   1|      INTEGER*1 FORECAST_GROWTH_YEARS=AVAIL_DATA_YEARS | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000018 c:   2|      LOGICAL*1 SAVE_WH_FILE_EXISTS/.FALSE./,R_WH_FILE_EXISTS,| 
+TTTXf:wh_objt.for                    l:000018 c:   2|      LOGICAL*1 SAVE_WH_FILE_EXISTS=.FALSE. ,R_WH_FILE_EXISTS,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000019 c:   3|     +          R_WH_FILE_USED,SAVE_WH_FILE_USED/.FALSE./| 
+TTTXf:wh_objt.for                    l:000019 c:   3|     +          R_WH_FILE_USED,SAVE_WH_FILE_USED=.FALSE. | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000024 c:   4|      CHARACTER*1 EXTENSION_PERIOD_GROWTH_SWITCH/'X'/,TABLE_ACTIVE| 
+TTTXf:wh_objt.for                    l:000024 c:   4|      CHARACTER*1 EXTENSION_PERIOD_GROWTH_SWITCH='X' ,TABLE_ACTIVE| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000025 c:   5|      INTEGER*2   INUNIT,IREC,DELETE,LRECL/350/,BASE_YEAR,| 
+TTTXf:wh_objt.for                    l:000025 c:   5|      INTEGER*2   INUNIT,IREC,DELETE,LRECL=350 ,BASE_YEAR,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000027 c:   6|     +            SAVE_TRANS_LOAD_TABLES/0/,R_TRANS_LOAD_TABLES,| 
+TTTXf:wh_objt.for                    l:000027 c:   6|     +            SAVE_TRANS_LOAD_TABLES=0 ,R_TRANS_LOAD_TABLES,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000029 c:   7|     +            R_NUM_OF_TRANS_CLASSES,NUM_OF_OL_TRANS_CLASSES/0/,| 
+TTTXf:wh_objt.for                    l:000029 c:   7|     +            R_NUM_OF_TRANS_CLASSES,NUM_OF_OL_TRANS_CLASSES=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000030 c:   8|     +            R_MAX_TRANS_CLASS_NUM,MAX_OL_TRANS_CLASS_ID_NUM/0/,| 
+TTTXf:wh_objt.for                    l:000030 c:   8|     +            R_MAX_TRANS_CLASS_NUM,MAX_OL_TRANS_CLASS_ID_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000031 c:   9|     +            R_NUM_OF_ASSET_CLASSES,NUM_OF_OL_ASSET_CLASSES/0/,| 
+TTTXf:wh_objt.for                    l:000031 c:   9|     +            R_NUM_OF_ASSET_CLASSES,NUM_OF_OL_ASSET_CLASSES=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000032 c:  10|     +            R_MAX_ASSET_CLASS_NUM,MAX_OL_ASSET_CLASS_ID_NUM/0/,| 
+TTTXf:wh_objt.for                    l:000032 c:  10|     +            R_MAX_ASSET_CLASS_NUM,MAX_OL_ASSET_CLASS_ID_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000033 c:  11|     +            R_NUM_OF_CUST_CLASSES,NUM_OF_OL_CUST_CLASSES/0/,| 
+TTTXf:wh_objt.for                    l:000033 c:  11|     +            R_NUM_OF_CUST_CLASSES,NUM_OF_OL_CUST_CLASSES=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000034 c:  12|     +            R_MAX_CUST_CLASS_NUM,MAX_OL_CUST_CLASS_ID_NUM/0/,| 
+TTTXf:wh_objt.for                    l:000034 c:  12|     +            R_MAX_CUST_CLASS_NUM,MAX_OL_CUST_CLASS_ID_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000035 c:  13|     +            NUM_OF_BC_TRANS_CLASSES/0/,| 
+TTTXf:wh_objt.for                    l:000035 c:  13|     +            NUM_OF_BC_TRANS_CLASSES=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000036 c:  14|     +            MAX_BC_TRANS_CLASS_ID_NUM/0/,| 
+TTTXf:wh_objt.for                    l:000036 c:  14|     +            MAX_BC_TRANS_CLASS_ID_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000037 c:  15|     +            NUM_OF_BC_ASSET_CLASSES/0/,| 
+TTTXf:wh_objt.for                    l:000037 c:  15|     +            NUM_OF_BC_ASSET_CLASSES=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000038 c:  16|     +            MAX_BC_ASSET_CLASS_ID_NUM/0/,| 
+TTTXf:wh_objt.for                    l:000038 c:  16|     +            MAX_BC_ASSET_CLASS_ID_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000039 c:  17|     +            NUM_OF_BC_CUST_CLASSES/0/,| 
+TTTXf:wh_objt.for                    l:000039 c:  17|     +            NUM_OF_BC_CUST_CLASSES=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000040 c:  18|     +            MAX_BC_CUST_CLASS_ID_NUM/0/,| 
+TTTXf:wh_objt.for                    l:000040 c:  18|     +            MAX_BC_CUST_CLASS_ID_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000059 c:  19|      INTEGER*2 YEAR,UNIT_NUM/10/,REFERENCE_LOAD_NUMBER| 
+TTTXf:wh_objt.for                    l:000059 c:  19|      INTEGER*2 YEAR,UNIT_NUM=10 ,REFERENCE_LOAD_NUMBER| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000094 c:  20|      CHARACTER*2 WEEKLY_HYDRO_OL/'BC'/,R_WEEKLY_HYDRO_OL| 
+TTTXf:wh_objt.for                    l:000094 c:  20|      CHARACTER*2 WEEKLY_HYDRO_OL='BC' ,R_WEEKLY_HYDRO_OL| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000661 c:  21|     +               SAVE_WEEKLY_HYDRO_STATUS/.FALSE./,| 
+TTTXf:wh_objt.for                    l:000661 c:  21|     +               SAVE_WEEKLY_HYDRO_STATUS=.FALSE. ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000667 c:  22|      INTEGER*2      YR,MAKER_TABLES/0/,DELETE,| 
+TTTXf:wh_objt.for                    l:000667 c:  22|      INTEGER*2      YR,MAKER_TABLES=0 ,DELETE,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000672 c:  23|     +               LOCAL_LOAD_UNIT/3246/,| 
+TTTXf:wh_objt.for                    l:000672 c:  23|     +               LOCAL_LOAD_UNIT=3246 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000684 c:  24|     +               MAX_TRANS_GROUP_NUMBER/0/,| 
+TTTXf:wh_objt.for                    l:000684 c:  24|     +               MAX_TRANS_GROUP_NUMBER=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:000714 c:  25|     +                                 SAVE_HOUR_IN_WEEK/0/,| 
+TTTXf:wh_objt.for                    l:000714 c:  25|     +                                 SAVE_HOUR_IN_WEEK=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:001573 c:  26|      logical*1 Feasible,yDecreasing,L1_FALSE/.false./,MappingFailed| 
+TTTXf:wh_objt.for                    l:001573 c:  26|      logical*1 Feasible,yDecreasing,L1_FALSE=.false. ,MappingFailed| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:001800 c:  27|      logical*1 L1_FALSE/.false./| 
+TTTXf:wh_objt.for                    l:001800 c:  27|      logical*1 L1_FALSE=.false. | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:001898 c:  28|      LOGICAL*1 SAVE_WD_FILE_EXISTS/.FALSE./,R_WD_FILE_EXISTS,| 
+TTTXf:wh_objt.for                    l:001898 c:  28|      LOGICAL*1 SAVE_WD_FILE_EXISTS=.FALSE. ,R_WD_FILE_EXISTS,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:001899 c:  29|     +          R_WD_FILE_USED,SAVE_WD_FILE_USED/.FALSE./| 
+TTTXf:wh_objt.for                    l:001899 c:  29|     +          R_WD_FILE_USED,SAVE_WD_FILE_USED=.FALSE. | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:001900 c:  30|      INTEGER*2   INUNIT,IREC,DELETE,LRECL/229/,BASE_YEAR,| 
+TTTXf:wh_objt.for                    l:001900 c:  30|      INTEGER*2   INUNIT,IREC,DELETE,LRECL=229 ,BASE_YEAR,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:001902 c:  31|     +            SAVE_TRANS_LOAD_RECORDS/0/,R_TRANS_LOAD_RECORDS,| 
+TTTXf:wh_objt.for                    l:001902 c:  31|     +            SAVE_TRANS_LOAD_RECORDS=0 ,R_TRANS_LOAD_RECORDS,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:001904 c:  32|     +            R_NUM_OF_TRANS_CLASSES,NUM_OF_OL_TRANS_CLASSES/0/,| 
+TTTXf:wh_objt.for                    l:001904 c:  32|     +            R_NUM_OF_TRANS_CLASSES,NUM_OF_OL_TRANS_CLASSES=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:001905 c:  33|     +            R_MAX_TRANS_CLASS_NUM,MAX_OL_TRANS_CLASS_ID_NUM/0/,| 
+TTTXf:wh_objt.for                    l:001905 c:  33|     +            R_MAX_TRANS_CLASS_NUM,MAX_OL_TRANS_CLASS_ID_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:001906 c:  34|     +            R_NUM_OF_ASSET_CLASSES,NUM_OF_OL_ASSET_CLASSES/0/,| 
+TTTXf:wh_objt.for                    l:001906 c:  34|     +            R_NUM_OF_ASSET_CLASSES,NUM_OF_OL_ASSET_CLASSES=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:001907 c:  35|     +            R_MAX_ASSET_CLASS_NUM,MAX_OL_ASSET_CLASS_ID_NUM/0/,| 
+TTTXf:wh_objt.for                    l:001907 c:  35|     +            R_MAX_ASSET_CLASS_NUM,MAX_OL_ASSET_CLASS_ID_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:001908 c:  36|     +            R_NUM_OF_CUST_CLASSES,NUM_OF_OL_CUST_CLASSES/0/,| 
+TTTXf:wh_objt.for                    l:001908 c:  36|     +            R_NUM_OF_CUST_CLASSES,NUM_OF_OL_CUST_CLASSES=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:001909 c:  37|     +            R_MAX_CUST_CLASS_NUM,MAX_OL_CUST_CLASS_ID_NUM/0/,| 
+TTTXf:wh_objt.for                    l:001909 c:  37|     +            R_MAX_CUST_CLASS_NUM,MAX_OL_CUST_CLASS_ID_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:001910 c:  38|     +            NUM_OF_BC_TRANS_CLASSES/0/,| 
+TTTXf:wh_objt.for                    l:001910 c:  38|     +            NUM_OF_BC_TRANS_CLASSES=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:001911 c:  39|     +            MAX_BC_TRANS_CLASS_ID_NUM/0/,| 
+TTTXf:wh_objt.for                    l:001911 c:  39|     +            MAX_BC_TRANS_CLASS_ID_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:001912 c:  40|     +            NUM_OF_BC_ASSET_CLASSES/0/,| 
+TTTXf:wh_objt.for                    l:001912 c:  40|     +            NUM_OF_BC_ASSET_CLASSES=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:001913 c:  41|     +            MAX_BC_ASSET_CLASS_ID_NUM/0/,| 
+TTTXf:wh_objt.for                    l:001913 c:  41|     +            MAX_BC_ASSET_CLASS_ID_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:001914 c:  42|     +            NUM_OF_BC_CUST_CLASSES/0/,| 
+TTTXf:wh_objt.for                    l:001914 c:  42|     +            NUM_OF_BC_CUST_CLASSES=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:001915 c:  43|     +            MAX_BC_CUST_CLASS_ID_NUM/0/,| 
+TTTXf:wh_objt.for                    l:001915 c:  43|     +            MAX_BC_CUST_CLASS_ID_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:001935 c:  44|      INTEGER*2 YEAR,UNIT_NUM/10/| 
+TTTXf:wh_objt.for                    l:001935 c:  44|      INTEGER*2 YEAR,UNIT_NUM=10 | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:001962 c:  45|      CHARACTER*2 WEATHER_DEMAND_OL/'BC'/,R_WEATHER_DEMAND_OL| 
+TTTXf:wh_objt.for                    l:001962 c:  45|      CHARACTER*2 WEATHER_DEMAND_OL='BC' ,R_WEATHER_DEMAND_OL| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:002345 c:  46|      LOGICAL*1      SAVE_WEATHER_DEMAND_STATUS/.FALSE./,| 
+TTTXf:wh_objt.for                    l:002345 c:  46|      LOGICAL*1      SAVE_WEATHER_DEMAND_STATUS=.FALSE. ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:002349 c:  47|      INTEGER*2      YR,MAKER_TABLES/0/,DELETE,| 
+TTTXf:wh_objt.for                    l:002349 c:  47|      INTEGER*2      YR,MAKER_TABLES=0 ,DELETE,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:002398 c:  48|     +                  LOCAL_MAX_NUM_MARKET_AREAS/0/,| 
+TTTXf:wh_objt.for                    l:002398 c:  48|     +                  LOCAL_MAX_NUM_MARKET_AREAS=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:002399 c:  49|     +                  LOCAL_MAX_HOURS/24/,| 
+TTTXf:wh_objt.for                    l:002399 c:  49|     +                  LOCAL_MAX_HOURS=24 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:002400 c:  50|     +                  LOCAL_MAX_DAYS/31/,| 
+TTTXf:wh_objt.for                    l:002400 c:  50|     +                  LOCAL_MAX_DAYS=31 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:002401 c:  51|     +                  LOCAL_MAX_MONTHS/12/,| 
+TTTXf:wh_objt.for                    l:002401 c:  51|     +                  LOCAL_MAX_MONTHS=12 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:002402 c:  52|     +                  LOCAL_MAX_YEARS/12/, ! UP'ED FOR DOUG 051310 ! UP'ED FOR SCOTT 02/26/08 ! UP'ED FOR SCOTT 01/08/04| 
+TTTXf:wh_objt.for                    l:002402 c:  52|     +                  LOCAL_MAX_YEARS=12 , ! UP'ED FOR DOUG 051310 ! UP'ED FOR SCOTT 02/26/08 ! UP'ED FOR SCOTT 01/08/04| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:002403 c:  53|     +                  MIN_YEAR/9999/,| 
+TTTXf:wh_objt.for                    l:002403 c:  53|     +                  MIN_YEAR=9999 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:002404 c:  54|     +                  MAX_YEAR/0/| 
+TTTXf:wh_objt.for                    l:002404 c:  54|     +                  MAX_YEAR=0 | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:003387 c:  55|      INTEGER (KIND=2),SAVE :: ActiveStateIDs/304/| 
+TTTXf:wh_objt.for                    l:003387 c:  55|      INTEGER (KIND=2),SAVE :: ActiveStateIDs=304 | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:004104 c:  56|      LOGICAL*1 SAVE_MK_FILE_EXISTS/.FALSE./| 
+TTTXf:wh_objt.for                    l:004104 c:  56|      LOGICAL*1 SAVE_MK_FILE_EXISTS=.FALSE. | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:004106 c:  57|      INTEGER*2   UNIT_NUM/10/,INUNIT,IREC,DELETE,LRECL/46/,| 
+TTTXf:wh_objt.for                    l:004106 c:  57|      INTEGER*2   UNIT_NUM=10 ,INUNIT,IREC,DELETE,LRECL/46/,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:004106 c:  58|      INTEGER*2   UNIT_NUM=10 ,INUNIT,IREC,DELETE,LRECL/46/,| 
+TTTXf:wh_objt.for                    l:004106 c:  58|      INTEGER*2   UNIT_NUM=10 ,INUNIT,IREC,DELETE,LRECL=46 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:004107 c:  59|     +            SAVE_MARKET_GROUPS_TABLES/0/,R_MARKET_GROUPS_TABLES,| 
+TTTXf:wh_objt.for                    l:004107 c:  59|     +            SAVE_MARKET_GROUPS_TABLES=0 ,R_MARKET_GROUPS_TABLES,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:004108 c:  60|     +            SAVE_MARKET_GROUPS_RECORDS/0/,R_MARKET_GROUPS_RECORDS,| 
+TTTXf:wh_objt.for                    l:004108 c:  60|     +            SAVE_MARKET_GROUPS_RECORDS=0 ,R_MARKET_GROUPS_RECORDS,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:004140 c:  61|      CHARACTER*2 MKROUP_OL/'BC'/,R_MKROUP_OL| 
+TTTXf:wh_objt.for                    l:004140 c:  61|      CHARACTER*2 MKROUP_OL='BC' ,R_MKROUP_OL| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:004452 c:  62|      LOGICAL*1 SAVE_MK_FILE_EXISTS/.FALSE./| 
+TTTXf:wh_objt.for                    l:004452 c:  62|      LOGICAL*1 SAVE_MK_FILE_EXISTS=.FALSE. | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:004456 c:  63|     +          MAX_MARKET_GROUPS/599/, ! CHANGED TO 0:599 041304| 
+TTTXf:wh_objt.for                    l:004456 c:  63|     +          MAX_MARKET_GROUPS=599 , ! CHANGED TO 0:599 041304| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:004457 c:  64|     +          SAVE_MARKET_GROUPS_RECORDS/0/,| 
+TTTXf:wh_objt.for                    l:004457 c:  64|     +          SAVE_MARKET_GROUPS_RECORDS=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:004462 c:  65|     +          HYDRO_AGGREGATION/.FALSE./| 
+TTTXf:wh_objt.for                    l:004462 c:  65|     +          HYDRO_AGGREGATION=.FALSE. | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:005365 c:  66|     +                  STUDY_BASE_YEAR/0/,BASE_YEAR| 
+TTTXf:wh_objt.for                    l:005365 c:  66|     +                  STUDY_BASE_YEAR=0 ,BASE_YEAR| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:005375 c:  67|      INTEGER*2 DELETE,INUNIT,IREC,LRECL/81/| 
+TTTXf:wh_objt.for                    l:005375 c:  67|      INTEGER*2 DELETE,INUNIT,IREC,LRECL=81 | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:005377 c:  68|      INTEGER*2   UNIT_NUM/10/,OUTAGES_TABLES_IN_FILE/0/,| 
+TTTXf:wh_objt.for                    l:005377 c:  68|      INTEGER*2   UNIT_NUM=10 ,OUTAGES_TABLES_IN_FILE/0/,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:005377 c:  69|      INTEGER*2   UNIT_NUM=10 ,OUTAGES_TABLES_IN_FILE/0/,| 
+TTTXf:wh_objt.for                    l:005377 c:  69|      INTEGER*2   UNIT_NUM=10 ,OUTAGES_TABLES_IN_FILE=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:005385 c:  70|      LOGICAL*4   FILE_EXISTS,REG_OUTAGES_FILE_EXISTS/.FALSE./,| 
+TTTXf:wh_objt.for                    l:005385 c:  70|      LOGICAL*4   FILE_EXISTS,REG_OUTAGES_FILE_EXISTS=.FALSE. ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:005393 c:  71|      CHARACTER*2 REGIONAL_OUTAGES_OL/'BC'/| 
+TTTXf:wh_objt.for                    l:005393 c:  71|      CHARACTER*2 REGIONAL_OUTAGES_OL='BC' | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:005672 c:  72|     +               SAVE_REGIONAL_OUTAGES_STATUS/.FALSE./,| 
+TTTXf:wh_objt.for                    l:005672 c:  72|     +               SAVE_REGIONAL_OUTAGES_STATUS=.FALSE. ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:005675 c:  73|      INTEGER*2      YR,OUTAGES_TABLES/0/,DELETE,| 
+TTTXf:wh_objt.for                    l:005675 c:  73|      INTEGER*2      YR,OUTAGES_TABLES=0 ,DELETE,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:005683 c:  74|     +               MAX_REGIONAL_INDEX/6/,| 
+TTTXf:wh_objt.for                    l:005683 c:  74|     +               MAX_REGIONAL_INDEX=6 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:005848 c:  75|      INTEGER*2 DELETE,INUNIT,LRECL/147/| 
+TTTXf:wh_objt.for                    l:005848 c:  75|      INTEGER*2 DELETE,INUNIT,LRECL=147 | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:005853 c:  76|      INTEGER*2   UNIT_NUM/10/,HOURS_PER_DAY,| 
+TTTXf:wh_objt.for                    l:005853 c:  76|      INTEGER*2   UNIT_NUM=10 ,HOURS_PER_DAY,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:005854 c:  77|     +            USER_DAYS_IN_MONTH,BIN_TABLES_IN_FILE/0/,| 
+TTTXf:wh_objt.for                    l:005854 c:  77|     +            USER_DAYS_IN_MONTH,BIN_TABLES_IN_FILE=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:005886 c:  78|     +        USER_DAY_FILE_EXISTS/.FALSE./| 
+TTTXf:wh_objt.for                    l:005886 c:  78|     +        USER_DAY_FILE_EXISTS=.FALSE. | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:006123 c:  79|     +            R_HOUR,R_DAY_OF_WEEK,R_MONTH,LAST_USER_DAY/1/,| 
+TTTXf:wh_objt.for                    l:006123 c:  79|     +            R_HOUR,R_DAY_OF_WEEK,R_MONTH,LAST_USER_DAY=1 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:006693 c:  80|     +                  STUDY_BASE_YEAR/0/,BASE_YEAR| 
+TTTXf:wh_objt.for                    l:006693 c:  80|     +                  STUDY_BASE_YEAR=0 ,BASE_YEAR| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:006703 c:  81|      INTEGER*2 DELETE,INUNIT,IREC,LRECL/81/| 
+TTTXf:wh_objt.for                    l:006703 c:  81|      INTEGER*2 DELETE,INUNIT,IREC,LRECL=81 | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:006705 c:  82|      INTEGER*2   UNIT_NUM/10/,PARAMETER_TABLES_IN_FILE/0/,| 
+TTTXf:wh_objt.for                    l:006705 c:  82|      INTEGER*2   UNIT_NUM=10 ,PARAMETER_TABLES_IN_FILE/0/,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:006705 c:  83|      INTEGER*2   UNIT_NUM=10 ,PARAMETER_TABLES_IN_FILE/0/,| 
+TTTXf:wh_objt.for                    l:006705 c:  83|      INTEGER*2   UNIT_NUM=10 ,PARAMETER_TABLES_IN_FILE=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:006713 c:  84|      LOGICAL*4   FILE_EXISTS,REG_PARAMETER_FILE_EXISTS/.FALSE./,| 
+TTTXf:wh_objt.for                    l:006713 c:  84|      LOGICAL*4   FILE_EXISTS,REG_PARAMETER_FILE_EXISTS=.FALSE. ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:006721 c:  85|      CHARACTER*2 REGIONAL_PARAMETER_OL/'BC'/| 
+TTTXf:wh_objt.for                    l:006721 c:  85|      CHARACTER*2 REGIONAL_PARAMETER_OL='BC' | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:006993 c:  86|     +          R_AREA_PRICE,AREA_PRICE/.FALSE./| 
+TTTXf:wh_objt.for                    l:006993 c:  86|     +          R_AREA_PRICE,AREA_PRICE=.FALSE. | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:007025 c:  87|     +            TRANS_GROUP/0/,| 
+TTTXf:wh_objt.for                    l:007025 c:  87|     +            TRANS_GROUP=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:007507 c:  88|     +  nUnits/2/,| 
+TTTXf:wh_objt.for                    l:007507 c:  88|     +  nUnits=2 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:007508 c:  89|     +  MaxBlocksPerUnit/2/, ! <=2 per GAT| 
+TTTXf:wh_objt.for                    l:007508 c:  89|     +  MaxBlocksPerUnit=2 , ! <=2 per GAT| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:007509 c:  90|     +  SystemMaxStrikesPerYear/32/,| 
+TTTXf:wh_objt.for                    l:007509 c:  90|     +  SystemMaxStrikesPerYear=32 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:007553 c:  91|      logical*1 GPSameHour,GPShoulder,TgtAttained,L1_FALSE/.false./| 
+TTTXf:wh_objt.for                    l:007553 c:  91|      logical*1 GPSameHour,GPShoulder,TgtAttained,L1_FALSE=.false. | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:007555 c:  92|     +   iHr,iGP,PrtDetail/0/, ! 2 to get LDC before and after PS mods| 
+TTTXf:wh_objt.for                    l:007555 c:  92|     +   iHr,iGP,PrtDetail=0 , ! 2 to get LDC before and after PS mods| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:007561 c:  93|     +   Nearly1/0.999999/, ! relative threshold for completion| 
+TTTXf:wh_objt.for                    l:007561 c:  93|     +   Nearly1=0.999999 , ! relative threshold for completion| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:007819 c:  94|      INTEGER*2 R_HOUR,R_TG,MAX_INTERVALS/5/,INTERVAL,| 
+TTTXf:wh_objt.for                    l:007819 c:  94|      INTEGER*2 R_HOUR,R_TG,MAX_INTERVALS=5 ,INTERVAL,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:007856 c:  95|     +            FILE_NEVER_OPENED/.TRUE./,| 
+TTTXf:wh_objt.for                    l:007856 c:  95|     +            FILE_NEVER_OPENED=.TRUE. ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:007876 c:  96|     +         C_DEPTH_MARGIN_NOT_OPEN/.TRUE./| 
+TTTXf:wh_objt.for                    l:007876 c:  96|     +         C_DEPTH_MARGIN_NOT_OPEN=.TRUE. | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:008617 c:  97|      INTEGER*2 DELETE,INUNIT,IREC,LRECL/214/| 
+TTTXf:wh_objt.for                    l:008617 c:  97|      INTEGER*2 DELETE,INUNIT,IREC,LRECL=214 | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:008619 c:  98|      INTEGER*2   UNIT_NUM/10/| 
+TTTXf:wh_objt.for                    l:008619 c:  98|      INTEGER*2   UNIT_NUM=10 | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:008625 c:  99|      LOGICAL*4   FILE_EXISTS,FUEL_DERIVATIVES_FILE_EXISTS/.FALSE./,| 
+TTTXf:wh_objt.for                    l:008625 c:  99|      LOGICAL*4   FILE_EXISTS,FUEL_DERIVATIVES_FILE_EXISTS=.FALSE. ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:008652 c: 100|     +               BASE_TRANSACTIONS_IN_FILE/0/,| 
+TTTXf:wh_objt.for                    l:008652 c: 100|     +               BASE_TRANSACTIONS_IN_FILE=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:008654 c: 101|     +               OVERLAY_TRANSACTIONS_IN_FILE/0/,| 
+TTTXf:wh_objt.for                    l:008654 c: 101|     +               OVERLAY_TRANSACTIONS_IN_FILE=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:008655 c: 102|     +               MAX_BASE_TRANS_GROUP_NUM/0/,| 
+TTTXf:wh_objt.for                    l:008655 c: 102|     +               MAX_BASE_TRANS_GROUP_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:008656 c: 103|     +               MAX_OVL_TRANS_GROUP_NUM/0/,| 
+TTTXf:wh_objt.for                    l:008656 c: 103|     +               MAX_OVL_TRANS_GROUP_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:008659 c: 104|     +            R_NUM_OF_TRANS_CLASSES,NUM_OF_OL_TRANS_CLASSES/0/,| 
+TTTXf:wh_objt.for                    l:008659 c: 104|     +            R_NUM_OF_TRANS_CLASSES,NUM_OF_OL_TRANS_CLASSES=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:008660 c: 105|     +            R_MAX_TRANS_CLASS_NUM,MAX_OL_TRANS_CLASS_ID_NUM/0/,| 
+TTTXf:wh_objt.for                    l:008660 c: 105|     +            R_MAX_TRANS_CLASS_NUM,MAX_OL_TRANS_CLASS_ID_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:008661 c: 106|     +            R_NUM_OF_ASSET_CLASSES,NUM_OF_OL_ASSET_CLASSES/0/,| 
+TTTXf:wh_objt.for                    l:008661 c: 106|     +            R_NUM_OF_ASSET_CLASSES,NUM_OF_OL_ASSET_CLASSES=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:008662 c: 107|     +            R_MAX_ASSET_CLASS_NUM,MAX_OL_ASSET_CLASS_ID_NUM/0/,| 
+TTTXf:wh_objt.for                    l:008662 c: 107|     +            R_MAX_ASSET_CLASS_NUM,MAX_OL_ASSET_CLASS_ID_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:008663 c: 108|     +            R_NUM_OF_CUST_CLASSES,NUM_OF_OL_CUST_CLASSES/0/,| 
+TTTXf:wh_objt.for                    l:008663 c: 108|     +            R_NUM_OF_CUST_CLASSES,NUM_OF_OL_CUST_CLASSES=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:008664 c: 109|     +            R_MAX_CUST_CLASS_NUM,MAX_OL_CUST_CLASS_ID_NUM/0/,| 
+TTTXf:wh_objt.for                    l:008664 c: 109|     +            R_MAX_CUST_CLASS_NUM,MAX_OL_CUST_CLASS_ID_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:008665 c: 110|     +            NUM_OF_BC_TRANS_CLASSES/0/,| 
+TTTXf:wh_objt.for                    l:008665 c: 110|     +            NUM_OF_BC_TRANS_CLASSES=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:008666 c: 111|     +            MAX_BC_TRANS_CLASS_ID_NUM/0/,| 
+TTTXf:wh_objt.for                    l:008666 c: 111|     +            MAX_BC_TRANS_CLASS_ID_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:008667 c: 112|     +            NUM_OF_BC_ASSET_CLASSES/0/,| 
+TTTXf:wh_objt.for                    l:008667 c: 112|     +            NUM_OF_BC_ASSET_CLASSES=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:008668 c: 113|     +            MAX_BC_ASSET_CLASS_ID_NUM/0/,| 
+TTTXf:wh_objt.for                    l:008668 c: 113|     +            MAX_BC_ASSET_CLASS_ID_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:008669 c: 114|     +            NUM_OF_BC_CUST_CLASSES/0/,| 
+TTTXf:wh_objt.for                    l:008669 c: 114|     +            NUM_OF_BC_CUST_CLASSES=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:008670 c: 115|     +            MAX_BC_CUST_CLASS_ID_NUM/0/,| 
+TTTXf:wh_objt.for                    l:008670 c: 115|     +            MAX_BC_CUST_CLASS_ID_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:008700 c: 116|      CHARACTER*2 FUEL_DERIVATIVES_OL/'BC'/| 
+TTTXf:wh_objt.for                    l:008700 c: 116|      CHARACTER*2 FUEL_DERIVATIVES_OL='BC' | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:009185 c: 117|     +               SAVE_FUEL_DERIVATIVES_STATUS/.FALSE./,| 
+TTTXf:wh_objt.for                    l:009185 c: 117|     +               SAVE_FUEL_DERIVATIVES_STATUS=.FALSE. ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:009186 c: 118|     +               RUN_TRANSACT/.FALSE./,YES_RUN_TRANSACT,| 
+TTTXf:wh_objt.for                    l:009186 c: 118|     +               RUN_TRANSACT=.FALSE. ,YES_RUN_TRANSACT,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:009207 c: 119|     +                  NUM_TRANSACTIONS/0/,| 
+TTTXf:wh_objt.for                    l:009207 c: 119|     +                  NUM_TRANSACTIONS=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:009208 c: 120|     +               SAVE_ACTIVE_TRANSACTIONS/0/,| 
+TTTXf:wh_objt.for                    l:009208 c: 120|     +               SAVE_ACTIVE_TRANSACTIONS=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:009209 c: 121|     +               MONTHLY_ACTIVE_TRANSACTIONS/0/,| 
+TTTXf:wh_objt.for                    l:009209 c: 121|     +               MONTHLY_ACTIVE_TRANSACTIONS=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:009210 c: 122|     +               ANNUAL_ACTIVE_TRANSACTIONS/0/,| 
+TTTXf:wh_objt.for                    l:009210 c: 122|     +               ANNUAL_ACTIVE_TRANSACTIONS=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:009305 c: 123|     +               BASE_TRANSACTIONS_IN_FILE/0/,| 
+TTTXf:wh_objt.for                    l:009305 c: 123|     +               BASE_TRANSACTIONS_IN_FILE=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:009306 c: 124|     +               OVERLAY_TRANSACTIONS_IN_FILE/0/,| 
+TTTXf:wh_objt.for                    l:009306 c: 124|     +               OVERLAY_TRANSACTIONS_IN_FILE=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:009307 c: 125|     +               MAX_BASE_TRANS_GROUP_NUM/0/,| 
+TTTXf:wh_objt.for                    l:009307 c: 125|     +               MAX_BASE_TRANS_GROUP_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:009308 c: 126|     +               MAX_OVL_TRANS_GROUP_NUM/0/,| 
+TTTXf:wh_objt.for                    l:009308 c: 126|     +               MAX_OVL_TRANS_GROUP_NUM=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:009507 c: 127|      LOGICAL*1 MONTH_DERIV_REPORT_NOT_OPEN/.TRUE./,| 
+TTTXf:wh_objt.for                    l:009507 c: 127|      LOGICAL*1 MONTH_DERIV_REPORT_NOT_OPEN=.TRUE. ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:009511 c: 128|     +          MONTHLY_FUEL_DERIV_UNIT/0/,| 
+TTTXf:wh_objt.for                    l:009511 c: 128|     +          MONTHLY_FUEL_DERIV_UNIT=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:009512 c: 129|     +          FUEL_REPORT_VARIABLE_NUMBER/18/| 
+TTTXf:wh_objt.for                    l:009512 c: 129|     +          FUEL_REPORT_VARIABLE_NUMBER=18 | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:011282 c: 130|     +                  STUDY_BASE_YEAR/0/,BASE_YEAR,| 
+TTTXf:wh_objt.for                    l:011282 c: 130|     +                  STUDY_BASE_YEAR=0 ,BASE_YEAR,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:011298 c: 131|     +            LRECL/100/,| 
+TTTXf:wh_objt.for                    l:011298 c: 131|     +            LRECL=100 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:011301 c: 132|      INTEGER*2   UNIT_NUM/10/,| 
+TTTXf:wh_objt.for                    l:011301 c: 132|      INTEGER*2   UNIT_NUM=10 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:011311 c: 133|      LOGICAL*4   FILE_EXISTS,REG_OUT_PARAM_FILE_EXISTS/.FALSE./,| 
+TTTXf:wh_objt.for                    l:011311 c: 133|      LOGICAL*4   FILE_EXISTS,REG_OUT_PARAM_FILE_EXISTS=.FALSE. ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:011319 c: 134|      CHARACTER*2 REG_OUT_PARAM_OL/'BC'/| 
+TTTXf:wh_objt.for                    l:011319 c: 134|      CHARACTER*2 REG_OUT_PARAM_OL='BC' | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:011356 c: 135|     +          RM_OVERLAY_MASTR_FILE_OPEN/.FALSE./,| 
+TTTXf:wh_objt.for                    l:011356 c: 135|     +          RM_OVERLAY_MASTR_FILE_OPEN=.FALSE. ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:011357 c: 136|     +          CHECK_4_SCENARIO_YEAR/.FALSE./,| 
+TTTXf:wh_objt.for                    l:011357 c: 136|     +          CHECK_4_SCENARIO_YEAR=.FALSE. ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:011358 c: 137|     +          RECORD_BASED_OVERLAYS/.TRUE./,| 
+TTTXf:wh_objt.for                    l:011358 c: 137|     +          RECORD_BASED_OVERLAYS=.TRUE. ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:011784 c: 138|     +               SAVE_REGIONAL_PARAMS_STATUS/.FALSE./,| 
+TTTXf:wh_objt.for                    l:011784 c: 138|     +               SAVE_REGIONAL_PARAMS_STATUS=.FALSE. ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:011786 c: 139|     +               IS_REGIONAL_HYDRO_PARAM_ACTIVE/.FALSE./,| 
+TTTXf:wh_objt.for                    l:011786 c: 139|     +               IS_REGIONAL_HYDRO_PARAM_ACTIVE=.FALSE. ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:011791 c: 140|      INTEGER*2      YR,PARAMS_TABLES/0/,DELETE,| 
+TTTXf:wh_objt.for                    l:011791 c: 140|      INTEGER*2      YR,PARAMS_TABLES=0 ,DELETE,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:011801 c: 141|     +               MAX_REGIONAL_INDEX/13/,| 
+TTTXf:wh_objt.for                    l:011801 c: 141|     +               MAX_REGIONAL_INDEX=13 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:011841 c: 142|      LOGICAL*1 REGIONAL_MAKER_REPORT_NOT_OPEN/.TRUE./,| 
+TTTXf:wh_objt.for                    l:011841 c: 142|      LOGICAL*1 REGIONAL_MAKER_REPORT_NOT_OPEN=.TRUE. ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:011845 c: 143|     +          REGIONAL_MAKER_UNIT/0/,| 
+TTTXf:wh_objt.for                    l:011845 c: 143|     +          REGIONAL_MAKER_UNIT=0 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:012229 c: 144|      INTEGER*2 IREC,INUNIT,DELETE,LRECL/65/| 
+TTTXf:wh_objt.for                    l:012229 c: 144|      INTEGER*2 IREC,INUNIT,DELETE,LRECL=65 | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:012232 c: 145|      LOGICAL*4 LH_GLOBAL_FILE_EXISTS/.FALSE./| 
+TTTXf:wh_objt.for                    l:012232 c: 145|      LOGICAL*4 LH_GLOBAL_FILE_EXISTS=.FALSE. | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:012242 c: 146|      CHARACTER*2 CAPACITY_LH_GLOBAL_OL/'BC'/| 
+TTTXf:wh_objt.for                    l:012242 c: 146|      CHARACTER*2 CAPACITY_LH_GLOBAL_OL='BC' | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:012503 c: 147|     +      STOCHASTIC_OVERLAYS/'R'/,    ! CHAR*1| 
+TTTXf:wh_objt.for                    l:012503 c: 147|     +      STOCHASTIC_OVERLAYS='R' ,    ! CHAR*1| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:012504 c: 148|     +      HOURLY_MARKET_PRICES/'C'/,   ! CHAR*1| 
+TTTXf:wh_objt.for                    l:012504 c: 148|     +      HOURLY_MARKET_PRICES='C' ,   ! CHAR*1| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:012506 c: 149|     +      AOD_VALUATION_TYPE/'C'/,| 
+TTTXf:wh_objt.for                    l:012506 c: 149|     +      AOD_VALUATION_TYPE='C' ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:012507 c: 150|     +      AOD_UNIT_REPORTING/'A'/| 
+TTTXf:wh_objt.for                    l:012507 c: 150|     +      AOD_UNIT_REPORTING='A' | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:012654 c: 151|     +          MAX_SEARCHES_WITHIN_TRANS/50/| 
+TTTXf:wh_objt.for                    l:012654 c: 151|     +          MAX_SEARCHES_WITHIN_TRANS=50 | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:012965 c: 152|      INTEGER*1 FORECAST_GROWTH_YEARS/AVAIL_DATA_YEARS/| 
+TTTXf:wh_objt.for                    l:012965 c: 152|      INTEGER*1 FORECAST_GROWTH_YEARS=AVAIL_DATA_YEARS | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:012966 c: 153|      LOGICAL*1 SAVE_RR_FILE_EXISTS/.FALSE./,R_RR_FILE_EXISTS,| 
+TTTXf:wh_objt.for                    l:012966 c: 153|      LOGICAL*1 SAVE_RR_FILE_EXISTS=.FALSE. ,R_RR_FILE_EXISTS,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:012967 c: 154|     +          R_RR_FILE_USED,SAVE_RR_FILE_USED/.FALSE./| 
+TTTXf:wh_objt.for                    l:012967 c: 154|     +          R_RR_FILE_USED,SAVE_RR_FILE_USED=.FALSE. | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:012969 c: 155|      CHARACTER*1 EXTENSION_PERIOD_GROWTH_SWITCH/'X'/,TABLE_ACTIVE| 
+TTTXf:wh_objt.for                    l:012969 c: 155|      CHARACTER*1 EXTENSION_PERIOD_GROWTH_SWITCH='X' ,TABLE_ACTIVE| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:012970 c: 156|      INTEGER*2   INUNIT,IREC,DELETE,LRECL/270/,| 
+TTTXf:wh_objt.for                    l:012970 c: 156|      INTEGER*2   INUNIT,IREC,DELETE,LRECL=270 ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:012973 c: 157|     +            SAVE_TRANS_LOAD_TABLES/0/,R_TRANS_LOAD_TABLES,| 
+TTTXf:wh_objt.for                    l:012973 c: 157|     +            SAVE_TRANS_LOAD_TABLES=0 ,R_TRANS_LOAD_TABLES,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:012988 c: 158|      INTEGER*2 YEAR,UNIT_NUM/10/| 
+TTTXf:wh_objt.for                    l:012988 c: 158|      INTEGER*2 YEAR,UNIT_NUM=10 | 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:012994 c: 159|      CHARACTER*2 RPS_REQUIREMENTS_OL/'BC'/,R_RPS_REQUIREMENTS_OL| 
+TTTXf:wh_objt.for                    l:012994 c: 159|      CHARACTER*2 RPS_REQUIREMENTS_OL='BC' ,R_RPS_REQUIREMENTS_OL| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:013302 c: 160|     +               SAVE_RPS_REQUIREMENTS_STATUS/.FALSE./,| 
+TTTXf:wh_objt.for                    l:013302 c: 160|     +               SAVE_RPS_REQUIREMENTS_STATUS=.FALSE. ,| 
+TTTX
+TTTX
+TTTXf:wh_objt.for                    l:013308 c: 161|      INTEGER*2      YR,MAKER_TABLES/0/,DELETE,| 
+TTTXf:wh_objt.for                    l:013308 c: 161|      INTEGER*2      YR,MAKER_TABLES=0 ,DELETE,| 
+TTTX
