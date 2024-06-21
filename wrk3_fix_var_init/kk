@@ -1,0 +1,6 @@
+      REAL (kind=4) ::  ATL_AMORTIZATION
+      REAL (kind=4) ::  BTL_AMORTIZATION
+      REAL (kind=4) ::  LTD_INTEREST_AND_AMORTIZATION
+      REAL (kind=4) ::  BTL_DEF_TAXES
+      REAL (kind=4) ::  TOTAL_DEF_TAXES_CR
+      REAL (kind=4) ::  NET_DERIVATIVES_INCOME
