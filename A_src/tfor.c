@@ -83,7 +83,6 @@
  *      3 - mas nivel de debug
  *
  *
- *	Changes pending...
  *	
  *
  *
@@ -304,6 +303,22 @@
 
 
 /*
+ *	--chgcom
+ *	stadisticas 
+ *
+ *	--chgmas
+ *	ej. ANDECOMP.FOR
+ *
+ *	poner contador cuando se aplanan las declaracions de vars
+ *
+ *	no funciona p4_mas cuando hay lineas con comentarios
+ *	en medio de las lineas con mas 
+ *
+ *
+ *
+ *	---- otros ----
+ *
+ *
  *	poner en orden los codigos de error !!!
  *
  *	errores
@@ -776,7 +791,7 @@ int	sq_character;			/* q de character cambiados */
 int	sq_variables_no_convertidas;	/* importante ! variables que no se pud convertir */
 int	sq_lcont;			/* lineas de continuacion modificadas */
 int	sq_vinit_simple;		/* var inits cambiados - simple ...en una linea */
-
+int	sq_lineas_con_mas_elim;		/* lineas con cont de linea mas eliminadas */
 
 
 
@@ -1011,11 +1026,13 @@ char	*s;
 		printf ("Cantidad de logical cambiados    %6d \n", sq_logical);
 		printf ("Cantidad de character cambiados  %6d \n", sq_character);
 		printf ("Cantidad de lin cont cambiadas   %6d \n", sq_lcont);
-		printf ("variables_no_convertidas         %6d \n", sq_variables_no_convertidas);
-		printf ("var inits simples convertidos    %6d \n", sq_vinit_simple);
+		printf ("Variables_no_convertidas         %6d \n", sq_variables_no_convertidas);
+		printf ("Var inits simples convertidos    %6d \n", sq_vinit_simple);
+		printf ("Lineas con cont mas convertidas  %6d \n", sq_lineas_con_mas_elim);
 
 		if (ffsta)
 		{
+
 		fprintf (hfsta,"%s","\n");
 		fprintf (hfsta,"File: %s\n",finp);
 		fprintf (hfsta,"Cantidad de lineas divididas     %6d \n", sq_lineas_desdobladas);
@@ -1024,10 +1041,9 @@ char	*s;
 		fprintf (hfsta,"Cantidad de logical cambiados    %6d \n", sq_logical);
 		fprintf (hfsta,"Cantidad de character cambiados  %6d \n", sq_character);
 		fprintf (hfsta,"Cantidad de lin cont cambiadas   %6d \n", sq_lcont);
-		fprintf (hfsta,"variables_no_convertidas         %6d \n", sq_variables_no_convertidas);
-		fprintf (hfsta,"var inits simples convertidos    %6d \n", sq_vinit_simple);
-
-
+		fprintf (hfsta,"Variables_no_convertidas         %6d \n", sq_variables_no_convertidas);
+		fprintf (hfsta,"Var inits simples convertidos    %6d \n", sq_vinit_simple);
+		fprintf (hfsta,"Lineas con cont mas convertidas  %6d \n", sq_lineas_con_mas_elim);
 
 		}
 	}
@@ -1072,6 +1088,7 @@ int	borrar_stats()
 	sq_character             = 0;
 	sq_lcont                 = 0;
 	sq_vinit_simple          = 0;
+	sq_lineas_con_mas_elim   = 0;
 
 }
 
@@ -3366,7 +3383,7 @@ int	pro_prue2()
 			/* registro datos del archivo */
 			tb[qf_ff] = (ffptr ) malloc (sizeof (ff));
 			if ( tb[qf_ff] == NULL )
-				error(903);
+				error(904);
 
 			strcpy ( (*tb[qf_ff]).n, extract_fname(d1));
 			(*tb[qf_ff]).pf = q_ptr;
@@ -4873,7 +4890,7 @@ int	pro_proc4()
 			/* registro datos del archivo */
 			tb[qf_ff] = (ffptr ) malloc (sizeof (ff));
 			if ( tb[qf_ff] == NULL )
-				error(903);
+				error(905);
 
 			strcpy ( (*tb[qf_ff]).n, extract_fname(d1));
 			(*tb[qf_ff]).ql = qlf;
@@ -5258,7 +5275,7 @@ int	nl;
 {
 	q1[nl] = (fnptr  ) malloc (sizeof (node));
 	if ( q1[nl] == NULL)
-		error(903);
+		error(911);
 
 	(*q1[nl]).l[0] = 0;
 	(*q1[nl]).f1 = 0;
@@ -6128,7 +6145,7 @@ FILE	*fpr;
 
 			fnp[qf_lin] = ( fnptr ) malloc ( sizeof (node));
 			if ( fnp[qf_lin] == NULL)
-				error(904);
+				error(908);
 
 			sprintf ( (*fnp[qf_lin]).l,"%s",b1);
 			(*fnp[qf_lin]).f1 = 0;
@@ -6256,7 +6273,7 @@ int	proc_makefile()
 #endif
 							fnf[qf_fen] = ( fnptr ) malloc ( sizeof (node));
 							if ( fnf[qf_fen] == NULL)
-								error(905);
+								error(906);
 
 							sprintf ( (*fnf[qf_fen]).l,"%s",b2);
 							(*fnf[qf_fen]).f1 = 1;	
@@ -6808,7 +6825,7 @@ int	*ql_f;
 	/* registro datos del archivo */
 	tb[fl_n] = (ffptr ) malloc (sizeof (ff));
 	if ( tb[fl_n] == NULL )
-		error(906);
+		error(907);
 
 	strcpy ( (*tb[fl_n]).n, extract_fname(fout));
 	(*tb[fl_n]).pf = pf; 
@@ -6933,17 +6950,6 @@ int	*ql_f;
  *
  */
 
-#if 0
-int	cfor_mas(ql_i,ql_f)
-int	*ql_i;
-int	*ql_f;
-{
-
-
-}
-
-#endif
-
 
 #if 1
 
@@ -6952,7 +6958,7 @@ int	*ql_i;
 int	*ql_f;
 {
 
-	int	i,j,k;
+	int	i,i1,j,k,k1;
 	int	p1,p2;
 	int	f1,f2,f3,f4,f5;
 	int	qi,qf;
@@ -7039,17 +7045,26 @@ int	*ql_f;
 				{
 					strcat (b3, limpiar_mas ( (*fnp[i+delta1]).l )  );
 					delta1++;
+		
+					sq_lineas_con_mas_elim++;
+
 				}
 				while ( def_var_continua (  (*fnp[i+delta1]).l) ) ;
 
+printf ("limpiar_mas (desp del while) : |%s| \n", limpiar_mas ( (*fnp[i+delta1]).l) );
 				strcat (b3, limpiar_mas ( (*fnp[i+delta1]).l) );
 
 
 				if (gp_fverbose("d3"))
 				{
 					printf ("\n\n");
-					printf ("concatenada (%d) l: %d |%s| \n\n\n",delta1,strlen(b3),b3); 
+					printf ("Concateno: delta1: %2d len: %2d b3: |%s| \n\n\n",delta1,strlen(b3),b3); 
 				}
+
+		/* mas chanchadas ... la PM con el (:,:) */
+		for (i1=0; i1<strlen(b3); i1++)
+			if (!strncmp(b3+i1,":,:",3) )
+				b3[i1+i] = '&';
 
 				
 				memset (b4,0,MSTR);
@@ -7067,13 +7082,14 @@ int	*ql_f;
 
 				delta2 = 0;
 				tok = strtok(b5,",");
+
+
 printf ("CFMAS 5 : 1er strtok  |%s|  \n",tok);
-#if 0
-				tok = strtok(b5,",");
-#endif
+
 				while ( tok != NULL )
 				{
 					sprintf (b3,"      %s  %s",b4,tok); 
+
 					tok = strtok(NULL,",");
 
 					if (gp_fverbose("d3"))
@@ -7084,6 +7100,7 @@ printf ("CFMAS 5 : 1er strtok  |%s|  \n",tok);
 
 				}
 				
+
 				if (gp_fverbose("d3"))
 				{
 					printf ("ZZZ delta1                   :   %4d        \n",delta1);
@@ -7097,14 +7114,25 @@ printf ("CFMAS 5 : 1er strtok  |%s|  \n",tok);
 				}
 
 				/* correr todas las lineas ... */
+				if (gp_fverbose("d3"))
+				{
+				printf ("MUEVO: ant de for,  delta1   : %2d \n", delta1);
+				printf ("MUEVO: ant de for,  delta2   : %2d \n", delta2);
+				printf ("MUEVO: ant de for,  i        : %2d \n", i);
+				printf ("MUEVO: ant de for,  desde    : %2d \n", (qf-1)+(delta2-delta1-1) );
+				printf ("MUEVO: ant de for,  hasta    : %2d \n", i+delta2);
+				}
+
+
 				for ( k = (qf-1)+(delta2-delta1-1); k >= i + delta2  ; k-- )
 				{
+ 
 					if ( k >= qf )
 					{
 						/* agrego lineas al final */ 
 						fnp[k] = (fnptr  ) malloc (sizeof (node));
 						if ( fnp[k] == NULL)
-							error(904);
+							error(910);
 						(*fnp[k]).l[0] = 0;
 						(*fnp[k]).f1 = 0;
 						(*fnp[k]).f2 = 0;
@@ -7113,28 +7141,57 @@ printf ("CFMAS 5 : 1er strtok  |%s|  \n",tok);
 
 					if (gp_fverbose("d3"))
 					{
-						printf ("KKK  a k: %4d   desde: %4d  f(k): |%s|    \n\n",
+						printf ("KKK2:   a k: %4d   desde: %4d  f(k): |%s|    \n\n",
 							k, k-(delta2-delta1-1), (*fnp[k-(delta2-delta1-1)]).l );
 					}
 
 					memcpy ( fnp[k],fnp[k-(delta2-delta1-1)], sizeof (node) );
 				}
-/* KKK */
 
-
-#if 1
-
+/* EEE */
 
 				/* grabar ambas lineas */
 				delta2 = 0;
 				tok = strtok(b6,",");
 				while ( tok != NULL )
 				{	
+					k1 = i+delta2;
+
+					/* hay que agregar malloc ... deberia conf rango de lineas ! */
+					if (fnp[k1] == NULL)
+					{				
+						fnp[k1] = (fnptr  ) malloc (sizeof (node));
+						if ( fnp[k1] == NULL)
+							error(912);
+						(*fnp[k1]).l[0] = 0;
+						(*fnp[k1]).f1 = 0;
+						(*fnp[k1]).f2 = 0;
+						(*fnp[k1]).f3 = 0;
+					}
+
 					sprintf (b3,"      %s  %s",b4,tok);
-					strcpy ( (*fnp[i+delta2]).l, b3);
+
 					if (gp_fverbose("d3"))
 					{
-						printf ("GRABO: %4d |%s| \n", i+delta2, (*fnp[i+delta2]).l );
+						printf ("KK3: GRABO: qf     : %4d  \n", qf);
+						printf ("KK3: GRABO: f(x)   : %4d  \n", i+delta2);
+						printf ("KK3: GRABO: str de : |%s| \n", b3 );
+						printf ("KK3: GRABO: str a  : |%s| \n", (*fnp[i+delta2]).l );
+					}
+
+
+					/* recuperando la chanchada */
+					for (i1=0; i1<strlen(b3); i1++)
+						if (!strncmp(b3+i1,":&:",3) )
+							b3[i1+i] = ',';
+
+
+					strcpy ( (*fnp[i+delta2]).l, b3);
+
+					if (gp_fverbose("d3"))
+					{
+						printf ("KK4: GRABO: f(x) : %4d  \n", i+delta2);
+						printf ("KK4: GRABO: str  :|%s|  \n",  (*fnp[i+delta2]).l );
 					}
 
 					tok = strtok(NULL,",");
@@ -7144,12 +7201,7 @@ printf ("CFMAS 5 : 1er strtok  |%s|  \n",tok);
 			
 				/* agregar una linea mas al count */
 				qf = qf + delta2 - delta1 - 1;
-#endif
 
-#if 0
-				/* no es linea larga, guardar una sola linea*/
-				strcpy ( (*fnp[i]).l, b2);
-#endif
 			}
 			else
 			{	/* no es linea con continuacion */
@@ -7165,6 +7217,13 @@ printf ("CFMAS 5 : 1er strtok  |%s|  \n",tok);
 
 #endif
 
+
+/*
+ * recibe linea con continuacion (+) y declaracion de variables 
+ * si hay comentarios al final, elimina
+ *
+ */
+
 char	*limpiar_mas(s)
 char	*s;
 {
@@ -7178,10 +7237,17 @@ char	*s;
 		if (s[i] != ' ' && s[i] != '+')
 			p1 = i, f1 = 0;
 
+#if 0
 	/* por ahora .. si hay comentarios al final, fuera */
 	for (i=strlen(s)-1, f1=1; f1 && i; i--)
 		if (s[i] == ',')
 			s[i+1] = 0, f1 = 0;
+#endif
+
+	/* por ahora .. si hay comentarios al final, fuera */
+	for (i=strlen(s)-1, f1=1; f1 && i; i--)
+		if (s[i] == '!')
+			s[i] = 0, f1 = 0;
 
 	strcpy(b1,s+p1);
 
@@ -7448,7 +7514,7 @@ int	ql;
 	/* agrego una linea al final */
 	fnp[ql] = (fnptr  ) malloc (sizeof (node));
 	if ( fnp[ql] == NULL)
-		error(904);
+		error(913);
 
 	(*fnp[ql]).l[0] = 0;
 	(*fnp[ql]).f1 = 0;
@@ -7489,7 +7555,7 @@ int	ql;
 		/* agrego una linea al final */
 		fnp[j] = (fnptr  ) malloc (sizeof (node));
 		if ( fnp[j] == NULL)
-			error(904);
+			error(914);
 
 		(*fnp[j]).l[0] = 0;
 		(*fnp[j]).f1 = 0;
@@ -9039,12 +9105,9 @@ int	pro_tool6()
 	if ( ffchg_lco )
 		cfor_lcon(&ql_ini,&ql_fin);
 
-#if 1
-	/* 4 - pidio sacar las lineas de cont. replicar declaracion */
+	/* 4 - pidio sacar las lineas de cont. y replicar declaracion */
 	if ( ffchg_mas )
 		cfor_mas(&ql_ini,&ql_fin);
-#endif
-
 
 	/* 5 - pidio convertir formato var/xx/ por var = xx         */
 	if ( ffchg_ini )
@@ -10597,7 +10660,6 @@ int	gp_print()
 int	gp_parser()
 {
 
-/* EEE */
 
 
 	char	s_opcion[MAXR];	/* opcion menu ... en str */
@@ -11657,9 +11719,8 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0039");
-	strcpy (d," Tue Jun 18 21:23:33 -03 2024");
-
+	strcpy (ver,"0040");
+	strcpy (d,"Sun Jun 23 17:49:03 -03 2024");
 
 	sprintf (z,"%s -- (%s)  %s", gp_fp(GP_GET,0,(char **)0), ver, d  );
 	memset (w,0,MAXV);
