@@ -1,9 +1,9 @@
 #!/bin/bash
 
 
-./tfor -v -opciones=d5 -tool=6 -inp=t4.for -out=t5.for -aux=p.err  --chgmas  > log
+./tfor -v -opciones=d5 -tool=6 -inp=t5.for -out=t6.for -aux=p.err  --chglco  > log5
 
-wc  t4.for t5.for 
+wc  t5.for t6.for 
 
 
 

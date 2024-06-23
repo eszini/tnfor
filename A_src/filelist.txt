@@ -1,7 +1,10 @@
 Makefile
 tfor.c
+menu.txt
+del_files.sh
+traeme.sh
 p1_com.sh
 p2_typ.sh
-p3_lco.sh
-p4_mas.sh
-p5_ini.sh
+p3_mas.sh
+p4_ini.sh
+p5_lco.sh

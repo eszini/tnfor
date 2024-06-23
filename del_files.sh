@@ -14,4 +14,7 @@ find "$root_dir" -type f -name "*.sta*" -exec echo "Eliminando: {}" \; -exec rm 
 echo "Todos los archivos .exe han sido eliminados desde $root_dir."
 
 
+echo "tfor en .. "
+find . -print | grep -i 'tfor\.c'
+
 
