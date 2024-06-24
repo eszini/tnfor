@@ -7056,8 +7056,13 @@ int	*ql_f;
 		
 					sq_lineas_con_mas_elim++;
 
+					/* ojo !! para una misma linea no puede ser true mas de una condicion !! */
 					/* si me encuentro una linea que es coment ... skip */
 					if ( (*fnp[i+delta1]).l[0] == '!')
+						delta1++;
+
+					/* si me encuentro una linea en blanco  ... skip */
+					if ( (*fnp[i+delta1]).l[0] != '!' && strlen( (*fnp[i+delta1]).l ) < 4 )
 						delta1++;
 				}
 				while ( def_var_continua (  (*fnp[i+delta1]).l) ) ;
@@ -11762,7 +11767,7 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0041");
+	strcpy (ver,"0042");
 	strcpy (d,"Sun Jun 23 17:49:03 -03 2024");
 
 	sprintf (z,"%s -- (%s)  %s", gp_fp(GP_GET,0,(char **)0), ver, d  );
