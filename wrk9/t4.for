@@ -1,5412 +1,8173 @@
-!     ******************************************************************
-!     CAT2OBJT.FOR
-!     Copyright(c)  2000
-!
-!     Created: 6/20/2003 3:37:14 PM
-!     Author : MARK S GERBER
-!     Last change: MSG 1/10/2010 3:02:24 PM
-!     ******************************************************************
 
-!***********************************************************************
-!
-!                ROUTINE TO CONVERT CATAWBA CONTRACT FILE
-!
-!                             COPYRIGHT (C) 1996
-!                        M.S. GERBER & ASSOCIATES, INC.
-!                             ALL RIGHTS RESERVED
-!
-!***********************************************************************
-!
-      SUBROUTINE CAT2_OBJECT
-      use end_routine, only: end_program, er_message
-      use logging
-      use filename_tracker
-      use procost_data
-      USE SIZECOM
-!!! RECORD LENGTH UPDATED WITH VARIABLE CHANGES
-      INCLUDE 'SpinLib.MON'
-      INTEGER (kind=2) ::  DELETE,INUNIT,IREC,LRECL/72/,YEAR
-      INTEGER ::  IOS
-!
-      INTEGER (kind=2) ::  NUMBER_OF_BC_CLASSES/0/
-      INTEGER (kind=2) ::  MAX_BC_CLASS_ID_NUM/0/
-      INTEGER (kind=2) ::  NUMBER_OF_OL_CLASSES/0/
-      INTEGER (kind=2) ::  MAX_OL_CLASS_ID_NUM/0/
-      INTEGER (kind=2) ::  UNIT_NUM/10/,YEAR_OF_RECORD
-      INTEGER (kind=2) ::  ASSET_CLASS_NUM
-      INTEGER (kind=2) ::  ASSET_CLASS_VECTOR
-      REAL (kind=4) ::  SUPPLEMENTAL_CAPACITY_REV
-      REAL (kind=4) ::  RESERVE_CAPACITY_REV
-      REAL (kind=4) ::  WHEELING_REV
-      REAL (kind=4) ::  OEI_REV
-      REAL (kind=4) ::  PKR_REV
-      REAL (kind=4) ::  SUPPLEMENTAL_ENERGY_REV
-      REAL (kind=4) ::  EXCHANGE_CAPACITY_EXP
-      REAL (kind=4) ::  PURCHASED_ENERGY_EXP
-      REAL (kind=4) ::  SURPLUS_ENERGY_EXP
-      REAL (kind=4) ::  EXCHANGE_ENERGY_EXP
-      REAL (kind=4) ::  PURCHASED_CAP_PAYMENTS
-      REAL (kind=4) ::  LEVEL_PURCHASED_CAP_PAYMENTS
-      REAL (kind=4) ::  OTHER_NET_REV_RETURN
-      REAL (kind=4) ::  PURCHASED_CAP_DEFERRED_DEBITS
-      REAL (kind=4) ::  DEFERRED_TAXES_PURCHASED_CAP
-      REAL (kind=4) ::  IS_DEFERRED_TAXES
-!
-      CHARACTER (len=5) ::  BASE_FILE_NAME
-      CHARACTER (len=5) ::  OVERLAY_FAMILY_NAME
-      CHARACTER (len=5) ::  CATAWBA2_CONTRACT_FILE
-      CHARACTER (len=256) ::  FILE_NAME
-      CHARACTER (len=256) ::  BASE_FILE_DIRECTORY
-      CHARACTER (len=256) ::  DATA_DRIVE,OUTPUT_DIRECTORY
-      LOGICAL (kind=4) ::  FILE_EXISTS/.FALSE./
-      LOGICAL (kind=4) ::  R_CATAWBA2_FILE_EXISTS
+        subroutine write_unique_msgmtrcl_log_entry(whichwrite)
+        use miscmod
+        use logging
+        implicit none
+        integer :: whichwrite
+        character (len=1024) :: uniques(50)=""
+        integer :: lastuq=0, index, foundindex
+        logical :: found
+        character (len=1024) :: outtext
 
-! DECLARATION FOR DBREAD COMMON BLOCK
-      CHARACTER (len=1024) ::  RECLN
-! DECLARATION FOR CATAWBA CONTRACT DETERMINANTS
-      CHARACTER (len=16) ::  FILE_TYPE/'Catawba Contract'/
-      CHARACTER (len=2) ::  CATAW2_OL/'BC'/
-      INTEGER (kind=2) ::  BC_ASSET_CLASS_POINTER(:)
-      INTEGER (kind=2) ::  OL_ASSET_CLASS_POINTER(:)
-      INTEGER (kind=2) ::  TEMP_ASSET_CLASS_POINTER(:)
-      ALLOCATABLE :: BC_ASSET_CLASS_POINTER,
-     +               OL_ASSET_CLASS_POINTER,
-     +               TEMP_ASSET_CLASS_POINTER
-      SAVE BC_ASSET_CLASS_POINTER,OL_ASSET_CLASS_POINTER
-      INTEGER (kind=2) ::  R_NUM_OF_CLASSES
-      INTEGER (kind=2) ::  R_MAX_CLASS_NUM,R_CLASS_POINTERS(*)
-      LOGICAL (kind=1) ::  LAHEY_LF95
-      CHARACTER (len=30) ::  SCREEN_OUTPUT
-!
-! CONVERT THE CATAWBA CONTRACT FILE
-!***********************************************************************
-      ENTRY CAT2_MAKEBIN
-!***********************************************************************
-      BASE_FILE_NAME = CATAWBA2_CONTRACT_FILE()
-      DATA_DRIVE = OUTPUT_DIRECTORY()
+            outtext="msgmtrcl write " // trim(itos(whichwrite))
+            found=.false.
+            foundindex=-1
 
-       file_name=get_c2b_filename()
+            do index=1, lastuq
+                if(trim(uniques(index))==outtext) then
+                    foundindex=index
+                    found=.true.
+                    exit
+                endif
+            enddo
 
-      INQUIRE(FILE=FILE_NAME,EXIST=file_exists)
-      CATAWBA2_FILE_EXISTS = file_exists
-
-      IF(FILE_EXISTS) THEN
-         IF(LAHEY_LF95()) THEN
-            SCREEN_OUTPUT = trim(FILE_TYPE)//'-'//BASE_FILE_NAME
-            CALL MG_LOCATE_WRITE(16,30,SCREEN_OUTPUT,ALL_VERSIONS,0)
-         ELSE
-            CALL MG_CLEAR_LINE_WRITE(17,9,36,FILE_TYPE,ALL_VERSIONS,0)
-            CALL MG_LOCATE_WRITE(16,30,BASE_FILE_NAME,ALL_VERSIONS,0)
-         ENDIF
-         ALLOCATE(TEMP_ASSET_CLASS_POINTER(1024))
-         TEMP_ASSET_CLASS_POINTER = 0
-         NUMBER_OF_OL_CLASSES = 0
-         MAX_OL_CLASS_ID_NUM = 0
-         ASSET_CLASS_NUM = 0
-         ASSET_CLASS_VECTOR = 0
-!
-         OPEN(10,FILE=FILE_NAME)
-         OPEN(11,FILE=trim(DATA_DRIVE)//"BCCATA2.BIN",ACCESS="DIRECT",
-     +                                      STATUS="UNKNOWN",RECL=LRECL)
-         IREC = 1
-!
-         READ(10,*) DELETE
-         DO YEAR_OF_RECORD = 1, 30
-            READ(10,1000,IOSTAT=IOS) RECLN
-            IF(IOS /= 0) EXIT
-            RECLN = trim(RECLN)//',,,,,,,,,,,,,,,,,,,,,,,,,,,,,,'
-            READ(RECLN,*,ERR=200) DELETE,
-     +            YEAR,
-     +            SUPPLEMENTAL_CAPACITY_REV,
-     +            RESERVE_CAPACITY_REV,
-     +            WHEELING_REV,
-     +            OEI_REV,
-     +            PKR_REV,
-     +            SUPPLEMENTAL_ENERGY_REV,
-     +            EXCHANGE_CAPACITY_EXP,
-     +            PURCHASED_ENERGY_EXP,
-     +            SURPLUS_ENERGY_EXP,
-     +            EXCHANGE_ENERGY_EXP,
-     +            PURCHASED_CAP_PAYMENTS,
-     +            LEVEL_PURCHASED_CAP_PAYMENTS,
-     +            OTHER_NET_REV_RETURN,
-     +            PURCHASED_CAP_DEFERRED_DEBITS,
-     +            DEFERRED_TAXES_PURCHASED_CAP,
-     +            IS_DEFERRED_TAXES,
-     +            ASSET_CLASS_NUM,
-     +            ASSET_CLASS_VECTOR
-!
-!
-! TRACK ASSET CLASS INFO
-!
-          CALL SET_ASSET_CLASSES(ASSET_CLASS_NUM,
-     +                             NUMBER_OF_BC_CLASSES,
-     +                              MAX_BC_CLASS_ID_NUM,
-     +                             TEMP_ASSET_CLASS_POINTER)
-!
-            WRITE(11,REC=IREC) DELETE,
-     +            YEAR,
-     +            SUPPLEMENTAL_CAPACITY_REV,
-     +            RESERVE_CAPACITY_REV,
-     +            WHEELING_REV,
-     +            OEI_REV,
-     +            PKR_REV,
-     +            SUPPLEMENTAL_ENERGY_REV,
-     +            EXCHANGE_CAPACITY_EXP,
-     +            PURCHASED_ENERGY_EXP,
-     +            SURPLUS_ENERGY_EXP,
-     +            EXCHANGE_ENERGY_EXP,
-     +            PURCHASED_CAP_PAYMENTS,
-     +            LEVEL_PURCHASED_CAP_PAYMENTS,
-     +            OTHER_NET_REV_RETURN,
-     +            PURCHASED_CAP_DEFERRED_DEBITS,
-     +            DEFERRED_TAXES_PURCHASED_CAP,
-     +            IS_DEFERRED_TAXES,
-     +            ASSET_CLASS_NUM,
-     +            ASSET_CLASS_VECTOR
-            IREC = IREC + 1
-         ENDDO ! YEAR
-         CLOSE(10)
-         CLOSE(11)
-         IF(MAX_BC_CLASS_ID_NUM > 0) THEN
-            ALLOCATE(BC_ASSET_CLASS_POINTER(MAX_BC_CLASS_ID_NUM))
-     +
-            BC_ASSET_CLASS_POINTER(1:MAX_BC_CLASS_ID_NUM) =
-     +                   TEMP_ASSET_CLASS_POINTER(1:MAX_BC_CLASS_ID_NUM)
-         ENDIF
-         DEALLOCATE(TEMP_ASSET_CLASS_POINTER)
-      ELSE IF(INDEX(BASE_FILE_NAME,'NONE') == 0) THEN
-         CALL STOP_NOFILE(FILE_TYPE,FILE_NAME)
-      ENDIF
-      RETURN
+            if(.not. found) then
+                lastuq=lastuq+1
+                uniques(lastuq)=outtext
+                call write_log_entry("clreport:0001", outtext)
+            endif
 
 
 
-! OVERLAY THE CATAWBA CONTRACT FILE
-!***********************************************************************
-      ENTRY CAT2_MAKEOVL(OVERLAY_FAMILY_NAME)
-!***********************************************************************
-      IF(LAHEY_LF95()) THEN
-         SCREEN_OUTPUT = trim(FILE_TYPE)//'-'//OVERLAY_FAMILY_NAME
-         CALL MG_LOCATE_WRITE(16,30,SCREEN_OUTPUT,ALL_VERSIONS,0)
-      ELSE
-         CALL MG_CLEAR_LINE_WRITE(17,9,36,FILE_TYPE,ALL_VERSIONS,0)
-         CALL LOCATE(10,51)
-      ENDIF
-      DATA_DRIVE = OUTPUT_DIRECTORY()
-      FILE_NAME = trim(DATA_DRIVE)//"C2O"//
-     +   trim(OVERLAY_FAMILY_NAME)//".DAT"
-      OPEN(10,FILE=FILE_NAME)
-      READ(10,*) DELETE
-      INUNIT = 12
-      IF(CATAW2_OL == 'BC') THEN
-         OPEN(11,FILE=trim(DATA_DRIVE)//"BCCATA2.BIN",
-     +                                       ACCESS="DIRECT",RECL=LRECL)
-         INUNIT = 11
-      ENDIF
-      OPEN(12,FILE=trim(DATA_DRIVE)//"OLCATA2.BIN",ACCESS="DIRECT",
-     +                                      STATUS="UNKNOWN",RECL=LRECL)
-      ALLOCATE(TEMP_ASSET_CLASS_POINTER(1024))
-      TEMP_ASSET_CLASS_POINTER = 0
-      IREC = 0
-      DO
-         IREC = IREC + 1
-         READ(INUNIT,REC=IREC,IOSTAT=IOS) DELETE,
-     +            YEAR,
-     +            SUPPLEMENTAL_CAPACITY_REV,
-     +            RESERVE_CAPACITY_REV,
-     +            WHEELING_REV,
-     +            OEI_REV,
-     +            PKR_REV,
-     +            SUPPLEMENTAL_ENERGY_REV,
-     +            EXCHANGE_CAPACITY_EXP,
-     +            PURCHASED_ENERGY_EXP,
-     +            SURPLUS_ENERGY_EXP,
-     +            EXCHANGE_ENERGY_EXP,
-     +            PURCHASED_CAP_PAYMENTS,
-     +            LEVEL_PURCHASED_CAP_PAYMENTS,
-     +            OTHER_NET_REV_RETURN,
-     +            PURCHASED_CAP_DEFERRED_DEBITS,
-     +            DEFERRED_TAXES_PURCHASED_CAP,
-     +            IS_DEFERRED_TAXES,
-     +            ASSET_CLASS_NUM,
-     +            ASSET_CLASS_VECTOR
-         IF(IOS /= 0) EXIT
-         READ(10,1000,IOSTAT=IOS) RECLN
-         IF(IOS == 0) THEN
-            RECLN = trim(RECLN)//',,,,,,,,,,,,,'
-            READ(RECLN,*,ERR=300) DELETE,
-     +            YEAR,
-     +            SUPPLEMENTAL_CAPACITY_REV,
-     +            RESERVE_CAPACITY_REV,
-     +            WHEELING_REV,
-     +            OEI_REV,
-     +            PKR_REV,
-     +            SUPPLEMENTAL_ENERGY_REV,
-     +            EXCHANGE_CAPACITY_EXP,
-     +            PURCHASED_ENERGY_EXP,
-     +            SURPLUS_ENERGY_EXP,
-     +            EXCHANGE_ENERGY_EXP,
-     +            PURCHASED_CAP_PAYMENTS,
-     +            LEVEL_PURCHASED_CAP_PAYMENTS,
-     +            OTHER_NET_REV_RETURN,
-     +            PURCHASED_CAP_DEFERRED_DEBITS,
-     +            DEFERRED_TAXES_PURCHASED_CAP,
-     +            IS_DEFERRED_TAXES,
-     +            ASSET_CLASS_NUM,
-     +            ASSET_CLASS_VECTOR
-         ENDIF
-!
-       CALL SET_ASSET_CLASSES(ASSET_CLASS_NUM,
-     +                          NUMBER_OF_OL_CLASSES,
-     +                           MAX_OL_CLASS_ID_NUM,
-     +                          TEMP_ASSET_CLASS_POINTER)
-!
-         WRITE(12,REC=IREC) DELETE,
-     +            YEAR,
-     +            SUPPLEMENTAL_CAPACITY_REV,
-     +            RESERVE_CAPACITY_REV,
-     +            WHEELING_REV,
-     +            OEI_REV,
-     +            PKR_REV,
-     +            SUPPLEMENTAL_ENERGY_REV,
-     +            EXCHANGE_CAPACITY_EXP,
-     +            PURCHASED_ENERGY_EXP,
-     +            SURPLUS_ENERGY_EXP,
-     +            EXCHANGE_ENERGY_EXP,
-     +            PURCHASED_CAP_PAYMENTS,
-     +            LEVEL_PURCHASED_CAP_PAYMENTS,
-     +            OTHER_NET_REV_RETURN,
-     +            PURCHASED_CAP_DEFERRED_DEBITS,
-     +            DEFERRED_TAXES_PURCHASED_CAP,
-     +            IS_DEFERRED_TAXES,
-     +            ASSET_CLASS_NUM,
-     +            ASSET_CLASS_VECTOR
-      ENDDO
-      CLOSE(10)
-      CLOSE(12)
-      IF(CATAW2_OL == 'BC') CLOSE(11)
-      CATAW2_OL = 'OL'
-      IF(ALLOCATED(OL_ASSET_CLASS_POINTER))
-     +                             DEALLOCATE(OL_ASSET_CLASS_POINTER)
-      IF(MAX_OL_CLASS_ID_NUM > 0) THEN
-         ALLOCATE(OL_ASSET_CLASS_POINTER(MAX_OL_CLASS_ID_NUM))
-         OL_ASSET_CLASS_POINTER(1:MAX_OL_CLASS_ID_NUM) =
-     +                   TEMP_ASSET_CLASS_POINTER(1:MAX_OL_CLASS_ID_NUM)
-      ENDIF
-      DEALLOCATE(TEMP_ASSET_CLASS_POINTER)
-      RETURN
+        end subroutine write_unique_msgmtrcl_log_entry
 
+!***********************************************************************
+!
+!             CAPACITY LIMITED MONTHLY REPORT WRITER
+!                   COPYRIGHT (C) 1987-2000
+!               M.S. GERBER & ASSOCIATES, INC.
+!                   ALL RIGHTS RESERVED
+!
+!**********************************************************************
+!
+! CLREPORT
+      SUBROUTINE PERIOD_CL_REPORT(ISEAS,YR,PENRG,
+     +         PMMBTUS,PFUELCST,PVARCOST,P_PUR_ENRG,P_PUR_POWER_COST,
+     +         PFIXCOST,ENERGY,SEAS_HOURS,BLK1_HEAT,
+     +         BLK2_HEAT,
+     +         MAINTENANCE_RATE,
+     +         DEMAND,P_NUCLEAR_FUEL_COST,
+     +         BASE,PEAK,
+     +         CONTRACT_ENERGY,CONTRACT_CAPACITY,MAXIMUM_CAPACITY,
+     +         MINIMUM_CAPACITY,PEAK_MONTH,KEPCO,
+     +         BLOCK_FUEL_COST,CONTRACTS_IN_PERIOD,
+     +         MONTHLY_ECONOMY_BOUGHT,MONTHLY_ECONOMY_COST,
+     +         MONTHLY_ECONOMY_SOLD,MONTHLY_ECONOMY_REVENUE,
+     +         FUEL_MIX_PRIM,
+     +         EFFECTIVE_CAPACITY,MONTH_BTUS_GOCN12,
+     +         MMBTU_FUEL_BALANCE,
+     +         WABASH_VALLEY,REALLY_KEPCO,
+     +         P_SALES_ENERGY,P_SALES_REVENUE,MAXIMUM_ENERGY,
+     +         RATCHET_CAPACITY_BASIS,MIN_RATCHET_CAPACITY,
+     +         REVENUE_GENERATING_CAPACITY,
+     +         CL_UNIT_MONTHLY_FIXED_COST)
 
-  200 CALL MG_LOCATE_WRITE(20,0,trim(RECLN),ALL_VERSIONS,1)
-      er_message='stop requested from CAT2OBJT SIID7'
-      call end_program(er_message)
-
-  300 CALL MG_LOCATE_WRITE(20,0,trim(RECLN),ALL_VERSIONS,1)
-      CALL MG_LOCATE_WRITE(20,0,
-     +               'Error reading Custom Contract record.  Look for'//
-     +                     ' a "," in a character name.',
-     +                     ALL_VERSIONS,1)
-      er_message='stop requested from CAT2OBJT SIID8'
-      call end_program(er_message)
-!
-!***********************************************************************
-      ENTRY RESET_CATAW2_OL
-!***********************************************************************
-         CATAW2_OL = 'BC'
-      RETURN
-!
-!***********************************************************************
-      ENTRY OPEN_CATAW2_ALLOCATOR_FILE
-!***********************************************************************
-         OPEN(UNIT_NUM,FILE=trim(OUTPUT_DIRECTORY())//CATAW2_OL//
-     +          "CATA2.BIN",ACCESS="DIRECT",STATUS="UNKNOWN",RECL=LRECL)
-      RETURN
-!
-!***********************************************************************
-      ENTRY CLOSE_CATAW2_ALLOCATOR_FILE
-!***********************************************************************
-         CLOSE(UNIT_NUM)
-      RETURN
-!***********************************************************************
-      ENTRY DOES_CATAWBA2_FILE_EXIST(R_CATAWBA2_FILE_EXISTS)
-!***********************************************************************
-         R_CATAWBA2_FILE_EXISTS = CATAWBA2_FILE_EXISTS
-      RETURN
-!
-!***********************************************************************
-      ENTRY RETURN_NUM_CATAWBA_CLASSES(R_NUM_OF_CLASSES,
-     +                                 R_MAX_CLASS_NUM)
-!***********************************************************************
-         IF(CATAW2_OL == 'OL') THEN
-            R_NUM_OF_CLASSES = NUMBER_OF_OL_CLASSES
-            R_MAX_CLASS_NUM = MAX_OL_CLASS_ID_NUM
-         ELSE
-            R_NUM_OF_CLASSES = NUMBER_OF_BC_CLASSES
-            R_MAX_CLASS_NUM = MAX_BC_CLASS_ID_NUM
-         ENDIF
-      RETURN
-!***********************************************************************
-      ENTRY RETURN_CATAWBA_POINTERS(R_CLASS_POINTERS)
-!***********************************************************************
-         IF(CATAW2_OL == 'OL') THEN
-            R_CLASS_POINTERS(1:MAX_OL_CLASS_ID_NUM) =
-     +                     OL_ASSET_CLASS_POINTER(1:MAX_OL_CLASS_ID_NUM)
-         ELSE
-            R_CLASS_POINTERS(1:MAX_BC_CLASS_ID_NUM) =
-     +                     BC_ASSET_CLASS_POINTER(1:MAX_BC_CLASS_ID_NUM)
-         ENDIF
-      RETURN
- 1000 FORMAT(A)
- 1010 FORMAT('&',A)
-      END
-!***********************************************************************
-      FUNCTION UPDATE_CATAWBA_CONTRACT_DATA()
-!***********************************************************************
-!
-      use miscmod
-      USE SIZECOM
-      INCLUDE 'SpinLib.MON'
-      INCLUDE 'GLOBECOM.MON'
-      LOGICAL (kind=1) ::  UPDATE_CATAWBA_CONTRACT_DATA,CATAWBA_INFO
-      INTEGER (kind=2) ::  DELETE
-      INTEGER (kind=2) ::  S_YEAR
-      INTEGER (kind=2) ::  NUMBER_OF_PARTIES
-      INTEGER ::  IOS
-      PARAMETER(NUMBER_OF_PARTIES=4)
-      LOGICAL (kind=4) ::  CATAWBA_FILE_EXISTS
-      SAVE CATAWBA_FILE_EXISTS
-
-      REAL (kind=4) ::  S_SUPPLEMENTAL_CAPACITY_REV/0./
-      REAL (kind=4) ::  S_RESERVE_CAPACITY_REV/0./
-      REAL (kind=4) ::  S_WHEELING_REV/0./
-      REAL (kind=4) ::  S_OEI_REV/0./
-      REAL (kind=4) ::  S_PKR_REV/0./
-      REAL (kind=4) ::  S_SUPPLEMENTAL_ENERGY_REV/0./
-      REAL (kind=4) ::  S_EXCHANGE_CAPACITY_EXP/0./
-      REAL (kind=4) ::  S_PURCHASED_ENERGY_EXP/0./
-      REAL (kind=4) ::  S_SURPLUS_ENERGY_EXP/0./
-      REAL (kind=4) ::  S_EXCHANGE_ENERGY_EXP/0./
-      REAL (kind=4) ::  S_PURCHASED_CAP_PAYMENTS/0./
-      REAL (kind=4) ::  S_LEVEL_PURCHASED_CAP_PAYMENTS/0./
-      REAL (kind=4) ::  S_OTHER_NET_REV_RETURN/0./
-      REAL (kind=4) ::  S_PURCHASED_CAP_DEFERRED_DEBITS/0./
-      REAL (kind=4) ::  S_DEFERRED_TAXES_PURCHASED_CAP/0./
-      REAL (kind=4) ::  S_IS_DEFERRED_TAXES/0./
-      INTEGER (kind=2) ::  ASSET_CLASS/0/
-      INTEGER (kind=2) ::  ASSET_ALLOCATION_VECTOR/0/
-!
-!
-      REAL (kind=4) ::  CATAWBA_REVENUES(:,:)
-      REAL (kind=4) ::  CATAWBA_EXPENSES(:,:)
-      REAL (kind=4) ::  CATAWBA_CAPACITY_PAYMENTS(:,:)
-      REAL (kind=4) ::  CATAWBA_LEVEL_CAP_PAYMENTS(:,:)
-      REAL (kind=4) ::  CATAWBA_OTHER_NET_REVENUES(:,:)
-      REAL (kind=4) ::  CATAWBA_DEFERRED_DEBITS(:,:)
-      REAL (kind=4) ::  CATAWBA_DEFERRED_TAXES_BAL_CR(:,:)
-      REAL (kind=4) ::  CATAWBA_DEFERRED_TAXES_CR(:,:)
-      ALLOCATABLE :: CATAWBA_REVENUES,
-     +               CATAWBA_EXPENSES,
-     +               CATAWBA_CAPACITY_PAYMENTS,
-     +               CATAWBA_LEVEL_CAP_PAYMENTS,
-     +               CATAWBA_OTHER_NET_REVENUES,
-     +               CATAWBA_DEFERRED_DEBITS,
-     +               CATAWBA_DEFERRED_TAXES_BAL_CR,
-     +               CATAWBA_DEFERRED_TAXES_CR
-      SAVE CATAWBA_REVENUES,
-     +     CATAWBA_EXPENSES,
-     +     CATAWBA_CAPACITY_PAYMENTS,
-     +     CATAWBA_LEVEL_CAP_PAYMENTS,
-     +     CATAWBA_OTHER_NET_REVENUES,
-     +     CATAWBA_DEFERRED_DEBITS,
-     +     CATAWBA_DEFERRED_TAXES_BAL_CR,
-     +     CATAWBA_DEFERRED_TAXES_CR
-      INTEGER (kind=2) ::  ASSET_CLASS_POINTER(:)
-      INTEGER (kind=2) ::  MAX_ASSET_CLASS_NUM
-      INTEGER (kind=2) ::  NUM_OF_ASSET_CLASSES
-      ALLOCATABLE :: ASSET_CLASS_POINTER
-      SAVE ASSET_CLASS_POINTER,MAX_ASSET_CLASS_NUM,NUM_OF_ASSET_CLASSES
-      INTEGER (kind=4) ::  VALUES_TO_ZERO
-      CHARACTER (len=1) ::  DUMMY_TYPE
-      REAL (kind=4) ::  ASSET_CLASS_LIST(:),ASSET_ALLOCATION_LIST(:)
-      ALLOCATABLE :: ASSET_CLASS_LIST,ASSET_ALLOCATION_LIST
-      REAL (kind=4) ::  TOTAL_CATAWBA_REVENUES,TOTAL_CATAWBA_EXPENSES
-      INTEGER (kind=2) ::  YR,R_YR
-      REAL (kind=4) ::  R_CATAWBA_REVENUES
-      REAL (kind=4) ::  R_CATAWBA_EXPENSES
-      REAL (kind=4) ::  R_CATAWBA_CAPACITY_PAYMENTS
-      REAL (kind=4) ::  R_CATAWBA_LEVEL_CAP_PAYMENTS
-      REAL (kind=4) ::  R_CATAWBA_OTHER_NET_REVENUES
-      REAL (kind=4) ::  R_CATAWBA_DEFERRED_DEBITS
-      REAL (kind=4) ::  R_CATAWBA_DEFER_TAXES_BAL_CR
-      REAL (kind=4) ::  R_CATAWBA_DEFERRED_TAXES_CR
-      INTEGER (kind=2) ::  CLASS_POINTER,R_CLASS
-      REAL (kind=4) ::  ASSET_ALLOCATOR
-      REAL (kind=4) ::  S_CATAWBA_DEF_TAX_BY_BAL
-      REAL (kind=4) ::  S_CATAWBA_DEF_DEBT_BY_BAL
-      SAVE S_CATAWBA_DEF_TAX_BY_BAL,
-     +     S_CATAWBA_DEF_DEBT_BY_BAL
-      REAL (kind=4) ::  CATAWBA_BY_DEBITS_BALANCE
-      REAL (kind=4) ::  CATAWBA_BY_DEF_TAX_BALANCE
-      REAL (kind=4) ::  CATAWBA_DEFERRED_TAXES
-      REAL (kind=4) ::  CATAWBA_TOTAL_OTHER_NET_REVS
-      REAL (kind=4) ::  CATAWBA_TOTAL_LEVEL_CAP_PAYMTS
-      REAL (kind=4) ::  CATAWBA_TOTAL_CAP_PAYMENTS
-      REAL (kind=4) ::  CATAWBA_TOTAL_EXPENSES
-      REAL (kind=4) ::  CATAWBA_TOTAL_REVENUES
-!
-! END DATA DECLARATIONS
-!
-         CALL DOES_CATAWBA2_FILE_EXIST(CATAWBA_FILE_EXISTS)
-         UPDATE_CATAWBA_CONTRACT_DATA = CATAWBA_FILE_EXISTS
-         IF(.NOT. CATAWBA_FILE_EXISTS) RETURN
-!
-!
-! ASSET CLASS EXPENSE AND REVENUE INFORMATION
-!
-         CALL RETURN_NUM_CATAWBA_CLASSES(NUM_OF_ASSET_CLASSES,
-     +                                   MAX_ASSET_CLASS_NUM)
-         IF(ALLOCATED(ASSET_CLASS_POINTER))
-     +                                   DEALLOCATE(ASSET_CLASS_POINTER)
-         IF(MAX_ASSET_CLASS_NUM > 0) THEN
-            ALLOCATE(ASSET_CLASS_POINTER(MAX_ASSET_CLASS_NUM))
-            CALL RETURN_CATAWBA_POINTERS(ASSET_CLASS_POINTER)
-         ENDIF
-         IF(ALLOCATED(CATAWBA_REVENUES)) THEN
-            DEALLOCATE(CATAWBA_REVENUES,
-     +                 CATAWBA_EXPENSES,
-     +                 CATAWBA_CAPACITY_PAYMENTS,
-     +                 CATAWBA_LEVEL_CAP_PAYMENTS,
-     +                 CATAWBA_OTHER_NET_REVENUES,
-     +                 CATAWBA_DEFERRED_DEBITS,
-     +                 CATAWBA_DEFERRED_TAXES_BAL_CR,
-     +                 CATAWBA_DEFERRED_TAXES_CR)
-         ENDIF
-         ALLOCATE(CATAWBA_REVENUES(0:NUM_OF_ASSET_CLASSES,
-     +                                                AVAIL_DATA_YEARS),
-     +            CATAWBA_EXPENSES(0:NUM_OF_ASSET_CLASSES,
-     +                                                AVAIL_DATA_YEARS),
-     +            CATAWBA_CAPACITY_PAYMENTS(0:NUM_OF_ASSET_CLASSES,
-     +                                                AVAIL_DATA_YEARS),
-     +            CATAWBA_LEVEL_CAP_PAYMENTS(0:NUM_OF_ASSET_CLASSES,
-     +                                                AVAIL_DATA_YEARS),
-     +            CATAWBA_OTHER_NET_REVENUES(0:NUM_OF_ASSET_CLASSES,
-     +                                                AVAIL_DATA_YEARS),
-     +            CATAWBA_DEFERRED_TAXES_CR(0:NUM_OF_ASSET_CLASSES,
-     +                                                AVAIL_DATA_YEARS),
-     +            CATAWBA_DEFERRED_DEBITS(0:NUM_OF_ASSET_CLASSES,
-     +                                              0:AVAIL_DATA_YEARS),
-     +            CATAWBA_DEFERRED_TAXES_BAL_CR(0:NUM_OF_ASSET_CLASSES,
-     +                                              0:AVAIL_DATA_YEARS))
-!
-         CATAWBA_REVENUES = 0.
-         CATAWBA_EXPENSES = 0.
-         CATAWBA_CAPACITY_PAYMENTS = 0.
-         CATAWBA_LEVEL_CAP_PAYMENTS = 0.
-         CATAWBA_OTHER_NET_REVENUES = 0.
-         CATAWBA_DEFERRED_TAXES_CR = 0.
-         CATAWBA_DEFERRED_DEBITS = 0.
-         CATAWBA_DEFERRED_TAXES_BAL_CR = 0.
-         ALLOCATE(ASSET_CLASS_LIST(AVAIL_DATA_YEARS),
-     +            ASSET_ALLOCATION_LIST(AVAIL_DATA_YEARS))
-         CALL OPEN_CATAW2_ALLOCATOR_FILE
-         DO YR = 1, AVAIL_DATA_YEARS
-            READ(10,IOSTAT=IOS) DELETE,S_YEAR,
-     +                     S_SUPPLEMENTAL_CAPACITY_REV,
-     +                     S_RESERVE_CAPACITY_REV,
-     +                     S_WHEELING_REV,
-     +                     S_OEI_REV,
-     +                     S_PKR_REV,
-     +                     S_SUPPLEMENTAL_ENERGY_REV,
-     +                     S_EXCHANGE_CAPACITY_EXP,
-     +                     S_PURCHASED_ENERGY_EXP,
-     +                     S_SURPLUS_ENERGY_EXP,
-     +                     S_EXCHANGE_ENERGY_EXP,
-     +                     S_PURCHASED_CAP_PAYMENTS,
-     +                     S_LEVEL_PURCHASED_CAP_PAYMENTS,
-     +                     S_OTHER_NET_REV_RETURN,
-     +                     S_PURCHASED_CAP_DEFERRED_DEBITS,
-     +                     S_DEFERRED_TAXES_PURCHASED_CAP,
-     +                     S_IS_DEFERRED_TAXES,
-     +                     ASSET_CLASS,
-     +                     ASSET_ALLOCATION_VECTOR
-            IF(IOS /= 0) EXIT
-            IF(YR == 1) THEN
-               S_CATAWBA_DEF_TAX_BY_BAL=S_DEFERRED_TAXES_PURCHASED_CAP +
-     +                                  S_IS_DEFERRED_TAXES
-               S_CATAWBA_DEF_DEBT_BY_BAL =
-     +                                 S_PURCHASED_CAP_DEFERRED_DEBITS -
-     +                                 S_LEVEL_PURCHASED_CAP_PAYMENTS -
-     +                                 S_OTHER_NET_REV_RETURN
-            ENDIF
-!
-! CALCULATIONS
-!
-            TOTAL_CATAWBA_REVENUES = S_SUPPLEMENTAL_CAPACITY_REV +
-     +                               S_RESERVE_CAPACITY_REV +
-     +                               S_WHEELING_REV +
-     +                               S_OEI_REV +
-     +                               S_PKR_REV +
-     +                               S_SUPPLEMENTAL_ENERGY_REV
-            TOTAL_CATAWBA_EXPENSES = S_EXCHANGE_CAPACITY_EXP +
-     +                               S_PURCHASED_ENERGY_EXP +
-     +                               S_SURPLUS_ENERGY_EXP +
-     +                               S_EXCHANGE_ENERGY_EXP
-!
-! ALLOCATE TO TOTAL COMPANY AND ASSET CLASSES
-!
-            IF(ASSET_CLASS < 0.) THEN
-               CALL GET_ASSET_VAR(ABS(ASSET_CLASS),
-     +                                      DUMMY_TYPE,ASSET_CLASS_LIST)
-               CALL GET_ASSET_VAR(ABS(ASSET_ALLOCATION_VECTOR),
-     +                                 DUMMY_TYPE,ASSET_ALLOCATION_LIST)
-            ELSE
-               ASSET_CLASS_LIST(1) = ASSET_CLASS
-               ASSET_CLASS_LIST(2) = 0
-               ASSET_ALLOCATION_LIST(1) = 100.
-               ASSET_ALLOCATION_LIST(2) = 0.
-            ENDIF
-!
-            CLASS_POINTER = 1
-            DO
-               ASSET_CLASS = ASSET_CLASS_LIST(CLASS_POINTER) + 1
-               IF(ASSET_CLASS > 0) ASSET_CLASS =
-     +                                  ASSET_CLASS_POINTER(ASSET_CLASS)
-               ASSET_ALLOCATOR=ASSET_ALLOCATION_LIST(CLASS_POINTER)/100.
-!
-               IF(YR == 1) THEN
-                  CATAWBA_DEFERRED_DEBITS(ASSET_CLASS,0) =
-     +                       CATAWBA_DEFERRED_DEBITS(ASSET_CLASS,0) +
-     +                       ASSET_ALLOCATOR * S_CATAWBA_DEF_DEBT_BY_BAL
-                  CATAWBA_DEFERRED_TAXES_BAL_CR(ASSET_CLASS,0) =
-     +                    CATAWBA_DEFERRED_TAXES_BAL_CR(ASSET_CLASS,0) +
-     +                    ASSET_ALLOCATOR * S_CATAWBA_DEF_TAX_BY_BAL
-               ENDIF
-               CATAWBA_REVENUES(ASSET_CLASS,YR) =
-     +                          CATAWBA_REVENUES(ASSET_CLASS,YR) +
-     +                          ASSET_ALLOCATOR * TOTAL_CATAWBA_REVENUES
-               CATAWBA_EXPENSES(ASSET_CLASS,YR) =
-     +                          CATAWBA_EXPENSES(ASSET_CLASS,YR) +
-     +                          ASSET_ALLOCATOR * TOTAL_CATAWBA_EXPENSES
-               CATAWBA_CAPACITY_PAYMENTS(ASSET_CLASS,YR) =
-     +                        CATAWBA_CAPACITY_PAYMENTS(ASSET_CLASS,YR)+
-     +                        ASSET_ALLOCATOR * S_PURCHASED_CAP_PAYMENTS
-               CATAWBA_LEVEL_CAP_PAYMENTS(ASSET_CLASS,YR) =
-     +                  CATAWBA_LEVEL_CAP_PAYMENTS(ASSET_CLASS,YR) +
-     +                  ASSET_ALLOCATOR * S_LEVEL_PURCHASED_CAP_PAYMENTS
-               CATAWBA_OTHER_NET_REVENUES(ASSET_CLASS,YR) =
-     +                       CATAWBA_OTHER_NET_REVENUES(ASSET_CLASS,YR)+
-     +                       ASSET_ALLOCATOR * S_OTHER_NET_REV_RETURN
-               CATAWBA_DEFERRED_DEBITS(ASSET_CLASS,YR) =
-     +                 CATAWBA_DEFERRED_DEBITS(ASSET_CLASS,YR) +
-     +                 ASSET_ALLOCATOR * S_PURCHASED_CAP_DEFERRED_DEBITS
-               CATAWBA_DEFERRED_TAXES_BAL_CR(ASSET_CLASS,YR) =
-     +                  CATAWBA_DEFERRED_TAXES_BAL_CR(ASSET_CLASS,YR) +
-     +                  ASSET_ALLOCATOR * S_DEFERRED_TAXES_PURCHASED_CAP
-               CATAWBA_DEFERRED_TAXES_CR(ASSET_CLASS,YR) =
-     +                        CATAWBA_DEFERRED_TAXES_CR(ASSET_CLASS,YR)+
-     +                        ASSET_ALLOCATOR * S_IS_DEFERRED_TAXES
-               CLASS_POINTER = CLASS_POINTER + 1
-               IF(CLASS_POINTER > AVAIL_DATA_YEARS) EXIT
-               IF(ASSET_CLASS_LIST(CLASS_POINTER) == 0. .OR.
-     +                      ASSET_CLASS_LIST(CLASS_POINTER) ==-99.) EXIT
-            ENDDO
-            DO ASSET_CLASS = 1, NUM_OF_ASSET_CLASSES
-               CATAWBA_REVENUES(0,YR) = CATAWBA_REVENUES(0,YR) +
-     +                                  CATAWBA_REVENUES(ASSET_CLASS,YR)
-               CATAWBA_EXPENSES(0,YR) = CATAWBA_EXPENSES(0,YR) +
-     +                                  CATAWBA_EXPENSES(ASSET_CLASS,YR)
-               CATAWBA_CAPACITY_PAYMENTS(0,YR) =
-     +                         CATAWBA_CAPACITY_PAYMENTS(0,YR) +
-     +                         CATAWBA_CAPACITY_PAYMENTS(ASSET_CLASS,YR)
-               CATAWBA_LEVEL_CAP_PAYMENTS(0,YR) =
-     +                        CATAWBA_LEVEL_CAP_PAYMENTS(0,YR) +
-     +                        CATAWBA_LEVEL_CAP_PAYMENTS(ASSET_CLASS,YR)
-               CATAWBA_OTHER_NET_REVENUES(0,YR) =
-     +                        CATAWBA_OTHER_NET_REVENUES(0,YR) +
-     +                        CATAWBA_OTHER_NET_REVENUES(ASSET_CLASS,YR)
-               CATAWBA_DEFERRED_TAXES_CR(0,YR) =
-     +                         CATAWBA_DEFERRED_TAXES_CR(0,YR) +
-     +                         CATAWBA_DEFERRED_TAXES_CR(ASSET_CLASS,YR)
-               CATAWBA_DEFERRED_DEBITS(0,YR) =
-     +                           CATAWBA_DEFERRED_DEBITS(0,YR) +
-     +                           CATAWBA_DEFERRED_DEBITS(ASSET_CLASS,YR)
-               CATAWBA_DEFERRED_TAXES_BAL_CR(0,YR) =
-     +                     CATAWBA_DEFERRED_TAXES_BAL_CR(0,YR) +
-     +                     CATAWBA_DEFERRED_TAXES_BAL_CR(ASSET_CLASS,YR)
-            ENDDO
-            IF(YR == 1) THEN
-               DO ASSET_CLASS = 1, NUM_OF_ASSET_CLASSES
-                  CATAWBA_DEFERRED_DEBITS(0,0) =
-     +                            CATAWBA_DEFERRED_DEBITS(0,0) +
-     +                            CATAWBA_DEFERRED_DEBITS(ASSET_CLASS,0)
-                  CATAWBA_DEFERRED_TAXES_BAL_CR(0,0) =
-     +                      CATAWBA_DEFERRED_TAXES_BAL_CR(0,0) +
-     +                      CATAWBA_DEFERRED_TAXES_BAL_CR(ASSET_CLASS,0)
-               ENDDO
-            ENDIF
-         ENDDO
-!
-         DEALLOCATE(ASSET_CLASS_LIST,
-     +              ASSET_ALLOCATION_LIST)
-         CALL CLOSE_CATAW2_ALLOCATOR_FILE
-!
-! SINCE THIS ROUTINE IS CALLED AFTER THE INIT FILE IS READ THE CATAWBA
-! DEFERRED DEBIT AND DEFERRED TAX BALANCE MUST BE PASSED TO THE CONSOLIDATE
-! BALANCE SHEET INFORMATION.
-!
-!         CALL CATAWBA_BY_DEF_TAXES_BAL(
-!     +                               CATAWBA_DEFERRED_TAXES_BAL_CR(0,0))
-      RETURN
-!
-!***********************************************************************
-      ENTRY CATAWBA_BY_DEBITS_BALANCE(R_CLASS)
-!***********************************************************************
-         CATAWBA_BY_DEBITS_BALANCE = 0.
-         IF(R_CLASS<=MAX_ASSET_CLASS_NUM .AND. CATAWBA_FILE_EXISTS) THEN
-            IF(R_CLASS ==0) THEN
-               ASSET_CLASS = 0
-            ELSE
-               ASSET_CLASS = ASSET_CLASS_POINTER(R_CLASS)
-            ENDIF
-            IF(ASSET_CLASS > 0 .OR. R_CLASS == 0) THEN
-               CATAWBA_BY_DEBITS_BALANCE =
-     +                            CATAWBA_DEFERRED_DEBITS(ASSET_CLASS,0)
-            ENDIF
-         ENDIF
-      RETURN
-!***********************************************************************
-      ENTRY CATAWBA_BY_DEF_TAX_BALANCE(R_CLASS)
-!***********************************************************************
-         CATAWBA_BY_DEF_TAX_BALANCE = 0.
-         IF(R_CLASS<=MAX_ASSET_CLASS_NUM .AND. CATAWBA_FILE_EXISTS) THEN
-            IF(R_CLASS ==0) THEN
-               ASSET_CLASS = 0
-            ELSE
-               ASSET_CLASS = ASSET_CLASS_POINTER(R_CLASS)
-            ENDIF
-            IF(ASSET_CLASS > 0 .OR. R_CLASS == 0) THEN
-               CATAWBA_BY_DEF_TAX_BALANCE =
-     +                      CATAWBA_DEFERRED_TAXES_BAL_CR(ASSET_CLASS,0)
-            ENDIF
-         ENDIF
-      RETURN
-!***********************************************************************
-      ENTRY CATAWBA_DEFERRED_TAXES(R_YR)
-!***********************************************************************
-!
-         S_YEAR = MIN(R_YR,AVAIL_DATA_YEARS)
-         IF(CATAWBA_FILE_EXISTS) THEN
-            CATAWBA_DEFERRED_TAXES = CATAWBA_DEFERRED_TAXES_CR(0,S_YEAR)
-         ELSE
-            CATAWBA_DEFERRED_TAXES = 0.
-         ENDIF
-      RETURN
-!***********************************************************************
-      ENTRY CATAWBA_TOTAL_REVENUES(R_YR)
-!***********************************************************************
-!
-         S_YEAR = MIN(R_YR,AVAIL_DATA_YEARS)
-         IF(CATAWBA_FILE_EXISTS) THEN
-            CATAWBA_TOTAL_REVENUES = CATAWBA_REVENUES(0,S_YEAR)
-         ELSE
-            CATAWBA_TOTAL_REVENUES = 0.
-         ENDIF
-      RETURN
-!***********************************************************************
-      ENTRY CATAWBA_TOTAL_EXPENSES(R_YR)
-!***********************************************************************
-!
-         S_YEAR = MIN(R_YR,AVAIL_DATA_YEARS)
-         IF(CATAWBA_FILE_EXISTS) THEN
-            CATAWBA_TOTAL_EXPENSES = CATAWBA_EXPENSES(0,S_YEAR) +
-     +                            CATAWBA_CAPACITY_PAYMENTS(0,S_YEAR) -
-     +                            CATAWBA_LEVEL_CAP_PAYMENTS(0,S_YEAR)
-         ELSE
-            CATAWBA_TOTAL_EXPENSES = 0.
-         ENDIF
-      RETURN
-!***********************************************************************
-      ENTRY CATAWBA_TOTAL_CAP_PAYMENTS(R_YR)
-!***********************************************************************
-!
-         S_YEAR = MIN(R_YR,AVAIL_DATA_YEARS)
-         IF(CATAWBA_FILE_EXISTS) THEN
-            CATAWBA_TOTAL_CAP_PAYMENTS =
-     +                               CATAWBA_CAPACITY_PAYMENTS(0,S_YEAR)
-         ELSE
-            CATAWBA_TOTAL_CAP_PAYMENTS = 0.
-         ENDIF
-      RETURN
-!***********************************************************************
-      ENTRY CATAWBA_TOTAL_LEVEL_CAP_PAYMTS(R_YR)
-!***********************************************************************
-!
-         S_YEAR = MIN(R_YR,AVAIL_DATA_YEARS)
-         IF(CATAWBA_FILE_EXISTS) THEN
-            CATAWBA_TOTAL_LEVEL_CAP_PAYMTS =
-     +                              CATAWBA_LEVEL_CAP_PAYMENTS(0,S_YEAR)
-         ELSE
-            CATAWBA_TOTAL_LEVEL_CAP_PAYMTS = 0.
-         ENDIF
-      RETURN
-!***********************************************************************
-      ENTRY CATAWBA_TOTAL_OTHER_NET_REVS(R_YR)
-!***********************************************************************
-!
-         S_YEAR = MIN(R_YR,AVAIL_DATA_YEARS)
-         IF(CATAWBA_FILE_EXISTS) THEN
-            CATAWBA_TOTAL_OTHER_NET_REVS =
-     +                              CATAWBA_OTHER_NET_REVENUES(0,S_YEAR)
-         ELSE
-            CATAWBA_TOTAL_OTHER_NET_REVS = 0.
-         ENDIF
-      RETURN
-!***********************************************************************
-      ENTRY CATAWBA_INFO(R_YR,R_CLASS,
-     +                   R_CATAWBA_REVENUES,
-     +                   R_CATAWBA_EXPENSES,
-     +                   R_CATAWBA_CAPACITY_PAYMENTS,
-     +                   R_CATAWBA_LEVEL_CAP_PAYMENTS,
-     +                   R_CATAWBA_OTHER_NET_REVENUES,
-     +                   R_CATAWBA_DEFERRED_DEBITS,
-     +                   R_CATAWBA_DEFER_TAXES_BAL_CR,
-     +                   R_CATAWBA_DEFERRED_TAXES_CR)
-!***********************************************************************
-!
-         R_CATAWBA_REVENUES = 0.
-         R_CATAWBA_EXPENSES = 0.
-         R_CATAWBA_CAPACITY_PAYMENTS = 0.
-         R_CATAWBA_LEVEL_CAP_PAYMENTS = 0.
-         R_CATAWBA_OTHER_NET_REVENUES = 0.
-         R_CATAWBA_DEFERRED_DEBITS = 0.
-         R_CATAWBA_DEFER_TAXES_BAL_CR = 0.
-         R_CATAWBA_DEFERRED_TAXES_CR = 0.
-         CATAWBA_INFO = CATAWBA_FILE_EXISTS
-!
-         S_YEAR = MIN(R_YR,AVAIL_DATA_YEARS)
-!
-         IF(R_CLASS<=MAX_ASSET_CLASS_NUM .AND. CATAWBA_FILE_EXISTS) THEN
-            IF(R_CLASS ==0) THEN
-               ASSET_CLASS = 0
-            ELSE
-               ASSET_CLASS = ASSET_CLASS_POINTER(R_CLASS)
-            ENDIF
-            IF(ASSET_CLASS > 0 .OR. R_CLASS == 0) THEN
-               R_CATAWBA_REVENUES = CATAWBA_REVENUES(ASSET_CLASS,S_YEAR)
-               R_CATAWBA_EXPENSES = CATAWBA_EXPENSES(ASSET_CLASS,S_YEAR)
-               R_CATAWBA_CAPACITY_PAYMENTS =
-     +                     CATAWBA_CAPACITY_PAYMENTS(ASSET_CLASS,S_YEAR)
-               R_CATAWBA_LEVEL_CAP_PAYMENTS =
-     +                    CATAWBA_LEVEL_CAP_PAYMENTS(ASSET_CLASS,S_YEAR)
-               R_CATAWBA_OTHER_NET_REVENUES =
-     +                    CATAWBA_OTHER_NET_REVENUES(ASSET_CLASS,S_YEAR)
-               R_CATAWBA_DEFERRED_DEBITS =
-     +                       CATAWBA_DEFERRED_DEBITS(ASSET_CLASS,S_YEAR)
-               R_CATAWBA_DEFER_TAXES_BAL_CR =
-     +                 CATAWBA_DEFERRED_TAXES_BAL_CR(ASSET_CLASS,S_YEAR)
-               R_CATAWBA_DEFERRED_TAXES_CR =
-     +                     CATAWBA_DEFERRED_TAXES_CR(ASSET_CLASS,S_YEAR)
-            ENDIF
-         ENDIF
-      RETURN
-      END
-!
-!
-!
-!
-!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!
-! CALLED ANNUALLY AT THE BEGINNING OF PRO_COST.
-! $ MILLIONS
-!
-      SUBROUTINE READ_CPL_DATA(R_YEAR) ! PER SKIP. 8/96. KATHY ANDERSON. 8/11/97. GAT.
-!
-!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!
-      use logging
-      USE SIZECOM
-      INCLUDE 'SpinLib.MON'
-      CHARACTER (len=1) ::  DUMMY_TYPE
-      LOGICAL (kind=1) ::    R_USE_COIN_PEAK,R_PA_SWITCH
-      INTEGER (kind=2) ::  R_YEAR
-      INTEGER (kind=2) ::  I
-      INTEGER (kind=2) ::  CLASS_POINTER
-      INTEGER (kind=2) ::  DELETE
-      INTEGER (kind=2) ::  YR
-      INTEGER (kind=2) ::  ASSET_CLASS
-      INTEGER (kind=2) ::  ASSET_CLASS_ID
-      INTEGER (kind=2) ::  ASSET_ALLOCATION_VECTOR
-      INTEGER (kind=2) ::  I2TEMP
-      INTEGER (kind=2) ::  SAVE_CPL_READ_VARIABLES
-      INTEGER ::  IOS
-!
-      REAL (kind=4) ::       ASSET_ALLOCATOR
-      REAL (kind=4) ::
-     +            SOR_A_RATE,
-     +            SOR_B_RATE,
-     +            SOR_C_RATE,
-     +            SOR_D_RATE,
-     +            SOR_E_RATE,
-     +            EMC_MONTHLY_FACTOR(12),
-     +            EMC_SEPA_CAPACITY,
-     +            EMC_RESOURCE_CAPACITY,
-     +            SOR_A_RESOURCE,
-     +            SOR_D_RESOURCE,
-     +            SOR_E_RESOURCE,
-     +            PA_SEPA_CAPACITY,
-     +            FIRM_PURCHASE_CAPACITY,
-     +            MAYO_BUYBACK_RATE,
-     +            HARRIS_BUYBACK_RATE,
-     +            PA_RESERVE_RATE,
-     +            PA_SUPPLEMENTAL_RATE,
-     +            PA_TRANSMISSION_RATE,
-     +            HARRIS_RETAINED_CAPACITY,
-     +            BURNSWICK1_RETAINED_CAPACITY,
-     +            BURNSWICK2_RETAINED_CAPACITY,
-     +            MAYO_RETAINED_CAPACITY,
-     +            ROXBORO4_RETAINED_CAPACITY,
-     +            EMC_TRANSMISSION_RATE,
-     +            R_SOR_A_RATE,
-     +            R_SOR_B_RATE,
-     +            R_SOR_C_RATE,
-     +            R_SOR_D_RATE,
-     +            R_SOR_E_RATE,
-     +            R_EMC_MONTHLY_FACTOR(12),
-     +            R_EMC_SEPA_CAPACITY,
-     +            R_EMC_RESOURCE_CAPACITY,
-     +            R_SOR_A_RESOURCE,
-     +            R_SOR_D_RESOURCE,
-     +            R_SOR_E_RESOURCE,
-     +            R_FIRM_PURCHASE_CAPACITY,
-     +            R_PA_SEPA_CAPACITY,
-     +            R_HARRIS_RETAINED_CAPACITY,
-     +            R_BURNSWICK1_RETAINED_CAPACITY,
-     +            R_BURNSWICK2_RETAINED_CAPACITY,
-     +            R_MAYO_RETAINED_CAPACITY,
-     +            R_ROXBORO4_RETAINED_CAPACITY,
-     +            R_PA_RESERVE_RATE,
-     +            R_PA_SUPPLEMENTAL_RATE,
-     +            R_PA_TRANSMISSION_RATE,
-     +            R_MAYO_BUYBACK_RATE,
-     +            R_HARRIS_BUYBACK_RATE,
-     +            R_EMC_TRANSMISSION_RATE,
-     +            R_TOTAL_RETAINED,
-     +            PA_ANN_AVE_PROD,
-     +            EMC_ANN_AVE_PROD,
-     +            PA_MONTHLY_FACTOR(12)
-      CHARACTER (len=1) ::  EMC_PEAK
-      CHARACTER (len=1) ::  PA_ENERGY_PRICE_SWITCH
-      CHARACTER (len=1) ::  EMC_ENERGY_PRICE_SWITCH
-      CHARACTER (len=1) ::  PA_SWITCH
-!
-! DECLARATION FOR DBREAD COMMON BLOCK
-      INTEGER (kind=2) ::  ASSET_CLASS_POINTER(:)
-      INTEGER (kind=2) ::  MAX_ASSET_CLASS_NUM
-      INTEGER (kind=2) ::  NUM_OF_ASSET_CLASSES
-      ALLOCATABLE :: ASSET_CLASS_POINTER
-      SAVE ASSET_CLASS_POINTER,MAX_ASSET_CLASS_NUM,NUM_OF_ASSET_CLASSES
-      REAL (kind=4) ::  ASSET_CLASS_LIST(:),ASSET_ALLOCATION_LIST(:)
-      ALLOCATABLE :: ASSET_CLASS_LIST,ASSET_ALLOCATION_LIST
-      SAVE
-     +            ASSET_CLASS,
-     +            ASSET_ALLOCATION_VECTOR,
-     +            SOR_A_RATE,
-     +            SOR_B_RATE,
-     +            SOR_C_RATE,
-     +            SOR_D_RATE,
-     +            SOR_E_RATE,
-     +            EMC_PEAK,
-     +            EMC_MONTHLY_FACTOR,
-     +            EMC_SEPA_CAPACITY,
-     +            EMC_RESOURCE_CAPACITY,
-     +            SOR_A_RESOURCE,
-     +            SOR_D_RESOURCE,
-     +            SOR_E_RESOURCE,
-     +            PA_SEPA_CAPACITY,
-     +            FIRM_PURCHASE_CAPACITY,
-     +            MAYO_BUYBACK_RATE,
-     +            HARRIS_BUYBACK_RATE,
-     +            PA_RESERVE_RATE,
-     +            PA_SUPPLEMENTAL_RATE,
-     +            PA_TRANSMISSION_RATE,
-     +            HARRIS_RETAINED_CAPACITY,
-     +            BURNSWICK1_RETAINED_CAPACITY,
-     +            BURNSWICK2_RETAINED_CAPACITY,
-     +            MAYO_RETAINED_CAPACITY,
-     +            ROXBORO4_RETAINED_CAPACITY,
-     +            EMC_TRANSMISSION_RATE,
-     +            PA_ENERGY_PRICE_SWITCH,
-     +            EMC_ENERGY_PRICE_SWITCH,
-     +            PA_SWITCH,
-     +            PA_ANN_AVE_PROD,
-     +            EMC_ANN_AVE_PROD,
-     +            PA_MONTHLY_FACTOR
-!
-      INTEGER (kind=2) ::    R_NUM_OF_CLASSES,R_MAX_CLASS_NUM
-!
-! END OF DATA DECLARATIONS
-!
-         CALL RETURN_NUM_CPL_CLASSES(NUM_OF_ASSET_CLASSES,
-     +                                   MAX_ASSET_CLASS_NUM)
-         IF(ALLOCATED(ASSET_CLASS_POINTER))
-     +                                   DEALLOCATE(ASSET_CLASS_POINTER)
-!
-         IF(MAX_ASSET_CLASS_NUM > 0) THEN
-            ALLOCATE(ASSET_CLASS_POINTER(MAX_ASSET_CLASS_NUM))
-            CALL RETURN_CPL_POINTERS(ASSET_CLASS_POINTER)
-         ENDIF
-!
-         CALL OPEN_CPL_ALLOCATOR_FILE
-         ALLOCATE(ASSET_CLASS_LIST(AVAIL_DATA_YEARS),
-     +            ASSET_ALLOCATION_LIST(AVAIL_DATA_YEARS))
-         READ(10,REC=R_YEAR,IOSTAT=IOS) DELETE,YR,
-     +            ASSET_CLASS,
-     +            ASSET_ALLOCATION_VECTOR,
-     +            SOR_A_RATE,
-     +            SOR_B_RATE,
-     +            SOR_C_RATE,
-     +            SOR_D_RATE,
-     +            SOR_E_RATE,
-     +            EMC_PEAK,
-     +            EMC_MONTHLY_FACTOR,
-     +            EMC_SEPA_CAPACITY,
-     +            EMC_RESOURCE_CAPACITY,
-     +            SOR_A_RESOURCE,
-     +            SOR_D_RESOURCE,
-     +            SOR_E_RESOURCE,
-     +            PA_SEPA_CAPACITY,
-     +            FIRM_PURCHASE_CAPACITY,
-     +            MAYO_BUYBACK_RATE,
-     +            HARRIS_BUYBACK_RATE,
-     +            PA_RESERVE_RATE,
-     +            PA_SUPPLEMENTAL_RATE,
-     +            PA_TRANSMISSION_RATE,
-     +            HARRIS_RETAINED_CAPACITY,
-     +            BURNSWICK1_RETAINED_CAPACITY,
-     +            BURNSWICK2_RETAINED_CAPACITY,
-     +            MAYO_RETAINED_CAPACITY,
-     +            ROXBORO4_RETAINED_CAPACITY,
-     +            EMC_TRANSMISSION_RATE,
-     +            PA_ENERGY_PRICE_SWITCH,
-     +            EMC_ENERGY_PRICE_SWITCH,
-     +            PA_ANN_AVE_PROD,
-     +            EMC_ANN_AVE_PROD,
-     +            PA_MONTHLY_FACTOR,
-     +            PA_SWITCH
-!
-         IF(ASSET_ALLOCATION_VECTOR /= 0) THEN
-            WRITE(4,*) "CPL EMC / PA file currently does not"
-            WRITE(4,*) "support a vector of asset classes"
-            WRITE(4,*) "MIDAS will reset asset class to 1."
-            ASSET_CLASS = 1
-         ENDIF
-         ASSET_CLASS_ID = ASSET_CLASS + 1
-!
-         I2TEMP = SAVE_CPL_READ_VARIABLES(ASSET_CLASS_ID,
-     +                                 EMC_ANN_AVE_PROD,
-     +                                 PA_ANN_AVE_PROD,
-     +                                 EMC_ENERGY_PRICE_SWITCH,
-     +                                 PA_ENERGY_PRICE_SWITCH)
-!
-
-         DEALLOCATE(ASSET_CLASS_LIST,
-     +              ASSET_ALLOCATION_LIST)
-         CALL CLOSE_CPL_ALLOCATOR_FILE
-      RETURN
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_PA_SWITCH(R_PA_SWITCH)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         R_PA_SWITCH = PA_SWITCH == 'T'
-      RETURN
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_EMC_RATES(R_SOR_A_RATE,R_SOR_B_RATE,R_SOR_C_RATE,
-     +                                 R_SOR_D_RATE,R_SOR_E_RATE)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         R_SOR_A_RATE = SOR_A_RATE
-         R_SOR_B_RATE = SOR_B_RATE
-         R_SOR_C_RATE = SOR_C_RATE
-         R_SOR_D_RATE = SOR_D_RATE
-         R_SOR_E_RATE = SOR_E_RATE
-      RETURN
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_EMC_PEAK_AND_LOAD_SHAPES(R_USE_COIN_PEAK,
-     +                                   R_EMC_MONTHLY_FACTOR)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         R_USE_COIN_PEAK = EMC_PEAK == 'C'
-         DO I = 1, 12
-            R_EMC_MONTHLY_FACTOR(I) = EMC_MONTHLY_FACTOR(I)
-         ENDDO
-      RETURN
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_EMC_RESOURCES(R_EMC_SEPA_CAPACITY,
-     +                        R_EMC_RESOURCE_CAPACITY,
-     +                        R_SOR_A_RESOURCE,
-     +                        R_SOR_D_RESOURCE,
-     +                        R_SOR_E_RESOURCE)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         R_EMC_SEPA_CAPACITY = EMC_SEPA_CAPACITY
-         R_EMC_RESOURCE_CAPACITY = EMC_RESOURCE_CAPACITY
-         R_SOR_A_RESOURCE = SOR_A_RESOURCE
-         R_SOR_D_RESOURCE = SOR_D_RESOURCE
-         R_SOR_E_RESOURCE = SOR_E_RESOURCE
-      RETURN
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_PA_FIRM_N_SEPA(  R_FIRM_PURCHASE_CAPACITY,
-     +                           R_PA_SEPA_CAPACITY)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         R_FIRM_PURCHASE_CAPACITY = FIRM_PURCHASE_CAPACITY
-         R_PA_SEPA_CAPACITY = PA_SEPA_CAPACITY
-      RETURN
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_PA_SEPA_CAPACITY(R_PA_SEPA_CAPACITY)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         R_PA_SEPA_CAPACITY = PA_SEPA_CAPACITY
-      RETURN
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_EMC_SEPA_CAPACITY(R_EMC_SEPA_CAPACITY)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         R_EMC_SEPA_CAPACITY = EMC_SEPA_CAPACITY
-      RETURN
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_PA_RESOURCE_CAPACITY(R_FIRM_PURCHASE_CAPACITY)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         R_FIRM_PURCHASE_CAPACITY = FIRM_PURCHASE_CAPACITY
-      RETURN
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_UNIT_RETAINED(
-     +                              R_BURNSWICK1_RETAINED_CAPACITY,
-     +                              R_BURNSWICK2_RETAINED_CAPACITY,
-     +                              R_HARRIS_RETAINED_CAPACITY,
-     +                              R_ROXBORO4_RETAINED_CAPACITY,
-     +                              R_MAYO_RETAINED_CAPACITY)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         R_BURNSWICK1_RETAINED_CAPACITY = BURNSWICK1_RETAINED_CAPACITY
-         R_BURNSWICK2_RETAINED_CAPACITY = BURNSWICK2_RETAINED_CAPACITY
-         R_HARRIS_RETAINED_CAPACITY = HARRIS_RETAINED_CAPACITY
-         R_ROXBORO4_RETAINED_CAPACITY = ROXBORO4_RETAINED_CAPACITY
-         R_MAYO_RETAINED_CAPACITY = MAYO_RETAINED_CAPACITY
-      RETURN
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_TOTAL_RETAINED(R_TOTAL_RETAINED)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         R_TOTAL_RETAINED          =   BURNSWICK1_RETAINED_CAPACITY +
-     +                                 BURNSWICK2_RETAINED_CAPACITY +
-     +                                 HARRIS_RETAINED_CAPACITY +
-     +                                 ROXBORO4_RETAINED_CAPACITY +
-     +                                 MAYO_RETAINED_CAPACITY
-      RETURN
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_PA_CAPACITY_RATES(     R_PA_RESERVE_RATE,
-     +                                 R_PA_SUPPLEMENTAL_RATE,
-     +                                 R_PA_TRANSMISSION_RATE)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         R_PA_RESERVE_RATE = PA_RESERVE_RATE
-         R_PA_SUPPLEMENTAL_RATE = PA_SUPPLEMENTAL_RATE
-         R_PA_TRANSMISSION_RATE = PA_TRANSMISSION_RATE
-      RETURN
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_PA_TRANSMISSION_RATE(R_PA_TRANSMISSION_RATE)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         R_PA_TRANSMISSION_RATE = PA_TRANSMISSION_RATE
-      RETURN
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_EMC_TRANSMISSION_RATE(R_EMC_TRANSMISSION_RATE)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         R_EMC_TRANSMISSION_RATE = EMC_TRANSMISSION_RATE
-      RETURN
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_BUYBACK_CAPACITY(   R_MAYO_BUYBACK_RATE,
-     +                              R_HARRIS_BUYBACK_RATE)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         R_MAYO_BUYBACK_RATE = MAYO_BUYBACK_RATE
-         R_HARRIS_BUYBACK_RATE = HARRIS_BUYBACK_RATE
-      RETURN
-!
-      END
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      FUNCTION SAVE_CPL_READ_VARIABLES(CLASS_FROM_READ_CPL,
-     +                                 R_EMC_ANN_AVE_PROD,
-     +                                 R_PA_ANN_AVE_PROD,
-     +                                 R_EMC_ENERGY_PRICE_SWITCH,
-     +                                 R_PA_ENERGY_PRICE_SWITCH)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      use logging
-      LOGICAL (kind=1) ::    USE_EMC_ENERGY_PRICE,USE_PA_ENERGY_PRICE
-      CHARACTER (len=1) ::
-     +            EMC_ENERGY_PRICE_SWITCH_SAVE/' '/,
-     +            PA_ENERGY_PRICE_SWITCH_SAVE/' '/,
-     +            R_EMC_ENERGY_PRICE_SWITCH,
-     +            R_PA_ENERGY_PRICE_SWITCH
-      INTEGER (kind=2) ::  EMC_PA_CLASS
-      INTEGER (kind=2) ::  ANNUAL_EMC_PA_CLASS/0/
-      INTEGER (kind=2) ::  CLASS_FROM_READ_CPL
-      INTEGER (kind=2) ::  SAVE_CPL_READ_VARIABLES
-      REAL (kind=4) ::  EMC_ANN_AVE_PROD
-      REAL (kind=4) ::  PA_ANN_AVE_PROD
-      REAL (kind=4) ::  R_EMC_ANN_AVE_PROD
-      REAL (kind=4) ::  R_PA_ANN_AVE_PROD
-      REAL (kind=4) ::  EMC_ANN_AVE_PROD_SAVE/0./
-      REAL (kind=4) ::  PA_ANN_AVE_PROD_SAVE/0./
-!
-!
-!
-         EMC_ANN_AVE_PROD_SAVE = R_EMC_ANN_AVE_PROD
-         PA_ANN_AVE_PROD_SAVE = R_PA_ANN_AVE_PROD
-         EMC_ENERGY_PRICE_SWITCH_SAVE = R_EMC_ENERGY_PRICE_SWITCH
-         PA_ENERGY_PRICE_SWITCH_SAVE = R_PA_ENERGY_PRICE_SWITCH
-         ANNUAL_EMC_PA_CLASS = CLASS_FROM_READ_CPL
-         SAVE_CPL_READ_VARIABLES = ANNUAL_EMC_PA_CLASS
-      RETURN
-!
-      ENTRY EMC_PA_CLASS()
-         EMC_PA_CLASS = ANNUAL_EMC_PA_CLASS
-      RETURN
-!
-      ENTRY EMC_ANN_AVE_PROD()
-         EMC_ANN_AVE_PROD = EMC_ANN_AVE_PROD_SAVE
-      RETURN
-!
-      ENTRY PA_ANN_AVE_PROD()
-         PA_ANN_AVE_PROD = PA_ANN_AVE_PROD_SAVE
-      RETURN
-!
-      ENTRY USE_EMC_ENERGY_PRICE()
-         USE_EMC_ENERGY_PRICE = EMC_ENERGY_PRICE_SWITCH_SAVE == 'I'
-      RETURN
-!
-      ENTRY USE_PA_ENERGY_PRICE()
-         USE_PA_ENERGY_PRICE = PA_ENERGY_PRICE_SWITCH_SAVE == 'I'
-      RETURN
-!
-      END
-!
-!
-!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!
-! CALLED ANNUALLY AT THE END OF PRO_COST.
-! $ MILLIONS
-!
-      SUBROUTINE GET_CPL_EMC_CAP_REVS ! PER SKIP SEEKAMP MEMO: 11/11/96.
-!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!
-      INCLUDE 'SpinLib.MON'
+      use annual_cl_unit
+      use hesi
+      use eco
+      USE ArrayAllocationInterface
+      USE SPCapExVariables
+      USE TRANS_GROUP_VARIABLES
       USE IREC_ENDPOINT_CONTROL
-      use logging
-      use grx_planning_routines
-      use prod_arrays_dimensions
-      use cls_load
-      USE SIZECOM
-      INCLUDE 'GLOBECOM.MON'
-!     INCLUDE 'LAMCOM.MON'
-!
-      INTEGER (kind=2) ::  CURRENT_YEAR
-      INTEGER (kind=2) ::  CURRENT_MONTH
-      INTEGER (kind=2) ::  EMC_CLASS
-      INTEGER (kind=2) ::  R_MONTH
-      INTEGER (kind=2) ::  R_CURRENT_YEAR
-      PARAMETER (EMC_CLASS=5) ! (OTHER 2) IN THE DATA BASE
-      REAL (kind=4) ::    EMC_ENERGY_REVENUE
-      REAL (kind=4) ::  ANN_EMC_ENERGY_REVENUE/0./
-      REAL (kind=4) ::  R_EMC_RATE
-      REAL (kind=4) ::  ANN_EMC_ENERGY_SALES/0./
-      REAL (kind=4) ::  EMC_SALES
-      REAL (kind=4) ::  NON_COIN_PEAK
-      REAL (kind=4) ::  ANN_NON_COIN_PEAK/0./
-      REAL (kind=4) ::  R_ANN_EMC_ENERGY_SALES
-      REAL (kind=4) ::  R_ANN_NON_COIN_PEAK
-      REAL (kind=4) ::  R_ANN_EMC_ENERGY_REVENUE
-      REAL (kind=4) ::  R_ANN_EMC_CAP_REVENUE
-      REAL (kind=4) ::  R_ANN_EMC_TRAN_REVENUE
-      REAL (kind=4) ::  ANN_SUM_NON_COIN_PEAK/0./
-      REAL (kind=4) ::  EMC_TRANS_RATE
-      REAL (kind=4) ::  R_ANN_SUM_TRAN_PEAK
-      REAL (kind=4) ::
-     +   EMC_RESOURCE_CAP/1012./, ! CALC
-     +   EMC_EXCESS_OR_DEFICIT, ! CALC
-     +   NCEMC_COIN_PEAK, ! AREA FORECASTS
-     +   NCEMC_NON_COIN_PEAK, ! AREA FORECASTS
-     +   CPS_N_NCPS, ! CALC
-     +   CP_DIVIDED_BY_NCP(12), ! DATA
-!
-
-     +   SEPA_ALLOCATION/44.885/, ! PER SEEKAMP FAX.
-     +   NCEMC_SUPP_BILLING_CPS, ! CALC
-! SERVICE OBLIGATION RESOURCES
-     +   SOR_A_RESOURCE, ! PER CONTRACT
-     +   SOR_B_RESOURCE, ! PER CONTRACT
-     +   SOR_C_RESOURCE, ! PER CONTRACT
-     +   SOR_D_RESOURCE, ! PER CONTRACT
-     +   SOR_E_RESOURCE, ! PER CONTRACT
-     +   TOTAL_SERVED_BY_CPL, ! CALC
-     +   LOAD_POSS_SERVE_BY_OTHERS, ! CALC
-!
-     +   ANN_CPS_N_NCPS/0./, ! ACCUMULATED MONTHLY
-     +   ANN_NCEMC_SUPP_BILLING_CPS/0./, ! ACCUMULATED MONTHLY
-     +   ANN_SOR_A_RESOURCE/0./, ! ACCUMULATED MONTHLY
-     +   ANN_SOR_B_RESOURCE/0./, ! ACCUMULATED MONTHLY
-     +   ANN_SOR_C_RESOURCE/0./, ! ACCUMULATED MONTHLY
-     +   ANN_SOR_D_RESOURCE/0./, ! ACCUMULATED MONTHLY
-     +   ANN_SOR_E_RESOURCE/0./, ! ACCUMULATED MONTHLY
-     +   ANN_SEPA_ALLOCATION/0./, ! ???
-     +   ANN_TOTAL_SERVED_BY_CPL/0./, ! ACCUMULATED MONTHLY
-     +   ANN_LOAD_POSS_SERVE_BY_OTHERS/0./, ! ACCUMULATED MONTHLY
-! SERVICE OBLIGATION RESOURCE RATES
-     +   SOR_A_RATE/0./, ! PER CONTRACT
-     +   SOR_B_RATE/0./, ! PER CONTRACT
-     +   SOR_C_RATE/0./, ! PER CONTRACT
-     +   SOR_D_RATE/0./, ! PER CONTRACT
-     +   SOR_E_RATE/0./, ! PER CONTRACT
-! SERVICE OBLIGATION RESOURCE REVENUES
-     +   SOR_A_REVENUE, ! CALC
-     +   SOR_B_REVENUE, ! CALC
-     +   SOR_C_REVENUE, ! CALC
-     +   SOR_D_REVENUE, ! CALC
-     +   SOR_E_REVENUE, ! CALC
-     +   TOTAL_EMC_CAP_REVENUE, ! CALC
-!
-     +   ANN_SOR_A_REVENUE/0./, ! ACCUMULATED MONTHLY
-     +   ANN_SOR_B_REVENUE/0./, ! ACCUMULATED MONTHLY
-     +   ANN_SOR_C_REVENUE/0./, ! ACCUMULATED MONTHLY
-     +   ANN_SOR_D_REVENUE/0./, ! ACCUMULATED MONTHLY
-     +   ANN_SOR_E_REVENUE/0./, ! ACCUMULATED MONTHLY
-     +   ANN_TOTAL_EMC_CAP_REVENUE/0./ ! CALC
-      DATA CP_DIVIDED_BY_NCP
-     +            /0.967327,0.933236,0.891418,0.91152,0.890577,0.882076,
-     +            0.931185,0.947181,0.936194,0.881214,0.888394,0.899382/
-!
-! DETAILED REPORT OVERHEAD
-!
-      LOGICAL (kind=1) ::    ECAP_REPORT_NOT_OPEN/.TRUE./
-      LOGICAL (kind=1) ::  ECAP_REPORT_ACTIVE
-      LOGICAL (kind=1) ::  USE_COIN_PEAK
-      INTEGER (kind=2) ::  LAST_SEASON
-      INTEGER (kind=2) ::  PRODUCTION_PERIODS
-      INTEGER (kind=2) ::  CPL_EMC_CAP_REVS_RPT_HEADER
-      INTEGER (kind=2) ::  CPL_ECAP_UNIT
-      INTEGER ::  CPL_ECAP_REC
-      SAVE CPL_ECAP_REC
-      CHARACTER (len=9) ::  CL_MONTH_NAME(13),MONTH_NAME*20
-      SAVE CL_MONTH_NAME,CPL_ECAP_UNIT
-!
-! END DATA DECLARATIONS
-!
-      CALL GET_EMC_RATES(SOR_A_RATE,SOR_B_RATE,SOR_C_RATE,
-     +                              SOR_D_RATE,SOR_E_RATE)
-      CALL GET_EMC_PEAK_AND_LOAD_SHAPES(USE_COIN_PEAK,
-     +                                   CP_DIVIDED_BY_NCP)
-      CALL GET_EMC_RESOURCES( SEPA_ALLOCATION,
-     +                        EMC_RESOURCE_CAP,
-     +                        SOR_A_RESOURCE,
-     +                        SOR_D_RESOURCE,
-     +                        SOR_E_RESOURCE)
-!
-      ECAP_REPORT_ACTIVE = .TRUE. ! UNTIL ADDED TO DETAILED REPORTS
-      IF(ECAP_REPORT_NOT_OPEN .AND.
-     +                       ECAP_REPORT_ACTIVE .AND.
-     +                                         .NOT. TESTING_PLAN ) THEN
-         ECAP_REPORT_NOT_OPEN = .FALSE.
-         CPL_ECAP_UNIT = CPL_EMC_CAP_REVS_RPT_HEADER(CPL_ECAP_REC)
-         LAST_SEASON = PRODUCTION_PERIODS()
-         DO CURRENT_MONTH = 1, LAST_SEASON
-            CL_MONTH_NAME(CURRENT_MONTH) = MONTH_NAME(CURRENT_MONTH)
-         ENDDO
-         CL_MONTH_NAME(LAST_SEASON+1) = 'Annual'
-      ENDIF
-!
-!
-!
-      CURRENT_YEAR = BASE_YEAR + YEAR
-!
-!
-      DO CURRENT_MONTH = 1, 12
-!
-         NCEMC_NON_COIN_PEAK =
-     +          MAX(FORECAST_COINCIDENT_PEAK(1,CURRENT_MONTH,EMC_CLASS),
-     +              FORECAST_COINCIDENT_PEAK(2,CURRENT_MONTH,EMC_CLASS))
-!
-         NCEMC_COIN_PEAK =
-     +                        NCEMC_NON_COIN_PEAK *
-     +                        CP_DIVIDED_BY_NCP(CURRENT_MONTH)
-         IF(USE_COIN_PEAK) THEN
-            CPS_N_NCPS =  NCEMC_COIN_PEAK
-         ELSE
-            CPS_N_NCPS = NCEMC_NON_COIN_PEAK
-         ENDIF
-
-!
-         NCEMC_SUPP_BILLING_CPS =
-     +                        CPS_N_NCPS -
-     +                        SEPA_ALLOCATION
-!
-         EMC_EXCESS_OR_DEFICIT =
-     +                        EMC_RESOURCE_CAP -
-     +                        NCEMC_SUPP_BILLING_CPS
-
-         IF(SOR_B_RATE == 0.) THEN
-               SOR_B_RESOURCE = 0.
-         ELSEIF(CURRENT_YEAR >= 1996 .AND. CURRENT_YEAR < 2100) THEN  ! 2004
-            IF(EMC_EXCESS_OR_DEFICIT > 0.) THEN
-               SOR_B_RESOURCE =
-     +                        NCEMC_SUPP_BILLING_CPS -
-     +                        SOR_A_RESOURCE -
-     +                        SOR_D_RESOURCE -
-     +                        SOR_E_RESOURCE
-            ELSE
-               SOR_B_RESOURCE =
-     +                        EMC_RESOURCE_CAP -
-     +                        SOR_A_RESOURCE -
-     +                        SOR_D_RESOURCE -
-     +                        SOR_E_RESOURCE
-            ENDIF
-         ELSE
-            SOR_B_RESOURCE = 0.
-         ENDIF
-! C
-         IF(SOR_C_RATE == 0.) THEN
-            SOR_C_RESOURCE = 0.
-         ELSEIF(CURRENT_YEAR >= 1996 .AND. CURRENT_YEAR < 2100) THEN    !2001
-            SOR_C_RESOURCE = -1* MIN(0.,EMC_EXCESS_OR_DEFICIT) ! C GETS DEFICIT
-         ELSE
-            SOR_C_RESOURCE = 0.
-         ENDIF
-!
-         TOTAL_SERVED_BY_CPL =
-     +                        SOR_A_RESOURCE +
-     +                        SOR_B_RESOURCE +
-     +                        SOR_C_RESOURCE +
-     +                        SOR_D_RESOURCE +
-     +                        SOR_E_RESOURCE
-         LOAD_POSS_SERVE_BY_OTHERS =
-     +                        MAX(0.,NCEMC_SUPP_BILLING_CPS -
-     +                        TOTAL_SERVED_BY_CPL)
-!
-! SERVICE OBLIGATION RESOURCE REVENUES
-!
-         SOR_A_REVENUE =
-     +                        SOR_A_RESOURCE *
-     +                        SOR_A_RATE/1000.
-         SOR_B_REVENUE =
-     +                        SOR_B_RESOURCE *
-     +                        SOR_B_RATE/1000.
-         SOR_C_REVENUE =
-     +                        SOR_C_RESOURCE *
-     +                        SOR_C_RATE/1000.
-         SOR_D_REVENUE =
-     +                        SOR_D_RESOURCE *
-     +                        SOR_D_RATE/1000.
-         SOR_E_REVENUE =
-     +                        SOR_E_RESOURCE *
-     +                        SOR_E_RATE/1000.
-         TOTAL_EMC_CAP_REVENUE =
-     +                        SOR_A_REVENUE +
-     +                        SOR_B_REVENUE +
-     +                        SOR_C_REVENUE +
-     +                        SOR_D_REVENUE +
-     +                        SOR_E_REVENUE
-!
-! ACCUMULATE ANNUAL VALUES
-!
-         ANN_CPS_N_NCPS =
-     +                        ANN_CPS_N_NCPS +
-     +                        CPS_N_NCPS
-         ANN_NCEMC_SUPP_BILLING_CPS =
-     +                        ANN_NCEMC_SUPP_BILLING_CPS +
-     +                        NCEMC_SUPP_BILLING_CPS
-         ANN_SOR_A_RESOURCE = ANN_SOR_A_RESOURCE +
-     +                        SOR_A_RESOURCE
-         ANN_SOR_B_RESOURCE = ANN_SOR_B_RESOURCE +
-     +                        SOR_B_RESOURCE
-         ANN_SOR_C_RESOURCE = ANN_SOR_C_RESOURCE +
-     +                        SOR_C_RESOURCE
-         ANN_SOR_D_RESOURCE = ANN_SOR_D_RESOURCE +
-     +                        SOR_D_RESOURCE
-         ANN_SOR_E_RESOURCE = ANN_SOR_E_RESOURCE +
-     +                        SOR_E_RESOURCE
-         ANN_LOAD_POSS_SERVE_BY_OTHERS = ANN_LOAD_POSS_SERVE_BY_OTHERS +
-     +                        LOAD_POSS_SERVE_BY_OTHERS
-         ANN_SEPA_ALLOCATION =
-     +                        ANN_SEPA_ALLOCATION +
-     +                        SEPA_ALLOCATION
-         ANN_SOR_A_REVENUE =  ANN_SOR_A_REVENUE +
-     +                        SOR_A_REVENUE
-         ANN_SOR_B_REVENUE =  ANN_SOR_B_REVENUE +
-     +                        SOR_B_REVENUE
-         ANN_SOR_C_REVENUE =  ANN_SOR_C_REVENUE +
-     +                        SOR_C_REVENUE
-         ANN_SOR_D_REVENUE =  ANN_SOR_D_REVENUE +
-     +                        SOR_D_REVENUE
-         ANN_SOR_E_REVENUE =  ANN_SOR_E_REVENUE +
-     +                        SOR_E_REVENUE
-         ANN_TOTAL_EMC_CAP_REVENUE =
-     +                        ANN_TOTAL_EMC_CAP_REVENUE +
-     +                        TOTAL_EMC_CAP_REVENUE
-!
-!
-! MONTHLY WRITE
-!
-         WRITE(CPL_ECAP_UNIT,REC=CPL_ECAP_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(CURRENT_MONTH),
-     +               CPS_N_NCPS,
-     +               SEPA_ALLOCATION,
-     +               NCEMC_SUPP_BILLING_CPS,
-     +               SOR_A_RESOURCE,
-     +               SOR_B_RESOURCE,
-     +               SOR_C_RESOURCE,
-     +               SOR_D_RESOURCE,
-     +               SOR_E_RESOURCE,
-     +               TOTAL_SERVED_BY_CPL,
-     +               LOAD_POSS_SERVE_BY_OTHERS,
-     +               SOR_A_RATE,
-     +               SOR_B_RATE,
-     +               SOR_C_RATE,
-     +               SOR_D_RATE,
-     +               SOR_E_RATE,
-     +               SOR_A_REVENUE,
-     +               SOR_B_REVENUE,
-     +               SOR_C_REVENUE,
-     +               SOR_D_REVENUE,
-     +               SOR_E_REVENUE,
-     +               TOTAL_EMC_CAP_REVENUE
-         CPL_ECAP_REC = CPL_ECAP_REC + 1
-!
-      ENDDO ! CURRENT_MONTH
-!
-! ANNUAL WRITE
-!
-      WRITE(CPL_ECAP_UNIT,REC=CPL_ECAP_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(LAST_SEASON+1),
-     +               ANN_CPS_N_NCPS,
-     +               ANN_SEPA_ALLOCATION,
-     +               ANN_NCEMC_SUPP_BILLING_CPS,
-     +               ANN_SOR_A_RESOURCE,
-     +               ANN_SOR_B_RESOURCE,
-     +               ANN_SOR_C_RESOURCE,
-     +               ANN_SOR_D_RESOURCE,
-     +               ANN_SOR_E_RESOURCE,
-     +               ANN_TOTAL_SERVED_BY_CPL,
-     +               ANN_LOAD_POSS_SERVE_BY_OTHERS,
-     +               SOR_A_RATE,
-     +               SOR_B_RATE,
-     +               SOR_C_RATE,
-     +               SOR_D_RATE,
-     +               SOR_E_RATE,
-     +               ANN_SOR_A_REVENUE,
-     +               ANN_SOR_B_REVENUE,
-     +               ANN_SOR_C_REVENUE,
-     +               ANN_SOR_D_REVENUE,
-     +               ANN_SOR_E_REVENUE,
-     +               ANN_TOTAL_EMC_CAP_REVENUE
-      CPL_ECAP_REC = CPL_ECAP_REC + 1
-!
-      RETURN ! CALLED ANNUALLY
-!
-!
-      ENTRY INIT_CPL_EMC_ANN_CAP
-!
-!
-         ANN_NCEMC_SUPP_BILLING_CPS = 0.
-         ANN_CPS_N_NCPS = 0.
-!         SUM_12_MONTH_CPS_N_NCPS = 0.
-         ANN_SOR_A_RESOURCE = 0.
-         ANN_SOR_B_RESOURCE = 0.
-         ANN_SOR_C_RESOURCE = 0.
-         ANN_SOR_D_RESOURCE = 0.
-         ANN_SOR_E_RESOURCE = 0.
-         ANN_TOTAL_SERVED_BY_CPL = 0.
-         ANN_LOAD_POSS_SERVE_BY_OTHERS = 0.
-         ANN_SEPA_ALLOCATION = 0.
-         ANN_SOR_A_REVENUE = 0.
-         ANN_SOR_B_REVENUE = 0.
-         ANN_SOR_C_REVENUE = 0.
-         ANN_SOR_D_REVENUE = 0.
-         ANN_SOR_E_REVENUE = 0.
-         ANN_TOTAL_EMC_CAP_REVENUE = 0.
-!
-         ANN_EMC_ENERGY_REVENUE = 0.
-         ANN_EMC_ENERGY_SALES = 0.
-         ANN_NON_COIN_PEAK = 0.
-         ANN_SUM_NON_COIN_PEAK = 0.
-!
-      RETURN
-!
-!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_CPL_EMC_MON_ENER_REVS(R_MONTH,R_EMC_RATE,
-     +         EMC_SALES,NON_COIN_PEAK,EMC_ENERGY_REVENUE)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         EMC_SALES =          FORECAST_ENERGY(1,R_MONTH,EMC_CLASS) +
-     +                        FORECAST_ENERGY(2,R_MONTH,EMC_CLASS)
-         NON_COIN_PEAK =
-     +          MAX(FORECAST_COINCIDENT_PEAK(1,R_MONTH,EMC_CLASS),
-     +              FORECAST_COINCIDENT_PEAK(2,R_MONTH,EMC_CLASS))
-         ANN_NON_COIN_PEAK = MAX(ANN_NON_COIN_PEAK,NON_COIN_PEAK)
-         ANN_EMC_ENERGY_SALES =     ANN_EMC_ENERGY_SALES +
-     +                              EMC_SALES
-         EMC_ENERGY_REVENUE = EMC_SALES * R_EMC_RATE
-         ANN_EMC_ENERGY_REVENUE =   ANN_EMC_ENERGY_REVENUE +
-     +                              EMC_ENERGY_REVENUE
-!
-         ANN_SUM_NON_COIN_PEAK = ANN_SUM_NON_COIN_PEAK +
-     +                                                 ANN_NON_COIN_PEAK
-!
-      RETURN
-!
-!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_CPL_EMC_ANN_CAP_REVS( R_ANN_EMC_ENERGY_SALES,
-     +                                 R_ANN_NON_COIN_PEAK,
-     +                                 R_ANN_EMC_CAP_REVENUE)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         R_ANN_EMC_ENERGY_SALES = 0.
-         R_ANN_NON_COIN_PEAK = ANN_NON_COIN_PEAK
-         R_ANN_EMC_CAP_REVENUE  =  1000000.*ANN_TOTAL_EMC_CAP_REVENUE
-!
-      RETURN
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_CPL_EMC_ANN_ENER_REVS( R_ANN_EMC_ENERGY_SALES,
-     +                                 R_ANN_NON_COIN_PEAK,
-     +                                 R_ANN_EMC_ENERGY_REVENUE)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         R_ANN_EMC_ENERGY_SALES = ANN_EMC_ENERGY_SALES
-         R_ANN_NON_COIN_PEAK = ANN_NON_COIN_PEAK
-         R_ANN_EMC_ENERGY_REVENUE  =  ANN_EMC_ENERGY_REVENUE
-!
-      RETURN
-!
-!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_CPL_EMC_ANN_TRAN_REVS( R_ANN_SUM_TRAN_PEAK,
-     +                                 R_ANN_EMC_TRAN_REVENUE,
-     +                                 R_CURRENT_YEAR)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         CALL GET_EMC_TRANSMISSION_RATE(EMC_TRANS_RATE)
-         R_ANN_SUM_TRAN_PEAK = ANN_SUM_NON_COIN_PEAK - 539.
-         R_ANN_EMC_TRAN_REVENUE =   1000. *
-     +                              R_ANN_SUM_TRAN_PEAK * EMC_TRANS_RATE
-      RETURN
-!
-!
-!
-      END
-      FUNCTION CPL_ACTIVE()
-      use logging
-      LOGICAL (kind=1) ::  SAVE_CPL_STATUS/.FALSE./
-      LOGICAL (kind=1) ::  CPL_ACTIVE
-      LOGICAL (kind=1) ::  CHANGE_CPL_STATUS_TO_ACTIVE
-!
-         CPL_ACTIVE = SAVE_CPL_STATUS
-      RETURN
-      ENTRY CHANGE_CPL_STATUS_TO_ACTIVE()
-         SAVE_CPL_STATUS = .TRUE.
-         CHANGE_CPL_STATUS_TO_ACTIVE = SAVE_CPL_STATUS
-      RETURN
-      END
-!
-!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!
-      RECURSIVE SUBROUTINE CPL_PA_DISPATCH(LPROB2,SYSTEM_LODDUR,
-     +                           HOURS_INCREMENT,
-     +                           LAST_POINT,MAINTENANCE_RATE,
-     +                           SYSTEM_DEMAND,TEMPEA,SYSTEM_PEAK,ISEAS,
-     +                           BLOCK_FUEL_COST,SYSTEM_ENERGY,
-     +                           SYS_EFFECTIVE_CAPACITY,
-     +                           PERIOD_CPL_GEN_COST_FOSSIL,
-     +                           PERIOD_CPL_GENERATION_COST_NUC,
-     +                           PERIOD_CPL_PURCHASE_POWER_COST)
-      use end_routine, only: end_program, er_message
+      USE GRX_PLANNING_ROUTINES
+      use annual_contracts
+      USE ICAP_RESULTS  ! VARIABLE USED IN CLREPORT AND HERE
+      USE ABB_CapMarketRptData
       use logging
       use capacity_arrays
+      use cl_data
+      use dsex_data
       use grx_planning_routines
-      use shared_vars_interg82
-      use interg82
-!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!
-!     NO_PA_ACCTS = 7: 1 = Mayo 1 Replacement
-!                      2 = Harris 1 Replacement
-!                      3 = Total Replacement
-!                      4 = Surplus
-!                      5 = Harris 1 Buyback
-!                      6 = Mayo 1 Buyback
-!                      7 = Total Buyback
-!
-!
-      USE IREC_ENDPOINT_CONTROL
+      use rptreccontrol
+      use monthly_icap
+      use p_fuel
+      use dr_booth_modules
       USE SIZECOM
-      use cls_load
       INCLUDE 'SpinLib.MON'
-
       INCLUDE 'PRODCOM.MON'
       INCLUDE 'PROD2COM.MON'
       INCLUDE 'PROD3COM.MON'
-!     INCLUDE 'LAMCOM.MON'
-      INCLUDE 'POOLCOM.MON'
-      SAVE
-!
-      LOGICAL (kind=1) ::  CL_UNITS_ACTIVE
-      LOGICAL (kind=1) ::  USE_PA_ENERGY_PRICE,USE_EMC_ENERGY_PRICE
-      INTEGER (kind=2) ::    NO_PA_UNITS/0/
-      INTEGER (kind=2) ::  I
-      INTEGER (kind=2) ::  J
-      INTEGER (kind=2) ::  HOURS_INCREMENT
-      INTEGER (kind=2) ::  UNITNO
-      INTEGER (kind=2) ::  LAST_POINT
-      INTEGER (kind=2) ::  PA_UNIT_INDEX(:)
-      INTEGER (kind=2) ::  NBLOK2
-      INTEGER (kind=2) ::  BLKNUM
-      INTEGER (kind=2) ::  CURRENT
-      INTEGER (kind=2) ::  PAUNITNO
-      INTEGER (kind=2) ::  ISEAS
-      INTEGER (kind=2) ::  ISTART
-      INTEGER (kind=2) ::  NO_PA_RESOURCES
-      INTEGER (kind=2) ::  NO_PA_CONTRACTS/5/
-      INTEGER (kind=2) ::  CURRENT_CPL_CONTRACT
-      INTEGER (kind=2) ::  NO_PA_ACCTS/7/
-      INTEGER (kind=2) ::  OFF_SYSTEM_SALES_CLASS
-      INTEGER (kind=2) ::  R_ISEAS
-      INTEGER (kind=2) ::  Reserve Capacity
-      INTEGER (kind=2) ::  Unused Supplemental
-      INTEGER (kind=2) ::  Supplemental Cap
-      INTEGER (kind=2) ::  PA Resource
-      INTEGER (kind=2) ::  Deficiency Capacity
-      INTEGER (kind=2) ::  Mayo 1 Replacement
-      INTEGER (kind=2) ::  Roxboro4 Replacement
-      INTEGER (kind=2) ::  Replacement Energy
-      INTEGER (kind=2) ::  Surplus Energy
-      INTEGER (kind=2) ::  Harris Buyback Energ
-      INTEGER (kind=2) ::  Mayo1 Buyback Energy
-      INTEGER (kind=2) ::  Buyback Energy
-      PARAMETER (OFF_SYSTEM_SALES_CLASS=2, ! Residental is 2 was 1
-     +            Reserve Capacity = 6,
-     +            Unused Supplemental = 7,
-     +            Supplemental Cap = 8,
-     +            PA Resource = 9,
-     +            Deficiency Capacity = 10,
-     +            Mayo 1 Replacement = 6,
-     +            Roxboro4 Replacement = 7,
-     +            Replacement Energy = 8,
-     +            Surplus Energy = 9,
-     +            Harris Buyback Energ = 10,
-     +            Mayo1 Buyback Energy = 11,
-     +            Buyback Energy = 12)
-      REAL (kind=4) ::  LPROB2(CONVOLUTION_POINTS)
-      REAL (kind=4) ::  LPROB(CONVOLUTION_POINTS,2)
-      REAL (kind=4) ::  SYSTEM_LODDUR(CONVOLUTION_POINTS)
-      REAL (kind=4) ::  PA_DX
-      REAL (kind=4) ::  PA_LODDUR(CONVOLUTION_POINTS)
-      REAL (kind=4) ::  LEFT(:)
-      REAL (kind=4) ::  RIGHT(:)
-      REAL (kind=4) ::  EA
-      REAL (kind=4) ::  A
-      REAL (kind=4) ::  B
-      REAL (kind=4) ::  ENRG
-      REAL (kind=4) ::  PA_BASE
-      REAL (kind=4) ::  PA_PEAK
-      REAL (kind=4) ::  SYSTEM_PEAK
-      REAL (kind=4) ::  LIMR
-      REAL (kind=4) ::  PA_CAPSYS
-      REAL (kind=4) ::  SEAS_HOURS/0/
-      REAL (kind=4) ::  REMAINING_ENERGY
-      REAL (kind=4) ::  CAPON
-      REAL (kind=4) ::  CAPBLK
-      REAL (kind=4) ::  PA_ENERGY(:,:)
-      REAL (kind=4) ::  EFFECTIVE_CAPACITY(:,:)
-      REAL (kind=4) ::  CUMCAP
-      REAL (kind=4) ::  BLK_MW
-      REAL (kind=4) ::  MAINTENANCE_RATE(MAX_CL_UNITS)
-      REAL (kind=4) ::  UNIT_ENRG
-      REAL (kind=4) ::  TEMPEA(2,MAX_CL_UNITS)
-      REAL (kind=4) ::  RESERVE_CAPACITY
-      REAL (kind=4) ::  RESERVE_PERCENT
-      REAL (kind=4) ::  UNUSED_SUPP_CAPACITY
-      REAL (kind=4) ::  SUPPLEMENTAL_CAPACITY
-      REAL (kind=4) ::  PA_EXP_CAPSYS
-      REAL (kind=4) ::  PA_CONTRACT_CAPACITY
-      REAL (kind=4) ::  PA_RESOURCE_ENERGY_COST
-      REAL (kind=4) ::  SEPA_ENERGY(12)
-      REAL (kind=4) ::  SEPA_ENERGY_PER_ECAP(12)
-      REAL (kind=4) ::  OFF_SYSTEM_SALES_ENERGY(0:12)
-      REAL (kind=4) ::  R_CPL_GEN_COST
-      REAL (kind=4) ::  R_CPL_PA_ENTITLE
-      REAL (kind=4) ::  R_CPL_PUR_POWER
-      REAL (kind=4) ::  R_CPL_OFF_SYS_INC_COST
-      REAL (kind=4) ::  R_CPL_PA_MWH_COST
-      REAL (kind=4) ::  CPL_FUEL_GENERATION(0:12)
-      REAL (kind=4) ::  CPL_NUC_GENERATION(0:12)
-      REAL (kind=4) ::  CPL_PUR_POWER_ENERGY_COST(0:12)
-      REAL (kind=4) ::  CPL_NCEMPA_ENTITLEMENT(0:12)
-      REAL (kind=4) ::  CPL_NCEMPA_ENTITLEMENT_MWH(0:12)
-      REAL (kind=4) ::  CPL_NCEMPA_MWH_SUPPLIED_BY_CPL(0:12)
-      REAL (kind=4) ::  CPL_NCEMPA_COST_MWH_SUP_BY_CPL(0:12)
-      REAL (kind=4) ::  CPL_OFF_SYSTEM_INCR_COST(0:12)
-      REAL (kind=8) ::  PERIOD_CPL_GEN_COST_FOSSIL
-      REAL (kind=8) ::  PERIOD_CPL_PURCHASE_POWER_COST
-      REAL (kind=4) ::    PERIOD_CPL_GENERATION_COST_NUC
-      CHARACTER (len=20) ::  CONTRACT_NAMES(5),PA_ACCT_NAMES(7)
-      DATA CONTRACT_NAMES/ 'Reserve Capacity    ',
-     +                     'Unused Supplemental ',
-     +                     'Supplemental Cap    ',
-     +                     'PA Resource         ',
-     +                     'Deficiency Capacity '/,
-     +     PA_ACCT_NAMES/
-     +               'Mayo 1 Replacement  ',
-     +               'Roxboro4 Replacement',
-     +               'Replacement Energy  ',
-     +               'Surplus Energy      ',
-     +               'Harris Buyback Energ',
-     +               'Mayo1 Buyback Energy',
-     +               'Buyback Energy      '/,
-     +      SEPA_ENERGY/18798,17789,18606,18257,17805,14226,
-     +                  13128,12690,11392,12757,12327,14104/,
-     +      SEPA_ENERGY_PER_ECAP/2616,1712,1862,1807,
-     +                           1820,1700,2503,2505,
-     +                           2425,1751,1689,2519/
-      REAL (kind=8) ::  SYSTEM_DEMAND,PA_DEMAND,MMBTUS
-      ALLOCATABLE :: PA_UNIT_INDEX,PA_ENERGY,EFFECTIVE_CAPACITY,
-     +               LEFT,RIGHT
-!
-! ENERGY RECONCILE CALCULATIONS
-!
-      REAL (kind=4) ::  SYSTEM_ENERGY(2,MAX_CL_UNITS)
-      REAL (kind=4) ::  SYS_EFFECTIVE_CAPACITY(2,MAX_CL_UNITS)
-      REAL (kind=4) ::  SURPLUS_ENERGY
-      REAL (kind=4) ::  REPLACEMENT_ENERGY
-      REAL (kind=4) ::  WRITE_ENERGY
-      REAL (kind=4) ::  BUYBACK_ENERGY
-      REAL (kind=4) ::  MAYO1_BUYBACK_PERCENT/.0334/
-      REAL (kind=4) ::  HARRIS1_BUYBACK_PERCENT/.3333/
-      REAL (kind=4) ::  MAYO1_BUYBACK
-      REAL (kind=4) ::  HARRIS_BUYBACK
-      REAL (kind=4) ::  RETAINED_PERCENT
-      REAL (kind=4) ::  MAYO1_REPLACEMENT
-      REAL (kind=4) ::  ROX4_REPLACEMENT
-      REAL (kind=4) ::  TOTAL_ENT_ENERGY/0./
-      REAL (kind=4) ::  TOTAL_ENT_CAPACITY/0./
-      REAL (kind=4) ::  RESOURCE_PERCENT
-!
-! REVENUE CALCULATIONS
-!
-      REAL (kind=4) ::  WRITE_FUEL_COST
-      REAL (kind=4) ::  AVERAGE_FUEL_COST
-      REAL (kind=4) ::  AVERAGE_PRODUCTION_COSTS
-      REAL (kind=4) ::  SYS_FUEL_COST
-      REAL (kind=4) ::  SYS_ENERGY
-      REAL (kind=4) ::  BLOCK_FUEL_COST(2,MAX_CL_UNITS)
-      REAL (kind=4) ::  WRITE_PRODUCTION_COST
-      REAL (kind=4) ::  TOTAL_ENT_FUEL_COST/0./
-      REAL (kind=4) ::  TOTAL_ENT_PRODUCTION_COST/0./
-      REAL (kind=4) ::  MAYO1_RPL_PROD_COST
-      REAL (kind=4) ::  MAYO1_RPL_AVE_COST
-      REAL (kind=4) ::  ROX4_RPL_PROD_COST
-      REAL (kind=4) ::  ROX4_RPL_AVE_COST
-      REAL (kind=4) ::  REPLACEMENT_PROD_COST
-      REAL (kind=4) ::  REPLACEMENT_AVE_COST
-      REAL (kind=4) ::  SURPLUS_PROD_COST
-      REAL (kind=4) ::  SURPLUS_AVE_COST
-      REAL (kind=4) ::  HARRIS_BUYBACK_PROD_COST
-      REAL (kind=4) ::  HARRIS_BUYBACK_AVE_COST
-      REAL (kind=4) ::  MAYO1_BUYBACK_PROD_COST
-      REAL (kind=4) ::  MAYO1_BUYBACK_AVE_COST
-      REAL (kind=4) ::  BUYBACK_PROD_COST
-      REAL (kind=4) ::  BUYBACK_AVE_COST
-      REAL (kind=4) ::  TRANSFER_COST/0./
-      REAL (kind=4) ::  TRANSFER_GEN/0./
-      REAL (kind=4) ::  TRANSFER_SALES
-      REAL (kind=4) ::   TRANSFER_PRICE
-      REAL (kind=4) ::  PA_ANN_AVE_PROD
-      REAL (kind=4) ::  EMC_ANN_AVE_PROD
-      REAL (kind=4) ::  EMC_COST
-      REAL (kind=4) ::  EMC_GEN
-      REAL (kind=4) ::  EMC_PRICE
-      REAL (kind=4) ::  TOTAL_PA_PRODUCTION_COST
-      REAL (kind=4) ::  DEFICIT_ENERGY_COST
-      REAL (kind=4) ::  ANN_RESERVE_CAPACITY
-!
-! ANNUAL CALCULATIONS
-!
-      REAL (kind=4) ::  ANN_PA_ENERGY(:)
-      REAL (kind=4) ::  ANN_SYS_ENERGY(:)
-      REAL (kind=4) ::  MON_SYS_ENERGY(:,:)
-      REAL (kind=4) ::  MON_SYS_COST(:,:)
-      REAL (kind=4) ::  MON_PA_ENERGY(:,:)
-      REAL (kind=4) ::  MON_PA_COST(:,:)
-      REAL (kind=4) ::  MON_PA_CAP(:,:)
-      REAL (kind=4) ::  ANN_PA_CAP(:)
-      REAL (kind=4) ::  ANN_SYS_CAP(:)
-      REAL (kind=4) ::  ANN_PA_COST(:)
-      REAL (kind=4) ::  ANN_SYS_COST(:)
-      REAL (kind=4) ::  PA_HOURLY_LOADS(:)
-      REAL (kind=4) ::  CPL_ENERGY_REVENUE_FROM_PA(0:12)
-      REAL (kind=4) ::  CPL_ENERGY_TO_PA(0:12)
-      REAL (kind=4) ::  CPL_EMC_REVENUE(0:12)
-      REAL (kind=4) ::  R_CPL_EMC_REVENUE
-      REAL (kind=4) ::  CPL_ENERGY_EXPENSE_TO_PA(0:12)
-      REAL (kind=4) ::  CPL_ENERGY_FROM_PA(0:12)
-      REAL (kind=4) ::  CPL_ANN_EXPENSE_TO_PA/0./
-      REAL (kind=4) ::  CPL_ANN_REVENUE_FROM_PA/0./
-      REAL (kind=4) ::  R_CPL_ENERGY_REVENUE_FROM_PA
-      REAL (kind=4) ::  R_CPL_ENERGY_TO_PA
-      REAL (kind=4) ::  R_CPL_ENERGY_EXPENSE_TO_PA
-      REAL (kind=4) ::  R_CPL_ENERGY_FROM_PA
-      REAL (kind=4) ::  PA_RESERVE_RATE
-      REAL (kind=4) ::  PA_SUPPLEMENTAL_RATE
-      REAL (kind=4) ::  PA_TRANSMISSION_RATE
-      REAL (kind=4) ::  PA_MAYO_BUYBACK
-      REAL (kind=4) ::  PA_HARRIS_BUYBACK
-      REAL (kind=4) ::  R_BUYBACK
-      REAL (kind=4) ::  S_CATAWBA_REVENUES
-      REAL (kind=4) ::  S_CATAWBA_EXPENSES
-      REAL (kind=4) ::  S_CPL_ENERGY_TO_PA
-      REAL (kind=4) ::  S_CPL_ENERGY_FROM_PA
-      INTEGER (kind=2) ::  SORTED_HOUR(:),PA_SEPA_HOUR(:)
-      ALLOCATABLE ::
-     +         ANN_PA_ENERGY,ANN_SYS_ENERGY,
-     +         MON_PA_ENERGY,MON_PA_COST,
-     +         MON_SYS_ENERGY,MON_SYS_COST,MON_PA_CAP,
-     +         ANN_PA_CAP,ANN_SYS_CAP,ANN_PA_COST,ANN_SYS_COST,
-     +         PA_HOURLY_LOADS,SORTED_HOUR,PA_SEPA_HOUR
-!
-!
-! DETAILED REPORT OVERHEAD
-!
-      LOGICAL (kind=1) ::  PAEN_REPORT_NOT_OPEN/.TRUE./
-      LOGICAL (kind=1) ::  PAEN_REPORT_ACTIVE
-      INTEGER (kind=2) ::  LAST_SEASON/0/
-      INTEGER (kind=2) ::  PRODUCTION_PERIODS
-      INTEGER (kind=2) ::  CPL_PAEN_RPT_HEADER
-      INTEGER (kind=2) ::  CPL_PAEN_UNIT
-      INTEGER (kind=2) ::  CURRENT_YEAR
-      INTEGER (kind=2) ::  CURRENT_MONTH
-      INTEGER (kind=2) ::  ANNUAL_COUNTER/0/
-      INTEGER (kind=2) ::  REMAINING_SYSTEM_CLASS/4/
-      INTEGER ::  CPL_PAEN_REC
-      REAL (kind=4) ::  WRITE_CAPACITY
-      REAL (kind=4) ::  CF
-      REAL (kind=4) ::  TOTAL_WRITE_ENERGY
-      REAL (kind=4) ::  TOTAL_WRITE_CAPACITY
-      REAL (kind=4) ::  RS_CLASS_LOSSES
-      CHARACTER (len=9) ::  CL_MONTH_NAME(13)
-      CHARACTER (len=20) ::    MONTH_NAME,WRITE_UNIT_NAME
-!
-      LOGICAL (kind=1) ::    ECAP_REPORT_NOT_OPEN/.TRUE./
-      LOGICAL (kind=1) ::  ECAP_REPORT_ACTIVE
-      LOGICAL (kind=1) ::  HOURLY_ECAP_REPORT
-      LOGICAL (kind=1) ::  HOURLY_ECAP_ACTIVE
-      LOGICAL (kind=1) ::  PA_SWITCH
-      INTEGER (kind=2) ::    HOURLY_ECAP_RPT_HEADER,HOURLY_ECAP_UNIT
-      INTEGER ::  HOURLY_ECAP_REC
-!
-! SONG'S DATA
-!
-      REAL (kind=4) ::
-     +            PAGENCY_PEAK,
-     +            PAGENCY_LOAD,
-     +            SEPA_CAP,
-     +            NEW_RESOURCE_CAP,
-     +            CONTRACT_CAP,
-     +            BRUNSW1_CAP,
-     +            BRUNSW2_CAP,
-     +            HARRIS1_CAP,
-     +            MAYO1_CAP,
-     +            ROXB4_CAP,
-     +            UNUSED_ROXB4_CAP,
-     +            UNUSED_MAYO1_CAP,
-     +            UNUSED_HARRIS1_CAP,
-     +            UNUSED_BRUNSW2_CAP,
-     +            UNUSED_BRUNSW1_CAP,
-     +            TOT_RETAINED_CAP,
-     +            TOTAL_RETAINED_CAP_BASE,
-     +            TOTAL_RETAINED_AFTER_OUT,
-     +            RES_CAP,
-     +            RES_CAP_FACTOR,
-     +            UNUSED_SUPP_CAP,
-     +            SUPP_CAP,
-     +            UNMET_DEMAND,
-     +            MONTHLY_SEPA_CAP,
-     +            MONTHLY_CONTRACT_CAP,
-     +            MONTHLY_TOT_RETAINED_CAP,
-     +            MONTHLY_SUPP_CAP,
-     +            MONTHLY_RES_CAP,
-     +            MONTHLY_UNMET_DEMAND,
-     +            MONTHLY_UNUSED_SUPP_CAP,
-     +            MONTHLY_UNUSED_ENTITLED_CAP,
-     +            AVA_RES_CAP,
-     +            AVG_SEPA_CAP,
-     +            AVG_CONTRACT_CAP,
-     +            AVG_TOT_RETAINED_CAP,
-     +            AVG_SUPP_CAP,
-     +            AVG_AVA_RES_CAP,
-     +            AVG_RES_CAP,
-     +            AVG_UNMET_DEMAND,
-     +            AVG_UNUSED_SUPP_CAP,
-     +            AVG_UNUSED_ENTITLED_CAP,
-     +            PAGENCY_ENERGY,
-     +            SQ_SEPA_ENERGY,
-     +            NEW_RESOURCE_ENERGY,
-     +            BRUNSW1_ENERGY,
-     +            BRUNSW2_ENERGY,
-     +            HARRIS1_ENERGY,
-     +            MAYO1_ENERGY,
-     +            ROXB4_ENERGY,
-     +            MONTHLY_PA_ENERGY,
-     +            MONTHLY_BRUNSW1_ENERGY,
-     +            MONTHLY_BRUNSW2_ENERGY,
-     +            MONTHLY_HARRIS1_ENERGY,
-     +            MONTHLY_MAYO1_ENERGY,
-     +            MONTHLY_ROXB4_ENERGY,
-     +            TOTAL_ENTITLE_ENERGY,
-     +            RES_ENERGY,
-     +            UNUSED_SUPP_ENERGY,
-     +            SUPP_ENERGY,
-     +            UNSERVED_ENERGY,
-     +            CONTRACT_ENERGY,
-     +            UNUSED_CONTRACT_ENERGY,
-     +            UNUSED_ENERGY_COEF,
-     +            UNUSED_ENTITLED_CAP,
-     +            TEMP,
-     +            DEFICIENCY,
-     +            CONTRACT_SURPLUS,
-     +            CONTRACT_REPLACEMENT,
-     +            MONTHLY_AVA_RES_CAP,
-     +            MONTH_TOTAL_ENTITLE_ENERGY,
-     +            PA_UNIT_DISPATCH_CAP(10),
-     +            TEMP_UNUSED_CAP,
-     +            TEMP_UNIT_CAP,
-     +            MONTH_RES_ENERGY,
-     +            MONTH_UNUSED_SUPP_ENERGY,
-     +            MONTH_SUPP_ENERGY,
-     +            MONTH_UNSERVED_ENERGY,
-     +            MONTH_CONTRACT_ENERGY,
-     +            MONTH_UNUSED_CONTRACT_ENGY,
-     +            MONTH_DEFICIENCY,
-     +            MONTH_CONTRACT_SURPLUS,
-     +            MONTH_CONTRACT_REPLACEMENT,
-     +            MONTH_SEPA_ENERGY
-      INTEGER (kind=2) ::
-     +            PA_UNIT_DISPATCH_INDEX(10),
-     +            MAX_PA_DISPATCH_BLOCKS,L,MAX_SEPA_HOUR
-      REAL (kind=4) ::  R_CPL_PA_MWH,R_CPL_OFF_SYS_ENRG,R_CPL_NUC_COST
-      REAL (kind=4) ::  R_CATAWBA_REVENUES(0:12)
-      REAL (kind=4) ::  R_CATAWBA_EXPENSES(0:12)
-      INTEGER (kind=2) ::  MO
-
-
-      IF(ISEAS == 1) THEN
-         CPL_FUEL_GENERATION = 0.
-         CPL_NUC_GENERATION = 0.
-         CPL_PUR_POWER_ENERGY_COST = 0.
-         CPL_NCEMPA_ENTITLEMENT = 0.
-         CPL_NCEMPA_ENTITLEMENT_MWH = 0.
-         CPL_NCEMPA_MWH_SUPPLIED_BY_CPL = 0.
-         CPL_NCEMPA_COST_MWH_SUP_BY_CPL = 0.
-         CPL_OFF_SYSTEM_INCR_COST = 0.
-         OFF_SYSTEM_SALES_ENERGY = 0.
-!
-         CPL_ENERGY_REVENUE_FROM_PA = 0.
-         CPL_EMC_REVENUE = 0.
-         CPL_ENERGY_TO_PA = 0.
-         CPL_ENERGY_EXPENSE_TO_PA = 0.
-         CPL_ENERGY_FROM_PA = 0.
-         CPL_ANN_EXPENSE_TO_PA = 0.
-         CPL_ANN_REVENUE_FROM_PA = 0.
-      ENDIF
-!
-! PULLED IN FROM DR_BOOTH
-!
-      CPL_NUC_GENERATION(ISEAS) = CPL_NUC_GENERATION(ISEAS)
-     +                            + PERIOD_CPL_GENERATION_COST_NUC
-      CPL_NUC_GENERATION(0) = CPL_NUC_GENERATION(0)
-     +                        + PERIOD_CPL_GENERATION_COST_NUC
-      CPL_FUEL_GENERATION(ISEAS) = CPL_FUEL_GENERATION(ISEAS)
-     +                             + PERIOD_CPL_GEN_COST_FOSSIL
-      CPL_FUEL_GENERATION(0) = CPL_FUEL_GENERATION(0)
-     +                         + PERIOD_CPL_GEN_COST_FOSSIL
-      CPL_PUR_POWER_ENERGY_COST(ISEAS) =
-     +                            CPL_PUR_POWER_ENERGY_COST(ISEAS) +
-     +                                    PERIOD_CPL_PURCHASE_POWER_COST
-      CPL_PUR_POWER_ENERGY_COST(0) =
-     +                            CPL_PUR_POWER_ENERGY_COST(0) +
-     +                                    PERIOD_CPL_PURCHASE_POWER_COST
-!
-! 8/5/99. GAT.
-!
-      CALL GET_PA_SWITCH(PA_SWITCH)
-      IF(.NOT. PA_SWITCH) THEN
-!
-         TRANSFER_COST =
-     +      (P_CLASS_ASSIGNED_COST(1) +
-     +       P_CLASS_ASS_ECON_COST(1) - P_CLASS_ASS_ECON_REV(1) +
-     +       P_CLASS_ASSIGNED_COST(2) +
-     +       P_CLASS_ASS_ECON_COST(2) - P_CLASS_ASS_ECON_REV(2))
-         TRANSFER_GEN =
-     +      (P_CLASS_ASSIGNED_ENERGY(1) + P_CLASS_ASSIGNED_ENERGY(2) -
-     +       P_CLASS_ASS_ECON_SELL(1) + P_CLASS_ASS_ECON_BUY(1) -
-     +       P_CLASS_ASS_ECON_SELL(2) + P_CLASS_ASS_ECON_BUY(2) )
-!
-         CALL RETURN_CLASS_LOSSES(RS_CLASS_LOSSES,
-     +                                           REMAINING_SYSTEM_CLASS)
-!
-!
-! EMC ENERGY REVENUES
-!
-         EMC_COST = TRANSFER_COST
-         TRANSFER_SALES = TRANSFER_GEN *
-     +                 (1. - MIN(RS_CLASS_LOSSES,.9999)) -
-     +                                                SEPA_ENERGY(ISEAS)
-         EMC_GEN = TRANSFER_SALES
-         IF(USE_EMC_ENERGY_PRICE()) THEN
-             EMC_PRICE = EMC_ANN_AVE_PROD()
-         ELSEIF(EMC_GEN > 0.) THEN
-            EMC_PRICE = EMC_COST / EMC_GEN
-         ELSE
-            EMC_PRICE = 0.
-         ENDIF
-         CALL GET_CPL_EMC_MON_ENER_REVS(ISEAS,EMC_PRICE,
-     +                                    WRITE_ENERGY,WRITE_CAPACITY,
-     +                                    WRITE_PRODUCTION_COST)
-!
-         RETURN
-!
-      ENDIF
-!
-      PAEN_REPORT_ACTIVE = .TRUE. ! UNTIL ADDED TO DETAILED REPORTS
-      CURRENT_YEAR = BASE_YEAR_COMMON + YEAR
-      IF(PAEN_REPORT_NOT_OPEN .AND.
-     +                       PAEN_REPORT_ACTIVE .AND.
-     +                                         .NOT. TESTING_PLAN ) THEN
-         PAEN_REPORT_NOT_OPEN = .FALSE.
-         CPL_PAEN_UNIT = CPL_PAEN_RPT_HEADER(CPL_PAEN_REC)
-         LAST_SEASON = PRODUCTION_PERIODS()
-         DO CURRENT_MONTH = 1, LAST_SEASON
-            CL_MONTH_NAME(CURRENT_MONTH) = MONTH_NAME(CURRENT_MONTH)
-         ENDDO
-         CL_MONTH_NAME(LAST_SEASON+1) = 'Annual'
-         ANNUAL_COUNTER = LAST_SEASON + 1
-      ENDIF
-      IF(CURRENT_YEAR < 2008) THEN
-         HARRIS1_BUYBACK_PERCENT = 0.3333
-      ELSE
-         HARRIS1_BUYBACK_PERCENT = 0.0000
-      ENDIF
-!
-! IDENTIFY UNITS PARTIALLY OWNED BY PA
-!
-      NO_PA_UNITS = 0
-      PA_RESOURCE_ENERGY_COST = 0.
-      SEAS_HOURS = FLOAT(HOURS_INCREMENT)
-      DO UNITNO = 1, NUNITS
-         IF(CL_POOL_FRAC_OWN(UNITNO) < 100. .AND.
-     +                               CL_POOL_FRAC_OWN(UNITNO) > 0.) THEN
-            NO_PA_UNITS = NO_PA_UNITS + 1
-            IF(NO_PA_UNITS == 1) THEN
-               IF(CURRENT_YEAR <= 1997) THEN
-                  MAYO1_BUYBACK =
-     +               (SYSTEM_ENERGY(1,UNITNO) +
-     +                      SYSTEM_ENERGY(2,UNITNO)) *
-     +                              (1.-CL_POOL_FRAC_OWN(UNITNO)/100.) *
-     +                                           MAYO1_BUYBACK_PERCENT *
-     +                                                        SEAS_HOURS
-                  BUYBACK_ENERGY = BUYBACK_ENERGY + MAYO1_BUYBACK
-               ELSE
-                  MAYO1_BUYBACK = 0.
-               ENDIF
-            ELSEIF(NO_PA_UNITS == 5) THEN
-               IF(CURRENT_YEAR <= 2007) THEN
-                  HARRIS_BUYBACK =
-     +               (SYSTEM_ENERGY(1,UNITNO) +
-     +                      SYSTEM_ENERGY(2,UNITNO)) *
-     +                              (1.-CL_POOL_FRAC_OWN(UNITNO)/100.) *
-     +                                         HARRIS1_BUYBACK_PERCENT *
-     +                                                        SEAS_HOURS
-               ENDIF
-            ENDIF
-         ELSEIF(CL_POOL_FRAC_OWN(UNITNO) == 0.) THEN
-            SYS_ENERGY = (SYSTEM_ENERGY(1,UNITNO) +
-     +                             SYSTEM_ENERGY(2,UNITNO)) * SEAS_HOURS
-            SYS_FUEL_COST = BLOCK_FUEL_COST(1,UNITNO) +
-     +                      BLOCK_FUEL_COST(2,UNITNO)
-            IF(SYS_ENERGY > 0.) THEN
-               PA_RESOURCE_ENERGY_COST = SYS_FUEL_COST/SYS_ENERGY +
-     +                                                   VCPMWH(UNITNO)
-            ELSE
-               PA_RESOURCE_ENERGY_COST = VCPMWH(UNITNO)
-            ENDIF
-         ENDIF
-      ENDDO
-      IF(NO_PA_UNITS < 5) THEN
-         WRITE(4,*) "Less than 5 PA Units were detected when"
-         WRITE(4,*) "PA was false. Please check PA switch in the"
-         WRITE(4,*) "CPL file and percent ownership in the CL file"
-         er_message='See WARNING MESSAGES-cat2objt.1'
-         call end_program(er_message)
-      ENDIF
-!      IF(NO_PA_UNITS <= 0) RETURN ! NO PARTIALLY OWNED UNITS. WHAT'S THE POINT?
-      NO_PA_RESOURCES = NO_PA_UNITS + NO_PA_CONTRACTS
-!
-!
-!
-! REPLACE CPL LOAD CURVE WITH TRANSFORMED LOAD CURVE
-!
-!      SEAS_HOURS = FLOAT(HOURS_INCREMENT) MOVED UP. 9/10/97. GAT.
-      BUYBACK_ENERGY = MAYO1_BUYBACK + HARRIS_BUYBACK
-!
-!
-!
-      IF(ALLOCATED(PA_HOURLY_LOADS)) DEALLOCATE(PA_HOURLY_LOADS,
-     +                                         SORTED_HOUR,PA_SEPA_HOUR)
-      ALLOCATE(PA_HOURLY_LOADS(HOURS_INCREMENT),
-     +         SORTED_HOUR(HOURS_INCREMENT),
-     +         PA_SEPA_HOUR(HOURS_INCREMENT))
-      CALL  CREATE_CPL_LDC(      ISEAS,
-     +                           SYSTEM_PEAK,
-     +                           SYSTEM_DEMAND,
-     +                           SYSTEM_LODDUR,
-     +                           PA_LODDUR,
-     +                           LPROB2,
-     +                           SEAS_HOURS,
-     +                           PA_PEAK,
-     +                           PA_DEMAND,
-     +                           PA_DX,
-     +                           BUYBACK_ENERGY,
-     +                           PA_HOURLY_LOADS)
-!
-!
-
-         IF(ALLOCATED(PA_ENERGY)) DEALLOCATE(PA_ENERGY,PA_UNIT_INDEX)
-         ALLOCATE(PA_UNIT_INDEX(NO_PA_RESOURCES),
-     +            PA_ENERGY(2,NO_PA_RESOURCES),
-     +            EFFECTIVE_CAPACITY(2,NO_PA_RESOURCES),
-     +            LEFT(NO_PA_RESOURCES),
-     +            RIGHT(NO_PA_RESOURCES))
-!
-!
-         IF(ISEAS == 1 .AND. NO_PA_UNITS > 0) THEN
-            IF(ALLOCATED(ANN_PA_ENERGY))
-     +                     DEALLOCATE( ANN_PA_ENERGY,ANN_SYS_ENERGY,
-     +                                 ANN_PA_CAP,ANN_SYS_CAP,
-     +                                 ANN_PA_COST,ANN_SYS_COST,
-     +                                 MON_SYS_ENERGY,MON_SYS_COST,
-     +                                 MON_PA_CAP,
-     +                                 MON_PA_ENERGY,
-     +                                 MON_PA_COST)
-            ALLOCATE(ANN_PA_ENERGY(0:NO_PA_RESOURCES+1),
-     +               ANN_SYS_ENERGY(NO_PA_UNITS+NO_PA_ACCTS),
-     +               ANN_PA_CAP(0:NO_PA_RESOURCES+1),
-     +               ANN_SYS_CAP(NO_PA_UNITS+NO_PA_ACCTS),
-     +               ANN_PA_COST(0:NO_PA_RESOURCES+1),
-     +               ANN_SYS_COST(NO_PA_UNITS+NO_PA_ACCTS),
-     +               MON_SYS_ENERGY(NO_PA_UNITS+NO_PA_ACCTS,0:12),
-     +               MON_SYS_COST(NO_PA_UNITS+NO_PA_ACCTS,0:12),
-     +               MON_PA_CAP(0:NO_PA_RESOURCES+1,0:12),
-     +               MON_PA_ENERGY(0:NO_PA_RESOURCES+1,0:12),
-     +               MON_PA_COST(NO_PA_UNITS+NO_PA_ACCTS,0:12))
-
-            ANN_PA_ENERGY = 0.
-            ANN_PA_CAP = 0.
-            ANN_SYS_ENERGY = 0.
-            ANN_SYS_CAP = 0.
-            ANN_PA_COST = 0.
-            ANN_SYS_COST = 0.
-            MON_SYS_ENERGY = 0.
-            MON_SYS_COST = 0.
-            MON_PA_CAP = 0.
-            MON_PA_ENERGY = 0.
-            MON_PA_COST = 0.
-         ELSEIF(NO_PA_UNITS == 0.) THEN
-            WRITE(4,*) "NO PA OWNED UNITS FOUND"
-            WRITE(4,*) "CPL DATA BASE MUST HAVE OWNERSHIP SHARES"
-            WRITE(4,*) " "
-         ENDIF
-         I = 1
-         PA_CAPSYS = 0.
-         PA_EXP_CAPSYS = 0.
-         DO UNITNO = 1, NUNITS
-            IF(CL_POOL_FRAC_OWN(UNITNO) < 100. .AND.
-     +                               CL_POOL_FRAC_OWN(UNITNO) > 0.) THEN
-!
-               PA_UNIT_INDEX(I) = UNITNO
-               PA_ENERGY(1,I) = 0.
-               PA_ENERGY(2,I) = 0.
-               EFFECTIVE_CAPACITY(1,I) = 0.
-               EFFECTIVE_CAPACITY(2,I) = 0.
-               LEFT(I) = 0.
-               RIGHT(I) = 0.
-!
-               CALL GET_PA_RETAINED_PERCENT(I,RESOURCE_PERCENT)
-!
-               PA_CAPSYS = PA_CAPSYS + MW(2,UNITNO) *
-     +                              RESOURCE_PERCENT
-               PA_EXP_CAPSYS = PA_EXP_CAPSYS + MW(2,UNITNO) *
-     +                              RESOURCE_PERCENT *
-     +                              EAVAIL(UNITNO) *
-     +                              (1.-MAINTENANCE_RATE(UNITNO))
-!
-               I = I + 1
-            ENDIF
-         ENDDO
-         CALL GET_PA_RESERVE_CAPACITY(RESERVE_CAPACITY,MAINTENANCE_RATE,
-     +                                EAVAIL,PA_UNIT_INDEX,
-     +                                PA_CAPSYS,PA_EXP_CAPSYS,
-     +                                RESERVE_PERCENT)
-         CALL GET_UNUSED_SUPP_CAPACITY(UNUSED_SUPP_CAPACITY)
-         CALL GET_SUPPLEMENTAL_CAPACITY(SUPPLEMENTAL_CAPACITY,PA_PEAK)
-         CALL GET_PA_RESOURCE_CAPACITY(PA_CONTRACT_CAPACITY)
-         DO UNITNO = 1, NO_PA_CONTRACTS ! LAST ENERGY SOURCE IN CL FILE
-!
-               I = NO_PA_UNITS + UNITNO
-               PA_UNIT_INDEX(I) = UNITNO
-               PA_ENERGY(1,I) = 0.
-               PA_ENERGY(2,I) = 0.
-               EFFECTIVE_CAPACITY(1,I) = 0.
-               EFFECTIVE_CAPACITY(2,I) = 0.
-               LEFT(I) = 0.
-               RIGHT(I) = 0.
-               IF(UNITNO == 1) THEN !
-                  PA_CAPSYS = PA_CAPSYS + RESERVE_CAPACITY
-               ELSEIF(UNITNO == 2) THEN
-                  PA_CAPSYS = PA_CAPSYS + UNUSED_SUPP_CAPACITY
-               ELSEIF(UNITNO == 3) THEN
-                  PA_CAPSYS = PA_CAPSYS + SUPPLEMENTAL_CAPACITY
-               ELSEIF(UNITNO == 4) THEN
-                  PA_CAPSYS = PA_CAPSYS + PA_CONTRACT_CAPACITY
-               ENDIF
-!
-         ENDDO
-!
-         DO J = 1, LAST_POINT
-            LPROB(J,1) = LPROB2(J)
-            LPROB(J,2) = 0.
-         ENDDO
-         LPROB(1,2) = 1.
-!
-         CURRENT = 1
-         PA_BASE = PA_LODDUR(1)
-         NBLOK2 = NBLOCK
-         REMAINING_ENERGY = SNGL(PA_DEMAND)/SEAS_HOURS
-         A = 0.
-         B = 0.
-         CAPON = 0.
-!
-! MAIN ROUTINE
-!
-         I = 0
-         CURRENT_CPL_CONTRACT = 0
-         CL_UNITS_ACTIVE = .TRUE.
-!
-         TOTAL_RETAINED_CAP_BASE = 0.
-         TOTAL_RETAINED_AFTER_OUT = 0.
-         BRUNSW1_CAP= 0.0
-         BRUNSW2_CAP = 0.0
-         HARRIS1_CAP = 0.0
-         MAYO1_CAP = 0.0
-         ROXB4_CAP = 0.0
-         MAX_PA_DISPATCH_BLOCKS = 0
-!
-         ECAP_REPORT_ACTIVE = HOURLY_ECAP_REPORT()
-         HOURLY_ECAP_ACTIVE = ECAP_REPORT_ACTIVE
-         IF(ECAP_REPORT_NOT_OPEN .AND.
-     +                       ECAP_REPORT_ACTIVE .AND.
-     +                                         .NOT. TESTING_PLAN ) THEN
-            ECAP_REPORT_NOT_OPEN = .FALSE.
-            HOURLY_ECAP_UNIT = HOURLY_ECAP_RPT_HEADER(HOURLY_ECAP_REC)
-            LAST_SEASON = PRODUCTION_PERIODS()
-            DO CURRENT_MONTH = 1, LAST_SEASON
-               CL_MONTH_NAME(CURRENT_MONTH) = MONTH_NAME(CURRENT_MONTH)
-            ENDDO
-            CL_MONTH_NAME(LAST_SEASON+1) = 'Annual'
-            ANNUAL_COUNTER = LAST_SEASON + 1
-         ENDIF
-!
-         DO
-!
-            IF(I == NBLOK2) CL_UNITS_ACTIVE = .FALSE.
-!
-            IF(CL_UNITS_ACTIVE) THEN
-               I = I + 1 ! UNIT SEGMENT COUNTER
-               J = 1
-               DOWHILE(UNIT(I) /= PA_UNIT_INDEX(J) .AND.
-     +                                                J <= NO_PA_UNITS )
-                  J = J + 1
-                  CYCLE
-               ENDDO
-               IF(J > NO_PA_UNITS) CYCLE ! THIS IS NOT A PA UNIT
-!
-! THIS IS A VALID PA UNIT
-!
-               PAUNITNO = J ! POSITION OF PA UNIT INSIDE PA ARRAY
-!
-               UNITNO = UNIT(I)
-               BLKNUM = MAX(1,BLKNO(I))
-!
-               IF(CL_POOL_FRAC_OWN(UNITNO) < 100. .AND.
-     +                               CL_POOL_FRAC_OWN(UNITNO) > 0.) THEN
-                  IF(J == 5) THEN
-                    BLK_MW = MWBLOK(I) * (1.-HARRIS1_BUYBACK_PERCENT) *
-     +                                (1.-CL_POOL_FRAC_OWN(UNITNO)/100.)
-                  ELSE
-                     BLK_MW = MWBLOK(I) *
-     +                                (1.-CL_POOL_FRAC_OWN(UNITNO)/100.)
-                  ENDIF
-               ELSE
-                  WRITE(4,*) '*** line 2313 CPL_PA_DISPATCH ***'
-                  WRITE(4,*) UNITNM(UNITNO),"IS NOT OWNED BY POOL."
-                  WRITE(4,*) "JOINT UNITS MUST BE PART OWNED BY POOL"
-                  WRITE(4,*) "TO PERFORM JOINT DISPATCH."
-                  er_message='See WARNING MESSAGES-cat2objt-2'
-                  call end_program(er_message)
-               ENDIF
-!
-               EA = TEMPEA(BLKNUM,UNITNO) ! ASSUMES BOOTH ALGORITHM
-               CAPBLK = BLK_MW * (1. - MAINTENANCE_RATE(UNITNO))
-!
-!
-!
-               MAX_PA_DISPATCH_BLOCKS = MAX_PA_DISPATCH_BLOCKS + 1
-               PA_UNIT_DISPATCH_CAP(MAX_PA_DISPATCH_BLOCKS) = CAPBLK*EA
-               PA_UNIT_DISPATCH_INDEX(MAX_PA_DISPATCH_BLOCKS) = J
-!
-               TOTAL_RETAINED_CAP_BASE = TOTAL_RETAINED_CAP_BASE +
-     +                                                            BLK_MW
-               TOTAL_RETAINED_AFTER_OUT = TOTAL_RETAINED_AFTER_OUT +
-     +                                                       BLK_MW * EA
-               IF(J == 1) THEN
-                  MAYO1_CAP = MAYO1_CAP + CAPBLK * EA
-               ELSEIF(J == 2) THEN
-                  ROXB4_CAP = ROXB4_CAP + CAPBLK * EA
-               ELSEIF(J == 3) THEN
-                  BRUNSW1_CAP= BRUNSW1_CAP + CAPBLK * EA
-               ELSEIF(J == 4) THEN
-                  BRUNSW2_CAP= BRUNSW2_CAP + CAPBLK * EA
-               ELSEIF(J == 5) THEN
-                  HARRIS1_CAP = HARRIS1_CAP + CAPBLK * EA
-               ENDIF
-!
-!
-            ELSEIF(CURRENT_CPL_CONTRACT < NO_PA_CONTRACTS) THEN
-               CURRENT_CPL_CONTRACT = CURRENT_CPL_CONTRACT + 1
-               PAUNITNO = NO_PA_UNITS + CURRENT_CPL_CONTRACT
-!
-               IF(CURRENT_CPL_CONTRACT == NO_PA_CONTRACTS) THEN
-!
-! IN GENERAL MULTI-AREA DISPATCH, THE MODEL WILL RELY ON 'L' UNIT
-!
-                  PA_ENERGY(1,PAUNITNO) = MAX(0.,REMAINING_ENERGY)
-                  REMAINING_ENERGY = 0.
-                  EXIT
-               ELSE
-                  IF(CURRENT_CPL_CONTRACT == 1) THEN !
-                     BLK_MW = RESERVE_CAPACITY
-                  ELSEIF(CURRENT_CPL_CONTRACT == 2) THEN
-                     BLK_MW = UNUSED_SUPP_CAPACITY
-                  ELSEIF(CURRENT_CPL_CONTRACT == 3) THEN
-                     BLK_MW = SUPPLEMENTAL_CAPACITY
-                  ELSEIF(CURRENT_CPL_CONTRACT == 4) THEN
-                     BLK_MW = PA_CONTRACT_CAPACITY
-                  ENDIF
-!
-!                 UNIT INDEXED ARRAY DON'T APPLY
-!
-                  BLKNUM = 1
-                  EA = 1.0 ! 100% AVAILABLE PER UPM CODE
-                  CAPBLK = BLK_MW ! 100% AVAILABLE PER UPM CODE
-!
-               ENDIF
-!
-            ELSE
-               WRITE(4,*) '*** line 2387 CPL_PA_DISPATCH ***'
-               WRITE(4,*) "MULTI-AREA DISPATCH EXCEEDS AVAILABLE"
-               WRITE(4,*) "RESOURCES.  LAST RESOURCE NOT FOUND"
-               er_message='See WARNING MESSAGES-cat2objt-6'
-               call end_program(er_message)
-            ENDIF
-            IF(BLKNUM <= 1) THEN
-               EFFECTIVE_CAPACITY(1,PAUNITNO) = CAPBLK
-            ELSE
-               EFFECTIVE_CAPACITY(2,PAUNITNO) = CAPBLK
-            ENDIF
-!
-!
-! VALID UNITS FOR DISPATCH
-!
-            IF( .NOT. HOURLY_ECAP_ACTIVE) THEN
-               IF(BLK_MW == 0.0) CYCLE
-
-               ENRG = 0.0
-               A = B
-
-
-               PA_CAPSYS = PA_CAPSYS - BLK_MW + CAPBLK
-
-               IF(CAPBLK > 0. .AND. REMAINING_ENERGY > 0.) THEN
-                  B = A + CAPBLK
-                  IF(A < PA_CAPSYS) THEN
-                     IF(B < PA_BASE) THEN
-                        ENRG = CAPBLK
-                        IF(BLKNUM <= 1) THEN
-                           PA_ENERGY(1,PAUNITNO) = ENRG
-                           EFFECTIVE_CAPACITY(1,PAUNITNO) = ENRG
-                        ELSE
-                           PA_ENERGY(2,PAUNITNO) = ENRG
-                           EFFECTIVE_CAPACITY(2,PAUNITNO) = ENRG
-                           LEFT(PAUNITNO) = 1.0
-                           RIGHT(PAUNITNO) = 1.0
-                        ENDIF
-                     ELSE
-                        CALL CALENRG( PA_LODDUR,LPROB(1,CURRENT),
-     +                              A,B,ENRG,
-     +                              PA_CAPSYS,PA_DX,LEFT(PAUNITNO),
-     +                              RIGHT(PAUNITNO),ISTART)
-                        ENRG = MIN(ENRG,REMAINING_ENERGY/EA)
-                        IF(BLKNUM <= 1) THEN
-                           PA_ENERGY(1,PAUNITNO) = ENRG
-                           EFFECTIVE_CAPACITY(1,PAUNITNO) = CAPBLK
-                        ELSE
-                           PA_ENERGY(2,PAUNITNO) = ENRG
-                           EFFECTIVE_CAPACITY(2,PAUNITNO) = CAPBLK
-                        ENDIF
-                     ENDIF
-                  ENDIF
-                  REMAINING_ENERGY = REMAINING_ENERGY - EA*ENRG
-                  IF((REMAINING_ENERGY > 0.) .AND. I < NBLOK2 ) THEN
-                     CAPON = CAPON + CAPBLK
-                     IF(UNIT(I+1) /= UNITNO) THEN
-                        IF(EA <= .999 .AND. EA >= .001) THEN
-                           CUMCAP = CUMCAP + CAPON
-                           LIMR = MIN(PA_PEAK+CUMCAP,PA_CAPSYS) + PA_DX
-                           CALL CONVOL(CAPON,EA,CURRENT,LIMR,
-     +                                      LPROB,PA_LODDUR,LAST_POINT)
-                        ELSEIF(EA < .001) THEN
-                           B = A
-                        ENDIF
-                        CAPON = 0.
-                     ENDIF
-                  ENDIF
-               ENDIF !END BOOTH REMAINING ENERGY <> 0
-            ENDIF
-         ENDDO ! DISPATCHING LOOP (CONTRACTS OR CL UNITS ACTIVE)
-!
-! 12/29/98. SQ.
-! 1/16/99. GAT. MOVED INTO MAINSTREAM CODE.
-!
-! 3/14/99. GAT. RETAINED: BEFORE OUTAGES. ENTITLEMENT: AFTER OUTAGES
-!
-!     1. NEED TO SORT SEPA CONTRACT.
-!
-! CAPACITY CALCULATIONS FOR CPL_PA CONTRACT
-!
-         IF( HOURLY_ECAP_ACTIVE) THEN
-!            TOTAL_RETAINED_CAP_BASE = 593.64
-            SEPA_CAP = 29.2
-            NEW_RESOURCE_CAP = 116.0
-!           BRUNSW1_CAP= 0.0
-!           BRUNSW2_CAP = 144.8
-!           HARRIS1_CAP = 92.7
-!           MAYO1_CAP = 120.5
-!           ROXB4_CAP = 90.6
-            RES_CAP_FACTOR = .12
-
-
-            CONTRACT_CAP = SEPA_CAP + NEW_RESOURCE_CAP
-            TOT_RETAINED_CAP = BRUNSW1_CAP + BRUNSW2_CAP + HARRIS1_CAP +
-     +                                      MAYO1_CAP + ROXB4_CAP
-
-            TOTAL_RETAINED_CAP_BASE = TOTAL_RETAINED_AFTER_OUT
-
-
-!            SUPP_CAP = PA_PEAK - SEPA_CAP - NEW_RESOURCE_CAP -
-!     +                                          TOTAL_RETAINED_CAP_BASE
-
-! 3/14/99. PER SKIP SPREADSHEET
-
-            SUPP_CAP = PA_PEAK - CONTRACT_CAP - TOTAL_RETAINED_CAP_BASE
-
-!            AVA_RES_CAP = RES_CAP_FACTOR * TOTAL_RETAINED_CAP_BASE
-
-!            IF (TOTAL_RETAINED_CAP_BASE -
-!     +                             TOT_RETAINED_CAP < AVA_RES_CAP ) THEN
-!               RES_CAP = TOTAL_RETAINED_CAP_BASE - TOT_RETAINED_CAP
-!            ELSE
-!               IF (TOTAL_RETAINED_CAP_BASE - TOT_RETAINED_CAP >
-!     +                                               AVA_RES_CAP ) THEN
-!                  RES_CAP =  AVA_RES_CAP
-!               ELSE
-!                  RES_CAP = 0
-!               ENDIF
-!            ENDIF
-
-! OVERWRITTEN BELOW.  CALCULATED IN PA_... ROUTINE
-
-!            RES_CAP = MIN(TOTAL_RETAINED_CAP_BASE -
-!     +                                    TOT_RETAINED_CAP,AVA_RES_CAP )
-
-!            UNMET_DEMAND = PA_PEAK - SEPA_CAP - NEW_RESOURCE_CAP -
-!     +          TOT_RETAINED_CAP - RES_CAP - UNUSED_SUPP_CAP - SUPP_CAP
-            AVA_RES_CAP = RES_CAP
-            RES_CAP = MIN(TOTAL_RETAINED_CAP_BASE -
-     +                               TOT_RETAINED_CAP,RESERVE_CAPACITY )
-!            RES_CAP = RESERVE_CAPACITY ! OVER WRITES ABOVE CALCULATION.
-
-            IF (RES_CAP == AVA_RES_CAP) THEN
-               UNUSED_SUPP_CAP = TOTAL_RETAINED_CAP_BASE -
-     +                                       TOT_RETAINED_CAP - RES_CAP
-            ELSE
-               UNUSED_SUPP_CAP = 0.
-            ENDIF
-!
-            MONTH_RES_ENERGY = 0.
-            MONTH_UNUSED_SUPP_ENERGY = 0.
-            MONTH_SUPP_ENERGY = 0.
-            MONTH_UNSERVED_ENERGY = 0.
-            MONTH_CONTRACT_ENERGY = 0.
-            MONTH_UNUSED_CONTRACT_ENGY = 0.
-            MONTH_DEFICIENCY = 0.
-            MONTH_CONTRACT_SURPLUS = 0.
-            MONTH_CONTRACT_REPLACEMENT = 0.
-            MONTH_SEPA_ENERGY = 0.
-            MONTHLY_SEPA_CAP = 0.
-            MONTHLY_CONTRACT_CAP = 0.
-            MONTHLY_TOT_RETAINED_CAP = 0.
-            MONTHLY_SUPP_CAP = 0.
-            MONTHLY_RES_CAP = 0.
-            MONTHLY_UNMET_DEMAND = 0.
-            MONTHLY_UNUSED_SUPP_CAP = 0.
-            MONTHLY_UNUSED_ENTITLED_CAP = 0.
-!
-            MONTHLY_AVA_RES_CAP = 0.
-            MONTH_TOTAL_ENTITLE_ENERGY = 0.
-!
-!           PAGENCY_ENERGY = 1263.0
-!           SQ_SEPA_ENERGY = 29.2
-!           NEW_RESOURCE_ENERGY = 116.0
-!
-!
-            MONTHLY_PA_ENERGY = 0.
-            MONTHLY_BRUNSW1_ENERGY= 0.
-            MONTHLY_BRUNSW2_ENERGY = 0.
-            MONTHLY_HARRIS1_ENERGY = 0.
-            MONTHLY_MAYO1_ENERGY = 0.
-            MONTHLY_ROXB4_ENERGY = 0.
-!           BRUNSW1_ENERGY= 0.
-!           BRUNSW2_ENERGY = 144.8
-!           HARRIS1_ENERGY = 92.7
-!           MAYO1_ENERGY = 120.5
-!           ROXB4_ENERGY = 90.6
-!
-!           SEPA_CAP = 0.
-!
-! GET THIS WORKING. THEN, SPEED IT UP.
-!
-            MAX_SEPA_HOUR = INT(SEPA_ENERGY_PER_ECAP(ISEAS)/SEPA_CAP)
-
-            DO I = 1, HOURS_INCREMENT
-               SORTED_HOUR(I) = I
-            ENDDO
-
-            PA_SEPA_HOUR = 0
-
-            CALL SortIncrPos(HOURS_INCREMENT,
-     +                                      SORTED_HOUR,PA_HOURLY_LOADS)
-
-            DO I = HOURS_INCREMENT, HOURS_INCREMENT - MAX_SEPA_HOUR,-1
-               PA_SEPA_HOUR(SORTED_HOUR(I)) = I
-            ENDDO
-
-!            UNUSED_SUPP_CAP = UNUSED_SUPP_CAPACITY
-!            SUPP_CAP = SUPPLEMENTAL_CAPACITY
-!           NEW_RESOURCE_CAP = PA_CONTRACT_CAPACITY
-!
-
-            DO I = 1, HOURS_INCREMENT
-!
-! ENERGY CALCULATIONS FOR CPL_PA CONTRACT
-!
-!
-!
-               IF(PA_SEPA_HOUR(I) >
-     +                             HOURS_INCREMENT - MAX_SEPA_HOUR) THEN
-                  SQ_SEPA_ENERGY = SEPA_CAP
-               ELSEIF(PA_SEPA_HOUR(I) ==
-     +                             HOURS_INCREMENT - MAX_SEPA_HOUR) THEN
-                  SQ_SEPA_ENERGY = SEPA_ENERGY_PER_ECAP(ISEAS) -
-     +                                        (MAX_SEPA_HOUR) * SEPA_CAP
-               ELSE
-                  SQ_SEPA_ENERGY = 0.
-               ENDIF
-!
-               BRUNSW1_ENERGY= 0.
-               BRUNSW2_ENERGY =0.
-               HARRIS1_ENERGY = 0.
-               MAYO1_ENERGY = 0.
-               ROXB4_ENERGY = 0.
-               MONTHLY_PA_ENERGY = MONTHLY_PA_ENERGY +
-     +                                                PA_HOURLY_LOADS(I)
-!
-               IF (PA_HOURLY_LOADS(I) < TOT_RETAINED_CAP) THEN
-                  UNUSED_ENTITLED_CAP = TOT_RETAINED_CAP -
-     +                                                PA_HOURLY_LOADS(I)
-               ELSE
-                  UNUSED_ENTITLED_CAP = 0.
-               ENDIF
-
-               TEMP_UNUSED_CAP = UNUSED_ENTITLED_CAP
-               L = MAX_PA_DISPATCH_BLOCKS
-               DO L = MAX_PA_DISPATCH_BLOCKS,1,-1
-                  IF(TEMP_UNUSED_CAP > 0. .AND. L > 3) THEN
-                     IF(TEMP_UNUSED_CAP < PA_UNIT_DISPATCH_CAP(L) ) THEN
-                        TEMP_UNIT_CAP =
-     +                         PA_UNIT_DISPATCH_CAP(L) - TEMP_UNUSED_CAP
-                        TEMP_UNUSED_CAP = 0.
-                     ELSE
-                        TEMP_UNUSED_CAP = TEMP_UNUSED_CAP -
-     +                                           PA_UNIT_DISPATCH_CAP(L)
-                        TEMP_UNIT_CAP = 0.
-                     ENDIF
-!   !                L = L - 1
-                     IF(L == 0 .AND. TEMP_UNUSED_CAP > .0001) THEN
-                        WRITE(4,*) '*** line 2635 CPL_PA_DISPATCH ***'
-                        WRITE(4,*) " INSUFFICIENT RETAINED CAPACITY"
-                        WRITE(4,*) " IN THE PA CALCULATION"
-                        er_message='See WARNING MESSAGES-cat2objt-5'
-                        call end_program(er_message)
-                     ENDIF
-                  ELSE
-                     TEMP_UNIT_CAP = PA_UNIT_DISPATCH_CAP(L)
-                  ENDIF
-                  IF(PA_UNIT_DISPATCH_INDEX(L) == 1) THEN
-                     MAYO1_ENERGY = MAYO1_ENERGY + TEMP_UNIT_CAP
-                     MONTHLY_MAYO1_ENERGY =
-     +                              MONTHLY_MAYO1_ENERGY + TEMP_UNIT_CAP
-                  ELSEIF(PA_UNIT_DISPATCH_INDEX(L) == 2) THEN
-                     ROXB4_ENERGY = ROXB4_ENERGY + TEMP_UNIT_CAP
-                     MONTHLY_ROXB4_ENERGY =
-     +                              MONTHLY_ROXB4_ENERGY + TEMP_UNIT_CAP
-                  ELSEIF(PA_UNIT_DISPATCH_INDEX(L) == 3) THEN
-                     BRUNSW1_ENERGY = BRUNSW1_ENERGY + TEMP_UNIT_CAP
-                     MONTHLY_BRUNSW1_ENERGY =
-     +                            MONTHLY_BRUNSW1_ENERGY + TEMP_UNIT_CAP
-                  ELSEIF(PA_UNIT_DISPATCH_INDEX(L) == 4) THEN
-                     BRUNSW2_ENERGY = BRUNSW2_ENERGY + TEMP_UNIT_CAP
-                     MONTHLY_BRUNSW2_ENERGY =
-     +                            MONTHLY_BRUNSW2_ENERGY + TEMP_UNIT_CAP
-                  ELSEIF(PA_UNIT_DISPATCH_INDEX(L) == 5) THEN
-                     HARRIS1_ENERGY = HARRIS1_ENERGY + TEMP_UNIT_CAP
-                     MONTHLY_HARRIS1_ENERGY =
-     +                            MONTHLY_HARRIS1_ENERGY + TEMP_UNIT_CAP
-                  ENDIF
-               ENDDO
-!
-! Entitlement Done.
-!
-               TOTAL_ENTITLE_ENERGY = BRUNSW1_ENERGY + BRUNSW2_ENERGY +
-     +                      HARRIS1_ENERGY + MAYO1_ENERGY + ROXB4_ENERGY
-
-! RES_ENERGY. GAT. 3/3/99.
-
-
-!               RES_ENERGY = RES_CAP
-
-               RES_ENERGY = MAX(0.,MIN(RES_CAP,
-     +                       (PA_HOURLY_LOADS(I)-TOTAL_ENTITLE_ENERGY)))
-
+      INCLUDE 'ENVIRCOM.MON'
+      INCLUDE 'CNTRCOM.MON'
 
 !
-! Reserve Done. GAT. 3/15/99.
-!
-               SUPP_ENERGY =
-     +            MAX( MIN( (PA_PEAK - CONTRACT_CAP),
-     +                     (PA_HOURLY_LOADS(I) - SQ_SEPA_ENERGY) ),
-     +                                       TOTAL_RETAINED_CAP_BASE ) -
-     +                                           TOTAL_RETAINED_CAP_BASE
-!
-! Supplemental Done.
-!
-               CONTRACT_ENERGY =
-     +             MAX( (PA_HOURLY_LOADS(I) - SUPP_ENERGY -
-     +                                                  SQ_SEPA_ENERGY),
-     +                                       TOTAL_RETAINED_CAP_BASE ) -
-     +                                           TOTAL_RETAINED_CAP_BASE
-
-!
-! Contract energy done.
-!
-               IF ((PA_HOURLY_LOADS(I) - SQ_SEPA_ENERGY) >
-     +               (TOTAL_ENTITLE_ENERGY + RES_ENERGY) ) THEN
-                  UNUSED_ENERGY_COEF = 1
-               ELSE
-                  UNUSED_ENERGY_COEF = 0
-               ENDIF
-
-!
-! Every thing but unused supplemental and deficiency has been calculated
-!
+! MARKETSYM TRANSFER VARIABLE
+      TYPE MARKETSYM_TRANSFER_STRUCTURE
+            CHARACTER (LEN=31) :: UnitName
+            CHARACTER (LEN=20) :: TransZoneName
+            INTEGER (KIND=2) :: UnitsBuilt
+      END TYPE MARKETSYM_TRANSFER_STRUCTURE
 
 
-               TEMP =  SQ_SEPA_ENERGY + CONTRACT_ENERGY + SUPP_ENERGY +
-     +                                 RES_ENERGY + TOTAL_ENTITLE_ENERGY
-! GAT. ADDED ZERO CONDITION. 3/3/99. GAT.
-               UNUSED_SUPP_ENERGY = MAX(0.,
-     +                                 UNUSED_ENERGY_COEF *
-     +                                 MIN((PA_HOURLY_LOADS(I) - TEMP),
-     +                                 (SUPP_CAP - SUPP_ENERGY)))
-
-! SET TO ZERO PER SKIP'S SPREADSHEET. 3/14/99.
-
-
-
-               UNUSED_CONTRACT_ENERGY = 0.
-
-
-               DEFICIENCY = MAX(0.,
-     +                      PA_HOURLY_LOADS(I) - TEMP -
-     +                      UNUSED_SUPP_ENERGY - UNUSED_CONTRACT_ENERGY)
-!
-               CONTRACT_SURPLUS = MAX( 0.,
-     +                  CONTRACT_CAP - CONTRACT_ENERGY -
-     +                                          UNUSED_CONTRACT_ENERGY )
-               CONTRACT_REPLACEMENT = MAX( 0.,
-     +                  CONTRACT_ENERGY - UNUSED_CONTRACT_ENERGY -
-     +                                                    CONTRACT_CAP )
-               UNMET_DEMAND = PA_HOURLY_LOADS(I) -
-     +            SQ_SEPA_ENERGY -
-     +                CONTRACT_ENERGY -
-     +                     TOTAL_ENTITLE_ENERGY -
-     +                           RES_ENERGY -
-     +                              DEFICIENCY -
-     +                                   UNUSED_SUPP_ENERGY -
-     +                                       SUPP_ENERGY
-!
-!
-!
-               WRITE(HOURLY_ECAP_UNIT,REC=HOURLY_ECAP_REC)
-     +            PRT_ENDPOINT(),
-     +            FLOAT(CURRENT_YEAR),
-     +            CL_MONTH_NAME(ISEAS),
-     +            FLOAT(I),
-     +            PA_PEAK,
-     +            PA_HOURLY_LOADS(I),
-     +            CONTRACT_CAP,
-     +            TOT_RETAINED_CAP,
-     +            SUPP_CAP,
-     +            AVA_RES_CAP,
-     +            RES_CAP,
-     +            UNMET_DEMAND,
-     +            UNUSED_SUPP_CAP,
-     +            TOTAL_ENTITLE_ENERGY,
-     +            UNUSED_ENTITLED_CAP,
-     +            MAYO1_ENERGY,
-     +            ROXB4_ENERGY,
-     +            BRUNSW1_ENERGY,
-     +            BRUNSW2_ENERGY,
-     +            HARRIS1_ENERGY,
-     +            RES_ENERGY,
-     +            SUPP_ENERGY,
-     +            CONTRACT_ENERGY,
-     +            UNUSED_ENERGY_COEF,
-     +            TEMP,
-     +            UNUSED_SUPP_ENERGY,
-     +            UNUSED_CONTRACT_ENERGY,
-     +            DEFICIENCY,
-     +            SQ_SEPA_ENERGY
-               HOURLY_ECAP_REC = HOURLY_ECAP_REC + 1
-!
-!              CALCULATE MONTHLY TOTAL CAPACITIES
-!
-               MONTHLY_SEPA_CAP = MONTHLY_SEPA_CAP + SEPA_CAP
-               MONTHLY_CONTRACT_CAP = MONTHLY_CONTRACT_CAP +
-     +                                              CONTRACT_CAP
-               MONTHLY_TOT_RETAINED_CAP = MONTHLY_TOT_RETAINED_CAP +
-     +                                             TOT_RETAINED_CAP
-               MONTHLY_SUPP_CAP = MONTHLY_SUPP_CAP + SUPP_CAP
-               MONTHLY_AVA_RES_CAP = MONTHLY_AVA_RES_CAP +
-     +                                                AVA_RES_CAP
-               MONTHLY_RES_CAP = MONTHLY_RES_CAP + RES_CAP
-               MONTHLY_UNMET_DEMAND = MONTHLY_UNMET_DEMAND +
-     +                                              UNMET_DEMAND
-               MONTHLY_UNUSED_SUPP_CAP = MONTHLY_UNUSED_SUPP_CAP +
-     +                                              UNUSED_SUPP_CAP
-               MONTHLY_UNUSED_ENTITLED_CAP =
-     +            MONTHLY_UNUSED_ENTITLED_CAP + UNUSED_ENTITLED_CAP
-
-
-!
-!              CALCULATE MONTHLY TOTAL ENERGY
-!
-               MONTH_TOTAL_ENTITLE_ENERGY = MONTH_TOTAL_ENTITLE_ENERGY+
-     +                                            TOTAL_ENTITLE_ENERGY
-               MONTH_RES_ENERGY = MONTH_RES_ENERGY + RES_ENERGY
-               MONTH_UNUSED_SUPP_ENERGY = MONTH_UNUSED_SUPP_ENERGY +
-     +                                             UNUSED_SUPP_ENERGY
-               MONTH_SUPP_ENERGY = MONTH_SUPP_ENERGY + SUPP_ENERGY
-               UNSERVED_ENERGY = 0. ! DONE TO ELIMINATE THE WARNING BELOW MSG 8/3/01
-               MONTH_UNSERVED_ENERGY = MONTH_UNSERVED_ENERGY +
-     +                                                UNSERVED_ENERGY ! THIS USED BUT NEVER SET TO A VALUE
-               MONTH_CONTRACT_ENERGY = MONTH_CONTRACT_ENERGY +
-     +                                                CONTRACT_ENERGY
-               MONTH_UNUSED_CONTRACT_ENGY = MONTH_UNUSED_CONTRACT_ENGY +
-     +                                          UNUSED_CONTRACT_ENERGY
-               MONTH_DEFICIENCY = MONTH_DEFICIENCY + DEFICIENCY
-               MONTH_CONTRACT_SURPLUS = MONTH_CONTRACT_SURPLUS  +
-     +                                                  CONTRACT_SURPLUS
-               MONTH_CONTRACT_REPLACEMENT = MONTH_CONTRACT_REPLACEMENT +
-     +                                              CONTRACT_REPLACEMENT
-               MONTH_SEPA_ENERGY = MONTH_SEPA_ENERGY + SQ_SEPA_ENERGY
-!
-!     +        WRITE<*,*>  MONTH_RES_ENERGY, MONTH_UNUSED_SUPP_ENERGY,
-!     +                  MONTH_SUPP_ENERGY, MONTH_UNSERVED_ENERGY,
-!     +                  MONTH_CONTRACT_ENERGY,
-!     +                  MONTH_UNUSED_CONTRACT_ENERGY, MONTH_DEFICIENCY
-            ENDDO
-!              CALCULATE AVERAGE MONTHLY CAPACITY
-
-            AVG_SEPA_CAP = MONTHLY_SEPA_CAP/HOURS_INCREMENT
-            AVG_CONTRACT_CAP = MONTHLY_CONTRACT_CAP/HOURS_INCREMENT
-            AVG_TOT_RETAINED_CAP = MONTHLY_TOT_RETAINED_CAP/
-     +                                             HOURS_INCREMENT
-            AVG_SUPP_CAP = MONTHLY_SUPP_CAP/HOURS_INCREMENT
-            AVG_AVA_RES_CAP = MONTHLY_AVA_RES_CAP/HOURS_INCREMENT
-            AVG_RES_CAP = MONTHLY_RES_CAP/HOURS_INCREMENT
-            AVG_UNMET_DEMAND = MONTHLY_UNMET_DEMAND/HOURS_INCREMENT
-            AVG_UNUSED_SUPP_CAP = MONTHLY_UNUSED_SUPP_CAP/
-     +                                             HOURS_INCREMENT
-            AVG_UNUSED_ENTITLED_CAP = MONTHLY_UNUSED_ENTITLED_CAP/
-     +                                             HOURS_INCREMENT
-!
-            I = 750
-!
-            WRITE(HOURLY_ECAP_UNIT,REC=HOURLY_ECAP_REC)
-     +            PRT_ENDPOINT(),
-     +            FLOAT(CURRENT_YEAR),
-     +            CL_MONTH_NAME(ISEAS),
-     +            FLOAT(I),
-     +            PA_PEAK,
-     +            MONTHLY_PA_ENERGY,
-     +            CONTRACT_CAP,
-     +            TOT_RETAINED_CAP,
-     +            SUPP_CAP,
-     +            AVA_RES_CAP,
-     +            RES_CAP,
-     +            MONTHLY_UNMET_DEMAND,
-     +            UNUSED_SUPP_CAP,
-     +            MONTH_TOTAL_ENTITLE_ENERGY,
-     +            UNUSED_ENTITLED_CAP,
-     +            MONTHLY_MAYO1_ENERGY,
-     +            MONTHLY_ROXB4_ENERGY,
-     +            MONTHLY_BRUNSW1_ENERGY,
-     +            MONTHLY_BRUNSW2_ENERGY,
-     +            MONTHLY_HARRIS1_ENERGY,
-     +            MONTH_RES_ENERGY,
-     +            MONTH_SUPP_ENERGY,
-     +            MONTH_CONTRACT_ENERGY,
-     +            UNUSED_ENERGY_COEF,
-     +            TEMP,
-     +            MONTH_UNUSED_SUPP_ENERGY,
-     +            MONTH_UNUSED_CONTRACT_ENGY,
-     +            MONTH_DEFICIENCY,
-     +            MONTH_SEPA_ENERGY
-            HOURLY_ECAP_REC = HOURLY_ECAP_REC + 1
-!
-!
-            I = PA_UNIT_INDEX(1)
-            IF(TEMPEA(2,I) == 0.) THEN
-               PA_ENERGY(1,1) = 0.
-            ELSE
-               PA_ENERGY(1,1) = MONTHLY_MAYO1_ENERGY/
-     +                                          (SEAS_HOURS*TEMPEA(2,I))
-            ENDIF
-!
-            I = PA_UNIT_INDEX(2)
-            IF(TEMPEA(2,I) == 0.) THEN
-               PA_ENERGY(1,2) = 0.
-            ELSE
-               PA_ENERGY(1,2) = MONTHLY_ROXB4_ENERGY/
-     +                                          (SEAS_HOURS*TEMPEA(2,I))
-            ENDIF
-!
-            I = PA_UNIT_INDEX(3)
-            IF(TEMPEA(2,I) == 0.) THEN
-               PA_ENERGY(1,3) = 0.
-            ELSE
-               PA_ENERGY(1,3) = MONTHLY_BRUNSW1_ENERGY/
-     +                                          (SEAS_HOURS*TEMPEA(2,I))
-            ENDIF
-!
-            I = PA_UNIT_INDEX(4)
-            IF(TEMPEA(2,I) == 0.) THEN
-               PA_ENERGY(1,4) = 0.
-            ELSE
-               PA_ENERGY(1,4) = MONTHLY_BRUNSW2_ENERGY/
-     +                                          (SEAS_HOURS*TEMPEA(2,I))
-            ENDIF
-!
-            I = PA_UNIT_INDEX(5)
-            IF(TEMPEA(2,I) == 0.) THEN
-               PA_ENERGY(1,5) = 0.
-            ELSE
-               PA_ENERGY(1,5) = MONTHLY_HARRIS1_ENERGY/
-     +                                          (SEAS_HOURS*TEMPEA(2,I))
-            ENDIF
-            PA_ENERGY(1,6) = MONTH_RES_ENERGY/(SEAS_HOURS)
-            PA_ENERGY(1,7) = MONTH_UNUSED_SUPP_ENERGY/(SEAS_HOURS)
-            PA_ENERGY(1,8) = MONTH_SUPP_ENERGY/(SEAS_HOURS)
-            PA_ENERGY(1,9) = MONTH_CONTRACT_ENERGY/(SEAS_HOURS)
-            PA_ENERGY(1,10) = MONTH_DEFICIENCY/(SEAS_HOURS)
-         ENDIF ! HOURLY ECAP LOGIC
-!
-!
-! PA REPORTING
-!
-!
-         TRANSFER_COST =
-     +      (P_CLASS_ASSIGNED_COST(1) +
-     +       P_CLASS_ASS_ECON_COST(1) - P_CLASS_ASS_ECON_REV(1) +
-     +       P_CLASS_ASSIGNED_COST(2) +
-     +       P_CLASS_ASS_ECON_COST(2) - P_CLASS_ASS_ECON_REV(2))
-         TRANSFER_GEN =
-     +      (P_CLASS_ASSIGNED_ENERGY(1) + P_CLASS_ASSIGNED_ENERGY(2) -
-     +       P_CLASS_ASS_ECON_SELL(1) + P_CLASS_ASS_ECON_BUY(1) -
-     +       P_CLASS_ASS_ECON_SELL(2) + P_CLASS_ASS_ECON_BUY(2) )
-!
-         CALL RETURN_CLASS_LOSSES(RS_CLASS_LOSSES,
-     +                                           REMAINING_SYSTEM_CLASS)
-!
-         IF(USE_PA_ENERGY_PRICE()) THEN
-            TRANSFER_PRICE = PA_ANN_AVE_PROD()
-         ELSEIF(TRANSFER_GEN > 0.) THEN
-            TRANSFER_PRICE = TRANSFER_COST / TRANSFER_GEN
-         ELSE
-            TRANSFER_PRICE = 0.
-         ENDIF
-!
-         DEFICIT_ENERGY_COST = TRANSFER_PRICE * 1.25
-!
-         TOTAL_WRITE_ENERGY = 0.
-         TOTAL_WRITE_CAPACITY = 0.
-         TOTAL_PA_PRODUCTION_COST = 0.
-         DO J = 0, NO_PA_RESOURCES + 1
-!        INCLUDE TOTALS FOR SUPPLY AND DEMAND
-            IF(J == 0) THEN
-               WRITE_UNIT_NAME = 'PA Demand           '
-               WRITE_CAPACITY = PA_PEAK
-!               UNIT_ENRG = SNGL(PA_DEMAND)/SEAS_HOURS
-               WRITE_ENERGY = SNGL(PA_DEMAND)
-               WRITE_PRODUCTION_COST = 0.
-               AVERAGE_PRODUCTION_COSTS = 0.
-               ANN_PA_ENERGY(J) = ANN_PA_ENERGY(J) + WRITE_ENERGY
-               MON_PA_ENERGY(J,ISEAS) = MON_PA_ENERGY(J,ISEAS) +
-     +                                                      WRITE_ENERGY
-               MON_PA_ENERGY(J,0) = MON_PA_ENERGY(J,0) +
-     +                                                      WRITE_ENERGY
-               ANN_PA_CAP(J) = ANN_PA_CAP(J) + WRITE_CAPACITY
-               MON_PA_CAP(J,ISEAS) =
-     +                              MON_PA_CAP(J,ISEAS) + WRITE_CAPACITY
-               MON_PA_CAP(J,0) = MON_PA_CAP(J,0) + WRITE_CAPACITY
-            ELSEIF(J > 0 .AND. J <= NO_PA_UNITS) THEN
-               I = PA_UNIT_INDEX(J)
-               UNIT_ENRG = (  PA_ENERGY(1,J) * TEMPEA(1,I) +
-     +                        PA_ENERGY(2,J) * TEMPEA(2,I))
-               WRITE_UNIT_NAME = UNITNM(I)(1:18)//'PA'
-               WRITE_CAPACITY =
-     +                 (EFFECTIVE_CAPACITY(1,J)+EFFECTIVE_CAPACITY(2,J))
-               IF(UNIT_ENRG > 0.) THEN
-                  CALL CALHEAT(PA_ENERGY(1,J),LEFT(J),RIGHT(J),
-     +                  COEFF(1,I),
-     +                   MW(1,I),MMBTUS,EFFECTIVE_CAPACITY(1,J),
-     +                   TEMPEA(1,I),TEMPEA(2,I))
-               ENDIF
-               TOTAL_WRITE_ENERGY = TOTAL_WRITE_ENERGY + UNIT_ENRG
-               TOTAL_WRITE_CAPACITY = TOTAL_WRITE_CAPACITY +
-     +                                                    WRITE_CAPACITY
-               ANN_PA_ENERGY(J) = ANN_PA_ENERGY(J) + UNIT_ENRG
-     +                                                      * SEAS_HOURS
-               MON_PA_ENERGY(J,ISEAS) = MON_PA_ENERGY(J,ISEAS) +
-     +                                              UNIT_ENRG*SEAS_HOURS
-               MON_PA_ENERGY(J,0) = MON_PA_ENERGY(J,0) +
-     +                                              UNIT_ENRG*SEAS_HOURS
-               ANN_PA_CAP(J) = ANN_PA_CAP(J) + WRITE_CAPACITY
-               MON_PA_CAP(J,ISEAS) =
-     +                              MON_PA_CAP(J,ISEAS) + WRITE_CAPACITY
-               MON_PA_CAP(J,0) = MON_PA_CAP(J,0) + WRITE_CAPACITY
-!
-!
-!
-               WRITE_ENERGY = UNIT_ENRG*SEAS_HOURS
-               IF(NINT(WRITE_ENERGY) > 0) THEN
-!
-                  SYS_ENERGY = (SYSTEM_ENERGY(1,I) +
-     +                                  SYSTEM_ENERGY(2,I)) * SEAS_HOURS
-                  SYS_FUEL_COST =
-     +                       BLOCK_FUEL_COST(1,I) + BLOCK_FUEL_COST(2,I)
-                  IF(SYS_ENERGY /= 0.) THEN
-                     AVERAGE_FUEL_COST = SYS_FUEL_COST / SYS_ENERGY
-                  ELSE
-                     AVERAGE_FUEL_COST = SYS_FUEL_COST
-                  ENDIF
-                  WRITE_PRODUCTION_COST =
-     +                                 (AVERAGE_FUEL_COST + VCPMWH(I)) *
-     +                                                      WRITE_ENERGY
-                  TOTAL_PA_PRODUCTION_COST = TOTAL_PA_PRODUCTION_COST +
-     +                                             WRITE_PRODUCTION_COST
-!
-                  AVERAGE_PRODUCTION_COSTS = AVERAGE_FUEL_COST +
-     +                                                         VCPMWH(I)
-               ELSE
-                  WRITE_PRODUCTION_COST = 0.
-                  AVERAGE_PRODUCTION_COSTS = 0.
-               ENDIF
-!
-               ANN_PA_COST(J) = ANN_PA_COST(J) + WRITE_PRODUCTION_COST
-               MON_PA_COST(J,ISEAS) = MON_PA_COST(J,ISEAS) +
-     +                                             WRITE_PRODUCTION_COST
-               MON_PA_COST(J,0) = MON_PA_COST(J,0) +
-     +                                             WRITE_PRODUCTION_COST
-!
-            ELSEIF(J <= NO_PA_RESOURCES) THEN
-               I = J - NO_PA_UNITS
-               UNIT_ENRG = PA_ENERGY(1,J) + PA_ENERGY(2,J)
-               WRITE_UNIT_NAME = CONTRACT_NAMES(I)
-               IF(I == 1) THEN
-                  WRITE_CAPACITY = RESERVE_CAPACITY
-               ELSEIF(I== 2) THEN
-                  WRITE_CAPACITY = UNUSED_SUPP_CAPACITY
-               ELSEIF(I== 3) THEN
-                  WRITE_CAPACITY = SUPPLEMENTAL_CAPACITY
-               ELSEIF(I== 4) THEN
-                  WRITE_CAPACITY = PA_CONTRACT_CAPACITY
-               ELSEIF(I== 5) THEN
-                  WRITE_CAPACITY = 0.
-               ELSE
-                  WRITE(4,*) '*** line 3050 CPL_PA_DISPATCH ***'
-                  WRITE(4,*) "UNSUPPORTED PA CONTRACT TYPE"
-                  er_message='See WARNING MESSAGES-cat2objt-4'
-                  call end_program(er_message)
-               ENDIF
-!
-!
-!
-               WRITE_ENERGY = UNIT_ENRG*SEAS_HOURS
-               IF(NINT(WRITE_ENERGY) > 0) THEN
-!
-                  IF(I < 4) THEN
-                     AVERAGE_PRODUCTION_COSTS = TRANSFER_PRICE
-                     WRITE_PRODUCTION_COST = WRITE_ENERGY *
-     +                                                    TRANSFER_PRICE
-                  ELSEIF(I == 4) THEN
-                     AVERAGE_PRODUCTION_COSTS = PA_RESOURCE_ENERGY_COST
-                     WRITE_PRODUCTION_COST = WRITE_ENERGY *
-     +                                           PA_RESOURCE_ENERGY_COST
-                  ELSEIF(I == 5) THEN
-                     AVERAGE_PRODUCTION_COSTS = DEFICIT_ENERGY_COST
-                     WRITE_PRODUCTION_COST = WRITE_ENERGY *
-     +                                               DEFICIT_ENERGY_COST
-                  ENDIF
-!
-               ELSE
-                  WRITE_PRODUCTION_COST = 0.
-                  AVERAGE_PRODUCTION_COSTS = 0.
-               ENDIF
-               TOTAL_PA_PRODUCTION_COST = TOTAL_PA_PRODUCTION_COST +
-     +                                             WRITE_PRODUCTION_COST
-!
-               TOTAL_WRITE_ENERGY = TOTAL_WRITE_ENERGY + UNIT_ENRG
-               TOTAL_WRITE_CAPACITY = TOTAL_WRITE_CAPACITY +
-     +                                                    WRITE_CAPACITY
-               ANN_PA_ENERGY(J) = ANN_PA_ENERGY(J) + UNIT_ENRG
-     +                                                      * SEAS_HOURS
-               MON_PA_ENERGY(J,ISEAS) = MON_PA_ENERGY(J,ISEAS) +
-     +                                              UNIT_ENRG*SEAS_HOURS
-               MON_PA_ENERGY(J,0) = MON_PA_ENERGY(J,0) +
-     +                                              UNIT_ENRG*SEAS_HOURS
-               ANN_PA_CAP(J) = ANN_PA_CAP(J) + WRITE_CAPACITY
-               MON_PA_CAP(J,ISEAS) =
-     +                              MON_PA_CAP(J,ISEAS) + WRITE_CAPACITY
-               MON_PA_CAP(J,0) = MON_PA_CAP(J,0) + WRITE_CAPACITY
-!
-               ANN_PA_COST(J) = ANN_PA_COST(J) + WRITE_PRODUCTION_COST
-               MON_PA_COST(J,ISEAS) = MON_PA_COST(J,ISEAS) +
-     +                                             WRITE_PRODUCTION_COST
-               MON_PA_COST(J,0) = MON_PA_COST(J,0) +
-     +                                             WRITE_PRODUCTION_COST
-!
-            ELSE
-               WRITE_UNIT_NAME = 'PA Supply           '
-               WRITE_CAPACITY = TOTAL_WRITE_CAPACITY
-               WRITE_ENERGY = TOTAL_WRITE_ENERGY * SEAS_HOURS
-               IF(WRITE_ENERGY > 0.) THEN
-                  WRITE_PRODUCTION_COST = TOTAL_PA_PRODUCTION_COST
-                  AVERAGE_PRODUCTION_COSTS = TOTAL_PA_PRODUCTION_COST /
-     +                                                      WRITE_ENERGY
-               ELSE
-                  WRITE_PRODUCTION_COST = 0.
-                  AVERAGE_PRODUCTION_COSTS = 0.
-               ENDIF
-               ANN_PA_ENERGY(J) = ANN_PA_ENERGY(J) + WRITE_ENERGY
-               MON_PA_ENERGY(J,ISEAS) = MON_PA_ENERGY(J,ISEAS) +
-     +                                                      WRITE_ENERGY
-               MON_PA_ENERGY(J,0) = MON_PA_ENERGY(J,0) + WRITE_ENERGY
-               ANN_PA_CAP(J) = ANN_PA_CAP(J) + WRITE_CAPACITY
-               MON_PA_CAP(J,ISEAS) =
-     +                              MON_PA_CAP(J,ISEAS) + WRITE_CAPACITY
-               MON_PA_CAP(J,0) = MON_PA_CAP(J,0) + WRITE_CAPACITY
-               ANN_PA_COST(J) = ANN_PA_COST(J) +
-     +                                          TOTAL_PA_PRODUCTION_COST
-               MON_PA_COST(J,ISEAS) = MON_PA_COST(J,ISEAS) +
-     +                                             WRITE_PRODUCTION_COST
-               MON_PA_COST(J,0) = MON_PA_COST(J,0) +
-     +                                             WRITE_PRODUCTION_COST
-            ENDIF
-!
-            CF = WRITE_CAPACITY*SEAS_HOURS
-            IF(CF > 0.) THEN
-               CF = 100.*WRITE_ENERGY/CF
-            ELSE
-               CF = 0.
-            ENDIF
-!
-            WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ISEAS),
-     +               WRITE_UNIT_NAME,
-     +               WRITE_CAPACITY,
-     +               WRITE_ENERGY,
-     +               CF,
-     +               WRITE_PRODUCTION_COST/1000.,
-     +               AVERAGE_PRODUCTION_COSTS
-            CPL_PAEN_REC = CPL_PAEN_REC + 1
-         ENDDO
-!
-!
-         DEALLOCATE(EFFECTIVE_CAPACITY,LEFT,RIGHT)
-
-
-         IF(NO_PA_UNITS <= 0) RETURN
-         TOTAL_ENT_CAPACITY = 0.
-         TOTAL_ENT_ENERGY = 0.
-         TOTAL_ENT_FUEL_COST = 0.
-         TOTAL_ENT_PRODUCTION_COST = 0.
-         REPLACEMENT_ENERGY = 0.
-         SURPLUS_ENERGY = 0.
-         SURPLUS_PROD_COST = 0.
-         MAYO1_REPLACEMENT = 0.
-         ROX4_REPLACEMENT = 0.
-         MAYO1_BUYBACK = 0.
-         HARRIS_BUYBACK = 0.
-         BUYBACK_ENERGY = 0.
-         DO J = 1, NO_PA_UNITS
-            I = PA_UNIT_INDEX(J)
-            WRITE_PRODUCTION_COST = 0.
-            WRITE_FUEL_COST = 0.
-            IF(J == 1) THEN
-               IF(CURRENT_YEAR <= 1997) THEN
-                  RETAINED_PERCENT = .1563
-               ELSE
-                  RETAINED_PERCENT = .1617
-               ENDIF
-            ELSEIF(J < 5) THEN
-               RETAINED_PERCENT =  (1.-CL_POOL_FRAC_OWN(I)/100.)
-            ELSEIF(J == 5) THEN
-               IF(CURRENT_YEAR <= 2007) THEN
-                  RETAINED_PERCENT = .1078
-               ELSE
-                  RETAINED_PERCENT = .1617
-               ENDIF
-            ENDIF
-!
-            SYS_ENERGY = (SYSTEM_ENERGY(1,I) +
-     +                                  SYSTEM_ENERGY(2,I)) * SEAS_HOURS
-            WRITE_ENERGY = SYS_ENERGY * RETAINED_PERCENT
-!
-            IF(NINT(SYS_ENERGY) > 0) THEN
-!
-               SYS_FUEL_COST =
-     +                       BLOCK_FUEL_COST(1,I) + BLOCK_FUEL_COST(2,I)
-               WRITE_FUEL_COST = SYS_FUEL_COST * RETAINED_PERCENT
-               WRITE_PRODUCTION_COST = WRITE_FUEL_COST + VCPMWH(I) *
-     +                                                      WRITE_ENERGY
-!
-               AVERAGE_FUEL_COST = SYS_FUEL_COST / SYS_ENERGY
-               AVERAGE_PRODUCTION_COSTS =  AVERAGE_FUEL_COST + VCPMWH(I)
-            ELSE
-               WRITE_FUEL_COST = 0.
-               AVERAGE_FUEL_COST = 0.
-               AVERAGE_PRODUCTION_COSTS = 0.
-            ENDIF
-            WRITE_FUEL_COST = WRITE_FUEL_COST + WRITE_ENERGY *
-     +                                          FUEL_ADDER_ADJUSTMENT(I)
-!
-!
-!
-            WRITE_CAPACITY = (SYS_EFFECTIVE_CAPACITY(1,I) +
-     +                        SYS_EFFECTIVE_CAPACITY(2,I))*
-     +                                                  RETAINED_PERCENT
-            TOTAL_ENT_ENERGY = TOTAL_ENT_ENERGY + WRITE_ENERGY
-            TOTAL_ENT_CAPACITY = TOTAL_ENT_CAPACITY + WRITE_CAPACITY
-!
-            TOTAL_ENT_FUEL_COST = TOTAL_ENT_FUEL_COST + WRITE_FUEL_COST
-            TOTAL_ENT_PRODUCTION_COST = TOTAL_ENT_PRODUCTION_COST +
-     +                                             WRITE_PRODUCTION_COST
-!
-            UNIT_ENRG = (PA_ENERGY(1,J) + PA_ENERGY(2,J)) * SEAS_HOURS
-!
-            IF(J == 1) THEN !!! THIS NEEDS TO BE REPLACED WITH SPECIAL UNIT ID !!!
-               IF(UNIT_ENRG > WRITE_ENERGY ) THEN
-                  MAYO1_REPLACEMENT =  UNIT_ENRG - WRITE_ENERGY
-                  REPLACEMENT_ENERGY = REPLACEMENT_ENERGY +
-     +                                                 MAYO1_REPLACEMENT
-                  MAYO1_RPL_PROD_COST = WRITE_PRODUCTION_COST
-                  MAYO1_RPL_AVE_COST = AVERAGE_PRODUCTION_COSTS
-               ELSE
-                  SURPLUS_ENERGY = SURPLUS_ENERGY +
-     +                                          WRITE_ENERGY - UNIT_ENRG
-                  SURPLUS_PROD_COST = SURPLUS_PROD_COST +
-     +                                      (WRITE_ENERGY - UNIT_ENRG) *
-     +                                          AVERAGE_PRODUCTION_COSTS
-!
-                  MAYO1_RPL_PROD_COST = 0.
-                  MAYO1_RPL_AVE_COST = 0.
-               ENDIF
-!
-               IF(CURRENT_YEAR <= 1997) THEN
-                  MAYO1_BUYBACK =
-     +               (SYSTEM_ENERGY(1,I) +
-     +                      SYSTEM_ENERGY(2,I)) *
-     +                                (1.-CL_POOL_FRAC_OWN(I)/100.) *
-     +                                           MAYO1_BUYBACK_PERCENT *
-     +                                                        SEAS_HOURS
-                  BUYBACK_ENERGY = BUYBACK_ENERGY + MAYO1_BUYBACK
-               ELSE
-                  MAYO1_BUYBACK = 0.
-               ENDIF
-!
-               MAYO1_BUYBACK_PROD_COST = MAYO1_BUYBACK *
-     +                                          AVERAGE_PRODUCTION_COSTS
-               IF(MAYO1_BUYBACK > 0.) THEN
-                  MAYO1_BUYBACK_AVE_COST = AVERAGE_PRODUCTION_COSTS
-               ELSE
-                  MAYO1_BUYBACK_AVE_COST = 0.
-               ENDIF
-            ELSEIF(J == 2) THEN
-               IF(UNIT_ENRG > WRITE_ENERGY ) THEN
-                  ROX4_REPLACEMENT =  UNIT_ENRG - WRITE_ENERGY
-                  REPLACEMENT_ENERGY = REPLACEMENT_ENERGY +
-     +                                                  ROX4_REPLACEMENT
-                  ROX4_RPL_PROD_COST = ROX4_REPLACEMENT *
-     +                                          AVERAGE_PRODUCTION_COSTS
-                  ROX4_RPL_AVE_COST = AVERAGE_PRODUCTION_COSTS
-               ELSE
-                  SURPLUS_ENERGY = SURPLUS_ENERGY +
-     +                                          WRITE_ENERGY - UNIT_ENRG
-                  SURPLUS_PROD_COST = SURPLUS_PROD_COST +
-     +                                      (WRITE_ENERGY - UNIT_ENRG) *
-     +                                          AVERAGE_PRODUCTION_COSTS
-!
-                  ROX4_RPL_PROD_COST = 0.
-                  ROX4_RPL_AVE_COST = 0.
-               ENDIF
-!
-            ELSEIF(J == 5) THEN
-               IF(CURRENT_YEAR <= 2007) THEN
-                  HARRIS_BUYBACK =
-     +               (SYSTEM_ENERGY(1,I) +
-     +                      SYSTEM_ENERGY(2,I)) *
-     +                                (1.-CL_POOL_FRAC_OWN(I)/100.) *
-     +                                         HARRIS1_BUYBACK_PERCENT *
-     +                                                        SEAS_HOURS
-               ELSE
-                  HARRIS_BUYBACK = 0.
-               ENDIF
-               BUYBACK_ENERGY = BUYBACK_ENERGY + HARRIS_BUYBACK
-               HARRIS_BUYBACK_PROD_COST = HARRIS_BUYBACK *
-     +                                          AVERAGE_PRODUCTION_COSTS
-               IF(HARRIS_BUYBACK > 0.) THEN
-                  HARRIS_BUYBACK_AVE_COST = AVERAGE_PRODUCTION_COSTS
-               ELSE
-                  HARRIS_BUYBACK_AVE_COST = 0.
-               ENDIF
-            ENDIF
-            ANN_SYS_ENERGY(J) = ANN_SYS_ENERGY(J) + WRITE_ENERGY
-            MON_SYS_ENERGY(J,ISEAS) = MON_SYS_ENERGY(J,ISEAS) +
-     +                                                      WRITE_ENERGY
-            MON_SYS_ENERGY(J,0) = MON_SYS_ENERGY(J,0) + WRITE_ENERGY
-            ANN_SYS_CAP(J) = ANN_SYS_CAP(J) + WRITE_CAPACITY
-            ANN_SYS_COST(J) = ANN_SYS_COST(J) + WRITE_PRODUCTION_COST
-            MON_SYS_COST(J,ISEAS) = MON_SYS_COST(J,ISEAS) +
-     +                                             WRITE_PRODUCTION_COST
-            MON_SYS_COST(J,0) = MON_SYS_COST(J,0) +
-     +                                             WRITE_PRODUCTION_COST
-!
-            WRITE_UNIT_NAME = UNITNM(I)(1:17)//'ENT'
-            CF = WRITE_CAPACITY*SEAS_HOURS
-            IF(CF > 0.) THEN
-               CF = 100.*WRITE_ENERGY/CF
-            ELSE
-               CF = 0.
-            ENDIF
-!!
-            WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ISEAS),
-     +               WRITE_UNIT_NAME,
-     +               WRITE_CAPACITY,
-     +               WRITE_ENERGY,
-     +               CF,
-     +               WRITE_PRODUCTION_COST/1000.,
-     +               AVERAGE_PRODUCTION_COSTS
-            CPL_PAEN_REC = CPL_PAEN_REC + 1
-!
-            IF(J == 4 .OR. J == 7) THEN
-               CPL_NCEMPA_MWH_SUPPLIED_BY_CPL(ISEAS) =
-     +                     CPL_NCEMPA_MWH_SUPPLIED_BY_CPL(ISEAS) +
-     +                                             WRITE_PRODUCTION_COST
-               CPL_NCEMPA_MWH_SUPPLIED_BY_CPL(0) =
-     +                     CPL_NCEMPA_MWH_SUPPLIED_BY_CPL(0) +
-     +                                             WRITE_PRODUCTION_COST
-               CPL_NCEMPA_COST_MWH_SUP_BY_CPL(ISEAS) =
-     +              CPL_NCEMPA_COST_MWH_SUP_BY_CPL(ISEAS) + WRITE_ENERGY
-               CPL_NCEMPA_COST_MWH_SUP_BY_CPL(0) =
-     +                  CPL_NCEMPA_COST_MWH_SUP_BY_CPL(0) + WRITE_ENERGY
-            ENDIF
-!
-         ENDDO ! J = 1, NO_PA_UNITS
-!
-         CF = TOTAL_ENT_CAPACITY*SEAS_HOURS
-         IF(CF > 0.) THEN
-            CF = 100.*TOTAL_ENT_ENERGY/CF
-         ELSE
-            CF = 0.
-         ENDIF
-         IF(TOTAL_ENT_ENERGY > 0.) THEN
-            AVERAGE_PRODUCTION_COSTS = TOTAL_ENT_PRODUCTION_COST/
-     +                                                  TOTAL_ENT_ENERGY
-         ELSE
-            AVERAGE_PRODUCTION_COSTS = 0.
-         ENDIF
-!
-         CPL_NCEMPA_ENTITLEMENT(ISEAS) = CPL_NCEMPA_ENTITLEMENT(ISEAS) +
-     +                                         TOTAL_ENT_PRODUCTION_COST
-!
-         CPL_NCEMPA_ENTITLEMENT(0) = CPL_NCEMPA_ENTITLEMENT(0) +
-     +                                         TOTAL_ENT_PRODUCTION_COST
-!
-         CPL_NCEMPA_ENTITLEMENT_MWH(ISEAS) =
-     +              CPL_NCEMPA_ENTITLEMENT_MWH(ISEAS) + TOTAL_ENT_ENERGY
-         CPL_NCEMPA_ENTITLEMENT_MWH(0) =
-     +              CPL_NCEMPA_ENTITLEMENT_MWH(0) + TOTAL_ENT_ENERGY
-!
-         OFF_SYSTEM_SALES_ENERGY(ISEAS) =
-     +                 FORECAST_ENERGY(1,ISEAS,OFF_SYSTEM_SALES_CLASS)
-     +                 + FORECAST_ENERGY(2,ISEAS,OFF_SYSTEM_SALES_CLASS)
-         OFF_SYSTEM_SALES_ENERGY(0) = OFF_SYSTEM_SALES_ENERGY(0) +
-     +                                    OFF_SYSTEM_SALES_ENERGY(ISEAS)
-         CPL_OFF_SYSTEM_INCR_COST(ISEAS) =
-     +            CPL_OFF_SYSTEM_INCR_COST(ISEAS) +
-     +         OFF_SYSTEM_SALES_ENERGY(ISEAS) * AVERAGE_PRODUCTION_COSTS
-         CPL_OFF_SYSTEM_INCR_COST(0) =
-     +            CPL_OFF_SYSTEM_INCR_COST(0) +
-     +         OFF_SYSTEM_SALES_ENERGY(ISEAS) * AVERAGE_PRODUCTION_COSTS
-!
-         WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ISEAS),
-     +               'Total Entitlement   ',
-     +               TOTAL_ENT_CAPACITY,
-     +               TOTAL_ENT_ENERGY,
-     +               CF,
-     +               TOTAL_ENT_PRODUCTION_COST/1000.,
-     +               AVERAGE_PRODUCTION_COSTS
-         CPL_PAEN_REC = CPL_PAEN_REC + 1
-!
-         J = NO_PA_UNITS
-         J = J + 1
-         ANN_SYS_ENERGY(J) = ANN_SYS_ENERGY(J) + MAYO1_REPLACEMENT
-         ANN_SYS_COST(J) = ANN_SYS_COST(J) + MAYO1_RPL_PROD_COST
-!
-         MON_SYS_ENERGY(J,ISEAS) = MON_SYS_ENERGY(J,ISEAS) +
-     +                                                 MAYO1_REPLACEMENT
-         MON_SYS_COST(J,ISEAS) = MON_SYS_COST(J,ISEAS) +
-     +                                               MAYO1_RPL_PROD_COST
-         MON_SYS_ENERGY(J,0) = MON_SYS_ENERGY(J,0) +
-     +                                                 MAYO1_REPLACEMENT
-         MON_SYS_COST(J,0) = MON_SYS_COST(J,0) +  MAYO1_RPL_PROD_COST
-!
-!
-         WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ISEAS),
-     +               PA_ACCT_NAMES(1),
-     +               0.,
-     +               MAYO1_REPLACEMENT,
-     +               0.,
-     +               MAYO1_RPL_PROD_COST/1000.,
-     +               MAYO1_RPL_AVE_COST
-         CPL_PAEN_REC = CPL_PAEN_REC + 1
-!
-         J = J + 1
-         ANN_SYS_ENERGY(J) = ANN_SYS_ENERGY(J) + ROX4_REPLACEMENT
-         ANN_SYS_COST(J) = ANN_SYS_COST(J) + ROX4_RPL_PROD_COST
-!
-         MON_SYS_ENERGY(J,ISEAS) = MON_SYS_ENERGY(J,ISEAS) +
-     +                                                  ROX4_REPLACEMENT
-         MON_SYS_COST(J,ISEAS) = MON_SYS_COST(J,ISEAS) +
-     +                                                ROX4_RPL_PROD_COST
-         MON_SYS_ENERGY(J,0) = MON_SYS_ENERGY(J,0) +
-     +                                                  ROX4_REPLACEMENT
-         MON_SYS_COST(J,0) = MON_SYS_COST(J,0) + ROX4_RPL_PROD_COST
-!
-         WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ISEAS),
-     +               PA_ACCT_NAMES(2),
-     +               0.,
-     +               ROX4_REPLACEMENT,
-     +               0.,
-     +               ROX4_RPL_PROD_COST/1000.,
-     +               ROX4_RPL_AVE_COST
-         CPL_PAEN_REC = CPL_PAEN_REC + 1
-!
-         REPLACEMENT_PROD_COST = MAYO1_RPL_PROD_COST +
-     +                                                ROX4_RPL_PROD_COST
-         IF(REPLACEMENT_ENERGY > 0.) THEN
-            REPLACEMENT_AVE_COST = REPLACEMENT_PROD_COST /
-     +                                                REPLACEMENT_ENERGY
-         ELSE
-            REPLACEMENT_AVE_COST = 0.
-         ENDIF
-!
-!
-         J = J + 1
-         ANN_SYS_ENERGY(J) = ANN_SYS_ENERGY(J) + REPLACEMENT_ENERGY
-         ANN_SYS_COST(J) = ANN_SYS_COST(J) + REPLACEMENT_PROD_COST
-!
-         MON_SYS_ENERGY(J,ISEAS) = MON_SYS_ENERGY(J,ISEAS) +
-     +                                                REPLACEMENT_ENERGY
-         MON_SYS_COST(J,ISEAS) = MON_SYS_COST(J,ISEAS) +
-     +                                             REPLACEMENT_PROD_COST
-         MON_SYS_ENERGY(J,0) = MON_SYS_ENERGY(J,0) +
-     +                                                REPLACEMENT_ENERGY
-         MON_SYS_COST(J,0) = MON_SYS_COST(J,0) + REPLACEMENT_PROD_COST
-!
-         WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ISEAS),
-     +               PA_ACCT_NAMES(3),
-     +               0.,
-     +               REPLACEMENT_ENERGY,
-     +               0.,
-     +               REPLACEMENT_PROD_COST/1000.,
-     +               REPLACEMENT_AVE_COST
-         CPL_PAEN_REC = CPL_PAEN_REC + 1
-!
-         IF(SURPLUS_ENERGY > 0.) THEN
-            SURPLUS_AVE_COST = SURPLUS_PROD_COST / SURPLUS_ENERGY
-         ELSE
-            SURPLUS_AVE_COST = 0.
-         ENDIF
-!
-!
-         J = J + 1
-         ANN_SYS_ENERGY(J) = ANN_SYS_ENERGY(J) + SURPLUS_ENERGY
-         ANN_SYS_COST(J) = ANN_SYS_COST(J) + SURPLUS_PROD_COST
-!
-         MON_SYS_ENERGY(J,ISEAS) = MON_SYS_ENERGY(J,ISEAS) +
-     +                                                    SURPLUS_ENERGY
-         MON_SYS_COST(J,ISEAS) = MON_SYS_COST(J,ISEAS) +
-     +                                                 SURPLUS_PROD_COST
-         MON_SYS_ENERGY(J,0) = MON_SYS_ENERGY(J,0) + SURPLUS_ENERGY
-         MON_SYS_COST(J,0) = MON_SYS_COST(J,0) + SURPLUS_PROD_COST
-!
-         WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ISEAS),
-     +               PA_ACCT_NAMES(4),
-     +               0.,
-     +               SURPLUS_ENERGY,
-     +               0.,
-     +               SURPLUS_PROD_COST/1000.,
-     +               SURPLUS_AVE_COST
-         CPL_PAEN_REC = CPL_PAEN_REC + 1
-!
-!
-         J = J + 1
-         ANN_SYS_ENERGY(J) = ANN_SYS_ENERGY(J) + HARRIS_BUYBACK
-         ANN_SYS_COST(J) = ANN_SYS_COST(J) + HARRIS_BUYBACK_PROD_COST
-!
-         MON_SYS_ENERGY(J,ISEAS) = MON_SYS_ENERGY(J,ISEAS) +
-     +                                                    HARRIS_BUYBACK
-         MON_SYS_COST(J,ISEAS) = MON_SYS_COST(J,ISEAS) +
-     +                                          HARRIS_BUYBACK_PROD_COST
-         MON_SYS_ENERGY(J,0) = MON_SYS_ENERGY(J,0) + HARRIS_BUYBACK
-         MON_SYS_COST(J,0) = MON_SYS_COST(J,0) +
-     +                                          HARRIS_BUYBACK_PROD_COST
-!
-         WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ISEAS),
-     +               PA_ACCT_NAMES(5),
-     +               0.,
-     +               HARRIS_BUYBACK,
-     +               0.,
-     +               HARRIS_BUYBACK_PROD_COST/1000.,
-     +               HARRIS_BUYBACK_AVE_COST
-         CPL_PAEN_REC = CPL_PAEN_REC + 1
-!
-!
-         J = J + 1
-         ANN_SYS_ENERGY(J) = ANN_SYS_ENERGY(J) + MAYO1_BUYBACK
-         ANN_SYS_COST(J) = ANN_SYS_COST(J) + MAYO1_BUYBACK_PROD_COST
-!
-         MON_SYS_ENERGY(J,ISEAS) = MON_SYS_ENERGY(J,ISEAS) +
-     +                                                     MAYO1_BUYBACK
-         MON_SYS_COST(J,ISEAS) = MON_SYS_COST(J,ISEAS) +
-     +                                           MAYO1_BUYBACK_PROD_COST
-         MON_SYS_ENERGY(J,0) = MON_SYS_ENERGY(J,0) + MAYO1_BUYBACK
-         MON_SYS_COST(J,0) = MON_SYS_COST(J,0) + MAYO1_BUYBACK_PROD_COST
-!
-         WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ISEAS),
-     +               PA_ACCT_NAMES(6),
-     +               0.,
-     +               MAYO1_BUYBACK,
-     +               0.,
-     +               MAYO1_BUYBACK_PROD_COST/1000.,
-     +               MAYO1_BUYBACK_AVE_COST
-         CPL_PAEN_REC = CPL_PAEN_REC + 1
-!
-         BUYBACK_PROD_COST = MAYO1_BUYBACK_PROD_COST +
-     +                                          HARRIS_BUYBACK_PROD_COST
-         IF(BUYBACK_ENERGY > 0.) THEN
-            BUYBACK_AVE_COST = BUYBACK_PROD_COST / BUYBACK_ENERGY
-         ELSE
-            BUYBACK_AVE_COST = 0.
-         ENDIF
-!
-         J = J + 1
-         ANN_SYS_ENERGY(J) = ANN_SYS_ENERGY(J) + BUYBACK_ENERGY
-         ANN_SYS_COST(J) = ANN_SYS_COST(J) + BUYBACK_PROD_COST
-!
-         MON_SYS_ENERGY(J,ISEAS) = MON_SYS_ENERGY(J,ISEAS) +
-     +                                                    BUYBACK_ENERGY
-         MON_SYS_COST(J,ISEAS) = MON_SYS_COST(J,ISEAS) +
-     +                                                 BUYBACK_PROD_COST
-         MON_SYS_ENERGY(J,0) = MON_SYS_ENERGY(J,0) + BUYBACK_ENERGY
-         MON_SYS_COST(J,0) = MON_SYS_COST(J,0) + BUYBACK_PROD_COST
-!
-         WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ISEAS),
-     +               PA_ACCT_NAMES(7),
-     +               0.,
-     +               BUYBACK_ENERGY,
-     +               0.,
-     +               BUYBACK_PROD_COST/1000.,
-     +               BUYBACK_AVE_COST
-         CPL_PAEN_REC = CPL_PAEN_REC + 1
-!
-! EMC ENERGY REVENUES
-!
-         EMC_COST = TRANSFER_COST - TOTAL_ENT_PRODUCTION_COST
-         TRANSFER_SALES = TRANSFER_GEN *
-     +                 (1. - MIN(RS_CLASS_LOSSES,.9999)) -
-     +                                                SEPA_ENERGY(ISEAS)
-         EMC_GEN = TRANSFER_SALES - TOTAL_ENT_ENERGY
-         IF(USE_EMC_ENERGY_PRICE()) THEN
-             EMC_PRICE = EMC_ANN_AVE_PROD()
-         ELSEIF(EMC_GEN > 0.) THEN
-            EMC_PRICE = EMC_COST / EMC_GEN
-         ELSE
-            EMC_PRICE = 0.
-         ENDIF
-         CALL GET_CPL_EMC_MON_ENER_REVS(ISEAS,EMC_PRICE,
-     +                                    WRITE_ENERGY,WRITE_CAPACITY,
-     +                                    WRITE_PRODUCTION_COST)
-!
-!
-         AVERAGE_PRODUCTION_COSTS = EMC_PRICE ! TRANSFER_PRICE WILL BE MODIFIED
-!
-         CF = WRITE_CAPACITY*SEAS_HOURS
-         IF(CF > 0.) THEN
-            CF = 100.*WRITE_ENERGY/CF
-         ELSE
-            CF = 0.
-         ENDIF
-!
-         WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ISEAS),
-     +               'EMC Energy Revenues ',
-     +               WRITE_CAPACITY,
-     +               WRITE_ENERGY,
-     +               CF,
-     +               WRITE_PRODUCTION_COST/1000.,
-     +               AVERAGE_PRODUCTION_COSTS
-         CPL_PAEN_REC = CPL_PAEN_REC + 1
-!
-         CALL CPL_MON_ENERGY_REV_AND_EXP(ISEAS,
-     +                                   S_CATAWBA_REVENUES,
-     +                                   S_CPL_ENERGY_TO_PA,
-     +                                   S_CATAWBA_EXPENSES,
-     +                                   S_CPL_ENERGY_FROM_PA)
-!
-!
-! EMC ENERGY REVENUES
-!
-         WRITE_UNIT_NAME = 'MWHs Supplied by CPL'
-         WRITE_CAPACITY = 0.
-         CF = 0.
-         WRITE_ENERGY = S_CPL_ENERGY_TO_PA
-         WRITE_PRODUCTION_COST = S_CATAWBA_REVENUES
-         IF(WRITE_ENERGY > 0.) THEN
-            AVERAGE_PRODUCTION_COSTS = WRITE_PRODUCTION_COST/
-     +                                     WRITE_ENERGY
-         ELSE
-            AVERAGE_PRODUCTION_COSTS = 0.
-         ENDIF
-         WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ISEAS),
-     +               WRITE_UNIT_NAME,
-     +               WRITE_CAPACITY,
-     +               WRITE_ENERGY,
-     +               CF,
-     +               WRITE_PRODUCTION_COST/1000.,
-     +               AVERAGE_PRODUCTION_COSTS
-         CPL_PAEN_REC = CPL_PAEN_REC + 1
-!
-         WRITE_UNIT_NAME = 'MWHs Supplied to CPL'
-         WRITE_CAPACITY = 0.
-         CF = 0.
-!         WRITE_ENERGY = S_CPL_ENERGY_FROM_PA
-         WRITE_ENERGY = MON_SYS_ENERGY(4+NO_PA_UNITS,ISEAS) +
-     +                               MON_SYS_ENERGY(7+NO_PA_UNITS,ISEAS)
-!
-         WRITE_PRODUCTION_COST = S_CATAWBA_EXPENSES
-         IF(WRITE_ENERGY > 0.) THEN
-            AVERAGE_PRODUCTION_COSTS = WRITE_PRODUCTION_COST /
-     +                                                      WRITE_ENERGY
-         ELSE
-            AVERAGE_PRODUCTION_COSTS = 0.
-         ENDIF
-         WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ISEAS),
-     +               WRITE_UNIT_NAME,
-     +               WRITE_CAPACITY,
-     +               WRITE_ENERGY,
-     +               CF,
-     +               WRITE_PRODUCTION_COST/1000.,
-     +               AVERAGE_PRODUCTION_COSTS
-         CPL_PAEN_REC = CPL_PAEN_REC + 1
-      RETURN
-!CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-!
-      ENTRY CPL_SC_RETAIL(R_ISEAS,
-     +                    R_CPL_GEN_COST,
-     +                    R_CPL_NUC_COST,
-     +                    R_CPL_PA_ENTITLE,
-     +                    R_CPL_PUR_POWER,
-     +                    R_CPL_PA_MWH_COST,
-     +                    R_CPL_PA_MWH,
-     +                    R_CPL_OFF_SYS_ENRG,
-     +                    R_CPL_OFF_SYS_INC_COST)
-!
-! FOR MONTHLY MIDAS
-!CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-!
-!
-         R_CPL_GEN_COST = CPL_FUEL_GENERATION(R_ISEAS)
-         R_CPL_NUC_COST = CPL_NUC_GENERATION(R_ISEAS)
-         R_CPL_PUR_POWER = CPL_PUR_POWER_ENERGY_COST(R_ISEAS)
-         R_CPL_OFF_SYS_ENRG = OFF_SYSTEM_SALES_ENERGY(R_ISEAS)
-!
-! 8/5/99. GAT.
-!
-      CALL GET_PA_SWITCH(PA_SWITCH)
-      IF(.NOT. PA_SWITCH) THEN
-!
-         R_CPL_PA_ENTITLE = 0.
-!
-         R_CPL_OFF_SYS_INC_COST = 0.
-!
-         R_CPL_PA_MWH_COST = 0.
-!
-         R_CPL_PA_MWH = 0.
-!
-      ELSE
-         R_CPL_PA_ENTITLE = CPL_NCEMPA_ENTITLEMENT(R_ISEAS)
-         IF(MON_PA_ENERGY(Supplemental Cap,R_ISEAS) > 0.) THEN
-            R_CPL_OFF_SYS_INC_COST =
-     +                        MON_PA_COST(Supplemental Cap,R_ISEAS)/
-     +                           MON_PA_ENERGY(Supplemental Cap,R_ISEAS)
-         ELSE
-            R_CPL_OFF_SYS_INC_COST = 0.
-         ENDIF
-!
-         R_CPL_PA_MWH_COST = MON_PA_COST(Reserve Capacity,R_ISEAS) +
-     +                       MON_PA_COST(Supplemental Cap,R_ISEAS) +
-     +                       MON_PA_COST(PA Resource,R_ISEAS) +
-     +                       MON_PA_COST(Deficiency Capacity,R_ISEAS) +
-     +                       MON_SYS_COST(Mayo 1 Replacement,R_ISEAS) +
-     +                       MON_SYS_COST(Roxboro4 Replacement,R_ISEAS)
-!
-         R_CPL_PA_MWH = MON_PA_ENERGY(Reserve Capacity,R_ISEAS) +
-     +                  MON_PA_ENERGY(Supplemental Cap,R_ISEAS) +
-     +                  MON_PA_ENERGY(PA Resource,R_ISEAS) +
-     +                  MON_PA_ENERGY(Deficiency Capacity,R_ISEAS) +
-     +                  MON_SYS_ENERGY(Mayo 1 Replacement,R_ISEAS) +
-     +                  MON_SYS_ENERGY(Roxboro4 Replacement,R_ISEAS)
-      ENDIF
-!
-!         R_CPL_OFF_SYS_INC_COST = CPL_OFF_SYSTEM_INCR_COST(R_ISEAS)
-! 3/10/99. GAT. TESTING
-!         R_CPL_PA_MWH_COST = CPL_NCEMPA_MWH_SUPPLIED_BY_CPL(R_ISEAS)
-!         R_CPL_PA_MWH = CPL_NCEMPA_COST_MWH_SUP_BY_CPL(R_ISEAS)
-! J = 1-5 = PA OWNERSHIP UNITS
-! J = 6 'Reserve Capacity    ',
-! J = 7 'Unused Supplemental ',
-! J = 8 'Supplemental Cap    ',
-! J = 9 'PA Resource         ',
-! J = 10 'Deficiency Capacity '
-! Mayo 1 Replacement = 6,
-! Roxboro4 Replacement = 7,
-!
-      RETURN
-!CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-!
-      ENTRY CPL_PA_ENTITLEMENT_MWH( R_ISEAS,
-     +                              R_CPL_PA_ENTITLE,
-     +                              R_BUYBACK)
-!     +                              R_CPL_ENERGY_TO_PA,
-!     +                              R_CPL_ENERGY_FROM_PA)
-!
-!CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-!
-!
-      CALL GET_PA_SWITCH(PA_SWITCH)
-      IF(.NOT. PA_SWITCH) THEN
-         R_CPL_PA_ENTITLE = 0.
-         R_BUYBACK = 0.
-      ELSE
-         R_CPL_PA_ENTITLE = CPL_NCEMPA_ENTITLEMENT_MWH(R_ISEAS)/1000.
-         I = 12
-         R_BUYBACK = MON_SYS_ENERGY(I,R_ISEAS)/1000.
-      ENDIF
-!         R_CPL_PA_MWH = R_CPL_PA_MWH +
-!     +                     CPL_NCEMPA_COST_MWH_SUP_BY_CPL(R_ISEAS)/1000.
-
-!
-!         R_CPL_ENERGY_TO_PA = CPL_ENERGY_TO_PA(R_ISEAS)/1000.
-!         R_CPL_ENERGY_FROM_PA = R_CPL_ENERGY_FROM_PA  +
-!     +                                 CPL_ENERGY_FROM_PA(R_ISEAS)/1000.
-!
-      RETURN
-!CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-      ENTRY CPL_PA_ANN_CAPACITY ! CURRENTLY HARD-CODED
-!CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-!
-!        CAPACITY REVENUE AND EXPENSE CALC'S
-!
-         CALL GET_PA_SWITCH(PA_SWITCH)
-         IF(.NOT. PA_SWITCH) THEN
-!
-!
-! EMC STUFF
-!
-            CALL GET_CPL_EMC_ANN_ENER_REVS( WRITE_ENERGY,
-     +                                   WRITE_CAPACITY,
-     +                                   WRITE_PRODUCTION_COST)
-            CPL_EMC_REVENUE(0) = CPL_EMC_REVENUE(0) +
-     +                                             WRITE_PRODUCTION_COST
-!
-            CALL GET_CPL_EMC_ANN_TRAN_REVS(  WRITE_CAPACITY,
-     +                                    WRITE_PRODUCTION_COST,
-     +                                    CURRENT_YEAR)
-            CPL_EMC_REVENUE(0) = CPL_EMC_REVENUE(0) +
-     +                                             WRITE_PRODUCTION_COST
-!
-            CALL GET_CPL_EMC_ANN_CAP_REVS(  WRITE_ENERGY,
-     +                                   WRITE_CAPACITY,
-     +                                   WRITE_PRODUCTION_COST)
-            CPL_EMC_REVENUE(0) = CPL_EMC_REVENUE(0) +
-     +                                             WRITE_PRODUCTION_COST
-!
-            RETURN
-!
-         ENDIF
-!
-         CALL GET_PA_CAPACITY_RATES(   PA_RESERVE_RATE,
-     +                                 PA_SUPPLEMENTAL_RATE,
-     +                                 PA_TRANSMISSION_RATE)
-         DO J = 1, 3, 2
-            WRITE_CAPACITY = ANN_PA_CAP(J+NO_PA_UNITS)
-            WRITE_UNIT_NAME = CONTRACT_NAMES(J)(1:17)//'Cap'
-            WRITE_ENERGY = 0.
-            CF = 0.
-!
-            IF(J == 1) THEN
-               CALL GET_ANN_RESERVE_CAPACITY(ANN_RESERVE_CAPACITY)
-               WRITE_CAPACITY = ANN_RESERVE_CAPACITY
-               WRITE_PRODUCTION_COST = WRITE_CAPACITY * PA_RESERVE_RATE
-     +                                                           * 1000.
-               CPL_ENERGY_REVENUE_FROM_PA(0) =
-     +             CPL_ENERGY_REVENUE_FROM_PA(0) + WRITE_PRODUCTION_COST
-               CPL_ANN_REVENUE_FROM_PA = CPL_ANN_REVENUE_FROM_PA +
-     +                                             WRITE_PRODUCTION_COST
-!
-            ELSEIF(J == 3) THEN
-               WRITE_PRODUCTION_COST = WRITE_CAPACITY *
-     +                                      PA_SUPPLEMENTAL_RATE * 1000.
-               CPL_ENERGY_REVENUE_FROM_PA(0) =
-     +             CPL_ENERGY_REVENUE_FROM_PA(0) + WRITE_PRODUCTION_COST
-            ENDIF
-!
-            IF(WRITE_CAPACITY > 0.) THEN
-               AVERAGE_PRODUCTION_COSTS = .001 * WRITE_PRODUCTION_COST /
-     +                                                    WRITE_CAPACITY
-            ELSE
-               AVERAGE_PRODUCTION_COSTS = 0.
-            ENDIF
-            WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ANNUAL_COUNTER),
-     +               WRITE_UNIT_NAME,
-     +               WRITE_CAPACITY,
-     +               WRITE_ENERGY,
-     +               CF,
-     +               WRITE_PRODUCTION_COST/1000.,
-     +               AVERAGE_PRODUCTION_COSTS
-            CPL_PAEN_REC = CPL_PAEN_REC + 1
-         ENDDO
-!
-         CALL GET_BUYBACK_CAPACITY(PA_MAYO_BUYBACK,
-     +                             PA_HARRIS_BUYBACK)
-         DO J = 1, 2
-            WRITE_CAPACITY = 0.
-            WRITE_ENERGY = 0.
-            CF = 0.
-!
-            IF(J == 1) THEN
-               WRITE_UNIT_NAME = PA_ACCT_NAMES(5)(1:14)//'   Cap'
-               WRITE_PRODUCTION_COST = PA_HARRIS_BUYBACK
-               CPL_ENERGY_EXPENSE_TO_PA(0) =
-     +               CPL_ENERGY_EXPENSE_TO_PA(0) +
-     +                                             WRITE_PRODUCTION_COST
-               CPL_ANN_EXPENSE_TO_PA = CPL_ANN_EXPENSE_TO_PA +
-     +                                             WRITE_PRODUCTION_COST
-            ELSEIF(J == 2) THEN
-               WRITE_UNIT_NAME = PA_ACCT_NAMES(6)(1:14)//'   Cap'
-               WRITE_PRODUCTION_COST = PA_MAYO_BUYBACK
-               CPL_ENERGY_EXPENSE_TO_PA(0) =
-     +               CPL_ENERGY_EXPENSE_TO_PA(0) +
-     +                                             WRITE_PRODUCTION_COST
-               CPL_ANN_EXPENSE_TO_PA = CPL_ANN_EXPENSE_TO_PA +
-     +                                             WRITE_PRODUCTION_COST
-            ENDIF
-!
-            WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ANNUAL_COUNTER),
-     +               WRITE_UNIT_NAME,
-     +               WRITE_CAPACITY,
-     +               WRITE_ENERGY,
-     +               CF,
-     +               WRITE_PRODUCTION_COST/1000.,
-     +               0.
-            CPL_PAEN_REC = CPL_PAEN_REC + 1
-         ENDDO
-!
-!
-!
-         WRITE_CAPACITY = ANN_PA_CAP(0)
-         WRITE_ENERGY = 0.
-         WRITE_PRODUCTION_COST = 1000. *
-     +                             WRITE_CAPACITY * PA_TRANSMISSION_RATE
-!
-         CF = 0.
-!
-         IF(WRITE_CAPACITY > 0.) THEN
-            AVERAGE_PRODUCTION_COSTS = WRITE_PRODUCTION_COST/
-     +                                                    WRITE_CAPACITY
-         ELSE
-            AVERAGE_PRODUCTION_COSTS = 0.
-         ENDIF
-!
-         CPL_ENERGY_REVENUE_FROM_PA(0) =
-     +                    CPL_ENERGY_REVENUE_FROM_PA(0) +
-     +                                             WRITE_PRODUCTION_COST
-!
-!
-         WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ANNUAL_COUNTER),
-     +               'PA Trans Revenues   ',
-     +               WRITE_CAPACITY,
-     +               WRITE_ENERGY,
-     +               CF,
-     +               WRITE_PRODUCTION_COST/1000.,
-     +               AVERAGE_PRODUCTION_COSTS
-         CPL_PAEN_REC = CPL_PAEN_REC + 1
-!
-! EMC STUFF
-!
-         CALL GET_CPL_EMC_ANN_ENER_REVS( WRITE_ENERGY,
-     +                                   WRITE_CAPACITY,
-     +                                   WRITE_PRODUCTION_COST)
-!
-!
-         IF(WRITE_ENERGY > 0.) THEN
-            AVERAGE_PRODUCTION_COSTS = WRITE_PRODUCTION_COST/
-     +                                                      WRITE_ENERGY
-         ELSE
-            AVERAGE_PRODUCTION_COSTS = 0.
-         ENDIF
-!
-         CF = WRITE_CAPACITY*8760.
-         IF(CF > 0.) THEN
-            CF = 100.*WRITE_ENERGY/CF
-         ELSE
-            CF = 0.
-         ENDIF
-!
-         CPL_EMC_REVENUE(0) = CPL_EMC_REVENUE(0) +
-     +                                             WRITE_PRODUCTION_COST
-!         CPL_ENERGY_REVENUE_FROM_PA(0) =
-!     +                       CPL_ENERGY_REVENUE_FROM_PA(0) +
-!     +                                             WRITE_PRODUCTION_COST
-         CPL_ANN_REVENUE_FROM_PA = CPL_ANN_REVENUE_FROM_PA +
-     +                                             WRITE_PRODUCTION_COST
-!
-         WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ANNUAL_COUNTER),
-     +               'EMC Energy Revenues ',
-     +               WRITE_CAPACITY,
-     +               WRITE_ENERGY,
-     +               CF,
-     +               WRITE_PRODUCTION_COST/1000.,
-     +               AVERAGE_PRODUCTION_COSTS
-         CPL_PAEN_REC = CPL_PAEN_REC + 1
-!
-         CALL GET_CPL_EMC_ANN_TRAN_REVS(  WRITE_CAPACITY,
-     +                                    WRITE_PRODUCTION_COST,
-     +                                    CURRENT_YEAR)
-         IF(WRITE_CAPACITY > 0.) THEN
-            AVERAGE_PRODUCTION_COSTS = WRITE_PRODUCTION_COST/
-     +                                                    WRITE_CAPACITY
-         ELSE
-            AVERAGE_PRODUCTION_COSTS = 0.
-         ENDIF
-!
-         WRITE_ENERGY = 0.
-         CF = 0.
-!
-!         CPL_ENERGY_REVENUE_FROM_PA(0) =
-!     +                       CPL_ENERGY_REVENUE_FROM_PA(0) +
-!     +                                             WRITE_PRODUCTION_COST
-         CPL_EMC_REVENUE(0) = CPL_EMC_REVENUE(0) +
-     +                                             WRITE_PRODUCTION_COST
-         CPL_ANN_REVENUE_FROM_PA = CPL_ANN_REVENUE_FROM_PA +
-     +                                             WRITE_PRODUCTION_COST
-!
-!
-         WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ANNUAL_COUNTER),
-     +               'EMC Trans Revenues  ',
-     +               WRITE_CAPACITY,
-     +               WRITE_ENERGY,
-     +               CF,
-     +               WRITE_PRODUCTION_COST/1000.,
-     +               AVERAGE_PRODUCTION_COSTS
-         CPL_PAEN_REC = CPL_PAEN_REC + 1
-!
-         CALL GET_CPL_EMC_ANN_CAP_REVS(  WRITE_ENERGY,
-     +                                   WRITE_CAPACITY,
-     +                                   WRITE_PRODUCTION_COST)
-         IF(WRITE_CAPACITY > 0.) THEN
-            AVERAGE_PRODUCTION_COSTS = WRITE_PRODUCTION_COST/
-     +                                                    WRITE_CAPACITY
-         ELSE
-            AVERAGE_PRODUCTION_COSTS = 0.
-         ENDIF
-!
-         WRITE_ENERGY = 0.
-         CF = 0.
-!
-         CPL_EMC_REVENUE(0) = CPL_EMC_REVENUE(0) +
-     +                                             WRITE_PRODUCTION_COST
-!         CPL_ENERGY_REVENUE_FROM_PA(0) =
-!     +                       CPL_ENERGY_REVENUE_FROM_PA(0) +
-!     +                                             WRITE_PRODUCTION_COST
-         CPL_ANN_REVENUE_FROM_PA = CPL_ANN_REVENUE_FROM_PA +
-     +                                             WRITE_PRODUCTION_COST
-!
-!
-         WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ANNUAL_COUNTER),
-     +               'EMC Capacity Revenue',
-     +               WRITE_CAPACITY,
-     +               WRITE_ENERGY,
-     +               CF,
-     +               WRITE_PRODUCTION_COST/1000.,
-     +               AVERAGE_PRODUCTION_COSTS
-         CPL_PAEN_REC = CPL_PAEN_REC + 1
-!
-         WRITE_CAPACITY = 0.
-         WRITE_PRODUCTION_COST = CPL_ENERGY_REVENUE_FROM_PA(0) +
-     +                                                CPL_EMC_REVENUE(0)
-         IF(WRITE_CAPACITY > 0.) THEN
-            AVERAGE_PRODUCTION_COSTS = WRITE_PRODUCTION_COST/
-     +                                                    WRITE_CAPACITY
-         ELSE
-            AVERAGE_PRODUCTION_COSTS = 0.
-         ENDIF
-!
-         WRITE_ENERGY = 0.
-         CF = 0.
-!
-         WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ANNUAL_COUNTER),
-     +               'EMC and Pa Revenues ',
-     +               WRITE_CAPACITY,
-     +               WRITE_ENERGY,
-     +               CF,
-     +               WRITE_PRODUCTION_COST/1000.,
-     +               AVERAGE_PRODUCTION_COSTS
-         CPL_PAEN_REC = CPL_PAEN_REC + 1
-      RETURN
-!CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-      ENTRY CPL_PA_ANN_ENERGY ! INCLUDES EXPENSE AND REVENUE CALC'S
-!CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-!
-!        TOTAL REVENUE AND ENERGY CALC'S
-!
-         CPL_ENERGY_REVENUE_FROM_PA(0) = 0.
-         CPL_ENERGY_TO_PA(0) = 0.
-         CPL_ENERGY_EXPENSE_TO_PA(0) = 0.
-         CPL_ENERGY_FROM_PA(0) = 0.
-!
-         DO I = 0, NO_PA_RESOURCES + 1 ! INCLUDES DEMAND, PA, RESERVE, UNUSED, SUPP, CONTRACT, DEFICIENCY, TOTAL PA
-            IF(I == 0) THEN
-               WRITE_UNIT_NAME = 'PA Demand           '
-            ELSEIF(I <= NO_PA_UNITS) THEN
-               J = PA_UNIT_INDEX(I)
-               WRITE_UNIT_NAME = UNITNM(J)(1:18)//'PA'
-            ELSEIF(I <= NO_PA_RESOURCES) THEN
-               J = I - NO_PA_UNITS
-               WRITE_UNIT_NAME = CONTRACT_NAMES(J)
-               IF( J == 1 .OR. J == 3 .OR. J == 5) THEN
-                  CPL_ENERGY_REVENUE_FROM_PA(0) =
-     +                    CPL_ENERGY_REVENUE_FROM_PA(0) + ANN_PA_COST(I)
-                  CPL_ENERGY_TO_PA(0) = CPL_ENERGY_TO_PA(0) +
-     +                                                  ANN_PA_ENERGY(I)
-               ELSEIF(J == 2) THEN ! NET UNUSED AGAINST SUPPLEMENTAL
-                  CPL_ENERGY_REVENUE_FROM_PA(0) =
-     +                    CPL_ENERGY_REVENUE_FROM_PA(0) - ANN_PA_COST(I)
-                  CPL_ENERGY_TO_PA(0) = CPL_ENERGY_TO_PA(0) -
-     +                                                  ANN_PA_ENERGY(I)
-               ELSE
-!                 CONTRACT I THINK IS TREATED LIKE ENTITLEMENT
-               ENDIF
-            ELSE
-               WRITE_UNIT_NAME = 'PA Supply           '
-            ENDIF
-            WRITE_ENERGY = ANN_PA_ENERGY(I)
-            WRITE_CAPACITY = ANN_PA_CAP(I)/12.
-            CF = WRITE_CAPACITY*8760.
-            IF(CF > 0.) THEN
-               CF = 100.*WRITE_ENERGY/CF
-            ELSE
-               CF = 0.
-            ENDIF
-            WRITE_PRODUCTION_COST = ANN_PA_COST(I)
-            IF(WRITE_ENERGY > 0.) THEN
-               AVERAGE_PRODUCTION_COSTS = WRITE_PRODUCTION_COST /
-     +                                                      WRITE_ENERGY
-            ELSE
-               AVERAGE_PRODUCTION_COSTS = 0.
-            ENDIF
-            WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ANNUAL_COUNTER),
-     +               WRITE_UNIT_NAME,
-     +               WRITE_CAPACITY,
-     +               WRITE_ENERGY,
-     +               CF,
-     +               WRITE_PRODUCTION_COST/1000.,
-     +               AVERAGE_PRODUCTION_COSTS
-            CPL_PAEN_REC = CPL_PAEN_REC + 1
-         ENDDO
-!
-!
-!
-         TOTAL_ENT_CAPACITY = 0.
-         TOTAL_ENT_ENERGY = 0.
-         TOTAL_ENT_PRODUCTION_COST = 0.
-!
-         DO I = 1, NO_PA_UNITS ! ENTITLEMENT UNITS ONLY
-            J = PA_UNIT_INDEX(I)
-            WRITE_UNIT_NAME = UNITNM(J)(1:17)//'ENT'
-            WRITE_ENERGY = ANN_SYS_ENERGY(I)
-            WRITE_CAPACITY = ANN_SYS_CAP(I)/12.
-            CF = WRITE_CAPACITY*8760.
-            IF(CF > 0.) THEN
-               CF = 100.*WRITE_ENERGY/CF
-            ELSE
-               CF = 0.
-            ENDIF
-            WRITE_PRODUCTION_COST = ANN_SYS_COST(I)
-!!
-            TOTAL_ENT_CAPACITY = TOTAL_ENT_CAPACITY + WRITE_CAPACITY
-            TOTAL_ENT_ENERGY = TOTAL_ENT_ENERGY + WRITE_ENERGY
-            TOTAL_ENT_PRODUCTION_COST = TOTAL_ENT_PRODUCTION_COST +
-     +                                             WRITE_PRODUCTION_COST
-!!
-            IF(WRITE_ENERGY > 0.) THEN
-               AVERAGE_PRODUCTION_COSTS = WRITE_PRODUCTION_COST /
-     +                                                      WRITE_ENERGY
-            ELSE
-               AVERAGE_PRODUCTION_COSTS = 0.
-            ENDIF
-            WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ANNUAL_COUNTER),
-     +               WRITE_UNIT_NAME,
-     +               WRITE_CAPACITY,
-     +               WRITE_ENERGY,
-     +               CF,
-     +               WRITE_PRODUCTION_COST/1000.,
-     +               AVERAGE_PRODUCTION_COSTS
-            CPL_PAEN_REC = CPL_PAEN_REC + 1
-         ENDDO
-!!
-         WRITE_ENERGY = TOTAL_ENT_ENERGY
-         WRITE_CAPACITY = TOTAL_ENT_CAPACITY
-         WRITE_PRODUCTION_COST = TOTAL_ENT_PRODUCTION_COST
-!
-         CF = WRITE_CAPACITY*8760.
-         IF(CF > 0.) THEN
-            CF = 100.*WRITE_ENERGY/CF
-         ELSE
-            CF = 0.
-         ENDIF
-!
-         WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ANNUAL_COUNTER),
-     +               'Total Entitlement   ',
-     +               WRITE_CAPACITY,
-     +               WRITE_ENERGY,
-     +               CF,
-     +               WRITE_PRODUCTION_COST/1000.,
-     +               AVERAGE_PRODUCTION_COSTS
-         CPL_PAEN_REC = CPL_PAEN_REC + 1
-!
-!
-         DO J = 1, NO_PA_ACCTS ! INCLUDES REPLACEMENT (3), SURPLUS (4), BUYBACK (7)
-            I = J + NO_PA_UNITS
-            WRITE_UNIT_NAME = PA_ACCT_NAMES(J)
-            WRITE_ENERGY = ANN_SYS_ENERGY(I)
-            WRITE_CAPACITY = 0.
-            CF = 0.
-            WRITE_PRODUCTION_COST = ANN_SYS_COST(I)
-!!
-            IF(WRITE_ENERGY > 0.) THEN
-               AVERAGE_PRODUCTION_COSTS = WRITE_PRODUCTION_COST /
-     +                                                      WRITE_ENERGY
-            ELSE
-               AVERAGE_PRODUCTION_COSTS = 0.
-            ENDIF
-            WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ANNUAL_COUNTER),
-     +               WRITE_UNIT_NAME,
-     +               WRITE_CAPACITY,
-     +               WRITE_ENERGY,
-     +               CF,
-     +               WRITE_PRODUCTION_COST/1000.,
-     +               AVERAGE_PRODUCTION_COSTS
-            CPL_PAEN_REC = CPL_PAEN_REC + 1
-!
-            IF(J == 3) THEN
-!
-               CPL_ENERGY_REVENUE_FROM_PA(0) =
-     +                   CPL_ENERGY_REVENUE_FROM_PA(0) + ANN_SYS_COST(I)
-               CPL_ENERGY_TO_PA(0) = CPL_ENERGY_TO_PA(0) +
-     +                                                 ANN_SYS_ENERGY(I)
-            ELSEIF(J == 4 .OR. J == 7) THEN
-!
-               CPL_ENERGY_EXPENSE_TO_PA(0) =
-     +                     CPL_ENERGY_EXPENSE_TO_PA(0) + ANN_SYS_COST(I)
-               CPL_ENERGY_FROM_PA(0) = CPL_ENERGY_FROM_PA(0) +
-     +                                                 ANN_SYS_ENERGY(I)
-            ENDIF
-         ENDDO
-!
-         WRITE_UNIT_NAME = 'MWHs Supplied by CPL'
-         WRITE_CAPACITY = 0.
-         CF = 0.
-         WRITE_ENERGY = CPL_ENERGY_TO_PA(0)
-         WRITE_PRODUCTION_COST = CPL_ENERGY_REVENUE_FROM_PA(0)
-         IF(WRITE_ENERGY > 0.) THEN
-            AVERAGE_PRODUCTION_COSTS = WRITE_PRODUCTION_COST /
-     +                                                      WRITE_ENERGY
-         ELSE
-            AVERAGE_PRODUCTION_COSTS = 0.
-         ENDIF
-         WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ANNUAL_COUNTER),
-     +               WRITE_UNIT_NAME,
-     +               WRITE_CAPACITY,
-     +               WRITE_ENERGY,
-     +               CF,
-     +               WRITE_PRODUCTION_COST/1000.,
-     +               AVERAGE_PRODUCTION_COSTS
-         CPL_PAEN_REC = CPL_PAEN_REC + 1
-!
-         WRITE_UNIT_NAME = 'MWHs Supplied to CPL'
-         WRITE_CAPACITY = 0.
-         CF = 0.
-         WRITE_ENERGY = CPL_ENERGY_FROM_PA(0)
-         WRITE_PRODUCTION_COST = CPL_ENERGY_EXPENSE_TO_PA(0)
-         IF(WRITE_ENERGY > 0.) THEN
-            AVERAGE_PRODUCTION_COSTS = WRITE_PRODUCTION_COST /
-     +                                                      WRITE_ENERGY
-         ELSE
-            AVERAGE_PRODUCTION_COSTS = 0.
-         ENDIF
-         WRITE(CPL_PAEN_UNIT,REC=CPL_PAEN_REC)
-     +               PRT_ENDPOINT(),
-     +               FLOAT(CURRENT_YEAR),
-     +               CL_MONTH_NAME(ANNUAL_COUNTER),
-     +               WRITE_UNIT_NAME,
-     +               WRITE_CAPACITY,
-     +               WRITE_ENERGY,
-     +               CF,
-     +               WRITE_PRODUCTION_COST/1000.,
-     +               AVERAGE_PRODUCTION_COSTS
-         CPL_PAEN_REC = CPL_PAEN_REC + 1
-      RETURN
-!CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-      ENTRY CPL_ENERGY_REV_AND_EXP(R_CPL_ENERGY_REVENUE_FROM_PA,
-     +                             R_CPL_ENERGY_TO_PA,
-     +                             R_CPL_ENERGY_EXPENSE_TO_PA,
-     +                             R_CPL_ENERGY_FROM_PA,
-     +                             R_CPL_EMC_REVENUE)
-!CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-        R_CPL_ENERGY_REVENUE_FROM_PA = CPL_ENERGY_REVENUE_FROM_PA(0)/
-     +                                                          1000000.
-        R_CPL_ENERGY_TO_PA  = CPL_ENERGY_TO_PA(0)
-        R_CPL_ENERGY_EXPENSE_TO_PA = CPL_ENERGY_EXPENSE_TO_PA(0)/
-     +                                                          1000000.
-        R_CPL_ENERGY_FROM_PA = CPL_ENERGY_FROM_PA(0)
-!
-        R_CPL_EMC_REVENUE = CPL_EMC_REVENUE(0)/1000000.
-!
-      RETURN
-!
-!***********************************************************************
-      ENTRY CPL_MONTHLY_REV_AND_EXP(R_CATAWBA_REVENUES,
-     +                              R_CATAWBA_EXPENSES,
-     +                              R_CPL_ENERGY_TO_PA,
-     +                              R_CPL_ENERGY_FROM_PA)
-!***********************************************************************
-!
-         R_CPL_ENERGY_TO_PA  = 0.
-         R_CPL_ENERGY_FROM_PA = 0.
-!
-         DO MO = 0, 12
-!
-            IF(MO == 0) THEN
-               R_CATAWBA_EXPENSES(MO) = CPL_ANN_EXPENSE_TO_PA
-               R_CATAWBA_REVENUES(MO) = CPL_ANN_REVENUE_FROM_PA
-            ELSE
-               R_CATAWBA_EXPENSES(MO) = CPL_ANN_EXPENSE_TO_PA/12.
-               R_CATAWBA_REVENUES(MO) = CPL_ANN_REVENUE_FROM_PA/12.
-            ENDIF
-!
-! EXPENSE
-!
-            DO J = 4, 7, 3
-               I = J + NO_PA_UNITS
-               R_CATAWBA_EXPENSES(MO) = R_CATAWBA_EXPENSES(MO)
-     +                                  + MON_SYS_COST(I,MO)
-               R_CPL_ENERGY_FROM_PA = R_CPL_ENERGY_FROM_PA
-     +                                + MON_SYS_ENERGY(I,MO)
-            ENDDO
-!
-! REVENUE
-!
-
-! CAPACITY
-            CALL GET_PA_CAPACITY_RATES(PA_RESERVE_RATE,
-     +                                 PA_SUPPLEMENTAL_RATE,
-     +                                 PA_TRANSMISSION_RATE)
-!         J = 1
-!         I = J + NO_PA_UNITS
-!         CALL GET_ANN_RESERVE_CAPACITY(ANN_RESERVE_CAPACITY)
-!         R_CATAWBA_REVENUES(MO) =
-!     +            R_CATAWBA_REVENUES(MO) +
-!     +                    ANN_RESERVE_CAPACITY * PA_RESERVE_RATE * 1000.
-            J = 3
-            I = J + NO_PA_UNITS
-            R_CATAWBA_REVENUES(MO) = R_CATAWBA_REVENUES(MO) +
-     +                   MON_PA_CAP(I,MO) * PA_SUPPLEMENTAL_RATE * 1000.
-            I = 0
-            R_CATAWBA_REVENUES(MO) = R_CATAWBA_REVENUES(MO) +
-     +                   MON_PA_CAP(I,MO) * PA_TRANSMISSION_RATE * 1000.
-! ENERGY
-            DO I = NO_PA_UNITS+1, NO_PA_RESOURCES
-               J = I - NO_PA_UNITS
-               IF(J == 1 .OR. J == 3 .OR. J == 5) THEN
-                  R_CATAWBA_REVENUES(MO) = R_CATAWBA_REVENUES(MO)
-     +                                     + MON_PA_COST(I,MO)
-                  R_CPL_ENERGY_TO_PA = R_CPL_ENERGY_TO_PA
-     +                                 + MON_PA_ENERGY(I,MO)
-               ELSEIF(J == 2) THEN ! NET UNUSED AGAINST SUPPLEMENTAL
-                  R_CATAWBA_REVENUES(MO) = R_CATAWBA_REVENUES(MO)
-     +                                     - MON_PA_COST(I,MO)
-                  R_CPL_ENERGY_TO_PA = R_CPL_ENERGY_TO_PA
-     +                                 - MON_PA_ENERGY(I,MO)
-               ELSE
-!                 CONTRACT I THINK IS TREATED LIKE ENTITLEMENT
-               ENDIF
-!
-               IF(J == 3) THEN
-!
-                  R_CATAWBA_REVENUES(MO) = R_CATAWBA_REVENUES(MO)
-     +                                     + MON_SYS_COST(I,MO)
-                  R_CPL_ENERGY_TO_PA = R_CPL_ENERGY_TO_PA
-     +                                 + MON_SYS_ENERGY(I,MO)
-!
-
-               ENDIF
-            ENDDO
-            R_CATAWBA_EXPENSES(MO) = R_CATAWBA_EXPENSES(MO)/1000000.
-            R_CATAWBA_REVENUES(MO) = R_CATAWBA_REVENUES(MO)/1000000.
-         ENDDO
-      RETURN
-!$ifdefined(use_this_code)
-!CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-      ENTRY CPL_MON_ENERGY_REV_AND_EXP(R_ISEAS,
-     +                             R_CPL_ENERGY_REVENUE_FROM_PA,
-     +                             R_CPL_ENERGY_TO_PA,
-     +                             R_CPL_ENERGY_EXPENSE_TO_PA,
-     +                             R_CPL_ENERGY_FROM_PA)
-!CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-!         R_CPL_ENERGY_REVENUE_FROM_PA = 0.
-         R_CPL_ENERGY_TO_PA  = 0.
-!         R_CPL_ENERGY_EXPENSE_TO_PA = 0.
-         R_CPL_ENERGY_FROM_PA = 0.
-!
-         IF(R_ISEAS == 0) THEN
-            R_CPL_ENERGY_EXPENSE_TO_PA = CPL_ANN_EXPENSE_TO_PA
-            R_CPL_ENERGY_REVENUE_FROM_PA = CPL_ANN_REVENUE_FROM_PA
-         ELSE
-            R_CPL_ENERGY_EXPENSE_TO_PA = CPL_ANN_EXPENSE_TO_PA/12.
-            R_CPL_ENERGY_REVENUE_FROM_PA = CPL_ANN_REVENUE_FROM_PA/12.
-         ENDIF
-!
-         CALL GET_PA_SWITCH(PA_SWITCH)
-         IF(.NOT. PA_SWITCH) RETURN
-!
-! EXPENSE
-!
-         DO J = 4, 7, 3
-            I = J + NO_PA_UNITS
-            R_CPL_ENERGY_EXPENSE_TO_PA = R_CPL_ENERGY_EXPENSE_TO_PA +
-     +                                           MON_SYS_COST(I,R_ISEAS)
-            R_CPL_ENERGY_FROM_PA = R_CPL_ENERGY_FROM_PA +
-     +                                         MON_SYS_ENERGY(I,R_ISEAS)
-         ENDDO
-!
-! REVENUE
-!
-
-! CAPACITY
-         CALL GET_PA_CAPACITY_RATES(   PA_RESERVE_RATE,
-     +                                 PA_SUPPLEMENTAL_RATE,
-     +                                 PA_TRANSMISSION_RATE)
-!         J = 1
-!         I = J + NO_PA_UNITS
-!         CALL GET_ANN_RESERVE_CAPACITY(ANN_RESERVE_CAPACITY)
-!         R_CPL_ENERGY_REVENUE_FROM_PA =
-!     +            R_CPL_ENERGY_REVENUE_FROM_PA +
-!     +                    ANN_RESERVE_CAPACITY * PA_RESERVE_RATE * 1000.
-         J = 3
-         I = J + NO_PA_UNITS
-         R_CPL_ENERGY_REVENUE_FROM_PA =
-     +            R_CPL_ENERGY_REVENUE_FROM_PA +
-     +              MON_PA_CAP(I,R_ISEAS) * PA_SUPPLEMENTAL_RATE * 1000.
-         I = 0
-         R_CPL_ENERGY_REVENUE_FROM_PA =
-     +            R_CPL_ENERGY_REVENUE_FROM_PA +
-     +              MON_PA_CAP(I,R_ISEAS) * PA_TRANSMISSION_RATE * 1000.
-! ENERGY
-         DO I = NO_PA_UNITS+1, NO_PA_RESOURCES
-            J = I - NO_PA_UNITS
-            IF( J == 1 .OR. J == 3 .OR. J == 5) THEN
-               R_CPL_ENERGY_REVENUE_FROM_PA =
-     +                    R_CPL_ENERGY_REVENUE_FROM_PA +
-     +                                            MON_PA_COST(I,R_ISEAS)
-               R_CPL_ENERGY_TO_PA = R_CPL_ENERGY_TO_PA +
-     +                                          MON_PA_ENERGY(I,R_ISEAS)
-            ELSEIF(J == 2) THEN ! NET UNUSED AGAINST SUPPLEMENTAL
-               R_CPL_ENERGY_REVENUE_FROM_PA =
-     +                    R_CPL_ENERGY_REVENUE_FROM_PA -
-     +                                            MON_PA_COST(I,R_ISEAS)
-               R_CPL_ENERGY_TO_PA = R_CPL_ENERGY_TO_PA -
-     +                                          MON_PA_ENERGY(I,R_ISEAS)
-            ELSE
-!                 CONTRACT I THINK IS TREATED LIKE ENTITLEMENT
-            ENDIF
-!
-            IF(J == 3) THEN
-!
-               R_CPL_ENERGY_REVENUE_FROM_PA =
-     +                    R_CPL_ENERGY_REVENUE_FROM_PA +
-     +                                           MON_SYS_COST(I,R_ISEAS)
-               R_CPL_ENERGY_TO_PA = R_CPL_ENERGY_TO_PA +
-     +                                         MON_SYS_ENERGY(I,R_ISEAS)
-            ELSEIF(J == 4 .OR. J == 7) THEN
-!
-               R_CPL_ENERGY_EXPENSE_TO_PA =
-     +                  R_CPL_ENERGY_EXPENSE_TO_PA +
-     +                                           MON_SYS_COST(I,R_ISEAS)
-               R_CPL_ENERGY_FROM_PA = R_CPL_ENERGY_FROM_PA +
-     +                                         MON_SYS_ENERGY(I,R_ISEAS)
-            ENDIF
-         ENDDO
-      RETURN
-!$endif
-      END
-!
-!
-!
-!CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-      SUBROUTINE CREATE_CPL_LDC( ISEAS,
-     +                           SYSTEM_PEAK,
-     +                           SYSTEM_DEMAND,
-     +                           SYSTEM_LODDUR,
-     +                           PA_LODDUR,
-     +                           LPROB2,
-     +                           SEAS_HOURS,
-     +                           PA_PEAK,
-     +                           PA_DEMAND,
-     +                           PA_DX,
-     +                           BUYBACK_ENERGY,
-     +                           R_PA_HOURLY_LOADS)
-      use end_routine, only: end_program, er_message
-      use logging
-!CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-!
-!     TAKEN FROM LDCTRANS.FOR 4-2-91
-!     ASSUMES:
-!
-!        NO DSM FOR THE PA SYSTEM
-!
-!
-!     DECLARE VARIABLES
-!
-      USE SIZECOM
-      use cls_load
-
-      INCLUDE 'SpinLib.MON'
-!     INCLUDE 'LAMCOM.MON'
-
-      REAL (kind=4) ::    LPROB2(*)
-      REAL (kind=4) ::  SYSTEM_LODDUR(CONVOLUTION_POINTS)
-      REAL (kind=4) ::  SYSTEM_PEAK
-      REAL (kind=4) ::  PA_LODDUR(CONVOLUTION_POINTS)
-      REAL (kind=4) ::  PA_PEAK
-      REAL (kind=4) ::  LODDUR_SLOPE
-      REAL (kind=4) ::  LODDUR_INTERCEPT
-      REAL (kind=4) ::  SEAS_HOURS
-      REAL (kind=4) ::  PA_DX
-      REAL (kind=4) ::  BUYBACK_ENERGY
-      REAL (kind=4) ::  R_PA_HOURLY_LOADS(*)
-      REAL (kind=8) ::  SYSTEM_DEMAND
-      REAL (kind=8) ::  PA_DEMAND
-      REAL (kind=8) ::  PA_DEMAND_TEST
-      REAL (kind=8) ::  SYSTEM_AVE_ENERGY
-      REAL (kind=8) ::  PA_AVE_ENERGY
-      INTEGER (kind=2) ::    I
-      INTEGER (kind=2) ::    PA_CLASS/6/
-      INTEGER (kind=2) ::  ISEAS
-      INTEGER (kind=2) ::  IMAX
-      INTEGER (kind=2) ::  IREC
-      INTEGER (kind=2) ::  ALINE_LOAD_DATA
-      INTEGER (kind=2) ::  DAYS_IN_MONTH
-      INTEGER (kind=2) ::  CURRENT_HR
-      INTEGER (kind=2) ::  LOCAL_HOURS
-      INTEGER (kind=2) ::  DA
-      INTEGER (kind=2) ::  LDE_DAY
-      INTEGER (kind=2) ::  LDE_MONTH
-      INTEGER (kind=2) ::  LDE_YEAR
-      INTEGER (kind=2) ::  DAY_WEEK
-      INTEGER (kind=2) ::  HR
-      CHARACTER (len=8) ::  EEICODE
-      INTEGER (kind=2) ::  TIMZON,TEMPER,DELTMP,LOCAL_LOAD_POINTS
-      PARAMETER (LOCAL_LOAD_POINTS=79)
-      REAL (kind=4) ::  MONTHLY_PA_LOADS(:)
-      REAL (kind=4) ::  PA_HIST_BASE
-      REAL (kind=4) ::  PA_HIST_PEAK
-      REAL (kind=4) ::  LOCAL_LPROB(LOCAL_LOAD_POINTS)
-      REAL (kind=4) ::  LOCAL_LODDUR(LOCAL_LOAD_POINTS)
-      REAL (kind=8) ::  PA_HIST_ENERGY
-      INTEGER (kind=4) ::  LOCAL_PA_LOADS(24)
-      ALLOCATABLE :: MONTHLY_PA_LOADS
-      CHARACTER (len=256) ::  FILE_NAME,BASE_FILE_DIRECTORY
-      LOGICAL (kind=4) ::  FILE_EXISTS
-!
-! END DATA DECLARATIONS
-!
-!
-!     INITIALIZE VARIABLES
-!
-!
-         LOCAL_HOURS = INT(SEAS_HOURS)
-         ALLOCATE(MONTHLY_PA_LOADS(LOCAL_HOURS))
-!
-!
-! CASE 2 WITH BINARY MARKET FILES
-!
-!
-!         CALL GET_MARKET_PRICE_NAME(MARKET_PRICE_NAME)
-         FILE_NAME = trim(BASE_FILE_DIRECTORY())//"LDEPAT95.BIN"
-         INQUIRE(FILE=FILE_NAME,EXIST=file_exists)
-         IF(file_exists) THEN
-            OPEN(UNIT=2801,FILE=FILE_NAME,
-     +                                     ACCESS="DIRECT",STATUS="OLD")
-            I = 1
-            IREC = ALINE_LOAD_DATA(I,ISEAS)
-            DAYS_IN_MONTH = LOCAL_HOURS/24
-!
-            CURRENT_HR = 0
-!
-            PA_HIST_BASE = 999999.
-            PA_HIST_PEAK = 0.
-            PA_HIST_ENERGY = 0.
-!
-            DO DA = 1, DAYS_IN_MONTH
-               READ(2801,REC=IREC) LDE_DAY,LDE_MONTH,LDE_YEAR,
-     +                               EEICODE,DAY_WEEK,
-     +                               TIMZON,TEMPER,
-     +                               DELTMP,
-     +                               (LOCAL_PA_LOADS(HR),HR=1,24)
-               IREC = IREC + 1
-               DO HR = 1, 24
-                  CURRENT_HR = CURRENT_HR + 1
-                  MONTHLY_PA_LOADS(CURRENT_HR) = LOCAL_PA_LOADS(HR)
-                  PA_HIST_BASE = MIN(PA_HIST_BASE,LOCAL_PA_LOADS(HR))
-                  PA_HIST_PEAK = MAX(PA_HIST_PEAK,LOCAL_PA_LOADS(HR))
-                  PA_HIST_ENERGY = PA_HIST_ENERGY + LOCAL_PA_LOADS(HR)
-               ENDDO
-            ENDDO
-            CLOSE(2801)
-!
-         ELSE
-            WRITE(4,*) '*** line 4589 CPL_PA_DISPATCH ***'
-            WRITE(4,*) "CANNOT FIND PA HOURLY LOAD FILE"
-            WRITE(4,*) "NAMED LDEPAT95.BIN. THIS FILE IS NEEDED"
-            WRITE(4,*) "TO RUN THE CUSTOM CPL/PA LOGIC"
-            er_message='See WARNING MESSAGES-cat2obj-3'
-            call end_program(er_message)
-         ENDIF
-!
-!
-!
-         PA_PEAK = MAX(FORECAST_COINCIDENT_PEAK(1,ISEAS,PA_CLASS),
-     +              FORECAST_COINCIDENT_PEAK(2,ISEAS,PA_CLASS))
-         PA_DEMAND = FORECAST_ENERGY(1,ISEAS,PA_CLASS) +
-     +                        FORECAST_ENERGY(2,ISEAS,PA_CLASS)
-!
-!
-!
-
-         SYSTEM_AVE_ENERGY = PA_HIST_ENERGY / SEAS_HOURS
-         PA_AVE_ENERGY = PA_DEMAND / SEAS_HOURS
-         LODDUR_SLOPE = (PA_PEAK - PA_AVE_ENERGY) /
-     +                                (PA_HIST_PEAK - SYSTEM_AVE_ENERGY)
-         LODDUR_INTERCEPT = PA_AVE_ENERGY - LODDUR_SLOPE*
-     +                                                 SYSTEM_AVE_ENERGY
-!
-! NOTE: REUSING MONTHLY_PA_LOADS TO BUILD TO FORECASTED VALUES
-!
-!
-         PA_HIST_BASE = 999999.
-         PA_HIST_PEAK = 0.
-         PA_HIST_ENERGY = 0.
-!
-         DO HR = 1, LOCAL_HOURS
-            MONTHLY_PA_LOADS(HR) = LODDUR_INTERCEPT +
-     +                               LODDUR_SLOPE * MONTHLY_PA_LOADS(HR)
-            PA_HIST_BASE = MIN(PA_HIST_BASE,MONTHLY_PA_LOADS(HR))
-            PA_HIST_PEAK = MAX(PA_HIST_PEAK,MONTHLY_PA_LOADS(HR))
-            PA_HIST_ENERGY = PA_HIST_ENERGY + MONTHLY_PA_LOADS(HR)
-!
-            R_PA_HOURLY_LOADS(HR) = MONTHLY_PA_LOADS(HR)
-!
-         ENDDO
-         CALL GENERIC_LOAD_PROB(    LOCAL_HOURS,
-     +                              MONTHLY_PA_LOADS,
-     +                              PA_HIST_ENERGY,
-     +                              PA_HIST_PEAK,
-     +                              PA_HIST_BASE,
-     +                              LOCAL_LPROB,
-     +                              LOCAL_LODDUR)
-!
-         DEALLOCATE(MONTHLY_PA_LOADS)
-!
-!
-!
-      IMAX = LOCAL_LOAD_POINTS
-      DO I = 1, LOCAL_LOAD_POINTS
-
-
-         LPROB2(I) = LOCAL_LPROB(I)
-         PA_LODDUR(I) = LOCAL_LODDUR(I)
-      ENDDO
-      IF(IMAX == 9999) IMAX = CONVOLUTION_POINTS
-      IF(IMAX > 2) THEN
-         PA_DX = MAX(1.,(PA_LODDUR(3) - PA_LODDUR(1))/2.)
-      ELSE
-         PA_DX = 1.
-      ENDIF
-!
-!     TEST LINEAR TRANSFORM
-!
-      CALL INTEG8(PA_DEMAND_TEST,PA_LODDUR,LPROB2,IMAX,
-     +                                     INT(SEAS_HOURS),PA_LODDUR(1))
-      RETURN
-      END
-!
-!
-!
-!***********************************************************************
-!
-!     ROUTINE TO CALCULATE THE TRANS LOAD PROBABILITY
-!                 CURVE ON AN ODD SPACED GRID
-!
-!***********************************************************************
-!
-      SUBROUTINE GENERIC_LOAD_PROB( HOURS_INCREMENT,
-     +                              TRANS_LOAD,
-     +                              SUM_TRANS_LOADS,
-     +                              MAX_TRANS_LOAD,
-     +                              MIN_TRANS_LOAD,
-     +                              LPROB,LODDUR)
-!
-      use logging
-      use grx_planning_routines
-      USE SIZECOM
-      INCLUDE 'SpinLib.MON'
-      INCLUDE 'GLOBECOM.MON'
-      INTEGER (kind=2) ::  LOAD_POINTS
-      PARAMETER (LOAD_POINTS=79)
-      INTEGER (kind=2) ::  I
-      INTEGER (kind=2) ::  HR
-      INTEGER (kind=2) ::  IMAX
-      INTEGER (kind=2) ::  HOURS_INCREMENT
-      INTEGER (kind=2) ::  IPEAK
-      INTEGER (kind=2) ::  COUNT
-      INTEGER (kind=2) ::  INTERVALS
-      INTEGER (kind=2) ::  COUNTER
-      INTEGER (kind=2) ::  POINTS_IN_CURVE
-      INTEGER (kind=2) ::  R_LOAD_POINTS
-      INTEGER (kind=2) ::  R_MAX_TRANS_LOAD_GROUPS
-      INTEGER (kind=2) ::  SAVE_MAX_TRANS_LOAD_GROUPS/0/
-      INTEGER (kind=2) ::  SAVE_TARGET_TRANS_GROUP/0/
-      INTEGER (kind=2) ::  TG_FROM_TRANS_LOAD_GROUP
+      TYPE (MARKETSYM_TRANSFER_STRUCTURE) ::
+     +  MarketSymAdditions(1000)
+      INTEGER (KIND=2) ::  UnitsAdded
+      INTEGER (KIND=2) ::  LastNunits
+      INTEGER (KIND=2) ::  MSUnitsAdded
+      INTEGER (KIND=2) ::  GET_PROCOST_LAST_NUNITS
+      LOGICAL (KIND=1), SAVE :: MarketSymFileOpen=.FALSE.
+      INTEGER (KIND=4) :: MARKETSYM_REC
+!
+      LOGICAL (kind=1) ::  KEPCO
+      LOGICAL (kind=1) ::  CONTRACTS_IN_PERIOD
+      LOGICAL (kind=1) ::  WABASH_VALLEY
+      LOGICAL (kind=1) ::  REALLY_KEPCO
+      LOGICAL (kind=1) ::  GET_MONTHLY_TRANS_VARIABLES
+      LOGICAL (kind=1) ::  VOID_LOGICAL
+      LOGICAL (kind=1) ::  MON_MDS_CL_VAR
+      LOGICAL (kind=1) ::  FUEL_PRICE_DATA_AVAILABLE/.FALSE./
+      LOGICAL (kind=1) ::  YES_RUN_TRANSACT
+      LOGICAL (kind=1) ::  RUN_TRANSACT/.FALSE./
+      LOGICAL (kind=1) ::  YES_RUN_MULTIAREA_TRANSACT
+      LOGICAL (kind=1) ::  RUN_MULTIAREA_TRANSACT
+      LOGICAL (kind=1) ::  YES_REPORT_PRODUCT
+      LOGICAL (kind=1) ::  TEMP_L1
+      LOGICAL (kind=1) ::  GET_CL_BASECASE_MARKET_ID
+      LOGICAL (kind=1) ::  GET_ICAP_REPORT_VALUES
+      LOGICAL (kind=1) ::  CALC_ANN_ICAP_VALUES
+      LOGICAL (kind=1) ::  GET_TG_MONTH_SUM_B4_HYDRO
+      LOGICAL (kind=1) ::  YES_DETAILED_TRANSFER_PRICING
+      LOGICAL (kind=1) ::  R_DETAILED_TRANSFER_PRICING
+      LOGICAL (kind=1) ::  TRANSFER_PRICING_VECTORS
+      LOGICAL (kind=1) ::  YES_FISCAL_REPORTING
+      LOGICAL (kind=1) ::  FISCAL_ONLY
+      LOGICAL (kind=1) ::  IS_FISCAL_YEAR_ACTIVE
+      LOGICAL (kind=1) ::  DERIVATIVES_REPORT/.FALSE./
+      LOGICAL (kind=1) ::  MONTHLY_DERIVATIVES_ACTIVE
+      LOGICAL (kind=1) ::  SUPPRESS_DERIVATIVES_ACTIVE
+      LOGICAL (kind=1) ::  SUPPRESS_DERIVATIVES/.FALSE./
+      LOGICAL (kind=1) ::  NEW_UNITS_REPORT/.FALSE./
+      LOGICAL (kind=1) ::  NEW_UNITS_REPORT_ACTIVE
+      LOGICAL (kind=1) ::  CLA_SPECIAL_ID_NAME
+      LOGICAL (kind=1) ::  GET_PORT_MARKET_AREA_ABBREV
+      LOGICAL (kind=1) ::  GET_BASECASE_MARKET_AREA_ID
+      LOGICAL (kind=1) ::  GET_CUBIC_HEAT_CURVE
+      LOGICAL (kind=1) ::  GET_PW_UNIT_TEXT_FIELDS
+      LOGICAL (kind=1) ::  MONTHLY_PW_REPORT
+      LOGICAL (kind=1) ::  MONTHLY_NEW_PW_REPORT
+      LOGICAL (kind=1) ::  YES_POWERWORLD_REPORT
+      LOGICAL (kind=1) ::  YES_POWERWORLD_NEW_REPORT
+      LOGICAL (kind=1) ::  YES_REFERENCE_CASE_REPORT
+      LOGICAL (kind=1) ::  REFERENCE_CASE_REPORT
+      LOGICAL (kind=1) ::  CapEx_Running
+      LOGICAL (kind=1) ::  PW_REPORT_NOT_OPEN/.TRUE./
+      LOGICAL (kind=1) ::  TRANSACT_PROD_REPORT
+      LOGICAL (kind=1) ::  TRANS_NOT_ACTIVE
+      LOGICAL (kind=1) ::  GET_TRANS_RPS_SUM
+      LOGICAL (kind=1) ::  GET_GRX_UNIT_INFO
+      LOGICAL (kind=1) ::  GET_DERIV_PRIM_MOVER_INDEX
+      LOGICAL (kind=1) ::  GET_DERIV_ZONE_ID
+      LOGICAL (kind=4) ::  FILE_OPENED
+      CHARACTER (len=1) ::  QUOTE/'"'/
+      CHARACTER (len=5) ::  GET_SCENAME
+      CHARACTER (len=6) ::  MARKET_ID
+      CHARACTER (len=6) ::  EIA_PLANT_CODE
+      CHARACTER (len=6) ::  RDI_MARKET_AREA_NAME
+      CHARACTER (len=6) ::  EV_TRANS_AREA_NAME
+      CHARACTER (len=64) ::  FILE_NAME
+      CHARACTER (len=256) ::  XML_FILE_DIRECTORY
+      CHARACTER (len=1024) ::  PW_REC
+      REAL ::  P_SALES_REVENUE,P_SALES_ENERGY
+      REAL ::  ENERGY(2,MAX_CL_UNITS)
       REAL ::  BASE
-      REAL ::  OBS(LOAD_POINTS)
-      REAL ::  DELTA_PROB
-      REAL ::  AREA
-      REAL ::  MIN_LPROB
-      REAL ::  OBSERVATIONS
-      REAL ::
-     +     LPROB(LOAD_POINTS),
-     +     DX,
-     +     R_DX,
-     +     PEAK,
-     +     R_PEAK,
-     +     R_BASE,
-     +     LODDUR(LOAD_POINTS),
-     +     TRANS_LOAD(*),
-     +     AVE_ENERGY,
-     +     MAX_TRANS_LOAD,
-     +     MIN_TRANS_LOAD,LOAD_VAL,PEAK_DX,BASE_DX,
-     +     BASE_ADJUSTMENT,INTERVAL_HOURS
-      REAL (kind=8) ::  SUM_TRANS_LOADS
+      REAL ::  PEAK
+      REAL ::  MONTHLY_ECONOMY_BOUGHT
+      REAL ::  MONTHLY_ECONOMY_COST
+      REAL ::  MONTHLY_ECONOMY_SOLD
+      REAL ::  MONTHLY_ECONOMY_REVENUE
+      REAL ::  MONTHLY_KEPCO_SALES
+      REAL ::  MONTHLY_KEPCO_SALES_REV
+      REAL ::  CAPACITY_BILLED_AT_MIN
+      REAL ::  CAPACITY_BILLED_AT_MAX
+      REAL ::  CONTRACT_BILLING_CAPACITY
+      REAL ::  REPORTING_CAPACITY
+      REAL ::  CL_UNIT_MONTHLY_FIXED_COST(*)
+      REAL ::  GET_DUKE_RESERVE_CAPACITY
+      REAL ::  GET_POWERDAT_PLANT_ID
+      REAL ::  GET_Holding_Company_ID
+      REAL ::  HESI_ID_NUM_4_UNIT
+      REAL ::  HESI_SECOND_UNIT_ID_NUM
+      REAL ::  POWERDAT_PLANT_ID
+      REAL ::  P_FUEL_DELIVERY
+      REAL ::  PBTUCT_SAVE
+      REAL ::  GET_PBTUCT_SAVE
+      REAL ::  A_CO
+      REAL ::  B_CO
+      REAL ::  C_CO
+      REAL ::  D_CO
+      REAL ::  FIXED_COST_PER_UNIT
+      REAL ::  AVE_FUEL_MULT
+      REAL ::  LOCAL_MW1
+      REAL ::  LOCAL_MW2
+      REAL ::  MONTHLY_MOR
+      REAL ::  MONTHLY_FOR
+      REAL ::  EV_DATA_SOURCE/2./
+      REAL ::  EV_PLANNING_AREA/0./
+      REAL ::  CAP_MARKET_REVENUE/0./
+      REAL ::  CAPITAL_COST_OF_BUILD/0./
+      REAL ::  MONTHLY_CAPITAL_COST_OF_BUILD
+      REAL ::  UNIT_EBITDA/0./
+      REAL ::  MONTHLY_EBITDA
+      REAL ::  MONTHLY_CHARGING_ENERGY
+      REAL ::  GET_CAP_MARKET_REVENUE
+      REAL ::  TRANS_ON_LINE
+      REAL ::  TRANS_OFF_LINE
+      REAL ::  TRANS_UNIT_ID
+      REAL ::  TRANS_ASSET_CLASS
+      REAL ::  PRIMARY_HEAT
+      REAL ::  PRIMARY_FUEL_COST
+      REAL ::  SECONDARY_HEAT
+      REAL ::  SECONDARY_FUEL_COST
+      REAL ::  TEMP_R
+      REAL ::  GET_TRANS_ITER_CAP_PERCENT
+      CHARACTER (len=1) ::  COUNTRY
+      LOGICAL (kind=1) ::  CANADA
+      CHARACTER (len=20) ::  UNIT_NAME
+      CHARACTER (len=20) ::  CL_SEGMENT_NAME*22
+      CHARACTER (len=20) ::  CL_TRANS_NAME*25
+      CHARACTER (len=20) ::  SPECIAL_ID_NAME
+      CHARACTER (len=20) ::  TRANS_NAME*22
+      CHARACTER (len=20) ::  PA_NAME
+      CHARACTER (len=20) ::  CM_NAME*35
+
+      CHARACTER (len=2) ::  CAPACITY_PLANNING_METHOD,LOAD_FILE_CHAR_EXT
+      CHARACTER (len=6) ::  STATE_PROVINCE ! CHANGED 060206.
+      CHARACTER (len=20) ::  TEMP_NAME
+      LOGICAL (kind=1) ::  UNIT_OUTPUT_REPORT,MONTHLY_BLOCK_REPORT
+      LOGICAL (kind=1) :: MONTHLY_SUMMARY_REPORT_ACTIVE
+      LOGICAL (kind=1) :: MONTHLY_SUMMARY_REPORT
+      INTEGER (kind=2) ::  ISEAS
+      INTEGER (kind=2) ::  UNITNO
+      INTEGER (kind=2) ::  YR
+      INTEGER (kind=2) ::  I
+      INTEGER (kind=2) ::  BLKNUM
+      INTEGER (kind=2) ::  EM
+      INTEGER (kind=2) ::  PEAK_MONTH
+      INTEGER (kind=2) ::  FIRST_MONTH
+      INTEGER (kind=2) ::  LAST_MONTH
+      INTEGER (kind=2) ::  TG
+      INTEGER (kind=2) ::  GET_PA_PEAK_MONTH
+      INTEGER (kind=2) ::  LPM
+      INTEGER (kind=2) ::  GET_CM_PEAK_MONTH
+      INTEGER (kind=2) ::  MONTHS_ACTIVE(MAX_CL_UNITS)
+      INTEGER (kind=2) ::  FISCAL_MONTHS_ACTIVE(MAX_CL_UNITS)
+      INTEGER (kind=2) ::  GET_DUKE_RESERVE_CAP_NO
+      INTEGER (kind=2) ::  DUKE_RESERVE_CAP_NO
+      INTEGER (kind=2) ::  CLASS
+      INTEGER (kind=2) ::  GET_ASSET_CLASS_NUM
+      INTEGER (kind=2) ::  TRANS
+      INTEGER (kind=2) ::  MON_CL_TRANS_UNIT_VAR_NUM/63/
+      INTEGER (kind=2) ::  MON_DV_TRANS_UNIT_VAR_NUM/63/
+      INTEGER (kind=2) ::  MON_NU_TRANS_UNIT_VAR_NUM/63/
+      INTEGER (kind=2) ::  SUM_ANNUAL
+      INTEGER (kind=2) ::  MK
+      INTEGER (kind=2) ::  MARKET_AREA_LOOKUP
+      INTEGER (kind=2) ::  GET_STATE_PROVINCE_NAMES
+      INTEGER (kind=2) ::  SP
+      INTEGER (kind=2) ::  R_SP
+      INTEGER (kind=2) ::  GET_UNIT_STATE_PROVINCE_INDEX
+      INTEGER (kind=2) ::  GET_UNIT_GAS_REGION_INDEX
+      INTEGER (kind=2) ::  R_ISEAS
+      INTEGER (kind=2) ::  R_AC_REV_VECTOR
+      INTEGER (kind=2) ::  R_AC_REV_ALLOC_VECTOR
+      INTEGER (kind=2) ::  R_AC_COST_VECTOR
+      INTEGER (kind=2) ::  R_AC_COST_ALLOC_VECTOR
+      INTEGER (kind=2) ::  GET_PURCHASE_ASSET_CLASS_ID
+      INTEGER (kind=2) ::  MONTH_UNIT_STARTS(MAX_CL_UNITS)
+      INTEGER (kind=2) ::  ANNUAL_UNIT_STARTS(MAX_CL_UNITS)
+      INTEGER (kind=2) ::  FISCAL_UNIT_STARTS(MAX_CL_UNITS)
+      INTEGER (kind=2) ::  R_UNIT
+      INTEGER (kind=2) ::  R_STARTS
+      INTEGER (kind=2) ::  MONTHLY_STARTS
+      INTEGER (kind=2) ::  FISCAL_SEASON
+      INTEGER (kind=2) ::  FISCAL_SEASON_RESET
+      INTEGER (kind=2) ::  BEGIN_DATE
+      INTEGER (kind=2) ::  MAX_ASSET_CLASSES/1/
+      INTEGER (kind=2) ::  R_CLASS
+      INTEGER (kind=2) ::  PM
+      INTEGER (kind=2) ::  GET_PRIMARY_MOVER_INDEX
+      INTEGER (kind=2) ::  LM
+      INTEGER (kind=2) ::  GET_PA_VALUE_FROM_TG
+      INTEGER (kind=2) ::  GET_CM_INDEX_FROM_TG
+      INTEGER (kind=2) ::  PA_INDEX
+      INTEGER (kind=2) ::  CM_INDEX
+      INTEGER (kind=2) ::  R_MONTH
+      INTEGER (kind=2) ::  INSERVICE_STATUS
+      INTEGER (kind=2) ::  LAST_RESOURCE_UPDATE_NO
+      INTEGER (kind=2) ::  TEMP_I2
+      INTEGER (kind=2) ::  GET_REGIONAL_PA_NAME
+      INTEGER (kind=2) ::  GET_REGIONAL_CM_NAME
+      INTEGER (kind=2) ::  ST_TG
+      INTEGER (kind=2) ::  STATE_ID_LOOKUP
+      INTEGER (kind=2) ::  RPS_STATE_VAR_NUM/12/
+      INTEGER (kind=2) ::  NUM_RESOURCE_RPS_VARS/14/
+      INTEGER (kind=2) ::  I2_VARIABLE_NUMBER
+      INTEGER (kind=2) ::  GET_THERMAL_STATE_INDEX
+! new declarations
+      REAL (KIND=4), ALLOCATABLE :: SaveMW2(:,:)
+      REAL (KIND=4) :: VariableOMRate
+!
+      REAL (kind=4) ::  RTG
+      REAL (kind=4) ::  RMK
+      REAL (kind=4) ::  RFT
+      REAL (kind=4) ::  RSP
+      REAL (kind=4) ::  RPM
+      REAL (kind=4) ::  CHARGING_ENERGY
+      REAL (kind=4) ::  R_START_COSTS
+      REAL (kind=4) ::  R_CAP
+      REAL (kind=4) ::  R_ENERGY
+      REAL (kind=4) ::  MONTH_UNIT_START_COSTS(MAX_CL_UNITS)
+      REAL (kind=4) ::  ANNUAL_UNIT_START_COSTS(MAX_CL_UNITS)
+      REAL (kind=4) ::  ANNUAL_CAPITAL_COST_OF_BUILD(MAX_CL_UNITS)
+      REAL (kind=4) ::  ANNUAL_EBITDA(MAX_CL_UNITS)
+      REAL (kind=4) ::  FISCAL_CAPITAL_COST_OF_BUILD(MAX_CL_UNITS)
+      REAL (kind=4) ::  FISCAL_EBITDA(MAX_CL_UNITS)
+      REAL (kind=4) ::  FISCAL_UNIT_START_COSTS(MAX_CL_UNITS)
+      REAL (kind=4) ::  ANNUAL_UNIT_CAPACITY_REVENUE(MAX_CL_UNITS)
+      REAL (kind=4) ::  MONTHLY_CAPACITY_REVENUE
+      REAL (kind=4) ::  MONTHLY_START_COSTS
+      REAL (kind=4) ::  GET_UNIT_START_UP_COSTS
+      REAL (kind=4) ::  UNIT_START_UP_COSTS
+      REAL (kind=4) ::  GET_TRANS_BASE_AFTER_EL
+      REAL (kind=4) ::  GET_TRANS_PEAK_AFTER_EL
+      REAL (kind=4) ::  GET_MONTHLY_TL_MWH
+      REAL (kind=4) ::  TG_MWH
+      REAL (kind=4) ::  TG_PEAK
+      REAL (kind=4) ::  TG_BASE
+      REAL (kind=4) ::  STATE_RPS_VARS(12)
+      REAL (kind=4) ::  RESOURCE_RPS_VARS(14)
+!     INTEGER*4 FMT1,FMT2
+      REAL ::  SEAS_HOURS
+      REAL ::  P_NUCLEAR_FUEL_COST
+      REAL ::  CAPBLK
+      REAL ::  ENRG
+      REAL ::  BLK1_HEAT(MAX_CL_UNITS)
+      REAL ::  BLK2_HEAT(MAX_CL_UNITS)
+      REAL ::  MAINTENANCE_RATE(MAX_CL_UNITS)
+      REAL ::  AVERAGE_HEATRATE
+      REAL ::  AVERAGE_FUEL_COST_PER_MWH
+      REAL ::  DAYS_IN_MONTH
       REAL (kind=8) ::  DEMAND
-      REAL (kind=8) ::  R_DEMAND
-      REAL (kind=8) ::  ENERGY(LOAD_POINTS)
-      REAL (kind=8) ::  ALPHA
-      REAL (kind=8) ::  PRECISN
+      REAL (kind=8) ::  PENRG
+      REAL (kind=8) ::  PMMBTUS
+      REAL (kind=8) ::  PFUELCST
+      REAL (kind=8) ::  PVARCOST
+      REAL (kind=8) ::  P_PUR_POWER_COST
+      REAL (kind=8) ::  PFIXCOST
+      REAL (kind=8) ::  P_PUR_ENRG
+      REAL (kind=8) ::  FUEL_COST
+      REAL (kind=8) ::  HEAT
+      REAL (kind=8) ::  CNTR_ENRG
+      REAL (kind=8) ::  MMBTU_FUEL_BALANCE(*)
+      REAL ::  HEAT_CONVERSION,TONS_CONVERSION
+      REAL ::  GET_HEAT_CONVERSION,GET_TONS_CONVERSION
+      REAL ::  CONTRACT_ENERGY(MAX_CONTRACTS)
+      REAL ::  CONTRACT_CAPACITY(MAX_CONTRACTS)
+      REAL ::  MAXIMUM_CAPACITY(MAX_CONTRACTS)
+      REAL ::  CNTR_EMISSIONS
+      REAL ::  CNTR_MIN_FIXED_COST
+      REAL ::  CNTR_MAX_FIXED_COST
+      REAL ::  TOTAL_CONTRACT_COST
+      REAL ::  MINIMUM_CAPACITY(MAX_CONTRACTS)
+      REAL ::  MAXIMUM_ENERGY(MAX_CONTRACTS)
+      REAL ::  R_SOX,R_NOX,R_CO2,R_OTH2,R_OTH3
+      REAL ::  EFFECTIVE_CAPACITY(2,*)
+      REAL (kind=4) ::  MONTHLY_TOTAL_EMISSIONS(5)
+      REAL (kind=4) ::  UNIT_EMISSIONS(5)
+      REAL (kind=4) ::  TEMP_SNGL
+      REAL (kind=4) ::  EMISSION_COST_PER_TON(5)
+      REAL (kind=4) ::  EMISSIONS_COST_BY_SP(:,:)
+      REAL (kind=4) ::  ANNUAL_EMISSIONS_COST_BY_SP(:,:)
+      REAL (kind=4) ::  MONTHLY_TOTAL_EMISSIONS_COST(5)
+      REAL (kind=4) ::  ANNUAL_LOCAL_EMIS_COST(5)
+      REAL (kind=4) ::  TOTAL_EMISSION_COSTS_BY_TYPE(5)
+      REAL (kind=4) ::  MONTHLY_UNIT_EMISSIONS_COST(:,:)
+      REAL (kind=4) ::  R_MONTHLY_UNIT_EMISSIONS_COST
+      REAL (kind=4) ::  UNIT_EMISSIONS_COST(5)
+      REAL (kind=4) ::  EMIS_DISPATCH_1
+      REAL (kind=4) ::  EMIS_DISPATCH_2
+      REAL (kind=4) ::  EMIS_DISPATCH_3
+      REAL (kind=4) ::  EMIS_DISPATCH_4
+      REAL (kind=4) ::  EMIS_DISPATCH_5
+      REAL (kind=4) ::  TRANS_DISPATCH_EMIS_ADDER
+      REAL (kind=4) ::  TRANS_CAP
+      REAL (kind=4) ::  TRANS_VAR_EXP
+      REAL (kind=4) ::  TRANS_VAR_MWH
+      REAL (kind=4) ::  TRANS_FIX_EXP
+      REAL (kind=4) ::  TRANS_REV
+      REAL (kind=4) ::  TRANS_REV_MWH
+      REAL (kind=4) ::  TRANS_HOURS
+      REAL (kind=4) ::  PRODUCT_HOURS
+      REAL (kind=4) ::  TRANS_STRIKES
+      REAL (kind=4) ::  WHOLESALE_PRODUCTION_COST
+      REAL (kind=4) ::  RETAIL_SALES
+      REAL (kind=4) ::  MONTHLY_RETAIL_SALES/0./
+      REAL (kind=4) ::  MONTHLY_WHOLE_COSTS/0./
+      REAL (kind=4) ::  MONTHLY_WHOLESALE_FUEL_COSTS/0./
+      REAL (kind=4) ::  MONTHLY_WHOLESALE_VOM_COSTS/0./
+      REAL (kind=4) ::  MONTHLY_DERIV_WHOLESALE_COST/0./
+      REAL (kind=4) ::  R_WHOLESALE_MARKET_COST_AC(0:12)
+      REAL (kind=4) ::  R_WHOLESALE_MARKET_BUY_MWH_AC(0:12)
+      REAL (kind=4) ::  R_MONTHLY_WHOLESALE_COST_AC(0:12)
+      REAL (kind=4) ::  R_MONTHLY_WHOLE_FUEL_COST_AC(0:12)
+      REAL (kind=4) ::  R_MONTHLY_WHOLE_VOM_COST_AC(0:12)
+      REAL (kind=4) ::  R_WHOLESALE_MARKET_REV_AC(0:12)
+      REAL (kind=4) ::  R_WHOLESALE_MARKET_SELL_MWH_AC(0:12)
+      REAL (kind=4) ::  R_WHOLESALE_DERIV_COST_AC(0:12)
+      REAL (kind=4) ::  R_WHOLESALE_MARKET_COST
+      REAL (kind=4) ::  R_WHOLESALE_MARKET_BUY_MWH
+      REAL (kind=4) ::  R_MONTHLY_WHOLESALE_COST
+      REAL (kind=4) ::  R_MONTHLY_WHOLESALE_FUEL_COST
+      REAL (kind=4) ::  R_MONTHLY_WHOLESALE_VOM_COST
+      REAL (kind=4) ::  R_WHOLESALE_MARKET_REV
+      REAL (kind=4) ::  R_WHOLESALE_MARKET_SELL_MWH
+      REAL (kind=4) ::  WHOLESALE_MARKET_COST(0:12)
+      REAL (kind=4) ::  WHOLESALE_MARKET_BUY_MWH(0:12)
+      REAL (kind=4) ::  WHOLESALE_DERIV_COST(0:12)
+      REAL (kind=4) ::  MONTHLY_WHOLESALE_COST(0:12,3)
+      REAL (kind=4) ::   WHOLESALE_MARKET_REV(0:12)
+      REAL (kind=4) ::  WHOLESALE_MARKET_SELL_MWH(0:12)
+      REAL (kind=4) ::  ANNUAL_WHOLESALE_COST/0./
+      REAL (kind=4) ::  ANNUAL_ECO_SALES/0./
+      REAL (kind=4) ::  ANNUAL_ECO_SALES_ENRG/0./
+      REAL (kind=4) ::  ANNUAL_ECO_PUCH/0./
+      REAL (kind=4) ::  ANNUAL_ECO_PUCH_ENRG/0./
+      REAL (kind=4) ::  UNECONOMIC_RATE
 !
-      SAVE DX,PEAK,DEMAND
+      REAL (kind=8) ::  MONTHLY_HEAT
+      CHARACTER (len=20) ::  MONTH_NAME
+      REAL (kind=8) ::  MONTH_BTUS_GOCN12(0:6)
+      REAL (kind=4) ::  MONTHLY_TRANS_CAPACITY
+      REAL (kind=4) ::  MONTHLY_TRANS_EFFECTIVE_CAP
+      REAL (kind=4) ::  MONTHLY_TRANS_AVAIL_CAP
+      REAL (kind=4) ::  MONTHLY_TRANS_ENERGY
+      REAL (kind=4) ::  MONTHLY_TRANS_VAR_COST
+      REAL (kind=4) ::  MONTHLY_UNIT_EMISSIONS(5)
+      REAL (kind=4) ::  MONTHLY_TRANS_FIXED_COST
+      REAL (kind=4) ::  MONTHLY_ECO_SALES/0./
+      REAL (kind=4) ::  MONTHLY_ECO_SALES_ENRG/0./
+      REAL (kind=4) ::  MONTHLY_DERIV_ECO_SALES/0./
+      REAL (kind=4) ::  MONTHLY_DERIV_ECO_SALES_ENRG/0./
+      REAL (kind=4) ::  MONTHLY_ECO_PUCH/0./
+      REAL (kind=4) ::  MONTHLY_ECO_PUCH_ENRG/0./
+      REAL (kind=4) ::  TOTAL_UNIT_COST
+      REAL (kind=4) ::  AVE_REV_FROM_SALES
+      REAL (kind=4) ::  REVENUE_GENERATING_CAPACITY(MAX_CL_UNITS)
+      REAL (kind=4) ::  TRANS_EQUIV_AVAIL
+      REAL (kind=4) ::  TRANS_CAP_FACTOR
+      REAL (kind=4) ::  ANNUAL_REV_GEN_CAPACITY(MAX_CL_UNITS)
+      REAL (kind=4) ::  FISCAL_REV_GEN_CAPACITY(MAX_CL_UNITS)
+      REAL (kind=4) ::  ANNUAL_UNIT_EMISSIONS_COST(MAX_CL_UNITS,5)
+      REAL (kind=4) ::  ANNUAL_EFFECTIVE_CAP(MAX_CL_UNITS)
+      REAL (kind=4) ::  FISCAL_EFFECTIVE_CAP(MAX_CL_UNITS)
+      REAL (kind=4) ::  ANNUAL_CAP(MAX_CL_UNITS)
+      REAL (kind=4) ::  AllHoursMonth(MAX_CL_UNITS)
+      REAL (kind=4) ::  CapHours(MAX_CL_UNITS)
+      REAL (kind=4) ::  EffectiveCapHours(MAX_CL_UNITS)
+      REAL (kind=4) ::  AvailHoursMonth(MAX_CL_UNITS)
+      REAL (kind=4) ::  TransAllHoursMonth(:)
+      REAL (kind=4) ::  TransCapHours(:)
+      REAL (kind=4) ::  TransEffectiveCapHours(:)
+      REAL (kind=4) ::  TransAvailHoursMonth(:)
+      REAL (kind=4) ::  LOCAL_YEAR
+      REAL (kind=4) ::  TEMP_YEAR
+      REAL (kind=4) ::  FISCAL_CAP(MAX_CL_UNITS)
+      REAL (kind=4) ::  FISCAL_CL_UNIT_ENERGY(MAX_CL_UNITS)
+      REAL (kind=4) ::  FISCAL_CL_UNIT_FUEL_COST(MAX_CL_UNITS)
+      REAL (kind=4) ::  FISCAL_CL_UNIT_VAR_COST(MAX_CL_UNITS)
+      REAL (kind=4) ::  FISCAL_CL_UNIT_FIXED_COST(MAX_CL_UNITS)
+      REAL (kind=4) ::  ANNUAL_P_FUEL_CONSUMPTION(MAX_CL_UNITS)
+      REAL (kind=4) ::  ANNUAL_S_FUEL_CONSUMPTION(MAX_CL_UNITS)
+      REAL (kind=4) ::  ANNUAL_E_FUEL_CONSUMPTION(MAX_CL_UNITS)
+      REAL (kind=4) ::  ANNUAL_WHOLESALE_PROD_COST(MAX_CL_UNITS)
+      REAL (kind=4) ::  ANNUAL_NOX_SEASON_EMISSIONS(MAX_CL_UNITS)
+      REAL (kind=4) ::  ANNUAL_NOX_SEASON_THERMAL(MAX_CL_UNITS)
+      REAL (kind=4) ::  FISCAL_P_FUEL_CONSUMPTION(MAX_CL_UNITS)
+      REAL (kind=4) ::  FISCAL_S_FUEL_CONSUMPTION(MAX_CL_UNITS)
+      REAL (kind=4) ::  FISCAL_E_FUEL_CONSUMPTION(MAX_CL_UNITS)
+      REAL (kind=4) ::  FISCAL_WHOLESALE_PROD_COST(MAX_CL_UNITS)
+      REAL (kind=4) ::  FISCAL_NOX_SEASON_EMISSIONS(MAX_CL_UNITS)
+      REAL (kind=4) ::  FISCAL_NOX_SEASON_THERMAL(MAX_CL_UNITS)
+      REAL (kind=4) ::  FISCAL_CL_UNIT_EMISSIONS(5,MAX_CL_UNITS)
+      REAL (kind=4) ::  FISCAL_UNIT_EMISSIONS_COST(MAX_CL_UNITS,5)
+      REAL (kind=4) ::  FISCAL_ECO_SALES_REV_FROM(MAX_CL_UNITS)
+      REAL (kind=4) ::  FISCAL_ECO_SALES_ENRG_FROM(MAX_CL_UNITS)
+      REAL (kind=4) ::  FISCAL_ECO_PUCH_COST_FROM(MAX_CL_UNITS)
+      REAL (kind=4) ::  FISCAL_ECO_PUCH_ENRG_FROM(MAX_CL_UNITS)
+      REAL (kind=4) ::  MONTHLY_P_HEAT
+      REAL (kind=4) ::  MONTHLY_S_HEAT
+      REAL (kind=4) ::  MONTHLY_E_HEAT
+      REAL (kind=8) ::  MONTHLY_TRANS_HEAT
+      REAL (kind=8) ::  MONTHLY_TRANS_FUEL_COST
+      REAL (kind=8) ::  FISCAL_CL_UNIT_MMBTUS(MAX_CL_UNITS)
+! NDIM DETAILED REPORTS. 12/2/93.
+      LOGICAL (kind=1) ::  MON_CL_REPORT_NOT_OPEN/.TRUE./
+      LOGICAL (kind=1) ::  MON_CT_REPORT_NOT_OPEN/.TRUE./
+      LOGICAL (kind=1) ::  TRANS_REPORT_NOT_OPEN/.TRUE./
+      LOGICAL (kind=1) ::  MON_SUMMARY_REPORT_NOT_OPEN/.TRUE./
+      LOGICAL (kind=1) ::  MONTHLY_CONTRACT_REPORT_ACTIVE
+      LOGICAL (kind=1) ::  ANNUAL_CONTRACT_REPORT_ACTIVE
+      LOGICAL (kind=1) ::  TRANS_GROUP_REPORTING_ACTIVE(:)
+      LOGICAL (kind=1) ::  REPORT_MARKET_AREA
+      LOGICAL (kind=1) ::  GET_REPORT_CL_CAPACITY
+      LOGICAL (kind=1) ::  REPORT_THIS_CL_UNIT
+      ALLOCATABLE :: TRANS_GROUP_REPORTING_ACTIVE
 !
-      REAL (kind=4) ::  TEMP_INTERVALS,TEMP_VALUE
-      LOGICAL (kind=1) ::  SET_POINTS
-!
-      INTEGER (kind=2) ::  CURRENT_MONTH
+      SAVE           TRANS_GROUP_REPORTING_ACTIVE,
+     +               ANNUAL_UNIT_EMISSIONS_COST,
+     +               FISCAL_UNIT_EMISSIONS_COST,
+     +               ANNUAL_UNIT_STARTS,
+     +               FISCAL_UNIT_STARTS,
+     +               ANNUAL_CAPITAL_COST_OF_BUILD,
+     +               ANNUAL_EBITDA,
+     +               FISCAL_CAPITAL_COST_OF_BUILD,
+     +               FISCAL_EBITDA,
+     +               ANNUAL_UNIT_START_COSTS,
+     +               ANNUAL_UNIT_CAPACITY_REVENUE,
+     +               FISCAL_UNIT_START_COSTS
+      CHARACTER (len=1) ::  CONTRACT_REPORT
+      INTEGER (kind=2) ::  MON_CL_UNIT_NO
+      INTEGER (kind=2) ::  MON_CL_UNIT_HEADER
+      INTEGER (kind=2) ::  MON_CL_TRANS_UNIT_NO
+      INTEGER (kind=2) ::  MON_CL_TRANS_UNIT_HEADER
+      INTEGER (kind=2) ::  MON_DV_TRANS_UNIT_NO
+      INTEGER (kind=2) ::  MON_DV_TRANS_UNIT_HEADER
+      INTEGER (kind=2) ::  MON_NU_TRANS_UNIT_NO
+      INTEGER (kind=2) ::  MON_NU_TRANS_UNIT_HEADER
+      INTEGER (kind=2) ::  MON_CL_SUM_NO
+      INTEGER (kind=2) ::  MON_CL_SUMMARY_HEADER
+      INTEGER (kind=2) ::  MON_CT_UNIT_NO
+      INTEGER (kind=2) ::  MON_CT_UNIT_HEADER
       INTEGER (kind=2) ::  LAST_SEASON/0/
       INTEGER (kind=2) ::  PRODUCTION_PERIODS
-      INTEGER (kind=2) ::  CURRENT_YEAR
-      CHARACTER (len=9) ::  CL_MONTH_NAME(13)
-      CHARACTER (len=20) ::  MONTH_NAME
+      INTEGER (kind=2) ::  MAX_TRANS_GROUP_NUMBER/0/
+      INTEGER (kind=2) ::  GET_MAX_TRANS_GROUP_NUMBER
+      INTEGER (kind=2) ::  TRANSACTION_GROUP
+      INTEGER (kind=2) ::  TP
+      INTEGER (kind=2) ::  TRANS_FUEL_VARIABLES
+      INTEGER (kind=2) ::  _            TRANS_PROD_VARIABLES
+      INTEGER ::  CL_TRANS_UNIT_REC_LEN
+      INTEGER ::  DV_TRANS_UNIT_REC_LEN
+      INTEGER ::  NU_TRANS_UNIT_REC_LEN
+      INTEGER ::  MON_PW_TRANS_UNIT_REC/0/
+      REAL ::  N_A/-999999./
+      REAL ::  TOTAL_PRODUCTION_COSTS
+      REAL ::  AVERAGE_PRODUCTION_COSTS
+      REAL ::  DIVIDE_BY_ENRG
+      REAL ::  AVERAGE_TOTAL_COST
+      REAL ::  MONTHLY_REPORTING_CAPACITY
+      REAL ::  MONTHLY_CONTRACT_CAPACITY
+      REAL ::  MONTHLY_MINIMUM_CAPACITY
+      REAL ::  MONTHLY_ENRG
+      REAL ::  MONTHLY_CONTRACT_VARIABLE_COST
+      REAL ::  MONTHLY_CONTRACT_AVE_VAR_COST
+      REAL ::  MONTHLY_CNTR_MAX_FIXED_COST
+      REAL ::  MONTHLY_CNTR_MIN_FIXED_COST
+      REAL ::  MONTHLY_TOTAL_FIXED_COST
+      REAL ::  MONTHLY_TOTAL_CONTRACT_COST
+      REAL ::  MONTHLY_AVERAGE_TOTAL_COST
+      REAL ::  MONTHLY_CNTR_EMISSIONS
+      REAL ::  ANNUAL_REPORTING_CAPACITY
+      REAL ::  ANNUAL_CNTR_CAPACITY
+      REAL ::  ANNUAL_MINIMUM_CAPACITY
+      REAL ::  ANNUAL_ENRG
+      REAL ::  ANNUAL_CNTR_VARIABLE_COST
+      REAL ::  ANNUAL_CONTRACT_AVE_VAR_COST
+      REAL ::  ANNUAL_CNTR_MAX_FIXED_COST
+      REAL ::  ANNUAL_CNTR_MIN_FIXED_COST
+      REAL ::  ANNUAL_TOTAL_FIXED_COST
+      REAL ::  ANNUAL_TOTAL_CONTRACT_COST
+      REAL ::  ANNUAL_AVERAGE_TOTAL_COST
+      REAL ::  ANNUAL_CNTR_EMISSIONS
+      REAL ::  TRANS_TOTAL_GROSS_MARGIN
+      REAL ::  R_TRANS_GROSS_MARGIN
+      REAL ::  REAL_FUEL_COST
+      REAL ::  VOM_COST
+      REAL ::  UNIT_GROSS_MARGIN
+      REAL ::  SAVE_ANNUAL_GROSS_MARGIN
+      REAL ::  INIT_ANNUAL_GROSS_MARGIN
+      REAL ::  TEMP_R4
+      REAL ::  CO2_COST
+      REAL ::  CAP_COST
 !
-!     END OF DATA DECLARATIONS
+      CHARACTER (len=9) ::  CL_MONTH_NAME(14)
+     +                         /'January  ','February ',
+     +                          'March    ','April    ',
+     +                          'May      ','June     ',
+     +                          'July     ','August   ',
+     +                          'September','October  ',
+     +                          'November ','December ',
+     +                          'Annual   ','Fiscal Yr'/
+      CHARACTER (len=3) ::  THREE_CHAR_MONTH_NAMES
+      CHARACTER (len=3) ::  PA_CHAR_NUM
+      CHARACTER (len=3) ::  CM_CHAR_NUM
+      SAVE     MON_CL_UNIT_NO,
+     +         MON_CL_TRANS_UNIT_NO,
+     +         MON_DV_TRANS_UNIT_NO,
+     +         MON_NU_TRANS_UNIT_NO,
+     +         MON_CL_SUM_NO,
+     +         CL_MONTH_NAME,
+     +         MON_CT_UNIT_NO,
+     +         ANNUAL_REPORTING_CAPACITY,
+     +         ANNUAL_CNTR_CAPACITY,
+     +         ANNUAL_MINIMUM_CAPACITY,
+     +         ANNUAL_ENRG,
+     +         ANNUAL_CNTR_VARIABLE_COST,
+     +         ANNUAL_CONTRACT_AVE_VAR_COST,
+     +         ANNUAL_CNTR_MAX_FIXED_COST,
+     +         ANNUAL_CNTR_MIN_FIXED_COST,
+     +         ANNUAL_TOTAL_FIXED_COST,
+     +         ANNUAL_TOTAL_CONTRACT_COST,
+     +         ANNUAL_AVERAGE_TOTAL_COST,
+     +         ANNUAL_CNTR_EMISSIONS,
+     +         ANNUAL_REV_GEN_CAPACITY,
+     +         FISCAL_REV_GEN_CAPACITY,
+     +         ANNUAL_EFFECTIVE_CAP,
+     +         FISCAL_EFFECTIVE_CAP,
+     +         MONTHS_ACTIVE,
+     +         FISCAL_MONTHS_ACTIVE,
+     +         ANNUAL_CAP,
+     +         AllHoursMonth,
+     +         CapHours,
+     +         EffectiveCapHours,
+     +         AvailHoursMonth,
+     +         FISCAL_CAP,
+     +         FISCAL_CL_UNIT_ENERGY,
+     +         FISCAL_CL_UNIT_MMBTUS,
+     +         FISCAL_CL_UNIT_VAR_COST,
+     +         FISCAL_CL_UNIT_FIXED_COST,
+     +         FISCAL_CL_UNIT_FUEL_COST,
+     +         ANNUAL_P_FUEL_CONSUMPTION,
+     +         ANNUAL_S_FUEL_CONSUMPTION,
+     +         ANNUAL_E_FUEL_CONSUMPTION,
+     +         ANNUAL_WHOLESALE_PROD_COST,
+     +         ANNUAL_NOX_SEASON_EMISSIONS,
+     +         ANNUAL_NOX_SEASON_THERMAL,
+     +         FISCAL_P_FUEL_CONSUMPTION,
+     +         FISCAL_S_FUEL_CONSUMPTION,
+     +         FISCAL_E_FUEL_CONSUMPTION,
+     +         FISCAL_WHOLESALE_PROD_COST,
+     +         FISCAL_NOX_SEASON_EMISSIONS,
+     +         FISCAL_NOX_SEASON_THERMAL
+      INTEGER ::  MON_CT_UNIT_REC
+      INTEGER ::  MON_CL_SUM_REC
+      INTEGER ::  MON_CL_UNIT_REC
+      INTEGER ::  MON_CL_TRANS_UNIT_REC
+      INTEGER ::  MON_DV_TRANS_UNIT_REC
+      INTEGER ::  MON_NU_TRANS_UNIT_REC
+      INTEGER ::  TRANS_FUEL_REC
+      INTEGER ::  TRANS_STATE_REC
+      INTEGER ::  TRAN_PROD_FUEL_REC
+      SAVE MON_CT_UNIT_REC,MON_CL_SUM_REC,MON_CL_UNIT_REC,
+     +     MON_CL_TRANS_UNIT_REC,
+     +     MON_DV_TRANS_UNIT_REC,
+     +     MON_NU_TRANS_UNIT_REC,
+     +     TRANS_FUEL_REC,
+     +     TRAN_PROD_FUEL_REC
 !
 !
+      REAL ::  RATCHET_CAPACITY_BASIS(NUMBER_OF_CONTRACTS)
+      REAL ::  MIN_RATCHET_CAPACITY(NUMBER_OF_CONTRACTS)
 !
-      CURRENT_YEAR = BASE_YEAR + YEAR
+
 !
+      REAL ::  FUEL_MIX_PRIM(MAX_CL_UNITS)
 !
-      BASE_ADJUSTMENT = -999.
-      INTERVALS = LOAD_POINTS/2 + 1
-      DX =
-     +           MAX((MAX_TRANS_LOAD-MIN_TRANS_LOAD)/FLOAT(INTERVALS-1),
-     +                                                             0.01)
-      POINTS_IN_CURVE = LOAD_POINTS
-      COUNT = LOAD_POINTS
-!
-      PEAK = MAX_TRANS_LOAD
-      BASE = MIN_TRANS_LOAD
-!
-      DO I = 1, LOAD_POINTS
-         ENERGY(I)= 0.
-         OBS(I) = 0.
-         LPROB(I) = 0.
-      ENDDO
-      LPROB(1) = 1.
-!
-      LODDUR(1) = BASE
-      COUNT = 1
-      DOWHILE (LODDUR(COUNT) <
-     +                    PEAK .AND. COUNT + 2 <= LOAD_POINTS )
-         COUNT = COUNT + 2
-         LODDUR(COUNT) = LODDUR(COUNT-2) + DX
-      ENDDO
-      IF(LODDUR(COUNT) < PEAK) THEN
-         TEMP_VALUE = LODDUR(COUNT) - PEAK
-      ENDIF
-      IF(PEAK - LODDUR(COUNT-2) < .0001*DX)
-     +                                                COUNT = COUNT - 2
-      LODDUR(COUNT) = PEAK
-      POINTS_IN_CURVE = COUNT
-      IMAX = COUNT
-      INTERVALS = COUNT/2 + 1
-      IPEAK = INTERVALS - 1
-      DO I = COUNT + 1, LOAD_POINTS
-         LODDUR(I) = LODDUR(I-1) + DX
-      ENDDO
-!
-!     PLACES TRANS LOADS INTO LOAD_POINTS/2 - 1 INTERVALS
-!
-      DO HR = 1,HOURS_INCREMENT
-         IF(TRANS_LOAD(HR) .GE. BASE) THEN
-            I = AINT((TRANS_LOAD(HR) +.0001 - BASE)/DX) + 1
-            IF(I.GT.IPEAK) I = IPEAK
-            OBS(I) = OBS(I) + 1.
-            ENERGY(I) = ENERGY(I) + TRANS_LOAD(HR)
-         ENDIF
-      ENDDO
+
 !
 !
-      MIN_LPROB = 1./FLOAT(HOURS_INCREMENT)
-      OBSERVATIONS = 0.
-      DO I = 2 , INTERVALS
-         COUNT = 2*(I) - 2
-         OBSERVATIONS = OBSERVATIONS + OBS(I-1)
-         DELTA_PROB = 1. - OBSERVATIONS/FLOAT(HOURS_INCREMENT)
+      CHARACTER (len=35) ::  MULTI_AREA_NAME(:),GET_GROUP_NAME
+      INTEGER (kind=2) ::  J
+      INTEGER (kind=2) ::  K
+      INTEGER (kind=2) ::  MAX_LOAD_TYPES
+      INTEGER (kind=2) ::  MFT1
+      INTEGER (kind=2) ::  TFT
+      INTEGER (kind=2) ::  TRANS_FUEL_NO/0/
+      INTEGER (kind=2) ::  TRANSACT_FUEL_RPT_HEADER
+      INTEGER (kind=2) ::  TRANS_STATE_NO/0/
+      INTEGER (kind=2) ::  TRANSACT_STATE_RPT_HEADER
+      INTEGER (kind=2) ::  MAX_STATE_PROVINCE_NO/0/
+      INTEGER (kind=2) ::  GET_MAX_STATE_PROVINCE_NO
+      INTEGER (kind=2) ::  MAX_GROUP_VAR/17/
+      INTEGER (kind=2) ::  MAX_GAS_REGION_NO/500/
+      INTEGER (kind=2) ::  GSP
+      INTEGER (kind=2) ::  TRANSACT_PROD_RPT_HEADER
+      INTEGER (kind=2) ::  TRAN_PROD_FUEL_NO/0/
+      INTEGER (kind=2) ::  TRAN_PROD_FUEL_RPT_HEADER
+      INTEGER (kind=2) ::  FT
+      INTEGER (kind=2) ::  GET_PRIMARY_MOVER
+      INTEGER (kind=2) ::  SD
+      INTEGER (kind=2) ::  TG_POSITION
+      INTEGER (kind=2) ::  GET_TRANS_GROUP_POSITION
+      INTEGER (kind=2) ::  GET_TRANS_STATE_INDEX
+      INTEGER (kind=2) ::  GET_TRANS_GROUP_INDEX
+      INTEGER (kind=2) ::  RETURN_CL_UNITS_B4_ADDITIONS
+      INTEGER (kind=2) ::  CL_UNITS_B4_ADDITIONS
+      INTEGER (kind=2) ::  GET_PA_FROM_TG
+      INTEGER (kind=2) ::  GET_CM_FROM_TG
+      INTEGER (kind=2) ::  NUM_MONTHLY_TRANSACTIONS
+      INTEGER (kind=2) ::  GET_NUM_MONTHLY_TRANSACTIONS
+      INTEGER (kind=2) ::  GET_NUM_SCENARIO_TRANSACTIONS
+      INTEGER (kind=2) ::  NUM_TRANSACTIONS/0/
+      INTEGER (kind=2) ::  GET_NUM_ANNUAL_TRANSACTIONS
+      INTEGER (kind=2) ::  GET_NUM_FISCAL_TRANSACTIONS
+      INTEGER (kind=2) ::  R_MK
+! 061207. max_prod_types_clr: ADDED STORAGE AS 18 ! 112220. ADDED DG POSITION 19.
+! 112920. MFT1=14 FOR DG (?).
+      PARAMETER(MAX_LOAD_TYPES=4, MFT1=16)
+      INTEGER (kind=4) ::  VALUES_2_ZERO
+      real, allocatable ::
+     +   ANNUAL_FUEL_COST_BY_TG_BY_FUEL(:,:) ! ACCUMULATE BY TRANSACTION GROUP AND FUEL TYPE
+      REAL ::  P_FUEL_CONSUMPTION
+      REAL ::  S_FUEL_CONSUMPTION
+      REAL ::  E_FUEL_CONSUMPTION
+      REAL ::  SINGLE_FUEL_COST
+      REAL ::  RETURN_PROD_BY_MK_BY_MWH(3)
+      REAL ::  R_NG_BTUS_BY_GSP_BY_FUEL(3)
+      REAL ::  BLOCK_FUEL_COST(2,MAX_CL_UNITS)
+      REAL ::  FUEL_COST_BY_SP_BY_FUEL(:,:)
+      REAL ::  ANNUAL_FUEL_COST_BY_SP_BY_FUEL(:,:)
+      REAL ::   GROUP_VAR_BY_SP(:,:)
+      REAL ::  ANNUAL_GROUP_VAR_BY_SP(:,:)
+      REAL ::   FUEL_COST_BY_TG_BY_FUEL(:,:)
+      REAL ::  PROD_BY_MK_BY_MWH(:,:)
+      REAL ::  ANNUAL_PROD_BY_MK_BY_MWH(:,:)
+      REAL ::   FUEL_BTUS_BY_TG_BY_FUEL(:,:)
+      REAL ::  ANNUAL_FUEL_BTUS_BY_TG_BY_FUEL(:,:)
+      REAL ::   FUEL_BTUS_BY_SP_BY_FUEL(:,:)
+      REAL ::  ANNUAL_FUEL_BTUS_BY_SP_BY_FUEL(:,:)
+      REAL ::   FUEL_BTUS_BY_GSP_BY_FUEL(:,:)
+      REAL ::  ANNUAL_FUEL_BTUS_BY_GSP_BY_FUEL(:,:)
+      REAL ::  FUEL_COST_PER_MMBTU(:)
+      REAL ::  PRIM_MOVER_CONVERSION(max_fuel_types_clr)
+     +                /0.04545455,0.970874,0.1724138,
+     +                 0.000025,1.0,1.0/,
+     +     FUEL_PRICE_CONVERSION,
+     +     CAP_MARKET_RATE,CAP_MARKET_FACTOR
+      REAL ::  PRIM_HEAT,SEC_HEAT,EMIS_HEAT
+      ALLOCATABLE ::
+     +     MULTI_AREA_NAME,
+     +     EMISSIONS_COST_BY_SP,
+     +     ANNUAL_EMISSIONS_COST_BY_SP,
+     +     FUEL_COST_PER_MMBTU,
+     +     FUEL_COST_BY_SP_BY_FUEL,
+     +     ANNUAL_FUEL_COST_BY_SP_BY_FUEL,
+     +     GROUP_VAR_BY_SP,
+     +     ANNUAL_GROUP_VAR_BY_SP,
+     +     FUEL_COST_BY_TG_BY_FUEL,
+     +     PROD_BY_MK_BY_MWH,
+     +     ANNUAL_PROD_BY_MK_BY_MWH, ! ACCUMULATE BY TRANSACTION GROUP AND PROD TYPE
+     +     FUEL_BTUS_BY_TG_BY_FUEL,
+     +     ANNUAL_FUEL_BTUS_BY_TG_BY_FUEL,
+     +     FUEL_BTUS_BY_SP_BY_FUEL,
+     +     ANNUAL_FUEL_BTUS_BY_SP_BY_FUEL,
+     +     FUEL_BTUS_BY_GSP_BY_FUEL,
+     +     ANNUAL_FUEL_BTUS_BY_GSP_BY_FUEL,
+     +     MONTHLY_UNIT_EMISSIONS_COST,
+     +     TransAllHoursMonth,
+     +     TransCapHours,
+     +     TransEffectiveCapHours,
+     +     TransAvailHoursMonth
+      SAVE MULTI_AREA_NAME,
+     +     EMISSIONS_COST_BY_SP,
+     +     ANNUAL_EMISSIONS_COST_BY_SP,
+     +     FUEL_COST_PER_MMBTU,
+     +     FUEL_COST_BY_SP_BY_FUEL,
+     +     ANNUAL_FUEL_COST_BY_SP_BY_FUEL,
+     +     GROUP_VAR_BY_SP,
+     +     ANNUAL_GROUP_VAR_BY_SP,
+     +     FUEL_COST_BY_TG_BY_FUEL,
+     +     ANNUAL_FUEL_COST_BY_TG_BY_FUEL,
+     +     PROD_BY_MK_BY_MWH,
+     +     ANNUAL_PROD_BY_MK_BY_MWH, ! ACCUMULATE BY TRANSACTION GROUP AND PROD TYPE
+     +     FUEL_BTUS_BY_TG_BY_FUEL,
+     +     ANNUAL_FUEL_BTUS_BY_TG_BY_FUEL,
+     +     FUEL_BTUS_BY_SP_BY_FUEL,
+     +     ANNUAL_FUEL_BTUS_BY_SP_BY_FUEL,
+     +     FUEL_BTUS_BY_GSP_BY_FUEL,
+     +     ANNUAL_FUEL_BTUS_BY_GSP_BY_FUEL
+      LOGICAL (kind=1) ::  CAP_MARKET_ACTIVE,CAP_MARKET_SALE
 !
 !
+      LOGICAL (kind=1) ::  MONTHLY_TRANS_REPORT
+      LOGICAL (kind=1) ::  ANNUAL_TRANS_REPORT
+      LOGICAL (kind=1) ::  TRANSACT_UNIT_MONTHLY_REPORT
+      LOGICAL (kind=1) ::  TRANSACT_UNIT_ANNUAL_REPORT
+      LOGICAL (kind=1) ::  TRANSACT_FUEL_REPORT_ACTIVE
+      LOGICAL (kind=1) ::  TRANSACT_FUEL_REPORT
+      LOGICAL (kind=1) ::  TRANS_FUEL_REPORT_NOT_OPEN/.TRUE./
+      LOGICAL (kind=1) ::  TRANS_PROD_REPORT_NOT_OPEN/.TRUE./
+      LOGICAL (kind=1) ::  DERIVATIVES_REPORT_NOT_OPEN/.TRUE./
+      LOGICAL (kind=1) ::  NEW_UNITS_REPORT_NOT_OPEN/.TRUE./
+
+      REAL (kind=4) ::  AVERAGE_NOX_RATE
+      REAL (kind=4) ::  AVERAGE_SOX_RATE
+      REAL (kind=4) ::  AVERAGE_CO2_RATE
+      REAL (kind=4) ::  AVERAGE_HG_RATE
+      REAL (kind=4) ::  AVERAGE_FUEL_COST
+      REAL (kind=4) ::  PW_AVE_FUEL_COST
+      REAL (kind=4) ::  DISP_COST_1
+      REAL (kind=4) ::  DISP_COST_2
+      REAL (kind=4) ::  AVERAGE_VAR_OM
+      REAL (kind=4) ::  TOTAL_NOX_HEAT
+      REAL (kind=4) ::  MONTHLY_NOX_SEASON_THERM
 !
-         IF(OBS(I-1) .LE. 0.) THEN
-            LPROB(COUNT+1) = LPROB(COUNT-1)
-            LPROB(COUNT) = LPROB(COUNT-1)
-            LODDUR(COUNT) =
-     +           (LODDUR(COUNT+1)+LODDUR(COUNT-1))/2.
+      CHARACTER (len=5) ::
+     +    CL_UNIQUE_RPT_STR !  THAT GETS A UNIQUE ID FOR THE UNIT
+      CHARACTER (len=10) ::  SAC_ONLINE_DATE,SAC_DATE
+      CHARACTER (len=16) ::  SAC_UNIT_NAME
+      CHARACTER (len=16) ::  GET_RUN_DATE_TIME,SAC_STATION_GROUP
+!
+! DETAILED REPORTING FOR ICAP.
+!
+      LOGICAL (kind=1) ::  MX_ICAP_SUMMARY_REPORT/.FALSE./
+      LOGICAL (kind=1) ::  MX_ICAP_REPORT_NOT_OPEN/.TRUE./
+      LOGICAL (kind=1) ::  MARGINAL_ICAP
+
+      INTEGER (kind=2) ::  MX_ICAP_REPORT_VARIABLES
+      INTEGER (kind=2) ::  MX_ICAP_ANNUAL_ALT_NO/0/
+      INTEGER (kind=2) ::  MX_ICAP_ANNUAL_HEADER
+      INTEGER (kind=2) ::  TEMP_POINTER
+      INTEGER (kind=2) ::  GET_POINTER_FOR_NEW_CL_UNIT
+      INTEGER (kind=2) ::  UPPER_TRANS_GROUP/1/
+      INTEGER (kind=2) ::  GET_NUMBER_OF_ACTIVE_GROUPS
+      INTEGER (kind=2) ::  PG/0/
+      INTEGER (kind=2) ::  CG/0/
+      INTEGER (kind=2) ::  GET_NUMBER_OF_PLANNING_GROUPS
+      INTEGER (kind=2) ::  GET_NUMBER_OF_CAPACITY_MARKETS
+      INTEGER (kind=2) ::  FIRST_MONTHLY_TRANSACT/0/
+      INTEGER (kind=2) ::  FIRST_LAST_MONTH_OF_TRANSACT
+      INTEGER (kind=2) ::  R_LAST_MONTH
+      INTEGER (kind=2) ::  GET_NEWGEN_INDEX
+      INTEGER (kind=2) ::  MIN_UPTIME
+      INTEGER (kind=2) ::  MIN_DOWNTIME
+      INTEGER (kind=2) ::  ICAP_MRX_USE_MARGINAL
+         REAL (kind=4) ::
+     +                  ICAP_TOTAL_CAPACITY(:),
+     +                  ICAP_TOTAL_MWH(:),
+     +                  ICAP_TOTAL_COST(:),
+     +                  ICAP_TOTAL_REVENUE(:),
+     +                  ICAP_LEVEL_CAPITAL_COST(:),
+     +                  ICAP_NET_MARGIN(:),
+     +                  ICAP_NET_MARGIN_PER_MWH(:),
+     +                  ICAP_NET_MARGIN_PER_KW(:),
+     +                  ICAP_CONE_VALUE,
+     +                  ICAP_MRX_EAS(:),
+     +                  ICAP_MRX_EAS_PER_KW,
+     +                  ICAP_VAR_COST(:),
+     +                  ICAP_FUEL_COST(:),
+     +                  ICAP_START_COST(:),
+     +                  ICAP_VOM_COST(:),
+     +                  ICAP_EMISSION_COST(:),
+     +                  ICAP_INSTL_CAPACITY_VALUE,
+     +                  ICAP_EAS_REVENUE_OFFSET,
+     +                  ICAP_ADJ_CAPACITY_VALUE,
+     +                  ICAP_MAX_MRX_OR_CONE,
+     +                  ICAP_RESERVE_MARGIN,
+     +                  ICAP_DEMAND_POINT,
+     +                  ICAP_VALUE_POINT,
+     +                  ICAP_MRX_CONE,
+     +                  ANNUAL_ICAP_CONE_VALUE(:),
+     +                  ANNUAL_ICAP_MAX_MRX_OR_CONE(:),
+     +                  ANNUAL_ICAP_RESERVE_MARGIN(:),
+     +                  ANNUAL_ICAP_INSTL_CAPACITY_VALUE(:),
+     +                  ANNUAL_ICAP_DEMAND_POINT(:),
+     +                  ANNUAL_ICAP_VALUE_POINT(:),
+     +                  ANNUAL_ICAP_MRX_CONE(:),
+     +                  ANNUAL_ICAP_MRX_EAS(:),
+     +                  ANNUAL_ICAP_FUEL_COST(:),
+     +                  ANNUAL_ICAP_START_COST(:),
+     +                  ANNUAL_ICAP_VOM_COST(:),
+     +                  ANNUAL_ICAP_EMISSION_COST(:),
+     +                  ANNUAL_ICAP_VAR_COST(:),
+     +                  ANNUAL_ICAP_EAS_REVENUE_OFFSET(:),
+     +                  ANNUAL_ICAP_ADJ_CAPACITY_VALUE(:),
+     +                  ANNUAL_ICAP_TOTAL_CAPACITY(:),
+     +                  ANNUAL_ICAP_PEAK_MONTH_CAP,
+     +                  MONTHLY_ICAP_TOTAL_CAPACITY(:,:),
+     +                  MONTHLY_ICAP_VALUE(:),
+     +                  ANNUAL_ICAP_TOTAL_MWH(:),
+     +                  ANNUAL_ICAP_TOTAL_COST(:),
+     +                  ANNUAL_ICAP_TOTAL_REVENUE(:),
+     +                  ANNUAL_ICAP_LEVEL_CAPITAL_COST(:),
+     +                  ANNUAL_ICAP_NET_MARGIN(:),
+     +                  ANNUAL_ICAP_NET_MARGIN_PER_MWH(:),
+     +                  ANNUAL_ICAP_NET_MARGIN_PER_KW(:),
+     +                  RETURN_SCREEN_CAP_COST,
+     +                  NEWGEN_UNIT_STATUS,
+     +                  ONLINE_DATE,
+     +                  OFLINE_DATE,
+     +                  SAC_ONLINE_MO,
+     +                  GET_MIN_UP_TIME,                         !TMS 30/23/05 ADDED FOR EXELON
+     +                  GET_MIN_DOWN_TIME,                        !TMS 30/23/05 ADDED FOR EXELON
+     +                  MRX_CAPACITY,
+     +                  MRX_ENERGY,
+     +                  MRX_TOTAL_REVENUE,
+     +                  MRX_TOTAL_VARIABLE,
+     +                  MRX_FUEL,
+     +                  MRX_VOM,
+     +                  MRX_EMISSIONS,
+     +                  MRX_TOTAL_COST,
+     +                  MRX_ANN_CAP_COST,
+     +                  MRX_NET_MARGIN_MM,
+     +                  MRX_NET_MARGIN_PER_MWH,
+     +                  MRX_NET_MARGIN_PER_KWMO,
+     +                  MRX_CONE_PER_KWMO,
+     +                  MRX_EAS_REV_PER_KWMO,
+     +                  MRX_ICAP_VALUE_POINT
+!      CHARACTER*35      GET_GROUP_NAME
+      ALLOCATABLE ::
+     +                  ICAP_TOTAL_CAPACITY,
+     +                  ICAP_TOTAL_MWH,
+     +                  ICAP_TOTAL_COST,
+     +                  ICAP_TOTAL_REVENUE,
+     +                  ICAP_LEVEL_CAPITAL_COST,
+     +                  ICAP_NET_MARGIN,
+     +                  ICAP_NET_MARGIN_PER_MWH,
+     +                  ICAP_NET_MARGIN_PER_KW,
+     +                  ICAP_MRX_EAS,
+     +                  ICAP_VAR_COST,
+     +                  ICAP_FUEL_COST,
+     +                  ICAP_START_COST,
+     +                  ICAP_VOM_COST,
+     +                  ICAP_EMISSION_COST,
+     +                  ANNUAL_ICAP_CONE_VALUE,
+     +                  ANNUAL_ICAP_MAX_MRX_OR_CONE,
+     +                  ANNUAL_ICAP_RESERVE_MARGIN,
+     +                  ANNUAL_ICAP_INSTL_CAPACITY_VALUE,
+     +                  ANNUAL_ICAP_DEMAND_POINT,
+     +                  ANNUAL_ICAP_VALUE_POINT,
+     +                  ANNUAL_ICAP_MRX_CONE,
+     +                  ANNUAL_ICAP_MRX_EAS,
+     +                  ANNUAL_ICAP_VAR_COST,
+     +                  ANNUAL_ICAP_FUEL_COST,
+     +                  ANNUAL_ICAP_START_COST,
+     +                  ANNUAL_ICAP_VOM_COST,
+     +                  ANNUAL_ICAP_EMISSION_COST,
+     +                  ANNUAL_ICAP_EAS_REVENUE_OFFSET,
+     +                  ANNUAL_ICAP_ADJ_CAPACITY_VALUE,
+     +                  ANNUAL_ICAP_TOTAL_CAPACITY,
+     +                  MONTHLY_ICAP_TOTAL_CAPACITY,
+     +                  MONTHLY_ICAP_VALUE,
+     +                  ANNUAL_ICAP_TOTAL_MWH,
+     +                  ANNUAL_ICAP_TOTAL_COST,
+     +                  ANNUAL_ICAP_TOTAL_REVENUE,
+     +                  ANNUAL_ICAP_LEVEL_CAPITAL_COST,
+     +                  ANNUAL_ICAP_NET_MARGIN,
+     +                  ANNUAL_ICAP_NET_MARGIN_PER_MWH,
+     +                  ANNUAL_ICAP_NET_MARGIN_PER_KW
+      INTEGER ::  MX_ICAP_ANNUAL_ALT_REC
+      SAVE MX_ICAP_ANNUAL_ALT_REC,
+     +                  ICAP_TOTAL_CAPACITY,
+     +                  ICAP_TOTAL_MWH,
+     +                  ICAP_TOTAL_COST,
+     +                  ICAP_TOTAL_REVENUE,
+     +                  ICAP_LEVEL_CAPITAL_COST,
+     +                  ICAP_NET_MARGIN,
+     +                  ICAP_NET_MARGIN_PER_MWH,
+     +                  ICAP_NET_MARGIN_PER_KW,
+     +                  ICAP_MRX_EAS,
+     +                  ICAP_VAR_COST,
+     +                  ICAP_FUEL_COST,
+     +                  ICAP_START_COST,
+     +                  ICAP_VOM_COST,
+     +                  ICAP_EMISSION_COST,
+     +                  ANNUAL_ICAP_CONE_VALUE,
+     +                  ANNUAL_ICAP_MAX_MRX_OR_CONE,
+     +                  ANNUAL_ICAP_RESERVE_MARGIN,
+     +                  ANNUAL_ICAP_INSTL_CAPACITY_VALUE,
+     +                  ANNUAL_ICAP_DEMAND_POINT,
+     +                  ANNUAL_ICAP_VALUE_POINT,
+     +                  ANNUAL_ICAP_MRX_CONE,
+     +                  ANNUAL_ICAP_MRX_EAS,
+     +                  ANNUAL_ICAP_FUEL_COST,
+     +                  ANNUAL_ICAP_START_COST,
+     +                  ANNUAL_ICAP_VOM_COST,
+     +                  ANNUAL_ICAP_EMISSION_COST,
+     +                  ANNUAL_ICAP_VAR_COST,
+     +                  ANNUAL_ICAP_EAS_REVENUE_OFFSET,
+     +                  ANNUAL_ICAP_ADJ_CAPACITY_VALUE,
+     +                  ANNUAL_ICAP_TOTAL_CAPACITY,
+     +                  MONTHLY_ICAP_TOTAL_CAPACITY,
+     +                  MONTHLY_ICAP_VALUE,
+     +                  ANNUAL_ICAP_TOTAL_MWH,
+     +                  ANNUAL_ICAP_TOTAL_COST,
+     +                  ANNUAL_ICAP_TOTAL_REVENUE,
+     +                  ANNUAL_ICAP_LEVEL_CAPITAL_COST,
+     +                  ANNUAL_ICAP_NET_MARGIN,
+     +                  ANNUAL_ICAP_NET_MARGIN_PER_MWH,
+     +                  ANNUAL_ICAP_NET_MARGIN_PER_KW,
+     +                  TransAllHoursMonth,
+     +                  TransCapHours,
+     +                  TransEffectiveCapHours,
+     +                  TransAvailHoursMonth
+      REAL (kind=4) ::  TOTAL_EMISSION_COSTS,PER_UNIT_EMISSION_COST
+! 031005
+      REAL (kind=4) ::  GET_WH_MONTH_ENERGY
+      REAL (kind=4) ::  TEMP_TL_MWH
+      REAL (kind=4) ::  ROR_CAPACITY
+      REAL (kind=4) ::  GET_MONTHLY_TL_HYDRO_MWH
+      REAL (kind=4) ::  TEMP_TL_HYDRO_MW
+      REAL (kind=4) ::  GET_SYSTEM_PROD_BY_TG_BY_MWH
+      REAL (kind=4) ::  GET_MONTHLY_TL_HYDRO_MW
+      REAL (kind=4) ::  GET_WH_MONTH_CAPACITY
+
+      real(kind=4) :: DebugValue
+      hesi_second_unit_id_num=0
+
+
+      MONTHLY_PW_REPORT = YES_POWERWORLD_REPORT()
+      MONTHLY_NEW_PW_REPORT = YES_POWERWORLD_NEW_REPORT()
+      REFERENCE_CASE_REPORT = YES_REFERENCE_CASE_REPORT()
+      CapEx_Running = YES_POWERWORLD_REPORT()
+      CL_UNITS_B4_ADDITIONS = RETURN_CL_UNITS_B4_ADDITIONS()
+
+      IF(MONTHLY_PW_REPORT .OR. MONTHLY_NEW_PW_REPORT) THEN
+         IF(MONTHLY_NEW_PW_REPORT) THEN
+            FILE_NAME = TRIM(XML_FILE_DIRECTORY())//
+     +                               'PWB'//TRIM(clData%Scename)//'.XML'
          ELSE
-            LODDUR(COUNT) = ENERGY(I-1)/OBS(I-1)
-            LPROB(COUNT+1) = DELTA_PROB
-            IF(LPROB(COUNT+1) <
-     +                            MIN_LPROB) LPROB(COUNT+1) = 0.
-            AREA = (ENERGY(I-1)-LODDUR(COUNT-1)*OBS(I-1))/
-     +         FLOAT(HOURS_INCREMENT) +
-     +         LPROB(COUNT+1)*
-     +                 (LODDUR(COUNT+1)-LODDUR(COUNT-1))
-            LPROB(COUNT) = (2*AREA -
-     +         (LPROB(COUNT-1)*
-     +                 (LODDUR(COUNT)-LODDUR(COUNT-1)) +
-     +         LPROB(COUNT+1)*
-     +             (LODDUR(COUNT+1)-LODDUR(COUNT)))  ) /
-     +         (LODDUR(COUNT+1)-LODDUR(COUNT-1))
-!
-            IF( ENERGY(I-1)/(OBS(I-1) * LODDUR(COUNT+1))
-     +                                  > .999999 ) THEN
-               LODDUR(COUNT) = LODDUR(COUNT+1)
-               IF(LODDUR(COUNT+1) < 10000) THEN
-                  LODDUR(COUNT+1) =
-     +                                    LODDUR(COUNT+1) + .001
-               ELSE
-                  LODDUR(COUNT+1) =
-     +                                     LODDUR(COUNT+1) + .01
-               ENDIF
+            clData%Scename=check_scename()
+
+            FILE_NAME = 'PWB'//TRIM(clData%Scename)//'.CSV'
+         ENDIF
+         IF(PW_REPORT_NOT_OPEN) THEN
+            OPEN(4444,FILE=FILE_NAME,ACCESS='DIRECT',
+     +                     FORM='FORMATTED',RECL=1024,STATUS='REPLACE')
+            PW_REPORT_NOT_OPEN = .FALSE.
+            IF(MONTHLY_NEW_PW_REPORT) THEN
+
+               WRITE(4444,4445,REC=1)
+     +               '<XMLIntegration>'//GET_RUN_DATE_TIME()
+               AVE_FUEL_MULT = 100.
+               LAST_RESOURCE_UPDATE_NO = CL_UNITS_B4_ADDITIONS
+            ELSE
+               AVE_FUEL_MULT = 1.
+               LAST_RESOURCE_UPDATE_NO = 30000
             ENDIF
-            IF(LPROB(COUNT) .GT. LPROB(COUNT-1)) THEN
-               LPROB(COUNT) = LPROB(COUNT-1)
-            ELSEIF(LPROB(COUNT) .LT.
-     +                                     LPROB(COUNT+1) ) THEN
-               LPROB(COUNT) = LPROB(COUNT+1)
+            WRITE(4444,4445,REC=2)
+     +               CRLF//'<NewStation COLUMNS='//
+     +               '"ENDPOINT,YEAR,MONTH,UNIT,'//
+     +               'EV_TRANS_AREA_NAME,'//
+     +               'TRANS_GROUP_ID,TRANS_GROUP_NAME,MIN_CAPACITY,'//
+     +               'TOTAL_CAPACITY,'//
+     +               'FIXED COST,AVERAGE_FUEL_COST,'//
+     +               'FUEL_TYPE,AVERAGE_VAR_COST,IOA,IOB,IOC,IOD,'//
+     +               'INSERVICE_STATUS,ONLINE_DATE,'//
+     +               'NOX_RATE,SOX_RATE,NO_COST,'//
+     +               'SOX_COST,START_UP_COST,MOR,FOR,DATE,'//
+     +            'STATIONGROUP,'//
+     +            'MINUP,MINDOWN,'//
+     +               'CO2_COST,CO2_RATE,HG_COST,HG_RATE">'
+            MON_PW_TRANS_UNIT_REC = RPTREC(4444_2,SAVE_REC=3,
+     +                     REC_LENGHT=1024_2,FILE_NAME=FILE_NAME)
+4445        FORMAT(4A)
+
+         ENDIF
+      ENDIF
+!
+      P_FUEL_CONSUMPTION = 0.
+      S_FUEL_CONSUMPTION = 0.
+      E_FUEL_CONSUMPTION = 0.
+      CNTR_ENRG = 0.
+      TOTAL_CONTRACT_COST = 0.
+      CANADA = COUNTRY() == 'C'
+      TONS_CONVERSION = GET_TONS_CONVERSION()
+      HEAT_CONVERSION = GET_HEAT_CONVERSION()
+
+
+      MONTHLY_BLOCK_REPORT = .FALSE.
+
+
+      MONTHLY_SUMMARY_REPORT_ACTIVE = .FALSE.
+
+
+      MONTHLY_CONTRACT_REPORT_ACTIVE = .FALSE.
+!
+      ANNUAL_CONTRACT_REPORT_ACTIVE = (CONTRACT_REPORT() == 'A' .OR.
+     +                               MONTHLY_CONTRACT_REPORT_ACTIVE)
+!
+      MONTHLY_TRANS_REPORT = TRANSACT_UNIT_MONTHLY_REPORT()
+      ANNUAL_TRANS_REPORT = TRANSACT_UNIT_ANNUAL_REPORT()
+      TRANSACT_FUEL_REPORT_ACTIVE = TRANSACT_FUEL_REPORT()
+      TRANSACT_PROD_REPORT_ACTIVE = TRANSACT_PROD_REPORT()
+!
+      DUKE_RESERVE_CAP_NO = GET_DUKE_RESERVE_CAP_NO()
+!
+      LAST_SEASON = PRODUCTION_PERIODS()
+      BEGIN_DATE = 100.*(BASE_YEAR+1-1900)
+! 11/26/02. GAT. AS REQUESTED FROM THE 2002 USERS GROUP MEETING.
+      DERIVATIVES_REPORT = MONTHLY_DERIVATIVES_ACTIVE()
+      SUPPRESS_DERIVATIVES = SUPPRESS_DERIVATIVES_ACTIVE()
+      NEW_UNITS_REPORT = NEW_UNITS_REPORT_ACTIVE()
+!
+      IF(MON_CT_REPORT_NOT_OPEN .AND.
+     +     (ANNUAL_CONTRACT_REPORT_ACTIVE .OR.
+     +                       MONTHLY_CONTRACT_REPORT_ACTIVE) .AND.
+     +                .NOT. TESTING_PLAN .AND. CONTRACTS_IN_PERIOD) THEN
+         MON_CT_REPORT_NOT_OPEN = .FALSE.
+         MON_CT_UNIT_NO = MON_CT_UNIT_HEADER(MON_CT_UNIT_REC)
+         IF(MON_SUMMARY_REPORT_NOT_OPEN) THEN
+            MON_CL_SUM_NO = MON_CL_SUMMARY_HEADER(MON_CL_SUM_REC)
+            MON_SUMMARY_REPORT_NOT_OPEN = .FALSE.
+
+         ENDIF
+      ENDIF
+      IF((MONTHLY_BLOCK_REPORT .OR. MONTHLY_SUMMARY_REPORT_ACTIVE) .AND.
+     +                         .NOT. TESTING_PLAN .AND. NBLOCK > 0) THEN
+         IF(MON_CL_REPORT_NOT_OPEN .AND. MONTHLY_BLOCK_REPORT) THEN
+            MON_CL_UNIT_NO = MON_CL_UNIT_HEADER(MON_CL_UNIT_REC)
+            MON_CL_REPORT_NOT_OPEN = .FALSE.
+         ENDIF
+         IF(MON_SUMMARY_REPORT_NOT_OPEN) THEN
+            MON_CL_SUM_NO = MON_CL_SUMMARY_HEADER(MON_CL_SUM_REC)
+            MON_SUMMARY_REPORT_NOT_OPEN = .FALSE.
+
+         ENDIF
+      ENDIF
+      IF( (MONTHLY_TRANS_REPORT .OR. ANNUAL_TRANS_REPORT .OR.
+     +          NEW_UNITS_REPORT .OR. DERIVATIVES_REPORT) .AND.
+     +                         .NOT. TESTING_PLAN .AND. NBLOCK > 0) THEN
+         IF(TRANS_REPORT_NOT_OPEN .AND.
+     +             (MONTHLY_TRANS_REPORT .OR. ANNUAL_TRANS_REPORT)) THEN
+!
+! VAR(37) = COST TO PRODUCE WHOLESALE POWER
+! VAR(38) = POWER GENERATED TO SERVE OWN LOADS
+! VAR(39) = REVENUE FROM NATIVE LOADS: PROVIDES A BETTER
+! VIEW OF GROSS MARGIN WITH 'W' SWITCH
+! VAR(44) = SUM OF EMISSION COSTS
+!
+
+            MON_CL_TRANS_UNIT_NO = MON_CL_TRANS_UNIT_HEADER(
+     +                  MON_CL_TRANS_UNIT_REC,MON_CL_TRANS_UNIT_VAR_NUM,
+     +                  CL_TRANS_UNIT_REC_LEN)
+!
+            TRANS_REPORT_NOT_OPEN = .FALSE.
+
+!
+         ENDIF
+!
+         MAX_TRANS_GROUP_NUMBER = GET_MAX_TRANS_GROUP_NUMBER()
+!
+         IF(ALLOCATED(TRANS_GROUP_REPORTING_ACTIVE))
+     +                          DEALLOCATE(TRANS_GROUP_REPORTING_ACTIVE)
+         ALLOCATE(
+     +         TRANS_GROUP_REPORTING_ACTIVE(
+     +                                   MAX(1,MAX_TRANS_GROUP_NUMBER)))
+         DO I = 1, MAX_TRANS_GROUP_NUMBER
+            TRANS_GROUP_REPORTING_ACTIVE(I) =
+     +                                         GET_REPORT_CL_CAPACITY(I)
+         ENDDO
+!
+      ENDIF
+!
+!
+! 11/26/02. DERIVATIVES REPORT FOR SRP AND OTHERS.
+!
+      IF( DERIVATIVES_REPORT .AND.
+     +                 DERIVATIVES_REPORT_NOT_OPEN .AND.
+     +                         .NOT. TESTING_PLAN .AND. NBLOCK > 0) THEN
+            DERIVATIVES_REPORT_NOT_OPEN = .FALSE.
+            MON_DV_TRANS_UNIT_VAR_NUM = MON_CL_TRANS_UNIT_VAR_NUM
+            MON_DV_TRANS_UNIT_NO = MON_DV_TRANS_UNIT_HEADER(
+     +                  MON_DV_TRANS_UNIT_REC,MON_DV_TRANS_UNIT_VAR_NUM,
+     +                  DV_TRANS_UNIT_REC_LEN)
+      ENDIF
+      IF(NEW_UNITS_REPORT .AND.
+     +                 NEW_UNITS_REPORT_NOT_OPEN .AND.
+     +                         .NOT. TESTING_PLAN .AND. NBLOCK > 0) THEN
+            NEW_UNITS_REPORT_NOT_OPEN = .FALSE.
+            MON_NU_TRANS_UNIT_VAR_NUM = MON_CL_TRANS_UNIT_VAR_NUM
+            MON_NU_TRANS_UNIT_NO = MON_NU_TRANS_UNIT_HEADER(
+     +                  MON_NU_TRANS_UNIT_REC,MON_NU_TRANS_UNIT_VAR_NUM,
+     +                  NU_TRANS_UNIT_REC_LEN)
+      ENDIF
+      IF( TRANSACT_FUEL_REPORT_ACTIVE .AND.
+     +                 TRANS_FUEL_REPORT_NOT_OPEN .AND.
+     +                         .NOT. TESTING_PLAN .AND. NBLOCK > 0) THEN
+         TRANS_FUEL_VARIABLES = 3*max_fuel_types_clr+1 ! 09/09/05 ! 4/30/02 FOR LGE
+         TRANS_FUEL_NO = TRANSACT_FUEL_RPT_HEADER(TRANS_FUEL_VARIABLES,
+     +                                                   TRANS_FUEL_REC)
+         I2_VARIABLE_NUMBER = TRANS_FUEL_VARIABLES +
+     +                              3*NUMBER_OF_EMISSION_TYPES +
+     +                              MAX_GROUP_VAR +
+     +                              RPS_STATE_VAR_NUM+
+     +                              NUM_RESOURCE_RPS_VARS
+         TRANS_STATE_NO = TRANSACT_STATE_RPT_HEADER(I2_VARIABLE_NUMBER,
+     +                                                  TRANS_STATE_REC)
+         TRANS_FUEL_REPORT_NOT_OPEN = .FALSE.
+      ENDIF
+!
+      IF( TRANSACT_PROD_REPORT_ACTIVE .AND.
+     +                 TRANS_PROD_REPORT_NOT_OPEN .AND.
+     +                         .NOT. TESTING_PLAN .AND. NBLOCK > 0) THEN
+         TRANS_PROD_VARIABLES = 2*max_prod_types_clr +
+     + MAX_LOAD_TYPES + 1
+         TRANS_PROD_NO = TRANSACT_PROD_RPT_HEADER(TRANS_PROD_VARIABLES,
+     +                                                   TRANS_PROD_REC)
+         TRANS_PROD_VARIABLES = 2*MFT1
+         TRAN_PROD_FUEL_NO =
+     +                   TRAN_PROD_FUEL_RPT_HEADER(TRANS_PROD_VARIABLES,
+     +                                               TRAN_PROD_FUEL_REC)
+         TRANS_PROD_REPORT_NOT_OPEN = .FALSE.
+      ENDIF
+!
+      YES_FISCAL_REPORTING = IS_FISCAL_YEAR_ACTIVE(FISCAL_SEASON_RESET,
+     +                                                      FISCAL_ONLY)
+!      FISCAL_ONLY = .TRUE.
+!      FISCAL_SEASON = 9
+!
+      IF(FISCAL_SEASON_RESET == 1) THEN
+         FISCAL_SEASON = LAST_SEASON
+      ELSE
+         FISCAL_SEASON = FISCAL_SEASON_RESET - 1
+      ENDIF
+!
+      LOCAL_YEAR = FLOAT(YEAR+BASE_YEAR)
+      TEMP_YEAR = FLOAT(YEAR+BASE_YEAR)
+!
+      IF(FISCAL_ONLY) THEN
+         IF(FISCAL_SEASON_RESET > 1 .AND.
+     +                                ISEAS >= FISCAL_SEASON_RESET) THEN
+            LOCAL_YEAR = FLOAT(YEAR+BASE_YEAR+1)
+         ENDIF
+      ENDIF
+      IF((YES_FISCAL_REPORTING .AND. ISEAS == FISCAL_SEASON_RESET) .OR.
+     +               (.NOT. YES_FISCAL_REPORTING .AND. ISEAS == 1)) THEN
+            FISCAL_REV_GEN_CAPACITY = 0.
+            FISCAL_EFFECTIVE_CAP = 0.
+            FISCAL_CAP = 0.
+            FISCAL_CL_UNIT_ENERGY = 0.
+!            DO I = 1, MAX_CL_UNITS
+               FISCAL_CL_UNIT_MMBTUS = 0.D0
+!            ENDDO
+            FISCAL_CL_UNIT_VAR_COST = 0.
+            FISCAL_CL_UNIT_FIXED_COST = 0.
+            FISCAL_CL_UNIT_FUEL_COST = 0.
+            FISCAL_P_FUEL_CONSUMPTION = 0.
+            FISCAL_S_FUEL_CONSUMPTION = 0.
+            FISCAL_E_FUEL_CONSUMPTION = 0.
+            FISCAL_WHOLESALE_PROD_COST = 0.
+            FISCAL_NOX_SEASON_EMISSIONS = 0.
+            FISCAL_NOX_SEASON_THERMAL = 0.
+            FISCAL_UNIT_STARTS = 0.
+            FISCAL_UNIT_START_COSTS = 0.
+            FISCAL_CAPITAL_COST_OF_BUILD = 0.
+            FISCAL_EBITDA = 0.
+            FISCAL_MONTHS_ACTIVE = 0.
+            FISCAL_CL_UNIT_EMISSIONS = 0.
+            FISCAL_UNIT_EMISSIONS_COST = 0.
+            FISCAL_ECO_SALES_REV_FROM = 0.
+            FISCAL_ECO_SALES_ENRG_FROM = 0.
+            FISCAL_ECO_PUCH_COST_FROM = 0.
+            FISCAL_ECO_PUCH_ENRG_FROM = 0.
+      ENDIF
+!
+! ALWAYS ACCUMULATE THE FUEL INFO.
+!
+
+         IF(ISEAS == 1) THEN
+            UPPER_TRANS_GROUP = GET_NUMBER_OF_ACTIVE_GROUPS()
+!
+            MAX_STATE_PROVINCE_NO = GET_MAX_STATE_PROVINCE_NO()
+!
+
+            CG = MAX(GET_NUMBER_OF_CAPACITY_MARKETS(),1)
+!
+            NUM_TRANSACTIONS = GET_NUM_SCENARIO_TRANSACTIONS()
+!
+            ANNUAL_UNIT_EMISSIONS_COST = 0.
+            ANNUAL_UNIT_STARTS = 0.
+            ANNUAL_CAPITAL_COST_OF_BUILD = 0.
+            ANNUAL_EBITDA = 0.
+            ANNUAL_UNIT_START_COSTS = 0.
+            ANNUAL_UNIT_CAPACITY_REVENUE = 0.
+!
+
+            RUN_TRANSACT = YES_RUN_TRANSACT()
+!
+            IF(ALLOCATED(ANNUAL_FUEL_COST_BY_TG_BY_FUEL)) THEN
+                DEALLOCATE(   ANNUAL_FUEL_COST_BY_TG_BY_FUEL,
+     +                        FUEL_COST_BY_TG_BY_FUEL)
+                DEALLOCATE(   ANNUAL_FUEL_COST_BY_SP_BY_FUEL,
+     +                        FUEL_COST_BY_SP_BY_FUEL)
+                DEALLOCATE(   MULTI_AREA_NAME)
+                DEALLOCATE(   ANNUAL_FUEL_BTUS_BY_TG_BY_FUEL)
+                DEALLOCATE(   FUEL_BTUS_BY_TG_BY_FUEL)
+                DEALLOCATE(   MW_BY_TG_BY_FUEL,
+     +                        ANNUAL_MW_BY_TG_BY_FUEL,
+     +                        MWH_BY_TG_BY_FUEL,
+     +                        ANNUAL_MWH_BY_TG_BY_FUEL)
+                DEALLOCATE(   ANNUAL_FUEL_BTUS_BY_SP_BY_FUEL)
+                DEALLOCATE(   FUEL_BTUS_BY_SP_BY_FUEL)
+                DEALLOCATE(   FUEL_BTUS_BY_GSP_BY_FUEL,
+     +                        ANNUAL_FUEL_BTUS_BY_GSP_BY_FUEL)
+                DEALLOCATE(   PROD_BY_TG_BY_MW)
+                DEALLOCATE(   ANNUAL_PROD_BY_TG_BY_MW)
+                DEALLOCATE(   PROD_BY_TG_BY_MWH)
+                DEALLOCATE(   ANNUAL_PROD_BY_TG_BY_MWH)
+                DEALLOCATE(   LOAD_BY_TG_BY_MWH)
+                DEALLOCATE(   ANNUAL_LOAD_BY_TG_BY_MWH)
+                DEALLOCATE(   PROD_BY_MK_BY_MWH)
+                DEALLOCATE(   ANNUAL_PROD_BY_MK_BY_MWH)
+                DEALLOCATE(   FUEL_COST_PER_MMBTU)
+                DEALLOCATE(   EMISSIONS_COST_BY_SP,
+     +                        ANNUAL_EMISSIONS_COST_BY_SP)
+                DEALLOCATE(   GROUP_VAR_BY_SP)
+                DEALLOCATE(   ANNUAL_GROUP_VAR_BY_SP)
+            ENDIF
+            ALLOCATE(
+     +         ANNUAL_FUEL_COST_BY_TG_BY_FUEL(
+     +               MAX(1,UPPER_TRANS_GROUP),max_fuel_types_clr),
+     +         FUEL_COST_BY_TG_BY_FUEL(
+     +               MAX(1,UPPER_TRANS_GROUP),max_fuel_types_clr),
+     +         ANNUAL_FUEL_COST_BY_SP_BY_FUEL(
+     +                    0:MAX_STATE_PROVINCE_NO,max_fuel_types_clr),
+     +         FUEL_COST_BY_SP_BY_FUEL(
+     +                    0:MAX_STATE_PROVINCE_NO,max_fuel_types_clr),
+     +         GROUP_VAR_BY_SP(
+     +                    0:MAX_STATE_PROVINCE_NO,MAX_GROUP_VAR),
+     +         ANNUAL_GROUP_VAR_BY_SP(
+     +                    0:MAX_STATE_PROVINCE_NO,MAX_GROUP_VAR),
+     +         EMISSIONS_COST_BY_SP(
+     +                    0:MAX_STATE_PROVINCE_NO,5),
+     +         ANNUAL_EMISSIONS_COST_BY_SP(
+     +                    0:MAX_STATE_PROVINCE_NO,5),
+     +         FUEL_COST_PER_MMBTU(max_fuel_types_clr),
+     +         ANNUAL_FUEL_BTUS_BY_TG_BY_FUEL(
+     +               MAX(1,UPPER_TRANS_GROUP),max_fuel_types_clr),
+     +         FUEL_BTUS_BY_TG_BY_FUEL(
+     +               MAX(1,UPPER_TRANS_GROUP),max_fuel_types_clr),
+     +         MW_BY_TG_BY_FUEL(
+     +               MAX(1,UPPER_TRANS_GROUP),MFT1),
+     +         ANNUAL_MW_BY_TG_BY_FUEL(
+     +               MAX(1,UPPER_TRANS_GROUP),MFT1),
+     +         MWH_BY_TG_BY_FUEL(
+     +               MAX(1,UPPER_TRANS_GROUP),MFT1),
+     +         ANNUAL_MWH_BY_TG_BY_FUEL(
+     +               MAX(1,UPPER_TRANS_GROUP),MFT1),
+     +         ANNUAL_FUEL_BTUS_BY_SP_BY_FUEL(
+     +                    0:MAX_STATE_PROVINCE_NO,max_fuel_types_clr),
+     +         FUEL_BTUS_BY_SP_BY_FUEL(
+     +                    0:MAX_STATE_PROVINCE_NO,max_fuel_types_clr),
+     +         ANNUAL_FUEL_BTUS_BY_GSP_BY_FUEL(
+     +                    0:MAX_GAS_REGION_NO,3),
+     +         FUEL_BTUS_BY_GSP_BY_FUEL(
+     +                    0:MAX_GAS_REGION_NO,3),
+     +         PROD_BY_TG_BY_MW(
+     +               MAX(1,UPPER_TRANS_GROUP),max_prod_types_clr),
+     +         ANNUAL_PROD_BY_TG_BY_MW(
+     +               MAX(1,UPPER_TRANS_GROUP),max_prod_types_clr),
+     +         PROD_BY_TG_BY_MWH(
+     +               MAX(1,UPPER_TRANS_GROUP),max_prod_types_clr),
+     +         ANNUAL_PROD_BY_TG_BY_MWH(
+     +               MAX(1,UPPER_TRANS_GROUP),max_prod_types_clr),
+     +         LOAD_BY_TG_BY_MWH(
+     +               MAX(1,UPPER_TRANS_GROUP),MAX_LOAD_TYPES),
+     +         ANNUAL_LOAD_BY_TG_BY_MWH(
+     +               MAX(1,UPPER_TRANS_GROUP),MAX_LOAD_TYPES),
+     +         PROD_BY_MK_BY_MWH(0:600,3),
+     +         ANNUAL_PROD_BY_MK_BY_MWH(0:600,3),
+     +         MULTI_AREA_NAME(MAX(1,UPPER_TRANS_GROUP)))
+            ANNUAL_FUEL_COST_BY_TG_BY_FUEL = 0.
+            ANNUAL_FUEL_COST_BY_SP_BY_FUEL = 0.
+            ANNUAL_GROUP_VAR_BY_SP = 0.
+            ANNUAL_MW_BY_TG_BY_FUEL = 0.
+            ANNUAL_MWH_BY_TG_BY_FUEL = 0.
+            ANNUAL_FUEL_BTUS_BY_TG_BY_FUEL = 0.
+            ANNUAL_FUEL_BTUS_BY_SP_BY_FUEL = 0.
+            ANNUAL_FUEL_BTUS_BY_GSP_BY_FUEL = 0.
+            ANNUAL_PROD_BY_TG_BY_MW = 0.
+            ANNUAL_PROD_BY_TG_BY_MWH = 0.
+            ANNUAL_LOAD_BY_TG_BY_MWH = 0.
+            ANNUAL_LOAD_BY_TG_BY_MWH(:,1) = 9999999.
+            ANNUAL_PROD_BY_MK_BY_MWH = 0.
+            IF(UPPER_TRANS_GROUP > 0) THEN
+               DO I = 1, UPPER_TRANS_GROUP
+                  MULTI_AREA_NAME(I) = GET_GROUP_NAME(I)
+               ENDDO
+            ELSE
+               MULTI_AREA_NAME(1) = 'System              '
+            ENDIF
+         ENDIF
+!
+         CALL FUEL_PRICE_FILES_ACTIVE(FUEL_PRICE_DATA_AVAILABLE)
+!
+         FUEL_COST_BY_TG_BY_FUEL = 0.
+         FUEL_COST_BY_SP_BY_FUEL = 0.
+         GROUP_VAR_BY_SP = 0.
+         FUEL_BTUS_BY_TG_BY_FUEL = 0.
+         FUEL_BTUS_BY_SP_BY_FUEL = 0.
+         FUEL_BTUS_BY_GSP_BY_FUEL = 0.
+         MW_BY_TG_BY_FUEL = 0.
+         MWH_BY_TG_BY_FUEL = 0.
+         PROD_BY_TG_BY_MW = 0.
+         PROD_BY_TG_BY_MWH = 0.
+         LOAD_BY_TG_BY_MWH = 0.
+         PROD_BY_MK_BY_MWH = 0.
+!
+!      ENDIF
+!
+! 040905. NUNITS MAY BE TOO SHORT IF WE INCLUDE DERIVATIVES
+!
+      IF(ALLOCATED(MONTHLY_UNIT_EMISSIONS_COST))
+     +                           DEALLOCATE(MONTHLY_UNIT_EMISSIONS_COST)
+      ALLOCATE(MONTHLY_UNIT_EMISSIONS_COST(5,NUNITS))
+      MONTHLY_UNIT_EMISSIONS_COST = 0.
+!
+         MONTHLY_TOTAL_EMISSIONS = 0.
+         MONTHLY_TOTAL_EMISSIONS_COST = 0.
+      MONTHLY_HEAT = 0. D0
+!
+      DAYS_IN_MONTH = MAX(SEAS_HOURS/24.,.001)
+
+!
+! CL UNITS BY BLOCK
+!
+      DO I = 1, NBLOCK
+!        ! First assignment to UNITNO. Only case where it's assigned from the
+!        ! UNIT array. In this case it's iterating to NBLOCK; other cases it's
+!        ! iterating to NUNITS.
+         UNITNO = UNIT(I)
+         BLKNUM = MIN(2,MAX(BLKNO(I),1))
+         ENRG = SEAS_HOURS * ENERGY(BLKNUM,UNITNO)
+         CAPBLK = EFFECTIVE_CAPACITY(BLKNUM,UNITNO)
+         IF(BLKNUM == 1) THEN
+            HEAT = BLK1_HEAT(UNITNO)
+            FUEL_COST = BLOCK_FUEL_COST(1,UNITNO)
+         ELSE
+            HEAT = BLK2_HEAT(UNITNO)
+            FUEL_COST = BLOCK_FUEL_COST(2,UNITNO)
+         endif
+         VOM_COST = 0.0
+!
+         ANNUAL_CL_UNIT_FUEL_COST(UNITNO) = FUEL_COST +
+     +                            ANNUAL_CL_UNIT_FUEL_COST(UNITNO)
+         ANNUAL_CL_UNIT_MMBTUS(UNITNO) = HEAT +
+     +                                  ANNUAL_CL_UNIT_MMBTUS(UNITNO)
+         FISCAL_CL_UNIT_FUEL_COST(UNITNO) = FUEL_COST +
+     +                            FISCAL_CL_UNIT_FUEL_COST(UNITNO)
+         FISCAL_CL_UNIT_MMBTUS(UNITNO) = HEAT +
+     +                                  FISCAL_CL_UNIT_MMBTUS(UNITNO)
+         MONTHLY_HEAT = MONTHLY_HEAT + HEAT
+         IF(ENRG > .45) THEN
+            FUEL_COST = FUEL_COST + ENRG * FUEL_ADDER_ADJUSTMENT(UNITNO)
+!
+            VOM_COST = VCPMWH(UNITNO) * ENRG
+        ANNUAL_CL_UNIT_ENERGY(UNITNO) = ENRG +
+     +                                  ANNUAL_CL_UNIT_ENERGY(UNITNO)
+        ANNUAL_CL_UNIT_VAR_COST(UNITNO) = VOM_COST +
+     +                                ANNUAL_CL_UNIT_VAR_COST(UNITNO)
+        FISCAL_CL_UNIT_ENERGY(UNITNO) = ENRG +
+     +                                  FISCAL_CL_UNIT_ENERGY(UNITNO)
+        FISCAL_CL_UNIT_VAR_COST(UNITNO) = VOM_COST +
+     +                                FISCAL_CL_UNIT_VAR_COST(UNITNO)
+         endif
+!
+! EMISSIONS
+!
+         CALL RETURN_EMISSIONS_BY_BLOCK(UNITNO,BLKNUM,R_SOX,R_NOX,
+     +                                  R_CO2,R_OTH2,R_OTH3)
+         UNIT_EMISSIONS(1) = R_SOX/TONS_CONVERSION
+         UNIT_EMISSIONS(2) = R_NOX/TONS_CONVERSION
+         UNIT_EMISSIONS(3) = R_CO2/TONS_CONVERSION
+         UNIT_EMISSIONS(4) = R_OTH2/TONS_CONVERSION
+         UNIT_EMISSIONS(5) = R_OTH3/TONS_CONVERSION
+!
+! SEND COST INFORMATION FOR USE BY MONTHLY MIDAS
+!
+         REAL_FUEL_COST = SNGL(FUEL_COST)
+         VOID_LOGICAL = MON_MDS_CL_VAR(ISEAS,YR,UNITNO,
+     +                                 REAL_FUEL_COST,
+     +                                 ENRG,HEAT,UNIT_EMISSIONS,
+     +                                 VOM_COST)
+!
+! TODO: EXTRACT_METHOD record_emission_types (failed)
+         DO EM = 1, NUMBER_OF_EMISSION_TYPES
+            MONTHLY_TOTAL_EMISSIONS(EM) = UNIT_EMISSIONS(EM) +
+     +                                    MONTHLY_TOTAL_EMISSIONS(EM)
+            ANNUAL_CL_UNIT_EMISSIONS(EM,UNITNO)=UNIT_EMISSIONS(EM) +
+     +                           ANNUAL_CL_UNIT_EMISSIONS(EM,UNITNO)
+            FISCAL_CL_UNIT_EMISSIONS(EM,UNITNO)=UNIT_EMISSIONS(EM) +
+     +                           FISCAL_CL_UNIT_EMISSIONS(EM,UNITNO)
+         ENDDO
+
+! TODO: EXTRACT_METHOD record_emission_types (end)
+
+         IF(MONTHLY_BLOCK_REPORT .AND.
+     +                         .NOT. TESTING_PLAN .AND. NBLOCK > 0) THEN
+            IF(.NOT. CANADA .AND. PHASE_I_UNIT(UNITNO) ) THEN
+!     +       .AND.  (YR+BASE_YEAR <= 2000)) THEN
+               UNIT_NAME = trim(UNITNM(UNITNO))//'*'
+            ELSE
+               UNIT_NAME = UNITNM(UNITNO)
+            endif
+            IF(BLKNO(I) < 2) THEN
+               CL_SEGMENT_NAME = trim(UNIT_NAME)//'01'
+            ELSE
+               CL_SEGMENT_NAME = trim(UNIT_NAME)//'02'
+            endif
+            IF(ENRG > 0.45) THEN
+               AVERAGE_HEATRATE = HEAT_CONVERSION*HEAT/ENRG
+               AVERAGE_PRODUCTION_COSTS =
+     +               SNGL((FUEL_COST))/ENRG+VCPMWH(UNITNO)
+               IF(.NOT. CANADA) AVERAGE_HEATRATE = AVERAGE_HEATRATE + .5
+            ELSE
+!               FUEL_COST = 0.0 D0
+!               HEAT = 0.0 D0
+               AVERAGE_HEATRATE = N_A
+               AVERAGE_PRODUCTION_COSTS = N_A
+            endif
+            MON_CL_UNIT_REC = RPTREC(MON_CL_UNIT_NO)
+            WRITE(MON_CL_UNIT_NO,REC=MON_CL_UNIT_REC)
+     +               PRT_ENDPOINT(),
+     +               FLOAT(YEAR+BASE_YEAR),
+     +               CL_MONTH_NAME(ISEAS),
+     +               CL_SEGMENT_NAME,
+     +               FLOAT(I),
+     +               MWBLOK(I),
+     +               CAPBLK,
+     +               ENRG/1000.,
+     +               SNGL(HEAT),
+     +               AVERAGE_HEATRATE,
+     +               SNGL(FUEL_COST)/1000000.,
+     +               VCPMWH(UNITNO)*ENRG/1000000.,
+     +               AVERAGE_PRODUCTION_COSTS,
+     +               (UNIT_EMISSIONS(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES)
+            MON_CL_UNIT_REC = MON_CL_UNIT_REC + 1
+         endif
+      ENDDO
+!
+! CL UNITS BY UNIT
+!
+! 3/21/02. ICAP REPORT.
+      MX_ICAP_SUMMARY_REPORT = CAPACITY_PLANNING_METHOD() == 'MX'
+     +                                                .AND. RUN_TRANSACT
+!
+! NEED TO PULL REVENUES FROM TRANSACT INTO THIS REPORT
+!
+!
+      IF((MONTHLY_TRANS_REPORT .OR. ANNUAL_TRANS_REPORT
+     +                         .OR. MX_ICAP_SUMMARY_REPORT
+     +                         .OR. TRANSACT_FUEL_REPORT_ACTIVE) .AND.
+     +                                          .NOT. TESTING_PLAN) THEN
+
+!
+         IF(ISEAS == 1) THEN
+            ANNUAL_REV_GEN_CAPACITY = 0.
+            ANNUAL_CAP = 0.
+            AllHoursMonth = 0.
+            CapHours = 0.
+            EffectiveCapHours = 0.
+            AvailHoursMonth = 0.
+            ANNUAL_P_FUEL_CONSUMPTION = 0.
+            ANNUAL_S_FUEL_CONSUMPTION = 0.
+            ANNUAL_E_FUEL_CONSUMPTION = 0.
+            ANNUAL_EFFECTIVE_CAP = 0.
+            MONTHS_ACTIVE = 0.
+            ANNUAL_WHOLESALE_PROD_COST = 0.
+            ANNUAL_NOX_SEASON_EMISSIONS = 0.
+            ANNUAL_NOX_SEASON_THERMAL = 0.
+            TOTAL_NOX_HEAT = 0.
+!
+            WHOLESALE_MARKET_COST = 0.
+            WHOLESALE_MARKET_BUY_MWH = 0.
+            MONTHLY_WHOLESALE_COST = 0.
+            WHOLESALE_MARKET_REV = 0.
+            WHOLESALE_DERIV_COST = 0.
+            WHOLESALE_MARKET_SELL_MWH = 0.
+         endif
+!
+         MONTHLY_STARTS = 0
+         MONTHLY_START_COSTS = 0.
+         MONTHLY_CAPITAL_COST_OF_BUILD = 0.
+         MONTHLY_EBITDA = 0.
+         MONTHLY_CHARGING_ENERGY = 0.
+         MONTHLY_CAPACITY_REVENUE = 0.
+!
+         MONTHLY_TRANS_CAPACITY = 0.0
+         MONTHLY_TRANS_EFFECTIVE_CAP = 0.0
+         MONTHLY_TRANS_AVAIL_CAP = 0.0
+         MONTHLY_TRANS_ENERGY = 0.0
+         MONTHLY_TRANS_HEAT = 0.0 D0
+         MONTHLY_P_HEAT = 0.0 ! D0
+         MONTHLY_S_HEAT = 0.0 ! D0
+         MONTHLY_E_HEAT = 0.0 ! D0
+         MONTHLY_TRANS_FUEL_COST = 0.0 D0
+         MONTHLY_TRANS_VAR_COST = 0.0
+!
+         MONTHLY_UNIT_EMISSIONS(:) = 0.0
+!
+!
+         MONTHLY_TRANS_FIXED_COST = 0.
+!
+         MONTHLY_ECO_SALES = 0.
+         MONTHLY_ECO_SALES_ENRG = 0.
+         MONTHLY_DERIV_ECO_SALES = 0.
+         MONTHLY_DERIV_ECO_SALES_ENRG = 0.
+         MONTHLY_ECO_PUCH = 0.
+         MONTHLY_ECO_PUCH_ENRG = 0.
+!
+         MONTHLY_WHOLE_COSTS = 0.
+         MONTHLY_WHOLESALE_FUEL_COSTS = 0.
+         MONTHLY_WHOLESALE_VOM_COSTS = 0.
+         MONTHLY_DERIV_WHOLESALE_COST = 0.
+!
+         IF(ALLOCATED(ICAP_TOTAL_MWH))
+     +         DEALLOCATE(ICAP_TOTAL_MWH)
+         IF(ALLOCATED(ICAP_TOTAL_REVENUE))
+     +         DEALLOCATE(ICAP_TOTAL_REVENUE,
+     +                  ICAP_LEVEL_CAPITAL_COST,
+     +                  ICAP_NET_MARGIN,
+     +                  ICAP_NET_MARGIN_PER_MWH,
+     +                  ICAP_NET_MARGIN_PER_KW,
+     +                  ICAP_MRX_EAS,
+     +                  ICAP_VAR_COST,
+     +                  ICAP_FUEL_COST,
+     +                  ICAP_START_COST,
+     +                  ICAP_VOM_COST,
+     +                  ICAP_EMISSION_COST)
+         IF (ALLOCATED(ICAP_TOTAL_CAPACITY) )
+     +         DEALLOCATE(ICAP_TOTAL_CAPACITY)
+         IF(ALLOCATED(ICAP_TOTAL_COST))
+     +         DEALLOCATE(ICAP_TOTAL_COST)
+         ALLOCATE(ICAP_TOTAL_CAPACITY(CG),
+     +            ICAP_TOTAL_MWH(CG),
+     +            ICAP_TOTAL_COST(CG),
+     +            ICAP_TOTAL_REVENUE(CG),
+     +            ICAP_LEVEL_CAPITAL_COST(CG),
+     +            ICAP_NET_MARGIN(CG),
+     +            ICAP_NET_MARGIN_PER_MWH(CG),
+     +            ICAP_NET_MARGIN_PER_KW(CG),
+     +            ICAP_MRX_EAS(CG),
+     +            ICAP_VAR_COST(CG),
+     +            ICAP_FUEL_COST(CG),
+     +            ICAP_START_COST(CG),
+     +            ICAP_VOM_COST(CG),
+     +            ICAP_EMISSION_COST(CG))
+!         DO I = 1, PG
+!
+            ICAP_TOTAL_CAPACITY = 0.
+            ICAP_TOTAL_MWH = 0.
+            ICAP_TOTAL_REVENUE = 0.
+            ICAP_TOTAL_COST = 0.
+            ICAP_LEVEL_CAPITAL_COST = 0.
+            ICAP_NET_MARGIN = 0.
+            ICAP_MRX_EAS = 0.
+            ICAP_VAR_COST = 0.
+            ICAP_FUEL_COST = 0.
+            ICAP_START_COST = 0.
+            ICAP_VOM_COST = 0.
+            ICAP_EMISSION_COST = 0.
+            EMISSIONS_COST_BY_SP = 0.
+!
+!         ENDDO
+         IF(ISEAS == 1) THEN
+            FIRST_MONTHLY_TRANSACT =
+     +                        FIRST_LAST_MONTH_OF_TRANSACT(R_LAST_MONTH)
+         endif
+         IF(ISEAS == FIRST_MONTHLY_TRANSACT) THEN
+!
+            IF (ALLOCATED(ANNUAL_ICAP_TOTAL_CAPACITY) )
+     +         DEALLOCATE(TG_EffectiveCapacity,
+     +                    TG_CapacitySupplyObligation,
+     +                  ANNUAL_ICAP_CONE_VALUE,
+     +                  ANNUAL_ICAP_MAX_MRX_OR_CONE,
+     +                  ANNUAL_ICAP_RESERVE_MARGIN,
+     +                  ANNUAL_ICAP_INSTL_CAPACITY_VALUE,
+     +                  ANNUAL_ICAP_DEMAND_POINT,
+     +                  ANNUAL_ICAP_VALUE_POINT,
+     +                  ANNUAL_ICAP_MRX_CONE,
+     +                  ANNUAL_ICAP_MRX_EAS,
+     +                  ANNUAL_ICAP_VAR_COST,
+     +                  ANNUAL_ICAP_FUEL_COST,
+     +                  ANNUAL_ICAP_START_COST,
+     +                  ANNUAL_ICAP_VOM_COST,
+     +                  ANNUAL_ICAP_EMISSION_COST,
+     +                  ANNUAL_ICAP_EAS_REVENUE_OFFSET,
+     +                  ANNUAL_ICAP_ADJ_CAPACITY_VALUE,
+     +                  ANNUAL_ICAP_TOTAL_CAPACITY,
+     +                  MONTHLY_ICAP_TOTAL_CAPACITY,
+     +                  MONTHLY_ICAP_VALUE,
+     +                  ANNUAL_ICAP_TOTAL_MWH,
+     +                  ANNUAL_ICAP_TOTAL_COST,
+     +                  ANNUAL_ICAP_TOTAL_REVENUE,
+     +                  ANNUAL_ICAP_LEVEL_CAPITAL_COST,
+     +                  ANNUAL_ICAP_NET_MARGIN,
+     +                  ANNUAL_ICAP_NET_MARGIN_PER_MWH,
+     +                  ANNUAL_ICAP_NET_MARGIN_PER_KW,
+     +                  MRX_RPS_DV_CURVE_GROSS_MARGIN,
+     +                  MRX_RPS_DV_CURVE_REVENUE,
+     +                  MRX_RPS_DV_CURVE_COST,
+     +                  MRX_RPS_DV_CURVE_UMWH,
+     +                  TransAllHoursMonth,
+     +                  TransCapHours,
+     +                  TransEffectiveCapHours,
+     +                  TransAvailHoursMonth)
+            ALLOCATE(
+     +               ANNUAL_ICAP_CONE_VALUE(CG),
+     +               ANNUAL_ICAP_MAX_MRX_OR_CONE(CG),
+     +               ANNUAL_ICAP_RESERVE_MARGIN(CG),
+     +               ANNUAL_ICAP_INSTL_CAPACITY_VALUE(CG),
+     +               ANNUAL_ICAP_DEMAND_POINT(CG),
+     +               ANNUAL_ICAP_MRX_CONE(CG),
+     +               ANNUAL_ICAP_MRX_EAS(CG),
+     +               ANNUAL_ICAP_VAR_COST(CG),
+     +               ANNUAL_ICAP_FUEL_COST(CG),
+     +               ANNUAL_ICAP_START_COST(CG),
+     +               ANNUAL_ICAP_VOM_COST(CG),
+     +               ANNUAL_ICAP_EMISSION_COST(CG),
+     +               ANNUAL_ICAP_EAS_REVENUE_OFFSET(CG),
+     +               ANNUAL_ICAP_ADJ_CAPACITY_VALUE(CG),
+     +               ANNUAL_ICAP_VALUE_POINT(CG),
+     +               ANNUAL_ICAP_TOTAL_CAPACITY(CG),
+     +               MONTHLY_ICAP_TOTAL_CAPACITY(CG,0:12),
+     +               MONTHLY_ICAP_VALUE(CG),
+     +               ANNUAL_ICAP_TOTAL_MWH(CG),
+     +               ANNUAL_ICAP_TOTAL_COST(CG),
+     +               ANNUAL_ICAP_TOTAL_REVENUE(CG),
+     +               ANNUAL_ICAP_LEVEL_CAPITAL_COST(CG),
+     +               ANNUAL_ICAP_NET_MARGIN(CG),
+     +               ANNUAL_ICAP_NET_MARGIN_PER_MWH(CG),
+     +               ANNUAL_ICAP_NET_MARGIN_PER_KW(CG),
+     +               MRX_RPS_DV_CURVE_GROSS_MARGIN(NUM_TRANSACTIONS),
+     +               MRX_RPS_DV_CURVE_REVENUE(NUM_TRANSACTIONS),
+     +               MRX_RPS_DV_CURVE_COST(NUM_TRANSACTIONS),
+     +               MRX_RPS_DV_CURVE_UMWH(NUM_TRANSACTIONS),
+     +               TransAllHoursMonth(NUM_TRANSACTIONS),
+     +               TransCapHours(NUM_TRANSACTIONS),
+     +               TransEffectiveCapHours(NUM_TRANSACTIONS),
+     +               TransAvailHoursMonth(NUM_TRANSACTIONS),
+     +               TG_CapacitySupplyObligation(
+     +                                MAX(1,UPPER_TRANS_GROUP),12),
+     +               TG_EffectiveCapacity(
+     +                                MAX(1,UPPER_TRANS_GROUP),12))
+!            DO I = 1, PG
+!
+            MRX_RPS_CL_CURVE_GROSS_MARGIN = 0.
+            MRX_RPS_CL_CURVE_REVENUE = 0.
+            MRX_RPS_CL_CURVE_COST = 0.
+            MRX_RPS_CL_CURVE_UMWH = 0.
+            MRX_RPS_DV_CURVE_GROSS_MARGIN = 0.
+            MRX_RPS_DV_CURVE_REVENUE = 0.
+            MRX_RPS_DV_CURVE_COST = 0.
+            MRX_RPS_DV_CURVE_UMWH = 0.
+!
+            TransAllHoursMonth = 0.
+            TransCapHours = 0.
+            TransEffectiveCapHours = 0.
+            TransAvailHoursMonth = 0.
+            TG_CapacitySupplyObligation = 0.0
+            TG_EffectiveCapacity = 0.0
+            MONTHLY_ICAP_TOTAL_CAPACITY = 0.
+            ANNUAL_ICAP_TOTAL_CAPACITY = 0.
+            ANNUAL_ICAP_TOTAL_MWH = 0.
+            ANNUAL_ICAP_TOTAL_REVENUE = 0.
+            ANNUAL_ICAP_TOTAL_COST = 0.
+            ANNUAL_ICAP_LEVEL_CAPITAL_COST = 0.
+            ANNUAL_ICAP_NET_MARGIN = 0.
+            ANNUAL_ICAP_CONE_VALUE = 0.
+            ANNUAL_ICAP_MAX_MRX_OR_CONE = 0.
+            ANNUAL_ICAP_RESERVE_MARGIN = 0.
+            ANNUAL_ICAP_INSTL_CAPACITY_VALUE = 0.0
+            ANNUAL_ICAP_DEMAND_POINT = 0.
+            ANNUAL_ICAP_VALUE_POINT = 0.
+            ANNUAL_ICAP_MRX_CONE = 0.0
+            ANNUAL_ICAP_MRX_EAS = 0.0
+            ANNUAL_ICAP_VAR_COST = 0.0
+            ANNUAL_ICAP_FUEL_COST = 0.0
+            ANNUAL_ICAP_START_COST = 0.0
+            ANNUAL_ICAP_VOM_COST = 0.0
+            ANNUAL_ICAP_EMISSION_COST = 0.0
+            ANNUAL_ICAP_EAS_REVENUE_OFFSET = 0.0
+            ANNUAL_ICAP_ADJ_CAPACITY_VALUE = 0.0
+            ANNUAL_EMISSIONS_COST_BY_SP = 0.0
+!
+            TEMP_L1 = CALC_ANN_ICAP_VALUES(YR)
+!
+!            ENDDO
+         endif ! FIRST SEASON
+         RUN_MULTIAREA_TRANSACT = YES_RUN_MULTIAREA_TRANSACT()
+         MONTHLY_ICAP_VALUE = 0.0
+!
+         CALL AllocateArray(SaveMW2,2_2,NUNITS)
+         DO I = 1, NUNITS
+            SaveMW2(:,I)= MW(:,I)
+            IF(ONLINE(I) > DATE2 .OR. OFLINE(I) < DATE1) THEN
+               MW(:,I) = 0.
+            endif
+         ENDDO
+!
+! 102409.
+!
+! TODO: EXTRACT_METHOD prepare_icap_summary_report
+         IF(MX_ICAP_SUMMARY_REPORT) THEN
+            DO I = UNITS_BEFORE_ADDITIONS()+1, NUNITS
+!              ! Second assignment of UNITNO.
+               UNITNO = I
+               TEMP_POINTER = GET_POINTER_FOR_NEW_CL_UNIT(UNITNO)
+               ENRG = SEAS_HOURS * (ENERGY(1,UNITNO) + ENERGY(2,UNITNO))
+               IF(ENRG > 0.45 .AND. TEMP_POINTER > 0) THEN
+                  FUEL_COST = BLOCK_FUEL_COST(1,UNITNO) +
+     +                                         BLOCK_FUEL_COST(2,UNITNO)
+                  FUEL_COST = FUEL_COST +
+     +                              ENRG * FUEL_ADDER_ADJUSTMENT(UNITNO)
+                  CALL RETURN_EMISSIONS_BY_BLOCK(UNITNO,INT2(1),R_SOX,
+     +                                        R_NOX,R_CO2,R_OTH2,R_OTH3)
+!                 ! TODO: Unit Emissions 1..5 should be named constants.
+                  UNIT_EMISSIONS(1) = R_SOX/TONS_CONVERSION
+                  UNIT_EMISSIONS(2) = R_NOX/TONS_CONVERSION
+                  UNIT_EMISSIONS(3) = R_CO2/TONS_CONVERSION
+                  UNIT_EMISSIONS(4) = R_OTH2/TONS_CONVERSION
+                  UNIT_EMISSIONS(5) = R_OTH3/TONS_CONVERSION
+!
+                  CALL RETURN_EMISSIONS_BY_BLOCK(UNITNO,INT2(2),R_SOX,
+     +                                        R_NOX,R_CO2,R_OTH2,R_OTH3)
+                  UNIT_EMISSIONS(1) = UNIT_EMISSIONS(1) +
+     +                                             R_SOX/TONS_CONVERSION
+                  UNIT_EMISSIONS(2) = UNIT_EMISSIONS(2) +
+     +                                             R_NOX/TONS_CONVERSION
+                  UNIT_EMISSIONS(3) = UNIT_EMISSIONS(3) +
+     +                                             R_CO2/TONS_CONVERSION
+                  UNIT_EMISSIONS(4) = UNIT_EMISSIONS(4) +
+     +                                            R_OTH2/TONS_CONVERSION
+                  UNIT_EMISSIONS(5) = UNIT_EMISSIONS(5) +
+     +                                            R_OTH3/TONS_CONVERSION
+!
+!
+                  EMIS_DISPATCH_1 = 0.002*
+     +                     TRANS_DISPATCH_EMIS_ADDER(1,ISEAS,YR,UNITNO)
+                  EMIS_DISPATCH_2 = 0.002*
+     +                     TRANS_DISPATCH_EMIS_ADDER(2,ISEAS,YR,UNITNO)
+                  EMIS_DISPATCH_3 = 0.002*
+     +                     TRANS_DISPATCH_EMIS_ADDER(3,ISEAS,YR,UNITNO)
+                  EMIS_DISPATCH_4 = 0.002*
+     +                     TRANS_DISPATCH_EMIS_ADDER(4,ISEAS,YR,UNITNO)
+                  EMIS_DISPATCH_5 = 0.002*
+     +                     TRANS_DISPATCH_EMIS_ADDER(5,ISEAS,YR,UNITNO)
+!
+                  UNIT_EMISSIONS_COST(1) =
+     +                               UNIT_EMISSIONS(1) * EMIS_DISPATCH_1
+                  UNIT_EMISSIONS_COST(2) =
+     +                               UNIT_EMISSIONS(2) * EMIS_DISPATCH_2
+                  UNIT_EMISSIONS_COST(3) =
+     +                               UNIT_EMISSIONS(3) * EMIS_DISPATCH_3
+                  UNIT_EMISSIONS_COST(4) =
+     +                               UNIT_EMISSIONS(4) * EMIS_DISPATCH_4
+                  UNIT_EMISSIONS_COST(5) =
+     +                               UNIT_EMISSIONS(5) * EMIS_DISPATCH_5
+                  TOTAL_EMISSION_COSTS = SUM(UNIT_EMISSIONS_COST)
+               ELSE
+                  FUEL_COST = 0.0 D0
+                  UNIT_EMISSIONS(1:5) = 0.
+!
+                  UNIT_EMISSIONS_COST(1:5) = 0.
+                  TOTAL_EMISSION_COSTS = 0.
+!
+               endif
+!
+!
+!
+! ALL ICAP VARIABLES NEED TO BE BY TRANSACTION GROUP
+!
+!               TP = TG_POSITION
+               TG = MAX(1,TRANSACTION_GROUP(I))
+               TG_POSITION = MAX(1,GET_TRANS_GROUP_POSITION(TG))
+!               TP = GET_PA_FROM_TG(TG_POSITION)
+               TP = GET_CM_FROM_TG(TG_POSITION) ! 072716
+! 030311. ADDED ON-LINE OFF-LINE MONTH CHECK FOR ODEC.
+               IF(TEMP_POINTER > 0 .AND.
+     +             ONLINE(I) .LE. DATE2 .AND. OFLINE(I) .GE. DATE1) THEN
+                  ICAP_TOTAL_CAPACITY(TP) =
+     +                                 ICAP_TOTAL_CAPACITY(TP) + MW(2,I)
+                  ICAP_TOTAL_MWH(TP) = ICAP_TOTAL_MWH(TP) + ENRG/1000.
+                  ICAP_TOTAL_REVENUE(TP) = ICAP_TOTAL_REVENUE(TP) +
+     +                           MON_ECO_SALES_REV_FROM(UNITNO)/1000000.
+                  ICAP_LEVEL_CAPITAL_COST(TP) =
+     +                  ICAP_LEVEL_CAPITAL_COST(TP) +
+     +                  RETURN_SCREEN_CAP_COST(TEMP_POINTER,YEAR)/12. +
+     +                  CL_UNIT_MONTHLY_FIXED_COST(I)/1000000.
+                  ICAP_FUEL_COST(TP) = ICAP_FUEL_COST(TP) +
+     +                                           SNGL(FUEL_COST)*.000001
+                  ICAP_START_COST(TP) = ICAP_START_COST(TP) +
+     +                           MONTH_UNIT_START_COSTS(UNITNO)/1000000.
+                  ICAP_VOM_COST(TP) = ICAP_VOM_COST(TP) +
+     +                                       VCPMWH(UNITNO)*ENRG*.000001
+                  ICAP_EMISSION_COST(TP) = ICAP_EMISSION_COST(TP) +
+     +                                              TOTAL_EMISSION_COSTS
+!
+                  ANNUAL_ICAP_TOTAL_CAPACITY(TP) =
+     +                          ANNUAL_ICAP_TOTAL_CAPACITY(TP) + MW(2,I)
+                  MONTHLY_ICAP_TOTAL_CAPACITY(TP,ISEAS) =
+     +                   MONTHLY_ICAP_TOTAL_CAPACITY(TP,ISEAS) + MW(2,I)
+                  ANNUAL_ICAP_TOTAL_MWH(TP) =
+     +                            ANNUAL_ICAP_TOTAL_MWH(TP) + ENRG/1000.
+                  ANNUAL_ICAP_TOTAL_REVENUE(TP) =
+     +                     ANNUAL_ICAP_TOTAL_REVENUE(TP) +
+     +                           MON_ECO_SALES_REV_FROM(UNITNO)/1000000.
+                  ANNUAL_ICAP_LEVEL_CAPITAL_COST(TP) =
+     +                  ANNUAL_ICAP_LEVEL_CAPITAL_COST(TP) +
+     +                  RETURN_SCREEN_CAP_COST(TEMP_POINTER,YEAR)/12. +
+     +                  CL_UNIT_MONTHLY_FIXED_COST(I)/1000000.
+                  MONTHLY_ICAP_REVENUES(UNITNO) =
+     +                        MONTHLY_ICAP_REVENUES(UNITNO) +
+     +                           MON_ECO_SALES_REV_FROM(UNITNO)/1000000.
+               endif
+!
+            ENDDO ! NUNITS FOR ICAP REPORT
+!         IF(MX_ICAP_SUMMARY_REPORT) THEN
+!
+            IF(MX_ICAP_REPORT_NOT_OPEN) THEN
+               MX_ICAP_REPORT_NOT_OPEN = .FALSE.
+               MX_ICAP_REPORT_VARIABLES = 22 ! 22 110408 ! 17 103008 !042308.
+               MX_ICAP_ANNUAL_ALT_NO =
+     +                            MX_ICAP_ANNUAL_HEADER(
+     +                                         MX_ICAP_REPORT_VARIABLES,
+     +                                           MX_ICAP_ANNUAL_ALT_REC)
+!
+            endif
+!
+!            DO I = 1, PG
+            DO I = 1, CG
+!
+!               PA_INDEX = GET_PA_VALUE_FROM_TG(I)
+               CM_INDEX = GET_CM_INDEX_FROM_TG(I)
+!
+               WRITE(CM_CHAR_NUM,"(I3)") CM_INDEX
+!
+!
+! 03/16/05. FOR BURESH/ONDEMAND ASP.
+!
+!               TEMP_I2 = GET_REGIONAL_PA_NAME(I,PA_NAME)
+               TEMP_I2 = GET_REGIONAL_CM_NAME(I,CM_NAME)
+               IF(TEMP_I2 <= 0) THEN
+                  CM_NAME = "AREA "//CM_CHAR_NUM
+               endif
+!               PA_NAME = "AREA "//PA_CHAR_NUM
+               ICAP_VAR_COST(I) =
+     +                ICAP_FUEL_COST(I)  +
+     +                ICAP_START_COST(I) +
+     +                ICAP_VOM_COST(I)   +
+     +                ICAP_EMISSION_COST(I)
+!
+               ICAP_MRX_EAS(I) =
+     +                          ICAP_TOTAL_REVENUE(I) - ICAP_VAR_COST(I)
+!               ICAP_MRX_EAS(I) = EAS_PROFIT_PER_KWYR(I)/12
+               ICAP_TOTAL_COST(I) = ICAP_TOTAL_COST(I) +
+     +                                  ICAP_VAR_COST(I) +
+     +                                        ICAP_LEVEL_CAPITAL_COST(I)
+!
+               ICAP_NET_MARGIN(I) = ICAP_TOTAL_REVENUE(I) -
+     +                                                ICAP_TOTAL_COST(I)
+!
+               IF(ICAP_TOTAL_CAPACITY(I) > 0.) THEN
+                  ICAP_NET_MARGIN_PER_KW(I) = 1000. *
+     +                                    ICAP_NET_MARGIN(I) /
+     +                                            ICAP_TOTAL_CAPACITY(I)
+                  ICAP_MRX_EAS_PER_KW = 1000. *
+     +                                    ICAP_MRX_EAS(I) /
+     +                                            ICAP_TOTAL_CAPACITY(I)
+!                  ICAP_MRX_CONE =
+                  ICAP_MRX_CONE =
+     +                     1000.0 * ICAP_LEVEL_CAPITAL_COST(TP)/
+     +                                            ICAP_TOTAL_CAPACITY(I)
+               ELSE
+                  ICAP_NET_MARGIN_PER_KW(I) = 0.
+                  ICAP_MRX_EAS_PER_KW = 0.
+                  ICAP_MRX_CONE = 0.0
+               endif
+               IF(ICAP_TOTAL_MWH(I) > 0.) THEN
+                  ICAP_NET_MARGIN_PER_MWH(I) = 1000. *
+     +                                    ICAP_NET_MARGIN(I) /
+     +                                               ICAP_TOTAL_MWH(I)
+               ELSE
+                  ICAP_NET_MARGIN_PER_MWH(I) = 0.
+               endif
+
+               TEMP_L1 = GET_ICAP_REPORT_VALUES(I,
+     +                                   YR,
+     +                                   ICAP_CONE_VALUE,
+     +                                   ICAP_MRX_CONE,
+     +                                   ICAP_RESERVE_MARGIN,
+     +                                   ICAP_DEMAND_POINT,
+     +                                   ICAP_VALUE_POINT,
+     +                                   ICAP_INSTL_CAPACITY_VALUE,
+     +                                   ICAP_EAS_REVENUE_OFFSET,
+     +                                   ICAP_ADJ_CAPACITY_VALUE,
+     +                                   ICAP_MRX_EAS_PER_KW,
+     +                                   ICAP_MRX_USE_MARGINAL)
+!
+! 110709.
+!
+               IF(ICAP_MRX_USE_MARGINAL > 0) THEN
+                  CALL GET_MRX_ICAP_REPORT_VALUES(
+     +                                          I,
+     +                                          MRX_CAPACITY,
+     +                                          MRX_ENERGY,
+     +                                          MRX_TOTAL_REVENUE,
+     +                                          MRX_TOTAL_VARIABLE,
+     +                                          MRX_FUEL,
+     +                                          MRX_VOM,
+     +                                          MRX_EMISSIONS,
+     +                                          MRX_TOTAL_COST,
+     +                                          MRX_ANN_CAP_COST,
+     +                                          MRX_NET_MARGIN_MM,
+     +                                          MRX_NET_MARGIN_PER_MWH,
+     +                                          MRX_NET_MARGIN_PER_KWMO,
+     +                                          MRX_CONE_PER_KWMO,
+     +                                          MRX_EAS_REV_PER_KWMO,
+     +                                          MRX_ICAP_VALUE_POINT)
+! 111009. Simple treatment of annual to monthly: divide by 12
+                  ICAP_TOTAL_CAPACITY(I) = MRX_CAPACITY
+                  ICAP_TOTAL_MWH(I) = MRX_ENERGY/12.0
+                  ICAP_TOTAL_REVENUE(I) = MRX_TOTAL_REVENUE/12.0
+                  ICAP_VAR_COST(I) = MRX_TOTAL_VARIABLE/12.0
+                  ICAP_FUEL_COST(I) = MRX_FUEL/12.0
+                  ICAP_VOM_COST(I) = MRX_VOM/12.0
+                  ICAP_EMISSION_COST(I) = MRX_EMISSIONS/12.0
+                  ICAP_TOTAL_COST(I) = MRX_TOTAL_COST/12.0
+                  ICAP_LEVEL_CAPITAL_COST(I) = MRX_ANN_CAP_COST/12.0
+                  ICAP_NET_MARGIN(I) = MRX_NET_MARGIN_MM/12.0
+                  ICAP_NET_MARGIN_PER_MWH(I) = MRX_NET_MARGIN_PER_MWH
+                  ICAP_NET_MARGIN_PER_KW(I) =
+     +                                 MRX_NET_MARGIN_PER_KWMO/12.0
+                  ICAP_MRX_CONE = MRX_CONE_PER_KWMO/12.0
+                  ICAP_MRX_EAS_PER_KW = MRX_EAS_REV_PER_KWMO ! /12.0
+                  ICAP_VALUE_POINT = MRX_ICAP_VALUE_POINT/12.0
+               END IF
+!
+               ANNUAL_ICAP_CONE_VALUE(I) =
+     +                     ANNUAL_ICAP_CONE_VALUE(I) + ICAP_CONE_VALUE
+
+               ANNUAL_ICAP_RESERVE_MARGIN(I) =
+     +                     ANNUAL_ICAP_RESERVE_MARGIN(I) +
+     +                                    ICAP_RESERVE_MARGIN
+               ANNUAL_ICAP_INSTL_CAPACITY_VALUE(I) =
+     +                     ANNUAL_ICAP_INSTL_CAPACITY_VALUE(I) +
+     +               ICAP_INSTL_CAPACITY_VALUE  ! * ICAP_TOTAL_CAPACITY(I)
+               ANNUAL_ICAP_DEMAND_POINT(I) =
+     +                     ANNUAL_ICAP_DEMAND_POINT(I) +
+     +                                    ICAP_DEMAND_POINT
+               ANNUAL_ICAP_VALUE_POINT(I) =
+     +                     ANNUAL_ICAP_VALUE_POINT(I) +
+     +                                    ICAP_VALUE_POINT
+               ANNUAL_ICAP_MRX_CONE(I) = ANNUAL_ICAP_MRX_CONE(I) +
+     +                                                     ICAP_MRX_CONE
+               ANNUAL_ICAP_MRX_EAS(I) = ANNUAL_ICAP_MRX_EAS(I) +
+     +                                                  ICAP_MRX_EAS(I)
+               ANNUAL_ICAP_VAR_COST(I) = ANNUAL_ICAP_VAR_COST(I) +
+     +                                                  ICAP_VAR_COST(I)
+               ANNUAL_ICAP_FUEL_COST(I) =  ANNUAL_ICAP_FUEL_COST(I) +
+     +                                       ICAP_FUEL_COST(I)
+               ANNUAL_ICAP_START_COST(I) = ANNUAL_ICAP_START_COST(I) +
+     +                                       ICAP_START_COST(I)
+               ANNUAL_ICAP_VOM_COST(I) =  ANNUAL_ICAP_VOM_COST(I) +
+     +                                       ICAP_VOM_COST(I)
+               ANNUAL_ICAP_EMISSION_COST(I) =
+     +              ANNUAL_ICAP_EMISSION_COST(I) + ICAP_EMISSION_COST(I)
+               ANNUAL_ICAP_EAS_REVENUE_OFFSET(I) =
+     +                     ANNUAL_ICAP_EAS_REVENUE_OFFSET(I) +
+     +                              ICAP_EAS_REVENUE_OFFSET *
+     +                                       ICAP_TOTAL_CAPACITY(I)
+               MONTHLY_ICAP_VALUE(I) = ICAP_VALUE_POINT
+
+               MX_ICAP_ANNUAL_ALT_REC = RPTREC(MX_ICAP_ANNUAL_ALT_NO)
+               WRITE(MX_ICAP_ANNUAL_ALT_NO,REC=MX_ICAP_ANNUAL_ALT_REC)
+     +                  FLOAT(END_POINT),
+     +                  FLOAT(YEAR+BASE_YEAR),
+     +                  CL_MONTH_NAME(ISEAS),
+     +                  CM_NAME,
+     +                  ICAP_TOTAL_CAPACITY(I), ! 0
+     +                  ICAP_TOTAL_MWH(I),
+     +                  ICAP_TOTAL_COST(I),
+     +                  ICAP_TOTAL_REVENUE(I),
+     +                  ICAP_NET_MARGIN(I),
+     +                  ICAP_NET_MARGIN_PER_MWH(I),
+     +                  ICAP_NET_MARGIN_PER_KW(I),
+     +                  ICAP_LEVEL_CAPITAL_COST(I),
+     +                  ICAP_CONE_VALUE,     ! 8  CONE VALUE
+     +                  ! 9 INSTALLED CAP VALUE
+     +                  ICAP_INSTL_CAPACITY_VALUE, ! 9 INSTALLED CAP VALUE
+     +                  ICAP_RESERVE_MARGIN, ! 10 RESERVE MARGIN
+     +                  ICAP_DEMAND_POINT,   ! 11 DEMAND CURVE MULT
+     +                  ICAP_VALUE_POINT,    ! 12 ICAP VALUE
+     +                  ICAP_MRX_CONE, !       13 MRX CONE
+     +                  ICAP_MRX_EAS_PER_KW,  ! 14 MRX EAS
+     +                  ICAP_EAS_REVENUE_OFFSET, ! 15 EAS OFFSET
+     +                  ICAP_ADJ_CAPACITY_VALUE, ! 16 ADJ CAP VALUE
+     +                  ICAP_VAR_COST(I),
+     +                  ICAP_FUEL_COST(I),
+     +                  ICAP_START_COST(I), !19
+     +                  ICAP_VOM_COST(I),  ! 20
+     +                  ICAP_EMISSION_COST(I) !21
+
+               MX_ICAP_ANNUAL_ALT_REC = MX_ICAP_ANNUAL_ALT_REC + 1
+            ENDDO
+!
+            IF(ISEAS == 12 .AND. FIRST_MONTHLY_TRANSACT < 13) THEN
+!               DO I = 1, PG
+               DO I = 1, CG
+!
+                  CM_INDEX = GET_CM_INDEX_FROM_TG(I)
+!
+                  WRITE(CM_CHAR_NUM,"(I3)") CM_INDEX
+                  TEMP_I2 = GET_REGIONAL_CM_NAME(I,CM_NAME)
+                  IF(TEMP_I2 <= 0) THEN
+                     CM_NAME = "AREA "//CM_CHAR_NUM
+                  endif
+                  LPM = GET_CM_PEAK_MONTH(I)
+                  ANNUAL_ICAP_PEAK_MONTH_CAP =
+     +                                MONTHLY_ICAP_TOTAL_CAPACITY(I,LPM)
+                  ANNUAL_ICAP_TOTAL_COST(I) =
+
+     +                           ANNUAL_ICAP_VAR_COST(I) +
+     +                                 ANNUAL_ICAP_LEVEL_CAPITAL_COST(I)
+!
+                  ANNUAL_ICAP_NET_MARGIN(I) =
+     +                     ANNUAL_ICAP_TOTAL_REVENUE(I) -
+     +                                         ANNUAL_ICAP_TOTAL_COST(I)
+!
+                  IF(ANNUAL_ICAP_PEAK_MONTH_CAP > 0.) THEN
+!
+
+                     ANNUAL_ICAP_MRX_CONE(I) =
+     +                     1000. * ANNUAL_ICAP_LEVEL_CAPITAL_COST(I)/
+     +                                 (12.0*ANNUAL_ICAP_PEAK_MONTH_CAP)
+                     ANNUAL_ICAP_NET_MARGIN_PER_KW(I) = 1000. *
+     +                                    ANNUAL_ICAP_NET_MARGIN(I) /
+     +                                 (12.0*ANNUAL_ICAP_PEAK_MONTH_CAP)
+                     ICAP_MRX_EAS_PER_KW = 1000. *
+     +                                 ANNUAL_ICAP_MRX_EAS(I) /
+     +                             (12.*ANNUAL_ICAP_PEAK_MONTH_CAP)
+                  ELSE
+
+                     ANNUAL_ICAP_MRX_CONE(I) = 0.
+                     ANNUAL_ICAP_NET_MARGIN_PER_KW(I) = 0.
+                     ICAP_MRX_EAS_PER_KW = 0.
+                  endif
+                     ANNUAL_ICAP_INSTL_CAPACITY_VALUE(I) =
+     +                  ANNUAL_ICAP_INSTL_CAPACITY_VALUE(I)/12.0
+                  IF(ANNUAL_ICAP_TOTAL_CAPACITY(I) > 0.) THEN
+                     ICAP_EAS_REVENUE_OFFSET =
+     +                           ANNUAL_ICAP_EAS_REVENUE_OFFSET(I) /
+     +                             ANNUAL_ICAP_TOTAL_CAPACITY(I)
+                  ELSE
+                     ICAP_EAS_REVENUE_OFFSET = 0.
+                  ENDIF
+                  IF(ANNUAL_ICAP_TOTAL_MWH(I) > 0.) THEN
+                     ANNUAL_ICAP_NET_MARGIN_PER_MWH(I) = 1000. *
+     +                        ANNUAL_ICAP_NET_MARGIN(I) /
+     +                                          ANNUAL_ICAP_TOTAL_MWH(I)
+                  ELSE
+                     ANNUAL_ICAP_NET_MARGIN_PER_MWH(I) = 0.
+                  ENDIF
+
+                  ANNUAL_ICAP_CONE_VALUE(I) =
+     +                     ANNUAL_ICAP_CONE_VALUE(I) ! /12.0
+                  ANNUAL_ICAP_MAX_MRX_OR_CONE(I) =
+     +                  MAX(-ANNUAL_ICAP_NET_MARGIN_PER_KW(I),
+     +                        ANNUAL_ICAP_CONE_VALUE(I))
+
+                  ANNUAL_ICAP_RESERVE_MARGIN(I) =
+     +                     ANNUAL_ICAP_RESERVE_MARGIN(I)/12.0
+                  ANNUAL_ICAP_DEMAND_POINT(I) =
+     +                     ANNUAL_ICAP_DEMAND_POINT(I)/12.0
+
+                  ANNUAL_ICAP_ADJ_CAPACITY_VALUE(I) =
+     +                  ANNUAL_ICAP_INSTL_CAPACITY_VALUE(I) -
+     +                                         ICAP_EAS_REVENUE_OFFSET
+                  IF(MARGINAL_ICAP(YEAR,I)) THEN
+! 031210
+                     CALL GET_MRX_ICAP_REPORT_VALUES(
+     +                                          I,
+     +                                          MRX_CAPACITY,
+     +                                          MRX_ENERGY,
+     +                                          MRX_TOTAL_REVENUE,
+     +                                          MRX_TOTAL_VARIABLE,
+     +                                          MRX_FUEL,
+     +                                          MRX_VOM,
+     +                                          MRX_EMISSIONS,
+     +                                          MRX_TOTAL_COST,
+     +                                          MRX_ANN_CAP_COST,
+     +                                          MRX_NET_MARGIN_MM,
+     +                                          MRX_NET_MARGIN_PER_MWH,
+     +                                          MRX_NET_MARGIN_PER_KWMO,
+     +                                          MRX_CONE_PER_KWMO,
+     +                                          MRX_EAS_REV_PER_KWMO,
+     +                                          MRX_ICAP_VALUE_POINT)
+!
+                     ANNUAL_ICAP_PEAK_MONTH_CAP = MRX_CAPACITY
+                     ANNUAL_ICAP_TOTAL_MWH(I) = MRX_ENERGY
+                     ANNUAL_ICAP_TOTAL_COST(I) = MRX_TOTAL_COST
+                     ANNUAL_ICAP_TOTAL_REVENUE(I) = MRX_TOTAL_REVENUE
+                     ANNUAL_ICAP_LEVEL_CAPITAL_COST(I) =
+     +                                                  MRX_ANN_CAP_COST
+                     ANNUAL_ICAP_VALUE_POINT(I) =
+     +                                          MRX_ICAP_VALUE_POINT ! /12.
+                     ANNUAL_ICAP_NET_MARGIN(I) = MRX_NET_MARGIN_MM
+                     ANNUAL_ICAP_NET_MARGIN_PER_MWH(I) =
+     +                                            MRX_NET_MARGIN_PER_MWH
+                     ANNUAL_ICAP_NET_MARGIN_PER_KW(I) =
+     +                                       MRX_NET_MARGIN_PER_KWMO !/12.
+                     ANNUAL_ICAP_MRX_CONE(I) = MRX_CONE_PER_KWMO / 12.
+! 042717.
+                     ICAP_MRX_EAS_PER_KW = MRX_EAS_REV_PER_KWMO !
+
+                  endif
+                  MX_ICAP_ANNUAL_ALT_REC = RPTREC(MX_ICAP_ANNUAL_ALT_NO)
+                  INQUIRE(UNIT=1809,OPENED=FILE_OPENED)
+                  IF(.NOT. FILE_OPENED) THEN
+                     WRITE(9,*) "ERROR IN MX ICAP REPORT OPEN STATUS"
+              er_message='Stop requested from Clreport SIID34'
+                     call end_program(er_message)
+                  endif
+                  WRITE(MX_ICAP_ANNUAL_ALT_NO,
+     +                                       REC=MX_ICAP_ANNUAL_ALT_REC)
+     +                  FLOAT(END_POINT),
+     +                  FLOAT(YEAR+BASE_YEAR),
+     +                  CL_MONTH_NAME(13),
+     +                  CM_NAME,
+     +                  ANNUAL_ICAP_PEAK_MONTH_CAP,  ! 0
+     +                  ANNUAL_ICAP_TOTAL_MWH(I),
+     +                  ANNUAL_ICAP_TOTAL_COST(I),
+     +                  ANNUAL_ICAP_TOTAL_REVENUE(I),
+     +                  ANNUAL_ICAP_NET_MARGIN(I),
+     +                  ANNUAL_ICAP_NET_MARGIN_PER_MWH(I),
+     +                  ANNUAL_ICAP_NET_MARGIN_PER_KW(I), ! /12.,
+     +                  ANNUAL_ICAP_LEVEL_CAPITAL_COST(I),
+     +                  ANNUAL_ICAP_CONE_VALUE(I)/12.,   ! ANNUAL_ICAP_MRX_CONE(I)/12.,
+     +                  ANNUAL_ICAP_INSTL_CAPACITY_VALUE(I), ! 9
+     +                  ANNUAL_ICAP_RESERVE_MARGIN(I),  !10
+     +                  ANNUAL_ICAP_DEMAND_POINT(I),
+     +                  ANNUAL_ICAP_VALUE_POINT(I)/12,  ! 12
+     +                  ANNUAL_ICAP_MRX_CONE(I), ! /12., ! 13 MRX CONE
+     +                  ICAP_MRX_EAS_PER_KW,  ! /12.,         ! 14
+     +                  ICAP_EAS_REVENUE_OFFSET, ! 15
+     +                  ANNUAL_ICAP_ADJ_CAPACITY_VALUE(I), ! 16
+     +                  ANNUAL_ICAP_VAR_COST(I),
+     +                  ANNUAL_ICAP_FUEL_COST(I),
+     +                  ANNUAL_ICAP_START_COST(I), !19
+     +                  ANNUAL_ICAP_VOM_COST(I),
+     +                  ANNUAL_ICAP_EMISSION_COST(I)  ! 21
+                  MX_ICAP_ANNUAL_ALT_REC = MX_ICAP_ANNUAL_ALT_REC + 1
+               ENDDO ! PG
+            ENDIF ! ANNUAL REPORT
+!
+         ENDIF ! ICAP REPORT
+!
+!
+
+!
+         DO I = 1, NUNITS
+            UNITNO = I
+            CL_TRANS_NAME = UNITNM(I)//CL_UNIQUE_RPT_STR(I)
+            ENRG = SEAS_HOURS * (ENERGY(1,UNITNO) + ENERGY(2,UNITNO))
+!
+! 5/6/00. ADDED FOR ECITIES.
+!
+            IF(DUKE_RESERVE_CAP_NO == UNITNO) THEN
+!
+               CAPBLK = GET_DUKE_RESERVE_CAPACITY()
+!
+            ELSE
+               CAPBLK = EFFECTIVE_CAPACITY(1,UNITNO) +
+     +                                      EFFECTIVE_CAPACITY(2,UNITNO)
+            ENDIF
+!
+            ANNUAL_CAP(I) = ANNUAL_CAP(I) + MW(2,I)
+            ANNUAL_REV_GEN_CAPACITY(I) = ANNUAL_REV_GEN_CAPACITY(I) +
+     +                                    REVENUE_GENERATING_CAPACITY(I)
+            ANNUAL_EFFECTIVE_CAP(I) = ANNUAL_EFFECTIVE_CAP(I) + CAPBLK
+            MONTHS_ACTIVE(I) = MONTHS_ACTIVE(I) + 1
+!
+! 11/22/04. FISCAL OFF-LINE PROBLEM WITH SRP.
+!
+            IF (ONLINE(I) .LE. DATE2 .AND. OFLINE(I) .GE. DATE1) THEN
+               FISCAL_CAP(I) = FISCAL_CAP(I) + MW(2,I)
+               FISCAL_REV_GEN_CAPACITY(I) = FISCAL_REV_GEN_CAPACITY(I) +
+     +                                    REVENUE_GENERATING_CAPACITY(I)
+               FISCAL_EFFECTIVE_CAP(I) =
+     +                                 FISCAL_EFFECTIVE_CAP(I) + CAPBLK
+               FISCAL_CL_UNIT_FIXED_COST(I) =
+     +                     FISCAL_CL_UNIT_FIXED_COST(I) +
+     +                                     CL_UNIT_MONTHLY_FIXED_COST(I)
+               FISCAL_MONTHS_ACTIVE(I) = FISCAL_MONTHS_ACTIVE(I) + 1
+            ENDIF
+! 8/28/02
+            CLASS = GET_ASSET_CLASS_NUM(UNITNO)
+            P_FUEL_DELIVERY = ABS(GET_P_FUEL_DELIVERY(UNITNO))
+            PBTUCT_SAVE = ABS(GET_PBTUCT_SAVE(UNITNO))
+!
+!
+            IF(ENRG > 0.45) THEN
+               HEAT = BLK1_HEAT(UNITNO) + BLK2_HEAT(UNITNO)
+               FUEL_COST = BLOCK_FUEL_COST(1,UNITNO) +
+     +                                         BLOCK_FUEL_COST(2,UNITNO)
+               FUEL_COST = FUEL_COST +
+     +                              ENRG * FUEL_ADDER_ADJUSTMENT(UNITNO)
+!
+! EMISSIONS
+!
+               CALL RETURN_EMISSIONS_BY_BLOCK(UNITNO,INT2(1),R_SOX,
+     +                                        R_NOX,R_CO2,R_OTH2,R_OTH3)
+               UNIT_EMISSIONS(1) = R_SOX/TONS_CONVERSION
+               UNIT_EMISSIONS(2) = R_NOX/TONS_CONVERSION
+               UNIT_EMISSIONS(3) = R_CO2/TONS_CONVERSION
+               UNIT_EMISSIONS(4) = R_OTH2/TONS_CONVERSION
+               UNIT_EMISSIONS(5) = R_OTH3/TONS_CONVERSION
+!
+               CALL RETURN_EMISSIONS_BY_BLOCK(UNITNO,INT2(2),R_SOX,
+     +                                        R_NOX,R_CO2,R_OTH2,R_OTH3)
+               UNIT_EMISSIONS(1) = UNIT_EMISSIONS(1) +
+     +                                             R_SOX/TONS_CONVERSION
+               UNIT_EMISSIONS(2) = UNIT_EMISSIONS(2) +
+     +                                             R_NOX/TONS_CONVERSION
+               UNIT_EMISSIONS(3) = UNIT_EMISSIONS(3) +
+     +                                             R_CO2/TONS_CONVERSION
+               UNIT_EMISSIONS(4) = UNIT_EMISSIONS(4) +
+     +                                            R_OTH2/TONS_CONVERSION
+               UNIT_EMISSIONS(5) = UNIT_EMISSIONS(5) +
+     +                                            R_OTH3/TONS_CONVERSION
+!
+!
+               EMIS_DISPATCH_1 = 0.002*
+     +                     TRANS_DISPATCH_EMIS_ADDER(1,ISEAS,YR,UNITNO)
+               EMIS_DISPATCH_2 = 0.002*
+     +                     TRANS_DISPATCH_EMIS_ADDER(2,ISEAS,YR,UNITNO)
+               EMIS_DISPATCH_3 = 0.002*
+     +                     TRANS_DISPATCH_EMIS_ADDER(3,ISEAS,YR,UNITNO)
+               EMIS_DISPATCH_4 = 0.002*
+     +                     TRANS_DISPATCH_EMIS_ADDER(4,ISEAS,YR,UNITNO)
+               EMIS_DISPATCH_5 = 0.002*
+     +                     TRANS_DISPATCH_EMIS_ADDER(5,ISEAS,YR,UNITNO)
+!
+               UNIT_EMISSIONS_COST(1) =
+     +                               UNIT_EMISSIONS(1) * EMIS_DISPATCH_1
+               UNIT_EMISSIONS_COST(2) =
+     +                               UNIT_EMISSIONS(2) * EMIS_DISPATCH_2
+               UNIT_EMISSIONS_COST(3) =
+     +                               UNIT_EMISSIONS(3) * EMIS_DISPATCH_3
+               UNIT_EMISSIONS_COST(4) =
+     +                               UNIT_EMISSIONS(4) * EMIS_DISPATCH_4
+               UNIT_EMISSIONS_COST(5) =
+     +                               UNIT_EMISSIONS(5) * EMIS_DISPATCH_5
+!
+            ELSE
+               HEAT = 0.D0
+               UNIT_EMISSIONS(1) = 0.
+               UNIT_EMISSIONS(2) = 0.
+               UNIT_EMISSIONS(3) = 0.
+               UNIT_EMISSIONS(4) = 0.
+               UNIT_EMISSIONS(5) = 0.
+!
+               UNIT_EMISSIONS_COST(1) = 0.
+               UNIT_EMISSIONS_COST(2) = 0.
+               UNIT_EMISSIONS_COST(3) = 0.
+               UNIT_EMISSIONS_COST(4) = 0.
+               UNIT_EMISSIONS_COST(5) = 0.
+!
+            ENDIF
+!
+! 091307. CAPACITY MARKETS. ! 092507. UPDATED
+! 103109. MOVED TG, TG_POSITION OUT OF LOOP
+            TG = MAX(1,TRANSACTION_GROUP(I))
+            TG_POSITION = MAX(1,GET_TRANS_GROUP_POSITION(TG))
+            TG_EffectiveCapacity(TG_POSITION,ISEAS) =
+     +                           TG_EffectiveCapacity(TG_POSITION,ISEAS)
+     +                           + CAPBLK
+! 030311. FOR ODEC.
+            IF(CAP_MARKET_ACTIVE(I) .AND.
+     +             ONLINE(I) .LE. DATE2 .AND. OFLINE(I) .GE. DATE1) THEN       ! L*1
+
+               TP = GET_CM_FROM_TG(TG_POSITION)
+
+               IF(RUN_MULTIAREA_TRANSACT) THEN ! 102409. FOR BURESH.
+! THE INDEX IS A GUESS.
+                  CAP_MARKET_REVENUE =
+     +                              MONTHLY_ICAP_VALUE(TP)*MW(2,I)*0.001
+               ELSE
+                  CAP_MARKET_REVENUE = GET_CAP_MARKET_REVENUE(I)
+               ENDIF
+            ELSE
+               CAP_MARKET_REVENUE = 0.0
+            ENDIF
+!
+! NEW VARIABLES FOR TRACKING INPUTS TO OUTPUTS. MSG 3/29/00
+!
+!
+            IF(HEAT > 0.D0) THEN
+               AVERAGE_NOX_RATE = TONS_CONVERSION*UNIT_EMISSIONS(2)/HEAT
+               AVERAGE_SOX_RATE = TONS_CONVERSION*UNIT_EMISSIONS(1)/HEAT
+               AVERAGE_CO2_RATE = TONS_CONVERSION*UNIT_EMISSIONS(3)/HEAT
+               AVERAGE_HG_RATE = TONS_CONVERSION*UNIT_EMISSIONS(4)/HEAT
+               AVERAGE_FUEL_COST = FUEL_COST/HEAT
+            ELSE
+               AVERAGE_NOX_RATE = 0.
+               AVERAGE_SOX_RATE = 0.
+               AVERAGE_CO2_RATE = 0.
+               AVERAGE_HG_RATE = 0.
+               AVERAGE_FUEL_COST = 0.
+            endif
+! TODO: EXTRACT_METHOD collect_nox_data
+            IF(UNIT_EMISSIONS(2) > 0.) THEN
+               ANNUAL_NOX_SEASON_EMISSIONS(I) =
+     +                                    ANNUAL_NOX_SEASON_EMISSIONS(I)
+     +                                    + UNIT_EMISSIONS(2)
+               ANNUAL_NOX_SEASON_THERMAL(I) = HEAT
+     +                                    + ANNUAL_NOX_SEASON_THERMAL(I)
+!
+               FISCAL_NOX_SEASON_EMISSIONS(I) =
+     +                                    FISCAL_NOX_SEASON_EMISSIONS(I)
+     +                                    + UNIT_EMISSIONS(2)
+               FISCAL_NOX_SEASON_THERMAL(I) = HEAT
+     +                                    + FISCAL_NOX_SEASON_THERMAL(I)
+!
+               TOTAL_NOX_HEAT = TOTAL_NOX_HEAT + HEAT
+            endif
+! TODO: EXTRACT_METHOD collect_nox_data (end)
+!
+            IF(.NOT. TESTING_PLAN .AND. NBLOCK > 0) THEN
+               IF(.NOT. CANADA .AND. PHASE_I_UNIT(UNITNO) ) THEN
+
+                  UNIT_NAME = trim(UNITNM(UNITNO))//'*'
+               ELSE
+                  UNIT_NAME = UNITNM(UNITNO)
+               ENDIF
+               IF(ENRG > 0.45) THEN
+                  AVERAGE_HEATRATE = HEAT_CONVERSION*HEAT/ENRG
+                  AVERAGE_FUEL_COST_PER_MWH = FUEL_COST / ENRG
+
+                  AVERAGE_PRODUCTION_COSTS =
+     +               SNGL((FUEL_COST))/ENRG+VCPMWH(UNITNO)
+                  IF(.NOT. CANADA) AVERAGE_HEATRATE =
+     +                                             AVERAGE_HEATRATE + .5
+               ELSE
+                  FUEL_COST = 0.0 D0
+                  HEAT = 0.0 D0
+                  AVERAGE_HEATRATE = 0.0
+                  AVERAGE_FUEL_COST_PER_MWH = 0.0
+                  AVERAGE_PRODUCTION_COSTS = 0.0
+               ENDIF
+               IF(MW(2,I) > 0.01 .AND. SEAS_HOURS > 0) THEN
+                  TRANS_EQUIV_AVAIL =  100. *
+     +                            REVENUE_GENERATING_CAPACITY(I)/MW(2,I)
+                  TRANS_CAP_FACTOR = ENRG * 100. /
+     +                                            (MW(2,I) * SEAS_HOURS)
+               ELSE
+                  TRANS_EQUIV_AVAIL = 0.0
+                  TRANS_CAP_FACTOR = 0.0
+               ENDIF
+! 050519.
+               IF (ONLINE(I) .LE. DATE2 .AND. OFLINE(I) .GE. DATE1) THEN
+                  AllHoursMonth(I) = AllHoursMonth(I) + SEAS_HOURS
+                  CapHours(I) = CapHours(I) + SEAS_HOURS * MW(2,I)
+                  EffectiveCapHours(I) = EffectiveCapHours(I) +
+     +                              SEAS_HOURS * CAPBLK
+                  AvailHoursMonth(I) = AvailHoursMonth(I) +
+     +                              SEAS_HOURS * TRANS_EQUIV_AVAIL *.01
+               ENDIF
+!
+               TOTAL_UNIT_COST =
+     +               (SNGL(FUEL_COST) + VCPMWH(UNITNO)*ENRG +
+     +                      CL_UNIT_MONTHLY_FIXED_COST(UNITNO))/1000000.
+!
+               IF(MON_ECO_SALES_ENRG_FROM(UNITNO) > 0.1) THEN
+                  AVE_REV_FROM_SALES =  MON_ECO_SALES_REV_FROM(UNITNO) /
+     +                                   MON_ECO_SALES_ENRG_FROM(UNITNO)
+               ELSE
+                  AVE_REV_FROM_SALES =  0.
+               ENDIF
+               MONTHLY_ECO_SALES = MONTHLY_ECO_SALES +
+     +                                    MON_ECO_SALES_REV_FROM(UNITNO)
+               MONTHLY_ECO_SALES_ENRG = MONTHLY_ECO_SALES_ENRG +
+     +                                   MON_ECO_SALES_ENRG_FROM(UNITNO)
+               MONTHLY_ECO_PUCH = MONTHLY_ECO_PUCH +
+     +                                    MON_ECO_PUCH_COST_FROM(UNITNO)
+               MONTHLY_ECO_PUCH_ENRG = MONTHLY_ECO_PUCH_ENRG +
+     +                                    MON_ECO_PUCH_ENRG_FROM(UNITNO)
+!
+               MONTHLY_TRANS_CAPACITY = MONTHLY_TRANS_CAPACITY + MW(2,I)
+               MONTHLY_TRANS_EFFECTIVE_CAP =
+     +                              MONTHLY_TRANS_EFFECTIVE_CAP + CAPBLK
+               MONTHLY_TRANS_AVAIL_CAP = MONTHLY_TRANS_AVAIL_CAP +
+     +                                    REVENUE_GENERATING_CAPACITY(I)
+               MONTHLY_TRANS_ENERGY = MONTHLY_TRANS_ENERGY + ENRG
+               MONTHLY_TRANS_HEAT = MONTHLY_TRANS_HEAT + HEAT
+               MONTHLY_TRANS_FUEL_COST = MONTHLY_TRANS_FUEL_COST +
+     +                                                         FUEL_COST
+               MONTHLY_TRANS_VAR_COST = MONTHLY_TRANS_VAR_COST +
+     +                                               VCPMWH(UNITNO)*ENRG
+!
+               MONTHLY_UNIT_EMISSIONS(1) = MONTHLY_UNIT_EMISSIONS(1) +
+     +                                                 UNIT_EMISSIONS(1)
+               MONTHLY_UNIT_EMISSIONS(2) = MONTHLY_UNIT_EMISSIONS(2) +
+     +                                                 UNIT_EMISSIONS(2)
+               MONTHLY_UNIT_EMISSIONS(3) = MONTHLY_UNIT_EMISSIONS(3) +
+     +                                                 UNIT_EMISSIONS(3)
+               MONTHLY_UNIT_EMISSIONS(4) = MONTHLY_UNIT_EMISSIONS(4) +
+     +                                                 UNIT_EMISSIONS(4)
+               MONTHLY_UNIT_EMISSIONS(5) = MONTHLY_UNIT_EMISSIONS(5) +
+     +                                                 UNIT_EMISSIONS(5)
+!
+               MONTHLY_UNIT_EMISSIONS_COST(1,UNITNO) =
+     +               MONTHLY_UNIT_EMISSIONS_COST(1,UNITNO) +
+     +                                            UNIT_EMISSIONS_COST(1)
+               MONTHLY_UNIT_EMISSIONS_COST(2,UNITNO) =
+     +               MONTHLY_UNIT_EMISSIONS_COST(2,UNITNO) +
+     +                                            UNIT_EMISSIONS_COST(2)
+               MONTHLY_UNIT_EMISSIONS_COST(3,UNITNO) =
+     +               MONTHLY_UNIT_EMISSIONS_COST(3,UNITNO) +
+     +                                            UNIT_EMISSIONS_COST(3)
+               MONTHLY_UNIT_EMISSIONS_COST(4,UNITNO) =
+     +               MONTHLY_UNIT_EMISSIONS_COST(4,UNITNO) +
+     +                                            UNIT_EMISSIONS_COST(4)
+               MONTHLY_UNIT_EMISSIONS_COST(5,UNITNO) =
+     +               MONTHLY_UNIT_EMISSIONS_COST(5,UNITNO) +
+     +                                            UNIT_EMISSIONS_COST(5)
+!
+               ANNUAL_UNIT_EMISSIONS_COST(I,1) =
+     +               ANNUAL_UNIT_EMISSIONS_COST(I,1) +
+     +                                            UNIT_EMISSIONS_COST(1)
+               ANNUAL_UNIT_EMISSIONS_COST(I,2) =
+     +               ANNUAL_UNIT_EMISSIONS_COST(I,2) +
+     +                                            UNIT_EMISSIONS_COST(2)
+               ANNUAL_UNIT_EMISSIONS_COST(I,3) =
+     +               ANNUAL_UNIT_EMISSIONS_COST(I,3) +
+     +                                            UNIT_EMISSIONS_COST(3)
+               ANNUAL_UNIT_EMISSIONS_COST(I,4) =
+     +               ANNUAL_UNIT_EMISSIONS_COST(I,4) +
+     +                                            UNIT_EMISSIONS_COST(4)
+               ANNUAL_UNIT_EMISSIONS_COST(I,5) =
+     +               ANNUAL_UNIT_EMISSIONS_COST(I,5) +
+     +                                            UNIT_EMISSIONS_COST(5)
+!
+               MONTHLY_TRANS_FIXED_COST = MONTHLY_TRANS_FIXED_COST +
+     +                                     CL_UNIT_MONTHLY_FIXED_COST(I)
+!
+
+               FT = MAX(1,MIN(GET_PRIMARY_MOVER(I),max_fuel_types_clr))
+               SP = MIN(MAX(0,GET_UNIT_STATE_PROVINCE_INDEX(I)),
+     +                                            MAX_STATE_PROVINCE_NO)
+               GSP = MIN(MAX(0,GET_UNIT_GAS_REGION_INDEX(I)),
+     +                                                MAX_GAS_REGION_NO)
+
+!
+               TEMP_L1 = GET_CL_BASECASE_MARKET_ID(I,MARKET_ID)
+
+               MK = MARKET_AREA_LOOKUP(MARKET_ID(1:5))
+               IF(MK < 0 .OR. MK > 600) THEN
+                  MK =MAX(0,MIN(600,MARKET_AREA_LOOKUP(MARKET_ID(1:5))))
+               ENDIF
+               PM = GET_PRIMARY_MOVER_INDEX(I)
+               RTG = TG
+               RMK = MK
+               RFT = FT
+               RSP = FLOAT(GET_THERMAL_STATE_INDEX(I))
+               CHARGING_ENERGY = 0.0
+!               RSP = SP
+               RPM = PM
+!
+               HESI_ID_NUM_4_UNIT = GET_HESI_UNIT_ID_NUM(int(I),
+     +                             int(HESI_SECOND_UNIT_ID_NUM))
+               POWERDAT_PLANT_ID = GET_POWERDAT_PLANT_ID(I)
+               NEWGEN_UNIT_STATUS = FLOAT(GET_NEWGEN_INDEX(I))
+
+!
+               ONLINE_DATE = 190000.+FLOAT(ONLINE(I))
+               OFLINE_DATE = 190000.+FLOAT(OFLINE(I))
+!
+               SINGLE_FUEL_COST = SNGL(FUEL_COST)/1000000.
+!
+! 072006. TEMPORARY FOR BURESH.
+!
+               IF(ABS(FUELMX(I)) < 0.99999 .AND.
+     +                       SEC_FUEL_TYPE(I) /= PRIM_FUEL_TYPE(I)) THEN
+                  IF( SEC_FUEL_TYPE(I) == 'N' .OR.
+     +                           SEC_FUEL_TYPE(I) == 'G') THEN
+                     SD = 2
+                  ELSEIF( SEC_FUEL_TYPE(I) == 'F' .OR.
+     +                           SEC_FUEL_TYPE(I) == 'J' .OR.
+     +                                 SEC_FUEL_TYPE(I) == 'K' .OR.
+     +                                     SEC_FUEL_TYPE(I) == 'D') THEN
+                     SD = 3
+                  ELSE
+                     SD = FT
+                  ENDIF
+                  PRIMARY_HEAT = ABS(FUELMX(I)) * SNGL(HEAT)
+                  SECONDARY_HEAT = SNGL(HEAT) - PRIMARY_HEAT
+                  IF(ABS(FUELMX(I)) > 0.001) THEN
+                     PRIMARY_FUEL_COST = MAX(0.,SINGLE_FUEL_COST -
+     +                                 SECONDARY_HEAT*SBTUCT(I)*.000001)
+                  ELSE
+                     PRIMARY_FUEL_COST = 0.0
+                  ENDIF
+                  SECONDARY_FUEL_COST =
+     +                      MAX(0.,SINGLE_FUEL_COST - PRIMARY_FUEL_COST)
+! PRIMARY
+                  FUEL_COST_BY_TG_BY_FUEL(TG_POSITION,FT) =
+     +                 FUEL_COST_BY_TG_BY_FUEL(TG_POSITION,FT) +
+     +                                                 PRIMARY_FUEL_COST
+                  ANNUAL_FUEL_COST_BY_TG_BY_FUEL(TG_POSITION,FT) =
+     +                  ANNUAL_FUEL_COST_BY_TG_BY_FUEL(TG_POSITION,FT) +
+     +                                                 PRIMARY_FUEL_COST
+                  FUEL_BTUS_BY_TG_BY_FUEL(TG_POSITION,FT) =
+     +                 FUEL_BTUS_BY_TG_BY_FUEL(TG_POSITION,FT) +
+     +                                                      PRIMARY_HEAT
+                  ANNUAL_FUEL_BTUS_BY_TG_BY_FUEL(TG_POSITION,FT) =
+     +                  ANNUAL_FUEL_BTUS_BY_TG_BY_FUEL(TG_POSITION,FT) +
+     +                                                      PRIMARY_HEAT
+! SECONDARY
+                  FUEL_COST_BY_TG_BY_FUEL(TG_POSITION,SD) =
+     +                 FUEL_COST_BY_TG_BY_FUEL(TG_POSITION,SD) +
+     +                                               SECONDARY_FUEL_COST
+                  ANNUAL_FUEL_COST_BY_TG_BY_FUEL(TG_POSITION,SD) =
+     +                  ANNUAL_FUEL_COST_BY_TG_BY_FUEL(TG_POSITION,SD) +
+     +                                               SECONDARY_FUEL_COST
+                  FUEL_BTUS_BY_TG_BY_FUEL(TG_POSITION,SD) =
+     +                 FUEL_BTUS_BY_TG_BY_FUEL(TG_POSITION,SD) +
+     +                                                    SECONDARY_HEAT
+                  ANNUAL_FUEL_BTUS_BY_TG_BY_FUEL(TG_POSITION,SD) =
+     +                  ANNUAL_FUEL_BTUS_BY_TG_BY_FUEL(TG_POSITION,SD) +
+     +                                                    SECONDARY_HEAT
+
+               ELSE
+!
+                  FUEL_COST_BY_TG_BY_FUEL(TG_POSITION,FT) =
+     +                 FUEL_COST_BY_TG_BY_FUEL(TG_POSITION,FT) +
+     +                                                  SINGLE_FUEL_COST
+                  ANNUAL_FUEL_COST_BY_TG_BY_FUEL(TG_POSITION,FT) =
+     +                  ANNUAL_FUEL_COST_BY_TG_BY_FUEL(TG_POSITION,FT) +
+     +                                                  SINGLE_FUEL_COST
+                  FUEL_BTUS_BY_TG_BY_FUEL(TG_POSITION,FT) =
+     +                 FUEL_BTUS_BY_TG_BY_FUEL(TG_POSITION,FT) +
+     +                                                        SNGL(HEAT)
+                  ANNUAL_FUEL_BTUS_BY_TG_BY_FUEL(TG_POSITION,FT) =
+     +                  ANNUAL_FUEL_BTUS_BY_TG_BY_FUEL(TG_POSITION,FT) +
+     +                                                        SNGL(HEAT)
+               ENDIF
+!
+
+!
+
+               PROD_BY_MK_BY_MWH(MK,1) = PROD_BY_MK_BY_MWH(MK,1) + ENRG
+               PROD_BY_MK_BY_MWH(MK,2) = PROD_BY_MK_BY_MWH(MK,2) +
+     +                                                           MW(2,I)
+               PROD_BY_MK_BY_MWH(MK,3) = PROD_BY_MK_BY_MWH(MK,3) + 1
+               ANNUAL_PROD_BY_MK_BY_MWH(MK,1) =
+     +                             ANNUAL_PROD_BY_MK_BY_MWH(MK,1) + ENRG
+               ANNUAL_PROD_BY_MK_BY_MWH(MK,2) =
+     +                         ANNUAL_PROD_BY_MK_BY_MWH(MK,2) + MW(2,I)
+               ANNUAL_PROD_BY_MK_BY_MWH(MK,3) =
+     +                                ANNUAL_PROD_BY_MK_BY_MWH(MK,3) + 1
+!               ENDIF
+!
+               IF(TRANSACT_PROD_REPORT_ACTIVE) THEN
+!
+                  IF( ABS(HESI_ID_NUM_4_UNIT+999999.0) > 2) THEN ! PER KJ
+
+
+       call check_capacity_array_bounds("mw_by_tg_by_fuel",
+     + mw_by_tg_by_fuel,int(tg_position), int(tft))
+       call check_capacity_array_bounds("mwh_by_tg_by_fuel",
+     + mwh_by_tg_by_fuel,int(tg_position), int(tft))
+       call check_capacity_array_bounds("annual_mwh_by_tg_by_fuel",
+     + annual_mwh_by_tg_by_fuel,int(tg_position), int(tft))
+       call check_capacity_array_bounds("annual_mwh_by_tg_by_fuel",
+     + annual_mwh_by_tg_by_fuel,int(tg_position), int(tft))
+                     IF(FT == 6) THEN
+                        IF(PM == 2) THEN
+                           TFT = 7
+                        ELSEIF(PM == 3) THEN
+                           TFT = 8
+                        ELSEIF(PM == 7) THEN
+                           TFT = 9
+                        ELSEIF(PM == 9) THEN
+                           TFT = 10
+                        ELSEIF(PM == 11) THEN
+                           TFT = 11
+                        ELSEIF(PM == 12) THEN
+                           TFT = 12
+                        ELSEIF(PM == 14) THEN
+                           TFT = 14
+                        ELSEIF(PM == 15) THEN
+                           TFT = 15
+                        ELSE
+                           TFT = 13
+                        ENDIF
+!
+                        MW_BY_TG_BY_FUEL(TG_POSITION,TFT) =
+     +                      MW_BY_TG_BY_FUEL(TG_POSITION,TFT) + MW(2,I)
+                        MWH_BY_TG_BY_FUEL(TG_POSITION,TFT) =
+     +                        MWH_BY_TG_BY_FUEL(TG_POSITION,TFT) + ENRG
+                        ANNUAL_MWH_BY_TG_BY_FUEL(TG_POSITION,TFT) =
+     +                      ANNUAL_MWH_BY_TG_BY_FUEL(TG_POSITION,TFT) +
+     +                                                            ENRG
+                        IF(ISEAS == 12) THEN
+                           ANNUAL_MW_BY_TG_BY_FUEL(TG_POSITION,TFT) =
+     +                        ANNUAL_MW_BY_TG_BY_FUEL(TG_POSITION,TFT) +
+     +                                                           MW(2,I)
+                        ENDIF
+                     ENDIF
+!
+                     MW_BY_TG_BY_FUEL(TG_POSITION,FT) =
+     +                  MW_BY_TG_BY_FUEL(TG_POSITION,FT) + MW(2,I)
+                     MWH_BY_TG_BY_FUEL(TG_POSITION,FT) =
+     +                  MWH_BY_TG_BY_FUEL(TG_POSITION,FT) + ENRG
+                     ANNUAL_MWH_BY_TG_BY_FUEL(TG_POSITION,FT) =
+     +                  ANNUAL_MWH_BY_TG_BY_FUEL(TG_POSITION,FT) + ENRG
+!
+                     MW_BY_TG_BY_FUEL(TG_POSITION,MFT1) =
+     +                   MW_BY_TG_BY_FUEL(TG_POSITION,MFT1) + MW(2,I)
+                     MWH_BY_TG_BY_FUEL(TG_POSITION,MFT1) =
+     +                  MWH_BY_TG_BY_FUEL(TG_POSITION,MFT1) + ENRG
+                     ANNUAL_MWH_BY_TG_BY_FUEL(TG_POSITION,MFT1) =
+     +                  ANNUAL_MWH_BY_TG_BY_FUEL(TG_POSITION,MFT1) +
+     +                                                            ENRG
+!PER KJ.
+                     IF(ISEAS == 12) THEN
+                        ANNUAL_MW_BY_TG_BY_FUEL(TG_POSITION,FT) =
+     +                    ANNUAL_MW_BY_TG_BY_FUEL(TG_POSITION,FT) +
+     +                                                          MW(2,I)
+                        ANNUAL_MW_BY_TG_BY_FUEL(TG_POSITION,MFT1) =
+     +                      ANNUAL_MW_BY_TG_BY_FUEL(TG_POSITION,MFT1) +
+     +                                                          MW(2,I)
+                     ENDIF
+                  ENDIF
+!
+       call check_capacity_array_bounds("prod_by_tg_by_mwh",
+     + prod_by_tg_by_mwh,int(tg_position), int(PM))
+       call check_capacity_array_bounds("prod_by_tg_by_mw",
+     + prod_by_tg_by_mw,int(tg_position), int(PM))
+                  PROD_BY_TG_BY_MWH(TG_POSITION,PM) =
+     +                  PROD_BY_TG_BY_MWH(TG_POSITION,PM) + ENRG
+                  ANNUAL_PROD_BY_TG_BY_MWH(TG_POSITION,PM) =
+     +                  ANNUAL_PROD_BY_TG_BY_MWH(TG_POSITION,PM) + ENRG
+
+                  PROD_BY_TG_BY_MW(TG_POSITION,PM) =
+     +                  PROD_BY_TG_BY_MW(TG_POSITION,PM) +  MW(2,I)
+
+
+                  IF(PM == 10) THEN ! STEAM
+
+                     LM = MIN(PM + FT + 4,max_prod_types_clr)
+                     PROD_BY_TG_BY_MWH(TG_POSITION,LM) =
+     +                  PROD_BY_TG_BY_MWH(TG_POSITION,LM) +
+     + ENRG
+                    if(PROD_BY_TG_BY_MWH(tg_position,lm)>0.0) then
+                        LM=LM!debugstop
+                    endif
+                     ANNUAL_PROD_BY_TG_BY_MWH(TG_POSITION,LM) =
+     +                  ANNUAL_PROD_BY_TG_BY_MWH(TG_POSITION,LM) +
+     + ENRG
+                     if(LM>15 .and. lm<18) then
+                        lm=lm!debugstop
+                     endif
+                     PROD_BY_TG_BY_MW(TG_POSITION,LM) =
+     +                  PROD_BY_TG_BY_MW(TG_POSITION,LM) + MW(2,I)
+                  ENDIF
+!
+
+                  PROD_BY_TG_BY_MWH(TG_POSITION,14) =
+     +                  PROD_BY_TG_BY_MWH(TG_POSITION,14) + ENRG
+                  ANNUAL_PROD_BY_TG_BY_MWH(TG_POSITION,14) =
+     +                  ANNUAL_PROD_BY_TG_BY_MWH(TG_POSITION,14) + ENRG
+                  PROD_BY_TG_BY_MW(TG_POSITION,14) =
+     +                  PROD_BY_TG_BY_MW(TG_POSITION,14) + MW(2,I)
+
+!
+               ENDIF
+
+!
+               IF(FUEL_PRICE_DATA_AVAILABLE) THEN
+                  CALL
+     +               RETURN_HEAT_BY_FUEL(I,PRIM_HEAT,SEC_HEAT,EMIS_HEAT)
+                  IF(PRIM_HEAT > 0.) THEN
+                     CALL GET_P_FUEL_PRICE_CONVERSION(
+     +                                     I,FUEL_PRICE_CONVERSION,YEAR)
+                     P_FUEL_CONSUMPTION =
+     +                                 PRIM_HEAT * FUEL_PRICE_CONVERSION
+                  ELSE
+                     P_FUEL_CONSUMPTION = 0.
+                  ENDIF
+                  IF(SEC_HEAT > 0.) THEN
+                     CALL GET_S_FUEL_PRICE_CONVERSION(
+     +                                     I,FUEL_PRICE_CONVERSION,YEAR)
+                     S_FUEL_CONSUMPTION =
+     +                                  SEC_HEAT * FUEL_PRICE_CONVERSION
+                  ELSE
+                     S_FUEL_CONSUMPTION = 0.
+                  ENDIF
+                  IF(EMIS_HEAT > 0.) THEN
+                     CALL GET_E_FUEL_PRICE_CONVERSION(
+     +                                     I,FUEL_PRICE_CONVERSION,YEAR)
+                     E_FUEL_CONSUMPTION =
+     +                                 EMIS_HEAT * FUEL_PRICE_CONVERSION
+                  ELSE
+                     E_FUEL_CONSUMPTION = 0.
+                  ENDIF
+               ELSE
+                  P_FUEL_CONSUMPTION =
+     +                              SNGL(HEAT)*PRIM_MOVER_CONVERSION(FT)
+               ENDIF
+!
+               MONTHLY_P_HEAT = MONTHLY_P_HEAT + P_FUEL_CONSUMPTION
+               MONTHLY_S_HEAT = MONTHLY_S_HEAT + S_FUEL_CONSUMPTION
+               MONTHLY_E_HEAT = MONTHLY_E_HEAT + E_FUEL_CONSUMPTION
+!
+               ANNUAL_UNIT_START_COSTS(I) = ANNUAL_UNIT_START_COSTS(I) +
+     +                                         MONTH_UNIT_START_COSTS(I)
+               MONTHLY_START_COSTS = MONTHLY_START_COSTS +
+     +                                         MONTH_UNIT_START_COSTS(I)
+!
+               MONTHLY_CAPACITY_REVENUE = MONTHLY_CAPACITY_REVENUE +
+     +                                                CAP_MARKET_REVENUE
+               ANNUAL_UNIT_CAPACITY_REVENUE(I) =
+     +                        ANNUAL_UNIT_CAPACITY_REVENUE(I) +
+     +                                                CAP_MARKET_REVENUE
+!
+               ANNUAL_UNIT_STARTS(I) = ANNUAL_UNIT_STARTS(I) +
+     +                                              MONTH_UNIT_STARTS(I)
+               MONTHLY_STARTS = MONTHLY_STARTS + MONTH_UNIT_STARTS(I)
+!
+               ANNUAL_P_FUEL_CONSUMPTION(I) =
+     +                           ANNUAL_P_FUEL_CONSUMPTION(I) +
+     +                                                P_FUEL_CONSUMPTION
+               ANNUAL_S_FUEL_CONSUMPTION(I) =
+     +                           ANNUAL_S_FUEL_CONSUMPTION(I) +
+     +                                                S_FUEL_CONSUMPTION
+               ANNUAL_E_FUEL_CONSUMPTION(I) =
+     +                           ANNUAL_E_FUEL_CONSUMPTION(I) +
+     +                                                E_FUEL_CONSUMPTION
+               WHOLESALE_PRODUCTION_COST =
+     +                  AVERAGE_PRODUCTION_COSTS *
+     +                          MON_ECO_SALES_ENRG_FROM(UNITNO)/1000000.
+               ANNUAL_WHOLESALE_PROD_COST(I) =
+     +                     ANNUAL_WHOLESALE_PROD_COST(I) +
+     +                                         WHOLESALE_PRODUCTION_COST
+               RETAIL_SALES = MAX(0.,
+     +                   (ENRG - MON_ECO_SALES_ENRG_FROM(UNITNO))/1000.)
+               MONTHLY_WHOLE_COSTS = MONTHLY_WHOLE_COSTS +
+     +                                         WHOLESALE_PRODUCTION_COST
+               MONTHLY_WHOLESALE_FUEL_COSTS =
+     +                           MONTHLY_WHOLESALE_FUEL_COSTS +
+     +                              AVERAGE_FUEL_COST_PER_MWH *
+     +                          MON_ECO_SALES_ENRG_FROM(UNITNO)/1000000.
+               MONTHLY_WHOLESALE_VOM_COSTS =
+     +                           MONTHLY_WHOLESALE_VOM_COSTS +
+     +                              VCPMWH(UNITNO) *
+     +                          MON_ECO_SALES_ENRG_FROM(UNITNO)/1000000.
+!
+               FISCAL_ECO_SALES_REV_FROM(UNITNO) =
+     +                        FISCAL_ECO_SALES_REV_FROM(UNITNO) +
+     +                                    MON_ECO_SALES_REV_FROM(UNITNO)
+               FISCAL_ECO_SALES_ENRG_FROM(UNITNO) =
+     +                        FISCAL_ECO_SALES_ENRG_FROM(UNITNO) +
+     +                                   MON_ECO_SALES_ENRG_FROM(UNITNO)
+               FISCAL_ECO_PUCH_COST_FROM(UNITNO) =
+     +                        FISCAL_ECO_PUCH_COST_FROM(UNITNO) +
+     +                                    MON_ECO_PUCH_COST_FROM(UNITNO)
+               FISCAL_ECO_PUCH_ENRG_FROM(UNITNO) =
+     +                        FISCAL_ECO_PUCH_ENRG_FROM(UNITNO) +
+     +                                    MON_ECO_PUCH_ENRG_FROM(UNITNO)
+!
+               FISCAL_P_FUEL_CONSUMPTION(I) =
+     +                           FISCAL_P_FUEL_CONSUMPTION(I) +
+     +                                                P_FUEL_CONSUMPTION
+               FISCAL_S_FUEL_CONSUMPTION(I) =
+     +                           FISCAL_S_FUEL_CONSUMPTION(I) +
+     +                                                P_FUEL_CONSUMPTION
+               FISCAL_E_FUEL_CONSUMPTION(I) =
+     +                           FISCAL_E_FUEL_CONSUMPTION(I) +
+     +                                                P_FUEL_CONSUMPTION
+
+               FISCAL_UNIT_STARTS(I) = FISCAL_UNIT_STARTS(I) +
+     +                                              MONTH_UNIT_STARTS(I)
+               FISCAL_UNIT_START_COSTS(I) = FISCAL_UNIT_START_COSTS(I) +
+     +                                         MONTH_UNIT_START_COSTS(I)
+               FISCAL_WHOLESALE_PROD_COST(I) =
+     +                     FISCAL_WHOLESALE_PROD_COST(I) +
+     +                                         WHOLESALE_PRODUCTION_COST
+!
+               FISCAL_UNIT_EMISSIONS_COST(I,1) =
+     +               FISCAL_UNIT_EMISSIONS_COST(I,1) +
+     +                                            UNIT_EMISSIONS_COST(1)
+               FISCAL_UNIT_EMISSIONS_COST(I,2) =
+     +               FISCAL_UNIT_EMISSIONS_COST(I,2) +
+     +                                            UNIT_EMISSIONS_COST(2)
+               FISCAL_UNIT_EMISSIONS_COST(I,3) =
+     +               FISCAL_UNIT_EMISSIONS_COST(I,3) +
+     +                                            UNIT_EMISSIONS_COST(3)
+               FISCAL_UNIT_EMISSIONS_COST(I,4) =
+     +               FISCAL_UNIT_EMISSIONS_COST(I,4) +
+     +                                            UNIT_EMISSIONS_COST(4)
+               FISCAL_UNIT_EMISSIONS_COST(I,5) =
+     +               FISCAL_UNIT_EMISSIONS_COST(I,5) +
+     +                                            UNIT_EMISSIONS_COST(5)
+! TODO: EXTRACT_METHOD collect_fiscal_data (end)
+
+! TODO: EXTRACT_METHOD collect_emissions_costs
+               EMISSIONS_COST_BY_SP(SP,1) =
+     +             EMISSIONS_COST_BY_SP(SP,1) + UNIT_EMISSIONS_COST(1)
+               EMISSIONS_COST_BY_SP(SP,2) =
+     +             EMISSIONS_COST_BY_SP(SP,2) + UNIT_EMISSIONS_COST(2)
+               EMISSIONS_COST_BY_SP(SP,3) =
+     +             EMISSIONS_COST_BY_SP(SP,3) + UNIT_EMISSIONS_COST(3)
+               EMISSIONS_COST_BY_SP(SP,4) =
+     +             EMISSIONS_COST_BY_SP(SP,4) + UNIT_EMISSIONS_COST(4)
+               EMISSIONS_COST_BY_SP(SP,5) =
+     +             EMISSIONS_COST_BY_SP(SP,5) + UNIT_EMISSIONS_COST(5)
+! TODO: EXTRACT_METHOD collect_emissions_costs (end)
+
+! TODO: EXTRACT_METHOD collect_group_data
+               GROUP_VAR_BY_SP(SP,1) = GROUP_VAR_BY_SP(SP,1) +
+     +                                                           MW(2,I)
+               ANNUAL_GROUP_VAR_BY_SP(SP,1) =
+     +                                 ANNUAL_GROUP_VAR_BY_SP(SP,1) +
+     +                                                           MW(2,I)
+               GROUP_VAR_BY_SP(SP,2) = GROUP_VAR_BY_SP(SP,2) +
+     +                                                           CAPBLK
+               ANNUAL_GROUP_VAR_BY_SP(SP,2) =
+     +                                 ANNUAL_GROUP_VAR_BY_SP(SP,2) +
+     +                                                           CAPBLK
+               GROUP_VAR_BY_SP(SP,3) = GROUP_VAR_BY_SP(SP,3) +
+     +                                                        ENRG/1000.
+               ANNUAL_GROUP_VAR_BY_SP(SP,3) =
+     +                                 ANNUAL_GROUP_VAR_BY_SP(SP,3) +
+     +                                                        ENRG/1000.
+               GROUP_VAR_BY_SP(SP,4) = GROUP_VAR_BY_SP(SP,4) +
+     +                                                        SNGL(HEAT)
+               ANNUAL_GROUP_VAR_BY_SP(SP,4) =
+     +                                 ANNUAL_GROUP_VAR_BY_SP(SP,4) +
+     +                                                        SNGL(HEAT)
+               GROUP_VAR_BY_SP(SP,5) = GROUP_VAR_BY_SP(SP,5) +
+     +                                          SNGL(FUEL_COST)/1000000.
+               ANNUAL_GROUP_VAR_BY_SP(SP,5) =
+     +                                 ANNUAL_GROUP_VAR_BY_SP(SP,5) +
+     +                                          SNGL(FUEL_COST)/1000000.
+               GROUP_VAR_BY_SP(SP,6) = GROUP_VAR_BY_SP(SP,6) +
+     +                                      VCPMWH(UNITNO)*ENRG/1000000.
+               ANNUAL_GROUP_VAR_BY_SP(SP,6) =
+     +                                 ANNUAL_GROUP_VAR_BY_SP(SP,6) +
+     +                                      VCPMWH(UNITNO)*ENRG/1000000.
+               GROUP_VAR_BY_SP(SP,7) = GROUP_VAR_BY_SP(SP,7) +
+     +                       CL_UNIT_MONTHLY_FIXED_COST(UNITNO)/1000000.
+               ANNUAL_GROUP_VAR_BY_SP(SP,7) =
+     +                                 ANNUAL_GROUP_VAR_BY_SP(SP,7) +
+     +                       CL_UNIT_MONTHLY_FIXED_COST(UNITNO)/1000000.
+               DO EM = 1, 5
+                  GROUP_VAR_BY_SP(SP,7+EM) = GROUP_VAR_BY_SP(SP,7+EM) +
+     +                                                UNIT_EMISSIONS(EM)
+                  ANNUAL_GROUP_VAR_BY_SP(SP,7+EM) =
+     +                                 ANNUAL_GROUP_VAR_BY_SP(SP,7+EM) +
+     +                                                UNIT_EMISSIONS(EM)
+               ENDDO
+               GROUP_VAR_BY_SP(SP,13) = GROUP_VAR_BY_SP(SP,13) +
+     +                           MON_ECO_SALES_REV_FROM(UNITNO)/1000000.
+               ANNUAL_GROUP_VAR_BY_SP(SP,13) =
+     +                                 ANNUAL_GROUP_VAR_BY_SP(SP,13) +
+     +                           MON_ECO_SALES_REV_FROM(UNITNO)/1000000.
+               GROUP_VAR_BY_SP(SP,14) = GROUP_VAR_BY_SP(SP,14) +
+     +                             MON_ECO_SALES_ENRG_FROM(UNITNO)/1000.
+               ANNUAL_GROUP_VAR_BY_SP(SP,14) =
+     +                                 ANNUAL_GROUP_VAR_BY_SP(SP,14) +
+     +                             MON_ECO_SALES_ENRG_FROM(UNITNO)/1000.
+               GROUP_VAR_BY_SP(SP,15) = GROUP_VAR_BY_SP(SP,15) +
+     +                           MON_ECO_PUCH_COST_FROM(UNITNO)/1000000.
+               ANNUAL_GROUP_VAR_BY_SP(SP,15) =
+     +                                 ANNUAL_GROUP_VAR_BY_SP(SP,15) +
+     +                           MON_ECO_PUCH_COST_FROM(UNITNO)/1000000.
+               GROUP_VAR_BY_SP(SP,16) = GROUP_VAR_BY_SP(SP,16) +
+     +                           MON_ECO_PUCH_ENRG_FROM(UNITNO)/1000.
+               ANNUAL_GROUP_VAR_BY_SP(SP,16) =
+     +                                 ANNUAL_GROUP_VAR_BY_SP(SP,16) +
+     +                           MON_ECO_PUCH_ENRG_FROM(UNITNO)/1000.
+               GROUP_VAR_BY_SP(SP,17) = GROUP_VAR_BY_SP(SP,17) +
+     +               MON_ECO_SALES_REV_FROM(UNITNO)/1000000. -
+     +                                                   TOTAL_UNIT_COST
+               ANNUAL_GROUP_VAR_BY_SP(SP,17) =
+     +                                 ANNUAL_GROUP_VAR_BY_SP(SP,17) +
+     +               MON_ECO_SALES_REV_FROM(UNITNO)/1000000. -
+     +                                                   TOTAL_UNIT_COST
+!
+
+! TODO: EXTRACT_METHOD collect_fuel_data
+
+               FUEL_COST_BY_SP_BY_FUEL(SP,FT) =
+     +                 FUEL_COST_BY_SP_BY_FUEL(SP,FT) +
+     +                                                  SINGLE_FUEL_COST
+               ANNUAL_FUEL_COST_BY_SP_BY_FUEL(SP,FT) =
+     +                  ANNUAL_FUEL_COST_BY_SP_BY_FUEL(SP,FT) +
+     +                                                  SINGLE_FUEL_COST
+               FUEL_BTUS_BY_SP_BY_FUEL(SP,FT) =
+     +                 FUEL_BTUS_BY_SP_BY_FUEL(SP,FT) +
+     +                                                        SNGL(HEAT)
+               ANNUAL_FUEL_BTUS_BY_SP_BY_FUEL(SP,FT) =
+     +                  ANNUAL_FUEL_BTUS_BY_SP_BY_FUEL(SP,FT) +
+     +                                                        SNGL(HEAT)
+               IF(FT == 2) THEN ! FOR THE GAS MODEL.
+                  FUEL_BTUS_BY_GSP_BY_FUEL(GSP,1) =
+     +                 FUEL_BTUS_BY_GSP_BY_FUEL(GSP,1) + SNGL(HEAT)
+                  ANNUAL_FUEL_BTUS_BY_GSP_BY_FUEL(GSP,1) =
+     +                  ANNUAL_FUEL_BTUS_BY_GSP_BY_FUEL(GSP,1) +
+     +                                                        SNGL(HEAT)
+! THE HEAT PEAK DAY HEAT SHOULD BE A FUNCTION OF THE SIZE OF THE MONTHLY CF
+                  FUEL_BTUS_BY_GSP_BY_FUEL(GSP,2) =
+     +                  FUEL_BTUS_BY_GSP_BY_FUEL(GSP,2) +
+     +                                         SNGL(HEAT)/DAYS_IN_MONTH
+                  ANNUAL_FUEL_BTUS_BY_GSP_BY_FUEL(GSP,2) =
+     +                  ANNUAL_FUEL_BTUS_BY_GSP_BY_FUEL(GSP,2) +
+     +                                         SNGL(HEAT)/DAYS_IN_MONTH
+                  FUEL_BTUS_BY_GSP_BY_FUEL(GSP,3) =
+     +                 FUEL_BTUS_BY_GSP_BY_FUEL(GSP,3) + 1
+                  ANNUAL_FUEL_BTUS_BY_GSP_BY_FUEL(GSP,3) =
+     +                  ANNUAL_FUEL_BTUS_BY_GSP_BY_FUEL(GSP,3) + 1
+               ENDIF
+!
+! 120410. FOR RETIREMENTS LOGIC
+!
+               TEMP_POINTER = GET_POINTER_FOR_NEW_CL_UNIT(UNITNO)
+               IF(TEMP_POINTER > 0) THEN
+                  CAPITAL_COST_OF_BUILD =
+     +                    RETURN_SCREEN_CAP_COST(TEMP_POINTER,YEAR)/12.
+               ELSE
+                  CAPITAL_COST_OF_BUILD = 0.0
+               ENDIF
+               TOTAL_EMISSION_COSTS = SUM(UNIT_EMISSIONS_COST)
+               UNIT_EBITDA = CAP_MARKET_REVENUE +
+     +                      MON_ECO_SALES_REV_FROM(UNITNO)/1000000. -
+     +                      (TOTAL_UNIT_COST + TOTAL_EMISSION_COSTS +
+     +                                        CAPITAL_COST_OF_BUILD)
+               ANNUAL_EBITDA(UNITNO) = ANNUAL_EBITDA(UNITNO) +
+     +                                                      UNIT_EBITDA
+!
+!
+
+               IF(TG <= MAX_TRANS_GROUP_NUMBER .AND.
+     +                        TRANS_GROUP_REPORTING_ACTIVE(TG) .AND.
+     +                             REPORT_MARKET_AREA(MARKET_ID) .AND.
+     +                                 REPORT_THIS_CL_UNIT(UNITNO)) THEN
+
+!
+                  IF(TRANS_EQUIV_AVAIL > 0.) THEN
+                     UNECONOMIC_RATE = 100.*(1. -
+     +                             (TRANS_CAP_FACTOR/TRANS_EQUIV_AVAIL))
+                  ELSE
+                     UNECONOMIC_RATE = 0.
+                  ENDIF
+!
+
+                  MONTHLY_CAPITAL_COST_OF_BUILD =
+     +                  MONTHLY_CAPITAL_COST_OF_BUILD +
+     +                                           CAPITAL_COST_OF_BUILD
+                  ANNUAL_CAPITAL_COST_OF_BUILD(UNITNO) =
+     +                       ANNUAL_CAPITAL_COST_OF_BUILD(UNITNO) +
+     +                           CAPITAL_COST_OF_BUILD
+                  FISCAL_CAPITAL_COST_OF_BUILD(UNITNO) =
+     +                  FISCAL_CAPITAL_COST_OF_BUILD(UNITNO) +
+     +                           CAPITAL_COST_OF_BUILD
+!
+
+                  MONTHLY_EBITDA = MONTHLY_EBITDA + UNIT_EBITDA
+                  MONTHLY_CHARGING_ENERGY = MONTHLY_CHARGING_ENERGY +
+     +                                                   CHARGING_ENERGY
+
+                  FISCAL_EBITDA(UNITNO) = FISCAL_EBITDA(UNITNO) +
+     +                                                      UNIT_EBITDA
+
+!                ! Ignore fractional component when determining variable O&M rate.
+                 IF(FUEL_COST > 0.) THEN
+                    VariableOMRate =  VCPMWH(UNITNO)
+                 ELSE
+                    VariableOMRate = 0.
+                 ENDIF
+
+                 IF(MONTHLY_TRANS_REPORT) THEN
+
+                   MON_CL_TRANS_UNIT_REC = RPTREC(MON_CL_TRANS_UNIT_NO)
+
+                   call write_unique_msgmtrcl_log_entry(1) ! debugmod
+!                  ! This is the monthly transact report (monthly thermal units).
+!                  !msgmtrcl monthly thermal units.  The third write is also
+!                  ! a monthly_trans_report, so document differences.
+! This is the monthly transact report (monthly thermal units).
+!msgmtrcl monthly thermal units.  The third write is also
+! a monthly_trans_report, so document differences.
+                   WRITE(MON_CL_TRANS_UNIT_NO,REC=MON_CL_TRANS_UNIT_REC)
+     +               PRT_ENDPOINT(),
+     +               LOCAL_YEAR,
+     +               CL_MONTH_NAME(ISEAS), ! Can be season, or an index value
+     +               CL_TRANS_NAME,
+     +               FLOAT(I), ! 0 - Unit
+     +               MW(2,I), ! 1 - Unit Capacity (MW)
+     +               CAPBLK, ! 2 - Effective Capacity (MW)
+     +               TRANS_EQUIV_AVAIL, ! 3 - Equivalent Availability
+     +               TRANS_CAP_FACTOR, ! 4 - Capacity Factor
+     +               ENRG/1000., ! 5 - Unit Generation (GWh)
+     +               SNGL(HEAT), ! 6 - Thermal Input (MMBTUs)
+     +               AVERAGE_HEATRATE, ! 7 Average Heatrate
+     +               SNGL(FUEL_COST)/1000000., ! 8 - Fuel Cost ($/MMW)
+     +               VariableOMRate*ENRG/1000000., ! 9 - Variable O&M Cost ($/MMW)
+     +               AVERAGE_PRODUCTION_COSTS,
+
+!                     ! 10: Avg. Generating Cost ($/MWh)
+!                     ! 11: SO2 Emissions (Tons)
+!                     ! 12: NOx Emssions (Tons)
+!                     ! 13: CO2 Emissions (Tons)
+!                     ! 14: Hg Emissions (Tons)
+!                     ! 15: Other Emissions (Tons)
+     +               (UNIT_EMISSIONS(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES), !11-15
+
+     +               CL_UNIT_MONTHLY_FIXED_COST(UNITNO)/1000000., ! 16 - Fixed Cost ($/MMW)
+     +               TOTAL_UNIT_COST, ! 17 Total Production Cost ($/MMW)
+     +               MON_ECO_SALES_REV_FROM(UNITNO)/1000000., ! 18 - Wholesale market revenue ($/MWh)
+     +               MON_ECO_SALES_ENRG_FROM(UNITNO)/1000., ! 19 - Wholesale Market Sold ($/MWh)
+     +               AVE_REV_FROM_SALES, !20 - Avg. Market Revenue ($/MWh)
+     +               MON_ECO_SALES_REV_FROM(UNITNO)/1000000. -
+     +                 TOTAL_UNIT_COST, ! 21 - Gross Margin ($/MMW)
+     +               MON_ECO_PUCH_COST_FROM(UNITNO)/1000000., ! 22 - Wholesale Market Cost ($/MMW)
+     +               MON_ECO_PUCH_ENRG_FROM(UNITNO)/1000., ! 23 - Whilesale Market Bought ($/MMW)
+     +               P_FUEL_CONSUMPTION, ! 24 - Primary Fuel Consumption
+     +               S_FUEL_CONSUMPTION, ! 25 - Secondary Fuel Consumption
+     +               E_FUEL_CONSUMPTION, ! 26 - Tertiary Fuel Consumption
+     +               AVERAGE_NOX_RATE, ! 27 - NOX avg. emiss. rate
+     +               AVERAGE_SOX_RATE, ! 28 - SOX avg. emiss. rate
+     +               AVERAGE_FUEL_COST, ! 29 - Av. fuel cost
+     +               VariableOMRate, ! VCPMWH(UNITNO), ! 30 - Variable O&M cost, avg.
+!
+!                     ! 31 - SO2 emissions cost
+!                     ! 32 - NOx emissions cost
+!                     ! 33 - CO2 emissions cost
+!                     ! 34 - Hg emissions cost
+!                     ! 35 - Other emissions cost
+     +               (UNIT_EMISSIONS_COST(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES), !31-35
+
+
+     +               WHOLESALE_PRODUCTION_COST, ! 36 - ($/MMW)
+     +               RETAIL_SALES, ! 37 - Retail Market Sold (GWh)
+     +               RTG, ! 38 - Transaction Group
+     +               RMK, ! 39 - Zone
+     +               RFT, ! 40 - Fuel Type
+     +               HESI_ID_NUM_4_UNIT, ! 41 - Unit ID
+     +               POWERDAT_PLANT_ID, ! 42 - Plant ID
+     +               FLOAT(MONTH_UNIT_STARTS(UNITNO)), ! 43 - Start-ups
+     +               TOTAL_EMISSION_COSTS, ! 44 - Total emission costs ($/MMW)
+     +               MONTH_UNIT_START_COSTS(UNITNO)/1000000., ! 45 - Start-up costs
+     +               FLOAT(CLASS), ! 46 - Asset class
+     +               PBTUCT_SAVE, ! 47 - Fuel hub index
+     +               P_FUEL_DELIVERY, ! 48 - Fuel Basis index
+     +               UNECONOMIC_RATE, ! 49 - Uneconomic rate (%)
+     +               NEWGEN_UNIT_STATUS, ! 50 - New entrants unit status
+     +               ONLINE_DATE, ! 51 - online date
+     +               OFLINE_DATE, ! 52 - offline date
+     +               RPM, ! 53 - Prime Mover
+     +               HESI_SECOND_UNIT_ID_NUM, ! 54 - Second unit id
+     +               EV_DATA_SOURCE, ! 55 - EV Data Source
+     +               EV_PLANNING_AREA, ! 56 - EV Planning Area
+     +               CAP_MARKET_REVENUE, ! 57 - Capacity Revenue ($/MMW)
+     +               CAPITAL_COST_OF_BUILD, ! 58 - Capital Cost (MRX units) ($/MMW)
+     +               UNIT_EBITDA,   ! 59 - EBITDA ($/MMW)
+     +               RSP, ! 60 - State/Province
+     +               CHARGING_ENERGY/1000. ! 61 - Charging energy (GWh)
+                  MON_CL_TRANS_UNIT_REC = MON_CL_TRANS_UNIT_REC + 1
+                 endif ! THERMAL UNITS
+! TODO: EXTRACT_METHOD handle_monthly_pw_report
+                 IF( MONTHLY_PW_REPORT .OR.
+     +                     ( MONTHLY_NEW_PW_REPORT .AND.
+     +                           UNITNO > CL_UNITS_B4_ADDITIONS ) ) THEN
+!
+                     UNIT_START_UP_COSTS =
+     +                        GET_UNIT_START_UP_COSTS(YEAR,UNITNO,ISEAS)
+!
+                     TEMP_L1 =
+     +                GET_PW_UNIT_TEXT_FIELDS(
+     +                     UNITNO,
+     +                     EIA_PLANT_CODE)
+                     TEMP_L1 = GET_PORT_MARKET_AREA_ABBREV(
+     +                                         RDI_MARKET_AREA_NAME,RMK)
+                     TEMP_L1 = GET_BASECASE_MARKET_AREA_ID(
+     +                                   EV_TRANS_AREA_NAME,TG_POSITION)
+                     TEMP_L1 = GET_CUBIC_HEAT_CURVE(UNITNO,
+     +                                              A_CO,B_CO,C_CO,D_CO)
+!
+!         !TMS 03/23/05 ADDED FOR EXELON
+          MIN_UPTIME = INT(GET_MIN_UP_TIME(UNITNO))
+                     MIN_DOWNTIME = INT(GET_MIN_DOWN_TIME(UNITNO))
+!
+                     IF(MONTHLY_NEW_PW_REPORT .AND.
+     +                              UNITNO > CL_UNITS_B4_ADDITIONS) THEN
+
+!                       ! TMS 3/01/05 INCREASED SIZE TO 8:16
+                        SAC_UNIT_NAME =
+     +                 TRIM(CL_TRANS_NAME(8:16))//'.'//
+     +                           TRIM(CL_TRANS_NAME(1:2))//
+     +                              TRIM(CL_TRANS_NAME(4:7))
+                  SAC_STATION_GROUP =
+     +                        'NEW.'//
+     +                        TRIM(CL_TRANS_NAME(9:10))
+                     ELSE
+                        SAC_UNIT_NAME = CL_TRANS_NAME
+                        SAC_STATION_GROUP = 'EXISTING.UNIT'
+                     endif
+!
+! 07/28/03. ADDED FOR RICHARDSON.
+!
+                     LOCAL_MW1 = MW(1,I)
+                     LOCAL_MW2 = MW(2,I)
+                     CALL CheckO3P(A_CO,B_CO,C_CO,D_CO,
+     +                                                 LOCAL_MW1,
+     +                                                 LOCAL_MW2)
+!
+! TEST FOR MONOTONIC NON-DECREASING.
+!
+                     IF(MW(2,I) > 0.) THEN
+                        FIXED_COST_PER_UNIT =
+     +                     .001*CL_UNIT_MONTHLY_FIXED_COST(UNITNO)/
+     +                                                           MW(2,I)
+                     ELSE
+                        FIXED_COST_PER_UNIT = 0.
+                     ENDIF
+!
+                     IF(MW(2,UNITNO) > 0.) THEN
+                        MONTHLY_MOR = MAX(0.,MIN(1.,
+     +                                       (1.-CAPBLK/MW(2,UNITNO))))
+                     ELSE
+                        MONTHLY_MOR = 0.
+                     ENDIF
+!
+                     IF(MONTHLY_MOR  < 0.999) THEN
+                        MONTHLY_FOR = MAX(0.,MIN(1.,
+     +                            (1.-(.01*TRANS_EQUIV_AVAIL)/
+     +                                             (1.-MONTHLY_MOR)) ) )
+                     ELSE
+                        MONTHLY_FOR = 0.
+                     ENDIF
+
+                     IF(HEAT <= 10.D0) THEN
+                        CALL GET_DISP_COST_FOR_A_UNIT(
+     +                                   UNITNO,DISP_COST_1,DISP_COST_2)
+                        PW_AVE_FUEL_COST = MAX(DISP_COST_1,DISP_COST_2)*
+!    +                                                     AVE_FUEL_MULT
+     +                                                .1 * AVE_FUEL_MULT ! TMS added 2/6/2005 for c/MMBtu
+                     ELSE
+                        PW_AVE_FUEL_COST =
+     +                                   AVERAGE_FUEL_COST*AVE_FUEL_MULT
+                     ENDIF
+!
+                     SAC_ONLINE_MO = ONLINE_DATE
+     +                               - AINT(ONLINE_DATE/100.)*100         ! TMS ADDED 3/15/05 EXTRACTS ONLINE MONTH
+!
+                     IF(ISEAS == 1 .AND. UNITNO >
+     +                                     LAST_RESOURCE_UPDATE_NO) THEN
+                      INSERVICE_STATUS = 0
+                      SAC_ONLINE_DATE = '01/01/2004'
+                      PW_REC = ' '
+
+                      WRITE(PW_REC,4321)
+     +                  PRT_ENDPOINT(),                      ',', ! F4.0
+     +                  LOCAL_YEAR,                            ',', ! F4.0
+     +                  QUOTE,CL_MONTH_NAME(ISEAS),QUOTE,      ',', ! A
+     +                  SAC_UNIT_NAME,                         ',', ! A
+     +                  MULTI_AREA_NAME(TG_POSITION),          ',', ! F4.0
+     +                  RTG,                                   ',', ! F4.0
+     +                  EV_TRANS_AREA_NAME,                    ',', ! A 01/31/05. FLIPPED POSITION
+     +                  MW(1,I),                               ',', ! F8.1
+     +                  MW(2,I),                               ',', ! F8.1
+     +                  FIXED_COST_PER_UNIT,                   ',',
+     +                  PW_AVE_FUEL_COST               ,       ',', ! F7.3
+     +                  RFT,                                   ',', ! F3.0
+     +                  VCPMWH(UNITNO),                        ',', ! F7.3
+     +                  A_CO,                                  ',', ! F12.4
+     +                  B_CO,                                  ',', ! F10.4
+     +                  C_CO,                                  ',', ! F14.10
+     +                  D_CO,                                  ',', ! F14.12
+     +                  INSERVICE_STATUS,                      ',', ! I4
+     +                  SAC_ONLINE_DATE,                       ',', ! A
+     +                  AVERAGE_NOX_RATE,                      ',', ! F6.3
+     +                  AVERAGE_SOX_RATE,                      ',', ! F6.3
+     +                  EMIS_DISPATCH_2*1000000.,              ',', ! F6.0
+     +                  EMIS_DISPATCH_1*1000000.,              ',', ! F6.0
+     +                  UNIT_START_UP_COSTS,                   ',', ! F10.2
+     +                  MONTHLY_MOR,                           ',', ! F6.2
+     +                  MONTHLY_FOR,                           ',', ! F6.2
+     +                  SAC_ONLINE_DATE,                       ',', ! A
+     +                  TRIM(SAC_STATION_GROUP),               ',', ! A   ! TMS 03/01/05 - ADDED FOR EXELON
+     +                  MIN_UPTIME,                            ',', ! I4  ! TMS 03/23/05  - ADDED FOR EXELON
+     +                  MIN_DOWNTIME,                          ',', ! I4  ! TMS 03/23/05  - ADDED FOR EXELON
+     +                  EMIS_DISPATCH_3*1000000.,              ',', ! F6.0
+     +                  AVERAGE_CO2_RATE,                      ',', ! F6.3
+     +                  EMIS_DISPATCH_4*1000000.,              ',', ! F6.0
+     +                  AVERAGE_HG_RATE,                       ','  ! F6.3
+                      MON_PW_TRANS_UNIT_REC = RPTREC(4444_2)
+                      WRITE(4444,4445,REC=MON_PW_TRANS_UNIT_REC)
+     +                                                      TRIM(PW_REC)
+                      LAST_RESOURCE_UPDATE_NO =
+     +                                       LAST_RESOURCE_UPDATE_NO + 1
+                     ENDIF
+!
+                     INSERVICE_STATUS = 1
+                     WRITE(SAC_ONLINE_DATE,4322) INT(SAC_ONLINE_MO),
+     +                                          '/01/',YEAR+BASE_YEAR   ! TMS 03/15/05 MODIFIED TO ALLOW USER SELECTABLE ON-LINE MO
+                     WRITE(SAC_DATE,4323) ISEAS,'/01/',YEAR+BASE_YEAR
+ 4322                FORMAT(I2,A,I4)
+ 4323                FORMAT(I2,A,I4)
+                     PW_REC = ' '
+                     WRITE(PW_REC,4321)
+     +                  PRT_ENDPOINT(),                      ',', ! F4.0
+     +                  LOCAL_YEAR,                            ',', ! F4.0
+     +                  QUOTE,CL_MONTH_NAME(ISEAS),QUOTE,      ',', ! A
+     +                  SAC_UNIT_NAME,                         ',', ! A
+
+     +                  MULTI_AREA_NAME(TG_POSITION),          ',', !
+
+     +                  RTG,                                   ',', ! F4.0
+     +                  EV_TRANS_AREA_NAME,                    ',', ! A 01/31/05. FLIPPED POSITION
+
+     +                  MW(1,I),                               ',', ! F8.1
+     +                  MW(2,I),                               ',', ! F8.1
+     +                  FIXED_COST_PER_UNIT*MW(2,I)*1000.,     ',', ! F12.0
+     +                  PW_AVE_FUEL_COST,                      ',', ! F7.3
+     +                  RFT,                                   ',', ! F3.0
+     +                  VCPMWH(UNITNO),                        ',', ! F7.3
+     +                  A_CO,                                  ',', ! F12.4
+     +                  B_CO,                                  ',', ! F10.4
+     +                  C_CO,                                  ',', ! F14.10
+     +                  D_CO,                                  ',', ! F14.12
+     +                  INSERVICE_STATUS,                      ',', ! I4
+     +                  SAC_ONLINE_DATE,                       ',', ! A
+     +                  AVERAGE_NOX_RATE,                      ',', ! F6.3
+     +                  AVERAGE_SOX_RATE,                      ',', ! F6.3
+     +                  EMIS_DISPATCH_2*1000000.,              ',', ! F6.0
+     +                  EMIS_DISPATCH_1*1000000.,              ',', ! F6.0
+     +                  UNIT_START_UP_COSTS,                   ',', ! F10.2
+     +                  MONTHLY_MOR,                           ',', ! F6.2
+     +                  MONTHLY_FOR,                           ',', ! F6.2
+     +                  SAC_DATE,                              ',', ! A
+     +                  TRIM(SAC_STATION_GROUP), ',',
+     +                  MIN_UPTIME,  ',', ! I4
+     +                  MIN_DOWNTIME,',', ! I4
+     +                  EMIS_DISPATCH_3*1000000.,              ',', ! F6.0
+     +                  AVERAGE_CO2_RATE,                      ',', ! F6.3
+     +                  EMIS_DISPATCH_4*1000000.,              ',', ! F6.0
+     +                  AVERAGE_HG_RATE,                       ',' ! F6.3
+
+                     MON_PW_TRANS_UNIT_REC = RPTREC(4444_2)
+                     WRITE(4444,4445,REC=MON_PW_TRANS_UNIT_REC)
+     +                                                      TRIM(PW_REC)
+
+ 4321                FORMAT(
+     +                   1X,F5.0,   A,
+     +                   1X,F5.0,   A,
+     +                   1X,A,A,A,A,
+     +                   1X,A,A, !     +                   1X,A,A,A,A, ! TOOK OUT QUOTES FOR UNIT NAME PER EMBREY
+     +                   1X,A,A,   ! MULTI-AREA NAME ! TOOK OUT QUOTES PER TOM
+     +                   1X,F6.0,   A,  ! MULTI-AREA TRANSACTION GROUP
+     +                   1X,A,A,        ! TRANS AREA NAME ! TOOK OUT QUOTES PER EMBREY
+     +                   1X,F8.1,   A, ! MIN CAPACITY
+     +                   1X,F8.1,   A, ! MAX CAPACITY
+     +                   1X,F12.0,   A,! FIXED COST
+     +                   1X,F9.3,   A, ! AVE FUEL COST
+     +                   1X,F3.0,   A, ! FUEL TYPE INDEX
+     +                   1X,F7.3,   A, ! VOM
+     +                   1X,F12.4, A, ! A COEFFICIENT
+     +                   1X,F10.4, A, ! B COEFFICIENT
+     +                   1X,F14.10,   A, ! C COEFFICIENT
+     +                   1X,F14.12,   A, ! D COEFFICIENT
+     +                   1X,I4,       A, ! INSERVICE_STATUS
+     +                   1X,A,        A, ! SAC_ONLINE_DATE
+     +                   1X,F6.3,     A, ! NOX RATE
+     +                   1X,F6.3,     A, ! SOX RATE
+     +                   1X,F6.0,     A, ! NOX EMISSION COST
+     +                   1X,F6.0,     A, ! SOX EMISSION COST
+     +                   1X,F10.2,     A, ! UNIT START UP COSTS
+     +                   1X,F6.2,     A, ! MONTHLY MOR
+     +                   1X,F6.2,     A, ! MONTHLY FOR
+     +                   1X,A,        A, ! SAC_DATE
+     +                   1X,A,        A, ! SAC_STATION_GROUP    ! TMS 03/01/05 - ADDED FOR EXELON
+     +                   1X,I4,       A, ! MIN_UPTIME           ! TMS 03/23/05  - ADDED FOR EXELON
+     +                   1X,I4        A,  ! MIN_DOWNTIME         ! TMS 03/23/05  - ADDED FOR EXELON
+     +                   1X,F9.2,     A, ! CO2 EMISSION COST
+     +                   1X,F6.1,     A, ! CO2 RATE
+     +                   1X,F9.0,     A, ! HG EMISSION COST
+     +                   1X,F11.9,     A) ! HG RATE
+
+
+!
+                     MON_PW_TRANS_UNIT_REC = MON_PW_TRANS_UNIT_REC + 1
+!
+                 ENDIF
+
+! TODO: EXTRACT_METHOD handle_monthly_pw_report (end)
+
+! TODO: Determine whether three writes to MON_NU_TRANS_UNIT_NO
+! can be combined into a single function call.
+                 IF(NEW_UNITS_REPORT .AND.
+     +                                 ONLINE(UNITNO) > BEGIN_DATE) THEN
+                   MON_NU_TRANS_UNIT_REC = RPTREC(MON_NU_TRANS_UNIT_NO)
+                   WRITE(MON_NU_TRANS_UNIT_NO,REC=MON_NU_TRANS_UNIT_REC)
+     +               PRT_ENDPOINT(),
+     +               LOCAL_YEAR,
+     +               CL_MONTH_NAME(ISEAS),
+     +               CL_TRANS_NAME,
+     +               FLOAT(I),
+     +               MW(2,I),
+     +               CAPBLK,
+     +               TRANS_EQUIV_AVAIL,
+     +               TRANS_CAP_FACTOR,
+     +               ENRG/1000.,
+     +               SNGL(HEAT),
+     +               AVERAGE_HEATRATE,
+     +               SNGL(FUEL_COST)/1000000.,
+     +               VCPMWH(UNITNO)*ENRG/1000000.,
+     +               AVERAGE_PRODUCTION_COSTS,
+     +               (UNIT_EMISSIONS(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +               CL_UNIT_MONTHLY_FIXED_COST(UNITNO)/1000000.,
+     +               TOTAL_UNIT_COST,
+     +               MON_ECO_SALES_REV_FROM(UNITNO)/1000000.,
+     +               MON_ECO_SALES_ENRG_FROM(UNITNO)/1000.,
+     +               AVE_REV_FROM_SALES,
+     +               MON_ECO_SALES_REV_FROM(UNITNO)/1000000. -
+     +                                                  TOTAL_UNIT_COST,
+     +               MON_ECO_PUCH_COST_FROM(UNITNO)/1000000.,
+     +               MON_ECO_PUCH_ENRG_FROM(UNITNO)/1000.,
+     +               P_FUEL_CONSUMPTION,
+     +               S_FUEL_CONSUMPTION,
+     +               E_FUEL_CONSUMPTION,
+     +               AVERAGE_NOX_RATE,
+     +               AVERAGE_SOX_RATE,
+     +               AVERAGE_FUEL_COST,
+     +               VCPMWH(UNITNO),
+     +               (UNIT_EMISSIONS_COST(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +               WHOLESALE_PRODUCTION_COST,
+     +               RETAIL_SALES,
+     +               RTG,RMK,RFT,
+     +               HESI_ID_NUM_4_UNIT,
+     +               POWERDAT_PLANT_ID,
+     +               FLOAT(MONTH_UNIT_STARTS(UNITNO)),
+     +               TOTAL_EMISSION_COSTS,
+     +               MONTH_UNIT_START_COSTS(UNITNO)/1000000.,
+     +               FLOAT(CLASS),
+     +               PBTUCT_SAVE,
+     +               P_FUEL_DELIVERY,
+     +               UNECONOMIC_RATE,
+     +               NEWGEN_UNIT_STATUS,
+     +               ONLINE_DATE,
+     +               OFLINE_DATE,
+     +               RPM,
+     +               HESI_SECOND_UNIT_ID_NUM,
+     +               EV_DATA_SOURCE,
+     +               EV_PLANNING_AREA,
+     +               CAP_MARKET_REVENUE,
+     +               CAPITAL_COST_OF_BUILD,
+     +               UNIT_EBITDA,
+     +               RSP,
+     +               CHARGING_ENERGY/1000.
+                  MON_NU_TRANS_UNIT_REC = MON_NU_TRANS_UNIT_REC + 1
+                 ENDIF ! NEW UNITS
+               ENDIF ! EXTERNAL UNIT TRAPS
+            ENDIF
+
+         ENDDO ! UNITS
+
+         SUM_ANNUAL = 1
+!
+         I = NUNITS
+!
+
+         DO TRANS = 1, NUM_TRANSACTIONS
+!
+            VOID_LOGICAL = GET_MONTHLY_TRANS_VARIABLES(TRANS,
+     +                                               ENRG,
+     +                                               TRANS_CAP,
+     +                                               TRANS_VAR_EXP,
+     +                                               TRANS_VAR_MWH,
+     +                                               TRANS_FIX_EXP,
+     +                                               TRANS_REV,
+     +                                               TRANS_REV_MWH,
+     +                                               TRANS_HOURS,
+     +                                               PRODUCT_HOURS,
+     +                                               TRANS_STRIKES,
+     +                                               ISEAS,
+     +                                               TRANS_NAME,
+     +                                               SUM_ANNUAL,
+     +                                               YES_REPORT_PRODUCT,
+     +                                               TG,
+     +                                               PM,
+     +                                               FT,
+     +                                               TRANS_ON_LINE,
+     +                                               TRANS_OFF_LINE,
+     +                                               TRANS_UNIT_ID,
+     +                                               TRANS_ASSET_CLASS,
+     +                                               TRANS_NOT_ACTIVE,
+     +                                               TEMP_YEAR,
+     +                                               CHARGING_ENERGY) ! 060308
+! 121806
+            IF(TRANS_NOT_ACTIVE) CYCLE
+!
+            I = I + 1
+            CL_TRANS_NAME = TRANS_NAME
+
+            TRANS_STRIKES = 0.0 ! 092107. PER BURESH.
+!
+            ANNUAL_CAP(I) = ANNUAL_CAP(I) + TRANS_CAP
+            FISCAL_CAP(I) = FISCAL_CAP(I) + TRANS_CAP
+            ANNUAL_REV_GEN_CAPACITY(I) = ANNUAL_REV_GEN_CAPACITY(I) +
+     +                                    TRANS_CAP
+            FISCAL_REV_GEN_CAPACITY(I) = FISCAL_REV_GEN_CAPACITY(I) +
+     +                                    TRANS_CAP
+            ANNUAL_EFFECTIVE_CAP(I) =
+     +                               ANNUAL_EFFECTIVE_CAP(I) + TRANS_CAP
+            FISCAL_EFFECTIVE_CAP(I) =
+     +                               FISCAL_EFFECTIVE_CAP(I) + TRANS_CAP
+            FISCAL_CL_UNIT_FIXED_COST(I) =
+     +                     FISCAL_CL_UNIT_FIXED_COST(I) +
+     +                                     CL_UNIT_MONTHLY_FIXED_COST(I)
+            MONTHS_ACTIVE(I) = MONTHS_ACTIVE(I) + 1
+            FISCAL_MONTHS_ACTIVE(I) = FISCAL_MONTHS_ACTIVE(I) + 1
+!
+            CAP_MARKET_REVENUE = 0. ! NO CAPACITY MARKET FOR DERIVATIVES YET.
+
+
+!
+               UNIT_EMISSIONS = 0.
+               UNIT_EMISSIONS_COST = 0.
+!               TG = MAX(1,TRANSACTION_GROUP(I))
+!
+!
+               TG_POSITION = MAX(1,GET_TRANS_GROUP_POSITION(TG))
+!               PM = GET_PRIMARY_MOVER_INDEX(I)
+               RTG = TG
+               RFT = FT
+               RSP = FLOAT(GET_TRANS_STATE_INDEX(TRANS))
+               MONTHLY_CHARGING_ENERGY = MONTHLY_CHARGING_ENERGY +
+     +                                                   CHARGING_ENERGY
+
+
+               RPM = PM
+! todo: promote_pm
+               IF(PM == 16) THEN
+                  PM = 18 ! BATTERY
+               ELSEIF(PM == 17) THEN
+                  PM = 19 ! DG
+               ENDIF
+!
+               IF(TRANSACT_PROD_REPORT_ACTIVE .AND.
+     +                                       FT > 0 .AND. FT /= 10) THEN
+!
+                  FT = MAX(1,MIN(FT,6))
+!
+                  PROD_BY_TG_BY_MWH(TG_POSITION,PM) =
+     +                  PROD_BY_TG_BY_MWH(TG_POSITION,PM) + ENRG
+                  ANNUAL_PROD_BY_TG_BY_MWH(TG_POSITION,PM) =
+     +                  ANNUAL_PROD_BY_TG_BY_MWH(TG_POSITION,PM) + ENRG
+                  PROD_BY_TG_BY_MW(TG_POSITION,PM) =
+     +                  PROD_BY_TG_BY_MW(TG_POSITION,PM) + TRANS_CAP
+                  IF(PM == 10) THEN ! STEAM
+
+                     pm=pm !debugstop
+
+                     LM = MIN(PM + FT + 4,max_prod_types_clr)
+                     PROD_BY_TG_BY_MWH(TG_POSITION,LM) =
+     +                  PROD_BY_TG_BY_MWH(TG_POSITION,LM) + ENRG
+                     ANNUAL_PROD_BY_TG_BY_MWH(TG_POSITION,LM) =
+     +                  ANNUAL_PROD_BY_TG_BY_MWH(TG_POSITION,LM) + ENRG
+                     PROD_BY_TG_BY_MW(TG_POSITION,LM) =
+     +                  PROD_BY_TG_BY_MW(TG_POSITION,LM) + TRANS_CAP
+                  ENDIF
+!
+                  PROD_BY_TG_BY_MWH(TG_POSITION,14) =
+     +                  PROD_BY_TG_BY_MWH(TG_POSITION,14) + ENRG
+                  ANNUAL_PROD_BY_TG_BY_MWH(TG_POSITION,14) =
+     +                  ANNUAL_PROD_BY_TG_BY_MWH(TG_POSITION,14) + ENRG
+                  PROD_BY_TG_BY_MW(TG_POSITION,14) =
+     +                      PROD_BY_TG_BY_MW(TG_POSITION,14) + TRANS_CAP
+!
+                  IF( ABS(TRANS_UNIT_ID+999999.0) > 2) THEN ! PER KJ
+!
+                     IF(FT == 6) THEN
+                        IF(PM == 2) THEN
+                           TFT = 7
+                        ELSEIF(PM == 3) THEN
+                           TFT = 8
+                        ELSEIF(PM == 7) THEN
+                           TFT = 9
+                        ELSEIF(PM == 9) THEN
+                           TFT = 10
+                        ELSEIF(PM == 11) THEN
+                           TFT = 11
+                        ELSEIF(PM == 12) THEN
+                           TFT = 12
+                        ELSEIF(INT2(RPM) == 16) THEN
+                           TFT = 14 ! BATTERY
+                        ELSEIF(INT2(RPM) == 17) THEN
+                           TFT = 15 ! DG
+                        ELSE
+                           TFT = 13
+                        ENDIF
+                        MW_BY_TG_BY_FUEL(TG_POSITION,TFT) =
+     +                     MW_BY_TG_BY_FUEL(TG_POSITION,TFT) + TRANS_CAP
+                        MWH_BY_TG_BY_FUEL(TG_POSITION,TFT) =
+     +                         MWH_BY_TG_BY_FUEL(TG_POSITION,TFT) + ENRG
+                        ANNUAL_MWH_BY_TG_BY_FUEL(TG_POSITION,TFT) =
+     +                      ANNUAL_MWH_BY_TG_BY_FUEL(TG_POSITION,TFT) +
+     +                                                              ENRG
+                        IF(ISEAS == 12) THEN
+                           ANNUAL_MW_BY_TG_BY_FUEL(TG_POSITION,TFT) =
+     +                       ANNUAL_MW_BY_TG_BY_FUEL(TG_POSITION,TFT) +
+     +                                                        TRANS_CAP
+                        ENDIF
+                     ENDIF
+!
+                     MW_BY_TG_BY_FUEL(TG_POSITION,FT) =
+     +                  MW_BY_TG_BY_FUEL(TG_POSITION,FT) + TRANS_CAP
+                     MWH_BY_TG_BY_FUEL(TG_POSITION,FT) =
+     +                  MWH_BY_TG_BY_FUEL(TG_POSITION,FT) + ENRG
+                     ANNUAL_MWH_BY_TG_BY_FUEL(TG_POSITION,FT) =
+     +                  ANNUAL_MWH_BY_TG_BY_FUEL(TG_POSITION,FT) + ENRG
+!
+                     MW_BY_TG_BY_FUEL(TG_POSITION,MFT1) =
+     +                  MW_BY_TG_BY_FUEL(TG_POSITION,MFT1) + TRANS_CAP
+! PER KJ.
+                     IF(ISEAS == 12) THEN
+                        ANNUAL_MW_BY_TG_BY_FUEL(TG_POSITION,FT) =
+     +                    ANNUAL_MW_BY_TG_BY_FUEL(TG_POSITION,FT) +
+     +                                                     TRANS_CAP
+                        ANNUAL_MW_BY_TG_BY_FUEL(TG_POSITION,MFT1) =
+     +                    ANNUAL_MW_BY_TG_BY_FUEL(TG_POSITION,MFT1) +
+     +                                                     TRANS_CAP
+                     ENDIF
+                  ENDIF
+! TODO: EXTRACT_METHOD handle_complex_inputs (end)
+! (don't know what to call this)
+                  MWH_BY_TG_BY_FUEL(TG_POSITION,MFT1) =
+     +                  MWH_BY_TG_BY_FUEL(TG_POSITION,MFT1) + ENRG
+                  ANNUAL_MWH_BY_TG_BY_FUEL(TG_POSITION,MFT1) =
+     +                 ANNUAL_MWH_BY_TG_BY_FUEL(TG_POSITION,MFT1) + ENRG
+!
+               ENDIF
+
+               AVERAGE_NOX_RATE = 0.
+               AVERAGE_SOX_RATE = 0.
+               AVERAGE_FUEL_COST = 0.
+
+            IF(.NOT. TESTING_PLAN .AND. NBLOCK > 0) THEN
+
+                  FUEL_COST = 0.0 D0
+                  HEAT = 0.0 D0
+                  AVERAGE_HEATRATE = 0.0
+                  AVERAGE_PRODUCTION_COSTS = 0.0
+
+               IF( ABS(TRANS_CAP) > 0.01 .AND. PRODUCT_HOURS > 0) THEN
+                  TRANS_CAP_FACTOR = ENRG * 100. /
+     +                                       (TRANS_CAP * PRODUCT_HOURS)
+               ELSE
+                  TRANS_CAP_FACTOR = 0.0
+               ENDIF
+!
+               TOTAL_UNIT_COST = TRANS_VAR_EXP + TRANS_FIX_EXP
+!
+               MONTHLY_ECO_SALES = MONTHLY_ECO_SALES + TRANS_REV
+               MONTHLY_DERIV_ECO_SALES = MONTHLY_DERIV_ECO_SALES +
+     +                                                         TRANS_REV
+!
+               MONTHLY_ECO_SALES_ENRG = MONTHLY_ECO_SALES_ENRG + ENRG
+               MONTHLY_DERIV_ECO_SALES_ENRG =
+     +                             MONTHLY_DERIV_ECO_SALES_ENRG + ENRG
+
+!
+               MONTHLY_TRANS_CAPACITY =
+     +                                MONTHLY_TRANS_CAPACITY + TRANS_CAP
+               MONTHLY_TRANS_EFFECTIVE_CAP =
+     +                           MONTHLY_TRANS_EFFECTIVE_CAP + TRANS_CAP
+               MONTHLY_TRANS_AVAIL_CAP = MONTHLY_TRANS_AVAIL_CAP +
+     +                                                         TRANS_CAP
+               MONTHLY_TRANS_ENERGY = MONTHLY_TRANS_ENERGY + ENRG
+
+               MONTHLY_TRANS_VAR_COST = MONTHLY_TRANS_VAR_COST +
+     +                                                     TRANS_VAR_EXP
+
+               MONTHLY_TRANS_FIXED_COST = MONTHLY_TRANS_FIXED_COST +
+     +                                                     TRANS_FIX_EXP
+
+
+               WHOLESALE_PRODUCTION_COST = TRANS_VAR_MWH * ENRG/1000000.
+               RETAIL_SALES = MAX(0.,(ENRG - ENRG)/1000.)
+               MONTHLY_WHOLE_COSTS = MONTHLY_WHOLE_COSTS +
+     +                                         WHOLESALE_PRODUCTION_COST
+               MONTHLY_DERIV_WHOLESALE_COST =
+     +                                    MONTHLY_DERIV_WHOLESALE_COST +
+     +                                         WHOLESALE_PRODUCTION_COST
+!
+               NEWGEN_UNIT_STATUS = 0.
+               CAPITAL_COST_OF_BUILD = 0.
+               TOTAL_EMISSION_COSTS = SUM(UNIT_EMISSIONS_COST)
+               UNIT_EBITDA = (TRANS_REV-TOTAL_UNIT_COST-
+     +                                    TOTAL_EMISSION_COSTS)/1000000.
+               POWERDAT_PLANT_ID = GET_Holding_Company_ID(TRANS)
+! 112820. NEW MARKET_ID
+
+               TEMP_L1 = GET_DERIV_ZONE_ID(I,MARKET_ID)
+               MK = MARKET_AREA_LOOKUP(MARKET_ID(1:5))
+               IF(MK < 0 .OR. MK > 600) THEN
+                  MK =MAX(0,MIN(600,MARKET_AREA_LOOKUP(MARKET_ID(1:5))))
+               ENDIF
+               RMK = FLOAT(MK)
+               IF (TRANS_ON_LINE - 190000. .LE. DATE2 .AND.
+     +                         TRANS_OFF_LINE - 190000. .GE. DATE1) THEN
+                  TransAllHoursMonth(TRANS) =
+     +                   TransAllHoursMonth(TRANS) + SEAS_HOURS
+                  TransCapHours(TRANS) =
+     +                   TransCapHours(TRANS) + SEAS_HOURS * TRANS_CAP
+                  TransEffectiveCapHours(TRANS) =
+     +                   TransEffectiveCapHours(TRANS) +
+     +                                            SEAS_HOURS * TRANS_CAP
+                  TransAvailHoursMonth(TRANS) =
+     +                   TransAvailHoursMonth(TRANS) + PRODUCT_HOURS
+               ENDIF
+               TRANS_EQUIV_AVAIL = 100.* PRODUCT_HOURS / SEAS_HOURS
+
+!
+               IF( MONTHLY_TRANS_REPORT .AND.
+     +                    YES_REPORT_PRODUCT .AND.
+     +                                 .NOT. SUPPRESS_DERIVATIVES) THEN
+
+                   MON_CL_TRANS_UNIT_REC = RPTREC(MON_CL_TRANS_UNIT_NO)
+!                  ! This is the monthly transact report, derivatives are active. _Product_ is being reported.
+!                  ! msgmtrcl Monthly derivatives/renewables
+                   call write_unique_msgmtrcl_log_entry(2)
+               WRITE(MON_CL_TRANS_UNIT_NO,REC=MON_CL_TRANS_UNIT_REC)
+     +               PRT_ENDPOINT(),
+     +               LOCAL_YEAR,
+     +               CL_MONTH_NAME(ISEAS),
+     +               CL_TRANS_NAME,
+     +               FLOAT(I),
+     +               TRANS_CAP, ! Installed capacity
+     +               TRANS_CAP, ! Equivalent capacity
+     +               TRANS_EQUIV_AVAIL, ! TRANS_HOURS,
+     +               TRANS_CAP_FACTOR,
+     +               ENRG/1000.,
+     +               0.,
+     +               TRANS_STRIKES,
+     +               0.,
+     +               TRANS_VAR_EXP/1000000., ! 9 - Variable O&M Cost ($/MWH)
+     +               TRANS_VAR_MWH,
+     +               (UNIT_EMISSIONS(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES), ! 10-15
+     +               TRANS_FIX_EXP/1000000., ! 16
+     +               TOTAL_UNIT_COST/1000000.,
+     +               TRANS_REV/1000000.,
+     +               ENRG/1000.,
+     +               TRANS_REV_MWH,
+     +               (TRANS_REV-TOTAL_UNIT_COST)/1000000.,
+     +               0.,
+     +               0.,
+     +               0.,
+     +               0.,
+     +               0.,
+     +               0.,
+     +               0.,
+     +               0.,
+     +               TRANS_VAR_MWH,
+     +               (UNIT_EMISSIONS_COST(EM),
+     +                EM=1,NUMBER_OF_EMISSION_TYPES),
+     +               WHOLESALE_PRODUCTION_COST,
+     +               RETAIL_SALES,
+     +               RTG,RMK,RFT,
+     +               TRANS_UNIT_ID, ! HESI UNIT ID NUM
+     +               POWERDAT_PLANT_ID,  ! POWER PLANT ID NUM
+     +               0.,
+     +               TOTAL_EMISSION_COSTS,
+     +               0.,
+     +               TRANS_ASSET_CLASS, ! ASSET CLASS
+     +               0.,
+     +               0.,
+     +               0., ! UNECONOMIC_RATE
+     +               NEWGEN_UNIT_STATUS,
+     +               TRANS_ON_LINE, ! ONLINE
+     +               TRANS_OFF_LINE, ! OFLINE
+     +               RPM,
+     +               0., ! HESI_SECOND_UNIT_ID
+     +               EV_DATA_SOURCE,
+     +               EV_PLANNING_AREA,
+     +               CAP_MARKET_REVENUE,
+     +               CAPITAL_COST_OF_BUILD,
+     +               UNIT_EBITDA,
+     +               RSP,
+     +               CHARGING_ENERGY/1000.
+              MON_CL_TRANS_UNIT_REC = MON_CL_TRANS_UNIT_REC + 1
+               ENDIF ! THERMAL UNITS REPORT
+!
+               IF(DERIVATIVES_REPORT) THEN
+                  MON_DV_TRANS_UNIT_REC = RPTREC(MON_DV_TRANS_UNIT_NO)
+                  WRITE(MON_DV_TRANS_UNIT_NO,REC=MON_DV_TRANS_UNIT_REC)
+     +               PRT_ENDPOINT(),
+     +               LOCAL_YEAR,
+     +               CL_MONTH_NAME(ISEAS),
+     +               CL_TRANS_NAME,
+     +               FLOAT(I),
+     +               TRANS_CAP,
+     +               PRODUCT_HOURS,
+     +               TRANS_HOURS,
+     +               TRANS_CAP_FACTOR,
+     +               ENRG/1000.,
+     +               0.,
+     +               TRANS_STRIKES,
+     +               0.,
+     +               TRANS_VAR_EXP/1000000.,
+     +               TRANS_VAR_MWH,
+     +               (UNIT_EMISSIONS(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +               TRANS_FIX_EXP/1000000.,
+     +               TOTAL_UNIT_COST/1000000.,
+     +               TRANS_REV/1000000.,
+     +               ENRG/1000.,
+     +               TRANS_REV_MWH,
+     +               (TRANS_REV-TOTAL_UNIT_COST)/1000000.,
+     +               0.,
+     +               0.,
+     +               0.,
+     +               0.,
+     +               0.,
+     +               0.,
+     +               0.,
+     +               0.,
+     +               TRANS_VAR_MWH,
+     +               (UNIT_EMISSIONS_COST(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +               WHOLESALE_PRODUCTION_COST,
+     +               RETAIL_SALES,
+     +               RTG,RMK,RFT,
+     +               TRANS_UNIT_ID, ! HESI UNIT ID NUM
+     +               POWERDAT_PLANT_ID, ! POWER PLANT ID NUM
+     +               0.,
+     +               TOTAL_EMISSION_COSTS,
+     +               0.,
+     +               TRANS_ASSET_CLASS, ! ASSET CLASS
+     +               0.,
+     +               0.,
+     +               0., ! UNECONOMIC_RATE
+     +               NEWGEN_UNIT_STATUS,
+     +               TRANS_ON_LINE, ! ONLINE
+     +               TRANS_OFF_LINE, ! OFLINE
+     +               RPM,
+     +               0., ! HESI_SECOND_UNIT_ID
+     +               EV_DATA_SOURCE,
+     +               EV_PLANNING_AREA,
+     +               CAP_MARKET_REVENUE,
+     +               CAPITAL_COST_OF_BUILD,
+     +               UNIT_EBITDA,
+     +               RSP,
+     +               CHARGING_ENERGY/1000.
+                    MON_DV_TRANS_UNIT_REC = MON_DV_TRANS_UNIT_REC + 1
+               ENDIF ! DERIVATIVES REPORT
+            ENDIF
+         ENDDO ! TRANSACTIONS
+!
+         CL_TRANS_NAME = 'Total Resources       '
+         I = I + 1
+!
+         IF(MONTHLY_TRANS_ENERGY > 0.45) THEN
+            AVERAGE_HEATRATE = HEAT_CONVERSION*MONTHLY_TRANS_HEAT/
+     +                                              MONTHLY_TRANS_ENERGY
+            AVERAGE_PRODUCTION_COSTS =
+     +               (SNGL(MONTHLY_TRANS_FUEL_COST) +
+     +                              MONTHLY_TRANS_VAR_COST) /
+     +                                              MONTHLY_TRANS_ENERGY
+            IF(.NOT. CANADA) AVERAGE_HEATRATE = AVERAGE_HEATRATE + .5
+         ELSE
+            MONTHLY_TRANS_FUEL_COST = 0.0 D0
+            MONTHLY_TRANS_HEAT = 0.0 D0
+            AVERAGE_HEATRATE = 0.0
+            AVERAGE_PRODUCTION_COSTS = 0.0
+         ENDIF
+         IF(MONTHLY_TRANS_CAPACITY > 0.01 .AND. SEAS_HOURS > 0) THEN
+            TRANS_EQUIV_AVAIL =  100. * MONTHLY_TRANS_AVAIL_CAP/
+     +                                            MONTHLY_TRANS_CAPACITY
+            TRANS_CAP_FACTOR = MONTHLY_TRANS_ENERGY * 100. /
+     +                             (MONTHLY_TRANS_CAPACITY * SEAS_HOURS)
+         ELSE
+            TRANS_EQUIV_AVAIL = 0.0
+            TRANS_CAP_FACTOR = 0.0
+         ENDIF
+! TODO:  EXTRACT_METHOD apply_trans_energy (end)
+         TOTAL_UNIT_COST =
+     +               (SNGL(MONTHLY_TRANS_FUEL_COST) +
+     +                         MONTHLY_TRANS_VAR_COST +
+     +                                MONTHLY_TRANS_FIXED_COST)/1000000.
+!
+         IF(MONTHLY_ECO_SALES_ENRG > 0.1) THEN
+            AVE_REV_FROM_SALES =  MONTHLY_ECO_SALES /
+     +                                            MONTHLY_ECO_SALES_ENRG
+         ELSE
+            AVE_REV_FROM_SALES =  0.
+         ENDIF
+
+!
+         IF(MONTHLY_TRANS_HEAT /= 0.) THEN
+            AVERAGE_SOX_RATE=TONS_CONVERSION*MONTHLY_UNIT_EMISSIONS(1)/
+     +                              MONTHLY_TRANS_HEAT
+            AVERAGE_FUEL_COST = MONTHLY_TRANS_FUEL_COST/
+     +                           MONTHLY_TRANS_HEAT
+         ELSE
+            AVERAGE_SOX_RATE = 0.
+            AVERAGE_FUEL_COST = 0.
+         ENDIF
+         AVERAGE_VAR_OM = 0.
+         IF(MONTHLY_TRANS_ENERGY /= 0.) AVERAGE_VAR_OM =
+     +                                           MONTHLY_TRANS_VAR_COST/
+     +                                            MONTHLY_TRANS_ENERGY
+         AVERAGE_NOX_RATE = 0.
+         IF(TOTAL_NOX_HEAT > 0.) THEN
+            AVERAGE_NOX_RATE = TONS_CONVERSION *
+     +                          MONTHLY_UNIT_EMISSIONS(2)/TOTAL_NOX_HEAT
+         ENDIF
+! TODO: EXTRACT_METHOD handle_for_monthly_trans_heat (end)
+         MONTHLY_RETAIL_SALES = MAX(0.,
+     +            (MONTHLY_TRANS_ENERGY - MONTHLY_ECO_SALES_ENRG)/1000.)
+!
+!
+         WHOLESALE_MARKET_COST(ISEAS) = MONTHLY_ECO_PUCH/1000.
+         WHOLESALE_MARKET_BUY_MWH(ISEAS) = MONTHLY_ECO_PUCH_ENRG ! MWH
+         MONTHLY_WHOLESALE_COST(ISEAS,1) =   MONTHLY_WHOLE_COSTS * 1000.
+
+         MONTHLY_WHOLESALE_COST(ISEAS,2) =
+     +                          (MONTHLY_WHOLESALE_FUEL_COSTS)*1000.
+         MONTHLY_WHOLESALE_COST(ISEAS,3) = MONTHLY_WHOLESALE_VOM_COSTS *
+     +                                                             1000.
+
+         WHOLESALE_MARKET_REV(ISEAS) =
+     +                           (MONTHLY_ECO_SALES -
+     +                                    MONTHLY_DERIV_ECO_SALES)/1000.
+!
+         WHOLESALE_DERIV_COST(ISEAS) = WHOLESALE_DERIV_COST(ISEAS) +
+     +                                     MONTHLY_DERIV_ECO_SALES/1000.
+!
+         WHOLESALE_MARKET_SELL_MWH(ISEAS) =
+     +                     MONTHLY_ECO_SALES_ENRG -
+     +                                 MONTHLY_DERIV_ECO_SALES_ENRG! MWH
+!
+         WHOLESALE_MARKET_COST(0) =
+     +                     WHOLESALE_MARKET_COST(0) +
+     +                                      WHOLESALE_MARKET_COST(ISEAS)
+         WHOLESALE_MARKET_BUY_MWH(0) =
+     +                     WHOLESALE_MARKET_BUY_MWH(0) +
+     +                                   WHOLESALE_MARKET_BUY_MWH(ISEAS)
+         MONTHLY_WHOLESALE_COST(0,1) =  MONTHLY_WHOLESALE_COST(0,1) +
+     +                                   MONTHLY_WHOLESALE_COST(ISEAS,1)
+         MONTHLY_WHOLESALE_COST(0,2) =  MONTHLY_WHOLESALE_COST(0,2) +
+     +                                   MONTHLY_WHOLESALE_COST(ISEAS,2)
+         MONTHLY_WHOLESALE_COST(0,3) =  MONTHLY_WHOLESALE_COST(0,3) +
+     +                                   MONTHLY_WHOLESALE_COST(ISEAS,3)
+         WHOLESALE_MARKET_REV(0) = WHOLESALE_MARKET_REV(0) +
+     +                                 WHOLESALE_MARKET_REV(ISEAS)
+!
+         WHOLESALE_DERIV_COST(0) = WHOLESALE_DERIV_COST(0) +
+     +                                       WHOLESALE_DERIV_COST(ISEAS)
+!
+         WHOLESALE_MARKET_SELL_MWH(0) =
+     +                                 WHOLESALE_MARKET_SELL_MWH(0) +
+     +                                  WHOLESALE_MARKET_SELL_MWH(ISEAS)
+!
+! TODO: EXTRACT_METHOD handle_market_data (end)
+         NEWGEN_UNIT_STATUS = 0.
+!
+! TODO: EXTRACT_METHOD handle_monthly_trans_report
+         IF(MONTHLY_TRANS_REPORT) THEN
+
+            TOTAL_EMISSION_COSTS = SUM(MONTHLY_UNIT_EMISSIONS_COST)
+            TOTAL_EMISSION_COSTS_BY_TYPE(:) =
+     +                       SUM(MONTHLY_UNIT_EMISSIONS_COST(:,:),dim=2)
+
+!
+            IF(TRANS_EQUIV_AVAIL > 0.) THEN
+               UNECONOMIC_RATE = 100.*(1. -
+     +                             (TRANS_CAP_FACTOR/TRANS_EQUIV_AVAIL))
+            ELSE
+               UNECONOMIC_RATE = 0.
+            ENDIF
+!
+            MON_CL_TRANS_UNIT_REC = RPTREC(MON_CL_TRANS_UNIT_NO)
+!           ! Monthly Transact report.
+!           !msgmtrcl
+            call write_unique_msgmtrcl_log_entry(3)
+            WRITE(MON_CL_TRANS_UNIT_NO,REC=MON_CL_TRANS_UNIT_REC)
+     +               PRT_ENDPOINT(),
+     +               LOCAL_YEAR,
+     +               CL_MONTH_NAME(ISEAS),
+     +               CL_TRANS_NAME,
+     +               FLOAT(I),
+     +               MONTHLY_TRANS_CAPACITY,
+     +               MONTHLY_TRANS_EFFECTIVE_CAP,
+     +               TRANS_EQUIV_AVAIL,
+     +               TRANS_CAP_FACTOR,
+     +               MONTHLY_TRANS_ENERGY/1000.,
+     +               SNGL(MONTHLY_TRANS_HEAT),
+     +               AVERAGE_HEATRATE,
+     +               SNGL(MONTHLY_TRANS_FUEL_COST)/1000000.,
+     +               MONTHLY_TRANS_VAR_COST/1000000., ! 9 - Variable O&M Cost ($/MMW)
+     +               AVERAGE_PRODUCTION_COSTS,
+     +               (MONTHLY_UNIT_EMISSIONS(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +               MONTHLY_TRANS_FIXED_COST/1000000., ! 16 - Fixed Cost ($/MMW)
+     +               TOTAL_UNIT_COST,
+     +               MONTHLY_ECO_SALES/1000000.,
+     +               MONTHLY_ECO_SALES_ENRG/1000.,
+     +               AVE_REV_FROM_SALES,
+     +               MONTHLY_ECO_SALES/1000000. - TOTAL_UNIT_COST,
+     +               MONTHLY_ECO_PUCH/1000000.,
+     +               MONTHLY_ECO_PUCH_ENRG/1000.,
+     +               MONTHLY_P_HEAT,
+     +               MONTHLY_S_HEAT,
+     +               MONTHLY_E_HEAT,
+     +               AVERAGE_NOX_RATE,
+     +               AVERAGE_SOX_RATE,
+     +               AVERAGE_FUEL_COST,
+     +               AVERAGE_VAR_OM,
+     +               (TOTAL_EMISSION_COSTS_BY_TYPE(EM),
+     +                                   EM=1,NUMBER_OF_EMISSION_TYPES),
+     +               MONTHLY_WHOLE_COSTS,
+     +               MONTHLY_RETAIL_SALES,
+     +               999.,999.,999.,99999.,99999.,
+     +               FLOAT(MONTHLY_STARTS),
+     +               TOTAL_EMISSION_COSTS,
+     +               MONTHLY_START_COSTS/1000000.,
+     +               999., ! ASSET CLASS
+     +               0.,
+     +               0.,
+     +               UNECONOMIC_RATE,
+     +               NEWGEN_UNIT_STATUS,
+     +               0.,
+     +               0.,
+     +               0.,
+     +               0.,
+     +               EV_DATA_SOURCE,
+     +               EV_PLANNING_AREA,
+     +               MONTHLY_CAPACITY_REVENUE,
+     +               MONTHLY_CAPITAL_COST_OF_BUILD,
+     +               MONTHLY_EBITDA,
+     +               999.,
+     +               MONTHLY_CHARGING_ENERGY/1000.
+            MON_CL_TRANS_UNIT_REC = MON_CL_TRANS_UNIT_REC + 1
+         endif
+! TODO: EXTRACT_METHOD handle_monthly_trans_report (end)
+
+! TODO: EXTRACT_METHOD handle_transact_fuel_report
+         IF(TRANSACT_FUEL_REPORT_ACTIVE) THEN
+            DO I = 1, UPPER_TRANS_GROUP
+               FUEL_COST_PER_MMBTU = 0.
+               DO J = 1, max_fuel_types_clr
+                  IF(FUEL_BTUS_BY_TG_BY_FUEL(I,J) < .0001) CYCLE
+                  FUEL_COST_PER_MMBTU(J) =
+     +                  FUEL_COST_BY_TG_BY_FUEL(I,J)*1000000. /
+     +                              FUEL_BTUS_BY_TG_BY_FUEL(I,J)
+               ENDDO
+               TRANS_FUEL_REC = RPTREC(TRANS_FUEL_NO)
+               WRITE(TRANS_FUEL_NO,REC=TRANS_FUEL_REC)
+     +               PRT_ENDPOINT(),
+     +               FLOAT(YEAR+BASE_YEAR),
+     +               CL_MONTH_NAME(ISEAS),
+     +               MULTI_AREA_NAME(I),
+     +         (FUEL_COST_BY_TG_BY_FUEL(I,J),J=1,max_fuel_types_clr),
+     +         (FUEL_BTUS_BY_TG_BY_FUEL(I,J),J=1,max_fuel_types_clr),
+     +               (FUEL_COST_PER_MMBTU(J),J=1,max_fuel_types_clr),
+     +               EV_DATA_SOURCE
+               TRANS_FUEL_REC = TRANS_FUEL_REC + 1
+            ENDDO
+            DO I = 1, MAX_STATE_PROVINCE_NO
+               FUEL_COST_PER_MMBTU = 0.
+               RESOURCE_RPS_VARS = 0.0
+               DO J = 1, max_fuel_types_clr
+                  IF(FUEL_BTUS_BY_SP_BY_FUEL(I,J) < .0001) CYCLE
+                  FUEL_COST_PER_MMBTU(J) =
+     +                  FUEL_COST_BY_SP_BY_FUEL(I,J)*1000000. /
+     +                              FUEL_BTUS_BY_SP_BY_FUEL(I,J)
+               ENDDO
+! 1=LB/MMBTU; 2=$MM; 3=$/TON
+               DO J = 1, 5
+                  IF(GROUP_VAR_BY_SP(I,4) > 0.1) THEN
+                     UNIT_EMISSIONS(J) =
+     +                  2000.* GROUP_VAR_BY_SP(I,7+J)/
+     +                                              GROUP_VAR_BY_SP(I,4)
+                  ELSE
+                     UNIT_EMISSIONS(J) = 0.
+                  ENDIF
+                  IF(GROUP_VAR_BY_SP(I,7+J) > 0.1) THEN
+                     EMISSION_COST_PER_TON(J) =
+     +                     1000000. * EMISSIONS_COST_BY_SP(I,J) /
+     +                                GROUP_VAR_BY_SP(I,7+J)
+                  ELSE
+                     EMISSION_COST_PER_TON(J) = 0.0
+                  ENDIF
+                  ANNUAL_EMISSIONS_COST_BY_SP(I,J) =
+     +                     ANNUAL_EMISSIONS_COST_BY_SP(I,J) +
+     +                                   EMISSIONS_COST_BY_SP(I,J)
+               ENDDO
+               IF(GROUP_VAR_BY_SP(I,3) > 0.1) THEN
+                  GROUP_VAR_BY_SP(I,4) = GROUP_VAR_BY_SP(I,4)/
+     +                                             GROUP_VAR_BY_SP(I,3)
+               ELSE
+                  GROUP_VAR_BY_SP(I,4) = 0.
+               ENDIF
+               TEMP_I2 = GET_STATE_PROVINCE_NAMES(STATE_PROVINCE,I)
+               ST_TG = STATE_ID_LOOKUP(STATE_PROVINCE)
+               CALL GET_STATE_RPS_DATA(ISEAS,ST_TG,STATE_RPS_VARS)
+
+               TEMP_L1 = GET_TRANS_RPS_SUM(ISEAS,ST_TG,
+     +                                                RESOURCE_RPS_VARS)
+               CALL GET_HYDRO_RPS_SUM(ISEAS,ST_TG,
+     +                                                RESOURCE_RPS_VARS)
+               CALL GET_THERMAL_RPS_SUM(ISEAS,ST_TG,RESOURCE_RPS_VARS)
+               TEMP_NAME = STATE_PROVINCE
+               TRANS_STATE_REC = RPTREC(TRANS_STATE_NO)
+               WRITE(TRANS_STATE_NO,REC=TRANS_STATE_REC)
+     +               PRT_ENDPOINT(),
+     +               FLOAT(YEAR+BASE_YEAR),
+     +               CL_MONTH_NAME(ISEAS),
+     +               TEMP_NAME,
+     +         (FUEL_COST_BY_SP_BY_FUEL(I,J),J=1,max_fuel_types_clr),
+     +         (FUEL_BTUS_BY_SP_BY_FUEL(I,J),J=1,max_fuel_types_clr),
+     +               (FUEL_COST_PER_MMBTU(J),J=1,max_fuel_types_clr),
+     +               EV_DATA_SOURCE,
+     +               (GROUP_VAR_BY_SP(I,J),J=1,MAX_GROUP_VAR),
+     +               UNIT_EMISSIONS,
+     +               (EMISSIONS_COST_BY_SP(I,J),J=1,5),
+     +               EMISSION_COST_PER_TON,
+     +               STATE_RPS_VARS,
+     +               RESOURCE_RPS_VARS
+
+               TRANS_STATE_REC = TRANS_STATE_REC + 1
+            ENDDO
+         ENDIF
+!
+         IF(TRANSACT_PROD_REPORT_ACTIVE) THEN
+            DO I = 1, UPPER_TRANS_GROUP
+
+               ANNUAL_PROD_BY_TG_BY_MW(I,18) =
+     +                MAX(ANNUAL_PROD_BY_TG_BY_MW(I,18),
+     +                                 PROD_BY_TG_BY_MW(I,18))
+               ANNUAL_PROD_BY_TG_BY_MW(I,19) =
+     +                MAX(ANNUAL_PROD_BY_TG_BY_MW(I,19),
+     +                                 PROD_BY_TG_BY_MW(I,19))
+               DO PM = 1, 13
+                  ANNUAL_PROD_BY_TG_BY_MW(I,PM) =
+     +                MAX(ANNUAL_PROD_BY_TG_BY_MW(I,PM),
+     +                                 PROD_BY_TG_BY_MW(I,PM))
+                  IF(PM == 10) THEN ! STEAM
+                     FT=FT !debugstop
+
+                     DO FT = 1, 3
+                        LM = MIN(PM + FT + 4,max_prod_types_clr)
+                        if(lm==max_prod_types_clr) THEN
+                            lm=lm ! debugstop
+                        endif
+                        ANNUAL_PROD_BY_TG_BY_MW(I,LM) =
+     +                      MAX(ANNUAL_PROD_BY_TG_BY_MW(I,LM),
+     +                                 PROD_BY_TG_BY_MW(I,LM))
+                     END DO
+                  ENDIF
+! TODO: EXTRACT_METHOD handle_transact_fuel_report (end)
+
+               ENDDO
+!
+!
+! 031005. HYDRO SECTION. ADDED FOR DOUG
+!
+               WH_MONTH_ENERGY = GET_WH_MONTH_ENERGY(ISEAS,I)
+!
+               CALL GET_ONE_TRANS_ROR_CAP(I,ROR_CAPACITY)
+!
+               T_I = 1
+               T_J = 6
+!
+               SYSTEM_PROD_BY_TG_BY_MWH =
+     +                           GET_SYSTEM_PROD_BY_TG_BY_MWH(T_I,I,T_J)
+!
+               TEMP_TL_MWH = ROR_CAPACITY*SEAS_HOURS +
+     +                 (GET_MONTHLY_TL_HYDRO_MWH(I) + WH_MONTH_ENERGY) -
+     +                                          SYSTEM_PROD_BY_TG_BY_MWH
+!
+               TEMP_TL_HYDRO_MW = GET_MONTHLY_TL_HYDRO_MW(I) +
+     +                          GET_WH_MONTH_CAPACITY(ISEAS,I) +
+     +                                                ROR_CAPACITY
+!
+               PROD_BY_TG_BY_MWH(I,5) =
+     +                        PROD_BY_TG_BY_MWH(I,5) +
+     +                                                TEMP_TL_MWH
+               ANNUAL_PROD_BY_TG_BY_MWH(I,5) =
+     +                  ANNUAL_PROD_BY_TG_BY_MWH(I,5) +
+     +                                                TEMP_TL_MWH
+!
+               PROD_BY_TG_BY_MWH(I,18) =
+     +                        PROD_BY_TG_BY_MWH(I,18) +
+     +                                          SYSTEM_PROD_BY_TG_BY_MWH
+               ANNUAL_PROD_BY_TG_BY_MWH(I,18) =
+     +                  ANNUAL_PROD_BY_TG_BY_MWH(I,18) +
+     +                                          SYSTEM_PROD_BY_TG_BY_MWH
+               PROD_BY_TG_BY_MW(I,18) =
+     +                        PROD_BY_TG_BY_MW(I,18) +
+     +                               SYSTEM_PROD_BY_TG_BY_MWH/SEAS_HOURS
+               ANNUAL_PROD_BY_TG_BY_MW(I,18) =
+     +                  ANNUAL_PROD_BY_TG_BY_MW(I,18) +
+     +                               SYSTEM_PROD_BY_TG_BY_MWH/SEAS_HOURS
+! TODO: EXTRACT_METHOD handle_fiscal_reporting_for_season
+               PROD_BY_TG_BY_MW(I,5) =
+     +                  PROD_BY_TG_BY_MW(I,5) + TEMP_TL_HYDRO_MW
+               ANNUAL_PROD_BY_TG_BY_MW(I,5) = ! 080608
+     +                MAX(ANNUAL_PROD_BY_TG_BY_MW(I,5),
+     +                                            PROD_BY_TG_BY_MW(I,5))
+!     +                MAX(ANNUAL_PROD_BY_TG_BY_MW(I,5),TEMP_TL_HYDRO_MW)
+!
+               MW_BY_TG_BY_FUEL(I,5) =
+     +                  MW_BY_TG_BY_FUEL(I,5) + TEMP_TL_HYDRO_MW
+               ANNUAL_MW_BY_TG_BY_FUEL(I,5) =
+     +                MAX(ANNUAL_MW_BY_TG_BY_FUEL(I,5),TEMP_TL_HYDRO_MW)
+               MWH_BY_TG_BY_FUEL(I,5) =
+     +                  MWH_BY_TG_BY_FUEL(I,5) + TEMP_TL_MWH
+               ANNUAL_MWH_BY_TG_BY_FUEL(I,5) =
+     +            ANNUAL_MWH_BY_TG_BY_FUEL(I,5) + TEMP_TL_MWH
+!
+               MW_BY_TG_BY_FUEL(I,MFT1) =
+     +                  MW_BY_TG_BY_FUEL(I,MFT1) + TEMP_TL_HYDRO_MW
+               IF(ISEAS == 12) THEN
+                  ANNUAL_MW_BY_TG_BY_FUEL(I,MFT1) =
+     +                   ANNUAL_MW_BY_TG_BY_FUEL(I,MFT1) +
+     +                                  ANNUAL_MW_BY_TG_BY_FUEL(I,5)
+               ENDIF
+               MWH_BY_TG_BY_FUEL(I,MFT1) =
+     +                  MWH_BY_TG_BY_FUEL(I,MFT1) + TEMP_TL_MWH
+               ANNUAL_MWH_BY_TG_BY_FUEL(I,MFT1) =
+     +            ANNUAL_MWH_BY_TG_BY_FUEL(I,MFT1) + TEMP_TL_MWH
+!
+!
+               PROD_BY_TG_BY_MWH(I,14) =
+     +                  PROD_BY_TG_BY_MWH(I,14) +
+     +                          SYSTEM_PROD_BY_TG_BY_MWH + TEMP_TL_MWH
+               ANNUAL_PROD_BY_TG_BY_MWH(I,14) =
+     +                  ANNUAL_PROD_BY_TG_BY_MWH(I,14) +
+     +                          SYSTEM_PROD_BY_TG_BY_MWH + TEMP_TL_MWH
+               PROD_BY_TG_BY_MW(I,14) =
+     +                  PROD_BY_TG_BY_MW(I,14) +
+     +                                                  TEMP_TL_HYDRO_MW
+               ANNUAL_PROD_BY_TG_BY_MW(I,14) =
+     +                MAX(ANNUAL_PROD_BY_TG_BY_MW(I,14),
+     +                                 PROD_BY_TG_BY_MW(I,14))
+!
+
+               TG = GET_TRANS_GROUP_INDEX(I)
+               TEMP_L1 = GET_TG_MONTH_SUM_B4_HYDRO(TG,
+     +                                             TG_MWH,
+     +                                             TG_PEAK,
+     +                                             TG_BASE)
+               LOAD_BY_TG_BY_MWH(I,1) = MAX(0.,TG_BASE)
+               LOAD_BY_TG_BY_MWH(I,3) = MAX(0.,TG_PEAK)
+               LOAD_BY_TG_BY_MWH(I,4) = MAX(0.,TG_MWH)
+               IF(SEAS_HOURS > 0.0) THEN
+                  LOAD_BY_TG_BY_MWH(I,2) =
+     +                                 LOAD_BY_TG_BY_MWH(I,4)/SEAS_HOURS
+               ENDIF
+               ANNUAL_LOAD_BY_TG_BY_MWH(I,1) =
+     +               MIN(ANNUAL_LOAD_BY_TG_BY_MWH(I,1),
+     +                          LOAD_BY_TG_BY_MWH(I,1))
+               ANNUAL_LOAD_BY_TG_BY_MWH(I,3) =
+     +               MAX(ANNUAL_LOAD_BY_TG_BY_MWH(I,3),
+     +                          LOAD_BY_TG_BY_MWH(I,3))
+               ANNUAL_LOAD_BY_TG_BY_MWH(I,4) =
+     +               ANNUAL_LOAD_BY_TG_BY_MWH(I,4) +
+     +                      LOAD_BY_TG_BY_MWH(I,4)
+!
+               TG_CapacitySupplyObligation(I,ISEAS) =
+     +                              + PROD_BY_TG_BY_MW(I,3)
+     +                              + PROD_BY_TG_BY_MW(I,5)
+     +                              + PROD_BY_TG_BY_MW(I,6)
+     +                              + PROD_BY_TG_BY_MW(I,8)
+     +                              + PROD_BY_TG_BY_MW(I,12)
+     +                              + PROD_BY_TG_BY_MW(I,15)
+     +                              + PROD_BY_TG_BY_MW(I,16)
+
+
+               TG_ResourceActualPreference =
+     +                            TG_EffectiveCapacity(I,ISEAS)
+     +                            - TG_CapacitySupplyObligation(I,ISEAS)
+
+               UZVars(ISEAS,I,1:18) = PROD_BY_TG_BY_MW(I,1:18)
+               UZVars(ISEAS,I,19) = TG_EffectiveCapacity(I,ISEAS)
+               UZVars(ISEAS,I,20) = TG_CapacitySupplyObligation(I,ISEAS)
+               UZVars(ISEAS,I,21) = TG_ResourceActualPreference
+               UZVars(ISEAS,I,22) = PROD_BY_TG_BY_MWH(I,14)
+               CAPACITY_AREA_NAME(I) = MULTI_AREA_NAME(I)
+               TRANS_PROD_REC = RPTREC(TRANS_PROD_NO)
+       call check_capacity_array_bounds("prod_by_tg_by_mw",
+     +   prod_by_tg_by_mw, int(I), int(max_prod_types_clr))
+       call check_capacity_array_bounds("prod_by_tg_by_mwh",
+     +   prod_by_tg_by_mwh, int(I), int(max_prod_types_clr))
+
+!              ! Transact Production report (msgmopro)
+               WRITE(TRANS_PROD_NO,REC=TRANS_PROD_REC)
+     +               PRT_ENDPOINT(),
+     +               FLOAT(YEAR+BASE_YEAR),
+     +               CL_MONTH_NAME(ISEAS),
+     +               MULTI_AREA_NAME(I),
+     +               (PROD_BY_TG_BY_MW(I,J),J=1,max_prod_types_clr), !0-18
+     +               (PROD_BY_TG_BY_MWH(I,J),J=1,max_prod_types_clr), !19-37
+     +               2.0,
+     +               (LOAD_BY_TG_BY_MWH(I,J),J=1,MAX_LOAD_TYPES), !37-40
+     +               TG_EffectiveCapacity(I,ISEAS),   ! 41
+     +               TG_CapacitySupplyObligation(I,ISEAS),  !42
+     +               TG_ResourceActualPreference      ! 43
+               TRANS_PROD_REC = TRANS_PROD_REC + 1
+
+       call check_capacity_array_bounds("mw_by_tg_by_fuel",
+     +   mw_by_tg_by_fuel, int(I), int(MFT1))
+       call check_capacity_array_bounds("mwh_by_tg_by_fuel",
+     +   mwh_by_tg_by_fuel, int(I), int(MFT1))
+               TRAN_PROD_FUEL_REC = RPTREC(TRAN_PROD_FUEL_NO)
+               WRITE(TRAN_PROD_FUEL_NO,REC=TRAN_PROD_FUEL_REC)
+     +               PRT_ENDPOINT(),
+     +               FLOAT(YEAR+BASE_YEAR),
+     +               CL_MONTH_NAME(ISEAS),
+     +               MULTI_AREA_NAME(I),
+     +               (MW_BY_TG_BY_FUEL(I,J),J=1,MFT1),
+     +               (MWH_BY_TG_BY_FUEL(I,J),J=1,MFT1)
+               TRAN_PROD_FUEL_REC = TRAN_PROD_FUEL_REC + 1
+            ENDDO
+         ENDIF
+!
+!
+! FISCAL TRANS REPORT
+!
+!
+         IF(YES_FISCAL_REPORTING .AND. ISEAS == FISCAL_SEASON) THEN
+!
+            MONTHLY_STARTS = 0
+            MONTHLY_START_COSTS = 0.
+            MONTHLY_CAPITAL_COST_OF_BUILD = 0.
+            MONTHLY_EBITDA = 0.
+            MONTHLY_CHARGING_ENERGY = 0.
+            MONTHLY_CAPACITY_REVENUE = 0.
+!
+            MONTHLY_NOX_SEASON_THERM = 0.
+            MONTHLY_TRANS_CAPACITY = 0.0
+            MONTHLY_TRANS_EFFECTIVE_CAP = 0.0
+            MONTHLY_TRANS_AVAIL_CAP = 0.0
+            MONTHLY_TRANS_ENERGY = 0.0
+!
+            MONTHLY_P_HEAT = 0.0 ! D0
+            MONTHLY_S_HEAT = 0.0 ! D0
+            MONTHLY_E_HEAT = 0.0 ! D0
+!
+            MONTHLY_TRANS_HEAT = 0.0 D0
+            MONTHLY_TRANS_FUEL_COST = 0.0 D0
+            MONTHLY_TRANS_VAR_COST = 0.0
+!
+            MONTHLY_UNIT_EMISSIONS(:) = 0.0
+!
+!            MONTHLY_UNIT_EMISSIONS_COST(:) = 0.0
+!
+            MONTHLY_TRANS_FIXED_COST = 0.
+!
+            ANNUAL_ECO_SALES = 0.
+            ANNUAL_ECO_SALES_ENRG = 0.
+            ANNUAL_ECO_PUCH = 0.
+            ANNUAL_ECO_PUCH_ENRG = 0.
+!
+            ANNUAL_WHOLESALE_COST = 0.
+!
+!
+! ONLY CALLED ONCE FOR RETIREMENT LOGIC.
+!
+!            UNIT_GROSS_MARGIN = INIT_ANNUAL_GROSS_MARGIN()
+!
+            DO I = 1, NUNITS
+               UNITNO = I
+               CL_TRANS_NAME = UNITNM(I)//CL_UNIQUE_RPT_STR(I) ! '  '
+               ENRG = FISCAL_CL_UNIT_ENERGY(UNITNO)
+! 1/12/00.
+               FISCAL_REV_GEN_CAPACITY(I) =
+     +                           FISCAL_REV_GEN_CAPACITY(I) /
+     +                                                       LAST_SEASON
+               CAPBLK = FISCAL_EFFECTIVE_CAP(I) / LAST_SEASON
+               IF(FISCAL_MONTHS_ACTIVE(I) == LAST_SEASON) THEN
+                  FISCAL_CAP(I) = FISCAL_CAP(I) / LAST_SEASON
+               ELSEIF(FISCAL_MONTHS_ACTIVE(I) > 0) THEN
+                  FISCAL_CAP(I) = FISCAL_CAP(I) /FISCAL_MONTHS_ACTIVE(I)
+               ENDIF
+! 8/28/02
+               CLASS = GET_ASSET_CLASS_NUM(UNITNO)
+               P_FUEL_DELIVERY = ABS(GET_P_FUEL_DELIVERY(UNITNO))
+               PBTUCT_SAVE = ABS(GET_PBTUCT_SAVE(UNITNO))
+!
+               IF(ENRG > 0.45) THEN
+                  HEAT = FISCAL_CL_UNIT_MMBTUS(UNITNO)
+                  FUEL_COST = FISCAL_CL_UNIT_FUEL_COST(UNITNO)
+!
+! EMISSIONS
+!
+!          ! TODO: integration
+!          ! TODO: Suggest iterating or using constants, depending on which
+!          ! is appropriate. UNIT_EMISSIONS, UNIT_EMISSIONS_COST
+                  UNIT_EMISSIONS(1) = FISCAL_CL_UNIT_EMISSIONS(1,UNITNO)
+                  UNIT_EMISSIONS(2) = FISCAL_CL_UNIT_EMISSIONS(2,UNITNO)
+                  UNIT_EMISSIONS(3) = FISCAL_CL_UNIT_EMISSIONS(3,UNITNO)
+                  UNIT_EMISSIONS(4) = FISCAL_CL_UNIT_EMISSIONS(4,UNITNO)
+                  UNIT_EMISSIONS(5) = FISCAL_CL_UNIT_EMISSIONS(5,UNITNO)
+!
+                  UNIT_EMISSIONS_COST(1) =
+     +                              FISCAL_UNIT_EMISSIONS_COST(UNITNO,1)
+                  UNIT_EMISSIONS_COST(2) =
+     +                              FISCAL_UNIT_EMISSIONS_COST(UNITNO,2)
+                  UNIT_EMISSIONS_COST(3) =
+     +                              FISCAL_UNIT_EMISSIONS_COST(UNITNO,3)
+                  UNIT_EMISSIONS_COST(4) =
+     +                              FISCAL_UNIT_EMISSIONS_COST(UNITNO,4)
+                  UNIT_EMISSIONS_COST(5) =
+     +                              FISCAL_UNIT_EMISSIONS_COST(UNITNO,5)
+!
+               ELSE
+                  HEAT = 0.D0
+                  FUEL_COST = 0.
+!
+                  UNIT_EMISSIONS(1) = 0.
+                  UNIT_EMISSIONS(2) = 0.
+                  UNIT_EMISSIONS(3) = 0.
+                  UNIT_EMISSIONS(4) = 0.
+                  UNIT_EMISSIONS(5) = 0.
+!
+                  UNIT_EMISSIONS_COST(1) = 0.
+                  UNIT_EMISSIONS_COST(2) = 0.
+                  UNIT_EMISSIONS_COST(3) = 0.
+                  UNIT_EMISSIONS_COST(4) = 0.
+                  UNIT_EMISSIONS_COST(5) = 0.
+!
+               ENDIF
+               IF(.NOT. TESTING_PLAN) THEN
+                  IF(.NOT. CANADA .AND. PHASE_I_UNIT(UNITNO) ) THEN
+                     UNIT_NAME = trim(UNITNM(UNITNO))//'*'
+                  ELSE
+                     UNIT_NAME = UNITNM(UNITNO)
+                  ENDIF
+                  IF(ENRG > 0.45) THEN
+                     AVERAGE_HEATRATE = HEAT_CONVERSION*HEAT/ENRG
+                     AVERAGE_PRODUCTION_COSTS =
+     +                        (SNGL((FUEL_COST)) +
+     +                             FISCAL_CL_UNIT_VAR_COST(UNITNO))/ENRG
+                     IF(.NOT. CANADA) AVERAGE_HEATRATE =
+     +                                             AVERAGE_HEATRATE + .5
+                  ELSE
+                     FUEL_COST = 0.0 D0
+                     HEAT = 0.0 D0
+                     AVERAGE_HEATRATE = 0.0
+                     AVERAGE_PRODUCTION_COSTS = 0.0
+                  ENDIF
+                  IF(FISCAL_CAP(I) > 0.01) THEN
+                     TRANS_EQUIV_AVAIL =  100. *
+     +                        FISCAL_REV_GEN_CAPACITY(I) / FISCAL_CAP(I)
+                     TRANS_CAP_FACTOR = ENRG * 100. /
+     +                                           (FISCAL_CAP(I) * 8760.)
+                  ELSE
+                     TRANS_EQUIV_AVAIL = 0.0
+                     TRANS_CAP_FACTOR = 0.0
+                  ENDIF
+!
+                  TOTAL_UNIT_COST =
+     +               (SNGL(FUEL_COST) +
+     +                   FISCAL_CL_UNIT_VAR_COST(UNITNO) +
+     +                       FISCAL_CL_UNIT_FIXED_COST(UNITNO))/1000000.
+!
+                  IF(FISCAL_ECO_SALES_ENRG_FROM(UNITNO) > 0.1) THEN
+                     AVE_REV_FROM_SALES =
+     +                        FISCAL_ECO_SALES_REV_FROM(UNITNO) /
+     +                                FISCAL_ECO_SALES_ENRG_FROM(UNITNO)
+                  ELSE
+                     AVE_REV_FROM_SALES =  0.
+                  ENDIF
+!
+                  MONTHLY_NOX_SEASON_THERM = MONTHLY_NOX_SEASON_THERM
+     +                                    + FISCAL_NOX_SEASON_THERMAL(I)
+                  ANNUAL_ECO_SALES = ANNUAL_ECO_SALES +
+     +                                 FISCAL_ECO_SALES_REV_FROM(UNITNO)
+                  ANNUAL_ECO_SALES_ENRG = ANNUAL_ECO_SALES_ENRG +
+     +                                FISCAL_ECO_SALES_ENRG_FROM(UNITNO)
+                  ANNUAL_ECO_PUCH = ANNUAL_ECO_PUCH +
+     +                                 FISCAL_ECO_PUCH_COST_FROM(UNITNO)
+                  ANNUAL_ECO_PUCH_ENRG = ANNUAL_ECO_PUCH_ENRG +
+     +                                 FISCAL_ECO_PUCH_ENRG_FROM(UNITNO)
+!
+                  MONTHLY_TRANS_CAPACITY =
+     +                            MONTHLY_TRANS_CAPACITY + FISCAL_CAP(I)
+                  MONTHLY_TRANS_EFFECTIVE_CAP =
+     +                              MONTHLY_TRANS_EFFECTIVE_CAP + CAPBLK
+                  MONTHLY_TRANS_AVAIL_CAP = MONTHLY_TRANS_AVAIL_CAP +
+     +                                        FISCAL_REV_GEN_CAPACITY(I)
+                  MONTHLY_TRANS_ENERGY = MONTHLY_TRANS_ENERGY + ENRG
+                  MONTHLY_TRANS_HEAT = MONTHLY_TRANS_HEAT + HEAT
+                  MONTHLY_P_HEAT = MONTHLY_P_HEAT +
+     +                                 FISCAL_P_FUEL_CONSUMPTION(UNITNO)
+                  MONTHLY_S_HEAT = MONTHLY_S_HEAT +
+     +                                 FISCAL_S_FUEL_CONSUMPTION(UNITNO)
+                  MONTHLY_E_HEAT = MONTHLY_E_HEAT +
+     +                                 FISCAL_E_FUEL_CONSUMPTION(UNITNO)
+                  MONTHLY_TRANS_FUEL_COST = MONTHLY_TRANS_FUEL_COST +
+     +                                                         FUEL_COST
+! 6/13/01. To account for varying VCPMWH.
+                  MONTHLY_TRANS_VAR_COST = MONTHLY_TRANS_VAR_COST +
+     +                                   FISCAL_CL_UNIT_VAR_COST(UNITNO)
+!     +                                               VCPMWH(UNITNO)*ENRG
+!
+                  MONTHLY_UNIT_EMISSIONS(1) =
+     +                           MONTHLY_UNIT_EMISSIONS(1) +
+     +                                                 UNIT_EMISSIONS(1)
+                  MONTHLY_UNIT_EMISSIONS(2) =
+     +                           MONTHLY_UNIT_EMISSIONS(2) +
+     +                                                 UNIT_EMISSIONS(2)
+                  MONTHLY_UNIT_EMISSIONS(3) =
+     +                           MONTHLY_UNIT_EMISSIONS(3) +
+     +                                                 UNIT_EMISSIONS(3)
+                  MONTHLY_UNIT_EMISSIONS(4) =
+     +                           MONTHLY_UNIT_EMISSIONS(4) +
+     +                                                 UNIT_EMISSIONS(4)
+                  MONTHLY_UNIT_EMISSIONS(5) =
+     +                           MONTHLY_UNIT_EMISSIONS(5) +
+     +                                                 UNIT_EMISSIONS(5)
+                  MONTHLY_TRANS_FIXED_COST = MONTHLY_TRANS_FIXED_COST +
+     +                                 FISCAL_CL_UNIT_FIXED_COST(UNITNO)
+!
+                  MONTHLY_UNIT_EMISSIONS_COST(1,I) =
+     +               MONTHLY_UNIT_EMISSIONS_COST(1,I) +
+     +                                            UNIT_EMISSIONS_COST(1)
+                  MONTHLY_UNIT_EMISSIONS_COST(2,I) =
+     +               MONTHLY_UNIT_EMISSIONS_COST(2,I) +
+     +                                            UNIT_EMISSIONS_COST(2)
+                  MONTHLY_UNIT_EMISSIONS_COST(3,I) =
+     +               MONTHLY_UNIT_EMISSIONS_COST(3,I) +
+     +                                            UNIT_EMISSIONS_COST(3)
+                  MONTHLY_UNIT_EMISSIONS_COST(4,I) =
+     +               MONTHLY_UNIT_EMISSIONS_COST(4,I) +
+     +                                            UNIT_EMISSIONS_COST(4)
+                  MONTHLY_UNIT_EMISSIONS_COST(5,I) =
+     +               MONTHLY_UNIT_EMISSIONS_COST(5,I) +
+     +                                            UNIT_EMISSIONS_COST(5)
+!
+!
+                  FT = MAX(1,MIN(GET_PRIMARY_MOVER(I),6))
+                  SP = MIN(MAX(0,GET_UNIT_STATE_PROVINCE_INDEX(I)),
+     +                                            MAX_STATE_PROVINCE_NO)
+                  TG = TRANSACTION_GROUP(UNITNO)
+
+                  TEMP_L1 = GET_CL_BASECASE_MARKET_ID(I,MARKET_ID)
+                  MK = MARKET_AREA_LOOKUP(MARKET_ID(1:5))
+                  PM = GET_PRIMARY_MOVER_INDEX(I)
+                  RTG = TG
+                  RMK = MK
+                  RFT = FT
+                  RSP = FLOAT(GET_THERMAL_STATE_INDEX(I))
+                  CHARGING_ENERGY = 0.0
+
+                  RPM = PM
+!
+                  HESI_ID_NUM_4_UNIT = GET_HESI_UNIT_ID_NUM(int(I),
+     +                                    int(HESI_SECOND_UNIT_ID_NUM))
+                  POWERDAT_PLANT_ID = GET_POWERDAT_PLANT_ID(I)
+!
+                  NEWGEN_UNIT_STATUS = FLOAT(GET_NEWGEN_INDEX(I))
+!
+
+                  IF(HEAT /= 0.) THEN
+                     AVERAGE_SOX_RATE=TONS_CONVERSION*UNIT_EMISSIONS(1)/
+     +                                             HEAT
+                     AVERAGE_FUEL_COST = FUEL_COST/HEAT
+                  ELSE
+                     AVERAGE_SOX_RATE = 0.
+                     AVERAGE_FUEL_COST = 0.
+                  ENDIF
+                  AVERAGE_VAR_OM = 0.
+                  IF(ENRG /= 0.) AVERAGE_VAR_OM =
+     +                              FISCAL_CL_UNIT_VAR_COST(UNITNO)/ENRG
+                  AVERAGE_NOX_RATE = 0.
+                  IF(FISCAL_NOX_SEASON_THERMAL(I) > 0.) THEN
+                     AVERAGE_NOX_RATE=TONS_CONVERSION*UNIT_EMISSIONS(2)/
+     +                                    FISCAL_NOX_SEASON_THERMAL(I)
+                  ENDIF
+!
+                  UNIT_GROSS_MARGIN =
+     +                  FISCAL_ECO_SALES_REV_FROM(UNITNO)/1000000. -
+     +                                                   TOTAL_UNIT_COST
+
+                  RETAIL_SALES = MAX(0.,
+     +                (ENRG - FISCAL_ECO_SALES_ENRG_FROM(UNITNO))/1000.)
+                  ANNUAL_WHOLESALE_COST = ANNUAL_WHOLESALE_COST +
+     +                                     FISCAL_WHOLESALE_PROD_COST(I)
+!     +                                         WHOLESALE_PRODUCTION_COST
+!
+!
+                  IF(TG <= MAX_TRANS_GROUP_NUMBER .AND.
+     +                  TRANS_GROUP_REPORTING_ACTIVE(TG) .AND.
+     +                        REPORT_MARKET_AREA(MARKET_ID) .AND.
+     +                              REPORT_THIS_CL_UNIT(UNITNO) .AND.
+     +                                 (MONTHLY_TRANS_REPORT .OR.
+     +                                   ANNUAL_TRANS_REPORT)) THEN
+
+                    TOTAL_EMISSION_COSTS = SUM(UNIT_EMISSIONS_COST)
+!
+                     IF(TRANS_EQUIV_AVAIL > 0.) THEN
+                     UNECONOMIC_RATE = 100.*(1. -
+     +                             (TRANS_CAP_FACTOR/TRANS_EQUIV_AVAIL))
+                     ELSE
+                        UNECONOMIC_RATE = 0.
+                     ENDIF
+!
+                   MON_CL_TRANS_UNIT_REC = RPTREC(MON_CL_TRANS_UNIT_NO)
+!                  !msgmtrcl
+                   call write_unique_msgmtrcl_log_entry(4)
+                   WRITE(MON_CL_TRANS_UNIT_NO,REC=MON_CL_TRANS_UNIT_REC)
+     +                  PRT_ENDPOINT(),
+     +                  LOCAL_YEAR,
+     +                  CL_MONTH_NAME(14),
+     +                  CL_TRANS_NAME,
+     +                  FLOAT(I),
+     +                  FISCAL_CAP(I),
+     +                  CAPBLK,
+     +                  TRANS_EQUIV_AVAIL,
+     +                  TRANS_CAP_FACTOR,
+     +                  ENRG/1000.,
+     +                  SNGL(HEAT),
+     +                  AVERAGE_HEATRATE,
+     +                  SNGL(FUEL_COST)/1000000.,
+     +                  FISCAL_CL_UNIT_VAR_COST(UNITNO)/1000000., ! 9 - Variable O&M cost ($/MMW)
+     +                  AVERAGE_PRODUCTION_COSTS,
+     +                  (UNIT_EMISSIONS(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +                  FISCAL_CL_UNIT_FIXED_COST(UNITNO)/1000000., ! 16 Fixed cost ($/MMW)
+     +                  TOTAL_UNIT_COST,
+     +                  FISCAL_ECO_SALES_REV_FROM(UNITNO)/1000000.,
+     +                  FISCAL_ECO_SALES_ENRG_FROM(UNITNO)/1000.,
+     +                  AVE_REV_FROM_SALES,
+     +                  UNIT_GROSS_MARGIN,
+     +                  FISCAL_ECO_PUCH_COST_FROM(UNITNO)/1000000.,
+     +                  FISCAL_ECO_PUCH_ENRG_FROM(UNITNO)  /1000.,
+     +                  FISCAL_P_FUEL_CONSUMPTION(UNITNO),
+     +                  FISCAL_S_FUEL_CONSUMPTION(UNITNO),
+     +                  FISCAL_E_FUEL_CONSUMPTION(UNITNO),
+     +                  AVERAGE_NOX_RATE,
+     +                  AVERAGE_SOX_RATE,
+     +                  AVERAGE_FUEL_COST,
+     +                  AVERAGE_VAR_OM,
+     +                  (UNIT_EMISSIONS_COST(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +                  FISCAL_WHOLESALE_PROD_COST(I),
+     +                  RETAIL_SALES,
+     +                  RTG,RMK,RFT,
+     +                  HESI_ID_NUM_4_UNIT,
+     +                  POWERDAT_PLANT_ID,
+     +                  FLOAT(FISCAL_UNIT_STARTS(UNITNO)),
+     +                  TOTAL_EMISSION_COSTS,
+     +                  FISCAL_UNIT_START_COSTS(UNITNO)/1000000.,
+     +                  FLOAT(CLASS),
+     +                  PBTUCT_SAVE,
+     +                  P_FUEL_DELIVERY,
+     +                  UNECONOMIC_RATE,
+     +                  NEWGEN_UNIT_STATUS,
+     +                  0.,
+     +                  0.,
+     +                  RPM,
+     +                  HESI_SECOND_UNIT_ID_NUM,
+     +                  EV_DATA_SOURCE,
+     +                  EV_PLANNING_AREA,
+     +                  CAP_MARKET_REVENUE,
+     +                  FISCAL_CAPITAL_COST_OF_BUILD(UNITNO),
+     +                  FISCAL_EBITDA(UNITNO),
+     +                  RSP,
+     +                  CHARGING_ENERGY/1000.
+                     MON_CL_TRANS_UNIT_REC = MON_CL_TRANS_UNIT_REC + 1
+                  ENDIF
+               ENDIF
+            ENDDO ! UNITS
+!
+! GET NUMBER OF TRANSACTIONS
+!
+!            NUM_MONTHLY_TRANSACTIONS = GET_NUM_MONTHLY_TRANSACTIONS()
+!
+!
+            SUM_ANNUAL = -1
+!
+            DO TRANS = 1, NUM_TRANSACTIONS
+               VOID_LOGICAL = GET_MONTHLY_TRANS_VARIABLES(TRANS,
+     +                                               ENRG,
+     +                                               TRANS_CAP,
+     +                                               TRANS_VAR_EXP,
+     +                                               TRANS_VAR_MWH,
+     +                                               TRANS_FIX_EXP,
+     +                                               TRANS_REV,
+     +                                               TRANS_REV_MWH,
+     +                                               TRANS_HOURS,
+     +                                               PRODUCT_HOURS,
+     +                                               TRANS_STRIKES,
+     +                                               INT2(0),
+     +                                               TRANS_NAME,
+     +                                               SUM_ANNUAL,
+     +                                               YES_REPORT_PRODUCT,
+     +                                               TG,
+     +                                               PM,
+     +                                               FT,
+     +                                               TRANS_ON_LINE,
+     +                                               TRANS_OFF_LINE,
+     +                                               TRANS_UNIT_ID,
+     +                                               TRANS_ASSET_CLASS,
+     +                                               TRANS_NOT_ACTIVE,
+     +                                               TEMP_YEAR,
+     +                                               CHARGING_ENERGY) ! 060308
+! 121806
+               IF(TRANS_NOT_ACTIVE) CYCLE
+               I = I + 1
+!
+               TRANS_STRIKES = 0.0 ! 092107. PER BURESH.
+!
+               TG_POSITION = MAX(1,GET_TRANS_GROUP_POSITION(TG))
+               FT = MAX(1,MIN(FT,6))
+!               PM = GET_PRIMARY_MOVER_INDEX(I)
+               RTG = TG
+               RFT = FT
+               RSP = FLOAT(GET_TRANS_STATE_INDEX(TRANS))
+
+               RPM = PM
+!
+               CL_TRANS_NAME = TRANS_NAME
+               FISCAL_REV_GEN_CAPACITY(I) =
+     +                           FISCAL_REV_GEN_CAPACITY(I) /
+     +                                                       LAST_SEASON
+               CAPBLK = FISCAL_EFFECTIVE_CAP(I) / LAST_SEASON
+!
+               IF(TRANS_HOURS > 0.) THEN
+                  FISCAL_CAP(I) = ENRG / TRANS_HOURS
+               ELSE
+                  FISCAL_CAP(I) = TRANS_CAP / LAST_SEASON
+               ENDIF
+!
+               HEAT = 0.D0
+               FUEL_COST = 0.
+!
+               NEWGEN_UNIT_STATUS = 0.
+!
+               UNIT_EMISSIONS(1) = 0.
+               UNIT_EMISSIONS(2) = 0.
+               UNIT_EMISSIONS(3) = 0.
+               UNIT_EMISSIONS(4) = 0.
+               UNIT_EMISSIONS(5) = 0.
+!
+               UNIT_EMISSIONS_COST(1) = 0.
+               UNIT_EMISSIONS_COST(2) = 0.
+               UNIT_EMISSIONS_COST(3) = 0.
+               UNIT_EMISSIONS_COST(4) = 0.
+               UNIT_EMISSIONS_COST(5) = 0.
+!
+               IF(.NOT. TESTING_PLAN) THEN
+                  IF(ABS(ENRG) > 0.45) THEN
+                     AVERAGE_HEATRATE = 0.
+                     AVERAGE_PRODUCTION_COSTS = TRANS_VAR_EXP/ENRG
+                  ELSE
+                     FUEL_COST = 0.0 D0
+                     HEAT = 0.0 D0
+                     AVERAGE_HEATRATE = 0.0
+                     AVERAGE_PRODUCTION_COSTS = 0.0
+                  ENDIF
+                  IF(TRANS_CAP > 0.01 .AND. PRODUCT_HOURS > 0) THEN
+                     TRANS_CAP_FACTOR = ENRG * 100. /
+     +                                   (FISCAL_CAP(I) * PRODUCT_HOURS)
+                  ELSE
+                     TRANS_CAP_FACTOR = 0.0
+                  ENDIF
+!
+                  TOTAL_UNIT_COST = TRANS_VAR_EXP + TRANS_FIX_EXP
+!
+                  IF(ABS(ENRG) > 0.1) THEN
+                     AVE_REV_FROM_SALES =   TRANS_REV / ENRG
+                  ELSE
+                     AVE_REV_FROM_SALES =  0.
+                  ENDIF
+!
+                  ANNUAL_ECO_SALES = ANNUAL_ECO_SALES +  TRANS_REV
+                  ANNUAL_ECO_SALES_ENRG = ANNUAL_ECO_SALES_ENRG +
+     +                                                              ENRG
+!
+                  MONTHLY_STARTS = MONTHLY_STARTS +
+     +                                             FISCAL_UNIT_STARTS(I)
+                  MONTHLY_START_COSTS = MONTHLY_START_COSTS +
+     +                                        FISCAL_UNIT_START_COSTS(I)
+                  MONTHLY_CAPITAL_COST_OF_BUILD =
+     +                        MONTHLY_CAPITAL_COST_OF_BUILD +
+     +                                   FISCAL_CAPITAL_COST_OF_BUILD(I)
+                  MONTHLY_EBITDA = MONTHLY_EBITDA + FISCAL_EBITDA(I)
+                  MONTHLY_CHARGING_ENERGY = MONTHLY_CHARGING_ENERGY +
+     +                                                   CHARGING_ENERGY
+!
+                  MONTHLY_TRANS_CAPACITY =
+     +                            MONTHLY_TRANS_CAPACITY + FISCAL_CAP(I)
+                  MONTHLY_TRANS_EFFECTIVE_CAP =
+     +                              MONTHLY_TRANS_EFFECTIVE_CAP + CAPBLK
+                  MONTHLY_TRANS_AVAIL_CAP = MONTHLY_TRANS_AVAIL_CAP +
+     +                                        FISCAL_REV_GEN_CAPACITY(I)
+                  MONTHLY_TRANS_ENERGY = MONTHLY_TRANS_ENERGY + ENRG
+                  MONTHLY_TRANS_VAR_COST = MONTHLY_TRANS_VAR_COST +
+     +                                                     TRANS_VAR_EXP
+!
+                  MONTHLY_TRANS_FIXED_COST = MONTHLY_TRANS_FIXED_COST +
+     +                                                     TRANS_FIX_EXP
+!
+                  AVERAGE_VAR_OM = 0.
+                  IF(ENRG /= 0.) AVERAGE_VAR_OM = TRANS_VAR_EXP / ENRG
+!
+                  UNIT_GROSS_MARGIN =
+     +                  (TRANS_REV - TOTAL_UNIT_COST)/1000000.
+                  TOTAL_EMISSION_COSTS = SUM(UNIT_EMISSIONS_COST)
+                  UNIT_EBITDA = (TRANS_REV-TOTAL_UNIT_COST-
+     +                                    TOTAL_EMISSION_COSTS)/1000000.
+!
+                  WHOLESALE_PRODUCTION_COST =
+     +                                     TRANS_VAR_MWH * ENRG/1000000.
+                  RETAIL_SALES = MAX(0.,(ENRG - ENRG)/1000.)
+                  ANNUAL_WHOLESALE_COST = ANNUAL_WHOLESALE_COST +
+     +                                         WHOLESALE_PRODUCTION_COST
+!
+!
+                  POWERDAT_PLANT_ID = GET_Holding_Company_ID(I)
+!                  TEMP_L1 = GET_DERIV_PRIM_MOVER_INDEX(I,MARKET_ID)
+                  TEMP_L1 = GET_DERIV_ZONE_ID(I,MARKET_ID)
+                  MK = MARKET_AREA_LOOKUP(MARKET_ID(1:5))
+                  IF(MK < 0 .OR. MK > 600) THEN
+                     MK =MAX(0,MIN(600,
+     +                              MARKET_AREA_LOOKUP(MARKET_ID(1:5))))
+                  ENDIF
+                  RMK = FLOAT(MK)
+                   IF( (MONTHLY_TRANS_REPORT .OR.
+     +                                   ANNUAL_TRANS_REPORT) .AND.
+     +                                 .NOT. SUPPRESS_DERIVATIVES .AND.
+     +                                          YES_REPORT_PRODUCT) THEN
+
+!
+                   MON_CL_TRANS_UNIT_REC = RPTREC(MON_CL_TRANS_UNIT_NO)
+!                  !msgmtrcl
+                   call write_unique_msgmtrcl_log_entry(5)
+                   WRITE(MON_CL_TRANS_UNIT_NO,REC=MON_CL_TRANS_UNIT_REC)
+     +                  PRT_ENDPOINT(),
+     +                  LOCAL_YEAR,
+     +                  CL_MONTH_NAME(14),
+     +                  CL_TRANS_NAME,
+     +                  FLOAT(I),
+     +                  FISCAL_CAP(I),
+     +                  PRODUCT_HOURS,
+     +                  TRANS_HOURS,
+     +                  TRANS_CAP_FACTOR,
+     +                  ENRG/1000.,
+     +                  0.,
+     +                  TRANS_STRIKES,
+     +                  0.,
+     +                  TRANS_VAR_EXP/1000000., ! 9 - Variable O&M Cost ($/MMW)
+     +                  AVERAGE_PRODUCTION_COSTS,
+     +                  (UNIT_EMISSIONS(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +                  TRANS_FIX_EXP/1000000., ! 16 - fixed cost ($/MMW)
+     +                  TOTAL_UNIT_COST/1000000.,
+     +                  TRANS_REV/1000000.,
+     +                  ENRG/1000.,
+     +                  AVE_REV_FROM_SALES,
+     +                  UNIT_GROSS_MARGIN ,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  AVERAGE_VAR_OM,
+     +                  (UNIT_EMISSIONS_COST(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +                  WHOLESALE_PRODUCTION_COST,
+     +                  RETAIL_SALES,
+     +                  RTG,RMK,RFT,
+     +                  TRANS_UNIT_ID, ! HESI UNIT ID NUM
+     +                  POWERDAT_PLANT_ID, ! POWER PLANT ID NUM
+     +                  0.,
+     +                  TOTAL_EMISSION_COSTS,
+     +                  0.,
+     +                  TRANS_ASSET_CLASS, ! ASSET CLASS
+     +                  0.,
+     +                  0.,
+     +                  0., ! UNECONOMIC_RATE
+     +                  NEWGEN_UNIT_STATUS,
+     +                  TRANS_ON_LINE, ! ONLINE
+     +                  TRANS_OFF_LINE, ! OFLINE
+     +                  RPM,
+     +                  0., ! HESI_SECOND_UNIT_ID
+     +                  EV_DATA_SOURCE,
+     +                  EV_PLANNING_AREA,
+     +                  CAP_MARKET_REVENUE,
+     +                  CAPITAL_COST_OF_BUILD,
+     +                  UNIT_EBITDA,
+     +                  RSP,
+     +                  CHARGING_ENERGY/1000.
+                     MON_CL_TRANS_UNIT_REC = MON_CL_TRANS_UNIT_REC + 1
+                  ENDIF ! THERMAL UNITS REPORT
+!
+                  IF(DERIVATIVES_REPORT) THEN
+                    MON_DV_TRANS_UNIT_REC = RPTREC(MON_DV_TRANS_UNIT_NO)
+                      WRITE(MON_DV_TRANS_UNIT_NO,
+     +                                        REC=MON_DV_TRANS_UNIT_REC)
+     +                  PRT_ENDPOINT(),
+     +                  LOCAL_YEAR,
+     +                  CL_MONTH_NAME(14),
+     +                  CL_TRANS_NAME,
+     +                  FLOAT(I),
+     +                  FISCAL_CAP(I),
+     +                  PRODUCT_HOURS,
+     +                  TRANS_HOURS,
+     +                  TRANS_CAP_FACTOR,
+     +                  ENRG/1000.,
+     +                  0.,
+     +                  TRANS_STRIKES,
+     +                  0.,
+     +                  TRANS_VAR_EXP/1000000.,
+     +                  AVERAGE_PRODUCTION_COSTS,
+     +                  (UNIT_EMISSIONS(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +                  TRANS_FIX_EXP/1000000.,
+     +                  TOTAL_UNIT_COST/1000000.,
+     +                  TRANS_REV/1000000.,
+     +                  ENRG/1000.,
+     +                  AVE_REV_FROM_SALES,
+     +                  UNIT_GROSS_MARGIN ,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  AVERAGE_VAR_OM,
+     +                  (UNIT_EMISSIONS_COST(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +                  WHOLESALE_PRODUCTION_COST,
+     +                  RETAIL_SALES,
+     +                  RTG,RMK,RFT,
+     +                  TRANS_UNIT_ID, ! HESI UNIT ID NUM
+     +                  POWERDAT_PLANT_ID,  ! POWER PLANT ID NUM
+     +                  0.,
+     +                  TOTAL_EMISSION_COSTS,
+     +                  0.,
+     +                  TRANS_ASSET_CLASS, ! ASSET CLASS
+     +                  0.,
+     +                  0.,
+     +                  0., ! UNECONOMIC_RATE
+     +                  NEWGEN_UNIT_STATUS,
+     +                  TRANS_ON_LINE, ! ONLINE
+     +                  TRANS_OFF_LINE, ! OFLINE
+     +                  RPM,
+     +                  0., ! HESI_SECOND_UNIT_ID
+     +                  EV_DATA_SOURCE,
+     +                  EV_PLANNING_AREA,
+     +                  MONTHLY_CAPACITY_REVENUE,
+     +                  CAPITAL_COST_OF_BUILD,
+     +                  UNIT_EBITDA,
+     +                  RSP,
+     +                  CHARGING_ENERGY/1000.
+                      MON_DV_TRANS_UNIT_REC = MON_DV_TRANS_UNIT_REC + 1
+                  ENDIF ! DERIVATIVES REPORT
+               ENDIF
+            ENDDO ! DERIVATIVES
+!
+            CL_TRANS_NAME = 'Total Resources       '
+            I = I + 1
+!
+            IF(MONTHLY_TRANS_ENERGY > 0.45) THEN
+               AVERAGE_HEATRATE = HEAT_CONVERSION*MONTHLY_TRANS_HEAT/
+     +                                              MONTHLY_TRANS_ENERGY
+               AVERAGE_PRODUCTION_COSTS =
+     +               (SNGL(MONTHLY_TRANS_FUEL_COST) +
+     +                              MONTHLY_TRANS_VAR_COST) /
+     +                                              MONTHLY_TRANS_ENERGY
+               AVERAGE_VAR_OM = MONTHLY_TRANS_VAR_COST/
+     +                            MONTHLY_TRANS_ENERGY
+               IF(.NOT. CANADA) AVERAGE_HEATRATE = AVERAGE_HEATRATE + .5
+            ELSE
+               MONTHLY_TRANS_FUEL_COST = 0.0 D0
+               MONTHLY_TRANS_HEAT = 0.0 D0
+               AVERAGE_HEATRATE = 0.0
+               AVERAGE_PRODUCTION_COSTS = 0.0
+               AVERAGE_VAR_OM = 0.
+            ENDIF
+            IF(MONTHLY_TRANS_CAPACITY > 0.01 .AND. SEAS_HOURS > 0) THEN
+               TRANS_EQUIV_AVAIL =  100. * MONTHLY_TRANS_AVAIL_CAP/
+     +                                            MONTHLY_TRANS_CAPACITY
+               TRANS_CAP_FACTOR = MONTHLY_TRANS_ENERGY * 100. /
+     +                                  (MONTHLY_TRANS_CAPACITY * 8760.)
+            ELSE
+               TRANS_EQUIV_AVAIL = 0.0
+               TRANS_CAP_FACTOR = 0.0
+            ENDIF
+!
+            TOTAL_UNIT_COST =
+     +               (SNGL(MONTHLY_TRANS_FUEL_COST) +
+     +                       MONTHLY_TRANS_VAR_COST +
+     +                                MONTHLY_TRANS_FIXED_COST)/1000000.
+!
+            IF(ANNUAL_ECO_SALES_ENRG > 0.1) THEN
+               AVE_REV_FROM_SALES =  ANNUAL_ECO_SALES /
+     +                                            ANNUAL_ECO_SALES_ENRG
+            ELSE
+               AVE_REV_FROM_SALES =  0.
+            ENDIF
+!
+            NEWGEN_UNIT_STATUS = 0.
+!
+            AVERAGE_NOX_RATE = 0.
+            AVERAGE_SOX_RATE = 0.
+            AVERAGE_FUEL_COST = 0.
+            IF(MONTHLY_NOX_SEASON_THERM /= 0.) THEN
+               AVERAGE_NOX_RATE =
+     +                        TONS_CONVERSION*MONTHLY_UNIT_EMISSIONS(2)/
+     +                                 MONTHLY_NOX_SEASON_THERM
+            ENDIF
+!
+            IF(MONTHLY_TRANS_HEAT /= 0.) THEN
+               AVERAGE_SOX_RATE =
+     +                        TONS_CONVERSION*MONTHLY_UNIT_EMISSIONS(1)/
+     +                                  MONTHLY_TRANS_HEAT
+               AVERAGE_FUEL_COST = MONTHLY_TRANS_FUEL_COST/
+     +                               MONTHLY_TRANS_HEAT
+            ENDIF
+!
+            TRANS_TOTAL_GROSS_MARGIN =
+     +               ANNUAL_ECO_SALES/1000000. - TOTAL_UNIT_COST
+!
+            MONTHLY_RETAIL_SALES = MAX(0.,
+     +            (MONTHLY_TRANS_ENERGY - ANNUAL_ECO_SALES_ENRG)/1000.)
+!
+
+            TOTAL_EMISSION_COSTS = SUM(MONTHLY_UNIT_EMISSIONS_COST)
+            TOTAL_EMISSION_COSTS_BY_TYPE(:) =
+     +                       SUM(MONTHLY_UNIT_EMISSIONS_COST(:,:),DIM=2)
+            IF(TRANS_EQUIV_AVAIL > 0.) THEN
+               UNECONOMIC_RATE = 100.*(1. -
+     +                             (TRANS_CAP_FACTOR/TRANS_EQUIV_AVAIL))
+            ELSE
+               UNECONOMIC_RATE = 0.
+            ENDIF
+            IF(MONTHLY_TRANS_REPORT .OR. ANNUAL_TRANS_REPORT) THEN
+
+                   MON_CL_TRANS_UNIT_REC = RPTREC(MON_CL_TRANS_UNIT_NO)
+!                  !msgmtrcl - total for fiscal (includes deriv. and thermal)
+                   call write_unique_msgmtrcl_log_entry(6)
+                   WRITE(MON_CL_TRANS_UNIT_NO,REC=MON_CL_TRANS_UNIT_REC)
+     +               PRT_ENDPOINT(),
+     +               LOCAL_YEAR,
+     +               CL_MONTH_NAME(14),
+     +               CL_TRANS_NAME,
+     +               FLOAT(I),
+     +               MONTHLY_TRANS_CAPACITY,
+     +               MONTHLY_TRANS_EFFECTIVE_CAP,
+     +               TRANS_EQUIV_AVAIL,
+     +               TRANS_CAP_FACTOR,
+     +               MONTHLY_TRANS_ENERGY/1000.,
+     +               SNGL(MONTHLY_TRANS_HEAT),
+     +               AVERAGE_HEATRATE,
+     +               SNGL(MONTHLY_TRANS_FUEL_COST)/1000000.,
+     +               MONTHLY_TRANS_VAR_COST/1000000., ! 9 - Variable O&M Cost ($/mmw)
+     +               AVERAGE_PRODUCTION_COSTS,
+     +               (MONTHLY_UNIT_EMISSIONS(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +               MONTHLY_TRANS_FIXED_COST/1000000., ! 16 - Fixed cost ($/MMW)
+     +               TOTAL_UNIT_COST,
+     +               ANNUAL_ECO_SALES/1000000.,
+     +               ANNUAL_ECO_SALES_ENRG/1000.,
+     +               AVE_REV_FROM_SALES,
+     +               TRANS_TOTAL_GROSS_MARGIN,
+     +               ANNUAL_ECO_PUCH/1000000.,
+     +               ANNUAL_ECO_PUCH_ENRG/1000.,
+     +               MONTHLY_P_HEAT,
+     +               MONTHLY_S_HEAT,
+     +               MONTHLY_E_HEAT,
+
+     +               AVERAGE_NOX_RATE, ! 27
+     +               AVERAGE_SOX_RATE,
+     +               AVERAGE_FUEL_COST,
+     +               AVERAGE_VAR_OM,
+     +               (TOTAL_EMISSION_COSTS_BY_TYPE(EM),
+     +                                   EM=1,NUMBER_OF_EMISSION_TYPES),
+     +               ANNUAL_WHOLESALE_COST,
+     +               MONTHLY_RETAIL_SALES,
+     +               999.,999.,999.,99999.,99999.,
+     +               FLOAT(MONTHLY_STARTS),
+     +               TOTAL_EMISSION_COSTS/1000000.,
+     +               MONTHLY_START_COSTS/1000000.,
+     +               999., ! ASSET CLASS
+     +               0.,
+     +               0.,
+     +               UNECONOMIC_RATE,
+     +               NEWGEN_UNIT_STATUS,
+     +               0.,
+     +               0.,
+     +               0.,
+     +               0.,
+     +               EV_DATA_SOURCE,
+     +               EV_PLANNING_AREA,
+     +               MONTHLY_CAPACITY_REVENUE,
+     +               MONTHLY_CAPITAL_COST_OF_BUILD,
+     +               MONTHLY_EBITDA,
+     +               999.,
+     +               MONTHLY_CHARGING_ENERGY/1000.
+               MON_CL_TRANS_UNIT_REC = MON_CL_TRANS_UNIT_REC + 1
+            ENDIF
+!
+         ENDIF ! ISEAS == LAST_SEASON
+!
+! ANNUAL TRANS REPORT
+!
+!
+! TODO: EXTRACT_METHOD HANDLE_ANNUAL_TRANS_REPORT
+         IF(ISEAS == LAST_SEASON) THEN
+!
+            IF(TRANSACT_FUEL_REPORT_ACTIVE) THEN
+               DO I = 1, UPPER_TRANS_GROUP
+                  FUEL_COST_PER_MMBTU = 0.
+                  DO J = 1, max_fuel_types_clr
+                     IF(ANNUAL_FUEL_BTUS_BY_TG_BY_FUEL(I,J) <
+     +                                                      .0001) CYCLE
+                     FUEL_COST_PER_MMBTU(J) =
+     +                  ANNUAL_FUEL_COST_BY_TG_BY_FUEL(I,J) * 1000000. /
+     +                               ANNUAL_FUEL_BTUS_BY_TG_BY_FUEL(I,J)
+                  ENDDO
+                  TRANS_FUEL_REC = RPTREC(TRANS_FUEL_NO)
+                  WRITE(TRANS_FUEL_NO,REC=TRANS_FUEL_REC)
+     +               PRT_ENDPOINT(),
+     +               FLOAT(YEAR+BASE_YEAR),
+     +               CL_MONTH_NAME(13),
+     +               MULTI_AREA_NAME(I),
+     +               (ANNUAL_FUEL_COST_BY_TG_BY_FUEL(I,J),
+     +                                      J=1,max_fuel_types_clr),
+     +               (ANNUAL_FUEL_BTUS_BY_TG_BY_FUEL(I,J),
+     +                                       J=1,max_fuel_types_clr),
+     +               (FUEL_COST_PER_MMBTU(J),J=1,max_fuel_types_clr),
+     +               EV_DATA_SOURCE
+                  TRANS_FUEL_REC = TRANS_FUEL_REC + 1
+               ENDDO
+               DO I = 1, MAX_STATE_PROVINCE_NO
+                  FUEL_COST_PER_MMBTU = 0.
+                  RESOURCE_RPS_VARS = 0.0
+                  DO J = 1, max_fuel_types_clr
+                     IF(ANNUAL_FUEL_BTUS_BY_SP_BY_FUEL(I,J) < .0001)
+     +                                                             CYCLE
+                     FUEL_COST_PER_MMBTU(J) =
+     +                     ANNUAL_FUEL_COST_BY_SP_BY_FUEL(I,J) *
+     +                                                        1000000. /
+     +                         ANNUAL_FUEL_BTUS_BY_SP_BY_FUEL(I,J)
+                  ENDDO
+                  DO J = 1, 5
+                     IF(ANNUAL_GROUP_VAR_BY_SP(I,4) > 0.1) THEN
+                        UNIT_EMISSIONS(J) =
+     +                          2000.*ANNUAL_GROUP_VAR_BY_SP(I,7+J)/
+     +                                       ANNUAL_GROUP_VAR_BY_SP(I,4)
+                     ELSE
+                        UNIT_EMISSIONS(J) = 0.
+                     ENDIF
+                     IF(GROUP_VAR_BY_SP(I,7+J) > 0.1) THEN
+                        EMISSION_COST_PER_TON(J) = 1000000.0 *
+     +                        ANNUAL_EMISSIONS_COST_BY_SP(I,J) /
+     +                                     ANNUAL_GROUP_VAR_BY_SP(I,7+J)
+                     ELSE
+                        EMISSION_COST_PER_TON(J) = 0.0
+                     ENDIF
+                  ENDDO
+!
+                  IF(ANNUAL_GROUP_VAR_BY_SP(I,3) > 0.1) THEN
+                     ANNUAL_GROUP_VAR_BY_SP(I,4) =
+     +                        ANNUAL_GROUP_VAR_BY_SP(I,4)/
+     +                                       ANNUAL_GROUP_VAR_BY_SP(I,3)
+                  ELSE
+                     GROUP_VAR_BY_SP(I,4) = 0.
+                  ENDIF
+                  ANNUAL_GROUP_VAR_BY_SP(I,1) =
+     +                                   ANNUAL_GROUP_VAR_BY_SP(I,1)/12.
+                  ANNUAL_GROUP_VAR_BY_SP(I,2) =
+     +                                   ANNUAL_GROUP_VAR_BY_SP(I,2)/12.
+!
+                  TEMP_I2 = GET_STATE_PROVINCE_NAMES(STATE_PROVINCE,I)
+                  TEMP_NAME = STATE_PROVINCE
+                  ST_TG = STATE_ID_LOOKUP(STATE_PROVINCE)
+                  CALL GET_STATE_RPS_DATA(INT2(0),ST_TG,STATE_RPS_VARS)
+! RESOURCE_RPS_VARS ADDS TO PREVIOUS VALUE. NEEDS TO BE
+! PROPERLY INITIALIZED.
+                  TEMP_L1 = GET_TRANS_RPS_SUM(INT2(0),ST_TG,
+     +                                                RESOURCE_RPS_VARS)
+                  CALL GET_HYDRO_RPS_SUM(INT2(0),ST_TG,
+     +                                                RESOURCE_RPS_VARS)
+                  CALL GET_THERMAL_RPS_SUM(
+     +                                  INT2(0),ST_TG,RESOURCE_RPS_VARS)
+                  DO J = 8, 14
+                     RESOURCE_RPS_VARS(J) = RESOURCE_RPS_VARS(J) / 12.0
+                  ENDDO
+                  TRANS_STATE_REC = RPTREC(TRANS_STATE_NO)
+                  WRITE(TRANS_STATE_NO,REC=TRANS_STATE_REC)
+     +               PRT_ENDPOINT(),
+     +               FLOAT(YEAR+BASE_YEAR),
+     +               CL_MONTH_NAME(13),
+     +               TEMP_NAME,
+     +               (ANNUAL_FUEL_COST_BY_SP_BY_FUEL(I,J),
+     +                                       J=1,max_fuel_types_clr),
+     +               (ANNUAL_FUEL_BTUS_BY_SP_BY_FUEL(I,J),
+     +                                       J=1,max_fuel_types_clr),
+     +               (FUEL_COST_PER_MMBTU(J),J=1,max_fuel_types_clr),
+     +               EV_DATA_SOURCE,
+     +               (ANNUAL_GROUP_VAR_BY_SP(I,J),J=1,MAX_GROUP_VAR),
+     +               UNIT_EMISSIONS,
+     +               (ANNUAL_EMISSIONS_COST_BY_SP(I,J),J=1,5),
+     +               EMISSION_COST_PER_TON,
+     +               STATE_RPS_VARS,
+     +               RESOURCE_RPS_VARS
+                  TRANS_STATE_REC = TRANS_STATE_REC + 1
+               ENDDO
+            ENDIF
+!
+            IF(TRANSACT_PROD_REPORT_ACTIVE) THEN
+               DO I = 1, UPPER_TRANS_GROUP
+                  ANNUAL_LOAD_BY_TG_BY_MWH(I,2) =
+     +                      ANNUAL_LOAD_BY_TG_BY_MWH(I,4)/8760.
+                  TRANS_PROD_REC = RPTREC(TRANS_PROD_NO)
+
+!                 ! Transact Production report (msgmopro)
+                  WRITE(TRANS_PROD_NO,REC=TRANS_PROD_REC)
+     +               PRT_ENDPOINT(),
+     +               FLOAT(YEAR+BASE_YEAR),
+     +               CL_MONTH_NAME(13),
+     +               MULTI_AREA_NAME(I),
+     +               (ANNUAL_PROD_BY_TG_BY_MW(I,J),
+     +                        J=1,max_prod_types_clr),
+     +               (ANNUAL_PROD_BY_TG_BY_MWH(I,J),
+     +                        J=1,max_prod_types_clr),
+     +               2.0,
+     +               (ANNUAL_LOAD_BY_TG_BY_MWH(I,J),
+     +                        J=1,MAX_LOAD_TYPES)
+                  TRANS_PROD_REC = TRANS_PROD_REC + 1
+!
+                  TRAN_PROD_FUEL_REC = RPTREC(TRAN_PROD_FUEL_NO)
+                  WRITE(TRAN_PROD_FUEL_NO,REC=TRAN_PROD_FUEL_REC)
+     +               PRT_ENDPOINT(),
+     +               FLOAT(YEAR+BASE_YEAR),
+     +               CL_MONTH_NAME(13),
+     +               MULTI_AREA_NAME(I),
+     +               (ANNUAL_MW_BY_TG_BY_FUEL(I,J),
+     +                                            J=1,MFT1),
+     +               (ANNUAL_MWH_BY_TG_BY_FUEL(I,J),
+     +                                            J=1,MFT1)
+                  TRAN_PROD_FUEL_REC = TRAN_PROD_FUEL_REC + 1
+!
+               ENDDO
+            ENDIF
+!
+            MONTHLY_STARTS = 0
+            MONTHLY_START_COSTS = 0.
+            MONTHLY_CAPITAL_COST_OF_BUILD = 0.
+            MONTHLY_EBITDA = 0.
+            MONTHLY_CHARGING_ENERGY = 0.
+            MONTHLY_CAPACITY_REVENUE = 0.
+!
+            MONTHLY_NOX_SEASON_THERM = 0.
+            MONTHLY_TRANS_CAPACITY = 0.0
+            MONTHLY_TRANS_EFFECTIVE_CAP = 0.0
+            MONTHLY_TRANS_AVAIL_CAP = 0.0
+            MONTHLY_TRANS_ENERGY = 0.0
+!
+            MONTHLY_P_HEAT = 0.0 ! D0
+            MONTHLY_S_HEAT = 0.0 ! D0
+            MONTHLY_E_HEAT = 0.0 ! D0
+!
+            MONTHLY_TRANS_HEAT = 0.0 D0
+            MONTHLY_TRANS_FUEL_COST = 0.0 D0
+            MONTHLY_TRANS_VAR_COST = 0.0
+!
+            MONTHLY_UNIT_EMISSIONS(:) = 0.0
+! SHOULD THIS COME OUT?
+!            MONTHLY_UNIT_EMISSIONS_COST(:) = 0.0
+            ANNUAL_LOCAL_EMIS_COST(:) = 0.0
+!
+            MONTHLY_TRANS_FIXED_COST = 0.
+!
+            ANNUAL_ECO_SALES = 0.
+            ANNUAL_ECO_SALES_ENRG = 0.
+            ANNUAL_ECO_PUCH = 0.
+            ANNUAL_ECO_PUCH_ENRG = 0.
+!
+            ANNUAL_WHOLESALE_COST = 0.
+!
+!
+! ONLY CALLED ONCE FOR RETIREMENT LOGIC.
+!
+            UNIT_GROSS_MARGIN = INIT_ANNUAL_GROSS_MARGIN()
+!
+            DO I = 1, NUNITS
+!               IF(REVENUE_GENERATING_CAPACITY(I) <= 0.01) CYCLE
+
+!              ! Fifth assignment of Unitno
+               UNITNO = I
+               CL_TRANS_NAME = UNITNM(I)//CL_UNIQUE_RPT_STR(I) ! '  '
+               ENRG = ANNUAL_CL_UNIT_ENERGY(UNITNO)
+! 1/12/00.
+               ANNUAL_REV_GEN_CAPACITY(I) =
+     +                           ANNUAL_REV_GEN_CAPACITY(I) /
+     +                                                       LAST_SEASON
+               CAPBLK = ANNUAL_EFFECTIVE_CAP(I) / LAST_SEASON
+               IF(MONTHS_ACTIVE(I) >= LAST_SEASON) THEN
+                  ANNUAL_CAP(I) = ANNUAL_CAP(I) / LAST_SEASON
+               ELSEIF(MONTHS_ACTIVE(I) > 0) THEN ! MODIFIED 9/23/02.
+                  ANNUAL_CAP(I) = ANNUAL_CAP(I) /
+     +                                           FLOAT(MONTHS_ACTIVE(I))
+               ELSE
+                  ANNUAL_CAP(I) = MW(2,I)
+               ENDIF
+! 8/28/02
+               CLASS = GET_ASSET_CLASS_NUM(UNITNO)
+               P_FUEL_DELIVERY = ABS(GET_P_FUEL_DELIVERY(UNITNO))
+               PBTUCT_SAVE = ABS(GET_PBTUCT_SAVE(UNITNO))
+!
+               IF(ENRG > 0.45) THEN
+                  HEAT = ANNUAL_CL_UNIT_MMBTUS(UNITNO)
+                  FUEL_COST = ANNUAL_CL_UNIT_FUEL_COST(UNITNO)
+!
+! EMISSIONS
+!
+                  UNIT_EMISSIONS(1) = ANNUAL_CL_UNIT_EMISSIONS(1,UNITNO)
+                  UNIT_EMISSIONS(2) = ANNUAL_CL_UNIT_EMISSIONS(2,UNITNO)
+                  UNIT_EMISSIONS(3) = ANNUAL_CL_UNIT_EMISSIONS(3,UNITNO)
+                  UNIT_EMISSIONS(4) = ANNUAL_CL_UNIT_EMISSIONS(4,UNITNO)
+                  UNIT_EMISSIONS(5) = ANNUAL_CL_UNIT_EMISSIONS(5,UNITNO)
+!
+                  UNIT_EMISSIONS_COST(1) =
+     +                              ANNUAL_UNIT_EMISSIONS_COST(UNITNO,1)
+                  UNIT_EMISSIONS_COST(2) =
+     +                              ANNUAL_UNIT_EMISSIONS_COST(UNITNO,2)
+                  UNIT_EMISSIONS_COST(3) =
+     +                              ANNUAL_UNIT_EMISSIONS_COST(UNITNO,3)
+                  UNIT_EMISSIONS_COST(4) =
+     +                              ANNUAL_UNIT_EMISSIONS_COST(UNITNO,4)
+                  UNIT_EMISSIONS_COST(5) =
+     +                              ANNUAL_UNIT_EMISSIONS_COST(UNITNO,5)
+!
+               ELSE
+                  HEAT = 0.D0
+                  FUEL_COST = 0.
+!
+                  UNIT_EMISSIONS(1) = 0.
+                  UNIT_EMISSIONS(2) = 0.
+                  UNIT_EMISSIONS(3) = 0.
+                  UNIT_EMISSIONS(4) = 0.
+                  UNIT_EMISSIONS(5) = 0.
+!
+                  UNIT_EMISSIONS_COST(1) = 0.
+                  UNIT_EMISSIONS_COST(2) = 0.
+                  UNIT_EMISSIONS_COST(3) = 0.
+                  UNIT_EMISSIONS_COST(4) = 0.
+                  UNIT_EMISSIONS_COST(5) = 0.
+!
+               ENDIF
+               IF(.NOT. TESTING_PLAN) THEN
+                  IF(.NOT. CANADA .AND. PHASE_I_UNIT(UNITNO) ) THEN
+                     UNIT_NAME = trim(UNITNM(UNITNO))//'*'
+                  ELSE
+                     UNIT_NAME = UNITNM(UNITNO)
+                  ENDIF
+                  IF(ENRG > 0.45) THEN
+                     AVERAGE_HEATRATE = HEAT_CONVERSION*HEAT/ENRG
+                     AVERAGE_PRODUCTION_COSTS =
+     +                        (SNGL((FUEL_COST)) +
+     +                             ANNUAL_CL_UNIT_VAR_COST(UNITNO))/ENRG
+                     IF(.NOT. CANADA) AVERAGE_HEATRATE =
+     +                                             AVERAGE_HEATRATE + .5
+                  ELSE
+                     FUEL_COST = 0.0 D0
+                     HEAT = 0.0 D0
+                     AVERAGE_HEATRATE = 0.0
+                     AVERAGE_PRODUCTION_COSTS = 0.0
+                  ENDIF
+                  IF(ANNUAL_CAP(I) > 0.01) THEN
+                     TRANS_EQUIV_AVAIL =  100. *
+     +                        ANNUAL_REV_GEN_CAPACITY(I) / ANNUAL_CAP(I)
+                     TRANS_CAP_FACTOR = ENRG * 100. /
+     +                                           (ANNUAL_CAP(I) * 8760.)
+                  ELSE
+                     TRANS_EQUIV_AVAIL = 0.0
+                     TRANS_CAP_FACTOR = 0.0
+                  ENDIF
+!
+                  TOTAL_UNIT_COST =
+     +               (SNGL(FUEL_COST) +
+     +                   ANNUAL_CL_UNIT_VAR_COST(UNITNO) +
+     +                       ANNUAL_CL_UNIT_FIXED_COST(UNITNO))/1000000.
+!
+                  IF(ECO_SALES_ENRG_FROM(UNITNO) > 0.1) THEN
+                     AVE_REV_FROM_SALES =  ECO_SALES_REV_FROM(UNITNO) /
+     +                                       ECO_SALES_ENRG_FROM(UNITNO)
+                  ELSE
+                     AVE_REV_FROM_SALES =  0.
+                  ENDIF
+!
+                  MONTHLY_NOX_SEASON_THERM = MONTHLY_NOX_SEASON_THERM
+     +                                    + ANNUAL_NOX_SEASON_THERMAL(I)
+                  ANNUAL_ECO_SALES = ANNUAL_ECO_SALES +
+     +                                        ECO_SALES_REV_FROM(UNITNO)
+                  ANNUAL_ECO_SALES_ENRG = ANNUAL_ECO_SALES_ENRG +
+     +                                       ECO_SALES_ENRG_FROM(UNITNO)
+                  ANNUAL_ECO_PUCH = ANNUAL_ECO_PUCH +
+     +                                        ECO_PUCH_COST_FROM(UNITNO)
+                  ANNUAL_ECO_PUCH_ENRG = ANNUAL_ECO_PUCH_ENRG +
+     +                                        ECO_PUCH_ENRG_FROM(UNITNO)
+!
+                  MONTHLY_STARTS = MONTHLY_STARTS +
+     +                                        ANNUAL_UNIT_STARTS(UNITNO)
+                  MONTHLY_START_COSTS = MONTHLY_START_COSTS +
+     +                                   ANNUAL_UNIT_START_COSTS(UNITNO)
+                  MONTHLY_CAPITAL_COST_OF_BUILD =
+     +                     MONTHLY_CAPITAL_COST_OF_BUILD +
+     +                              ANNUAL_CAPITAL_COST_OF_BUILD(UNITNO)
+                  MONTHLY_EBITDA = MONTHLY_EBITDA +
+     +                                             ANNUAL_EBITDA(UNITNO)
+
+                  MONTHLY_CAPACITY_REVENUE =
+     +                        MONTHLY_CAPACITY_REVENUE +
+     +                              ANNUAL_UNIT_CAPACITY_REVENUE(UNITNO)
+!
+                  MONTHLY_TRANS_CAPACITY =
+     +                            MONTHLY_TRANS_CAPACITY + ANNUAL_CAP(I)
+                  MONTHLY_TRANS_EFFECTIVE_CAP =
+     +                              MONTHLY_TRANS_EFFECTIVE_CAP + CAPBLK
+                  MONTHLY_TRANS_AVAIL_CAP = MONTHLY_TRANS_AVAIL_CAP +
+     +                                        ANNUAL_REV_GEN_CAPACITY(I)
+                  MONTHLY_TRANS_ENERGY = MONTHLY_TRANS_ENERGY + ENRG
+                  MONTHLY_TRANS_HEAT = MONTHLY_TRANS_HEAT + HEAT
+                  MONTHLY_P_HEAT = MONTHLY_P_HEAT +
+     +                                 ANNUAL_P_FUEL_CONSUMPTION(UNITNO)
+                  MONTHLY_S_HEAT = MONTHLY_S_HEAT +
+     +                                 ANNUAL_S_FUEL_CONSUMPTION(UNITNO)
+                  MONTHLY_E_HEAT = MONTHLY_E_HEAT +
+     +                                 ANNUAL_E_FUEL_CONSUMPTION(UNITNO)
+                  MONTHLY_TRANS_FUEL_COST = MONTHLY_TRANS_FUEL_COST +
+     +                                                         FUEL_COST
+! 6/13/01. To account for varying VCPMWH.
+                  MONTHLY_TRANS_VAR_COST = MONTHLY_TRANS_VAR_COST +
+     +                                   ANNUAL_CL_UNIT_VAR_COST(UNITNO)
+
+                  MONTHLY_UNIT_EMISSIONS(1) =
+     +                           MONTHLY_UNIT_EMISSIONS(1) +
+     +                                                 UNIT_EMISSIONS(1)
+                  MONTHLY_UNIT_EMISSIONS(2) =
+     +                           MONTHLY_UNIT_EMISSIONS(2) +
+     +                                                 UNIT_EMISSIONS(2)
+                  MONTHLY_UNIT_EMISSIONS(3) =
+     +                           MONTHLY_UNIT_EMISSIONS(3) +
+     +                                                 UNIT_EMISSIONS(3)
+                  MONTHLY_UNIT_EMISSIONS(4) =
+     +                           MONTHLY_UNIT_EMISSIONS(4) +
+     +                                                 UNIT_EMISSIONS(4)
+                  MONTHLY_UNIT_EMISSIONS(5) =
+     +                           MONTHLY_UNIT_EMISSIONS(5) +
+     +                                                 UNIT_EMISSIONS(5)
+                  MONTHLY_TRANS_FIXED_COST = MONTHLY_TRANS_FIXED_COST +
+     +                                 ANNUAL_CL_UNIT_FIXED_COST(UNITNO)
+!
+                  ANNUAL_LOCAL_EMIS_COST(1) =
+     +               ANNUAL_LOCAL_EMIS_COST(1) +
+     +                                            UNIT_EMISSIONS_COST(1)
+                  ANNUAL_LOCAL_EMIS_COST(2) =
+     +               ANNUAL_LOCAL_EMIS_COST(2) +
+     +                                            UNIT_EMISSIONS_COST(2)
+                  ANNUAL_LOCAL_EMIS_COST(3) =
+     +               ANNUAL_LOCAL_EMIS_COST(3) +
+     +                                            UNIT_EMISSIONS_COST(3)
+                  ANNUAL_LOCAL_EMIS_COST(4) =
+     +               ANNUAL_LOCAL_EMIS_COST(4) +
+     +                                            UNIT_EMISSIONS_COST(4)
+                  ANNUAL_LOCAL_EMIS_COST(5) =
+     +               ANNUAL_LOCAL_EMIS_COST(5) +
+     +                                            UNIT_EMISSIONS_COST(5)
+!
+!
+                  FT = MAX(1,MIN(GET_PRIMARY_MOVER(I),6))
+                  SP = MIN(MAX(0,GET_UNIT_STATE_PROVINCE_INDEX(I)),
+     +                                            MAX_STATE_PROVINCE_NO)
+
+                  TG = TRANSACTION_GROUP(UNITNO)
+!
+                  ONLINE_DATE = 190000.+FLOAT(ONLINE(I))
+                  OFLINE_DATE = 190000.+FLOAT(OFLINE(I))
+!
+! 10/04/01
+!
+                  TEMP_L1 = GET_CL_BASECASE_MARKET_ID(I,MARKET_ID)
+                  MK = MARKET_AREA_LOOKUP(MARKET_ID(1:5))
+                  PM = GET_PRIMARY_MOVER_INDEX(I)
+                  RTG = TG
+                  RMK = MK
+                  RFT = FT
+                  RSP = FLOAT(GET_THERMAL_STATE_INDEX(I))
+                  CHARGING_ENERGY = 0.0
+
+                  RPM = PM
+                  HESI_ID_NUM_4_UNIT = GET_HESI_UNIT_ID_NUM(int(I),
+     +                                    int(HESI_SECOND_UNIT_ID_NUM))
+                  POWERDAT_PLANT_ID = GET_POWERDAT_PLANT_ID(I)
+                  NEWGEN_UNIT_STATUS = FLOAT(GET_NEWGEN_INDEX(I))
+
+                  IF(HEAT /= 0.) THEN
+                     AVERAGE_SOX_RATE=TONS_CONVERSION*UNIT_EMISSIONS(1)/
+     +                                             HEAT
+                     AVERAGE_FUEL_COST = FUEL_COST/HEAT
+                  ELSE
+                     AVERAGE_SOX_RATE = 0.
+                     AVERAGE_FUEL_COST = 0.
+                  ENDIF
+                  AVERAGE_VAR_OM = 0.
+                  IF(ENRG /= 0.) AVERAGE_VAR_OM =
+     +                              ANNUAL_CL_UNIT_VAR_COST(UNITNO)/ENRG
+                  AVERAGE_NOX_RATE = 0.
+                  IF(ANNUAL_NOX_SEASON_THERMAL(I) > 0.) THEN
+                     AVERAGE_NOX_RATE=TONS_CONVERSION*UNIT_EMISSIONS(2)/
+     +                                    ANNUAL_NOX_SEASON_THERMAL(I)
+                  ENDIF
+!
+                  UNIT_GROSS_MARGIN =
+     +                  ECO_SALES_REV_FROM(UNITNO)/1000000. -
+     +                                                   TOTAL_UNIT_COST
+                  IF(RUN_TRANSACT) THEN
+                     TEMP_R4 = ANNUAL_EBITDA(UNITNO) ! 102509.
+                     CO2_COST = UNIT_EMISSIONS_COST(3)
+                     CAP_COST = CAP_MARKET_REVENUE
+                     TEMP_R4 =
+     +                  SAVE_ANNUAL_GROSS_MARGIN(UNITNO,
+     +                                           ANNUAL_CAP(I),
+     +                                           TEMP_R4,
+     +                                           UNIT_EMISSIONS(3),
+     +                                           ENRG,
+     +                                           CO2_COST,
+     +                                           CAP_COST)
+                     MRX_RPS_CL_CURVE_GROSS_MARGIN(UNITNO) =
+     +                     1000.*(ANNUAL_EBITDA(UNITNO) +
+     +                                               CAP_MARKET_REVENUE)
+                     MRX_RPS_CL_CURVE_REVENUE(UNITNO) =
+     +                     0.001*ECO_SALES_REV_FROM(UNITNO) +
+     +                        1000.*ANNUAL_UNIT_CAPACITY_REVENUE(UNITNO)
+                     MRX_RPS_CL_CURVE_COST(UNITNO) =
+     +                    1000.*(TOTAL_UNIT_COST + TOTAL_EMISSION_COSTS)
+                     MRX_RPS_CL_CURVE_UMWH(UNITNO) = ENRG
+
+
+                  ENDIF
+
+                  RETAIL_SALES = MAX(0.,
+     +                       (ENRG - ECO_SALES_ENRG_FROM(UNITNO))/1000.)
+                  ANNUAL_WHOLESALE_COST = ANNUAL_WHOLESALE_COST +
+     +                                     ANNUAL_WHOLESALE_PROD_COST(I)
+
+!
+                  IF(TG <= MAX_TRANS_GROUP_NUMBER .AND.
+     +                  TRANS_GROUP_REPORTING_ACTIVE(TG) .AND.
+     +                      REPORT_MARKET_AREA(MARKET_ID) .AND.
+     +                              REPORT_THIS_CL_UNIT(UNITNO) .AND.
+     +                                .NOT. FISCAL_ONLY .AND.
+     +                                 (MONTHLY_TRANS_REPORT .OR.
+     +                                   ANNUAL_TRANS_REPORT .OR.
+     +                                       NEW_UNITS_REPORT)) THEN
+
+                    TOTAL_EMISSION_COSTS = SUM(UNIT_EMISSIONS_COST)
+!
+                     IF(TRANS_EQUIV_AVAIL > 0.) THEN
+                        UNECONOMIC_RATE = 100.*(1. -
+     +                             (TRANS_CAP_FACTOR/TRANS_EQUIV_AVAIL))
+                     ELSE
+                        UNECONOMIC_RATE = 0.
+                     ENDIF
+!
+! 050519.
+                     IF(AllHoursMonth(UNITNO) > 0.) THEN
+                        ANNUAL_CAP(UNITNO) =
+     +                        CapHours(UNITNO) / AllHoursMonth(UNITNO)
+                        CAPBLK =
+     +                        EffectiveCapHours(UNITNO) /
+     +                                             AllHoursMonth(UNITNO)
+                        TRANS_EQUIV_AVAIL =
+     +                        100. * AvailHoursMonth(UNITNO) / 8760.
+                        TRANS_CAP_FACTOR =
+     +                        100. * ENRG / (8760. * ANNUAL_CAP(UNITNO))
+                        UNECONOMIC_RATE =
+     +                              TRANS_EQUIV_AVAIL - TRANS_CAP_FACTOR
+                     ELSE
+                        ANNUAL_CAP(I) = 0.
+                        CAPBLK = 0.
+                        TRANS_EQUIV_AVAIL = 0.
+                        TRANS_CAP_FACTOR = 0.
+                        UNECONOMIC_RATE = 0.
+                     ENDIF
+
+                     IF(MONTHLY_TRANS_REPORT .OR.
+     +                                         ANNUAL_TRANS_REPORT) THEN
+                   MON_CL_TRANS_UNIT_REC = RPTREC(MON_CL_TRANS_UNIT_NO)
+!                  !msgmtrcl
+                   call write_unique_msgmtrcl_log_entry(7)
+                   WRITE(MON_CL_TRANS_UNIT_NO,REC=MON_CL_TRANS_UNIT_REC)
+     +                  PRT_ENDPOINT(),
+     +                  LOCAL_YEAR,
+     +                  CL_MONTH_NAME(13),
+     +                  CL_TRANS_NAME,
+     +                  FLOAT(I),
+     +                  ANNUAL_CAP(I),
+     +                  CAPBLK,
+     +                  TRANS_EQUIV_AVAIL,
+     +                  TRANS_CAP_FACTOR,
+     +                  ENRG/1000.,
+     +                  SNGL(HEAT),
+     +                  AVERAGE_HEATRATE,
+     +                  SNGL(FUEL_COST)/1000000.,
+     +                  ANNUAL_CL_UNIT_VAR_COST(UNITNO)/1000000., ! 9 - Variable O&M Cost ($/MMW)
+     +                  AVERAGE_PRODUCTION_COSTS,
+     +                  (UNIT_EMISSIONS(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +                  ANNUAL_CL_UNIT_FIXED_COST(UNITNO)/1000000., ! 16 - Fixed cost ($/MMW)
+     +                  TOTAL_UNIT_COST,
+     +                  ECO_SALES_REV_FROM(UNITNO)/1000000.,
+     +                  ECO_SALES_ENRG_FROM(UNITNO)/1000.,
+     +                  AVE_REV_FROM_SALES,
+     +                  UNIT_GROSS_MARGIN,
+     +                  ECO_PUCH_COST_FROM(UNITNO)/1000000.,
+     +                  ECO_PUCH_ENRG_FROM(UNITNO)  /1000.,
+     +                  ANNUAL_P_FUEL_CONSUMPTION(UNITNO),
+     +                  ANNUAL_S_FUEL_CONSUMPTION(UNITNO),
+     +                  ANNUAL_E_FUEL_CONSUMPTION(UNITNO),
+     +                  AVERAGE_NOX_RATE,
+     +                  AVERAGE_SOX_RATE,
+     +                  AVERAGE_FUEL_COST,
+     +                  AVERAGE_VAR_OM,
+     +                  (UNIT_EMISSIONS_COST(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +                  ANNUAL_WHOLESALE_PROD_COST(I),
+     +                  RETAIL_SALES,
+     +                  RTG,RMK,RFT,
+     +                  HESI_ID_NUM_4_UNIT,
+     +                  POWERDAT_PLANT_ID,
+     +                  FLOAT(ANNUAL_UNIT_STARTS(UNITNO)),
+     +                  TOTAL_EMISSION_COSTS,
+     +                  ANNUAL_UNIT_START_COSTS(UNITNO)/1000000.,
+     +                  FLOAT(CLASS),
+     +                  PBTUCT_SAVE,
+     +                  P_FUEL_DELIVERY,
+     +                  UNECONOMIC_RATE,
+     +                  NEWGEN_UNIT_STATUS,
+     +                  ONLINE_DATE,
+     +                  OFLINE_DATE,
+     +                  RPM,
+     +                  HESI_SECOND_UNIT_ID_NUM,
+     +                  EV_DATA_SOURCE,
+     +                  EV_PLANNING_AREA,
+     +                  ANNUAL_UNIT_CAPACITY_REVENUE(UNITNO),
+     +                  ANNUAL_CAPITAL_COST_OF_BUILD(UNITNO),
+     +                  ANNUAL_EBITDA(UNITNO),
+     +                  RSP,
+     +                  CHARGING_ENERGY/1000.
+                       MON_CL_TRANS_UNIT_REC = MON_CL_TRANS_UNIT_REC + 1
+                    ENDIF ! WRITE THE ANNUAL THERMAL UNITS REPORT
+                    IF(NEW_UNITS_REPORT .AND. ONLINE(UNITNO) >
+     +                                                  BEGIN_DATE) THEN
+                    MON_NU_TRANS_UNIT_REC = RPTREC(MON_NU_TRANS_UNIT_NO)
+
+                       WRITE(MON_NU_TRANS_UNIT_NO,
+     +                                        REC=MON_NU_TRANS_UNIT_REC)
+     +                  PRT_ENDPOINT(),
+     +                  LOCAL_YEAR,
+     +                  CL_MONTH_NAME(13),
+     +                  CL_TRANS_NAME,
+     +                  FLOAT(I),
+     +                  ANNUAL_CAP(I),
+     +                  CAPBLK,
+     +                  TRANS_EQUIV_AVAIL,
+     +                  TRANS_CAP_FACTOR,
+     +                  ENRG/1000.,
+     +                  SNGL(HEAT),
+     +                  AVERAGE_HEATRATE,
+     +                  SNGL(FUEL_COST)/1000000.,
+     +                  ANNUAL_CL_UNIT_VAR_COST(UNITNO)/1000000.,
+     +                  AVERAGE_PRODUCTION_COSTS,
+     +                  (UNIT_EMISSIONS(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +                  ANNUAL_CL_UNIT_FIXED_COST(UNITNO)/1000000.,
+     +                  TOTAL_UNIT_COST,
+     +                  ECO_SALES_REV_FROM(UNITNO)/1000000.,
+     +                  ECO_SALES_ENRG_FROM(UNITNO)/1000.,
+     +                  AVE_REV_FROM_SALES,
+     +                  UNIT_GROSS_MARGIN,
+     +                  ECO_PUCH_COST_FROM(UNITNO)/1000000.,
+     +                  ECO_PUCH_ENRG_FROM(UNITNO)/1000.,
+     +                  ANNUAL_P_FUEL_CONSUMPTION(UNITNO),
+     +                  ANNUAL_S_FUEL_CONSUMPTION(UNITNO),
+     +                  ANNUAL_E_FUEL_CONSUMPTION(UNITNO),
+     +                  AVERAGE_NOX_RATE,
+     +                  AVERAGE_SOX_RATE,
+     +                  AVERAGE_FUEL_COST,
+     +                  AVERAGE_VAR_OM,
+     +                  (UNIT_EMISSIONS_COST(EM),
+     +                                   EM=1,NUMBER_OF_EMISSION_TYPES),
+     +                  ANNUAL_WHOLESALE_PROD_COST(I),
+     +                  RETAIL_SALES,
+     +                  RTG,RMK,RFT,
+     +                  HESI_ID_NUM_4_UNIT,
+     +                  POWERDAT_PLANT_ID,
+     +                  FLOAT(ANNUAL_UNIT_STARTS(UNITNO)),
+     +                  TOTAL_EMISSION_COSTS,
+     +                  ANNUAL_UNIT_START_COSTS(UNITNO)/1000000.,
+     +                  FLOAT(CLASS),
+     +                  PBTUCT_SAVE,
+     +                  P_FUEL_DELIVERY,
+     +                  UNECONOMIC_RATE,
+     +                  NEWGEN_UNIT_STATUS,
+     +                  ONLINE_DATE,
+     +                  OFLINE_DATE,
+     +                  RPM,
+     +                  HESI_SECOND_UNIT_ID_NUM,
+     +                  EV_DATA_SOURCE,
+     +                  EV_PLANNING_AREA,
+     +                  ANNUAL_UNIT_CAPACITY_REVENUE(UNITNO),
+     +                  ANNUAL_CAPITAL_COST_OF_BUILD(UNITNO),
+     +                  ANNUAL_EBITDA(UNITNO),
+     +                  RSP,
+     +                  CHARGING_ENERGY/1000.
+                     MON_NU_TRANS_UNIT_REC = MON_NU_TRANS_UNIT_REC + 1
+                    ENDIF ! WRITE THE ANNUAL NEW UNITS REPORT
+                  ENDIF ! WRITE ONE OF THE REPORTS
+               ENDIF ! TESTING PLAN
+            ENDDO ! UNITS
+!
+! GET NUMBER OF TRANSACTIONS
+!
+            SUM_ANNUAL = 0
+
+
+            DO TRANS = 1, NUM_TRANSACTIONS
+               VOID_LOGICAL = GET_MONTHLY_TRANS_VARIABLES(TRANS,
+     +                                               ENRG,
+     +                                               TRANS_CAP,
+     +                                               TRANS_VAR_EXP,
+     +                                               TRANS_VAR_MWH,
+     +                                               TRANS_FIX_EXP,
+     +                                               TRANS_REV,
+     +                                               TRANS_REV_MWH,
+     +                                               TRANS_HOURS,
+     +                                               PRODUCT_HOURS,
+     +                                               TRANS_STRIKES,
+     +                                               INT2(0),
+     +                                               TRANS_NAME,
+     +                                               SUM_ANNUAL,
+     +                                               YES_REPORT_PRODUCT,
+     +                                               TG,
+     +                                               PM,
+     +                                               FT,
+     +                                               TRANS_ON_LINE,
+     +                                               TRANS_OFF_LINE,
+     +                                               TRANS_UNIT_ID,
+     +                                               TRANS_ASSET_CLASS,
+     +                                               TRANS_NOT_ACTIVE,
+     +                                               TEMP_YEAR,
+     +                                               CHARGING_ENERGY) ! 060308
+! 121806
+               IF(TRANS_NOT_ACTIVE) CYCLE
+               I = I + 1
+!
+               CL_TRANS_NAME = TRANS_NAME
+!
+               TRANS_STRIKES = 0.0 ! 092107. PER BURESH.
+!
+               TG_POSITION = MAX(1,GET_TRANS_GROUP_POSITION(TG))
+               FT = MAX(1,MIN(FT,6))
+
+               RTG = TG
+               RFT = FT
+               RSP = FLOAT(GET_TRANS_STATE_INDEX(TRANS))
+               MONTHLY_CHARGING_ENERGY = MONTHLY_CHARGING_ENERGY +
+     +                                                   CHARGING_ENERGY
+
+               RPM = PM
+
+               ANNUAL_REV_GEN_CAPACITY(I) =
+     +                           ANNUAL_REV_GEN_CAPACITY(I) /
+     +                                                       LAST_SEASON
+               CAPBLK = ANNUAL_EFFECTIVE_CAP(I) / LAST_SEASON
+
+               IF(MONTHS_ACTIVE(I) > 0) THEN
+                  TRANS_CAP = TRANS_CAP / FLOAT(MONTHS_ACTIVE(I))
+               ELSE
+                  TRANS_CAP = 0.0
+               ENDIF
+
+! EMISSIONS
+                  HEAT = 0.D0
+                  FUEL_COST = 0.
+
+                  NEWGEN_UNIT_STATUS = 0.
+
+                  UNIT_EMISSIONS(1) = 0.
+                  UNIT_EMISSIONS(2) = 0.
+                  UNIT_EMISSIONS(3) = 0.
+                  UNIT_EMISSIONS(4) = 0.
+                  UNIT_EMISSIONS(5) = 0.
+!
+                  UNIT_EMISSIONS_COST(1) = 0.
+                  UNIT_EMISSIONS_COST(2) = 0.
+                  UNIT_EMISSIONS_COST(3) = 0.
+                  UNIT_EMISSIONS_COST(4) = 0.
+                  UNIT_EMISSIONS_COST(5) = 0.
+
+               IF(.NOT. TESTING_PLAN) THEN
+
+                  IF(ABS(ENRG) > 0.45) THEN
+                     AVERAGE_HEATRATE = 0.
+! TODO: Determine why I put the following code in and took it back out:
+!                   AVERAGE_PRODUCTION_COSTS = ABS(TRANS_VAR_EXP/ENRG)
+
+                  ELSE
+                     FUEL_COST = 0.0 D0
+                     HEAT = 0.0 D0
+                     AVERAGE_HEATRATE = 0.0
+                     AVERAGE_PRODUCTION_COSTS = 0.0
+                  ENDIF
+                  IF(TRANS_CAP > 0.01 .AND. PRODUCT_HOURS > 0) THEN
+                     TRANS_CAP_FACTOR = ENRG * 100. /
+     +                                   (TRANS_CAP * PRODUCT_HOURS)
+                  ELSE
+                     TRANS_CAP_FACTOR = 0.0
+                  ENDIF
+
+                  TOTAL_UNIT_COST = TRANS_VAR_EXP + TRANS_FIX_EXP
+
+                  IF(ABS(ENRG) > 0.1) THEN
+                     AVE_REV_FROM_SALES =   ABS(TRANS_REV / ENRG)
+                  ELSE
+                     AVE_REV_FROM_SALES =  0.
+                  ENDIF
+
+                  ANNUAL_ECO_SALES = ANNUAL_ECO_SALES +  TRANS_REV
+                  ANNUAL_ECO_SALES_ENRG = ANNUAL_ECO_SALES_ENRG +
+     +                                                              ENRG
+
+                  MONTHLY_TRANS_CAPACITY =
+     +                            MONTHLY_TRANS_CAPACITY + TRANS_CAP
+                  MONTHLY_TRANS_EFFECTIVE_CAP =
+     +                              MONTHLY_TRANS_EFFECTIVE_CAP + CAPBLK
+                  MONTHLY_TRANS_AVAIL_CAP = MONTHLY_TRANS_AVAIL_CAP +
+     +                                        ANNUAL_REV_GEN_CAPACITY(I)
+                  MONTHLY_TRANS_ENERGY = MONTHLY_TRANS_ENERGY + ENRG
+
+                  MONTHLY_TRANS_VAR_COST = MONTHLY_TRANS_VAR_COST +
+     +                                                     TRANS_VAR_EXP
+
+                  MONTHLY_TRANS_FIXED_COST = MONTHLY_TRANS_FIXED_COST +
+     +                                                     TRANS_FIX_EXP
+
+                  AVERAGE_VAR_OM = 0.
+                  IF(ENRG /= 0.) AVERAGE_VAR_OM = TRANS_VAR_EXP / ENRG
+
+                  UNIT_GROSS_MARGIN =
+     +                  (TRANS_REV - TOTAL_UNIT_COST)/1000000.
+                  TOTAL_EMISSION_COSTS = SUM(UNIT_EMISSIONS_COST)
+                  UNIT_EBITDA = (TRANS_REV-TOTAL_UNIT_COST-
+     +                                    TOTAL_EMISSION_COSTS)/1000000.
+
+                  WHOLESALE_PRODUCTION_COST =
+     +                                     TRANS_VAR_MWH * ENRG/1000000.
+                  RETAIL_SALES = MAX(0.,(ENRG - ENRG)/1000.)
+                  ANNUAL_WHOLESALE_COST = ANNUAL_WHOLESALE_COST +
+     +                                         WHOLESALE_PRODUCTION_COST
+
+                  TEMP_R4 = GET_TRANS_ITER_CAP_PERCENT(TRANS)
+                  MRX_RPS_DV_CURVE_REVENUE(TRANS) = TEMP_R4 *
+     +                     (TRANS_REV*0.001 + CAP_MARKET_REVENUE*1000.0)
+                  MRX_RPS_DV_CURVE_COST(TRANS) = TEMP_R4 *
+     +                     (TOTAL_UNIT_COST*0.001 +
+     +                                      TOTAL_EMISSION_COSTS*1000.0)
+                  MRX_RPS_DV_CURVE_GROSS_MARGIN(TRANS) =
+     +                     MRX_RPS_DV_CURVE_REVENUE(TRANS) -
+     +                                 MRX_RPS_DV_CURVE_COST(TRANS)
+                  MRX_RPS_DV_CURVE_UMWH(TRANS) = TEMP_R4 * ENRG
+!
+                  POWERDAT_PLANT_ID = GET_Holding_Company_ID(TRANS)
+
+                  TEMP_L1 = GET_DERIV_ZONE_ID(I,MARKET_ID)
+                  MK = MARKET_AREA_LOOKUP(MARKET_ID(1:5))
+                  RMK = FLOAT(MK)
+                  IF(MK < 0 .OR. MK > 600) THEN
+                     MK =MAX(0,
+     +                      MIN(600,MARKET_AREA_LOOKUP(MARKET_ID(1:5))))
+                  ENDIF
+! 050519.
+                  IF(TransAllHoursMonth(TRANS) > 0.) THEN
+                     TRANS_CAP =
+     +                  TransCapHours(TRANS) / TransAllHoursMonth(TRANS)
+                     CAPBLK =
+     +                        TransEffectiveCapHours(TRANS) /
+     +                                         TransAllHoursMonth(TRANS)
+                     TRANS_EQUIV_AVAIL =
+     +                        100. * TransAvailHoursMonth(TRANS) / 8760.
+                     TRANS_CAP_FACTOR =
+     +                        100. * ENRG / (8760. * TRANS_CAP)
+                     UNECONOMIC_RATE =
+     +                              TRANS_EQUIV_AVAIL - TRANS_CAP_FACTOR
+                  ELSE
+                     TRANS_CAP = 0.
+                     CAPBLK = 0.
+                     TRANS_EQUIV_AVAIL = 0.
+                     TRANS_CAP_FACTOR = 0.
+                     UNECONOMIC_RATE = 0.
+                  ENDIF
+                   IF( (MONTHLY_TRANS_REPORT .OR.
+     +                                   ANNUAL_TRANS_REPORT) .AND.
+     +                     .NOT. SUPPRESS_DERIVATIVES .AND.
+     +                                .NOT. FISCAL_ONLY .AND.
+     +                                          YES_REPORT_PRODUCT) THEN
+!
+                   MON_CL_TRANS_UNIT_REC = RPTREC(MON_CL_TRANS_UNIT_NO)
+!                  !msgmtrcl
+                   call write_unique_msgmtrcl_log_entry(8)
+                   WRITE(MON_CL_TRANS_UNIT_NO,REC=MON_CL_TRANS_UNIT_REC)
+     +                  PRT_ENDPOINT(),
+     +                  LOCAL_YEAR,
+     +                  CL_MONTH_NAME(13),
+     +                  CL_TRANS_NAME,
+     +                  FLOAT(I),
+     +                  TRANS_CAP,
+     +                  CAPBLK,
+     +                  TRANS_EQUIV_AVAIL,
+     +                  TRANS_CAP_FACTOR,
+     +                  ENRG/1000.,
+     +                  0.,
+     +                  TRANS_STRIKES,
+     +                  0.,
+     +                  TRANS_VAR_EXP/1000000., ! 9 - Variable O&M COST ($/MMW)
+     +                  AVERAGE_PRODUCTION_COSTS,
+     +                  (UNIT_EMISSIONS(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +                  TRANS_FIX_EXP/1000000., ! 16 Fixed cost ($/MMW)
+     +                  TOTAL_UNIT_COST/1000000.,
+     +                  TRANS_REV/1000000.,
+     +                  ENRG/1000.,
+     +                  AVE_REV_FROM_SALES,
+     +                  UNIT_GROSS_MARGIN ,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  AVERAGE_VAR_OM,
+     +                  (UNIT_EMISSIONS_COST(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +                  WHOLESALE_PRODUCTION_COST,
+     +                  RETAIL_SALES,
+     +                  RTG,RMK,RFT,
+     +                  TRANS_UNIT_ID, ! HESI UNIT ID NUM
+     +                  POWERDAT_PLANT_ID,  ! POWER PLANT ID NUM
+     +                  0.,
+     +                  TOTAL_EMISSION_COSTS,
+     +                  0.,
+     +                  TRANS_ASSET_CLASS, ! ASSET CLASS
+     +                  0.,
+     +                  0.,
+     +                  0., ! UNECONOMIC_RATE
+     +                  NEWGEN_UNIT_STATUS,
+     +                  TRANS_ON_LINE, ! ONLINE
+     +                  TRANS_OFF_LINE, ! OFLINE
+     +                  RPM,
+     +                  0., ! HESI_SECOND_UNIT_ID
+     +                  EV_DATA_SOURCE,
+     +                  EV_PLANNING_AREA,
+     +                  CAP_MARKET_REVENUE,
+     +                  CAPITAL_COST_OF_BUILD,
+     +                  UNIT_EBITDA,
+     +                  RSP,
+     +                  CHARGING_ENERGY/1000.
+                     MON_CL_TRANS_UNIT_REC = MON_CL_TRANS_UNIT_REC + 1
+                  ENDIF ! THERMAL UNITS REPORT
+!
+                  IF(DERIVATIVES_REPORT) THEN
+                    MON_DV_TRANS_UNIT_REC = RPTREC(MON_DV_TRANS_UNIT_NO)
+                    WRITE(MON_DV_TRANS_UNIT_NO,
+     +                                        REC=MON_DV_TRANS_UNIT_REC)
+     +                  PRT_ENDPOINT(),
+     +                  LOCAL_YEAR,
+     +                  CL_MONTH_NAME(13),
+     +                  CL_TRANS_NAME,
+     +                  FLOAT(I),
+     +                  TRANS_CAP,
+     +                  PRODUCT_HOURS,
+     +                  TRANS_HOURS,
+     +                  TRANS_CAP_FACTOR,
+     +                  ENRG/1000.,
+     +                  0.,
+     +                  TRANS_STRIKES,
+     +                  0.,
+     +                  TRANS_VAR_EXP/1000000.,
+     +                  AVERAGE_PRODUCTION_COSTS,
+     +                  (UNIT_EMISSIONS(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +                  TRANS_FIX_EXP/1000000.,
+     +                  TOTAL_UNIT_COST/1000000.,
+     +                  TRANS_REV/1000000.,
+     +                  ENRG/1000.,
+     +                  AVE_REV_FROM_SALES,
+     +                  UNIT_GROSS_MARGIN ,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  0.,
+     +                  AVERAGE_VAR_OM,
+     +                  (UNIT_EMISSIONS_COST(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +                  WHOLESALE_PRODUCTION_COST,
+     +                  RETAIL_SALES,
+     +                  RTG,RMK,RFT,
+     +                  TRANS_UNIT_ID, ! HESI UNIT ID NUM
+     +                  POWERDAT_PLANT_ID, ! POWER PLANT ID NUM
+     +                  0.,
+     +                  TOTAL_EMISSION_COSTS,
+     +                  0.,
+     +                  TRANS_ASSET_CLASS, ! ASSET CLASS
+     +                  0.,
+     +                  0.,
+     +                  0., ! UNECONOMIC_RATE
+     +                  NEWGEN_UNIT_STATUS,
+     +                  TRANS_ON_LINE, ! ONLINE
+     +                  TRANS_OFF_LINE, ! OFLINE
+     +                  RPM,
+     +                  0., ! HESI_SECOND_UNIT_ID
+     +                  EV_DATA_SOURCE,
+     +                  EV_PLANNING_AREA,
+     +                  CAP_MARKET_REVENUE,
+     +                  CAPITAL_COST_OF_BUILD,
+     +                  UNIT_EBITDA,
+     +                  RSP,
+     +                  CHARGING_ENERGY/1000.
+                     MON_DV_TRANS_UNIT_REC = MON_DV_TRANS_UNIT_REC + 1
+                  ENDIF ! DERIVATIVES REPORT
+               ENDIF
+            ENDDO ! DERIVATIVES
+!
+            CL_TRANS_NAME = 'Total Resources       '
+            I = I + 1
+!
+            IF(MONTHLY_TRANS_ENERGY > 0.45) THEN
+               AVERAGE_HEATRATE = HEAT_CONVERSION*MONTHLY_TRANS_HEAT/
+     +                                              MONTHLY_TRANS_ENERGY
+               AVERAGE_PRODUCTION_COSTS =
+     +               (SNGL(MONTHLY_TRANS_FUEL_COST) +
+     +                              MONTHLY_TRANS_VAR_COST) /
+     +                                              MONTHLY_TRANS_ENERGY
+               AVERAGE_VAR_OM = MONTHLY_TRANS_VAR_COST/
+     +                            MONTHLY_TRANS_ENERGY
+               IF(.NOT. CANADA) AVERAGE_HEATRATE = AVERAGE_HEATRATE + .5
+            ELSE
+               MONTHLY_TRANS_FUEL_COST = 0.0 D0
+               MONTHLY_TRANS_HEAT = 0.0 D0
+               AVERAGE_HEATRATE = 0.0
+               AVERAGE_PRODUCTION_COSTS = 0.0
+               AVERAGE_VAR_OM = 0.
+            ENDIF
+            IF(MONTHLY_TRANS_CAPACITY > 0.01 .AND. SEAS_HOURS > 0) THEN
+               TRANS_EQUIV_AVAIL =  100. * MONTHLY_TRANS_AVAIL_CAP/
+     +                                            MONTHLY_TRANS_CAPACITY
+               TRANS_CAP_FACTOR = MONTHLY_TRANS_ENERGY * 100. /
+     +                                  (MONTHLY_TRANS_CAPACITY * 8760.)
+            ELSE
+               TRANS_EQUIV_AVAIL = 0.0
+               TRANS_CAP_FACTOR = 0.0
+            ENDIF
+!
+            TOTAL_UNIT_COST =
+     +               (SNGL(MONTHLY_TRANS_FUEL_COST) +
+     +                       MONTHLY_TRANS_VAR_COST +
+     +                                MONTHLY_TRANS_FIXED_COST)/1000000.
+!
+            IF(ABS(ANNUAL_ECO_SALES_ENRG) > 0.1) THEN
+               AVE_REV_FROM_SALES =  ABS(ANNUAL_ECO_SALES /
+     +                                            ANNUAL_ECO_SALES_ENRG)
+            ELSE
+               AVE_REV_FROM_SALES =  0.
+            ENDIF
+!
+            AVERAGE_NOX_RATE = 0.
+            AVERAGE_SOX_RATE = 0.
+            AVERAGE_FUEL_COST = 0.
+            IF(MONTHLY_NOX_SEASON_THERM /= 0.) THEN
+               AVERAGE_NOX_RATE =
+     +                        TONS_CONVERSION*MONTHLY_UNIT_EMISSIONS(2)/
+     +                                 MONTHLY_NOX_SEASON_THERM
+            ENDIF
+!
+            IF(MONTHLY_TRANS_HEAT /= 0.) THEN
+               AVERAGE_SOX_RATE =
+     +                        TONS_CONVERSION*MONTHLY_UNIT_EMISSIONS(1)/
+     +                                  MONTHLY_TRANS_HEAT
+               AVERAGE_FUEL_COST = MONTHLY_TRANS_FUEL_COST/
+     +                               MONTHLY_TRANS_HEAT
+            ENDIF
+!
+            TRANS_TOTAL_GROSS_MARGIN =
+     +               ANNUAL_ECO_SALES/1000000. - TOTAL_UNIT_COST
+
+            MONTHLY_RETAIL_SALES = MAX(0.,
+     +            (MONTHLY_TRANS_ENERGY - ANNUAL_ECO_SALES_ENRG)/1000.)
+!
+            IF( (MONTHLY_TRANS_REPORT .OR. ANNUAL_TRANS_REPORT) .AND.
+     +                                          .NOT. FISCAL_ONLY ) THEN
+               TOTAL_EMISSION_COSTS = 0
+               DO EM = 1, NUMBER_OF_EMISSION_TYPES
+                  TOTAL_EMISSION_COSTS = TOTAL_EMISSION_COSTS
+     +                               + ANNUAL_LOCAL_EMIS_COST(EM)
+               ENDDO
+!
+               IF(TRANS_EQUIV_AVAIL > 0.) THEN
+                  UNECONOMIC_RATE = 100.*(1. -
+     +                             (TRANS_CAP_FACTOR/TRANS_EQUIV_AVAIL))
+               ELSE
+                  UNECONOMIC_RATE = 0.
+               ENDIF
+!
+                MON_CL_TRANS_UNIT_REC = RPTREC(MON_CL_TRANS_UNIT_NO)
+!               !msgmtrcl - total
+                call write_unique_msgmtrcl_log_entry(9)
+
+                WRITE(MON_CL_TRANS_UNIT_NO,REC=MON_CL_TRANS_UNIT_REC)
+     +                  PRT_ENDPOINT(),
+     +               LOCAL_YEAR,
+     +               CL_MONTH_NAME(13),
+     +               CL_TRANS_NAME,
+     +               FLOAT(I),
+     +               MONTHLY_TRANS_CAPACITY,
+     +               MONTHLY_TRANS_EFFECTIVE_CAP,
+     +               TRANS_EQUIV_AVAIL,
+     +               TRANS_CAP_FACTOR,
+     +               MONTHLY_TRANS_ENERGY/1000.,
+     +               SNGL(MONTHLY_TRANS_HEAT),
+     +               AVERAGE_HEATRATE,
+     +               SNGL(MONTHLY_TRANS_FUEL_COST)/1000000.,
+     +               MONTHLY_TRANS_VAR_COST/1000000., ! 9 - Variable O&M cost
+     +               AVERAGE_PRODUCTION_COSTS,
+     +               (MONTHLY_UNIT_EMISSIONS(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +               MONTHLY_TRANS_FIXED_COST/1000000., ! 16 Fixed cost ($/MMW)
+     +               TOTAL_UNIT_COST,
+     +               ANNUAL_ECO_SALES/1000000.,
+     +               ANNUAL_ECO_SALES_ENRG/1000.,
+     +               AVE_REV_FROM_SALES,
+     +               TRANS_TOTAL_GROSS_MARGIN,
+     +               ANNUAL_ECO_PUCH/1000000.,
+     +               ANNUAL_ECO_PUCH_ENRG/1000.,
+     +               MONTHLY_P_HEAT,
+     +               MONTHLY_S_HEAT,
+     +               MONTHLY_E_HEAT,
+
+     +               AVERAGE_NOX_RATE, ! 27
+     +               AVERAGE_SOX_RATE,
+     +               AVERAGE_FUEL_COST,
+     +               AVERAGE_VAR_OM,
+     +               (ANNUAL_LOCAL_EMIS_COST(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +               ANNUAL_WHOLESALE_COST,
+     +               MONTHLY_RETAIL_SALES,
+     +               999.,999.,999.,99999.,99999.,
+     +               FLOAT(MONTHLY_STARTS),
+     +               TOTAL_EMISSION_COSTS,
+     +               MONTHLY_START_COSTS/1000000.,
+     +               999., ! ASSET CLASS
+     +               0.,
+     +               0.,
+     +               UNECONOMIC_RATE,
+     +               NEWGEN_UNIT_STATUS,
+     +               0.,
+     +               0.,
+     +               0.,
+     +               0.,
+     +               EV_DATA_SOURCE,
+     +               EV_PLANNING_AREA,
+     +               MONTHLY_CAPACITY_REVENUE,
+     +               MONTHLY_CAPITAL_COST_OF_BUILD,
+     +               MONTHLY_EBITDA,
+     +               999.,
+     +               MONTHLY_CHARGING_ENERGY/1000.
+               MON_CL_TRANS_UNIT_REC = MON_CL_TRANS_UNIT_REC + 1
+            ENDIF
+            IF( NEW_UNITS_REPORT .AND. ONLINE(UNITNO) > BEGIN_DATE) THEN
+               TOTAL_EMISSION_COSTS = 0
+
+               TOTAL_EMISSION_COSTS = SUM(MONTHLY_UNIT_EMISSIONS_COST)
+               IF(TRANS_EQUIV_AVAIL > 0.) THEN
+                  UNECONOMIC_RATE = 100.*(1. -
+     +                             (TRANS_CAP_FACTOR/TRANS_EQUIV_AVAIL))
+               ELSE
+                  UNECONOMIC_RATE = 0.
+               ENDIF
+!
+               MON_NU_TRANS_UNIT_REC = RPTREC(MON_NU_TRANS_UNIT_NO)
+               WRITE(MON_NU_TRANS_UNIT_NO,REC=MON_NU_TRANS_UNIT_REC)
+     +               PRT_ENDPOINT(),
+     +               LOCAL_YEAR,
+!     +               FLOAT(YEAR+BASE_YEAR),
+     +               CL_MONTH_NAME(13),
+     +               CL_TRANS_NAME,
+     +               FLOAT(I),
+     +               MONTHLY_TRANS_CAPACITY,
+     +               MONTHLY_TRANS_EFFECTIVE_CAP,
+     +               TRANS_EQUIV_AVAIL,
+     +               TRANS_CAP_FACTOR,
+     +               MONTHLY_TRANS_ENERGY/1000.,
+     +               SNGL(MONTHLY_TRANS_HEAT),
+     +               AVERAGE_HEATRATE,
+     +               SNGL(MONTHLY_TRANS_FUEL_COST)/1000000.,
+     +               MONTHLY_TRANS_VAR_COST/1000000.,
+     +               AVERAGE_PRODUCTION_COSTS,
+     +               (MONTHLY_UNIT_EMISSIONS(EM),
+     +                     EM=1,NUMBER_OF_EMISSION_TYPES),
+     +               MONTHLY_TRANS_FIXED_COST/1000000.,
+     +               TOTAL_UNIT_COST,
+     +               ANNUAL_ECO_SALES/1000000.,
+     +               ANNUAL_ECO_SALES_ENRG/1000.,
+     +               AVE_REV_FROM_SALES,
+     +               TRANS_TOTAL_GROSS_MARGIN,
+     +               ANNUAL_ECO_PUCH/1000000.,
+     +               ANNUAL_ECO_PUCH_ENRG/1000.,
+     +               MONTHLY_P_HEAT,
+     +               MONTHLY_S_HEAT,
+     +               MONTHLY_E_HEAT,
+     +               AVERAGE_NOX_RATE, ! 27
+     +               AVERAGE_SOX_RATE,
+     +               AVERAGE_FUEL_COST,
+     +               AVERAGE_VAR_OM,
+     +               (ANNUAL_LOCAL_EMIS_COST(EM),
+     +                                   EM=1,NUMBER_OF_EMISSION_TYPES),
+     +               ANNUAL_WHOLESALE_COST,
+     +               MONTHLY_RETAIL_SALES,
+     +               999.,999.,999.,99999.,99999.,
+     +               FLOAT(MONTHLY_STARTS),
+     +               TOTAL_EMISSION_COSTS,
+     +               MONTHLY_START_COSTS/1000000.,
+     +               999., ! ASSET CLASS
+     +               0.,
+     +               0.,
+     +               UNECONOMIC_RATE,
+     +               NEWGEN_UNIT_STATUS,
+     +               0.,
+     +               0.,
+     +               0.,
+     +               0.,
+     +               EV_DATA_SOURCE,
+     +               EV_PLANNING_AREA,
+     +               MONTHLY_CAPACITY_REVENUE,
+     +               MONTHLY_CAPITAL_COST_OF_BUILD,
+     +               MONTHLY_EBITDA,
+     +               999.,
+     +               MONTHLY_CHARGING_ENERGY/1000.
+               MON_NU_TRANS_UNIT_REC = MON_NU_TRANS_UNIT_REC + 1
+            ENDIF
+!
+         ENDIF ! ISEAS == LAST_SEASON
+         MW(1:2,1:NUNITS) = SaveMW2(1:2,1:NUNITS)
+      ENDIF ! MONTHLY_CL_UNIT_REPORT
+      MONTHLY_KEPCO_SALES = 0.
+      MONTHLY_KEPCO_SALES_REV = 0.
+!
+      MONTHLY_REPORTING_CAPACITY = 0.
+      MONTHLY_CONTRACT_CAPACITY = 0.
+      MONTHLY_MINIMUM_CAPACITY = 0.
+      MONTHLY_ENRG = 0.
+      MONTHLY_CONTRACT_VARIABLE_COST = 0.
+      MONTHLY_CNTR_MAX_FIXED_COST = 0.
+      MONTHLY_CNTR_MIN_FIXED_COST = 0.
+      MONTHLY_TOTAL_FIXED_COST = 0.
+      MONTHLY_TOTAL_CONTRACT_COST = 0.
+      MONTHLY_CNTR_EMISSIONS = 0.
+!
+      IF(ISEAS == 1) THEN
+         ANNUAL_REPORTING_CAPACITY = 0.
+         ANNUAL_CNTR_CAPACITY = 0.
+         ANNUAL_MINIMUM_CAPACITY = 0.
+         ANNUAL_ENRG = 0.
+         ANNUAL_CNTR_VARIABLE_COST = 0.
+         ANNUAL_CNTR_MAX_FIXED_COST = 0.
+         ANNUAL_CNTR_MIN_FIXED_COST = 0.
+         ANNUAL_TOTAL_FIXED_COST = 0.
+         ANNUAL_TOTAL_CONTRACT_COST = 0.
+         ANNUAL_CNTR_EMISSIONS = 0.
+      ENDIF
+!
+! TODO: EXTRACT_METHOD handle_contracts
+      DO I = 1, NUMBER_OF_CONTRACTS
+         IF(CNTR_ON_LI(I) <= DATE2 .AND. CNTR_OFF_LI(I) >= DATE1) THEN
+            TOTAL_CONTRACT_COST = 0.0
+            ENRG = SEAS_HOURS * CONTRACT_ENERGY(I)
+            CNTR_ENRG = CNTR_ENRG + ENRG
+            CNTR_EMISSIONS = 0.
+            CNTR_MIN_FIXED_COST =MIN(MINIMUM_CAPACITY(I),
+     +                               CONTRACT_CAPACITY(I)) *
+     +                           MIN_CONTRACT_FIXED_COST(I)/1000.
+            IF(CNTR_CAPACITY_SWITCH(I) == 'V') THEN
+               CNTR_MAX_FIXED_COST = CONTRACT_FIXED_COST(I) *
+     +                (CONTRACT_CAPACITY(I) - MIN(MINIMUM_CAPACITY(I),
+     +                CONTRACT_CAPACITY(I)))/1000.
+            ELSEIF(KEPCO .AND. .NOT. REALLY_KEPCO) THEN
+               CNTR_MAX_FIXED_COST = CONTRACT_FIXED_COST(I) *
+     +             (MAX(MAXIMUM_CAPACITY(I),CONTRACT_CAPACITY(I)) -
+     +              MIN(MINIMUM_CAPACITY(I),CONTRACT_CAPACITY(I)))/1000.
+            ELSEIF(REALLY_KEPCO) THEN
+               IF(MAX_RATCHET_PATTERN(I) /= 0) THEN
+                  CONTRACT_BILLING_CAPACITY =
+     +                                    MAX(RATCHET_CAPACITY_BASIS(I),
+     +                                          MIN_RATCHET_CAPACITY(I),
+     +                                             CONTRACT_CAPACITY(I))
+                  CAPACITY_BILLED_AT_MIN =  MIN(MINIMUM_CAPACITY(I),
+     +                                        CONTRACT_BILLING_CAPACITY)
+                  CNTR_MIN_FIXED_COST = CAPACITY_BILLED_AT_MIN *
+     +                                  MIN_CONTRACT_FIXED_COST(I)/1000.
+                  CAPACITY_BILLED_AT_MAX=MAX(0.,
+     +                                       CONTRACT_BILLING_CAPACITY-
+     +                                           CAPACITY_BILLED_AT_MIN)
+                  CNTR_MAX_FIXED_COST = CAPACITY_BILLED_AT_MAX *
+     +                                      CONTRACT_FIXED_COST(I)/1000.
+               ELSE
+                  CNTR_MAX_FIXED_COST = CONTRACT_FIXED_COST(I) *
+     +                (MAX(MAXIMUM_CAPACITY(I),CONTRACT_CAPACITY(I)) -
+     +              MIN(MINIMUM_CAPACITY(I),CONTRACT_CAPACITY(I)))/1000.
+               ENDIF
+            ELSE
+               CNTR_MAX_FIXED_COST = CONTRACT_FIXED_COST(I) *
+     +                (MAXIMUM_CAPACITY(I) - MIN(MINIMUM_CAPACITY(I),
+     +                CONTRACT_CAPACITY(I)))/1000.
+            ENDIF
+            IF(KEPCO) THEN
+               IF(INDEX('1,2,3,4,5,6',CNTRTYPE(I)) .NE. 0) THEN
+                  ANNUAL_CONTRACT_CAPACITY(I)=MAX(CONTRACT_CAPACITY(I),
+     +                                      ANNUAL_CONTRACT_CAPACITY(I))
+               ELSEIF(INDEX('SX',CNTRTYPE(I)) /= 0) THEN
+                  MONTHLY_KEPCO_SALES = MONTHLY_KEPCO_SALES + ABS(ENRG)
+                  MONTHLY_KEPCO_SALES_REV = MONTHLY_KEPCO_SALES_REV +
+     +                           CONTRACT_VARIABLE_COST(I)*ENRG/1000000.
+               ELSE
+                  ANNUAL_CONTRACT_CAPACITY(I) = MAX(MAXIMUM_CAPACITY(I),
+     +                                      ANNUAL_CONTRACT_CAPACITY(I))
+               ENDIF
+            ELSE
+               IF(ISEAS == PEAK_MONTH) ANNUAL_CONTRACT_CAPACITY(I) =
+     +                                            CONTRACT_CAPACITY(I)
+            ENDIF
+            ANNUAL_CONTRACT_FIXED_COST(I) =
+     +               ANNUAL_CONTRACT_FIXED_COST(I) +
+     +               CNTR_MAX_FIXED_COST + CNTR_MIN_FIXED_COST
+            TOTAL_CONTRACT_COST = TOTAL_CONTRACT_COST +
+     +                    CNTR_MAX_FIXED_COST + CNTR_MIN_FIXED_COST +
+     +                    CONTRACT_VARIABLE_COST(I)*ENRG/1000000.
+            IF(ENRG > 0.5 .OR. ENRG < -.5) THEN
+               ANNUAL_CONTRACT_ENERGY(I) = ENRG +
+     +                                  ANNUAL_CONTRACT_ENERGY(I)
+               ANNUAL_CONTRACT_VARIABLE_COST(I) =
+     +                             ANNUAL_CONTRACT_VARIABLE_COST(I) +
+     +                           CONTRACT_VARIABLE_COST(I)*ENRG/1000000.
+!
+! EMISSIONS
+!
+               CNTR_EMISSIONS = CNTR_SO2(I)*ENRG/2000.
+               MONTHLY_TOTAL_EMISSIONS(1) = CNTR_EMISSIONS +
+     +                                      MONTHLY_TOTAL_EMISSIONS(1)
+               ANNUAL_CONTRACT_SO2(I) = ANNUAL_CONTRACT_SO2(I) +
+     +                                                  CNTR_EMISSIONS
+            ENDIF
+             IF(MONTHLY_CONTRACT_REPORT_ACTIVE .AND.
+     +          CONTRACTS_IN_PERIOD .AND. .NOT. TESTING_PLAN .AND.
+     +              (ENRG > .0001 .OR.  ENRG < -.05 .OR.
+     +                     CONTRACT_CAPACITY(I) > .01 .OR.
+     +                                   TOTAL_CONTRACT_COST > 0.)) THEN
+               UNIT_NAME = CNTRNM(I)
+               REPORTING_CAPACITY = MAXIMUM_CAPACITY(I)
+               IF(REALLY_KEPCO) THEN
+                  IF(INDEX('SX',CNTRTYPE(I)) /= 0) THEN
+                     UNIT_NAME = trim(CNTRNM(I))//'+'
+                     REPORTING_CAPACITY = MAXIMUM_CAPACITY(I)
+                  ELSEIF(MAX_RATCHET_PATTERN(I) /= 0) THEN
+                     REPORTING_CAPACITY = CONTRACT_BILLING_CAPACITY
+                  ENDIF
+               ENDIF
+               IF( ENRG .LT. .5 .AND. ENRG .GT. -.5) THEN
+                  ENRG = 0.0
+                  DIVIDE_BY_ENRG = 1E-15
+                  AVERAGE_TOTAL_COST = 0.
+               ELSE
+                  DIVIDE_BY_ENRG = ENRG
+                  AVERAGE_TOTAL_COST  =
+     +               CONTRACT_VARIABLE_COST(I) +
+     +               (CNTR_MIN_FIXED_COST+
+     +               CNTR_MAX_FIXED_COST)*1000000./DIVIDE_BY_ENRG
+               ENDIF
+!
+               MONTHLY_REPORTING_CAPACITY = MONTHLY_REPORTING_CAPACITY +
+     +                                                REPORTING_CAPACITY
+               MONTHLY_CONTRACT_CAPACITY = MONTHLY_CONTRACT_CAPACITY +
+     +                                              CONTRACT_CAPACITY(I)
+               MONTHLY_MINIMUM_CAPACITY = MONTHLY_MINIMUM_CAPACITY +
+     +                                               MINIMUM_CAPACITY(I)
+               MONTHLY_ENRG = MONTHLY_ENRG + ENRG/1000.
+               MONTHLY_CONTRACT_VARIABLE_COST =
+     +                 MONTHLY_CONTRACT_VARIABLE_COST +
+     +                 CONTRACT_VARIABLE_COST(I)*ENRG/1000000.
+               MONTHLY_CNTR_MAX_FIXED_COST =
+     +                 MONTHLY_CNTR_MAX_FIXED_COST + CNTR_MAX_FIXED_COST
+               MONTHLY_CNTR_MIN_FIXED_COST =
+     +                 MONTHLY_CNTR_MIN_FIXED_COST + CNTR_MIN_FIXED_COST
+               MONTHLY_TOTAL_FIXED_COST = MONTHLY_TOTAL_FIXED_COST +
+     +                         CNTR_MAX_FIXED_COST + CNTR_MIN_FIXED_COST
+               MONTHLY_TOTAL_CONTRACT_COST =
+     +                 MONTHLY_TOTAL_CONTRACT_COST + TOTAL_CONTRACT_COST
+               MONTHLY_CNTR_EMISSIONS = MONTHLY_CNTR_EMISSIONS +
+     +                                                    CNTR_EMISSIONS
+!
+               MON_CT_UNIT_REC = RPTREC(MON_CT_UNIT_NO)
+               WRITE(MON_CT_UNIT_NO,REC=MON_CT_UNIT_REC)
+     +               PRT_ENDPOINT(),
+     +               FLOAT(YEAR+BASE_YEAR),
+     +               CL_MONTH_NAME(ISEAS),
+     +               UNIT_NAME,
+     +               FLOAT(I),
+     +               REPORTING_CAPACITY,
+     +               CONTRACT_CAPACITY(I),MINIMUM_CAPACITY(I),
+     +               ENRG/1000.,
+     +               CONTRACT_VARIABLE_COST(I)*ENRG/1000000.,
+     +               CONTRACT_VARIABLE_COST(I),CNTR_MAX_FIXED_COST,
+     +               CNTR_MIN_FIXED_COST,
+     +               CNTR_MAX_FIXED_COST+CNTR_MIN_FIXED_COST,
+     +               TOTAL_CONTRACT_COST,
+     +               AVERAGE_TOTAL_COST,
+     +               CNTR_EMISSIONS
+               MON_CT_UNIT_REC = MON_CT_UNIT_REC + 1
             ENDIF
          ENDIF
       ENDDO
+      IF(MONTHLY_CONTRACT_REPORT_ACTIVE .AND.
+     +          CONTRACTS_IN_PERIOD .AND. .NOT. TESTING_PLAN .AND.
+     +              (MONTHLY_ENRG > .0001 .OR.
+     +                     MONTHLY_CONTRACT_CAPACITY > .01 .OR.
+     +                           MONTHLY_TOTAL_CONTRACT_COST > 0.)) THEN
 !
-!     THIS SECTION TAKES THE ROUNDING ERROR FROM THE
-!     PREVIOUS ALGORITHM (SINGLE PRECISION CALC.) AND
-!     DISTRIBUTES IT EVENLY ACROSS LOAD_POINTS-1 POINTS.
-!
-      COUNTER = 0.
-      BASE = LODDUR(1)
-   50 CALL INTEG8(DEMAND,
-     +            LODDUR(1),LPROB(1),IMAX,
-     +            HOURS_INCREMENT,BASE)
-      IF(BASE_ADJUSTMENT == -999.) THEN
-         ALPHA = LODDUR(2) * FLOAT(HOURS_INCREMENT)
-         ALPHA = (SUM_TRANS_LOADS-ALPHA)/(DEMAND-ALPHA)
-      ELSE
-         ALPHA = 1.
+         UNIT_NAME = 'Contract Total      '
+         IF(MONTHLY_ENRG == 0.) THEN
+            MONTHLY_CONTRACT_AVE_VAR_COST = 0.
+            MONTHLY_AVERAGE_TOTAL_COST = 0.
+         ELSE
+            MONTHLY_CONTRACT_AVE_VAR_COST =
+     +                 1000.*MONTHLY_CONTRACT_VARIABLE_COST/MONTHLY_ENRG
+            MONTHLY_AVERAGE_TOTAL_COST =
+     +                    1000.*MONTHLY_TOTAL_CONTRACT_COST/MONTHLY_ENRG
+         ENDIF
+! TODO: EXTRACT_METHOD handle_contracts (end)
+! TODO: EXTRACT_METHOD handle_capacity_enrg_and_emissions
+         ANNUAL_REPORTING_CAPACITY = ANNUAL_REPORTING_CAPACITY +
+     +                                        MONTHLY_REPORTING_CAPACITY
+         ANNUAL_CNTR_CAPACITY = ANNUAL_CNTR_CAPACITY +
+     +                                         MONTHLY_CONTRACT_CAPACITY
+         ANNUAL_MINIMUM_CAPACITY = ANNUAL_MINIMUM_CAPACITY +
+     +                                          MONTHLY_MINIMUM_CAPACITY
+         ANNUAL_ENRG = ANNUAL_ENRG + MONTHLY_ENRG
+         ANNUAL_CNTR_VARIABLE_COST =
+     +                 ANNUAL_CNTR_VARIABLE_COST +
+     +                                    MONTHLY_CONTRACT_VARIABLE_COST
+         ANNUAL_CNTR_MAX_FIXED_COST =
+     +                 ANNUAL_CNTR_MAX_FIXED_COST +
+     +                                       MONTHLY_CNTR_MAX_FIXED_COST
+         ANNUAL_CNTR_MIN_FIXED_COST =
+     +                 ANNUAL_CNTR_MIN_FIXED_COST +
+     +                                       MONTHLY_CNTR_MIN_FIXED_COST
+         ANNUAL_TOTAL_FIXED_COST = ANNUAL_TOTAL_FIXED_COST +
+     +                 MONTHLY_CNTR_MAX_FIXED_COST +
+     +                                       MONTHLY_CNTR_MIN_FIXED_COST
+         ANNUAL_TOTAL_CONTRACT_COST =
+     +                 ANNUAL_TOTAL_CONTRACT_COST +
+     +                                       MONTHLY_TOTAL_CONTRACT_COST
+         ANNUAL_CNTR_EMISSIONS = ANNUAL_CNTR_EMISSIONS +
+     +                                            MONTHLY_CNTR_EMISSIONS
+! TODO: EXTRACT_METHOD handle_capacity_enrg_and_emissions (end)
+         MON_CT_UNIT_REC = RPTREC(MON_CT_UNIT_NO)
+         WRITE(MON_CT_UNIT_NO,REC=MON_CT_UNIT_REC)
+     +               PRT_ENDPOINT(),
+     +               FLOAT(YEAR+BASE_YEAR),
+     +               CL_MONTH_NAME(ISEAS),
+     +               UNIT_NAME,
+     +               FLOAT(I),
+     +               MONTHLY_REPORTING_CAPACITY,
+     +               MONTHLY_CONTRACT_CAPACITY,
+     +               MONTHLY_MINIMUM_CAPACITY,
+     +               MONTHLY_ENRG,
+     +               MONTHLY_CONTRACT_VARIABLE_COST,
+     +               MONTHLY_CONTRACT_AVE_VAR_COST,
+     +               MONTHLY_CNTR_MAX_FIXED_COST,
+     +               MONTHLY_CNTR_MIN_FIXED_COST,
+     +               MONTHLY_TOTAL_FIXED_COST,
+     +               MONTHLY_TOTAL_CONTRACT_COST,
+     +               MONTHLY_AVERAGE_TOTAL_COST,
+     +               MONTHLY_CNTR_EMISSIONS
+         MON_CT_UNIT_REC = MON_CT_UNIT_REC + 1
       ENDIF
-      DO I = 2,IMAX
-         LPROB(I) = LPROB(I)*ALPHA
-      ENDDO
-      LPROB(IMAX) = 0.
-      BASE = LODDUR(1)
-      CALL INTEG8(DEMAND,
-     +   LODDUR(1),LPROB(1),IMAX,
-     +                      HOURS_INCREMENT,BASE)
-      PRECISN = 1.
-      IF(SUM_TRANS_LOADS .GT. DEMAND) THEN
-         PRECISN = DEMAND/SUM_TRANS_LOADS
-      ELSE
-         PRECISN = SUM_TRANS_LOADS/DEMAND
+      IF(ISEAS == LAST_SEASON .AND. ISEAS /= 1 .AND.
+     +      CONTRACTS_IN_PERIOD .AND.
+     +      ANNUAL_CONTRACT_REPORT_ACTIVE .AND.
+     +                                       .NOT. TESTING_PLAN) THEN
+         FIRST_MONTH = 100.*(BASE_YEAR+YR-1900) + 1
+         LAST_MONTH = 100.*(BASE_YEAR+YR-1900) + 12
+         DO I = 1 , NUMBER_OF_CONTRACTS
+            IF(CNTR_ON_LI(I) > LAST_MONTH .OR.
+     +                               CNTR_OFF_LI(I) < FIRST_MONTH) CYCLE
+            IF( ANNUAL_CONTRACT_ENERGY(I) .LT. .5 .AND.
+     +                       ANNUAL_CONTRACT_ENERGY(I) .GT. -.5) THEN
+               ANNUAL_CONTRACT_ENERGY(I) = 0.0
+               DIVIDE_BY_ENRG = 1E-15
+               AVERAGE_TOTAL_COST = 0.
+            ELSE
+               DIVIDE_BY_ENRG = ANNUAL_CONTRACT_ENERGY(I)
+               AVERAGE_TOTAL_COST =
+     +                  (ANNUAL_CONTRACT_FIXED_COST(I) +
+     +                  ANNUAL_CONTRACT_VARIABLE_COST(I))*1000000./
+     +                  DIVIDE_BY_ENRG
+            ENDIF
+            UNIT_NAME = CNTRNM(I)
+            MON_CT_UNIT_REC = RPTREC(MON_CT_UNIT_NO)
+            WRITE(MON_CT_UNIT_NO,REC=MON_CT_UNIT_REC)
+     +               PRT_ENDPOINT(),
+     +               FLOAT(YEAR+BASE_YEAR),
+     +               CL_MONTH_NAME(LAST_SEASON+1),
+     +               UNIT_NAME,
+     +               FLOAT(I),
+     +               N_A,
+     +               ANNUAL_CONTRACT_CAPACITY(I),
+     +               N_A,
+     +                 ANNUAL_CONTRACT_ENERGY(I)/1000.,
+     +                ANNUAL_CONTRACT_VARIABLE_COST(I),
+     +                  ANNUAL_CONTRACT_VARIABLE_COST(I)*1000000./
+     +                  DIVIDE_BY_ENRG,
+     +                  N_A,
+     +                  N_A,
+     +               ANNUAL_CONTRACT_FIXED_COST(I),
+     +                ANNUAL_CONTRACT_VARIABLE_COST(I) +
+     +                                    ANNUAL_CONTRACT_FIXED_COST(I),
+     +               AVERAGE_TOTAL_COST,
+     +               ANNUAL_CONTRACT_SO2(I)
+            MON_CT_UNIT_REC = MON_CT_UNIT_REC + 1
+         ENDDO
+!
+         UNIT_NAME = 'Contract Total      '
+         IF(ANNUAL_ENRG == 0.) THEN
+            ANNUAL_CONTRACT_AVE_VAR_COST = 0.
+            ANNUAL_AVERAGE_TOTAL_COST = 0.
+         ELSE
+            ANNUAL_CONTRACT_AVE_VAR_COST =
+     +                   1000.*ANNUAL_CNTR_VARIABLE_COST/ANNUAL_ENRG
+            ANNUAL_AVERAGE_TOTAL_COST =
+     +                      1000.*ANNUAL_TOTAL_CONTRACT_COST/ANNUAL_ENRG
+         ENDIF
+!
+         MON_CT_UNIT_REC = RPTREC(MON_CT_UNIT_NO)
+         WRITE(MON_CT_UNIT_NO,REC=MON_CT_UNIT_REC)
+     +               PRT_ENDPOINT(),
+     +               FLOAT(YEAR+BASE_YEAR),
+     +               CL_MONTH_NAME(LAST_SEASON+1),
+     +               UNIT_NAME,
+     +               FLOAT(I),
+     +               ANNUAL_REPORTING_CAPACITY,
+     +               ANNUAL_CNTR_CAPACITY,
+     +               ANNUAL_MINIMUM_CAPACITY,
+     +               ANNUAL_ENRG,
+     +               ANNUAL_CNTR_VARIABLE_COST,
+     +               ANNUAL_CONTRACT_AVE_VAR_COST,
+     +               ANNUAL_CNTR_MAX_FIXED_COST,
+     +               ANNUAL_CNTR_MIN_FIXED_COST,
+     +               ANNUAL_TOTAL_FIXED_COST,
+     +               ANNUAL_TOTAL_CONTRACT_COST,
+     +               ANNUAL_AVERAGE_TOTAL_COST,
+     +               ANNUAL_CNTR_EMISSIONS
+         MON_CT_UNIT_REC = MON_CT_UNIT_REC + 1
       ENDIF
-      COUNTER = COUNTER + 1
-      IF(PRECISN .LT. .999999 .AND. COUNTER .LT. 3) GOTO 50
+! TODO: EXTRACT_METHOD handle_block_and_summary_report_items
+      IF(((MONTHLY_BLOCK_REPORT .OR.
+     +               MONTHLY_SUMMARY_REPORT_ACTIVE) .AND.
+     +                    .NOT. TESTING_PLAN .AND. NBLOCK > 0) .OR.
+     +    (CONTRACTS_IN_PERIOD .AND.
+     +                    MONTHLY_CONTRACT_REPORT_ACTIVE .AND.
+     +                                         .NOT. TESTING_PLAN)) THEN
+         P_PUR_ENRG = P_PUR_ENRG * SEAS_HOURS
+         PVARCOST = PVARCOST * SEAS_HOURS
+         P_SALES_ENERGY = P_SALES_ENERGY * SEAS_HOURS
+         TOTAL_PRODUCTION_COSTS = SNGL( (PFUELCST +
+     +               P_NUCLEAR_FUEL_COST + PVARCOST +
+     +               PFIXCOST + P_PUR_POWER_COST +
+     +               MONTHLY_ECONOMY_COST -
+     +               MONTHLY_ECONOMY_REVENUE-P_SALES_REVENUE))/1000000.
+         IF(MONTHLY_HEAT > 0.0) THEN
+            IF(PMMBTUS /= 0.D0) THEN
+               TEMP_SNGL = 2000./SNGL(PMMBTUS)
+            ELSE
+               TEMP_SNGL = 1.
+            ENDIF
+            MON_CL_SUM_REC = RPTREC(MON_CL_SUM_NO)
+            WRITE(MON_CL_SUM_NO,REC=MON_CL_SUM_REC)
+     +               PRT_ENDPOINT(),
+     +               FLOAT(YEAR+BASE_YEAR),
+     +               CL_MONTH_NAME(ISEAS),
+     +               SNGL(DEMAND)/1000.,
+     +               MONTHLY_ECONOMY_SOLD/1000.,
+     +               SNGL((DEMAND + MONTHLY_ECONOMY_SOLD +
+     +                        DYN_STORAGE_PUMP_ENRG -
+     +                           DYN_STORAGE_GEN_ENRG -
+     +                              PENRG - P_PUR_ENRG -
+     +                                MONTHLY_ECONOMY_BOUGHT))/1000.,
+     +               SNGL(PENRG)/1000.,
+     +               SNGL(P_PUR_ENRG)/1000.,
+     +               MONTHLY_ECONOMY_BOUGHT/1000.,
+     +               SNGL(PMMBTUS),
+     +               SNGL(PFUELCST)/1000000.,
+     +               P_NUCLEAR_FUEL_COST/1000000.,
+     +               SNGL(PVARCOST)/1000000.,
+     +               SNGL(PFIXCOST)/1000000.,
+     +               SNGL(P_PUR_POWER_COST)/1000000.,
+     +               MONTHLY_ECONOMY_COST/1000000.,
+     +               MONTHLY_ECONOMY_REVENUE/1000000.,
+     +               TOTAL_PRODUCTION_COSTS,
+     +               PEAK,BASE,
+     +               (MONTHLY_TOTAL_EMISSIONS(I),
+     +                      MONTHLY_TOTAL_EMISSIONS(I)*TEMP_SNGL,I=1,5),
+     +               SNGL(DYN_STORAGE_PUMP_ENRG)/1000.,
+     +               SNGL(DYN_STORAGE_GEN_ENRG)/1000.,
+     +               SNGL(DEMAND + MONTHLY_ECONOMY_SOLD +
+     +                        DYN_STORAGE_PUMP_ENRG)/1000.,
+     +               SNGL(DYN_STORAGE_GEN_ENRG +
+     +                              PENRG + P_PUR_ENRG +
+     +                                MONTHLY_ECONOMY_BOUGHT)/1000.
+            MON_CL_SUM_REC = MON_CL_SUM_REC + 1
+         ELSE
+            MON_CL_SUM_REC = RPTREC(MON_CL_SUM_NO)
+            WRITE(MON_CL_SUM_NO,REC=MON_CL_SUM_REC)
+     +               PRT_ENDPOINT(),
+     +               FLOAT(YEAR+BASE_YEAR),
+     +               CL_MONTH_NAME(ISEAS),
+     +               SNGL(DEMAND)/1000.,
+     +               MONTHLY_ECONOMY_SOLD/1000.,
+     +               SNGL((DEMAND + MONTHLY_ECONOMY_SOLD +
+     +                        DYN_STORAGE_PUMP_ENRG -
+     +                           DYN_STORAGE_GEN_ENRG -
+     +                              PENRG - P_PUR_ENRG -
+     +                                MONTHLY_ECONOMY_BOUGHT))/1000.,
+     +               SNGL(PENRG)/1000.,
+     +               SNGL(P_PUR_ENRG)/1000.,
+     +               MONTHLY_ECONOMY_BOUGHT/1000.,
+     +               SNGL(PMMBTUS),
+     +               SNGL(PFUELCST)/1000000.,
+     +               P_NUCLEAR_FUEL_COST/1000000.,
+     +               SNGL(PVARCOST)/1000000.,
+     +               SNGL(PFIXCOST)/1000000.,
+     +               SNGL(P_PUR_POWER_COST)/1000000.,
+     +               MONTHLY_ECONOMY_COST/1000000.,
+     +               MONTHLY_ECONOMY_REVENUE/1000000.,
+     +               TOTAL_PRODUCTION_COSTS,
+     +               PEAK,BASE,
+     +               (MONTHLY_TOTAL_EMISSIONS(I),N_A,I=1,5),
+     +               SNGL(DYN_STORAGE_PUMP_ENRG)/1000.,
+     +               SNGL(DYN_STORAGE_GEN_ENRG)/1000.,
+     +               SNGL(DEMAND + MONTHLY_ECONOMY_SOLD +
+     +                        DYN_STORAGE_PUMP_ENRG)/1000.,
+     +               SNGL(DYN_STORAGE_GEN_ENRG +
+     +                              PENRG + P_PUR_ENRG +
+     +                                MONTHLY_ECONOMY_BOUGHT)/1000.
+            MON_CL_SUM_REC = MON_CL_SUM_REC + 1
+         ENDIF
+      ENDIF
+! TODO: EXTRACT_METHOD handle_block_and_summary_report_items (end)
+ 1000 FORMAT('&',F9.2,I10,I8,F9.2,F7.2,F8.2,2F9.1,3F8.1)
+ 1001 FORMAT('&',F9.2,I10,F8.3,F9.2,F7.2,F8.2,2F9.1,3F8.1)
+ 1002 FORMAT(1X,I3,1X,A20,3F7.1,F9.2,F7.2,F7.2,3F6.2,F8.2,F8.2,3X,F8.1)
+ 1003 FORMAT(/1X,A,F11.1)
+ 1005 FORMAT(1X,I3,1X,A20,3F7.1,23X,3F6.2,F8.2)
+ 1010 FORMAT(1X,A,F11.1)
+ 1011 FORMAT(1X,'mmBTUs                ',I11)
+ 1012 FORMAT(1X,'GigaJoules            ',I11)
+ 1020 FORMAT('&',2X,A,F11.2)
+ 1030 FORMAT('&',F11.1,'  (lbs/mmBTU)  ',F6.2)
+ 1031 FORMAT('&',F11.1,'  (kg/GJ)      ',F6.2)
+ 1100 FORMAT(4X,A,A,I4,A,I3,5X,A/)
+      RETURN
+!**********************************************************************
+      ENTRY GET_PROD_BY_MK_BY_MWH(R_MK,RETURN_PROD_BY_MK_BY_MWH)
+!**********************************************************************
+         RETURN_PROD_BY_MK_BY_MWH(1) = PROD_BY_MK_BY_MWH(R_MK,1)
+         RETURN_PROD_BY_MK_BY_MWH(2) = PROD_BY_MK_BY_MWH(R_MK,2)
+         RETURN_PROD_BY_MK_BY_MWH(3) = PROD_BY_MK_BY_MWH(R_MK,3)
+      RETURN
+!**********************************************************************
+      ENTRY GET_NG_BY_REGION_BY_MMBTU(R_SP,R_NG_BTUS_BY_GSP_BY_FUEL)
+!**********************************************************************
 !
-!     WRITE THE RESULTS TO BE READ BY PROCOST
+! FOR NG MODEL.
+! 1 = MONTH BTU
+! 2 = PEAK DAY BTU
+! 3 = GENERATING UNITS WITH BTU
 !
-      I = POINTS_IN_CURVE
-      DOWHILE (LPROB(I) == 0.)
-         I = I - 1
-      ENDDO
-      POINTS_IN_CURVE = I + 1
-      DX = (LODDUR(POINTS_IN_CURVE)-BASE)/
-     +                                          FLOAT(POINTS_IN_CURVE-1)
-      DX = MAX(DX,0.01)
+         R_NG_BTUS_BY_GSP_BY_FUEL(1) = FUEL_BTUS_BY_GSP_BY_FUEL(R_SP,1)
+         R_NG_BTUS_BY_GSP_BY_FUEL(2) = FUEL_BTUS_BY_GSP_BY_FUEL(R_SP,2)
+         R_NG_BTUS_BY_GSP_BY_FUEL(3) = FUEL_BTUS_BY_GSP_BY_FUEL(R_SP,3)
+      RETURN
+!**********************************************************************
+      ENTRY GET_ANNUAL_NG_BY_REGION_BY_MMBTU(R_SP,
+     +                                         R_NG_BTUS_BY_GSP_BY_FUEL)
+!**********************************************************************
+!
+! FOR NG MODEL.
+! 1 = MONTH BTU
+! 2 = PEAK DAY BTU
+! 3 = GENERATING UNITS WITH BTU
+!
+         R_NG_BTUS_BY_GSP_BY_FUEL(1) =
+     +                           ANNUAL_FUEL_BTUS_BY_GSP_BY_FUEL(R_SP,1)
+         R_NG_BTUS_BY_GSP_BY_FUEL(2) =
+     +                           ANNUAL_FUEL_BTUS_BY_GSP_BY_FUEL(R_SP,2)
+         R_NG_BTUS_BY_GSP_BY_FUEL(3) =
+     +                           ANNUAL_FUEL_BTUS_BY_GSP_BY_FUEL(R_SP,3)
+      RETURN
+!**********************************************************************
+      ENTRY GET_ANNUAL_PROD_BY_MK_BY_MWH(R_MK,RETURN_PROD_BY_MK_BY_MWH)
+!**********************************************************************
+         RETURN_PROD_BY_MK_BY_MWH(1) = ANNUAL_PROD_BY_MK_BY_MWH(R_MK,1)
+         RETURN_PROD_BY_MK_BY_MWH(2) = ANNUAL_PROD_BY_MK_BY_MWH(R_MK,2)
+         RETURN_PROD_BY_MK_BY_MWH(3) = ANNUAL_PROD_BY_MK_BY_MWH(R_MK,3)
+      RETURN
+!**********************************************************************
+      ENTRY INIT_TRANS_C_MONTH_START_UPS()
+!**********************************************************************
+!
+         MONTH_UNIT_STARTS(1:MAX_CL_UNITS) = 0
+         MONTH_UNIT_START_COSTS(1:MAX_CL_UNITS) = 0.
+!
+      RETURN
+!**********************************************************************
+      ENTRY PUT_TRANS_C_START_UPS(
+     +                        R_UNIT,
+     +                        R_STARTS,
+     +                        R_START_COSTS)
+!**********************************************************************
+!
+         MONTH_UNIT_STARTS(R_UNIT) = R_STARTS
+         MONTH_UNIT_START_COSTS(R_UNIT) = R_START_COSTS
+!
+      RETURN
+!**********************************************************************
+      ENTRY CL_REPORT_WHOLE_MARKET_COST( ! CALLED MONTHLY
+     +                               R_MONTH,
+     +                               R_MONTHLY_WHOLESALE_COST)
+!**********************************************************************
+         R_MONTHLY_WHOLESALE_COST = 1000000.*
+     +                     (MONTHLY_WHOLE_COSTS -
+     +                               MONTHLY_DERIV_WHOLESALE_COST)
+      RETURN
+!**********************************************************************
+      ENTRY CL_EMIS_TO_WVPA_REPORT( ! CALLED MONTHLY BY UNIT
+     +                             R_UNIT,R_MONTHLY_UNIT_EMISSIONS_COST)
+!**********************************************************************
+         R_MONTHLY_UNIT_EMISSIONS_COST = 1000.*
+     +                          (MONTHLY_UNIT_EMISSIONS_COST(1,R_UNIT) +
+     +                           MONTHLY_UNIT_EMISSIONS_COST(2,R_UNIT) +
+     +                           MONTHLY_UNIT_EMISSIONS_COST(3,R_UNIT) +
+     +                           MONTHLY_UNIT_EMISSIONS_COST(4,R_UNIT) +
+     +                           MONTHLY_UNIT_EMISSIONS_COST(5,R_UNIT) )
+      RETURN
+!**********************************************************************
+      ENTRY CL_REPORT_TO_WVPA_REPORT( ! CALLED MONTHLY
+     +                               R_MONTH,
+     +                               R_WHOLESALE_MARKET_COST,
+     +                               R_WHOLESALE_MARKET_BUY_MWH,
+     +                               R_MONTHLY_WHOLESALE_COST,
+     +                               R_MONTHLY_WHOLESALE_FUEL_COST,
+     +                               R_MONTHLY_WHOLESALE_VOM_COST,
+     +                               R_WHOLESALE_MARKET_REV,
+     +                               R_WHOLESALE_MARKET_SELL_MWH)
+!**********************************************************************
+!
+         R_WHOLESALE_MARKET_COST = MONTHLY_ECO_PUCH/1000.
+         R_WHOLESALE_MARKET_BUY_MWH = MONTHLY_ECO_PUCH_ENRG ! MWH
+!
+         R_MONTHLY_WHOLESALE_COST = (MONTHLY_WHOLE_COSTS -
+     +                               MONTHLY_DERIV_WHOLESALE_COST)*1000.
+         R_MONTHLY_WHOLESALE_FUEL_COST =
+     +                           MONTHLY_WHOLESALE_COST(R_MONTH,2)/1000.
+         R_MONTHLY_WHOLESALE_VOM_COST =
+     +                           MONTHLY_WHOLESALE_COST(R_MONTH,3)/1000.
+         R_WHOLESALE_MARKET_REV = (MONTHLY_ECO_SALES -
+     +                                    MONTHLY_DERIV_ECO_SALES)/1000.
+         R_WHOLESALE_MARKET_SELL_MWH = MONTHLY_ECO_SALES_ENRG -
+     +                                 MONTHLY_DERIV_ECO_SALES_ENRG! MWH
+!
+      RETURN
+!**********************************************************************
+      ENTRY TRANSACT_WHOLESALE_REV_COST(
+     +                               R_DETAILED_TRANSFER_PRICING, ! L1
+     +                               R_AC_REV_VECTOR, ! I2
+     +                               R_AC_REV_ALLOC_VECTOR, !I2
+     +                               R_AC_COST_VECTOR, ! I2
+     +                               R_AC_COST_ALLOC_VECTOR, !I2
+     +                               R_WHOLESALE_MARKET_COST_AC, ! R(0:12) USE THIS FOR AMEREN
+     +                               R_WHOLESALE_MARKET_BUY_MWH_AC,
+     +                               R_MONTHLY_WHOLESALE_COST_AC,
+     +                               R_WHOLESALE_MARKET_REV_AC, ! R(0:12) USE THIS FOR AMEREN
+     +                               R_WHOLESALE_MARKET_SELL_MWH_AC,
+     +                               R_MONTHLY_WHOLE_FUEL_COST_AC, ! R(0:12) USE THIS FOR AMEREN
+     +                               R_MONTHLY_WHOLE_VOM_COST_AC)
+
+!**********************************************************************
+!
+
+!
+         R_DETAILED_TRANSFER_PRICING =
+     +            YES_DETAILED_TRANSFER_PRICING() .AND.
+     +                RUN_TRANSACT .AND.
+     +                   .NOT. YES_RUN_MULTIAREA_TRANSACT() .AND.
+     +                                 TRANSFER_PRICING_VECTORS(
+     +                                       R_AC_REV_VECTOR,
+     +                                       R_AC_REV_ALLOC_VECTOR,
+     +                                       R_AC_COST_VECTOR,
+     +                                       R_AC_COST_ALLOC_VECTOR)
+!
+         DO I = 0, 12
+!
+            R_WHOLESALE_MARKET_COST_AC(I) = WHOLESALE_MARKET_COST(I)/
+     +                                                             1000.
+            R_WHOLESALE_MARKET_BUY_MWH_AC(I) =
+     +                                 WHOLESALE_MARKET_BUY_MWH(I)
+!
+            R_MONTHLY_WHOLESALE_COST_AC(I) =
+     +                                 MONTHLY_WHOLESALE_COST(I,1)/1000.
+!
+            R_WHOLESALE_MARKET_REV_AC(I) = WHOLESALE_MARKET_REV(I)/1000.
+            R_WHOLESALE_MARKET_SELL_MWH_AC(I) =
+     +                                WHOLESALE_MARKET_SELL_MWH(I)
+            R_MONTHLY_WHOLE_FUEL_COST_AC(I) =
+     +                                 MONTHLY_WHOLESALE_COST(I,2)/1000.
+            R_MONTHLY_WHOLE_VOM_COST_AC(I) =
+     +                                 MONTHLY_WHOLESALE_COST(I,3)/1000.
+
+         ENDDO
 
       RETURN
+!**********************************************************************
+      ENTRY WVPA_WHOLESALE_REV_COST_TRAMS(R_MONTHLY_WHOLESALE_COST_AC,
+     +                                    R_MONTHLY_WHOLE_FUEL_COST_AC, ! R(0:12) USE THIS FOR AMEREN
+     +                                    R_MONTHLY_WHOLE_VOM_COST_AC,
+     +                                    R_WHOLESALE_MARKET_REV_AC) ! R(0:12) USE THIS FOR AMEREN
+!**********************************************************************
+!
+         DO I = 0, 12
+!
+            R_MONTHLY_WHOLESALE_COST_AC(I) =
+     +                                 MONTHLY_WHOLESALE_COST(I,1)/1000.
+            R_MONTHLY_WHOLE_FUEL_COST_AC(I) =
+     +                                 MONTHLY_WHOLESALE_COST(I,2)/1000.
+            R_MONTHLY_WHOLE_VOM_COST_AC(I) =
+     +                                 MONTHLY_WHOLESALE_COST(I,3)/1000.
+            R_WHOLESALE_MARKET_REV_AC(I) = WHOLESALE_MARKET_REV(I)/1000.
+         ENDDO
+!
+      RETURN
+!**********************************************************************
+      ENTRY GET_TRANSACT_VARIABLES(R_TRANS_GROSS_MARGIN)
+!**********************************************************************
+         R_TRANS_GROSS_MARGIN = TRANS_TOTAL_GROSS_MARGIN
+      RETURN
       END
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!**********************************************************************
 !
-      SUBROUTINE CPL_PA_CAP_CALCS
+!             WRITES ANNUAL SUMMARY PRODUCTION UNIT REPORT
+!                       COPYRIGHT (C) 1987
+!                   M.S. GERBER & ASSOCIATES, INC.
+!                       ALL RIGHTS RESERVED
 !
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!**********************************************************************
 !
-      use logging
-      USE SIZECOM
+      SUBROUTINE ANNUAL_REPORT(YR,CAP_LIMITED_DEMAND,
+     +                         ENERGY_EXCHANGE_ADJUSTMENT,
+     +                         BASE,PEAK,
+     +                         NUMBER_OF_CONTRACTS,CNTRNM,
+     +                         CNTR_ON_LI,CNTR_OFF_LI,KEPCO,
+     +                         CNTR_WEIGHTED_CAPACITY,
+     +                         ANNUAL_BTUS_GOCN12,
+     +                         WABASH_VALLEY,REALLY_KEPCO,
+     +                         CNTR_SALES_ENERGY,CNTR_SALES_REVENUE,
+     +                         SAVE_YEAR)
+!
       INCLUDE 'SpinLib.MON'
+      USE PROCSAVE_COMMON
+      use annual_cl_unit
+      USE IREC_ENDPOINT_CONTROL
+      USE GRX_PLANNING_ROUTINES
+      use annual_contracts
+      use cl_data
+      use csvdat
+      USE SIZECOM
+!
+      CHARACTER (LEN=2) :: CAPACITY_PLANNING_METHOD,GREEN_MRX_METHOD
+!
+      REAL (kind=8) ::  ANNUAL_BTUS_GOCN12(0:6)
+      REAL ::  CL_UNIT_ANNUAL_FIXED_COST
+      REAL ::  CL_UNIT_ANNUAL_FUEL_COST
+      REAL ::  CL_UNIT_ANNUAL_VAR_COST
+      LOGICAL (kind=1) ::  KEPCO
+      LOGICAL (kind=1) ::  ANNUAL_OUTPUT_REPORT
+      LOGICAL (kind=1) ::  ANNUAL_UNIT_OUTPUT_REPORT
+      LOGICAL (kind=1) ::  WABASH_VALLEY
+      LOGICAL (kind=1) ::  REALLY_KEPCO
+      REAL ::  CNTR_SALES_REVENUE,CNTR_SALES_ENERGY
+      CHARACTER (len=1) ::  UTILITY_TYPE
+      CHARACTER (len=1) ::  COUNTRY
+      CHARACTER (len=1) ::  UNIT_NAME*20
+      CHARACTER (len=1) ::  KEPCO_REPORTS
+      CHARACTER (len=1) ::  CSV_REPORT
+      LOGICAL (kind=1) ::  CANADA
+      INTEGER (kind=2) ::  I
+      INTEGER (kind=2) ::  YR
+      INTEGER (kind=2) ::  EM
+      INTEGER (kind=2) ::  J
+      INTEGER (kind=2) ::  NUMBER_OF_CONTRACTS
+      INTEGER (kind=2) ::  RECORDS_PER_UNIT/0/
+      INTEGER (kind=2) ::  RECORDS_PRINTED_PER_UNIT/0/
+      INTEGER (kind=2) ::  LAST_YEAR,RUN_YEARS,SAVE_YEAR
+      REAL ::  CAP_FACTOR
+      INTEGER (kind=2) ::  CNTR_ON_LI(MAX_CONTRACTS)
+      INTEGER (kind=2) ::  CNTR_OFF_LI(MAX_CONTRACTS)
+      CHARACTER (len=20) ::   CNTRNM(MAX_CONTRACTS)
+      INTEGER (kind=4) ::  OFFSET/0/,IREC,NEXT_OFFSET/0/
+!     INTEGER*4 FMT1
+      LOGICAL (kind=1) ::  TVA
+      REAL ::  AVERAGE_HEATRATE
+      REAL ::  HEAT_CONVERSION
+      REAL ::  BASE
+      REAL ::  PEAK
+      REAL ::  CONTRACT_LOAD_FACTOR
+      REAL ::  CNTR_WEIGHTED_CAPACITY(MAX_CONTRACTS)
+      REAL ::  GET_HEAT_CONVERSION
+      CHARACTER (len=255) ::  PRODUCTION_METHOD
+      CHARACTER (len=255) ::  RECORD
+      CHARACTER (len=255) ::  EMISSIONS_TITLES(NUMBER_OF_EMISSION_TYPES)*26
+      CHARACTER (len=255) ::  EMISSIONS_CAP_TITLES(NUMBER_OF_EMISSION_TYPES)*28
+      CHARACTER (len=255) ::  NEW_LINE*2
+      CHARACTER (len=255) ::  FILE_NAME*64
+      CHARACTER (len=80) ::  PRODUCTION_METHOD_TITLE
+      LOGICAL (kind=4) ::  FILE_EXIST
+      LOGICAL (kind=1) ::  POOLING_TRANSACTIONS
+      LOGICAL (kind=1) ::  FIRST_TIME_BY_UNIT/.TRUE./
+      LOGICAL (kind=1) ::  FIRST_TIME_BY_YEAR/.TRUE./
+      LOGICAL (kind=1) ::  SPREAD_SHEET
+      LOGICAL (kind=1) ::  BY_UNIT
+      LOGICAL (kind=1) ::  BY_YEAR
+      REAL (kind=4) ::  ANNUAL_TOTAL_EMISSIONS(NUMBER_OF_EMISSION_TYPES)
+      REAL (kind=4) ::  ANNUAL_AI_INVESTMENT,TOTAL_COST,AVERAGE_COST
+      REAL ::    ENERGY_EXCHANGE_ADJUSTMENT
+      REAL (kind=8) ::  CAP_LIMITED_DEMAND
+
+      LOGICAL (kind=1) ::  ANN_CL_REPORT_NOT_OPEN/.TRUE./
+      INTEGER (kind=2) ::  ANN_CL_UNIT_NO
+      INTEGER (kind=2) ::  ANN_CL_UNIT_HEADER
+      INTEGER (kind=2) ::  ANN_CL_SUM_NO
+      INTEGER (kind=2) ::  ANN_CL_SUMMARY_HEADER
+      INTEGER (kind=2) ::  ANN_POOL_SUM_NO
+      INTEGER (kind=2) ::  ANN_POOL_SUMMARY_HEADER
+      REAL (kind=8) ::  TEMP_DBLE
+      REAL ::  N_A/-999999./,TOTAL_PRODUCTION_COSTS,ZERO/0./
+      SAVE ANN_CL_UNIT_NO,ANN_CL_SUM_NO,ANN_POOL_SUM_NO
+      INTEGER ::  ANN_CL_UNIT_REC,ANN_CL_SUM_REC,ANN_POOL_SUM_REC
+      SAVE ANN_CL_UNIT_REC,ANN_CL_SUM_REC,ANN_POOL_SUM_REC
+!
       INCLUDE 'PRODCOM.MON'
       INCLUDE 'PROD2COM.MON'
       INCLUDE 'PROD3COM.MON'
-!     INCLUDE 'LAMCOM.MON'
-!
-      INTEGER (kind=2) ::    R_PA_UNIT_INDEX(*)
-      REAL (kind=4) ::  R_RESERVE_CAPACITY
-      REAL (kind=4) ::  R_UNUSED_SUPP_CAPACITY
-      REAL (kind=4) ::  R_SUPPLEMENTAL_CAPACITY
-      REAL (kind=4) ::  LAST_YEAR_CPL_N_PA_CAP/0./
-      REAL (kind=4) ::  SEPA_CAPACITY
-      REAL (kind=4) ::  RESERVE_PERCENT
-      REAL (kind=4) ::  R_RESERVE_PERCENT
-      REAL (kind=4) ::  THIS_YEAR_PEAK
-      REAL (kind=4) ::  THIS_YEAR_CPL_N_PA_CAP/0./
-      REAL (kind=4) ::  SAVE_UNUSED_SUPP_CAPACITY/0./
-      REAL (kind=4) ::  PA_RETAINED_CAPACITY/0./
-      REAL (kind=4) ::  LAST_YEAR_PEAK
-      REAL (kind=4) ::  SAVE_RESERVE_CAPACITY/0./
-      REAL (kind=4) ::  R_ANN_RESERVE_CAPACITY
-      REAL (kind=4) ::  R_PA_EXP_CAPSYS
-      REAL (kind=4) ::  R_PA_CAPSYS
-      REAL (kind=4) ::  R_PA_PEAK
-      REAL (kind=4) ::  PA_FIRM_PURCHASE
-      REAL (kind=4) ::  R_MAINTENANCE_RATE(*)
-      REAL (kind=4) ::  R_EAVAIL(*)
-      REAL (kind=4) ::  PA_EXP_RETAINED_CAPACITY
-      REAL (kind=4) ::  UPDATE_NET_PLANNING_PEAK
-      REAL (kind=4) ::  CL_PLANNING_CAPACITY
-      REAL (kind=4) ::  EL_PLANNING_CAPACITY
-      REAL (kind=4) ::  LM_PLANNING_CAPACITY
-      REAL (kind=4) ::  CT_PLANNING_CAPACITY
-      REAL (kind=4) ::  ADJUSTMENT_CAPACITY
-      REAL (kind=4) ::  R_PA_FIRM_PURCHASE
-!
-!     END DATA DECLARATIONS
-!
-!     CALLED MONTHLY IN DR_BOOTH
-!
-      RETURN
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY CPL_CALC_RESERVE_PERCENT ! CALLED ANNUALLY IN PROCOST BEFORE DR_BOOTH
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         THIS_YEAR_PEAK =  UPDATE_NET_PLANNING_PEAK(YEAR)
-!
+      INCLUDE 'ENVIRCOM.MON'
 
-         THIS_YEAR_CPL_N_PA_CAP =
-     +                     CL_PLANNING_CAPACITY(3,YEAR) +
-     +                     EL_PLANNING_CAPACITY(3,YEAR) +
-     +                     LM_PLANNING_CAPACITY(YEAR)   +
-     +                     CT_PLANNING_CAPACITY(3,YEAR) +
-     +                     ADJUSTMENT_CAPACITY(YEAR)
 !
-         IF(YEAR == 1) THEN
-            LAST_YEAR_PEAK = THIS_YEAR_PEAK
-            LAST_YEAR_CPL_N_PA_CAP = THIS_YEAR_CPL_N_PA_CAP
-         ENDIF
+!     ADDED FOR MIDAS GOLD 6/5/91.
 !
-         CALL GET_PA_SEPA_CAPACITY(SEPA_CAPACITY)
-         RESERVE_PERCENT = (LAST_YEAR_CPL_N_PA_CAP - LAST_YEAR_PEAK)/
-     +                                  (LAST_YEAR_PEAK - SEPA_CAPACITY)
+      INCLUDE 'POOLCOM.MON'
+      LOGICAL (kind=1) ::  LOTUS_SPREAD_SHEET/.FALSE./
 !
-!         CURRENT_YEAR = BASE_YEAR_COMMON + YEAR
-      RETURN
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_PA_RESERVE_CAPACITY(R_RESERVE_CAPACITY,
-     +                                R_MAINTENANCE_RATE,
-     +                                R_EAVAIL,R_PA_UNIT_INDEX,
-     +                                R_PA_CAPSYS,R_PA_EXP_CAPSYS,
-     +                                R_RESERVE_PERCENT)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      EQUIVALENCE(RECORD(1:1),PRODUCTION_METHOD(1:1),FILE_NAME(1:1))
 !
 !
-         CALL GET_PA_RETAINED_CAPACITY(PA_RETAINED_CAPACITY,
-     +                                 PA_EXP_RETAINED_CAPACITY,
-     +                                 R_MAINTENANCE_RATE,R_EAVAIL,
-     +                                 R_PA_UNIT_INDEX)
-         SAVE_RESERVE_CAPACITY = PA_RETAINED_CAPACITY * RESERVE_PERCENT ! ANNUAL CALC
+      TVA = UTILITY_TYPE() == 'T'
+      LAST_YEAR = RUN_YEARS()
+      ANNUAL_OUTPUT_REPORT = ANNUAL_UNIT_OUTPUT_REPORT()
+      NEW_LINE(1:1) = CHAR(13)
+      NEW_LINE(2:2) = CHAR(10)
+
+      BY_UNIT = .FALSE.
+      BY_YEAR = .FALSE.
 !
-! 27/11/96. GAT. TAKEN-OUT FOR NOW. 4/12/96. BACK IN PER KING.
+      SPREAD_SHEET =  BY_UNIT .OR. BY_YEAR
+      IF(FIRST_TIME_BY_UNIT .AND. CSV_BY_UNIT(0)) THEN
+         FIRST_TIME_BY_UNIT = .FALSE.
+         FILE_NAME = 'BYU'//trim(clData%Scename)//'.CSV'
+
+         OPEN(97,FILE=FILE_NAME,ACCESS='DIRECT',STATUS='REPLACE',
+     +                                       FORM='FORMATTED',RECL=200)
+      ENDIF
+      IF(FIRST_TIME_BY_YEAR .AND. BY_YEAR) THEN
+         FIRST_TIME_BY_YEAR = .FALSE.
+         FILE_NAME = 'BYY'//trim(clData%Scename)//'.CSV'
+
+         OPEN(96,FILE=FILE_NAME,STATUS='REPLACE',
+     +                              CARRIAGE CONTROL="FORTRAN",RECL=200)
+      ENDIF
+      IF(CSV_BY_UNIT(0) .AND. (YR == 1)) THEN
+         IREC = OFFSET
+         DO I = 1, NUNITS
+!           IREC = (I-1)*(LAST_YEAR+2) + 1 + OFFSET
+            IREC = IREC + 1
+            WRITE(97,'(A,",",I4,",")',REC=IREC) NEW_LINE//
+     +                  '"'//trim(UNITNM(I))//'   Endpoint"',END_POINT
+            IREC = IREC + 1
+            IF(TVA) THEN
+               PRODUCTION_METHOD='"A&I","Cap Factor"'
+            ELSE
+               PRODUCTION_METHOD='"Cap Factor"'
+            ENDIF
+            WRITE(97,'(A)',REC=IREC) NEW_LINE//
+     +          '"Year","Cap-MW","Gen-GWh","Ave Ht",'//
+     +         '"Ave Cost","Fuel","Var","Fixed","Total","SO2","NOx",'//
+     +         '"Oth 1","Oth 2","Oth 3",'//trim(PRODUCTION_METHOD)
+            DO J = 1, LAST_YEAR
+               IF(CSV_BY_UNIT(J)) THEN
+                  IREC = IREC + 1
+                  WRITE(97,"(A,I5,',')",REC=IREC) NEW_LINE,J+BASE_YEAR
+               ENDIF
+            ENDDO
+         ENDDO
+         DO I = 1, NUMBER_OF_CONTRACTS
+!           IREC = (NUNITS+I-1)*(LAST_YEAR+2) + 1 + OFFSET
+            IREC = IREC + 1
+            WRITE(97,'(A,I4)',REC=IREC) NEW_LINE//
+     +                  '"'//trim(CNTRNM(I))//'   Endpoint"',END_POINT
+            IREC = IREC + 1
+            WRITE(97,'(A)',REC=IREC) NEW_LINE//
+     +          '"Year","Cap-MW","Gen-GWh",'//
+     +         '"Ave Cost","Var","Fixed","Total","SO2",'
+            DO J = 1, LAST_YEAR
+               IF(CSV_BY_UNIT(J)) THEN
+                  IREC = IREC + 1
+                  WRITE(97,"(A,I5,',')",REC=IREC) NEW_LINE,J+BASE_YEAR
+               ENDIF
+            ENDDO
+         ENDDO
+         NEXT_OFFSET = IREC + 1
+         RECORDS_PER_UNIT = 0.
+         RECORDS_PRINTED_PER_UNIT = 0
+         DO J = 1, LAST_YEAR
+            IF(CSV_BY_UNIT(J)) THEN
+               RECORDS_PER_UNIT = RECORDS_PER_UNIT + 1
+            ENDIF
+         ENDDO
+      ENDIF
 !
-         IF(R_PA_EXP_CAPSYS + SAVE_RESERVE_CAPACITY >
-     +                                        PA_RETAINED_CAPACITY) THEN
-            R_RESERVE_CAPACITY = MIN(  MAX(0.,
-     +                                   PA_RETAINED_CAPACITY -
-     +                                   R_PA_EXP_CAPSYS),
-     +                                   SAVE_RESERVE_CAPACITY)
+! ADDED TO GET THE SPACING CORRECT ON CSV OUTPUT BY UNIT
+!
+      IF(CSV_BY_UNIT(YR)) RECORDS_PRINTED_PER_UNIT = 1 +
+     +                                          RECORDS_PRINTED_PER_UNIT
+! TODO: EXTRACT_METHOD set_emission_report_titles
+      CANADA = COUNTRY() == 'C'
+      ANNUAL_AI_INVESTMENT = 0.
+      EMISSIONS_TITLES(1) = 'SO2 Emissions (tons)      '
+      EMISSIONS_TITLES(2) = 'NOx Emissions (tons)      '
+      EMISSIONS_TITLES(3) = 'CO2 Emissions (tons)      '
+      EMISSIONS_TITLES(4) = 'Other 1 Emissions (tons)  '
+      EMISSIONS_TITLES(5) = 'Other 2 Emissions (tons)  '
+      EMISSIONS_CAP_TITLES(1) = 'SO2 Emissions Cap (tons)    '
+      EMISSIONS_CAP_TITLES(2) = 'NOx Emissions Cap (tons)    '
+      EMISSIONS_CAP_TITLES(3) = 'CO2 Emissions Cap (tons)    '
+      EMISSIONS_CAP_TITLES(4) = 'Other 1 Emissions Cap (tons)'
+      EMISSIONS_CAP_TITLES(5) = 'Other 2 Emissions Cap (tons)'
+! TODO: EXTRACT_METHOD set_emission_report_titles (end)
+
+      DO EM = 1, NUMBER_OF_EMISSION_TYPES
+         ANNUAL_TOTAL_EMISSIONS(EM) = 0.
+      ENDDO
+      DATE1 = 100.*(BASE_YEAR+YR-1900) + 1
+      DATE2 = 100.*(BASE_YEAR+YR-1900) + 12
+      PRODUCTION_METHOD = PRODUCTION_METHOD_TITLE()
+
+! TODO: Determine whether spreadsheet interface should be removed.
+!
+! SPREADSHEET INTERFACE
+!
+!$DEFINE LOTUS
+!$IF DEFINED(LOTUS)
+      IF(LOTUS_SPREAD_SHEET) THEN
+      IF(SPREAD_SHEET .AND. BY_YEAR) THEN
+         WRITE(96,1002) YR+BASE_YEAR,' Annual Summary for Endpoint',
+     +                  END_POINT,trim(PRODUCTION_METHOD)
+         PRODUCTION_METHOD = '" "," ","Total","------- Average -------"'
+         WRITE(96,1001) trim(PRODUCTION_METHOD)
+        PRODUCTION_METHOD='" ","Unit","Gener-","Heatrate"," ","Fuel",'//
+     +    '"Variable","Fixed","Total",'//
+     +    '"----------------------- Emissions ---------------------"'//
+     +    ', , , , ,'
+         IF(TVA) THEN
+            PRODUCTION_METHOD = trim(PRODUCTION_METHOD)//
+     +                                             '"TVA","Capacity",'
          ELSE
-            R_RESERVE_CAPACITY = SAVE_RESERVE_CAPACITY
+            PRODUCTION_METHOD = trim(PRODUCTION_METHOD)//
+     +                                             '"Capacity",'
          ENDIF
-!
-         SAVE_UNUSED_SUPP_CAPACITY = MAX(0.,PA_RETAINED_CAPACITY -
-     +                             (R_PA_EXP_CAPSYS+R_RESERVE_CAPACITY))
-      RETURN
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_ANN_RESERVE_CAPACITY(R_ANN_RESERVE_CAPACITY)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         R_ANN_RESERVE_CAPACITY = SAVE_RESERVE_CAPACITY * 12.
-      RETURN
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_UNUSED_SUPP_CAPACITY(R_UNUSED_SUPP_CAPACITY)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         R_UNUSED_SUPP_CAPACITY = SAVE_UNUSED_SUPP_CAPACITY
-      RETURN
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY GET_SUPPLEMENTAL_CAPACITY(R_SUPPLEMENTAL_CAPACITY,R_PA_PEAK)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-         CALL GET_PA_FIRM_N_SEPA(PA_FIRM_PURCHASE,SEPA_CAPACITY)
-
-         R_SUPPLEMENTAL_CAPACITY =
-     +                         MAX(0.,R_PA_PEAK - PA_RETAINED_CAPACITY -
-     +                                 SEPA_CAPACITY - PA_FIRM_PURCHASE)
-      RETURN
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!      ENTRY GET_PA_RESOURCE_CAPACITY(R_PA_FIRM_PURCHASE)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      ENTRY UPDATE_CPL_CAP_CALCS ! CALLED ANNUALLY AFTER MONTH LOOP IN PROCOST
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         LAST_YEAR_PEAK = THIS_YEAR_PEAK
-         LAST_YEAR_CPL_N_PA_CAP = THIS_YEAR_CPL_N_PA_CAP
-      RETURN
-      END
-!
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!
-      SUBROUTINE GET_PA_RETAINED_CAPACITY(R_PA_RETAINED_CAPACITY,
-     +                                 R_PA_EXP_RETAINED_CAPACITY,
-     +                                 R_MAINTENANCE_RATE,R_EAVAIL,
-     +                                 R_PA_UNIT_INDEX)
-!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!
-      use logging
-      INTEGER (kind=2) ::    CURRENT_YEAR
-      INTEGER (kind=2) ::  ROUTINE_BASE_YEAR/1995/
-      INTEGER (kind=2) ::  YEAR_INDEX
-      INTEGER (kind=2) ::  R_PA_UNIT_INDEX(*)
-      INTEGER (kind=2) ::  RESOURCE_NO
-      REAL (kind=4) ::    R_PA_RETAINED_CAPACITY
-      REAL (kind=4) ::  R_PA_EXP_RETAINED_CAPACITY
-      REAL (kind=4) ::  BRUNS1_RETAINED/144.8/
-      REAL (kind=4) ::  BRUNS2_RETAINED/144.8/
-      REAL (kind=4) ::  HARRIS1_RETAINED
-      REAL (kind=4) ::  ROX4_RETAINED/90.6/
-      REAL (kind=4) ::  MAYO1_RETAINED
-      REAL (kind=4) ::  R_MAINTENANCE_RATE(*)
-      REAL (kind=4) ::  R_EAVAIL(*)
-      REAL (kind=4) ::  RESOURCE_PERCENT
-
-         CALL GET_UNIT_RETAINED(BRUNS1_RETAINED,BRUNS2_RETAINED,
-     +                                 HARRIS1_RETAINED,ROX4_RETAINED,
-     +                                 MAYO1_RETAINED)
-         R_PA_RETAINED_CAPACITY = BRUNS1_RETAINED + BRUNS2_RETAINED +
-     +                            HARRIS1_RETAINED +
-     +                            ROX4_RETAINED +
-     +                            MAYO1_RETAINED
-         R_PA_EXP_RETAINED_CAPACITY =
-     +            BRUNS1_RETAINED *
-     +                  R_EAVAIL(R_PA_UNIT_INDEX(3)) *
-     +                     (1.-R_MAINTENANCE_RATE(R_PA_UNIT_INDEX(3))) +
-     +            BRUNS2_RETAINED *
-     +                  R_EAVAIL(R_PA_UNIT_INDEX(4)) *
-     +                     (1.-R_MAINTENANCE_RATE(R_PA_UNIT_INDEX(4))) +
-     +            HARRIS1_RETAINED *
-     +                  R_EAVAIL(R_PA_UNIT_INDEX(5)) *
-     +                     (1.-R_MAINTENANCE_RATE(R_PA_UNIT_INDEX(5))) +
-     +            ROX4_RETAINED *
-     +                  R_EAVAIL(R_PA_UNIT_INDEX(2)) *
-     +                     (1.-R_MAINTENANCE_RATE(R_PA_UNIT_INDEX(2))) +
-     +            MAYO1_RETAINED *
-     +                  R_EAVAIL(R_PA_UNIT_INDEX(1)) *
-     +                     (1.-R_MAINTENANCE_RATE(R_PA_UNIT_INDEX(1)))
-      RETURN
-!
-      ENTRY GET_PA_RETAINED_PERCENT(RESOURCE_NO,RESOURCE_PERCENT)
-!
-         CALL GET_UNIT_RETAINED(BRUNS1_RETAINED,BRUNS2_RETAINED,
-     +                                 HARRIS1_RETAINED,ROX4_RETAINED,
-     +                                 MAYO1_RETAINED)
-         IF(RESOURCE_NO == 1) THEN
-            RESOURCE_PERCENT = MAYO1_RETAINED/745.
-         ELSEIF(RESOURCE_NO == 2) THEN
-            RESOURCE_PERCENT = .1294
-         ELSEIF(RESOURCE_NO == 3) THEN
-            RESOURCE_PERCENT = .1833
-         ELSEIF(RESOURCE_NO == 4) THEN
-            RESOURCE_PERCENT = .1833
-         ELSEIF(RESOURCE_NO == 5) THEN
-            RESOURCE_PERCENT = HARRIS1_RETAINED/860.
+         WRITE(96,1001) trim(PRODUCTION_METHOD)
+         IF(CANADA) THEN
+            PRODUCTION_METHOD='"","Cap","ation","(GJ/","Cost","Cost",'//
+     +         '"Cost",'
+         ELSE
+            PRODUCTION_METHOD='" ","Cap","ation","(BTU/","Cost",'//
+     +         '"Cost","Cost",'
          ENDIF
+         PRODUCTION_METHOD = trim(PRODUCTION_METHOD)//
+     +    '"Cost","Cost","SO2","NOx","CO2","Other 1","Other 2",'
+         IF(TVA) THEN
+            PRODUCTION_METHOD = trim(PRODUCTION_METHOD)//
+     +                                      '"A&I","Factor",'
+         ELSE
+            PRODUCTION_METHOD = trim(PRODUCTION_METHOD)//
+     +                                      '"Factor",'
+         ENDIF
+         WRITE(96,1001) trim(PRODUCTION_METHOD)
+         IF(CANADA) THEN
+            PRODUCTION_METHOD='"Unit Name","(MW)","(GWh)","MWh)",'//
+     +         '"($/MWh)",'
+         ELSE
+            PRODUCTION_METHOD='"Unit Name","(MW)","(GWh)","KWh)",'//
+     +         '"($/MWh)",'
+         ENDIF
+         PRODUCTION_METHOD = trim(PRODUCTION_METHOD)//
+     +         '"(M$)","(M$)","(M$)","(M$)","(tons)","(tons)",'//
+     +         '"(tons)","(tons)","(tons)",'
+         IF(TVA) THEN
+            PRODUCTION_METHOD = trim(PRODUCTION_METHOD)//
+     +                                      '"(M$)","(%)",'
+         ELSE
+            PRODUCTION_METHOD = trim(PRODUCTION_METHOD)//
+     +                                      '"(%)",'
+         ENDIF
+         WRITE(96,1001) trim(PRODUCTION_METHOD)
+      ENDIF
+!$ELSE
+      ELSE
+!
+! THIS IS THE CODE BEFORE MODIFYING TO BE COMPATIBLE WITH LOTUS
+!
+      IF(SPREAD_SHEET .AND. BY_YEAR) THEN
+         WRITE(96,1002) YR+BASE_YEAR,' Annual Summary for Endpoint',
+     +                  END_POINT,trim(PRODUCTION_METHOD)
+         PRODUCTION_METHOD = ' , ,Total,"------- Average -------"'
+         WRITE(96,1001) trim(PRODUCTION_METHOD)
+         PRODUCTION_METHOD=' ,Unit,"Gener-",Heatrate, ,Fuel,Variable,'//
+     +      'Fixed,Total,'//
+     +      '"----------------------- Emissions ---------------------"'
+         IF(TVA)
+     +             PRODUCTION_METHOD = trim(PRODUCTION_METHOD)//',TVA'
+         WRITE(96,1001) trim(PRODUCTION_METHOD)
+         IF(CANADA) THEN
+            PRODUCTION_METHOD=' ,Cap,ation,"(GJ/",Cost,Cost,Cost,'
+         ELSE
+            PRODUCTION_METHOD=' ,Cap,ation,"(BTU/",Cost,Cost,Cost,'
+         ENDIF
+         PRODUCTION_METHOD = trim(PRODUCTION_METHOD)//
+     +                 'Cost,Cost,SO2,NOx,"CO2","Other 1","Other 2"'
+         IF(TVA)
+     +      PRODUCTION_METHOD = trim(PRODUCTION_METHOD)//',"A&I"'
+         WRITE(96,1001) trim(PRODUCTION_METHOD)
+         IF(CANADA) THEN
+            PRODUCTION_METHOD='"Unit Name",(MW),(GWh),(MWh),($/MWh),'
+         ELSE
+            PRODUCTION_METHOD='"Unit Name",(MW),(GWh),(KWh),($/MWh),'
+         ENDIF
+         PRODUCTION_METHOD = trim(PRODUCTION_METHOD)//
+     +          '(M$),(M$),(M$),(M$),(tons),(tons),(tons),(tons),(tons)'
+         IF(TVA)
+     +            PRODUCTION_METHOD = trim(PRODUCTION_METHOD)//',(M$)'
+         WRITE(96,1001) trim(PRODUCTION_METHOD)
+      ENDIF
+!$ENDIF
+      ENDIF ! SPREAD SHEET TYPE
+!
+! 4/6/02. REMOVED ANNUAL CL REPORYT
+!
+      ANNUAL_OUTPUT_REPORT = .FALSE.
+!
+      IF(ANNUAL_OUTPUT_REPORT) THEN
+         IF(ANN_CL_REPORT_NOT_OPEN) THEN
+            ANN_CL_UNIT_NO = ANN_CL_UNIT_HEADER(ANN_CL_UNIT_REC)
+            ANN_CL_SUM_NO = ANN_CL_SUMMARY_HEADER(ANN_CL_SUM_REC)
+            IF(POOLING_TRANSACTIONS()) THEN
+               ANN_POOL_SUM_NO = ANN_POOL_SUMMARY_HEADER(
+     +                                                 ANN_POOL_SUM_REC)
+            ENDIF
+!            N_A = -999999.
+            ANN_CL_REPORT_NOT_OPEN = .FALSE.
+         ENDIF
+      ENDIF
+      HEAT_CONVERSION = GET_HEAT_CONVERSION()
+      DO I = 1, NUNITS
+         IREC = (I-1)*(RECORDS_PER_UNIT+2) + RECORDS_PRINTED_PER_UNIT +
+     +                                                        2 + OFFSET
+         IF (ONLINE(I) .LE. DATE2 .AND. OFLINE(I) .GE. DATE1) THEN
+!
+
+               UNIT_NAME = UNITNM(I)
+
+            CL_UNIT_ANNUAL_FIXED_COST =
+     +                             ANNUAL_CL_UNIT_FIXED_COST(I)/1000000.
+            TOTAL_COST = 0.
+            IF(ANNUAL_CL_UNIT_ENERGY(I) .NE. 0.) THEN
+               TOTAL_COST = ANNUAL_CL_UNIT_FUEL_COST(I) +
+     +                      ANNUAL_CL_UNIT_VAR_COST(I)
+               AVERAGE_COST = TOTAL_COST/ANNUAL_CL_UNIT_ENERGY(I)
+               TOTAL_COST = TOTAL_COST/1000000. +
+     +                                         CL_UNIT_ANNUAL_FIXED_COST
+               DO EM = 1, NUMBER_OF_EMISSION_TYPES
+                  ANNUAL_TOTAL_EMISSIONS(EM)=ANNUAL_TOTAL_EMISSIONS(EM)+
+     +                                    ANNUAL_CL_UNIT_EMISSIONS(EM,I)
+               ENDDO
+               CL_UNIT_ANNUAL_FUEL_COST =
+     +                              ANNUAL_CL_UNIT_FUEL_COST(I)/1000000.
+               CL_UNIT_ANNUAL_VAR_COST =
+     +                              ANNUAL_CL_UNIT_VAR_COST(I)/1000000.
+               AVERAGE_HEATRATE = HEAT_CONVERSION *
+     +               (ANNUAL_CL_UNIT_MMBTUS(I)/ANNUAL_CL_UNIT_ENERGY(I))
+               IF(MW(2,I) .GT. 0.0) THEN
+                  CAP_FACTOR =  ANNUAL_CL_UNIT_ENERGY(I)/(87.60*MW(2,I))
+               ELSE
+                  CAP_FACTOR = 0.
+               ENDIF
+               IF(.NOT. CANADA) AVERAGE_HEATRATE = AVERAGE_HEATRATE + .5
+!               ! TODO: Remove spreadsheet code -- it's unused and
+!               ! probably no longer works.
+               IF(SPREAD_SHEET) THEN
+                  IF(BY_UNIT) THEN
+                     IF(TVA) THEN
+                        WRITE(RECORD,1013) YR+BASE_YEAR,
+     +                    MW(2,I),
+     +                    ANNUAL_CL_UNIT_ENERGY(I)/1000.,
+     +                    AVERAGE_HEATRATE,
+     +                    AVERAGE_COST,
+     +                    CL_UNIT_ANNUAL_FUEL_COST,
+     +                    CL_UNIT_ANNUAL_VAR_COST,
+     +                    CL_UNIT_ANNUAL_FIXED_COST,
+     +                    TOTAL_COST,
+     +                   (ANNUAL_CL_UNIT_EMISSIONS(J,I),
+     +                                    J=1,NUMBER_OF_EMISSION_TYPES),
+     +                    CL_AI_INVESTMENT(I)/1000000.,
+     +                    CAP_FACTOR
+                     ELSE
+                        WRITE(RECORD,1013) YR+BASE_YEAR,
+     +                    MW(2,I),
+     +                    ANNUAL_CL_UNIT_ENERGY(I)/1000.,
+     +                    AVERAGE_HEATRATE,
+     +                    AVERAGE_COST,
+     +                    CL_UNIT_ANNUAL_FUEL_COST,
+     +                    CL_UNIT_ANNUAL_VAR_COST,
+     +                    CL_UNIT_ANNUAL_FIXED_COST,
+     +                    TOTAL_COST,
+     +                   (ANNUAL_CL_UNIT_EMISSIONS(J,I),
+     +                                    J=1,NUMBER_OF_EMISSION_TYPES),
+     +                    CAP_FACTOR
+                     ENDIF ! TVA
+                     WRITE(97,'(A)',REC=IREC)NEW_LINE//trim(RECORD)
+                  ENDIF
+                  IF(BY_YEAR) THEN
+                     IF(TVA) THEN
+                        WRITE(96,1011) trim(UNIT_NAME),MW(2,I),
+     +                    ANNUAL_CL_UNIT_ENERGY(I)/1000.,
+     +                    AVERAGE_HEATRATE,
+     +                    AVERAGE_COST,
+     +                    CL_UNIT_ANNUAL_FUEL_COST,
+     +                    CL_UNIT_ANNUAL_VAR_COST,
+     +                    CL_UNIT_ANNUAL_FIXED_COST,
+     +                    TOTAL_COST,
+     +                   (ANNUAL_CL_UNIT_EMISSIONS(J,I),
+     +                                    J=1,NUMBER_OF_EMISSION_TYPES),
+     +                    CL_AI_INVESTMENT(I)/1000000.,
+     +                    CAP_FACTOR
+                     ELSE
+                        WRITE(96,1011) trim(UNIT_NAME),MW(2,I),
+     +                    ANNUAL_CL_UNIT_ENERGY(I)/1000.,
+     +                    AVERAGE_HEATRATE,
+     +                    AVERAGE_COST,
+     +                    CL_UNIT_ANNUAL_FUEL_COST,
+     +                    CL_UNIT_ANNUAL_VAR_COST,
+     +                    CL_UNIT_ANNUAL_FIXED_COST,
+     +                    TOTAL_COST,
+     +                   (ANNUAL_CL_UNIT_EMISSIONS(J,I),
+     +                                    J=1,NUMBER_OF_EMISSION_TYPES),
+     +                    CAP_FACTOR
+                     ENDIF ! TVA
+                  ENDIF ! BY UNIT
+               ENDIF ! SPREADSHEET
+            ELSE
+               IF(ANNUAL_OUTPUT_REPORT) THEN
+                  IF(TVA) THEN
+                     ANNUAL_AI_INVESTMENT = ANNUAL_AI_INVESTMENT +
+     +                                               CL_AI_INVESTMENT(I)
+                  ENDIF
+               ENDIF
+               IF(SPREAD_SHEET) THEN
+                  IF(BY_UNIT) THEN
+                     IF(TVA) THEN
+                        WRITE(RECORD,1052) YR+BASE_YEAR,
+     +                     MW(2,I),'0,0,0,0,0,',
+     +                     CL_UNIT_ANNUAL_FIXED_COST,
+     +                     CL_UNIT_ANNUAL_FIXED_COST,
+     +                     '0,0,0,0,0,',
+     +                     CL_AI_INVESTMENT(I)/1000000.,',0,'
+                     ELSE
+                        WRITE(RECORD,1052) YR+BASE_YEAR,
+     +                     MW(2,I),'0,0,0,0,0,',
+     +                     CL_UNIT_ANNUAL_FIXED_COST,
+     +                     CL_UNIT_ANNUAL_FIXED_COST,
+     +                     '0,0,0,0,0,0,'
+                     ENDIF
+                     WRITE(97,'(A)',REC=IREC)NEW_LINE//trim(RECORD)
+                  ENDIF
+                  IF(BY_YEAR) THEN
+                     IF(TVA) THEN
+                        WRITE(96,1051) trim(UNIT_NAME),MW(2,I),
+     +                           '0,0,0,0,0,',
+     +                     CL_UNIT_ANNUAL_FIXED_COST,
+     +                     CL_UNIT_ANNUAL_FIXED_COST,'0,0,0,0,0,',
+     +                     CL_AI_INVESTMENT(I)/1000000.,',0,'
+                     ELSE
+                        WRITE(96,1051) trim(UNIT_NAME),MW(2,I),
+     +                           '0,0,0,0,0,',
+     +                     CL_UNIT_ANNUAL_FIXED_COST,
+     +                     CL_UNIT_ANNUAL_FIXED_COST,'0,0,0,0,0,0,'
+                     ENDIF
+                 ENDIF
+               ENDIF
+            ENDIF ! IF ENERGY FOR UNIT = 0.
+!
+            IF(ANNUAL_CL_UNIT_ENERGY(I) <= 0.0) THEN
+               CL_UNIT_ANNUAL_FUEL_COST = ZERO
+               CL_UNIT_ANNUAL_VAR_COST = ZERO
+               CAP_FACTOR = ZERO
+               AVERAGE_HEATRATE = N_A
+               AVERAGE_COST = N_A
+            ENDIF
+! TODO: EXTRACT_METHOD handle_annual_output_report
+            IF(ANNUAL_OUTPUT_REPORT) THEN
+               IF(CAPACITY_PLANNING_METHOD() == 'MX'  .AND.
+     +                                  GREEN_MRX_METHOD() == 'GX') THEN
+                  WRITE(ANN_CL_UNIT_NO,REC=ANN_CL_UNIT_REC) ! VARIABLE = 11 + # OF EMIS
+     +              PRT_ENDPOINT(),
+     +              FLOAT(SAVE_YEAR+BASE_YEAR),
+     +              UNIT_NAME,
+     +              FLOAT(GRX_ITERATIONS),
+     +              FLOAT(I),
+     +              MW(2,I),
+     +              CAP_FACTOR,
+     +              ANNUAL_CL_UNIT_ENERGY(I)/1000.,
+     +              AVERAGE_HEATRATE,
+     +              AVERAGE_COST,
+     +              CL_UNIT_ANNUAL_FUEL_COST,
+     +              CL_UNIT_ANNUAL_VAR_COST,
+     +              CL_UNIT_ANNUAL_FIXED_COST,
+     +              TOTAL_COST,
+     +             (ANNUAL_CL_UNIT_EMISSIONS(J,I),
+     +                              J=1,NUMBER_OF_EMISSION_TYPES),
+     +              CL_AI_INVESTMENT(I)/1000000.
+               ELSE
+                  WRITE(ANN_CL_UNIT_NO,REC=ANN_CL_UNIT_REC) ! VARIABLE = 11 + # OF EMIS
+     +                 PRT_ENDPOINT(),
+     +                 FLOAT(SAVE_YEAR+BASE_YEAR),
+     +                 UNIT_NAME,
+     +                 FLOAT(I),
+     +                 MW(2,I),
+     +                 CAP_FACTOR,
+     +                 ANNUAL_CL_UNIT_ENERGY(I)/1000.,
+     +                 AVERAGE_HEATRATE,
+     +                 AVERAGE_COST,
+     +                 CL_UNIT_ANNUAL_FUEL_COST,
+     +                 CL_UNIT_ANNUAL_VAR_COST,
+     +                 CL_UNIT_ANNUAL_FIXED_COST,
+     +                 TOTAL_COST,
+     +                (ANNUAL_CL_UNIT_EMISSIONS(J,I),
+     +                                 J=1,NUMBER_OF_EMISSION_TYPES),
+     +                 CL_AI_INVESTMENT(I)/1000000.
+               ENDIF
+               ANN_CL_UNIT_REC = ANN_CL_UNIT_REC + 1
+            ENDIF
+! TODO: EXTRACT_METHOD handle_annual_output_report (end)
+         ENDIF
+      ENDDO
+
+      DO I = 1 , NUMBER_OF_CONTRACTS
+         IREC = (NUNITS+I-1)*(RECORDS_PER_UNIT+2) +
+     +                             RECORDS_PRINTED_PER_UNIT + 2 + OFFSET
+         IF(AINT(CNTR_ON_LI(I)/100.)+1900-BASE_YEAR .LE. YR .AND.
+     +            AINT(CNTR_OFF_LI(I)/100.)+1900-BASE_YEAR .GE. YR) THEN
+            IF(ANNUAL_CONTRACT_ENERGY(I) .NE. 0.0) THEN
+               ANNUAL_TOTAL_EMISSIONS(1) = ANNUAL_TOTAL_EMISSIONS(1) +
+     +                                           ANNUAL_CONTRACT_SO2(I)
+
+               IF(CNTR_WEIGHTED_CAPACITY(I) > 0 ) THEN
+                  CONTRACT_LOAD_FACTOR = 100*ANNUAL_CONTRACT_ENERGY(I)/
+     +                                     CNTR_WEIGHTED_CAPACITY(I)
+               ELSE
+                  CONTRACT_LOAD_FACTOR = 0.
+               ENDIF
+               IF(SPREAD_SHEET) THEN
+                  IF(BY_UNIT) THEN
+                     WRITE(RECORD,3018) YR+BASE_YEAR,
+     +                  ANNUAL_CONTRACT_CAPACITY(I),
+     +                  ANNUAL_CONTRACT_ENERGY(I)/1000.,
+     +                  ANNUAL_CONTRACT_VARIABLE_COST(I)*1000000./
+     +                       ANNUAL_CONTRACT_ENERGY(I),
+     +                  ANNUAL_CONTRACT_VARIABLE_COST(I),
+     +                  ANNUAL_CONTRACT_FIXED_COST(I),
+     +                  ANNUAL_CONTRACT_VARIABLE_COST(I) +
+     +                  ANNUAL_CONTRACT_FIXED_COST(I),
+     +                  ANNUAL_CONTRACT_SO2(I)
+                     WRITE(97,'(A)',REC=IREC) NEW_LINE//trim(RECORD)
+                  ENDIF
+                  IF(BY_YEAR) THEN
+                     WRITE(96,3017)  trim(CNTRNM(I)),
+     +                  ANNUAL_CONTRACT_CAPACITY(I),
+     +                  ANNUAL_CONTRACT_ENERGY(I)/1000.,
+     +                  ANNUAL_CONTRACT_VARIABLE_COST(I)*1000000./
+     +                  ANNUAL_CONTRACT_ENERGY(I),
+     +                  ANNUAL_CONTRACT_VARIABLE_COST(I),
+     +                  ANNUAL_CONTRACT_FIXED_COST(I),
+     +                  ANNUAL_CONTRACT_VARIABLE_COST(I) +
+     +                  ANNUAL_CONTRACT_FIXED_COST(I),
+     +                  ANNUAL_CONTRACT_SO2(I)
+                  ENDIF
+               ENDIF
+            ELSE
+               IF(SPREAD_SHEET) THEN
+                  IF(BY_UNIT) THEN
+                     WRITE(RECORD,3015) YR+BASE_YEAR,
+     +                                  ANNUAL_CONTRACT_CAPACITY(I),
+     +                                  ANNUAL_CONTRACT_FIXED_COST(I),
+     +                                  ANNUAL_CONTRACT_FIXED_COST(I)
+                     WRITE(97,'(A)',REC=IREC) NEW_LINE//trim(RECORD)
+                  ENDIF
+                  IF(BY_YEAR) THEN
+                     WRITE(96,3014) trim(CNTRNM(I)),
+     +                              ANNUAL_CONTRACT_CAPACITY(I),
+     +                              ANNUAL_CONTRACT_FIXED_COST(I),
+     +                              ANNUAL_CONTRACT_FIXED_COST(I)
+                  ENDIF
+               ENDIF
+            ENDIF
+         ENDIF
+      ENDDO
+      IF(TMMBTUS(YR) /= 0.) THEN
+         TEMP_DBLE = DBLE(2000.)/TMMBTUS(YR)
+      ELSE
+         TEMP_DBLE = DBLE(1.)
+      ENDIF
+!
+!
+! TODO: EXTRACT_METHOD accumulate_production_costs
+      TOTAL_PRODUCTION_COSTS =
+     +            FUELCOST(YR) + TOTAL_NUCLEAR_FUEL_EXPENSE +
+     +            VARCOST(YR) + FIXED_OM_COSTS +
+     +            PURCHASE_COSTS + ANNUAL_ECONOMY_COST -
+     +            ANNUAL_ECONOMY_REVENUE +
+!
+! ADDED 9/5/97 FOR GETTING TOTAL COST CONSISTENT WITH THE INDIVIDUAL
+!  UNIT INFO
+!
+     +            CLASS_ASS_FOSSIL_COST(2) +
+     +            CLASS_ASS_NUCLEAR_COST(2) +
+     +            CLASS_ASSIGNED_VARIABLE_COST(2) +
+     +            CLASS_ASSIGNED_FIXED_COST(2) +
+     +            CLASS_ASS_PURCHASE_COST(2)
+!
+! TODO: EXTRACT_METHOD accumulate_production_costs (end)
+
+! TODO: EXTRACT_METHOD prepare_annual_output_report
+      IF(ANNUAL_OUTPUT_REPORT) THEN
+         WRITE(ANN_CL_SUM_NO,REC=ANN_CL_SUM_REC)
+     +                     PRT_ENDPOINT(),FLOAT(SAVE_YEAR+BASE_YEAR),
+! ENERGY BALANCE (6)
+     +                     SNGL(CAP_LIMITED_DEMAND/1000.),
+     +                     ANNUAL_ECONOMY_SOLD/1000.,
+!
+     +          SNGL(CAP_LIMITED_DEMAND + ANNUAL_ECONOMY_SOLD +
+     +            ANN_DYN_STORAGE_PUMP_ENRG - ANN_DYN_STORAGE_GEN_ENRG -
+     +          ANNUAL_ECONOMY_BOUGHT-TENRG(YR)-PURCHASE_ENERGY)/1000.,
+!
+     +                     SNGL(TENRG(YR))/1000.,
+     +                     SNGL(PURCHASE_ENERGY)/1000.,
+     +                     ANNUAL_ECONOMY_BOUGHT/1000.,
+! BTUS     (1)
+!    +                     SNGL(TMMBTUS(YR)),
+     +                  SNGL(TMMBTUS(YR) + CLASS_ASSIGNED_MMBTUS(2)),
+! COST VARIABLES (7)
+     +           SNGL((FUELCOST(YR)+CLASS_ASS_FOSSIL_COST(2))/1000000.),
+     +           (TOTAL_NUCLEAR_FUEL_EXPENSE +
+     +                             CLASS_ASS_NUCLEAR_COST(2))/1000000.,
+     +           SNGL((VARCOST(YR) +
+     +                       CLASS_ASSIGNED_VARIABLE_COST(2))/1000000.),
+     +           (FIXED_OM_COSTS +
+     +                          CLASS_ASSIGNED_FIXED_COST(2))/1000000.,
+     +           (PURCHASE_COSTS +
+     +                            CLASS_ASS_PURCHASE_COST(2))/1000000.,
+!
+
+     +                     ANNUAL_ECONOMY_COST/1000000.,
+     +                     ANNUAL_ECONOMY_REVENUE/1000000.,
+     +                     TOTAL_PRODUCTION_COSTS/1000000.,
+!
+! DEMAND VARIABLES (2)
+     +                     PEAK,BASE,
+! EMISSIONS VARIABLES (10)
+     +            (ANNUAL_TOTAL_EMISSIONS(I),
+     +                  SNGL(ANNUAL_TOTAL_EMISSIONS(I)*TEMP_DBLE),
+     +                                     I=1,NUMBER_OF_EMISSION_TYPES)
+         ANN_CL_SUM_REC = ANN_CL_SUM_REC + 1
+!
+      ENDIF
+      IF(POOLING_TRANSACTIONS()) THEN
+!
+         WRITE(ANN_POOL_SUM_NO,REC=ANN_POOL_SUM_REC)
+     +           PRT_ENDPOINT(),FLOAT(YEAR+BASE_YEAR),
+     +                  'System',
+     +                  SNGL(TENRG(YR))/1000.,
+     +                  SNGL(TMMBTUS(YR) + CLASS_ASSIGNED_MMBTUS(2)),
+     +           SNGL((FUELCOST(YR)+CLASS_ASS_FOSSIL_COST(2))/1000000.),
+     +           (TOTAL_NUCLEAR_FUEL_EXPENSE +
+     +                             CLASS_ASS_NUCLEAR_COST(2))/1000000.,
+     +   SNGL((VARCOST(YR) + CLASS_ASSIGNED_VARIABLE_COST(2))/1000000.),
+     +     (FIXED_OM_COSTS+CLASS_ASSIGNED_FIXED_COST(2))/1000000.,
+     +     (PURCHASE_COSTS + CLASS_ASS_PURCHASE_COST(2))/1000000.,
+     +                           (ANNUAL_TOTAL_EMISSIONS(I),
+     +                                     I=1,NUMBER_OF_EMISSION_TYPES)
+         ANN_POOL_SUM_REC = ANN_POOL_SUM_REC + 1
+         WRITE(ANN_POOL_SUM_NO,REC=ANN_POOL_SUM_REC)
+     +            PRT_ENDPOINT(),FLOAT(YEAR+BASE_YEAR),
+     +            'Native',
+     +            SNGL(TENRG(YR) - CLASS_ASSIGNED_ENERGY(2))/1000.,
+     +            SNGL(TMMBTUS(YR)),
+     +            SNGL(FUELCOST(YR)/1000000.),
+     +            TOTAL_NUCLEAR_FUEL_EXPENSE/1000000.,
+     +            SNGL(VARCOST(YR)/1000000.),
+     +            FIXED_OM_COSTS/1000000.,
+     +            PURCHASE_COSTS/1000000.,
+     +            ((ANNUAL_TOTAL_EMISSIONS(I) -
+     +                                 CLASS_ASSIGNED_EMISS(I,2)),
+     +                                     I=1,NUMBER_OF_EMISSION_TYPES)
+         ANN_POOL_SUM_REC = ANN_POOL_SUM_REC + 1
+         WRITE(ANN_POOL_SUM_NO,REC=ANN_POOL_SUM_REC)
+     +            PRT_ENDPOINT(),FLOAT(YEAR+BASE_YEAR),
+     +            'Other ',
+     +            CLASS_ASSIGNED_ENERGY(2)/1000.,
+     +            CLASS_ASSIGNED_MMBTUS(2),
+     +            CLASS_ASS_FOSSIL_COST(2)/1000000.,
+     +            CLASS_ASS_NUCLEAR_COST(2)/1000000.,
+     +            CLASS_ASSIGNED_VARIABLE_COST(2)/1000000.,
+     +            CLASS_ASSIGNED_FIXED_COST(2)/1000000.,
+     +            CLASS_ASS_PURCHASE_COST(2)/1000000.,
+     +            (CLASS_ASSIGNED_EMISS(I,2),
+     +                                     I=1,NUMBER_OF_EMISSION_TYPES)
+         ANN_POOL_SUM_REC = ANN_POOL_SUM_REC + 1
+!
+      ENDIF ! ANNUAL OUTPUT REPORT AND  NOT POOLING_TRANSACTIONS
+      IF(SPREAD_SHEET .AND. BY_YEAR) THEN
+         WRITE(96,*)
+         IF(POOLING_TRANSACTIONS()) THEN
+            WRITE(96,*) '" ","System","Native Utility",'//
+     +                                            '"Other Pool Members"'
+            WRITE(96,1021) 'Demand (GWh)',
+     +                              SNGL(CAP_LIMITED_DEMAND/1000.)
+            WRITE(96,1021) 'Economy Sold (GWh)',
+     +                             ANNUAL_ECONOMY_SOLD/1000.
+            WRITE(96,1021) 'Generation (GWh)',SNGL(TENRG(YR))/1000.,
+     +         SNGL(TENRG(YR) - CLASS_ASSIGNED_ENERGY(2) )/1000.,
+     +         CLASS_ASSIGNED_ENERGY(2)/1000.
+            WRITE(96,1021) 'Purchases (GWh)',
+     +                                     SNGL(PURCHASE_ENERGY)/1000.
+            WRITE(96,1021) 'Economy Bought (GWh)',
+     +                            ANNUAL_ECONOMY_BOUGHT/1000.
+            WRITE(96,1021) 'Unserved Energy (GWh)',
+     +          SNGL(CAP_LIMITED_DEMAND + ANNUAL_ECONOMY_SOLD +
+     +            CNTR_SALES_ENERGY -
+     +            ANNUAL_ECONOMY_BOUGHT-TENRG(YR)-PURCHASE_ENERGY)/1000.
+            IF(CANADA) THEN
+               WRITE(96,3032) 'GigaJoules',
+     +            DBLE(TMMBTUS(YR) + CLASS_ASSIGNED_MMBTUS(2)),
+     +                  DBLE(TMMBTUS(YR)),
+     +                  DBLE(CLASS_ASSIGNED_MMBTUS(2))
+            ELSE
+               WRITE(96,1016) 'mmBTUs',
+     +            DBLE(TMMBTUS(YR) + CLASS_ASSIGNED_MMBTUS(2)),
+     +                  DBLE(TMMBTUS(YR)),
+     +                  DBLE(CLASS_ASSIGNED_MMBTUS(2))
+            ENDIF
+            WRITE(96,1031) 'Fuel Cost (M$)',
+     +            (FUELCOST(YR)+CLASS_ASS_FOSSIL_COST(2))/1000000.,
+     +            FUELCOST(YR)/1000000.,
+     +            CLASS_ASS_FOSSIL_COST(2)/1000000.
+            IF(ABS(TOTAL_NUCLEAR_FUEL_EXPENSE/1000000.) > .005)
+     +            WRITE(96,1031) 'Nuclear Fuel Cost ($M)',
+     +                           (TOTAL_NUCLEAR_FUEL_EXPENSE +
+     +                           CLASS_ASS_NUCLEAR_COST(2))/1000000.,
+     +                            TOTAL_NUCLEAR_FUEL_EXPENSE/1000000.,
+     +                            CLASS_ASS_NUCLEAR_COST(2)/1000000.
+            WRITE(96,1031) 'Variable Costs (M$)',
+     +         (VARCOST(YR) + CLASS_ASSIGNED_VARIABLE_COST(2))/1000000.,
+     +                            VARCOST(YR)/1000000. ,
+     +                  CLASS_ASSIGNED_VARIABLE_COST(2)/1000000.
+            WRITE(96,1031) 'Fixed Costs (M$)',
+     +          (FIXED_OM_COSTS+CLASS_ASSIGNED_FIXED_COST(2))/1000000.,
+     +                            FIXED_OM_COSTS/1000000.,
+     +               CLASS_ASSIGNED_FIXED_COST(2)/1000000.
+            WRITE(96,1031) 'Purchase Power Costs (M$)',
+     +           (PURCHASE_COSTS + CLASS_ASS_PURCHASE_COST(2))/1000000.,
+     +       (PURCHASE_COSTS + ENERGY_EXCHANGE_ADJUSTMENT)/1000000.,
+     +       (CLASS_ASS_PURCHASE_COST(2) - ENERGY_EXCHANGE_ADJUSTMENT)/
+     +                              1000000.
+            DO J = 1, NUMBER_OF_EMISSION_TYPES
+               WRITE(96,1021) trim(EMISSIONS_TITLES(J)),
+     +                        DBLE(ANNUAL_TOTAL_EMISSIONS(J)),
+     +                        DBLE(ANNUAL_TOTAL_EMISSIONS(J) -
+     +                                       CLASS_ASSIGNED_EMISS(J,2)),
+     +                        DBLE(CLASS_ASSIGNED_EMISS(J,2))
+               WRITE(96,1021)trim(EMISSIONS_CAP_TITLES(J)),EMIS_CAP(J)
+            ENDDO
+         ELSE
+            WRITE(96,1021) 'Demand (GWh)',
+     +                              SNGL(CAP_LIMITED_DEMAND/1000.)
+            IF(REALLY_KEPCO .OR. WABASH_VALLEY)
+     +       WRITE(96,1021) 'Energy Losses (GWh)',
+     +       SNGL(CAP_LIMITED_DEMAND-TENRG(YR)-PURCHASE_ENERGY)/(-1000.)
+            WRITE(96,1021) 'Generation (GWh)',
+     +                           SNGL(TENRG(YR))/1000.
+            WRITE(96,1021) 'Purchases (GWh)',
+     +                                     SNGL(PURCHASE_ENERGY)/1000.
+            IF(KEPCO) THEN
+               WRITE(96,1021) 'Unserved Energy (GWh)',0.
+            ELSE
+               WRITE(96,1021) 'Unserved Energy (GWh)',
+     +          SNGL(CAP_LIMITED_DEMAND + CNTR_SALES_ENERGY -
+     +                                  TENRG(YR)-PURCHASE_ENERGY)/1000.
+            ENDIF
+            IF(CANADA) THEN
+               WRITE(96,3032) 'GigaJoules',TMMBTUS(YR)
+            ELSE
+               WRITE(96,1016) 'mmBTUs',TMMBTUS(YR)
+            ENDIF
+            WRITE(96,1031) 'Fuel Cost (M$)', FUELCOST(YR)/1000000.
+            IF(ABS(TOTAL_NUCLEAR_FUEL_EXPENSE/1000000.) >  .005)
+     +            WRITE(96,1031) 'Nuclear Fuel Cost (M$)    ',
+     +                          TOTAL_NUCLEAR_FUEL_EXPENSE/1000000.
+            WRITE(96,1031) 'Variable Costs (M$)', VARCOST(YR)/1000000.
+            WRITE(96,1031) 'Fixed Costs (M$)', FIXED_OM_COSTS/1000000.
+            WRITE(96,1031) 'Purchase Power Costs (M$)',
+     +                                      PURCHASE_COSTS/1000000.
+            DO J = 1, NUMBER_OF_EMISSION_TYPES
+               WRITE(96,1031) trim(EMISSIONS_TITLES(J)),
+     +                                         ANNUAL_TOTAL_EMISSIONS(J)
+               WRITE(96,1031)trim(EMISSIONS_CAP_TITLES(J)),EMIS_CAP(J)
+            ENDDO
+         ENDIF
+         IF(TVA) WRITE(96,1031)
+     +         'A&I Investment (M$)', ANNUAL_AI_INVESTMENT/1000000.
+         WRITE(96,1033) 'Peak Load (MW)',NINT(PEAK)
+         WRITE(96,1033) 'Minimum Load (MW)',NINT(BASE)
+         WRITE(96,*)
+      ENDIF
+      IF(YR == LAST_YEAR) OFFSET = NEXT_OFFSET
       RETURN
+ 1010 FORMAT('&',F8.1,I7,F7.2,F7.2,F6.2,F7.2,F8.2,2F9.1)
+ 1012 FORMAT('&',F8.1,F7.2,F7.2,F7.2,F6.2,F7.2,F8.2,2F9.1)
+!
+ 1017 FORMAT(1X,I3,1X,A20,F5.1,F5.1,F8.1,4X,A,F7.2,4X,A,F6.2,
+     +                                                 F7.2,F8.2,F9.1)
+ 1014 FORMAT(1X,I3,1X,A20,F5.1,I5,35X,F7.2,F8.2)
+!1015 FORMAT(1X,A,I13)
+ 1020 FORMAT(1X,A,F13.1)
+!1025 FORMAT('&',2X,A,F13.1)
+ 1030 FORMAT('&',2X,A,F13.2)
+ 1032 FORMAT('&',2X,A,I13)
+ 1035 FORMAT('&',4X,A,3I12)
+ 1050 FORMAT(1X,I3,1X,A20,F5.1,I5,F8.1,11X,16X,F7.2,F8.2,A)
+ 1250 FORMAT(1X,I3,1X,A20,I5,I5,F8.1,11X,16X,F7.2,F8.2,A)
+ 2015 FORMAT (3(1X,'mmBTUs                    ',I13:,5X))
+ 2016 FORMAT (3(1X,'GigaJoules                ',I13:,5X))
+ 2020 FORMAT (3(1X,'Generation (GWh)          ',F13.1,5X))
+ 2030 FORMAT (3(1X,'Fuel Cost (M$)            ',F13.2,5X))
+ 2031 FORMAT (3(1X,'Nuclear Fuel Cost (M$)    ',F13.2,5X))
+ 2032 FORMAT (3(1X,'Variable Costs (M$)       ',F13.2,5X))
+ 2033 FORMAT (3(1X,'Fixed Costs (M$)          ',F13.2,5X))
+ 2034 FORMAT (3(1X,'Purchase Power Costs (M$) ',F13.2,5X))
+ 2035 FORMAT (3(1X,'SO2 Emissions (tons)      ',F13.1,5X))
+ 2036 FORMAT (3(1X,'NOx Emissions (tons)      ',F13.1,5X))
+ 2037 FORMAT (3(1X,'CO2 Emissions (tons)      ',F13.1,5X))
+ 2038 FORMAT (3(1X,'Other 1 Emissions (tons)  ',F13.1,5X))
+ 2039 FORMAT (3(1X,'Other 2 Emissions (tons)  ',F13.1,5X))
+!
+! FORMATS FOR SPREADSHEET
+!
+ 1001 FORMAT(1X,A)
+ 1002 FORMAT(1X,'"',I4,A,I4,10X,A,'"')
+ 1011 FORMAT(1X,'"',A,'",',F6.1,',',F10.1,',',F12.3,',',F7.2,4(',',F8.2)
+     +                  ,5(',',F11.1),3(',',F7.2),',')
+ 1013 FORMAT(1X,I4,',',F6.1,',',F10.1,',',F12.3,',',F7.2,4(',',F8.2),
+     +                   5(',',F11.1),3(',',F7.2),',')
+ 1016 FORMAT(1X,'"',A,'",',3(I13,','))
+ 1021 FORMAT(1X,'"',A,'",',3(F13.1,','))
+ 1031 FORMAT(1X,'"',A,'",',3(F13.2,','))
+ 3032 FORMAT(1X,'"',A,'",',3(F13.3,','))
+ 1033 FORMAT(1X,'"',A,'",',I6,',')
+ 1051 FORMAT(1X,'"',A,'",',F6.1,',',A,2(F8.2,','),A,F8.2,A)
+ 1052 FORMAT(1X,I4,',',F6.1,',',A,2(F8.2,','),A,F8.2,A)
+ 3014 FORMAT(1X,'"',A,'",',F5.1,',,,,',F7.2,',',F8.2,',')
+ 3015 FORMAT(1X,I4,',',F5.1,',,,,',F7.2,',',F8.2,',')
+ 3017 FORMAT(1X,'"',A,'",',F5.1,',',F8.1,',,',F7.2,',,',
+     +       2(F7.2,','),F8.2,',',F9.1,',')
+ 3018 FORMAT(1X,I4,',',F5.1,',',F8.1,',',F7.2,',',
+     +       2(F7.2,','),F8.2,',',F9.1,',')
       END
+!**********************************************************************
 !
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!                       POWER POOLING ROUTINE FOR IE
+!                           COPYRIGHT (C) 1988
+!                       M.S. GERBER & ASSOCIATES, INC.
+!                           ALL RIGHTS RESERVED
 !
-      SUBROUTINE CPL_MON_SALE_AND_GEN_REPORT(R_YEAR)
+!**********************************************************************
 !
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!
-      USE IREC_ENDPOINT_CONTROL
-      use logging
+      SUBROUTINE POOLING(YR,PSMO,PEMO,
+     +                   ENERGY_EXCHANGE_ADJUSTMENT,
+     +                   DEMAND_AFTER_DSM_BEFORE_EL,
+     +                   POOL_PRICING_SWITCH,
+     +                   POOL_NATIVE_MULT,
+     +                   POOL_OTHER_MULT)
       use grx_planning_routines
       use cls_load
       USE SIZECOM
       INCLUDE 'SpinLib.MON'
-      INCLUDE 'GLOBECOM.MON'
+
+      INTEGER (kind=2) ::  YR,PSMO,PEMO,I
+      REAL (kind=8) ::  DEMAND_AFTER_DSM_BEFORE_EL
+      REAL ::  ENERGY_EXCHANGE_ADJUSTMENT
+      REAL ::  CIPCO_ENERGY
+      REAL ::  IE_ENERGY
+      REAL ::  TRANSFER_ENERGY
+      REAL ::  TRANSFER_PRICE
+      REAL ::  LOAD_MODIFICATION_ENERGY
+      REAL ::  POOL_NATIVE_MULT
+      REAL ::  POOL_OTHER_MULT
+      REAL ::  TRANSACTION_ERROR
+      REAL ::  NATIVE_MULT
+      REAL ::  OTHER_MULT
+      REAL ::  SEASON_SYSTEM_ENERGY
+      REAL ::  POOL_LOAD_MANAGEMENT
+      REAL ::  NATIVE_LOAD_MANAGEMENT
+      REAL ::  TOTAL_NATIVE_LOAD_MANAGEMENT
+      LOGICAL (kind=1) ::  UNIT_OUTPUT_REPORT
+      CHARACTER (len=1) ::  POOL_PRICING_SWITCH
 !     INCLUDE 'LAMCOM.MON'
 !
-         INTEGER (kind=2) ::    MO
-         INTEGER (kind=2) ::    LOCAL_YEAR
-      INTEGER (kind=2) ::  CPL_MON_SALE_GEN_HEADER
-      INTEGER (kind=2) ::  R_YEAR
-      INTEGER (kind=2) ::  EMC_CLASS/5/
-      INTEGER (kind=2) ::  VOID_I2
-      INTEGER (kind=2) ::  GET_CL_ENERGY_BY_TYPE
-         REAL (kind=4) ::
-     +         RESIDENTIAL_MWH(0:12),
-     +         COMMERCIAL_MWH(0:12),
-     +         INDUSTRIAL_MWH(0:12),
-     +         PUBLIC_STREET_HIGHWAY(0:12),
-     +         OTHER_PUBLIC(0:12),
-     +         TOTAL_RETAIL(0:12),
-     +         NCEMPA_SPECIAL_CONTRACT(0:12),
-     +         NCEMC_SUPPLEMENTAL(0:12),
-     +         WHOLESALE_INCL_UNBILLED(0:12),
-     +         SALES_TO_OTHER_UTILITIES(0:12),
-     +         TOTAL_SALES_ENERGY(0:12),
-     +         ENERGY_USED_BY_COMPANY(0:12),
-     +         ENERGY_UNACCOUNTED_FOR(0:12),
-     +         TOTAL_SYSTEM_INPUT_NET(0:12),
-     +         NET_GENERATION_STEAM(0:12),
-     +         NET_GENERATION_NUCLEAR(0:12),
-     +         NET_GENERATION_HYDRO(0:12),
-     +         NET_GENERATION_OTHER(0:12),
-     +         TOTAL_GENERATION(0:12),
-     +         PURCHASE_POWER(0:12),
-     +         RECEIVED_FOR_SEPA_CUST(0:12),
-     +         DELIVERD_FOR_SEPA_CUST(0:12),
-     +         TOTAL_SYSTEM_GEN_NET(0:12),
-     +         POWER_AGENCY_ENTITLEMENT(0:12),
-     +         CPL_ENERGY_REVENUE_FROM_PA,
-     +         CPL_ENERGY_EXPENSE_TO_PA,
-     +         CPL_ENERGY_FROM_PA,
-     +         BUYBACK_MWH
-         CHARACTER (len=9) ::  CL_MONTH_NAME(0:12)
-         CHARACTER (len=20) ::    WRITE_UNIT_NAME
-         SAVE CL_MONTH_NAME ! ,CPL_PAEN_UNIT,CURRENT_YEAR
+!     ALTERED FOR IP, 6/5/91.
 !
-      LOGICAL (kind=1) ::  CPL_SALES_GEN_NOT_OPEN/.TRUE./
-      LOGICAL (kind=1) ::  CPL_SALES_GEN_REPORT_ACTIVE
-         INTEGER (kind=2) ::    CPL_SALES_GEN_HEADER
-      INTEGER (kind=2) ::  CPL_SALES_GEN_UNIT/0/
-      INTEGER (kind=2) ::  VARIABLE_NUMBER
-         INTEGER ::  CPL_SALES_GEN_REC
-         SAVE CPL_SALES_GEN_REC
-         CHARACTER (len=38) ::
-     +    ASSET_CLASS_NAME/'Parent                      '/
-
-
-! END DATA DECLARATIONS
-
-         CPL_SALES_GEN_REPORT_ACTIVE = .TRUE. ! FOR NOW
-         IF(CPL_SALES_GEN_NOT_OPEN .AND.
-     +                                 CPL_SALES_GEN_REPORT_ACTIVE) THEN
+      INCLUDE 'POOLCOM.MON'
 !
-            CPL_SALES_GEN_NOT_OPEN = .FALSE.
-            VARIABLE_NUMBER = 24
-            CPL_SALES_GEN_UNIT = CPL_SALES_GEN_HEADER(VARIABLE_NUMBER,
-     +                                                CPL_SALES_GEN_REC)
+      IE_ENERGY = 0.
+      CIPCO_ENERGY = 0.
+      LOAD_MODIFICATION_ENERGY = 0.
+      NATIVE_MULT = 1. + POOL_NATIVE_MULT/100.
+      OTHER_MULT = 1. + POOL_OTHER_MULT/100.
+      TOTAL_NATIVE_LOAD_MANAGEMENT = 0.
+      DO I = PSMO, PEMO
 !
-            CL_MONTH_NAME(0) = 'Annual   '
-            CL_MONTH_NAME(1) = 'January  '
-            CL_MONTH_NAME(2) = 'February '
-            CL_MONTH_NAME(3) = 'March    '
-            CL_MONTH_NAME(4) = 'April    '
-            CL_MONTH_NAME(5) = 'May      '
-            CL_MONTH_NAME(6) = 'June     '
-            CL_MONTH_NAME(7) = 'July     '
-            CL_MONTH_NAME(8) = 'August   '
-            CL_MONTH_NAME(9) = 'September'
-            CL_MONTH_NAME(10) = 'October  '
-            CL_MONTH_NAME(11) = 'November '
-            CL_MONTH_NAME(12) = 'December '
+         CALL GET_CLASS_DSM_ENERGY(I,6,POOL_LOAD_MANAGEMENT)
+         CALL GET_CLASS_DSM_ENERGY(I,1,NATIVE_LOAD_MANAGEMENT)
+         TOTAL_NATIVE_LOAD_MANAGEMENT = TOTAL_NATIVE_LOAD_MANAGEMENT +
+     +                                            NATIVE_LOAD_MANAGEMENT
+         CALL GET_CLASS_DSM_ENERGY(I,2,NATIVE_LOAD_MANAGEMENT)
+         TOTAL_NATIVE_LOAD_MANAGEMENT = TOTAL_NATIVE_LOAD_MANAGEMENT +
+     +                                            NATIVE_LOAD_MANAGEMENT
+         CALL GET_CLASS_DSM_ENERGY(I,3,NATIVE_LOAD_MANAGEMENT)
+         TOTAL_NATIVE_LOAD_MANAGEMENT = TOTAL_NATIVE_LOAD_MANAGEMENT +
+     +                                            NATIVE_LOAD_MANAGEMENT
+         CALL GET_CLASS_DSM_ENERGY(I,4,NATIVE_LOAD_MANAGEMENT)
+         TOTAL_NATIVE_LOAD_MANAGEMENT = TOTAL_NATIVE_LOAD_MANAGEMENT +
+     +                                            NATIVE_LOAD_MANAGEMENT
+         CALL GET_CLASS_DSM_ENERGY(I,5,NATIVE_LOAD_MANAGEMENT)
+         TOTAL_NATIVE_LOAD_MANAGEMENT = TOTAL_NATIVE_LOAD_MANAGEMENT +
+     +                                            NATIVE_LOAD_MANAGEMENT
+         CALL GET_CLASS_DSM_ENERGY(I,7,NATIVE_LOAD_MANAGEMENT)
+         TOTAL_NATIVE_LOAD_MANAGEMENT = TOTAL_NATIVE_LOAD_MANAGEMENT +
+     +                                            NATIVE_LOAD_MANAGEMENT
 !
-            DELIVERD_FOR_SEPA_CUST(0) = 170.79965
-            DELIVERD_FOR_SEPA_CUST(1) = 16.67063
-            DELIVERD_FOR_SEPA_CUST(2) = 16.96104
-            DELIVERD_FOR_SEPA_CUST(3) = 18.73088
-            DELIVERD_FOR_SEPA_CUST(4) = 15.66725
-            DELIVERD_FOR_SEPA_CUST(5) = 13.93029
-            DELIVERD_FOR_SEPA_CUST(6) = 14.68544
-            DELIVERD_FOR_SEPA_CUST(7) = 13.86657
-            DELIVERD_FOR_SEPA_CUST(8) = 13.97898
-            DELIVERD_FOR_SEPA_CUST(9) = 13.79550
-            DELIVERD_FOR_SEPA_CUST(10) = 10.71280
-            DELIVERD_FOR_SEPA_CUST(11) = 10.68182
-            DELIVERD_FOR_SEPA_CUST(12) = 11.11846
-         ENDIF
+         IE_ENERGY = IE_ENERGY +
+     +      (FORECAST_ENERGY(1,I,1) + FORECAST_ENERGY(2,I,1)) /
+     +         (1 - CLASS_LOSSES(1)) +
+     +      (FORECAST_ENERGY(1,I,2) + FORECAST_ENERGY(2,I,2)) /
+     +         (1 - CLASS_LOSSES(2)) +
+     +      (FORECAST_ENERGY(1,I,3) + FORECAST_ENERGY(2,I,3)) /
+     +         (1 - CLASS_LOSSES(3)) +
+     +      (FORECAST_ENERGY(1,I,4) + FORECAST_ENERGY(2,I,4)) /
+     +         (1 - CLASS_LOSSES(4)) +
+     +      (FORECAST_ENERGY(1,I,5) + FORECAST_ENERGY(2,I,5)) /
+     +         (1 - CLASS_LOSSES(5))
+         CIPCO_ENERGY = CIPCO_ENERGY +
+     +      (FORECAST_ENERGY(1,I,6) + FORECAST_ENERGY(2,I,6))/
+     +                                    (1 - CLASS_LOSSES(6))
+         LOAD_MODIFICATION_ENERGY =  LOAD_MODIFICATION_ENERGY +
+     +                                  SEASON_SYSTEM_ENERGY(I)
+      ENDDO
+      LOAD_MODIFICATION_ENERGY = LOAD_MODIFICATION_ENERGY -
+     +                                  SNGL(DEMAND_AFTER_DSM_BEFORE_EL)
+      TRANSFER_ENERGY = IE_ENERGY - P_CLASS_ASSIGNED_ENERGY(1) -
+     +   LOAD_MODIFICATION_ENERGY -  P_CLASS_ASS_ECON_BUY(1) +
+     +                   P_CLASS_ASS_ECON_SELL(1) + POOL_LOAD_MANAGEMENT
 !
-         TOTAL_RETAIL(0) = 0.
-         TOTAL_SALES_ENERGY(0)  = 0.
-         TOTAL_SYSTEM_INPUT_NET(0)  = 0.
-         TOTAL_GENERATION(0)  = 0.
-         TOTAL_SYSTEM_GEN_NET(0)  = 0.
-         LOCAL_YEAR = R_YEAR + BASE_YEAR
-      DO MO = 0, 12
+!     5/15/92 ENHANCED PRICING STRUCTURE TO ACCOMODATE IE, IP, CIPS
 !
-         PURCHASE_POWER(MO) = 0.
-         NET_GENERATION_HYDRO(MO) = 0.
-         WHOLESALE_INCL_UNBILLED(MO) = 0.
-!
-         CALL GET_REV_FORECAST_SALES(  MO,
-     +                                 RESIDENTIAL_MWH(MO),
-     +                                 COMMERCIAL_MWH(MO),
-     +                                 INDUSTRIAL_MWH(MO),
-     +                                 PUBLIC_STREET_HIGHWAY(MO),
-     +                                 OTHER_PUBLIC(MO),
-     +                                 WHOLESALE_INCL_UNBILLED(MO),
-     +                                 SALES_TO_OTHER_UTILITIES(MO))
-         VOID_I2 = GET_CL_ENERGY_BY_TYPE( MO,
-     +                                    NET_GENERATION_NUCLEAR(MO),
-     +                                    NET_GENERATION_STEAM(MO),
-     +                                    PURCHASE_POWER(MO),
-     +                                    NET_GENERATION_OTHER(MO))
-
-
-         CALL GET_EL_ENERGY_BY_TYPE(   MO,
-     +                                 NET_GENERATION_HYDRO(MO),
-     +                                 RECEIVED_FOR_SEPA_CUST(MO),
-     +                                 WHOLESALE_INCL_UNBILLED(MO))
-!
-         CALL CPL_PA_ENTITLEMENT_MWH(  MO,
-     +                                 POWER_AGENCY_ENTITLEMENT(MO),
-     +                                 BUYBACK_MWH)
-
-         CALL CPL_MON_ENERGY_REV_AND_EXP(MO,
-     +                                 CPL_ENERGY_REVENUE_FROM_PA,
-     +                                 NCEMPA_SPECIAL_CONTRACT(MO),
-     +                                 CPL_ENERGY_EXPENSE_TO_PA,
-     +                                 CPL_ENERGY_FROM_PA)
-         NCEMPA_SPECIAL_CONTRACT(MO) = NCEMPA_SPECIAL_CONTRACT(MO)/1000.
-         PURCHASE_POWER(MO) = PURCHASE_POWER(MO) + BUYBACK_MWH -
-     +                                 RECEIVED_FOR_SEPA_CUST(MO)
-
-         IF(MO == 0) THEN
-!
-            NCEMC_SUPPLEMENTAL(MO) =
-     +               FORECAST_ENERGY(1,1,EMC_CLASS) +
-     +                  FORECAST_ENERGY(2,1,EMC_CLASS) +
-     +               FORECAST_ENERGY(1,2,EMC_CLASS) +
-     +                  FORECAST_ENERGY(2,2,EMC_CLASS) +
-     +               FORECAST_ENERGY(1,3,EMC_CLASS) +
-     +                  FORECAST_ENERGY(2,3,EMC_CLASS) +
-     +               FORECAST_ENERGY(1,4,EMC_CLASS) +
-     +                  FORECAST_ENERGY(2,4,EMC_CLASS) +
-     +               FORECAST_ENERGY(1,5,EMC_CLASS) +
-     +                  FORECAST_ENERGY(2,5,EMC_CLASS) +
-     +               FORECAST_ENERGY(1,6,EMC_CLASS) +
-     +                  FORECAST_ENERGY(2,6,EMC_CLASS) +
-     +               FORECAST_ENERGY(1,7,EMC_CLASS) +
-     +                  FORECAST_ENERGY(2,7,EMC_CLASS) +
-     +               FORECAST_ENERGY(1,8,EMC_CLASS) +
-     +                  FORECAST_ENERGY(2,8,EMC_CLASS) +
-     +               FORECAST_ENERGY(1,9,EMC_CLASS) +
-     +                  FORECAST_ENERGY(2,9,EMC_CLASS) +
-     +               FORECAST_ENERGY(1,10,EMC_CLASS) +
-     +                  FORECAST_ENERGY(2,10,EMC_CLASS) +
-     +               FORECAST_ENERGY(1,11,EMC_CLASS) +
-     +                  FORECAST_ENERGY(2,11,EMC_CLASS) +
-     +               FORECAST_ENERGY(1,12,EMC_CLASS) +
-     +                  FORECAST_ENERGY(2,12,EMC_CLASS)
-!
+      IF(POOL_PRICING_SWITCH == 'P') THEN
+         TRANSFER_PRICE =  (
+     +      NATIVE_MULT * (P_CLASS_ASSIGNED_COST(1) +
+     +      P_CLASS_ASS_ECON_COST(1) - P_CLASS_ASS_ECON_REV(1)) +
+     +      OTHER_MULT * (P_CLASS_ASSIGNED_COST(2) +
+     +      P_CLASS_ASS_ECON_COST(2) - P_CLASS_ASS_ECON_REV(2)) ) /
+     +      (P_CLASS_ASSIGNED_ENERGY(1) + P_CLASS_ASSIGNED_ENERGY(2) -
+     +      P_CLASS_ASS_ECON_SELL(1) + P_CLASS_ASS_ECON_BUY(1) -
+     +      P_CLASS_ASS_ECON_SELL(2) + P_CLASS_ASS_ECON_BUY(2) )
+      ELSEIF(POOL_PRICING_SWITCH == 'U') THEN
+         IF(TRANSFER_ENERGY < 0.) THEN
+            TRANSFER_PRICE =
+     +         (NATIVE_MULT * (P_CLASS_ASSIGNED_COST(1) +
+     +         P_CLASS_ASS_ECON_COST(1) - P_CLASS_ASS_ECON_REV(1)) )/
+     +         (P_CLASS_ASSIGNED_ENERGY(1) -
+     +         P_CLASS_ASS_ECON_SELL(1) + P_CLASS_ASS_ECON_BUY(1) )
+         ELSEIF(P_CLASS_ASSIGNED_ENERGY(2) .NE. 0.) THEN
+            TRANSFER_PRICE =
+     +         (OTHER_MULT * (P_CLASS_ASSIGNED_COST(2) +
+     +         P_CLASS_ASS_ECON_COST(2) - P_CLASS_ASS_ECON_REV(2)) )/
+     +         (P_CLASS_ASSIGNED_ENERGY(2) -
+     +         P_CLASS_ASS_ECON_SELL(2) + P_CLASS_ASS_ECON_BUY(2) )
          ELSE
-            NCEMC_SUPPLEMENTAL(MO) =
-     +               FORECAST_ENERGY(1,MO,EMC_CLASS) +
-     +                  FORECAST_ENERGY(2,MO,EMC_CLASS)
+            TRANSFER_PRICE =  0.
          ENDIF
-         NCEMC_SUPPLEMENTAL(MO) = NCEMC_SUPPLEMENTAL(MO) / 1000.
-
-         TOTAL_RETAIL(MO) =         RESIDENTIAL_MWH(MO) +
-     +                              INDUSTRIAL_MWH(MO) +
-     +                              COMMERCIAL_MWH(MO) +
-     +                              PUBLIC_STREET_HIGHWAY(MO) +
-     +                              OTHER_PUBLIC(MO)
-
-
-
-         TOTAL_SALES_ENERGY(MO) =   TOTAL_RETAIL(MO) +
-     +                              NCEMPA_SPECIAL_CONTRACT(MO) +
-     +                              NCEMC_SUPPLEMENTAL(MO) +
-     +                              WHOLESALE_INCL_UNBILLED(MO) +
-     +                              SALES_TO_OTHER_UTILITIES(MO)
-
-
-         ENERGY_USED_BY_COMPANY(MO) = 0. ! THIS IS NOT SET PER LF95
-         TOTAL_SYSTEM_INPUT_NET(MO) =
-     +                              TOTAL_SALES_ENERGY(MO) +
-     +                              ENERGY_USED_BY_COMPANY(MO) ! THIS IS NOT SET
-
-
-         TOTAL_GENERATION(MO) =
-     +                              NET_GENERATION_STEAM(MO) +
-     +                              NET_GENERATION_NUCLEAR(MO) +
-     +                              NET_GENERATION_HYDRO(MO) +
-     +                              NET_GENERATION_OTHER(MO)
-
-         TOTAL_SYSTEM_GEN_NET(MO) =
-     +                              TOTAL_GENERATION(MO)  +
-     +                              PURCHASE_POWER(MO) +
-     +                              RECEIVED_FOR_SEPA_CUST(MO) -
-     +                              DELIVERD_FOR_SEPA_CUST(MO)
-
-         ENERGY_UNACCOUNTED_FOR (MO) = TOTAL_SYSTEM_GEN_NET(MO) -
-     +                                        TOTAL_SYSTEM_INPUT_NET(MO)
-         TOTAL_SYSTEM_INPUT_NET(MO) = TOTAL_SYSTEM_INPUT_NET(MO) +
-     +                                       ENERGY_UNACCOUNTED_FOR (MO)
-         WRITE(CPL_SALES_GEN_UNIT,REC=CPL_SALES_GEN_REC)
-     +                              PRT_ENDPOINT(),
-     +                              FLOAT(LOCAL_YEAR),
-     +                              CL_MONTH_NAME(MO),
-     +                              ASSET_CLASS_NAME, ! HARD CODED TO PARENT
-     +                              RESIDENTIAL_MWH(MO),
-     +                              COMMERCIAL_MWH(MO),
-     +                              INDUSTRIAL_MWH(MO),
-     +                              PUBLIC_STREET_HIGHWAY(MO),
-     +                              OTHER_PUBLIC(MO),
-     +                              TOTAL_RETAIL(MO),
-     +                              NCEMPA_SPECIAL_CONTRACT(MO),
-     +                              NCEMC_SUPPLEMENTAL(MO),
-     +                              WHOLESALE_INCL_UNBILLED (MO),
-     +                              SALES_TO_OTHER_UTILITIES (MO),
-     +                              TOTAL_SALES_ENERGY (MO),
-     +                              ENERGY_USED_BY_COMPANY (MO),
-     +                              ENERGY_UNACCOUNTED_FOR (MO),
-     +                              TOTAL_SYSTEM_INPUT_NET (MO),
-     +                              NET_GENERATION_STEAM (MO),
-     +                              NET_GENERATION_NUCLEAR (MO),
-     +                              NET_GENERATION_HYDRO (MO),
-     +                              NET_GENERATION_OTHER (MO),
-     +                              TOTAL_GENERATION (MO),
-     +                              PURCHASE_POWER (MO),
-     +                              RECEIVED_FOR_SEPA_CUST(MO),
-     +                              -1*DELIVERD_FOR_SEPA_CUST(MO),
-     +                              TOTAL_SYSTEM_GEN_NET(MO),
-     +                              POWER_AGENCY_ENTITLEMENT(MO)
-         CPL_SALES_GEN_REC = CPL_SALES_GEN_REC + 1
-      ENDDO !MO
+      ENDIF
+      ENERGY_EXCHANGE_ADJUSTMENT = ENERGY_EXCHANGE_ADJUSTMENT +
+     +                             TRANSFER_PRICE * TRANSFER_ENERGY
+! ADDED 10/5/92 TO TRAP FOR TRANSACTION DIFFERENCES
+         TRANSACTION_ERROR = ABS(P_CLASS_ASSIGNED_ENERGY(1) -
+     +      P_CLASS_ASS_ECON_SELL(1) + P_CLASS_ASS_ECON_BUY(1) -
+     +      IE_ENERGY + LOAD_MODIFICATION_ENERGY +
+     +      (P_CLASS_ASSIGNED_ENERGY(2) - P_CLASS_ASS_ECON_SELL(2) +
+     +      P_CLASS_ASS_ECON_BUY(2) - CIPCO_ENERGY))
+         IF(TRANSACTION_ERROR .GT. 49) WRITE(4,*)
+     +      'Inconsistent buys and sells in the pooling calc_n in year',
+     +      YR,' season',PSMO,
+     +      TRANSACTION_ERROR/1000.,'= DIFFERENCE'
+!
+      IF(UNIT_OUTPUT_REPORT()) THEN
+         WRITE(9,"('0',A)") '---------------------- Pool Transa'//
+     +                      'ctions Summary ----------------------'
+         WRITE(9,1010) 'Company Energy (GWh)    ',(IE_ENERGY -
+     +               LOAD_MODIFICATION_ENERGY +
+     +                                       POOL_LOAD_MANAGEMENT)/1000.
+         WRITE(9,1020) 'Pool Energy Needs (GWh)  ',(CIPCO_ENERGY -
+     +                                       POOL_LOAD_MANAGEMENT)/1000.
+!
+         WRITE(9,1010) 'Company Generation (GWh)',
+     +                         P_CLASS_ASSIGNED_ENERGY(1)/1000.
+         WRITE(9,1020) 'Pool Generation (GWh)    ',
+     +                           P_CLASS_ASSIGNED_ENERGY(2)/1000.
+!
+         WRITE(9,1010) 'Energy to/frm Pool (GWh)',
+     +         (P_CLASS_ASSIGNED_ENERGY(1) - IE_ENERGY +
+     +         P_CLASS_ASS_ECON_BUY(1) - P_CLASS_ASS_ECON_SELL(1)  +
+     +                               LOAD_MODIFICATION_ENERGY -
+     +                                       POOL_LOAD_MANAGEMENT)/1000.
+         WRITE(9,1020) 'Energy to/frm Compy (GWh)',
+     +        (P_CLASS_ASSIGNED_ENERGY(2) - CIPCO_ENERGY +
+     +        P_CLASS_ASS_ECON_BUY(2) - P_CLASS_ASS_ECON_SELL(2) +
+     +                                       POOL_LOAD_MANAGEMENT)/1000.
+         IF(P_CLASS_ASSIGNED_ENERGY(1) > 0.) THEN
+            WRITE(9,1030) 'Company Price ($/MWh)   ',
+     +         (P_CLASS_ASSIGNED_COST(1) +
+     +         P_CLASS_ASS_ECON_COST(1) - P_CLASS_ASS_ECON_REV(1))/
+     +         (P_CLASS_ASSIGNED_ENERGY(1) -
+     +         P_CLASS_ASS_ECON_SELL(1) + P_CLASS_ASS_ECON_BUY(1) )
+         ELSE
+            WRITE(9,1030) 'Company Price ($/MWh)            '
+         ENDIF
+         IF(P_CLASS_ASSIGNED_ENERGY(2) > 0.) THEN
+            WRITE(9,1040) 'Pool Price ($/MWh)       ',
+     +         (P_CLASS_ASSIGNED_COST(2) +
+     +         P_CLASS_ASS_ECON_COST(2) - P_CLASS_ASS_ECON_REV(2))/
+     +         (P_CLASS_ASSIGNED_ENERGY(2) -
+     +         P_CLASS_ASS_ECON_SELL(2) + P_CLASS_ASS_ECON_BUY(2) )
+         ELSE
+            WRITE(9,1040) 'Pool Price ($/MWh)       '
+         ENDIF
+!
+         WRITE(9,1030) 'Compy Transfer Cost ($M)',
+     +                     TRANSFER_PRICE * TRANSFER_ENERGY/1000000.
+      ENDIF
+      RETURN
+ 1010 FORMAT(1X,A,F9.1)
+ 1020 FORMAT('&',2X,A,F11.1)
+ 1030 FORMAT(1X,A,F9.2)
+ 1040 FORMAT('&',2X,A,F11.2)
+      END
+!     ****************************************************************
+      SUBROUTINE LPPLOT (LODVAL,PBIL,NOPT,ISEAS,END_POINT,YEAR,BEFORE)
+!     ****************************************************************
+      USE IREC_ENDPOINT_CONTROL
+      use grx_planning_routines
+      LOGICAL (kind=1) ::  LDC_REPORT_NOT_OPEN/.TRUE./,BEFORE
+      INTEGER (kind=2) ::  NOPT
+      INTEGER (kind=2) ::  I
+      INTEGER (kind=2) ::  ISEAS
+      INTEGER (kind=2) ::  END_POINT
+      INTEGER (kind=2) ::  YEAR
+      INTEGER (kind=2) ::  LDC_REPORT_NO
+      INTEGER (kind=2) ::  LDC_REPORT_HEADER
+      INTEGER (kind=2) ::  SEASON
+      REAL ::  LODVAL(1000),PBIL(1000)
+      CHARACTER (len=9) ::  WRITE_MONTH_NAME(12)
+      CHARACTER (len=9) ::  MONTH_NAME*20
+      CHARACTER (len=9) ::  BEFORE_AFTER*6
+      INTEGER ::  LDC_REPORT_REC
+      SAVE LDC_REPORT_NO,WRITE_MONTH_NAME,LDC_REPORT_REC
+      IF(LDC_REPORT_NOT_OPEN) THEN
+         LDC_REPORT_NO = LDC_REPORT_HEADER(LDC_REPORT_REC)
+         LDC_REPORT_NOT_OPEN = .FALSE.
+         DO SEASON = 1 , 12
+            WRITE_MONTH_NAME(SEASON) = MONTH_NAME(SEASON)
+         ENDDO
+      ENDIF
+!
+      IF(BEFORE) THEN
+         BEFORE_AFTER = 'BEFORE'
+      ELSE
+         BEFORE_AFTER = 'AFTER '
+      ENDIF
+      DO I = 1 , NOPT
+         WRITE(LDC_REPORT_NO,REC=LDC_REPORT_REC)
+     +                        PRT_ENDPOINT(),FLOAT(YEAR),
+     +                        WRITE_MONTH_NAME(ISEAS),BEFORE_AFTER,
+     +                        FLOAT(I),LODVAL(I),100.*PBIL(I)
+         LDC_REPORT_REC = LDC_REPORT_REC + 1
+      ENDDO
+!
       RETURN
       END
+!************************************************************************
+!
+      SUBROUTINE REPORT_FUEL_INVENTORIES
+!
+!************************************************************************
+      USE IREC_ENDPOINT_CONTROL
+      use grx_planning_routines
+      USE SIZECOM
+      INCLUDE 'GLOBECOM.MON'
+      CHARACTER (len=20) ::  UNITNM,RETURN_UNITNM,FUEL_NAME,UNIT_NAME
+      CHARACTER (len=9) ::  FUEL_MONTH_NAME,MONTH_NAME*20
+      INTEGER (kind=2) ::  RETURN_SHADOW_UNIT_NUMBER
+      REAL ::  PRIM_HEAT,SEC_HEAT,EMIS_HEAT,CUM_GAS
+      REAL (kind=8) ::  MMBTU_FUEL_BALANCE,TEMP_HEAT
+      INTEGER (kind=2) ::  SHADOW_UNIT_NUMBER
+      INTEGER (kind=2) ::  I
+      INTEGER (kind=2) ::  FUEL_INVEN_NO
+      INTEGER (kind=2) ::  FUEL_INVENTORY_HEADER
+      INTEGER (kind=2) ::  FUEL_USED_BY_UNIT
+      INTEGER (kind=2) ::  R_ISEAS
+      INTEGER (kind=2) ::  UNIT_BLOCK
+      INTEGER (kind=2) ::  SEGMENT_NO
+      LOGICAL (kind=1) ::  FUEL_INVENTORY_NOT_OPEN/.TRUE./
+      INTEGER ::  FUEL_INVEN_REC
+      SAVE FUEL_INVEN_REC
+!
+!
+      SAVE CUM_GAS,FUEL_INVEN_NO,FUEL_MONTH_NAME
+!
+      ENTRY INITIALIZE_INVENTORY_REPORT
+         CUM_GAS = 0.0
+
+      RETURN
+      ENTRY FUEL_INVENTORY_BY_UNIT_REPORT(I,FUEL_USED_BY_UNIT,
+     +                           PRIM_HEAT,SEC_HEAT,EMIS_HEAT,
+     +                           MMBTU_FUEL_BALANCE)
+         IF(FUEL_INVENTORY_NOT_OPEN) THEN
+            FUEL_INVEN_NO = FUEL_INVENTORY_HEADER(FUEL_INVEN_REC)
+            FUEL_INVENTORY_NOT_OPEN = .FALSE.
+         ENDIF
+         UNITNM = RETURN_UNITNM(I)
+         FUEL_NAME = 'GREGS COAL'
+
+            CUM_GAS = CUM_GAS + PRIM_HEAT
+
+      RETURN
+      ENTRY SEASON_FUEL_INVENTORY_REPORT(UNIT_NAME,
+     +                        FUEL_USED_BY_UNIT,
+     +                        TEMP_HEAT,MMBTU_FUEL_BALANCE,SEGMENT_NO)
+         IF(SEGMENT_NO < 2) THEN
+            UNIT_NAME = UNIT_NAME(1:18)//'01'
+         ELSEIF(SEGMENT_NO == 2) THEN
+            UNIT_NAME = UNIT_NAME(1:18)//'02'
+         ENDIF
+         IF(FUEL_INVENTORY_NOT_OPEN) THEN
+            FUEL_INVEN_NO = FUEL_INVENTORY_HEADER(FUEL_INVEN_REC)
+            FUEL_INVENTORY_NOT_OPEN = .FALSE.
+         ENDIF
+         WRITE(FUEL_INVEN_NO,REC=FUEL_INVEN_REC) PRT_ENDPOINT(),
+     +         FLOAT(BASE_YEAR+YEAR),
+     +         FUEL_MONTH_NAME,FLOAT(FUEL_USED_BY_UNIT),
+     +         UNIT_NAME,
+     +         SNGL(TEMP_HEAT-MMBTU_FUEL_BALANCE),
+     +         SNGL(MMBTU_FUEL_BALANCE)
+         FUEL_INVEN_REC = FUEL_INVEN_REC + 1
+      RETURN
+      ENTRY UPDATE_SEASON_FOR_FUEL_RPT(R_ISEAS)
+         FUEL_MONTH_NAME = MONTH_NAME(R_ISEAS)
+      RETURN
+ 1234 FORMAT(1X,A,7F10.0)
+      END
+!++++++++
+      SUBROUTINE MARKETSYM_REPORT(NUNITS)
+      use cl_data
+      USE SPCapExVariables
+      USE TRANS_GROUP_VARIABLES
+      INCLUDE 'GLOBECOM.MON'
+      LOGICAL (KIND=1) :: YES_REFERENCE_CASE_REPORT
+      TYPE MARKETSYM_TRANSFER_STRUCTURE
+            CHARACTER (LEN=31) :: UnitName
+            CHARACTER (LEN=20) :: TransZoneName
+            INTEGER (KIND=2) :: UnitsBuilt
+      END TYPE MARKETSYM_TRANSFER_STRUCTURE
+      TYPE (MARKETSYM_TRANSFER_STRUCTURE) :: MarketSymAdditions(1000)
+      INTEGER (KIND=2) ::  UnitsAdded
+      INTEGER (KIND=2) ::  LastNunits
+      INTEGER (KIND=2) ::  I
+      INTEGER (KIND=2) ::  J
+      INTEGER (KIND=2) ::  K
+      INTEGER (KIND=2) ::  TG
+      INTEGER (KIND=2) ::  TG_POSITION
+      INTEGER (KIND=2) ::  MSUnitsAdded
+      INTEGER (KIND=2) ::  NUNITS
+      INTEGER (KIND=2) ::  GET_PROCOST_LAST_NUNITS
+      INTEGER (KIND=2) ::  RETURN_CL_UNITS_B4_ADDITIONS
+      INTEGER (KIND=2) ::  TRANSACTION_GROUP
+      INTEGER (KIND=2) ::  GET_TRANS_GROUP_POSITION
+      LOGICAL (KIND=1), SAVE :: MarketSymFileOpen=.FALSE.
+      CHARACTER (LEN=256) :: FILE_NAME
+      CHARACTER (LEN=5) :: GET_SCENAME
+      CHARACTER (LEN=35) :: GET_GROUP_NAME
+!
+
+        IF(YES_REFERENCE_CASE_REPORT()) THEN
+            IF(.NOT. MarketSymFileOpen) THEN
+               FILE_NAME = "MARKETSYM-"//TRIM(clData%Scename)//".CSV"
+               OPEN(7338,FILE=FILE_NAME,STATUS="REPLACE")
+               MarketSymFileOpen = .TRUE.
+            ENDIF
+            LastNunits = GET_PROCOST_LAST_NUNITS()
+            IF(YEAR == 1) THEN
+               UnitsAdded = max(0,NUNITS-RETURN_CL_UNITS_B4_ADDITIONS())
+            ELSE
+               UnitsAdded = max(0,NUNITS-LastNunits)
+            ENDIF
+! INITIALIZE THE MARKETSYM TRANSFER VARIABLE
+            IF(UnitsAdded > 0 ) THEN
+               MSUnitsAdded = 0
+               MarketSymAdditions(:)%TransZoneName = " "
+               MarketSymAdditions(:)%UnitName = " "
+               MarketSymAdditions(:)%UnitsBuilt = 0
+!      ENDIF
+!
+! Section for new MarketSym transfer
+!
+               DO K = 1,UnitsAdded
+                  I = NUNITS-UnitsAdded+K
+                  TG = MAX(1,TRANSACTION_GROUP(I))
+                  TG_POSITION = MAX(1,GET_TRANS_GROUP_POSITION(TG))
+                  DO J = 1, MSUnitsAdded
+                     IF(INDEX(MarketSymAdditions(J)%UnitName,
+     +                                MARKETSYM_UNIT_NAME(I)) /= 0) THEN
+! MATCH UNIT NAME AND ZONE LOCATION
+                        IF(INDEX(MarketSymAdditions(J)%TransZoneName,
+     +                          GET_GROUP_NAME(TG_POSITION)) == 0) CYCLE
+                           MarketSymAdditions(J)%UnitsBuilt = 1
+     +                              + MarketSymAdditions(J)%UnitsBuilt
+                           EXIT
+                     ENDIF
+                  ENDDO
+                  IF(J > MSUnitsAdded) THEN
+                     MSUnitsAdded = MSUnitsAdded + 1
+                     MarketSymAdditions(MSUnitsAdded)%TransZoneName =
+     +                                      GET_GROUP_NAME(TG_POSITION)
+                     MarketSymAdditions(MSUnitsAdded)%UnitName =
+     +                                            MARKETSYM_UNIT_NAME(I)
+                     MarketSymAdditions(MSUnitsAdded)%UnitsBuilt = 1
+                  ENDIF
+               ENDDO ! K
+! End MarketSym transfer
+               DO I = 1, MSUnitsAdded
+                  WRITE(7338,"(1X,A,',',I4,',',A,',',I3,',',A)")
+     +                        TRIM(MarketSymAdditions(I)%TransZoneName),
+     +                        BASE_YEAR+YEAR,
+     +                        TRIM(MarketSymAdditions(I)%UnitName),
+     +                        MarketSymAdditions(I)%UnitsBuilt,
+     +               '"'//TRIM(TRANS_GROUP_FULL_NAME(TG_POSITION))//'",'
+               ENDDO !
+               CALL FLUSH(7338)
+            ENDIF
+         ENDIF
+      END SUBROUTINE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
