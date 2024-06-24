@@ -6960,7 +6960,7 @@ int	*ql_f;
 
 	int	i,i1,j,k,k1;
 	int	p1,p2;
-	int	f1,f2,f3,f4,f5;
+	int	f1,f2,f3,f4,f5,f6;
 	int	qi,qf;
 	int	d1;
 	int	delta1,delta2;
@@ -7038,6 +7038,11 @@ int	*ql_f;
 		{
 			if ( def_var_continua(b2))
 			{
+				if (gp_fverbose("d3"))
+				{
+					printf ("DEF_var_cont desp del if ... b2: |%s| \n",b2);
+				}
+
 				memset (b3,0,MSTR);
 
 				delta1 = 0;
@@ -7048,10 +7053,17 @@ int	*ql_f;
 		
 					sq_lineas_con_mas_elim++;
 
+					/* si me encuentro una linea que es coment ... skip */
+					if ( (*fnp[i+delta1]).l[0] == '!')
+						delta1++;
 				}
 				while ( def_var_continua (  (*fnp[i+delta1]).l) ) ;
 
-printf ("limpiar_mas (desp del while) : |%s| \n", limpiar_mas ( (*fnp[i+delta1]).l) );
+				if (gp_fverbose("d3"))
+				{
+					printf ("limpiar_mas (desp del while) : |%s| \n", limpiar_mas ( (*fnp[i+delta1]).l) );
+				}
+
 				strcat (b3, limpiar_mas ( (*fnp[i+delta1]).l) );
 
 
@@ -7061,10 +7073,25 @@ printf ("limpiar_mas (desp del while) : |%s| \n", limpiar_mas ( (*fnp[i+delta1])
 					printf ("Concateno1: delta1: %2d len: %2d b3: |%s| \n\n\n",delta1,strlen(b3),b3); 
 				}
 
-				/* mas chanchadas ... la PM con el (:,:) */
+				/* 
+				 * mala eleccion strtok ... hay que canbiar , x & en los lugares que no hay que cortar !!
+				 * si hay coma entre esta estructura, reemplazar .. (:,:)
+				 */
 				for (i1=0; i1<strlen(b3); i1++)
 					if (!strncmp(b3+i1,":,:",3) )
 						b3[i1+1] = '&';
+
+				for (i1=0,f6=0; i1<strlen(b3); i1++)
+				{
+					if (!f6 && b3[i1] == '(')
+						f6 = 1;
+					if ( f6 && b3[i1] == ',')
+						b3[i1] = '&';
+					if ( f6 && b3[i1] == ')')
+						f6 = 0;
+				}
+
+
 
 				if (gp_fverbose("d3"))
 				{
@@ -7089,7 +7116,10 @@ printf ("limpiar_mas (desp del while) : |%s| \n", limpiar_mas ( (*fnp[i+delta1])
 				tok = strtok(b5,",");
 
 
-printf ("CFMAS 5 : 1er strtok  |%s|  \n",tok);
+				if (gp_fverbose("d3"))
+				{
+					printf ("CFMAS 5 : 1er strtok  |%s|  \n",tok);
+				}
 
 				while ( tok != NULL )
 				{
@@ -7187,8 +7217,13 @@ printf ("CFMAS 5 : 1er strtok  |%s|  \n",tok);
 
 					/* recuperando la chanchada */
 					for (i1=0; i1<strlen(b3); i1++)
+						if (b3[i1] == '&' )
+							b3[i1] = ',';
+						
+#if 0
 						if (!strncmp(b3+i1,":&:",3) )
 							b3[i1+1] = ',';
+#endif
 
 
 					strcpy ( (*fnp[i+delta2]).l, b3);
@@ -11724,7 +11759,7 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0040");
+	strcpy (ver,"0041");
 	strcpy (d,"Sun Jun 23 17:49:03 -03 2024");
 
 	sprintf (z,"%s -- (%s)  %s", gp_fp(GP_GET,0,(char **)0), ver, d  );

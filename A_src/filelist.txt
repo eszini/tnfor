@@ -1,8 +1,6 @@
 Makefile
 tfor.c
 menu.txt
-del_files.sh
-traeme.sh
 p1_com.sh
 p2_typ.sh
 p3_mas.sh
