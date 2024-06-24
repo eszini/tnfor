@@ -25,14 +25,14 @@
       USE SIZECOM
 !!! RECORD LENGTH UPDATED WITH VARIABLE CHANGES
       INCLUDE 'SpinLib.MON'
-      INTEGER (kind=2) ::  DELETE,INUNIT,IREC,LRECL/72/,YEAR
+      INTEGER (kind=2) ::  DELETE,INUNIT,IREC,LRECL=72 ,YEAR
       INTEGER ::  IOS
 !
-      INTEGER (kind=2) ::  NUMBER_OF_BC_CLASSES/0/
-      INTEGER (kind=2) ::  MAX_BC_CLASS_ID_NUM/0/
-      INTEGER (kind=2) ::  NUMBER_OF_OL_CLASSES/0/
-      INTEGER (kind=2) ::  MAX_OL_CLASS_ID_NUM/0/
-      INTEGER (kind=2) ::  UNIT_NUM/10/,YEAR_OF_RECORD
+      INTEGER (kind=2) ::  NUMBER_OF_BC_CLASSES=0 
+      INTEGER (kind=2) ::  MAX_BC_CLASS_ID_NUM=0 
+      INTEGER (kind=2) ::  NUMBER_OF_OL_CLASSES=0 
+      INTEGER (kind=2) ::  MAX_OL_CLASS_ID_NUM=0 
+      INTEGER (kind=2) ::  UNIT_NUM=10 ,YEAR_OF_RECORD
       INTEGER (kind=2) ::  ASSET_CLASS_NUM
       INTEGER (kind=2) ::  ASSET_CLASS_VECTOR
       REAL (kind=4) ::  SUPPLEMENTAL_CAPACITY_REV
@@ -58,14 +58,14 @@
       CHARACTER (len=256) ::  FILE_NAME
       CHARACTER (len=256) ::  BASE_FILE_DIRECTORY
       CHARACTER (len=256) ::  DATA_DRIVE,OUTPUT_DIRECTORY
-      LOGICAL (kind=4) ::  FILE_EXISTS/.FALSE./
+      LOGICAL (kind=4) ::  FILE_EXISTS=.FALSE. 
       LOGICAL (kind=4) ::  R_CATAWBA2_FILE_EXISTS
 
 ! DECLARATION FOR DBREAD COMMON BLOCK
       CHARACTER (len=1024) ::  RECLN
 ! DECLARATION FOR CATAWBA CONTRACT DETERMINANTS
       CHARACTER (len=16) ::  FILE_TYPE/'Catawba Contract'/
-      CHARACTER (len=2) ::  CATAW2_OL/'BC'/
+      CHARACTER (len=2) ::  CATAW2_OL='BC' 
       INTEGER (kind=2) ::  BC_ASSET_CLASS_POINTER(:)
       INTEGER (kind=2) ::  OL_ASSET_CLASS_POINTER(:)
       INTEGER (kind=2) ::  TEMP_ASSET_CLASS_POINTER(:)
@@ -377,24 +377,24 @@
       LOGICAL (kind=4) ::  CATAWBA_FILE_EXISTS
       SAVE CATAWBA_FILE_EXISTS
 
-      REAL (kind=4) ::  S_SUPPLEMENTAL_CAPACITY_REV/0./
-      REAL (kind=4) ::  S_RESERVE_CAPACITY_REV/0./
-      REAL (kind=4) ::  S_WHEELING_REV/0./
-      REAL (kind=4) ::  S_OEI_REV/0./
-      REAL (kind=4) ::  S_PKR_REV/0./
-      REAL (kind=4) ::  S_SUPPLEMENTAL_ENERGY_REV/0./
-      REAL (kind=4) ::  S_EXCHANGE_CAPACITY_EXP/0./
-      REAL (kind=4) ::  S_PURCHASED_ENERGY_EXP/0./
-      REAL (kind=4) ::  S_SURPLUS_ENERGY_EXP/0./
-      REAL (kind=4) ::  S_EXCHANGE_ENERGY_EXP/0./
-      REAL (kind=4) ::  S_PURCHASED_CAP_PAYMENTS/0./
-      REAL (kind=4) ::  S_LEVEL_PURCHASED_CAP_PAYMENTS/0./
-      REAL (kind=4) ::  S_OTHER_NET_REV_RETURN/0./
-      REAL (kind=4) ::  S_PURCHASED_CAP_DEFERRED_DEBITS/0./
-      REAL (kind=4) ::  S_DEFERRED_TAXES_PURCHASED_CAP/0./
-      REAL (kind=4) ::  S_IS_DEFERRED_TAXES/0./
-      INTEGER (kind=2) ::  ASSET_CLASS/0/
-      INTEGER (kind=2) ::  ASSET_ALLOCATION_VECTOR/0/
+      REAL (kind=4) ::  S_SUPPLEMENTAL_CAPACITY_REV=0. 
+      REAL (kind=4) ::  S_RESERVE_CAPACITY_REV=0. 
+      REAL (kind=4) ::  S_WHEELING_REV=0. 
+      REAL (kind=4) ::  S_OEI_REV=0. 
+      REAL (kind=4) ::  S_PKR_REV=0. 
+      REAL (kind=4) ::  S_SUPPLEMENTAL_ENERGY_REV=0. 
+      REAL (kind=4) ::  S_EXCHANGE_CAPACITY_EXP=0. 
+      REAL (kind=4) ::  S_PURCHASED_ENERGY_EXP=0. 
+      REAL (kind=4) ::  S_SURPLUS_ENERGY_EXP=0. 
+      REAL (kind=4) ::  S_EXCHANGE_ENERGY_EXP=0. 
+      REAL (kind=4) ::  S_PURCHASED_CAP_PAYMENTS=0. 
+      REAL (kind=4) ::  S_LEVEL_PURCHASED_CAP_PAYMENTS=0. 
+      REAL (kind=4) ::  S_OTHER_NET_REV_RETURN=0. 
+      REAL (kind=4) ::  S_PURCHASED_CAP_DEFERRED_DEBITS=0. 
+      REAL (kind=4) ::  S_DEFERRED_TAXES_PURCHASED_CAP=0. 
+      REAL (kind=4) ::  S_IS_DEFERRED_TAXES=0. 
+      INTEGER (kind=2) ::  ASSET_CLASS=0 
+      INTEGER (kind=2) ::  ASSET_ALLOCATION_VECTOR=0 
 !
 !
       REAL (kind=4) ::  CATAWBA_REVENUES(:,:)
@@ -1141,15 +1141,15 @@
      +            R_EMC_ENERGY_PRICE_SWITCH,
      +            R_PA_ENERGY_PRICE_SWITCH
       INTEGER (kind=2) ::  EMC_PA_CLASS
-      INTEGER (kind=2) ::  ANNUAL_EMC_PA_CLASS/0/
+      INTEGER (kind=2) ::  ANNUAL_EMC_PA_CLASS=0 
       INTEGER (kind=2) ::  CLASS_FROM_READ_CPL
       INTEGER (kind=2) ::  SAVE_CPL_READ_VARIABLES
       REAL (kind=4) ::  EMC_ANN_AVE_PROD
       REAL (kind=4) ::  PA_ANN_AVE_PROD
       REAL (kind=4) ::  R_EMC_ANN_AVE_PROD
       REAL (kind=4) ::  R_PA_ANN_AVE_PROD
-      REAL (kind=4) ::  EMC_ANN_AVE_PROD_SAVE/0./
-      REAL (kind=4) ::  PA_ANN_AVE_PROD_SAVE/0./
+      REAL (kind=4) ::  EMC_ANN_AVE_PROD_SAVE=0. 
+      REAL (kind=4) ::  PA_ANN_AVE_PROD_SAVE=0. 
 !
 !
 !
@@ -1211,22 +1211,22 @@
       INTEGER (kind=2) ::  R_CURRENT_YEAR
       PARAMETER (EMC_CLASS=5) ! (OTHER 2) IN THE DATA BASE
       REAL (kind=4) ::    EMC_ENERGY_REVENUE
-      REAL (kind=4) ::  ANN_EMC_ENERGY_REVENUE/0./
+      REAL (kind=4) ::  ANN_EMC_ENERGY_REVENUE=0. 
       REAL (kind=4) ::  R_EMC_RATE
-      REAL (kind=4) ::  ANN_EMC_ENERGY_SALES/0./
+      REAL (kind=4) ::  ANN_EMC_ENERGY_SALES=0. 
       REAL (kind=4) ::  EMC_SALES
       REAL (kind=4) ::  NON_COIN_PEAK
-      REAL (kind=4) ::  ANN_NON_COIN_PEAK/0./
+      REAL (kind=4) ::  ANN_NON_COIN_PEAK=0. 
       REAL (kind=4) ::  R_ANN_EMC_ENERGY_SALES
       REAL (kind=4) ::  R_ANN_NON_COIN_PEAK
       REAL (kind=4) ::  R_ANN_EMC_ENERGY_REVENUE
       REAL (kind=4) ::  R_ANN_EMC_CAP_REVENUE
       REAL (kind=4) ::  R_ANN_EMC_TRAN_REVENUE
-      REAL (kind=4) ::  ANN_SUM_NON_COIN_PEAK/0./
+      REAL (kind=4) ::  ANN_SUM_NON_COIN_PEAK=0. 
       REAL (kind=4) ::  EMC_TRANS_RATE
       REAL (kind=4) ::  R_ANN_SUM_TRAN_PEAK
       REAL (kind=4) ::
-     +   EMC_RESOURCE_CAP/1012./, ! CALC
+     +   EMC_RESOURCE_CAP=1012. , ! CALC
      +   EMC_EXCESS_OR_DEFICIT, ! CALC
      +   NCEMC_COIN_PEAK, ! AREA FORECASTS
      +   NCEMC_NON_COIN_PEAK, ! AREA FORECASTS
@@ -1234,7 +1234,7 @@
      +   CP_DIVIDED_BY_NCP(12), ! DATA
 !
 
-     +   SEPA_ALLOCATION/44.885/, ! PER SEEKAMP FAX.
+     +   SEPA_ALLOCATION=44.885 , ! PER SEEKAMP FAX.
      +   NCEMC_SUPP_BILLING_CPS, ! CALC
 ! SERVICE OBLIGATION RESOURCES
      +   SOR_A_RESOURCE, ! PER CONTRACT
@@ -1245,22 +1245,22 @@
      +   TOTAL_SERVED_BY_CPL, ! CALC
      +   LOAD_POSS_SERVE_BY_OTHERS, ! CALC
 !
-     +   ANN_CPS_N_NCPS/0./, ! ACCUMULATED MONTHLY
-     +   ANN_NCEMC_SUPP_BILLING_CPS/0./, ! ACCUMULATED MONTHLY
-     +   ANN_SOR_A_RESOURCE/0./, ! ACCUMULATED MONTHLY
-     +   ANN_SOR_B_RESOURCE/0./, ! ACCUMULATED MONTHLY
-     +   ANN_SOR_C_RESOURCE/0./, ! ACCUMULATED MONTHLY
-     +   ANN_SOR_D_RESOURCE/0./, ! ACCUMULATED MONTHLY
-     +   ANN_SOR_E_RESOURCE/0./, ! ACCUMULATED MONTHLY
-     +   ANN_SEPA_ALLOCATION/0./, ! ???
-     +   ANN_TOTAL_SERVED_BY_CPL/0./, ! ACCUMULATED MONTHLY
-     +   ANN_LOAD_POSS_SERVE_BY_OTHERS/0./, ! ACCUMULATED MONTHLY
+     +   ANN_CPS_N_NCPS=0. , ! ACCUMULATED MONTHLY
+     +   ANN_NCEMC_SUPP_BILLING_CPS=0. , ! ACCUMULATED MONTHLY
+     +   ANN_SOR_A_RESOURCE=0. , ! ACCUMULATED MONTHLY
+     +   ANN_SOR_B_RESOURCE=0. , ! ACCUMULATED MONTHLY
+     +   ANN_SOR_C_RESOURCE=0. , ! ACCUMULATED MONTHLY
+     +   ANN_SOR_D_RESOURCE=0. , ! ACCUMULATED MONTHLY
+     +   ANN_SOR_E_RESOURCE=0. , ! ACCUMULATED MONTHLY
+     +   ANN_SEPA_ALLOCATION=0. , ! ???
+     +   ANN_TOTAL_SERVED_BY_CPL=0. , ! ACCUMULATED MONTHLY
+     +   ANN_LOAD_POSS_SERVE_BY_OTHERS=0. , ! ACCUMULATED MONTHLY
 ! SERVICE OBLIGATION RESOURCE RATES
-     +   SOR_A_RATE/0./, ! PER CONTRACT
-     +   SOR_B_RATE/0./, ! PER CONTRACT
-     +   SOR_C_RATE/0./, ! PER CONTRACT
-     +   SOR_D_RATE/0./, ! PER CONTRACT
-     +   SOR_E_RATE/0./, ! PER CONTRACT
+     +   SOR_A_RATE=0. , ! PER CONTRACT
+     +   SOR_B_RATE=0. , ! PER CONTRACT
+     +   SOR_C_RATE=0. , ! PER CONTRACT
+     +   SOR_D_RATE=0. , ! PER CONTRACT
+     +   SOR_E_RATE=0. , ! PER CONTRACT
 ! SERVICE OBLIGATION RESOURCE REVENUES
      +   SOR_A_REVENUE, ! CALC
      +   SOR_B_REVENUE, ! CALC
@@ -1269,19 +1269,19 @@
      +   SOR_E_REVENUE, ! CALC
      +   TOTAL_EMC_CAP_REVENUE, ! CALC
 !
-     +   ANN_SOR_A_REVENUE/0./, ! ACCUMULATED MONTHLY
-     +   ANN_SOR_B_REVENUE/0./, ! ACCUMULATED MONTHLY
-     +   ANN_SOR_C_REVENUE/0./, ! ACCUMULATED MONTHLY
-     +   ANN_SOR_D_REVENUE/0./, ! ACCUMULATED MONTHLY
-     +   ANN_SOR_E_REVENUE/0./, ! ACCUMULATED MONTHLY
-     +   ANN_TOTAL_EMC_CAP_REVENUE/0./ ! CALC
+     +   ANN_SOR_A_REVENUE=0. , ! ACCUMULATED MONTHLY
+     +   ANN_SOR_B_REVENUE=0. , ! ACCUMULATED MONTHLY
+     +   ANN_SOR_C_REVENUE=0. , ! ACCUMULATED MONTHLY
+     +   ANN_SOR_D_REVENUE=0. , ! ACCUMULATED MONTHLY
+     +   ANN_SOR_E_REVENUE=0. , ! ACCUMULATED MONTHLY
+     +   ANN_TOTAL_EMC_CAP_REVENUE=0.  ! CALC
       DATA CP_DIVIDED_BY_NCP
      +            /0.967327,0.933236,0.891418,0.91152,0.890577,0.882076,
      +            0.931185,0.947181,0.936194,0.881214,0.888394,0.899382/
 !
 ! DETAILED REPORT OVERHEAD
 !
-      LOGICAL (kind=1) ::    ECAP_REPORT_NOT_OPEN/.TRUE./
+      LOGICAL (kind=1) ::    ECAP_REPORT_NOT_OPEN=.TRUE. 
       LOGICAL (kind=1) ::  ECAP_REPORT_ACTIVE
       LOGICAL (kind=1) ::  USE_COIN_PEAK
       INTEGER (kind=2) ::  LAST_SEASON
@@ -1599,7 +1599,7 @@
       END
       FUNCTION CPL_ACTIVE()
       use logging
-      LOGICAL (kind=1) ::  SAVE_CPL_STATUS/.FALSE./
+      LOGICAL (kind=1) ::  SAVE_CPL_STATUS=.FALSE. 
       LOGICAL (kind=1) ::  CPL_ACTIVE
       LOGICAL (kind=1) ::  CHANGE_CPL_STATUS_TO_ACTIVE
 !
@@ -1655,7 +1655,7 @@
 !
       LOGICAL (kind=1) ::  CL_UNITS_ACTIVE
       LOGICAL (kind=1) ::  USE_PA_ENERGY_PRICE,USE_EMC_ENERGY_PRICE
-      INTEGER (kind=2) ::    NO_PA_UNITS/0/
+      INTEGER (kind=2) ::    NO_PA_UNITS=0 
       INTEGER (kind=2) ::  I
       INTEGER (kind=2) ::  J
       INTEGER (kind=2) ::  HOURS_INCREMENT
@@ -1669,9 +1669,9 @@
       INTEGER (kind=2) ::  ISEAS
       INTEGER (kind=2) ::  ISTART
       INTEGER (kind=2) ::  NO_PA_RESOURCES
-      INTEGER (kind=2) ::  NO_PA_CONTRACTS/5/
+      INTEGER (kind=2) ::  NO_PA_CONTRACTS=5 
       INTEGER (kind=2) ::  CURRENT_CPL_CONTRACT
-      INTEGER (kind=2) ::  NO_PA_ACCTS/7/
+      INTEGER (kind=2) ::  NO_PA_ACCTS=7 
       INTEGER (kind=2) ::  OFF_SYSTEM_SALES_CLASS
       INTEGER (kind=2) ::  R_ISEAS
       INTEGER (kind=2) ::  Reserve Capacity
@@ -1715,7 +1715,7 @@
       REAL (kind=4) ::  SYSTEM_PEAK
       REAL (kind=4) ::  LIMR
       REAL (kind=4) ::  PA_CAPSYS
-      REAL (kind=4) ::  SEAS_HOURS/0/
+      REAL (kind=4) ::  SEAS_HOURS=0 
       REAL (kind=4) ::  REMAINING_ENERGY
       REAL (kind=4) ::  CAPON
       REAL (kind=4) ::  CAPBLK
@@ -1783,15 +1783,15 @@
       REAL (kind=4) ::  REPLACEMENT_ENERGY
       REAL (kind=4) ::  WRITE_ENERGY
       REAL (kind=4) ::  BUYBACK_ENERGY
-      REAL (kind=4) ::  MAYO1_BUYBACK_PERCENT/.0334/
-      REAL (kind=4) ::  HARRIS1_BUYBACK_PERCENT/.3333/
+      REAL (kind=4) ::  MAYO1_BUYBACK_PERCENT=.0334 
+      REAL (kind=4) ::  HARRIS1_BUYBACK_PERCENT=.3333 
       REAL (kind=4) ::  MAYO1_BUYBACK
       REAL (kind=4) ::  HARRIS_BUYBACK
       REAL (kind=4) ::  RETAINED_PERCENT
       REAL (kind=4) ::  MAYO1_REPLACEMENT
       REAL (kind=4) ::  ROX4_REPLACEMENT
-      REAL (kind=4) ::  TOTAL_ENT_ENERGY/0./
-      REAL (kind=4) ::  TOTAL_ENT_CAPACITY/0./
+      REAL (kind=4) ::  TOTAL_ENT_ENERGY=0. 
+      REAL (kind=4) ::  TOTAL_ENT_CAPACITY=0. 
       REAL (kind=4) ::  RESOURCE_PERCENT
 !
 ! REVENUE CALCULATIONS
@@ -1803,8 +1803,8 @@
       REAL (kind=4) ::  SYS_ENERGY
       REAL (kind=4) ::  BLOCK_FUEL_COST(2,MAX_CL_UNITS)
       REAL (kind=4) ::  WRITE_PRODUCTION_COST
-      REAL (kind=4) ::  TOTAL_ENT_FUEL_COST/0./
-      REAL (kind=4) ::  TOTAL_ENT_PRODUCTION_COST/0./
+      REAL (kind=4) ::  TOTAL_ENT_FUEL_COST=0. 
+      REAL (kind=4) ::  TOTAL_ENT_PRODUCTION_COST=0. 
       REAL (kind=4) ::  MAYO1_RPL_PROD_COST
       REAL (kind=4) ::  MAYO1_RPL_AVE_COST
       REAL (kind=4) ::  ROX4_RPL_PROD_COST
@@ -1819,8 +1819,8 @@
       REAL (kind=4) ::  MAYO1_BUYBACK_AVE_COST
       REAL (kind=4) ::  BUYBACK_PROD_COST
       REAL (kind=4) ::  BUYBACK_AVE_COST
-      REAL (kind=4) ::  TRANSFER_COST/0./
-      REAL (kind=4) ::  TRANSFER_GEN/0./
+      REAL (kind=4) ::  TRANSFER_COST=0. 
+      REAL (kind=4) ::  TRANSFER_GEN=0. 
       REAL (kind=4) ::  TRANSFER_SALES
       REAL (kind=4) ::   TRANSFER_PRICE
       REAL (kind=4) ::  PA_ANN_AVE_PROD
@@ -1852,8 +1852,8 @@
       REAL (kind=4) ::  R_CPL_EMC_REVENUE
       REAL (kind=4) ::  CPL_ENERGY_EXPENSE_TO_PA(0:12)
       REAL (kind=4) ::  CPL_ENERGY_FROM_PA(0:12)
-      REAL (kind=4) ::  CPL_ANN_EXPENSE_TO_PA/0./
-      REAL (kind=4) ::  CPL_ANN_REVENUE_FROM_PA/0./
+      REAL (kind=4) ::  CPL_ANN_EXPENSE_TO_PA=0. 
+      REAL (kind=4) ::  CPL_ANN_REVENUE_FROM_PA=0. 
       REAL (kind=4) ::  R_CPL_ENERGY_REVENUE_FROM_PA
       REAL (kind=4) ::  R_CPL_ENERGY_TO_PA
       REAL (kind=4) ::  R_CPL_ENERGY_EXPENSE_TO_PA
@@ -1879,16 +1879,16 @@
 !
 ! DETAILED REPORT OVERHEAD
 !
-      LOGICAL (kind=1) ::  PAEN_REPORT_NOT_OPEN/.TRUE./
+      LOGICAL (kind=1) ::  PAEN_REPORT_NOT_OPEN=.TRUE. 
       LOGICAL (kind=1) ::  PAEN_REPORT_ACTIVE
-      INTEGER (kind=2) ::  LAST_SEASON/0/
+      INTEGER (kind=2) ::  LAST_SEASON=0 
       INTEGER (kind=2) ::  PRODUCTION_PERIODS
       INTEGER (kind=2) ::  CPL_PAEN_RPT_HEADER
       INTEGER (kind=2) ::  CPL_PAEN_UNIT
       INTEGER (kind=2) ::  CURRENT_YEAR
       INTEGER (kind=2) ::  CURRENT_MONTH
-      INTEGER (kind=2) ::  ANNUAL_COUNTER/0/
-      INTEGER (kind=2) ::  REMAINING_SYSTEM_CLASS/4/
+      INTEGER (kind=2) ::  ANNUAL_COUNTER=0 
+      INTEGER (kind=2) ::  REMAINING_SYSTEM_CLASS=4 
       INTEGER ::  CPL_PAEN_REC
       REAL (kind=4) ::  WRITE_CAPACITY
       REAL (kind=4) ::  CF
@@ -1898,7 +1898,7 @@
       CHARACTER (len=9) ::  CL_MONTH_NAME(13)
       CHARACTER (len=20) ::    MONTH_NAME,WRITE_UNIT_NAME
 !
-      LOGICAL (kind=1) ::    ECAP_REPORT_NOT_OPEN/.TRUE./
+      LOGICAL (kind=1) ::    ECAP_REPORT_NOT_OPEN=.TRUE. 
       LOGICAL (kind=1) ::  ECAP_REPORT_ACTIVE
       LOGICAL (kind=1) ::  HOURLY_ECAP_REPORT
       LOGICAL (kind=1) ::  HOURLY_ECAP_ACTIVE
@@ -4568,7 +4568,7 @@
       REAL (kind=8) ::  SYSTEM_AVE_ENERGY
       REAL (kind=8) ::  PA_AVE_ENERGY
       INTEGER (kind=2) ::    I
-      INTEGER (kind=2) ::    PA_CLASS/6/
+      INTEGER (kind=2) ::    PA_CLASS=6 
       INTEGER (kind=2) ::  ISEAS
       INTEGER (kind=2) ::  IMAX
       INTEGER (kind=2) ::  IREC
@@ -4752,8 +4752,8 @@
       INTEGER (kind=2) ::  POINTS_IN_CURVE
       INTEGER (kind=2) ::  R_LOAD_POINTS
       INTEGER (kind=2) ::  R_MAX_TRANS_LOAD_GROUPS
-      INTEGER (kind=2) ::  SAVE_MAX_TRANS_LOAD_GROUPS/0/
-      INTEGER (kind=2) ::  SAVE_TARGET_TRANS_GROUP/0/
+      INTEGER (kind=2) ::  SAVE_MAX_TRANS_LOAD_GROUPS=0 
+      INTEGER (kind=2) ::  SAVE_TARGET_TRANS_GROUP=0 
       INTEGER (kind=2) ::  TG_FROM_TRANS_LOAD_GROUP
       REAL ::  BASE
       REAL ::  OBS(LOAD_POINTS)
@@ -4787,7 +4787,7 @@
       LOGICAL (kind=1) ::  SET_POINTS
 !
       INTEGER (kind=2) ::  CURRENT_MONTH
-      INTEGER (kind=2) ::  LAST_SEASON/0/
+      INTEGER (kind=2) ::  LAST_SEASON=0 
       INTEGER (kind=2) ::  PRODUCTION_PERIODS
       INTEGER (kind=2) ::  CURRENT_YEAR
       CHARACTER (len=9) ::  CL_MONTH_NAME(13)
@@ -4964,16 +4964,16 @@
       REAL (kind=4) ::  R_RESERVE_CAPACITY
       REAL (kind=4) ::  R_UNUSED_SUPP_CAPACITY
       REAL (kind=4) ::  R_SUPPLEMENTAL_CAPACITY
-      REAL (kind=4) ::  LAST_YEAR_CPL_N_PA_CAP/0./
+      REAL (kind=4) ::  LAST_YEAR_CPL_N_PA_CAP=0. 
       REAL (kind=4) ::  SEPA_CAPACITY
       REAL (kind=4) ::  RESERVE_PERCENT
       REAL (kind=4) ::  R_RESERVE_PERCENT
       REAL (kind=4) ::  THIS_YEAR_PEAK
-      REAL (kind=4) ::  THIS_YEAR_CPL_N_PA_CAP/0./
-      REAL (kind=4) ::  SAVE_UNUSED_SUPP_CAPACITY/0./
-      REAL (kind=4) ::  PA_RETAINED_CAPACITY/0./
+      REAL (kind=4) ::  THIS_YEAR_CPL_N_PA_CAP=0. 
+      REAL (kind=4) ::  SAVE_UNUSED_SUPP_CAPACITY=0. 
+      REAL (kind=4) ::  PA_RETAINED_CAPACITY=0. 
       REAL (kind=4) ::  LAST_YEAR_PEAK
-      REAL (kind=4) ::  SAVE_RESERVE_CAPACITY/0./
+      REAL (kind=4) ::  SAVE_RESERVE_CAPACITY=0. 
       REAL (kind=4) ::  R_ANN_RESERVE_CAPACITY
       REAL (kind=4) ::  R_PA_EXP_CAPSYS
       REAL (kind=4) ::  R_PA_CAPSYS
@@ -5093,16 +5093,16 @@
 !
       use logging
       INTEGER (kind=2) ::    CURRENT_YEAR
-      INTEGER (kind=2) ::  ROUTINE_BASE_YEAR/1995/
+      INTEGER (kind=2) ::  ROUTINE_BASE_YEAR=1995 
       INTEGER (kind=2) ::  YEAR_INDEX
       INTEGER (kind=2) ::  R_PA_UNIT_INDEX(*)
       INTEGER (kind=2) ::  RESOURCE_NO
       REAL (kind=4) ::    R_PA_RETAINED_CAPACITY
       REAL (kind=4) ::  R_PA_EXP_RETAINED_CAPACITY
-      REAL (kind=4) ::  BRUNS1_RETAINED/144.8/
-      REAL (kind=4) ::  BRUNS2_RETAINED/144.8/
+      REAL (kind=4) ::  BRUNS1_RETAINED=144.8 
+      REAL (kind=4) ::  BRUNS2_RETAINED=144.8 
       REAL (kind=4) ::  HARRIS1_RETAINED
-      REAL (kind=4) ::  ROX4_RETAINED/90.6/
+      REAL (kind=4) ::  ROX4_RETAINED=90.6 
       REAL (kind=4) ::  MAYO1_RETAINED
       REAL (kind=4) ::  R_MAINTENANCE_RATE(*)
       REAL (kind=4) ::  R_EAVAIL(*)
@@ -5171,7 +5171,7 @@
          INTEGER (kind=2) ::    LOCAL_YEAR
       INTEGER (kind=2) ::  CPL_MON_SALE_GEN_HEADER
       INTEGER (kind=2) ::  R_YEAR
-      INTEGER (kind=2) ::  EMC_CLASS/5/
+      INTEGER (kind=2) ::  EMC_CLASS=5 
       INTEGER (kind=2) ::  VOID_I2
       INTEGER (kind=2) ::  GET_CL_ENERGY_BY_TYPE
          REAL (kind=4) ::
@@ -5207,10 +5207,10 @@
          CHARACTER (len=20) ::    WRITE_UNIT_NAME
          SAVE CL_MONTH_NAME ! ,CPL_PAEN_UNIT,CURRENT_YEAR
 !
-      LOGICAL (kind=1) ::  CPL_SALES_GEN_NOT_OPEN/.TRUE./
+      LOGICAL (kind=1) ::  CPL_SALES_GEN_NOT_OPEN=.TRUE. 
       LOGICAL (kind=1) ::  CPL_SALES_GEN_REPORT_ACTIVE
          INTEGER (kind=2) ::    CPL_SALES_GEN_HEADER
-      INTEGER (kind=2) ::  CPL_SALES_GEN_UNIT/0/
+      INTEGER (kind=2) ::  CPL_SALES_GEN_UNIT=0 
       INTEGER (kind=2) ::  VARIABLE_NUMBER
          INTEGER ::  CPL_SALES_GEN_REC
          SAVE CPL_SALES_GEN_REC
