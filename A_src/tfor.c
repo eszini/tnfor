@@ -6963,7 +6963,7 @@ int	*ql_f;
 
 	int	i,i1,j,k,k1;
 	int	p1,p2;
-	int	f1,f2,f3,f4,f5,f6;
+	int	f1,f2,f3,f4,f5,f6,f7;
 	int	qi,qf;
 	int	d1;
 	int	delta1,delta2;
@@ -7056,14 +7056,30 @@ int	*ql_f;
 		
 					sq_lineas_con_mas_elim++;
 
-					/* ojo !! para una misma linea no puede ser true mas de una condicion !! */
-					/* si me encuentro una linea que es coment ... skip */
-					if ( (*fnp[i+delta1]).l[0] == '!')
-						delta1++;
+					do
+					{
+						f7=0;
+	
+						/* 
+						 * ojo !! para una misma linea no puede ser true mas de una condicion !! 
+						 * si me encuentro una linea que es coment ... skip 
+						 */
+	
+						if ( (*fnp[i+delta1]).l[0] == '!')
+							f7=1;
+	
+						/* 
+						 * si me encuentro una linea en blanco  ... skip 
+						 */
 
-					/* si me encuentro una linea en blanco  ... skip */
-					if ( (*fnp[i+delta1]).l[0] != '!' && strlen( (*fnp[i+delta1]).l ) < 4 )
-						delta1++;
+						if ( (*fnp[i+delta1]).l[0] != '!' && strlen( (*fnp[i+delta1]).l ) < 4 )
+							f7=1;
+	
+						if (f7)
+							delta1++;
+
+					} while (f7);
+
 				}
 				while ( def_var_continua (  (*fnp[i+delta1]).l) ) ;
 
@@ -7360,7 +7376,7 @@ char	*s;
 
 	if (gp_fverbose("d3"))
 	{
-		printf ("def_var_continua - - - - 3 |%s| (%d) \n\n",s,f2);
+		printf ("def_var_continua - - - - 3 |%s| f2 (ret): (%d) \n\n",s,f2);
 	}
 
 	return f2;
