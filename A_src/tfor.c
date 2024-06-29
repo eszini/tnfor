@@ -530,6 +530,7 @@ char	fou2[MAXF];
 char	faux[MAXF];	/* archivo aux para salidas segun necesidad */
 char	flog[MAXF];	/* archivo log para salidas segun necesidad */
 char	fsta[MAXF];	/* archivo stats segun necesidad */
+char	fckf[MAXF];	/* archivo de mensajes de check segun necesidad */
 
 char	fsrc[MAXF];	/* archivo de src de entrada */
 char	flst[MAXF];	/* archivo de listado de src de entrada */
@@ -542,6 +543,7 @@ int	ffaux;		/* archivo aux para output segun necesidad */
 int	fflog;		/* archivo log para output segun necesidad */
 int	ffcfg;		/* archivo de configuracion */
 int	ffsta;		/* estadisticas */
+int	ffckf;		/* check file messages */
 
 int	ffsrc;
 int	fflst;
@@ -565,6 +567,7 @@ FILE	*hfou2;
 FILE	*hfaux;
 FILE	*hflog;
 FILE	*hfsta;
+FILE	*hfckf;
 
 FILE	*hfsrc;
 FILE	*hflst;
@@ -584,11 +587,12 @@ int	agregar_ffsta(char *);
  *
  */
 
+int	ffchg_dec  = 0;		/* delete comentarios            */
 int	ffchg_com  = 0;		/* cambia caracter de comentario */
 int	ffchg_typ  = 0;		/* cambia type selectors */
-int	ffchg_lco  = 0;		/* cambia lineas de continuacion */
 int	ffchg_mas  = 0;		/* saca la continuacion de linea con mas */
 int	ffchg_ini  = 0;		/* cambia el tipo de init de vars        */
+int	ffchg_lco  = 0;		/* cambia lineas de continuacion */
 
 
 /*
@@ -745,6 +749,8 @@ int	cfor_vars(int *,int *);
 int	cfor_lcon(int *,int *);
 int	cfor_mas(int *,int *);
 int	cfor_ini(int *,int *);
+int	cfor_dec(int *,int *);
+int	check_file(int *);
 int	l_pars(int, int *);
 int	tiene_dec_var1();
 int	tiene_mas(char *);
@@ -775,7 +781,6 @@ int	lne(int );
 
 int	borrar_stats();
 
-
 /*
  *	variables para estadisticas en los procesos 
  *	estandarizacion del bendito fortran
@@ -783,6 +788,7 @@ int	borrar_stats();
  */
 
 
+int	sq_lineas_com;			/* q de lineas de comentarios cambiadas */
 int	sq_lineas_desdobladas;		/* q de lineas que hubo que dividir */
 int	sq_integer;			/* q de integer cambiados */
 int	sq_real;			/* q de real cambiados */
@@ -792,6 +798,7 @@ int	sq_variables_no_convertidas;	/* importante ! variables que no se pud convert
 int	sq_lcont;			/* lineas de continuacion modificadas */
 int	sq_vinit_simple;		/* var inits cambiados - simple ...en una linea */
 int	sq_lineas_con_mas_elim;		/* lineas con cont de linea mas eliminadas */
+int	sq_comentarios_elim;   		/* lineas de codigo comentadas  eliminadas */
 
 
 
@@ -984,6 +991,12 @@ char	**argv;
  * -----------------------------------------------------------------------------------
  */
 
+/*
+ * stats
+ *
+ * imprime / guarda estadisticas 
+ *
+ */
 
 
 int	mostrar_reportes(s)
@@ -1018,8 +1031,11 @@ char	*s;
 
 	if (n == 10 )
 	{
+
 		printf ("\n");
 		printf ("File: %s\n",finp);
+		printf ("Cantidad de lineas con com camb  %6d \n", sq_lineas_com);
+		printf ("Cantidad de lineas con com elim  %6d \n", sq_comentarios_elim);
 		printf ("Cantidad de lineas divididas     %6d \n", sq_lineas_desdobladas);
 		printf ("Cantidad de integer cambiados    %6d \n", sq_integer);
 		printf ("Cantidad de real cambiados       %6d \n", sq_real);
@@ -1035,6 +1051,8 @@ char	*s;
 
 		fprintf (hfsta,"%s","\n");
 		fprintf (hfsta,"File: %s\n",finp);
+		fprintf (hfsta,"Cantidad de lineas con com camb  %6d \n", sq_lineas_com);
+		fprintf (hfsta,"Cantidad de lineas con com elim  %6d \n", sq_comentarios_elim);
 		fprintf (hfsta,"Cantidad de lineas divididas     %6d \n", sq_lineas_desdobladas);
 		fprintf (hfsta,"Cantidad de integer cambiados    %6d \n", sq_integer);
 		fprintf (hfsta,"Cantidad de real cambiados       %6d \n", sq_real);
@@ -1081,6 +1099,8 @@ char	*s;
 int	borrar_stats()
 {
 
+	sq_lineas_com            = 0;
+	sq_comentarios_elim      = 0;
 	sq_lineas_desdobladas    = 0;
 	sq_integer               = 0;	
 	sq_real	                 = 0;	
@@ -3091,7 +3111,7 @@ stptr	*p1;
 {
 
 	int	ql,i;
-	char	b1[1024];
+	char	b1[MAXB];
 
 	ql=0;
 	for (i=0; i< qv; i++)
@@ -3135,7 +3155,7 @@ int	ff6(p1,p2)
 stptr	*p1,*p2;
 {
 	int	ql,i;
-	char	b1[1024];
+	char	b1[MAXB];
 
 	ql=0;
 	for (i=0; i< qv; i++)
@@ -3193,7 +3213,7 @@ int	ff7(r1,r2)
 stptr	**r1,**r2;
 {
 	int	ql,i;
-	char	b1[1024];
+	char	b1[MAXB];
 
 	ql=0;
 	for (i=0; i< qv; i++)
@@ -3671,6 +3691,8 @@ int 	*largo;
 			if ( c == '_' || c == '.' )
 				f3 = 1;
 			if ( c == '\'' )
+				f3 = 1;
+			if ( c == '-' )
 				f3 = 1;
 			if ( c == ' ' )
 				f3 = 1;
@@ -6768,6 +6790,152 @@ int	pro_tool4()
 
 
 
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	check_file
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ * Suponiendo que estamos en f77 ... 
+ * check file verifica si hay alguna linea "valida" (obviando comentarios)
+ * que sea mas larga que 72 , porque esa va a dar error al compilar !
+ *
+ */
+
+
+
+int	check_file(ql_f)
+int	*ql_f;
+{
+
+	int	i,j,k;
+	int	l1,l2;
+	int	p1,p2;
+	int	f1,f2,f3,f4;
+	int	qf;
+
+	char	b1[MSTR];
+	char	b2[MSTR];
+
+
+	qf = *ql_f;
+
+	/* f1 = 1 ... check_file ok !
+	 *      0 ... fallo !
+	 */
+
+	f1 = 1;
+
+printf ("Entro a CHECK qf: %5d  \n",qf);
+
+	for (i=0; i< qf; i++)
+	{
+printf ("CHECK proceso linea : %5d \n",lne(i));
+		memset(b1,0,MSTR);
+		strcpy(b1, (*fnp[i]).l );
+
+		f2 = 1;
+		
+		/*  lineas comentadas no cuentan */
+		if (f2)
+		{
+			if (b1[0]=='C' || b1[0]=='c' || b1[0]=='!')
+				f2 = 0;
+		}
+
+
+		/* otros tipos de lineas comentadas no cuentan */
+		if (f2)
+		{
+			j=0;
+			f3 = 1;
+	
+			while ( f3 && j<strlen(b1) )
+			{
+				if (b1[j]=='!')
+					f3 = 0, f2 = 0;
+				if (b1[j]!=' ' && b1[j]!='!')
+					f3 = 0;
+				if (b1[j]==' ')
+					j++;
+			}
+		}
+
+
+			
+		/* largo de la linea ... */
+		if (f2)
+		{
+			if (strlen(b1) < 73)
+				f2 = 0;
+		}
+
+		if (f2)
+		{
+			j = 7;
+
+			l1 = strlen(b1);
+			f3 = 1;
+
+			while ( f3 && j < strlen(b1) )
+			{
+				if (b1[j]=='!')
+					f3 = 0, l1 = j-1;
+				if (b1[j]!='!')
+					j++;
+			}
+
+			/* reviso si quedan blancos al final */
+			for (j=strlen(b1) - 1, f3=1; f3 && j > 0; j--)
+				if (b1[j] == ' ')
+					b1[j]= 0, l1--;
+				else
+					f3=0;
+
+
+
+			if (l1 < 73)
+				f2 = 0;
+		}
+
+
+
+		/* si la linea no cumplio ninguno de los criterios de linea valida,
+		 * entonces check_file falla !
+		 */
+		if (f2)
+		{
+			printf ("CHECK_FILE Linea: %6d (%3d) |%s|\n",lne(i),l1,b1);
+			f1 = 0;
+		}
+			
+
+#if 0
+		l_pars(i,&q_tk);
+
+
+		/* armo la linea de nuevo con todos los tokens
+		 * solucion por ahora ... dejo los comentarios al final, afuera
+		 */
+		memset(b2,0,MSTR);
+		for (j=0, f5=1; j< q_tk; j++)
+			strcat (b2,tk[j]);
+#endif
+	}
+
+	return (f1);
+}
+
+
+
+
 /*
  * -----------------------------------------------------------------------------------
  *
@@ -7518,10 +7686,12 @@ printf ("DDD despues de fix_dec_var1 q_tk: %d\n",q_tk);
 					printf ("ACA algo no anda carajo !!!! \n");
 					printf ("Atencion! -- linea larga %5d %3d |%s|\n",i,l1,b2);
 				}
+printf (" ZZZ--- 1 \n");
 
 				memset (b3,0,MAXB);
 				memset (b4,0,MAXB);
 
+printf (" ZZZ--- 2 \n");
 
 				armame_dos_lineas(b2,b3,b4);
 				if (gp_fverbose("d3"))
@@ -7529,8 +7699,11 @@ printf ("DDD despues de fix_dec_var1 q_tk: %d\n",q_tk);
 					printf ("dos lineas: 2  |%s| \n",b4);
 				}
 
+printf (" ZZZ--- 3 \n");
 				/* correr todas las lineas ... */
 				correme_una_linea(i+1,qf);
+
+printf (" ZZZ--- 4 \n");
 
 #if 1
 				/* grabar ambas lineas */
@@ -7659,6 +7832,8 @@ printf (" - - - - 4 l1: %4d ql: %4d j-1: %4d j: %4d  s[j-1]: |%s|  s[j]: |%s| \n
  *	idem si es x ej
  *	character (len=40000) :: variable_super_largar / cosa ,
  *	esa ',' tampoco me sirve, tiene que cerrar la '/'
+ *
+ *	si es una fuction ... tampoco sirve buscar el ::
  */
 
 int	armame_dos_lineas(s,l1,l2)
@@ -7668,8 +7843,8 @@ char	*l2;
 {
 	int	i,j,k;
 	int	c1;
-	int	f1,f2,f3,f4;
-	int	p1,p2,p3;
+	int	f1,f2,f3,f4,f5;
+	int	p1,p2,p3,p4,p5;
 	int	f_fix;
 	char	b1[MAXB];
 
@@ -7677,12 +7852,20 @@ char	*l2;
 
 	f_fix = 0;		/* f_fix 0, aun no se soluciono */
 
+	/* es una FUNCTION ? */
+	f5=0;
+	p4=0;
+	for (i=0; !f5 && i<strlen(s); i++)
+		if (!strncmp(s+i,"FUNCTION",8) || !strncmp(s+i,"function",8) )
+			p4=i, f5 = 1;
+
 
 	/* busco el :: - como estoy convirtiendo ... la linea ya lo tiene que tener ! */
 	for (i=0, f1=1; f1 && i<strlen(s); i++)
 		if (s[i] == ':' && s[i+1] == ':' )
 			f1 = 0, p1 = i+2, p2 = i+2;
 
+		
 	/* busco donde empieza el resto, despues de :: y blancos */
 	for (i=0, c1=0, f1=1; f1 && i<strlen(s); i++)
 		if (s[i+p1] == ' ')
@@ -7707,6 +7890,13 @@ char	*l2;
 	}
 
 
+	/* si es funcion, separo en declaracion y funcion */
+	if (f5)
+	{
+		p1 = p4 - 1;
+		p2 = LF77+1;
+	}
+
 
 	/* 
 	 * si encontro la ',' puede separar campos
@@ -7727,7 +7917,7 @@ printf ("p1 != p2: f4: %d l2: |%s| \n",f4,l2);
 		{
 
 			strncpy(l1,s,p1);
-			strcpy(l2,"    +  ");
+			strcpy(l2,"     + ");
 			strcat(l2,s+p1);
 			f_fix = 1;
 printf ("p2 > LF77: f4: %d l1: |%s| \n",f4,l1);
@@ -7751,7 +7941,7 @@ printf ("p2 > LF77,else: f4: %d l2: |%s| \n",f4,l2);
 	else
 	{
 		strncpy(l1,s,p1);
-		strcpy(l2,"     +  ");
+		strcpy(l2,"      + ");
 		strcat(l2,s+p1);
 
 		f_fix = 1;
@@ -7840,6 +8030,7 @@ int	fix_dec_var1()
 	int	coma,n_coma,f_coma;
 	int	ult, n_type;
 	int	f_aster;
+	char	nr[16];
 	char	b1[MAXB];
 
 	int	f_int,f_rea,f_log,f_cha;
@@ -7979,7 +8170,7 @@ int	fix_dec_var1()
 		if (f4)
 		{
 			sprintf (s_inte,"%s%s%s%s",tk[n_inten],tk[n_inten+1],tk[n_inten+2],tk[n_inten+3]);
-			printf ("fix_dec_var2: INTE: |%s|\n",s_inte);
+			printf ("fix_dec_var1: INTE: |%s|\n",s_inte);
 		}
 		else
 			error(1001);
@@ -8015,6 +8206,18 @@ no anda ... hay que mejorar esto del ultimo ...
 	}
 #endif 
 
+#if 1
+	/* algunos casos excepcionales ... logical* 4 var */
+	if (aster)
+	{	
+		strcpy(nr,tk[n_aster+1]);
+		if (!es_num_tk(nr) && tk[n_aster+1][0]==' ' && es_num_tk(tk[n_aster+2]) )
+		{	strcpy(nr,tk[n_aster+2]);
+			strcpy(tk[n_aster+1],nr);
+			strcpy(tk[n_aster+2]," ");
+		}
+	}
+#endif
 
 
 
@@ -8182,7 +8385,7 @@ no anda ... hay que mejorar esto del ultimo ...
 	{
 		ca = tk[n_aster+1][0];
 		if (ca != '1' && ca != '2' && ca != '4' && ca != '8' )
-			error(1002);
+			error(1004);
 
 		sprintf (tk[i] , "%s (kind=%c)  ",s_varb,ca);
 		tk[i+1][0]=0;
@@ -8208,7 +8411,7 @@ no anda ... hay que mejorar esto del ultimo ...
 	{
 		ca = tk[n_aster+1][0];
 		if (ca != '1' && ca != '2' && ca != '4' && ca != '8' )
-			error(1003);
+			error(1005);
 
 		sprintf (tk[i] , "%s (kind=%c), %s :: ",s_varb,s_inte,ca);
 		tk[i+1][0]=0;
@@ -8283,15 +8486,18 @@ printf ("EE2|%s| %c \n",tk[n_type],tk[n_kind+5][0]);
 /*
  * -----------------------------------------------------------------------------------
  *
- *	fix_fec_var2
+ *	fix_dec_var2
  *
  * -----------------------------------------------------------------------------------
  */
 
+/*
+ * arregla declaracion de variables cuando son character
+ */
 
 int	fix_dec_var2()
 {
-	int	f2;
+	int	f2,f3;
 	int	i,j,k,l,i1;
 	int	minus, aster, len, opt, inten, alloca, save, func, cont, dbl;
 	int	n_minus, n_aster, n_kind, n_opt, n_len;
@@ -8331,6 +8537,11 @@ int	fix_dec_var2()
 
 	f_aster = 0;
 	f_len   = 0;
+
+	memset(b2,0,MAXB);
+	for (j=0; j<q_tk; j++)
+		strcat(b2,tk[j]);
+
 
 	for (i=0; i< q_tk; i++)
 	{	
@@ -8402,7 +8613,53 @@ printf ("ZZZfix_dec_var2: arregle el len=4)var ... \n");
 	}
 
 
+#if 0
+	/* algunos casos excepcionales ... character* 6 var */
+	if (aster)
+	{	
+printf ("ZZZfix_dec_var2:1 estoy en if blanco despues de aster ... |%s| \n",b2);
+		if (tk[n_aster+1][0] == ' ')
+		{
+printf ("ZZZfix_dec_var2:2 estoy en if blanco despues de aster ... |%s| \n",b2);
 
+			strcpy(nr,tk[n_aster+2]);
+			if (es_num_tk(nr))
+			{
+				strcpy(tk[n_aster+1],tk[n_aster+2]);
+				strcpy(tk[n_aster+2]," ");
+				n_aster--;
+			}
+			else
+				error(2001);
+		}
+	}
+
+#endif
+
+#if 0
+	if (aster)
+	{	
+		strcpy(nr,tk[n_aster+1]);
+		if (!es_num_tk(nr))
+		{
+			if (tk[n_aster+1][0] != '(' ) 
+				error(2001);
+		}
+	}
+#endif
+
+#if 1
+	/* algunos casos excepcionales ... character* 6 var */
+	if (aster)
+	{	
+		strcpy(nr,tk[n_aster+1]);
+		if (!es_num_tk(nr) && tk[n_aster+1][0]==' ' && es_num_tk(tk[n_aster+2]) )
+		{	strcpy(nr,tk[n_aster+2]);
+			strcpy(tk[n_aster+1],nr);
+			strcpy(tk[n_aster+2]," ");
+		}
+	}
+#endif
 
 
 	if (gp_fverbose("d3"))
@@ -8416,15 +8673,6 @@ printf ("ZZZfix_dec_var2: arregle el len=4)var ... \n");
 
 
 
-	if (aster)
-	{	
-		strcpy(nr,tk[n_aster+1]);
-		if (!es_num_tk(nr))
-		{
-			if (tk[n_aster+1][0] != '(' ) 
-				error(2001);
-		}
-	}
  
 	/* caso 0 - esta bien formado, no hay que hacer nada !
 	 * tiene len
@@ -8436,6 +8684,8 @@ printf ("ZZZfix_dec_var2: arregle el len=4)var ... \n");
 
 	if ( !f1 && (len && dbl) || (len && !dbl &&func)  )
 	{
+printf ("ZZZfix_dec_var2: estoy en caso 0 ... |%s| \n",b2);
+
 		f1 = 1;
 	}
 
@@ -8452,6 +8702,7 @@ printf ("ZZZfix_dec_var2: arregle el len=4)var ... \n");
 
 	if ( !f1 && !aster && !dbl && !len && !func  )
 	{
+printf ("ZZZfix_dec_var2: estoy en caso 1 ... |%s| \n",b2);
 
 		if (ult == 0)
 			ult = i+1;
@@ -8475,6 +8726,7 @@ printf ("ZZZfix_dec_var2: arregle el len=4)var ... \n");
 	
 	if ( !f1 && aster && es_num_tk(nr) && !dbl && !func  )
 	{
+printf ("ZZZfix_dec_var2: estoy en caso 2 ... |%s| \n",b2);
 		strcpy(nr,tk[n_aster+1]);
 		tk[n_aster+1][0] = 0;
 
@@ -8484,6 +8736,12 @@ printf ("ZZZfix_dec_var2: arregle el len=4)var ... \n");
 			ult = i+1;
 
 		sprintf (tk[ult],"%s",":: ");
+
+#if 0
+		/* casos excepcionales ... la PM con los blanquitos */
+		if (tk[ult+1][0]=='*')
+			tk[ult+1][0]=' ';
+#endif
 		f1 = 1;
 	}
 
@@ -8497,6 +8755,7 @@ printf ("ZZZfix_dec_var2: arregle el len=4)var ... \n");
 
 	if ( !f1 && !aster && !dbl && len && !func  )
 	{
+printf ("ZZZfix_dec_var2: estoy en caso 3 ... |%s| \n",b2);
 
 		if (ult == 0)
 			ult = i+1;
@@ -8562,6 +8821,38 @@ printf ("ZZZfix_dec_var2: arregle el len=4)var ... \n");
 		f1 = 1;
 	}
 
+	/* caso 6 
+	 * tiene asteristco
+	 * tiene (*)
+	 * tiene dbl
+	 * no es funcion
+	 */
+	
+	if (!f1 && aster && !es_num_tk(tk[n_aster+1]) && dbl && !func )
+	{
+		if (ult == 0)
+		{	k=0;
+			while (tk[n_aster+k][0] != ')')
+				k++;
+			ult = n_aster+k+1;
+
+			if (ult == q_tk)
+				q_tk++; 
+		}
+
+		sprintf (tk[n_aster+0],"%s"," ");
+		sprintf (tk[n_aster+2],"%s","len=*");
+		sprintf (tk[n_aster+4],"%s"," ");
+		f1 = 1;
+	}
+
+
+
+
+
+
+
+	/* no pudo hacer fix ! */
 	if (!f1)
 	{
 		memset(b2,0,MAXB);
@@ -8569,6 +8860,11 @@ printf ("ZZZfix_dec_var2: arregle el len=4)var ... \n");
 			strcat(b2,tk[j]);
 
 		printf ("No hubo caso para .... |%s| \n",b2);
+
+		if (gp_fverbose("d3"))
+		{
+			printf ("FIX_dev_var2: caso: X f1: %d |%s| \n",f1,b2);
+		}
 	}
 
 
@@ -9108,7 +9404,8 @@ int	pro_tool6()
 {
 	int	i,j,k;
 	int	ql_ini,ql_fin;
-	int	lml;
+	int	l1,n_l1,lml;
+	int	f1;
 
 	char	b1[MAXB];
 
@@ -9129,14 +9426,46 @@ int	pro_tool6()
 		agregar_ffaux("parser.err");
 	if (!ffsta)
 		agregar_ffsta("tool.sta");
+	if (!ffckf)
+		agregar_ffckf("check.log");
 
 
 	if (!ffinp || !ffout || !ffaux)
 		gp_uso(12);
 
+
+
 	/* cargamos file en memo */
 	fnq1 = &fnp[0];
 	qfv_load(hfinp,fnq1,&ql_ini);
+
+/* EEE */
+	/* compatibiliad con la corrida tipo bunch files */
+	/* registro datos del archivo */
+	qf_ff=0;
+	tb[qf_ff] = (ffptr ) malloc (sizeof (ff));
+	if ( tb[qf_ff] == NULL )
+		error(915);
+
+	strcpy ( (*tb[qf_ff]).n, extract_fname(finp));
+	(*tb[qf_ff]).pf = 0;
+	(*tb[qf_ff]).uf = ql_ini-1;
+	qf_ff++;
+
+	if (gp_fverbose("d3"))
+	{
+		for (i=0; i<qf_ff; i++)
+		{
+			printf ("PRO_TOOL6: file a procesar: |%s| \n", (*tb[i]).n );
+		}
+	}
+
+	/* registro nombre de archivo en check log */
+	if (ffckf)
+	{
+		fprintf (hfckf,"File: %s\n", (*tb[0]).n);
+	}
+
 
 	lml=0;
 	for (i=0; i<ql_ini; i++)
@@ -9144,14 +9473,38 @@ int	pro_tool6()
 		strcpy(b1, (*fnp[i]).l );
 		if ( b1[0] != 'C' && b1[0] != 'c' && b1[0] != '!')
 		{	
-			if ( (k = strlen( b1) ) > lml)
-				lml = k;
+			l1 = strlen(b1);
+
+			for (k=0,f1=1; f1 && k < strlen(b1); k++)
+			{
+				if (b1[k]=='!')
+					f1=0,l1=k-1;
+			}
+				
+			for (k=strlen(b1)-1, f1=1; f1 && k; k--)
+				if (b1[k] == ' ')
+					b1[k]=0, l1--;
+				else
+					f1 = 0;
+
+			if ( l1 > lml )
+			{	lml = l1, n_l1 = lne(i);
+				printf ("LLL |%s|\n",b1);
+			}
 		}
 	}
+
 	if (gp_fverbose("d2"))
 	{
 		printf ("Linea mas larga: %4d\n\n",lml);
 	}
+
+
+	if (ffckf)
+	{
+		fprintf (hfckf,"Linea mas larga encontrada antes de procesar file (sin coments)  %3d \n",lml);
+	}
+
 
 	/* mientras que no cambie la cant de lineas !!! */
 	ql_fin=ql_ini;
@@ -9177,7 +9530,24 @@ int	pro_tool6()
 	if ( ffchg_ini )
 		cfor_ini(&ql_ini,&ql_fin);
 	
+	/* 6 - pidio borrar comentarios                             */
+	if ( ffchg_dec )
+		cfor_dec(&ql_ini,&ql_fin);
+	
 
+	/* hago un checking final de las lineas ! */
+	if ( 1 )
+	{
+		if ( !check_file(&ql_fin) )
+		{
+			printf ("CHECK LINEAS  largas !! \n");
+	
+			if (ffckf)
+			{
+				fprintf (hfckf,"Atencion ! file quedo con filas largas (si es f90 no hacer caso) !! \n");
+			}
+		}
+	}
 
 	/* grabo file */
 	for (i=0; i< ql_fin; i++)
@@ -9201,6 +9571,146 @@ int	pro_tool6()
 }
 
 #endif
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	cfor_dec
+ *
+ *	borra todos los comentarios
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ * borra comentarios:
+ * si son lineas de codigo 
+ * que esten despues de lineas de codigo "activas "
+ * 
+ * deja:
+ * aquellos comentarios que describen algoritmos y demas 
+ *
+ */
+
+
+#if 1
+
+int	cfor_dec(ql_i,ql_f)
+int	*ql_i;
+int	*ql_f;
+{
+
+	int	i,j,k;
+	int	p1,p2;
+	int	f1,f2,f3,f4;
+	int	qi,qf;
+	int	fl_n;
+	int	pf,uf,ln;
+
+	char	b1[MAXB];
+	char	b2[MAXB];
+	char	b3[MAXB];
+	char	b4[MAXB];
+	char	b5[MAXB];
+
+
+	qi = *ql_i;
+	qf = *ql_f;
+	memset(b4,' ',MAXB);
+
+
+	/* compatibilidad con cfor_vars / p_src3 etc
+	 *
+	 * primera y ultima fila del source 
+	 * poner nombre del file en table de files
+	 */
+
+	pf = 0;
+	uf = *ql_i - 1;
+
+	fl_n = 0;
+
+#if 1
+	/* registro datos del archivo */
+	tb[fl_n] = (ffptr ) malloc (sizeof (ff));
+	if ( tb[fl_n] == NULL )
+		error(916);
+
+	strcpy ( (*tb[fl_n]).n, extract_fname(fout));
+	(*tb[fl_n]).pf = pf; 
+	(*tb[fl_n]).uf = uf; 
+	(*tb[fl_n]).ql = uf - pf + 1;
+
+#endif
+
+
+
+	/* recorro todas las lineas */
+	for (i=0; i< qi ; i++)
+	{
+		/* copio linea y linea siguiente */
+		strcpy(b1, (*fnp[i]).l );
+
+
+		if(gp_fverbose("d4"))
+		{
+			printf ("cfor_dec: b1: |%s| \n",b1);
+			for (j=0; j<q_tk; j++)
+			{
+				printf ("TK: %3d %3d |%s|\n",j,strlen(tk[j]),tk[j]);
+			}	
+			printf ("\n");
+		}
+
+		if ( es_linea_comentario(b1))
+		{
+			if (gp_fverbose("d3"))
+			{
+				printf ("cfor_dec: com detectado \n");
+				printf ("cfor_dec: %4d #tk %4d |%s|\n",i,q_tk,b1);
+			}
+
+
+			/* actualizo stats */
+			sq_comentarios_elim++;
+		}
+
+		/* armo la linea de nuevo con todos los tokens */
+		memset (b3,0,MAXB);
+		for (j=0; j< q_tk; j++)
+			strcat (b3,tk[j]);
+
+		strcpy ( (*fnp[i]).l, b3);
+
+		if (gp_fverbose("d3"))
+			printf ("fix: |%s|\n",b3);
+
+	}
+}
+
+
+
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9244,7 +9754,20 @@ int	*ql_f;
 		/* copio linea y linea siguiente */
 		strcpy(b1, (*fnp[i]).l );
 
+		/* truchada ... */
+		if (b1[4]=='!')
+		{
+			b1[4]=' ';
+			b1[0]='!';
+		}
+
 		l_pars(i,&q_tk);
+
+		if (tk[4][0]=='!')
+		{
+			tk[4][0]=' ';
+			tk[0][0]='!';
+		}
 
 		if(gp_fverbose("d4"))
 		{
@@ -9267,13 +9790,16 @@ int	*ql_f;
 
 			/* pongo comentario
 			 * hay casos en que el comentario es 
-			 * 'C1015 ..... '
+			 * 'C1000 ..... '
 			 * 
 			 */
 #if 0
 			strcpy (tk[0],"!");
 #endif
 			tk[0][0]='!';
+
+			/* actualizo stats */
+			sq_lineas_com++;
 		}
 
 		/* armo la linea de nuevo con todos los tokens */
@@ -9761,17 +10287,22 @@ int	abro_files()
 
 	if ( ffsta && ((hfsta = fopen (fsta,"w")) == NULL) )
 	{
-		error(113);
+		error(107);
+	}
+
+	if ( ffckf && ((hfckf = fopen (fckf,"w")) == NULL) )
+	{
+		error(108);
 	}
 
 	if ( ffsrc && ((hfsrc = fopen (fsrc,"r")) == NULL) )
 	{
-		error(111);
+		error(109);
 	}
 
 	if ( fflst && ((hflst = fopen (flst,"r")) == NULL) )
 	{
-		error(112);
+		error(110);
 	}
 
 
@@ -9830,6 +10361,9 @@ int	cierro_files()
 
 	if ( ffsta)
 		fclose(hfsta);
+
+	if ( ffckf)
+		fclose(hfckf);
 
 	if ( ffsrc)
 		fclose(hfsrc);
@@ -10609,7 +11143,7 @@ char	*s;
 
 	if ( ffaux && ((hfaux = fopen (faux,"w")) == NULL) )
 	{
-		error(114);
+		error(121);
 	}
 }
 
@@ -10621,10 +11155,30 @@ char	*s;
 
 	if ( ffsta && ((hfsta = fopen (fsta,"w")) == NULL) )
 	{
-		error(115);
+		error(122);
 	}
 }
 
+int	agregar_ffckf(s)
+char	*s;
+{
+	ffckf = 1;
+	strcpy(fckf,s);
+
+	if ( ffckf && ((hfckf = fopen (fckf,"w")) == NULL) )
+	{
+		error(123);
+	}
+}
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	devuelve nombre de file base + fecha, hora 
+ *
+ * -----------------------------------------------------------------------------------
+ */
 
 
 char	*fname(bname) 
@@ -11040,6 +11594,12 @@ int	gp_parser()
 				ffsta=1;
 			}
 
+			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+1,"ckf",3) )
+			{	
+				strcpy(fckf,desde_igual( gp_fp(GP_GET,i,(char **)0)));
+				ffckf=1;
+			}
+
 			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+1,"src",3) )
 			{	
 				strcpy(fsrc,desde_igual( gp_fp(GP_GET,i,(char **)0)));
@@ -11127,6 +11687,11 @@ int	gp_parser()
 			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+2,"chgcom",6) )
 			{	
 				ffchg_com = 1;
+			}
+
+			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+2,"chgdec",6) )
+			{	
+				ffchg_dec = 1;
 			}
 
 			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+2,"chgtyp",6) )
@@ -11744,6 +12309,7 @@ int	gp_default()
 	ffaux=0;
 	fflog=0;
 	ffsta=0;
+	ffckf=0;
 
 	ffsrc=0;
 	fflst=0;
@@ -11783,8 +12349,8 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0042");
-	strcpy (d,"Sun Jun 23 17:49:03 -03 2024");
+	strcpy (ver,"0043");
+	strcpy (d,"Thu Jun 27 05:13:59 -03 2024");
 
 	sprintf (z,"%s -- (%s)  %s", gp_fp(GP_GET,0,(char **)0), ver, d  );
 	memset (w,0,MAXV);

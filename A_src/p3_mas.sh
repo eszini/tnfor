@@ -1,10 +1,25 @@
 #!/bin/bash
 
+clear_file="clear.txt"
 parser_log="parser.err"
 statis_log="tool.sta"
+checks_log="check.log"
 
 arc1="t3.for"
 arc2="t4.for"
+
+# Borrar pantalla segun clear.txt .... 
+if [ -f "$clear_file" ]; then
+    # Obtener la línea que contiene "clear" y extraer el valor después del "="
+    clear_option=$(grep -i '^\s*clear\s*=' "$clear_file" | sed 's/^\s*clear\s*=\s*//i')
+    
+    # Quitar espacios en blanco alrededor
+    clear_option=$(echo "$clear_option" | xargs)
+    
+    if [ "$clear_option" == "yes" ]; then
+        clear
+    fi
+fi
 
 ./tfor -v -opciones=d5 -tool=6 -inp="$arc1" -out="$arc2" -aux=p.err  --chgmas  > log3
 
@@ -12,7 +27,6 @@ echo "Cantidad de lineas en cada file:"
 for file in "$arc1"  "$arc2"; do
     echo "$(wc -l < "$file") $file"
 done
-
 
 
 
@@ -32,7 +46,13 @@ else
     echo "No hay estadisticas"
 fi
 
-
+echo
+if [ -e "$checks_log" ] && [ -s "$checks_log" ]; then
+    echo "Check file:"
+    cat "$checks_log"
+else
+    echo "No hay datos en check file"
+fi
 
 
 
