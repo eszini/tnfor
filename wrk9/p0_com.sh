@@ -1,14 +1,14 @@
 #!/bin/bash
 
+
 clear_file="clear.txt"
 parser_log="parser.err"
 statis_log="tool.sta"
 checks_log="check.log"
 
-ejecutar_greps=false
+arc1="t0.for"
+arc2="t1.for"
 
-arc1="t2.for"
-arc2="t3.for"
 
 # Borrar pantalla segun clear.txt .... 
 if [ -f "$clear_file" ]; then
@@ -24,28 +24,21 @@ if [ -f "$clear_file" ]; then
 fi
 
 
+./tfor -v -opciones=d5 -tool=6 -inp="$arc1" -out="$arc2" --chgcom -t  > log1
 
-./tfor -v -opciones=d5 -tool=6 -inp="$arc1" -out="$arc2" --chgtyp     > log2
+./tfor -exec=1 -inp="$arc1" -in2="$arc2" -out=d1.chr
 
-echo "Cantidad de lineas en cada file:"
+
+
+echo "Cantidad de lineas"
 for file in "$arc1"  "$arc2"; do
     echo "$(wc -l < "$file") $file"
 done
 
-if $ejecutar_greps; then
-  grep -i integer t2.for > t2i.log
-  grep -i integer t3.for > t3i.log
-  
-  grep -i logical t2.for > t2l.log
-  grep -i logical t3.for > t3l.log
-  
-  grep -i real t2.for > t2r.log
-  grep -i real t3.for > t3r.log
-  
-  grep -i character t2.for > t2c.log
-  grep -i character t3.for > t3c.log
-fi
 
+echo
+echo "Mapeo chars  file1   file2"
+grep ^X d1.chr
 
 echo
 if [ -e "$parser_log" ] && [ -s "$parser_log" ]; then
@@ -70,6 +63,7 @@ if [ -e "$checks_log" ] && [ -s "$checks_log" ]; then
 else
     echo "No hay datos en check file"
 fi
+
 
 
 
