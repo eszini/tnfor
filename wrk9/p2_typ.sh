@@ -25,7 +25,7 @@ fi
 
 
 
-./tfor -v -opciones=d5 -tool=6 -inp="$arc1" -out="$arc2" --chgtyp  > log2
+./tfor -v -opciones=d5 -tool=6 -inp="$arc1" -out="$arc2" --chgtyp     > log2
 
 echo "Cantidad de lineas en cada file:"
 for file in "$arc1"  "$arc2"; do

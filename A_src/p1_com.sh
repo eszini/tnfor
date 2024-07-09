@@ -24,7 +24,7 @@ if [ -f "$clear_file" ]; then
 fi
 
 
-./tfor -v -opciones=d5 -tool=6 -t -inp="$arc1" -out="$arc2"  --chgcomm  > log1
+./tfor -v -opciones=d5 -tool=6 -inp="$arc1" -out="$arc2" --chgdec -t  > log0
 
 ./tfor -exec=1 -inp="$arc1" -in2="$arc2" -out=d1.chr
 

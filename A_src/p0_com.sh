@@ -6,8 +6,8 @@ parser_log="parser.err"
 statis_log="tool.sta"
 checks_log="check.log"
 
-arc1="t1.for"
-arc2="t2.for"
+arc1="t0.for"
+arc2="t1.for"
 
 
 # Borrar pantalla segun clear.txt .... 
@@ -24,7 +24,7 @@ if [ -f "$clear_file" ]; then
 fi
 
 
-./tfor -v -opciones=d5 -tool=6 -t -inp="$arc1" -out="$arc2"  --chgcomm  > log1
+./tfor -v -opciones=d5 -tool=6 -inp="$arc1" -out="$arc2" --chgcom -t  > log1
 
 ./tfor -exec=1 -inp="$arc1" -in2="$arc2" -out=d1.chr
 

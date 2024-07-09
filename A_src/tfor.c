@@ -12,7 +12,6 @@
  */
 
 
-
 /*
  *	//header//
  *
@@ -314,6 +313,9 @@
  *	no funciona p4_mas cuando hay lineas con comentarios
  *	en medio de las lineas con mas 
  *
+ *	Un archivo tipo .err ... fferr para guardar todos los 
+ *	errores. Justo a cambios en error() .. que sea con 
+ *	numero y un mensaje
  *
  *
  *	---- otros ----
@@ -360,6 +362,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
+#include <ctype.h>
 #include <unistd.h>
 #include <time.h>
 
@@ -648,6 +652,7 @@ ldf_ptr	vldf[MAX_QSRC];			/* vector a punteros primer struct de c fuente */
 #define	MAX_FSRC	400000		/* 10000 lineas de codigo ... seran suf ? */
 int	qf_lin;				/* lineas en file */
 int	qf_fen;				/* strings con nombre de archivos validos encontrados */
+int	qf_src;				/* cantidad total de lineas de src en vector */
 
 typedef	struct	tfn	*fnptr;
 typedef	struct	tfn
@@ -676,7 +681,7 @@ int	qfc_write(FILE *,int);
  * 	MAX_QSRC		500		
  */
 
-int	qf_ff;
+int	qf_ff;				/* cantidad de archivos cargados en memo */
 
 typedef	struct tff	*ffptr;
 typedef	struct tff
@@ -760,6 +765,9 @@ int	fix_dec_var2();
 int	p_src1();
 int	p_src2();
 int	p_src3();
+int	ex3_p1();
+int	ex3_p2();
+int	ex3_p3();
 int	es_cadena_valida(int,char *);
 int	es_cadena_interesante(char *);
 int	es_cadena_int_src3(char *,int *);
@@ -776,10 +784,18 @@ int	ordenar_makefile();
 int	ps_src1();
 int	largo_linea(char *);
 int	tiene_include_valido(char *,char *,char *);
+int	tiene_include_v2(char *, char *);
 int	es_nombre_de_include(char *s);
 int	lne(int );
+char	*analisis_comentario(char *);
+bool	tiene_include_v3(char *, char *);
+bool	tiene_include_v4(char *, char *);
+int	info_cmp(char *, char *);
+int	tiene_coment_final(char *, int*);
+
 
 int	borrar_stats();
+
 
 /*
  *	variables para estadisticas en los procesos 
@@ -2226,10 +2242,757 @@ char	*s;
 
 
 
+
+
+
+
 /*
  * -----------------------------------------------------------------------------------
  *
- *	(MMM)
+ *	pro_exec 3
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ *
+ *	exec 3
+ *
+ *	abre archivo con lista de archivos a procesar 
+ *	x cada archivo, abre y carga a memoria en vector de estructuras
+ *	deja listo todo el contenido para procesos
+ *	termina y vuelve a grabar los archivos con mismo nombre, en otro dir
+ */
+
+
+#if 0
+
+#define	MAX_QSRC		500	/* cant max de archivos fuentes a manejar */
+int	qf_ff;
+
+typedef	struct tff	*ffptr;
+typedef	struct tff
+{	char	n[MAXB];		/* nombre de file */
+	int	pf,uf;			/* primera - ultima fila */
+	int	f1,f2,f3;		/* flags prop general */
+}	ff;
+
+ffptr	ffp1,ffp2,*ffq1,*ffq2;		/* punteros varios */
+
+ffptr	tb[MAX_QSRC];
+
+#endif
+
+
+int	pro_exec3()
+{
+
+	int	i,j,k,flag;
+	int	ql,qlf,q_ptr;
+	char	d1[MAXB];
+	char	d2[MAXB];
+	char	b1[MAXB];
+
+
+	FILE	*hwi,*hwo;
+
+	char	z[MAXV];
+	sprintf (z,"exec3");
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
+	}
+
+	if (!ffinp || !ffout || !ffdat )
+		gp_uso(11);
+
+
+/* EEE */
+
+	/* cantidad de archivos y lineas totales cargadas  */
+	qf_ff = 0;
+	q_ptr = 0;
+
+	while (fgets(d1,MAXB,hfinp) != NULL)
+	{
+		if (!linea_vacia(d1)  && d1[0] != '#' )
+		{
+			/* saco el fin de linea - contemplo 13 x fuentes fortran */
+			for ( flag=0, j=strlen(d1); !flag && j >= 0; j--)
+				if (d1[j] == '\n' )
+				{	
+					flag=1;
+					if ( j && d1[j-1] == 13)
+						d1[j-1]=0;
+					else
+						d1[j]=0;
+				}
+
+			/* proceso file */
+			if (gp_fverbose("d3"))
+				printf ("Archivo a cargar:  |%s|\n",d1);
+
+			if ( 1 && ((hwi = fopen (d1,"r")) == NULL) )
+				error(601);
+
+			fnq1 = &fnp[q_ptr];
+			qfv_load(hwi,fnq1,&qlf);
+
+			fclose (hwi);
+
+			/* procese file */
+			if (gp_fverbose("d3"))
+				printf ("Archivo cargado:  %5d |%s|\n\n",qlf,d1);
+
+
+			/* registro datos del archivo */
+			tb[qf_ff] = (ffptr ) malloc (sizeof (ff));
+			if ( tb[qf_ff] == NULL )
+				error(904);
+
+			strcpy ( (*tb[qf_ff]).n, extract_fname(d1));
+			(*tb[qf_ff]).pf = q_ptr;
+			(*tb[qf_ff]).uf = q_ptr+qlf-1;
+
+			if (gp_fverbose("d1"))
+			{
+				printf ("load: %5d %5d |%s|\n",
+					(*tb[qf_ff]).pf,(*tb[qf_ff]).uf,(*tb[qf_ff]).n);
+			}
+
+			qf_ff++;
+			q_ptr += qlf;
+		}
+	}
+
+
+	/* cantidad de lineas totales en vector (global) */
+	qf_src = q_ptr;
+
+	if (gp_fverbose("d3"))
+	{
+		printf ("Cantidad de archivos cargados :  %5d \n",qf_ff);
+		printf ("Cantidad de lineas cargadas   :  %5d \n",q_ptr);
+		printf ("\n");
+	}
+
+#if 1
+	if (gp_fverbose("d3"))
+	{
+		printf ("\n\nComprobando integridad de la carga: \n\n");
+	
+		for ( i=0; i< q_ptr; i++)
+		{
+			printf ("i: %5d  |%s| \n",
+				i,(*fnp[i]).l );
+		}
+	}
+
+	printf ("\n");
+
+#endif
+
+	/*
+	 * A este punto, todas las lineas de archivos cargados en vector
+	 * Hay otro vector, con nombre y lineas desde/hasta para indentificar
+	 * a que archivo pertenece una linea determinada 
+	 *
+	 */
+
+	ex3_p2();
+
+
+	/* grabo new file */
+	for (i = 0; i < qf_ff; i++)
+	{
+		/* nombre del archivo de salida */
+		sprintf (d2,"%s/%s",gp_dato,extract_fname( (*tb[i]).n));
+
+		if ( 1 && ((hwo = fopen (d2,"w")) == NULL) )
+			error(602);
+
+		for (j = (*tb[i]).pf ; j<= (*tb[i]).uf; j++)
+		{
+			fprintf (hwo,"%s\n", (*fnp[j]).l );
+		}
+	}
+
+
+	fclose(hwo);
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[1],z);
+	}
+}
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	ex3_p2
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ * llamado por pro_exec3
+ * hace algo con todas las lineas cargadas en memoria
+ *
+ */
+
+int	ex3_p2()
+{
+	int 	i,j,k;
+	int	f1,f2;
+	int	n_f;
+	int	pf,uf;
+	int	n_info;
+	char	b1[MAXB];
+	char	b2[MAXB];
+	char	b3[MAXB];
+	char	info[30][MAXB];
+	int	s_info[30];
+	char	nro[16];
+
+	for (i=0; i<30; i++)
+		s_info[i]=0;
+
+
+	/* para todos los archivos  */
+	for (j=0; j < qf_ff; j++)
+	{
+		strcpy (b3, (*tb[j]).n );
+		pf =  (*tb[j]).pf;
+		uf =  (*tb[j]).uf;
+
+
+
+		n_info = 0;
+		sprintf (info[n_info],"%-30.30s",b3);
+
+		for (i = pf; i <= uf; i++)
+		{
+			strcpy(b1,(*fnp[i]).l );
+
+			if (!es_linea_comentario(b1) && tiene_include_v4(b1,b2))
+			{
+				fprintf (hflog,"%-30.30s  %s\n", b3, b2);
+				fprintf (hfout,"%-15.15s  %s\n", b2, b3);
+
+				n_info++;
+				sprintf (info[n_info],"%-30.30s %s",b3,b2);
+			}
+
+
+
+		}
+
+		fprintf (hfaux,"%s\n","----------------------------------------------------------------------------");
+
+		if (n_info == 0)
+			fprintf (hfaux,"%3d %s\n",lne(j),info[n_info]);
+		else
+		{
+			s_info[1]=1;
+			if (n_info > 1)
+			{
+				qsort ( &info[1],n_info,MAXB,info_cmp );
+
+				for (k=1; k <= n_info; k++)
+				{
+
+					if ( k == 1 )
+					{
+						s_info[k] = 1;
+					}
+
+					if ( k != 1 )
+					{
+						if ( !strcmp(info[k],info[k-1]) )
+						{
+							s_info[k] = s_info[k-1] + 1;
+							s_info[k-1] = 0;
+						}
+						else
+							s_info[k] = 1;
+					}
+				}
+
+					
+			}
+
+			for (k=1, f2=1; k <= n_info; k++)
+			{
+				if (s_info[k])
+				{	
+					strcpy(nro,"   ");
+					if (f2)
+					{	sprintf (nro,"%3d",lne(j) );
+						f2 =0;
+					}
+
+					fprintf (hfaux,"%s %-50.50s (%2d)\n",nro,info[k],s_info[k]);
+				}
+			}
+		}
+
+	}
+
+}
+
+int	info_cmp(p1,p2)
+char	*p1;
+char	*p2;
+{
+	int k;
+
+	k = strcmp(p1,p2);
+
+	if (gp_fverbose("d4"))
+	{
+		printf ("SSS info_cmp %s %s %d !! \n",p1,p2,k);
+	}
+
+	return k;
+}
+
+
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	ex3_p1
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ * llamado por pro_exec3
+ * hace algo con todas las lineas cargadas en memoria
+ *
+ */
+
+int	ex3_p1()
+{
+	int 	i,j;
+	int	f1;
+	int	n_f;
+	char	b1[MAXB];
+	char	b2[MAXB];
+
+
+
+	/* para todas las lineas */
+	for (i=0; i < qf_src; i++)
+	{
+		/* me fijo que archivo es */
+		for (j=0, f1=1, n_f=0; f1 && j<qf_ff; j++)
+			if ( i >= (*tb[j]).pf && i <= (*tb[j]).uf )
+				n_f = j, f1=0;
+
+		strcpy(b1,(*fnp[i]).l );
+
+		if (!es_linea_comentario(b1) && tiene_include_v4(b1,b2))
+		{
+printf ("INC encontrado: %s \n",b2);
+
+			fprintf (hflog,"%-30.30s  %s\n", (*tb[n_f]).n, b2);
+			fprintf (hfout,"%-15.15s  %s\n", b2, (*tb[n_f]).n);
+		}
+
+
+#if 0
+		strcpy(b1,(*fnp[i]).l );
+		if ( es_linea_comentario(b1) )
+		{
+			strcpy(verif,analisis_comentario(b1));
+			fprintf (hflog,"%s|%s|\n",verif,b1);
+			fprintf (hflog,"%s\n",b1);
+		}
+#endif
+	}
+
+}
+
+
+
+
+bool	tiene_include_v4(s,t) 
+char	*s;
+char	*t;
+{
+	// Define la cadena a buscar
+	const 	char *keyword = "include";
+	char	b1[MAXB];
+
+	bool	r;
+	strcpy	(b1,pasar_a_minusc(s));
+	char 	*start = strstr(b1, keyword);
+
+
+	r = false;
+
+	if (start != NULL) 
+	{
+		// Avanza el puntero más allá de "include"
+		start += strlen(keyword);
+
+		// Salta los espacios en blanco
+		while (isspace(*start)) 
+		{
+		    start++;
+		}
+
+		// Verifica si el siguiente carácter es un apóstrofe
+		if (*start == '\'') 
+		{
+		    // Salta el apóstrofe inicial
+		    start++; 
+
+		    // Encuentra el apóstrofe final
+		    char *end = strchr(start, '\'');
+		    if (end != NULL) 
+		    {
+		        // Copia el nombre de archivo sin las comillas en t
+		        strncpy(t, start, end - start);
+		        t[end - start] = '\0';
+		        r =  true;
+		    }
+		}
+	}
+
+	// resultado
+	return r;
+}
+
+
+
+
+
+
+
+
+
+
+
+#if 0
+
+bool	tiene_include_v3(s,t) 
+char	*s;
+char	*t;
+{
+	// Define la cadena a buscar
+	const 	char *pattern = "   include  '";
+	int 	l1;
+	char	b1[MAXB];
+	bool	r;
+
+	r = false;
+	l1 = strlen(pattern);
+	strcpy (b1,pasar_a_minusc(s));
+
+printf ("TIENE1:  r: %d  b1: |%s| \n",r,b1);
+
+
+	// Busca el patrón en el string 
+	char *start = strstr(b1, pattern);
+
+	if (start != NULL) 
+	{
+		// Encuentra el inicio del nombre de archivo
+		start += l1;
+		char *end = strchr(start, '\'');
+        
+		if (end != NULL) 
+		{
+			// Copia el nombre de archivo sin las comillas en t
+			strncpy(t, start, end - start);
+			t[end - start] = '\0';
+			r = true;
+		}
+	}
+
+printf ("TIENE2:  r: %d  b1: |%s| \n",r,b1);
+
+	// resultado
+	return r;
+}
+#endif
+
+
+
+#if 0
+
+int	tiene_include_v2(s,t)
+char	*s;
+char	*t;
+{
+	int	i,j,k;
+	int	p1,p2,p3;
+	int	f1,f2,f3,f_sig,f_go;
+	int	m1,m2;
+	int	f_res;
+	char	b1[MAXB];
+	char	b2[MAXB];
+
+	f_res = 0;
+	f_sig = 1;
+
+	/* tiene la palabra include ? */
+	if (f_sig)
+	{
+		f_sig = 0;
+
+		for (i=0 , f_go = 1;  f_go && i < strlen(s); i++)
+			if (!strcmp("include", pasar_a_minusc(s+i)))
+				p1 = i+7, f3 = 1, f2 = 0;
+
+	}
+
+	return (f_res);
+}
+
+#endif
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	tiene_include
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+#if 0
+
+int	tiene_include(s,t)
+char	*s,*t;
+{
+
+	int	i,j,k;
+
+	f1 = 0;
+
+	/* tiene la palabra include ... ? */
+	for (i=0 , f2=1, f3=0; f2 && i < strlen(s); i++)
+		if (!strcmp("include", pasar_a_minusc(s+i)))
+			p1 = i+7, f3 = 1, f2 = 0;
+
+	/* despues de include, solo puede haber blancos y un ' */
+	if (f3)
+	{	
+		for(i=p1, f2=1, f4=0; f2 && i < strlen(s); i++)
+			
+	
+
+	s_count = 0;
+
+	p1 = 0;
+	f1 = 1;
+	f2 = 1;
+	f3 = 1;
+	l1 = 0;
+	i  = 0;
+
+
+	while ( f2 )
+	{
+		c = b1[p1 + i];
+		k = 0;
+			
+		if ( c >= 'a' && c <= 'z' )
+			k = 1;
+
+		if ( c >= 'A' && c <= 'Z' )
+			k = 1;
+
+		if ( c >= '0' && c <= '9' )
+			k = 2;
+
+		if ( c == ' ' )
+			k = 3;
+
+		if ( c == '_' )
+			k = 4;
+
+		if ( c == '.' )
+			k = 5;
+
+		if ( c == '/' )
+			k = 6;
+
+printf ("while: i: %d f9: %d k/c: %c%c |%s| \n",i,f9,c,b1[1+i+1],s);
+
+		switch (k)
+		{
+			case 	6:
+				if ( !f9 && i == 0 )
+					f9 = 1, i++;
+
+				if ( !f9 && i )
+					i++;
+
+				if ( f9 && i > 0 )
+					f2 = 0;
+
+				break;
+
+			default:
+				if ( c == 0 )
+					f2 = 0;
+				i++;
+				break;
+					
+
+#if 0
+				/* no es caracter valido en la cadena, terminamos */
+			case	0:
+				f2 = 0;
+				if (f1 == 0)
+					f9 = i;
+				else
+					f9 = 0;
+				break;
+
+				/* es letra */
+			case	1:
+				if (f1)
+					f1=0;
+				i++;
+				break;
+
+				/* es numero , solo si hubo una letra antes */
+			case	2:
+				if (f1)
+				{
+					f9 = 0;
+					f2 = 0;
+				}
+				else
+					i++;
+				break;
+
+
+				/* aceptamos casos en los que hay blancos como parte del nombre !! */
+			case 	3:
+				if (f1)
+				{
+					f9 = 0;
+					f2 = 0;
+				}
+				else
+					i++;
+				break;
+
+				/* aceptamos casos en los que hay _ como parte del nombre !! */
+			case 	4:
+				if (f1)
+				{
+					f9 = 0;
+					f2 = 0;
+				}
+				else
+					i++;
+				break;
+#endif
+		}			
+	}
+
+
+
+
+}
+
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	analisis comentario
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ * analiza un comentario para preparar entrenamiento de IA
+ *
+ * 00 - no hay certeza de lo que es 
+ * 01 - es un comentario
+ * 05 - es una linea de codigo
+ * 
+ */
+
+
+char	*analisis_comentario(s)
+char	*s;
+{
+	static char	verif[8];
+	int	i,j,k,f1,f2;
+	int	l1,l2,l3,l4;
+
+
+	memset(verif,0,8);
+
+	strcpy(verif,"00");
+	f1 = 0;
+
+	/* lineas tipo rayas, separadores etc */
+	if (!f1)
+	{
+		for (i=0, l1=0, l2=0, l3=0, l4=0; i < strlen(s); i++)
+		{		
+			if (s[i] == 'C')
+				l1++;
+			if (s[i] == 'c')
+				l2++;
+			if (s[i] == '!')
+				l3++;
+			if (s[i] == '*')
+				l4++;
+		}
+
+		if (l1 > 20 || l2 > 20 || l3 > 20 || l4 > 20 )
+			f1 = 1;
+	}
+
+	/* lineas vacias */
+	if (!f1)
+	{
+		if (strlen(s) < 4)
+			f1 = 1;
+	}
+
+
+
+	sprintf (verif,"%2d",f1);
+	
+	return (verif);
+}
+
+/*
+ * -----------------------------------------------------------------------------------
  *
  *	pro_exec 3
  *
@@ -2240,6 +3003,7 @@ char	*s;
 
 
 
+#if 0
 
 int	pro_exec3()
 {
@@ -2257,6 +3021,9 @@ int	pro_exec3()
 	}
 
 }
+
+#endif
+
 
 
 
@@ -3320,7 +4087,7 @@ stptr	*q1;
 
 #if 0
 
-#define	MAX_QSRC		500		* cant max de archivos fuentes a manejar */
+#define	MAX_QSRC		500	/* cant max de archivos fuentes a manejar */
 int	qf_ff;
 
 typedef	struct tff	*ffptr;
@@ -8385,7 +9152,7 @@ no anda ... hay que mejorar esto del ultimo ...
 	{
 		ca = tk[n_aster+1][0];
 		if (ca != '1' && ca != '2' && ca != '4' && ca != '8' )
-			error(1004);
+			error(1005);
 
 		sprintf (tk[i] , "%s (kind=%c)  ",s_varb,ca);
 		tk[i+1][0]=0;
@@ -8411,7 +9178,7 @@ no anda ... hay que mejorar esto del ultimo ...
 	{
 		ca = tk[n_aster+1][0];
 		if (ca != '1' && ca != '2' && ca != '4' && ca != '8' )
-			error(1005);
+			error(1006);
 
 		sprintf (tk[i] , "%s (kind=%c), %s :: ",s_varb,s_inte,ca);
 		tk[i+1][0]=0;
@@ -9395,6 +10162,19 @@ int	pro_tool5()
  *
  *	- cambia lineas de continuacion
  *
+ * 
+ *	ffinp
+ *	ffout   Archivo de salida con cambios realizados
+ *	ffaux   Generalmente, errores del parser
+ *	ffsta   Estadisticas de los procesos
+ *
+ *	ffckf	Ir guardando info general de todo el proceso 
+ *
+ *	Para entradas/salidas extras de los procesos
+ *
+ *	ffin2
+ *	ffou2
+ *
  */
 
 
@@ -9510,33 +10290,33 @@ int	pro_tool6()
 	ql_fin=ql_ini;
 
 	
-	/* 1 - pidio cambiar comentarios */
+	/* 0 - pidio cambiar comentarios                              */
 	if ( ffchg_com )
 		cfor_comm(&ql_ini,&ql_fin);
 
-	/* 2 - pidio cambiar type selectors */
-	if ( ffchg_typ )
-		cfor_vars(&ql_ini,&ql_fin);
-
-	/* 3 - pidio cambiar lineas de continuacion */
-	if ( ffchg_lco )
-		cfor_lcon(&ql_ini,&ql_fin);
-
-	/* 4 - pidio sacar las lineas de cont. y replicar declaracion */
-	if ( ffchg_mas )
-		cfor_mas(&ql_ini,&ql_fin);
-
-	/* 5 - pidio convertir formato var/xx/ por var = xx         */
-	if ( ffchg_ini )
-		cfor_ini(&ql_ini,&ql_fin);
-	
-	/* 6 - pidio borrar comentarios                             */
+	/* 1 - pidio borrar comentarios                               */
 	if ( ffchg_dec )
 		cfor_dec(&ql_ini,&ql_fin);
 	
+	/* 2 - pidio cambiar type selectors                           */
+	if ( ffchg_typ )
+		cfor_vars(&ql_ini,&ql_fin);
+
+	/* 3 - pidio sacar las lineas de cont. y replicar declaracion */
+	if ( ffchg_mas )
+		cfor_mas(&ql_ini,&ql_fin);
+
+	/* 4 - pidio convertir formato var/xx/ por var = xx           */
+	if ( ffchg_ini )
+		cfor_ini(&ql_ini,&ql_fin);
+	
+	/* 5 - pidio cambiar lineas de continuacion                   */
+	if ( ffchg_lco )
+		cfor_lcon(&ql_ini,&ql_fin);
+
 
 	/* hago un checking final de las lineas ! */
-	if ( 1 )
+	if ( 0 )
 	{
 		if ( !check_file(&ql_fin) )
 		{
@@ -9587,8 +10367,8 @@ int	pro_tool6()
 
 /*
  * borra comentarios:
- * si son lineas de codigo 
- * que esten despues de lineas de codigo "activas "
+ * a) si son lineas de codigo 
+ * b) que esten despues de lineas de codigo "activas "
  * 
  * deja:
  * aquellos comentarios que describen algoritmos y demas 
@@ -9649,44 +10429,70 @@ int	*ql_f;
 
 
 	/* recorro todas las lineas */
-	for (i=0; i< qi ; i++)
+	for (i=pf; i<= uf ; i++)
 	{
 		/* copio linea y linea siguiente */
 		strcpy(b1, (*fnp[i]).l );
+		strcpy(b2, (*fnp[i]).l );
+		strcpy(b3, (*fnp[i]).l );
 
+#if 0
+		/* parseo en tokens */
+		l_pars(i,&q_tk);
 
 		if(gp_fverbose("d4"))
 		{
 			printf ("cfor_dec: b1: |%s| \n",b1);
 			for (j=0; j<q_tk; j++)
 			{
-				printf ("TK: %3d %3d |%s|\n",j,strlen(tk[j]),tk[j]);
+				printf ("cfor_dec: TK: %3d (%3d) |%s|\n",j,strlen(tk[j]),tk[j]);
 			}	
 			printf ("\n");
 		}
+#endif
 
+#if 0
 		if ( es_linea_comentario(b1))
 		{
 			if (gp_fverbose("d3"))
 			{
 				printf ("cfor_dec: com detectado \n");
-				printf ("cfor_dec: %4d #tk %4d |%s|\n",i,q_tk,b1);
+				printf ("cfor_dec: %5d |%s|\n",lne(i),b1);
 			}
-
+		
+			strcpy(b2,"!");
 
 			/* actualizo stats */
 			sq_comentarios_elim++;
 		}
+#endif
+
+		if ( tiene_coment_final (b1,&p1))
+		{
+			b3[p1] ='\0';
+			strcpy(b2,b3);
+
+			if (fflog)
+			{
+				fprintf (hflog,"%5d %s\n",lne(i),b1);
+				fprintf (hflog,"%5d %s\n",lne(i),b2);
+				fprintf (hflog,"%s","\n");
+			}
+		}
 
 		/* armo la linea de nuevo con todos los tokens */
+#if 0
 		memset (b3,0,MAXB);
 		for (j=0; j< q_tk; j++)
 			strcat (b3,tk[j]);
+#endif
 
-		strcpy ( (*fnp[i]).l, b3);
+		strcpy ( (*fnp[i]).l, b2);
 
+#if 0
 		if (gp_fverbose("d3"))
 			printf ("fix: |%s|\n",b3);
+#endif
 
 	}
 }
@@ -9697,8 +10503,106 @@ int	*ql_f;
 #endif
 
 
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	cfor_comm
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ *	devuelve true si la linea es de este tipo 
+ *      
+ *      !     aca hay cualquier cosa      ! comentario
+ *            aca hay cualquier cosa      ! comentario
+ *            aca hay cualquier cosa      ! comentario !!! expresivo
+ *
+ *	no modifica las lineas tipo
+ *
+ *      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ *            aca hay cualquier cosa ' no tocar ! '  
+ */
+
+int	tiene_coment_final(s,p)
+char	*s;
+int	*p;
+{
+	int	i,j,k;
+	int	c1,c2,c3;
+	int	p1,p2;
+	int	f1,f2,f3;
+	int	f_ret,f_sig;
+	char	b1[MAXB];
 
 
+	f_ret = 0;
+	f_sig = 1;
+	i = strlen(s);
+	*p = 0;
+
+	/* ver si no se mando !!!!!!!!!!!!!!! !! !!! !!!! - hay cada uno */
+	if (f_sig)
+	{
+		c1 = 0;
+	 	c2 = 0;
+		c3 = 0;
+
+		for (i=0; i < strlen(s); i++)
+		{	if (s[i] == '!')
+				c1++;
+			if (s[i] == ' ')
+				c2++;
+			if (s[i] != '!' && s[i] != ' ')
+				c3++;
+		}
+
+		if (c1 > 15 && c3 < 10)
+		{
+			f_sig = 0;
+			f_ret = 0;
+		}
+	}
+
+			
+
+	i = strlen(s);
+	f1 = 0;
+	f2 = 0;
+
+	while (f_sig)
+	{
+		if (s[i] == '\'')
+		{	if (f1 == 0)
+				f1 = 1;
+			else
+				f1 = 0;
+		}
+		
+		if (s[i] == '"')
+		{	if (f2 == 0)
+				f2 = 1;
+			else
+				f2 = 0;
+		}
+
+
+		if (f1 == 0 && f2 == 0)
+		{
+			if (s[i] == '!')
+			{	f_ret = 1;
+				p1 = i;
+				*p = i;
+			}
+		}
+
+		i--;
+		if (i <= 6)
+			f_sig = 0;
+	}
+
+	return (f_ret);
+}
 
 
 
@@ -12694,6 +13598,145 @@ int main()
 
 
 #endif
+
+
+
+
+#if 0
+
+
+
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+bool tiene_include(char *s, char *t) 
+{
+    // Define la cadena a buscar
+    const char *pattern = "   include  '";
+    int pattern_len = strlen(pattern);
+
+    // Busca el patrón en el string s
+    char *start = strstr(s, pattern);
+
+    if (start != NULL) 
+    {
+        // Encuentra el inicio del nombre de archivo
+        start += pattern_len;
+        char *end = strchr(start, '\'');
+        
+        if (end != NULL) 
+        {
+            // Copia el nombre de archivo sin las comillas en t
+            strncpy(t, start, end - start);
+            t[end - start] = '\0';
+            return true;
+        }
+    }
+
+    // No se encontró el patrón
+    return false;
+}
+
+int main() 
+{
+    char s[] = "Este es un ejemplo de cadena con   include  'nombre_de_file_valido' en el medio.";
+    char t[100];
+
+    if (tiene_include(s, t)) 
+    {
+        printf("Se encontró la sentencia. El nombre de archivo es: %s\n", t);
+    }
+    else 
+    {
+        printf("No se encontró la sentencia.\n");
+    }
+
+    return 0;
+}
+
+
+
+
+#endif
+
+
+
+#if 0
+
+
+
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+#include <ctype.h>
+
+bool tiene_include(char *s, char *t) {
+    // Define la cadena a buscar
+    const char *keyword = "include";
+    char *start = strstr(s, keyword);
+
+    if (start != NULL) {
+        // Avanza el puntero más allá de "include"
+        start += strlen(keyword);
+
+        // Salta los espacios en blanco
+        while (isspace(*start)) {
+            start++;
+        }
+
+        // Verifica si el siguiente carácter es un apóstrofe
+        if (*start == '\'') {
+            start++; // Salta el apóstrofe inicial
+
+            // Encuentra el apóstrofe final
+            char *end = strchr(start, '\'');
+            if (end != NULL) {
+                // Copia el nombre de archivo sin las comillas en t
+                strncpy(t, start, end - start);
+                t[end - start] = '\0';
+                return true;
+            }
+        }
+    }
+
+    // No se encontró el patrón
+    return false;
+}
+
+int main() {
+    char s[] = "Este es un ejemplo de cadena con include    'nombre_de_file_valido' en el medio.";
+    char t[100];
+
+    if (tiene_include(s, t)) {
+        printf("Se encontró la sentencia. El nombre de archivo es: %s\n", t);
+    } else {
+        printf("No se encontró la sentencia.\n");
+    }
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#endif
+
 
 
 /*
