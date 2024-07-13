@@ -794,6 +794,8 @@ bool	tiene_include_v3(char *, char *);
 bool	tiene_include_v4(char *, char *);
 int	info_cmp(char *, char *);
 int	tiene_coment_final(char *, int*);
+int	complejidad_mon(int, int, int *, int *);
+int	es_mon(char *);
 
 
 int	borrar_stats();
@@ -2464,6 +2466,7 @@ int	ex3_p2()
 {
 	int 	i,j,k;
 	int	f1,f2;
+	int	f_mon,m_nl,m_nc;
 	int	n_f;
 	int	pf,uf;
 	int	n_info;
@@ -2473,6 +2476,7 @@ int	ex3_p2()
 	char	info[30][MAXB];
 	int	s_info[30];
 	char	nro[16];
+	char	nro2[16];
 
 	for (i=0; i<30; i++)
 		s_info[i]=0;
@@ -2481,14 +2485,26 @@ int	ex3_p2()
 	/* para todos los archivos  */
 	for (j=0; j < qf_ff; j++)
 	{
+		f_mon = 0;
+
 		strcpy (b3, (*tb[j]).n );
 		pf =  (*tb[j]).pf;
 		uf =  (*tb[j]).uf;
 
-
+		if (es_mon(b3))
+			f_mon = 1;
 
 		n_info = 0;
-		sprintf (info[n_info],"%-30.30s",b3);
+		sprintf (info[n_info],"%-34.34s",b3);
+
+		if (f_mon)
+		{	complejidad_mon(pf,uf,&m_nl,&m_nc);
+			sprintf (nro2,"%3d %2d",m_nl,m_nc);
+			sprintf (info[n_info],"%-34.34s                             %3d %2d",b3,m_nl,m_nc);
+			info[n_info][60] = 'M';
+		}
+
+			
 
 		for (i = pf; i <= uf; i++)
 		{
@@ -2496,18 +2512,18 @@ int	ex3_p2()
 
 			if (!es_linea_comentario(b1) && tiene_include_v4(b1,b2))
 			{
-				fprintf (hflog,"%-30.30s  %s\n", b3, b2);
+				fprintf (hflog,"%-34.34s  %s\n", b3, b2);
 				fprintf (hfout,"%-15.15s  %s\n", b2, b3);
 
 				n_info++;
-				sprintf (info[n_info],"%-30.30s %s",b3,b2);
+				sprintf (info[n_info],"%-34.34s %s",b3,b2);
 			}
 
 
 
 		}
 
-		fprintf (hfaux,"%s\n","----------------------------------------------------------------------------");
+		fprintf (hfaux,"%s\n","-------------------------------------------------------------------------");
 
 		if (n_info == 0)
 			fprintf (hfaux,"%3d %s\n",lne(j),info[n_info]);
@@ -2551,6 +2567,9 @@ int	ex3_p2()
 						f2 =0;
 					}
 
+					if (f_mon)
+						info[k][60]='M';
+
 					fprintf (hfaux,"%s %-50.50s (%2d)\n",nro,info[k],s_info[k]);
 				}
 			}
@@ -2559,6 +2578,79 @@ int	ex3_p2()
 	}
 
 }
+
+
+
+
+
+
+int	complejidad_mon(pf,uf,m_nl,m_nc)
+int	pf;
+int	uf;
+int	*m_nl;
+int	*m_nc;
+{
+	int	i,j,k;
+	int	f_sig;
+	int	f1,f2,f3;
+	int	ql,qc;
+	char	b1[MAXB];
+
+	ql = 0;
+	qc = 0;
+
+	for (i = pf; i <= uf; i++)
+	{
+		strcpy(b1,pasar_a_minusc((*fnp[i]).l)  );
+
+		if (!es_linea_comentario(b1))
+		{
+			ql++;
+
+			for (j=0, f_sig = 1; f_sig && j < strlen(b1); j++)
+			{	
+				f3 = strncmp("common",b1+j,6);
+printf ("complej: %5d f3: %d |%s| \n",j,f3,b1);
+
+				if (!f3 && ( b1[j+6] == '/' || b1[j+7] == '/' || b1[j+8] == '/')  )
+				{
+		printf ("complejidad: BINGO !!! \n");
+
+					f_sig = 0, qc ++;
+				}
+			}
+		}
+	}
+
+	*m_nl = ql;
+	*m_nc = qc;
+}
+
+
+
+int	es_mon(s)
+char	*s;
+{
+	int	i,j,k;
+	int	f1,f2;
+	int	f_sig,f_ret;
+	char	b1[MAXB];
+
+
+	f_ret = 0;
+	strcpy (b1,pasar_a_minusc(s));
+
+
+	for (i=0, f_sig = 1; f_sig && i < strlen(s); i++)
+		if (!strcmp(".mon",b1+i))
+			f_ret = 1, f_sig = 0;
+
+	return ( f_ret );
+}
+	
+
+
+
 
 int	info_cmp(p1,p2)
 char	*p1;

@@ -3,7 +3,7 @@ tfor.c
 menu.txt
 clear.txt
 p0_com.sh
-p1_com.sh
+p1_dec.sh
 p2_typ.sh
 p3_mas.sh
 p4_ini.sh
