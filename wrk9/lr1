@@ -5,7 +5,6 @@ repo1/ANDECOMP.FOR
 repo1/Abb_CapMarketRptData.f90
 repo1/Ac_equiv.MON
 repo1/BFIL_OBJ.FOR
-repo1/CATAWBA.FOR
 repo1/CF_OBJT.FOR
 repo1/CLM_OBJT.FOR
 repo1/CNTRCOM.MON
@@ -50,10 +49,8 @@ repo1/MIDASFileIndexingRoutines.f90
 repo1/MMM_COM.MON
 repo1/MSGMMExpRevCash.for
 repo1/MSGMMOUT.for
-repo1/MSGMMSB6B.FOR
-repo1/MSGProSymRevExp.for
+repo1/MSGProSymRevExp.f95
 repo1/MSGmmadm.FOR
-repo1/MUNIREV.FOR
 repo1/Msgmminp.for
 repo1/Msgmmrev.for
 repo1/Mthnmcom.mon
@@ -99,6 +96,7 @@ repo1/capacity_arrays.f90
 repo1/capacity_options_alloc_vars.f90
 repo1/capacity_options_fixed_variables.f90
 repo1/cat2objt.for
+repo1/catawba.f90
 repo1/cl_data.f90
 repo1/cl_screen_data.for
 repo1/cl_units_read_data.f90
@@ -168,7 +166,6 @@ repo1/ft_interfaces.f90
 repo1/fuel_types.f90
 repo1/fuelcat.f90
 repo1/fuelused_decs.f90
-repo1/global_variables_mod.f90
 repo1/globecom.f90
 repo1/group_prod.f90
 repo1/grx_captrade.f90
@@ -213,10 +210,12 @@ repo1/msgmmfa.for
 repo1/msgmmfv.for
 repo1/msgmmpyb.for
 repo1/msgmmsb6.for
+repo1/msgmmsb6b.for
 repo1/msgmmtax.for
 repo1/msgnorm.for
 repo1/msgold95rw.f90
 repo1/msgoutpt.for
+repo1/munirev.for
 repo1/mwunih.f90
 repo1/newfred2.for
 repo1/objtfunc.f90
@@ -233,6 +232,7 @@ repo1/procost_data.f90
 repo1/prod2com.f90
 repo1/prod_arrays_dimensions.f90
 repo1/prodcom.f90
+repo1/prosymmodule.f90
 repo1/reaenrg.for
 repo1/reference_loads.f90
 repo1/reference_loadsi2.f90
@@ -240,6 +240,7 @@ repo1/rps_data.f90
 repo1/rps_index_translate_mod.for
 repo1/rpth_obj.for
 repo1/screen_initialization.f90
+repo1/servcom.f90
 repo1/servicac.for
 repo1/shared_vars_interg82.f90
 repo1/sizecom.f90

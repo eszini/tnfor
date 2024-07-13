@@ -586,6 +586,7 @@ int	flag_before_exit;
 
 int	agregar_ffaux(char *);
 int	agregar_ffsta(char *);
+int	agregar_ffckf(char *);
 
 
 /*
@@ -13700,8 +13701,8 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0043");
-	strcpy (d,"Thu Jun 27 05:13:59 -03 2024");
+	strcpy (ver,"0044");
+	strcpy (d," Sat Jul 13 13:18:12 -03 2024");
 
 	sprintf (z,"%s -- (%s)  %s", gp_fp(GP_GET,0,(char **)0), ver, d  );
 	memset (w,0,MAXV);
