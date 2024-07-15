@@ -771,6 +771,7 @@ int	p_src3();
 int	ex3_p1();
 int	ex3_p2();
 int	ex3_p3();
+int	ex3_p4();
 int	es_cadena_valida(int,char *);
 int	es_cadena_interesante(char *);
 int	es_cadena_int_src3(char *,int *);
@@ -793,7 +794,8 @@ int	lne(int );
 char	*analisis_comentario(char *);
 bool	tiene_include_v3(char *, char *);
 bool	tiene_include_v4(char *, char *);
-int	info_cmp(char *, char *);
+int	info_cmp1(char *, char *);
+int	info_cmp2(char *, char *);
 int	tiene_coment_final(char *, int*);
 int	complejidad_mon(int, int, int *, int *);
 int	es_mon(char *);
@@ -2265,8 +2267,6 @@ char	*s;
 
 
 
-
-
 /*
  * -----------------------------------------------------------------------------------
  *
@@ -2421,6 +2421,8 @@ int	pro_exec3()
 	 */
 
 	ex3_p2();
+	ex3_p3();
+	ex3_p4();
 
 
 	/* grabo new file */
@@ -2446,6 +2448,7 @@ int	pro_exec3()
 	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[1],z);
 	}
 }
+
 
 
 
@@ -2513,8 +2516,10 @@ int	ex3_p2()
 
 			if (!es_linea_comentario(b1) && tiene_include_v4(b1,b2))
 			{
+#if 0
 				fprintf (hflog,"%-34.34s  %s\n", b3, b2);
 				fprintf (hfout,"%-15.15s  %s\n", b2, b3);
+#endif
 
 				n_info++;
 				sprintf (info[n_info],"%-34.34s %s",b3,b2);
@@ -2525,6 +2530,132 @@ int	ex3_p2()
 		}
 
 		fprintf (hfaux,"%s\n","-------------------------------------------------------------------------");
+
+		if (n_info == 0)
+			fprintf (hfaux,"%3d %s\n",lne(j),info[n_info]);
+		else
+		{
+			s_info[1]=1;
+			if (n_info > 1)
+			{
+				qsort ( &info[1],n_info,MAXB,info_cmp1 );
+
+				for (k=1; k <= n_info; k++)
+				{
+
+					if ( k == 1 )
+					{
+						s_info[k] = 1;
+					}
+
+					if ( k != 1 )
+					{
+						if ( !strcmp(info[k],info[k-1]) )
+						{
+							s_info[k] = s_info[k-1] + 1;
+							s_info[k-1] = 0;
+						}
+						else
+							s_info[k] = 1;
+					}
+				}
+
+					
+			}
+
+			for (k=1, f2=1; k <= n_info; k++)
+			{
+				if (s_info[k])
+				{	
+					strcpy(nro,"   ");
+					if (f2)
+					{	sprintf (nro,"%3d",lne(j) );
+						f2 =0;
+					}
+
+					if (f_mon)
+						info[k][60]='M';
+
+					fprintf (hfaux,"%s %-50.50s (%2d)\n",nro,info[k],s_info[k]);
+				}
+			}
+		}
+
+	}
+
+	fprintf (hfaux,"%s\n","-------------------------------------------------------------------------");
+}
+
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	ex3_p3
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ * llamado por pro_exec3
+ * hace algo con todas las lineas cargadas en memoria
+ *
+ * hfout ... include - file
+ *
+ */
+
+int	ex3_p3()
+{
+	int 	i,j,k;
+	int	f1,f2;
+	int	f_mon,m_nl,m_nc;
+	int	n_f;
+	int	pf,uf;
+	int	n_info;
+	char	b1[MAXB];
+	char	b2[MAXB];
+	char	b3[MAXB];
+	char	info[700][MAXB];
+	int	s_info[30];
+	char	nro[16];
+	char	nro2[16];
+
+	for (i=0; i<30; i++)
+		s_info[i]=0;
+
+
+	n_info = 0;
+
+	/* para todos los archivos  */
+	for (j=0; j < qf_ff; j++)
+	{
+		f_mon = 0;
+
+		strcpy (b3, (*tb[j]).n );
+		pf =  (*tb[j]).pf;
+		uf =  (*tb[j]).uf;
+
+			
+		for (i = pf; i <= uf; i++)
+		{
+			strcpy(b1,(*fnp[i]).l );
+
+			if (!es_linea_comentario(b1) && tiene_include_v4(b1,b2))
+			{
+
+				sprintf (info[n_info],"%-16.16s %s",b2,b3);
+				n_info++;
+			}
+
+
+
+		}
+
+#if 0
+
+		fprintf (hfout,"%s\n","-------------------------------------------------------------------------");
 
 		if (n_info == 0)
 			fprintf (hfaux,"%3d %s\n",lne(j),info[n_info]);
@@ -2576,6 +2707,16 @@ int	ex3_p2()
 			}
 		}
 
+#endif
+
+	}
+
+	qsort ( &info[0],n_info,MAXB,info_cmp2);
+
+	for (k=0; k < n_info; k++)
+	{
+
+		fprintf (hfout,"%s\n",info[k]);
 	}
 
 }
@@ -2583,6 +2724,173 @@ int	ex3_p2()
 
 
 
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	ex3_p4
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ * llamado por pro_exec3
+ * hace algo con todas las lineas cargadas en memoria
+ *
+ * hfout ... include - file
+ *
+ */
+
+int	ex3_p4()
+{
+	int 	i,j,k;
+	int	f1,f2;
+	int	f_mon,m_nl,m_nc;
+	int	n_f;
+	int	pf,uf;
+	int	n_info;
+	char	b1[MAXB];
+	char	b2[MAXB];
+	char	b3[MAXB];
+	char	info[700][MAXB];
+	int	s_info[30];
+	char	nro[16];
+	char	nro2[16];
+
+	for (i=0; i<30; i++)
+		s_info[i]=0;
+
+
+	n_info = 0;
+
+	/* para todos los archivos  */
+	for (j=0; j < qf_ff; j++)
+	{
+		f_mon = 0;
+
+		strcpy (b3, (*tb[j]).n );
+		pf =  (*tb[j]).pf;
+		uf =  (*tb[j]).uf;
+
+#if 0
+		if (es_mon(b3))
+			f_mon = 1;
+
+		n_info = 0;
+		sprintf (info[n_info],"%-34.34s",b3);
+
+		if (f_mon)
+		{	complejidad_mon(pf,uf,&m_nl,&m_nc);
+			sprintf (nro2,"%3d %2d",m_nl,m_nc);
+			sprintf (info[n_info],"%-34.34s                             %3d %2d",b3,m_nl,m_nc);
+			info[n_info][60] = 'M';
+		}
+#endif
+
+			
+		for (i = pf; i <= uf; i++)
+		{
+			strcpy(b1,(*fnp[i]).l );
+
+			if (!es_linea_comentario(b1) && tiene_include_v4(b1,b2))
+			{
+#if 0
+				fprintf (hflog,"%-34.34s  %s\n", b3, b2);
+				fprintf (hfout,"%-15.15s  %s\n", b2, b3);
+#endif
+
+				sprintf (info[n_info],"%-36.36s %s",b3,b2);
+				n_info++;
+			}
+
+
+
+		}
+
+#if 0
+
+
+
+		fprintf (hfout,"%s\n","-------------------------------------------------------------------------");
+
+		if (n_info == 0)
+			fprintf (hfaux,"%3d %s\n",lne(j),info[n_info]);
+		else
+		{
+			s_info[1]=1;
+			if (n_info > 1)
+			{
+				qsort ( &info[1],n_info,MAXB,info_cmp );
+
+				for (k=1; k <= n_info; k++)
+				{
+
+					if ( k == 1 )
+					{
+						s_info[k] = 1;
+					}
+
+					if ( k != 1 )
+					{
+						if ( !strcmp(info[k],info[k-1]) )
+						{
+							s_info[k] = s_info[k-1] + 1;
+							s_info[k-1] = 0;
+						}
+						else
+							s_info[k] = 1;
+					}
+				}
+
+					
+			}
+
+			for (k=1, f2=1; k <= n_info; k++)
+			{
+				if (s_info[k])
+				{	
+					strcpy(nro,"   ");
+					if (f2)
+					{	sprintf (nro,"%3d",lne(j) );
+						f2 =0;
+					}
+
+					if (f_mon)
+						info[k][60]='M';
+
+					fprintf (hfaux,"%s %-50.50s (%2d)\n",nro,info[k],s_info[k]);
+				}
+			}
+		}
+#endif 
+
+	}
+
+	qsort ( &info[0],n_info,MAXB,info_cmp2);
+
+	for (k=0; k < n_info; k++)
+	{
+
+		fprintf (hflog,"%s\n",info[k]);
+	}
+
+}
+
+
+
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	complejidad_mon
+ *
+ * -----------------------------------------------------------------------------------
+ */
 
 
 int	complejidad_mon(pf,uf,m_nl,m_nc)
@@ -2629,6 +2937,17 @@ printf ("complej: %5d f3: %d |%s| \n",j,f3,b1);
 
 
 
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	info_cmp1
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+
 int	es_mon(s)
 char	*s;
 {
@@ -2651,9 +2970,16 @@ char	*s;
 	
 
 
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	info_cmp1
+ *
+ * -----------------------------------------------------------------------------------
+ */
 
 
-int	info_cmp(p1,p2)
+int	info_cmp1(p1,p2)
 char	*p1;
 char	*p2;
 {
@@ -2670,6 +2996,30 @@ char	*p2;
 }
 
 
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	info_cmp2
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+
+int	info_cmp2(p1,p2)
+char	*p1;
+char	*p2;
+{
+	int k;
+
+	k = strcmp(p1,p2);
+
+	if (gp_fverbose("d4"))
+	{
+		printf ("SSS info_cmp %s %s %d !! \n",p1,p2,k);
+	}
+
+	return k;
+}
 
 
 
@@ -13701,7 +14051,7 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0044");
+	strcpy (ver,"0045");
 	strcpy (d," Sat Jul 13 13:18:12 -03 2024");
 
 	sprintf (z,"%s -- (%s)  %s", gp_fp(GP_GET,0,(char **)0), ver, d  );
