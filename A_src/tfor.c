@@ -12,6 +12,7 @@
  */
 
 
+
 /*
  *	//header//
  *
@@ -409,6 +410,7 @@ int	gp_verbose=0;		/* verbose 0 no 1 si */
 
 int	gp_minusculas=0;	/* output en minuscula 0 no 1 si */
 int	gp_tabs=0;		/* reemplazar tabs x 4 blancos si no */
+int	gp_rellena=0;		/* & en cont de linea 0 ĺo pegam 1 rellena a columna 90 */
 int	gp_fsentencia=0;	/* archivo de salida en formato sentencias 0 no 1 si */
 int	gp_eol=0;		/* fuerzo string EOL al final de la linea ... a veces hay . en medio de la linea */
 int	gp_reidx;		/* re indexar archivo de transacciones */
@@ -794,11 +796,18 @@ int	lne(int );
 char	*analisis_comentario(char *);
 bool	tiene_include_v3(char *, char *);
 bool	tiene_include_v4(char *, char *);
-int	info_cmp1(char *, char *);
-int	info_cmp2(char *, char *);
 int	tiene_coment_final(char *, int*);
 int	complejidad_mon(int, int, int *, int *);
 int	es_mon(char *);
+
+#if 0
+int	info_cmp1(char *, char *);
+int	info_cmp2(char *, char *);
+#endif
+
+int 	info_cmp1(const void *, const void *);
+int 	info_cmp2(const void *, const void *);
+
 
 
 int	borrar_stats();
@@ -2942,7 +2951,7 @@ printf ("complej: %5d f3: %d |%s| \n",j,f3,b1);
 /*
  * -----------------------------------------------------------------------------------
  *
- *	info_cmp1
+ *	es_mon
  *
  * -----------------------------------------------------------------------------------
  */
@@ -2978,14 +2987,25 @@ char	*s;
  * -----------------------------------------------------------------------------------
  */
 
+#if 0
+int info_cmp1(const void *p1, const void *p2) 
+{
+    // Convertir punteros void a punteros char
+    const char *a = (const char *)p1;
+    const char *b = (const char *)p2;
+
+    return strcmp(a, b);
+}
+#endif
+
 
 int	info_cmp1(p1,p2)
-char	*p1;
-char	*p2;
+const	void	*p1;
+const	void	*p2;
 {
 	int k;
 
-	k = strcmp(p1,p2);
+	k = strcmp((const char *)p1,(const char *)p2);
 
 	if (gp_fverbose("d4"))
 	{
@@ -2994,6 +3014,10 @@ char	*p2;
 
 	return k;
 }
+
+
+
+
 
 
 /*
@@ -3006,12 +3030,12 @@ char	*p2;
 
 
 int	info_cmp2(p1,p2)
-char	*p1;
-char	*p2;
+const	void	*p1;
+const	void	*p2;
 {
 	int k;
 
-	k = strcmp(p1,p2);
+	k = strcmp((const char *)p1,(const char *)p2);
 
 	if (gp_fverbose("d4"))
 	{
@@ -11644,9 +11668,15 @@ int	*ql_f;
 			}
 			else
 			{
+				/* ponemos el & al final ... */
 				memset(tk[q_tk],0,MAXB);
-				strncpy(tk[q_tk++],b4,90-strlen(b3));
-				sprintf (tk[q_tk++],"&");
+
+				if (gp_rellena)
+				{	
+					strncpy(tk[q_tk++],b4,90-strlen(b3));
+				}
+
+				sprintf (tk[q_tk++],"   &");
 			}
 
 
@@ -13233,6 +13263,9 @@ int	gp_parser()
 			if ( *( gp_fp(GP_GET,i,(char **)0) + 1) == 't'  )
 				gp_tabs = 1;
 
+			if ( *( gp_fp(GP_GET,i,(char **)0) + 1) == 'r'  )
+				gp_rellena = 1;
+
 			if ( *( gp_fp(GP_GET,i,(char **)0) + 1) == 'i'  )
 				gp_reidx = 1;
 
@@ -14546,4 +14579,96 @@ int main() {
  */
 
 
+#if 0
+
+#include <stdlib.h>
+#include <string.h>
+
+// Ejemplo de estructura para info
+typedef struct {
+    char data[MAXB];
+    // Otros campos...
+} info_t;
+
+// Función de comparación corregida
+int info_cmp1(const void *a, const void *b) {
+    // Convertir punteros void a punteros info_t
+    const info_t *ia = (const info_t *)a;
+    const info_t *ib = (const info_t *)b;
+
+    // Comparar los campos de la estructura (ajusta según lo necesario)
+    return strcmp(ia->data, ib->data);
+}
+
+// Otra función de comparación de ejemplo
+int info_cmp2(const void *a, const void *b) {
+    const info_t *ia = (const info_t *)a;
+    const info_t *ib = (const info_t *)b;
+
+    // Comparar los campos de la estructura (ajusta según lo necesario)
+    return strcmp(ia->data, ib->data);
+}
+
+// Función que usa qsort
+void ex3_p2() {
+    info_t info[MAXN]; // Ajusta según tu implementación
+    int n_info = /* número de elementos en info */;
+    
+    qsort(&info[1], n_info, sizeof(info_t), info_cmp1);
+}
+
+void ex3_p3() {
+    info_t info[MAXN]; // Ajusta según tu implementación
+    int n_info = /* número de elementos en info */;
+    
+    qsort(&info[0], n_info, sizeof(info_t), info_cmp2);
+}
+
+
+
+
+
+#endif
+
+
+
+
+
+#if 0
+
+
+#include <stdlib.h>
+#include <string.h>
+
+#define MAXB  1024
+
+char info[1000][MAXB];
+int n_info = 1000;
+
+// Función de comparación corregida
+int info_cmp1(const void *p1, const void *p2) 
+{
+    // Convertir punteros void a punteros char
+    const char *a = (const char *)p1;
+    const char *b = (const char *)p2;
+
+    return strcmp(a, b);
+}
+
+// Ejemplo de uso de qsort
+void ex3_p2() 
+{
+    qsort(&info[0], n_info, MAXB, info_cmp1);
+}
+
+int main() 
+{
+    // Llamada a la función para ordenar
+    ex3_p2();
+
+    return 0;
+}
+
+
+#endif
 
