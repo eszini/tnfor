@@ -5,5 +5,5 @@
 #
 
 
- ./tfor -v -opciones=d5 -exec=3 -dato=repo4 -inp=lr1 -out=r_inc.txt  -aux=r_res.txt -log=r_src.txt  > log8
+ ./tfor -v -opciones=d5 -exec=3 -dato=repo4 -inp=lr1 -out=r_inc.txt  -aux=r_res.txt  -log=r_src.txt  > log8
 
