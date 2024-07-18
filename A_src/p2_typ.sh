@@ -75,3 +75,14 @@ fi
 
 
 
+
+echo
+if [ -e "$arc2" ] ; then
+    echo "cp t3.for a t4.for por si quiere saltar el paso p3_mas.sh"
+    cp t3.for t4.for
+else
+    echo "No se genero t3.for !!"
+fi
+
+
+

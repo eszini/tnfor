@@ -64,8 +64,13 @@ else
     echo "No hay datos en check file"
 fi
 
-
-
+echo
+if [ -e "$arc2" ] ; then
+    echo "cp t1.for a t2.for por si quiere saltar el paso p1_dec.sh"
+    cp t1.for t2.for
+else
+    echo "No se genero t1.for !!"
+fi
 
 
 
