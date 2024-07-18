@@ -11330,6 +11330,8 @@ int	*ql_f;
  *
  *      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  *            aca hay cualquier cosa ' no tocar ! '  
+ *
+ *	ojo con las lineas que tienen pepe's margin ....
  */
 
 int	tiene_coment_final(s,p)
@@ -11337,9 +11339,9 @@ char	*s;
 int	*p;
 {
 	int	i,j,k;
-	int	c1,c2,c3;
+	int	c1,c2,c3,c4;
 	int	p1,p2;
-	int	f1,f2,f3;
+	int	f1,f2,f3,f4;
 	int	f_ret,f_sig;
 	char	b1[MAXB];
 
@@ -11348,6 +11350,27 @@ int	*p;
 	f_sig = 1;
 	i = strlen(s);
 	*p = 0;
+
+		
+	/* si despues de ! hay un solo ' , todo lo demas no funca */
+	c4 = 0;
+	f4 = 1;
+	j  = 8;
+       	p2 = 0;
+
+	while ( f4 && j < i)
+	{	if (s[j] == '!')
+			p2 = j;
+
+		if (p2 && s[j] == '\'')
+		{
+			c4++;
+		}
+
+		j++;
+	}
+
+
 
 	/* ver si no se mando !!!!!!!!!!!!!!! !! !!! !!!! - hay cada uno */
 	if (f_sig)
@@ -11380,12 +11403,18 @@ int	*p;
 
 	while (f_sig)
 	{
+		/* solo si hay mas de un solo '  */
+		if (c4 > 1)
+		{
+
 		if (s[i] == '\'')
 		{	if (f1 == 0)
 				f1 = 1;
 			else
 				f1 = 0;
 		}
+		}
+
 		
 		if (s[i] == '"')
 		{	if (f2 == 0)
@@ -11833,7 +11862,7 @@ char	*s;
 int	pro_tool7()
 {
 	int	i,j,k;
-	int	f1,f2,f3;
+	int	f1,f2,f3,f4;
 	int	p1;
 	char	b1[MAXB];
 	char	b2[MAXB];
@@ -11874,8 +11903,9 @@ int	pro_tool7()
 	{
 		strcpy(b1,(*fnp[i]).l);
 
-		if (tiene_coment_final(b1,&p1))
-			b1[p1] = '\0';
+
+		if ( f4 = tiene_coment_final(b1,&p1))
+			b1[p1] = 0;
 
 
 		if (!es_linea_comentario2 (b1))

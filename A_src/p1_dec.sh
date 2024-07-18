@@ -26,7 +26,7 @@ fi
 
 ./tfor -v -opciones=d5 -tool=6 -inp="$arc1" -out="$arc2" --chgdec -t -log=p.log  > log0
 
-./tfor -exec=1 -inp="$arc1" -in2="$arc2" -out=d1.chr
+# ./tfor -exec=1 -inp="$arc1" -in2="$arc2" -out=d1.chr
 
 
 
@@ -36,9 +36,9 @@ for file in "$arc1"  "$arc2"; do
 done
 
 
-echo
-echo "Mapeo chars  file1   file2"
-grep ^X d1.chr
+#echo
+#echo "Mapeo chars  file1   file2"
+#grep ^X d1.chr
 
 echo
 if [ -e "$parser_log" ] && [ -s "$parser_log" ]; then
