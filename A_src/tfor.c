@@ -12,7 +12,6 @@
  */
 
 
-
 /*
  *	//header//
  *
@@ -5828,6 +5827,8 @@ int	pro_prue5()
  * -----------------------------------------------------------------------------------
  */
 
+int	q_wrd;
+char	cwd[10000][32];
 
 int	q_cid;
 char	cid[20000][MAXR];
@@ -5925,11 +5926,52 @@ int	pro_prue6()
 	}
 
 
+	/*
+	 * cargo todas las palabras que suenan en comentarios de personas
+	 *
+	 */
+
+	q_wrd = 0;
+#if 1
+
+	if ( 1 && ((hwi = fopen ("diccio_dep.txt","r")) == NULL) )
+	{
+		error(3001);
+	}
+
+	q_wrd = 0;
+	while (fgets(b1,MAXB,hwi) != NULL)
+	{
+		if (strlen(b1) > 32)
+		{	printf ("%3d |%s|\n",strlen(b1),b1);
+			error(3002);
+		}
+
+		/* saco el fin de linea - contemplo 13 x fuentes fortran */
+		for ( flag=0, j=strlen(b1); !flag && j; j--)
+			if (b1[j] == '\n' )
+			{	
+				flag=1;
+
+				if ( j && b1[j-1] == 13)
+					b1[j-1]=0;
+				else
+					b1[j]=0;
+			}
+
+		strcpy(cwd[q_wrd],b1);
+		q_wrd++;
+	}
+
+	fclose(hwi);
+
+#endif
 
 	if (gp_fverbose("d1"))
 	{
 		printf ("Cantidad de palabras en diccionario  : %6d\n",ql);
 		printf ("Cantidad de terminos en index        : %6d\n",q_cid);
+		printf ("Cantidad de palabras en dic dep      : %6d\n",q_wrd);
 	}
 
 
@@ -5941,6 +5983,12 @@ int	pro_prue6()
 	 */
 
 	/* cosas que parezcan variables, probablemente sean lineas comentadas */
+
+	/*
+	 * x1 
+	 *
+	 */
+
 	for (i=0; i< q_cid; i++)
 	{
 		strcpy(b1,cid[i]+2);
