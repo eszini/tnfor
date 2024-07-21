@@ -1,0 +1,5 @@
+      MODULE CL_UNITS_READ_DATA
+         USE PROD_ARRAYS_DIMENSIONS
+         REAL (KIND=4) :: LOCAL_CL_POOL_FRAC_OWN(MAX_CL_UNITS)
+         REAL (KIND=8) :: ThermalDemandPreviousIter(MAX_CL_UNITS)
+      END MODULE
