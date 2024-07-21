@@ -499,6 +499,7 @@ int	pro_prue6();
 int	pro_exec1();
 int	pro_exec2();
 int	pro_exec3();
+int	pro_exec4();
 
 int	pro_proc1();
 int	pro_proc2();
@@ -692,6 +693,8 @@ typedef	struct tff
 {	char	n[MAXB];		/* nombre de file */
 	int	pf,uf,ql;		/* primera - ultima fila, q lineas */
 	int	f1,f2,f3;		/* flags prop general */
+	int	q_entrys;		/* cantidad de entrys */
+	int	q_prog_calling;		/* cant de programas (dif) que llaman a entrys */
 }	ff;
 
 ffptr	ffp1,ffp2,*ffq1,*ffq2;		/* punteros varios */
@@ -773,6 +776,7 @@ int	ex3_p1();
 int	ex3_p2();
 int	ex3_p3();
 int	ex3_p4();
+int	ex4_p1();
 int	es_cadena_valida(int,char *);
 int	es_cadena_interesante(char *);
 int	es_cadena_int_src3(char *,int *);
@@ -795,9 +799,16 @@ int	lne(int );
 char	*analisis_comentario(char *);
 bool	tiene_include_v3(char *, char *);
 bool	tiene_include_v4(char *, char *);
+int	tiene_entry_v1(char *, char *);
+int	tiene_call_a_entry(char *, char *);
 int	tiene_coment_final(char *, int*);
 int	complejidad_mon(int, int, int *, int *);
 int	es_mon(char *);
+int	len_linea_src(char *,int *,int *,int *);
+int	lml_src_sc(int *,int *,int , int );
+int	primer_char(char *, int *);
+char	*f_name(int);
+
 
 #if 0
 int	info_cmp1(char *, char *);
@@ -1077,34 +1088,34 @@ char	*s;
 
 		printf ("\n");
 		printf ("File: %s\n",finp);
-		printf ("Cantidad de lineas con com camb  %6d \n", sq_lineas_com);
-		printf ("Cantidad de lineas con com elim  %6d \n", sq_comentarios_elim);
-		printf ("Cantidad de lineas divididas     %6d \n", sq_lineas_desdobladas);
-		printf ("Cantidad de integer cambiados    %6d \n", sq_integer);
-		printf ("Cantidad de real cambiados       %6d \n", sq_real);
-		printf ("Cantidad de logical cambiados    %6d \n", sq_logical);
-		printf ("Cantidad de character cambiados  %6d \n", sq_character);
-		printf ("Cantidad de lin cont cambiadas   %6d \n", sq_lcont);
-		printf ("Variables_no_convertidas         %6d \n", sq_variables_no_convertidas);
-		printf ("Var inits simples convertidos    %6d \n", sq_vinit_simple);
-		printf ("Lineas con cont mas convertidas  %6d \n", sq_lineas_con_mas_elim);
+		printf ("Cantidad de lineas con coment camb  %6d \n", sq_lineas_com);
+		printf ("Cantidad de lineas con com elim     %6d \n", sq_comentarios_elim);
+		printf ("Cantidad de lineas divididas        %6d \n", sq_lineas_desdobladas);
+		printf ("Cantidad de integer cambiados       %6d \n", sq_integer);
+		printf ("Cantidad de real cambiados          %6d \n", sq_real);
+		printf ("Cantidad de logical cambiados       %6d \n", sq_logical);
+		printf ("Cantidad de character cambiados     %6d \n", sq_character);
+		printf ("Cantidad de lin cont cambiadas      %6d \n", sq_lcont);
+		printf ("Variables_no_convertidas            %6d \n", sq_variables_no_convertidas);
+		printf ("Var inits simples convertidos       %6d \n", sq_vinit_simple);
+		printf ("Lineas con cont mas convertidas     %6d \n", sq_lineas_con_mas_elim);
 
 		if (ffsta)
 		{
 
 		fprintf (hfsta,"%s","\n");
 		fprintf (hfsta,"File: %s\n",finp);
-		fprintf (hfsta,"Cantidad de lineas con com camb  %6d \n", sq_lineas_com);
-		fprintf (hfsta,"Cantidad de lineas con com elim  %6d \n", sq_comentarios_elim);
-		fprintf (hfsta,"Cantidad de lineas divididas     %6d \n", sq_lineas_desdobladas);
-		fprintf (hfsta,"Cantidad de integer cambiados    %6d \n", sq_integer);
-		fprintf (hfsta,"Cantidad de real cambiados       %6d \n", sq_real);
-		fprintf (hfsta,"Cantidad de logical cambiados    %6d \n", sq_logical);
-		fprintf (hfsta,"Cantidad de character cambiados  %6d \n", sq_character);
-		fprintf (hfsta,"Cantidad de lin cont cambiadas   %6d \n", sq_lcont);
-		fprintf (hfsta,"Variables_no_convertidas         %6d \n", sq_variables_no_convertidas);
-		fprintf (hfsta,"Var inits simples convertidos    %6d \n", sq_vinit_simple);
-		fprintf (hfsta,"Lineas con cont mas convertidas  %6d \n", sq_lineas_con_mas_elim);
+		fprintf (hfsta,"Cantidad de lineas con coment camb  %6d \n", sq_lineas_com);
+		fprintf (hfsta,"Cantidad de lineas con com elim     %6d \n", sq_comentarios_elim);
+		fprintf (hfsta,"Cantidad de lineas divididas        %6d \n", sq_lineas_desdobladas);
+		fprintf (hfsta,"Cantidad de integer cambiados       %6d \n", sq_integer);
+		fprintf (hfsta,"Cantidad de real cambiados          %6d \n", sq_real);
+		fprintf (hfsta,"Cantidad de logical cambiados       %6d \n", sq_logical);
+		fprintf (hfsta,"Cantidad de character cambiados     %6d \n", sq_character);
+		fprintf (hfsta,"Cantidad de lin cont cambiadas      %6d \n", sq_lcont);
+		fprintf (hfsta,"Variables_no_convertidas            %6d \n", sq_variables_no_convertidas);
+		fprintf (hfsta,"Var inits simples convertidos       %6d \n", sq_vinit_simple);
+		fprintf (hfsta,"Lineas con cont mas convertidas     %6d \n", sq_lineas_con_mas_elim);
 
 		}
 	}
@@ -1227,6 +1238,8 @@ int	proceso_principal()
 			pro_exec2();
 		if (ffexc == 3)
 			pro_exec3();
+		if (ffexc == 4)
+			pro_exec4();
 	}
 
 	if ( ffpro)
@@ -1312,7 +1325,7 @@ int	proc_principal()
 	}
 
 	if (!ffinp)
-		gp_uso(18);
+		gp_uso(101);
 
 /* parser */
 /* parser */
@@ -1708,7 +1721,7 @@ int	pro_exec1()
 		
 
 	if (!ffinp || !ffout) 
-		gp_uso(101);
+		gp_uso(102);
 
 
 	/* es uno o dos archivos */
@@ -1965,7 +1978,7 @@ int	pro_exec2()
 	}
 
 	if (!ffinp || !ffout || !ffdat )
-		gp_uso(12);
+		gp_uso(103);
 
 
 
@@ -2334,7 +2347,7 @@ int	pro_exec3()
 	}
 
 	if (!ffinp || !ffout || !ffdat )
-		gp_uso(11);
+		gp_uso(104);
 
 
 
@@ -2459,6 +2472,188 @@ int	pro_exec3()
 
 
 
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	pro_exec 4
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ *
+ *	exec 4
+ *
+ *	abre archivo con lista de archivos a procesar 
+ *	x cada archivo, abre y carga a memoria en vector de estructuras
+ *	deja listo todo el contenido para procesos
+ *	termina y vuelve a grabar los archivos con mismo nombre, en otro dir
+ */
+
+
+#if 0
+
+#define	MAX_QSRC		500	/* cant max de archivos fuentes a manejar */
+int	qf_ff;
+
+typedef	struct tff	*ffptr;
+typedef	struct tff
+{	char	n[MAXB];		/* nombre de file */
+	int	pf,uf;			/* primera - ultima fila */
+	int	f1,f2,f3;		/* flags prop general */
+}	ff;
+
+ffptr	ffp1,ffp2,*ffq1,*ffq2;		/* punteros varios */
+
+ffptr	tb[MAX_QSRC];
+
+#endif
+
+
+int	pro_exec4()
+{
+
+	int	i,j,k,flag;
+	int	ql,qlf,q_ptr;
+	char	d1[MAXB];
+	char	d2[MAXB];
+	char	b1[MAXB];
+
+
+	FILE	*hwi,*hwo;
+
+	char	z[MAXV];
+	sprintf (z,"exec4");
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
+	}
+
+	if (!ffinp || !ffaux )
+		gp_uso(105);
+
+
+
+	/* cantidad de archivos y lineas totales cargadas  */
+	qf_ff = 0;
+	q_ptr = 0;
+
+	while (fgets(d1,MAXB,hfinp) != NULL)
+	{
+		if (!linea_vacia(d1)  && d1[0] != '#' )
+		{
+			/* saco el fin de linea - contemplo 13 x fuentes fortran */
+			for ( flag=0, j=strlen(d1); !flag && j >= 0; j--)
+				if (d1[j] == '\n' )
+				{	
+					flag=1;
+					if ( j && d1[j-1] == 13)
+						d1[j-1]=0;
+					else
+						d1[j]=0;
+				}
+
+			/* proceso file */
+			if (gp_fverbose("d3"))
+				printf ("Archivo a cargar:  |%s|\n",d1);
+
+			if ( 1 && ((hwi = fopen (d1,"r")) == NULL) )
+				error(601);
+
+			fnq1 = &fnp[q_ptr];
+			qfv_load(hwi,fnq1,&qlf);
+
+			fclose (hwi);
+
+			/* procese file */
+			if (gp_fverbose("d3"))
+				printf ("Archivo cargado:  %5d |%s|\n\n",qlf,d1);
+
+
+			/* registro datos del archivo */
+			tb[qf_ff] = (ffptr ) malloc (sizeof (ff));
+			if ( tb[qf_ff] == NULL )
+				error(904);
+
+			strcpy ( (*tb[qf_ff]).n, extract_fname(d1));
+			(*tb[qf_ff]).pf = q_ptr;
+			(*tb[qf_ff]).uf = q_ptr+qlf-1;
+
+			if (gp_fverbose("d1"))
+			{
+				printf ("load: %5d %5d |%s|\n",
+					(*tb[qf_ff]).pf,(*tb[qf_ff]).uf,(*tb[qf_ff]).n);
+			}
+
+			qf_ff++;
+			q_ptr += qlf;
+		}
+	}
+
+
+	/* cantidad de lineas totales en vector (global) */
+	qf_src = q_ptr;
+
+	if (gp_fverbose("d3"))
+	{
+		printf ("Cantidad de archivos cargados :  %5d \n",qf_ff);
+		printf ("Cantidad de lineas cargadas   :  %5d \n",q_ptr);
+		printf ("\n");
+	}
+
+#if 1
+	if (gp_fverbose("d3"))
+	{
+		printf ("\n\nComprobando integridad de la carga: \n\n");
+	
+		for ( i=0; i< q_ptr; i++)
+		{
+			printf ("i: %5d  |%s| \n",
+				i,(*fnp[i]).l );
+		}
+	}
+
+	printf ("\n");
+
+#endif
+
+	/*
+	 * A este punto, todas las lineas de archivos cargados en vector
+	 * Hay otro vector, con nombre y lineas desde/hasta para indentificar
+	 * a que archivo pertenece una linea determinada 
+	 *
+	 */
+
+	ex4_p1();
+
+
+	/* grabo new file */
+	for (i = 0; i < qf_ff; i++)
+	{
+		/* nombre del archivo de salida */
+		sprintf (d2,"%s/%s",gp_dato,extract_fname( (*tb[i]).n));
+
+		if ( 1 && ((hwo = fopen (d2,"w")) == NULL) )
+			error(602);
+
+		for (j = (*tb[i]).pf ; j<= (*tb[i]).uf; j++)
+		{
+			fprintf (hwo,"%s\n", (*fnp[j]).l );
+		}
+	}
+
+
+	fclose(hwo);
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[1],z);
+	}
+}
+
+
+
 
 /*
  * -----------------------------------------------------------------------------------
@@ -2472,6 +2667,7 @@ int	pro_exec3()
  * llamado por pro_exec3
  * hace algo con todas las lineas cargadas en memoria
  *
+ * hfaux    source - include (resumen completo)
  */
 
 int	ex3_p2()
@@ -2747,7 +2943,7 @@ int	ex3_p3()
  * llamado por pro_exec3
  * hace algo con todas las lineas cargadas en memoria
  *
- * hfout ... include - file
+ * hfout ... file - include
  *
  */
 
@@ -2888,6 +3084,220 @@ int	ex3_p4()
 
 
 
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	ex4_p1
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ * llamado por pro_exec4
+ * hace algo con todas las lineas cargadas en memoria
+ *
+ * hfaux    source - entrys ....
+ *
+ */
+
+int	ex4_p1()
+{
+	int 	i,j,k,l;
+	int	f1,f2;
+	int	p1,p2;
+	int	f_mon,m_nl,m_nc;
+	int	n_f;
+	int	pf,uf,uuf;
+	int	n_info;
+	char	b1[MAXB];
+	char	b2[MAXB];
+	char	b3[MAXB];
+	char	b4[MAXB];
+	char	b5[MAXB];
+	char	info[300][MAXB];
+	int	s_info[300];
+	char	nro[128];
+	char	nro2[16];
+
+	for (i=0; i<30; i++)
+		s_info[i]=0;
+
+/* EEE */
+
+	uuf = (*tb[qf_ff-1]).uf;
+
+	/* para todos los archivos  */
+	for (j=0; j < qf_ff; j++)
+	{
+		f_mon = 0;
+
+		strcpy (b3, (*tb[j]).n );
+		pf =  (*tb[j]).pf;
+		uf =  (*tb[j]).uf;
+
+		if (es_mon(b3))
+			f_mon = 1;
+
+printf ("ex4_p1: proceso file %2d |%s| \n",strlen(b3),b3);
+
+		n_info = 0;
+		sprintf (info[n_info],"%-34.34s",b3);
+
+			
+
+		for (i = pf; i <= uf; i++)
+		{
+			strcpy(b1,(*fnp[i]).l );
+
+			if (!es_linea_comentario(b1) && tiene_entry_v1(b1,b2))
+			{
+				n_info++;
+				strcpy(info[n_info],b2);
+
+#if 0
+				sprintf (info[n_info],"%-20.20s %3d %s"," ",n_info,b2);
+#endif
+printf ("file: %-30.30s entry: %s \n",b3,b2);
+			}
+
+
+
+		}
+
+		fprintf (hfaux,"%s\n","-------------------------------------------------------------------------");
+
+
+		strcpy(nro," ");
+		if (n_info)
+			sprintf (nro,"%-20.20s (%3d)"," ",n_info);
+		strcat(info[0],nro);
+
+		fprintf (hfaux,"%3d %s\n",lne(j),info[0]);
+		if (n_info)
+		{
+			for (k=1; k <= n_info; k++)
+			{
+#if 0
+				fprintf (hfaux,"%s\n",info[k]);
+#endif
+				fprintf (hfaux,"%-3.3s %3d %s\n"," ",k,info[k]);
+
+#if 1
+				/* loop machazo */
+printf ("busco call |%s| \n",info[k]);
+
+				for (l=0; l< uuf; l++)
+				{
+					strcpy(b4,(*fnp[l]).l );
+					if (!es_linea_comentario(b4) && tiene_call_a_entry(b4,info[k]) )
+					{
+						primer_char(b4,&p1);
+						strcpy(b5,f_name(l));
+						fprintf (hfaux,"%-8.8s%-20.20s |%s\n"," ",b5,b4+p1);
+					}
+				}
+#endif
+
+			}
+		}
+
+
+#if 0
+		if (n_info == 0)
+			fprintf (hfaux,"%3d %s\n",lne(j),info[n_info]);
+		else
+		{
+			s_info[1]=1;
+			if (n_info > 1)
+			{
+				qsort ( &info[1],n_info,MAXB,info_cmp1 );
+
+				for (k=1; k <= n_info; k++)
+				{
+
+					if ( k == 1 )
+					{
+						s_info[k] = 1;
+					}
+
+					if ( k != 1 )
+					{
+						if ( !strcmp(info[k],info[k-1]) )
+						{
+							s_info[k] = s_info[k-1] + 1;
+							s_info[k-1] = 0;
+						}
+						else
+							s_info[k] = 1;
+					}
+				}
+
+					
+			}
+
+			for (k=1, f2=1; k <= n_info; k++)
+			{
+				if (s_info[k])
+				{	
+					strcpy(nro,"   ");
+					if (f2)
+					{	sprintf (nro,"%3d",lne(j) );
+						f2 =0;
+					}
+
+					if (f_mon)
+						info[k][60]='M';
+
+					fprintf (hfaux,"%s %-50.50s (%2d)\n",nro,info[k],s_info[k]);
+				}
+			}
+		}
+#endif
+
+	}
+
+	fprintf (hfaux,"%s\n","-------------------------------------------------------------------------");
+}
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	f_name
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ *	devuelve nombre de file en funcion de la linea de codigo nl
+ *
+ */
+ 
+
+char	*f_name(nl)
+int	nl;
+{
+	static char b1[MAXV];
+
+	int	i,j,k;
+	int	f1;
+	int	pf,uf;
+	
+	for (j=0, f1=1; f1 && j < qf_ff; j++)
+	{
+		pf =  (*tb[j]).pf;
+		uf =  (*tb[j]).uf;
+
+		if (pf <= nl && nl <= uf)
+		{
+			strcpy (b1, (*tb[j]).n );
+			f1 = 0;
+		}
+	}
+
+	return (b1);
+}
 
 
 
@@ -3153,6 +3563,290 @@ char	*t;
 	// resultado
 	return r;
 }
+
+
+
+
+#if 0
+#include <stdio.h>
+#include <ctype.h>
+#endif
+
+int primer_char(char *s, int *p)
+{
+    int pos = 0;
+    while (s[pos])
+    {
+        if (!isspace(s[pos]))
+        {
+            *p = pos;
+            return 1;
+        }
+        pos++;
+    }
+    return 0;
+}
+
+#if 0
+int main()
+{
+    char s[] = "    abc 123";
+    int p;
+
+    int resultado = primer_char(s, &p);
+
+    if (resultado)
+    {
+        printf("La posición del primer carácter distinto de blanco es: %d\n", p);
+    }
+    else
+    {
+        printf("No se encontró ningún carácter distinto de blanco.\n");
+    }
+
+    return 0;
+}
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#if 0
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#endif
+
+
+// Función para verificar si una cadena es un nombre válido en Fortran
+int es_nombre_valido2(const char *str)
+{
+    if (!isalpha(*str)) // El primer carácter debe ser una letra
+        return 0;
+    
+    while (*str && *str != '_')
+    {
+        if (!isalnum(*str))
+            return 0;
+        str++;
+    }
+    
+    // Si encontramos un '_', verificar la siguiente parte
+    while (*str)
+    {
+        if (*str == '_')
+        {
+            str++;
+            if (!isalnum(*str)) // Después de '_' debe haber al menos una letra o número
+                return 0;
+        }
+        else if (!isalnum(*str))
+        {
+            return 0;
+        }
+        str++;
+    }
+
+    return 1;
+}
+
+// Función principal para verificar si se encuentra "call nombre_valido" en la cadena s
+int tiene_call_a_entry(char *s, char *t)
+{
+    char b1[MAXB];
+
+    strcpy(b1,pasar_a_minusc(s));
+
+    char *ptr = b1;
+    char *call_pos = strstr(ptr, "call");
+
+    if (!call_pos)
+        return 0;
+
+    ptr = call_pos + 4; // Avanzar después de "call"
+    while (*ptr && isspace(*ptr)) // Saltar espacios en blanco
+        ptr++;
+
+    // Verificar si el nombre válido después de "call" coincide con el nombre válido en t
+    if (strncmp(ptr, t, strlen(t)) == 0)
+    {
+        ptr += strlen(t);
+        while (*ptr && isspace(*ptr)) // Saltar espacios en blanco después de nombre_valido
+            ptr++;
+        
+        if (*ptr == '\0' || *ptr == '(' || *ptr == '!') // Asegurarse de que no hay caracteres extra después del nombre válido
+            return 1;
+    }
+
+    return 0;
+}
+
+#if 0
+int main()
+{
+    char s[] = "call   str1_str2_str3  ";
+    char t[] = "str1_str2_str3";
+
+    int resultado = tiene_call_a_entry(s, t);
+
+    if (resultado)
+    {
+        printf("Se encontró la expresión 'call %s' en la línea.\n", t);
+    }
+    else
+    {
+        printf("No se encontró la expresión 'call %s' en la línea.\n", t);
+    }
+
+    return 0;
+}
+#endif
+
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	tiene_entry_v1
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+
+#if 0
+int	tiene_entry_v1(s,t)
+char	*s;
+char	*t;
+{
+
+
+
+
+
+}
+#endif
+
+
+
+#if 0
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#endif
+
+// Función para verificar si una cadena es un nombre válido en Fortran
+int es_nombre_valido(const char *str)
+{
+    if (!isalpha(*str)) // El primer carácter debe ser una letra
+        return 0;
+    
+    while (*str && *str != '_')
+    {
+        if (!isalnum(*str))
+            return 0;
+        str++;
+    }
+    
+    // Si encontramos un '_', verificar la siguiente parte
+    while (*str)
+    {
+        if (*str == '_')
+        {
+            str++;
+            if (!isalnum(*str)) // Después de '_' debe haber al menos una letra o número
+                return 0;
+        }
+        else if (!isalnum(*str))
+        {
+            return 0;
+        }
+        str++;
+    }
+
+    return 1;
+}
+
+// Función principal para buscar la expresión
+int tiene_entry_v1(char *s, char *t)
+{
+    char b1[MAXB];
+    strcpy(b1,pasar_a_minusc(s));
+
+
+    char *ptr = b1;
+    char *entry_pos = strstr(ptr, "entry");
+
+    if (!entry_pos)
+        return 0;
+
+    ptr = entry_pos + 5; // Avanzar después de "entry"
+    while (*ptr && isspace(*ptr)) // Saltar espacios en blanco
+        ptr++;
+
+    char nombre_valido[256];
+    int i = 0;
+
+    while (*ptr && (isalnum(*ptr) || *ptr == '_'))
+    {
+        nombre_valido[i++] = *ptr++;
+    }
+
+    nombre_valido[i] = '\0';
+
+    if (!es_nombre_valido(nombre_valido))
+        return 0;
+
+    while (*ptr && isspace(*ptr)) // Saltar espacios en blanco
+        ptr++;
+
+    if (*ptr == '(')
+    {
+        ptr++;
+        while (*ptr && isspace(*ptr)) // Saltar espacios en blanco
+            ptr++;
+    }
+
+    if (strstr(ptr, "return"))
+        return 0;
+
+    strcpy(t, nombre_valido);
+    return 1;
+}
+
+
+#if 0
+int main()
+{
+    char s[] = "entry   str1_str2_str3  ";
+    char t[256];
+
+    int resultado = tiene_entry_v1(s, t);
+
+    if (resultado)
+    {
+        printf("Se encontró la expresión. Nombre válido: %s\n", t);
+    }
+    else
+    {
+        printf("No se encontró la expresión o contiene 'return'.\n");
+    }
+
+    return 0;
+}
+#endif
 
 
 
@@ -4609,7 +5303,7 @@ int	pro_prue2()
 	}
 
 	if (!ffinp || !ffout || !ffdat )
-		gp_uso(11);
+		gp_uso(106);
 
 
 
@@ -5551,7 +6245,7 @@ int	pro_prue3()
 
 #if 0
 	if (!1 || !2 )
-		gp_uso(11);
+		gp_uso(107);
 #endif
 
 	/* bloque */
@@ -5634,7 +6328,7 @@ int	pro_prue4()
 	}
 
 	if (!1 || !2 )
-		gp_uso(11);
+		gp_uso(108);
 
 
 	x1 = 200;
@@ -5729,7 +6423,7 @@ int	pro_prue5()
 	}
 
 	if (!1 || !2 )
-		gp_uso(11);
+		gp_uso(109);
 
 #if 1
 
@@ -5863,10 +6557,8 @@ int	pro_prue6()
 	}
 
 	if (!ffinp || !ffout || !ffin2 || !ffou2 || !fflog  )
-		gp_uso(12);
+		gp_uso(110);
 
-
-/* EEE */
 
 
 	/*
@@ -6194,7 +6886,7 @@ int	pro_proc1()
 	}
 
 	if (!!ffsrc )
-		gp_uso(0);
+		gp_uso(111);
 
 	/* cargo el source en memoria */
 	pf_load();
@@ -6256,7 +6948,7 @@ int	pro_proc2()
 #if 1
 
 	if (!!fflst)
-		gp_uso(0);
+		gp_uso(112);
 
 
 /*
@@ -6448,7 +7140,7 @@ int	pro_proc4()
 #if 1
 
 	if (!ffinp || !ffout || !ffdat )
-		gp_uso(12);
+		gp_uso(113);
 
 
 	/* cantidad de lineas en el archivo  */
@@ -7277,7 +7969,7 @@ int	pro_tool1()
 
 	/* chequeo de parametros minimos */
 	if (!ffinp || !ffin2 || !ffout || !ffou2 )
-		gp_uso(0);
+		gp_uso(114);
 
 
 	/* cargo lista l1 */
@@ -7547,7 +8239,7 @@ int	pro_tool2()
 
 	/* chequeo condiciones para seguir */
 	if (!ffinp || !ffout )
-		gp_uso(0);
+		gp_uso(115);
 
 	/* cargo mk a memo */
 	load_makefile(hfinp);
@@ -8323,7 +9015,7 @@ int	pro_tool4()
 
 	/* chequeamos reqs */
 	if (!ffinp || !ffout || !ffaux )
-		gp_uso(11);
+		gp_uso(116);
 
 	/* cargamos file en memo */
 	fnq1 = &fnp[0];
@@ -8949,7 +9641,6 @@ int	*ql_f;
 					memcpy ( fnp[k],fnp[k-(delta2-delta1-1)], sizeof (node) );
 				}
 
-/* EEE */
 
 				/* grabar ambas lineas */
 				delta2 = 0;
@@ -10652,7 +11343,7 @@ int	pro_tool5()
 	}
 
 	if (!ffinp || !ffout || !ffaux)
-		gp_uso(0);
+		gp_uso(117);
 
 /* tool5 */
 #if 1
@@ -10991,8 +11682,10 @@ int	pro_tool6()
 {
 	int	i,j,k;
 	int	ql_ini,ql_fin;
-	int	l1,n_l1,lml;
+	int	l1,n_l1;
+	int	lml,n_lml;
 	int	f1;
+	int	pf,uf;
 
 	char	b1[MAXB];
 
@@ -11018,7 +11711,7 @@ int	pro_tool6()
 
 
 	if (!ffinp || !ffout || !ffaux)
-		gp_uso(12);
+		gp_uso(118);
 
 
 
@@ -11026,7 +11719,6 @@ int	pro_tool6()
 	fnq1 = &fnp[0];
 	qfv_load(hfinp,fnq1,&ql_ini);
 
-/* EEE */
 	/* compatibiliad con la corrida tipo bunch files */
 	/* registro datos del archivo */
 	qf_ff=0;
@@ -11038,6 +11730,10 @@ int	pro_tool6()
 	(*tb[qf_ff]).pf = 0;
 	(*tb[qf_ff]).uf = ql_ini-1;
 	qf_ff++;
+
+	/* proceso file */
+	pf = (*tb[0]).pf ;
+	uf = (*tb[0]).uf ;
 
 	if (gp_fverbose("d3"))
 	{
@@ -11054,6 +11750,7 @@ int	pro_tool6()
 	}
 
 
+#if 0
 	lml=0;
 	for (i=0; i<ql_ini; i++)
 	{
@@ -11080,16 +11777,24 @@ int	pro_tool6()
 			}
 		}
 	}
+#endif
+
+
+	lml_src_sc(&lml,&n_lml,pf,uf);
+
 
 	if (gp_fverbose("d2"))
 	{
 		printf ("Linea mas larga: %4d\n\n",lml);
+		printf ("|%s|\n",(*fnp[n_lml]).l );
 	}
 
 
 	if (ffckf)
 	{
 		fprintf (hfckf,"Linea mas larga encontrada antes de procesar file (sin coments)  %3d \n",lml);
+		fprintf (hfckf,"Nro de linea: %4d \n",lne(n_lml));
+		fprintf (hfckf,"|%s|\n",(*fnp[n_lml]).l );
 	}
 
 
@@ -11887,7 +12592,7 @@ int	pro_tool7()
 	}
 
 	if (!ffinp )
-		gp_uso(11);
+		gp_uso(119);
 
 	/* bloque */
 	/* cargamos file en memo */
@@ -11956,6 +12661,107 @@ int	pro_tool7()
 /* bloque */
 
 
+
+/* bloque 1 */
+#if 1
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	lml_src_sc 
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ *
+ *	Devuelve linea mas larga en file
+ *	considera lineas sin comentarios
+ *
+ */
+
+
+int	lml_src_sc(ar_lml,ar_n_lml,pf,uf)
+int	*ar_lml;
+int	*ar_n_lml;
+int	pf,uf;
+{
+	int	i,j,k;
+	int	f1,f2,f3,f4;
+	int	p1;
+	char	b1[MAXB];
+
+	int	lml1;
+	int	n_lml1;
+	
+	int	lml2;
+	int	n_lml2;
+	
+
+	lml1   = 0;
+	n_lml1 = 0;
+	lml2   = 0;
+	n_lml2 = 0;
+
+	for (i=pf; i<= uf; i++)
+	{
+		strcpy(b1,(*fnp[i]).l);
+
+		if ( tiene_coment_final(b1,&p1) )
+			b1[p1] = 0;
+
+
+		if (!es_linea_comentario2 (b1))
+		{
+			if ( (k = strlen( b1) ) > lml1)
+				lml1 = k, n_lml1 = i;
+		}
+
+		if (es_linea_comentario2 (b1) )
+		{	
+			if ( (k = strlen( b1 )) > lml2)
+				lml2 = k, n_lml2 = i;
+		}
+	}
+
+	*ar_lml   = lml1;
+	*ar_n_lml = n_lml1;
+
+}
+
+
+#endif
+/* bloque 1 */
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	len_linea_src           
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+
+int	len_linea_src(s,tipo,l1,l2)
+char	*s;
+int	*tipo;
+int	*l1,*l2;
+{
+
+
+
+
+
+
+}
+
+
+
+
+
 /*
  * -----------------------------------------------------------------------------------
  *
@@ -11993,7 +12799,7 @@ int	pro_tool8()
 	}
 
 	if (!ffinp )
-		gp_uso(11);
+		gp_uso(120);
 
 
 
