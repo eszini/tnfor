@@ -14968,8 +14968,8 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0045");
-	strcpy (d," Sat Jul 13 13:18:12 -03 2024");
+	strcpy (ver,"0046");
+	strcpy (d," Mon Jul 22 17:59:48 -03 2024");
 
 	sprintf (z,"%s -- (%s)  %s", gp_fp(GP_GET,0,(char **)0), ver, d  );
 	memset (w,0,MAXV);
