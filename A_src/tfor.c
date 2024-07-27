@@ -13938,7 +13938,7 @@ int	gp_parser()
 
 			/* pongo defaults si no quiere usar -cfg=archio ... */
 			ffcfg=1;
-			strcpy(var1,"menu.txt");
+			strcpy(var1,"tfor.cfg");
 
 			if (gp_fverbose("d3"))
 				printf ("Parametro encontrado: -x |%s| \n",s_opcion);

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-clear_file="clear.txt"
+clear_file="clear.cfg"
 parser_log="parser.err"
 statis_log="tool.sta"
 checks_log="check.log"
@@ -10,7 +10,7 @@ arc1="t0.for"
 arc2="t1.for"
 
 
-# Borrar pantalla segun clear.txt .... 
+# Borrar pantalla segun clear.cfg .... 
 if [ -f "$clear_file" ]; then
     # Obtener la línea que contiene "clear" y extraer el valor después del "="
     clear_option=$(grep -i '^\s*clear\s*=' "$clear_file" | sed 's/^\s*clear\s*=\s*//i')
