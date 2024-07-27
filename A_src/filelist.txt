@@ -1,6 +1,6 @@
 Makefile
 tfor.c
-menu.txt
+tfor.cfg
 clear.txt
 p0_com.sh
 p1_dec.sh
@@ -10,4 +10,6 @@ p4_ini.sh
 p5_lco.sh
 r1_todos.sh
 r8_includes.sh
+r8_entrys.sh
 c1_crear_repo_inc.sh
+cambiar.sh

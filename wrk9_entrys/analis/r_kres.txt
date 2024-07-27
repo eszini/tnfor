@@ -72,7 +72,7 @@ mthnmcom.mon     cla_objt.f90
 mthnmcom.mon     coal_obj.for
 mthnmcom.mon     enrglimit.f90
 mthnmcom.mon     finanbse.for
-mthnmcom.mon     msgmmdbt.for
+mthnmcom.mon     msgmmdbt_decs.f90
 mthnmcom.mon     msgmmdfd.for
 mthnmcom.mon     msgmmea.for
 mthnmcom.mon     msgmmfa.for
@@ -90,7 +90,6 @@ rollscom.mon     CLM_OBJT.FOR
 sizecom.mon      coal_obj.for
 spinlib.mon      MIDASMOD.FOR
 spinlib.mon      MSGMMOUT.for
-spinlib.mon      Msgmmrev.for
 spinlib.mon      Msgmmrev.for
 spinlib.mon      PRO_COST.FOR
 spinlib.mon      PRO_COST.FOR

@@ -60,7 +60,6 @@ Msgmmrev.for                         finacstw.mon
 Msgmmrev.for                         mthnmcom.mon
 Msgmmrev.for                         mthnmcom.mon
 Msgmmrev.for                         spinlib.mon
-Msgmmrev.for                         spinlib.mon
 PRO_COST.FOR                         spinlib.mon
 PRO_COST.FOR                         spinlib.mon
 Picadisp.for                         spinlib.mon
@@ -93,7 +92,7 @@ forecast.f90                         spinlib.mon
 forecast.f90                         spinlib.mon
 forecast.f90                         spinlib.mon
 msgmmasb.for                         finascom.mon
-msgmmdbt.for                         mthnmcom.mon
+msgmmdbt_decs.f90                    mthnmcom.mon
 msgmmdfd.for                         mthnmcom.mon
 msgmmea.for                          mthnmcom.mon
 msgmmea.for                          spinlib.mon
