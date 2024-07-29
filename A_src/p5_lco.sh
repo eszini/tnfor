@@ -56,3 +56,18 @@ fi
 
 
 
+
+
+
+
+
+echo
+if [ -e "$arc2" ] ; then
+    echo "cp t6.for a t7.for para modificar y probar en test"
+    cp t6.for t7.for
+else
+    echo "No se genero t6.for !!"
+fi
+
+
+

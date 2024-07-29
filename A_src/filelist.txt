@@ -1,7 +1,7 @@
 Makefile
 tfor.c
 tfor.cfg
-clear.txt
+clear.cfg
 p0_com.sh
 p1_dec.sh
 p2_typ.sh
