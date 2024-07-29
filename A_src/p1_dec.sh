@@ -5,6 +5,7 @@ clear_file="clear.cfg"
 parser_log="parser.err"
 statis_log="tool.sta"
 checks_log="check.log"
+checks_lo2="p.log"
 
 arc1="t1.for"
 arc2="t2.for"
@@ -24,7 +25,7 @@ if [ -f "$clear_file" ]; then
 fi
 
 
-./tfor -v -opciones=d5 -tool=6 -inp="$arc1" -out="$arc2" --chgdec -t -log=p.log  > log0
+./tfor -v -opciones=d5 -tool=6 -inp="$arc1" -out="$arc2" --chgdec -cab=1 -log=p.log  > log0
 
 # ./tfor -exec=1 -inp="$arc1" -in2="$arc2" -out=d1.chr
 
@@ -62,6 +63,13 @@ if [ -e "$checks_log" ] && [ -s "$checks_log" ]; then
     cat "$checks_log"
 else
     echo "No hay datos en check file"
+fi
+
+echo
+if [ -e "$checks_lo2" ] && [ -s "$checks_lo2" ]; then
+    echo "Revise lineas cambiadas en file: $checks_lo2"
+else
+    echo "No hay datos en log file"
 fi
 
 

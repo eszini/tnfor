@@ -416,6 +416,7 @@ int	gp_reidx;		/* re indexar archivo de transacciones */
 int	gp_pause;		/* pausa al mostrar ... */
 int	gp_niveldes=0;		/* nivel de descripcion que se vuelca en archivo de salida (solo con fsentencia = 0 ) */
 				/* 0 normal 1 sentencia y numero de token 2 .... agrego cosas del diccionario si se usa */
+int	gp_cborrar=0;		/* comentarios a borrar 0 nada, 1 al final de lineas 2 lineas comentadas 3 todos     */
 
 int	gp_help=0;		/* help 0 no 1 si */
 int	gp_vers=0;		/* version 0 no 1 si */
@@ -495,6 +496,7 @@ int	pro_prue3();
 int	pro_prue4();
 int	pro_prue5();
 int	pro_prue6();
+int	pro_prue7();
 
 int	pro_exec1();
 int	pro_exec2();
@@ -841,6 +843,7 @@ int	sq_lcont;			/* lineas de continuacion modificadas */
 int	sq_vinit_simple;		/* var inits cambiados - simple ...en una linea */
 int	sq_lineas_con_mas_elim;		/* lineas con cont de linea mas eliminadas */
 int	sq_comentarios_elim;   		/* lineas de codigo comentadas  eliminadas */
+int	sq_coment_al_final_elim;	/* comentarios al final de lineas de codigo validas eliminadas */
 
 
 
@@ -1099,6 +1102,7 @@ char	*s;
 		printf ("Variables_no_convertidas            %6d \n", sq_variables_no_convertidas);
 		printf ("Var inits simples convertidos       %6d \n", sq_vinit_simple);
 		printf ("Lineas con cont mas convertidas     %6d \n", sq_lineas_con_mas_elim);
+		printf ("Comentarios al final de lineas elim %6d \n", sq_coment_al_final_elim);	
 
 		if (ffsta)
 		{
@@ -1116,6 +1120,7 @@ char	*s;
 		fprintf (hfsta,"Variables_no_convertidas            %6d \n", sq_variables_no_convertidas);
 		fprintf (hfsta,"Var inits simples convertidos       %6d \n", sq_vinit_simple);
 		fprintf (hfsta,"Lineas con cont mas convertidas     %6d \n", sq_lineas_con_mas_elim);
+		fprintf (hfsta,"Comentarios al final de lineas elim %6d \n", sq_coment_al_final_elim);	
 
 		}
 	}
@@ -1163,6 +1168,7 @@ int	borrar_stats()
 	sq_lcont                 = 0;
 	sq_vinit_simple          = 0;
 	sq_lineas_con_mas_elim   = 0;
+	sq_coment_al_final_elim  = 0;	
 
 }
 
@@ -1228,6 +1234,8 @@ int	proceso_principal()
 			pro_prue5();
 		if (ffprb == 6)
 			pro_prue6();
+		if (ffprb == 7)
+			pro_prue7();
 	}	
 
 	if ( ffexc)
@@ -6841,6 +6849,104 @@ int	pro_prue6()
 
 
 
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	pro_prue 7
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+
+/*
+ *
+ *	prue7
+ *
+ *	probamos algunas cosas para las redes neuronales
+ *
+ */
+
+
+/* bloque */
+#if 1
+
+
+int	fim1(m1)
+int	m1[100][100];
+{
+	int	i,j,k;
+	
+	for (i=0; i<100; i++)
+		for (j=0; j<100; j++)
+			m1[i][j] = i * 10000 + j;
+}
+
+int	fim2(m0)
+void	*m0;
+{
+	int	i,j,k;
+	int	*m1;
+
+	m1 = (int *)m0;
+	
+	
+	for (i=0; i<100; i++)
+		for (j=0; j<100; j++)
+			m1[i*100+j] = i * 10000 + j;
+}
+
+
+int	m2[100][100];
+
+
+int	pro_prue7()
+{
+	int	i,j,k;
+	int	f1,f2,f3;
+	char	b1[MAXB];
+	char	b2[MAXB];
+	FILE	*hwi;
+
+
+
+	char	z[MAXV];
+	sprintf (z,"prue7");
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
+	}
+
+#if 0
+	if (!1 || !2 )
+		gp_uso(11);
+#endif
+
+
+	/* bloque */
+
+	fim1(m2);
+
+	for (i=0; i<100; i++)
+		for (j=0; j<100; j++)
+			printf ("%2d %2d %5d %5d\n", i,j,i * 10000 + j, m2[i][j]);
+		
+	/* proceso */
+	fim2(m2);
+
+	for (i=0; i<100; i++)
+		for (j=0; j<100; j++)
+			printf ("%2d %2d %5d %5d\n", i,j,i * 10000 + j, m2[i][j]);
+		
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[1],z);
+	}
+}
+
+
+#endif
+/* bloque */
 
 
 
@@ -11783,6 +11889,7 @@ int	pro_tool6()
 	lml_src_sc(&lml,&n_lml,pf,uf);
 
 
+
 	if (gp_fverbose("d2"))
 	{
 		printf ("Linea mas larga: %4d\n\n",lml);
@@ -11979,19 +12086,25 @@ int	*ql_f;
 		}
 #endif
 
-	/* REVISAR LA PROXIMA ... o es b3 en la rutina o es b1 abajo !!!! */
-		if ( tiene_coment_final (b1,&p1))
-		{
-			b3[p1] ='\0';
-			strcpy(b2,b3);
+	/* borro comentarios al final */
 
-			if (fflog)
+		if (gp_cborrar == 1)
+		{
+			if ( !es_linea_comentario(b3) && tiene_coment_final (b3,&p1))
 			{
-				fprintf (hflog,"%5d %s\n",lne(i),b1);
-				fprintf (hflog,"%5d %s\n",lne(i),b2);
-				fprintf (hflog,"%s","\n");
+				b3[p1] ='\0';
+
+				if (fflog)
+				{
+					fprintf (hflog,"%5d %s\n",lne(i),b1);
+					fprintf (hflog,"%5d %s\n",lne(i),b3);
+					fprintf (hflog,"%s","\n");
+				}
+
+				sq_coment_al_final_elim++;
 			}
 		}
+
 
 		/* armo la linea de nuevo con todos los tokens */
 #if 0
@@ -12000,12 +12113,8 @@ int	*ql_f;
 			strcat (b3,tk[j]);
 #endif
 
-		strcpy ( (*fnp[i]).l, b2);
+		strcpy ( (*fnp[i]).l, b3);
 
-#if 0
-		if (gp_fverbose("d3"))
-			printf ("fix: |%s|\n",b3);
-#endif
 
 	}
 }
@@ -12036,7 +12145,10 @@ int	*ql_f;
  *      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  *            aca hay cualquier cosa ' no tocar ! '  
  *
- *	ojo con las lineas que tienen pepe's margin ....
+ *	ojo con las lineas que tienen pepe's margin .... ( que HDP !!! )
+ *
+ *	INTEGER (KIND=2) :: LOCAL_MAX_MONTHS=12,LOCAL_MAX_YEARS=12 ! UP'ED FOR DOUG 051310 ! UP'ED FOR SCOTT 02/26/08 ! UP'ED FOR SCOTT 01/08/04
+ *
  */
 
 int	tiene_coment_final(s,p)
@@ -12044,12 +12156,50 @@ char	*s;
 int	*p;
 {
 	int	i,j,k;
+	int	l1;
 	int	c1,c2,c3,c4;
 	int	p1,p2;
 	int	f1,f2,f3,f4;
 	int	f_ret,f_sig;
 	char	b1[MAXB];
 
+
+
+	/* lo basico .. si no nay ' y encuentro un ! ... es coment */
+
+
+	f_ret = 0;
+	f_sig = 1;
+
+	f1 = 0;
+	f4 = 1;
+	l1 = strlen(s);
+	i = 7;             /* la eleccion de i es crucial ... */
+
+	while (f4 && i < l1 )
+	{
+		if ( f1 && s[i] == '\'' )
+			f1 = 0;
+
+		if (!f1 && s[i] == '\'' )
+			f1 = 1;
+
+		if (!f1 && s[i] == '!' )
+		{
+			f_ret = 1;
+			f_sig = 0;
+			*p = i;
+			f4 = 0;
+		}
+
+		i++;
+	}
+		
+
+
+
+	if (f_sig)
+	{
 
 	f_ret = 0;
 	f_sig = 1;
@@ -12075,6 +12225,7 @@ int	*p;
 		j++;
 	}
 
+	}
 
 
 	/* ver si no se mando !!!!!!!!!!!!!!! !! !!! !!!! - hay cada uno */
@@ -14233,10 +14384,14 @@ int	gp_parser()
 
 
 
-
 			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+1,"nvd",3) )
 			{	
 				gp_niveldes = *desde_igual( gp_fp(GP_GET,i,(char **)0)) - '0';
+			}
+
+			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+1,"cab",3) )
+			{	
+				gp_cborrar = *desde_igual( gp_fp(GP_GET,i,(char **)0)) - '0';
 			}
 
 
@@ -15552,6 +15707,36 @@ int main()
 
     return 0;
 }
+
+
+#endif
+
+
+#if 0
+
+
+!     
+! INPUT DATA LIST
+!
+      INTEGER (KIND=4) :: VALUES_2_ZERO
+
+      INTEGER (KIND=2) :: SCENARIO_YEAR,TABLE,SCENARIO_INDEX
+      INTEGER (KIND=2) :: LOCAL_MAX_NUM_MARKET_AREAS=0
+      INTEGER (KIND=2) :: LOCAL_MAX_HOURS=24,LOCAL_MAX_DAYS=31
+
+!         1         2         3         4         5         6         7         6         7         8         9
+!12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+      INTEGER (KIND=2) :: LOCAL_MAX_MONTHS=12,LOCAL_MAX_YEARS=12 ! UP'ED FOR DOUG 051310 ! UP'ED FOR SCOTT 02/26/08 ! UP'ED FOR SCOTT 01/08/04
+      INTEGER (KIND=2) :: MIN_YEAR=9999,MAX_YEAR=0
+      REAL (KIND=4) :: R_MONTHLY_SLOPE,R_MONTHLY_INTERCEPT
+      CHARACTER (LEN=20) :: HYDRO_VARIABLES
+      INTEGER (KIND=2) :: WD_INDEX(:,:,:,:) ! MARKET_ID, LOCAL_MONTH, LOCAL_DAY, LOCAL_YEAR
+      ALLOCATABLE :: WD_INDEX
+!      
+!      SAVE WD_LOAD,WD_INDEX
+!
+! END DATA DECLARATIONS      
+!
 
 
 #endif
