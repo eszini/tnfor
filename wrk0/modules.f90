@@ -35,12 +35,3 @@ module class_run_switchesC
   character(len=1) :: ratebase_valuation
 end module class_run_switchesC
 
-program main
-  use class_run_switchesL4
-  use class_run_switchesL1
-  use class_run_switchesC
-  implicit none
-
-  ! Resto del programa usando los módulos en lugar de COMMON blocks
-end program main
-
