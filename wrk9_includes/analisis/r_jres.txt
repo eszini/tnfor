@@ -183,9 +183,6 @@ spinlib.mon      GAS_objt.for
 spinlib.mon      GAS_objt.for
 spinlib.mon      GAS_objt.for
 spinlib.mon      GAS_objt.for
-spinlib.mon      LMG_OBJT.FOR
-spinlib.mon      LMG_OBJT.FOR
-spinlib.mon      LMG_OBJT.FOR
 spinlib.mon      LPSOLVER.for
 spinlib.mon      MSGMMExpRevCash.for
 spinlib.mon      MSGMMExpRevCash.for
@@ -311,7 +308,6 @@ spinlib.mon      msgmmfa.for
 spinlib.mon      msgmmfv.for
 spinlib.mon      msgmmfv.for
 spinlib.mon      msgmmfv.for
-spinlib.mon      msgmmpyb.for
 spinlib.mon      msgmmsb6.for
 spinlib.mon      msgmmtax.for
 spinlib.mon      msgmmtax.for
