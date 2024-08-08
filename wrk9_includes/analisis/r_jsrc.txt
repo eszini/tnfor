@@ -42,9 +42,6 @@ GAS_objt.for                         spinlib.mon
 GAS_objt.for                         spinlib.mon
 GAS_objt.for                         spinlib.mon
 LDPROB01.FOR                         8800com.mon
-LMG_OBJT.FOR                         spinlib.mon
-LMG_OBJT.FOR                         spinlib.mon
-LMG_OBJT.FOR                         spinlib.mon
 LPMATINV.for                         lpintcom.mon
 LPMATINV.for                         lpintcom.mon
 LPSOLVER.for                         lpintcom.mon
@@ -287,7 +284,6 @@ msgmmfv.for                          spinlib.mon
 msgmmfv.for                          spinlib.mon
 msgmmpyb.for                         mthnmcom.mon
 msgmmpyb.for                         mthnmcom.mon
-msgmmpyb.for                         spinlib.mon
 msgmmsb6.for                         ac_equiv.mon
 msgmmsb6.for                         acrslcom.mon
 msgmmsb6.for                         finaccom.mon

@@ -302,6 +302,9 @@
 
 
 /*
+ *	cfor_lcon da error con esta linea, pone el ampersand antes del !
+ *	error....   CALL MG_LOCATE_WRITE(15,35,'error reading definition file!',
+ *
  *	--chgcom
  *	stadisticas 
  *
@@ -12521,6 +12524,12 @@ char	*s;
  * -----------------------------------------------------------------------------------
  */
 
+/*
+ *	en esta linea falla ! lo pone antes del !
+ *
+ *	error....   CALL MG_LOCATE_WRITE(15,35,'error reading definition file!',
+ *
+ */
 
 int	cfor_lcon(ql_i,ql_f)
 int	*ql_i;
@@ -12645,11 +12654,28 @@ int	*ql_f;
 
 
 
+/*
+ *	en esta linea falla ! lo pone antes del !
+ *
+ *	error....   CALL MG_LOCATE_WRITE(15,35,'error reading definition file!',
+ *
+ */
+
 int	tiene_coment_intermedio (s)
 char	*s;
 {
 	int 	i,j,k;
-	int	f1;
+	int	f1,f2,f3;
+	int	c1;
+
+	for (i=0, c1=0, f2=0; i<strlen(s); i++)
+		if (s[i] == '\'')
+		{
+			c1++;
+			if ( c1 == 2)
+				f2 = 1;
+		}
+
 
 	f1=0;
 	for (i=0; i<strlen(s); i++)
@@ -15714,30 +15740,43 @@ int main()
 
 #if 0
 
+//
+//!     
+//! INPUT DATA LIST
+//!
+//      INTEGER (KIND=4) :: VALUES_2_ZERO
+//
+//      INTEGER (KIND=2) :: SCENARIO_YEAR,TABLE,SCENARIO_INDEX
+//      INTEGER (KIND=2) :: LOCAL_MAX_NUM_MARKET_AREAS=0
+//      INTEGER (KIND=2) :: LOCAL_MAX_HOURS=24,LOCAL_MAX_DAYS=31
+//
+//!         1         2         3         4         5         6         7         6         7         8         9
+//!12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+//      INTEGER (KIND=2) :: LOCAL_MAX_MONTHS=12,LOCAL_MAX_YEARS=12 ! UP'ED FOR DOUG 051310 ! UP'ED FOR SCOTT 02/26/08 ! UP'ED FOR SCOTT 01/08/04
+//      INTEGER (KIND=2) :: MIN_YEAR=9999,MAX_YEAR=0
+//      REAL (KIND=4) :: R_MONTHLY_SLOPE,R_MONTHLY_INTERCEPT
+//      CHARACTER (LEN=20) :: HYDRO_VARIABLES
+//      INTEGER (KIND=2) :: WD_INDEX(:,:,:,:) ! MARKET_ID, LOCAL_MONTH, LOCAL_DAY, LOCAL_YEAR
+//      ALLOCATABLE :: WD_INDEX
+//!      
+//!      SAVE WD_LOAD,WD_INDEX
+//!
+//! END DATA DECLARATIONS      
+//!
+//
 
-!     
-! INPUT DATA LIST
-!
-      INTEGER (KIND=4) :: VALUES_2_ZERO
-
-      INTEGER (KIND=2) :: SCENARIO_YEAR,TABLE,SCENARIO_INDEX
-      INTEGER (KIND=2) :: LOCAL_MAX_NUM_MARKET_AREAS=0
-      INTEGER (KIND=2) :: LOCAL_MAX_HOURS=24,LOCAL_MAX_DAYS=31
-
-!         1         2         3         4         5         6         7         6         7         8         9
-!12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
-      INTEGER (KIND=2) :: LOCAL_MAX_MONTHS=12,LOCAL_MAX_YEARS=12 ! UP'ED FOR DOUG 051310 ! UP'ED FOR SCOTT 02/26/08 ! UP'ED FOR SCOTT 01/08/04
-      INTEGER (KIND=2) :: MIN_YEAR=9999,MAX_YEAR=0
-      REAL (KIND=4) :: R_MONTHLY_SLOPE,R_MONTHLY_INTERCEPT
-      CHARACTER (LEN=20) :: HYDRO_VARIABLES
-      INTEGER (KIND=2) :: WD_INDEX(:,:,:,:) ! MARKET_ID, LOCAL_MONTH, LOCAL_DAY, LOCAL_YEAR
-      ALLOCATABLE :: WD_INDEX
-!      
-!      SAVE WD_LOAD,WD_INDEX
-!
-! END DATA DECLARATIONS      
-!
+#endif
 
 
+#if 0
+
+            CALL MG_LOCATE_WRITE(14,35,
+     +                             'Base Case Definition is missing or',
+     +                                                   ALL_VERSIONS,1)
+error....   CALL MG_LOCATE_WRITE(15,35,'error reading definition file!',
+     +                                                   ALL_VERSIONS,1)
+            er_message="bfil.0001 - Base case definition missing or "
+     + //"error reading definition file."
+            call end_program(er_message)
 #endif
 
