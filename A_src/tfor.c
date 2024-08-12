@@ -3354,7 +3354,7 @@ int	pro_exec5()
 	q_var = 0;
 	pf = 0;
 	uf = q_lin -1;
-	sprintf (b3,"    integer (kind=2), parameter :: ");
+	sprintf (b3,"      integer(kind=2),parameter:: ");
 
 
 	/* reviso cada linea marco sobre las que hay que trabjar */
