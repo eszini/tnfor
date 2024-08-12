@@ -1,0 +1,1893 @@
+Parametro encontrado: -v 
+Parametro encontrado: -opciones 
+Arg:  0  s:|./tfor| 
+Arg:  1  s:|-v| 
+Arg:  2  s:|-opciones=d5| 
+Arg:  3  s:|-tool=6| 
+Arg:  4  s:|-inp=t1.for| 
+Arg:  5  s:|-out=t2.for| 
+Arg:  6  s:|--chgdec| 
+Arg:  7  s:|-cab=1| 
+Arg:  8  s:|-log=p.log| 
+Arch de config solicit :  0 (ffcfg)  
+Cantidad de argumentos :  0          
+
+
+Argumentos despues de correspondientes gp_init ... 
+
+cantidad de args : 9  
+arg( 0) |./tfor| 
+arg( 1) |-v| 
+arg( 2) |-opciones=d5| 
+arg( 3) |-tool=6| 
+arg( 4) |-inp=t1.for| 
+arg( 5) |-out=t2.for| 
+arg( 6) |--chgdec| 
+arg( 7) |-cab=1| 
+arg( 8) |-log=p.log| 
+Programa    : ./tfor
+Param tipo 2: -v
+Param tipo 3: -opciones=d5
+Param tipo 3: -tool=6
+Param tipo 3: -inp=t1.for
+Param tipo 3: -out=t2.for
+Param tipo 4: --chgdec
+Param tipo 3: -cab=1
+Param tipo 3: -log=p.log
+
+
+[2024/08/09 00:42:23] ((+)) proceso main
+
+
+Uso cfg arc       :  0
+Cantidad de par   :  8
+Cantidad de par 1 :  0
+Cantidad de par 2 :  1
+Cantidad de par 3 :  6
+Cantidad de par 4 :  1
+
+Uso cfg arc       :  0
+Cantidad de par   :  8
+Cantidad de par 1 :  0
+Cantidad de par 2 :  1
+Cantidad de par 3 :  6
+Cantidad de par 4 :  1
+
+Parametro   0     : ./tfor
+Parametro   1     : -v
+Parametro   2     : -opciones=d5
+Parametro   3     : -tool=6
+Parametro   4     : -inp=t1.for
+Parametro   5     : -out=t2.for
+Parametro   6     : --chgdec
+Parametro   7     : -cab=1
+Parametro   8     : -log=p.log
+
+
+[2024/08/09 00:42:23] ((+)) abro_files
+
+[2024/08/09 00:42:23] ((-)) abro_files
+
+[2024/08/09 00:42:23] ((+)) proceso principal
+
+[2024/08/09 00:42:23] ((+)) tool6
+
+[2024/08/09 00:42:23] ((+)) qfv_load
+
+  0 |!|
+  1 |!     Last change: msg 2/27/2017 8:50:22 AM|
+  2 |      SUBROUTINE DISPAT(SEASONAL_SYSTEM_CAP,HEAT_RATE_FACTOR,|
+  3 |     +                  MAINTENANCE_RATE,CALL_DISPATCH_REPORT,|
+  4 |     +                  DISP_BTU_COST,DISP_BTU_TAX_ADDER,BTU_TAX_ACTIVE,|
+  5 |     +                  FUEL_INVENTORY_ACTIVE,|
+  6 |     +                  USE_SECONDARY_FUEL,ISEAS)|
+  7 |!|
+  8 ||
+  9 |      use SpinDriftLib|
+ 10 |      use prod_arrays_dimensions|
+ 11 |      USE IREC_ENDPOINT_CONTROL|
+ 12 |      USE SPCapExVariables|
+ 13 |      use rptreccontrol|
+ 14 |      use grx_planning_routines|
+ 15 |      use hesi|
+ 16 |      use p_fuel|
+ 17 |      use mwunih|
+ 18 |      USE SIZECOM|
+ 19 |      use globecom|
+ 20 |      use foshydi2com|
+ 21 |      use prod2com|
+ 22 |      use prodcom|
+ 23 |!|
+ 24 |!  BEGINNING OF THE COMMON BLOCK|
+ 25 ||
+ 26 |      integer (kind=2) :: HESI_UNIT_ID_NUM_ord|
+ 27 |      REAL (KIND=4) :: NonFuelDispatchCost(MAX_CL_UNITS,2),|
+ 28 |     +                 FuelDispatchCostMultiplier(MAX_CL_UNITS,2)|
+ 29 |      CHARACTER (len=1) ::  COUNTRY,FIRST_BLOCK_DISP_SWITCH|
+ 30 |      CHARACTER (len=6) ::  MARKET_ID|
+ 31 |      INTEGER (kind=2) ::  LAMDA(MAX_DISPATCH_BLOCKS)|
+ 32 |      INTEGER (kind=2) ::  PROCMETH,I,L,M,N,NB,UN,ITEMP,|
+ 33 |     +          PRODUCTION_METHOD,ISEAS,|
+ 34 |     +          MARKET_AREA_LOOKUP,|
+ 35 |     +          GET_PRIMARY_MOVER,|
+ 36 |     +          R_UN,|
+ 37 |     +          R_BLK(2),|
+ 38 |     +          R_TG,|
+ 39 |     +          UZ_PRIMARY_MOVER|
+ 40 |      INTEGER (kind=4) ::  FMT1|
+ 41 |      REAL (kind=4) ::  SYSTEM_CUM_CAP(0:MAX_DISPATCH_BLOCKS),|
+ 42 |     +       TRANS_GROUP_CUM_CAP(0:256,0:MAX_DISPATCH_BLOCKS),|
+ 43 |     +       RMK,RFT,RPM,|
+ 44 |     +       GET_HEAT_RATE_FACTOR,|
+ 45 |     +       TEMP_R,|
+ 46 |!|
+ 47 |     +       R_DISPATCH(2,12),|
+ 48 |     +       R_LOCAL_COEFF(3),|
+ 49 |     +       R_DISP_BTU_COST,|
+ 50 |     +       R_DISP_BTU_TAX_ADDER,|
+ 51 |     +       FUEL_SCEN_MULT,|
+ 52 |     +       GET_SCENARIO_COAL_PRICES,|
+ 53 |     +       GET_SCENARIO_GAS_PRICES,|
+ 54 |     +       GET_SCENARIO_OIL_PRICES,|
+ 55 |     +       GET_SCENARIO_URANIUM_PRICES,|
+ 56 |     +       TEMP_R4|
+ 57 |!|
+ 58 |! TRANSACTION GROUP VARIABLES FOR DISPATCH REPORT|
+ 59 |!|
+ 60 |      REAL (kind=4) ::  GROUP_CUM_CAP(0:256),GROUP_SEGMENT_NUM(0:256),|
+ 61 |     +       GROUP_TOTAL_CAP(0:256),|
+ 62 |     +       R_HEAT_RATE,BLOCK_CAP|
+ 63 ||
+ 64 |      INTEGER (kind=2) ::  TRANSACTION_GROUP,|
+ 65 |     +          GET_TRANS_GROUP_POSITION,|
+ 66 |     +          R_BLOCK,J,|
+ 67 |     +          LOCAL_DATE,BASE_DATE,|
+ 68 |     +          GET_NEWGEN_INDEX|
+ 69 |!|
+ 70 |! CHANGED TO REAL ON 5/14/92|
+ 71 |!|
+ 72 |      REAL ::  SEASONAL_SYSTEM_CAP,LOCAL_YEAR|
+ 73 |!|
+ 74 |      REAL ::  RTEMP,DISP_COST,HEAT_RATE_FACTOR(MAX_CL_UNITS),|
+ 75 |     +     PRIM_TOTAL_EMISSION_COST(MAX_CL_UNITS),|
+ 76 |     +     R_PRIM_TOTAL_EMISSION_COST,|
+ 77 |     +     STEMP,CURRENT_LAMDA,|
+ 78 |     +     MAINTENANCE_RATE(MAX_CL_UNITS),|
+ 79 |     +     COST_CONVERSION,HEAT_CONVERSION,HEAT_RATE,|
+ 80 |     +     DISP_ADJUSTER,DISP_BTU_COST(MAX_CL_UNITS),|
+ 81 |     +     DISP_BTU_TAX_ADDER(MAX_CL_UNITS),|
+ 82 |     +     DISPATCHING_BTU_COST,RTEMP1,|
+ 83 |     +     TEMP_DISPATCH_MULT,|
+ 84 |     +     GET_VAR,|
+ 85 |     +     SAVE_HEATRATE(MAX_DISPATCH_BLOCKS),|
+ 86 |     +     TOTAL_DELIVERY_COST,|
+ 87 |     +     GET_MAINTENANCE_RATE_FOR_MONTH,|
+ 88 |     +     BLENDED_BTU_COST(*),|
+ 89 |     +     NEWGEN_UNIT_STATUS|
+ 90 |      REAL ::  GET_COST_CONVERSION,GET_HEAT_CONVERSION|
+ 91 |!|
+ 92 |! ADDED 12/30/92 FOR FUEL LIMITS|
+ 93 |!|
+ 94 |      LOGICAL (kind=4) ::  FUEL_INVENTORY_ACTIVE|
+ 95 |      CHARACTER (len=20) ::  UNIT_NAME|
+ 96 |!|
+ 97 |      INTEGER (kind=2) ::  SHADOW_UN|
+ 98 |      REAL ::  SHADOW_DISPATCH_ADDER(:)|
+ 99 |      ALLOCATABLE :: SHADOW_DISPATCH_ADDER|
+100 |      LOGICAL (kind=1) ::  BTU_TAX_ACTIVE,USE_SECONDARY_FUEL(*)|
+101 |      REAL ::  F_MIX,S_MIX,NOX_RATE|
+102 |      LOGICAL (kind=1) ::  CALL_DISPATCH_REPORT|
+103 |      LOGICAL (kind=1) ::  SEASONAL_DISPATCH_REPORT,|
+104 |     +          SEASONAL_DISPATCH_REPORT_ACTIVE,|
+105 |     +          REPORT_THIS_DISPATCH_PERIOD,|
+106 |     +          REPORT_NEW_SUPPLY_PERIOD,|
+107 |     +          TEMP_L1,GET_CL_BASECASE_MARKET_ID,|
+108 |     +          FUEL_POINTERS_USED,|
+109 |     +          EXISTING_UNIT|
+110 ||
+111 |      REAL ::  ADJ_TOTAL_CAP,R_ADJ_TOTAL_CAP ! REMOVED 3/3/92 MSG, ADDED 11/8/95.|
+112 |      SAVE ADJ_TOTAL_CAP ! SPEEDS-UP MC ROUTINE|
+113 |      LOGICAL (kind=1) ::  REASON1,REASON2,REASON3,REASON4,REASON5|
+114 |!|
+115 |      INTEGER (kind=2) ::  DISPATCH_ORDER_HEADER,DISP_ORDER_NO|
+116 |      INTEGER (kind=2) ::  TRANS_DISP_ORDER_NO|
+117 |      INTEGER (kind=2) ::  TRANS_DISPATCH_RPT_HEADER,|
+118 |     +          NEW_SUPPLY_CURVE_NO,NEW_SUPPLY_CURVE_HEADER|
+119 |      SAVE DISP_ORDER_NO,TRANS_DISP_ORDER_NO,SAVE_HEATRATE,|
+120 |     +          NEW_SUPPLY_CURVE_NO|
+121 |      INTEGER ::  DISP_ORDER_REC|
+122 |      INTEGER ::  TRANS_DISP_ORDER_REC,NEW_SUPPLY_CURVE_REC|
+123 |      SAVE DISP_ORDER_REC,TRANS_DISP_ORDER_REC,NEW_SUPPLY_CURVE_REC|
+124 |      LOGICAL (kind=1) ::  TRANS_DISP_ORDER_RPT_NOT_OPEN=.TRUE. ,|
+125 |     +          NEW_SUPPLY_CURVE_NOT_OPEN=.TRUE.|
+126 |      REAL (KIND=4) :: CUM_CAP,RPT_CAP|
+127 |      CHARACTER (len=2) ::  FIRST=' 1' ,SECOND=' 2'|
+128 |      CHARACTER (len=22) ::  REPORT_UNIT_NAME|
+129 |      LOGICAL (kind=1) ::   DISP_ORDER_REPORT_NOT_OPEN=.TRUE. ,|
+130 |     +           SOUTHERN_COMPANY=.FALSE. ,|
+131 |     +            YES_SECOND_FUEL_EMIS_DISPATCH,|
+132 |     +            SECOND_FUEL_EMIS_DISPATCH,|
+133 |     +            NEW_SUPPLY_CURVE_REPORT|
+134 |      CHARACTER (len=1) ::  DISPATCH_RPT_TYPE|
+135 |!|
+136 |      REAL ::  DISPATCH_EMIS_ADDER|
+137 |!  END COMMON BLOCK SECTION|
+138 |      INTEGER (kind=2) ::    R_UNIT(*)|
+139 |      INTEGER (kind=2) ::    R_BLKNO(*),ECBLK,R_NUNITS,R_NBLOK2,|
+140 |     +            R_SINGLE_UNIT,|
+141 |     +            CLASS,|
+142 |     +            GET_ASSET_CLASS_NUM|
+143 |      REAL ::   BLOCK_DISP_COST(:,:),R_BLOCK_DISP_COST(NUNITS,2),|
+144 |     +      SECOND_DISP_COST(:,:),|
+145 |     +      R_1ST_DISP_COST,R_2ND_DISP_COST,|
+146 |     +      R_1ST_FUEL,R_1ST_NON_FUEL,R_2ND_FUEL,R_2ND_NON_FUEL,|
+147 |     +       EMIS_DISPATCH_1,|
+148 |     +       EMIS_DISPATCH_2,|
+149 |     +       EMIS_DISPATCH_3,|
+150 |     +       EMIS_DISPATCH_4,|
+151 |     +       EMIS_DISPATCH_5,|
+152 |     +       TRANS_DISPATCH_EMIS_ADDER,|
+153 |     +       TOTAL_S_DELIVERY_COST|
+154 |      ALLOCATABLE :: BLOCK_DISP_COST,SECOND_DISP_COST|
+155 |      SAVE BLOCK_DISP_COST,SECOND_DISP_COST|
+156 |!|
+157 |      INTEGER (kind=2) ::  UPPER_TRANS_GROUP,|
+158 |     +          GET_MAX_TRANS_ID_USED,|
+159 |     +          MAX_BLOCKS_PER_TRANS(:),|
+160 |     +          TRANS,|
+161 |     +          R_MAX_TRANS_BLOCK|
+162 |      ALLOCATABLE :: MAX_BLOCKS_PER_TRANS|
+163 |      SAVE           MAX_BLOCKS_PER_TRANS|
+164 |      REAL (kind=4) ::  TRANS_GROUP_SCARCITY_VALUE,LOCAL_SCARCITY_COST,|
+165 |     +       GLOBAL_SCARCITY_COST,TRANS_GLOBAL_SCARCITY_VALUE|
+166 |      INTEGER (kind=2) ::  T_GROUP|
+167 |      INTEGER (kind=4) ::  VALUES_TO_SET|
+168 |      CHARACTER (len=9) ::  REPORT_PERIOD,LOADS_MONTH_NAME|
+169 |      REAL (kind=4) ::  SOX_RATE|
+170 |      CHARACTER (len=35) ::  GET_TRANSACTION_GROUP_NAME|
+171 |      CHARACTER (len=35) ::  TRANS_GROUP_NAME*40,|
+172 |     +              TRANS_NAME ! *40 GT REMOVED 091611|
+173 |      CHARACTER (len=15) ::  LEFT_JUSTIFY_I2_IN_STR|
+174 |      INTEGER (KIND=2) :: MUST_RUN_BLOCKS,BLK1_DISPATCH,BLK2_DISPATCH,|
+175 |     +                    BLK0,BLK1,BLK2,PassPos,IBK1,IBK2|
+176 |      INTEGER (KIND=2) , ALLOCATABLE, DIMENSION(:) ::  LAMDA_BLK1,|
+177 |     +                                              BLKNO_BLK1,|
+178 |     +                                              UNIT_BLK1,|
+179 |     +                                              LAMDA_BLK2,|
+180 |     +                                              BLKNO_BLK2,|
+181 |     +                                              UNIT_BLK2,|
+182 |     +                                              LAMDA_MR,|
+183 |     +                                              BLKNO_MR,|
+184 |     +                                              UNIT_MR,|
+185 |     +                                              LAMDA_TEMP|
+186 |      INTEGER (KIND=4) , ALLOCATABLE, DIMENSION(:) :: PosBLK0,PosBLK1,|
+187 |     +                                               PosBLK2|
+188 |      REAL (KIND=4) , ALLOCATABLE, DIMENSION(:) :: SAVE_HEATRATE_BLK1,|
+189 |     +                                       SHADOW_DISPATCH_ADDER_BLK1,|
+190 |     +                                       INHEAT_BLK1,|
+191 |     +                                       MWBLOK_BLK1,|
+192 |     +                                       SAVE_HEATRATE_BLK2,|
+193 |     +                                       SHADOW_DISPATCH_ADDER_BLK2,|
+194 |     +                                       INHEAT_BLK2,|
+195 |     +                                       MWBLOK_BLK2,|
+196 |     +                                       SAVE_HEATRATE_MR,|
+197 |     +                                       SHADOW_DISPATCH_ADDER_MR,|
+198 |     +                                       INHEAT_MR,|
+199 |     +                                       MWBLOK_MR|
+200 |      LOGICAL (KIND=1) , ALLOCATABLE, DIMENSION(:) :: first_blk_used,|
+201 |     +                                               SECOND_BLK_PASSED|
+202 |      LOGICAL (KIND=1) , SAVE :: CAPEX_THERMAL_RPT_NOT_OPEN=.TRUE.|
+203 |      INTEGER (KIND=2) :: CAPEX_THERMAL_RPT_HEADER,DAY_TYPE_FOR_RESOURCE|
+204 |      INTEGER (KIND=2) , SAVE :: CAPEX_THERMAL_NO|
+205 |      INTEGER (KIND=4) , SAVE :: CAPEX_THERMAL_REC|
+206 |      REAL (KIND=4) :: MIN_CAP, MAX_CAP,MARKET_AREA,|
+207 |     +                 NEW_SUPPLY_VARIABLES(16)|
+208 |      LOGICAL (KIND=1) :: V_LOG|
+209 |      CHARACTER (LEN=6) :: BASECASE_MARKET_AREA_ID|
+210 |      CHARACTER (LEN=8) :: SP_BASECASE_MARKET_AREA_ID|
+211 |      REAL (KIND=4) ::|
+212 |     +                 GET_POWERDAT_PLANT_ID,|
+213 |     +                 HESI_SECOND_UNIT_ID_NUM,|
+214 |     +                 POWERDAT_PLANT_ID,|
+215 |     +                 SPCapExResourceOption|
+216 |      INTEGER (KIND=4) :: OnLineYr,OnLineMo,OffLineYr,OffLineMo|
+217 |      REAL (KIND=4) :: GET_UNIT_START_UP_COSTS,|
+218 |     +                 GET_MIN_UP_TIME,|
+219 |     +                 GET_MIN_DOWN_TIME,|
+220 |     +                 YEAR_MONTH|
+221 |      LOGICAL (KIND=1) :: GET_BASECASE_MARKET_AREA_ID,|
+222 |     +                    GET_CUBIC_HEAT_CURVE|
+223 |      CHARACTER (LEN=16) :: SAC_UNIT_NAME,SAC_STATION_GROUP|
+224 |      REAL (KIND=4) :: A_CO,B_CO,C_CO,D_CO,|
+225 |     +                 UNIT_START_UP_COSTS,|
+226 |     +                 MIN_UPTIME,|
+227 |     +                 MIN_DOWNTIME|
+228 |      CHARACTER (LEN=35) :: GET_GROUP_NAME|
+229 |      INTEGER (KIND=2) :: TG_POSITION,GET_EMISSION_MARKET_LINK|
+230 |      CHARACTER (LEN=6) :: EV_TRANS_AREA_NAME|
+231 |      LOGICAL (kind=1) ::    PASS_TO_ENERPRISE=.TRUE.|
+232 |      REAL (kind=4) ::       LOCAL_FUEL,GET_PBTUCT_SAVE,|
+233 |     +            LOCAL_DISPATCH_ADDER,GET_DISPADJ_SAVE,|
+234 |     +            TEMP_P_FUEL_DELIVERY,|
+235 |     +            TEMP_P_FUEL_DELIVERY_2,|
+236 |     +            TEMP_P_FUEL_DELIVERY_3|
+237 |      REAL (KIND=4) :: BTUDispatchAdder|
+238 |      HESI_SECOND_UNIT_ID_NUM=0|
+239 |      IF(ISEAS == 1) THEN|
+240 |         UPPER_TRANS_GROUP = GET_MAX_TRANS_ID_USED()|
+241 |         IF(ALLOCATED(MAX_BLOCKS_PER_TRANS))|
+242 |     +                                  DEALLOCATE(MAX_BLOCKS_PER_TRANS)|
+243 |         ALLOCATE(MAX_BLOCKS_PER_TRANS(0:UPPER_TRANS_GROUP)) ! 0 IS THE MAX OF ALL GROUPS|
+244 |         MAX_BLOCKS_PER_TRANS = 0|
+245 |      ENDIF|
+246 ||
+247 |      SEASONAL_SYSTEM_CAP = 0.|
+248 |      IF(NUNITS < 1) RETURN|
+249 |      SECOND_FUEL_EMIS_DISPATCH = YES_SECOND_FUEL_EMIS_DISPATCH()|
+250 |!|
+251 |      COST_CONVERSION = GET_COST_CONVERSION()|
+252 |      HEAT_CONVERSION = GET_HEAT_CONVERSION()|
+253 |      PRODUCTION_METHOD = PROCMETH()|
+254 |      IF(ALLOCATED(BLOCK_DISP_COST)) DEALLOCATE(BLOCK_DISP_COST,|
+255 |     +                                          SECOND_DISP_COST)|
+256 |      ALLOCATE(BLOCK_DISP_COST(NUNITS,2),|
+257 |     +         SECOND_DISP_COST(NUNITS,2))|
+258 |      IF(ALLOCATED(SHADOW_DISPATCH_ADDER))|
+259 |     +                               DEALLOCATE(SHADOW_DISPATCH_ADDER)|
+260 |      ALLOCATE(SHADOW_DISPATCH_ADDER(NBLOK))|
+261 ||
+262 |!|
+263 |      ADJ_TOTAL_CAP = 0.|
+264 |      BLOCK_DISP_COST = 0.|
+265 |      SECOND_DISP_COST = 0.|
+266 |      MUST_RUN_BLOCKS = 0|
+267 |      BLK1_DISPATCH = 0|
+268 |      BLK2_DISPATCH = 0|
+269 |      PRIM_TOTAL_EMISSION_COST = 0.0|
+270 |      NonFuelDispatchCost = 0.0|
+271 |      FuelDispatchCostMultiplier = 0.0|
+272 |!|
+273 |!|
+274 |!|
+275 |!|
+276 |!|
+277 |!|
+278 |      DO NB = 1, NBLOK|
+279 |         UN = UNIT(NB)|
+280 |         LAMDA(NB) = 32000|
+281 |         SHADOW_DISPATCH_ADDER(NB) = 0.|
+282 |!|
+283 |         IF(ISEAS == 1) THEN|
+284 |            TRANS = TRANSACTION_GROUP(UN)|
+285 |! 08/13/03. DOUBLE INDEX ADDED.|
+286 |            TRANS = GET_TRANS_GROUP_POSITION(TRANS)|
+287 |            MAX_BLOCKS_PER_TRANS(TRANS) =|
+288 |     +                                   MAX_BLOCKS_PER_TRANS(TRANS) + 1|
+289 |            MAX_BLOCKS_PER_TRANS(0) = MAX(MAX_BLOCKS_PER_TRANS(0),|
+290 |     +                                      MAX_BLOCKS_PER_TRANS(TRANS))|
+291 |         ENDIF|
+292 |!|
+293 |!|
+294 |            EMIS_DISPATCH_1 =|
+295 |     +                     TRANS_DISPATCH_EMIS_ADDER(1,ISEAS,YEAR,UN)|
+296 |            EMIS_DISPATCH_2 =|
+297 |     +                     TRANS_DISPATCH_EMIS_ADDER(2,ISEAS,YEAR,UN)|
+298 |            EMIS_DISPATCH_3 =|
+299 |     +                     TRANS_DISPATCH_EMIS_ADDER(3,ISEAS,YEAR,UN)|
+300 |            EMIS_DISPATCH_4 =|
+301 |     +                     TRANS_DISPATCH_EMIS_ADDER(4,ISEAS,YEAR,UN)|
+302 |            EMIS_DISPATCH_5 =|
+303 |     +                     TRANS_DISPATCH_EMIS_ADDER(5,ISEAS,YEAR,UN)|
+304 |!|
+305 |! GAT. 1/31/94.|
+306 |         IF(BLKNO(NB) == 2) THEN|
+307 |            MWBLOK(NB) = MW(2,UN) - MW(1,UN)|
+308 |         ELSE|
+309 |            MWBLOK(NB) = MW(1,UN)|
+310 |         ENDIF|
+311 |!|
+312 |         IF(ONLINE(UN) .LE. DATE2 .AND. OFLINE(UN) .GE. DATE1) THEN|
+313 |            IF(SHADOW_UNIT_NUMBER(UN) == 0 .OR.|
+314 |     +                                 UN < SHADOW_UNIT_NUMBER(UN)) THEN|
+315 |               SEASONAL_SYSTEM_CAP = SEASONAL_SYSTEM_CAP + MWBLOK(NB)|
+316 |            ENDIF|
+317 |            IF((MAINTENANCE_RATE(UN) /= 1. .AND. EAVAIL(UN) /= 0.|
+318 |     +          .AND. (MWBLOK(NB) /= 0. .OR. LDTYPE(UN) == 'L')) .OR.|
+319 |     +               (EAVAIL(UN) /= 0. .AND. CALL_DISPATCH_REPORT)) THEN|
+320 ||
+321 |               IF(USE_SECONDARY_FUEL(UN) .OR.|
+322 |     +            ((SOUTHERN_COMPANY .OR. SECOND_FUEL_EMIS_DISPATCH)|
+323 |     +                                     .AND. FUELMX(UN) < 0.) ) THEN|
+324 |                  F_MIX = 0.|
+325 |                  S_MIX = 1.|
+326 |               ELSE|
+327 |                  F_MIX = ABS(FUELMX(UN))|
+328 |                  S_MIX = 1. - F_MIX|
+329 |               ENDIF|
+330 |               IF(BLKNO(NB) == 2) THEN|
+331 |                  DISP_ADJUSTER = DISPADJ2(UN)|
+332 |                  NOX_RATE = F_MIX * PRIM_NOX_BK2(UN) +|
+333 |     +                       S_MIX * SEC_NOX_BK2(UN)|
+334 |               ELSE|
+335 |                  DISP_ADJUSTER = DISPADJ(UN)|
+336 |                  NOX_RATE = F_MIX * NOX(UN) + S_MIX * SEC_NOX_BK1(UN)|
+337 |               ENDIF|
+338 |!|
+339 |               IF(BTU_TAX_ACTIVE) THEN|
+340 |                  DISPATCHING_BTU_COST = DISP_BTU_COST(UN) +|
+341 |     +                                            DISP_BTU_TAX_ADDER(UN)|
+342 |               ELSE|
+343 |                  DISPATCHING_BTU_COST = DISP_BTU_COST(UN)|
+344 |               ENDIF|
+345 |               IF(BTU_TAX_ACTIVE) THEN|
+346 |                  BTUDispatchAdder = DISP_BTU_TAX_ADDER(UN)|
+347 |     +|
+348 |               ELSE|
+349 |                  BTUDispatchAdder = 0.|
+350 |               ENDIF|
+351 |!|
+352 |               TEMP_DISPATCH_MULT = DISPATCH_MULT(UN)|
+353 |               IF(TEMP_DISPATCH_MULT < 0.) THEN ! 030506. ADDED MONTH.|
+354 |                  TEMP_DISPATCH_MULT =|
+355 |     +                       GET_VAR(TEMP_DISPATCH_MULT,YEAR,UNITNM(UN))|
+356 |                  IF(TEMP_DISPATCH_MULT < 0.) THEN|
+357 |                     TEMP_DISPATCH_MULT =|
+358 |     +                      GET_VAR(TEMP_DISPATCH_MULT,ISEAS,UNITNM(UN))|
+359 |                  ENDIF|
+360 |               ENDIF|
+361 |!|
+362 |               SAVE_HEATRATE(NB) = INHEAT(NB) * HEAT_RATE_FACTOR(UN)|
+363 |!|
+364 |               PRIM_TOTAL_EMISSION_COST(UN) =|
+365 |     +            0.001 *|
+366 |     +                  TEMP_DISPATCH_MULT *|
+367 |     +                  SAVE_HEATRATE(NB) * (|
+368 |     +                  EMIS_DISPATCH_1 * (F_MIX * SO2(UN) +|
+369 |     +                                            S_MIX * SEC_SO2(UN)) +|
+370 |     +                  EMIS_DISPATCH_2 * NOX_RATE +|
+371 |     +                  EMIS_DISPATCH_3 *(F_MIX*PARTICULATES(UN)+|
+372 |     +                                              S_MIX*SEC_CO2(UN)) +|
+373 |     +                  EMIS_DISPATCH_4 *(F_MIX * EMIS_OTH2(UN) +|
+374 |     +                                           S_MIX * SEC_OTH2(UN)) +|
+375 |     +                  EMIS_DISPATCH_5 *(F_MIX * EMIS_OTH3(UN) +|
+376 |     +                                           S_MIX * SEC_OTH3(UN)))|
+377 |!|
+378 |               NonFuelDispatchCost(UN,MAX(1,BLKNO(NB))) =|
+379 |     +                            (TEMP_DISPATCH_MULT *|
+380 |     +                             COST_CONVERSION *|
+381 |     +                             SAVE_HEATRATE(NB) * ! 5/8/01. FOR SRP.|
+382 |     +                             BTUDispatchAdder)|
+383 |     +                             + 10.*(VCPMWH(UN) + DISP_ADJUSTER|
+384 |     +                                   + PRIM_TOTAL_EMISSION_COST(UN))|
+385 |               FuelDispatchCostMultiplier(UN,MAX(1,BLKNO(NB))) =|
+386 |     +                            (TEMP_DISPATCH_MULT *|
+387 |     +                             COST_CONVERSION *|
+388 |     +                             SAVE_HEATRATE(NB))|
+389 |               RTEMP = TEMP_DISPATCH_MULT * (|
+390 |     +                  SAVE_HEATRATE(NB) * ! 5/8/01. FOR SRP.|
+391 |     +                 (DISPATCHING_BTU_COST +|
+392 |     +                  EMIS_DISPATCH_1 * (F_MIX * SO2(UN) +|
+393 |     +                                            S_MIX * SEC_SO2(UN)) +|
+394 |     +                  EMIS_DISPATCH_2 * NOX_RATE +|
+395 |     +                  EMIS_DISPATCH_3 *(F_MIX*PARTICULATES(UN)+|
+396 |     +                                              S_MIX*SEC_CO2(UN)) +|
+397 |     +                  EMIS_DISPATCH_4 *(F_MIX * EMIS_OTH2(UN) +|
+398 |     +                                           S_MIX * SEC_OTH2(UN)) +|
+399 |     +                  EMIS_DISPATCH_5 *(F_MIX * EMIS_OTH3(UN) +|
+400 |     +                                           S_MIX * SEC_OTH3(UN)))*|
+401 |     +                  COST_CONVERSION +|
+402 |     +                    10.*(VCPMWH(UN) + DISP_ADJUSTER) )|
+403 |!|
+404 |               CALL GET_TOTAL_S_DELIVERY_COST(TOTAL_S_DELIVERY_COST,UN)|
+405 |!|
+406 |               STEMP = TEMP_DISPATCH_MULT * (|
+407 |     +                  SAVE_HEATRATE(NB) * ! 5/8/01. FOR SRP.|
+408 |     +                 (SBTUCT(UN) + TOTAL_S_DELIVERY_COST +|
+409 |     +                  EMIS_DISPATCH_1 * S_MIX * SEC_SO2(UN) +|
+410 |     +                  EMIS_DISPATCH_2 * S_MIX * SEC_NOX_BK2(UN) +|
+411 |     +                  EMIS_DISPATCH_3 * S_MIX*SEC_CO2(UN) +|
+412 |     +                  EMIS_DISPATCH_4 * S_MIX * SEC_OTH2(UN) +|
+413 |     +                  EMIS_DISPATCH_5 * S_MIX * SEC_OTH3(UN))*|
+414 |     +                  COST_CONVERSION +|
+415 |     +                    10.*(VCPMWH(UN) + DISP_ADJUSTER) )|
+416 |               IF(PRODUCTION_METHOD== 4) RTEMP = RTEMP + 10.*FUELADJ(UN)|
+417 |!|
+418 |! THE SHADOW_DISPATCH_ADDER IS USED TO ENSURE THAT THE SHADOW UNIT FOLLOWS|
+419 |!  THE MAIN UNIT IN THE DISPATCH ORDER|
+420 |!|
+421 |               SHADOW_UN = SHADOW_UNIT_NUMBER(UN)|
+422 |               IF(SHADOW_UN > 0 .AND. UN > SHADOW_UN) THEN|
+423 |                  RTEMP1 = BLOCK_DISP_COST(SHADOW_UN,MAX(BLKNO(NB),1))|
+424 |                  IF(RTEMP1 > RTEMP) THEN|
+425 |                     SHADOW_DISPATCH_ADDER(NB) = (RTEMP1 - RTEMP)/10.|
+426 |                     RTEMP = RTEMP1|
+427 |                  ENDIF|
+428 |               ELSE|
+429 |!|
+430 |                  ADJ_TOTAL_CAP = ADJ_TOTAL_CAP + MWBLOK(NB)|
+431 |     +                                       * (1.-MAINTENANCE_RATE(UN))|
+432 |!|
+433 |               ENDIF|
+434 |               BLOCK_DISP_COST(UN,MAX(BLKNO(NB),1)) = RTEMP|
+435 |               SECOND_DISP_COST(UN,MAX(BLKNO(NB),1)) = STEMP|
+436 |! LAMDA SET HERE|
+437 |               LAMDA(NB) = MAX(-31999,NINT(MIN(31999.,RTEMP)))|
+438 |            ENDIF|
+439 |         ENDIF|
+440 |         IF(BLKNO(NB) == 0 .AND. LAMDA(NB) < 32000) THEN|
+441 |            MUST_RUN_BLOCKS = MUST_RUN_BLOCKS + 1|
+442 |         ELSEIF(BLKNO(NB) == 1 .AND. LAMDA(NB) < 32000) THEN|
+443 |            BLK1_DISPATCH = BLK1_DISPATCH + 1|
+444 |         ELSE|
+445 |            BLK2_DISPATCH = BLK2_DISPATCH + 1|
+446 |         ENDIF|
+447 |      ENDDO|
+448 |      CALL RW_PROCESS_MESSAGES()|
+449 |!|
+450 |! TRYING TO INPROVE THE SORT TIME OF THE DISPATCH ROUTINE|
+451 |!|
+452 |      SCREEN_MESSAGES = TRIM(LOADS_MONTH_NAME(ISEAS))//"-Dispatch Order"|
+453 |      CALL MG_LOCATE_WRITE(18,70,TRIM(SCREEN_MESSAGES),3,2)|
+454 |      CALL DISPLAY_TIME|
+455 |!|
+456 |      IF(NUNITS > 2000 .AND. ISEAS <= 2) THEN|
+457 |         IF(ALLOCATED(LAMDA_BLK1))DEALLOCATE(LAMDA_BLK1,|
+458 |     +                                       BLKNO_BLK1,|
+459 |     +                                       INHEAT_BLK1,|
+460 |     +                                       MWBLOK_BLK1,|
+461 |     +                                       UNIT_BLK1,|
+462 |     +                                       SAVE_HEATRATE_BLK1,|
+463 |     +                                       SHADOW_DISPATCH_ADDER_BLK1)|
+464 |         IF(BLK1_DISPATCH > 0) THEN|
+465 |            ALLOCATE(LAMDA_BLK1(BLK1_DISPATCH),|
+466 |     +            BLKNO_BLK1(BLK1_DISPATCH),|
+467 |     +            INHEAT_BLK1(BLK1_DISPATCH),|
+468 |     +            MWBLOK_BLK1(BLK1_DISPATCH),|
+469 |     +            UNIT_BLK1(BLK1_DISPATCH),|
+470 |     +            SAVE_HEATRATE_BLK1(BLK1_DISPATCH),|
+471 |     +            SHADOW_DISPATCH_ADDER_BLK1(BLK1_DISPATCH))|
+472 |         ENDIF|
+473 |         IF(ALLOCATED(LAMDA_BLK2)) DEALLOCATE(LAMDA_BLK2,|
+474 |     +                              BLKNO_BLK2,|
+475 |     +                              INHEAT_BLK2,|
+476 |     +                              MWBLOK_BLK2,|
+477 |     +                              UNIT_BLK2,|
+478 |     +                              SAVE_HEATRATE_BLK2,|
+479 |     +                              SHADOW_DISPATCH_ADDER_BLK2)|
+480 |         IF(BLK2_DISPATCH > 0) THEN|
+481 |            ALLOCATE(LAMDA_BLK2(BLK2_DISPATCH),|
+482 |     +            BLKNO_BLK2(BLK2_DISPATCH),|
+483 |     +            INHEAT_BLK2(BLK2_DISPATCH),|
+484 |     +            MWBLOK_BLK2(BLK2_DISPATCH),|
+485 |     +            UNIT_BLK2(BLK2_DISPATCH),|
+486 |     +            SAVE_HEATRATE_BLK2(BLK2_DISPATCH),|
+487 |     +            SHADOW_DISPATCH_ADDER_BLK2(BLK2_DISPATCH))|
+488 |         ENDIF|
+489 |         IF(ALLOCATED(LAMDA_MR)) DEALLOCATE(LAMDA_MR,|
+490 |     +                           BLKNO_MR,|
+491 |     +                           INHEAT_MR,|
+492 |     +                           MWBLOK_MR,|
+493 |     +                           UNIT_MR,|
+494 |     +                           SAVE_HEATRATE_MR,|
+495 |     +                           SHADOW_DISPATCH_ADDER_MR)|
+496 |         IF(MUST_RUN_BLOCKS > 0) THEN|
+497 |            ALLOCATE(LAMDA_MR(MUST_RUN_BLOCKS),|
+498 |     +            BLKNO_MR(MUST_RUN_BLOCKS),|
+499 |     +            INHEAT_MR(MUST_RUN_BLOCKS),|
+500 |     +            MWBLOK_MR(MUST_RUN_BLOCKS),|
+501 |     +            UNIT_MR(MUST_RUN_BLOCKS),|
+502 |     +            SAVE_HEATRATE_MR(MUST_RUN_BLOCKS),|
+503 |     +            SHADOW_DISPATCH_ADDER_MR(MUST_RUN_BLOCKS))|
+504 |         ENDIF|
+505 |!|
+506 |         BLK2 = 0|
+507 |         BLK1 = 0|
+508 |         BLK0 = 0|
+509 |         DO NB = 1, NBLOK|
+510 |            UN = UNIT(NB)|
+511 |            IF(BLKNO(NB) == 0 .AND. LAMDA(NB) < 32000) THEN|
+512 |               BLK0 = BLK0 + 1|
+513 |               LAMDA_MR(BLK0) = LAMDA(NB)|
+514 |               BLKNO_MR(BLK0) = BLKNO(NB)|
+515 |               INHEAT_MR(BLK0) = INHEAT(NB)|
+516 |               MWBLOK_MR(BLK0) = MWBLOK(NB)|
+517 |               UNIT_MR(BLK0) = UNIT(NB)|
+518 |               SAVE_HEATRATE_MR(BLK0) = SAVE_HEATRATE(NB)|
+519 |               SHADOW_DISPATCH_ADDER_MR(BLK0)=SHADOW_DISPATCH_ADDER(NB)|
+520 |            ELSEIF(BLKNO(NB) == 1 .AND. LAMDA(NB) < 32000) THEN|
+521 |               BLK1 = BLK1 + 1|
+522 |               LAMDA_BLK1(BLK1) = LAMDA(NB)|
+523 |               BLKNO_BLK1(BLK1) = BLKNO(NB)|
+524 |               INHEAT_BLK1(BLK1) = INHEAT(NB)|
+525 |               MWBLOK_BLK1(BLK1) = MWBLOK(NB)|
+526 |               UNIT_BLK1(BLK1) = UNIT(NB)|
+527 |               SAVE_HEATRATE_BLK1(BLK1) = SAVE_HEATRATE(NB)|
+528 |               SHADOW_DISPATCH_ADDER_BLK1(BLK1) =|
+529 |     +                                         SHADOW_DISPATCH_ADDER(NB)|
+530 |            ELSE|
+531 |               BLK2 = BLK2 + 1|
+532 |               LAMDA_BLK2(BLK2) = LAMDA(NB)|
+533 |               BLKNO_BLK2(BLK2) = BLKNO(NB)|
+534 |               INHEAT_BLK2(BLK2) = INHEAT(NB)|
+535 |               MWBLOK_BLK2(BLK2) = MWBLOK(NB)|
+536 |               UNIT_BLK2(BLK2) = UNIT(NB)|
+537 |               SAVE_HEATRATE_BLK2(BLK2) = SAVE_HEATRATE(NB)|
+538 |               SHADOW_DISPATCH_ADDER_BLK2(BLK2) =|
+539 |     +                                         SHADOW_DISPATCH_ADDER(NB)|
+540 |            ENDIF|
+541 |         ENDDO|
+542 |!|
+543 |         allocate(first_blk_used(MAX_CL_UNITS))|
+544 |         first_blk_used = .FALSE.|
+545 |         PassPos = 1|
+546 |!|
+547 |! BY PASS IF THERE ARE NOT ANY MUST RUN UNITS|
+548 |!|
+549 |         IF(BLK0 > 0) THEN|
+550 |            IF(ALLOCATED(PosBLK0)) DEALLOCATE(PosBLK0)|
+551 |            ALLOCATE(PosBLK0(BLK0))|
+552 |            CAll QuickI(INT4(BLK0),LAMDA_MR,PosBLK0) ! sorts nItems items into ascending order|
+553 |            DO PassPos = 1, BLK0|
+554 |               UN = UNIT_MR(PosBLK0(PassPos))|
+555 |               if(first_blk_used(UN)) then|
+556 |               WRITE(SCREEN_MESSAGES,"(1x,I5,1x,a)") UN,UNITNM(UN)|
+557 |              CALL MG_CLEAR_LINE_WRITE(8,59,63,TRIM(SCREEN_MESSAGES),|
+558 |     +                                                   ALL_VERSIONS,0)|
+559 |!                 ! TODO: Get rid of this pause.|
+560 |                  pause|
+561 |               endif|
+562 |               first_blk_used(UN) = .TRUE.|
+563 |               LAMDA(PassPos) = LAMDA_MR(PosBLK0(PassPos))|
+564 |               UNIT(PassPos) = UNIT_MR(PosBLK0(PassPos))|
+565 |               BLKNO(PassPos) = BLKNO_MR(PosBLK0(PassPos))|
+566 |               INHEAT(PassPos) = INHEAT_MR(PosBLK0(PassPos))|
+567 |               MWBLOK(PassPos) = MWBLOK_MR(PosBLK0(PassPos))|
+568 |               SAVE_HEATRATE(PassPos) =|
+569 |     +                                SAVE_HEATRATE_MR(PosBLK0(PassPos))|
+570 |               SHADOW_DISPATCH_ADDER(PassPos) =|
+571 |     +                        SHADOW_DISPATCH_ADDER_MR(PosBLK0(PassPos))|
+572 |            ENDDO|
+573 |            CALL RW_PROCESS_MESSAGES()|
+574 |            IF(ALLOCATED(PosBLK0)) DEALLOCATE(PosBLK0)|
+575 |         ENDIF|
+576 |!|
+577 |! PROCESS FIRST BLOCKS|
+578 |!|
+579 |         IF(BLK1 > 0) THEN|
+580 |            IF(ALLOCATED(PosBLK1)) DEALLOCATE(PosBLK1)|
+581 |            ALLOCATE(PosBLK1(BLK1))|
+582 |            ALLOCATE(LAMDA_TEMP(BLK1_DISPATCH))|
+583 |            LAMDA_TEMP = LAMDA_BLK1|
+584 |            CAll QuickI(INT4(BLK1),LAMDA_TEMP,PosBLK1) ! sorts nItems items into ascending order|
+585 |            DO I = 1, BLK1|
+586 |               LAMDA_BLK1(I) = LAMDA_TEMP(PosBLK1(I))|
+587 |            ENDDO|
+588 |            DEALLOCATE(LAMDA_TEMP)|
+589 |            CALL RW_PROCESS_MESSAGES()|
+590 |         ENDIF|
+591 |!|
+592 |! PROCESS SECOND BLOCKS IF THERE ARE ANY|
+593 |!|
+594 |         IF(BLK2 > 0) THEN|
+595 |            ALLOCATE(LAMDA_TEMP(BLK2_DISPATCH))|
+596 |            LAMDA_TEMP = LAMDA_BLK2|
+597 |            IF(ALLOCATED(PosBLK2)) DEALLOCATE(PosBLK2)|
+598 |            ALLOCATE(PosBLK2(BLK2))|
+599 |            CAll QuickI(INT4(BLK2),LAMDA_TEMP,PosBLK2) ! sorts nItems items into ascending order|
+600 |            DO I = 1, BLK2|
+601 |               LAMDA_BLK2(I) = LAMDA_TEMP(PosBLK2(I))|
+602 |            ENDDO|
+603 |            DEALLOCATE(LAMDA_TEMP)|
+604 |            ALLOCATE(SECOND_BLK_PASSED(BLK2))|
+605 |            SECOND_BLK_PASSED = .FALSE.|
+606 |            CALL RW_PROCESS_MESSAGES()|
+607 |         ENDIF|
+608 |         IBK1 = 1|
+609 |         IBK2 = 1|
+610 |         DO|
+611 |!|
+612 ||
+613 |            IF(IBK1 <= BLK1 .AND. IBK2 <= BLK2) THEN|
+614 |               IF(LAMDA_BLK1(IBK1) <= MINVAL(LAMDA_BLK2(IBK2:BLK2)))THEN|
+615 |                  UN = UNIT_BLK1(PosBLK1(IBK1))|
+616 |                  first_blk_used(UN) = .TRUE.|
+617 |                  LAMDA(PassPos) = LAMDA_BLK1(IBK1)|
+618 |                  UNIT(PassPos) = UNIT_BLK1(PosBLK1(IBK1))|
+619 |                  BLKNO(PassPos) = BLKNO_BLK1(PosBLK1(IBK1))|
+620 |                  INHEAT(PassPos) = INHEAT_BLK1(PosBLK1(IBK1))|
+621 |                  MWBLOK(PassPos) = MWBLOK_BLK1(PosBLK1(IBK1))|
+622 |                  SAVE_HEATRATE(PassPos) =|
+623 |     +                                 SAVE_HEATRATE_BLK1(PosBLK1(IBK1))|
+624 |                  SHADOW_DISPATCH_ADDER(PassPos) =|
+625 |     +                         SHADOW_DISPATCH_ADDER_BLK1(PosBLK1(IBK1))|
+626 |                  PassPos = PassPos + 1|
+627 |                  IBK1 = IBK1 + 1|
+628 |               ELSE|
+629 |                  DO I = IBK2, BLK2|
+630 |!|
+631 |                     IF(LAMDA_BLK1(IBK1) <= LAMDA_BLK2(I) .OR.|
+632 |     +                                       SECOND_BLK_PASSED(I)) CYCLE|
+633 |                     UN = UNIT_BLK2(PosBLK2(I))|
+634 |                     IF(first_blk_used(UN)) THEN|
+635 |                        LAMDA(PassPos) = LAMDA_BLK2(I)|
+636 |                        UNIT(PassPos) = UNIT_BLK2(PosBLK2(I))|
+637 |                        BLKNO(PassPos) = BLKNO_BLK2(PosBLK2(I))|
+638 |                        INHEAT(PassPos) = INHEAT_BLK2(PosBLK2(I))|
+639 |                        MWBLOK(PassPos) = MWBLOK_BLK2(PosBLK2(I))|
+640 |                        SAVE_HEATRATE(PassPos) =|
+641 |     +                                    SAVE_HEATRATE_BLK2(PosBLK2(I))|
+642 |                        SHADOW_DISPATCH_ADDER(PassPos) =|
+643 |     +                            SHADOW_DISPATCH_ADDER_BLK2(PosBLK2(I))|
+644 |                        PassPos = PassPos + 1|
+645 |                        SECOND_BLK_PASSED(I) = .TRUE.|
+646 |                        LAMDA_BLK2(I) = 32000|
+647 |                     ENDIF|
+648 |                  ENDDO|
+649 |! RESET THE VALUE IBK2 TO THE FIRST SECOND BLOCK THAT HASN'T BEEN DISPATCHED|
+650 |                  DO I = 1, BLK2|
+651 |!|
+652 |                     IF(.NOT. SECOND_BLK_PASSED(I)) EXIT|
+653 |                  ENDDO|
+654 |                  IBK2 = I|
+655 |!|
+656 |! PASS THE FIRST BLOCK|
+657 |!|
+658 |                  UN = UNIT_BLK1(PosBLK1(IBK1))|
+659 |                  first_blk_used(UN) = .TRUE.|
+660 |                  LAMDA(PassPos) = LAMDA_BLK1(IBK1)|
+661 |                  UNIT(PassPos) = UNIT_BLK1(PosBLK1(IBK1))|
+662 |                  BLKNO(PassPos) = BLKNO_BLK1(PosBLK1(IBK1))|
+663 |                  INHEAT(PassPos) = INHEAT_BLK1(PosBLK1(IBK1))|
+664 |                  MWBLOK(PassPos) = MWBLOK_BLK1(PosBLK1(IBK1))|
+665 |                  SAVE_HEATRATE(PassPos) =|
+666 |     +                                 SAVE_HEATRATE_BLK1(PosBLK1(IBK1))|
+667 |                  SHADOW_DISPATCH_ADDER(PassPos) =|
+668 |     +                         SHADOW_DISPATCH_ADDER_BLK1(PosBLK1(IBK1))|
+669 |                  PassPos = PassPos + 1|
+670 |                  IBK1 = IBK1 + 1|
+671 |               ENDIF|
+672 |            ELSE|
+673 |               IF(IBK1 <= BLK1) THEN|
+674 |                  DO I = IBK1, BLK1|
+675 |                     LAMDA(PassPos) = LAMDA_BLK1(I)|
+676 |                     UNIT(PassPos) = UNIT_BLK1(PosBLK1(I))|
+677 |                     BLKNO(PassPos) = BLKNO_BLK1(PosBLK1(I))|
+678 |                     INHEAT(PassPos) = INHEAT_BLK1(PosBLK1(I))|
+679 |                     MWBLOK(PassPos) = MWBLOK_BLK1(PosBLK1(I))|
+680 |                     SAVE_HEATRATE(PassPos) =|
+681 |     +                                    SAVE_HEATRATE_BLK1(PosBLK1(I))|
+682 |                     SHADOW_DISPATCH_ADDER(PassPos) =|
+683 |     +                            SHADOW_DISPATCH_ADDER_BLK1(PosBLK1(I))|
+684 |                     PassPos = PassPos + 1|
+685 |!|
+686 |                  ENDDO|
+687 |               ENDIF|
+688 |               IF(BLK2 > 0) THEN|
+689 |                  DO I = 1, BLK2|
+690 |                     IF(SECOND_BLK_PASSED(I)) CYCLE|
+691 |                     LAMDA(PassPos) = LAMDA_BLK2(I)|
+692 |                     UNIT(PassPos) = UNIT_BLK2(PosBLK2(I))|
+693 |                     BLKNO(PassPos) = BLKNO_BLK2(PosBLK2(I))|
+694 |                     INHEAT(PassPos) = INHEAT_BLK2(PosBLK2(I))|
+695 |                     MWBLOK(PassPos) = MWBLOK_BLK2(PosBLK2(I))|
+696 |                     SAVE_HEATRATE(PassPos) =|
+697 |     +                                    SAVE_HEATRATE_BLK2(PosBLK2(I))|
+698 |                     SHADOW_DISPATCH_ADDER(PassPos) =|
+699 |     +                            SHADOW_DISPATCH_ADDER_BLK2(PosBLK2(I))|
+700 |                     PassPos = PassPos + 1|
+701 |!|
+702 |                  ENDDO|
+703 |               ENDIF|
+704 |               EXIT|
+705 |            ENDIF|
+706 |         ENDDO|
+707 |         IF(ALLOCATED(PosBLK1)) DEALLOCATE(PosBLK1)|
+708 |         IF(ALLOCATED(PosBLK2)) DEALLOCATE(PosBLK2)|
+709 |         IF(ALLOCATED(SECOND_BLK_PASSED)) DEALLOCATE(SECOND_BLK_PASSED)|
+710 |         IF(ALLOCATED(first_blk_used)) DEALLOCATE(first_blk_used)|
+711 |         IF(ALLOCATED(LAMDA_BLK1)) DEALLOCATE(LAMDA_BLK1,|
+712 |     +                           BLKNO_BLK1,|
+713 |     +                           INHEAT_BLK1,|
+714 |     +                           MWBLOK_BLK1,|
+715 |     +                           UNIT_BLK1,|
+716 |     +                           SAVE_HEATRATE_BLK1,|
+717 |     +                           SHADOW_DISPATCH_ADDER_BLK1)|
+718 |         IF(ALLOCATED(LAMDA_BLK2)) DEALLOCATE(LAMDA_BLK2,|
+719 |     +                           BLKNO_BLK2,|
+720 |     +                           INHEAT_BLK2,|
+721 |     +                           MWBLOK_BLK2,|
+722 |     +                           UNIT_BLK2,|
+723 |     +                           SAVE_HEATRATE_BLK2,|
+724 |     +                           SHADOW_DISPATCH_ADDER_BLK2)|
+725 |         IF(ALLOCATED(LAMDA_MR)) DEALLOCATE(LAMDA_MR,|
+726 |     +                           BLKNO_MR,|
+727 |     +                           INHEAT_MR,|
+728 |     +                           MWBLOK_MR,|
+729 |     +                           UNIT_MR,|
+730 |     +                           SAVE_HEATRATE_MR,|
+731 |     +                           SHADOW_DISPATCH_ADDER_MR)|
+732 |      ELSE|
+733 |         CALL DISPATCH_SORT(NBLOK,|
+734 |     +                      LAMDA,|
+735 |     +                      BLKNO,|
+736 |     +                      INHEAT,|
+737 |     +                      MWBLOK,|
+738 |     +                      UNIT,|
+739 |     +                      SAVE_HEATRATE,|
+740 |     +                      SHADOW_DISPATCH_ADDER)|
+741 |      ENDIF|
+742 |      CALL DISPLAY_TIME|
+743 |      SCREEN_MESSAGES ="Dispatch Order Finished"|
+744 |      CALL MG_LOCATE_WRITE(18,70,TRIM(SCREEN_MESSAGES),3,2)|
+745 |!|
+746 |! THE BELOW MAY NOT BE NEEDED 11/17/04|
+747 |!|
+748 |      NBLOCK = NBLOK|
+749 |      DO WHILE ((NBLOCK > 0) .AND. (LAMDA(NBLOCK) > 31999))|
+750 |         NBLOCK = NBLOCK - 1|
+751 |      ENDDO|
+752 |      CALL RW_PROCESS_MESSAGES()|
+753 ||
+754 |      SEASONAL_DISPATCH_REPORT_ACTIVE = SEASONAL_DISPATCH_REPORT()|
+755 ||
+756 |      IF((CALL_DISPATCH_REPORT .OR. REPORT_THIS_DISPATCH_PERIOD(ISEAS))|
+757 |     +                  .AND. NBLOCK > 0 .AND. .NOT. TESTING_PLAN) THEN|
+758 |!|
+759 |         GROUP_CUM_CAP = 0.|
+760 |         GROUP_SEGMENT_NUM = 0.|
+761 |         GROUP_TOTAL_CAP = 0.|
+762 |         SYSTEM_CUM_CAP = 0.|
+763 |         TRANS_GROUP_CUM_CAP = 0.|
+764 |         IF(DISP_ORDER_REPORT_NOT_OPEN .AND.|
+765 |     +                            (DISPATCH_RPT_TYPE() == 'A' .OR.|
+766 |     +                                 DISPATCH_RPT_TYPE() == 'B')) THEN|
+767 |            DISP_ORDER_NO = DISPATCH_ORDER_HEADER(DISP_ORDER_REC)|
+768 |            DISP_ORDER_REPORT_NOT_OPEN = .FALSE.|
+769 |         ENDIF|
+770 |         IF(TRANS_DISP_ORDER_RPT_NOT_OPEN .AND.|
+771 |     +                            (DISPATCH_RPT_TYPE() == 'T' .OR.|
+772 |     +                                 DISPATCH_RPT_TYPE() == 'B')) THEN|
+773 |            TRANS_DISP_ORDER_NO = TRANS_DISPATCH_RPT_HEADER(INT2(60),|
+774 |     +                                             TRANS_DISP_ORDER_REC)|
+775 |            TRANS_DISP_ORDER_RPT_NOT_OPEN = .FALSE.|
+776 |         ENDIF|
+777 |!|
+778 |         LOCAL_YEAR = FLOAT(YEAR+BASE_YEAR)|
+779 |         IF(CALL_DISPATCH_REPORT) THEN|
+780 |            REPORT_PERIOD = 'Annual'|
+781 |         ELSE|
+782 |            REPORT_PERIOD = LOADS_MONTH_NAME(ISEAS)|
+783 |         ENDIF|
+784 |!|
+785 |! TESTING REPORT FOR DISPATCH ORDER|
+786 |!|
+787 ||
+788 |!|
+789 |! CALCULATE THE CAPACITY ISSUES|
+790 |!|
+791 |         CUM_CAP = 0.|
+792 |         DO I = 1, NBLOCK|
+793 |            UN = UNIT(I)|
+794 |            T_GROUP = TRANSACTION_GROUP(UN)|
+795 |            BLOCK_CAP = MWBLOK(I)*EAVAIL(UN)*(1.-MAINTENANCE_RATE(UN)) ! DERATED TOTAL CAP|
+796 |            GROUP_TOTAL_CAP(T_GROUP)=GROUP_TOTAL_CAP(T_GROUP)+BLOCK_CAP|
+797 |            TRANS_GROUP_CUM_CAP(T_GROUP,I) = GROUP_TOTAL_CAP(T_GROUP)|
+798 |            CUM_CAP = CUM_CAP + BLOCK_CAP|
+799 |            SYSTEM_CUM_CAP(I) = CUM_CAP|
+800 |            SYSTEM_CUM_CAP(0) = SYSTEM_CUM_CAP(0) + BLOCK_CAP|
+801 |         ENDDO|
+802 |         CALL RW_PROCESS_MESSAGES()|
+803 |!|
+804 |         CUM_CAP = 0.|
+805 |          DO I = 1, NBLOCK|
+806 |            UN = UNIT(I)|
+807 |            T_GROUP = TRANSACTION_GROUP(UN)|
+808 |            DISP_COST = FLOAT(LAMDA(I))/10.|
+809 |            RTEMP = SAVE_HEATRATE(I)/HEAT_CONVERSION|
+810 |            UNIT_NAME = UNITNM(UN)|
+811 ||
+812 ||
+813 |            EMIS_DISPATCH_1 =|
+814 |     +                     TRANS_DISPATCH_EMIS_ADDER(1,ISEAS,YEAR,UN)|
+815 |            EMIS_DISPATCH_2 =|
+816 |     +                     TRANS_DISPATCH_EMIS_ADDER(2,ISEAS,YEAR,UN)|
+817 |            EMIS_DISPATCH_3 =|
+818 |     +                     TRANS_DISPATCH_EMIS_ADDER(3,ISEAS,YEAR,UN)|
+819 |            EMIS_DISPATCH_4 =|
+820 |     +                     TRANS_DISPATCH_EMIS_ADDER(4,ISEAS,YEAR,UN)|
+821 |            EMIS_DISPATCH_5 =|
+822 |     +                     TRANS_DISPATCH_EMIS_ADDER(5,ISEAS,YEAR,UN)|
+823 ||
+824 ||
+825 |             IF(USE_SECONDARY_FUEL(UN) .OR.|
+826 |     +              ((SOUTHERN_COMPANY .OR. SECOND_FUEL_EMIS_DISPATCH)|
+827 |     +                                     .AND. FUELMX(UN) < 0.) ) THEN|
+828 |                F_MIX = 0.|
+829 |                S_MIX = 1.|
+830 |             ELSE|
+831 |                F_MIX = ABS(FUELMX(UN))|
+832 |                S_MIX = 1. - F_MIX|
+833 |             ENDIF|
+834 |             IF(BTU_TAX_ACTIVE) THEN|
+835 |                DISPATCHING_BTU_COST = DISP_BTU_COST(UN) +|
+836 |     +                                          DISP_BTU_TAX_ADDER(UN)|
+837 |             ELSE|
+838 |                DISPATCHING_BTU_COST = DISP_BTU_COST(UN)|
+839 |             ENDIF|
+840 |            IF(BLKNO(I) == 2) THEN|
+841 |               DISP_ADJUSTER = DISPADJ2(UN)|
+842 |               NOX_RATE = F_MIX * PRIM_NOX_BK2(UN) +|
+843 |     +                       S_MIX * SEC_NOX_BK2(UN)|
+844 |            ELSE|
+845 |               DISP_ADJUSTER = DISPADJ(UN)|
+846 |               NOX_RATE = F_MIX * NOX(UN) + S_MIX * SEC_NOX_BK1(UN)|
+847 |            ENDIF|
+848 |            SOX_RATE = F_MIX * SO2(UN) + S_MIX * SEC_SO2(UN)|
+849 |            IF(SHADOW_DISPATCH_ADDER(I) /= 0.)|
+850 |     +                          DISP_ADJUSTER = SHADOW_DISPATCH_ADDER(I)|
+851 |!|
+852 |            TEMP_DISPATCH_MULT = DISPATCH_MULT(UN)|
+853 |            IF(TEMP_DISPATCH_MULT < 0.) THEN ! 030506. ADDED MONTH.|
+854 |               TEMP_DISPATCH_MULT =|
+855 |     +                       GET_VAR(TEMP_DISPATCH_MULT,YEAR,UNITNM(UN))|
+856 |               IF(TEMP_DISPATCH_MULT < 0.) THEN|
+857 |                  TEMP_DISPATCH_MULT =|
+858 |     +                      GET_VAR(TEMP_DISPATCH_MULT,ISEAS,UNITNM(UN))|
+859 |               ENDIF|
+860 |            ENDIF|
+861 |!|
+862 |! 10/19/01|
+863 |!|
+864 |            TEMP_L1 = GET_CL_BASECASE_MARKET_ID(UN,MARKET_ID)|
+865 |            RMK = MARKET_AREA_LOOKUP(MARKET_ID(1:5))|
+866 |!|
+867 |            RFT = GET_PRIMARY_MOVER(UN)|
+868 |!|
+869 |            IF(BLKNO(I) < 2) THEN|
+870 |               REPORT_UNIT_NAME = UNIT_NAME//FIRST|
+871 |            ELSE|
+872 |               REPORT_UNIT_NAME = UNIT_NAME//SECOND|
+873 |            ENDIF|
+874 |            CUM_CAP = CUM_CAP + MWBLOK(I)|
+875 ||
+876 |            LOCAL_SCARCITY_COST = TRANS_GROUP_SCARCITY_VALUE(|
+877 |     +                                   T_GROUP,|
+878 |     +                                   ISEAS,|
+879 |     +                                   YEAR,|
+880 |     +                                   TRANS_GROUP_CUM_CAP(T_GROUP,I),|
+881 |     +                                   GROUP_TOTAL_CAP(T_GROUP))|
+882 |            GLOBAL_SCARCITY_COST = TRANS_GLOBAL_SCARCITY_VALUE(ISEAS,|
+883 |     +                                                YEAR,|
+884 |     +                                                SYSTEM_CUM_CAP(I),|
+885 |     +                                                SYSTEM_CUM_CAP(0))|
+886 |            IF(DISPATCH_RPT_TYPE() == 'A' .OR.|
+887 |     +                                  DISPATCH_RPT_TYPE() == 'B') THEN|
+888 |               DISP_ORDER_REC = RPTREC(DISP_ORDER_NO)|
+889 |                 WRITE(DISP_ORDER_NO,REC=DISP_ORDER_REC) PRT_ENDPOINT(),|
+890 |     +                LOCAL_YEAR,|
+891 |     +            REPORT_PERIOD,|
+892 |     +            REPORT_UNIT_NAME,|
+893 |     +            FLOAT(I),|
+894 |     +            MWBLOK(I),|
+895 |     +            CUM_CAP,|
+896 |     +            SAVE_HEATRATE(I),|
+897 |     +            DISP_COST,|
+898 |     +            RTEMP * DISPATCHING_BTU_COST,|
+899 |     +            VCPMWH(UN),|
+900 |     +            DISP_ADJUSTER,|
+901 |     +            RTEMP * SOX_RATE * EMIS_DISPATCH_1,|
+902 |     +            RTEMP * NOX_RATE * EMIS_DISPATCH_2,|
+903 |     +            RTEMP * (EMIS_DISPATCH_3 *(F_MIX*PARTICULATES(UN)+|
+904 |     +                                              S_MIX*SEC_CO2(UN)) +|
+905 |     +                  EMIS_DISPATCH_4 *(F_MIX * EMIS_OTH2(UN) +|
+906 |     +                                           S_MIX * SEC_OTH2(UN)) +|
+907 |     +                  EMIS_DISPATCH_5 *(F_MIX * EMIS_OTH3(UN) +|
+908 |     +                                           S_MIX * SEC_OTH3(UN))),|
+909 |     +               TEMP_DISPATCH_MULT,|
+910 |     +            SOX_RATE,|
+911 |     +            2000.*EMIS_DISPATCH_1,|
+912 |     +            NOX_RATE,|
+913 |     +            2000.*EMIS_DISPATCH_2,|
+914 |     +            DISPATCHING_BTU_COST,|
+915 |     +            100.*MAINTENANCE_RATE(UN), ! DERATED MAINTENANCE CAP|
+916 |     +            100.*(1.-EAVAIL(UN)), ! DERATED EFOR CAP|
+917 |     +            MWBLOK(I)*(1.-MAINTENANCE_RATE(UN))*EAVAIL(UN), ! DERATED TOTAL CAP|
+918 |     +            LOCAL_SCARCITY_COST,|
+919 |     +            FLOAT(T_GROUP),|
+920 |     +            GLOBAL_SCARCITY_COST,|
+921 |     +            GLOBAL_SCARCITY_COST + LOCAL_SCARCITY_COST,|
+922 |     +            RMK,|
+923 |     +            RFT|
+924 |               DISP_ORDER_REC = DISP_ORDER_REC + 1|
+925 |            ENDIF|
+926 |!|
+927 |! TRANSACTION GROUP REPORT|
+928 |!|
+929 |            IF(DISPATCH_RPT_TYPE() == 'T' .OR.|
+930 |     +                                  DISPATCH_RPT_TYPE() == 'B') THEN|
+931 |               T_GROUP = TRANSACTION_GROUP(UN)|
+932 |               TRANS_GROUP_NAME = GET_TRANSACTION_GROUP_NAME(T_GROUP)//|
+933 |     +                              " "//LEFT_JUSTIFY_I2_IN_STR(T_GROUP)|
+934 |               GROUP_SEGMENT_NUM(T_GROUP)=GROUP_SEGMENT_NUM(T_GROUP)+1.|
+935 |               GROUP_CUM_CAP(T_GROUP) = GROUP_CUM_CAP(T_GROUP)|
+936 |     +                       + MWBLOK(I)*EAVAIL(UN)*|
+937 |     +                                         (1.-MAINTENANCE_RATE(UN)) ! DERATED TOTAL CAP|
+938 |               TRANS_DISP_ORDER_REC = RPTREC(TRANS_DISP_ORDER_NO)|
+939 |                 WRITE(TRANS_DISP_ORDER_NO,REC=TRANS_DISP_ORDER_REC)|
+940 |     +              PRT_ENDPOINT(),|
+941 |     +                LOCAL_YEAR,|
+942 |     +              TRANS_GROUP_NAME, ! FLOAT(T_GROUP),|
+943 |     +              REPORT_PERIOD,|
+944 |     +              REPORT_UNIT_NAME,|
+945 |     +              GROUP_SEGMENT_NUM(T_GROUP),|
+946 |     +              MWBLOK(I),|
+947 |     +              GROUP_CUM_CAP(T_GROUP),|
+948 |     +              SAVE_HEATRATE(I),|
+949 |     +              DISP_COST,|
+950 |     +              RTEMP * DISPATCHING_BTU_COST,|
+951 |     +              VCPMWH(UN),|
+952 |     +              DISP_ADJUSTER,|
+953 |     +              RTEMP * SOX_RATE * EMIS_DISPATCH_1,|
+954 |     +              RTEMP * NOX_RATE * EMIS_DISPATCH_2,|
+955 |     +              RTEMP * (EMIS_DISPATCH_3 *(F_MIX*PARTICULATES(UN)|
+956 |     +                                         + S_MIX*SEC_CO2(UN))|
+957 |     +                       + EMIS_DISPATCH_4 *(F_MIX * EMIS_OTH2(UN)|
+958 |     +                                        + S_MIX * SEC_OTH2(UN))|
+959 |     +                       + EMIS_DISPATCH_5 *(F_MIX * EMIS_OTH3(UN)|
+960 |     +                                        + S_MIX * SEC_OTH3(UN))),|
+961 |     +                 DISPATCH_MULT(UN),|
+962 |     +              SOX_RATE,|
+963 |     +              2000.*EMIS_DISPATCH_1,|
+964 |     +              NOX_RATE,|
+965 |     +              2000.*EMIS_DISPATCH_2,|
+966 |     +              DISPATCHING_BTU_COST,|
+967 |     +              FLOAT(I),|
+968 |     +              CUM_CAP,|
+969 |     +              100.*MAINTENANCE_RATE(UN), ! DERATED MAINTENANCE CAP|
+970 |     +              100.*(1.-EAVAIL(UN)), ! DERATED EFOR CAP|
+971 |     +              MWBLOK(I)*(1.-MAINTENANCE_RATE(UN))*EAVAIL(UN), ! DERATED TOTAL CAP|
+972 |     +              LOCAL_SCARCITY_COST,|
+973 |     +              FLOAT(T_GROUP),|
+974 |     +              GLOBAL_SCARCITY_COST,|
+975 |     +              GLOBAL_SCARCITY_COST + LOCAL_SCARCITY_COST,|
+976 |     +              RMK,|
+977 |     +              RFT,|
+978 |     +              FLOAT(BLKNO(I))|
+979 |               TRANS_DISP_ORDER_REC = TRANS_DISP_ORDER_REC + 1|
+980 |            ENDIF|
+981 |         ENDDO|
+982 |       ENDIF|
+983 |      CALL RW_PROCESS_MESSAGES()|
+984 |!|
+985 |!      DEALLOCATE(BLOCK_DISP_COST, !!! 3/7/95. GAT. !!!|
+986 |!|
+987 | 9330 DEALLOCATE(SHADOW_DISPATCH_ADDER)|
+988 |!|
+989 |! ADDED 08/18/03.|
+990 |!|
+991 |      CALL MG_LOCATE_WRITE(18,70," ",3,2)|
+992 |!|
+993 |      RETURN|
+994 |!***********************************************************************|
+995 |      ENTRY GET_PRIM_TOTAL_EMISSION_COST(R_NUNITS,|
+996 |     +                                   R_PRIM_TOTAL_EMISSION_COST)|
+997 |!***********************************************************************|
+998 |         R_PRIM_TOTAL_EMISSION_COST =|
+999 |     +                                PRIM_TOTAL_EMISSION_COST(R_NUNITS)|
+1000 |      RETURN|
+1001 |!***********************************************************************|
+1002 |      ENTRY SP_CAPEX_OUTPUT(ISEAS,|
+1003 |     +                      HEAT_RATE_FACTOR,|
+1004 |     +                      MAINTENANCE_RATE,|
+1005 |     +                      DISP_BTU_COST,|
+1006 |     +                      USE_SECONDARY_FUEL,|
+1007 |     +                      BLENDED_BTU_COST)|
+1008 |!***********************************************************************|
+1009 |!|
+1010 |!|
+1011 |      IF(NUNITS < 1) RETURN|
+1012 |      SECOND_FUEL_EMIS_DISPATCH = YES_SECOND_FUEL_EMIS_DISPATCH()|
+1013 |!|
+1014 |      COST_CONVERSION = GET_COST_CONVERSION()|
+1015 |      HEAT_CONVERSION = GET_HEAT_CONVERSION()|
+1016 |      PRODUCTION_METHOD = PROCMETH()|
+1017 |      REPORT_PERIOD = LOADS_MONTH_NAME(ISEAS)|
+1018 |      IF(ALLOCATED(BLOCK_DISP_COST)) DEALLOCATE(BLOCK_DISP_COST,|
+1019 |     +                                          SECOND_DISP_COST)|
+1020 |      ALLOCATE(BLOCK_DISP_COST(NUNITS,2),|
+1021 |     +         SECOND_DISP_COST(NUNITS,2))|
+1022 |      IF(ALLOCATED(SHADOW_DISPATCH_ADDER) )|
+1023 |     +                           DEALLOCATE(SHADOW_DISPATCH_ADDER)|
+1024 |      ALLOCATE(SHADOW_DISPATCH_ADDER(NBLOK))|
+1025 |!|
+1026 |      BLOCK_DISP_COST = 0.|
+1027 |      SECOND_DISP_COST = 0.|
+1028 |      SHADOW_DISPATCH_ADDER = 0.|
+1029 |!|
+1030 |      DO NB = 1, NBLOK|
+1031 |         UN = UNIT(NB)|
+1032 |!|
+1033 |!|
+1034 |         EMIS_DISPATCH_1 = TRANS_DISPATCH_EMIS_ADDER(1,ISEAS,YEAR,UN)|
+1035 |         EMIS_DISPATCH_2 = TRANS_DISPATCH_EMIS_ADDER(2,ISEAS,YEAR,UN)|
+1036 |         EMIS_DISPATCH_3 = TRANS_DISPATCH_EMIS_ADDER(3,ISEAS,YEAR,UN)|
+1037 |         EMIS_DISPATCH_4 = TRANS_DISPATCH_EMIS_ADDER(4,ISEAS,YEAR,UN)|
+1038 |         EMIS_DISPATCH_5 = TRANS_DISPATCH_EMIS_ADDER(5,ISEAS,YEAR,UN)|
+1039 |!|
+1040 ||
+1041 |               IF(USE_SECONDARY_FUEL(UN) .OR.|
+1042 |     +            ((SOUTHERN_COMPANY .OR. SECOND_FUEL_EMIS_DISPATCH)|
+1043 |     +                                     .AND. FUELMX(UN) < 0.) ) THEN|
+1044 |                  F_MIX = 0.|
+1045 |                  S_MIX = 1.|
+1046 |               ELSE|
+1047 |                  F_MIX = ABS(FUELMX(UN))|
+1048 |                  S_MIX = 1. - F_MIX|
+1049 |               ENDIF|
+1050 |               IF(BLKNO(NB) == 2) THEN|
+1051 |                  DISP_ADJUSTER = DISPADJ2(UN)|
+1052 |                  NOX_RATE = F_MIX * PRIM_NOX_BK2(UN) +|
+1053 |     +                       S_MIX * SEC_NOX_BK2(UN)|
+1054 |               ELSE|
+1055 |                  DISP_ADJUSTER = DISPADJ(UN)|
+1056 |                  NOX_RATE = F_MIX * NOX(UN) + S_MIX * SEC_NOX_BK1(UN)|
+1057 |               ENDIF|
+1058 |!|
+1059 |               DISPATCHING_BTU_COST = DISP_BTU_COST(UN)|
+1060 |!|
+1061 |               TEMP_DISPATCH_MULT = DISPATCH_MULT(UN)|
+1062 |               IF(TEMP_DISPATCH_MULT < 0.) THEN ! 030506. ADDED MONTH.|
+1063 |                  TEMP_DISPATCH_MULT =|
+1064 |     +                       GET_VAR(TEMP_DISPATCH_MULT,YEAR,UNITNM(UN))|
+1065 |                  IF(TEMP_DISPATCH_MULT < 0.) THEN|
+1066 |                     TEMP_DISPATCH_MULT =|
+1067 |     +                      GET_VAR(TEMP_DISPATCH_MULT,ISEAS,UNITNM(UN))|
+1068 |                  ENDIF|
+1069 |               ENDIF|
+1070 |!|
+1071 |               SAVE_HEATRATE(NB) = INHEAT(NB) * HEAT_RATE_FACTOR(UN)|
+1072 |!|
+1073 |               RTEMP = TEMP_DISPATCH_MULT * (|
+1074 |     +                  SAVE_HEATRATE(NB) * ! 5/8/01. FOR SRP.|
+1075 |     +                 (DISPATCHING_BTU_COST +|
+1076 |     +                  EMIS_DISPATCH_1 * (F_MIX * SO2(UN) +|
+1077 |     +                                            S_MIX * SEC_SO2(UN)) +|
+1078 |     +                  EMIS_DISPATCH_2 * NOX_RATE +|
+1079 |     +                  EMIS_DISPATCH_3 *(F_MIX*PARTICULATES(UN)+|
+1080 |     +                                              S_MIX*SEC_CO2(UN)) +|
+1081 |     +                  EMIS_DISPATCH_4 *(F_MIX * EMIS_OTH2(UN) +|
+1082 |     +                                           S_MIX * SEC_OTH2(UN)) +|
+1083 |     +                  EMIS_DISPATCH_5 *(F_MIX * EMIS_OTH3(UN) +|
+1084 |     +                                           S_MIX * SEC_OTH3(UN)))*|
+1085 |     +                  COST_CONVERSION +|
+1086 |     +                    10.*(VCPMWH(UN) + DISP_ADJUSTER) )|
+1087 |!|
+1088 |               CALL GET_TOTAL_S_DELIVERY_COST(TOTAL_S_DELIVERY_COST,UN)|
+1089 |!|
+1090 |               STEMP = TEMP_DISPATCH_MULT * (|
+1091 |     +                  SAVE_HEATRATE(NB) * ! 5/8/01. FOR SRP.|
+1092 |     +                 (SBTUCT(UN) + TOTAL_S_DELIVERY_COST +|
+1093 |     +                  EMIS_DISPATCH_1 * S_MIX * SEC_SO2(UN) +|
+1094 |     +                  EMIS_DISPATCH_2 * S_MIX * SEC_NOX_BK2(UN) +|
+1095 |     +                  EMIS_DISPATCH_3 * S_MIX*SEC_CO2(UN) +|
+1096 |     +                  EMIS_DISPATCH_4 * S_MIX * SEC_OTH2(UN) +|
+1097 |     +                  EMIS_DISPATCH_5 * S_MIX * SEC_OTH3(UN))*|
+1098 |     +                  COST_CONVERSION +|
+1099 |     +                    10.*(VCPMWH(UN) + DISP_ADJUSTER) )|
+1100 |               IF(PRODUCTION_METHOD== 4) RTEMP = RTEMP + 10.*FUELADJ(UN)|
+1101 |!|
+1102 |! THE SHADOW_DISPATCH_ADDER IS USED TO ENSURE THAT THE SHADOW UNIT FOLLOWS|
+1103 |!  THE MAIN UNIT IN THE DISPATCH ORDER|
+1104 |!|
+1105 |               SHADOW_UN = SHADOW_UNIT_NUMBER(UN)|
+1106 |               IF(SHADOW_UN > 0 .AND. UN > SHADOW_UN) THEN|
+1107 |                  RTEMP1 = BLOCK_DISP_COST(SHADOW_UN,MAX(BLKNO(NB),1))|
+1108 |                  IF(RTEMP1 > RTEMP) THEN|
+1109 |                     SHADOW_DISPATCH_ADDER(NB) = (RTEMP1 - RTEMP)/10.|
+1110 |                     RTEMP = RTEMP1|
+1111 |                  ENDIF|
+1112 |               ENDIF|
+1113 |               BLOCK_DISP_COST(UN,MAX(BLKNO(NB),1)) = RTEMP|
+1114 |               SECOND_DISP_COST(UN,MAX(BLKNO(NB),1)) = STEMP|
+1115 |!|
+1116 |      ENDDO|
+1117 |      CALL RW_PROCESS_MESSAGES()|
+1118 |!|
+1119 |! TRYING TO INPROVE THE SORT TIME OF THE DISPATCH ROUTINE|
+1120 |!|
+1121 |      TEMP_R4 = 0.|
+1122 |      LOCAL_YEAR = FLOAT(YEAR+BASE_YEAR)|
+1123 |      SCREEN_MESSAGES = TRIM(LOADS_MONTH_NAME(ISEAS))//"-CapEx Thermal"|
+1124 |      CALL MG_LOCATE_WRITE(18,70,TRIM(SCREEN_MESSAGES),3,2)|
+1125 |      CALL DISPLAY_TIME|
+1126 |         IF(CAPEX_THERMAL_RPT_NOT_OPEN) THEN|
+1127 |            CAPEX_THERMAL_NO = CAPEX_THERMAL_RPT_HEADER(INT2(120),|
+1128 |     +                                                CAPEX_THERMAL_REC)|
+1129 |            CAPEX_THERMAL_RPT_NOT_OPEN = .FALSE.|
+1130 |         ENDIF|
+1131 |          DO I = 1, NBLOK|
+1132 |            IF(BLKNO(I) > 1)  CYCLE|
+1133 |            UN = UNIT(I)|
+1134 |            IF(.not.(ONLINE(UN)<=DATE2 .AND. OFLINE(UN)>=DATE1)) CYCLE|
+1135 |            T_GROUP = TRANSACTION_GROUP(UN)|
+1136 |            TG_POSITION = MAX(1,GET_TRANS_GROUP_POSITION(T_GROUP))|
+1137 |            DISP_COST = BLOCK_DISP_COST(UN,1)/10.|
+1138 |            RTEMP = SAVE_HEATRATE(I)/HEAT_CONVERSION|
+1139 |!|
+1140 |            EMIS_DISPATCH_1 = TRANS_DISPATCH_EMIS_ADDER(1,ISEAS,YEAR,UN)|
+1141 |            EMIS_DISPATCH_2 = TRANS_DISPATCH_EMIS_ADDER(2,ISEAS,YEAR,UN)|
+1142 |            EMIS_DISPATCH_3 = TRANS_DISPATCH_EMIS_ADDER(3,ISEAS,YEAR,UN)|
+1143 |            EMIS_DISPATCH_4 = TRANS_DISPATCH_EMIS_ADDER(4,ISEAS,YEAR,UN)|
+1144 |            EMIS_DISPATCH_5 = TRANS_DISPATCH_EMIS_ADDER(5,ISEAS,YEAR,UN)|
+1145 |!|
+1146 |!|
+1147 |             IF(USE_SECONDARY_FUEL(UN) .OR.|
+1148 |     +              ((SOUTHERN_COMPANY .OR. SECOND_FUEL_EMIS_DISPATCH)|
+1149 |     +                                     .AND. FUELMX(UN) < 0.) ) THEN|
+1150 |                F_MIX = 0.|
+1151 |                S_MIX = 1.|
+1152 |             ELSE|
+1153 |                F_MIX = ABS(FUELMX(UN))|
+1154 |                S_MIX = 1. - F_MIX|
+1155 |             ENDIF|
+1156 |            IF(BLKNO(I) == 2) THEN|
+1157 |               DISP_ADJUSTER = DISPADJ2(UN)|
+1158 |               NOX_RATE = F_MIX * PRIM_NOX_BK2(UN) +|
+1159 |     +                       S_MIX * SEC_NOX_BK2(UN)|
+1160 |            ELSE|
+1161 |               DISP_ADJUSTER = DISPADJ(UN)|
+1162 |               NOX_RATE = F_MIX * NOX(UN) + S_MIX * SEC_NOX_BK1(UN)|
+1163 |            ENDIF|
+1164 |            SOX_RATE = F_MIX * SO2(UN) + S_MIX * SEC_SO2(UN)|
+1165 |            IF(SHADOW_DISPATCH_ADDER(I) /= 0.)|
+1166 |     +                          DISP_ADJUSTER = SHADOW_DISPATCH_ADDER(I)|
+1167 |            DISPATCHING_BTU_COST = DISP_BTU_COST(UN)|
+1168 |!|
+1169 |            TEMP_DISPATCH_MULT = DISPATCH_MULT(UN)|
+1170 |               IF(TEMP_DISPATCH_MULT < 0.) THEN ! 030506. ADDED MONTH.|
+1171 |                  TEMP_DISPATCH_MULT =|
+1172 |     +                       GET_VAR(TEMP_DISPATCH_MULT,YEAR,UNITNM(UN))|
+1173 |                  IF(TEMP_DISPATCH_MULT < 0.) THEN|
+1174 |                     TEMP_DISPATCH_MULT =|
+1175 |     +                      GET_VAR(TEMP_DISPATCH_MULT,ISEAS,UNITNM(UN))|
+1176 |                  ENDIF|
+1177 |               ENDIF|
+1178 |!|
+1179 |! 10/19/01|
+1180 |!|
+1181 |            TEMP_L1 = GET_CL_BASECASE_MARKET_ID(UN,MARKET_ID)|
+1182 |            MARKET_AREA = MARKET_AREA_LOOKUP(MARKET_ID(1:5))|
+1183 |!|
+1184 |            PRIMARY_MOVER = GET_PRIMARY_MOVER(UN)|
+1185 |!|
+1186 |            SPCapExResourceOption = MIN(1.,|
+1187 |     +                      INDEX(SP_NEWGEN_UNIT_STATUS(UN),"SPCapEx"))|
+1188 |            IF(BLKNO(I) == 0 .OR. SPCapExResourceOption == 1.) THEN|
+1189 |               MIN_CAP = MW(1,UN)|
+1190 |               MAX_CAP = MW(2,UN)|
+1191 |            ELSE|
+1192 |               MIN_CAP = 0.|
+1193 |               MAX_CAP = MW(2,UN)|
+1194 |            ENDIF|
+1195 |            V_LOG=GET_CL_BASECASE_MARKET_ID(UN,BASECASE_MARKET_AREA_ID)  ! L1|
+1196 |            HESI_UNIT_ID_NUM_ord = GET_HESI_UNIT_ID_NUM(int(UN),|
+1197 |     +                                   int(HESI_SECOND_UNIT_ID_NUM))|
+1198 |            POWERDAT_PLANT_ID = GET_POWERDAT_PLANT_ID(UN)|
+1199 |            SP_BASECASE_MARKET_AREA_ID = BASECASE_MARKET_AREA_ID|
+1200 |!|
+1201 |            OnLineYr = ONLINE(UN)/100.|
+1202 |            OnLineMo = ONLINE(UN) - 100.*OnLineYr|
+1203 |            IF(OnLineYr >= 100) THEN|
+1204 |               OnLineYr = 2000 + OnLineYr - 100|
+1205 |            ELSE|
+1206 |               OnLineYr = 1900 + OnLineYr|
+1207 |            ENDIF|
+1208 |            OffLineYr = OFLINE(UN)/100.|
+1209 |            OffLineMo = OFLINE(UN)-100.*OffLineYr|
+1210 |            IF(OffLineYr >= 100) THEN|
+1211 |               OffLineYr = 2000 + OffLineYr - 100|
+1212 |            ELSE|
+1213 |               OffLineYr = 1900 + OffLineYr|
+1214 |            ENDIF|
+1215 |            UNIT_START_UP_COSTS = GET_UNIT_START_UP_COSTS(YEAR,UN,ISEAS)|
+1216 |!|
+1217 |            V_LOG = GET_BASECASE_MARKET_AREA_ID(|
+1218 |     +                                   EV_TRANS_AREA_NAME,TG_POSITION)|
+1219 |            V_LOG = GET_CUBIC_HEAT_CURVE(UN,A_CO,B_CO,C_CO,D_CO)|
+1220 |!|
+1221 |            MIN_UPTIME = GET_MIN_UP_TIME(UN)        !TMS 03/23/05 ADDED FOR EXELON|
+1222 |            MIN_DOWNTIME = GET_MIN_DOWN_TIME(UN)|
+1223 |!|
+1224 |            IF(BLKNO(I) == 0 .OR. SPCapExResourceOption == 1.) THEN|
+1225 ||
+1226 |               SAC_UNIT_NAME = UNITNM(UN)|
+1227 |               SAC_STATION_GROUP =                    ! TMS 3/01/05 ADDED FOR MARKEdir|
+1228 |     +               'NEW.'|
+1229 |            ELSE|
+1230 |               SAC_UNIT_NAME = UNITNM(UN)|
+1231 |               SAC_STATION_GROUP = 'EXISTING.UNIT'|
+1232 |            ENDIF|
+1233 |            IF(PASS_TO_ENERPRISE) THEN|
+1234 |               LOCAL_FUEL = GET_PBTUCT_SAVE(UN)|
+1235 |               LOCAL_DISPATCH_ADDER = GET_DISPADJ_SAVE(UN)|
+1236 |            ELSE|
+1237 |               LOCAL_FUEL = RTEMP * DISPATCHING_BTU_COST|
+1238 |               LOCAL_DISPATCH_ADDER = DISP_ADJUSTER|
+1239 |            ENDIF|
+1240 |!|
+1241 |! 080306|
+1242 |!|
+1243 |            TEMP_P_FUEL_DELIVERY = GET_P_FUEL_DELIVERY(UN)|
+1244 |            TEMP_P_FUEL_DELIVERY_2 = GET_P_FUEL_DELIVERY_2(UN)|
+1245 |            TEMP_P_FUEL_DELIVERY_3 = GET_P_FUEL_DELIVERY_3(UN)|
+1246 |!|
+1247 |!|
+1248 |! TRANSACTION GROUP REPORT|
+1249 |! 050108. THIS IS USED TO DRIVER HORIZONS INTERACTIVE SUPPLY CURVE.|
+1250 |!|
+1251 |            IF(NEW_SUPPLY_CURVE_REPORT()) THEN|
+1252 |               IF(REPORT_NEW_SUPPLY_PERIOD(ISEAS)) THEN|
+1253 |                  IF(NEW_SUPPLY_CURVE_NOT_OPEN) THEN|
+1254 |!|
+1255 |!|
+1256 |                     NEW_SUPPLY_CURVE_NO =|
+1257 |     +                     NEW_SUPPLY_CURVE_HEADER(INT2(17),|
+1258 |     +                                             NEW_SUPPLY_CURVE_REC)|
+1259 |                     NEW_SUPPLY_CURVE_NOT_OPEN = .FALSE.|
+1260 |                  ENDIF|
+1261 |!|
+1262 |                  RPM = FLOAT(UZ_PRIMARY_MOVER(UN))|
+1263 |                  T_GROUP = TRANSACTION_GROUP(UN)|
+1264 |                  TRANS_NAME = GET_TRANSACTION_GROUP_NAME(T_GROUP)//|
+1265 |     +                              " "//LEFT_JUSTIFY_I2_IN_STR(T_GROUP)|
+1266 |                  NEWGEN_UNIT_STATUS = FLOAT(GET_NEWGEN_INDEX(UN))|
+1267 |                  YEAR_MONTH = FLOAT(OnLineYr*100 + OnLineMo)|
+1268 |                  NEW_SUPPLY_VARIABLES = 0.0|
+1269 |                  NEW_SUPPLY_CURVE_REC = RPTREC(NEW_SUPPLY_CURVE_NO)|
+1270 |                     WRITE(NEW_SUPPLY_CURVE_NO,REC=NEW_SUPPLY_CURVE_REC)|
+1271 |     +              PRT_ENDPOINT(),|
+1272 |     +                LOCAL_YEAR,|
+1273 |     +              REPORT_PERIOD,|
+1274 |     +              TRANS_NAME,|
+1275 |     +              UNITNM(UN),|
+1276 |     +              HESI_UNIT_ID_NUM_ord,|
+1277 |     +              MAX_CAP,|
+1278 |     +              SAVE_HEATRATE(I),|
+1279 |     +              SAVE_HEATRATE(I)* DISPATCHING_BTU_COST * 0.001,|
+1280 |     +              VCPMWH(UN),|
+1281 |     +              SAVE_HEATRATE(I) * .001 * SOX_RATE*EMIS_DISPATCH_1,|
+1282 |     +              SAVE_HEATRATE(I) * .001 * NOX_RATE*EMIS_DISPATCH_2,|
+1283 |     +              SAVE_HEATRATE(I) * .001 * EMIS_DISPATCH_3 *|
+1284 |     +                                        (F_MIX*PARTICULATES(UN)|
+1285 |     +                                            + S_MIX*SEC_CO2(UN)),|
+1286 |     +              SAVE_HEATRATE(I) * .001 * EMIS_DISPATCH_4 *|
+1287 |     +                                          (F_MIX * EMIS_OTH2(UN)|
+1288 |     +                                         + S_MIX * SEC_OTH2(UN)),|
+1289 |     +              NEWGEN_UNIT_STATUS,|
+1290 |     +              YEAR_MONTH,|
+1291 |     +              RPM,|
+1292 |     +              PRIMARY_MOVER, ! ?|
+1293 |     +                DISPATCH_MULT(UN),|
+1294 |     +              100.*MAINTENANCE_RATE(UN), ! 15 DERATED MAINTENANCE CAP|
+1295 |     +              100.*(1.-EAVAIL(UN)), ! DERATED EFOR CAP|
+1296 |     +              HESI_SECOND_UNIT_ID_NUM ! 050208. TO REPRESENT REALLY BIG ID'S|
+1297 |                  NEW_SUPPLY_CURVE_REC = NEW_SUPPLY_CURVE_REC + 1|
+1298 |               ENDIF|
+1299 |!|
+1300 |            ELSE|
+1301 |                 WRITE(CAPEX_THERMAL_NO,REC=CAPEX_THERMAL_REC)|
+1302 |     +               PRT_ENDPOINT(),|
+1303 |     +                LOCAL_YEAR,|
+1304 |     +               FLOAT(ISEAS),|
+1305 |     +               SP_UNIT_NAME(UN),|
+1306 |     +               FLOAT(T_GROUP),                   ! 0|
+1307 |     +               SAVE_HEATRATE(I),|
+1308 |     +               DISP_COST,|
+1309 |     +               LOCAL_FUEL,|
+1310 |     +               VCPMWH(UN),|
+1311 |     +               LOCAL_DISPATCH_ADDER,                    ! 5|
+1312 |     +               RTEMP * SOX_RATE * EMIS_DISPATCH_1,|
+1313 |     +               RTEMP * NOX_RATE * EMIS_DISPATCH_2,|
+1314 |     +               RTEMP * (EMIS_DISPATCH_3 *(F_MIX*PARTICULATES(UN)|
+1315 |     +                                          + S_MIX*SEC_CO2(UN))|
+1316 |     +                        + EMIS_DISPATCH_4 *(F_MIX * EMIS_OTH2(UN)|
+1317 |     +                                         + S_MIX * SEC_OTH2(UN))|
+1318 |     +                        + EMIS_DISPATCH_5 *(F_MIX * EMIS_OTH3(UN)|
+1319 |     +                                         + S_MIX * SEC_OTH3(UN))),|
+1320 |     +                 DISPATCH_MULT(UN),|
+1321 |     +               SOX_RATE,                        ! 10|
+1322 |     +               2000.*EMIS_DISPATCH_1,|
+1323 |     +               NOX_RATE,|
+1324 |     +               2000.*EMIS_DISPATCH_2,|
+1325 |     +               DISPATCHING_BTU_COST,|
+1326 |     +               100.*MAINTENANCE_RATE(UN), ! 15 DERATED MAINTENANCE CAP|
+1327 |     +               100.*(1.-EAVAIL(UN)), ! DERATED EFOR CAP|
+1328 |     +               MARKET_AREA,|
+1329 |     +               PRIMARY_MOVER,  ! 18|
+1330 |     +               FLOAT(OnLineYr),|
+1331 |     +               FLOAT(OffLineYr),    ! 20|
+1332 |     +               FLOAT(BLKNO(I)),|
+1333 |     +               MIN_CAP,|
+1334 |     +               MAX_CAP,|
+1335 |     +               FIXED_COST(UN),  ! 24 $/KW-YEAR|
+1336 |! COSTS|
+1337 |     +               RTEMP * EMIS_DISPATCH_3 *(F_MIX*PARTICULATES(UN)|
+1338 |     +                                          + S_MIX*SEC_CO2(UN)), ! 25|
+1339 |     +               RTEMP * EMIS_DISPATCH_4 *(F_MIX * EMIS_OTH2(UN)|
+1340 |     +                                         + S_MIX * SEC_OTH2(UN)),|
+1341 |     +               RTEMP * EMIS_DISPATCH_5 *(F_MIX * EMIS_OTH3(UN)|
+1342 |     +                                         + S_MIX * SEC_OTH3(UN)),|
+1343 |! RATES|
+1344 |     +               F_MIX * PARTICULATES(UN) + S_MIX * SEC_CO2(UN),|
+1345 |     +               F_MIX * EMIS_OTH2(UN) + S_MIX * SEC_OTH2(UN),|
+1346 |     +               F_MIX * EMIS_OTH3(UN) + S_MIX * SEC_OTH3(UN),  ! 30|
+1347 |! EMISSION MARKET COST|
+1348 |     +               2000. * EMIS_DISPATCH_3,|
+1349 |     +               2000. * EMIS_DISPATCH_4,|
+1350 |     +               2000. * EMIS_DISPATCH_5,|
+1351 |     +               foshyd.CAP_PLANNING_FAC(UN),|
+1352 |     +               HESI_UNIT_ID_NUM_ord,                        ! 35|
+1353 |     +               HESI_SECOND_UNIT_ID_NUM,|
+1354 |     +               POWERDAT_PLANT_ID,|
+1355 |     +               FLOAT(CL_RESOURCE_ID(UN)),|
+1356 |     +               FLOAT(DAY_TYPE_FOR_RESOURCE(UN)),|
+1357 |     +               FLOAT(OnLineMo),    ! 40|
+1358 |     +               FLOAT(OffLineMo),    ! 41|
+1359 |     +               SPCapExResourceOption, ! 42|
+1360 |     +               DISPATCHING_BTU_COST, ! 43 $/MMBTU|
+1361 |     +               BLENDED_BTU_COST(UN), ! 44 $/MMBTU PRICEING FUEL COST|
+1362 |     +               RTEMP * BLENDED_BTU_COST(UN), ! 45 $/MWH BLENDED FUEL COST|
+1363 |     +               FIRST_YEAR_DECOMM_AVAIALABLE(UN),|
+1364 |     +               DECOM_CONTINUING_COST(UN),|
+1365 |     +               DECOM_CONTINUING_COST_ESCALATION(UN),|
+1366 |     +               ANNUAL_ENERGY_PLANNING_FACTOR(UN),    ! 49|
+1367 |     +               NAME_PLATE_CAPACITY(UN),   ! 50|
+1368 |     +               MW(1,UN),|
+1369 |     +               MW(2,UN),|
+1370 |     +               A_CO,|
+1371 |     +               B_CO,|
+1372 |     +               C_CO,                      ! 55|
+1373 |     +               D_CO,|
+1374 |     +               UNIT_START_UP_COSTS,|
+1375 |     +               MIN_UPTIME,|
+1376 |     +               MIN_DOWNTIME,|
+1377 |     +               FuelRatio(1,UN),|
+1378 |     +               FuelRatio(2,UN),|
+1379 |     +               FuelRatio(3,UN),         ! 164|
+1380 |     +               FuelRatio(4,UN),|
+1381 |     +               FuelRatio(5,UN),         ! 166|
+1382 |     +               BlendableFuelsPtr(1,UN), ! 167|
+1383 |     +               BlendableFuelsPtr(2,UN), ! 168|
+1384 |     +               BlendableFuelsPtr(3,UN),|
+1385 |     +               BlendableFuelsPtr(4,UN),|
+1386 |     +               FuelTransportationCost(1,UN),|
+1387 |     +               FuelTransportationCost(2,UN),  ! 172|
+1388 |     +               FuelTransportationCost(3,UN),|
+1389 |     +               FuelTransportationCost(4,UN),|
+1390 |     +               BlendedEnthalpyUp(UN),|
+1391 |     +               BlendedEnthalpyLo(UN),|
+1392 |     +               BlendedSO2Up(UN),                  ! 177|
+1393 |     +               BettermentProjectID(UN),|
+1394 |     +               TEMP_R4, ! DECOM_CONTINUING_COST(UN),|
+1395 |     +               FLOAT(GET_EMISSION_MARKET_LINK(UN)), ! DECOM_CONTINUING_COST_ESCALATION(UN),|
+1396 |     +               EnrgPatternPointer(UN), ! 181|
+1397 |     +               EmissRedRate(1,UN),|
+1398 |     +               EmissRedRate(2,UN),|
+1399 |     +               EmissRedRate(3,UN),|
+1400 |     +               EmissRedRate(4,UN),              ! 186|
+1401 |     +               EmissRedRate(5,UN),|
+1402 |     +               EmissMaxRate(1,UN),|
+1403 |     +               EmissMaxRate(2,UN),|
+1404 |     +               EmissMaxRate(3,UN),|
+1405 |     +               EmissMaxRate(4,UN),|
+1406 |     +               EmissMaxRate(5,UN),|
+1407 |     +               MaxEnergyLimit(1,UN),|
+1408 |     +               MaxEnergyLimit(2,UN),|
+1409 |     +               MaxEnergyLimit(3,UN),|
+1410 |     +               TEMP_P_FUEL_DELIVERY,|
+1411 |     +               TEMP_P_FUEL_DELIVERY_2,|
+1412 |     +               TEMP_P_FUEL_DELIVERY_3,|
+1413 |     +               EMISSION_DATA_UNITS(UN),    ! LEN = 1|
+1414 |     +               AGGREGATE_THIS_UNIT(UN),    ! LEN = 1|
+1415 |     +               SP_BASECASE_MARKET_AREA_ID, ! LEN = 8|
+1416 |     +               GET_GROUP_NAME(TG_POSITION),! LEN = 35|
+1417 |     +               SAC_UNIT_NAME,              ! LEN = 16|
+1418 |     +               EV_TRANS_AREA_NAME,         ! LEN = 6|
+1419 |     +               SAC_STATION_GROUP,          ! LEN = 16|
+1420 |     +               FUEL_BLENDING_IS(UN),       ! LEN = 10 NO, FIXED BLEND, MODEL DETERMINED IF ONLY ONE FUEL ELSE USER OPTION|
+1421 |     +               TECH_TYPE(UN),              ! LEN = 20|
+1422 |     +               LINKED_BETTERMENT_OPTION(UN)! LEN = 1|
+1423 |! RECORD LENGTH = 64 + 4 X 92 + 99 = 531|
+1424 |!|
+1425 |! END WRITE FOR CAPEX|
+1426 |               CAPEX_THERMAL_REC = CAPEX_THERMAL_REC + 1|
+1427 |            ENDIF|
+1428 |         ENDDO|
+1429 |         DEALLOCATE(BLOCK_DISP_COST,|
+1430 |     +              SECOND_DISP_COST,|
+1431 |     +              SHADOW_DISPATCH_ADDER)|
+1432 |      RETURN|
+1433 |!***********************************************************************|
+1434 |      ENTRY GET_BLOCK_DISP_COST(R_UNIT,R_BLKNO,R_BLOCK_DISP_COST,|
+1435 |     +                                                         R_NBLOK2)|
+1436 |!***********************************************************************|
+1437 |!|
+1438 |!|
+1439 |!|
+1440 |         DO NB = 1, R_NBLOK2|
+1441 |            UN = R_UNIT(NB)|
+1442 |            ECBLK = MAX(1,R_BLKNO(NB))|
+1443 |            R_BLOCK_DISP_COST(UN,ECBLK) = BLOCK_DISP_COST(UN,ECBLK)|
+1444 |         ENDDO|
+1445 |!|
+1446 |      RETURN|
+1447 |!|
+1448 |!***********************************************************************|
+1449 |      ENTRY GET_DISP_COST_FOR_A_UNIT(R_SINGLE_UNIT,R_1ST_DISP_COST,|
+1450 |     +                                                  R_2ND_DISP_COST)|
+1451 |!***********************************************************************|
+1452 |         R_1ST_DISP_COST = BLOCK_DISP_COST(R_SINGLE_UNIT,1)/10.|
+1453 |         R_2ND_DISP_COST = BLOCK_DISP_COST(R_SINGLE_UNIT,2)/10.|
+1454 |         IF(.FALSE. ) then|
+1455 |         RFT = GET_PRIMARY_MOVER(R_SINGLE_UNIT)|
+1456 |         IF(RFT == 2) THEN|
+1457 |             R_1ST_DISP_COST = (500 *|
+1458 |     +                 FuelDispatchCostMultiplier(UN,MAX(1,BLKNO(NB))))|
+1459 |     +                 + NonFuelDispatchCost(UN,MAX(1,BLKNO(NB)))|
+1460 |             R_1ST_DISP_COST = R_1ST_DISP_COST/10.|
+1461 |         ENDIF|
+1462 |         Endif|
+1463 |!|
+1464 |      RETURN|
+1465 |!***********************************************************************|
+1466 |      ENTRY GET_DISP_PARAM_FOR_A_UNIT(R_SINGLE_UNIT,|
+1467 |     +                                R_DISP_BTU_COST,|
+1468 |     +                                R_1ST_FUEL,|
+1469 |     +                                R_1ST_NON_FUEL,|
+1470 |     +                                R_2ND_FUEL,|
+1471 |     +                                R_2ND_NON_FUEL)|
+1472 |!***********************************************************************|
+1473 |         RFT = GET_PRIMARY_MOVER(R_SINGLE_UNIT)|
+1474 |!|
+1475 |             R_DISP_BTU_COST = DISP_BTU_COST(R_SINGLE_UNIT)|
+1476 |             R_1ST_FUEL =|
+1477 |     +         FuelDispatchCostMultiplier(R_SINGLE_UNIT,1)*0.1|
+1478 |             R_1ST_NON_FUEL =|
+1479 |     +                NonFuelDispatchCost(R_SINGLE_UNIT,1)*0.1|
+1480 |             R_2ND_FUEL =|
+1481 |     +         FuelDispatchCostMultiplier(R_SINGLE_UNIT,2)*0.1|
+1482 |             R_2ND_NON_FUEL =|
+1483 |     +                NonFuelDispatchCost(R_SINGLE_UNIT,2)*0.1|
+1484 |!|
+1485 |!|
+1486 |      RETURN|
+1487 |!***********************************************************************|
+1488 |      ENTRY GET_SECOND_COST_FOR_A_UNIT(R_SINGLE_UNIT,R_1ST_DISP_COST,|
+1489 |     +                                                  R_2ND_DISP_COST)|
+1490 |!***********************************************************************|
+1491 |         R_1ST_DISP_COST = SECOND_DISP_COST(R_SINGLE_UNIT,1)/10.|
+1492 |         R_2ND_DISP_COST = SECOND_DISP_COST(R_SINGLE_UNIT,2)/10.|
+1493 |!|
+1494 |      RETURN|
+1495 |!***********************************************************************|
+1496 |      ENTRY GET_ADJ_TOTAL_CAP(R_ADJ_TOTAL_CAP)|
+1497 |!***********************************************************************|
+1498 |         R_ADJ_TOTAL_CAP = ADJ_TOTAL_CAP|
+1499 |      RETURN|
+1500 |!|
+1501 |!***********************************************************************|
+1502 |      ENTRY TELL_DISPATCH_SOUTHERN_STATUS|
+1503 |!***********************************************************************|
+1504 |         SOUTHERN_COMPANY = .TRUE.|
+1505 |      RETURN|
+1506 |!|
+1507 |!***********************************************************************|
+1508 |      ENTRY DEALLOCATE_DISPAT_ARRAYS|
+1509 |!***********************************************************************|
+1510 |         IF(ALLOCATED(BLOCK_DISP_COST)) DEALLOCATE(BLOCK_DISP_COST,|
+1511 |     +                                             SECOND_DISP_COST)|
+1512 |      RETURN|
+1513 |!***********************************************************************|
+1514 |      ENTRY GET_MAX_TRANS_BLOCKS_USED(R_MAX_TRANS_BLOCK)|
+1515 |!***********************************************************************|
+1516 |         R_MAX_TRANS_BLOCK= MAX_BLOCKS_PER_TRANS(0)|
+1517 |      RETURN|
+1518 |!***********************************************************************|
+1519 |      ENTRY GET_MAX_BLOCKS_PER_TRANS(R_TG,R_MAX_TRANS_BLOCK)|
+1520 |!***********************************************************************|
+1521 |         R_MAX_TRANS_BLOCK= MAX_BLOCKS_PER_TRANS(R_TG)|
+1522 |      RETURN|
+1523 |!***********************************************************************|
+1524 |      ENTRY GET_INHEAT_AND_FUEL(R_HEAT_RATE,R_BLOCK)|
+1525 |!***********************************************************************|
+1526 |         R_HEAT_RATE = SAVE_HEATRATE(R_BLOCK)|
+1527 |      RETURN|
+1528 |!|
+1529 |! 7/5/02.|
+1530 |!|
+1531 |!***********************************************************************|
+1532 |      ENTRY GET_MONTHLY_DISP_COST_BY_UNIT(|
+1533 |     +                                R_UN,|
+1534 |     +                                R_LOCAL_COEFF,|
+1535 |     +                                R_DISPATCH) ! 2x12|
+1536 ||
+1537 |!***********************************************************************|
+1538 |!|
+1539 |      UN = R_UN|
+1540 |      EXISTING_UNIT = .TRUE.|
+1541 |      BASE_DATE = (YEAR + BASE_YEAR - 1900) * 100|
+1542 |!|
+1543 |      RFT = GET_PRIMARY_MOVER(UN)|
+1544 |      IF(RFT > 3 .OR. RFT < 1) RFT = 1|
+1545 |!|
+1546 |      DO J = 1, 12|
+1547 |         CALL GET_MRX_DELIVERY_COST(      UN,|
+1548 |     +                                    TOTAL_DELIVERY_COST,|
+1549 |     +                                    J,YEAR,|
+1550 |     +                                    FUEL_POINTERS_USED,|
+1551 |     +                                    EXISTING_UNIT)|
+1552 |!|
+1553 |         FUEL_SCEN_MULT = 1.0|
+1554 |         IF(RFT == 1) THEN|
+1555 |            FUEL_SCEN_MULT =  GET_SCENARIO_COAL_PRICES(YEAR,J)|
+1556 |         ELSEIF(RFT == 2) THEN|
+1557 |            FUEL_SCEN_MULT =  GET_SCENARIO_GAS_PRICES(YEAR,J)|
+1558 |         ELSEIF(RFT == 3) THEN|
+1559 |            FUEL_SCEN_MULT =  GET_SCENARIO_OIL_PRICES(YEAR,J)|
+1560 |         ELSEIF(RFT == 4) THEN|
+1561 |            FUEL_SCEN_MULT =  GET_SCENARIO_URANIUM_PRICES(YEAR,J)|
+1562 |         ENDIF|
+1563 |!|
+1564 |         DISPATCHING_BTU_COST = TOTAL_DELIVERY_COST * FUEL_SCEN_MULT|
+1565 |!|
+1566 |         LOCAL_DATE = BASE_DATE + J|
+1567 |!|
+1568 |         DO I = 1, 2|
+1569 ||
+1570 |            EMIS_DISPATCH_1 =|
+1571 |     +                     TRANS_DISPATCH_EMIS_ADDER(1,J,YEAR,UN)|
+1572 |            EMIS_DISPATCH_2 =|
+1573 |     +                     TRANS_DISPATCH_EMIS_ADDER(2,J,YEAR,UN)|
+1574 |            EMIS_DISPATCH_3 =|
+1575 |     +                     TRANS_DISPATCH_EMIS_ADDER(3,J,YEAR,UN)|
+1576 |            EMIS_DISPATCH_4 =|
+1577 |     +                     TRANS_DISPATCH_EMIS_ADDER(4,J,YEAR,UN)|
+1578 |            EMIS_DISPATCH_5 =|
+1579 |     +                     TRANS_DISPATCH_EMIS_ADDER(5,J,YEAR,UN)|
+1580 ||
+1581 |            IF(ONLINE(UN) <= LOCAL_DATE .AND.|
+1582 |     +                                    OFLINE(UN) >= LOCAL_DATE) THEN|
+1583 |               IF(GET_MAINTENANCE_RATE_FOR_MONTH(UN,J) /= 1. .AND.|
+1584 |     +                                            EAVAIL(UN) /= 0.) THEN|
+1585 ||
+1586 |                  IF(USE_SECONDARY_FUEL(UN) .OR.|
+1587 |     +               ((SOUTHERN_COMPANY .OR. SECOND_FUEL_EMIS_DISPATCH)|
+1588 |     +                                     .AND. FUELMX(UN) < 0.) ) THEN|
+1589 |                     F_MIX = 0.|
+1590 |                     S_MIX = 1.|
+1591 |                  ELSE|
+1592 |                     F_MIX = ABS(FUELMX(UN))|
+1593 |                     S_MIX = 1. - F_MIX|
+1594 |                  ENDIF|
+1595 ||
+1596 |                  TEMP_R4 = GET_DISPADJ_SAVE(UN)|
+1597 |                  IF(TEMP_R4 < 0.0) THEN|
+1598 |                     TEMP_R4 = GET_VAR(RTEMP,J,UNITNM(UN))|
+1599 |                     IF(TEMP_R4 < 0.0) THEN|
+1600 |                        DISP_ADJUSTER = GET_VAR(RTEMP,J,UNITNM(UN))|
+1601 |                     ELSE|
+1602 |                        DISP_ADJUSTER = TEMP_R4|
+1603 |                     ENDIF|
+1604 |                  ELSE|
+1605 |                     DISP_ADJUSTER = TEMP_R4|
+1606 |                  ENDIF|
+1607 |                  NOX_RATE = F_MIX * NOX(UN) +|
+1608 |     +                                           S_MIX * SEC_NOX_BK1(UN)|
+1609 ||
+1610 |!|
+1611 |                  TEMP_DISPATCH_MULT = DISPATCH_MULT(UN)|
+1612 |                  IF(TEMP_DISPATCH_MULT < 0.) THEN ! 030506. ADDED MONTH.|
+1613 |                     TEMP_DISPATCH_MULT =|
+1614 |     +                       GET_VAR(TEMP_DISPATCH_MULT,YEAR,UNITNM(UN))|
+1615 |                     IF(TEMP_DISPATCH_MULT < 0.) THEN|
+1616 |                        TEMP_DISPATCH_MULT =|
+1617 |     +                      GET_VAR(TEMP_DISPATCH_MULT,J,UNITNM(UN))|
+1618 |                     ENDIF|
+1619 |                  ENDIF|
+1620 |!|
+1621 |!|
+1622 ||
+1623 |!|
+1624 |                   TEMP_R = R_LOCAL_COEFF(I+1)*GET_HEAT_RATE_FACTOR(UN)|
+1625 |!|
+1626 |! 10/05/02. $/MWH Units.|
+1627 |!|
+1628 |                  R_DISPATCH(I,J) = (TEMP_DISPATCH_MULT * (|
+1629 |     +                  TEMP_R * ! 07/03/03. FOR IPL|
+1630 |     +                 (DISPATCHING_BTU_COST +|
+1631 |     +                  EMIS_DISPATCH_1 * (F_MIX * SO2(UN) +|
+1632 |     +                                            S_MIX * SEC_SO2(UN)) +|
+1633 |     +                  EMIS_DISPATCH_2 * NOX_RATE +|
+1634 |     +                  EMIS_DISPATCH_3 *(F_MIX*PARTICULATES(UN)+|
+1635 |     +                                              S_MIX*SEC_CO2(UN)) +|
+1636 |     +                  EMIS_DISPATCH_4 *(F_MIX * EMIS_OTH2(UN) +|
+1637 |     +                                           S_MIX * SEC_OTH2(UN)) +|
+1638 |     +                  EMIS_DISPATCH_5 *(F_MIX * EMIS_OTH3(UN) +|
+1639 |     +                                           S_MIX * SEC_OTH3(UN)))*|
+1640 |     +                  COST_CONVERSION)/10. +|
+1641 |     +                    (VCPMWH(UN) + DISP_ADJUSTER) )|
+1642 ||
+1643 |               ENDIF|
+1644 |            ENDIF|
+1645 |         ENDDO|
+1646 |      ENDDO|
+1647 |      CALL RW_PROCESS_MESSAGES()|
+1648 |      RETURN|
+1649 |      END|
+1650 |!***********************************************************************|
+1651 |      SUBROUTINE DISPATCH_SORT(NBLOK,|
+1652 |     +                         LAMDA,|
+1653 |     +                         BLKNO,|
+1654 |     +                         INHEAT,|
+1655 |     +                         MWBLOK,|
+1656 |     +                         UNIT,|
+1657 |     +                         SAVE_HEATRATE,|
+1658 |     +                         SHADOW_DISPATCH_ADDER)|
+1659 |!***********************************************************************|
+1660 |!|
+1661 |      USE IREC_ENDPOINT_CONTROL|
+1662 |      use grx_planning_routines|
+1663 ||
+1664 |      INTEGER (KIND=2) :: NBLOK,L,M,I,N,ITEMP|
+1665 |      INTEGER (KIND=2) :: LAMDA(NBLOK),BLKNO(NBLOK),UNIT(NBLOK)|
+1666 |      REAL (KIND=4) :: SAVE_HEATRATE(NBLOK),|
+1667 |     +                 SHADOW_DISPATCH_ADDER(NBLOK),|
+1668 |     +                 MWBLOK(NBLOK),INHEAT(NBLOK),RTEMP|
+1669 |      LOGICAL (KIND=4) :: REASON1,REASON2,REASON3,REASON4,REASON5|
+1670 |!|
+1671 |!=======================================================================|
+1672 |!     THIS SECTION OF THE PROGRAM CALCULATES THE LOADING ORDER OF|
+1673 |!       THE DISPATCHING BLOCKS.  THIS SECTION IS PATTERNED AFTER THE|
+1674 |!     SORT IN THE CREORD SUBROUTINE IN PCS|
+1675 |!=======================================================================|
+1676 |!|
+1677 |!|
+1678 |! TO CHANGE THE PROMOD PROBLEM CAUSED BY INCREMENTAL HEAT RATES GOING|
+1679 |! LOWER (THE FIT TO I/O DATA PRODUCES NEGATIVE COEFFICIENTS WHICH LEAD TO|
+1680 |! DECLINING INCREMENTAIL HEAT RATES), THE UNITS SHOULD BE SHORTED FIRST BY|
+1681 |! BLOCK NUMBER THEN BY INCREMENT COST.|
+1682 |! I DON'T THINK THIS SHOULD BE DONE.  10/4/88|
+1683 |! AFTER SEEING COMMONWEALTH EDISON'S DISPATCHING ORDER I CHANGED MY MIND|
+1684 |! AND IMPLEMENTE A PRE SORT ON BLOCK NUMBER|
+1685 |!|
+1686 |         L = NBLOK - 1|
+1687 |         IF(L >= 1) THEN|
+1688 |            DO I=1,L|
+1689 |               M=I|
+1690 |               N=I+1|
+1691 |   20          REASON4 = .FALSE.|
+1692 ||
+1693 |               IF(M > 0) THEN|
+1694 |!|
+1695 |! UNIT TO BE FLIPPED IS A MUST RUN|
+1696 |!|
+1697 |                  REASON1 = BLKNO(M) /= 0 .AND. BLKNO(N) == 0 .AND.|
+1698 |     +                     LAMDA(M) /= 32000 .AND. LAMDA(N) /= 32000|
+1699 |!|
+1700 |! BOTH UNITS ARE MUST RUNS AND THE LAMDA IS LOWER|
+1701 |!|
+1702 |                  REASON2 = BLKNO(M) == 0 .AND. BLKNO(N) == 0 .AND.|
+1703 |     +                                               LAMDA(M) > LAMDA(N)|
+1704 |!|
+1705 |! DON'T FLIP BLOCK 1 AND BLOCK 2 OF THE SAME UNIT|
+1706 |!|
+1707 |                  REASON3 = BLKNO(M) /= 0 .AND. BLKNO(N) /= 0 .AND.|
+1708 |     +                      LAMDA(M) > LAMDA(N) .AND. UNIT(M) /= UNIT(N)|
+1709 |!|
+1710 |! THE PROMOD REASON FOR FLIPPING A DECREASING INCREMENTAL HEAT RATE|
+1711 |! CHECK TO SEE IF BLOCK 2  HAS STOPPED BECAUSE IT HIT ITS BLOCK 1|
+1712 |!|
+1713 |                  IF(M > 1) REASON4 = LAMDA(N) < LAMDA(M-1) .AND.|
+1714 |     +                                              UNIT(M) == UNIT(M-1)|
+1715 |!|
+1716 |! REASON 5 IS MOVE ALL UNITS WITH LAMDAS GE 32000 TO THE BOTTOM OF THE|
+1717 |! STACK|
+1718 |!|
+1719 |                  REASON5 = LAMDA(M) > LAMDA(N) .AND. LAMDA(M) > 31999|
+1720 |!|
+1721 |                  IF(REASON1 .OR. REASON2 .OR. REASON3 .OR.|
+1722 |     +                                        REASON4 .OR. REASON5) THEN|
+1723 |!        THEN INTERCHANGES THE ARRAY POSITIONS|
+1724 |                     ITEMP=LAMDA(M)|
+1725 |                     LAMDA(M)=LAMDA(N)|
+1726 |                     LAMDA(N)=ITEMP|
+1727 |                     RTEMP=MWBLOK(M)|
+1728 |                     MWBLOK(M)=MWBLOK(N)|
+1729 |                     MWBLOK(N)=RTEMP|
+1730 |                     ITEMP=UNIT(M)|
+1731 |                     UNIT(M)=UNIT(N)|
+1732 |                     UNIT(N)=ITEMP|
+1733 |!|
+1734 |                     RTEMP=INHEAT(M)|
+1735 |                     INHEAT(M)=INHEAT(N)|
+1736 |                     INHEAT(N)=RTEMP|
+1737 |!|
+1738 |                     RTEMP=SAVE_HEATRATE(M)|
+1739 |                     SAVE_HEATRATE(M)=SAVE_HEATRATE(N)|
+1740 |                     SAVE_HEATRATE(N)=RTEMP|
+1741 |!|
+1742 |                     ITEMP = BLKNO(M)|
+1743 |                     BLKNO(M) = BLKNO(N)|
+1744 |                     BLKNO(N) = ITEMP|
+1745 |                     RTEMP = SHADOW_DISPATCH_ADDER(M)|
+1746 |                     SHADOW_DISPATCH_ADDER(M) = SHADOW_DISPATCH_ADDER(N)|
+1747 |                     SHADOW_DISPATCH_ADDER(N) = RTEMP|
+1748 |                     N = M|
+1749 |                     M = M - 1|
+1750 |                     GOTO 20|
+1751 |                  ENDIF|
+1752 |               ENDIF|
+1753 |            ENDDO|
+1754 |         ENDIF|
+1755 |      RETURN|
+1756 |      END SUBROUTINE|
+1757 |!***********************************************************************|
+1758 |!|
+1759 |      FUNCTION UZ_PRIMARY_MOVER(R_UNIT_NO)|
+1760 |        use params|
+1761 |        use prim_mover_idx|
+1762 ||
+1763 |!***********************************************************************|
+1764 |      INTEGER (kind=2) ::  UZ_PRIMARY_MOVER|
+1765 |      INTEGER (kind=2) ::  R_UNIT_NO,GET_PRIMARY_MOVER_INDEX,|
+1766 |     +          PM,FT,MAX_FUEL_TYPES=6 ,MAX_PROD_TYPES=18 ,|
+1767 |     +          GET_PRIMARY_MOVER|
+1768 |! END DATA DECLARATIONS|
+1769 |         PM = GET_PRIMARY_MOVER_INDEX(R_UNIT_NO)|
+1770 |         IF(PM == pm_steam_TPR) THEN|
+1771 |            FT = MIN(GET_PRIMARY_MOVER(R_UNIT_NO),MAX_FUEL_TYPES)|
+1772 |            UZ_PRIMARY_MOVER = MIN(PM + FT + 4,MAX_PROD_TYPES)|
+1773 |         ELSE|
+1774 |            UZ_PRIMARY_MOVER = PM|
+1775 |         ENDIF|
+1776 |      RETURN|
+1777 |      END|
+1778 |!|
+1779 |!|
+Cantidad de lineas en source ql       :   1780
+
+
+[2024/08/09 00:42:23] ((-)) qfv_load
+
+PRO_TOOL6: file a procesar: |t1.for| 
+Linea mas larga:   73
+
+|            V_LOG=GET_CL_BASECASE_MARKET_ID(UN,BASECASE_MARKET_AREA_ID)  ! L1|
+[2024/08/09 00:42:23] ((+)) mostrar_reportes
+
+
+File: t1.for
+Cantidad de lineas con coment camb       0 
+Cantidad de lineas con com elim          0 
+Cantidad de lineas divididas             0 
+Cantidad de integer cambiados            0 
+Cantidad de real cambiados               0 
+Cantidad de logical cambiados            0 
+Cantidad de character cambiados          0 
+Cantidad de lin cont cambiadas           0 
+Variables_no_convertidas                 0 
+Var inits simples convertidos            0 
+Lineas con cont mas convertidas          0 
+Comentarios al final de lineas elim     75 
+[2024/08/09 00:42:23] ((-)) mostrar_reportes
+
+[2024/08/09 00:42:23] ((-)) tool6
+
+[2024/08/09 00:42:23] ((-)) proceso principal
+
+[2024/08/09 00:42:23] ((+)) cierro_files
+
+[2024/08/09 00:42:23] ((-)) cierro_files
+
+[2024/08/09 00:42:23] ((-)) proceso main
+
