@@ -1,4 +1,3 @@
-repo1/Cls_runs.for
 repo1/FINACELM.FOR
 repo1/Finaclp2.for
 repo1/Fuelused.for
@@ -6,18 +5,11 @@ repo1/GAS_objt.for
 repo1/LDPROB01.FOR
 repo1/LPMATINV.for
 repo1/LPSOLVER.for
-repo1/MSGMMExpRevCash.for
-repo1/MSGMMOUT.for
 repo1/MSGProSymRevExp.for
 repo1/MSGmmadm.FOR
 repo1/Msgmminp.for
-repo1/Msgmmrev.for
-repo1/POSTFIX.FOR
-repo1/PP_OBJT.FOR
-repo1/RDI_OBJT.FOR
 repo1/SF_OBJT.FOR
 repo1/TRANSOBJ2.FOR
-repo1/WVPACoopRevenueCals.FOR
 repo1/WVPARTRK.FOR
 repo1/WinFileFindData.for
 repo1/cap_objt.for
@@ -43,8 +35,11 @@ repo1/msgmmasb.for
 repo1/msgmmdbt.for
 repo1/msgmmdfd.for
 repo1/msgmmea.for
+repo1/msgmmexprevcash.for
 repo1/msgmmfa.for
+repo1/msgmmout.for
 repo1/msgmmpyb.for
+repo1/msgmmrev.for
 repo1/msgmmsb6.for
 repo1/msgmmsb6b.for
 repo1/msgmmtax.for
@@ -52,7 +47,6 @@ repo1/msgnorm.for
 repo1/msgoutpt.for
 repo1/munirev.for
 repo1/newfred2.for
-repo1/picadisp.for
 repo1/pro_cost.for
 repo1/reaenrg.for
 repo1/rps_index_translate_mod.for
@@ -62,6 +56,7 @@ repo1/tf_objt.for
 repo1/tf_objt2.for
 repo1/transobj.for
 repo1/wh_objt.for
+repo1/wvpacooprevenuecals.for
 repo1/ABBCapacityMarketRept.f90
 repo1/Abb_CapMarketRptData.f90
 repo1/COAL_VECTOR_OBJ.F90
@@ -94,12 +89,16 @@ repo1/cl_units_read_data.f90
 repo1/cla_decs.f90
 repo1/cla_fuel.f90
 repo1/cla_objt_arrays.f90
+repo1/class_run_switchesc.f90
+repo1/class_run_switchesl1.f90
+repo1/class_run_switchesl4.f90
 repo1/clgetter.f90
 repo1/clm_objt.f90
 repo1/closfile.f90
 repo1/clreport_decs.f90
 repo1/clreport_routines.f90
 repo1/cls_load.f90
+repo1/cls_runs.f90
 repo1/cn_objt.f90
 repo1/cnwmsubs.f90
 repo1/co2_cap_n_trade.f90
@@ -193,9 +192,12 @@ repo1/objtfunc.f90
 repo1/p_fuel.f90
 repo1/params.f90
 repo1/pf_objt.f90
+repo1/picadisp.f90
 repo1/pms.f90
 repo1/pn_objt.f90
 repo1/poolcom.f90
+repo1/postfix.f90
+repo1/pp_objt.f90
 repo1/prim_mover_idx.f90
 repo1/prngener.f90
 repo1/procost_data.f90
@@ -203,6 +205,7 @@ repo1/prod2com.f90
 repo1/prod_arrays_dimensions.f90
 repo1/prodcom.f90
 repo1/prosymmodule.f90
+repo1/rdi_objt.f90
 repo1/reference_loads.f90
 repo1/reference_loadsi2.f90
 repo1/rollscom.f90
@@ -230,7 +233,6 @@ repo1/wvpa_data_bases.f90
 repo1/8800COM.MON
 repo1/ACRSLCOM.MON
 repo1/Ac_equiv.MON
-repo1/CNTRCOM.MON
 repo1/DSMCOM.MON
 repo1/DSMFNCOM.MON
 repo1/DSMFRCOM.MON

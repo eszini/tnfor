@@ -609,6 +609,21 @@ int	ffchg_typ  = 0;		/* cambia type selectors */
 int	ffchg_mas  = 0;		/* saca la continuacion de linea con mas */
 int	ffchg_ini  = 0;		/* cambia el tipo de init de vars        */
 int	ffchg_lco  = 0;		/* cambia lineas de continuacion */
+int	ffchg_vcb  = 0;		/* cambia variables con blancos intermedios */
+
+
+
+/*
+ *	Estructuras y variables para la lista de variables fortran con blancos
+ *
+ *
+ */
+
+#define	MAX_VCB		250	/* maxima cantidad de variables con blancos en codebase */
+
+int	q_vcb;
+char	vcb[MAX_VCB][MAXV];
+
 
 
 /*
@@ -768,6 +783,7 @@ int	cfor_vars(int *,int *);
 int	cfor_lcon(int *,int *);
 int	cfor_mas(int *,int *);
 int	cfor_ini(int *,int *);
+int	cfor_vcb(int *,int *);
 int	cfor_dec(int *,int *);
 int	check_file(int *);
 int	l_pars(int, int *);
@@ -2692,7 +2708,7 @@ int	ex3_p2()
 	int	f1,f2;
 	int	f_mon,m_nl,m_nc;
 	int	n_f;
-	int	pf,uf;
+	int	pf,uf,ql;
 	int	n_info;
 	char	b1[MAXB];
 	char	b2[MAXB];
@@ -2714,6 +2730,7 @@ int	ex3_p2()
 		strcpy (b3, (*tb[j]).n );
 		pf =  (*tb[j]).pf;
 		uf =  (*tb[j]).uf;
+		ql = uf - pf + 1;
 
 		if (es_mon(b3))
 			f_mon = 1;
@@ -3139,7 +3156,6 @@ int	ex4_p1()
 	for (i=0; i<30; i++)
 		s_info[i]=0;
 
-/* EEE */
 
 	uuf = (*tb[qf_ff-1]).uf;
 
@@ -6704,7 +6720,6 @@ int	pro_prue5()
 
 #if 1
 
-/* EE4 */
 
 
 	/* cantidad de palabras en el diccionario */
@@ -7959,7 +7974,6 @@ int	*l1;
 
 
 
-/* EE6 */
 
 
 	ldfq1 = (ldf_ptr *) &vldf[q1];
@@ -9913,6 +9927,189 @@ int	*ql_f;
 		}
 	}
 
+
+
+#if 0
+	/* actualizo la cantidad de lineas del source para proximos cambios */
+	*ql_f = qf;
+#endif
+
+}
+
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	cfor_vcb
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ *	lee una lista de variables con blancos intermedios         
+ *	busca en el fuente si encuentra algna de esa variables
+ *	si encuentra, las cmbia
+ *	ql_f vuelve con nueva ultima linea
+ *
+ */
+
+
+
+int	cfor_vcb(ql_i,ql_f)
+int	*ql_i;
+int	*ql_f;
+{
+
+	int	i,j,k,k1,l;
+	int	f1,f2,f3,f4,f5;
+	int	flag;
+	int	pf,uf,qf;
+	int	m1,m2;
+	int	p1;
+	int	l1,l2;
+
+	int	fl_n;
+	int	f_sig;
+
+	char	b0[MAXB];
+	char	b1[MAXB];
+	char	b2[MAXB];
+	char	b3[MAXB];
+	char	b4[MAXB];
+	char	b5[MAXB];
+	
+	char	d1[MAXR];
+	char	d2[MAXR];
+
+
+
+
+	memset (b3,'X',MAXB);
+
+	/* compatibilidad con cfor_vars / p_src3 etc
+	 *
+	 * primera y ultima fila del source 
+	 * poner nombre del file en table de files
+	 */
+
+	pf = 0;
+	uf = *ql_i - 1;
+
+	fl_n = 0;
+
+#if 1
+	/* registro datos del archivo */
+	tb[fl_n] = (ffptr ) malloc (sizeof (ff));
+	if ( tb[fl_n] == NULL )
+		error(907);
+
+	strcpy ( (*tb[fl_n]).n, extract_fname(fout));
+	(*tb[fl_n]).pf = pf; 
+	(*tb[fl_n]).uf = uf; 
+	(*tb[fl_n]).ql = uf - pf + 1;
+
+#endif
+
+
+	/* cargo archivo con lista de variables vcb */
+	if (!ffin2)
+		gp_uso(1001);
+ 	
+	q_vcb = 0;
+
+	while (fgets(b1,MAXV,hfin2) != NULL)
+	{
+		if (!linea_vacia(b1)  && b1[0] != '#' )
+		{
+			/* saco el fin de linea - contemplo 13 x fuentes fortran */
+			for ( flag=0, j=strlen(b1); !flag && j; j--)
+				if (b1[j] == '\n' )
+				{	
+					flag=1;
+					if ( j && b1[j-1] == 13)
+						b1[j-1]=0;
+					else
+						b1[j]=0;
+				}
+
+			/* saco el ultimo | */
+			if (b1[strlen(b1)-1] == '|')
+				b1[strlen(b1)-1] = 0;
+			else
+				error(5003);
+
+			/* copio desde el primer caracter despues del primer | */
+			strcpy(vcb[q_vcb],b1+1);
+
+printf ("XXX cargue vcb |%s| \n",vcb[q_vcb]);
+
+
+			q_vcb++;
+		}
+	}
+
+	if (gp_fverbose("d1"))
+	{
+		printf ("Cantidad de lineas cargadas : %6d\n",q_vcb);
+	}
+
+
+
+/* EEE */
+
+	/* reviso cada linea */
+	for (j = pf; j <= uf; j++)
+	{
+		/* la linea j */
+		strcpy (b0, (*fnp[ j ]).l );
+		strcpy (b1, (*fnp[ j ]).l );
+		strcpy (b2, pasar_a_minusc(b1));
+		l2 = strlen(b2);
+
+		/* parseo fila a tokens ... si tiene sentido  */
+		l_pars(j,&q_tk);
+
+
+		/*
+		 * detectar si la linea es comentarios ...
+		 * falta mas ... chequear si no puso ! o c en otra posicion que no sea 0
+		 */
+
+		f4 = 1;
+		if (es_linea_comentario(b1))
+			f4 = 0;
+
+		/* solo proceso lineas que no son comentario */
+		if (f4)
+		{	
+
+			/* veo si encuentro alguna variable ! */
+			for (k=0; k< q_vcb; k++)
+			{
+				strcpy(b3,pasar_a_minusc(vcb[k]));
+
+				for (k1=0; k1 < l2; k1++)
+				{
+					if (!strncmp(b2+k1,b3,strlen(b3)))
+					{
+						printf ("ZZ1 var (%5d) |%s|\n",k,b3);
+						printf ("ZZ2 lin (%5d) |%s|\n",lne(j),b2);
+						printf ("ZZ3\n");
+					}
+				}
+			}		
+		}	
+
+		/* grabo la linea */
+		if ( 1 )
+		{
+			strcpy ((*fnp[ j ]).l, b1 );
+		}
+
+	}
 
 
 #if 0
@@ -12390,6 +12587,10 @@ int	pro_tool6()
 	if ( ffchg_lco )
 		cfor_lcon(&ql_ini,&ql_fin);
 
+	/* 6 - pidio cambiar variables con blancos intermedios        */
+	if ( ffchg_vcb )
+		cfor_vcb(&ql_ini,&ql_fin);
+
 
 	/* hago un checking final de las lineas ! */
 	if ( 0 )
@@ -13726,7 +13927,7 @@ FILE	*fpr;
 		}
 	}
 
-	if (gp_verbose)
+	if (gp_verbose("d1"))
 	{
 		printf ("Cantidad de lineas cargadas : %6d\n",q_wrd);
 	}
@@ -14966,6 +15167,11 @@ int	gp_parser()
 			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+2,"chgini",6) )
 			{	
 				ffchg_ini = 1;
+			}
+
+			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+2,"chgvcb",6) )
+			{	
+				ffchg_vcb = 1;
 			}
 
 
@@ -16239,3 +16445,57 @@ error....   CALL MG_LOCATE_WRITE(15,35,'error reading definition file!',
             call end_program(er_message)
 #endif
 
+
+
+
+#if 0
+
+		if (f4)
+		{	
+			f5 = 1;
+			while ( f5 )
+			{
+				strcpy(b2,b1);
+
+				f5 = 0;
+				if (p1 = es_cadena_int_src3(b1,&m1))
+				{	f5 = 1;
+
+					memset(d1,0,MAXR);
+					strncpy(d1,b1+p1,m1);
+
+		printf ("XXX1: |%s| \n",d1);
+						memset (d2,0,MAXR);
+						strcpy(d2,d1);
+						d2[0] = '=';
+						d2[m1-1] = ' ';
+						sq_vinit_simple++;
+		printf ("XXX2: |%s| \n",d2);
+
+					strncpy(b1+p1,d2,m1);
+
+					sprintf (b4,"f:%-30.30s l:%06d c:%4d|%s| \n", (*tb[fl_n]).n,lne(j),sq_vinit_simple,b2 );
+					sprintf (b5,"f:%-30.30s l:%06d c:%4d|%s| \n", (*tb[fl_n]).n,lne(j),sq_vinit_simple,b1 );
+					
+					if (gp_fverbose("d3"))
+					{
+						printf ("TTTX\n");
+						printf ("TTTX%s",b4);
+						printf ("TTTX%s",b5);
+						printf ("TTTX\n");
+					}
+
+#if 1
+					if (fflog)
+					{
+						fprintf (hflog,"%s",b4);
+						fprintf (hflog,"%s",b5);
+						fprintf (hflog,"%s","\n");
+					}
+#endif
+				}
+			}
+		}	
+
+
+#endif

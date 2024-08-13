@@ -1,4 +1,4 @@
-  Char   0     701     701     || 
+  Char   0     207     207     || 
   Char   1       0       0     || 
   Char   2       0       0     || 
   Char   3       0       0     || 
@@ -8,7 +8,7 @@
   Char   7       0       0     || 
   Char   8       0       0     |Backspace| 
   Char   9       0       0     |TAB| 
-  Char  10     701     701     |Line Feed| 
+  Char  10     207     207     |Line Feed| 
   Char  11       0       0     |Vertical Tab| 
   Char  12       0       0     |Form Feed| 
   Char  13       0       0     |Carriage Return| 
@@ -30,99 +30,99 @@
   Char  29       0       0     || 
   Char  30       0       0     || 
   Char  31       0       0     || 
-X Char  32    5357    5302     | | 
-X Char  33      70     144     |!| 
+  Char  32     544     544     | | 
+  Char  33       0       0     |!| 
   Char  34       0       0     |"| 
   Char  35       0       0     |#| 
   Char  36       0       0     |$| 
   Char  37       0       0     |%| 
-  Char  38       3       3     |&| 
+  Char  38       0       0     |&| 
   Char  39       0       0     |'| 
-  Char  40     607     607     |(| 
-  Char  41     607     607     |)| 
-  Char  42     416     416     |*| 
+  Char  40       0       0     |(| 
+  Char  41       0       0     |)| 
+  Char  42       0       0     |*| 
   Char  43       0       0     |+| 
-  Char  44     608     608     |,| 
-  Char  45       2       2     |-| 
-  Char  46       4       4     |.| 
-  Char  47       8       8     |/| 
-  Char  48     113     113     |0| 
-  Char  49     334     334     |1| 
-  Char  50     864     864     |2| 
-  Char  51     128     128     |3| 
-  Char  52     122     122     |4| 
-  Char  53     111     111     |5| 
-  Char  54     119     119     |6| 
-  Char  55     113     113     |7| 
-  Char  56     108     108     |8| 
-  Char  57     108     108     |9| 
-  Char  58    1217    1217     |:| 
+  Char  44       0       0     |,| 
+  Char  45       0       0     |-| 
+  Char  46       0       0     |.| 
+  Char  47       0       0     |/| 
+  Char  48       2       2     |0| 
+  Char  49       3       3     |1| 
+  Char  50       1       1     |2| 
+  Char  51       3       3     |3| 
+  Char  52       1       1     |4| 
+  Char  53       0       0     |5| 
+  Char  54       0       0     |6| 
+  Char  55       1       1     |7| 
+  Char  56       0       0     |8| 
+  Char  57       1       1     |9| 
+  Char  58       0       0     |:| 
   Char  59       0       0     |;| 
   Char  60       0       0     |<| 
-  Char  61    1210    1210     |=| 
+  Char  61       0       0     |=| 
   Char  62       0       0     |>| 
   Char  63       0       0     |?| 
   Char  64       0       0     |@| 
-  Char  65     143     143     |A| 
-  Char  66      50      50     |B| 
-X Char  67     181     159     |C| 
-  Char  68      80      80     |D| 
-  Char  69     170     170     |E| 
-  Char  70      84      84     |F| 
-  Char  71      21      21     |G| 
-  Char  72      15      15     |H| 
-  Char  73      94      94     |I| 
-  Char  74       3       3     |J| 
+  Char  65      63      63     |A| 
+  Char  66      29      29     |B| 
+  Char  67     114     114     |C| 
+  Char  68      68      68     |D| 
+  Char  69      77      77     |E| 
+  Char  70      69      69     |F| 
+  Char  71      15      15     |G| 
+  Char  72       0       0     |H| 
+  Char  73      49      49     |I| 
+  Char  74       0       0     |J| 
   Char  75       0       0     |K| 
-  Char  76      72      72     |L| 
-  Char  77     177     177     |M| 
-  Char  78      60      60     |N| 
-  Char  79      56      56     |O| 
-  Char  80      90      90     |P| 
-  Char  81       2       2     |Q| 
-  Char  82      92      92     |R| 
-  Char  83     118     118     |S| 
-  Char  84     141     141     |T| 
-  Char  85      19      19     |U| 
-  Char  86      42      42     |V| 
-  Char  87      14      14     |W| 
-  Char  88      12      12     |X| 
-  Char  89       9       9     |Y| 
+  Char  76      37      37     |L| 
+  Char  77     124     124     |M| 
+  Char  78      20      20     |N| 
+  Char  79      34      34     |O| 
+  Char  80      65      65     |P| 
+  Char  81       1       1     |Q| 
+  Char  82      51      51     |R| 
+  Char  83      48      48     |S| 
+  Char  84      74      74     |T| 
+  Char  85       6       6     |U| 
+  Char  86      24      24     |V| 
+  Char  87      11      11     |W| 
+  Char  88       1       1     |X| 
+  Char  89       2       2     |Y| 
   Char  90       0       0     |Z| 
   Char  91       0       0     |[| 
   Char  92       0       0     |\| 
   Char  93       0       0     |]| 
   Char  94       0       0     |^| 
-  Char  95    1118    1118     |_| 
+  Char  95       6       6     |_| 
   Char  96       0       0     |`| 
-  Char  97    2169    2169     |a| 
-  Char  98     157     157     |b| 
-X Char  99     492     489     |c| 
-  Char 100     939     939     |d| 
-  Char 101    3658    3658     |e| 
-  Char 102     156     156     |f| 
-  Char 103     698     698     |g| 
-  Char 104     512     512     |h| 
-  Char 105    1798    1798     |i| 
-  Char 106      12      12     |j| 
-  Char 107     632     632     |k| 
-  Char 108     631     631     |l| 
-  Char 109    1051    1051     |m| 
-  Char 110    2101    2101     |n| 
-  Char 111     668     668     |o| 
-  Char 112     922     922     |p| 
-  Char 113       6       6     |q| 
-  Char 114    2393    2393     |r| 
-  Char 115     885     885     |s| 
-  Char 116    2313    2313     |t| 
-  Char 117     237     237     |u| 
-  Char 118     211     211     |v| 
-  Char 119      55      55     |w| 
-  Char 120     250     250     |x| 
-  Char 121     349     349     |y| 
-  Char 122      11      11     |z| 
+  Char  97     317     317     |a| 
+  Char  98      29      29     |b| 
+  Char  99      76      76     |c| 
+  Char 100      64      64     |d| 
+  Char 101     457     457     |e| 
+  Char 102      10      10     |f| 
+  Char 103      23      23     |g| 
+  Char 104     214     214     |h| 
+  Char 105     232     232     |i| 
+  Char 106       5       5     |j| 
+  Char 107       5       5     |k| 
+  Char 108     209     209     |l| 
+  Char 109      84      84     |m| 
+  Char 110     317     317     |n| 
+  Char 111     230     230     |o| 
+  Char 112      64      64     |p| 
+  Char 113       1       1     |q| 
+  Char 114     190     190     |r| 
+  Char 115     293     293     |s| 
+  Char 116     270     270     |t| 
+  Char 117      80      80     |u| 
+  Char 118      78      78     |v| 
+  Char 119      10      10     |w| 
+  Char 120      73      73     |x| 
+  Char 121     126     126     |y| 
+  Char 122       3       3     |z| 
   Char 123       0       0     |{| 
-  Char 124       0       0     ||| 
+  Char 124     414     414     ||| 
   Char 125       0       0     |}| 
   Char 126       0       0     |~| 
   Char 127       0       0     |Delete| 
