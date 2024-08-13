@@ -30,12 +30,16 @@ repo1/cl_units_read_data.f90
 repo1/cla_decs.f90
 repo1/cla_fuel.f90
 repo1/cla_objt_arrays.f90
+repo1/class_run_switchesc.f90
+repo1/class_run_switchesl1.f90
+repo1/class_run_switchesl4.f90
 repo1/clgetter.f90
 repo1/clm_objt.f90
 repo1/closfile.f90
 repo1/clreport_decs.f90
 repo1/clreport_routines.f90
 repo1/cls_load.f90
+repo1/cls_runs.f90
 repo1/cn_objt.f90
 repo1/cnwmsubs.f90
 repo1/co2_cap_n_trade.f90
@@ -129,9 +133,12 @@ repo1/objtfunc.f90
 repo1/p_fuel.f90
 repo1/params.f90
 repo1/pf_objt.f90
+repo1/picadisp.f90
 repo1/pms.f90
 repo1/pn_objt.f90
 repo1/poolcom.f90
+repo1/postfix.f90
+repo1/pp_objt.f90
 repo1/prim_mover_idx.f90
 repo1/prngener.f90
 repo1/procost_data.f90
@@ -139,6 +146,7 @@ repo1/prod2com.f90
 repo1/prod_arrays_dimensions.f90
 repo1/prodcom.f90
 repo1/prosymmodule.f90
+repo1/rdi_objt.f90
 repo1/reference_loads.f90
 repo1/reference_loadsi2.f90
 repo1/rollscom.f90
