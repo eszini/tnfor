@@ -1,0 +1,20 @@
+#
+#
+#
+# paso 01
+# 
+# Partiendo del Mthnmcom.mon original
+# con algunas modificaciones basicas
+# se genera 
+#
+# 1 - mthnmcom.f90
+#     el nuevo file, que contiene las mismas
+#     filas, pero en orden, y veriricando
+#     que compila tanto en f77 que en f90
+#
+#
+# 2 - vars.txt
+#     
+#
+#
+#

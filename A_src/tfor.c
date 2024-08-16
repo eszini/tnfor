@@ -504,8 +504,9 @@ int	pro_prue7();
 int	pro_exec1();	/* cuenta caracteres en un archivo */
 int	pro_exec2();	/* carga todos los fuentes en memoria, en vector de ptr - version vieja */
 int	pro_exec3();	/* carga todos los fuentes en memoria, en vector de ptr - para procesos - version vieja */
-int	pro_exec4();	/* carga todos los src en mem en vec de ptr para procesos - version nueva */
+int	pro_exec4();	/* carga todos los src en mem en vec de ptr para procesos - version nueva - entrys */
 int	pro_exec5();	/* carga file con definicion de variables de fort con blancos inermedios y genera lista */
+int	pro_exec6();	/* carga todos los src en mem en vec de ptr para procesos - version nueva - var con blanks */
 
 int	pro_proc1();
 int	pro_proc2();
@@ -540,6 +541,7 @@ int	pro_tool9();
 
 char	finp[MAXF];	/* archivo inp para entrada segun necesidad */
 char	fin2[MAXF];	/* archivo inp para entrada segun necesidad */
+char	fin3[MAXF];	/* archivo inp para entrada segun necesidad */
 char	fout[MAXF];
 char	fou2[MAXF];
 char	faux[MAXF];	/* archivo aux para salidas segun necesidad */
@@ -552,6 +554,7 @@ char	flst[MAXF];	/* archivo de listado de src de entrada */
 
 int	ffinp;
 int	ffin2;
+int	ffin3;
 int	ffout;
 int	ffou2;
 int	ffaux;		/* archivo aux para output segun necesidad */
@@ -577,6 +580,7 @@ int	fftb4;
 
 FILE	*hfinp;
 FILE	*hfin2;
+FILE	*hfin3;
 FILE	*hfout;
 FILE	*hfou2;
 FILE	*hfaux;
@@ -596,6 +600,7 @@ int	flag_before_exit;
 int	agregar_ffaux(char *);
 int	agregar_ffsta(char *);
 int	agregar_ffckf(char *);
+int	agregar_fflog(char *);
 
 
 /*
@@ -620,9 +625,13 @@ int	ffchg_vcb  = 0;		/* cambia variables con blancos intermedios */
  */
 
 #define	MAX_VCB		250	/* maxima cantidad de variables con blancos en codebase */
+#define	MAX_VSB		450	/* maxima cantidad de variables con blancos en codebase */
 
 int	q_vcb;
 char	vcb[MAX_VCB][MAXV];
+
+int	q_vsb;
+char	vsb[MAX_VSB][MAXV];
 
 
 
@@ -800,6 +809,9 @@ int	ex3_p2();
 int	ex3_p3();
 int	ex3_p4();
 int	ex4_p1();
+int	ex6_p1();
+int	ex6_p2();
+int	ex6_p3();
 int	es_cadena_valida(int,char *);
 int	es_cadena_interesante(char *);
 int	es_cadena_int_src3(char *,int *);
@@ -809,9 +821,7 @@ int	es_linea_comentario2(char *);
 int	armame_dos_lineas(char *, char *, char *);
 int	preparame_dos_lineas(char *, char *, char *);
 int	correme_una_linea(int, int);
-char	*limpiar_mas(char *);
 int	pasa_filtro(char *);
-char	*trim_blanks(char *);
 int	ordenar_makefile();
 int	ps_src1();
 int	largo_linea(char *);
@@ -819,6 +829,8 @@ int	tiene_include_valido(char *,char *,char *);
 int	tiene_include_v2(char *, char *);
 int	es_nombre_de_include(char *s);
 int	lne(int );
+char	*trim_blanks(char *);
+char	*limpiar_mas(char *);
 char	*analisis_comentario(char *);
 bool	tiene_include_v3(char *, char *);
 bool	tiene_include_v4(char *, char *);
@@ -1272,6 +1284,8 @@ int	proceso_principal()
 			pro_exec4();
 		if (ffexc == 5)
 			pro_exec5();
+		if (ffexc == 6)
+			pro_exec6();
 	}
 
 	if ( ffpro)
@@ -3349,7 +3363,7 @@ int	pro_exec5()
 	if (!ffaux)
 		agregar_ffaux("parser.err");
 
-	if (!ffinp || !ffout) 
+	if (!ffinp || !ffout || !fflog) 
 		gp_uso(102);
 
 
@@ -3451,6 +3465,12 @@ int	pro_exec5()
 			{
 				fprintf (hfou2,"|%s|\n",b4);
 			}
+
+			/* grabo la lista de variables con _ */
+			if (!f3 && fflog)
+			{
+				fprintf (hflog,"|%s|\n",b4);
+			}
 			
 			q_var++;
 		}
@@ -3542,6 +3562,725 @@ char	*s;
 
 	
 
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	pro_exec 6
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ *
+ *	exec 6
+ *
+ *	abre archivo con lista de archivos a procesar 
+ *	x cada archivo, abre y carga a memoria en vector de estructuras
+ *	deja listo todo el contenido para procesos
+ *	termina y vuelve a grabar los archivos con mismo nombre, en otro dir
+ *
+ *	proceso para determinar variables con blancos intermedios
+ */
+
+
+#if 0
+
+#define	MAX_QSRC		500	/* cant max de archivos fuentes a manejar */
+int	qf_ff;
+
+typedef	struct tff	*ffptr;
+typedef	struct tff
+{	char	n[MAXB];		/* nombre de file */
+	int	pf,uf;			/* primera - ultima fila */
+	int	f1,f2,f3;		/* flags prop general */
+}	ff;
+
+ffptr	ffp1,ffp2,*ffq1,*ffq2;		/* punteros varios */
+
+ffptr	tb[MAX_QSRC];
+
+#endif
+
+
+int	pro_exec6()
+{
+
+	int	i,j,k,flag;
+	int	ql,qlf,q_ptr;
+	char	d1[MAXB];
+	char	d2[MAXB];
+	char	b1[MAXB];
+
+
+	FILE	*hwi,*hwo;
+
+	char	z[MAXV];
+	sprintf (z,"exec6");
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
+	}
+
+	if (!ffinp || !ffin2 || !ffin3 || !ffaux )
+		gp_uso(105);
+
+
+
+ 	/* cargo las variables vcb */	
+	q_vcb = 0;
+
+	while (fgets(b1,MAXV,hfin2) != NULL)
+	{
+		if (!linea_vacia(b1)  && b1[0] != '#' )
+		{
+			/* saco el fin de linea - contemplo 13 x fuentes fortran */
+			for ( flag=0, j=strlen(b1); !flag && j; j--)
+				if (b1[j] == '\n' )
+				{	
+					flag=1;
+					if ( j && b1[j-1] == 13)
+						b1[j-1]=0;
+					else
+						b1[j]=0;
+				}
+
+			/* saco el ultimo | */
+			if (b1[strlen(b1)-1] == '|')
+				b1[strlen(b1)-1] = 0;
+			else
+				error(5003);
+
+			/* copio desde el primer caracter despues del primer | */
+			strcpy(vcb[q_vcb],b1+1);
+
+printf ("XXX cargue vcb |%s| \n",vcb[q_vcb]);
+
+			q_vcb++;
+		}
+	}
+
+	if (gp_fverbose("d1"))
+	{
+		printf ("Cantidad de vcb cargadas : %6d\n",q_vcb);
+	}
+
+
+
+ 	/* cargo las variables vsb */	
+	q_vsb = 0;
+
+	while (fgets(b1,MAXV,hfin3) != NULL)
+	{
+		if (!linea_vacia(b1)  && b1[0] != '#' )
+		{
+			/* saco el fin de linea - contemplo 13 x fuentes fortran */
+			for ( flag=0, j=strlen(b1); !flag && j; j--)
+				if (b1[j] == '\n' )
+				{	
+					flag=1;
+					if ( j && b1[j-1] == 13)
+						b1[j-1]=0;
+					else
+						b1[j]=0;
+				}
+
+			/* saco el ultimo | */
+			if (b1[strlen(b1)-1] == '|')
+				b1[strlen(b1)-1] = 0;
+			else
+				error(5004);
+
+			/* copio desde el primer caracter despues del primer | */
+			strcpy(vsb[q_vsb],b1+1);
+
+printf ("XXX cargue vsb |%s| \n",vsb[q_vsb]);
+
+			q_vsb++;
+		}
+	}
+
+	if (gp_fverbose("d1"))
+	{
+		printf ("Cantidad de vsb cargadas : %6d\n",q_vsb);
+	}
+
+
+
+
+
+	/* cantidad de archivos y lineas totales cargadas  */
+	qf_ff = 0;
+	q_ptr = 0;
+
+	while (fgets(d1,MAXB,hfinp) != NULL)
+	{
+		if (!linea_vacia(d1)  && d1[0] != '#' )
+		{
+			/* saco el fin de linea - contemplo 13 x fuentes fortran */
+			for ( flag=0, j=strlen(d1); !flag && j >= 0; j--)
+				if (d1[j] == '\n' )
+				{	
+					flag=1;
+					if ( j && d1[j-1] == 13)
+						d1[j-1]=0;
+					else
+						d1[j]=0;
+				}
+
+			/* proceso file */
+			if (gp_fverbose("d3"))
+				printf ("Archivo a cargar:  |%s|\n",d1);
+
+			if ( 1 && ((hwi = fopen (d1,"r")) == NULL) )
+				error(601);
+
+			fnq1 = &fnp[q_ptr];
+			qfv_load(hwi,fnq1,&qlf);
+
+			fclose (hwi);
+
+			/* procese file */
+			if (gp_fverbose("d3"))
+				printf ("Archivo cargado:  %5d |%s|\n\n",qlf,d1);
+
+
+			/* registro datos del archivo */
+			tb[qf_ff] = (ffptr ) malloc (sizeof (ff));
+			if ( tb[qf_ff] == NULL )
+				error(904);
+
+			strcpy ( (*tb[qf_ff]).n, extract_fname(d1));
+			(*tb[qf_ff]).pf = q_ptr;
+			(*tb[qf_ff]).uf = q_ptr+qlf-1;
+
+			if (gp_fverbose("d1"))
+			{
+				printf ("load: %5d %5d |%s|\n",
+					(*tb[qf_ff]).pf,(*tb[qf_ff]).uf,(*tb[qf_ff]).n);
+			}
+
+			qf_ff++;
+			q_ptr += qlf;
+		}
+	}
+
+
+	/* cantidad de lineas totales en vector (global) */
+	qf_src = q_ptr;
+
+	if (gp_fverbose("d3"))
+	{
+		printf ("Cantidad de archivos cargados :  %5d \n",qf_ff);
+		printf ("Cantidad de lineas cargadas   :  %5d \n",q_ptr);
+		printf ("\n");
+	}
+
+#if 1
+	if (gp_fverbose("d3"))
+	{
+		printf ("\n\nComprobando integridad de la carga: \n\n");
+	
+		for ( i=0; i< q_ptr; i++)
+		{
+			printf ("i: %5d  |%s| \n",
+				i,(*fnp[i]).l );
+		}
+	}
+
+	printf ("\n");
+
+#endif
+
+	/*
+	 * A este punto, todas las lineas de archivos cargados en vector
+	 * Hay otro vector, con nombre y lineas desde/hasta para indentificar
+	 * a que archivo pertenece una linea determinada 
+	 *
+	 */
+
+#if 1
+	/* hace el cambio de variables con blancos x misma version con _ */
+	ex6_p1();
+#endif
+
+#if 0
+	/* chequeo ... estas variables con blancos ... estan en otros fuentes que no t el include ? */
+	ex6_p2();
+#endif
+
+#if 0
+	/* chequeo ... estas variables con blancos reemp x _, ... estan en los fuentes que  t el include ? */
+	ex6_p3();
+#endif
+
+	/* grabo new file */
+	for (i = 0; i < qf_ff; i++)
+	{
+		/* nombre del archivo de salida */
+		sprintf (d2,"%s/%s",gp_dato,extract_fname( (*tb[i]).n));
+
+		if ( 1 && ((hwo = fopen (d2,"w")) == NULL) )
+			error(603);
+
+		for (j = (*tb[i]).pf ; j<= (*tb[i]).uf; j++)
+		{
+			fprintf (hwo,"%s\n", (*fnp[j]).l );
+		}
+	}
+
+
+	fclose(hwo);
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[1],z);
+	}
+}
+
+
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	ex6_p1
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ * llamado por pro_exec6
+ * hace algo con todas las lineas cargadas en memoria
+ *
+ * v1
+ * toma las variables vcb (var con blanks )
+ * y reemplaza por la misma con '_'
+ * trabaja sobre todos los fuentes cargados en vector 
+ * genera version modificada en repo indicado
+ *
+ */
+
+int	ex6_p1()
+{
+	int 	i,j,k,k1,k2;
+	int	l1,l2;
+	int	c1,c2;
+	int	f1,f2,f3,f4,f5;
+	int	f_proceso;
+	int	n_f;
+	char	base_name[MAXV];
+	char	prog_name[MAXV];
+	char	b0[MAXB];
+	char	b1[MAXB];
+	char	b2[MAXB];
+	char	b3[MAXB];
+	char	b4[MAXB];
+	char	b5[MAXB];
+	int	pf,uf,nf;
+
+
+/* EEE */
+	strcpy(base_name,"empty");
+
+	/* para todas las lineas */
+	for (i=0; i < qf_src; i++)
+	{
+		/* me fijo que archivo es */
+		strcpy(prog_name,f_name(i));
+
+		/* me fijo lineas */
+		for (j=0, f1=1, n_f=0; f1 && j<qf_ff; j++)
+			if ( i >= (*tb[j]).pf && i <= (*tb[j]).uf )
+			{	n_f = j;
+				pf = (*tb[j]).pf;
+				uf = (*tb[j]).uf;
+				f1=0;
+			}
+
+		if (strcmp(base_name,prog_name))
+		{	strcpy(base_name,prog_name);
+			nf = 0;
+		}
+
+		/* proceso linea i */
+		strcpy(b0,(*fnp[i]).l );
+		strcpy(b1,(*fnp[i]).l );
+		strcpy (b2, pasar_a_minusc(b1));
+		l2 = strlen(b1);
+
+		f_proceso = 1;
+		if (linea_vacia(b1) || es_linea_comentario(b1))
+			f_proceso = 0;
+
+		/* solo proceso lineas que no son comentario ni vacias */
+		if (f_proceso)
+		{	
+			c1 = 0;
+			f5 = 1;
+
+			while (f5)
+			{
+				f5 = 0;
+	
+				/* veo si encuentro alguna variable ! */
+				for (k=0; k< q_vcb; k++)
+				{
+					strcpy(b3,pasar_a_minusc(vcb[k]));
+	
+					for (k1=0; k1 < l2; k1++)
+					{
+						if (!strncmp(b2+k1,b3,strlen(b3)))
+						{
+							c1++;
+							f5 = 1;
+	
+							/* cambiazos */
+							strcpy(b4,b3);
+							strcpy(b5,vcb[k]);
+							for (k2 = 0; k2 < strlen(b4); k2++)
+							{
+								if( b4[k2] == ' ')
+								{
+									b4[k2] = '_';
+									b5[k2] = '_';
+								}
+							}
+
+							strncpy(b1+k1,b5,strlen(b5));
+							strncpy(b2+k1,b4,strlen(b4));
+	
+							printf ("VV1 Prog:          |%s|\n",prog_name);
+							printf ("VV2 var :          |%s|\n",b3);
+							printf ("VV3 cnt : (%6d)\n",c1);
+							printf ("VV4 lin : (%6d) |%s|\n",lne(nf),b0);
+							printf ("VV5 lin : (%6d) |%s|\n",lne(nf),b1);
+							printf ("VV6 \n");
+
+							if (fflog)
+							{
+								fprintf (hflog,"%-30.30s (%d) %05d |%s|\n",prog_name,c1,lne(nf),b0);
+								fprintf (hflog,"%-30.30s     %05d |%s|\n",prog_name,lne(nf),b1);
+								fprintf (hflog,"%s","\n");
+							}
+						}
+					}
+				}		
+	
+			} /* while f5 */
+		} /* proceso */
+
+		strcpy( (*fnp[i]).l , b1 );
+		nf++;
+
+	} /* for */
+}
+
+#if 0
+			fprintf (hflog,"%-30.30s  %s\n", (*tb[n_f]).n, b2);
+			fprintf (hfout,"%-15.15s  %s\n", b2, (*tb[n_f]).n);
+#endif
+
+
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	ex6_p2
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ * llamado por pro_exec6
+ * hace algo con todas las lineas cargadas en memoria
+ *
+ * v2
+ * toma las variables vcb (var con blanks )
+ * y busca en todos los programas cargados
+ * trabaja sobre todos los fuentes cargados en vector 
+ * (la idea es buscar estas variables en programas que no tienen 
+ * el include mthnmcom.mon )
+ *
+ */
+
+int	ex6_p2()
+{
+	int 	i,j,k,k1,k2;
+	int	l1,l2;
+	int	c1,c2;
+	int	f1,f2,f3,f4,f5;
+	int	f_proceso;
+	int	n_f;
+	char	base_name[MAXV];
+	char	prog_name[MAXV];
+	char	b0[MAXB];
+	char	b1[MAXB];
+	char	b2[MAXB];
+	char	b3[MAXB];
+	char	b4[MAXB];
+	char	b5[MAXB];
+	int	pf,uf,nf;
+
+
+/* EEE */
+	strcpy(base_name,"empty");
+
+	/* para todas las lineas */
+	for (i=0; i < qf_src; i++)
+	{
+		/* me fijo que archivo es */
+		strcpy(prog_name,f_name(i));
+
+		/* me fijo lineas */
+		for (j=0, f1=1, n_f=0; f1 && j<qf_ff; j++)
+			if ( i >= (*tb[j]).pf && i <= (*tb[j]).uf )
+			{	n_f = j;
+				pf = (*tb[j]).pf;
+				uf = (*tb[j]).uf;
+				f1=0;
+			}
+
+		if (strcmp(base_name,prog_name))
+		{	strcpy(base_name,prog_name);
+			nf = 0;
+		}
+
+		/* proceso linea i */
+		strcpy(b0,(*fnp[i]).l );
+		strcpy(b1,(*fnp[i]).l );
+		strcpy (b2, pasar_a_minusc(b1));
+		l2 = strlen(b1);
+
+		f_proceso = 1;
+		if (linea_vacia(b1) || es_linea_comentario(b1))
+			f_proceso = 0;
+
+		/* solo proceso lineas que no son comentario ni vacias */
+		if (f_proceso)
+		{	
+			c1 = 0;
+			f5 = 1;
+
+			while (f5)
+			{
+				f5 = 0;
+	
+				/* veo si encuentro alguna variable ! */
+				for (k=0; k< q_vcb; k++)
+				{
+					strcpy(b3,pasar_a_minusc(vcb[k]));
+	
+					for (k1=0; k1 < l2; k1++)
+					{
+						if (!strncmp(b2+k1,b3,strlen(b3)))
+						{
+							c1++;
+							f5 = 1;
+	
+							/* cambiazos */
+							strcpy(b4,b3);
+							strcpy(b5,vcb[k]);
+							for (k2 = 0; k2 < strlen(b4); k2++)
+							{
+								if( b4[k2] == ' ')
+								{
+									b4[k2] = '_';
+									b5[k2] = '_';
+								}
+							}
+
+							strncpy(b1+k1,b5,strlen(b5));
+							strncpy(b2+k1,b4,strlen(b4));
+	
+							printf ("VV1 Prog:          |%s|\n",prog_name);
+							printf ("VV2 var :          |%s|\n",b3);
+							printf ("VV3 cnt : (%6d)\n",c1);
+							printf ("VV4 lin : (%6d) |%s|\n",lne(nf),b0);
+							printf ("VV5 lin : (%6d) |%s|\n",lne(nf),b1);
+							printf ("VV6 \n");
+
+							if (fflog)
+							{
+								fprintf (hfaux,"%-40.40s %05d |%s|\n",prog_name,lne(nf),b0);
+								fprintf (hfaux,"%s","\n");
+							}
+						}
+					}
+				}		
+	
+			} /* while f5 */
+		} /* proceso */
+
+		strcpy( (*fnp[i]).l , b1 );
+		nf++;
+
+	} /* for */
+}
+
+#if 0
+			fprintf (hflog,"%-30.30s  %s\n", (*tb[n_f]).n, b2);
+			fprintf (hfout,"%-15.15s  %s\n", b2, (*tb[n_f]).n);
+#endif
+
+
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	ex6_p3
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ * llamado por pro_exec6
+ * hace algo con todas las lineas cargadas en memoria
+ *
+ * v3
+ * toma las variables vcb (var con blanks ) 
+ * reemp blanks con _
+ * y busca en todos los programas cargados
+ * trabaja sobre todos los fuentes cargados en vector 
+ * (la idea es buscar estas variables en programas que tienen 
+ * el include mthnmcom.mon )
+ *
+ */
+
+int	ex6_p3()
+{
+	int 	i,j,k,k1,k2;
+	int	l1,l2;
+	int	c1,c2;
+	int	f1,f2,f3,f4,f5;
+	int	f_proceso;
+	int	n_f;
+	char	base_name[MAXV];
+	char	prog_name[MAXV];
+	char	b0[MAXB];
+	char	b1[MAXB];
+	char	b2[MAXB];
+	char	b3[MAXB];
+	char	b4[MAXB];
+	char	b5[MAXB];
+	int	pf,uf,nf;
+
+
+/* EEE */
+	memset(b4,'X',MAXB);
+	strcpy(base_name,"empty");
+
+	/* para todas las lineas */
+	for (i=0; i < qf_src; i++)
+	{
+
+		/* me fijo que archivo es */
+		strcpy(prog_name,f_name(i));
+
+		/* me fijo lineas */
+		for (j=0, f1=1, n_f=0; f1 && j<qf_ff; j++)
+			if ( i >= (*tb[j]).pf && i <= (*tb[j]).uf )
+			{	n_f = j;
+				pf = (*tb[j]).pf;
+				uf = (*tb[j]).uf;
+				f1=0;
+			}
+
+		if (strcmp(base_name,prog_name))
+		{	strcpy(base_name,prog_name);
+			nf = 0;
+
+			printf ("Trabajo con ... |%s|\n",prog_name);
+		}
+
+		/* proceso linea i */
+		strcpy(b0,(*fnp[i]).l );
+		strcpy(b1,(*fnp[i]).l );
+		strcpy(b2,(*fnp[i]).l );
+#if 0
+		strcpy (b2, pasar_a_minusc(b1));
+#endif
+		l2 = strlen(b1);
+
+		f_proceso = 1;
+		if (linea_vacia(b1) || es_linea_comentario(b1))
+			f_proceso = 0;
+
+		/* solo proceso lineas que no son comentario ni vacias */
+		if (f_proceso)
+		{	
+			c1 = 0;
+			f5 = 1;
+
+			while (f5)
+			{
+				f5 = 0;
+	
+				/* veo si encuentro alguna variable ! */
+				for (k=0; k< q_vcb; k++)
+				{
+					/* copio la variable vcb a buscar */
+#if 0
+					strcpy(b3,pasar_a_minusc(vcb[k]));
+#endif
+					strcpy(b3,vcb[k]);
+					strcpy(b5,vcb[k]);
+
+					/* cambio blanks x underscore */
+					for (k2 = 0; k2 < strlen(b3); k2++)
+						if (b3[k2] == ' ')
+							b3[k2] = '_';
+	
+					for (k1=0; k1 < l2; k1++)
+					{
+						if (!strncmp(b2+k1,b3,strlen(b3)))
+						{
+							c1++;
+							f5 = 1;
+	
+							/* cambiazos */
+							strncpy(b2+k1,b4,strlen(b3));
+	
+							printf ("VV1 Prog:          |%s|\n",prog_name);
+							printf ("VV2 var :          |%s|\n",b3);
+							printf ("VV3 cnt : (%6d)\n",c1);
+							printf ("VV4 lin : (%6d) |%s|\n",lne(nf),b0);
+							printf ("VV6 \n");
+
+							if (fflog)
+							{
+								fprintf (hfaux,"%-40.40s  var: |%s| \n",prog_name,b5);
+								fprintf (hfaux,"(%5d) |%s|\n",lne(nf),b0);
+								fprintf (hfaux,"%s","\n");
+							}
+						}
+					}
+				}		
+	
+			} /* while f5 */
+		} /* proceso */
+
+		strcpy( (*fnp[i]).l , b1 );
+		nf++;
+
+	} /* for */
+}
+
+#if 0
+			fprintf (hflog,"%-30.30s  %s\n", (*tb[n_f]).n, b2);
+			fprintf (hfout,"%-15.15s  %s\n", b2, (*tb[n_f]).n);
+#endif
 
 
 
@@ -9963,13 +10702,14 @@ int	*ql_i;
 int	*ql_f;
 {
 
-	int	i,j,k,k1,l;
+	int	i,j,k,k1,k2,l;
 	int	f1,f2,f3,f4,f5;
 	int	flag;
 	int	pf,uf,qf;
 	int	m1,m2;
 	int	p1;
 	int	l1,l2;
+	int	c1;
 
 	int	fl_n;
 	int	f_sig;
@@ -10078,29 +10818,66 @@ printf ("XXX cargue vcb |%s| \n",vcb[q_vcb]);
 		 * falta mas ... chequear si no puso ! o c en otra posicion que no sea 0
 		 */
 
+		c1 = 0;
+
 		f4 = 1;
-		if (es_linea_comentario(b1))
+		if (es_linea_comentario(b2) || linea_vacia_for(b2) )
 			f4 = 0;
 
-		/* solo proceso lineas que no son comentario */
+		/* solo proceso lineas que tienen codigo */
 		if (f4)
 		{	
-
-			/* veo si encuentro alguna variable ! */
-			for (k=0; k< q_vcb; k++)
+			f5 = 1;
+			while (f5)
 			{
-				strcpy(b3,pasar_a_minusc(vcb[k]));
-
-				for (k1=0; k1 < l2; k1++)
+				f5 = 0;
+	
+				/* veo si encuentro alguna variable ! */
+				for (k=0; k< q_vcb; k++)
 				{
-					if (!strncmp(b2+k1,b3,strlen(b3)))
+					strcpy(b3,pasar_a_minusc(vcb[k]));
+	
+					for (k1=0; k1 < l2; k1++)
 					{
-						printf ("ZZ1 var (%5d) |%s|\n",k,b3);
-						printf ("ZZ2 lin (%5d) |%s|\n",lne(j),b2);
-						printf ("ZZ3\n");
+						if (!strncmp(b2+k1,b3,strlen(b3)))
+						{
+							c1++;
+							f5 = 1;
+	
+							/* cambiazos */
+							strcpy(b4,b3);
+							strcpy(b5,vcb[k]);
+							for (k2 = 0; k2 < strlen(b4); k2++)
+							{
+								if( b4[k2] == ' ')
+								{
+									b4[k2] = '_';
+									b5[k2] = '_';
+								}
+							}
+	
+							strncpy(b1+k1,b5,strlen(b5));
+							strncpy(b2+k1,b4,strlen(b4));
+	
+							printf ("ZZ1 b3 var (%5d) |%s|\n",k,b3);
+							printf ("ZZ2 b2 lin (%5d) |%s|\n",lne(j),b2);
+							printf ("ZZ3 cnt (%5d)\n",c1);
+							printf ("ZZ4 b0             |%s|\n",b0);
+							printf ("ZZ5 b1             |%s|\n",b1);
+							printf ("ZZ6 b2             |%s|\n",b2);
+							printf ("ZZ7 \n");
+
+							if (fflog)
+							{
+								fprintf (hflog,"%s\n",b0);
+								fprintf (hflog,"%s\n",b1);
+								fprintf (hflog,"%s","\n");
+							}
+						}
 					}
-				}
-			}		
+				}		
+	
+			} /* while f5 */
 		}	
 
 		/* grabo la linea */
@@ -12016,11 +12793,16 @@ printf ("LLL: strlen     %3d |%s| \n",strlen(s),s);
  * 	linea_vacia_for 
  *
  *	edicion especial para sources fortran
+ *
  *	Determina si una linea esta vacia (generalmente, para lineas leidas de files)
- *	La linea NO esta vacia si contiene al menos 1 caracter distinto de
+ *	La linea NO esta vacia si:
+ *
+ *	1) contiene al menos 1 caracter distinto de
  *	' ' 	blanco
  *	'\t' 	tab
  *	'\n'	new line
+ *
+ *	2) si el primer caracter es distinto de '!'
  *
  *
  * -----------------------------------------------------------------------------------
@@ -12037,6 +12819,7 @@ char	*s;
 	i=0;
 	flag=1;
 
+	/* si toda la linea es comentario, consideramos vacia para fortran */
 	if (f1 && s[0] == '!')
 		f1=0;
 
@@ -12432,6 +13215,7 @@ int	pro_tool5()
  *
  *	ffin2
  *	ffou2
+ *	fflog
  *
  */
 
@@ -12468,6 +13252,8 @@ int	pro_tool6()
 		agregar_ffsta("tool.sta");
 	if (!ffckf)
 		agregar_ffckf("check.log");
+	if (!fflog)
+		agregar_fflog("p.log");
 
 
 	if (!ffinp || !ffout || !ffaux)
@@ -13713,6 +14499,11 @@ int	abro_files()
 		error(102);
 	}
 
+	if ( ffin3 && ((hfin3 = fopen (fin3,"r")) == NULL) )
+	{
+		error(125);
+	}
+
 	if ( ffout && ((hfout = fopen (fout,"w")) == NULL) )
 	{
 		error(103);
@@ -13794,6 +14585,9 @@ int	cierro_files()
 
 	if ( ffin2)
 		fclose(hfin2);
+
+	if ( ffin3)
+		fclose(hfin3);
 
 	if ( ffout)
 		fclose(hfout);
@@ -14583,6 +15377,18 @@ int	(*fx)(int,int,char *);
  */
 
 
+int	agregar_fflog(s)
+char	*s;
+{
+	fflog = 1;
+	strcpy(flog,s);
+
+	if ( fflog && ((hflog = fopen (flog,"w")) == NULL) )
+	{
+		error(124);
+	}
+}
+
 int	agregar_ffaux(s)
 char	*s;
 {
@@ -15013,6 +15819,12 @@ int	gp_parser()
 			{
 				strcpy(fin2,desde_igual( gp_fp(GP_GET,i,(char **)0)));
 				ffin2=1;
+			}
+
+			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+1,"in3",3) )
+			{
+				strcpy(fin3,desde_igual( gp_fp(GP_GET,i,(char **)0)));
+				ffin3=1;
 			}
 
 			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+1,"out",3) )

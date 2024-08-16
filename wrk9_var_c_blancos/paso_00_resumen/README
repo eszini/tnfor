@@ -1,0 +1,54 @@
+
+
+
+Analisis before changing all variables with blanks in between 
+in files using "include mthnmcom.mon" (23)  
+(file lr1_solo_mth.txt)
+
+
+
+mthnmcom.mon
+
+vars with blanks in between,     207    ( file vcb.txt )
+vars without blanks in between,  398    ( file vsb.txt )
+
+
+
+Check #1  
+
+I've checked that there are no variables with and without blanks 
+that have the same name
+
+e.g.  "this is a valid var" and "this_is_a_valid_var" does not exist for any var
+
+
+Check #2
+
+I've checked that there is no variable originally without blanks in mthnmcom, 
+replaced with underscores, in any source that DOES NOT include mthnmcom."
+
+
+e.g. "this is valid var" doesn´t exist as "this_is_a_valid_var" in any src
+
+
+Check #3
+
+what about files that DO include mthnmcom ?   ( log in file  m2_solo_mth.txt )
+only in 1 file ....
+
+WVPARTRK.FOR                              var: |WVPA Member Rates without SDI| 
+( 2766) |      REAL (KIND=4), SAVE :: WVPA_Member_Rates_without_SDI(0:12),|
+
+
+Check #4
+
+file m3_changes_log.txt
+1388 changes were made (replacing vars with blanks by vars with '_' )
+
+
+
+
+
+
+
+

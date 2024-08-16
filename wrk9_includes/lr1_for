@@ -6,9 +6,6 @@ repo1/LDPROB01.FOR
 repo1/LPMATINV.for
 repo1/LPSOLVER.for
 repo1/MSGProSymRevExp.for
-repo1/MSGmmadm.FOR
-repo1/Msgmminp.for
-repo1/SF_OBJT.FOR
 repo1/TRANSOBJ2.FOR
 repo1/WVPARTRK.FOR
 repo1/WinFileFindData.for
@@ -31,12 +28,14 @@ repo1/fp_objt.for
 repo1/margnobj.for
 repo1/midasmod.for
 repo1/msgandec.for
+repo1/msgmmadm.for
 repo1/msgmmasb.for
 repo1/msgmmdbt.for
 repo1/msgmmdfd.for
 repo1/msgmmea.for
 repo1/msgmmexprevcash.for
 repo1/msgmmfa.for
+repo1/msgmminp.for
 repo1/msgmmout.for
 repo1/msgmmpyb.for
 repo1/msgmmrev.for

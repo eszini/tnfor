@@ -861,7 +861,7 @@ C
      +                                                        CLASS_POS)
          PAYABLE_MONTHLY_VALUES(:,payment_revenues_receivable,
      +                                                   CLASS_POS) = 0.
-         CASH_VARIABLES(:,Cash Paid on Accounts Payable) =
+         CASH_VARIABLES(:,Cash_Paid_on_Accounts_Payable) =
      +                PAYABLE_MONTHLY_VALUES(:,payment_expenses_payable,
      +                                                        CLASS_POS)
          PAYABLE_MONTHLY_VALUES(:,payment_expenses_payable,CLASS_POS)=0.
@@ -881,13 +881,13 @@ c
 c nuclear fuel expenses and taxes
 c
             INCOME_VARIABLES(:,Mthy_Leasd_Nucl_Fuel_Expns) =
-     +                  INCOME_VARIABLES(:,Monthly Nuclear Fuel Expense)
-            INCOME_VARIABLES(:,Monthly Nuclear Fuel Expense) = 
+     +                  INCOME_VARIABLES(:,Monthly_Nuclear_Fuel_Expense)
+            INCOME_VARIABLES(:,Monthly_Nuclear_Fuel_Expense) = 
      +         INCOME_VARIABLES(:,monthly_ownd_nuc_fl_expense)
      +         + INCOME_VARIABLES(:,Mthy_Leasd_Nucl_Fuel_Expns)
             INCOME_VARIABLES(:,monthly_nuclr_fuel_tax_expns) = 
      +           INCOME_VARIABLES(:,Mthy_Leasd_Nucl_Fuel_Expns)
-     +           + INCOME_VARIABLES(:,Monthly DOE Disposal)
+     +           + INCOME_VARIABLES(:,Monthly_DOE_Disposal)
              
 
             CALL MONTHLY_CASH_REV_EXP(R_YR,CLASS_ID,CASH_VARIABLES)
@@ -900,13 +900,13 @@ c
      +                                          INCOME_VARIABLES,
      +                                          CASH_VARIABLES)
             CALL WVPA_MONTHLY_SPECIAL_ADDENDUMS(CLASS_ID,R_YR,
-     +                    INCOME_VARIABLES(0,Monthly Book Depreciation))
+     +                    INCOME_VARIABLES(0,Monthly_Book_Depreciation))
 
             INCOME_VARIABLES(0:12,monthly_purchased_power) =
      +                    INCOME_VARIABLES(0:12,monthly_purchased_power)
      +                    + PurPowerFromCongestion(0:12)
-            CASH_VARIABLES(0:12,Cash Purchased Power) =
-     +                    CASH_VARIABLES(0:12,Cash Purchased Power)
+            CASH_VARIABLES(0:12,Cash_Purchased_Power) =
+     +                    CASH_VARIABLES(0:12,Cash_Purchased_Power)
      +                    + PurPowerFromCongestion(0:12)
             PURCHASE_POWER_IN_DEFERRED_FUEL = 0.
             IF(USE_PURCHASE_POWER_ACCOUNTING)
@@ -917,21 +917,21 @@ c
                      INCOME_VARIABLES(MO,Adjustment Clause) =
      +                            INCOME_VARIABLES(MO,Adjustment Clause)
      +                            + CPL_MONTHLY_FUEL_REVENUES(MO)
-                     INCOME_VARIABLES(MO,Monthly Deferred Fuel Expense)=
+                     INCOME_VARIABLES(MO,Monthly_Deferred_Fuel_Expense)=
      +                     INCOME_VARIABLES(MO,
-     +                                    Monthly Deferred Fuel Expense)
+     +                                    Monthly_Deferred_Fuel_Expense)
      +                     + MONTHLY_DEFERRED_FUEL_EXPENSE(MO)
-                     CASH_VARIABLES(MO,Cash Adjustment Clause) =
-     +                         CASH_VARIABLES(MO,Cash Adjustment Clause)
+                     CASH_VARIABLES(MO,Cash_Adjustment_Clause) =
+     +                         CASH_VARIABLES(MO,Cash_Adjustment_Clause)
      +                         + CPL_CASH_FUEL_REVENUES(MO)
                   ENDDO
                ELSE
                   DO MO = 0, 12
-                     INCOME_VARIABLES(MO,Monthly Deferred Fuel Expense)=
+                     INCOME_VARIABLES(MO,Monthly_Deferred_Fuel_Expense)=
      +                 INCOME_VARIABLES(MO,Adjustment Clause)
-     +                 - INCOME_VARIABLES(MO,Monthly Fossil Fuel)
+     +                 - INCOME_VARIABLES(MO,Monthly_Fossil_Fuel)
      +                 - INCOME_VARIABLES(MO,
-     +                                     Monthly Nuclear Fuel Expense)
+     +                                     Monthly_Nuclear_Fuel_Expense)
      +                 - INCOME_VARIABLES(MO,monthly_purchased_power) *
      +                                   PURCHASE_POWER_IN_DEFERRED_FUEL
                   ENDDO
@@ -952,11 +952,11 @@ C
                CATAWBA_CASH_REVENUES = 0.
                CATAWBA_CASH_EXPENSES = 0.
                DO MO = 0, 12
-                  INCOME_VARIABLES(MO,Monthly Catawba Expenses) =
-     +                     INCOME_VARIABLES(MO,Monthly Catawba Expenses)
+                  INCOME_VARIABLES(MO,Monthly_Catawba_Expenses) =
+     +                     INCOME_VARIABLES(MO,Monthly_Catawba_Expenses)
      +                     + CATAWBA_EXPENSES(MO)
-                  INCOME_VARIABLES(MO,Monthly Catawba Revenues) =
-     +                     INCOME_VARIABLES(MO,Monthly Catawba Revenues)
+                  INCOME_VARIABLES(MO,Monthly_Catawba_Revenues) =
+     +                     INCOME_VARIABLES(MO,Monthly_Catawba_Revenues)
      +                     + CATAWBA_REVENUES(MO)
                   IF(MO > 0) THEN
                      IF(MO < 12) THEN
@@ -1033,11 +1033,11 @@ C
 C               DO MO = 0, 12
                   CHANGE_IN_DEFERRED_DEBIT_BAL(:) =  ! due to debit file amortizations
      +                 INCOME_VARIABLES(:,monthly_other_atl_amort)
-     +                 + INCOME_VARIABLES(:,Monthly Goodwill Amort)
+     +                 + INCOME_VARIABLES(:,Monthly_Goodwill_Amort)
      +                 + INCOME_VARIABLES(:,
-     +                                  Monthly Regulatory Assets Amort)
-     +                 + INCOME_VARIABLES(:,Monthly FASB 109 Amort)
-     +                 + INCOME_VARIABLES(:,Monthly FASB 133 Amort)
+     +                                  Monthly_Regulatory_Assets_Amort)
+     +                 + INCOME_VARIABLES(:,Monthly_FASB_109_Amort)
+     +                 + INCOME_VARIABLES(:,Monthly_FASB_133_Amort)
      +                 + INCOME_VARIABLES(:,monthly_other_btl_amort)
      +                 + INCOME_VARIABLES(:,
      +                          mthly_debit_fl_Pchs_pwr_amort)
@@ -1050,14 +1050,14 @@ C LOWER LEVEL DEBIT AMORTZATION WAS NOT BEING PASSED UP.
 C
      +                 + INCOME_LINKED_LEVEL(:,
      +                              monthly_other_atl_amort,CLASS_LEVEL)
-     +                 + INCOME_LINKED_LEVEL(:,Monthly Goodwill Amort,
+     +                 + INCOME_LINKED_LEVEL(:,Monthly_Goodwill_Amort,
      +                                                      CLASS_LEVEL)
      +                 + INCOME_LINKED_LEVEL(:,
-     +                                  Monthly Regulatory Assets Amort,
+     +                                  Monthly_Regulatory_Assets_Amort,
      +                                                      CLASS_LEVEL)
-     +                 + INCOME_LINKED_LEVEL(:,Monthly FASB 109 Amort,
+     +                 + INCOME_LINKED_LEVEL(:,Monthly_FASB_109_Amort,
      +                                                      CLASS_LEVEL)
-     +                 + INCOME_LINKED_LEVEL(:,Monthly FASB 133 Amort,
+     +                 + INCOME_LINKED_LEVEL(:,Monthly_FASB_133_Amort,
      +                                                      CLASS_LEVEL)
      +                 + INCOME_LINKED_LEVEL(:,
      +                              monthly_other_btl_amort,CLASS_LEVEL)
@@ -1075,7 +1075,7 @@ C               ENDDO
      +                                       CURRENT_PORTION_OF_LTD)
 c            CURRENT_PORTION_OF_LTD(0) = LTD_RETIREMENTS
 C            DO MO = 0, 12
-               INCOME_VARIABLES(:,Monthly LTD Amort Interest) =
+               INCOME_VARIABLES(:,Monthly_LTD_Amort_Interest) =
      +                        INCOME_VARIABLES(:,
      +                                 mt_dt_file_intrst_amrt)
      +                        + INCOME_VARIABLES(:,
@@ -1088,10 +1088,10 @@ C            DO MO = 0, 12
      +                        - INCOME_LINKED_LEVEL(:,
      +                             mty_dbt_fl_intrst_amrt_cr,
      +                                                      CLASS_LEVEL)
-               INCOME_VARIABLES(0,Monthly LTD Amort Interest) =
-     +              SUM(INCOME_VARIABLES(1:,Monthly LTD Amort Interest))
+               INCOME_VARIABLES(0,Monthly_LTD_Amort_Interest) =
+     +              SUM(INCOME_VARIABLES(1:,Monthly_LTD_Amort_Interest))
                UNMODELED_SUB_INCOME(:) = 
-     +                     INCOME_VARIABLES(:,Monthly Subsidiary Income)
+     +                     INCOME_VARIABLES(:,Monthly_Subsidiary_Income)
                UNMODELED_SUB_DIVIDENDS(:) =
      +                CASH_VARIABLES(:,cash_subsidiary_dividends)
      
@@ -1114,11 +1114,11 @@ C            ENDDO
             CASH_VARIABLES(7,common_shares_issued) =
      +                            CASH_VARIABLES(7,common_shares_issued)
      +                            + MIDAS_COMMON_SHARES_ISSUED
-            INCOME_VARIABLES(0,Monthly Shares Outstanding) =
+            INCOME_VARIABLES(0,Monthly_Shares_Outstanding) =
      +                                                  ANNUAL_VARS(409)
             DO MO = 1, 12
-               INCOME_VARIABLES(MO,Monthly Shares Outstanding) =
-     +                 INCOME_VARIABLES(MO-1,Monthly Shares Outstanding)
+               INCOME_VARIABLES(MO,Monthly_Shares_Outstanding) =
+     +                 INCOME_VARIABLES(MO-1,Monthly_Shares_Outstanding)
      +                 + CASH_VARIABLES(MO,common_shares_issued)
             ENDDO
 C
@@ -1142,24 +1142,24 @@ C
             CLASS_TYPE = PARENT
          ENDIF
          TEMP_EMISSION_DATA(:) =
-     +                 INCOME_VARIABLES(:,Monthly Emission Credits)
-     +                 + INCOME_LINKED_LEVEL(:,Monthly Emission Credits,
+     +                 INCOME_VARIABLES(:,Monthly_Emission_Credits)
+     +                 + INCOME_LINKED_LEVEL(:,Monthly_Emission_Credits,
      +                                                      CLASS_LEVEL)
          IF(ABS(ANNUAL_VARS(15) - TEMP_EMISSION_DATA(0)) > .001) THEN
-            UNALLOCATED_AMOUNT(Monthly Emission Credits) =
+            UNALLOCATED_AMOUNT(Monthly_Emission_Credits) =
      +                      ALLOCATE_ACCOUNT_BALANCE(ANNUAL_VARS(15),
      +                                               TEMP_EMISSION_DATA)
-            INCOME_VARIABLES(:,Monthly Emission Credits) =
+            INCOME_VARIABLES(:,Monthly_Emission_Credits) =
      +                 TEMP_EMISSION_DATA(:)
-     +                 - INCOME_LINKED_LEVEL(:,Monthly Emission Credits,
+     +                 - INCOME_LINKED_LEVEL(:,Monthly_Emission_Credits,
      +                                                      CLASS_LEVEL)
          ELSE
-            INCOME_VARIABLES(:,Monthly Emission Credits) =
+            INCOME_VARIABLES(:,Monthly_Emission_Credits) =
      +                                             TEMP_EMISSION_DATA(:)
          ENDIF
-         CASH_VARIABLES(:,Cash Emission Credits) =
-     +                  CASH_VARIABLES(:,Cash Emission Credits)
-     +                  + INCOME_VARIABLES(:,Monthly Emission Credits)
+         CASH_VARIABLES(:,Cash_Emission_Credits) =
+     +                  CASH_VARIABLES(:,Cash_Emission_Credits)
+     +                  + INCOME_VARIABLES(:,Monthly_Emission_Credits)
 
 C ADD PREVIOUS LEVELS
 C
@@ -1167,7 +1167,7 @@ C
      +                              FASB143_MONTHLY_ARO_CASH_PAYMENTS(:)
          CASH_VARIABLES(:,cash_aro_trust_payments) =
      +                        FASB143_MONTHLY_ARO_TRUST_CASH_PAYMENTS(:)
-         INCOME_VARIABLES(:,Monthly FASB 143 Amort) =
+         INCOME_VARIABLES(:,Monthly_FASB_143_Amort) =
      +                           FASB143_MONTHLY_ARO_INTEREST_ACCREATION
          IF(ADD_2_INCOME_STATEMENT == 'T') THEN
             INCOME_VARIABLES(:,
@@ -1208,20 +1208,20 @@ c
          ENDIF
          DO VARIABLE = 1, INCOME_VARS
 C            IF(VARIABLE == Monthly Emission Credits) CYCLE
-            IF(VARIABLE == Monthly Emission Credits
+            IF(VARIABLE == Monthly_Emission_Credits
      +                                         .AND. .NOT. WVPA()) CYCLE
-            IF(VARIABLE == Monthly LTD Amort Interest) CYCLE 
+            IF(VARIABLE == Monthly_LTD_Amort_Interest) CYCLE 
             IF(VARIABLE == monthly_oth_taxes) CYCLE
-            IF(VARIABLE == Monthly Operating Revenue Tax) CYCLE
+            IF(VARIABLE == Monthly_Operating_Revenue_Tax) CYCLE
             IF(VARIABLE == mthy_nf_incm_tax_dfrls_cr) CYCLE
 C
-            IF(VARIABLE == Monthly Property Taxes) CYCLE
-            IF(VARIABLE==Monthly Exp File Property Taxes) CYCLE
-            IF(VARIABLE==Monthly Exp File Other Taxes) CYCLE
+            IF(VARIABLE == Monthly_Property_Taxes) CYCLE
+            IF(VARIABLE==Monthly_Exp_File_Property_Taxes) CYCLE
+            IF(VARIABLE==Monthly_Exp_File_Other_Taxes) CYCLE
             IF(VARIABLE==mthy_exp_file_opng_revnue_tax) CYCLE
             IF(VARIABLE == mth_modl_calcd_prop_taxes) THEN
 
-            ELSEIF(VARIABLE == Monthly CIAC Amort) THEN
+            ELSEIF(VARIABLE == Monthly_CIAC_Amort) THEN
                INCOME_VARIABLES(:,VARIABLE) =
      +                     CIAC_MONTHLY_AMORTIZATION(:)
      +                     + INCOME_LINKED_LEVEL(:,VARIABLE,CLASS_LEVEL)
@@ -1243,7 +1243,7 @@ C CASH MOVE UPS
 C
          DO VARIABLE = 1, CASH_VARS 
 c            IF(VARIABLE == Cash Emission Credits) CYCLE
-            IF(VARIABLE == Cash Emission Credits
+            IF(VARIABLE == Cash_Emission_Credits
      +                                         .AND. .NOT. WVPA()) CYCLE
             IF(VARIABLE == common_shares_issued) CYCLE
             CASH_VARIABLES(:,VARIABLE) =
@@ -1256,16 +1256,16 @@ C
      +                                 CLASS_ID - 1 == ODEC_NA3_ID) THEN
                ODEC_NA3_INTRA_BULK_POWER(0) = ANNUAL_VARS(253)! 15
                ODEC_NA3_INTRA_BULK_POWER(1:12) = ANNUAL_VARS(253)/12.!15
-               CASH_VARIABLES(:,Cash Bulk Power) =
-     +                                 CASH_VARIABLES(:,Cash Bulk Power)
+               CASH_VARIABLES(:,Cash_Bulk_Power) =
+     +                                 CASH_VARIABLES(:,Cash_Bulk_Power)
      +                                 + ODEC_NA3_INTRA_BULK_POWER(:)
                INCOME_VARIABLES(:,Bulk Power) = 
      +                                    INCOME_VARIABLES(:,Bulk Power)
      +                                    + ODEC_NA3_INTRA_BULK_POWER(:)
                ODEC_NA3_ACTIVE = .TRUE.
             ELSEIF(CLASS_TYPE == PARENT .AND. ODEC_NA3_ACTIVE) THEN
-               CASH_VARIABLES(:,Cash Purchased Power) =
-     +                            CASH_VARIABLES(:,Cash Purchased Power)
+               CASH_VARIABLES(:,Cash_Purchased_Power) =
+     +                            CASH_VARIABLES(:,Cash_Purchased_Power)
      +                            + ODEC_NA3_INTRA_BULK_POWER(:)
                INCOME_VARIABLES(:,monthly_purchased_power) = 
      +                       INCOME_VARIABLES(:,monthly_purchased_power)
@@ -1274,38 +1274,38 @@ C
          ENDIF
 C
          DO MO = 0, 12
-            CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS) =
+            CASH_VARIABLES(MO,Cash_TOTAL_OPERATING_RECEIPTS) =
      +                              SUM_CASH_RECEIPTS(MO,CASH_VARIABLES)
-            CASH_VARIABLES(MO,Cash TOTAL EXPENSE PAYMENTS) =
+            CASH_VARIABLES(MO,Cash_TOTAL_EXPENSE_PAYMENTS) =
      +                              SUM_CASH_PAYMENTS(MO,CASH_VARIABLES)
          ENDDO
 C
 C STD AND CUSTOMER DEPOSIT INTEREST EXPENSE
-         INCOME_VARIABLES(0,Monthly STD Interest) = 0. ! ANNUAL_VARS(40)
+         INCOME_VARIABLES(0,Monthly_STD_Interest) = 0. ! ANNUAL_VARS(40)
 C
 C INTEREST ON CUSTOMER DEPOSITS
 C
          CASH_VARIABLES(0,cash_customer_deposits) = 0.
          BALANCE_SHEET_VARIABLES(0,monthly_customer_deposits) =
      +                                        CUSTOMER_DEPOSITS_BAL(BOY)
-         INCOME_VARIABLES(0,Monthly Amortization) =
-     +           + INCOME_VARIABLES(0,Monthly Goodwill Amort)
-     +           + INCOME_VARIABLES(0,Monthly Regulatory Assets Amort)
-     +           + INCOME_VARIABLES(0,Monthly FASB 109 Amort)
-     +           + INCOME_VARIABLES(0,Monthly FASB 133 Amort)
-     +           + INCOME_VARIABLES(0,Monthly FASB 143 Amort)
+         INCOME_VARIABLES(0,Monthly_Amortization) =
+     +           + INCOME_VARIABLES(0,Monthly_Goodwill_Amort)
+     +           + INCOME_VARIABLES(0,Monthly_Regulatory_Assets_Amort)
+     +           + INCOME_VARIABLES(0,Monthly_FASB_109_Amort)
+     +           + INCOME_VARIABLES(0,Monthly_FASB_133_Amort)
+     +           + INCOME_VARIABLES(0,Monthly_FASB_143_Amort)
      +           + INCOME_VARIABLES(0,mthy_common_stock_issue_amort)
      +           + INCOME_VARIABLES(0,monthly_other_atl_amort)
-     +           - INCOME_VARIABLES(0,Monthly ATL Gain Amort)
-     +           - INCOME_VARIABLES(0,Monthly CIAC Amort)
+     +           - INCOME_VARIABLES(0,Monthly_ATL_Gain_Amort)
+     +           - INCOME_VARIABLES(0,Monthly_CIAC_Amort)
 
 
 
 
-         INCOME_VARIABLES(0,BTL Monthly Amortization) =
-     +               INCOME_VARIABLES(0,Monthly Lease BTL Amort Expense)
+         INCOME_VARIABLES(0,BTL Monthly_Amortization) =
+     +               INCOME_VARIABLES(0,Monthly_Lease_BTL_Amort_Expense)
      +               + INCOME_VARIABLES(0,monthly_other_btl_amort)
-     +               - INCOME_VARIABLES(0,Monthly BTL Gain Amort)
+     +               - INCOME_VARIABLES(0,Monthly_BTL_Gain_Amort)
          DO MO = 1, 12
 C
 C CALCULATE monthly_customer_deposits
@@ -1317,24 +1317,24 @@ C
             BALANCE_SHEET_VARIABLES(MO,monthly_customer_deposits) =
      +           BALANCE_SHEET_VARIABLES(MO-1,monthly_customer_deposits)
      +                       + CASH_VARIABLES(MO,cash_customer_deposits)
-            INCOME_VARIABLES(MO,Monthly Amortization) =
-     +           + INCOME_VARIABLES(MO,Monthly Goodwill Amort)
-     +           + INCOME_VARIABLES(MO,Monthly Regulatory Assets Amort)
-     +           + INCOME_VARIABLES(MO,Monthly FASB 109 Amort)
-     +           + INCOME_VARIABLES(MO,Monthly FASB 133 Amort)
-     +           + INCOME_VARIABLES(MO,Monthly FASB 143 Amort)
+            INCOME_VARIABLES(MO,Monthly_Amortization) =
+     +           + INCOME_VARIABLES(MO,Monthly_Goodwill_Amort)
+     +           + INCOME_VARIABLES(MO,Monthly_Regulatory_Assets_Amort)
+     +           + INCOME_VARIABLES(MO,Monthly_FASB_109_Amort)
+     +           + INCOME_VARIABLES(MO,Monthly_FASB_133_Amort)
+     +           + INCOME_VARIABLES(MO,Monthly_FASB_143_Amort)
      +           + INCOME_VARIABLES(MO,mthy_common_stock_issue_amort)
      +           + INCOME_VARIABLES(MO,monthly_other_atl_amort)
-     +           - INCOME_VARIABLES(MO,Monthly ATL Gain Amort)
-     +           - INCOME_VARIABLES(MO,Monthly CIAC Amort)
-            INCOME_VARIABLES(MO,BTL Monthly Amortization) =
+     +           - INCOME_VARIABLES(MO,Monthly_ATL_Gain_Amort)
+     +           - INCOME_VARIABLES(MO,Monthly_CIAC_Amort)
+            INCOME_VARIABLES(MO,BTL Monthly_Amortization) =
      +            INCOME_VARIABLES(MO,monthly_other_btl_amort)
-     +            - INCOME_VARIABLES(MO,Monthly BTL Gain Amort)
-     +            + INCOME_VARIABLES(MO,Monthly Lease BTL Amort Expense)
+     +            - INCOME_VARIABLES(MO,Monthly_BTL_Gain_Amort)
+     +            + INCOME_VARIABLES(MO,Monthly_Lease_BTL_Amort_Expense)
 C
 C STD INTEREST
 C            
-            INCOME_VARIABLES(MO,Monthly STD Interest) =
+            INCOME_VARIABLES(MO,Monthly_STD_Interest) =
      +       (BALANCE_SHEET_VARIABLES(MO-1,monthly_short_term_debt_bal)
      +        + BALANCE_SHEET_VARIABLES(MO,monthly_short_term_debt_bal))
      +                                * STD_MONTHLY_INTEREST_RATE(MO)/2.
@@ -1345,19 +1345,19 @@ C
             ELSE
                CASH_VARIABLES(MO,cash_std_interest) =
      +                     INCOME_VARIABLES(MO-STI_CASH_LAG,
-     +                                             Monthly STD Interest)
+     +                                             Monthly_STD_Interest)
      +                     + PAYABLE_MONTHLY_VALUES(MO,
      +                                   payment_std_interest,CLASS_POS)
             ENDIF
             PAYABLE_MONTHLY_VALUES(MO,payment_std_interest,CLASS_POS)=0.
-            INCOME_VARIABLES(MO,Monthly STD Interest) =
-     +                         INCOME_VARIABLES(MO,Monthly STD Interest)
+            INCOME_VARIABLES(MO,Monthly_STD_Interest) =
+     +                         INCOME_VARIABLES(MO,Monthly_STD_Interest)
      +                         + CUSTOMER_DEPOSITS_INTEREST
             IF(MO == 12) THEN
                PAYABLE_MONTHLY_VALUES(1,payment_std_interest,CLASS_POS)=
-     +                         INCOME_VARIABLES(MO,Monthly STD Interest)
+     +                         INCOME_VARIABLES(MO,Monthly_STD_Interest)
                PAYABLE_MONTHLY_VALUES(0,payment_std_interest,CLASS_POS)=
-     +                         INCOME_VARIABLES(MO,Monthly STD Interest)
+     +                         INCOME_VARIABLES(MO,Monthly_STD_Interest)
             ENDIF
          ENDDO
          CASH_VARIABLES(0,cash_customer_deposits) =
@@ -1365,8 +1365,8 @@ C
 C
 C ADD STD INTEREST EXPENSE THAT HAS BEEN LAGGED BY THE EXPENSE FILE
 C
-         INCOME_VARIABLES(1:,Monthly STD Interest) =
-     +                         INCOME_VARIABLES(1:,Monthly STD Interest)
+         INCOME_VARIABLES(1:,Monthly_STD_Interest) =
+     +                         INCOME_VARIABLES(1:,Monthly_STD_Interest)
                                ! Interest from Expense File
      +                         + STD_INTEREST_ADJ(1:) 
          CASH_VARIABLES(1:,cash_std_interest) =
@@ -1374,42 +1374,42 @@ C
      +                              + STD_CASH_INTEREST_ADJ(1:) ! lagged cash interest from expense file
          CASH_VARIABLES(0,cash_std_interest) =
      +                         SUM(CASH_VARIABLES(1:,cash_std_interest))
-         INCOME_VARIABLES(0,Monthly STD Interest) =
-     +                    SUM(INCOME_VARIABLES(1:,Monthly STD Interest))
+         INCOME_VARIABLES(0,Monthly_STD_Interest) =
+     +                    SUM(INCOME_VARIABLES(1:,Monthly_STD_Interest))
 C
 C ALLOCATE EXPENSE ITEMS
 C
          UNALLOCATED_AMOUNT = 0.
-         UNALLOCATED_AMOUNT(Monthly Book Depreciation) =
+         UNALLOCATED_AMOUNT(Monthly_Book_Depreciation) =
      +          ALLOCATE_ACCOUNT_BALANCE(ANNUAL_VARS(17),
-     +                    INCOME_VARIABLES(0,Monthly Book Depreciation))
-         UNALLOCATED_AMOUNT(Monthly Amortization) =
+     +                    INCOME_VARIABLES(0,Monthly_Book_Depreciation))
+         UNALLOCATED_AMOUNT(Monthly_Amortization) =
      +          ALLOCATE_ACCOUNT_BALANCE(ANNUAL_VARS(291),
-     +                         INCOME_VARIABLES(0,Monthly Amortization))
-         UNALLOCATED_AMOUNT(BTL Monthly Expenses) =
+     +                         INCOME_VARIABLES(0,Monthly_Amortization))
+         UNALLOCATED_AMOUNT(BTL_Monthly_Expenses) =
      +          ALLOCATE_ACCOUNT_BALANCE(ANNUAL_VARS(35),
-     +                     INCOME_VARIABLES(0,BTL Monthly Expenses))
+     +                     INCOME_VARIABLES(0,BTL_Monthly_Expenses))
 C
 C AFUDC ADJUSTMENTS-STILL NEEDED FOR NUCLEAR
 C
-         UNALLOCATED_AMOUNT(Monthly AFUDC Equity) =
+         UNALLOCATED_AMOUNT(Monthly_AFUDC_Equity) =
      +          ALLOCATE_ACCOUNT_BALANCE(ANNUAL_VARS(37),
-     +                     INCOME_VARIABLES(0,Monthly AFUDC Equity))
-         UNALLOCATED_AMOUNT(Monthly AFUDC Borrowed) =
+     +                     INCOME_VARIABLES(0,Monthly_AFUDC_Equity))
+         UNALLOCATED_AMOUNT(Monthly_AFUDC_Borrowed) =
      +          ALLOCATE_ACCOUNT_BALANCE(ANNUAL_VARS(41),
-     +                     INCOME_VARIABLES(0,Monthly AFUDC Borrowed))
+     +                     INCOME_VARIABLES(0,Monthly_AFUDC_Borrowed))
 
 C
 C ADD ALLOCATED AMOUNTS TO TOTAL EXPENSE B4 TAXES
 C
          VOID_LOGICAL = SUM_MONTHLY_INCOME_EXPENSES(INCOME_VARIABLES)
 
-         INCOME_VARIABLES(:,BTL Monthly STInvestmet Income) =
+         INCOME_VARIABLES(:,BTL_Monthly_STInvestmet_Income) =
      +                                                   STI_EARNINGS(:)
          INCOME_VARIABLES(:,mty_mdl_lt_nvst_income) =
      +                                                   LTI_EARNINGS(:)
-         INCOME_VARIABLES(:,BTL Monthly Interest Income) =
-     +              INCOME_VARIABLES(:,BTL Monthly STInvestmet Income)
+         INCOME_VARIABLES(:,BTL_Monthly_Interest_Income) =
+     +              INCOME_VARIABLES(:,BTL_Monthly_STInvestmet_Income)
      +              + INCOME_VARIABLES(:,
      +                                mty_mdl_lt_nvst_income)
      +              + INCOME_VARIABLES(:,
@@ -1427,29 +1427,29 @@ C
      +                       MONTHLY_NUC_DECOM_FUND_NET_OF_TAX_RETURN(:)
          INCOME_VARIABLES(:,mthy_rtrmt_med_fd_rngs) =
      +                                 RETIREMENT_MEDICAL_FUND_RETURN(:)
-         INCOME_VARIABLES(:,Monthly Investment Earnings) =
+         INCOME_VARIABLES(:,Monthly_Investment_Earnings) =
      +            RETIREMENT_MEDICAL_FUND_RETURN(:)
-     +            + INCOME_VARIABLES(:,Monthly Dividend 70 Earnings)
+     +            + INCOME_VARIABLES(:,Monthly_Dividend_70_Earnings)
      +            + INCOME_VARIABLES(:,mty_rglr_dvd_income)
          IF(SALT_RIVER_PROJECT()) THEN
-            INCOME_VARIABLES(:,Monthly Investment Earnings) =
-     +                   INCOME_VARIABLES(:,Monthly Investment Earnings)
+            INCOME_VARIABLES(:,Monthly_Investment_Earnings) =
+     +                   INCOME_VARIABLES(:,Monthly_Investment_Earnings)
      +                   + MONTHLY_NUC_DECOM_FUND_RETURN(:)
             INCOME_VARIABLES(:,
      +                  mthy_nclr_dcmssng_fd_rngs) =
      +                                  MONTHLY_NUC_DECOM_FUND_RETURN(:)
 
             INCOME_VARIABLES(:,mthly_invstmt_earngs_rcvbl) =
-     +            + INCOME_VARIABLES(:,Monthly Dividend 70 Earnings)
+     +            + INCOME_VARIABLES(:,Monthly_Dividend_70_Earnings)
      +            + INCOME_VARIABLES(:,mty_rglr_dvd_income)
           ELSEIF(RETAIN_POST_RETIREMENT_EARNINGS()) THEN
              INCOME_VARIABLES(:,mthly_invstmt_earngs_rcvbl)=
-     +             INCOME_VARIABLES(:,Monthly Dividend 70 Earnings)
+     +             INCOME_VARIABLES(:,Monthly_Dividend_70_Earnings)
      +             + INCOME_VARIABLES(:,mty_rglr_dvd_income)
           ELSE
              INCOME_VARIABLES(:,mthly_invstmt_earngs_rcvbl)=
      +            RETIREMENT_MEDICAL_FUND_RETURN(:)
-     +            + INCOME_VARIABLES(:,Monthly Dividend 70 Earnings)
+     +            + INCOME_VARIABLES(:,Monthly_Dividend_70_Earnings)
      +            + INCOME_VARIABLES(:,mty_rglr_dvd_income)
          ENDIF
 
@@ -1467,28 +1467,28 @@ C
      +       INCOME_VARIABLES(:,mth_modl_calcd_prop_taxes)
      +       + PROPERTY_TAX_ADJUSTMENT(:)
 C
-         INCOME_VARIABLES(0,Monthly ITC Amortization) = ANNUAL_VARS(50)
+         INCOME_VARIABLES(0,Monthly_ITC_Amortization) = ANNUAL_VARS(50)
          INCOME_VARIABLES(0,mthy_state_atl_incm_tax_pd) =
      +                                                   ANNUAL_VARS(24)
-         INCOME_VARIABLES(0,Monthly State Tax on Capital) =
+         INCOME_VARIABLES(0,Monthly_State_Tax_on_Capital) =
      +                                                   ANNUAL_VARS(25)
          INCOME_VARIABLES(0,mthy_fed_atl_income_tax_pd) =
      +                                                   ANNUAL_VARS(26)
-         INCOME_VARIABLES(0,Monthly Federal Tax on Capital) =
+         INCOME_VARIABLES(0,Monthly_Federal_Tax_on_Capital) =
      +                                                   ANNUAL_VARS(27)
-         INCOME_VARIABLES(0,Monthly Income Tax Deferrals Dr) =
+         INCOME_VARIABLES(0,Monthly_Income_Tax_Deferrals_Dr) =
      +                                                   ANNUAL_VARS(28)
 C
-         INCOME_VARIABLES(0,BTL Monthly Income Taxes) = ANNUAL_VARS(36)
-         INCOME_VARIABLES(0,BTL Monthly Income Tax Deferrals) =
+         INCOME_VARIABLES(0,BTL_Monthly_Income_Taxes) = ANNUAL_VARS(36)
+         INCOME_VARIABLES(0,BTL_Monthly_Income_Tax_Deferrals) =
      +                                                  ANNUAL_VARS(294)
          INCOME_VARIABLES(0,BTLMonthlyDeferralTaxCr) = ANNUAL_VARS(902)
          INCOME_VARIABLES(0,BTLMonthlyDeferralTaxDr) = ANNUAL_VARS(903)
-         INCOME_VARIABLES(0,BTL Monthly Amortization) =
+         INCOME_VARIABLES(0,BTL Monthly_Amortization) =
      +                                                  ANNUAL_VARS(350)
-         INCOME_VARIABLES(0,Monthly Subsidiary Income) =
+         INCOME_VARIABLES(0,Monthly_Subsidiary_Income) =
      +                                                   ANNUAL_VARS(43)
-         INCOME_VARIABLES(0,Monthly Extraordinary Items) =
+         INCOME_VARIABLES(0,Monthly_Extraordinary_Items) =
      +                                                   ANNUAL_VARS(44)
 C
 C DEFERRED TAXES CR
@@ -1498,11 +1498,11 @@ C
          INCOME_VARIABLES(1:,mthy_ltd_ps_incm_tax_dfrls_cr) = 
      +            INCOME_VARIABLES(0,
      +                       mthy_ltd_ps_incm_tax_dfrls_cr)/12.
-         INCOME_VARIABLES(0,mth_othr_incm_tax_dfrls Cr) =
+         INCOME_VARIABLES(0,mth_othr_incm_tax_dfrls_Cr) =
      +                                                  ANNUAL_VARS(682)
-         INCOME_VARIABLES(1:,mth_othr_incm_tax_dfrls Cr) =
+         INCOME_VARIABLES(1:,mth_othr_incm_tax_dfrls_Cr) =
      +            INCOME_VARIABLES(0,
-     +                        mth_othr_incm_tax_dfrls Cr)/12.
+     +                        mth_othr_incm_tax_dfrls_Cr)/12.
          INCOME_VARIABLES(0,mthy_nf_incm_tax_dfrls_cr) =
      +       RETURN_NF_DEFERRED_TAXES(INCOME_VARIABLES(0,
      +                              mthy_nf_incm_tax_dfrls_cr))
@@ -1511,14 +1511,14 @@ C
      +            + INCOME_LINKED_LEVEL(:,
      +                               mthy_nf_incm_tax_dfrls_cr,
      +                                                      CLASS_LEVEL)
-         INCOME_VARIABLES(:,Monthly Income Tax Deferrals Cr) =
-     +      INCOME_VARIABLES(:,mth_othr_incm_tax_dfrls Cr)
+         INCOME_VARIABLES(:,Monthly_Income_Tax_Deferrals_Cr) =
+     +      INCOME_VARIABLES(:,mth_othr_incm_tax_dfrls_Cr)
      +      + INCOME_VARIABLES(:,mthy_ltd_ps_incm_tax_dfrls_cr)
      +      + INCOME_VARIABLES(:,mthy_nf_incm_tax_dfrls_cr)
          INCOME_VARIABLES(0,wvpa_non_mbr_svcs_cost) =
      +        SUM(INCOME_VARIABLES(1:,wvpa_non_mbr_svcs_cost))
-         INCOME_VARIABLES(0,WVPA Member Cost of Services) =
-     +            SUM(INCOME_VARIABLES(1:,WVPA Member Cost of Services))
+         INCOME_VARIABLES(0,WVPA_Member_Cost_of_Services) =
+     +            SUM(INCOME_VARIABLES(1:,WVPA_Member_Cost_of_Services))
 C
 C COMMON DIVIDENDS BY QUARTER
 C
@@ -1526,15 +1526,15 @@ C
          SKIP_MONTH = 0
          CASH_VARIABLES(0,cash_common_dividends) = 0.
          IF(SALT_RIVER_PROJECT()) THEN 
-            INCOME_VARIABLES(:,Monthly Common Dividends) =
+            INCOME_VARIABLES(:,Monthly_Common_Dividends) =
      +                                       MONTHLY_COMMON_DIVIDENDS(:)
             CASH_VARIABLES(:,cash_common_dividends) =
      +                                       MONTHLY_COMMON_DIVIDENDS(:)
          ELSEIF(DIVIDEND_PAYMENT_METHOD == DPS) THEN
-            INCOME_VARIABLES(0,Monthly Common Dividends) =
+            INCOME_VARIABLES(0,Monthly_Common_Dividends) =
      +                                       MONTHLY_COMMON_DIVIDENDS(0)
             DO MO = 1, 12
-               INCOME_VARIABLES(MO,Monthly Common Dividends) =
+               INCOME_VARIABLES(MO,Monthly_Common_Dividends) =
      +                                      MONTHLY_COMMON_DIVIDENDS(MO)
                IF(MPS()) THEN
                   IF(CLASS_TYPE == PARENT) THEN
@@ -1547,10 +1547,10 @@ C
                         TEMP_CS_DIV_CARRY_OVER = 0.
                      ENDIF
                      TEMP_CS_DIV_CARRY_OVER = TEMP_CS_DIV_CARRY_OVER
-     +                   + INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +                   + INCOME_VARIABLES(MO,Monthly_Common_Dividends)
                   ELSE
                      CASH_VARIABLES(MO,cash_common_dividends) =
-     +                     INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +                     INCOME_VARIABLES(MO,Monthly_Common_Dividends)
                   ENDIF
                ELSE
                   IF(CLASS_TYPE == PARENT) THEN
@@ -1566,26 +1566,26 @@ C
                      IF(MO == CS_DECLARATION_MONTH(QUARTER)) THEN
                         IF(MO+CS_DIVIDEND_PAYMENT_LAG > 12) THEN
                            TEMP_CS_DIV_CARRY_OVER =
-     +                     INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +                     INCOME_VARIABLES(MO,Monthly_Common_Dividends)
                         ELSE
                            CASH_VARIABLES(MO+CS_DIVIDEND_PAYMENT_LAG,
      +                                          cash_common_dividends) =
-     +                     INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +                     INCOME_VARIABLES(MO,Monthly_Common_Dividends)
                            CASH_VARIABLES(0,cash_common_dividends) =
      +                         CASH_VARIABLES(0,cash_common_dividends) +
-     +                     INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +                     INCOME_VARIABLES(MO,Monthly_Common_Dividends)
                         ENDIF
                         QUARTER = MIN(4,QUARTER + 1)
                         SKIP_MONTH = MO + CS_DIVIDEND_PAYMENT_LAG
                      ENDIF
                   ELSE
                      CASH_VARIABLES(MO,cash_common_dividends) =
-     +                     INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +                     INCOME_VARIABLES(MO,Monthly_Common_Dividends)
                   ENDIF
                ENDIF
             ENDDO
          ELSE ! DIVIDEND DPR
-            INCOME_VARIABLES(0,Monthly Common Dividends) = 
+            INCOME_VARIABLES(0,Monthly_Common_Dividends) = 
      +                                       MONTHLY_COMMON_DIVIDENDS(0)
             IF(CLASS_TYPE == PARENT) THEN
                IF(DIVIDEND_PAYMENT_METHOD == DPR) THEN
@@ -1622,7 +1622,7 @@ C
             ENDIF
             DO MO = 1, 12
                IF(CLASS_TYPE == PARENT) THEN
-                  INCOME_VARIABLES(MO,Monthly Common Dividends) = 0.
+                  INCOME_VARIABLES(MO,Monthly_Common_Dividends) = 0.
                   IF(MO == CS_DIVIDEND_PAYMENT_LAG) THEN
                      CASH_VARIABLES(MO,cash_common_dividends) =
      +                                            TEMP_CS_DIV_CARRY_OVER
@@ -1633,34 +1633,34 @@ C
                      CASH_VARIABLES(MO,cash_common_dividends) = 0.
                   ENDIF
                   IF(MO == CS_DECLARATION_MONTH(QUARTER)) THEN
-                     INCOME_VARIABLES(MO,Monthly Common Dividends) =
-     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+                     INCOME_VARIABLES(MO,Monthly_Common_Dividends) =
+     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly_Common_Dividends)/4.
                      IF(MO+CS_DIVIDEND_PAYMENT_LAG > 12) THEN
                         TEMP_CS_DIV_CARRY_OVER =
-     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly_Common_Dividends)/4.
                      ELSE
                         CASH_VARIABLES(MO+CS_DIVIDEND_PAYMENT_LAG,
      +                                          cash_common_dividends) =
-     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly_Common_Dividends)/4.
                         CASH_VARIABLES(0,cash_common_dividends) =
      +                         CASH_VARIABLES(0,cash_common_dividends) +
-     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly_Common_Dividends)/4.
                      ENDIF
                      SKIP_MONTH = MO + CS_DIVIDEND_PAYMENT_LAG
                      QUARTER = MIN(4,QUARTER + 1)
                   ENDIF
                ELSE ! NOT PARENT
                   IF(MO==3 .OR. MO==6 .OR. MO==9 .OR. MO==12) THEN
-                     INCOME_VARIABLES(MO,Monthly Common Dividends) =
-     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+                     INCOME_VARIABLES(MO,Monthly_Common_Dividends) =
+     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly_Common_Dividends)/4.
                      CASH_VARIABLES(MO,cash_common_dividends) =
-     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly_Common_Dividends)/4.
                      CASH_VARIABLES(0,cash_common_dividends) =
      +                   CASH_VARIABLES(0,cash_common_dividends) +
-     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly_Common_Dividends)/4.
                      QUARTER = MIN(4,QUARTER + 1)
                   ELSE
-                     INCOME_VARIABLES(MO,Monthly Common Dividends) = 0.
+                     INCOME_VARIABLES(MO,Monthly_Common_Dividends) = 0.
                      CASH_VARIABLES(MO,cash_common_dividends) = 0.
                   ENDIF
                ENDIF
@@ -1669,12 +1669,12 @@ C
 C
          CASH_VARIABLES(0,cash_common_dividends) =
      +                     SUM(CASH_VARIABLES(1:,cash_common_dividends))
-         INCOME_VARIABLES(0,Monthly Common Dividends) =
-     +                SUM(INCOME_VARIABLES(1:,Monthly Common Dividends))
+         INCOME_VARIABLES(0,Monthly_Common_Dividends) =
+     +                SUM(INCOME_VARIABLES(1:,Monthly_Common_Dividends))
          COMMON_STOCK_CASH_DIVIDENDS =
      +                           CASH_VARIABLES(0,cash_common_dividends)
 c
-         INCOME_VARIABLES(0,Monthly Total Taxes Expense) =
+         INCOME_VARIABLES(0,Monthly_Total_Taxes_Expense) =
      +         MONTHLY_TOTAL_EXPENSES_B4_TAXES(INT2(0),INCOME_VARIABLES)
      +         + TOTAL_TAXES_EXPENSE(INT2(0),INCOME_VARIABLES) 
 C
@@ -1691,14 +1691,14 @@ C
          INCOME_VARIABLES(:,Prior Years Method Adjustment) =
      +                                     MONTHLY_PREVIOUS_OPT_REVS(:)
 
-         INCOME_VARIABLES(0,Total Derivative Revenues) =
-     +               SUM(INCOME_VARIABLES(1:,Total Derivative Revenues))
-         INCOME_VARIABLES(0,Total Derivative Expenses) =
-     +               SUM(INCOME_VARIABLES(1:,Total Derivative Expenses))
-         INCOME_VARIABLES(0,Total Fuel Derivative Revenues) =
-     +          SUM(INCOME_VARIABLES(1:,Total Fuel Derivative Revenues))
-         INCOME_VARIABLES(0,Total Fuel Derivative Expenses) =
-     +          SUM(INCOME_VARIABLES(1:,Total Fuel Derivative Expenses))
+         INCOME_VARIABLES(0,Total_Derivative_Revenues) =
+     +               SUM(INCOME_VARIABLES(1:,Total_Derivative_Revenues))
+         INCOME_VARIABLES(0,Total_Derivative_Expenses) =
+     +               SUM(INCOME_VARIABLES(1:,Total_Derivative_Expenses))
+         INCOME_VARIABLES(0,Total_Fuel_Derivative_Revenues) =
+     +          SUM(INCOME_VARIABLES(1:,Total_Fuel_Derivative_Revenues))
+         INCOME_VARIABLES(0,Total_Fuel_Derivative_Expenses) =
+     +          SUM(INCOME_VARIABLES(1:,Total_Fuel_Derivative_Expenses))
 
          INCOME_VARIABLES(0,Total Base Revenues) =
      +                  SUM_REGULATED_REVENUES(INT2(0),INCOME_VARIABLES)
@@ -1715,42 +1715,42 @@ C
 C
 C  CALCULATE OP INCOME
 C
-         INCOME_VARIABLES(0,Monthly Op Income) = 
+         INCOME_VARIABLES(0,Monthly_Op_Income) = 
      +          INCOME_VARIABLES(0,monthly_total_revenues) -
-     +          INCOME_VARIABLES(0,Monthly Total Taxes Expense)
+     +          INCOME_VARIABLES(0,Monthly_Total_Taxes_Expense)
          MO = 0
-         INCOME_VARIABLES(MO,Monthly INCOME BEFORE INTEREST) = 
+         INCOME_VARIABLES(MO,Monthly_INCOME_BEFORE_INTEREST) = 
      +                       INCOME_BEFORE_INTEREST(MO,INCOME_VARIABLES)
 C
 C ADJUST LTD INTEREST FOR AMORTIZATION
 C
          IF(CPL_ACTIVE() .OR. MORTGAGE_DEBT) THEN
             TAX_VARIABLES(0,monthly_ltd_tax_deduction) =
-     +                    INCOME_VARIABLES(0,Monthly LTD Total Interest)
+     +                    INCOME_VARIABLES(0,Monthly_LTD_Total_Interest)
      +                    + LTD_BOOKED_ISSUED_INTEREST(0)
-            INCOME_VARIABLES(0,Monthly LTD Booked Interest) =
-     +                    INCOME_VARIABLES(0,Monthly LTD Total Interest)
+            INCOME_VARIABLES(0,Monthly_LTD_Booked_Interest) =
+     +                    INCOME_VARIABLES(0,Monthly_LTD_Total_Interest)
      +                    + LTD_BOOKED_ISSUED_INTEREST(0)
-            INCOME_VARIABLES(0,Monthly LTD Total Interest) =
-     +                 INCOME_VARIABLES(0,Monthly LTD Total Interest)
+            INCOME_VARIABLES(0,Monthly_LTD_Total_Interest) =
+     +                 INCOME_VARIABLES(0,Monthly_LTD_Total_Interest)
      +                 + LTD_BOOKED_ISSUED_INTEREST(0)
      +                 + ANNUAL_VARS(630) ! was 384 but only debit file is included. LTD INTEREST AMORTIZATION
             DO MO = 1, 12
-               INCOME_VARIABLES(MO,Monthly LTD Total Interest) =
-     +                   INCOME_VARIABLES(MO,Monthly LTD Total Interest)
+               INCOME_VARIABLES(MO,Monthly_LTD_Total_Interest) =
+     +                   INCOME_VARIABLES(MO,Monthly_LTD_Total_Interest)
      +                   + LTD_BOOKED_ISSUED_INTEREST(MO)
-               INCOME_VARIABLES(MO,Monthly LTD Booked Interest) =
-     +                   INCOME_VARIABLES(MO,Monthly LTD Total Interest)
+               INCOME_VARIABLES(MO,Monthly_LTD_Booked_Interest) =
+     +                   INCOME_VARIABLES(MO,Monthly_LTD_Total_Interest)
                TAX_VARIABLES(MO,monthly_ltd_tax_deduction) =
-     +                   INCOME_VARIABLES(MO,Monthly LTD Total Interest)
+     +                   INCOME_VARIABLES(MO,Monthly_LTD_Total_Interest)
             ENDDO
          ELSE
             IF(CLASS_TYPE == REGULATED_GROUP) THEN
                TAX_VARIABLES(0,monthly_ltd_tax_deduction) =
      +                                      LTD_ISSUE_YR_INTEREST_BOOKED
-               INCOME_VARIABLES(0,Monthly LTD Booked Interest) =
+               INCOME_VARIABLES(0,Monthly_LTD_Booked_Interest) =
      +                                      LTD_ISSUE_YR_INTEREST_BOOKED
-               INCOME_VARIABLES(0,Monthly LTD Total Interest) =
+               INCOME_VARIABLES(0,Monthly_LTD_Total_Interest) =
      +                                      LTD_ISSUE_YR_INTEREST_BOOKED
      +                                      + ANNUAL_VARS(384) ! LTD INTEREST AMORTIZATION
                HALF_YEAR = LTD_ISSUE_YR_INTEREST_PAYMENT *
@@ -1758,81 +1758,81 @@ C
      +                                 - LTD_RETIREMENTS
      +                                 + LONG_TERM_DEBT_ISSUED)
 
-                  INCOME_VARIABLES(1:6,Monthly LTD Total Interest) =
+                  INCOME_VARIABLES(1:6,Monthly_LTD_Total_Interest) =
      +                                                      HALF_YEAR/6.
 
                HALF_YEAR = LTD_ISSUE_YR_INTEREST_PAYMENT - HALF_YEAR 
 
-                  INCOME_VARIABLES(7:12,Monthly LTD Total Interest) =
+                  INCOME_VARIABLES(7:12,Monthly_LTD_Total_Interest) =
      +                                                      HALF_YEAR/6.
 
             ELSE
                TAX_VARIABLES(0,monthly_ltd_tax_deduction) =
-     +                    INCOME_VARIABLES(0,Monthly LTD Total Interest)
+     +                    INCOME_VARIABLES(0,Monthly_LTD_Total_Interest)
      +                    + LTD_ISSUE_YR_INTEREST_BOOKED
-               INCOME_VARIABLES(0,Monthly LTD Booked Interest) =
-     +                    INCOME_VARIABLES(0,Monthly LTD Total Interest)
+               INCOME_VARIABLES(0,Monthly_LTD_Booked_Interest) =
+     +                    INCOME_VARIABLES(0,Monthly_LTD_Total_Interest)
      +                    + LTD_ISSUE_YR_INTEREST_BOOKED
-               INCOME_VARIABLES(0,Monthly LTD Total Interest) =
-     +                 INCOME_VARIABLES(0,Monthly LTD Total Interest)
+               INCOME_VARIABLES(0,Monthly_LTD_Total_Interest) =
+     +                 INCOME_VARIABLES(0,Monthly_LTD_Total_Interest)
      +                 + LTD_ISSUE_YR_INTEREST_BOOKED
      +                 + ANNUAL_VARS(384) ! LTD INTEREST AMORTIZATION
               if(.false.) then
-               INCOME_VARIABLES(9,Monthly LTD Total Interest) =
-     +                 INCOME_VARIABLES(9,Monthly LTD Total Interest)
+               INCOME_VARIABLES(9,Monthly_LTD_Total_Interest) =
+     +                 INCOME_VARIABLES(9,Monthly_LTD_Total_Interest)
      +                 + LTD_ISSUE_YR_INTEREST_BOOKED/2.
-               INCOME_VARIABLES(12,Monthly LTD Total Interest) =
-     +                 INCOME_VARIABLES(12,Monthly LTD Total Interest)
+               INCOME_VARIABLES(12,Monthly_LTD_Total_Interest) =
+     +                 INCOME_VARIABLES(12,Monthly_LTD_Total_Interest)
      +                 + LTD_ISSUE_YR_INTEREST_BOOKED/2.
               else
-               INCOME_VARIABLES(7:12,Monthly LTD Total Interest) =
-     +                 INCOME_VARIABLES(7:12,Monthly LTD Total Interest)
+               INCOME_VARIABLES(7:12,Monthly_LTD_Total_Interest) =
+     +                 INCOME_VARIABLES(7:12,Monthly_LTD_Total_Interest)
      +                 + LTD_ISSUE_YR_INTEREST_BOOKED/6.
               endif
             ENDIF
 
                TAX_VARIABLES(1:,monthly_ltd_tax_deduction) =
-     +                   INCOME_VARIABLES(1:,Monthly LTD Total Interest)
-               INCOME_VARIABLES(1:,Monthly LTD Booked Interest) =
-     +                   INCOME_VARIABLES(1:,Monthly LTD Total Interest)
+     +                   INCOME_VARIABLES(1:,Monthly_LTD_Total_Interest)
+               INCOME_VARIABLES(1:,Monthly_LTD_Booked_Interest) =
+     +                   INCOME_VARIABLES(1:,Monthly_LTD_Total_Interest)
 
          ENDIF
          IF(CLASS_TYPE == REGULATED_GROUP) THEN
-            INCOME_VARIABLES(0,Monthly Booked PS Dividends) =
+            INCOME_VARIABLES(0,Monthly_Booked_PS_Dividends) =
      +                                       PS_ISSUE_YR_DIVIDEND_BOOKED
-            INCOME_VARIABLES(0,Monthly Total PS Dividends) =
+            INCOME_VARIABLES(0,Monthly_Total_PS_Dividends) =
      +                                       PS_ISSUE_YR_DIVIDEND_BOOKED
      +                                       + ANNUAL_VARS(360) ! PS AMORTIZATIONS
-            INCOME_VARIABLES(9,Monthly Total PS Dividends) =
+            INCOME_VARIABLES(9,Monthly_Total_PS_Dividends) =
      +                                    PS_ISSUE_YR_DIVIDEND_BOOKED/2.
-            INCOME_VARIABLES(12,Monthly Total PS Dividends) =
+            INCOME_VARIABLES(12,Monthly_Total_PS_Dividends) =
      +                                    PS_ISSUE_YR_DIVIDEND_BOOKED/2.
          ELSE
-            INCOME_VARIABLES(0,Monthly Booked PS Dividends) =
-     +                    INCOME_VARIABLES(0,Monthly Total PS Dividends)
+            INCOME_VARIABLES(0,Monthly_Booked_PS_Dividends) =
+     +                    INCOME_VARIABLES(0,Monthly_Total_PS_Dividends)
      +                    + PS_ISSUE_YR_DIVIDEND_BOOKED
-            INCOME_VARIABLES(0,Monthly Total PS Dividends) =
-     +                    INCOME_VARIABLES(0,Monthly Total PS Dividends)
+            INCOME_VARIABLES(0,Monthly_Total_PS_Dividends) =
+     +                    INCOME_VARIABLES(0,Monthly_Total_PS_Dividends)
      +                    + PS_ISSUE_YR_DIVIDEND_BOOKED
      +                    + ANNUAL_VARS(360) ! PS AMORTIZATIONS
-            INCOME_VARIABLES(9,Monthly Total PS Dividends) =
-     +                    INCOME_VARIABLES(9,Monthly Total PS Dividends)
+            INCOME_VARIABLES(9,Monthly_Total_PS_Dividends) =
+     +                    INCOME_VARIABLES(9,Monthly_Total_PS_Dividends)
      +                    + PS_ISSUE_YR_DIVIDEND_BOOKED/2.
-            INCOME_VARIABLES(12,Monthly Total PS Dividends) =
-     +                   INCOME_VARIABLES(12,Monthly Total PS Dividends)
+            INCOME_VARIABLES(12,Monthly_Total_PS_Dividends) =
+     +                   INCOME_VARIABLES(12,Monthly_Total_PS_Dividends)
      +                   + PS_ISSUE_YR_DIVIDEND_BOOKED/2.
          ENDIF
 C
-         INCOME_VARIABLES(0,Monthly INCOME AFTER INTEREST) = 
+         INCOME_VARIABLES(0,Monthly_INCOME_AFTER_INTEREST) = 
      +           MONTHLY_INCOME_AFTER_INTEREST(INT2(0),INCOME_VARIABLES)
-         INCOME_VARIABLES(0,Monthly Net Income) = 
+         INCOME_VARIABLES(0,Monthly_Net_Income) = 
      +                      MONTHLY_NET_INCOME(INT2(0),INCOME_VARIABLES)
-         INCOME_VARIABLES(0,Monthly Earnings 2 Common) = 
-     +          INCOME_VARIABLES(0,Monthly Net Income) -
-     +          INCOME_VARIABLES(0,Monthly Total PS Dividends)
-         INCOME_VARIABLES(0,Monthly RETAINED EARNINGS) = 
-     +          INCOME_VARIABLES(0,Monthly Earnings 2 Common) -
-     +          INCOME_VARIABLES(0,Monthly Common Dividends)
+         INCOME_VARIABLES(0,Monthly_Earnings_2_Common) = 
+     +          INCOME_VARIABLES(0,Monthly_Net_Income) -
+     +          INCOME_VARIABLES(0,Monthly_Total_PS_Dividends)
+         INCOME_VARIABLES(0,Monthly_RETAINED_EARNINGS) = 
+     +          INCOME_VARIABLES(0,Monthly_Earnings_2_Common) -
+     +          INCOME_VARIABLES(0,Monthly_Common_Dividends)
 
 
 C
@@ -1844,8 +1844,8 @@ C
      +         INCOME_VARIABLES(0,mthy_state_atl_incm_tax_pd)/12.
           INCOME_VARIABLES(1:,mthy_fed_atl_income_tax_pd) =
      +       INCOME_VARIABLES(0,mthy_fed_atl_income_tax_pd)/12.
-          INCOME_VARIABLES(1:,Monthly Income Tax Deferrals Dr) =
-     +           INCOME_VARIABLES(0,Monthly Income Tax Deferrals Dr)/12.
+          INCOME_VARIABLES(1:,Monthly_Income_Tax_Deferrals_Dr) =
+     +           INCOME_VARIABLES(0,Monthly_Income_Tax_Deferrals_Dr)/12.
 
 C
 C FIRST ORDER STATE & FEDERAL INCOME TAXES 10/12/99
@@ -1863,7 +1863,7 @@ C
                UNALLOCATED_DEF_TAX_DR = 0.
             ELSE
                UNALLOCATED_DEF_TAX_DR =
-     +               INCOME_VARIABLES(0,Monthly Income Tax Deferrals Dr)
+     +               INCOME_VARIABLES(0,Monthly_Income_Tax_Deferrals_Dr)
      +               - STATE_DEF_TAX_DR_FROM_NOLS(0)
      +               - FED_DEF_TAX_DR_FROM_NOLS_AMT(0)
             ENDIF
@@ -1881,13 +1881,13 @@ C
                INCOME_VARIABLES(MO,mty_st_def_tax_dr_nols) =
      +                                  FED_DEF_TAX_DR_FROM_NOLS_AMT(MO)
                IF(MO == 0) THEN
-                  INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Dr) =
+                  INCOME_VARIABLES(MO,Monthly_Income_Tax_Deferrals_Dr) =
      +                                STATE_DEF_TAX_DR_FROM_NOLS(MO)
      +                                + FED_DEF_TAX_DR_FROM_NOLS_AMT(MO)
      +                                + UNALLOCATED_DEF_TAX_DR
                   UNALLOCATED_DEF_TAX_DR = UNALLOCATED_DEF_TAX_DR/12.
                ELSE
-                  INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Dr) =
+                  INCOME_VARIABLES(MO,Monthly_Income_Tax_Deferrals_Dr) =
      +                                STATE_DEF_TAX_DR_FROM_NOLS(MO)
      +                                + FED_DEF_TAX_DR_FROM_NOLS_AMT(MO)
      +                                + UNALLOCATED_DEF_TAX_DR
@@ -1898,10 +1898,10 @@ C
 C END INCOME TAX DISTRIBUTION
 C
          CALL RETURN_ACTUAL_TAX_VALUES(R_YR,CLASS_ID,
-     +          INCOME_VARIABLES(0,Monthly Income Tax Deferrals Cr),
+     +          INCOME_VARIABLES(0,Monthly_Income_Tax_Deferrals_Cr),
      +          INCOME_VARIABLES(0,mty_tot_fed_incm_tax_pd),
      +          INCOME_VARIABLES(0,mty_tot_st_incm_tax_pd),
-     +          INCOME_VARIABLES(0,Monthly Income Tax Deferrals Dr))
+     +          INCOME_VARIABLES(0,Monthly_Income_Tax_Deferrals_Dr))
          DO MO = 0, 12
             INCOME_VARIABLES(MO,mthy_fed_atl_income_tax_pd)=
      +            INCOME_VARIABLES(MO,mty_tot_fed_incm_tax_pd)
@@ -1921,12 +1921,12 @@ C
 C DIVIDE BY 12 VALUES
 C
 
-            INCOME_VARIABLES(MO,Monthly ITC Amortization) =
-     +                  INCOME_VARIABLES(0,Monthly ITC Amortization)/12.
-            INCOME_VARIABLES(MO,Monthly State Tax on Capital) =
-     +              INCOME_VARIABLES(0,Monthly State Tax on Capital)/12.
-            INCOME_VARIABLES(MO,Monthly Federal Tax on Capital) =
-     +            INCOME_VARIABLES(0,Monthly Federal Tax on Capital)/12.
+            INCOME_VARIABLES(MO,Monthly_ITC_Amortization) =
+     +                  INCOME_VARIABLES(0,Monthly_ITC_Amortization)/12.
+            INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital) =
+     +              INCOME_VARIABLES(0,Monthly_State_Tax_on_Capital)/12.
+            INCOME_VARIABLES(MO,Monthly_Federal_Tax_on_Capital) =
+     +            INCOME_VARIABLES(0,Monthly_Federal_Tax_on_Capital)/12.
 C
 C ALLOCATE OP METHOD ADJUSTMENT
 C
@@ -1945,10 +1945,10 @@ C ALLOCATE OP METH ADJUSTMENTS
 C
          USE_OP_METH_ALLOCATOR = .TRUE.
          IF(INCOME_VARIABLES(0,Operating Method Adjustment) /= 0.) THEN
-            IF(INCOME_VARIABLES(0,Monthly Total Taxes Expense)/=0.) THEN
+            IF(INCOME_VARIABLES(0,Monthly_Total_Taxes_Expense)/=0.) THEN
                OP_METH_ALLOCATOR =
      +                  INCOME_VARIABLES(0,Operating Method Adjustment)/
-     +                   INCOME_VARIABLES(0,Monthly Total Taxes Expense)
+     +                   INCOME_VARIABLES(0,Monthly_Total_Taxes_Expense)
             ELSE
                USE_OP_METH_ALLOCATOR = .FALSE.
             ENDIF
@@ -1975,7 +1975,7 @@ C
 C
 C REVENUE TAXES
 C
-               INCOME_VARIABLES(MO,Monthly Operating Revenue Tax) =
+               INCOME_VARIABLES(MO,Monthly_Operating_Revenue_Tax) =
      +                 CALCULATE_REVENUE_TAXES(MO,CLASS_LEVEL,
      +                                         INCOME_VARIABLES,
      +                                         REVENUE_TAX_ADJUSTMENT,
@@ -1993,7 +1993,7 @@ C
      +                          INCOME_VARIABLES(MO,monthly_oth_taxes)
      +                          + ANNUAL_VARS(216) ! environmental tax
 C
-               INCOME_VARIABLES(MO,Monthly Total Taxes Expense) =
+               INCOME_VARIABLES(MO,Monthly_Total_Taxes_Expense) =
      +              MONTHLY_TOTAL_EXPENSES_B4_TAXES(MO,INCOME_VARIABLES)
      +              + TOTAL_TAXES_EXPENSE(MO,INCOME_VARIABLES) 
 C
@@ -2002,7 +2002,7 @@ C
                IF(USE_OP_METH_ALLOCATOR) THEN
                   INCOME_VARIABLES(MO,Operating Method Adjustment) = 
      +              OP_METH_ALLOCATOR *
-     +                  INCOME_VARIABLES(MO,Monthly Total Taxes Expense)
+     +                  INCOME_VARIABLES(MO,Monthly_Total_Taxes_Expense)
                ELSE
                   INCOME_VARIABLES(MO,Operating Method Adjustment) = 
      +               INCOME_VARIABLES(0,Operating Method Adjustment)/12.
@@ -2010,7 +2010,7 @@ C
                test_total_op_adj = test_total_op_adj
      +                + INCOME_VARIABLES(MO,Operating Method Adjustment)
                test_total_exp_taxes = test_total_exp_taxes
-     +                + INCOME_VARIABLES(MO,Monthly Total Taxes Expense)
+     +                + INCOME_VARIABLES(MO,Monthly_Total_Taxes_Expense)
             ENDDO
             IF(USE_OP_METH_ALLOCATOR) THEN
                IF(ITER > 5 .AND. CONVERGENCE_TEST == 
@@ -2027,39 +2027,39 @@ C
             ITER = ITER + 1
          ENDDO
 C
-         INCOME_VARIABLES(0,Monthly Operating Revenue Tax) =
-     +           SUM(INCOME_VARIABLES(1:,Monthly Operating Revenue Tax))
+         INCOME_VARIABLES(0,Monthly_Operating_Revenue_Tax) =
+     +           SUM(INCOME_VARIABLES(1:,Monthly_Operating_Revenue_Tax))
          INCOME_VARIABLES(0,monthly_oth_taxes) =
      +                     SUM(INCOME_VARIABLES(1:,monthly_oth_taxes))
-         INCOME_VARIABLES(0,Monthly Total Taxes Expense) =
+         INCOME_VARIABLES(0,Monthly_Total_Taxes_Expense) =
      +         MONTHLY_TOTAL_EXPENSES_B4_TAXES(INT2(0),INCOME_VARIABLES)
      +         + TOTAL_TAXES_EXPENSE(INT2(0),INCOME_VARIABLES) 
-         INCOME_VARIABLES(0,Monthly Op Income) = 
+         INCOME_VARIABLES(0,Monthly_Op_Income) = 
      +                 INCOME_VARIABLES(0,monthly_total_revenues)
-     +                 - INCOME_VARIABLES(0,Monthly Total Taxes Expense)
+     +                 - INCOME_VARIABLES(0,Monthly_Total_Taxes_Expense)
          MO = 0
-         INCOME_VARIABLES(0,Monthly INCOME BEFORE INTEREST) = 
+         INCOME_VARIABLES(0,Monthly_INCOME_BEFORE_INTEREST) = 
      +                       INCOME_BEFORE_INTEREST(MO,INCOME_VARIABLES)
-         INCOME_VARIABLES(0,Monthly INCOME AFTER INTEREST) = 
+         INCOME_VARIABLES(0,Monthly_INCOME_AFTER_INTEREST) = 
      +                MONTHLY_INCOME_AFTER_INTEREST(MO,INCOME_VARIABLES)
-         INCOME_VARIABLES(0,Monthly Net Income) = 
+         INCOME_VARIABLES(0,Monthly_Net_Income) = 
      +                           MONTHLY_NET_INCOME(MO,INCOME_VARIABLES)
-         INCOME_VARIABLES(0,Monthly Earnings 2 Common) = 
-     +                 INCOME_VARIABLES(MO,Monthly Net Income)
-     +                 - INCOME_VARIABLES(MO,Monthly Total PS Dividends)
-         INCOME_VARIABLES(0,Monthly RETAINED EARNINGS) = 
-     +                    INCOME_VARIABLES(0,Monthly Earnings 2 Common)
-     +                    - INCOME_VARIABLES(0,Monthly Common Dividends)
+         INCOME_VARIABLES(0,Monthly_Earnings_2_Common) = 
+     +                 INCOME_VARIABLES(MO,Monthly_Net_Income)
+     +                 - INCOME_VARIABLES(MO,Monthly_Total_PS_Dividends)
+         INCOME_VARIABLES(0,Monthly_RETAINED_EARNINGS) = 
+     +                    INCOME_VARIABLES(0,Monthly_Earnings_2_Common)
+     +                    - INCOME_VARIABLES(0,Monthly_Common_Dividends)
      
          IF(CALCULATE_BTL_INCOME_TAXES) THEN
             DO MO = 1, 12  ! RPT_ are functions
                BTL_TAXABLE_INCOME(MO) = RPT_BTL_TAXABLE_INCOME(MO)
-               INCOME_VARIABLES(MO,BTL Monthly Income Taxes) =
+               INCOME_VARIABLES(MO,BTL_Monthly_Income_Taxes) =
      +                                  RPT_STATE_BTL_INCOME_TAX(MO)
      +                                  + RPT_FEDERAL_BTL_INCOME_TAX(MO)
             ENDDO
          ELSE
-            INCOME_VARIABLES(:,BTL Monthly Income Taxes) = 0.
+            INCOME_VARIABLES(:,BTL_Monthly_Income_Taxes) = 0.
             BTL_TAXABLE_INCOME(:) = 0.
          ENDIF
 C
@@ -2067,49 +2067,49 @@ C
 C
 C  CALCULATE OP INCOME
 C
-            INCOME_VARIABLES(MO,Monthly Op Income) = 
+            INCOME_VARIABLES(MO,Monthly_Op_Income) = 
      +                INCOME_VARIABLES(MO,monthly_total_revenues)
-     +                - INCOME_VARIABLES(MO,Monthly Total Taxes Expense)
+     +                - INCOME_VARIABLES(MO,Monthly_Total_Taxes_Expense)
 C
 C BTL ITEMS
 C
-            INCOME_VARIABLES(MO,BTL Monthly Income Tax Deferrals) =
-     +          INCOME_VARIABLES(0,BTL Monthly Income Tax Deferrals)/12.
+            INCOME_VARIABLES(MO,BTL_Monthly_Income_Tax_Deferrals) =
+     +          INCOME_VARIABLES(0,BTL_Monthly_Income_Tax_Deferrals)/12.
             INCOME_VARIABLES(MO,BTLMonthlyDeferralTaxCr) =
      +                   INCOME_VARIABLES(0,BTLMonthlyDeferralTaxCr)/12.
             INCOME_VARIABLES(MO,BTLMonthlyDeferralTaxDr) =
      +                   INCOME_VARIABLES(0,BTLMonthlyDeferralTaxDr)/12.
-            INCOME_VARIABLES(MO,Monthly LTD Total Interest) =
-     +                 INCOME_VARIABLES(MO,Monthly LTD Total Interest)
-     +                 + INCOME_VARIABLES(MO,Monthly LTD Amort Interest)
+            INCOME_VARIABLES(MO,Monthly_LTD_Total_Interest) =
+     +                 INCOME_VARIABLES(MO,Monthly_LTD_Total_Interest)
+     +                 + INCOME_VARIABLES(MO,Monthly_LTD_Amort_Interest)
 
-            INCOME_VARIABLES(MO,Monthly Booked PS Dividends) =
-     +                   INCOME_VARIABLES(MO,Monthly Total PS Dividends)
-            INCOME_VARIABLES(MO,Monthly Total PS Dividends) =
-     +                 INCOME_VARIABLES(MO,Monthly Total PS Dividends)
-     +                 + INCOME_VARIABLES(MO,Monthly PS Amort Dividends)
+            INCOME_VARIABLES(MO,Monthly_Booked_PS_Dividends) =
+     +                   INCOME_VARIABLES(MO,Monthly_Total_PS_Dividends)
+            INCOME_VARIABLES(MO,Monthly_Total_PS_Dividends) =
+     +                 INCOME_VARIABLES(MO,Monthly_Total_PS_Dividends)
+     +                 + INCOME_VARIABLES(MO,Monthly_PS_Amort_Dividends)
 
-            INCOME_VARIABLES(MO,Monthly Extraordinary Items) =
-     +           INCOME_VARIABLES(0,Monthly Extraordinary Items)/12.
-            INCOME_VARIABLES(MO,Monthly INCOME BEFORE INTEREST) = 
+            INCOME_VARIABLES(MO,Monthly_Extraordinary_Items) =
+     +           INCOME_VARIABLES(0,Monthly_Extraordinary_Items)/12.
+            INCOME_VARIABLES(MO,Monthly_INCOME_BEFORE_INTEREST) = 
      +                       INCOME_BEFORE_INTEREST(MO,INCOME_VARIABLES)
-            INCOME_VARIABLES(MO,Monthly INCOME AFTER INTEREST) = 
+            INCOME_VARIABLES(MO,Monthly_INCOME_AFTER_INTEREST) = 
      +                MONTHLY_INCOME_AFTER_INTEREST(MO,INCOME_VARIABLES)
-            INCOME_VARIABLES(MO,Monthly Net Income) = 
+            INCOME_VARIABLES(MO,Monthly_Net_Income) = 
      +                           MONTHLY_NET_INCOME(MO,INCOME_VARIABLES)
-            INCOME_VARIABLES(MO,Monthly Earnings 2 Common) = 
-     +          INCOME_VARIABLES(MO,Monthly Net Income) -
-     +          INCOME_VARIABLES(MO,Monthly Total PS Dividends)
-             INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS) =
-     +                   INCOME_VARIABLES(MO,Monthly Earnings 2 Common)
-     +                   - INCOME_VARIABLES(MO,Monthly Common Dividends)
+            INCOME_VARIABLES(MO,Monthly_Earnings_2_Common) = 
+     +          INCOME_VARIABLES(MO,Monthly_Net_Income) -
+     +          INCOME_VARIABLES(MO,Monthly_Total_PS_Dividends)
+             INCOME_VARIABLES(MO,Monthly_RETAINED_EARNINGS) =
+     +                   INCOME_VARIABLES(MO,Monthly_Earnings_2_Common)
+     +                   - INCOME_VARIABLES(MO,Monthly_Common_Dividends)
          ENDDO
 C
 C PASS-UP CASH ITEMS
 !  Deleted commented out code below this comment, which is probably no longer relevant.
          CALL LAG_CASH_VALUES(
      +                CASH_VARIABLES(0,cash_operating_revenue_tax),
-     +                INCOME_VARIABLES(0,Monthly Operating Revenue Tax),
+     +                INCOME_VARIABLES(0,Monthly_Operating_Revenue_Tax),
      +                PAYABLE_MONTHLY_VALUES(0,
      +                         payment_operating_revenue_tax,CLASS_POS),
      +                payment_operating_revenue_tax,
@@ -2271,7 +2271,7 @@ C Federal Income Taxes Paid
 C Monthly State Tax on Capital
          CALL LAG_CASH_VALUES(
      +                CASH_VARIABLES(0,cash_state_on_capital),
-     +                INCOME_VARIABLES(0,Monthly State Tax on Capital),
+     +                INCOME_VARIABLES(0,Monthly_State_Tax_on_Capital),
      +                PAYABLE_MONTHLY_VALUES(0,
      +                          payment_state_tax_on_capital,CLASS_POS),
      +                payment_state_tax_on_capital,
@@ -2279,7 +2279,7 @@ C Monthly State Tax on Capital
 C Federal Tax on Capital
          CALL LAG_CASH_VALUES(
      +               CASH_VARIABLES(0,cash_fed_tax_on_capital),
-     +               INCOME_VARIABLES(0,Monthly Federal Tax on Capital),
+     +               INCOME_VARIABLES(0,Monthly_Federal_Tax_on_Capital),
      +               PAYABLE_MONTHLY_VALUES(0,
      +                        payment_federal_tax_on_capital,CLASS_POS),
      +               payment_federal_tax_on_capital,
@@ -2314,7 +2314,7 @@ C
             IF(CLASS_TYPE == REGULATED_GROUP) THEN
                CASH_VARIABLES(7,cash_ltd_retirements) = LTD_RETIREMENTS
                CASH_VARIABLES(1:,cash_ltd_interest) =
-     +                   INCOME_VARIABLES(1:,Monthly LTD Total Interest)
+     +                   INCOME_VARIABLES(1:,Monthly_LTD_Total_Interest)
             ELSE
                CASH_VARIABLES(10,cash_ltd_interest) =
      +                              CASH_VARIABLES(10,cash_ltd_interest)
@@ -2402,8 +2402,8 @@ C
 C
 C PROPERTY TAXES
 C
-         INCOME_VARIABLES(:,Monthly Property Taxes) =
-     +              INCOME_VARIABLES(:,Monthly Exp File Property Taxes)
+         INCOME_VARIABLES(:,Monthly_Property_Taxes) =
+     +              INCOME_VARIABLES(:,Monthly_Exp_File_Property_Taxes)
      +              + INCOME_VARIABLES(:,
      +                          mth_modl_calcd_prop_taxes)
          CASH_VARIABLES(:,cash_property_taxes) =
@@ -2414,15 +2414,15 @@ C OTHER TAXES
 C
          INCOME_VARIABLES(:,monthly_oth_taxes) =
      +                INCOME_VARIABLES(:,monthly_oth_taxes)
-     +                + INCOME_VARIABLES(:,Monthly Exp File Other Taxes)
+     +                + INCOME_VARIABLES(:,Monthly_Exp_File_Other_Taxes)
          CASH_VARIABLES(:,cash_other_taxes) =
      +                     CASH_VARIABLES(:,cash_other_taxes)
      +                     + CASH_VARIABLES(:,cash_exp_file_othr_taxes)
 C
 C REVENUE TAXES
 C
-         INCOME_VARIABLES(:,Monthly Operating Revenue Tax) =
-     +                INCOME_VARIABLES(:,Monthly Operating Revenue Tax)
+         INCOME_VARIABLES(:,Monthly_Operating_Revenue_Tax) =
+     +                INCOME_VARIABLES(:,Monthly_Operating_Revenue_Tax)
      +                + INCOME_VARIABLES(:,
      +                           mthy_exp_file_opng_revnue_tax)
          CASH_VARIABLES(:,cash_operating_revenue_tax) =
@@ -2431,29 +2431,29 @@ C
      +                              cash_exp_file_oprn_rev_tax)
 C
          DO MO = 0, 12
-            CASH_VARIABLES(MO,Cash Operating Method Adj) =
+            CASH_VARIABLES(MO,Cash_Operating_Method_Adj) =
      +                  INCOME_VARIABLES(MO,Operating Method Adjustment)
-            CASH_VARIABLES(MO,Cash Prior Years Method Adj) =
+            CASH_VARIABLES(MO,Cash_Prior_Years_Method_Adj) =
      +                  INCOME_VARIABLES(MO,
      +                                    Prior Years Method Adjustment)
             CASH_VARIABLES(MO,csh_st_invstmt_incm) =
      +                                      CASH_BTL_INTEREST_INCOME(MO)
 
-            CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS) =
-     +                  CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS)
+            CASH_VARIABLES(MO,Cash_TOTAL_OPERATING_RECEIPTS) =
+     +                  CASH_VARIABLES(MO,Cash_TOTAL_OPERATING_RECEIPTS)
      +                  + CASH_VARIABLES(MO,
      +                                csh_st_invstmt_incm)
-     +                  + CASH_VARIABLES(MO,Cash Operating Method Adj)
-     +                  + CASH_VARIABLES(MO,Cash Prior level Method Adj)
+     +                  + CASH_VARIABLES(MO,Cash_Operating_Method_Adj)
+     +                  + CASH_VARIABLES(MO,Cash_Prior_level_Method_Adj)
      +                  + CASH_VARIABLES(MO,
      +                                cash_investmt_divnd_earngs)
      +                  + CASH_VARIABLES(MO,
      +                                cash_invest_interest_ernings)
-     +                  + CASH_VARIABLES(MO,Cash Prior Years Method Adj)
+     +                  + CASH_VARIABLES(MO,Cash_Prior_Years_Method_Adj)
 
             CASH_VARIABLES(MO,net_cash_receipts_or_pmts) =
-     +                CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS) -
-     +                CASH_VARIABLES(MO,Cash TOTAL EXPENSE PAYMENTS)
+     +                CASH_VARIABLES(MO,Cash_TOTAL_OPERATING_RECEIPTS) -
+     +                CASH_VARIABLES(MO,Cash_TOTAL_EXPENSE_PAYMENTS)
 C
 C CAPITAL SERVICE
 C
@@ -2462,7 +2462,7 @@ C
      +               + CASH_VARIABLES(MO,cash_ltd_interest)
      +               + CASH_VARIABLES(MO,cash_std_interest)
      +               + CASH_VARIABLES(MO,cash_common_dividends)
-     +               + CASH_VARIABLES(MO,Cash Interest on Notes Payable)
+     +               + CASH_VARIABLES(MO,Cash_Interest_on_Notes_Payable)
 C
 C TAXES 
 C
@@ -2547,7 +2547,7 @@ C
             CASH_VARIABLES(1,cash_opening_balance) = FUNDS_BALANCE(BOY)
             CASH_VARIABLES(0,cash_opening_balance) = FUNDS_BALANCE(BOY)
             STD_BALANCE = OPENING_STD_BALANCE
-            INCOME_VARIABLES(0,BTL Monthly Interest Income) = 0.
+            INCOME_VARIABLES(0,BTL_Monthly_Interest_Income) = 0.
             CASH_VARIABLES(0,csh_st_invstmt_incm) = 0.
 c           CASH_VARIABLES(0,cash_change_ltinvestments) = 0.
             IF(CPL_ACTIVE()) THEN
@@ -2931,12 +2931,12 @@ C
 C
 C RE CALC 
 C
-            INCOME_VARIABLES(:,BTL Monthly STInvestmet Income) =
+            INCOME_VARIABLES(:,BTL_Monthly_STInvestmet_Income) =
      +                                                   STI_EARNINGS(:)
             INCOME_VARIABLES(:,mty_mdl_lt_nvst_income) =
      +                                                   LTI_EARNINGS(:)
-            INCOME_VARIABLES(:,BTL Monthly Interest Income) =
-     +              INCOME_VARIABLES(:,BTL Monthly STInvestmet Income)
+            INCOME_VARIABLES(:,BTL_Monthly_Interest_Income) =
+     +              INCOME_VARIABLES(:,BTL_Monthly_STInvestmet_Income)
      +              + INCOME_VARIABLES(:,
      +                                mty_mdl_lt_nvst_income)
      +              + INCOME_VARIABLES(:,
@@ -3056,14 +3056,14 @@ C
      +          - BALANCE_SHEET_VARIABLES(0,monthly_short_term_debt_bal)
 
          R_STD_CASH_INTEREST = CASH_VARIABLES(0,cash_std_interest)
-     +                + CASH_VARIABLES(0,Cash Interest on Notes Payable)
-         R_STD_INCOME_INTEREST=INCOME_VARIABLES(0,Monthly STD Interest)
+     +                + CASH_VARIABLES(0,Cash_Interest_on_Notes_Payable)
+         R_STD_INCOME_INTEREST=INCOME_VARIABLES(0,Monthly_STD_Interest)
          R_NON_INCOME_TAXES_ACCRUAL_ADJ =
      +              INCOME_VARIABLES(0,monthly_oth_taxes)
-     +              + INCOME_VARIABLES(0,Monthly Property Taxes)
-     +              + INCOME_VARIABLES(0,Monthly Operating Revenue Tax)
-     +              + INCOME_VARIABLES(0,Monthly State Tax on Capital)
-     +              + INCOME_VARIABLES(0,Monthly Federal Tax on Capital)
+     +              + INCOME_VARIABLES(0,Monthly_Property_Taxes)
+     +              + INCOME_VARIABLES(0,Monthly_Operating_Revenue_Tax)
+     +              + INCOME_VARIABLES(0,Monthly_State_Tax_on_Capital)
+     +              + INCOME_VARIABLES(0,Monthly_Federal_Tax_on_Capital)
      +              + INCOME_VARIABLES(0,
      +                                wvpa_prop_txs_n_pwr_cst)
      +              - CASH_VARIABLES(0,cash_other_taxes)
@@ -3090,7 +3090,7 @@ C
          ENDIF
          R_OTHER_TAXES =  INCOME_VARIABLES(0,monthly_oth_taxes) 
      +                    - ANNUAL_VARS(216) ! environmental tax
-         R_OP_REV_TAX=INCOME_VARIABLES(0,Monthly Operating Revenue Tax)
+         R_OP_REV_TAX=INCOME_VARIABLES(0,Monthly_Operating_Revenue_Tax)
 C
 C CALCULATE PROXIE FOR TAXABLE INCOME
 C
@@ -3128,18 +3128,18 @@ C
 C
 C SEND THE CALCULATED MONTHLY TAXES BACK
 C
-         FUEL_EXPENSE = INCOME_VARIABLES(0,Monthly Fossil Fuel)
+         FUEL_EXPENSE = INCOME_VARIABLES(0,Monthly_Fossil_Fuel)
          VARIABLE_EXPENSE = INCOME_VARIABLES(0,monthly_variable_oandm)
          FIXED_EXPENSE = INCOME_VARIABLES(0,monthly_fixed_oandm)
          CASH_REVENUES_RECEIVED =
      +               CASH_VARIABLES(0,cash_rcd_accts_rcvbl)
          CASH_EXPENSES_PAID =
-     +                   CASH_VARIABLES(0,Cash Paid on Accounts Payable)
+     +                   CASH_VARIABLES(0,Cash_Paid_on_Accounts_Payable)
          CHANGE_IN_INVESTMENT_PAYABLE(:) =
      +          INCOME_VARIABLES(:,
      +                           mthly_invstmt_earngs_rcvbl)
      +          + INCOME_VARIABLES(:,mty_totl_lti_income)
-     +          + INCOME_VARIABLES(:,BTL Monthly STInvestmet Income)
+     +          + INCOME_VARIABLES(:,BTL_Monthly_STInvestmet_Income)
      +          - CASH_VARIABLES(:,cash_investmt_divnd_earngs)
      +          - CASH_VARIABLES(:,cash_invest_interest_ernings)
      +          - CASH_VARIABLES(:,csh_st_invstmt_incm)  ! 112
@@ -3494,7 +3494,7 @@ C ROLL-UP THE PAYABLE CHANGES
                MONTHLY_CHANGE_IN_PAYABLES(:) =
      +                 MONTHLY_CHANGE_IN_PAYABLES(:)
      +                 +  PAYABLE_LINKED_LOWER_LEVEL(:,CLASS_LEVEL)
-     +                 - CASH_VARIABLES(:,Cash Paid on Accounts Payable)
+     +                 - CASH_VARIABLES(:,Cash_Paid_on_Accounts_Payable)
                MONTHLY_CHANGE_IN_RECEIVABLES(:) =
      +             MONTHLY_CHANGE_IN_RECEIVABLES(:)
      +             +  RECEIVABLES_LINKED_LOWER_LEVEL(:,CLASS_LEVEL)
@@ -3549,7 +3549,7 @@ C
      +                                           ACCOUNTS_RECEIVABLE_BOY
                BALANCE_SHEET_VARIABLES(0,monthly_deferred_fuel_bal) =
      +               ANNUAL_VARS(392)
-     +               + INCOME_VARIABLES(0,Monthly Deferred Fuel Expense)
+     +               + INCOME_VARIABLES(0,Monthly_Deferred_Fuel_Expense)
 
                BALANCE_SHEET_VARIABLES(0,monthly_retained_earnings_bal)=
      +                                             BOY_RETAINED_EARNINGS
@@ -3584,7 +3584,7 @@ C
      +               - BALANCE_SHEET_VARIABLES(0,monthly_deferred_gains)
                BALANCE_SHEET_VARIABLES(0,monthly_deferred_gains) =
      +                                      DEFERRED_GAIN_FROM_SALES_BOY
-               BALANCE_SHEET_VARIABLES(0,Monthly Strom Reserve) =
+               BALANCE_SHEET_VARIABLES(0,Monthly_Strom_Reserve) =
      +                                         STORM_RESERVE_BALANCE_BOY
                BALANCE_SHEET_VARIABLES(0,MonthlyExecBenefitsReserve) =
      +                                           ExecBenefitsBalance_BOY
@@ -3650,13 +3650,13 @@ C 9/5/00 NEED TO ADD ACQUISTION OF NEW SUB.
      +                                  monthly_subsidiary_investment) =
      +               BALANCE_SHEET_VARIABLES(MO-1,
      +                                    monthly_subsidiary_investment)
-     +               + INCOME_VARIABLES(MO,Monthly Subsidiary Income)
+     +               + INCOME_VARIABLES(MO,Monthly_Subsidiary_Income)
      +               - CASH_VARIABLES(MO,cash_subsidiary_dividends)
      +               + CASH_VARIABLES(MO,cash_equity_to_subsidiaries)
                  BALANCE_SHEET_VARIABLES(MO,monthly_net_nuclear_fuel) =
      +            BALANCE_SHEET_VARIABLES(MO-1,monthly_net_nuclear_fuel)
      +            + CASH_VARIABLES(MO,cash_nclr_fl_fabrication)
-     +            - INCOME_VARIABLES(MO,Monthly Nuclear Fuel Expense)
+     +            - INCOME_VARIABLES(MO,Monthly_Nuclear_Fuel_Expense)
      +            + ANNUAL_VARS(298) /12.
 C
                   BALANCE_SHEET_VARIABLES(MO,
@@ -3667,7 +3667,7 @@ C
      +                  - INCOME_VARIABLES(MO,
      +                               Mthly_Lease_Amort_xpns)
      +                  - INCOME_VARIABLES(MO,
-     +                                  Monthly Lease BTL Amort Expense)
+     +                                  Monthly_Lease_BTL_Amort_Expense)
 
                   BALANCE_SHEET_VARIABLES(MO,
      +                                monthly_nclr_dcms_trust_bal) =
@@ -3696,7 +3696,7 @@ C
      + monthly_nucl_decommiss_liability) =  ! 37
      +                BALANCE_SHEET_VARIABLES(MO-1,
      +   monthly_nucl_decommiss_liability)
-     +    + INCOME_VARIABLES(MO,Monthly DOE Decommissioning)
+     +    + INCOME_VARIABLES(MO,Monthly_DOE_Decommissioning)
      +     + MONTHLY_NUC_DECOM_FUND_NET_OF_TAX_RETURN(MO)
 
                   ENDIF
@@ -3704,15 +3704,15 @@ C
      +                             mtly_post_retre_med_payable) =  ! 43
      +                BALANCE_SHEET_VARIABLES(MO-1,
      +                               mtly_post_retre_med_payable)
-     +                + CASH_VARIABLES(MO,Cash Post Retirement Payments)
-     +                - CASH_VARIABLES(MO,Cash Retiree Medical Payments)
+     +                + CASH_VARIABLES(MO,Cash_Post_Retirement_Payments)
+     +                - CASH_VARIABLES(MO,Cash_Retiree_Medical_Payments)
                   BALANCE_SHEET_VARIABLES(MO,
      +                               monthly_post_retire_med_fnd) =  ! 11
      +                BALANCE_SHEET_VARIABLES(MO-1,
      +                                 monthly_post_retire_med_fnd)
-     +             + CASH_VARIABLES(MO,Cash Post Retirement Payments)
+     +             + CASH_VARIABLES(MO,Cash_Post_Retirement_Payments)
      +             + CASH_VARIABLES(MO,csh_2_post_retiremt_paymentss)
-     +             - CASH_VARIABLES(MO,Cash Retiree Medical Payments)
+     +             - CASH_VARIABLES(MO,Cash_Retiree_Medical_Payments)
      +             + OCI_RETIREMENT_MEDICAL_FUND_RETURN(MO)
                IF(SALT_RIVER_PROJECT() 
      +                      .OR. RETAIN_POST_RETIREMENT_EARNINGS()) THEN   ! ADD A RETAIN EARNINGS SWITCH HERE
@@ -3745,18 +3745,18 @@ C
      +                  BALANCE_SHEET_VARIABLES(MO-1,
      +                                    mty_dfrd_income_taxes)
      +                  + INCOME_VARIABLES(MO,
-     +                                  Monthly Income Tax Deferrals Cr)
+     +                                  Monthly_Income_Tax_Deferrals_Cr)
      +                  + INCOME_VARIABLES(MO,
-     +                                 BTL Monthly Income Tax Deferrals)
+     +                                 BTL_Monthly_Income_Tax_Deferrals)
      +                  + INCOME_VARIABLES(MO,
-     +                                  Monthly Income Tax Deferrals Dr)
+     +                                  Monthly_Income_Tax_Deferrals_Dr)
                   ELSE
                      BALANCE_SHEET_VARIABLES(MO,
      +                               monthly_deferred_income_taxes_dr) =
      +                  BALANCE_SHEET_VARIABLES(MO-1,
      +                                 monthly_deferred_income_taxes_dr)
      +                  - INCOME_VARIABLES(MO,
-     +                                  Monthly Income Tax Deferrals Dr)
+     +                                  Monthly_Income_Tax_Deferrals_Dr)
      +                  - INCOME_VARIABLES(MO,BTLMonthlyDeferralTaxDr)
      +                  + FASB87_DEFFERED_TAXES_ADJ_DR(MO)
                      BALANCE_SHEET_VARIABLES(MO,
@@ -3764,12 +3764,12 @@ C
      +                  BALANCE_SHEET_VARIABLES(MO-1,
      +                                    mty_dfrd_income_taxes)
      +                  + INCOME_VARIABLES(MO,
-     +                                  Monthly Income Tax Deferrals Cr)
+     +                                  Monthly_Income_Tax_Deferrals_Cr)
      +                  + INCOME_VARIABLES(MO,BTLMonthlyDeferralTaxCr)
                   ENDIF
                   BALANCE_SHEET_VARIABLES(MO,mtly_cwip) =
      +                        BALANCE_SHEET_VARIABLES(MO-1,mtly_cwip)
-     +                      + INCOME_VARIABLES(MO,Monthly AFUDC Total)
+     +                      + INCOME_VARIABLES(MO,Monthly_AFUDC_Total)
      +                      + CASH_VARIABLES(MO,cash_plant_construction)
      +                      - BALANCE_SHEET_VARIABLES(MO,
      +                                       monthly_afudc_capitalized)
@@ -3781,7 +3781,7 @@ C
      +                                      monthly_net_dfrd_debits)
      +               + CASH_VARIABLES(MO,cash_deferred_expenses)
      +               - CHANGE_IN_DEFERRED_DEBIT_BAL(MO)
-     +               - INCOME_VARIABLES(MO,Monthly Issue Expense Amorts)
+     +               - INCOME_VARIABLES(MO,Monthly_Issue_Expense_Amorts)
      +               + CASH_VARIABLES(MO,cash_ltd_ps_issue_expense)
      +               + CASH_VARIABLES(MO,cash_common_issue_expense)
      +               + GOODWILL_OF_NEW_SUB_INVESTMENT(MO)               !Goodwill
@@ -3791,20 +3791,20 @@ C
      +                            monthly_other_long_term_liabs) =
      +                        BALANCE_SHEET_VARIABLES(MO-1,
      +                              monthly_other_long_term_liabs)
-     +                 - CASH_VARIABLES(MO,Cash Leased Nuclear Fuel)! - NUCLEAR_FUEL_LEASE_PAYMENTS
+     +                 - CASH_VARIABLES(MO,Cash_Leased_Nuclear_Fuel)! - NUCLEAR_FUEL_LEASE_PAYMENTS
      +                     + CASH_VARIABLES(MO,cash_lease_receipts)     ! + CAPITIALIZED_LEASE_ADDITIONS
-     +                     - CASH_VARIABLES(MO,Cash Lease Expense)      ! - ATL_LEASE_PAYMENTS
-     +                     - CASH_VARIABLES(MO,Cash BTL Lease Cash)     ! - BTL_LEASE_PAYMENTS
+     +                     - CASH_VARIABLES(MO,Cash_Lease_Expense)      ! - ATL_LEASE_PAYMENTS
+     +                     - CASH_VARIABLES(MO,Cash_BTL_Lease_Cash)     ! - BTL_LEASE_PAYMENTS
 
                   ELSE
                      BALANCE_SHEET_VARIABLES(MO,
      +                            monthly_other_long_term_liabs) =
      +                        BALANCE_SHEET_VARIABLES(MO-1,
      +                              monthly_other_long_term_liabs)
-     +                     - CASH_VARIABLES(MO,Cash Leased Nuclear Fuel)! - NUCLEAR_FUEL_LEASE_PAYMENTS
+     +                     - CASH_VARIABLES(MO,Cash_Leased_Nuclear_Fuel)! - NUCLEAR_FUEL_LEASE_PAYMENTS
      +                     + CASH_VARIABLES(MO,cash_lease_receipts)     ! + CAPITIALIZED_LEASE_ADDITIONS
-     +                     - CASH_VARIABLES(MO,Cash Lease Expense)      ! - ATL_LEASE_PAYMENTS
-     +                     - CASH_VARIABLES(MO,Cash BTL Lease Cash)     ! - BTL_LEASE_PAYMENTS
+     +                     - CASH_VARIABLES(MO,Cash_Lease_Expense)      ! - ATL_LEASE_PAYMENTS
+     +                     - CASH_VARIABLES(MO,Cash_BTL_Lease_Cash)     ! - BTL_LEASE_PAYMENTS
      +                     + CONSOLIDATED_TAX_LIB_ADJUSTMENT/12.
                   ENDIF
 
@@ -3816,29 +3816,29 @@ C
 C CHANGE IS EXPENSES PAYABLE
      +                  + MONTHLY_CHANGE_IN_PAYABLES(MO)
 C STD INTEREST
-     +                  + INCOME_VARIABLES(MO,Monthly STD Interest) 
+     +                  + INCOME_VARIABLES(MO,Monthly_STD_Interest) 
      +                  - CASH_VARIABLES(MO,cash_std_interest)
 C LTD INTEREST
-     +                 +INCOME_VARIABLES(MO,Monthly LTD Booked Interest)
+     +                 +INCOME_VARIABLES(MO,Monthly_LTD_Booked_Interest)
      +                  - CASH_VARIABLES(MO,cash_ltd_interest)
 C COMMON DIVIDENDS
-     +                  + INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +                  + INCOME_VARIABLES(MO,Monthly_Common_Dividends)
      +                  - CASH_VARIABLES(MO,cash_common_dividends)
 C PS DIVIDENDS
-     +               + INCOME_VARIABLES(MO,Monthly Booked PS Dividends)
+     +               + INCOME_VARIABLES(MO,Monthly_Booked_PS_Dividends)
      +               - CASH_VARIABLES(MO,cash_ps_dividends)
 C NOTES PAYABLE INTEREST
      +               + INCOME_VARIABLES(MO,
      +                                mty_intst_on_nts_pyble)
-     +               - CASH_VARIABLES(MO,Cash Interest on Notes Payable)
+     +               - CASH_VARIABLES(MO,Cash_Interest_on_Notes_Payable)
 C NON_INCOME_TAXES_ACCRUAL_ADJ
      +               + INCOME_VARIABLES(MO,monthly_oth_taxes)
-     +               + INCOME_VARIABLES(MO,Monthly Property Taxes)
+     +               + INCOME_VARIABLES(MO,Monthly_Property_Taxes)
      +               + INCOME_VARIABLES(MO,
-     +                                    Monthly Operating Revenue Tax)
-     +               + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
+     +                                    Monthly_Operating_Revenue_Tax)
+     +               + INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital)
      +               + INCOME_VARIABLES(MO,
-     +                                   Monthly Federal Tax on Capital)
+     +                                   Monthly_Federal_Tax_on_Capital)
      +               + INCOME_VARIABLES(MO,
      +                                wvpa_prop_txs_n_pwr_cst)
      +               - CASH_VARIABLES(MO,cash_operating_revenue_tax)  
@@ -3869,29 +3869,29 @@ C WVPA ADDITIONS
 C CHANGE IS EXPENSES PAYABLE
      +               + MONTHLY_CHANGE_IN_PAYABLES(MO)
 C STD INTEREST
-     +               + INCOME_VARIABLES(MO,Monthly STD Interest) 
+     +               + INCOME_VARIABLES(MO,Monthly_STD_Interest) 
      +               - CASH_VARIABLES(MO,cash_std_interest)
 C LTD INTEREST
-     +               + INCOME_VARIABLES(MO,Monthly LTD Booked Interest)
+     +               + INCOME_VARIABLES(MO,Monthly_LTD_Booked_Interest)
      +               - CASH_VARIABLES(MO,cash_ltd_interest)
 C COMMON DIVIDENDS
-     +               + INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +               + INCOME_VARIABLES(MO,Monthly_Common_Dividends)
      +               - CASH_VARIABLES(MO,cash_common_dividends)
 C PS DIVIDENDS
-     +               + INCOME_VARIABLES(MO,Monthly Booked PS Dividends)
+     +               + INCOME_VARIABLES(MO,Monthly_Booked_PS_Dividends)
      +               - CASH_VARIABLES(MO,cash_ps_dividends)
 C NOTES PAYABLE INTEREST
      +               + INCOME_VARIABLES(MO,
      +                                mty_intst_on_nts_pyble)
-     +               - CASH_VARIABLES(MO,Cash Interest on Notes Payable)
+     +               - CASH_VARIABLES(MO,Cash_Interest_on_Notes_Payable)
 C NON_INCOME_TAXES_ACCRUAL_ADJ
      +               + INCOME_VARIABLES(MO,monthly_oth_taxes)
-     +               + INCOME_VARIABLES(MO,Monthly Property Taxes)
+     +               + INCOME_VARIABLES(MO,Monthly_Property_Taxes)
      +               + INCOME_VARIABLES(MO,
-     +                                    Monthly Operating Revenue Tax)
-     +               + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
+     +                                    Monthly_Operating_Revenue_Tax)
+     +               + INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital)
      +               + INCOME_VARIABLES(MO,
-     +                                   Monthly Federal Tax on Capital)
+     +                                   Monthly_Federal_Tax_on_Capital)
      +               + INCOME_VARIABLES(MO,
      +                                wvpa_prop_txs_n_pwr_cst)
      +               - CASH_VARIABLES(MO,cash_operating_revenue_tax)  
@@ -3928,7 +3928,7 @@ C
      +                + INCOME_VARIABLES(MO,
      +                           mthly_invstmt_earngs_rcvbl)
      +                + INCOME_VARIABLES(MO,
-     +                                   BTL Monthly STInvestmet Income)
+     +                                   BTL_Monthly_STInvestmet_Income)
      +                + INCOME_VARIABLES(MO,
      +                                mty_mdl_lt_nvst_income)
      +                + INCOME_VARIABLES(MO,
@@ -3952,7 +3952,7 @@ C
                BALANCE_SHEET_VARIABLES(MO,mty_dfrd_itc_credt) =
      +                   BALANCE_SHEET_VARIABLES(MO-1,
      +                                      mty_dfrd_itc_credt)
-     +                   + INCOME_VARIABLES(MO,Monthly ITC Amortization)
+     +                   + INCOME_VARIABLES(MO,Monthly_ITC_Amortization)
                BALANCE_SHEET_VARIABLES(MO,monthly_other_investments) =
      +           BALANCE_SHEET_VARIABLES(MO-1,monthly_other_investments)
      +                 + INCOME_VARIABLES(MO,MonthlyMarkToMarket)
@@ -3960,14 +3960,14 @@ C
      +                 + CASH_VARIABLES(MO,cash_net_investments)
                BALANCE_SHEET_VARIABLES(MO,monthly_deferred_fuel_bal) =
      +           BALANCE_SHEET_VARIABLES(MO-1,monthly_deferred_fuel_bal)
-     +           - INCOME_VARIABLES(MO,Monthly Deferred Fuel Expense)
+     +           - INCOME_VARIABLES(MO,Monthly_Deferred_Fuel_Expense)
 C
                BALANCE_SHEET_VARIABLES(MO,
      +                               monthly_accum_depreciation) =
      +            + BALANCE_SHEET_VARIABLES(MO-1,
      +                                 monthly_accum_depreciation)
      +            - BALANCE_SHEET_VARIABLES(MO,monthly_retirements)
-     +            + INCOME_VARIABLES(MO,Monthly Book Depreciation)
+     +            + INCOME_VARIABLES(MO,Monthly_Book_Depreciation)
      +            + BALANCE_SHEET_VARIABLES(MO,
      +                                      monthly_acc_dep_adjs)
      +            - CASH_VARIABLES(MO,cash_net_salvage)
@@ -4001,7 +4001,7 @@ C
      +                                  monthly_retained_earnings_bal) =
      +                BALANCE_SHEET_VARIABLES(MO-1,
      +                                    monthly_retained_earnings_bal)
-     +                + INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS)
+     +                + INCOME_VARIABLES(MO,Monthly_RETAINED_EARNINGS)
 C
                BALANCE_SHEET_VARIABLES(MO,monthly_common_stock) =
      +                BALANCE_SHEET_VARIABLES(MO-1,monthly_common_stock)
@@ -4012,13 +4012,13 @@ C
      +             BALANCE_SHEET_VARIABLES(MO-1,monthly_preferred_stock)
      +             + CASH_VARIABLES(MO,cash_ps_issued)
      +             - CASH_VARIABLES(MO,cash_ps_retirements)
-     +             - INCOME_VARIABLES(MO,Monthly PS Premium Amort)
+     +             - INCOME_VARIABLES(MO,Monthly_PS_Premium_Amort)
 C
                BALANCE_SHEET_VARIABLES(MO,monthly_long_term_debt) =
      +              BALANCE_SHEET_VARIABLES(MO-1,monthly_long_term_debt)
      +              + CASH_VARIABLES(MO,cash_ltd_issued)
      +              - CASH_VARIABLES(MO,cash_ltd_retirements)
-     +              - INCOME_VARIABLES(MO,Monthly LTD Premium Amort)
+     +              - INCOME_VARIABLES(MO,Monthly_LTD_Premium_Amort)
 C
                BALANCE_SHEET_VARIABLES(MO,monthly_notes_receivable) =
      +            BALANCE_SHEET_VARIABLES(MO-1,monthly_notes_receivable)
@@ -4031,14 +4031,14 @@ C
      +               - CASH_VARIABLES(MO,csh_4_redeeming_notes_owed)
                BALANCE_SHEET_VARIABLES(MO,monthly_accrued_pension) =
      +            BALANCE_SHEET_VARIABLES(MO-1,monthly_accrued_pension)
-     +            + INCOME_VARIABLES(MO,Monthly Pension Expense)
+     +            + INCOME_VARIABLES(MO,Monthly_Pension_Expense)
      +            - CASH_VARIABLES(MO,csh_unfundd_retrmt_pymts)
      +            + FASB87_PENSION_LIAB_ADJ(MO)
      +            + CASH_VARIABLES(MO,noncash_pension_in_capx)
-               BALANCE_SHEET_VARIABLES(MO,Monthly Strom Reserve) =
-     +               BALANCE_SHEET_VARIABLES(MO-1,Monthly Strom Reserve)
-     +               + INCOME_VARIABLES(MO,Monthly Storm Expense)
-     +               - CASH_VARIABLES(MO,Cash Storm Payments)
+               BALANCE_SHEET_VARIABLES(MO,Monthly_Strom_Reserve) =
+     +               BALANCE_SHEET_VARIABLES(MO-1,Monthly_Strom_Reserve)
+     +               + INCOME_VARIABLES(MO,Monthly_Storm_Expense)
+     +               - CASH_VARIABLES(MO,Cash_Storm_Payments)
                BALANCE_SHEET_VARIABLES(MO,MonthlyExecBenefitsReserve) =
      +               BALANCE_SHEET_VARIABLES(MO-1,
      +                                       MonthlyExecBenefitsReserve) 
@@ -4053,7 +4053,7 @@ C
      +              BALANCE_SHEET_VARIABLES(MO-1,
      +                                     mty_accrued_vaca_pay)
      +              + INCOME_VARIABLES(MO,monthly_vacation_pay)
-     +              - CASH_VARIABLES(MO,Cash Vacation Payments)
+     +              - CASH_VARIABLES(MO,Cash_Vacation_Payments)
 C
 C FINISH THE FOLLOWING
 C
@@ -4254,47 +4254,47 @@ C
      +                                          INCOME_VARIABLES,
      +                                          THIS_IS_REPORTING_CLASS)
             DO VARIABLE = 1, INCOME_VARS
-               IF(VARIABLE == Monthly Issue Expense Amorts) CYCLE
-               IF(VARIABLE == Monthly PS Amort Dividends) CYCLE
+               IF(VARIABLE == Monthly_Issue_Expense_Amorts) CYCLE
+               IF(VARIABLE == Monthly_PS_Amort_Dividends) CYCLE
                IF(CLASS_TYPE == SBU .OR.
      +                               CLASS_TYPE == REGULATED_GROUP) THEN
-                  IF(VARIABLE == Monthly Investment Earnings) CYCLE
+                  IF(VARIABLE == Monthly_Investment_Earnings) CYCLE
                   IF(VARIABLE == mthly_invstmt_earngs_rcvbl)
      +                                                             CYCLE
-                  IF(VARIABLE == Monthly LTD Total Interest) CYCLE
-                  IF(VARIABLE == Monthly STD Interest) CYCLE
+                  IF(VARIABLE == Monthly_LTD_Total_Interest) CYCLE
+                  IF(VARIABLE == Monthly_STD_Interest) CYCLE
                   IF(VARIABLE == mty_intst_on_nts_pyble)CYCLE
-                  IF(VARIABLE == Monthly Total PS Dividends) CYCLE
-                  IF(VARIABLE == Monthly Common Dividends) CYCLE
+                  IF(VARIABLE == Monthly_Total_PS_Dividends) CYCLE
+                  IF(VARIABLE == Monthly_Common_Dividends) CYCLE
                   IF(VARIABLE == mty_totl_lti_income)CYCLE
                   IF(VARIABLE == mty_mdl_lt_nvst_income)CYCLE
                   IF(VARIABLE ==
      +                        mt_dbt_file_linvst_income)CYCLE
                   IF(VARIABLE == monthly_notes_receivable_income)CYCLE
-                  IF(VARIABLE == Monthly Dividend 70 Earnings)CYCLE
+                  IF(VARIABLE == Monthly_Dividend_70_Earnings)CYCLE
                   IF(VARIABLE == mty_rglr_dvd_income)CYCLE
 
-                  IF(VARIABLE == BTL Monthly STInvestmet Income) CYCLE
-                  IF(VARIABLE == BTL Monthly Interest Income) CYCLE
-                  IF(VARIABLE == BTL Monthly Income Taxes) CYCLE
-                  IF(VARIABLE == Monthly Shares Outstanding) CYCLE
+                  IF(VARIABLE == BTL_Monthly_STInvestmet_Income) CYCLE
+                  IF(VARIABLE == BTL_Monthly_Interest_Income) CYCLE
+                  IF(VARIABLE == BTL_Monthly_Income_Taxes) CYCLE
+                  IF(VARIABLE == Monthly_Shares_Outstanding) CYCLE
                   IF(VARIABLE == mthy_fed_atl_income_tax_pd)
      +                                                             CYCLE
                   IF(VARIABLE == mt_fed_btl_incm_tax_pd)
      +                                                             CYCLE
                   IF(VARIABLE == mty_tot_fed_incm_tax_pd)
      +                                                             CYCLE
-                  IF(VARIABLE == Monthly LTD Premium Amort) CYCLE
-                  IF(VARIABLE == Monthly PS Premium Amort) CYCLE
+                  IF(VARIABLE == Monthly_LTD_Premium_Amort) CYCLE
+                  IF(VARIABLE == Monthly_PS_Premium_Amort) CYCLE
 
                   IF(.NOT. EXCLUDE_SBU_PROPERTY_TAX) THEN
-                     IF(VARIABLE == Monthly Property Taxes) CYCLE
-                     IF(VARIABLE==Monthly Exp File Property Taxes) CYCLE
+                     IF(VARIABLE == Monthly_Property_Taxes) CYCLE
+                     IF(VARIABLE==Monthly_Exp_File_Property_Taxes) CYCLE
                      IF(VARIABLE == 
      +                    mth_modl_calcd_prop_taxes) CYCLE
                   ENDIF
                   IF(.NOT. EXCLUDE_SBU_REVENUE_TAX .AND. 
-     +                  VARIABLE == Monthly Operating Revenue Tax) CYCLE
+     +                  VARIABLE == Monthly_Operating_Revenue_Tax) CYCLE
 
                   IF(VARIABLE == monthly_oth_taxes) CYCLE
                   IF(.NOT. EXCLUDE_SBU_STATE_INCOME_TAX) THEN
@@ -4306,33 +4306,33 @@ C
      +                                                             CYCLE
                   ENDIF
                   IF(.NOT. EXCLUDE_SBU_CAPITAL_TAX .AND. 
-     +               (VARIABLE == Monthly State Tax on Capital .OR.
-     +                VARIABLE == Monthly Federal Tax on Capital)) CYCLE
+     +               (VARIABLE == Monthly_State_Tax_on_Capital .OR.
+     +                VARIABLE == Monthly_Federal_Tax_on_Capital)) CYCLE
                ELSEIF(CLASS_TYPE == SUBSIDIARY) THEN
 
-                  IF(VARIABLE == Monthly Subsidiary Income) CYCLE
-                  IF(VARIABLE == Monthly Shares Outstanding) CYCLE
-                  IF(VARIABLE == Monthly Earnings 2 Common) THEN
+                  IF(VARIABLE == Monthly_Subsidiary_Income) CYCLE
+                  IF(VARIABLE == Monthly_Shares_Outstanding) CYCLE
+                  IF(VARIABLE == Monthly_Earnings_2_Common) THEN
                      DO MO = 1, 12
                         IF(.NOT. CLASS_IS_ACTIVE(MO)) THEN
 
                            INCOME_LINKED_LEVEL(MO,
-     +                                      Monthly Subsidiary Income,
+     +                                      Monthly_Subsidiary_Income,
      +                                            SUB_LINK_2_CLASS) = 0.
                         ELSE
                            INCOME_LINKED_LEVEL(MO,
-     +                                     Monthly Subsidiary Income,
+     +                                     Monthly_Subsidiary_Income,
      +                                               SUB_LINK_2_CLASS) =
      +                     INCOME_LINKED_LEVEL(MO,
-     +                       Monthly Subsidiary Income,SUB_LINK_2_CLASS)
+     +                       Monthly_Subsidiary_Income,SUB_LINK_2_CLASS)
      +                     + INCOME_VARIABLES(MO,
-     +                                        Monthly Earnings 2 Common)
+     +                                        Monthly_Earnings_2_Common)
                         ENDIF
                      ENDDO
-                     INCOME_LINKED_LEVEL(0,Monthly Subsidiary Income,
+                     INCOME_LINKED_LEVEL(0,Monthly_Subsidiary_Income,
      +                                               SUB_LINK_2_CLASS) =
      +                     SUM(INCOME_LINKED_LEVEL(1:,
-     +                                       Monthly Subsidiary Income,
+     +                                       Monthly_Subsidiary_Income,
      +                                                SUB_LINK_2_CLASS))
                      CYCLE
                   ENDIF
@@ -4406,7 +4406,7 @@ C
                   IF(VARIABLE == csh_4_redeeming_notes_owed) CYCLE
                   IF(VARIABLE == cash_4_new_notes_issued) CYCLE
                   IF(VARIABLE == cash_fm_notes_issd_by_othrs) CYCLE
-                  IF(VARIABLE == Cash Interest on Notes Payable) CYCLE
+                  IF(VARIABLE == Cash_Interest_on_Notes_Payable) CYCLE
                   IF(VARIABLE == cash_investmt_divnd_earngs)CYCLE
                   IF(VARIABLE == cash_invest_interest_ernings)CYCLE
                   IF(VARIABLE == cash_ltd_interest) CYCLE
@@ -4589,7 +4589,7 @@ C
                DO MO = 1, 12
                   IF(CLASS_IS_ACTIVE(MO)) THEN
 
-                     IF(VARIABLE == Cash Prior level Method Adj .AND.
+                     IF(VARIABLE == Cash_Prior_level_Method_Adj .AND.
      +                                .NOT. (CLASS_TYPE == PARENT)) THEN
                         CASH_LINKED_LEVEL(MO,VARIABLE,CLASS_LINK_2) =
      +                       CASH_LINKED_LEVEL(MO,VARIABLE,CLASS_LINK_2)
@@ -4599,10 +4599,10 @@ C
      +                                      Operating Method Adjustment)
      +                       + INCOME_VARIABLES(MO,
      +                                    Prior Years Method Adjustment)
-                     ELSEIF(VARIABLE == Cash Operating Method Adj .AND.
+                     ELSEIF(VARIABLE == Cash_Operating_Method_Adj .AND.
      +                                .NOT. (CLASS_TYPE == PARENT)) THEN
                         CASH_LINKED_LEVEL(MO,VARIABLE,CLASS_LINK_2) = 0.
-                     ELSEIF(VARIABLE==Cash Prior Years Method Adj .AND.
+                     ELSEIF(VARIABLE==Cash_Prior_Years_Method_Adj .AND.
      +                                .NOT. (CLASS_TYPE == PARENT)) THEN
                         CASH_LINKED_LEVEL(MO,VARIABLE,CLASS_LINK_2) = 0.
                      ELSE
@@ -4664,7 +4664,7 @@ C
      +                             SUB_FED_TAX_PAYMENTS_2_PARENT(:)
      +                             + SUB_STATE_TAX_PAYMENTS_2_PARENT(:)
                PARENT_COMMON_DIVIDEND(:) =
-     +                      INCOME_VARIABLES(:,Monthly Common Dividends)
+     +                      INCOME_VARIABLES(:,Monthly_Common_Dividends)
                PARENT_CASH_DIVIDEND_PAID(:) =
      +                           CASH_VARIABLES(:,cash_common_dividends)
                PARENT_COMMON_STOCK_ISSUED(:) =
@@ -4683,7 +4683,7 @@ C
      +                                   cash_fed_income_taxs_pd)
 
                SUB_DEFERRED_TAXES_DR(:) = INCOME_VARIABLES(:,
-     +                                  Monthly Income Tax Deferrals Dr)
+     +                                  Monthly_Income_Tax_Deferrals_Dr)
      +                                    - PARENT_DEFERRED_TAXES_DR(:)
 
          ENDIF
@@ -4720,7 +4720,7 @@ C ELIMINATE NA3 ODEC INCOME STATEMENT TRANSACTIONS
      +           INCOME_VARIABLES(:,
      +                           mthly_invstmt_earngs_rcvbl)
      +           + INCOME_VARIABLES(:,mty_totl_lti_income)
-     +           + INCOME_VARIABLES(:,BTL Monthly STInvestmet Income)
+     +           + INCOME_VARIABLES(:,BTL_Monthly_STInvestmet_Income)
      +           - CASH_VARIABLES(:,cash_investmt_divnd_earngs)
      +           - CASH_VARIABLES(:,cash_invest_interest_ernings)
      +           - CASH_VARIABLES(:,csh_st_invstmt_incm)  ! 112
@@ -4788,13 +4788,13 @@ C
 C
 C PROPERTY TAXES FOR CONSOLIDATED
 C
-            INCOME_VARIABLES(:,Monthly Property Taxes) =
-     +              INCOME_VARIABLES(:,Monthly Exp File Property Taxes)
+            INCOME_VARIABLES(:,Monthly_Property_Taxes) =
+     +              INCOME_VARIABLES(:,Monthly_Exp_File_Property_Taxes)
      +              + INCOME_VARIABLES(:,
      +                          mth_modl_calcd_prop_taxes)
 C
             DO VARIABLE = 1, INCOME_VARS 
-               IF(VARIABLE == Monthly Subsidiary Income) THEN
+               IF(VARIABLE == Monthly_Subsidiary_Income) THEN
                   INCOME_VARIABLES(:,VARIABLE) = UNMODELED_SUB_INCOME(:)
                   CYCLE
                ENDIF
@@ -4802,20 +4802,20 @@ C
                   INCOME_VARIABLES(:,VARIABLE) = SUB_OTHER_TAXES(:)
                   CYCLE
                ENDIF
-               IF(VARIABLE == Monthly Income Tax Deferrals Dr) THEN
+               IF(VARIABLE == Monthly_Income_Tax_Deferrals_Dr) THEN
                   INCOME_VARIABLES(:,VARIABLE) =
      +                                 PARENT_STATE_DR_TAX_FROM_NOLS(:)
      +                                 + SUB_STATE_DR_TAX_FROM_NOLS(:)
      +                                 + CONSOL_DEFERRED_TAXES_DR(:)
                   CYCLE
                ENDIF
-               IF(VARIABLE == Monthly Common Dividends) THEN
-                  INCOME_VARIABLES(:,Monthly Common Dividends) =
+               IF(VARIABLE == Monthly_Common_Dividends) THEN
+                  INCOME_VARIABLES(:,Monthly_Common_Dividends) =
      +                                         PARENT_COMMON_DIVIDEND(:)
                   CYCLE
                ENDIF
-               IF(VARIABLE == BTL Monthly Income Taxes) THEN
-                  INCOME_VARIABLES(:,BTL Monthly Income Taxes) =
+               IF(VARIABLE == BTL_Monthly_Income_Taxes) THEN
+                  INCOME_VARIABLES(:,BTL_Monthly_Income_Taxes) =
      +                                     SUB_BTL_FEDERAL_TAXES_PAID(:)
      +                                     + SUB_BTL_STATE_TAXES_PAID(:)
                   CYCLE
@@ -4892,11 +4892,11 @@ C            CASH_VARIABLES = 0.
             CALL MONTHLY_CASH_ELIM_REV_EXP(R_YR,INT2(-1),CASH_VARIABLES)
 C ELIMINATE NA3 ODEC INCOME STATEMENT TRANSACTIONS
             IF(ODEC() .AND. ODEC_NA3_ACTIVE) THEN
-               CASH_VARIABLES(:,Cash Purchased Power) =
-     +                            CASH_VARIABLES(:,Cash Purchased Power)
+               CASH_VARIABLES(:,Cash_Purchased_Power) =
+     +                            CASH_VARIABLES(:,Cash_Purchased_Power)
      +                            + ODEC_NA3_INTRA_BULK_POWER(:)
-               CASH_VARIABLES(:,Cash Bulk Power) =
-     +                                 CASH_VARIABLES(:,Cash Bulk Power)
+               CASH_VARIABLES(:,Cash_Bulk_Power) =
+     +                                 CASH_VARIABLES(:,Cash_Bulk_Power)
      +                                 + ODEC_NA3_INTRA_BULK_POWER(:)
             ENDIF
             CASH_VARIABLES(:,cash_property_taxes) =
@@ -4955,27 +4955,27 @@ C
 C RESUM THE CASH FLOW STATEMENT
 C
             DO MO = 0, 12
-               CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS) =
+               CASH_VARIABLES(MO,Cash_TOTAL_OPERATING_RECEIPTS) =
      +            SUM_CASH_RECEIPTS(MO,CASH_VARIABLES)
 C 
      +            + CASH_VARIABLES(MO,csh_st_invstmt_incm)
-     +            + CASH_VARIABLES(MO,Cash Operating Method Adj)
-     +            + CASH_VARIABLES(MO,Cash Prior level Method Adj)
-     +            + CASH_VARIABLES(MO,Cash Prior Years Method Adj)
+     +            + CASH_VARIABLES(MO,Cash_Operating_Method_Adj)
+     +            + CASH_VARIABLES(MO,Cash_Prior_level_Method_Adj)
+     +            + CASH_VARIABLES(MO,Cash_Prior_Years_Method_Adj)
      +            + CASH_VARIABLES(MO,cash_investmt_divnd_earngs)
      +            + CASH_VARIABLES(MO,cash_invest_interest_ernings)
 C
-               CASH_VARIABLES(MO,Cash TOTAL EXPENSE PAYMENTS) =
+               CASH_VARIABLES(MO,Cash_TOTAL_EXPENSE_PAYMENTS) =
      +                              SUM_CASH_PAYMENTS(MO,CASH_VARIABLES)
 C
                CASH_VARIABLES(MO,net_cash_receipts_or_pmts) =
-     +                CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS) -
-     +                CASH_VARIABLES(MO,Cash TOTAL EXPENSE PAYMENTS)
+     +                CASH_VARIABLES(MO,Cash_TOTAL_OPERATING_RECEIPTS) -
+     +                CASH_VARIABLES(MO,Cash_TOTAL_EXPENSE_PAYMENTS)
 C
 C CAPITAIL SERVICE
 C
                CASH_VARIABLES(MO,cash_capital_svc_pmts) =
-     +                 CASH_VARIABLES(MO,Cash Interest on Notes Payable)
+     +                 CASH_VARIABLES(MO,Cash_Interest_on_Notes_Payable)
      +                 + CASH_VARIABLES(MO,cash_ps_dividends)
      +                 + CASH_VARIABLES(MO,cash_ltd_interest)
      +                 + CASH_VARIABLES(MO,cash_std_interest)
@@ -5122,7 +5122,7 @@ C
                   INCOME_VARIABLES(MO,
      +                              mty_tot_fed_incm_tax_pd) =
      +                                        RPT_FEDERAL_INCOME_TAX(MO)
-                  INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Dr) =
+                  INCOME_VARIABLES(MO,Monthly_Income_Tax_Deferrals_Dr) =
      +                                PARENT_STATE_DR_TAX_FROM_NOLS(MO)
      +                                + SUB_STATE_DR_TAX_FROM_NOLS(MO)
      +                                + CONSOL_DEFERRED_TAXES_DR(MO)
@@ -5145,11 +5145,11 @@ C
             VOID_LOGICAL = SUM_MONTHLY_INCOME_REVENUES(INCOME_VARIABLES)
             VOID_LOGICAL = SUM_MONTHLY_INCOME_EXPENSES(INCOME_VARIABLES)
             VOID_LOGICAL = SUM_MONTHLY_TAXES_BTL_ITEMS(INCOME_VARIABLES)
-            INCOME_VARIABLES(0,Monthly Total Taxes Expense) =
+            INCOME_VARIABLES(0,Monthly_Total_Taxes_Expense) =
      +         MONTHLY_TOTAL_EXPENSES_B4_TAXES(INT2(0),INCOME_VARIABLES)
      +         + TOTAL_TAXES_EXPENSE(INT2(0),INCOME_VARIABLES) 
             DO MO = 1, 12
-               INCOME_VARIABLES(MO,Monthly Total Taxes Expense) =
+               INCOME_VARIABLES(MO,Monthly_Total_Taxes_Expense) =
      +              MONTHLY_TOTAL_EXPENSES_B4_TAXES(MO,INCOME_VARIABLES)
      +              + TOTAL_TAXES_EXPENSE(MO,INCOME_VARIABLES) 
             ENDDO
@@ -5179,7 +5179,7 @@ C
      +                                          monthly_long_term_debt)
      +                  + CASH_VARIABLES(MO,cash_ltd_issued)
      +                  - CASH_VARIABLES(MO,cash_ltd_retirements)
-     +                  - INCOME_VARIABLES(MO,Monthly LTD Premium Amort)
+     +                  - INCOME_VARIABLES(MO,Monthly_LTD_Premium_Amort)
                   ENDDO
                   CYCLE
                ENDIF
@@ -5191,7 +5191,7 @@ C
      +                  BALANCE_SHEET_VARIABLES(MO-1,VARIABLE)
      +                  + CASH_VARIABLES(MO,cash_ltd_issued)
      +                  - CASH_VARIABLES(MO,cash_ltd_retirements)
-     +                  - INCOME_VARIABLES(MO,Monthly LTD Premium Amort)
+     +                  - INCOME_VARIABLES(MO,Monthly_LTD_Premium_Amort)
                   ENDDO
                   CYCLE
                ENDIF
@@ -5204,7 +5204,7 @@ C
      +                                  monthly_retained_earnings_bal) =
      +                  BALANCE_SHEET_VARIABLES(MO-1,
      +                                    monthly_retained_earnings_bal)
-     +                  + INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS)
+     +                  + INCOME_VARIABLES(MO,Monthly_RETAINED_EARNINGS)
 
                   ENDDO
                   CYCLE
@@ -5218,7 +5218,7 @@ C
      +                                  monthly_subsidiary_investment) =
      +                  BALANCE_SHEET_VARIABLES(MO-1,
      +                                    monthly_subsidiary_investment)
-     +                  + INCOME_VARIABLES(MO,Monthly Subsidiary Income)
+     +                  + INCOME_VARIABLES(MO,Monthly_Subsidiary_Income)
      +                  - CASH_VARIABLES(MO,cash_subsidiary_dividends)
                   ENDDO
                   CYCLE
@@ -5239,7 +5239,7 @@ C
      +                     BALANCE_SHEET_VARIABLES(MO-1,
      +                                 monthly_deferred_income_taxes_dr)
      +                     - INCOME_VARIABLES(MO,
-     +                                  Monthly Income Tax Deferrals Dr)
+     +                                  Monthly_Income_Tax_Deferrals_Dr)
      +                     - INCOME_VARIABLES(MO,
      +                                         BTLMonthlyDeferralTaxDr) 
      +                     + SUB_FASB87_DEF_TAX_DR_ADJ(MO)
@@ -5269,11 +5269,11 @@ C
      +                        BALANCE_SHEET_VARIABLES(MO-1,
      +                                    mty_dfrd_income_taxes)
      +                        + INCOME_VARIABLES(MO,
-     +                                  Monthly Income Tax Deferrals Cr)
+     +                                  Monthly_Income_Tax_Deferrals_Cr)
      +                        + INCOME_VARIABLES(MO,
-     +                                 BTL Monthly Income Tax Deferrals)
+     +                                 BTL_Monthly_Income_Tax_Deferrals)
      +                        + INCOME_VARIABLES(MO,
-     +                                  Monthly Income Tax Deferrals Dr)
+     +                                  Monthly_Income_Tax_Deferrals_Dr)
                      ENDDO
                   ELSE
                      DO MO = 1, 12
@@ -5282,7 +5282,7 @@ C
      +                        BALANCE_SHEET_VARIABLES(MO-1,
      +                                    mty_dfrd_income_taxes)
      +                        + INCOME_VARIABLES(MO,
-     +                                  Monthly Income Tax Deferrals Cr)
+     +                                  Monthly_Income_Tax_Deferrals_Cr)
      +                        + INCOME_VARIABLES(MO,
      +                                         BTLMonthlyDeferralTaxCr) 
      +                        + NEW_ACQUISITION_DEF_TAXES_CR(MO)
@@ -5300,10 +5300,10 @@ C
      +                     BALANCE_SHEET_VARIABLES(MO-1,
      +                              monthly_other_long_term_liabs)
 
-     +                     - CASH_VARIABLES(MO,Cash Leased Nuclear Fuel)! - NUCLEAR_FUEL_LEASE_PAYMENTS
+     +                     - CASH_VARIABLES(MO,Cash_Leased_Nuclear_Fuel)! - NUCLEAR_FUEL_LEASE_PAYMENTS
      +                     + CASH_VARIABLES(MO,cash_lease_receipts)     ! + CAPITIALIZED_LEASE_ADDITIONS
-     +                     - CASH_VARIABLES(MO,Cash Lease Expense)      ! - ATL_LEASE_PAYMENTS
-     +                     - CASH_VARIABLES(MO,Cash BTL Lease Cash)     ! - BTL_LEASE_PAYMENTS
+     +                     - CASH_VARIABLES(MO,Cash_Lease_Expense)      ! - ATL_LEASE_PAYMENTS
+     +                     - CASH_VARIABLES(MO,Cash_BTL_Lease_Cash)     ! - BTL_LEASE_PAYMENTS
 
                   ENDDO
                   BALANCE_SHEET_VARIABLES(1:,
@@ -5328,7 +5328,7 @@ C
      +                + INCOME_VARIABLES(MO,
      +                           mthly_invstmt_earngs_rcvbl)
      +                + INCOME_VARIABLES(MO,
-     +                                   BTL Monthly STInvestmet Income)
+     +                                   BTL_Monthly_STInvestmet_Income)
      +                + INCOME_VARIABLES(MO,
      +                                mty_mdl_lt_nvst_income)
      +                + INCOME_VARIABLES(MO,
@@ -5360,29 +5360,29 @@ C WVPA RECEIVABLES
 C CHANGE IS EXPENSES PAYABLE
      +               + MONTHLY_CHANGE_IN_PAYABLES(MO)
 C STD INTEREST
-     +               + INCOME_VARIABLES(MO,Monthly STD Interest) 
+     +               + INCOME_VARIABLES(MO,Monthly_STD_Interest) 
      +               - CASH_VARIABLES(MO,cash_std_interest)
 C LTD INTEREST
-     +               + INCOME_VARIABLES(MO,Monthly LTD Booked Interest)
+     +               + INCOME_VARIABLES(MO,Monthly_LTD_Booked_Interest)
      +               - CASH_VARIABLES(MO,cash_ltd_interest)
 C COMMON DIVIDENDS
-     +               + INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +               + INCOME_VARIABLES(MO,Monthly_Common_Dividends)
      +               - CASH_VARIABLES(MO,cash_common_dividends)
 C PS DIVIDENDS
-     +               + INCOME_VARIABLES(MO,Monthly Booked PS Dividends)
+     +               + INCOME_VARIABLES(MO,Monthly_Booked_PS_Dividends)
      +               - CASH_VARIABLES(MO,cash_ps_dividends)
 C NOTES PAYABLE INTEREST
      +               + INCOME_VARIABLES(MO,
      +                                mty_intst_on_nts_pyble)
-     +               - CASH_VARIABLES(MO,Cash Interest on Notes Payable)
+     +               - CASH_VARIABLES(MO,Cash_Interest_on_Notes_Payable)
 C NON_INCOME_TAXES_ACCRUAL_ADJ
      +               + INCOME_VARIABLES(MO,monthly_oth_taxes)
-     +               + INCOME_VARIABLES(MO,Monthly Property Taxes) ! REMOVE 8.3.04
+     +               + INCOME_VARIABLES(MO,Monthly_Property_Taxes) ! REMOVE 8.3.04
      +               + INCOME_VARIABLES(MO,
-     +                                    Monthly Operating Revenue Tax)
-     +               + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
+     +                                    Monthly_Operating_Revenue_Tax)
+     +               + INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital)
      +               + INCOME_VARIABLES(MO,
-     +                                   Monthly Federal Tax on Capital)
+     +                                   Monthly_Federal_Tax_on_Capital)
      +               + INCOME_VARIABLES(MO,
      +                                wvpa_prop_txs_n_pwr_cst)
      +               - CASH_VARIABLES(MO,cash_operating_revenue_tax)  
@@ -5429,7 +5429,7 @@ C
             DO MO = 1, 12 
                BALANCE_SHEET_VARIABLES(MO,mtly_cwip) =
      +                BALANCE_SHEET_VARIABLES(MO-1,mtly_cwip)
-     +                + INCOME_VARIABLES(MO,Monthly AFUDC Total)
+     +                + INCOME_VARIABLES(MO,Monthly_AFUDC_Total)
      +                + CASH_VARIABLES(MO,cash_plant_construction)
      +                - BALANCE_SHEET_VARIABLES(MO,
      +                                 monthly_afudc_capitalized)
@@ -5487,8 +5487,8 @@ C
 C
 C AVERAGE CLOSING COMMON SHARES
 C
-            INCOME_VARIABLES(0,Monthly Shares Outstanding) =
-     +          SUM(INCOME_VARIABLES(1:,Monthly Shares Outstanding))/12.
+            INCOME_VARIABLES(0,Monthly_Shares_Outstanding) =
+     +          SUM(INCOME_VARIABLES(1:,Monthly_Shares_Outstanding))/12.
 
             CASH_VARIABLES(:,cash_tot_invest_intrst_earnings) =
      +             CASH_VARIABLES(:,cash_invest_interest_ernings)
@@ -5498,12 +5498,12 @@ C
      +                       + CASH_VARIABLES(:,cash_aro_trust_payments)
             PREVIOUS_BAL_SHEET_INBALANCE = 0.
             QUARTERLY_EARNINGS_PER_SHARE = 0.
-            CASH_VARIABLES(:,Cash Post Retirement Payments) =
-     +              CASH_VARIABLES(:,Cash Post Retirement Payments)
+            CASH_VARIABLES(:,Cash_Post_Retirement_Payments) =
+     +              CASH_VARIABLES(:,Cash_Post_Retirement_Payments)
      +              + CASH_VARIABLES(:,csh_2_post_retiremt_paymentss)
                                     
-            INCOME_VARIABLES(:,Monthly Property Taxes) =
-     +              INCOME_VARIABLES(:,Monthly Exp File Property Taxes)
+            INCOME_VARIABLES(:,Monthly_Property_Taxes) =
+     +              INCOME_VARIABLES(:,Monthly_Exp_File_Property_Taxes)
      +              + INCOME_VARIABLES(:,
      +                          mth_modl_calcd_prop_taxes)
             CASH_VARIABLES(:,cash_property_taxes) =
@@ -5512,35 +5512,35 @@ C
 C
             DO MO = 0, 12
                IF(CASH_VARIABLES(MO,common_shares_issued) /= 0) THEN
-                  CASH_VARIABLES(MO,Price of Issued Shares) =
+                  CASH_VARIABLES(MO,Price_of_Issued_Shares) =
      +                 (CASH_VARIABLES(MO,cash_common_stock_issued)
      +                  + CASH_VARIABLES(MO,cash_common_stock_buyback))/
      +                         CASH_VARIABLES(MO,common_shares_issued)
                ELSE
-                  CASH_VARIABLES(MO,Price of Issued Shares) = 0.
+                  CASH_VARIABLES(MO,Price_of_Issued_Shares) = 0.
                ENDIF
                IF(UI()) THEN
                   TAX_CASH_RETIREMENT_PAYMENTS =
      +              CASH_VARIABLES(MO,csh_unfundd_retrmt_pymts)
                   TAX_CASH_STORM_PAYMENTS =
-     +                            CASH_VARIABLES(MO,Cash Storm Payments)
+     +                            CASH_VARIABLES(MO,Cash_Storm_Payments)
                   TAX_CASH_VACATION_PAYMENTS =
-     +                         CASH_VARIABLES(MO,Cash Vacation Payments)
+     +                         CASH_VARIABLES(MO,Cash_Vacation_Payments)
                   TAX_BOOK_RETIREMENT_PAYMENTS = 0.
                   TAX_BOOK_STORM_PAYMENTS = 0.
                   TAX_BOOK_VACATION_PAYMENTS = 0.
                ELSE
                   TAX_BOOK_RETIREMENT_PAYMENTS =
-     +                      INCOME_VARIABLES(MO,Monthly Pension Expense)
+     +                      INCOME_VARIABLES(MO,Monthly_Pension_Expense)
                   TAX_BOOK_STORM_PAYMENTS =
-     +                        INCOME_VARIABLES(MO,Monthly Storm Expense)
+     +                        INCOME_VARIABLES(MO,Monthly_Storm_Expense)
                   TAX_BOOK_VACATION_PAYMENTS =
      +                         INCOME_VARIABLES(MO,monthly_vacation_pay)
                   TAX_CASH_RETIREMENT_PAYMENTS = 0.
                   TAX_CASH_STORM_PAYMENTS = 0.
                   TAX_CASH_VACATION_PAYMENTS = 0.
                ENDIF
-               INCOME_VARIABLES(MO,Monthly Other Debit Amort) =
+               INCOME_VARIABLES(MO,Monthly_Other Debit Amort) =
      +                    INCOME_VARIABLES(MO,monthly_other_atl_amort)
      +                    + INCOME_VARIABLES(MO,monthly_other_btl_amort)
 
@@ -5562,31 +5562,31 @@ C
      +                                   cash_fed_income_taxs_pd)   ! 108
                ENDIF
 C
-                INCOME_VARIABLES(MO,Monthly Earnings per Share) =
+                INCOME_VARIABLES(MO,Monthly_Earnings_per_Share) =
      +              THE_RATIO_OF_A_TO_B(
-     +                   INCOME_VARIABLES(MO,Monthly Earnings 2 Common),
-     +                  INCOME_VARIABLES(MO,Monthly Shares Outstanding))
+     +                   INCOME_VARIABLES(MO,Monthly_Earnings_2_Common),
+     +                  INCOME_VARIABLES(MO,Monthly_Shares_Outstanding))
                IF(MO==0) THEN
-                  INCOME_VARIABLES(MO,Quarterly Earnings per Share) =
-     +                   INCOME_VARIABLES(MO,Monthly Earnings per Share)
+                  INCOME_VARIABLES(MO,Quarterly_Earnings_per_Share) =
+     +                   INCOME_VARIABLES(MO,Monthly_Earnings_per_Share)
                ELSE
                   QUARTERLY_EARNINGS_PER_SHARE =
-     +                    INCOME_VARIABLES(MO,Monthly Earnings 2 Common)
+     +                    INCOME_VARIABLES(MO,Monthly_Earnings_2_Common)
      +                    + QUARTERLY_EARNINGS_PER_SHARE
                   IF(MO==3 .OR. MO==6 .OR. MO==9 .OR. MO==12) THEN
-                     INCOME_VARIABLES(MO,Quarterly Earnings per Share) =
+                     INCOME_VARIABLES(MO,Quarterly_Earnings_per_Share) =
      +                  THE_RATIO_OF_A_TO_B(
      +                                     QUARTERLY_EARNINGS_PER_SHARE,
-     +                  INCOME_VARIABLES(MO,Monthly Shares Outstanding))
+     +                  INCOME_VARIABLES(MO,Monthly_Shares_Outstanding))
                      QUARTERLY_EARNINGS_PER_SHARE = 0.
                   ELSE
                      INCOME_VARIABLES(MO,
-     +                         Quarterly Earnings per Share) = NOT_AVAIL
+     +                         Quarterly_Earnings_per_Share) = NOT_AVAIL
                   ENDIF
                ENDIF
 C
-               INCOME_VARIABLES(MO,BTL Monthly Interest Income) =
-     +              INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)
+               INCOME_VARIABLES(MO,BTL_Monthly_Interest_Income) =
+     +              INCOME_VARIABLES(MO,BTL_Monthly_STInvestmet_Income)
      +              + INCOME_VARIABLES(MO,
      +                                mty_mdl_lt_nvst_income)
      +              + INCOME_VARIABLES(MO,
@@ -5596,11 +5596,11 @@ C
 C
                IF(CALCULATE_BTL_INCOME_TAXES) THEN
                   RPT_BTL_TAXABLE_INTEREST_INCOME =
-     +                  INCOME_VARIABLES(MO,BTL Monthly Interest Income)   ! 33
+     +                  INCOME_VARIABLES(MO,BTL_Monthly_Interest_Income)   ! 33
                   RPT_BTL_TAXABLE_INVEST_EARNINGS =
-     +                  INCOME_VARIABLES(MO,Monthly Investment Earnings)   
+     +                  INCOME_VARIABLES(MO,Monthly_Investment_Earnings)   
      +                  - .7*INCOME_VARIABLES(MO,
-     +                                     Monthly Dividend 70 Earnings) ! 34
+     +                                     Monthly_Dividend_70_Earnings) ! 34
      +                  - INCOME_VARIABLES(MO,
      +                         mthy_rtrmt_med_fd_rngs) ! 9/28/04 changes
                   RPT_BTL_TAXABLE_LTI_INCOME =
@@ -5608,7 +5608,7 @@ C
      +                                mty_totl_lti_income) ! 35
                   RPT_BTL_TAXABLE_STI_INCOME =
      +                     INCOME_VARIABLES(MO,
-     +                                   BTL Monthly STInvestmet Income) ! 36
+     +                                   BTL_Monthly_STInvestmet_Income) ! 36
                ELSE
                   RPT_BTL_TAXABLE_INTEREST_INCOME = 0.
                   RPT_BTL_TAXABLE_INVEST_EARNINGS = 0.
@@ -5625,17 +5625,17 @@ C
      +                  + INCOME_VARIABLES(MO,
      +                                mty_tot_fed_incm_tax_pd) ! 136
      +                  + INCOME_VARIABLES(MO,
-     +                                  Monthly Income Tax Deferrals Dr) ! 89
+     +                                  Monthly_Income_Tax_Deferrals_Dr) ! 89
      +                  + INCOME_VARIABLES(MO,
-     +                                  Monthly Income Tax Deferrals Cr) ! 90
+     +                                  Monthly_Income_Tax_Deferrals_Cr) ! 90
      +                  + INCOME_VARIABLES(MO,
-     +                                 BTL Monthly Income Tax Deferrals) ! 97
-     +                  + INCOME_VARIABLES(MO,Monthly ITC Amortization)     ! 83
+     +                                 BTL_Monthly_Income_Tax_Deferrals) ! 97
+     +                  + INCOME_VARIABLES(MO,Monthly_ITC_Amortization)     ! 83
                ADJUSTED_BOOK_INCOME = 
-     +                       INCOME_VARIABLES(MO,Monthly Net Income) ! 25
-     +                       + INCOME_VARIABLES(MO,Monthly AFUDC Equity)         ! 108
+     +                       INCOME_VARIABLES(MO,Monthly_Net_Income) ! 25
+     +                       + INCOME_VARIABLES(MO,Monthly_AFUDC_Equity)         ! 108
      +                       + INCOME_VARIABLES(MO,
-     +                                   BTL Monthly NoTax Other Income) ! 16
+     +                                   BTL_Monthly_NoTax_Other_Income) ! 16
 
                BOOK_INCOME_B4_TAXES = TOTAL_INCOME_TAXES
      +                                + ADJUSTED_BOOK_INCOME
@@ -5688,42 +5688,42 @@ C
      +                       OUTPUT_CLASS_ID,
      +                      (BALANCE_SHEET_VARIABLES(MO,I),
      +                                              I=1,BAL_SHEET_VARS),
-     +                       INCOME_VARIABLES(MO,Monthly AFUDC Total),
+     +                       INCOME_VARIABLES(MO,Monthly_AFUDC_Total),
      +                       CASH_VARIABLES(MO,cash_plant_construction),
      +                       CHANGE_IN_DEFERRED_DEBIT_BAL(MO),
      +                       INCOME_VARIABLES(MO,
-     +                                    Monthly Issue Expense Amorts),
+     +                                    Monthly_Issue_Expense_Amorts),
      +                       INCOME_VARIABLES(MO,
-     +                                       Monthly LTD Premium Amort), ! 95
+     +                                       Monthly_LTD_Premium_Amort), ! 95
      +                       INCOME_VARIABLES(MO,
-     +                                        Monthly PS Premium Amort),
+     +                                        Monthly_PS_Premium_Amort),
      +                       INCOME_VARIABLES(MO,
-     +                                     Monthly Booked PS Dividends),
+     +                                     Monthly_Booked_PS_Dividends),
      +                       INCOME_VARIABLES(MO,
-     +                                     Monthly LTD Booked Interest),
+     +                                     Monthly_LTD_Booked_Interest),
      +                       MONTHLY_CHANGE_IN_PAYABLES(MO),            ! 99
      +                       MONTHLY_CHANGE_IN_RECEIVABLES(MO),         ! 100
 C STD INTEREST
-     +                       INCOME_VARIABLES(MO,Monthly STD Interest) 
+     +                       INCOME_VARIABLES(MO,Monthly_STD_Interest) 
      +                       - CASH_VARIABLES(MO,cash_std_interest),    !101
 C LTD INTEREST
-     +                  INCOME_VARIABLES(MO,Monthly LTD Booked Interest)
+     +                  INCOME_VARIABLES(MO,Monthly_LTD_Booked_Interest)
      +                  - CASH_VARIABLES(MO,cash_ltd_interest),         !102
 C COMMON DIVIDENDS
-     +                  INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +                  INCOME_VARIABLES(MO,Monthly_Common_Dividends)
      +                  - CASH_VARIABLES(MO,cash_common_dividends),     !103
 C PS DIVIDENDS
-     +                  INCOME_VARIABLES(MO,Monthly Booked PS Dividends)
+     +                  INCOME_VARIABLES(MO,Monthly_Booked_PS_Dividends)
      +                  - CASH_VARIABLES(MO,cash_ps_dividends),         !104
 C NOTES PAYABLE INTEREST
      +            INCOME_VARIABLES(MO,mty_intst_on_nts_pyble)
-     +            - CASH_VARIABLES(MO,Cash Interest on Notes Payable),  !105
+     +            - CASH_VARIABLES(MO,Cash_Interest_on_Notes_Payable),  !105
 C NON_INCOME_TAXES_ACCRUAL_ADJ
      +             INCOME_VARIABLES(MO,monthly_oth_taxes)
-     +             + INCOME_VARIABLES(MO,Monthly Property Taxes)
-     +             + INCOME_VARIABLES(MO,Monthly Operating Revenue Tax)
-     +             + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
-     +             + INCOME_VARIABLES(MO,Monthly Federal Tax on Capital)
+     +             + INCOME_VARIABLES(MO,Monthly_Property_Taxes)
+     +             + INCOME_VARIABLES(MO,Monthly_Operating_Revenue_Tax)
+     +             + INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital)
+     +             + INCOME_VARIABLES(MO,Monthly_Federal_Tax_on_Capital)
      +             + INCOME_VARIABLES(MO,
      +                                wvpa_prop_txs_n_pwr_cst)
      +             - CASH_VARIABLES(MO,cash_operating_revenue_tax)  
@@ -5744,13 +5744,13 @@ C BALANCE SHEET BALANCED?
      +          INCOME_VARIABLES(MO,
      +                           mthly_invstmt_earngs_rcvbl)
      +          + INCOME_VARIABLES(MO,mty_totl_lti_income)
-     +          + INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)
+     +          + INCOME_VARIABLES(MO,BTL_Monthly_STInvestmet_Income)
      +          - CASH_VARIABLES(MO,cash_investmt_divnd_earngs)
      +          - CASH_VARIABLES(MO,cash_invest_interest_ernings)
      +          - CASH_VARIABLES(MO,csh_st_invstmt_incm),  ! 112
      +          INCOME_VARIABLES(MO,Unbilled Revenues),    !113
-     +          INCOME_VARIABLES(MO,Monthly ATL Gain Amort)
-     +          + INCOME_VARIABLES(MO,Monthly BTL Gain Amort), ! 114
+     +          INCOME_VARIABLES(MO,Monthly_ATL_Gain_Amort)
+     +          + INCOME_VARIABLES(MO,Monthly_BTL_Gain_Amort), ! 114
      +          WVPA_OFF_SYSTEM_SALES_RECEIVABLE(MO), ! 115
      +          WVPA_OFF_SYSTEM_SALES_PAYABLE(MO), ! 116
      +          WVPA_INTERNAL_POWER_COSTS_PAYABLE(MO) ! 117
@@ -5788,24 +5788,24 @@ C
      +               INCOME_VARIABLES(MO,Other Revenue),
      +               INCOME_VARIABLES(MO,Gas Revenues),
      +               INCOME_VARIABLES(MO,Relationship Revenues),
-     +               INCOME_VARIABLES(MO,Monthly Catawba Revenues),
+     +               INCOME_VARIABLES(MO,Monthly_Catawba_Revenues),
      +               INCOME_VARIABLES(MO,TOTAL OPERATING REVENUES),      ! 20
      +               INCOME_VARIABLES(MO,Prior Years Method Adjustment), ! 21
-     +               INCOME_VARIABLES(MO,ICAP Revenues),                 ! 22
-     +               INCOME_VARIABLES(MO,Total Derivative Revenues),     ! 23
+     +               INCOME_VARIABLES(MO,ICAP_Revenues),                 ! 22
+     +               INCOME_VARIABLES(MO,Total_Derivative_Revenues),     ! 23
      +               INCOME_VARIABLES(MO,
-     +                                  Total Fuel Derivative Revenues), ! 24
-     +               INCOME_VARIABLES(MO,Monthly Net Income),            ! 25
-     +               INCOME_VARIABLES(MO,Monthly AFUDC Equity),          ! 26
+     +                                  Total_Fuel_Derivative_Revenues), ! 24
+     +               INCOME_VARIABLES(MO,Monthly_Net_Income),            ! 25
+     +               INCOME_VARIABLES(MO,Monthly_AFUDC_Equity),          ! 26
      +               INCOME_VARIABLES(MO,
-     +                                  BTL Monthly NoTax Other Income), ! 27
+     +                                  BTL_Monthly_NoTax_Other_Income), ! 27
      +               INCOME_VARIABLES(MO,
-     +                                 Monthly Income Tax Deferrals Dr), ! 28
+     +                                 Monthly_Income_Tax_Deferrals_Dr), ! 28
      +               INCOME_VARIABLES(MO,
-     +                                  Monthly Income Tax Deferrals Cr)
+     +                                  Monthly_Income_Tax_Deferrals_Cr)
      +                  + INCOME_VARIABLES(MO,
-     +                                BTL Monthly Income Tax Deferrals), ! 29
-     +               INCOME_VARIABLES(MO,Monthly ITC Amortization),     ! 30
+     +                                BTL_Monthly_Income_Tax_Deferrals), ! 29
+     +               INCOME_VARIABLES(MO,Monthly_ITC_Amortization),     ! 30
 C
 C BTL INCOME ITEMS
 C
@@ -5833,54 +5833,54 @@ C Total Investment Income
      +               + RPT_NON_BOOK_TAXABLE_ITEMS(MO),                   
 C TAXABLE DEDUCTIONS
 C EXPENSE ITEMS ARE OFFEST BY  EXP_OFFSET_LINE WHICH IS 30
-     +               INCOME_VARIABLES(MO,Monthly Fossil Fuel),
+     +               INCOME_VARIABLES(MO,Monthly_Fossil_Fuel),
      +               INCOME_VARIABLES(MO,
      +                                monthly_nuclr_fuel_tax_expns),  ! 52
-     +               INCOME_VARIABLES(MO,Monthly DOE Decommissioning),
-     +               INCOME_VARIABLES(MO,Monthly DOE Disposal),
+     +               INCOME_VARIABLES(MO,Monthly_DOE_Decommissioning),
+     +               INCOME_VARIABLES(MO,Monthly_DOE_Disposal),
      +               INCOME_VARIABLES(MO,monthly_purchased_power),
      +               INCOME_VARIABLES(MO,monthly_variable_oandm),
      +               INCOME_VARIABLES(MO,monthly_fixed_oandm),
-     +               INCOME_VARIABLES(MO,Monthly Service Transactions),
+     +               INCOME_VARIABLES(MO,Monthly_Service_Transactions),
      +               INCOME_VARIABLES(MO,monthly_other_oandm),
      +               INCOME_VARIABLES(MO,monthly_purchased_gas),         ! 60
-     +               INCOME_VARIABLES(MO,Monthly Other),
+     +               INCOME_VARIABLES(MO,Monthly_Other),
      +               INCOME_VARIABLES(MO,
-     +                                  Monthly Transmission Operation),
+     +                                  Monthly_Transmission_Operation),
      +               INCOME_VARIABLES(MO,
      +                                monthly_xmsn_maintnc),
      +               INCOME_VARIABLES(MO,
-     +                                  Monthly Distribution Operation),
+     +                                  Monthly_Distribution_Operation),
      +               INCOME_VARIABLES(MO,
-     +                                Monthly Distribution Maintenance),
-     +               INCOME_VARIABLES(MO,Monthly Customer Accounts),
-     +               INCOME_VARIABLES(MO,Monthly Customer Services),
-     +               INCOME_VARIABLES(MO,Monthly Sales Expense),
-     +               INCOME_VARIABLES(MO,Monthly AG Operations),
-     +               INCOME_VARIABLES(MO,Monthly AG Maintenance),
-     +              INCOME_VARIABLES(MO,Monthly Lease Interest Expense), ! 71
-     +               INCOME_VARIABLES(MO,Monthly DSM Expense),
-     +               INCOME_VARIABLES(MO,Monthly DSM Rebate),
-     +               INCOME_VARIABLES(MO,Monthly Emission Credits),
-     +               INCOME_VARIABLES(MO,Monthly Catawba Expenses),      ! 75
+     +                                Monthly_Distribution_Maintenance),
+     +               INCOME_VARIABLES(MO,Monthly_Customer_Accounts),
+     +               INCOME_VARIABLES(MO,Monthly_Customer_Services),
+     +               INCOME_VARIABLES(MO,Monthly_Sales_Expense),
+     +               INCOME_VARIABLES(MO,Monthly_AG_Operations),
+     +               INCOME_VARIABLES(MO,Monthly_AG_Maintenance),
+     +              INCOME_VARIABLES(MO,Monthly_Lease_Interest_Expense), ! 71
+     +               INCOME_VARIABLES(MO,Monthly_DSM_Expense),
+     +               INCOME_VARIABLES(MO,Monthly_DSM_Rebate),
+     +               INCOME_VARIABLES(MO,Monthly_Emission_Credits),
+     +               INCOME_VARIABLES(MO,Monthly_Catawba_Expenses),      ! 75
      +               TAX_BOOK_RETIREMENT_PAYMENTS,                       ! 76
      +               TAX_BOOK_STORM_PAYMENTS,                            ! 77
      +               TAX_BOOK_VACATION_PAYMENTS,                         ! 78
-     +               INCOME_VARIABLES(MO,Total Derivative Expenses),      ! 79
-     +               INCOME_VARIABLES(MO,Monthly Retirement Expense),    ! 80
+     +               INCOME_VARIABLES(MO,Total_Derivative_Expenses),      ! 79
+     +               INCOME_VARIABLES(MO,Monthly_Retirement_Expense),    ! 80
 C BTL ITEMS ARE NOT OFFSET
-     +               INCOME_VARIABLES(MO,Monthly STD Interest),          ! 81
+     +               INCOME_VARIABLES(MO,Monthly_STD_Interest),          ! 81
      +               INCOME_VARIABLES(MO,
      +                               mty_intst_on_nts_pyble), ! 82
      +               TAX_VARIABLES(MO,monthly_ltd_tax_deduction),        ! 83
-     +               INCOME_VARIABLES(MO,Monthly LTD Total Interest)     
-     +               - INCOME_VARIABLES(MO,Monthly LTD Amort Interest),  ! 84
+     +               INCOME_VARIABLES(MO,Monthly_LTD_Total_Interest)     
+     +               - INCOME_VARIABLES(MO,Monthly_LTD_Amort_Interest),  ! 84
      +               INCOME_VARIABLES(MO,monthly_oth_taxes),           ! 85
-     +               INCOME_VARIABLES(MO,Monthly Property Taxes),        ! 86
-     +               INCOME_VARIABLES(MO,Monthly Operating Revenue Tax), ! 87
-     +               INCOME_VARIABLES(MO,Monthly State Tax on Capital),  ! 88
-     +               INCOME_VARIABLES(MO,Monthly LTD Amort Interest),    ! 89
-     +              INCOME_VARIABLES(MO,Total Fuel Derivative Expenses), ! 90
+     +               INCOME_VARIABLES(MO,Monthly_Property_Taxes),        ! 86
+     +               INCOME_VARIABLES(MO,Monthly_Operating_Revenue_Tax), ! 87
+     +               INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital),  ! 88
+     +               INCOME_VARIABLES(MO,Monthly_LTD_Amort_Interest),    ! 89
+     +              INCOME_VARIABLES(MO,Total_Fuel_Derivative_Expenses), ! 90
 C TAKE DEDUCTIONS
      +               INCOME_TAX_DEPRECIATION,                            ! 91
      +               ANNUAL_VARS(228),     ! CONSTRUCTION_TAX_EXPENSE/12.! 92
@@ -6021,42 +6021,42 @@ C
      +                       OUTPUT_CLASS_ID,
      +                      (BALANCE_SHEET_VARIABLES(MO,I),
      +                                              I=1,BAL_SHEET_VARS),
-     +                       INCOME_VARIABLES(MO,Monthly AFUDC Total),
+     +                       INCOME_VARIABLES(MO,Monthly_AFUDC_Total),
      +                       CASH_VARIABLES(MO,cash_plant_construction),
      +                       CHANGE_IN_DEFERRED_DEBIT_BAL(MO),
      +                       INCOME_VARIABLES(MO,
-     +                                    Monthly Issue Expense Amorts),
+     +                                    Monthly_Issue_Expense_Amorts),
      +                       INCOME_VARIABLES(MO,
-     +                                       Monthly LTD Premium Amort), ! 95
+     +                                       Monthly_LTD_Premium_Amort), ! 95
      +                       INCOME_VARIABLES(MO,
-     +                                        Monthly PS Premium Amort),
+     +                                        Monthly_PS_Premium_Amort),
      +                       INCOME_VARIABLES(MO,
-     +                                     Monthly Booked PS Dividends),
+     +                                     Monthly_Booked_PS_Dividends),
      +                       INCOME_VARIABLES(MO,
-     +                                     Monthly LTD Booked Interest),
+     +                                     Monthly_LTD_Booked_Interest),
      +                       MONTHLY_CHANGE_IN_PAYABLES(MO),
      +                       MONTHLY_CHANGE_IN_RECEIVABLES(MO),
 C STD INTEREST
-     +                       INCOME_VARIABLES(MO,Monthly STD Interest) 
+     +                       INCOME_VARIABLES(MO,Monthly_STD_Interest) 
      +                       - CASH_VARIABLES(MO,cash_std_interest),    !101
 C LTD INTEREST
-     +                  INCOME_VARIABLES(MO,Monthly LTD Booked Interest)
+     +                  INCOME_VARIABLES(MO,Monthly_LTD_Booked_Interest)
      +                  - CASH_VARIABLES(MO,cash_ltd_interest),         !102
 C COMMON DIVIDENDS
-     +                  INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +                  INCOME_VARIABLES(MO,Monthly_Common_Dividends)
      +                  - CASH_VARIABLES(MO,cash_common_dividends),     !103
 C PS DIVIDENDS
-     +                  INCOME_VARIABLES(MO,Monthly Booked PS Dividends)
+     +                  INCOME_VARIABLES(MO,Monthly_Booked_PS_Dividends)
      +                  - CASH_VARIABLES(MO,cash_ps_dividends),         !104
 C NOTES PAYABLE INTEREST
      +            INCOME_VARIABLES(MO,mty_intst_on_nts_pyble)
-     +            - CASH_VARIABLES(MO,Cash Interest on Notes Payable),  !105
+     +            - CASH_VARIABLES(MO,Cash_Interest_on_Notes_Payable),  !105
 C NON_INCOME_TAXES_ACCRUAL_ADJ
      +             INCOME_VARIABLES(MO,monthly_oth_taxes)
-     +             + INCOME_VARIABLES(MO,Monthly Property Taxes)
-     +             + INCOME_VARIABLES(MO,Monthly Operating Revenue Tax)
-     +             + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
-     +             + INCOME_VARIABLES(MO,Monthly Federal Tax on Capital)
+     +             + INCOME_VARIABLES(MO,Monthly_Property_Taxes)
+     +             + INCOME_VARIABLES(MO,Monthly_Operating_Revenue_Tax)
+     +             + INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital)
+     +             + INCOME_VARIABLES(MO,Monthly_Federal_Tax_on_Capital)
      +             + INCOME_VARIABLES(MO,
      +                                wvpa_prop_txs_n_pwr_cst)
      +             - CASH_VARIABLES(MO,cash_operating_revenue_tax)  
@@ -6080,13 +6080,13 @@ C BALANCE SHEET BALANCED?
      +          INCOME_VARIABLES(MO,
      +                           mthly_invstmt_earngs_rcvbl)
      +          + INCOME_VARIABLES(MO,mty_totl_lti_income)
-     +          + INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)
+     +          + INCOME_VARIABLES(MO,BTL_Monthly_STInvestmet_Income)
      +          - CASH_VARIABLES(MO,cash_investmt_divnd_earngs)
      +          - CASH_VARIABLES(MO,cash_invest_interest_ernings) 
      +          - CASH_VARIABLES(MO,csh_st_invstmt_incm),          ! 112
      +          INCOME_VARIABLES(MO,Unbilled Revenues),    !113
-     +          INCOME_VARIABLES(MO,Monthly ATL Gain Amort)
-     +          + INCOME_VARIABLES(MO,Monthly BTL Gain Amort), ! 114
+     +          INCOME_VARIABLES(MO,Monthly_ATL_Gain_Amort)
+     +          + INCOME_VARIABLES(MO,Monthly_BTL_Gain_Amort), ! 114
      +          WVPA_OFF_SYSTEM_SALES_RECEIVABLE(MO), ! 115
      +          WVPA_OFF_SYSTEM_SALES_PAYABLE(MO), ! 116
      +          WVPA_INTERNAL_POWER_COSTS_PAYABLE(MO) ! 117
@@ -6124,24 +6124,24 @@ C
      +               INCOME_VARIABLES(MO,Other Revenue),
      +               INCOME_VARIABLES(MO,Gas Revenues),
      +               INCOME_VARIABLES(MO,Relationship Revenues),
-     +               INCOME_VARIABLES(MO,Monthly Catawba Revenues),
+     +               INCOME_VARIABLES(MO,Monthly_Catawba_Revenues),
      +               INCOME_VARIABLES(MO,TOTAL OPERATING REVENUES),      ! 20
      +               INCOME_VARIABLES(MO,Prior Years Method Adjustment), ! 21
-     +               INCOME_VARIABLES(MO,ICAP Revenues),
-     +               INCOME_VARIABLES(MO,Total Derivative Revenues),     ! 23
+     +               INCOME_VARIABLES(MO,ICAP_Revenues),
+     +               INCOME_VARIABLES(MO,Total_Derivative_Revenues),     ! 23
      +               INCOME_VARIABLES(MO,
-     +                                  Total Fuel Derivative Revenues), ! 24
-     +               INCOME_VARIABLES(MO,Monthly Net Income),            ! 25
-     +               INCOME_VARIABLES(MO,Monthly AFUDC Equity),          ! 26
+     +                                  Total_Fuel_Derivative_Revenues), ! 24
+     +               INCOME_VARIABLES(MO,Monthly_Net_Income),            ! 25
+     +               INCOME_VARIABLES(MO,Monthly_AFUDC_Equity),          ! 26
      +               INCOME_VARIABLES(MO,
-     +                                  BTL Monthly NoTax Other Income), ! 27
+     +                                  BTL_Monthly_NoTax_Other_Income), ! 27
      +               INCOME_VARIABLES(MO,
-     +                                 Monthly Income Tax Deferrals Dr) 
+     +                                 Monthly_Income_Tax_Deferrals_Dr) 
      +                   + INCOME_VARIABLES(MO,BTLMonthlyDeferralTaxCr),  ! 28
      +               INCOME_VARIABLES(MO,
-     +                                  Monthly Income Tax Deferrals Cr)
+     +                                  Monthly_Income_Tax_Deferrals_Cr)
      +                   + INCOME_VARIABLES(MO,BTLMonthlyDeferralTaxCr),  ! 29
-     +               INCOME_VARIABLES(MO,Monthly ITC Amortization),     ! 30
+     +               INCOME_VARIABLES(MO,Monthly_ITC_Amortization),     ! 30
 C
 C BTL INCOME ITEMS
 C
@@ -6155,7 +6155,7 @@ C Total Investment Income
      +               ANNUAL_VARS(129)/12., ! CAPITIALIZED_INTEREST/12.  ! 37
      +               INCOME_VARIABLES(MO,PGA Adjustment),               ! 38
      +               INCOME_VARIABLES(MO,
-     +                                BTL Monthly Income Tax Deferrals), ! 39
+     +                                BTL_Monthly_Income_Tax_Deferrals), ! 39
      +               ZERO_POS,                                          ! 40
      +               CASH_VARIABLES(MO,cash_net_salvage),               ! 41
      +               TAX_CASH_STORM_PAYMENTS,                           ! 42
@@ -6207,30 +6207,30 @@ C EXPENSE ITEMS ARE OFFEST BY  EXP_OFFSET_LINE WHICH IS 30
      +                                               + EXP_OFFSET_LINE), 
      +               INCOME_VARIABLES(MO,AG Maintenance
      +                                               + EXP_OFFSET_LINE), ! 70
-     +              INCOME_VARIABLES(MO,Monthly Lease Interest Expense), ! 71
+     +              INCOME_VARIABLES(MO,Monthly_Lease_Interest_Expense), ! 71
      +               INCOME_VARIABLES(MO,DSM Expense+ EXP_OFFSET_LINE),
      +               INCOME_VARIABLES(MO,DSM Rebate+ EXP_OFFSET_LINE),
-     +               INCOME_VARIABLES(MO,Monthly Emission Credits),
+     +               INCOME_VARIABLES(MO,Monthly_Emission_Credits),
      +               INCOME_VARIABLES(MO,Catawba Expenses
      +                                               + EXP_OFFSET_LINE), ! 75
      +               TAX_BOOK_RETIREMENT_PAYMENTS,                       ! 76
      +               TAX_BOOK_STORM_PAYMENTS,                            ! 77
      +               TAX_BOOK_VACATION_PAYMENTS,                         ! 78
-     +               INCOME_VARIABLES(MO,Total Derivative Expenses),     ! 79
-     +               INCOME_VARIABLES(MO,Monthly Retirement Expense),    ! 80
+     +               INCOME_VARIABLES(MO,Total_Derivative_Expenses),     ! 79
+     +               INCOME_VARIABLES(MO,Monthly_Retirement_Expense),    ! 80
 C BTL ITEMS ARE NOT OFFSET
-     +               INCOME_VARIABLES(MO,Monthly STD Interest),          ! 81
+     +               INCOME_VARIABLES(MO,Monthly_STD_Interest),          ! 81
      +               INCOME_VARIABLES(MO,
      +                               mty_intst_on_nts_pyble), ! 82
      +               TAX_VARIABLES(MO,monthly_ltd_tax_deduction),        ! 83
-     +               INCOME_VARIABLES(MO,Monthly LTD Total Interest)     
-     +               - INCOME_VARIABLES(MO,Monthly LTD Amort Interest),  ! 84
+     +               INCOME_VARIABLES(MO,Monthly_LTD_Total_Interest)     
+     +               - INCOME_VARIABLES(MO,Monthly_LTD_Amort_Interest),  ! 84
      +               INCOME_VARIABLES(MO,monthly_oth_taxes),           ! 85
-     +               INCOME_VARIABLES(MO,Monthly Property Taxes),        ! 86
-     +               INCOME_VARIABLES(MO,Monthly Operating Revenue Tax), ! 87
-     +               INCOME_VARIABLES(MO,Monthly State Tax on Capital),  ! 88
-     +               INCOME_VARIABLES(MO,Monthly LTD Amort Interest),    ! 89
-     +              INCOME_VARIABLES(MO,Total Fuel Derivative Expenses), ! 90
+     +               INCOME_VARIABLES(MO,Monthly_Property_Taxes),        ! 86
+     +               INCOME_VARIABLES(MO,Monthly_Operating_Revenue_Tax), ! 87
+     +               INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital),  ! 88
+     +               INCOME_VARIABLES(MO,Monthly_LTD_Amort_Interest),    ! 89
+     +              INCOME_VARIABLES(MO,Total_Fuel_Derivative_Expenses), ! 90
 C TAKE DEDUCTIONS
      +               INCOME_TAX_DEPRECIATION/12.,                        ! 91
      +               ANNUAL_VARS(228)/12., ! CONSTRUCTION_TAX_EXPENSE/12.! 92
@@ -6384,15 +6384,15 @@ C
                      SUB_BTL_TAXABLE_INVEST_INCOME(MO) =   ! 32 TAX TABLE
      +                                 SUB_BTL_TAXABLE_INVEST_INCOME(MO)  ! 32 TAX TABLE
 
-     +                + INCOME_VARIABLES(MO,Monthly Investment Earnings)
+     +                + INCOME_VARIABLES(MO,Monthly_Investment_Earnings)
      +                - .7*INCOME_VARIABLES(MO,
-     +                                     Monthly Dividend 70 Earnings)
+     +                                     Monthly_Dividend_70_Earnings)
      +                - INCOME_VARIABLES(MO,
      +                         mthy_rtrmt_med_fd_rngs) ! 9/28/04
      +                + INCOME_VARIABLES(MO,
      +                                mty_totl_lti_income)
      +                + INCOME_VARIABLES(MO,
-     +                                   BTL Monthly STInvestmet Income)
+     +                                   BTL_Monthly_STInvestmet_Income)
                      SUB_BTL_TAXABLE_EXPENSES(MO) =        ! 95 TAX TABLE
      +                                    SUB_BTL_TAXABLE_EXPENSES(MO)       ! 95 TAX TABLE
      +                                    + RPT_BTL_TAXABLE_EXPENSES(MO)          ! 95
@@ -7195,35 +7195,35 @@ C
             CPL_TAX__VARIABLES(MO,income_b4_income_taxes,ATL) =
      +          INCOME_VARIABLES(MO,monthly_total_revenues) -
      +          INCOME_VARIABLES(MO,mthly_pretax_expenses) -
-     +          INCOME_VARIABLES(MO,Monthly State Tax on Capital) -
-     +          INCOME_VARIABLES(MO,Monthly Property Taxes) -
-     +          INCOME_VARIABLES(MO,Monthly Federal Tax on Capital) -
+     +          INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital) -
+     +          INCOME_VARIABLES(MO,Monthly_Property_Taxes) -
+     +          INCOME_VARIABLES(MO,Monthly_Federal_Tax_on_Capital) -
      +          INCOME_VARIABLES(MO,monthly_oth_taxes) -
-     +          INCOME_VARIABLES(MO,Monthly Operating Revenue Tax)
+     +          INCOME_VARIABLES(MO,Monthly_Operating_Revenue_Tax)
             CPL_TAX__VARIABLES(MO,tax_afudc_equity,ATL) = 
-     +                         INCOME_VARIABLES(MO,Monthly AFUDC Equity)
+     +                         INCOME_VARIABLES(MO,Monthly_AFUDC_Equity)
             CPL_TAX__VARIABLES(MO,tax_afudc_borrowed,ATL) =
-     +                       INCOME_VARIABLES(MO,Monthly AFUDC Borrowed)
+     +                       INCOME_VARIABLES(MO,Monthly_AFUDC_Borrowed)
             CPL_TAX__VARIABLES(MO,tax_total_afudc,ATL) = 
      +                  -(CPL_TAX__VARIABLES(MO,tax_afudc_equity,ATL) +
      +                    CPL_TAX__VARIABLES(MO,tax_afudc_borrowed,ATL))
 
             CPL_TAX__VARIABLES(MO,tax_interest_expenses,ATL) =
-     +       -(INCOME_VARIABLES(MO,Monthly LTD Total Interest) ! NEED THIS VALUE WITHOUT AMORT
-     +         + INCOME_VARIABLES(MO,Monthly STD Interest)
+     +       -(INCOME_VARIABLES(MO,Monthly_LTD_Total_Interest) ! NEED THIS VALUE WITHOUT AMORT
+     +         + INCOME_VARIABLES(MO,Monthly_STD_Interest)
      +         + INCOME_VARIABLES(MO,mty_intst_on_nts_pyble))
 
             CPL_TAX__VARIABLES(MO,tax_interest_adjustment,ATL) = 0.
             CPL_TAX__VARIABLES(MO,
      +                         tax_interest_2_assoc_comp,ATL) = 0.
             CPL_TAX__VARIABLES(MO,tax_book_depreciation,ATL) =
-     +                    INCOME_VARIABLES(MO,Monthly Book Depreciation)
+     +                    INCOME_VARIABLES(MO,Monthly_Book_Depreciation)
             CPL_TAX__VARIABLES(MO,tax_amortization,ATL) =
-     +                    INCOME_VARIABLES(MO,Monthly Amortization)
+     +                    INCOME_VARIABLES(MO,Monthly_Amortization)
             CPL_TAX__VARIABLES(MO,tax_interest_amortization,ATL) =
-     +                   INCOME_VARIABLES(MO,Monthly LTD Amort Interest)
+     +                   INCOME_VARIABLES(MO,Monthly_LTD_Amort_Interest)
             CPL_TAX__VARIABLES(MO,tax_book_nclr_fuel,ATL) =
-     +                 INCOME_VARIABLES(MO,Monthly Nuclear Fuel Expense)
+     +                 INCOME_VARIABLES(MO,Monthly_Nuclear_Fuel_Expense)
             CPL_TAX__VARIABLES(MO,tax_state_income_tax,ATL) =
      +                  TAX_VARIABLES(MO,monthly_atl_state_income_taxes)
 C
@@ -7239,11 +7239,11 @@ C
 C BTL ITEMS
 C
             CPL_TAX__VARIABLES(MO,income_b4_income_taxes,BTL) =
-     +          INCOME_VARIABLES(MO,BTL monthly_other_income)
+     +          INCOME_VARIABLES(MO,BTL_monthly_other_income)
      +          + INCOME_VARIABLES(MO,mty_totl_lti_income)
-     +          + INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)
-     +          - INCOME_VARIABLES(MO,BTL Monthly Expenses)
-     +          - INCOME_VARIABLES(MO,BTL Monthly Amortization)
+     +          + INCOME_VARIABLES(MO,BTL_Monthly_STInvestmet_Income)
+     +          - INCOME_VARIABLES(MO,BTL_Monthly_Expenses)
+     +          - INCOME_VARIABLES(MO,BTL Monthly_Amortization)
             CPL_TAX__VARIABLES(MO,tax_afudc_equity,BTL) = 0.
             CPL_TAX__VARIABLES(MO,tax_afudc_borrowed,BTL) = 0.
             CPL_TAX__VARIABLES(MO,tax_total_afudc,BTL) = 0.
@@ -7253,7 +7253,7 @@ C
      +                         tax_interest_2_assoc_comp,BTL) = 0.
             CPL_TAX__VARIABLES(MO,tax_book_depreciation,BTL) = 0.
             CPL_TAX__VARIABLES(MO,tax_amortization,BTL) =
-     +                    INCOME_VARIABLES(MO,BTL Monthly Amortization)
+     +                    INCOME_VARIABLES(MO,BTL Monthly_Amortization)
             CPL_TAX__VARIABLES(MO,tax_interest_amortization,BTL) = 0.
 C
             CPL_TAX__VARIABLES(MO,temp_tax_differences,BTL) =
@@ -7606,21 +7606,21 @@ C
             USE_REVENUES_TO_ALLOCATE = .TRUE.
             IF(CLASS_REVENUE_TAX_REVENUES(MO) /= 0.) THEN
                REVENUE_TAX_ALLOCATOR = 
-     +             INCOME_VARIABLES(0,Monthly Operating Revenue Tax)/
+     +             INCOME_VARIABLES(0,Monthly_Operating_Revenue_Tax)/
      +                        CLASS_REVENUE_TAX_REVENUES(MO)
                ALLOCATE_REVENUE_TAX = REVENUE_TAX_ALLOCATOR
             ELSE
                USE_REVENUES_TO_ALLOCATE = .FALSE.
                MONTHLY_REVENUE_TAX =
-     +             INCOME_VARIABLES(0,Monthly Operating Revenue Tax)/12.
+     +             INCOME_VARIABLES(0,Monthly_Operating_Revenue_Tax)/12.
                ALLOCATE_REVENUE_TAX = MONTHLY_REVENUE_TAX
             ENDIF
          ELSE
             IF(USE_REVENUES_TO_ALLOCATE) THEN
-               ALLOCATE_REVENUE_TAX =  ! INCOME_VARIABLES(MO,Monthly Operating Revenue Tax) =
+               ALLOCATE_REVENUE_TAX =  ! INCOME_VARIABLES(MO,Monthly_Operating_Revenue_Tax) =
      +            REVENUE_TAX_ALLOCATOR * CLASS_REVENUE_TAX_REVENUES(MO)
             ELSE   
-               ALLOCATE_REVENUE_TAX = ! INCOME_VARIABLES(MO,Monthly Operating Revenue Tax) =
+               ALLOCATE_REVENUE_TAX = ! INCOME_VARIABLES(MO,Monthly_Operating_Revenue_Tax) =
      +                                          MONTHLY_REVENUE_TAX
             ENDIF
          ENDIF
@@ -7635,21 +7635,21 @@ C***********************************************************************
 C***********************************************************************
 C
          CLASS_NON_VARIABLE_EXPENSE(MO) =
-     +              INCOME_VARIABLES(MO,Cash Fixed OandM)
-     +              + INCOME_VARIABLES(MO,Cash Other OandM)
-     +              + INCOME_VARIABLES(MO,Cash Purchased Gas)
-     +              + INCOME_VARIABLES(MO,Cash Other)
-     +              + INCOME_VARIABLES(MO,Cash Transmission Operation)
-     +              + INCOME_VARIABLES(MO,Cash Transmission Maintenance)
-     +              + INCOME_VARIABLES(MO,Cash Distribution Operation)
-     +              + INCOME_VARIABLES(MO,Cash Distribution Maintenance)
-     +              + INCOME_VARIABLES(MO,Cash Customer Accounts)
-     +              + INCOME_VARIABLES(MO,Cash Customer Services)
-     +              + INCOME_VARIABLES(MO,Cash Sales Expense)
-     +              + INCOME_VARIABLES(MO,Cash AG Operations)
-     +              + INCOME_VARIABLES(MO,Cash AG Maintenance)
-     +              + INCOME_VARIABLES(MO,Cash DSM Expense)
-     +              + INCOME_VARIABLES(MO,Cash DSM Rebate)
+     +              INCOME_VARIABLES(MO,Cash_Fixed_OandM)
+     +              + INCOME_VARIABLES(MO,Cash_Other_OandM)
+     +              + INCOME_VARIABLES(MO,Cash_Purchased_Gas)
+     +              + INCOME_VARIABLES(MO,Cash_Other)
+     +              + INCOME_VARIABLES(MO,Cash_Transmission_Operation)
+     +              + INCOME_VARIABLES(MO,Cash_Transmission_Maintenance)
+     +              + INCOME_VARIABLES(MO,Cash_Distribution_Operation)
+     +              + INCOME_VARIABLES(MO,Cash_Distribution_Maintenance)
+     +              + INCOME_VARIABLES(MO,Cash_Customer_Accounts)
+     +              + INCOME_VARIABLES(MO,Cash_Customer_Services)
+     +              + INCOME_VARIABLES(MO,Cash_Sales_Expense)
+     +              + INCOME_VARIABLES(MO,Cash_AG_Operations)
+     +              + INCOME_VARIABLES(MO,Cash_AG_Maintenance)
+     +              + INCOME_VARIABLES(MO,Cash_DSM_Expense)
+     +              + INCOME_VARIABLES(MO,Cash_DSM_Rebate)
 C                   
          CLASS_OPERATING_REVENUES(MO) =
      +                     INCOME_VARIABLES(MO,TOTAL OPERATING REVENUES)
@@ -8209,17 +8209,17 @@ C
                TAX_CASH_RETIREMENT_PAYMENTS =
      +              CASH_VARIABLES(MO,csh_unfundd_retrmt_pymts)
                TAX_CASH_STORM_PAYMENTS =
-     +                            CASH_VARIABLES(MO,Cash Storm Payments)
+     +                            CASH_VARIABLES(MO,Cash_Storm_Payments)
                TAX_CASH_VACATION_PAYMENTS =
-     +                         CASH_VARIABLES(MO,Cash Vacation Payments)
+     +                         CASH_VARIABLES(MO,Cash_Vacation_Payments)
                TAX_BOOK_RETIREMENT_PAYMENTS = 0.
                TAX_BOOK_STORM_PAYMENTS = 0.
                TAX_BOOK_VACATION_PAYMENTS = 0.
             ELSE
                TAX_BOOK_RETIREMENT_PAYMENTS =
-     +                      INCOME_VARIABLES(MO,Monthly Pension Expense)
+     +                      INCOME_VARIABLES(MO,Monthly_Pension_Expense)
                TAX_BOOK_STORM_PAYMENTS =
-     +                        INCOME_VARIABLES(MO,Monthly Storm Expense)
+     +                        INCOME_VARIABLES(MO,Monthly_Storm_Expense)
                TAX_BOOK_VACATION_PAYMENTS =
      +                         INCOME_VARIABLES(MO,monthly_vacation_pay)
                TAX_CASH_RETIREMENT_PAYMENTS = 0.
@@ -8248,24 +8248,24 @@ C
 C BTL TAXES
 C
              R_BTL_TAXABLE_REVENUES(MO) =
-     +             INCOME_VARIABLES(MO,BTL monthly_other_income)
-     +             + INCOME_VARIABLES(MO,Monthly Investment Earnings)
+     +             INCOME_VARIABLES(MO,BTL_monthly_other_income)
+     +             + INCOME_VARIABLES(MO,Monthly_Investment_Earnings)
      +             - .7*INCOME_VARIABLES(MO,
-     +                                     Monthly Dividend 70 Earnings)
+     +                                     Monthly_Dividend_70_Earnings)
      +             - INCOME_VARIABLES(MO,
      +                         mthy_rtrmt_med_fd_rngs) ! 9/28/04
      +             + INCOME_VARIABLES(MO,
      +                                mty_totl_lti_income)
-     +             + INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)
+     +             + INCOME_VARIABLES(MO,BTL_Monthly_STInvestmet_Income)
      +             + INCOME_VARIABLES(MO,
      +                                  monthly_notes_receivable_income)
      +             + CASH_VARIABLES(MO,CashEarningsNonCorporate)
 
             R_BTL_EXPENSE_DEDUCTIONS(MO) =
-     +                         INCOME_VARIABLES(MO,BTL Monthly Expenses)
+     +                         INCOME_VARIABLES(MO,BTL_Monthly_Expenses)
 C BTL ITEMS ARE NOT OFFSET
             R_INTEREST_DEDUCTIONS(MO) = 
-     +          INCOME_VARIABLES(MO,Monthly STD Interest)
+     +          INCOME_VARIABLES(MO,Monthly_STD_Interest)
      +          + INCOME_VARIABLES(MO,mty_intst_on_nts_pyble)
      +          + TAX_VARIABLES(MO,monthly_ltd_tax_deduction)
             R_INTEREST_DEDUCTIONS(0) = R_INTEREST_DEDUCTIONS(0)
@@ -8273,10 +8273,10 @@ C BTL ITEMS ARE NOT OFFSET
 C
             R_NON_INCOME_TAX_DEDUCTIONS(MO) = 
      +              INCOME_VARIABLES(MO,monthly_oth_taxes)
-     +              + INCOME_VARIABLES(MO,Monthly Property Taxes)
-     +              + INCOME_VARIABLES(MO,Monthly Operating Revenue Tax)
-     +              + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
-     +              + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
+     +              + INCOME_VARIABLES(MO,Monthly_Property_Taxes)
+     +              + INCOME_VARIABLES(MO,Monthly_Operating_Revenue_Tax)
+     +              + INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital)
+     +              + INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital)
      +              + INCOME_VARIABLES(MO,MonthlyPayrollTaxes)
       
             R_NON_INCOME_TAX_DEDUCTIONS(0) = 
@@ -8303,15 +8303,15 @@ C TAKE DEDUCTIONS
      +                                 R_NON_BOOK_DEDUCTIBLE_ITEMS(0)
      +                                 + R_NON_BOOK_DEDUCTIBLE_ITEMS(MO)
                R_BTL_TAXABLE_INVESTMENT(MO) =
-     +                  INCOME_VARIABLES(MO,Monthly Investment Earnings)
+     +                  INCOME_VARIABLES(MO,Monthly_Investment_Earnings)
      +                  - .7*INCOME_VARIABLES(MO,
-     +                                     Monthly Dividend 70 Earnings)
+     +                                     Monthly_Dividend_70_Earnings)
      +                  - INCOME_VARIABLES(MO,
      +                         mthy_rtrmt_med_fd_rngs) ! 9/28/04
      +                  + INCOME_VARIABLES(MO,
      +                                mty_totl_lti_income)
      +                  + INCOME_VARIABLES(MO,
-     +                                   BTL Monthly STInvestmet Income)
+     +                                   BTL_Monthly_STInvestmet_Income)
      +                  + INCOME_VARIABLES(MO,
      +                                  monthly_notes_receivable_income)
 C
@@ -8512,17 +8512,17 @@ C
      +                                R_BTL_TAX_EXPENSE_DEDUCTIONS(0) 
      +                                + R_BTL_TAX_EXPENSE_DEDUCTIONS(MO)
                R_BTL_OTHER_TAXABLE_INCOME(MO) =
-     +                     INCOME_VARIABLES(MO,BTL monthly_other_income)
+     +                     INCOME_VARIABLES(MO,BTL_monthly_other_income)
                R_BTL_TAXABLE_INVESTMENT(MO) =
-     +                  INCOME_VARIABLES(MO,Monthly Investment Earnings)
+     +                  INCOME_VARIABLES(MO,Monthly_Investment_Earnings)
      +                  - .7*INCOME_VARIABLES(MO,
-     +                                     Monthly Dividend 70 Earnings)
+     +                                     Monthly_Dividend_70_Earnings)
      +                  - INCOME_VARIABLES(MO,
      +                         mthy_rtrmt_med_fd_rngs) ! 9/28/04
      +                  + INCOME_VARIABLES(MO,
      +                                mty_totl_lti_income)
      +                  + INCOME_VARIABLES(MO,
-     +                                   BTL Monthly STInvestmet Income)
+     +                                   BTL_Monthly_STInvestmet_Income)
      +                  + INCOME_VARIABLES(MO,
      +                                  monthly_notes_receivable_income)
                IF(CALCULATE_BTL_INCOME_TAXES) THEN
@@ -9035,24 +9035,24 @@ C***********************************************************************
 C
          SUM_MONTHLY_TAXES_BTL_ITEMS = .TRUE.
          DO MO = 0, 12
-            INCOME_VARIABLES(MO,Monthly Total Taxes Expense) =
+            INCOME_VARIABLES(MO,Monthly_Total_Taxes_Expense) =
      +              MONTHLY_TOTAL_EXPENSES_B4_TAXES(MO,INCOME_VARIABLES)
      +              + TOTAL_TAXES_EXPENSE(MO,INCOME_VARIABLES) 
-            INCOME_VARIABLES(MO,Monthly Op Income) = 
+            INCOME_VARIABLES(MO,Monthly_Op_Income) = 
      +          INCOME_VARIABLES(MO,monthly_total_revenues)
-     +          - INCOME_VARIABLES(MO,Monthly Total Taxes Expense)
-            INCOME_VARIABLES(MO,Monthly INCOME BEFORE INTEREST) = 
+     +          - INCOME_VARIABLES(MO,Monthly_Total_Taxes_Expense)
+            INCOME_VARIABLES(MO,Monthly_INCOME_BEFORE_INTEREST) = 
      +                       INCOME_BEFORE_INTEREST(MO,INCOME_VARIABLES)
-            INCOME_VARIABLES(MO,Monthly INCOME AFTER INTEREST) = 
+            INCOME_VARIABLES(MO,Monthly_INCOME_AFTER_INTEREST) = 
      +                MONTHLY_INCOME_AFTER_INTEREST(MO,INCOME_VARIABLES)
-            INCOME_VARIABLES(MO,Monthly Net Income) = 
+            INCOME_VARIABLES(MO,Monthly_Net_Income) = 
      +                           MONTHLY_NET_INCOME(MO,INCOME_VARIABLES)
-            INCOME_VARIABLES(MO,Monthly Earnings 2 Common) = 
-     +          INCOME_VARIABLES(MO,Monthly Net Income)
-     +          - INCOME_VARIABLES(MO,Monthly Total PS Dividends)
-            INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS) = 
-     +          INCOME_VARIABLES(MO,Monthly Earnings 2 Common)
-     +          - INCOME_VARIABLES(MO,Monthly Common Dividends)
+            INCOME_VARIABLES(MO,Monthly_Earnings_2_Common) = 
+     +          INCOME_VARIABLES(MO,Monthly_Net_Income)
+     +          - INCOME_VARIABLES(MO,Monthly_Total_PS_Dividends)
+            INCOME_VARIABLES(MO,Monthly_RETAINED_EARNINGS) = 
+     +          INCOME_VARIABLES(MO,Monthly_Earnings_2_Common)
+     +          - INCOME_VARIABLES(MO,Monthly_Common_Dividends)
          ENDDO
       RETURN
       END
@@ -9072,8 +9072,8 @@ C
       INTEGER*2 MO
       LOGICAL*1 WVPA,IMPA
 C      
-         INCOME_VARIABLES(MO,BTL Monthly Interest Income) =       ! 101
-     +              INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)
+         INCOME_VARIABLES(MO,BTL_Monthly_Interest_Income) =       ! 101
+     +              INCOME_VARIABLES(MO,BTL_Monthly_STInvestmet_Income)
      +              + INCOME_VARIABLES(MO,
      +                                mty_mdl_lt_nvst_income)
      +              + INCOME_VARIABLES(MO,
@@ -9081,60 +9081,60 @@ C
      +              + INCOME_VARIABLES(MO,
      +                                  monthly_notes_receivable_income) 
          INCOME_BEFORE_INTEREST = 
-     +          INCOME_VARIABLES(MO,Monthly Op Income)
+     +          INCOME_VARIABLES(MO,Monthly_Op_Income)
      +          + INCOME_VARIABLES(MO,btl_monthly_deferred_revenues)
-     +          + INCOME_VARIABLES(MO,BTL monthly_other_income)
+     +          + INCOME_VARIABLES(MO,BTL_monthly_other_income)
      +          + INCOME_VARIABLES(MO,MonthlyMarkToMarket)
      +          + INCOME_VARIABLES(MO,MonthlyEarningNonCompany)
-     +          + INCOME_VARIABLES(MO,BTL Monthly NoTax Other Income)
-     +          + INCOME_VARIABLES(MO,Monthly Investment Earnings)       ! 157
-     +          + INCOME_VARIABLES(MO,BTL Monthly Interest Income)       ! 101
+     +          + INCOME_VARIABLES(MO,BTL_Monthly_NoTax_Other_Income)
+     +          + INCOME_VARIABLES(MO,Monthly_Investment_Earnings)       ! 157
+     +          + INCOME_VARIABLES(MO,BTL_Monthly_Interest_Income)       ! 101
 
-     +          - INCOME_VARIABLES(MO,BTL Monthly Expenses)              ! 58
-     +          - INCOME_VARIABLES(MO,BTL Monthly Income Taxes)
-     +          - INCOME_VARIABLES(MO,BTL Monthly Income Tax Deferrals)
-     +          - INCOME_VARIABLES(MO,BTL Monthly Amortization)
-     +          + INCOME_VARIABLES(MO,Monthly AFUDC Equity)
+     +          - INCOME_VARIABLES(MO,BTL_Monthly_Expenses)              ! 58
+     +          - INCOME_VARIABLES(MO,BTL_Monthly_Income_Taxes)
+     +          - INCOME_VARIABLES(MO,BTL_Monthly_Income_Tax_Deferrals)
+     +          - INCOME_VARIABLES(MO,BTL Monthly_Amortization)
+     +          + INCOME_VARIABLES(MO,Monthly_AFUDC_Equity)
       RETURN
 C***********************************************************************
       ENTRY TOTAL_TAXES_EXPENSE(MO,INCOME_VARIABLES)
 C***********************************************************************
             TOTAL_TAXES_EXPENSE = 
      +          INCOME_VARIABLES(MO,monthly_oth_taxes)
-     +          + INCOME_VARIABLES(MO,Monthly ITC Amortization)
+     +          + INCOME_VARIABLES(MO,Monthly_ITC_Amortization)
 
-     +          + INCOME_VARIABLES(MO,Monthly Exp File Property Taxes)
+     +          + INCOME_VARIABLES(MO,Monthly_Exp_File_Property_Taxes)
      +          + INCOME_VARIABLES(MO,
      +                          mth_modl_calcd_prop_taxes)
-     +          + INCOME_VARIABLES(MO,Monthly Operating Revenue Tax)
+     +          + INCOME_VARIABLES(MO,Monthly_Operating_Revenue_Tax)
      +          + INCOME_VARIABLES(MO,mthy_state_atl_incm_tax_pd)
-     +          + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
+     +          + INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital)
      +          + INCOME_VARIABLES(MO,
      +                              mthy_fed_atl_income_tax_pd)
-     +          + INCOME_VARIABLES(MO,Monthly Federal Tax on Capital)
-     +          + INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Dr)
-     +          + INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Cr)
+     +          + INCOME_VARIABLES(MO,Monthly_Federal_Tax_on_Capital)
+     +          + INCOME_VARIABLES(MO,Monthly_Income_Tax_Deferrals_Dr)
+     +          + INCOME_VARIABLES(MO,Monthly_Income_Tax_Deferrals_Cr)
      +          + INCOME_VARIABLES(MO,MonthlyPayrollTaxes)
       RETURN
 C***********************************************************************
       ENTRY MONTHLY_INCOME_AFTER_INTEREST(MO,INCOME_VARIABLES)
 C***********************************************************************
          MONTHLY_INCOME_AFTER_INTEREST =  
-     +          INCOME_VARIABLES(MO,Monthly INCOME BEFORE INTEREST)
-     +          - INCOME_VARIABLES(MO,Monthly LTD Total Interest)
-     +          - INCOME_VARIABLES(MO,Monthly STD Interest)
+     +          INCOME_VARIABLES(MO,Monthly_INCOME_BEFORE_INTEREST)
+     +          - INCOME_VARIABLES(MO,Monthly_LTD_Total_Interest)
+     +          - INCOME_VARIABLES(MO,Monthly_STD_Interest)
      +          - INCOME_VARIABLES(MO,mty_intst_on_nts_pyble)
-     +          + INCOME_VARIABLES(MO,Monthly AFUDC Borrowed)
+     +          + INCOME_VARIABLES(MO,Monthly_AFUDC_Borrowed)
       RETURN
 C***********************************************************************
       ENTRY MONTHLY_NET_INCOME(MO,INCOME_VARIABLES) 
 C***********************************************************************
 C
          MONTHLY_NET_INCOME =  
-     +             INCOME_VARIABLES(MO,Monthly INCOME AFTER INTEREST)
-     +             + INCOME_VARIABLES(MO,Monthly Unused Fed Tax Credits)
-     +             + INCOME_VARIABLES(MO,Monthly Subsidiary Income)
-     +             - INCOME_VARIABLES(MO,Monthly Extraordinary Items)
+     +             INCOME_VARIABLES(MO,Monthly_INCOME_AFTER_INTEREST)
+     +             + INCOME_VARIABLES(MO,Monthly_Unused_Fed_Tax_Credits)
+     +             + INCOME_VARIABLES(MO,Monthly_Subsidiary_Income)
+     +             - INCOME_VARIABLES(MO,Monthly_Extraordinary_Items)
       RETURN
 C***********************************************************************
       ENTRY MONTHLY_TOTAL_EXPENSES_B4_TAXES(MO,INCOME_VARIABLES)
@@ -9146,20 +9146,20 @@ c
          MONTHLY_TOTAL_EXPENSES_B4_TAXES =
      +           MONTHLY_ATL_INCOME_STATEMENT_TAX_DEDUCTIONS(MO,
      +                                                 INCOME_VARIABLES)
-     +           + INCOME_VARIABLES(MO,Monthly Deferred Fuel Expense)
-     +           + INCOME_VARIABLES(MO,Monthly Nuclear Fuel Expense)
+     +           + INCOME_VARIABLES(MO,Monthly_Deferred_Fuel_Expense)
+     +           + INCOME_VARIABLES(MO,Monthly_Nuclear_Fuel_Expense)
 
-     +           + INCOME_VARIABLES(MO,Monthly DOE Decommissioning)
-     +           + INCOME_VARIABLES(MO,Monthly DOE Disposal)
-     +           + INCOME_VARIABLES(MO,Monthly Amortization)
+     +           + INCOME_VARIABLES(MO,Monthly_DOE_Decommissioning)
+     +           + INCOME_VARIABLES(MO,Monthly_DOE_Disposal)
+     +           + INCOME_VARIABLES(MO,Monthly_Amortization)
      +           + INCOME_VARIABLES(MO,
      +                               Mthly_Lease_Amort_xpns)
      +           + INCOME_VARIABLES(MO,
      +                            Mthly_dfrd_rev_Amortization)
-     +           + INCOME_VARIABLES(MO,Monthly Book Depreciation)
+     +           + INCOME_VARIABLES(MO,Monthly_Book_Depreciation)
      +           + INCOME_VARIABLES(MO,monthly_vacation_pay)
-     +           + INCOME_VARIABLES(MO,Monthly Pension Expense)
-     +           + INCOME_VARIABLES(MO,Monthly Storm Expense)
+     +           + INCOME_VARIABLES(MO,Monthly_Pension_Expense)
+     +           + INCOME_VARIABLES(MO,Monthly_Storm_Expense)
      +           + INCOME_VARIABLES(MO,MonthlyExecBenefits)
      +           + INCOME_VARIABLES(MO,MonthlyIncentiveComp)
 
@@ -9190,10 +9190,10 @@ C***********************************************************************
 C***********************************************************************
 C
          IF(MO == 0) THEN
-            INCOME_VARIABLES(0,Total Derivative Revenues) =
-     +               SUM(INCOME_VARIABLES(1:,Total Derivative Revenues))
-            INCOME_VARIABLES(0,Total Fuel Derivative Revenues) =
-     +          SUM(INCOME_VARIABLES(1:,Total Fuel Derivative Revenues))
+            INCOME_VARIABLES(0,Total_Derivative_Revenues) =
+     +               SUM(INCOME_VARIABLES(1:,Total_Derivative_Revenues))
+            INCOME_VARIABLES(0,Total_Fuel_Derivative_Revenues) =
+     +          SUM(INCOME_VARIABLES(1:,Total_Fuel_Derivative_Revenues))
          ENDIF
          SUM_NONREGULATED_REVENUES = 
      +                INCOME_VARIABLES(MO,Adjustment Clause)
@@ -9204,19 +9204,19 @@ C
      +                + INCOME_VARIABLES(MO,Other Revenue)
      +                + INCOME_VARIABLES(MO,Gas Revenues)
      +                + INCOME_VARIABLES(MO,Relationship Revenues)
-     +                + INCOME_VARIABLES(MO,Monthly Catawba Revenues)
-     +                + INCOME_VARIABLES(MO,ICAP Revenues)
-     +                + INCOME_VARIABLES(MO,Total Derivative Revenues)
+     +                + INCOME_VARIABLES(MO,Monthly_Catawba_Revenues)
+     +                + INCOME_VARIABLES(MO,ICAP_Revenues)
+     +                + INCOME_VARIABLES(MO,Total_Derivative_Revenues)
      +                + INCOME_VARIABLES(MO,
-     +                                   Total Fuel Derivative Revenues)
+     +                                   Total_Fuel_Derivative_Revenues)
      +                + INCOME_VARIABLES(MO,
-     +                                   Monthly Gas Wholesale Revenues)
+     +                                   Monthly_Gas_Wholesale_Revenues)
      +                + INCOME_VARIABLES(MO,
      +                     mthy_incm_rsv_mgn_cap_sales)
      +                + INCOME_VARIABLES(MO,MonthlyOthATLRevenues)
          IF(WVPA()) SUM_NONREGULATED_REVENUES =
      +                 SUM_NONREGULATED_REVENUES
-     +                 + INCOME_VARIABLES(MO,WVPA NonMember Power Sales)
+     +                 + INCOME_VARIABLES(MO,WVPA_NonMember_Power_Sales)
       RETURN
       END
 C***********************************************************************
@@ -9231,38 +9231,38 @@ C
       LOGICAL*1 WVPA
 C      
          IF(MO == 0) THEN
-            INCOME_VARIABLES(0,Total Derivative Expenses) =
-     +               SUM(INCOME_VARIABLES(1:,Total Derivative Expenses))
-            INCOME_VARIABLES(0,Total Fuel Derivative Expenses) =
-     +          SUM(INCOME_VARIABLES(1:,Total Fuel Derivative Expenses))
+            INCOME_VARIABLES(0,Total_Derivative_Expenses) =
+     +               SUM(INCOME_VARIABLES(1:,Total_Derivative_Expenses))
+            INCOME_VARIABLES(0,Total_Fuel_Derivative_Expenses) =
+     +          SUM(INCOME_VARIABLES(1:,Total_Fuel_Derivative_Expenses))
          ENDIF
 
          MONTHLY_ATL_INCOME_STATEMENT_TAX_DEDUCTIONS =
-     +           INCOME_VARIABLES(MO,Monthly Fossil Fuel)
+     +           INCOME_VARIABLES(MO,Monthly_Fossil_Fuel)
      +           + INCOME_VARIABLES(MO,monthly_purchased_power)
      +           + INCOME_VARIABLES(MO,monthly_variable_oandm)
      +           + INCOME_VARIABLES(MO,monthly_fixed_oandm)
-     +           + INCOME_VARIABLES(MO,Monthly Service Transactions)
+     +           + INCOME_VARIABLES(MO,Monthly_Service_Transactions)
      +           + INCOME_VARIABLES(MO,monthly_other_oandm)
      +           + INCOME_VARIABLES(MO,monthly_purchased_gas)
-     +           + INCOME_VARIABLES(MO,Monthly Other)
-     +           + INCOME_VARIABLES(MO,Monthly Transmission Operation)
+     +           + INCOME_VARIABLES(MO,Monthly_Other)
+     +           + INCOME_VARIABLES(MO,Monthly_Transmission_Operation)
      +           + INCOME_VARIABLES(MO,monthly_xmsn_maintnc)
-     +           + INCOME_VARIABLES(MO,Monthly Distribution Operation)
-     +           + INCOME_VARIABLES(MO,Monthly Distribution Maintenance)
-     +           + INCOME_VARIABLES(MO,Monthly Customer Accounts)
-     +           + INCOME_VARIABLES(MO,Monthly Customer Services)
-     +           + INCOME_VARIABLES(MO,Monthly Sales Expense) 
-     +           + INCOME_VARIABLES(MO,Monthly AG Operations) 
-     +           + INCOME_VARIABLES(MO,Monthly AG Maintenance)
-     +           + INCOME_VARIABLES(MO,Monthly Lease Interest Expense)
-     +           + INCOME_VARIABLES(MO,Monthly DSM Expense)
-     +           + INCOME_VARIABLES(MO,Monthly DSM Rebate)
-     +           + INCOME_VARIABLES(MO,Monthly Emission Credits)
-     +           + INCOME_VARIABLES(MO,Monthly Catawba Expenses)
-     +           + INCOME_VARIABLES(MO,Total Derivative Expenses)
-     +           + INCOME_VARIABLES(MO,Total Fuel Derivative Expenses)
-     +           + INCOME_VARIABLES(MO,Monthly Retirement Expense)
+     +           + INCOME_VARIABLES(MO,Monthly_Distribution_Operation)
+     +           + INCOME_VARIABLES(MO,Monthly_Distribution_Maintenance)
+     +           + INCOME_VARIABLES(MO,Monthly_Customer_Accounts)
+     +           + INCOME_VARIABLES(MO,Monthly_Customer_Services)
+     +           + INCOME_VARIABLES(MO,Monthly_Sales_Expense) 
+     +           + INCOME_VARIABLES(MO,Monthly_AG_Operations) 
+     +           + INCOME_VARIABLES(MO,Monthly_AG_Maintenance)
+     +           + INCOME_VARIABLES(MO,Monthly_Lease_Interest_Expense)
+     +           + INCOME_VARIABLES(MO,Monthly_DSM_Expense)
+     +           + INCOME_VARIABLES(MO,Monthly_DSM_Rebate)
+     +           + INCOME_VARIABLES(MO,Monthly_Emission_Credits)
+     +           + INCOME_VARIABLES(MO,Monthly_Catawba_Expenses)
+     +           + INCOME_VARIABLES(MO,Total_Derivative_Expenses)
+     +           + INCOME_VARIABLES(MO,Total_Fuel_Derivative_Expenses)
+     +           + INCOME_VARIABLES(MO,Monthly_Retirement_Expense)
      +           + INCOME_VARIABLES(MO,
      +                 mty_xpns_rsv_mgn_cap_pchs)
      +           + INCOME_VARIABLES(MO,
@@ -9441,27 +9441,27 @@ C
       LOGICAL*1 SALT_RIVER_PROJECT,WVPA
 C
          SUM_CASH_RECEIPTS =
-     +        CASH_VARIABLES(R_MO,Cash Base Rates)
-     +        + CASH_VARIABLES(R_MO,Cash Adjustment Clause)
-     +        + CASH_VARIABLES(R_MO,Cash Secondary Sales)
-     +        + CASH_VARIABLES(R_MO,Cash Other Revenue)
+     +        CASH_VARIABLES(R_MO,Cash_Base_Rates)
+     +        + CASH_VARIABLES(R_MO,Cash_Adjustment_Clause)
+     +        + CASH_VARIABLES(R_MO,Cash_Secondary_Sales)
+     +        + CASH_VARIABLES(R_MO,Cash_Other_Revenue)
      +        + CASH_VARIABLES(R_MO,cash_catawba_revenues)
-     +        + CASH_VARIABLES(R_MO,Cash Gas Revenues)
-     +        + CASH_VARIABLES(R_MO,Cash Relationship Revenues)
-     +        + CASH_VARIABLES(R_MO,Cash Residential)
-     +        + CASH_VARIABLES(R_MO,Cash Commercial)
-     +        + CASH_VARIABLES(R_MO,Cash Industrial)
-     +        + CASH_VARIABLES(R_MO,Cash Lighting)
-     +        + CASH_VARIABLES(R_MO,Cash Bulk Power)
-     +        + CASH_VARIABLES(R_MO,Cash Capacity Sales)
-     +        + CASH_VARIABLES(R_MO,Cash Government)
-     +        + CASH_VARIABLES(R_MO,Cash BTL Revenues)
-     +        + CASH_VARIABLES(R_MO,Cash Net of Tax BTL Revenues)
+     +        + CASH_VARIABLES(R_MO,Cash_Gas_Revenues)
+     +        + CASH_VARIABLES(R_MO,Cash_Relationship_Revenues)
+     +        + CASH_VARIABLES(R_MO,Cash_Residential)
+     +        + CASH_VARIABLES(R_MO,Cash_Commercial)
+     +        + CASH_VARIABLES(R_MO,Cash_Industrial)
+     +        + CASH_VARIABLES(R_MO,Cash_Lighting)
+     +        + CASH_VARIABLES(R_MO,Cash_Bulk_Power)
+     +        + CASH_VARIABLES(R_MO,Cash_Capacity_Sales)
+     +        + CASH_VARIABLES(R_MO,Cash_Government)
+     +        + CASH_VARIABLES(R_MO,Cash_BTL_Revenues)
+     +        + CASH_VARIABLES(R_MO,Cash_Net_of_Tax_BTL_Revenues)
      +        + CASH_VARIABLES(R_MO,cash_rcd_accts_rcvbl)
-     +        + CASH_VARIABLES(R_MO,Cash ICAP Revenues)
-     +        + CASH_VARIABLES(R_MO,Total Cash Derivative Revenues)
+     +        + CASH_VARIABLES(R_MO,Cash ICAP_Revenues)
+     +        + CASH_VARIABLES(R_MO,Total_Cash_Derivative_Revenues)
      +        + CASH_VARIABLES(R_MO,tot_cash_fuel_deriv_revenues)
-     +        + CASH_VARIABLES(R_MO,Cash Gas Wholesale Revenues)
+     +        + CASH_VARIABLES(R_MO,Cash_Gas_Wholesale_Revenues)
      +        + CASH_VARIABLES(R_MO,
      +                        csh_income_rsv_mgn_cap_sales)
      +        + CASH_VARIABLES(R_MO,
@@ -9475,39 +9475,39 @@ C***********************************************************************
 C
          SUM_CASH_PAYMENTS =  
      +        CASH_VARIABLES(R_MO,csh_btl_lease_intrst_pymts)
-     +        + CASH_VARIABLES(R_MO,Cash Fossil Fuel)
-     +        + CASH_VARIABLES(R_MO,Cash Purchased Power)
-     +        + CASH_VARIABLES(R_MO,Cash Service Transactions)
-     +        + CASH_VARIABLES(R_MO,Cash Variable OandM)
-     +        + CASH_VARIABLES(R_MO,Cash Fixed OandM)
-     +        + CASH_VARIABLES(R_MO,Cash Other OandM)
-     +        + CASH_VARIABLES(R_MO,Cash Purchased Gas)
-     +        + CASH_VARIABLES(R_MO,Total Cash Derivative Expenses)
+     +        + CASH_VARIABLES(R_MO,Cash_Fossil_Fuel)
+     +        + CASH_VARIABLES(R_MO,Cash_Purchased_Power)
+     +        + CASH_VARIABLES(R_MO,Cash_Service_Transactions)
+     +        + CASH_VARIABLES(R_MO,Cash_Variable_OandM)
+     +        + CASH_VARIABLES(R_MO,Cash_Fixed_OandM)
+     +        + CASH_VARIABLES(R_MO,Cash_Other_OandM)
+     +        + CASH_VARIABLES(R_MO,Cash_Purchased_Gas)
+     +        + CASH_VARIABLES(R_MO,Total_Cash_Derivative_Expenses)
      +        + CASH_VARIABLES(R_MO,tot_cash_fuel_deriv_expenses)
-     +        + CASH_VARIABLES(R_MO,Cash Other)
-     +        + CASH_VARIABLES(R_MO,Cash Leased Nuclear Fuel)
-     +        + CASH_VARIABLES(R_MO,Cash DSM Expense)
-     +        + CASH_VARIABLES(R_MO,Cash DSM Rebate)
-     +        + CASH_VARIABLES(R_MO,Cash Lease Interest Payments)
-     +        + CASH_VARIABLES(R_MO,Cash Emission Credits)
+     +        + CASH_VARIABLES(R_MO,Cash_Other)
+     +        + CASH_VARIABLES(R_MO,Cash_Leased_Nuclear_Fuel)
+     +        + CASH_VARIABLES(R_MO,Cash_DSM_Expense)
+     +        + CASH_VARIABLES(R_MO,Cash_DSM_Rebate)
+     +        + CASH_VARIABLES(R_MO,Cash_Lease_Interest_Payments)
+     +        + CASH_VARIABLES(R_MO,Cash_Emission_Credits)
 c    +          + CASH_VARIABLES(R_MO,Cash DOE Decommissioning) ! 9/7/00 removed to match annual
-     +        + CASH_VARIABLES(R_MO,Cash DOE Disposal)
+     +        + CASH_VARIABLES(R_MO,Cash_DOE_Disposal)
      +        + CASH_VARIABLES(R_MO,cash_catawba_expenses)
-     +        + CASH_VARIABLES(R_MO,Cash BTL Expenses)
-     +        + CASH_VARIABLES(R_MO,Cash Transmission Operation)
-     +        + CASH_VARIABLES(R_MO,Cash Transmission Maintenance)
-     +        + CASH_VARIABLES(R_MO,Cash Distribution Operation)
-     +        + CASH_VARIABLES(R_MO,Cash Distribution Maintenance)
-     +        + CASH_VARIABLES(R_MO,Cash Customer Accounts)
-     +        + CASH_VARIABLES(R_MO,Cash Customer Services)
-     +        + CASH_VARIABLES(R_MO,Cash Sales Expense)
-     +        + CASH_VARIABLES(R_MO,Cash AG Operations)
-     +        + CASH_VARIABLES(R_MO,Cash AG Maintenance)
+     +        + CASH_VARIABLES(R_MO,Cash_BTL_Expenses)
+     +        + CASH_VARIABLES(R_MO,Cash_Transmission_Operation)
+     +        + CASH_VARIABLES(R_MO,Cash_Transmission_Maintenance)
+     +        + CASH_VARIABLES(R_MO,Cash_Distribution_Operation)
+     +        + CASH_VARIABLES(R_MO,Cash_Distribution_Maintenance)
+     +        + CASH_VARIABLES(R_MO,Cash_Customer_Accounts)
+     +        + CASH_VARIABLES(R_MO,Cash_Customer_Services)
+     +        + CASH_VARIABLES(R_MO,Cash_Sales_Expense)
+     +        + CASH_VARIABLES(R_MO,Cash_AG_Operations)
+     +        + CASH_VARIABLES(R_MO,Cash_AG_Maintenance)
      +        + CASH_VARIABLES(R_MO,csh_unfundd_retrmt_pymts)
-     +        + CASH_VARIABLES(R_MO,Cash Storm Payments)
-     +        + CASH_VARIABLES(R_MO,Cash Vacation Payments)
-     +        + CASH_VARIABLES(R_MO,Cash Post Retirement Payments)
-     +        + CASH_VARIABLES(R_MO,Cash Paid on Accounts Payable)
+     +        + CASH_VARIABLES(R_MO,Cash_Storm_Payments)
+     +        + CASH_VARIABLES(R_MO,Cash_Vacation_Payments)
+     +        + CASH_VARIABLES(R_MO,Cash_Post_Retirement_Payments)
+     +        + CASH_VARIABLES(R_MO,Cash_Paid_on_Accounts_Payable)
      +        + CASH_VARIABLES(R_MO,csh_2_post_retiremt_paymentss)
      +        + CASH_VARIABLES(R_MO,
      +                    csh_expns_rsv_mgn_cap_purch)
@@ -9519,7 +9519,7 @@ c    +          + CASH_VARIABLES(R_MO,Cash DOE Decommissioning) ! 9/7/00 removed
          IF(WVPA()) THEN
             SUM_CASH_PAYMENTS =
      +          SUM_CASH_PAYMENTS
-     +          + CASH_VARIABLES(R_MO,WVPA Cash Member Cost of Power) ! these are zero 5/3/04
+     +          + CASH_VARIABLES(R_MO,WVPA_Cash_Member_Cost_of_Power) ! these are zero 5/3/04
      +          + CASH_VARIABLES(R_MO,wvpa_cash_nonmbr_pwr_cost) ! these are zero 5/3/04
      +          + CASH_VARIABLES(R_MO,wvpa_cash_mbr_svc_cost) ! 205
      +          + CASH_VARIABLES(R_MO,
@@ -9571,8 +9571,8 @@ C
      +              + CASH_VARIABLES(R_MO,cash_change_debt_investments)
      +              + CASH_VARIABLES(R_MO,csh_4_redeeming_notes_owed)
      +              + CASH_VARIABLES(R_MO,cash_4_new_notes_issued)
-     +              + CASH_VARIABLES(R_MO,Cash Lease Expense)
-     +              + CASH_VARIABLES(R_MO,Cash BTL Lease Cash)
+     +              + CASH_VARIABLES(R_MO,Cash_Lease_Expense)
+     +              + CASH_VARIABLES(R_MO,Cash_BTL_Lease_Cash)
      +              + CASH_VARIABLES(R_MO,
      +                              cash_gas_strg_inventry_addtn)
      +              + CASH_VARIABLES(R_MO,
@@ -9751,9 +9751,9 @@ C
          MONTHLY_LEASED_NF(:) = INCOME_VARIABLES(:,
      +                              Mthy_Leasd_Nucl_Fuel_Expns)
          MONTHLY_DOE_DISPOSAL(:) = INCOME_VARIABLES(:,
-     +                                             Monthly DOE Disposal)
+     +                                             Monthly_DOE_Disposal)
          MONTHLY_DOE_DECOMMISSIONING(:) = INCOME_VARIABLES(:,
-     +                                      Monthly DOE Decommissioning)
+     +                                      Monthly_DOE_Decommissioning)
          MONTHLY_NF_SL_DEF_TAX_DEP(:) = INCOME_VARIABLES(:, 
      +                               monthly_ownd_nuc_fl_expense)
          IF(USE_BURN_4_NUC_FUEL_TAX_EXP) THEN
@@ -9821,23 +9821,23 @@ C
 c
 c EBITAD and EBIT
 c
-         INCOME_VARIABLES(:,Monthly EBIT) =
-     +         INCOME_VARIABLES(:,Monthly INCOME BEFORE INTEREST)
-     +         + INCOME_VARIABLES(:,Monthly ITC Amortization)
+         INCOME_VARIABLES(:,Monthly_EBIT) =
+     +         INCOME_VARIABLES(:,Monthly_INCOME_BEFORE_INTEREST)
+     +         + INCOME_VARIABLES(:,Monthly_ITC_Amortization)
      +         + INCOME_VARIABLES(:,mthy_state_atl_incm_tax_pd)
-     +         + INCOME_VARIABLES(:,Monthly State Tax on Capital)
+     +         + INCOME_VARIABLES(:,Monthly_State_Tax_on_Capital)
      +         + INCOME_VARIABLES(:,mthy_fed_atl_income_tax_pd)
-     +         + INCOME_VARIABLES(:,Monthly Federal Tax on Capital)
-     +         + INCOME_VARIABLES(:,Monthly Income Tax Deferrals Dr)
-     +         + INCOME_VARIABLES(:,Monthly Income Tax Deferrals Cr)
-     +         + INCOME_VARIABLES(:,Monthly AFUDC Borrowed)
-     +         + INCOME_VARIABLES(:,BTL Monthly Income Taxes)
-     +         + INCOME_VARIABLES(:,BTL Monthly Income Tax Deferrals)
-         INCOME_VARIABLES(:,Monthly EBITAD) =
-     +                   INCOME_VARIABLES(:,Monthly EBIT)
-     +                   + INCOME_VARIABLES(:,Monthly Book Depreciation)
-     +                   + INCOME_VARIABLES(:,Monthly Amortization)
-     +                   + INCOME_VARIABLES(:,BTL Monthly Amortization)
+     +         + INCOME_VARIABLES(:,Monthly_Federal_Tax_on_Capital)
+     +         + INCOME_VARIABLES(:,Monthly_Income_Tax_Deferrals_Dr)
+     +         + INCOME_VARIABLES(:,Monthly_Income_Tax_Deferrals_Cr)
+     +         + INCOME_VARIABLES(:,Monthly_AFUDC_Borrowed)
+     +         + INCOME_VARIABLES(:,BTL_Monthly_Income_Taxes)
+     +         + INCOME_VARIABLES(:,BTL_Monthly_Income_Tax_Deferrals)
+         INCOME_VARIABLES(:,Monthly_EBITAD) =
+     +                   INCOME_VARIABLES(:,Monthly_EBIT)
+     +                   + INCOME_VARIABLES(:,Monthly_Book_Depreciation)
+     +                   + INCOME_VARIABLES(:,Monthly_Amortization)
+     +                   + INCOME_VARIABLES(:,BTL Monthly_Amortization)
       END SUBROUTINE
 C***********************************************************************
       SUBROUTINE IMPA_REPORT_VALUES(MO,INCOME_VARIABLES,CASH_VARIABLES,
@@ -9853,30 +9853,30 @@ C
 c
          INCOME_VARIABLES(MO,mty_impa_net_incm_cvrg) = NA
 c         IF(OPERATING_METHOD == 'C') THEN
-            INCOME_VARIABLES(MO,IMPA Depreciation Add Back) =
-     +               INCOME_VARIABLES(MO,Monthly Book Depreciation)
-     +               + INCOME_VARIABLES(MO,Monthly LTD Amort Interest)
+            INCOME_VARIABLES(MO,IMPA_Depreciation_Add_Back) =
+     +               INCOME_VARIABLES(MO,Monthly_Book_Depreciation)
+     +               + INCOME_VARIABLES(MO,Monthly_LTD_Amort_Interest)
      +               - CASH_VARIABLES(MO,cash_ltd_retirements)
-            INCOME_VARIABLES(MO,Monthly Net Income) =
-     +               INCOME_VARIABLES(MO,Monthly Net Income)  
-     +               + INCOME_VARIABLES(MO,Monthly Book Depreciation)
-     +               + INCOME_VARIABLES(MO,Monthly LTD Amort Interest)
+            INCOME_VARIABLES(MO,Monthly_Net_Income) =
+     +               INCOME_VARIABLES(MO,Monthly_Net_Income)  
+     +               + INCOME_VARIABLES(MO,Monthly_Book_Depreciation)
+     +               + INCOME_VARIABLES(MO,Monthly_LTD_Amort_Interest)
      +               - CASH_VARIABLES(MO,cash_ltd_retirements)
-            INCOME_VARIABLES(MO,Monthly Earnings 2 Common) = 
-     +               INCOME_VARIABLES(MO,Monthly Net Income)
-     +               - INCOME_VARIABLES(MO,Monthly Total PS Dividends)
-            INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS) =
-     +                 INCOME_VARIABLES(MO,Monthly Earnings 2 Common)
-     +                 - INCOME_VARIABLES(MO,Monthly Common Dividends)
+            INCOME_VARIABLES(MO,Monthly_Earnings_2_Common) = 
+     +               INCOME_VARIABLES(MO,Monthly_Net_Income)
+     +               - INCOME_VARIABLES(MO,Monthly_Total_PS_Dividends)
+            INCOME_VARIABLES(MO,Monthly_RETAINED_EARNINGS) =
+     +                 INCOME_VARIABLES(MO,Monthly_Earnings_2_Common)
+     +                 - INCOME_VARIABLES(MO,Monthly_Common_Dividends)
 c         ENDIF
 C         DO  MO = 0, 12
             SUM_VALUES = CASH_VARIABLES(MO,cash_ltd_retirements) 
      +                 + INCOME_VARIABLES(MO,monthly_other_atl_amort)
-     +                 + INCOME_VARIABLES(MO,Monthly LTD Total Interest)
-     +                 - INCOME_VARIABLES(MO,Monthly LTD Amort Interest)
+     +                 + INCOME_VARIABLES(MO,Monthly_LTD_Total_Interest)
+     +                 - INCOME_VARIABLES(MO,Monthly_LTD_Amort_Interest)
             IF(SUM_VALUES /= 0.) THEN
                INCOME_VARIABLES(MO,mty_impa_net_incm_cvrg) =
-     +            1. + INCOME_VARIABLES(MO,Monthly Net Income)/
+     +            1. + INCOME_VARIABLES(MO,Monthly_Net_Income)/
      +                                       SUM_VALUES
             ENDIF
 C         ENDDO
