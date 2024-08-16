@@ -6,9 +6,6 @@ repo1/LDPROB01.FOR
 repo1/LPMATINV.for
 repo1/LPSOLVER.for
 repo1/MSGProSymRevExp.for
-repo1/MSGmmadm.FOR
-repo1/Msgmminp.for
-repo1/SF_OBJT.FOR
 repo1/TRANSOBJ2.FOR
 repo1/WVPARTRK.FOR
 repo1/WinFileFindData.for
@@ -31,12 +28,14 @@ repo1/fp_objt.for
 repo1/margnobj.for
 repo1/midasmod.for
 repo1/msgandec.for
+repo1/msgmmadm.for
 repo1/msgmmasb.for
 repo1/msgmmdbt.for
 repo1/msgmmdfd.for
 repo1/msgmmea.for
 repo1/msgmmexprevcash.for
 repo1/msgmmfa.for
+repo1/msgmminp.for
 repo1/msgmmout.for
 repo1/msgmmpyb.for
 repo1/msgmmrev.for
@@ -213,6 +212,7 @@ repo1/rps_data.f90
 repo1/rpth_obj.f90
 repo1/screen_initialization.f90
 repo1/servcom.f90
+repo1/sf_objt.f90
 repo1/shared_vars_interg82.f90
 repo1/sizecom.f90
 repo1/spindriftlib.f90
@@ -236,8 +236,6 @@ repo1/Ac_equiv.MON
 repo1/DSMCOM.MON
 repo1/DSMFNCOM.MON
 repo1/DSMFRCOM.MON
-repo1/ELRPTCOM.MON
-repo1/ENVIRCOM.MON
 repo1/FAIFFCOM.MON
 repo1/FAINTCOM.MON
 repo1/FINACCOM.MON
@@ -252,7 +250,6 @@ repo1/Mthnmcom.mon
 repo1/Namescom.mon
 repo1/OVLYCOM.MON
 repo1/PALTOCOM.MON
-repo1/POOLCOM.MON
 repo1/RATESCOM.MON
 repo1/RETLSCOM.MON
 repo1/ROLLSCOM.MON
@@ -261,6 +258,5 @@ repo1/SHRTFORM.MON
 repo1/SPINLIB.MON
 repo1/WEEKSCOM.MON
 repo1/ac_elmeq.mon
-repo1/m3active.mon
 repo1/mglr_external.MON
 repo1/prngener.MON

@@ -154,6 +154,7 @@ repo1/rps_data.f90
 repo1/rpth_obj.f90
 repo1/screen_initialization.f90
 repo1/servcom.f90
+repo1/sf_objt.f90
 repo1/shared_vars_interg82.f90
 repo1/sizecom.f90
 repo1/spindriftlib.f90
