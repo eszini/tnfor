@@ -23,12 +23,9 @@ repo1/dsslam.for
 repo1/elreport.for
 repo1/enrglimt.for
 repo1/finanbse.for
-repo1/finnucfl.for
-repo1/fp_objt.for
 repo1/margnobj.for
 repo1/midasmod.for
 repo1/msgandec.for
-repo1/msgmmadm.for
 repo1/msgmmasb.for
 repo1/msgmmdbt.for
 repo1/msgmmdfd.for
@@ -44,7 +41,6 @@ repo1/msgmmsb6b.for
 repo1/msgmmtax.for
 repo1/msgnorm.for
 repo1/msgoutpt.for
-repo1/munirev.for
 repo1/newfred2.for
 repo1/pro_cost.for
 repo1/reaenrg.for

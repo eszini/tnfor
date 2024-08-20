@@ -4,7 +4,7 @@
 # variables que tienen blancos intermedios !
 #
 
-./tfor -v -opciones=d5 -exec=5 -inp=mthnmcom.mon -out=mth.mon -ou2=vcb.txt -log=vsb.txt  > log
+./tfor -v -opciones=d5 -exec=5 -inp=namescom.mon -out=nam.mon -ou2=vcb.txt  -log=vsb.txt
 
 
 

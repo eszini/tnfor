@@ -1,0 +1,292 @@
+|Base Rates|
+|Adjustment Clause|
+|Secondary Sales|
+|Other Revenue|
+|BTL Revenues|
+|Catawba Revenues|
+|Gas Revenues|
+|Unbilled Revenues|
+|Deferred Revenues|
+|Relationship Revenues|
+|Customer Revenues|
+|Bulk Power|
+|Net of Tax BTL Revenues|
+|Capacity Sales|
+|PGA Adjustment|
+|Competitive Sales|
+|Utility Sales|
+|Prior Years Method Adjustment|
+|Prior level Method Adjustment|
+|Operating Method Adjustment|
+|Total Base Revenues|
+|TOTAL OPERATING REVENUES|
+|Gas Wholesale Revenues|
+|Derivative Physical Rev Variable|
+|Derivative Physical Rev Fixed|
+|Derivative Financial Rev Variable|
+|Derivative Financial Rev Fixed|
+|PCA BTL Revenues|
+|Associated Company Interest|
+|PJM MISO Retail Transmission|
+|PJM MISO FES Transmission|
+|Associated Company|
+|PJM MISO Revenues|
+|Forfeited Discounts Rents|
+|Miscellaneous Service Revenues|
+|Retail Generation|
+|Wholesale Generation|
+|Energy Efficiency|
+|Net Interco Sale Leaseback|
+|SLB Wholesale Associated Co|
+|PJM Contra|
+|Interest Dividend Income|
+|Total Expenses B4 Taxes|
+|BTL Decommissioning Liability|
+|Exp Collection in Adj Clause|
+|BTL Lease Cash|
+|Fossil Fuel|
+|Purchased Power|
+|Variable OandM|
+|Fixed OandM|
+|Other OandM|
+|Purchased Gas|
+|Purchased Capacity to Level RM|
+|Owned Nuclear Fuel|
+|Leased Nuclear Fuel|
+|Total Nuclear Fuel|
+|DSM Expense|
+|DSM Rebate|
+|ATL Book Lease Expense|
+|Service Transactions|
+|Emission Credits|
+|DOE Decommissioning|
+|DOE Disposal|
+|Catawba Expenses|
+|BTL Expenses|
+|Transmission Operation|
+|Transmission Maintenance|
+|Distribution Operation|
+|Distribution Maintenance|
+|Customer Accounts|
+|Customer Services|
+|Sales Expense|
+|AG Operations|
+|AG Maintenance|
+|Deferred Revenue Amortization|
+|ATL Lease Amortization|
+|BTL Lease Amortization|
+|Book Depreciation|
+|BTL Amortization|
+|BTL Lease Interest|
+|ATL Lease Interest|
+|Deferred Fuel|
+|Vacation Pay|
+|Pension Expense|
+|Unfunded Pension Expense|
+|Storm Expense|
+|STD Interest|
+|LTD Interest|
+|Preferred Dividends|
+|Derivative Physical Exp Variable|
+|Derivative Physical Exp Fixed|
+|Derivative Financial Exp Variable|
+|Derivative Financial Exp Fixed|
+|WVPA Member Purchases|
+|WVPA Non Member Purchases|
+|WVPA Member Services|
+|WVPA Non Member Services|
+|Cash Derative Physical Exp Var|
+|Cash Derative Physical Exp Fixed|
+|Cash Derative Financial Exp Var|
+|Cash Derative Financial Exp Fixed|
+|Cash WVPA Member Purchases|
+|Cash WVPA Non Member Purchases|
+|Cash WVPA Member Services|
+|Cash WVPA Non Member Services|
+|Item is taxed|
+|Item is not taxed|
+|Federal NOLs|
+|AMT NOLs|
+|General Carry Tax Credits|
+|Sec 42 Carry Tax Credits|
+|State NOLs|
+|State Credits Carried Forward|
+|Other Taxes|
+|Property Taxes|
+|Revenue Taxes|
+|Income Tax Credits|
+|Income Tax Adjustments|
+|M1 Additions|
+|M1 Deductions|
+|Deferred Taxes Cr|
+|Deferred Taxes Dr|
+|ITC Amortization|
+|BTL Tax Deductions|
+|Tax Depreciation|
+|AMT ACE Tax Depreciation|
+|AMT Depreciation Preference|
+|Sec 29 Credits|
+|Sec 42 Credits|
+|Federal Income Tax|
+|ITC Amortization Rate|
+|Local Tax Rate|
+|Operating Revenue Tax Rate|
+|Property Tax Rate|
+|Other Taxes of Revenues Rate|
+|Other Taxes of Expenses Rate|
+|Federal Capitial Tax Rate|
+|Local Capitial Tax Rate|
+|Taxable Income Deductions Rate|
+|AMT Income Addendum|
+|Addendum Federal Capitial Tax|
+|Addendum Local Capitial Tax|
+|Federal Capitial Tax Deduction|
+|Local Capitial Tax Deduction|
+|Temporary ATL Tax Differences|
+|Temporary BTL Tax Differences|
+|Permanent ATL Tax Differences|
+|Permanent BTL Tax Differences|
+|BTL Deferred Taxes Cr|
+|BTL Deferred Taxes Dr|
+|Decommissioning Fund|
+|Decommissioning Liability Chan|
+|Post Retirement Medical|
+|Retiree Medical Payments|
+|OUC Bond Sinking Fund|
+|OUC Long Term Investment|
+|OUC Debt Service Reserve|
+|OUC Customer Deposit Fund|
+|OUC Construction Trust Fund|
+|OUC Renewal Replacement Fund|
+|Dividend Subsidiary|
+|Net Income Subsidiary|
+|Investment in Subsidiary|
+|Other Investments|
+|Capitialized Lease Additions|
+|Cash for Assets|
+|Change in LTInvestments|
+|OUC Liability Reduction Fund|
+|OUC Self Insurance Fund|
+|OUC Base Stabilization Fund|
+|OUC Fuel Stabilization Fund|
+|OUC Water Stabilization Fund|
+|OUC Customer Retention Fund|
+|OUC Other|
+|OUC Withdraw Liab Reduct Fd|
+|Assets NEC Adjustment|
+|Rate Base Adjustment|
+|Deferred Tax Adjustment|
+|Plant in Service Adjustment|
+|CD Balance as PC of Revenues|
+|CD Addendum|
+|CIAC Cash Contributions|
+|CIAC Amortization Rate|
+|CIAC Addendum to Amortization|
+|Assets NEC Addendum|
+|Liabilities NEC Addendum|
+|Fuel Inventory Change|
+|Materials Supplies|
+|Gas Storage|
+|Rate Receivable Accounts|
+|Addendum Receivable Accounts|
+|Rate Payable Accounts|
+|Addendum Payable Accounts|
+|Rate Assets NEC|
+|Rate Liabilities NEC|
+|Fuel Inventory Change Out|
+|Materials Supplies Out|
+|Gas Storage Out|
+|Earnings Decommissioning Fund|
+|Earnings Post Retirement Fund|
+|Earnings ST Investments|
+|Earnings LT Investments|
+|STD Interest Rate|
+|Decommissioning Rate|
+|Post Retirement Rate|
+|STI Rate|
+|LTI Rate|
+|Customer Deposits Rate|
+|OCI Post Retirement Rate|
+|OCI Decommissioning Rate|
+|Net Removal|
+|Cash Received|
+|Gross Book Value|
+|Cumulative Depreciation|
+|Sale Deferred Taxes Adjustment|
+|Sale ATL Amortization|
+|Sale BTL Amortization|
+|Cost of Removal|
+|Salvage Value|
+|Addedum to Book Gain Loss|
+|Equity Risk Adjustment|
+|Economic Assets Adjustment|
+|Operating Profits Adjustment|
+|Capitial Recovery EXCLUDED OPAT|
+|NucDecom Discount Rate|
+|NucDecom Liability Addendum|
+|OCI Adjustment|
+|FASB87 Intangible Asset Adj|
+|FABS87 Pension Liab Adj|
+|OCI Deferred Tax Adj|
+|ARO Discount Rate|
+|ARO Accretion Amount|
+|ARO Cash Payment|
+|ARO Cash to Bal Sheet Trust|
+|Non Cash Pension|
+|Revenue Receipts|
+|Expense Payments|
+|Cash Receipts|
+|Cash Payments|
+|Gross Plant Value|
+|Cumulated Plant Depreciation|
+|Balance Deferred Taxes|
+|Deferred Debit Adjustment|
+|ATL Debit Amortization|
+|BTL Debt Amortization|
+|Annual Deferred Taxes|
+|Deferred ITCs Balance|
+|Net Nuclear Fuel|
+|Retained Earnings|
+|Extra Ordinary Expense|
+|LT Liabilities Balance|
+|Balance Deferred Taxes Dr|
+|CWIP Balance|
+|Paid in Capital|
+|ARO Net Assets|
+|ARO Liabilities|
+|Other Deferred Credits|
+|Regulatory Deferred Credits|
+|Reaquired Debt Gain|
+|Actual Deferred Taxes Cr|
+|Actual Fed Income Taxes|
+|Actual State Income Taxes|
+|Actual Deferred Taxes Dr|
+|Actual ATL Fed Income Taxes|
+|Actual ATL State Income Taxes|
+|Actual BTL Fed Income Taxes|
+|Actual BTL State Income Taxes|
+|SRP Target Sales|
+|STD Minimum Balance|
+|Cash Minimum Balance|
+|OUC Fuel Inventory|
+|OUC Prepayments|
+|OUC Materials Inventory|
+|GRE DSC Principal Pay Adj|
+|GRE DSC Interest Pay Adj|
+|Dividend 70|
+|Interest Payments|
+|Interest Earnings|
+|Cash Interest Payments|
+|Cash Interest Earnings|
+|Cash Dividend Earnings|
+|Intra Company Interest Earnings|
+|Minibond Interest Payment|
+|Minibond Principal Payment|
+|Minibond Interest Deposit|
+|Minibond Principal Deposit|
+|Annualized Interest|
+|Minibond Annualized Interest|
+|BAAN Additions|
+|BAAN Reductions|
+|BAAN Interest Payments|
+|BAAN Annualized Interest|
