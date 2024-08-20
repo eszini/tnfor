@@ -98,6 +98,7 @@
 |Cash_Adjustment_Clause|
 |cash_catawba_revenues|
 |tot_cash_fuel_deriv_revenues|
+|Cash_Operating_Method_Adj|
 |cash_financl_rev_variable|
 |cash_phys_fuel_deriv_rev_var|
 |cash_fin_fuel_deriv_rev_var|

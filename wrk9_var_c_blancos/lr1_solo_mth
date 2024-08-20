@@ -7,7 +7,7 @@ repo1/coal_obj.for
 repo1/enrglimt.for
 repo1/finanbse.for
 repo1/midasmod.for
-repo1/msgmmadm.for
+repo1/msgmmadm.f90
 repo1/msgmmdbt.for
 repo1/msgmmdfd.for
 repo1/msgmmea.for
@@ -20,3 +20,4 @@ repo1/msgmmtax.for
 repo1/servicac.for
 repo1/tf_objt.for
 repo1/wh_objt.for
+repo1/wvpacooprevenuecals.for
