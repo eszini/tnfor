@@ -11,7 +11,6 @@
  *
  */
 
-
 /*
  *	//header//
  *
@@ -508,6 +507,7 @@ int	pro_exec3();	/* carga todos los fuentes en memoria, en vector de ptr - para 
 int	pro_exec4();	/* carga todos los src en mem en vec de ptr para procesos - version nueva - entrys */
 int	pro_exec5();	/* carga file con definicion de variables de fort con blancos inermedios y genera lista */
 int	pro_exec6();	/* carga todos los src en mem en vec de ptr para procesos - version nueva - var con blanks */
+int	pro_exec7();	/* pone bonita la salida de check1 y check2 ... */
 
 int	pro_proc1();
 int	pro_proc2();
@@ -625,8 +625,8 @@ int	ffchg_vcb  = 0;		/* cambia variables con blancos intermedios */
  *
  */
 
-#define	MAX_VCB		250	/* maxima cantidad de variables con blancos en codebase */
-#define	MAX_VSB		450	/* maxima cantidad de variables con blancos en codebase */
+#define	MAX_VCB		400	/* maxima cantidad de variables con blancos en codebase */
+#define	MAX_VSB		400	/* maxima cantidad de variables con blancos en codebase */
 
 int	q_vcb;
 char	vcb[MAX_VCB][MAXV];
@@ -846,6 +846,11 @@ int	primer_char(char *, int *);
 char	*f_name(int);
 int	tiene_integer(char *);
 int	tiene_character(char *);
+
+
+
+int	es_integer2(char *s);		/* ojo. especificas de pro_exec5 */
+int	es_character1(char *s);
 
 
 #if 0
@@ -1288,6 +1293,8 @@ int	proceso_principal()
 			pro_exec5();
 		if (ffexc == 6)
 			pro_exec6();
+		if (ffexc == 7)
+			pro_exec7();
 	}
 
 	if ( ffpro)
@@ -3351,6 +3358,7 @@ int	pro_exec5()
 	char	b3[MAXB];
 	char	b4[MAXB];
 	char	b5[MAXB];
+	char	b6[MAXB];
 	char	tk[MAXT][MAXB];
 
 	char	mostrar[16];
@@ -3391,6 +3399,7 @@ int	pro_exec5()
 	uf = q_lin -1;
 	sprintf (b3,"      integer(kind=2),parameter:: ");
 	sprintf (b5,"      character(len=1),parameter:: ");
+	sprintf (b6,"      integer(kind=4),parameter:: ");
 
 
 	/* reviso cada linea marco sobre las que hay que trabjar */
@@ -3420,10 +3429,29 @@ int	pro_exec5()
 			es_int = 0;
 			es_chr = 0;
 
+			/* atencion ! big tema aca !!!
+			 * usamos el mismo proceso para dos files con diferentes variables !!!
+			 * un file tiene integer (kind=4) ... no se detecto !! 
+			 */
+
 			if (tiene_integer(b1))
 				es_int = 1;
 			if (tiene_character(b1))
 				es_chr = 1;
+
+			/* ojo
+			 * asi como esta, funciona solo para len=1 y kind=2 
+			 *
+			 * por el moemento, si no es asi, dejamos error ...
+			 */
+
+
+#if 1
+			if (tiene_integer(b1) && !es_integer2(b1))
+				error(6101);
+			if (tiene_character(b1) && !es_character1(b1))
+				error(6102);
+#endif
 
 			(*fnp[ j ]).f1 = 1;
 			(*fnp[ j ]).f2 = 0;
@@ -3553,6 +3581,54 @@ int	pro_exec5()
 
 
 }
+
+
+int	es_integer2(s)
+char	*s;
+{
+	int	i;
+	int	f_resultado, f_sigo;
+	char	target[MAXB];
+
+	strcpy(target,"kind=2");
+
+	f_resultado = 0;
+	for (i=0, f_sigo=1; f_sigo && i<strlen(s); i++)
+	{
+		if (!strncmp(s+i,target,strlen(target)))
+			f_sigo = 0, f_resultado = 1;
+	}
+
+	return (f_resultado);
+}
+
+
+
+int	es_character1(s)
+char	*s;
+{
+	int	i;
+	int	f_resultado, f_sigo;
+	char	target[MAXB];
+
+	strcpy(target,"len=1");
+
+	f_resultado = 0;
+	for (i=0, f_sigo=1; f_sigo && i<strlen(s); i++)
+	{
+		if (!strncmp(s+i,target,strlen(target)))
+			f_sigo = 0, f_resultado = 1;
+	}
+
+	return (f_resultado);
+}
+
+
+
+
+
+
+
 
 
 
@@ -4335,6 +4411,102 @@ int	ex6_p3()
 			fprintf (hfout,"%-15.15s  %s\n", b2, (*tb[n_f]).n);
 #endif
 
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	pro_exec 7
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ *
+ *	exec 7
+ *
+ *	lee archivo "check" (salida de grep de variables en codebase )
+ *	y formatea para que se vea lindo
+ */
+
+
+int	pro_exec7()
+{
+
+	int	i,j,k,flag;
+	int	ql,qlf,q_ptr;
+	int	f_proceso;
+	int	f_sigo;
+	int	p1,p2;
+	char	b1[MAXB];
+	char	b2[MAXB];
+
+
+	FILE	*hwi,*hwo;
+
+	char	z[MAXV];
+	sprintf (z,"exec7");
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
+	}
+
+	if (!ffinp || !ffout )
+		gp_uso(105);
+
+
+
+	/* cantidad de archivos y lineas totales cargadas  */
+	ql = 0;
+
+	while (fgets(b1,MAXB,hfinp) != NULL)
+	{
+		/* saco el fin de linea - contemplo 13 x fuentes fortran */
+		for ( flag=0, j=strlen(b1); !flag && j >= 0; j--)
+			if (b1[j] == '\n' )
+			{	
+				flag=1;
+				if ( j && b1[j-1] == 13)
+					b1[j-1]=0;
+				else
+					b1[j]=0;
+			}
+
+		f_proceso = 1;
+		if (linea_vacia(b1) || b1[0] == '#' )
+			f_proceso = 0;
+
+
+		if (f_proceso)
+		{
+
+			for (j=0, f_sigo=1; f_sigo && j < strlen(b1); j++)
+				if (b1[j]==':')
+					p1 = j, f_sigo = 0;
+
+			memset(b2,' ',30);
+			b2[30]=0;
+
+			strncpy(b2,b1,p1);
+			strcat(b2,"|");
+			strcat(b2,b1+p1+1);
+			strcat(b2,"|");
+
+			fprintf (hfout,"%s\n",b2);
+
+
+		}
+
+	}
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[1],z);
+	}
+}
 
 
 

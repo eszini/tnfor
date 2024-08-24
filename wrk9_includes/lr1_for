@@ -10,13 +10,11 @@ repo1/TRANSOBJ2.FOR
 repo1/WVPARTRK.FOR
 repo1/WinFileFindData.for
 repo1/cap_objt.for
-repo1/cat2objt.for
 repo1/cla_objt.for
 repo1/clreport.for
 repo1/co_objt.for
 repo1/coal_obj.for
 repo1/dr_booth.for
-repo1/dr_both2.for
 repo1/dsex_obj.for
 repo1/dsm_objt.for
 repo1/dsslam.for
@@ -37,7 +35,6 @@ repo1/msgmmout.for
 repo1/msgmmpyb.for
 repo1/msgmmrev.for
 repo1/msgmmsb6.for
-repo1/msgmmsb6b.for
 repo1/msgmmtax.for
 repo1/msgnorm.for
 repo1/msgoutpt.for

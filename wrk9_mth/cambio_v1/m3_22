@@ -1,0 +1,10 @@
+wvpacooprevenuecals.for        (1) 01319 |                  DO DATA_POS = Cash_Base_Rates, Cash Government|
+wvpacooprevenuecals.for        (1) 01341 |                  DO DATA_POS = Cash BTL Lease Cash, Cash Other|
+wvpacooprevenuecals.for        (2) 01341 |                  DO DATA_POS = Cash BTL Lease Cash, Cash Other|
+wvpacooprevenuecals.for        (1) 01342 |                     IF(DATA_POS == Cash Purchased Power) THEN|
+wvpacooprevenuecals.for        (1) 01350 |                  DO DATA_POS = Cash Leased Nuclear Fuel,|
+wvpacooprevenuecals.for        (1) 01351 |     +                                               Cash AG Maintenance|
+wvpacooprevenuecals.for        (1) 01407 |               DO DATA_POS = Cash_Base_Rates, Cash Gas Revenues|
+wvpacooprevenuecals.for        (1) 01413 |               DO DATA_POS = Cash Relationship Revenues,|
+wvpacooprevenuecals.for        (1) 01452 |                  DO DATA_POS = Cash_Base_Rates, Cash Gas Revenues|
+wvpacooprevenuecals.for        (1) 01458 |                  DO DATA_POS = Cash Relationship Revenues,|

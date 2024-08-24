@@ -16,4 +16,5 @@ r8_separa.sh
 r8_entrys.sh
 c1_crear_repo_inc.sh
 r0_mthnmcom.sh
+r0_src_inc.sh
 cambiar.sh

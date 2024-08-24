@@ -1,0 +1,36 @@
+          PAYMENT_TYPE = Cash Paid on Accounts Payable     ! 157|
+    CASH_VALUES(1:12,WVPA Cash Member Cost of Power) =|
+           CASH_VALUES(1:12,WVPA Cash Member Cost of Power)|
+    CASH_VALUES(1:,Cash Fossil Fuel) =|
+         CASH_VALUES(1:,Cash Fossil Fuel)|
+    CASH_VALUES(1:,Cash Variable OandM) =|
+         CASH_VALUES(1:,Cash Variable OandM)|
+    CASH_VALUES(1:,Cash Fixed OandM) =|
+         CASH_VALUES(1:,Cash Fixed OandM)|
+          PAYMENT_TYPE = Cash Paid on Accounts Payable     ! 157|
+          DO DATA_POS = Cash_Base_Rates, Cash Government|
+          DO DATA_POS = Cash BTL Lease Cash, Cash Other|
+          DO DATA_POS = Cash BTL Lease Cash, Cash Other|
+             IF(DATA_POS == Cash Purchased Power) THEN|
+          DO DATA_POS = Cash Leased Nuclear Fuel,|
+                                             Cash AG Maintenance|
+       DO DATA_POS = Cash_Base_Rates, Cash Gas Revenues|
+       DO DATA_POS = Cash Relationship Revenues,|
+          DO DATA_POS = Cash_Base_Rates, Cash Gas Revenues|
+          DO DATA_POS = Cash Relationship Revenues,|
+       R_INCOME_VARIABLES(MO,WVPA Member Cost of Services) =|
+             R_INCOME_VARIABLES(MO,WVPA Member Cost of Services)|
+       R_INCOME_VARIABLES(MO,WVPA NonMember Power Sales) =|
+               R_INCOME_VARIABLES(MO,WVPA NonMember Power Sales)|
+       R_CASH_VARIABLES(MO,WVPA Cash Member Cost of Power) =|
+           R_CASH_VARIABLES(MO,WVPA Cash Member Cost of Power)|
+ R_INCOME_VARIABLES(0,WVPA NonMember Power Sales) =|
+          SUM(R_INCOME_VARIABLES(1:,WVPA NonMember Power Sales))|
+ R_CASH_VARIABLES(0,WVPA Cash Member Cost of Power) =|
+        SUM(R_CASH_VARIABLES(1:,WVPA Cash Member Cost of Power))|
+ R_CASH_VARIABLES(0,Cash Fossil Fuel) =|
+                      SUM(R_CASH_VARIABLES(1:,Cash Fossil Fuel))|
+ R_CASH_VARIABLES(0,Cash Variable OandM) =|
+                   SUM(R_CASH_VARIABLES(1:,Cash Variable OandM))|
+ R_CASH_VARIABLES(0,Cash Fixed OandM) =|
+                      SUM(R_CASH_VARIABLES(1:,Cash Fixed OandM))|

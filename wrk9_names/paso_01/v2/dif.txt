@@ -1,0 +1,76 @@
+10,12c10,12
+< C
+< C MONTHLY VARIABLE NAMES COPYRIGHT (C) 1999 M.S. GERBER & ASSOCIATES, INC.
+< C
+---
+> !
+> ! MONTHLY VARIABLE NAMES COPYRIGHT (C) 1999 M.S. GERBER & ASSOCIATES, INC.
+> !
+18,20c18,20
+< c
+< c added 12/1/99 to keep Skip Seekamp in older version dated 11/19/99
+< c
+---
+> !
+> ! added 12/1/99 to keep Skip Seekamp in older version dated 11/19/99
+> !
+29,33c29,33
+< C
+< C INCOME STATEMENT VARIABLES
+< C
+< C IF THE EXPENSE OR REVENUE IS IN THE EXPENSE FILE PUT THE NAME IN
+< C
+---
+> !
+> ! INCOME STATEMENT VARIABLES
+> !
+> ! IF THE EXPENSE OR REVENUE IS IN THE EXPENSE FILE PUT THE NAME IN
+> !
+245,261c245,261
+< C
+< C FE Section
+< C
+<      +
+< C
+< C Monthly Reveneue
+< C
+<       integer (kind=2), PARAMETER :: Monthly Catawba Revenues=6,
+<      +          Monthly Catawba Expenses=57
+< C***********************************************************************
+< C
+< C CASH STATEMENT VARIABLES
+< C
+< C***********************************************************************
+< C
+< C CASH REVENUES
+< C
+---
+> !
+> ! FE Section
+> !
+>      
+> !
+> ! Monthly Reveneue
+> !
+>       integer (kind=2), PARAMETER :: Monthly Catawba Revenues=6
+>       integer (kind=2), PARAMETER :: Monthly Catawba Expenses=57
+> !***********************************************************************
+> !
+> ! CASH STATEMENT VARIABLES
+> !
+> !***********************************************************************
+> !
+> ! CASH REVENUES
+> !
+526c526
+<       integer (kind=2), PARAMETER :: monthly_common_stock=31
+---
+>       integer(kind=2), PARAMETER :: monthly_common_stock=31
+629c629
+<       integer (kind=2), PARAMETER :: income_b4_income_taxes=1
+---
+>       integer(kind=2), PARAMETER :: income_b4_income_taxes=1
+682c682
+<       integer (kind=2), PARAMETER :: CPL_FUEL_VARS=20
+---
+>       integer(kind=2), PARAMETER :: CPL_FUEL_VARS=20

@@ -10,13 +10,11 @@ repo1/TRANSOBJ2.FOR
 repo1/WVPARTRK.FOR
 repo1/WinFileFindData.for
 repo1/cap_objt.for
-repo1/cat2objt.for
 repo1/cla_objt.for
 repo1/clreport.for
 repo1/co_objt.for
 repo1/coal_obj.for
 repo1/dr_booth.for
-repo1/dr_both2.for
 repo1/dsex_obj.for
 repo1/dsm_objt.for
 repo1/dsslam.for
@@ -37,7 +35,6 @@ repo1/msgmmout.for
 repo1/msgmmpyb.for
 repo1/msgmmrev.for
 repo1/msgmmsb6.for
-repo1/msgmmsb6b.for
 repo1/msgmmtax.for
 repo1/msgnorm.for
 repo1/msgoutpt.for
@@ -74,6 +71,7 @@ repo1/cap_prod_costs.f90
 repo1/capacity_arrays.f90
 repo1/capacity_options_alloc_vars.f90
 repo1/capacity_options_fixed_variables.f90
+repo1/cat2objt.f90
 repo1/catawba.f90
 repo1/cf_objt.f90
 repo1/cl_data.f90
@@ -104,6 +102,7 @@ repo1/cpl_objt.f90
 repo1/csvdat.f90
 repo1/ct_objt.f90
 repo1/de_objt.f90
+repo1/dr_both2.f90
 repo1/dreptcom.f90
 repo1/drilling_rept_params.f90
 repo1/dsex_data.f90
@@ -183,6 +182,7 @@ repo1/msgindex.f90
 repo1/msgmmadm.f90
 repo1/msgmmcom.f90
 repo1/msgmmfv.f90
+repo1/msgmmsb6b.f90
 repo1/msgold95rw.f90
 repo1/mwunih.f90
 repo1/newpkshf.f90
@@ -246,8 +246,6 @@ repo1/FINASCOM.MON
 repo1/LMGRPCOM.MON
 repo1/LPINTCOM.MON
 repo1/MMM_COM.MON
-repo1/Mthnmcom.mon
-repo1/Namescom.mon
 repo1/OVLYCOM.MON
 repo1/PALTOCOM.MON
 repo1/RATESCOM.MON
@@ -256,4 +254,6 @@ repo1/SHRTFORM.MON
 repo1/SPINLIB.MON
 repo1/ac_elmeq.mon
 repo1/mglr_external.MON
+repo1/mthnmcom.mon
+repo1/namescom.mon
 repo1/prngener.MON

@@ -1,0 +1,10 @@
+msgmmpyb.for                   (1) 00613 |                  PAYMENT_TYPE = Cash Paid on Accounts Payable     ! 157|
+msgmmpyb.for                   (1) 00673 |            CASH_VALUES(1:12,WVPA Cash Member Cost of Power) =|
+msgmmpyb.for                   (1) 00674 |     +             CASH_VALUES(1:12,WVPA Cash Member Cost of Power)|
+msgmmpyb.for                   (1) 00680 |            CASH_VALUES(1:,Cash Fossil Fuel) =|
+msgmmpyb.for                   (1) 00681 |     +           CASH_VALUES(1:,Cash Fossil Fuel)|
+msgmmpyb.for                   (1) 00684 |            CASH_VALUES(1:,Cash Variable OandM) =|
+msgmmpyb.for                   (1) 00685 |     +           CASH_VALUES(1:,Cash Variable OandM)|
+msgmmpyb.for                   (1) 00688 |            CASH_VALUES(1:,Cash Fixed OandM) =|
+msgmmpyb.for                   (1) 00689 |     +           CASH_VALUES(1:,Cash Fixed OandM)|
+msgmmpyb.for                   (1) 00728 |                  PAYMENT_TYPE = Cash Paid on Accounts Payable     ! 157|
