@@ -12,15 +12,19 @@ if [ ! -f "$FILELIST" ]; then
     exit 1
 fi
 
-# Leer el archivo de configuración y copiar los archivos al directorio actual
+# Crear el directorio "src" si no existe
+DEST_DIR="$(pwd)/src"
+mkdir -p "$DEST_DIR"
+
+# Leer el archivo de configuración y copiar los archivos al directorio "src"
 while IFS= read -r file; do
     # Construir la ruta completa del archivo de origen
     src_file="$SOURCE_DIR/$file"
-    
+
     # Verificar si el archivo de origen existe
     if [ -f "$src_file" ]; then
-        echo "Copiando $src_file a $(pwd)"
-        cp "$src_file" .
+        echo "Copiando $src_file a $DEST_DIR"
+        cp "$src_file" "$DEST_DIR"
     else
         echo "Advertencia: $src_file no existe y no será copiado."
     fi

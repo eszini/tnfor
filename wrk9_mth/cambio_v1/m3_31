@@ -1,0 +1,36 @@
+msgmmpyb.for                   (1) 00613 |                  PAYMENT_TYPE = Cash Paid on Accounts Payable     ! 157|
+msgmmpyb.for                   (1) 00673 |            CASH_VALUES(1:12,WVPA Cash Member Cost of Power) =|
+msgmmpyb.for                   (1) 00674 |     +             CASH_VALUES(1:12,WVPA Cash Member Cost of Power)|
+msgmmpyb.for                   (1) 00680 |            CASH_VALUES(1:,Cash Fossil Fuel) =|
+msgmmpyb.for                   (1) 00681 |     +           CASH_VALUES(1:,Cash Fossil Fuel)|
+msgmmpyb.for                   (1) 00684 |            CASH_VALUES(1:,Cash Variable OandM) =|
+msgmmpyb.for                   (1) 00685 |     +           CASH_VALUES(1:,Cash Variable OandM)|
+msgmmpyb.for                   (1) 00688 |            CASH_VALUES(1:,Cash Fixed OandM) =|
+msgmmpyb.for                   (1) 00689 |     +           CASH_VALUES(1:,Cash Fixed OandM)|
+msgmmpyb.for                   (1) 00728 |                  PAYMENT_TYPE = Cash Paid on Accounts Payable     ! 157|
+wvpacooprevenuecals.for        (1) 01319 |                  DO DATA_POS = Cash_Base_Rates, Cash Government|
+wvpacooprevenuecals.for        (1) 01341 |                  DO DATA_POS = Cash BTL Lease Cash, Cash Other|
+wvpacooprevenuecals.for        (2) 01341 |                  DO DATA_POS = Cash BTL Lease Cash, Cash Other|
+wvpacooprevenuecals.for        (1) 01342 |                     IF(DATA_POS == Cash Purchased Power) THEN|
+wvpacooprevenuecals.for        (1) 01350 |                  DO DATA_POS = Cash Leased Nuclear Fuel,|
+wvpacooprevenuecals.for        (1) 01351 |     +                                               Cash AG Maintenance|
+wvpacooprevenuecals.for        (1) 01407 |               DO DATA_POS = Cash_Base_Rates, Cash Gas Revenues|
+wvpacooprevenuecals.for        (1) 01413 |               DO DATA_POS = Cash Relationship Revenues,|
+wvpacooprevenuecals.for        (1) 01452 |                  DO DATA_POS = Cash_Base_Rates, Cash Gas Revenues|
+wvpacooprevenuecals.for        (1) 01458 |                  DO DATA_POS = Cash Relationship Revenues,|
+WVPARTRK.FOR                   (1) 02637 |               R_INCOME_VARIABLES(MO,WVPA Member Cost of Services) =|
+WVPARTRK.FOR                   (1) 02638 |     +               R_INCOME_VARIABLES(MO,WVPA Member Cost of Services)|
+WVPARTRK.FOR                   (1) 02644 |               R_INCOME_VARIABLES(MO,WVPA NonMember Power Sales) =|
+WVPARTRK.FOR                   (1) 02645 |     +                 R_INCOME_VARIABLES(MO,WVPA NonMember Power Sales)|
+WVPARTRK.FOR                   (1) 02681 |               R_CASH_VARIABLES(MO,WVPA Cash Member Cost of Power) =|
+WVPARTRK.FOR                   (1) 02682 |     +             R_CASH_VARIABLES(MO,WVPA Cash Member Cost of Power)|
+WVPARTRK.FOR                   (1) 02689 |         R_INCOME_VARIABLES(0,WVPA NonMember Power Sales) =|
+WVPARTRK.FOR                   (1) 02690 |     +            SUM(R_INCOME_VARIABLES(1:,WVPA NonMember Power Sales))|
+WVPARTRK.FOR                   (1) 02705 |         R_CASH_VARIABLES(0,WVPA Cash Member Cost of Power) =|
+WVPARTRK.FOR                   (1) 02706 |     +          SUM(R_CASH_VARIABLES(1:,WVPA Cash Member Cost of Power))|
+WVPARTRK.FOR                   (1) 02709 |         R_CASH_VARIABLES(0,Cash Fossil Fuel) =|
+WVPARTRK.FOR                   (1) 02710 |     +                        SUM(R_CASH_VARIABLES(1:,Cash Fossil Fuel))|
+WVPARTRK.FOR                   (1) 02711 |         R_CASH_VARIABLES(0,Cash Variable OandM) =|
+WVPARTRK.FOR                   (1) 02712 |     +                     SUM(R_CASH_VARIABLES(1:,Cash Variable OandM))|
+WVPARTRK.FOR                   (1) 02713 |         R_CASH_VARIABLES(0,Cash Fixed OandM) =|
+WVPARTRK.FOR                   (1) 02714 |     +                        SUM(R_CASH_VARIABLES(1:,Cash Fixed OandM))|

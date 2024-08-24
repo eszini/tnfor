@@ -20,6 +20,7 @@ repo1/cap_prod_costs.f90
 repo1/capacity_arrays.f90
 repo1/capacity_options_alloc_vars.f90
 repo1/capacity_options_fixed_variables.f90
+repo1/cat2objt.f90
 repo1/catawba.f90
 repo1/cf_objt.f90
 repo1/cl_data.f90
@@ -50,6 +51,7 @@ repo1/cpl_objt.f90
 repo1/csvdat.f90
 repo1/ct_objt.f90
 repo1/de_objt.f90
+repo1/dr_both2.f90
 repo1/dreptcom.f90
 repo1/drilling_rept_params.f90
 repo1/dsex_data.f90
@@ -129,6 +131,7 @@ repo1/msgindex.f90
 repo1/msgmmadm.f90
 repo1/msgmmcom.f90
 repo1/msgmmfv.f90
+repo1/msgmmsb6b.f90
 repo1/msgold95rw.f90
 repo1/mwunih.f90
 repo1/newpkshf.f90

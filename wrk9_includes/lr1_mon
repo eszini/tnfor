@@ -13,8 +13,6 @@ repo1/FINASCOM.MON
 repo1/LMGRPCOM.MON
 repo1/LPINTCOM.MON
 repo1/MMM_COM.MON
-repo1/Mthnmcom.mon
-repo1/Namescom.mon
 repo1/OVLYCOM.MON
 repo1/PALTOCOM.MON
 repo1/RATESCOM.MON
@@ -23,4 +21,6 @@ repo1/SHRTFORM.MON
 repo1/SPINLIB.MON
 repo1/ac_elmeq.mon
 repo1/mglr_external.MON
+repo1/mthnmcom.mon
+repo1/namescom.mon
 repo1/prngener.MON
