@@ -1,0 +1,25 @@
+	ql=0;
+	while (fgets(b1,MAXB,fpr) != NULL)
+	{
+		if (!linea_vacia(b1)  && b1[0] != '#' )
+		{
+			for ( flag=0, j=strlen(b1); !flag && j; j--)
+				if (b1[j] == '\n')
+					b1[j]=0,flag=1;
+
+			if (gp_verbose)
+			{
+				printf ("%3d |%s|\n",ql,b1);
+			}
+
+			*npa = (pnodeptr ) malloc ( sizeof (knode));
+			(**npa).wrd = ( char *) malloc(strlen(b1)+1);
+			sprintf ( (**npa).wrd,"%s",b1);
+			(**npa).num = q_wrd+1;
+			(**npa).nx = (pnodeptr) NULL;
+			npa = (pnodeptr *) & (*npa)->nx;
+
+			q_wrd++;
+			ql++;
+		}
+	}

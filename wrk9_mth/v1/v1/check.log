@@ -1,0 +1,4 @@
+File: t0.for
+Linea mas larga encontrada antes de procesar file (sin coments)   90 
+Nro de linea:   97 
+|      integer(kind=2),parameter:: Monthly_Book_Depreciation=72                            ! v007|

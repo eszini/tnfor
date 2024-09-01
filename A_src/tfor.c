@@ -14618,6 +14618,8 @@ int	*l1,*l2;
  *	tool8
  *
  *
+ *	revisar mthnmcom ...
+ *	muestra que variables han quedado con un mix de blanco y _
  */
 
 
@@ -14629,8 +14631,12 @@ int	pro_tool8()
 {
 	int	i,j,k;
 	int	f1,f2,f3;
+	int	f_sigo,flag;
+	int	p1,p2;
 	char	b1[MAXB];
 	char	b2[MAXB];
+	int	c1,c2;
+	int	ql;
 	FILE	*hwi;
 
 	char	z[MAXV];
@@ -14641,8 +14647,124 @@ int	pro_tool8()
 	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
 	}
 
-	if (!ffinp )
+	if (!fflog)
+		agregar_fflog("vars.log");
+	if (!ffinp || !ffout)
 		gp_uso(120);
+
+
+
+	ql=0;
+	while (fgets(b1,MAXB,hfinp) != NULL)
+	{
+		if (!linea_vacia(b1)  && b1[0] != '#' )
+		{
+			/* saco el fin de linea - contemplo 13 x fuentes fortran */
+			for ( flag=0, j=strlen(b1); !flag && j; j--)
+				if (b1[j] == '\n' )
+				{	
+					flag=1;
+					if ( j && b1[j-1] == 13)
+						b1[j-1]=0;
+					else
+						b1[j]=0;
+				}
+	
+			for (i=0, f_sigo=1; f_sigo && i<strlen(b1); i++)
+			{
+				if (!strncmp(b1+i,"::",2))
+				{
+					f_sigo=0;
+					strcpy(b2,b1+i+3);
+
+					for (j=strlen(b2), f_sigo=1; f_sigo && j >= 7; j--)
+					{	
+						if (b2[j]=='!')
+						{
+							b2[j]=0;
+							j--;
+							while (b2[j]==' ')
+								b2[j]=0,j--;
+
+							f_sigo=0;
+						}
+					}
+
+
+					/* grabo todas las variables encontradas */
+					printf ("var:%3d |%s|\n",ql,b2);
+					fprintf (hfout,"|%s|\n",b2);
+
+
+					/* si la var tiene mix de blancos y _ ... mando a log */
+					for (j=0, c1=0, c2=0; j<strlen(b2); j++)
+					{
+						if (b2[j]==' ')
+							c1++;
+						if (b2[j]=='_')
+							c2++;
+
+					}
+
+					if (c1 && c2)
+						fprintf (hflog,"|%s|\n",b2);
+
+
+				}
+			}
+
+			ql++;
+		}
+	}
+	/* proceso */
+	if (gp_fverbose("d2"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[1],z);
+	}
+}
+
+
+#endif
+/* bloque */
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	pro_tool 9 
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ *
+ *	tool9
+ *
+ */
+
+
+/* bloque */
+#if 1
+
+
+int	pro_tool9()
+{
+	int	i,j,k;
+	int	f1,f2,f3;
+	char	b1[MAXB];
+	char	b2[MAXB];
+	FILE	*hwi;
+
+	char	z[MAXV];
+	sprintf (z,"tool9");
+
+	/* proceso */
+	if (gp_fverbose("d2"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
+	}
+
+	if (!ffinp || !ffout)
+		gp_uso(121);
 
 
 
