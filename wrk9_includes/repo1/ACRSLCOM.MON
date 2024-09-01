@@ -1,0 +1,68 @@
+!     ******************************************************************
+!     ACRSLCOM.MON
+!     Copyright(c) DrG Solutions 2011
+!
+!     Created: 9/25/2011 10:09:16 AM
+!     Author : Mark S Gerber
+!     Last change: MSG 11/13/2011 4:59:51 PM
+!     ******************************************************************
+
+C
+C ASSET_CLASS_RESULTS
+C
+      REAL INTEREST,LTD_PS_RETIREMENTS,
+     +     RETAINED_EARNINGS,NET_INCOME,PREFERRED_DIVIDENDS,
+     +     LONG_TERM_DEBT_ISSUED,PREFERRED_STOCK_ISSUED,
+     +     NET_OF_TAX_EXEXP,INVESTMENT_INCOME,AFUDC,
+     +     BTL_INCOME_TAXES,DEFERRED_TAXES_CR,DEFERRED_TAXES_DR,
+     +     ITC_USED,ITC_AMORTIZATION,
+     +     STATE_TAXES,FEDERAL_TAXES,LOCAL_TAXES,
+c    +     OTHER_AND_PROPERTY_TAXES,
+     +     ENVIRONMENTAL_TAX,
+     +     TOTAL_EXPENSES_B4_TAXES,
+     +     STATE_TAX_ON_CAPITAL,FEDERAL_TAX_ON_CAPITAL,
+     +     CLASS_PROPERTY_TAXES,
+     +     BOOK_DEPRECIATION,
+     +     AMORTIZATION_EXPENSE,
+     +     CIAC_AMORTIZATION, 
+     +     SRP_RATIO,PREFERRED_ISSUED_THIS_YEAR,
+     +     SECONDARY_SALES_REVENUES,
+     +     ATL_INCOME_TAXES,
+     +     OUC_TAX_PAYMENTS
+      REAL*4 BTL_AMORTIZATION,
+     +       BTL_DEF_TAXES_CR,
+     +       BTL_DEFERRED_TAXES_DR,
+     +       INTEREST_AMORTIZATION,
+     +       Mark_to_Market,
+     +       Payroll_Taxes,
+     +       FE_NonCashPension,
+     +       FE_NonCashEarningsNonCorp
+     
+      COMMON/CLASS_ASSETS_RESULTS/INTEREST,
+     +       LTD_PS_RETIREMENTS,RETAINED_EARNINGS,NET_INCOME,
+     +       PREFERRED_DIVIDENDS,LONG_TERM_DEBT_ISSUED,NET_OF_TAX_EXEXP,
+     +       PREFERRED_STOCK_ISSUED,INVESTMENT_INCOME,AFUDC,
+     +       BTL_INCOME_TAXES,DEFERRED_TAXES_CR,DEFERRED_TAXES_DR,
+     +       ITC_USED,ITC_AMORTIZATION,
+     +       STATE_TAXES,FEDERAL_TAXES,LOCAL_TAXES,
+c    +       OTHER_AND_PROPERTY_TAXES,
+     +       ENVIRONMENTAL_TAX,
+     +       TOTAL_EXPENSES_B4_TAXES,
+     +       STATE_TAX_ON_CAPITAL,FEDERAL_TAX_ON_CAPITAL,
+     +       CLASS_PROPERTY_TAXES,
+     +       BOOK_DEPRECIATION,
+     +       AMORTIZATION_EXPENSE,
+     +       CIAC_AMORTIZATION, 
+     +       SRP_RATIO,PREFERRED_ISSUED_THIS_YEAR,
+     +       BTL_AMORTIZATION,
+     +       BTL_DEF_TAXES_CR,
+     +       INTEREST_AMORTIZATION,
+     +       Mark_to_Market,
+     +       Payroll_Taxes,
+     +       FE_NonCashPension,
+     +       FE_NonCashEarningsNonCorp,
+     +       BTL_DEFERRED_TAXES_DR
+      COMMON/CLASS_ASSETS_RESULTS_2/
+     +       SECONDARY_SALES_REVENUES,
+     +       ATL_INCOME_TAXES,
+     +       OUC_TAX_PAYMENTS

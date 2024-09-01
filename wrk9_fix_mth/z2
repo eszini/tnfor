@@ -1,0 +1,55 @@
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	pro_tool 8 
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ *
+ *	tool8
+ *
+ *
+ *	revisar mthnmcom ...
+ *	muestra que variables han quedado con un mix de blanco y _
+ */
+
+
+/* bloque */
+#if 1
+
+
+int	pro_tool8()
+{
+	int	i,j,k;
+	int	f1,f2,f3;
+	char	b1[MAXB];
+	char	b2[MAXB];
+	FILE	*hwi;
+
+	char	z[MAXV];
+	sprintf (z,"tool8");
+
+	/* proceso */
+	if (gp_fverbose("d2"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
+	}
+
+	if (!ffinp !! !ffout)
+		gp_uso(120);
+
+
+
+	/* proceso */
+	if (gp_fverbose("d2"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[1],z);
+	}
+}
+
+
+#endif
+/* bloque */
+
+
+
