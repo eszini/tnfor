@@ -7051,20 +7051,20 @@ C
      +               MONTH_VARS(MO,Cash_Relationship_Revenues)+.000001*
      +                    MONTHLY_INTERRUPTIBLE_REVENUE(ASSET_CLASS,MO)
                   DO RI = 1, 4 ! across the four revenue sources
-                     MONTH_VARS(MO,Cash Residential) =
-     +                  MONTH_VARS(MO,Cash Residential) + .000001 *
+                     MONTH_VARS(MO,Cash_Residential) =
+     +                  MONTH_VARS(MO,Cash_Residential) + .000001 *
      +                   MONTHLY_AC_CONTRACT_REVENUE(ASSET_CLASS,RI,MO,
      +                                                   Residential,1)
-                     MONTH_VARS(MO,Cash Commercial) =
-     +                  MONTH_VARS(MO,Cash Commercial) + .000001 *
+                     MONTH_VARS(MO,Cash_Commercial) =
+     +                  MONTH_VARS(MO,Cash_Commercial) + .000001 *
      +                   MONTHLY_AC_CONTRACT_REVENUE(ASSET_CLASS,RI,MO,
      +                                                    Commercial,1)           
-                     MONTH_VARS(MO,Cash Industrial) =
-     +                  MONTH_VARS(MO,Cash Industrial) + .000001 *
+                     MONTH_VARS(MO,Cash_Industrial) =
+     +                  MONTH_VARS(MO,Cash_Industrial) + .000001 *
      +                   MONTHLY_AC_CONTRACT_REVENUE(ASSET_CLASS,RI,MO,
      +                                                    Industrial,1)           
-                     MONTH_VARS(MO,Cash Lighting) =
-     +                  MONTH_VARS(MO,Cash Lighting) + .000001 *
+                     MONTH_VARS(MO,Cash_Lighting) =
+     +                  MONTH_VARS(MO,Cash_Lighting) + .000001 *
      +                   MONTHLY_AC_CONTRACT_REVENUE(ASSET_CLASS,RI,MO,
      +                                                      Lighting,1)           
                      MONTH_VARS(MO,CashBulkPower) =
@@ -7087,12 +7087,12 @@ C
      +               MONTH_VARS(MO,Cash_Relationship_Revenues)+.000001*
      +                  MONTHLY_AC_CONTRACT_REVENUE(ASSET_CLASS,RI,MO,
      +                                             Customer Revenues,1)                
-                     MONTH_VARS(MO,Cash Utility Sales) =
-     +                  MONTH_VARS(MO,Cash Utility Sales) + .000001 *
+                     MONTH_VARS(MO,Cash_Utility_Sales) =
+     +                  MONTH_VARS(MO,Cash_Utility_Sales) + .000001 *
      +                   MONTHLY_AC_CONTRACT_REVENUE(ASSET_CLASS,RI,MO,
      +                                                 Utility Sales,1)                
-                     MONTH_VARS(MO,Cash Competitive Sales) =
-     +                 MONTH_VARS(MO,Cash Competitive Sales) + .000001*
+                     MONTH_VARS(MO,Cash_Competitive_Sales) =
+     +                 MONTH_VARS(MO,Cash_Competitive_Sales) + .000001*
      +                   MONTHLY_AC_CONTRACT_REVENUE(ASSET_CLASS,RI,MO,
      +                                             Competitive Sales,1)                
                   ENDDO
@@ -9979,7 +9979,7 @@ C******************************************************************
       RETURN
       END
 C******************************************************************
-      SUBROUTINE SINGLE_AREA_EXTENTION_PERIOD_PRICE_ESCALATION(R_YEAR,
+      SUBROUTINE SGL_AREA_EXT_PERIOD_PRICE_ESC(R_YEAR,
      +                                              LOCAL_MARKET_PRICE)
          INCLUDE 'SpinLib.MON'
          USE TRANS_GROUP_VARIABLES

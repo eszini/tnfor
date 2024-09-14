@@ -1881,14 +1881,14 @@ c     +                   + INTEREST_AMORTIZATION(MO,YR,ASSET_CLASS,Dr)
      +                        PURCHASE_POWER_AMORT(MO,YR,ASSET_CLASS,Dr)
                  CASH_VARIABLES(MO,cash_deferred_expenses) =
      +                     DEFERRED_CASH_ADDITIONS(MO,YR,ASSET_CLASS,Dr)
-                  INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Cr) =
+                  INCOME_VARIABLES(MO,Monthly_Income_Tax_Deferrals_Cr) =
      +                           INCOME_VARIABLES(MO,
-     +                                  Monthly Income Tax Deferrals Cr)
+     +                                  Monthly_Income_Tax_Deferrals_Cr)
      +                           + ATL_DEF_TAX(MO,YR,ASSET_CLASS,Dr)
                   INCOME_VARIABLES(MO,
-     +                               BTL Monthly Income Tax Deferrals) =
+     +                               BTL_Monthly_Income_Tax_Deferrals) =
      +                           INCOME_VARIABLES(MO,
-     +                                 BTL Monthly Income Tax Deferrals)
+     +                                 BTL_Monthly_Income_Tax_Deferrals)
      +                           + BTL_DEF_TAX(MO,YR,ASSET_CLASS,Dr)
                   INCOME_VARIABLES(MO,Monthly_Amortization) =
      +                          INCOME_VARIABLES(MO,
@@ -1906,24 +1906,24 @@ c                  INCOME_VARIABLES(MO,BTL_Monthly_Amortization) =
 c     +                          INCOME_VARIABLES(MO,
 c     +                                         BTL_Monthly_Amortization)
 c     +                          + BTL_AMORTIZATION(MO,YR,ASSET_CLASS,Dr)
-                  INCOME_VARIABLES(MO,Monthly Goodwill Amort) =
+                  INCOME_VARIABLES(MO,Monthly_Goodwill_Amort) =
      +                          INCOME_VARIABLES(MO,
-     +                                           Monthly Goodwill Amort)
+     +                                           Monthly_Goodwill_Amort)
      +                          + ATL_AMORT_SUB_ITEMS(MO,YR,ASSET_CLASS,
      +                                                      Goodwill,Dr)
-                  INCOME_VARIABLES(MO,Monthly Regulatory Assets Amort) =
+                  INCOME_VARIABLES(MO,Monthly_Regulatory_Assets_Amort) =
      +                          INCOME_VARIABLES(MO,
-     +                                  Monthly Regulatory Assets Amort)
+     +                                  Monthly_Regulatory_Assets_Amort)
      +                          + ATL_AMORT_SUB_ITEMS(MO,YR,ASSET_CLASS,
      +                                             Regulatory Assets,Dr)
-                  INCOME_VARIABLES(MO,Monthly FASB 109 Amort) =
+                  INCOME_VARIABLES(MO,Monthly_FASB_109_Amort) =
      +                          INCOME_VARIABLES(MO,
-     +                                           Monthly FASB 109 Amort)
+     +                                           Monthly_FASB_109_Amort)
      +                          + ATL_AMORT_SUB_ITEMS(MO,YR,ASSET_CLASS,
      +                                                      FASB 109,Dr)
-                  INCOME_VARIABLES(MO,Monthly FASB 133 Amort) =
+                  INCOME_VARIABLES(MO,Monthly_FASB_133_Amort) =
      +                          INCOME_VARIABLES(MO,
-     +                                           Monthly FASB 133 Amort)
+     +                                           Monthly_FASB_133_Amort)
      +                          + ATL_AMORT_SUB_ITEMS(MO,YR,ASSET_CLASS,
      +                                                      FASB 133,Dr)
                   INCOME_VARIABLES(MO,monthly_other_atl_amort) =
@@ -1944,9 +1944,9 @@ C
                   INCOME_VARIABLES(MO,Monthly_BTL_Gain_Amort) =
      +                      INCOME_VARIABLES(MO,Monthly_BTL_Gain_Amort)
      +                      + BTL_AMORTIZATION(MO,YR,ASSET_CLASS,CREDIT)
-                  INCOME_VARIABLES(MO,Monthly Regulatory Assets Amort) =
+                  INCOME_VARIABLES(MO,Monthly_Regulatory_Assets_Amort) =
      +                          INCOME_VARIABLES(MO,
-     +                                  Monthly Regulatory Assets Amort)
+     +                                  Monthly_Regulatory_Assets_Amort)
      +                          - ATL_AMORT_SUB_ITEMS(MO,YR,ASSET_CLASS,
      +                                             Regulatory Assets,Cr)
                   INCOME_VARIABLES(MO,monthly_variable_oandm) =

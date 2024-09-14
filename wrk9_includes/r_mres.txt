@@ -58,7 +58,7 @@ mthnmcom.mon     msgmmea.for
 mthnmcom.mon     msgmmexprevcash.f90
 mthnmcom.mon     msgmmexprevcash.f90
 mthnmcom.mon     msgmmexprevcash.f90
-mthnmcom.mon     msgmmfa.for
+mthnmcom.mon     msgmmfa.f90
 mthnmcom.mon     msgmmout.for
 mthnmcom.mon     msgmmout.for
 mthnmcom.mon     msgmmout.for
@@ -93,7 +93,7 @@ namescom.mon     msgmmdfd.for
 namescom.mon     msgmmea.for
 namescom.mon     msgmmea.for
 namescom.mon     msgmmexprevcash.f90
-namescom.mon     msgmmfa.for
+namescom.mon     msgmmfa.f90
 namescom.mon     msgmmout.for
 namescom.mon     msgmmout.for
 namescom.mon     msgmmout.for
@@ -146,20 +146,6 @@ spinlib.mon      msgindex.f90
 spinlib.mon      msgmmasb.for
 spinlib.mon      msgmmasb.for
 spinlib.mon      msgmmasb.for
-spinlib.mon      msgmmfa.for
-spinlib.mon      msgmmfa.for
-spinlib.mon      msgmmfa.for
-spinlib.mon      msgmmfa.for
-spinlib.mon      msgmmfa.for
-spinlib.mon      msgmmfa.for
-spinlib.mon      msgmmfa.for
-spinlib.mon      msgmmfa.for
-spinlib.mon      msgmmfa.for
-spinlib.mon      msgmmfa.for
-spinlib.mon      msgmmfa.for
-spinlib.mon      msgmmfa.for
-spinlib.mon      msgmmfa.for
-spinlib.mon      msgmmfa.for
 spinlib.mon      newfred2.for
 spinlib.mon      newfred2.for
 spinlib.mon      newfred2.for
@@ -180,6 +166,5 @@ spinlib.mon      tf_objt.for
 spinlib.mon      tf_objt.for
 spinlib.mon      tf_objt.for
 spinlib.mon      tf_objt.for
-spinlib.mon      transobj.for
 spinlib.mon      up_objt.f90
 spinlib.mon      up_objt.f90

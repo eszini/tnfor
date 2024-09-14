@@ -1036,11 +1036,11 @@ C
 C               DO MO = 0, 12
                   CHANGE_IN_DEFERRED_DEBIT_BAL(:) =  ! due to debit file amortizations
      +                 INCOME_VARIABLES(:,monthly_other_atl_amort)
-     +                 + INCOME_VARIABLES(:,Monthly Goodwill Amort)
+     +                 + INCOME_VARIABLES(:,Monthly_Goodwill_Amort)
      +                 + INCOME_VARIABLES(:,
-     +                                  Monthly Regulatory Assets Amort)
-     +                 + INCOME_VARIABLES(:,Monthly FASB 109 Amort)
-     +                 + INCOME_VARIABLES(:,Monthly FASB 133 Amort)
+     +                                  Monthly_Regulatory_Assets_Amort)
+     +                 + INCOME_VARIABLES(:,Monthly_FASB_109_Amort)
+     +                 + INCOME_VARIABLES(:,Monthly_FASB_133_Amort)
      +                 + INCOME_VARIABLES(:,monthly_other_btl_amort)
      +                 + INCOME_VARIABLES(:,
      +                          mthly_debit_fl_Pchs_pwr_amort)
@@ -1053,14 +1053,14 @@ C LOWER LEVEL DEBIT AMORTZATION WAS NOT BEING PASSED UP.
 C
      +                 + INCOME_LINKED_LEVEL(:,
      +                              monthly_other_atl_amort,CLASS_LEVEL)
-     +                 + INCOME_LINKED_LEVEL(:,Monthly Goodwill Amort,
+     +                 + INCOME_LINKED_LEVEL(:,Monthly_Goodwill_Amort,
      +                                                      CLASS_LEVEL)
      +                 + INCOME_LINKED_LEVEL(:,
-     +                                  Monthly Regulatory Assets Amort,
+     +                                  Monthly_Regulatory_Assets_Amort,
      +                                                      CLASS_LEVEL)
-     +                 + INCOME_LINKED_LEVEL(:,Monthly FASB 109 Amort,
+     +                 + INCOME_LINKED_LEVEL(:,Monthly_FASB_109_Amort,
      +                                                      CLASS_LEVEL)
-     +                 + INCOME_LINKED_LEVEL(:,Monthly FASB 133 Amort,
+     +                 + INCOME_LINKED_LEVEL(:,Monthly_FASB_133_Amort,
      +                                                      CLASS_LEVEL)
      +                 + INCOME_LINKED_LEVEL(:,
      +                              monthly_other_btl_amort,CLASS_LEVEL)
@@ -1292,10 +1292,10 @@ C
          BALANCE_SHEET_VARIABLES(0,monthly_customer_deposits) =
      +                                        CUSTOMER_DEPOSITS_BAL(BOY)
          INCOME_VARIABLES(0,Monthly_Amortization) =
-     +           + INCOME_VARIABLES(0,Monthly Goodwill Amort)
-     +           + INCOME_VARIABLES(0,Monthly Regulatory Assets Amort)
-     +           + INCOME_VARIABLES(0,Monthly FASB 109 Amort)
-     +           + INCOME_VARIABLES(0,Monthly FASB 133 Amort)
+     +           + INCOME_VARIABLES(0,Monthly_Goodwill_Amort)
+     +           + INCOME_VARIABLES(0,Monthly_Regulatory_Assets_Amort)
+     +           + INCOME_VARIABLES(0,Monthly_FASB_109_Amort)
+     +           + INCOME_VARIABLES(0,Monthly_FASB_133_Amort)
      +           + INCOME_VARIABLES(0,Monthly FASB 143 Amort)
      +           + INCOME_VARIABLES(0,mthy_common_stock_issue_amort)
      +           + INCOME_VARIABLES(0,monthly_other_atl_amort)
@@ -1321,10 +1321,10 @@ C
      +           BALANCE_SHEET_VARIABLES(MO-1,monthly_customer_deposits)
      +                       + CASH_VARIABLES(MO,cash_customer_deposits)
             INCOME_VARIABLES(MO,Monthly_Amortization) =
-     +           + INCOME_VARIABLES(MO,Monthly Goodwill Amort)
-     +           + INCOME_VARIABLES(MO,Monthly Regulatory Assets Amort)
-     +           + INCOME_VARIABLES(MO,Monthly FASB 109 Amort)
-     +           + INCOME_VARIABLES(MO,Monthly FASB 133 Amort)
+     +           + INCOME_VARIABLES(MO,Monthly_Goodwill_Amort)
+     +           + INCOME_VARIABLES(MO,Monthly_Regulatory_Assets_Amort)
+     +           + INCOME_VARIABLES(MO,Monthly_FASB_109_Amort)
+     +           + INCOME_VARIABLES(MO,Monthly_FASB_133_Amort)
      +           + INCOME_VARIABLES(MO,Monthly FASB 143 Amort)
      +           + INCOME_VARIABLES(MO,mthy_common_stock_issue_amort)
      +           + INCOME_VARIABLES(MO,monthly_other_atl_amort)
@@ -1483,7 +1483,7 @@ C
      +                                                   ANNUAL_VARS(28)
 C
          INCOME_VARIABLES(0,BTL Monthly Income Taxes) = ANNUAL_VARS(36)
-         INCOME_VARIABLES(0,BTL Monthly Income Tax Deferrals) =
+         INCOME_VARIABLES(0,BTL_Monthly_Income_Tax_Deferrals) =
      +                                                  ANNUAL_VARS(294)
          INCOME_VARIABLES(0,BTLMonthlyDeferralTaxCr) = ANNUAL_VARS(902)
          INCOME_VARIABLES(0,BTLMonthlyDeferralTaxDr) = ANNUAL_VARS(903)
@@ -1501,11 +1501,11 @@ C
          INCOME_VARIABLES(1:,mthy_ltd_ps_incm_tax_dfrls_cr) = 
      +            INCOME_VARIABLES(0,
      +                       mthy_ltd_ps_incm_tax_dfrls_cr)/12.
-         INCOME_VARIABLES(0,mth_othr_incm_tax_dfrls Cr) =
+         INCOME_VARIABLES(0,mth_othr_incm_tax_dfrls_cr) =
      +                                                  ANNUAL_VARS(682)
-         INCOME_VARIABLES(1:,mth_othr_incm_tax_dfrls Cr) =
+         INCOME_VARIABLES(1:,mth_othr_incm_tax_dfrls_cr) =
      +            INCOME_VARIABLES(0,
-     +                        mth_othr_incm_tax_dfrls Cr)/12.
+     +                        mth_othr_incm_tax_dfrls_cr)/12.
          INCOME_VARIABLES(0,mthy_nf_incm_tax_dfrls_cr) =
      +       RETURN_NF_DEFERRED_TAXES(INCOME_VARIABLES(0,
      +                              mthy_nf_incm_tax_dfrls_cr))
@@ -1514,8 +1514,8 @@ C
      +            + INCOME_LINKED_LEVEL(:,
      +                               mthy_nf_incm_tax_dfrls_cr,
      +                                                      CLASS_LEVEL)
-         INCOME_VARIABLES(:,Monthly Income Tax Deferrals Cr) =
-     +      INCOME_VARIABLES(:,mth_othr_incm_tax_dfrls Cr)
+         INCOME_VARIABLES(:,Monthly_Income_Tax_Deferrals_Cr) =
+     +      INCOME_VARIABLES(:,mth_othr_incm_tax_dfrls_cr)
      +      + INCOME_VARIABLES(:,mthy_ltd_ps_incm_tax_dfrls_cr)
      +      + INCOME_VARIABLES(:,mthy_nf_incm_tax_dfrls_cr)
          INCOME_VARIABLES(0,wvpa_non_mbr_svcs_cost) =
@@ -1901,7 +1901,7 @@ C
 C END INCOME TAX DISTRIBUTION
 C
          CALL RETURN_ACTUAL_TAX_VALUES(R_YR,CLASS_ID,
-     +          INCOME_VARIABLES(0,Monthly Income Tax Deferrals Cr),
+     +          INCOME_VARIABLES(0,Monthly_Income_Tax_Deferrals_Cr),
      +          INCOME_VARIABLES(0,mty_tot_fed_incm_tax_pd),
      +          INCOME_VARIABLES(0,mty_tot_st_incm_tax_pd),
      +          INCOME_VARIABLES(0,Monthly Income Tax Deferrals Dr))
@@ -2076,8 +2076,8 @@ C
 C
 C BTL ITEMS
 C
-            INCOME_VARIABLES(MO,BTL Monthly Income Tax Deferrals) =
-     +          INCOME_VARIABLES(0,BTL Monthly Income Tax Deferrals)/12.
+            INCOME_VARIABLES(MO,BTL_Monthly_Income_Tax_Deferrals) =
+     +          INCOME_VARIABLES(0,BTL_Monthly_Income_Tax_Deferrals)/12.
             INCOME_VARIABLES(MO,BTLMonthlyDeferralTaxCr) =
      +                   INCOME_VARIABLES(0,BTLMonthlyDeferralTaxCr)/12.
             INCOME_VARIABLES(MO,BTLMonthlyDeferralTaxDr) =
@@ -3748,9 +3748,9 @@ C
      +                  BALANCE_SHEET_VARIABLES(MO-1,
      +                                    mty_dfrd_income_taxes)
      +                  + INCOME_VARIABLES(MO,
-     +                                  Monthly Income Tax Deferrals Cr)
+     +                                  Monthly_Income_Tax_Deferrals_Cr)
      +                  + INCOME_VARIABLES(MO,
-     +                                 BTL Monthly Income Tax Deferrals)
+     +                                 BTL_Monthly_Income_Tax_Deferrals)
      +                  + INCOME_VARIABLES(MO,
      +                                  Monthly Income Tax Deferrals Dr)
                   ELSE
@@ -3767,7 +3767,7 @@ C
      +                  BALANCE_SHEET_VARIABLES(MO-1,
      +                                    mty_dfrd_income_taxes)
      +                  + INCOME_VARIABLES(MO,
-     +                                  Monthly Income Tax Deferrals Cr)
+     +                                  Monthly_Income_Tax_Deferrals_Cr)
      +                  + INCOME_VARIABLES(MO,BTLMonthlyDeferralTaxCr)
                   ENDIF
                   BALANCE_SHEET_VARIABLES(MO,mtly_cwip) =
@@ -5272,9 +5272,9 @@ C
      +                        BALANCE_SHEET_VARIABLES(MO-1,
      +                                    mty_dfrd_income_taxes)
      +                        + INCOME_VARIABLES(MO,
-     +                                  Monthly Income Tax Deferrals Cr)
+     +                                  Monthly_Income_Tax_Deferrals_Cr)
      +                        + INCOME_VARIABLES(MO,
-     +                                 BTL Monthly Income Tax Deferrals)
+     +                                 BTL_Monthly_Income_Tax_Deferrals)
      +                        + INCOME_VARIABLES(MO,
      +                                  Monthly Income Tax Deferrals Dr)
                      ENDDO
@@ -5285,7 +5285,7 @@ C
      +                        BALANCE_SHEET_VARIABLES(MO-1,
      +                                    mty_dfrd_income_taxes)
      +                        + INCOME_VARIABLES(MO,
-     +                                  Monthly Income Tax Deferrals Cr)
+     +                                  Monthly_Income_Tax_Deferrals_Cr)
      +                        + INCOME_VARIABLES(MO,
      +                                         BTLMonthlyDeferralTaxCr) 
      +                        + NEW_ACQUISITION_DEF_TAXES_CR(MO)
@@ -5630,9 +5630,9 @@ C
      +                  + INCOME_VARIABLES(MO,
      +                                  Monthly Income Tax Deferrals Dr) ! 89
      +                  + INCOME_VARIABLES(MO,
-     +                                  Monthly Income Tax Deferrals Cr) ! 90
+     +                                  Monthly_Income_Tax_Deferrals_Cr) ! 90
      +                  + INCOME_VARIABLES(MO,
-     +                                 BTL Monthly Income Tax Deferrals) ! 97
+     +                                 BTL_Monthly_Income_Tax_Deferrals) ! 97
      +                  + INCOME_VARIABLES(MO,Monthly ITC Amortization)     ! 83
                ADJUSTED_BOOK_INCOME = 
      +                       INCOME_VARIABLES(MO,Monthly Net Income) ! 25
@@ -5794,7 +5794,7 @@ C
      +               INCOME_VARIABLES(MO,MonthlyCatawbaRevenues),
      +               INCOME_VARIABLES(MO,TOTAL OPERATING REVENUES),      ! 20
      +               INCOME_VARIABLES(MO,Prior Years Method Adjustment), ! 21
-     +               INCOME_VARIABLES(MO,ICAP Revenues),                 ! 22
+     +               INCOME_VARIABLES(MO,ICAP_Revs_mth),                 ! 22
      +               INCOME_VARIABLES(MO,TotalDerivativeRevenues),     ! 23
      +               INCOME_VARIABLES(MO,
      +                                  TotalFuelDerivativeRevenues), ! 24
@@ -5805,9 +5805,9 @@ C
      +               INCOME_VARIABLES(MO,
      +                                 Monthly Income Tax Deferrals Dr), ! 28
      +               INCOME_VARIABLES(MO,
-     +                                  Monthly Income Tax Deferrals Cr)
+     +                                  Monthly_Income_Tax_Deferrals_Cr)
      +                  + INCOME_VARIABLES(MO,
-     +                                BTL Monthly Income Tax Deferrals), ! 29
+     +                                BTL_Monthly_Income_Tax_Deferrals), ! 29
      +               INCOME_VARIABLES(MO,Monthly ITC Amortization),     ! 30
 C
 C BTL INCOME ITEMS
@@ -6130,7 +6130,7 @@ C
      +               INCOME_VARIABLES(MO,MonthlyCatawbaRevenues),
      +               INCOME_VARIABLES(MO,TOTAL OPERATING REVENUES),      ! 20
      +               INCOME_VARIABLES(MO,Prior Years Method Adjustment), ! 21
-     +               INCOME_VARIABLES(MO,ICAP Revenues),
+     +               INCOME_VARIABLES(MO,ICAP_Revs_mth),
      +               INCOME_VARIABLES(MO,TotalDerivativeRevenues),     ! 23
      +               INCOME_VARIABLES(MO,
      +                                  TotalFuelDerivativeRevenues), ! 24
@@ -6142,7 +6142,7 @@ C
      +                                 Monthly Income Tax Deferrals Dr) 
      +                   + INCOME_VARIABLES(MO,BTLMonthlyDeferralTaxCr),  ! 28
      +               INCOME_VARIABLES(MO,
-     +                                  Monthly Income Tax Deferrals Cr)
+     +                                  Monthly_Income_Tax_Deferrals_Cr)
      +                   + INCOME_VARIABLES(MO,BTLMonthlyDeferralTaxCr),  ! 29
      +               INCOME_VARIABLES(MO,Monthly ITC Amortization),     ! 30
 C
@@ -6158,7 +6158,7 @@ C Total Investment Income
      +               ANNUAL_VARS(129)/12., ! CAPITIALIZED_INTEREST/12.  ! 37
      +               INCOME_VARIABLES(MO,PGAAdjustment),               ! 38
      +               INCOME_VARIABLES(MO,
-     +                                BTL Monthly Income Tax Deferrals), ! 39
+     +                                BTL_Monthly_Income_Tax_Deferrals), ! 39
      +               ZERO_POS,                                          ! 40
      +               CASH_VARIABLES(MO,cash_net_salvage),               ! 41
      +               TAX_CASH_STORM_PAYMENTS,                           ! 42
@@ -7242,7 +7242,7 @@ C
 C BTL ITEMS
 C
             CPL_TAX__VARIABLES(MO,income_b4_income_taxes,BTL) =
-     +          INCOME_VARIABLES(MO,BTL monthly_other_income)
+     +          INCOME_VARIABLES(MO,BTL_monthly_other_income)
      +          + INCOME_VARIABLES(MO,mty_totl_lti_income)
      +          + INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)
      +          - INCOME_VARIABLES(MO,BTL Monthly Expenses)
@@ -8257,7 +8257,7 @@ C
 C BTL TAXES
 C
              R_BTL_TAXABLE_REVENUES(MO) =
-     +             INCOME_VARIABLES(MO,BTL monthly_other_income)
+     +             INCOME_VARIABLES(MO,BTL_monthly_other_income)
      +             + INCOME_VARIABLES(MO,Monthly Investment Earnings)
      +             - .7*INCOME_VARIABLES(MO,
      +                                     Monthly Dividend 70 Earnings)
@@ -8521,7 +8521,7 @@ C
      +                                R_BTL_TAX_EXPENSE_DEDUCTIONS(0) 
      +                                + R_BTL_TAX_EXPENSE_DEDUCTIONS(MO)
                R_BTL_OTHER_TAXABLE_INCOME(MO) =
-     +                     INCOME_VARIABLES(MO,BTL monthly_other_income)
+     +                     INCOME_VARIABLES(MO,BTL_monthly_other_income)
                R_BTL_TAXABLE_INVESTMENT(MO) =
      +                  INCOME_VARIABLES(MO,Monthly Investment Earnings)
      +                  - .7*INCOME_VARIABLES(MO,
@@ -9096,7 +9096,7 @@ C
          INCOME_BEFORE_INTEREST = 
      +          INCOME_VARIABLES(MO,Monthly Op Income)
      +          + INCOME_VARIABLES(MO,btl_monthly_deferred_revenues)
-     +          + INCOME_VARIABLES(MO,BTL monthly_other_income)
+     +          + INCOME_VARIABLES(MO,BTL_monthly_other_income)
      +          + INCOME_VARIABLES(MO,MonthlyMarkToMarket)
      +          + INCOME_VARIABLES(MO,MonthlyEarningNonCompany)
      +          + INCOME_VARIABLES(MO,BTL Monthly NoTax Other Income)
@@ -9105,7 +9105,7 @@ C
 
      +          - INCOME_VARIABLES(MO,BTL Monthly Expenses)              ! 58
      +          - INCOME_VARIABLES(MO,BTL Monthly Income Taxes)
-     +          - INCOME_VARIABLES(MO,BTL Monthly Income Tax Deferrals)
+     +          - INCOME_VARIABLES(MO,BTL_Monthly_Income_Tax_Deferrals)
      +          - INCOME_VARIABLES(MO,BTL_Monthly_Amortization)
      +          + INCOME_VARIABLES(MO,Monthly_AFUDC_Equity)
       RETURN
@@ -9126,7 +9126,7 @@ C***********************************************************************
      +                              mthy_fed_atl_income_tax_pd)
      +          + INCOME_VARIABLES(MO,Monthly Federal Tax on Capital)
      +          + INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Dr)
-     +          + INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Cr)
+     +          + INCOME_VARIABLES(MO,Monthly_Income_Tax_Deferrals_Cr)
      +          + INCOME_VARIABLES(MO,MonthlyPayrollTaxes)
       RETURN
 C***********************************************************************
@@ -9218,7 +9218,7 @@ C
      +                + INCOME_VARIABLES(MO,GasRevenues)
      +                + INCOME_VARIABLES(MO,RelationshipRevenues)
      +                + INCOME_VARIABLES(MO,MonthlyCatawbaRevenues)
-     +                + INCOME_VARIABLES(MO,ICAP Revenues)
+     +                + INCOME_VARIABLES(MO,ICAP_Revs_mth)
      +                + INCOME_VARIABLES(MO,TotalDerivativeRevenues)
      +                + INCOME_VARIABLES(MO,
      +                                   TotalFuelDerivativeRevenues)
@@ -9466,10 +9466,10 @@ C
      +        + CASH_VARIABLES(R_MO,cash_catawba_revenues)
      +        + CASH_VARIABLES(R_MO,Cash_Gas_Revenues)
      +        + CASH_VARIABLES(R_MO,Cash_Relationship_Revenues)
-     +        + CASH_VARIABLES(R_MO,Cash Residential)
-     +        + CASH_VARIABLES(R_MO,Cash Commercial)
-     +        + CASH_VARIABLES(R_MO,Cash Industrial)
-     +        + CASH_VARIABLES(R_MO,Cash Lighting)
+     +        + CASH_VARIABLES(R_MO,Cash_Residential)
+     +        + CASH_VARIABLES(R_MO,Cash_Commercial)
+     +        + CASH_VARIABLES(R_MO,Cash_Industrial)
+     +        + CASH_VARIABLES(R_MO,Cash_Lighting)
      +        + CASH_VARIABLES(R_MO,CashBulkPower)
      +        + CASH_VARIABLES(R_MO,CashCapacitySales)
      +        + CASH_VARIABLES(R_MO,Cash_Government)
@@ -9854,10 +9854,10 @@ c
      +         + INCOME_VARIABLES(:,mthy_fed_atl_income_tax_pd)
      +         + INCOME_VARIABLES(:,Monthly Federal Tax on Capital)
      +         + INCOME_VARIABLES(:,Monthly Income Tax Deferrals Dr)
-     +         + INCOME_VARIABLES(:,Monthly Income Tax Deferrals Cr)
+     +         + INCOME_VARIABLES(:,Monthly_Income_Tax_Deferrals_Cr)
      +         + INCOME_VARIABLES(:,Monthly_AFUDC_Borrowed)
      +         + INCOME_VARIABLES(:,BTL Monthly Income Taxes)
-     +         + INCOME_VARIABLES(:,BTL Monthly Income Tax Deferrals)
+     +         + INCOME_VARIABLES(:,BTL_Monthly_Income_Tax_Deferrals)
          INCOME_VARIABLES(:,Monthly EBITAD) =
      +                   INCOME_VARIABLES(:,Monthly EBIT)
      +                   + INCOME_VARIABLES(:,Monthly_Book_Depreciation)

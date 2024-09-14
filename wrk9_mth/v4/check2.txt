@@ -1,0 +1,23 @@
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +       ICAP_REVENUES,
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +            (VARIABLE(631),ICAP_REVENUES),
+/home/123-D56SW/wrk/Midas/ABBICAP/cla_objt.for:     +      MON_MDS_ICAP_REVENUES(:,:),
+/home/123-D56SW/wrk/Midas/ABBICAP/cla_objt.for:     +       R_ICAP_REVENUES
+/home/123-D56SW/wrk/Midas/ABBICAP/cla_objt.for:     +                    MON_MDS_ICAP_REVENUES,
+/home/123-D56SW/wrk/Midas/ABBICAP/cla_objt.for:            ALLOCATE(MON_MDS_ICAP_REVENUES(R_NUNITS,0:12))
+/home/123-D56SW/wrk/Midas/ABBICAP/cla_objt.for:         MON_MDS_ICAP_REVENUES = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/cla_objt.for:         MON_MDS_ICAP_REVENUES(R_UNITNO,R_ISEAS) =
+/home/123-D56SW/wrk/Midas/ABBICAP/cla_objt.for:     +                MON_MDS_ICAP_REVENUES(R_UNITNO,R_ISEAS) +
+/home/123-D56SW/wrk/Midas/ABBICAP/cla_objt.for:     +                                   MONTHLY_ICAP_REVENUES(R_UNITNO)
+/home/123-D56SW/wrk/Midas/ABBICAP/cla_objt.for:         MON_MDS_ICAP_REVENUES(R_UNITNO,0) =
+/home/123-D56SW/wrk/Midas/ABBICAP/cla_objt.for:     +                MON_MDS_ICAP_REVENUES(R_UNITNO,0) +
+/home/123-D56SW/wrk/Midas/ABBICAP/cla_objt.for:     +                                   MONTHLY_ICAP_REVENUES(R_UNITNO)
+/home/123-D56SW/wrk/Midas/ABBICAP/cla_objt.for:     +                     MON_MDS_ICAP_REVENUES(UNUM,R_ISEAS)
+/home/123-D56SW/wrk/Midas/ABBICAP/cla_objt.for:     +                                   R_ICAP_REVENUES,
+/home/123-D56SW/wrk/Midas/ABBICAP/cla_objt.for:               R_ICAP_REVENUES = R_ICAP_REVENUES
+/home/123-D56SW/wrk/Midas/ABBICAP/clreport.for:                  MONTHLY_ICAP_REVENUES(UNITNO) =
+/home/123-D56SW/wrk/Midas/ABBICAP/clreport.for:     +                        MONTHLY_ICAP_REVENUES(UNITNO) +
+/home/123-D56SW/wrk/Midas/ABBICAP/monthly_icap.f90:real (kind=4) :: monthly_icap_revenues(max_cl_units)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                               ICAP_REVENUES,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                       + ICAP_REVENUES
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                + ICAP_REVENUES
+/home/123-D56SW/wrk/Midas/ABBICAP/pro_cost.for:         MONTHLY_ICAP_REVENUES = 0.

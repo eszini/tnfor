@@ -1,0 +1,12 @@
+tf_objt.for                    (1) 07054 |                     MONTH_VARS(MO,Cash Residential) =|
+tf_objt.for                    (1) 07055 |     +                  MONTH_VARS(MO,Cash Residential) + .000001 *|
+tf_objt.for                    (1) 07058 |                     MONTH_VARS(MO,Cash Commercial) =|
+tf_objt.for                    (1) 07059 |     +                  MONTH_VARS(MO,Cash Commercial) + .000001 *|
+tf_objt.for                    (1) 07062 |                     MONTH_VARS(MO,Cash Industrial) =|
+tf_objt.for                    (1) 07063 |     +                  MONTH_VARS(MO,Cash Industrial) + .000001 *|
+tf_objt.for                    (1) 07066 |                     MONTH_VARS(MO,Cash Lighting) =|
+tf_objt.for                    (1) 07067 |     +                  MONTH_VARS(MO,Cash Lighting) + .000001 *|
+tf_objt.for                    (1) 07090 |                     MONTH_VARS(MO,Cash Utility Sales) =|
+tf_objt.for                    (1) 07091 |     +                  MONTH_VARS(MO,Cash Utility Sales) + .000001 *|
+tf_objt.for                    (1) 07094 |                     MONTH_VARS(MO,Cash Competitive Sales) =|
+tf_objt.for                    (1) 07095 |     +                 MONTH_VARS(MO,Cash Competitive Sales) + .000001*|

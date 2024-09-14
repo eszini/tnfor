@@ -5789,12 +5789,12 @@
                IF(GRX_BOP_RETROFIT_ACTIVE(U)) CYCLE
             ENDIF
             IF(HardWiredRetrofitProject(U) .AND.
-     +                  .NOT. HardWiredRetrofitProjectThisYear(U))CYCLE
+     +                  .NOT. HWRetrofitProjectThisYear(U))CYCLE
             IF(OFLINE(U) < 100*(BASE_YEAR + R_YEAR - 1900)) CYCLE
             I = I + 1
             RETIRE_RETRO_POSITION(I) = I
             RETIRE_RETRO_INDEX(I) = RETROFIT_UNIT_INDEX(J)
-            IF(HardWiredRetrofitProjectThisYear(U)) THEN
+            IF(HWRetrofitProjectThisYear(U)) THEN
                RETIRE_OR_RETRO(I) = 4 ! RETRO = IS Hard Wired
             ELSE
                RETIRE_OR_RETRO(I) = 2 ! RETRO = 2
@@ -11880,12 +11880,12 @@
      +                      + MON_MDS_CL_CAP_REVENUE(ASSET_CLASS,1,MO)
      +                      + MON_MDS_CL_CAP_REVENUE(ASSET_CLASS,2,MO)
      +                      + MON_MDS_CL_CAP_REVENUE(ASSET_CLASS,3,MO)
-                  MONTH_VARS(MO,BTL monthly_other_income) =
-     +                      MONTH_VARS(MO,BTL monthly_other_income)
+                  MONTH_VARS(MO,BTL_monthly_other_income) =
+     +                      MONTH_VARS(MO,BTL_monthly_other_income)
      +                      + MON_MDS_CL_CLASS_REVENUE(ASSET_CLASS,4,MO)
      +                      + MON_MDS_CL_CAP_REVENUE(ASSET_CLASS,4,MO)
-                  MONTH_VARS(MO,ICAP Revenues) =
-     +                       MONTH_VARS(MO,ICAP Revenues)
+                  MONTH_VARS(MO,ICAP_Revs_mth) =
+     +                       MONTH_VARS(MO,ICAP_Revs_mth)
      +                       + MON_MDS_ICAP_REV_BY_CLASS(ASSET_CLASS,MO)
                ENDDO
             ENDIF

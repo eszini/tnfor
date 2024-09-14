@@ -4439,8 +4439,8 @@ C
      +                    EL_MON_MDS_REVENUE(ASSET_CLASS,2,MO) +
      +                    EL_MON_MDS_REVENUE(ASSET_CLASS,3,MO) +
      +                    EL_MON_MDS_MARKET_REVENUES(ASSET_CLASS,MO)
-                  MONTH_VARS(MO,BTL monthly_other_income) =
-     +                      MONTH_VARS(MO,BTL monthly_other_income) +
+                  MONTH_VARS(MO,BTL_monthly_other_income) =
+     +                      MONTH_VARS(MO,BTL_monthly_other_income) +
      +                      EL_MON_MDS_REVENUE(ASSET_CLASS,4,MO)
                ENDDO
             ENDIF

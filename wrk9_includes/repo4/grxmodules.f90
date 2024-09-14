@@ -342,7 +342,7 @@ contains
                          .AND. RETROFIT_PROJECT_YEAR <= LAST_STUDY_YEAR
        ENDIF
       END FUNCTION HardWiredRetrofitProject
-      LOGICAL FUNCTION HardWiredRetrofitProjectThisYear(R_NUNITS)
+      LOGICAL FUNCTION HWRetrofitProjectThisYear(R_NUNITS)
        USE CLA_OBJT_ARRAYS
        INTEGER (KIND=2) :: R_NUNITS,RETROFIT_PROJECT_YEAR
        INTEGER (KIND=2) :: BASE_YEAR,YEAR,END_POINT,STUDY_PERIOD,ENDYR, &
@@ -351,12 +351,12 @@ contains
        COMMON /GLOBAL_VARIABLES/ BASE_YEAR,YEAR,END_POINT,STUDY_PERIOD, &
                LAST_STUDY_YEAR,EXTENSION_PERIOD,LAST_EXTENSION_YEAR, &
                ENDYR,MAX_YEARS
-       HardWiredRetrofitProjectThisYear = .FALSE.
+       HWRetrofitProjectThisYear = .FALSE.
        IF(CO2_CONTROL_PERCENT(R_NUNITS) >= 0.) THEN
           RETROFIT_PROJECT_YEAR=(CO2_CONTROL_DATE(R_NUNITS)-10000)/100 &
                                  + 2000  ! should be a valid year ie 2028
-          HardWiredRetrofitProjectThisYear = RETROFIT_PROJECT_YEAR == BASE_YEAR + YEAR
+          HWRetrofitProjectThisYear = RETROFIT_PROJECT_YEAR == BASE_YEAR + YEAR
        ENDIF
-      END FUNCTION HardWiredRetrofitProjectThisYear
+      END FUNCTION HWRetrofitProjectThisYear
 
 end module grxmodules

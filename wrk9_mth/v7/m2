@@ -1,0 +1,481 @@
+midasmod.for                   (1) 02939 |Monthly Property Taxes|
+midasmod.for                   (1) 02945 |IPL Monthy OandM Expenses|
+midasmod.for                   (1) 02956 |IPL Total Operating Expenses|
+midasmod.for                   (1) 02958 |IPL Monthy OandM Expenses|
+midasmod.for                   (1) 02960 |Monthly Operating Revenue Tax|
+midasmod.for                   (1) 02964 |Monthly ITC Amortization|
+midasmod.for                   (1) 02965 |IPL Operating Income|
+midasmod.for                   (1) 02967 |IPL Total Operating Expenses|
+midasmod.for                   (1) 03047 |IPL Monthy OandM Expenses|
+midasmod.for                   (1) 03048 |IPL Monthy OandM Expenses|
+midasmod.for                   (1) 03141 |IPL Monthy OandM Expenses|
+midasmod.for                   (1) 03148 |Monthly Operating Revenue Tax|
+midasmod.for                   (1) 03162 |Monthly ITC Amortization|
+midasmod.for                   (1) 03164 |IPL Total Operating Expenses|
+midasmod.for                   (1) 03166 |IPL Operating Income|
+midasmod.for                   (1) 03209 |IPL Monthy OandM Expenses|
+midasmod.for                   (1) 03215 |Monthly Operating Revenue Tax|
+midasmod.for                   (1) 03225 |Monthly ITC Amortization|
+midasmod.for                   (1) 03227 |IPL Total Operating Expenses|
+midasmod.for                   (1) 03229 |IPL Operating Income|
+msgmmdbt.for                   (1) 03846 |BTL Monthly Total Other Income|
+msgmmdbt.for                   (1) 03847 |BTL Monthly Total Other Income|
+msgmmdbt.for                   (1) 03849 |BTL Monthly Interest Income|
+msgmmdbt.for                   (1) 03850 |BTL Monthly Interest Income|
+msgmmdbt.for                   (1) 03852 |Monthly LTD Total Interest|
+msgmmdbt.for                   (1) 03853 |Monthly LTD Total Interest|
+msgmmdbt.for                   (1) 03855 |Monthly LTD Booked Interest|
+msgmmdbt.for                   (1) 03856 |Monthly LTD Total Interest|
+msgmmdbt.for                   (1) 03857 |Monthly Total PS Dividends|
+msgmmdbt.for                   (1) 03858 |Monthly Total PS Dividends|
+msgmmdbt.for                   (1) 03865 |Monthly LTD Premium Amort|
+msgmmdbt.for                   (1) 03866 |Monthly LTD Premium Amort|
+msgmmdbt.for                   (1) 03868 |Monthly PS Amort Dividends|
+msgmmdbt.for                   (1) 03869 |Monthly PS Amort Dividends|
+msgmmdbt.for                   (1) 03872 |Monthly PS Premium Amort|
+msgmmdbt.for                   (1) 03873 |Monthly PS Premium Amort|
+msgmmdbt.for                   (1) 03876 |Monthly Issue Expense Amorts|
+msgmmdbt.for                   (1) 03877 |Monthly Issue Expense Amorts|
+msgmmdbt.for                   (1) 03884 |Monthly Investment Earnings|
+msgmmdbt.for                   (1) 03885 |Monthly Investment Earnings|
+msgmmdbt.for                   (1) 03892 |Monthly Dividend 70 Earnings|
+msgmmdbt.for                   (1) 03893 |Monthly Dividend 70 Earnings|
+msgmmdbt.for                   (1) 03988 |Cash Interest on Notes Payable|
+msgmmdbt.for                   (1) 03989 |Cash Interest on Notes Payable|
+msgmmdbt.for                   (1) 04826 |Monthly LTD Total Interest|
+msgmmdbt.for                   (1) 04853 |Cash Interest on Notes Payable|
+msgmmdbt.for                   (1) 04854 |Cash Interest on Notes Payable|
+msgmmout.for                   (1) 00887 |Monthly Nuclear Fuel Expense|
+msgmmout.for                   (1) 00888 |Monthly Nuclear Fuel Expense|
+msgmmout.for                   (1) 00937 |Monthly Nuclear Fuel Expense|
+msgmmout.for                   (1) 01081 |Monthly LTD Amort Interest|
+msgmmout.for                   (1) 01094 |Monthly LTD Amort Interest|
+msgmmout.for                   (1) 01095 |Monthly LTD Amort Interest|
+msgmmout.for                   (1) 01120 |Monthly Shares Outstanding|
+msgmmout.for                   (1) 01123 |Monthly Shares Outstanding|
+msgmmout.for                   (1) 01124 |Monthly Shares Outstanding|
+msgmmout.for                   (1) 01173 |Monthly FASB 143 Amort|
+msgmmout.for                   (1) 01216 |Monthly LTD Amort Interest|
+msgmmout.for                   (1) 01218 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 01221 |Monthly Property Taxes|
+msgmmout.for                   (1) 01227 |Monthly CIAC Amort|
+msgmmout.for                   (1) 01280 |Cash TOTAL OPERATING RECEIPTS|
+msgmmout.for                   (1) 01282 |Cash TOTAL EXPENSE PAYMENTS|
+msgmmout.for                   (1) 01299 |Monthly FASB 143 Amort|
+msgmmout.for                   (1) 01303 |Monthly CIAC Amort|
+msgmmout.for                   (1) 01309 |Monthly Lease BTL Amort Expense|
+msgmmout.for                   (1) 01328 |Monthly FASB 143 Amort|
+msgmmout.for                   (1) 01332 |Monthly CIAC Amort|
+msgmmout.for                   (1) 01336 |Monthly Lease BTL Amort Expense|
+msgmmout.for                   (1) 01392 |BTL Monthly Expenses|
+msgmmout.for                   (1) 01394 |BTL Monthly Expenses|
+msgmmout.for                   (1) 01410 |BTL Monthly STInvestmet Income|
+msgmmout.for                   (1) 01414 |BTL Monthly Interest Income|
+msgmmout.for                   (1) 01415 |BTL Monthly STInvestmet Income|
+msgmmout.for                   (1) 01433 |Monthly Investment Earnings|
+msgmmout.for                   (1) 01435 |Monthly Dividend 70 Earnings|
+msgmmout.for                   (1) 01438 |Monthly Investment Earnings|
+msgmmout.for                   (1) 01439 |Monthly Investment Earnings|
+msgmmout.for                   (1) 01446 |Monthly Dividend 70 Earnings|
+msgmmout.for                   (1) 01450 |Monthly Dividend 70 Earnings|
+msgmmout.for                   (1) 01455 |Monthly Dividend 70 Earnings|
+msgmmout.for                   (1) 01473 |Monthly ITC Amortization|
+msgmmout.for                   (1) 01476 |Monthly State Tax on Capital|
+msgmmout.for                   (1) 01480 |Monthly Federal Tax on Capital|
+msgmmout.for                   (1) 01482 |Monthly Income Tax Deferrals Dr|
+msgmmout.for                   (1) 01485 |BTL Monthly Income Taxes|
+msgmmout.for                   (1) 01494 |Monthly Extraordinary Items|
+msgmmout.for                   (1) 01532 |Monthly Common Dividends|
+msgmmout.for                   (1) 01537 |Monthly Common Dividends|
+msgmmout.for                   (1) 01540 |Monthly Common Dividends|
+msgmmout.for                   (1) 01553 |Monthly Common Dividends|
+msgmmout.for                   (1) 01556 |Monthly Common Dividends|
+msgmmout.for                   (1) 01572 |Monthly Common Dividends|
+msgmmout.for                   (1) 01576 |Monthly Common Dividends|
+msgmmout.for                   (1) 01579 |Monthly Common Dividends|
+msgmmout.for                   (1) 01586 |Monthly Common Dividends|
+msgmmout.for                   (1) 01591 |Monthly Common Dividends|
+msgmmout.for                   (1) 01628 |Monthly Common Dividends|
+msgmmout.for                   (1) 01639 |Monthly Common Dividends|
+msgmmout.for                   (1) 01657 |Monthly Common Dividends|
+msgmmout.for                   (1) 01666 |Monthly Common Dividends|
+msgmmout.for                   (1) 01675 |Monthly Common Dividends|
+msgmmout.for                   (1) 01676 |Monthly Common Dividends|
+msgmmout.for                   (1) 01680 |Monthly Total Taxes Expense|
+msgmmout.for                   (1) 01721 |Monthly Op Income|
+msgmmout.for                   (1) 01723 |Monthly Total Taxes Expense|
+msgmmout.for                   (1) 01725 |Monthly INCOME BEFORE INTEREST|
+msgmmout.for                   (1) 01732 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01734 |Monthly LTD Booked Interest|
+msgmmout.for                   (1) 01735 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01737 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01738 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01742 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01743 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01745 |Monthly LTD Booked Interest|
+msgmmout.for                   (1) 01746 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01748 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01754 |Monthly LTD Booked Interest|
+msgmmout.for                   (1) 01756 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01764 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01769 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01774 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01776 |Monthly LTD Booked Interest|
+msgmmout.for                   (1) 01777 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01779 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01780 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01784 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01785 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01787 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01788 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01791 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01792 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01798 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01799 |Monthly LTD Booked Interest|
+msgmmout.for                   (1) 01800 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 01804 |Monthly Booked PS Dividends|
+msgmmout.for                   (1) 01806 |Monthly Total PS Dividends|
+msgmmout.for                   (1) 01809 |Monthly Total PS Dividends|
+msgmmout.for                   (1) 01811 |Monthly Total PS Dividends|
+msgmmout.for                   (1) 01814 |Monthly Booked PS Dividends|
+msgmmout.for                   (1) 01815 |Monthly Total PS Dividends|
+msgmmout.for                   (1) 01817 |Monthly Total PS Dividends|
+msgmmout.for                   (1) 01818 |Monthly Total PS Dividends|
+msgmmout.for                   (1) 01821 |Monthly Total PS Dividends|
+msgmmout.for                   (1) 01822 |Monthly Total PS Dividends|
+msgmmout.for                   (1) 01824 |Monthly Total PS Dividends|
+msgmmout.for                   (1) 01825 |Monthly Total PS Dividends|
+msgmmout.for                   (1) 01829 |Monthly INCOME AFTER INTEREST|
+msgmmout.for                   (1) 01831 |Monthly Net Income|
+msgmmout.for                   (1) 01833 |Monthly Earnings 2 Common|
+msgmmout.for                   (1) 01834 |Monthly Net Income|
+msgmmout.for                   (1) 01835 |Monthly Total PS Dividends|
+msgmmout.for                   (1) 01836 |Monthly RETAINED EARNINGS|
+msgmmout.for                   (1) 01837 |Monthly Earnings 2 Common|
+msgmmout.for                   (1) 01838 |Monthly Common Dividends|
+msgmmout.for                   (1) 01850 |Monthly Income Tax Deferrals Dr|
+msgmmout.for                   (1) 01851 |Monthly Income Tax Deferrals Dr|
+msgmmout.for                   (1) 01869 |Monthly Income Tax Deferrals Dr|
+msgmmout.for                   (1) 01887 |Monthly Income Tax Deferrals Dr|
+msgmmout.for                   (1) 01893 |Monthly Income Tax Deferrals Dr|
+msgmmout.for                   (1) 01907 |Monthly Income Tax Deferrals Dr|
+msgmmout.for                   (1) 01927 |Monthly ITC Amortization|
+msgmmout.for                   (1) 01928 |Monthly ITC Amortization|
+msgmmout.for                   (1) 01929 |Monthly State Tax on Capital|
+msgmmout.for                   (1) 01930 |Monthly State Tax on Capital|
+msgmmout.for                   (1) 01931 |Monthly Federal Tax on Capital|
+msgmmout.for                   (1) 01932 |Monthly Federal Tax on Capital|
+msgmmout.for                   (1) 01951 |Monthly Total Taxes Expense|
+msgmmout.for                   (1) 01954 |Monthly Total Taxes Expense|
+msgmmout.for                   (1) 01981 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 01999 |Monthly Total Taxes Expense|
+msgmmout.for                   (1) 02008 |Monthly Total Taxes Expense|
+msgmmout.for                   (1) 02016 |Monthly Total Taxes Expense|
+msgmmout.for                   (1) 02033 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 02034 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 02037 |Monthly Total Taxes Expense|
+msgmmout.for                   (1) 02040 |Monthly Op Income|
+msgmmout.for                   (1) 02042 |Monthly Total Taxes Expense|
+msgmmout.for                   (1) 02044 |Monthly INCOME BEFORE INTEREST|
+msgmmout.for                   (1) 02046 |Monthly INCOME AFTER INTEREST|
+msgmmout.for                   (1) 02048 |Monthly Net Income|
+msgmmout.for                   (1) 02050 |Monthly Earnings 2 Common|
+msgmmout.for                   (1) 02051 |Monthly Net Income|
+msgmmout.for                   (1) 02052 |Monthly Total PS Dividends|
+msgmmout.for                   (1) 02053 |Monthly RETAINED EARNINGS|
+msgmmout.for                   (1) 02054 |Monthly Earnings 2 Common|
+msgmmout.for                   (1) 02055 |Monthly Common Dividends|
+msgmmout.for                   (1) 02060 |BTL Monthly Income Taxes|
+msgmmout.for                   (1) 02065 |BTL Monthly Income Taxes|
+msgmmout.for                   (1) 02073 |Monthly Op Income|
+msgmmout.for                   (1) 02075 |Monthly Total Taxes Expense|
+msgmmout.for                   (1) 02085 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 02086 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 02087 |Monthly LTD Amort Interest|
+msgmmout.for                   (1) 02089 |Monthly Booked PS Dividends|
+msgmmout.for                   (1) 02090 |Monthly Total PS Dividends|
+msgmmout.for                   (1) 02091 |Monthly Total PS Dividends|
+msgmmout.for                   (1) 02092 |Monthly Total PS Dividends|
+msgmmout.for                   (1) 02093 |Monthly PS Amort Dividends|
+msgmmout.for                   (1) 02095 |Monthly Extraordinary Items|
+msgmmout.for                   (1) 02096 |Monthly Extraordinary Items|
+msgmmout.for                   (1) 02097 |Monthly INCOME BEFORE INTEREST|
+msgmmout.for                   (1) 02099 |Monthly INCOME AFTER INTEREST|
+msgmmout.for                   (1) 02101 |Monthly Net Income|
+msgmmout.for                   (1) 02103 |Monthly Earnings 2 Common|
+msgmmout.for                   (1) 02104 |Monthly Net Income|
+msgmmout.for                   (1) 02105 |Monthly Total PS Dividends|
+msgmmout.for                   (1) 02106 |Monthly RETAINED EARNINGS|
+msgmmout.for                   (1) 02107 |Monthly Earnings 2 Common|
+msgmmout.for                   (1) 02108 |Monthly Common Dividends|
+msgmmout.for                   (1) 02115 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 02277 |Monthly State Tax on Capital|
+msgmmout.for                   (1) 02285 |Monthly Federal Tax on Capital|
+msgmmout.for                   (1) 02320 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 02408 |Monthly Property Taxes|
+msgmmout.for                   (1) 02427 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 02428 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 02439 |Cash Prior Years Method Adj|
+msgmmout.for                   (1) 02445 |Cash TOTAL OPERATING RECEIPTS|
+msgmmout.for                   (1) 02446 |Cash TOTAL OPERATING RECEIPTS|
+msgmmout.for                   (1) 02450 |Cash Prior level Method Adj|
+msgmmout.for                   (1) 02455 |Cash Prior Years Method Adj|
+msgmmout.for                   (1) 02458 |Cash TOTAL OPERATING RECEIPTS|
+msgmmout.for                   (1) 02459 |Cash TOTAL EXPENSE PAYMENTS|
+msgmmout.for                   (1) 02468 |Cash Interest on Notes Payable|
+msgmmout.for                   (1) 02553 |BTL Monthly Interest Income|
+msgmmout.for                   (1) 02937 |BTL Monthly STInvestmet Income|
+msgmmout.for                   (1) 02941 |BTL Monthly Interest Income|
+msgmmout.for                   (1) 02942 |BTL Monthly STInvestmet Income|
+msgmmout.for                   (1) 03062 |Cash Interest on Notes Payable|
+msgmmout.for                   (1) 03066 |Monthly Property Taxes|
+msgmmout.for                   (1) 03067 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 03068 |Monthly State Tax on Capital|
+msgmmout.for                   (1) 03069 |Monthly Federal Tax on Capital|
+msgmmout.for                   (1) 03096 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 03145 |BTL Monthly STInvestmet Income|
+msgmmout.for                   (1) 03590 |Monthly Strom Reserve|
+msgmmout.for                   (1) 03662 |Monthly Nuclear Fuel Expense|
+msgmmout.for                   (1) 03673 |Monthly Lease BTL Amort Expense|
+msgmmout.for                   (1) 03755 |Monthly Income Tax Deferrals Dr|
+msgmmout.for                   (1) 03762 |Monthly Income Tax Deferrals Dr|
+msgmmout.for                   (1) 03787 |Monthly Issue Expense Amorts|
+msgmmout.for                   (1) 03825 |Monthly LTD Booked Interest|
+msgmmout.for                   (1) 03828 |Monthly Common Dividends|
+msgmmout.for                   (1) 03831 |Monthly Booked PS Dividends|
+msgmmout.for                   (1) 03836 |Cash Interest on Notes Payable|
+msgmmout.for                   (1) 03839 |Monthly Property Taxes|
+msgmmout.for                   (1) 03841 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 03842 |Monthly State Tax on Capital|
+msgmmout.for                   (1) 03844 |Monthly Federal Tax on Capital|
+msgmmout.for                   (1) 03878 |Monthly LTD Booked Interest|
+msgmmout.for                   (1) 03881 |Monthly Common Dividends|
+msgmmout.for                   (1) 03884 |Monthly Booked PS Dividends|
+msgmmout.for                   (1) 03889 |Cash Interest on Notes Payable|
+msgmmout.for                   (1) 03892 |Monthly Property Taxes|
+msgmmout.for                   (1) 03894 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 03895 |Monthly State Tax on Capital|
+msgmmout.for                   (1) 03897 |Monthly Federal Tax on Capital|
+msgmmout.for                   (1) 03934 |BTL Monthly STInvestmet Income|
+msgmmout.for                   (1) 03958 |Monthly ITC Amortization|
+msgmmout.for                   (1) 04007 |Monthly RETAINED EARNINGS|
+msgmmout.for                   (1) 04018 |Monthly PS Premium Amort|
+msgmmout.for                   (1) 04024 |Monthly LTD Premium Amort|
+msgmmout.for                   (1) 04041 |Monthly Strom Reserve|
+msgmmout.for                   (1) 04042 |Monthly Strom Reserve|
+msgmmout.for                   (1) 04260 |Monthly Issue Expense Amorts|
+msgmmout.for                   (1) 04261 |Monthly PS Amort Dividends|
+msgmmout.for                   (1) 04264 |Monthly Investment Earnings|
+msgmmout.for                   (1) 04267 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 04270 |Monthly Total PS Dividends|
+msgmmout.for                   (1) 04271 |Monthly Common Dividends|
+msgmmout.for                   (1) 04277 |Monthly Dividend 70 Earnings|
+msgmmout.for                   (1) 04280 |BTL Monthly STInvestmet Income|
+msgmmout.for                   (1) 04281 |BTL Monthly Interest Income|
+msgmmout.for                   (1) 04282 |BTL Monthly Income Taxes|
+msgmmout.for                   (1) 04283 |Monthly Shares Outstanding|
+msgmmout.for                   (1) 04290 |Monthly LTD Premium Amort|
+msgmmout.for                   (1) 04291 |Monthly PS Premium Amort|
+msgmmout.for                   (1) 04294 |Monthly Property Taxes|
+msgmmout.for                   (1) 04300 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 04312 |Monthly State Tax on Capital|
+msgmmout.for                   (1) 04313 |Monthly Federal Tax on Capital|
+msgmmout.for                   (1) 04317 |Monthly Shares Outstanding|
+msgmmout.for                   (1) 04318 |Monthly Earnings 2 Common|
+msgmmout.for                   (1) 04332 |Monthly Earnings 2 Common|
+msgmmout.for                   (1) 04412 |Cash Interest on Notes Payable|
+msgmmout.for                   (1) 04595 |Cash Prior level Method Adj|
+msgmmout.for                   (1) 04608 |Cash Prior Years Method Adj|
+msgmmout.for                   (1) 04670 |Monthly Common Dividends|
+msgmmout.for                   (1) 04689 |Monthly Income Tax Deferrals Dr|
+msgmmout.for                   (1) 04726 |BTL Monthly STInvestmet Income|
+msgmmout.for                   (1) 04794 |Monthly Property Taxes|
+msgmmout.for                   (1) 04808 |Monthly Income Tax Deferrals Dr|
+msgmmout.for                   (1) 04815 |Monthly Common Dividends|
+msgmmout.for                   (1) 04816 |Monthly Common Dividends|
+msgmmout.for                   (1) 04820 |BTL Monthly Income Taxes|
+msgmmout.for                   (1) 04821 |BTL Monthly Income Taxes|
+msgmmout.for                   (1) 04961 |Cash TOTAL OPERATING RECEIPTS|
+msgmmout.for                   (1) 04966 |Cash Prior level Method Adj|
+msgmmout.for                   (1) 04967 |Cash Prior Years Method Adj|
+msgmmout.for                   (1) 04971 |Cash TOTAL EXPENSE PAYMENTS|
+msgmmout.for                   (1) 04975 |Cash TOTAL OPERATING RECEIPTS|
+msgmmout.for                   (1) 04976 |Cash TOTAL EXPENSE PAYMENTS|
+msgmmout.for                   (1) 04981 |Cash Interest on Notes Payable|
+msgmmout.for                   (1) 05128 |Monthly Income Tax Deferrals Dr|
+msgmmout.for                   (1) 05151 |Monthly Total Taxes Expense|
+msgmmout.for                   (1) 05155 |Monthly Total Taxes Expense|
+msgmmout.for                   (1) 05185 |Monthly LTD Premium Amort|
+msgmmout.for                   (1) 05197 |Monthly LTD Premium Amort|
+msgmmout.for                   (1) 05210 |Monthly RETAINED EARNINGS|
+msgmmout.for                   (1) 05245 |Monthly Income Tax Deferrals Dr|
+msgmmout.for                   (1) 05279 |Monthly Income Tax Deferrals Dr|
+msgmmout.for                   (1) 05334 |BTL Monthly STInvestmet Income|
+msgmmout.for                   (1) 05369 |Monthly LTD Booked Interest|
+msgmmout.for                   (1) 05372 |Monthly Common Dividends|
+msgmmout.for                   (1) 05375 |Monthly Booked PS Dividends|
+msgmmout.for                   (1) 05380 |Cash Interest on Notes Payable|
+msgmmout.for                   (1) 05383 |Monthly Property Taxes|
+msgmmout.for                   (1) 05385 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 05386 |Monthly State Tax on Capital|
+msgmmout.for                   (1) 05388 |Monthly Federal Tax on Capital|
+msgmmout.for                   (1) 05493 |Monthly Shares Outstanding|
+msgmmout.for                   (1) 05494 |Monthly Shares Outstanding|
+msgmmout.for                   (1) 05508 |Monthly Property Taxes|
+msgmmout.for                   (1) 05518 |Price of Issued Shares|
+msgmmout.for                   (1) 05523 |Price of Issued Shares|
+msgmmout.for                   (1) 05546 |Monthly Other Debit Amort|
+msgmmout.for                   (1) 05568 |Monthly Earnings per Share|
+msgmmout.for                   (1) 05570 |Monthly Earnings 2 Common|
+msgmmout.for                   (1) 05571 |Monthly Shares Outstanding|
+msgmmout.for                   (1) 05573 |Quarterly Earnings per Share|
+msgmmout.for                   (1) 05574 |Monthly Earnings per Share|
+msgmmout.for                   (1) 05577 |Monthly Earnings 2 Common|
+msgmmout.for                   (1) 05580 |Quarterly Earnings per Share|
+msgmmout.for                   (1) 05583 |Monthly Shares Outstanding|
+msgmmout.for                   (1) 05587 |Quarterly Earnings per Share|
+msgmmout.for                   (1) 05591 |BTL Monthly Interest Income|
+msgmmout.for                   (1) 05592 |BTL Monthly STInvestmet Income|
+msgmmout.for                   (1) 05602 |BTL Monthly Interest Income|
+msgmmout.for                   (1) 05604 |Monthly Investment Earnings|
+msgmmout.for                   (1) 05606 |Monthly Dividend 70 Earnings|
+msgmmout.for                   (1) 05614 |BTL Monthly STInvestmet Income|
+msgmmout.for                   (1) 05631 |Monthly Income Tax Deferrals Dr|
+msgmmout.for                   (1) 05636 |Monthly ITC Amortization|
+msgmmout.for                   (1) 05638 |Monthly Net Income|
+msgmmout.for                   (1) 05641 |BTL Monthly NoTax Other Income|
+msgmmout.for                   (1) 05698 |Monthly Issue Expense Amorts|
+msgmmout.for                   (1) 05700 |Monthly LTD Premium Amort|
+msgmmout.for                   (1) 05702 |Monthly PS Premium Amort|
+msgmmout.for                   (1) 05704 |Monthly Booked PS Dividends|
+msgmmout.for                   (1) 05706 |Monthly LTD Booked Interest|
+msgmmout.for                   (1) 05713 |Monthly LTD Booked Interest|
+msgmmout.for                   (1) 05716 |Monthly Common Dividends|
+msgmmout.for                   (1) 05719 |Monthly Booked PS Dividends|
+msgmmout.for                   (1) 05723 |Cash Interest on Notes Payable|
+msgmmout.for                   (1) 05726 |Monthly Property Taxes|
+msgmmout.for                   (1) 05727 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 05728 |Monthly State Tax on Capital|
+msgmmout.for                   (1) 05729 |Monthly Federal Tax on Capital|
+msgmmout.for                   (1) 05750 |BTL Monthly STInvestmet Income|
+msgmmout.for                   (1) 05801 |Monthly Net Income|
+msgmmout.for                   (1) 05804 |BTL Monthly NoTax Other Income|
+msgmmout.for                   (1) 05806 |Monthly Income Tax Deferrals Dr|
+msgmmout.for                   (1) 05811 |Monthly ITC Amortization|
+msgmmout.for                   (1) 05850 |Monthly Other|
+msgmmout.for                   (1) 05864 |Monthly Lease Interest Expense|
+msgmmout.for                   (1) 05879 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 05880 |Monthly LTD Amort Interest|
+msgmmout.for                   (1) 05882 |Monthly Property Taxes|
+msgmmout.for                   (1) 05883 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 05884 |Monthly State Tax on Capital|
+msgmmout.for                   (1) 05885 |Monthly LTD Amort Interest|
+msgmmout.for                   (1) 06031 |Monthly Issue Expense Amorts|
+msgmmout.for                   (1) 06033 |Monthly LTD Premium Amort|
+msgmmout.for                   (1) 06035 |Monthly PS Premium Amort|
+msgmmout.for                   (1) 06037 |Monthly Booked PS Dividends|
+msgmmout.for                   (1) 06039 |Monthly LTD Booked Interest|
+msgmmout.for                   (1) 06046 |Monthly LTD Booked Interest|
+msgmmout.for                   (1) 06049 |Monthly Common Dividends|
+msgmmout.for                   (1) 06052 |Monthly Booked PS Dividends|
+msgmmout.for                   (1) 06056 |Cash Interest on Notes Payable|
+msgmmout.for                   (1) 06059 |Monthly Property Taxes|
+msgmmout.for                   (1) 06060 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 06061 |Monthly State Tax on Capital|
+msgmmout.for                   (1) 06062 |Monthly Federal Tax on Capital|
+msgmmout.for                   (1) 06086 |BTL Monthly STInvestmet Income|
+msgmmout.for                   (1) 06137 |Monthly Net Income|
+msgmmout.for                   (1) 06140 |BTL Monthly NoTax Other Income|
+msgmmout.for                   (1) 06142 |Monthly Income Tax Deferrals Dr|
+msgmmout.for                   (1) 06147 |Monthly ITC Amortization|
+msgmmout.for                   (1) 06213 |Monthly Lease Interest Expense|
+msgmmout.for                   (1) 06229 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 06230 |Monthly LTD Amort Interest|
+msgmmout.for                   (1) 06232 |Monthly Property Taxes|
+msgmmout.for                   (1) 06233 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 06234 |Monthly State Tax on Capital|
+msgmmout.for                   (1) 06235 |Monthly LTD Amort Interest|
+msgmmout.for                   (1) 06390 |Monthly Investment Earnings|
+msgmmout.for                   (1) 06392 |Monthly Dividend 70 Earnings|
+msgmmout.for                   (1) 06398 |BTL Monthly STInvestmet Income|
+msgmmout.for                   (1) 07201 |Monthly State Tax on Capital|
+msgmmout.for                   (1) 07202 |Monthly Property Taxes|
+msgmmout.for                   (1) 07203 |Monthly Federal Tax on Capital|
+msgmmout.for                   (1) 07205 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 07215 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 07227 |Monthly LTD Amort Interest|
+msgmmout.for                   (1) 07229 |Monthly Nuclear Fuel Expense|
+msgmmout.for                   (1) 07247 |BTL Monthly STInvestmet Income|
+msgmmout.for                   (1) 07248 |BTL Monthly Expenses|
+msgmmout.for                   (1) 07615 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 07621 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 08261 |Monthly Investment Earnings|
+msgmmout.for                   (1) 08263 |Monthly Dividend 70 Earnings|
+msgmmout.for                   (1) 08268 |BTL Monthly STInvestmet Income|
+msgmmout.for                   (1) 08274 |BTL Monthly Expenses|
+msgmmout.for                   (1) 08285 |Monthly Property Taxes|
+msgmmout.for                   (1) 08286 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 08287 |Monthly State Tax on Capital|
+msgmmout.for                   (1) 08288 |Monthly State Tax on Capital|
+msgmmout.for                   (1) 08315 |Monthly Investment Earnings|
+msgmmout.for                   (1) 08317 |Monthly Dividend 70 Earnings|
+msgmmout.for                   (1) 08323 |BTL Monthly STInvestmet Income|
+msgmmout.for                   (1) 08526 |Monthly Investment Earnings|
+msgmmout.for                   (1) 08528 |Monthly Dividend 70 Earnings|
+msgmmout.for                   (1) 08534 |BTL Monthly STInvestmet Income|
+msgmmout.for                   (1) 09047 |Monthly Total Taxes Expense|
+msgmmout.for                   (1) 09050 |Monthly Op Income|
+msgmmout.for                   (1) 09052 |Monthly Total Taxes Expense|
+msgmmout.for                   (1) 09053 |Monthly INCOME BEFORE INTEREST|
+msgmmout.for                   (1) 09055 |Monthly INCOME AFTER INTEREST|
+msgmmout.for                   (1) 09057 |Monthly Net Income|
+msgmmout.for                   (1) 09059 |Monthly Earnings 2 Common|
+msgmmout.for                   (1) 09060 |Monthly Net Income|
+msgmmout.for                   (1) 09061 |Monthly Total PS Dividends|
+msgmmout.for                   (1) 09062 |Monthly RETAINED EARNINGS|
+msgmmout.for                   (1) 09063 |Monthly Earnings 2 Common|
+msgmmout.for                   (1) 09064 |Monthly Common Dividends|
+msgmmout.for                   (1) 09088 |BTL Monthly Interest Income|
+msgmmout.for                   (1) 09089 |BTL Monthly STInvestmet Income|
+msgmmout.for                   (1) 09097 |Monthly Op Income|
+msgmmout.for                   (1) 09102 |BTL Monthly NoTax Other Income|
+msgmmout.for                   (1) 09103 |Monthly Investment Earnings|
+msgmmout.for                   (1) 09104 |BTL Monthly Interest Income|
+msgmmout.for                   (1) 09106 |BTL Monthly Expenses|
+msgmmout.for                   (1) 09107 |BTL Monthly Income Taxes|
+msgmmout.for                   (1) 09117 |Monthly ITC Amortization|
+msgmmout.for                   (1) 09122 |Monthly Operating Revenue Tax|
+msgmmout.for                   (1) 09124 |Monthly State Tax on Capital|
+msgmmout.for                   (1) 09127 |Monthly Federal Tax on Capital|
+msgmmout.for                   (1) 09128 |Monthly Income Tax Deferrals Dr|
+msgmmout.for                   (1) 09136 |Monthly INCOME BEFORE INTEREST|
+msgmmout.for                   (1) 09137 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 09147 |Monthly INCOME AFTER INTEREST|
+msgmmout.for                   (1) 09148 |Monthly Unused Fed Tax Credits|
+msgmmout.for                   (1) 09150 |Monthly Extraordinary Items|
+msgmmout.for                   (1) 09163 |Monthly Nuclear Fuel Expense|
+msgmmout.for                   (1) 09262 |Monthly Other|
+msgmmout.for                   (1) 09272 |Monthly Lease Interest Expense|
+msgmmout.for                   (1) 09849 |Monthly EBIT|
+msgmmout.for                   (1) 09850 |Monthly INCOME BEFORE INTEREST|
+msgmmout.for                   (1) 09851 |Monthly ITC Amortization|
+msgmmout.for                   (1) 09853 |Monthly State Tax on Capital|
+msgmmout.for                   (1) 09855 |Monthly Federal Tax on Capital|
+msgmmout.for                   (1) 09856 |Monthly Income Tax Deferrals Dr|
+msgmmout.for                   (1) 09859 |BTL Monthly Income Taxes|
+msgmmout.for                   (1) 09861 |Monthly EBITAD|
+msgmmout.for                   (1) 09862 |Monthly EBIT|
+msgmmout.for                   (1) 09882 |IMPA Depreciation Add Back|
+msgmmout.for                   (1) 09884 |Monthly LTD Amort Interest|
+msgmmout.for                   (1) 09886 |Monthly Net Income|
+msgmmout.for                   (1) 09887 |Monthly Net Income|
+msgmmout.for                   (1) 09889 |Monthly LTD Amort Interest|
+msgmmout.for                   (1) 09891 |Monthly Earnings 2 Common|
+msgmmout.for                   (1) 09892 |Monthly Net Income|
+msgmmout.for                   (1) 09893 |Monthly Total PS Dividends|
+msgmmout.for                   (1) 09894 |Monthly RETAINED EARNINGS|
+msgmmout.for                   (1) 09895 |Monthly Earnings 2 Common|
+msgmmout.for                   (1) 09896 |Monthly Common Dividends|
+msgmmout.for                   (1) 09901 |Monthly LTD Total Interest|
+msgmmout.for                   (1) 09902 |Monthly LTD Amort Interest|
+msgmmout.for                   (1) 09905 |Monthly Net Income|

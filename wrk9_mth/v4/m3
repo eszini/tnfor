@@ -1,0 +1,225 @@
+cla_objt.for                   (1) 11887 |                  MONTH_VARS(MO,ICAP Revenues) =|
+cla_objt.for                       11887 |                  MONTH_VARS(MO,ICAP_Revenues) =|
+
+cla_objt.for                   (1) 11888 |     +                       MONTH_VARS(MO,ICAP Revenues)|
+cla_objt.for                       11888 |     +                       MONTH_VARS(MO,ICAP_Revenues)|
+
+midasmod.for                   (1) 02963 |     +            + R_INCOME_VARS(:,Monthly Income Tax Deferrals Cr)|
+midasmod.for                       02963 |     +            + R_INCOME_VARS(:,Monthly_Income_Tax_Deferrals_Cr)|
+
+midasmod.for                   (1) 03160 |     +                                Monthly Income Tax Deferrals Cr) = |
+midasmod.for                       03160 |     +                                Monthly_Income_Tax_Deferrals_Cr) = |
+
+midasmod.for                   (1) 03223 |     +              INCOME_ITEMS(1:12,:,Monthly Income Tax Deferrals Cr)  |
+midasmod.for                       03223 |     +              INCOME_ITEMS(1:12,:,Monthly_Income_Tax_Deferrals_Cr)  |
+
+msgmmdfd.for                   (1) 01884 |                  INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Cr) =|
+msgmmdfd.for                       01884 |                  INCOME_VARIABLES(MO,Monthly_Income_Tax_Deferrals_Cr) =|
+
+msgmmdfd.for                   (1) 01886 |     +                                  Monthly Income Tax Deferrals Cr)|
+msgmmdfd.for                       01886 |     +                                  Monthly_Income_Tax_Deferrals_Cr)|
+
+msgmmdfd.for                   (1) 01889 |     +                               BTL Monthly Income Tax Deferrals) =|
+msgmmdfd.for                       01889 |     +                               BTL_Monthly_Income_Tax_Deferrals) =|
+
+msgmmdfd.for                   (1) 01891 |     +                                 BTL Monthly Income Tax Deferrals)|
+msgmmdfd.for                       01891 |     +                                 BTL_Monthly_Income_Tax_Deferrals)|
+
+msgmmdfd.for                   (1) 01909 |                  INCOME_VARIABLES(MO,Monthly Goodwill Amort) =|
+msgmmdfd.for                       01909 |                  INCOME_VARIABLES(MO,Monthly_Goodwill_Amort) =|
+
+msgmmdfd.for                   (1) 01911 |     +                                           Monthly Goodwill Amort)|
+msgmmdfd.for                       01911 |     +                                           Monthly_Goodwill_Amort)|
+
+msgmmdfd.for                   (1) 01914 |                  INCOME_VARIABLES(MO,Monthly Regulatory Assets Amort) =|
+msgmmdfd.for                       01914 |                  INCOME_VARIABLES(MO,Monthly_Regulatory_Assets_Amort) =|
+
+msgmmdfd.for                   (1) 01916 |     +                                  Monthly Regulatory Assets Amort)|
+msgmmdfd.for                       01916 |     +                                  Monthly_Regulatory_Assets_Amort)|
+
+msgmmdfd.for                   (1) 01919 |                  INCOME_VARIABLES(MO,Monthly FASB 109 Amort) =|
+msgmmdfd.for                       01919 |                  INCOME_VARIABLES(MO,Monthly_FASB_109_Amort) =|
+
+msgmmdfd.for                   (1) 01921 |     +                                           Monthly FASB 109 Amort)|
+msgmmdfd.for                       01921 |     +                                           Monthly_FASB_109_Amort)|
+
+msgmmdfd.for                   (1) 01924 |                  INCOME_VARIABLES(MO,Monthly FASB 133 Amort) =|
+msgmmdfd.for                       01924 |                  INCOME_VARIABLES(MO,Monthly_FASB_133_Amort) =|
+
+msgmmdfd.for                   (1) 01926 |     +                                           Monthly FASB 133 Amort)|
+msgmmdfd.for                       01926 |     +                                           Monthly_FASB_133_Amort)|
+
+msgmmdfd.for                   (1) 01947 |                  INCOME_VARIABLES(MO,Monthly Regulatory Assets Amort) =|
+msgmmdfd.for                       01947 |                  INCOME_VARIABLES(MO,Monthly_Regulatory_Assets_Amort) =|
+
+msgmmdfd.for                   (1) 01949 |     +                                  Monthly Regulatory Assets Amort)|
+msgmmdfd.for                       01949 |     +                                  Monthly_Regulatory_Assets_Amort)|
+
+msgmmout.for                   (1) 01039 |     +                 + INCOME_VARIABLES(:,Monthly Goodwill Amort)|
+msgmmout.for                       01039 |     +                 + INCOME_VARIABLES(:,Monthly_Goodwill_Amort)|
+
+msgmmout.for                   (1) 01041 |     +                                  Monthly Regulatory Assets Amort)|
+msgmmout.for                       01041 |     +                                  Monthly_Regulatory_Assets_Amort)|
+
+msgmmout.for                   (1) 01042 |     +                 + INCOME_VARIABLES(:,Monthly FASB 109 Amort)|
+msgmmout.for                       01042 |     +                 + INCOME_VARIABLES(:,Monthly_FASB_109_Amort)|
+
+msgmmout.for                   (1) 01043 |     +                 + INCOME_VARIABLES(:,Monthly FASB 133 Amort)|
+msgmmout.for                       01043 |     +                 + INCOME_VARIABLES(:,Monthly_FASB_133_Amort)|
+
+msgmmout.for                   (1) 01056 |     +                 + INCOME_LINKED_LEVEL(:,Monthly Goodwill Amort,|
+msgmmout.for                       01056 |     +                 + INCOME_LINKED_LEVEL(:,Monthly_Goodwill_Amort,|
+
+msgmmout.for                   (1) 01059 |     +                                  Monthly Regulatory Assets Amort,|
+msgmmout.for                       01059 |     +                                  Monthly_Regulatory_Assets_Amort,|
+
+msgmmout.for                   (1) 01061 |     +                 + INCOME_LINKED_LEVEL(:,Monthly FASB 109 Amort,|
+msgmmout.for                       01061 |     +                 + INCOME_LINKED_LEVEL(:,Monthly_FASB_109_Amort,|
+
+msgmmout.for                   (1) 01063 |     +                 + INCOME_LINKED_LEVEL(:,Monthly FASB 133 Amort,|
+msgmmout.for                       01063 |     +                 + INCOME_LINKED_LEVEL(:,Monthly_FASB_133_Amort,|
+
+msgmmout.for                   (1) 01295 |     +           + INCOME_VARIABLES(0,Monthly Goodwill Amort)|
+msgmmout.for                       01295 |     +           + INCOME_VARIABLES(0,Monthly_Goodwill_Amort)|
+
+msgmmout.for                   (1) 01296 |     +           + INCOME_VARIABLES(0,Monthly Regulatory Assets Amort)|
+msgmmout.for                       01296 |     +           + INCOME_VARIABLES(0,Monthly_Regulatory_Assets_Amort)|
+
+msgmmout.for                   (1) 01297 |     +           + INCOME_VARIABLES(0,Monthly FASB 109 Amort)|
+msgmmout.for                       01297 |     +           + INCOME_VARIABLES(0,Monthly_FASB_109_Amort)|
+
+msgmmout.for                   (1) 01298 |     +           + INCOME_VARIABLES(0,Monthly FASB 133 Amort)|
+msgmmout.for                       01298 |     +           + INCOME_VARIABLES(0,Monthly_FASB_133_Amort)|
+
+msgmmout.for                   (1) 01324 |     +           + INCOME_VARIABLES(MO,Monthly Goodwill Amort)|
+msgmmout.for                       01324 |     +           + INCOME_VARIABLES(MO,Monthly_Goodwill_Amort)|
+
+msgmmout.for                   (1) 01325 |     +           + INCOME_VARIABLES(MO,Monthly Regulatory Assets Amort)|
+msgmmout.for                       01325 |     +           + INCOME_VARIABLES(MO,Monthly_Regulatory_Assets_Amort)|
+
+msgmmout.for                   (1) 01326 |     +           + INCOME_VARIABLES(MO,Monthly FASB 109 Amort)|
+msgmmout.for                       01326 |     +           + INCOME_VARIABLES(MO,Monthly_FASB_109_Amort)|
+
+msgmmout.for                   (1) 01327 |     +           + INCOME_VARIABLES(MO,Monthly FASB 133 Amort)|
+msgmmout.for                       01327 |     +           + INCOME_VARIABLES(MO,Monthly_FASB_133_Amort)|
+
+msgmmout.for                   (1) 01486 |         INCOME_VARIABLES(0,BTL Monthly Income Tax Deferrals) =|
+msgmmout.for                       01486 |         INCOME_VARIABLES(0,BTL_Monthly_Income_Tax_Deferrals) =|
+
+msgmmout.for                   (1) 01517 |         INCOME_VARIABLES(:,Monthly Income Tax Deferrals Cr) =|
+msgmmout.for                       01517 |         INCOME_VARIABLES(:,Monthly_Income_Tax_Deferrals_Cr) =|
+
+msgmmout.for                   (1) 01904 |     +          INCOME_VARIABLES(0,Monthly Income Tax Deferrals Cr),|
+msgmmout.for                       01904 |     +          INCOME_VARIABLES(0,Monthly_Income_Tax_Deferrals_Cr),|
+
+msgmmout.for                   (1) 02079 |            INCOME_VARIABLES(MO,BTL Monthly Income Tax Deferrals) =|
+msgmmout.for                       02079 |            INCOME_VARIABLES(MO,BTL_Monthly_Income_Tax_Deferrals) =|
+
+msgmmout.for                   (1) 02080 |     +          INCOME_VARIABLES(0,BTL Monthly Income Tax Deferrals)/12.|
+msgmmout.for                       02080 |     +          INCOME_VARIABLES(0,BTL_Monthly_Income_Tax_Deferrals)/12.|
+
+msgmmout.for                   (1) 03751 |     +                                  Monthly Income Tax Deferrals Cr)|
+msgmmout.for                       03751 |     +                                  Monthly_Income_Tax_Deferrals_Cr)|
+
+msgmmout.for                   (1) 03753 |     +                                 BTL Monthly Income Tax Deferrals)|
+msgmmout.for                       03753 |     +                                 BTL_Monthly_Income_Tax_Deferrals)|
+
+msgmmout.for                   (1) 03770 |     +                                  Monthly Income Tax Deferrals Cr)|
+msgmmout.for                       03770 |     +                                  Monthly_Income_Tax_Deferrals_Cr)|
+
+msgmmout.for                   (1) 05275 |     +                                  Monthly Income Tax Deferrals Cr)|
+msgmmout.for                       05275 |     +                                  Monthly_Income_Tax_Deferrals_Cr)|
+
+msgmmout.for                   (1) 05277 |     +                                 BTL Monthly Income Tax Deferrals)|
+msgmmout.for                       05277 |     +                                 BTL_Monthly_Income_Tax_Deferrals)|
+
+msgmmout.for                   (1) 05288 |     +                                  Monthly Income Tax Deferrals Cr)|
+msgmmout.for                       05288 |     +                                  Monthly_Income_Tax_Deferrals_Cr)|
+
+msgmmout.for                   (1) 05633 |     +                                  Monthly Income Tax Deferrals Cr) ! 90|
+msgmmout.for                       05633 |     +                                  Monthly_Income_Tax_Deferrals_Cr) ! 90|
+
+msgmmout.for                   (1) 05635 |     +                                 BTL Monthly Income Tax Deferrals) ! 97|
+msgmmout.for                       05635 |     +                                 BTL_Monthly_Income_Tax_Deferrals) ! 97|
+
+msgmmout.for                   (1) 05797 |     +               INCOME_VARIABLES(MO,ICAP Revenues),                 ! 22|
+msgmmout.for                       05797 |     +               INCOME_VARIABLES(MO,ICAP_Revenues),                 ! 22|
+
+msgmmout.for                   (1) 05808 |     +                                  Monthly Income Tax Deferrals Cr)|
+msgmmout.for                       05808 |     +                                  Monthly_Income_Tax_Deferrals_Cr)|
+
+msgmmout.for                   (1) 05810 |     +                                BTL Monthly Income Tax Deferrals), ! 29|
+msgmmout.for                       05810 |     +                                BTL_Monthly_Income_Tax_Deferrals), ! 29|
+
+msgmmout.for                   (1) 06133 |     +               INCOME_VARIABLES(MO,ICAP Revenues),|
+msgmmout.for                       06133 |     +               INCOME_VARIABLES(MO,ICAP_Revenues),|
+
+msgmmout.for                   (1) 06145 |     +                                  Monthly Income Tax Deferrals Cr)|
+msgmmout.for                       06145 |     +                                  Monthly_Income_Tax_Deferrals_Cr)|
+
+msgmmout.for                   (1) 06161 |     +                                BTL Monthly Income Tax Deferrals), ! 39|
+msgmmout.for                       06161 |     +                                BTL_Monthly_Income_Tax_Deferrals), ! 39|
+
+msgmmout.for                   (1) 09108 |     +          - INCOME_VARIABLES(MO,BTL Monthly Income Tax Deferrals)|
+msgmmout.for                       09108 |     +          - INCOME_VARIABLES(MO,BTL_Monthly_Income_Tax_Deferrals)|
+
+msgmmout.for                   (1) 09129 |     +          + INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Cr)|
+msgmmout.for                       09129 |     +          + INCOME_VARIABLES(MO,Monthly_Income_Tax_Deferrals_Cr)|
+
+msgmmout.for                   (1) 09221 |     +                + INCOME_VARIABLES(MO,ICAP Revenues)|
+msgmmout.for                       09221 |     +                + INCOME_VARIABLES(MO,ICAP_Revenues)|
+
+msgmmout.for                   (1) 09469 |     +        + CASH_VARIABLES(R_MO,Cash Residential)|
+msgmmout.for                       09469 |     +        + CASH_VARIABLES(R_MO,Cash_Residential)|
+
+msgmmout.for                   (1) 09470 |     +        + CASH_VARIABLES(R_MO,Cash Commercial)|
+msgmmout.for                       09470 |     +        + CASH_VARIABLES(R_MO,Cash_Commercial)|
+
+msgmmout.for                   (1) 09471 |     +        + CASH_VARIABLES(R_MO,Cash Industrial)|
+msgmmout.for                       09471 |     +        + CASH_VARIABLES(R_MO,Cash_Industrial)|
+
+msgmmout.for                   (1) 09472 |     +        + CASH_VARIABLES(R_MO,Cash Lighting)|
+msgmmout.for                       09472 |     +        + CASH_VARIABLES(R_MO,Cash_Lighting)|
+
+msgmmout.for                   (1) 09857 |     +         + INCOME_VARIABLES(:,Monthly Income Tax Deferrals Cr)|
+msgmmout.for                       09857 |     +         + INCOME_VARIABLES(:,Monthly_Income_Tax_Deferrals_Cr)|
+
+msgmmout.for                   (1) 09860 |     +         + INCOME_VARIABLES(:,BTL Monthly Income Tax Deferrals)|
+msgmmout.for                       09860 |     +         + INCOME_VARIABLES(:,BTL_Monthly_Income_Tax_Deferrals)|
+
+tf_objt.for                    (1) 07054 |                     MONTH_VARS(MO,Cash Residential) =|
+tf_objt.for                        07054 |                     MONTH_VARS(MO,Cash_Residential) =|
+
+tf_objt.for                    (1) 07055 |     +                  MONTH_VARS(MO,Cash Residential) + .000001 *|
+tf_objt.for                        07055 |     +                  MONTH_VARS(MO,Cash_Residential) + .000001 *|
+
+tf_objt.for                    (1) 07058 |                     MONTH_VARS(MO,Cash Commercial) =|
+tf_objt.for                        07058 |                     MONTH_VARS(MO,Cash_Commercial) =|
+
+tf_objt.for                    (1) 07059 |     +                  MONTH_VARS(MO,Cash Commercial) + .000001 *|
+tf_objt.for                        07059 |     +                  MONTH_VARS(MO,Cash_Commercial) + .000001 *|
+
+tf_objt.for                    (1) 07062 |                     MONTH_VARS(MO,Cash Industrial) =|
+tf_objt.for                        07062 |                     MONTH_VARS(MO,Cash_Industrial) =|
+
+tf_objt.for                    (1) 07063 |     +                  MONTH_VARS(MO,Cash Industrial) + .000001 *|
+tf_objt.for                        07063 |     +                  MONTH_VARS(MO,Cash_Industrial) + .000001 *|
+
+tf_objt.for                    (1) 07066 |                     MONTH_VARS(MO,Cash Lighting) =|
+tf_objt.for                        07066 |                     MONTH_VARS(MO,Cash_Lighting) =|
+
+tf_objt.for                    (1) 07067 |     +                  MONTH_VARS(MO,Cash Lighting) + .000001 *|
+tf_objt.for                        07067 |     +                  MONTH_VARS(MO,Cash_Lighting) + .000001 *|
+
+tf_objt.for                    (1) 07090 |                     MONTH_VARS(MO,Cash Utility Sales) =|
+tf_objt.for                        07090 |                     MONTH_VARS(MO,Cash_Utility_Sales) =|
+
+tf_objt.for                    (1) 07091 |     +                  MONTH_VARS(MO,Cash Utility Sales) + .000001 *|
+tf_objt.for                        07091 |     +                  MONTH_VARS(MO,Cash_Utility_Sales) + .000001 *|
+
+tf_objt.for                    (1) 07094 |                     MONTH_VARS(MO,Cash Competitive Sales) =|
+tf_objt.for                        07094 |                     MONTH_VARS(MO,Cash_Competitive_Sales) =|
+
+tf_objt.for                    (1) 07095 |     +                 MONTH_VARS(MO,Cash Competitive Sales) + .000001*|
+tf_objt.for                        07095 |     +                 MONTH_VARS(MO,Cash_Competitive_Sales) + .000001*|
+
