@@ -120,9 +120,9 @@ msgmmout.for                         namescom.mon
 msgmmout.for                         namescom.mon
 msgmmpyb.for                         mthnmcom.mon
 msgmmpyb.for                         mthnmcom.mon
-msgmmrev.for                         mthnmcom.mon
-msgmmrev.for                         mthnmcom.mon
-msgmmrev.for                         namescom.mon
+msgmmrev.f90                         mthnmcom.mon
+msgmmrev.f90                         mthnmcom.mon
+msgmmrev.f90                         namescom.mon
 msgmmsb6.for                         ac_equiv.mon
 msgmmsb6.for                         acrslcom.mon
 msgmmsb6.for                         finaccom.mon

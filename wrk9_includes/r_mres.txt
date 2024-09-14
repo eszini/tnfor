@@ -72,8 +72,8 @@ mthnmcom.mon     msgmmout.for
 mthnmcom.mon     msgmmout.for
 mthnmcom.mon     msgmmpyb.for
 mthnmcom.mon     msgmmpyb.for
-mthnmcom.mon     msgmmrev.for
-mthnmcom.mon     msgmmrev.for
+mthnmcom.mon     msgmmrev.f90
+mthnmcom.mon     msgmmrev.f90
 mthnmcom.mon     msgmmtax.f90
 mthnmcom.mon     servicac.for
 mthnmcom.mon     tf_objt.for
@@ -99,7 +99,7 @@ namescom.mon     msgmmout.for
 namescom.mon     msgmmout.for
 namescom.mon     msgmmout.for
 namescom.mon     msgmmout.for
-namescom.mon     msgmmrev.for
+namescom.mon     msgmmrev.f90
 namescom.mon     msgmmsb6.for
 namescom.mon     msgmmtax.f90
 namescom.mon     servicac.for
