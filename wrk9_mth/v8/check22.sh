@@ -1,0 +1,12 @@
+msgmmdbt.for                  ,grep -i "BTL_Monthly_Interest_Income"                ~/wrk/Midas/ABBICAP/*.* 
+msgmmdbt.for                  ,grep -i "BTL_Monthly_Total_Other_Income"             ~/wrk/Midas/ABBICAP/*.* 
+msgmmdbt.for                  ,grep -i "Cash_Interest_on_Notes_Payable"             ~/wrk/Midas/ABBICAP/*.* 
+msgmmdbt.for                  ,grep -i "Monthly_Dividend_70_Earnings"               ~/wrk/Midas/ABBICAP/*.* 
+msgmmdbt.for                  ,grep -i "Monthly_Investment_Earnings"                ~/wrk/Midas/ABBICAP/*.* 
+msgmmdbt.for                  ,grep -i "Monthly_Issue_Expense_Amorts"               ~/wrk/Midas/ABBICAP/*.* 
+msgmmdbt.for                  ,grep -i "Monthly_LTD_Booked_Interest"                ~/wrk/Midas/ABBICAP/*.* 
+msgmmdbt.for                  ,grep -i "Monthly_LTD_Premium_Amort"                  ~/wrk/Midas/ABBICAP/*.* 
+msgmmdbt.for                  ,grep -i "Monthly_LTD_Total_Interest"                 ~/wrk/Midas/ABBICAP/*.* 
+msgmmdbt.for                  ,grep -i "Monthly_PS_Amort_Dividends"                 ~/wrk/Midas/ABBICAP/*.* 
+msgmmdbt.for                  ,grep -i "Monthly_PS_Premium_Amort"                   ~/wrk/Midas/ABBICAP/*.* 
+msgmmdbt.for                  ,grep -i "Monthly_Total_PS_Dividends"                 ~/wrk/Midas/ABBICAP/*.* 

@@ -1,0 +1,50 @@
+midasmod.for                  ,|IPL Monthy OandM Expenses|
+midasmod.for                  ,|IPL Operating Income|
+midasmod.for                  ,|IPL Total Operating Expenses|
+midasmod.for                  ,|Monthly ITC Amortization|
+midasmod.for                  ,|Monthly Operating Revenue Tax|
+midasmod.for                  ,|Monthly Property Taxes|
+msgmmdbt.for                  ,|BTL Monthly Interest Income|
+msgmmdbt.for                  ,|BTL Monthly Total Other Income|
+msgmmdbt.for                  ,|Cash Interest on Notes Payable|
+msgmmdbt.for                  ,|Monthly Dividend 70 Earnings|
+msgmmdbt.for                  ,|Monthly Investment Earnings|
+msgmmdbt.for                  ,|Monthly Issue Expense Amorts|
+msgmmdbt.for                  ,|Monthly LTD Booked Interest|
+msgmmdbt.for                  ,|Monthly LTD Premium Amort|
+msgmmdbt.for                  ,|Monthly LTD Total Interest|
+msgmmdbt.for                  ,|Monthly PS Amort Dividends|
+msgmmdbt.for                  ,|Monthly PS Premium Amort|
+msgmmdbt.for                  ,|Monthly Total PS Dividends|
+msgmmout.for                  ,|BTL Monthly Interest Income|
+msgmmout.for                  ,|Cash Interest on Notes Payable|
+msgmmout.for                  ,|Monthly Dividend 70 Earnings|
+msgmmout.for                  ,|Monthly ITC Amortization|
+msgmmout.for                  ,|Monthly Investment Earnings|
+msgmmout.for                  ,|Monthly Issue Expense Amorts|
+msgmmout.for                  ,|Monthly LTD Booked Interest|
+msgmmout.for                  ,|Monthly LTD Premium Amort|
+msgmmout.for                  ,|Monthly LTD Total Interest|
+msgmmout.for                  ,|Monthly Operating Revenue Tax|
+msgmmout.for                  ,|Monthly PS Amort Dividends|
+msgmmout.for                  ,|Monthly PS Premium Amort|
+msgmmout.for                  ,|Monthly Property Taxes|
+msgmmout.for                  ,|Monthly Total PS Dividends|
+mthnmcom.mon                  ,|BTL Monthly Interest Income|
+mthnmcom.mon                  ,|BTL Monthly Total Other Income|
+mthnmcom.mon                  ,|Cash Interest on Notes Payable|
+mthnmcom.mon                  ,|IPL Monthy OandM Expenses|
+mthnmcom.mon                  ,|IPL Operating Income|
+mthnmcom.mon                  ,|IPL Total Operating Expenses|
+mthnmcom.mon                  ,|Monthly Dividend 70 Earnings|
+mthnmcom.mon                  ,|Monthly ITC Amortization|
+mthnmcom.mon                  ,|Monthly Investment Earnings|
+mthnmcom.mon                  ,|Monthly Issue Expense Amorts|
+mthnmcom.mon                  ,|Monthly LTD Booked Interest|
+mthnmcom.mon                  ,|Monthly LTD Premium Amort|
+mthnmcom.mon                  ,|Monthly LTD Total Interest|
+mthnmcom.mon                  ,|Monthly Operating Revenue Tax|
+mthnmcom.mon                  ,|Monthly PS Amort Dividends|
+mthnmcom.mon                  ,|Monthly PS Premium Amort|
+mthnmcom.mon                  ,|Monthly Property Taxes|
+mthnmcom.mon                  ,|Monthly Total PS Dividends|

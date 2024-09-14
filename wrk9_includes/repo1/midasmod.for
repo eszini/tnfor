@@ -2960,7 +2960,7 @@
      +            + R_INCOME_VARS(:,Monthly Operating Revenue Tax)
      +            + R_INCOME_VARS(:,mthy_fed_atl_income_tax_pd)
      +            + R_INCOME_VARS(:,mthy_state_atl_incm_tax_pd)
-     +            + R_INCOME_VARS(:,Monthly Income Tax Deferrals Cr)
+     +            + R_INCOME_VARS(:,Monthly_Income_Tax_Deferrals_Cr)
      +            + R_INCOME_VARS(:,Monthly ITC Amortization)
          R_INCOME_VARS(:,IPL Operating Income) = 
      +                   R_INCOME_VARS(:,ipl_operating_revenues)
@@ -3157,7 +3157,7 @@
      +                              mthy_state_atl_incm_tax_pd) = 
      +                                         IPL_REG_EXP_DATA(MO,YR,7)
                      INCOME_ITEMS(MO,YR,
-     +                                Monthly Income Tax Deferrals Cr) = 
+     +                                Monthly_Income_Tax_Deferrals_Cr) = 
      +                                         IPL_REG_EXP_DATA(MO,YR,8)
                      INCOME_ITEMS(MO,YR,Monthly ITC Amortization) = 
      +                                         IPL_REG_EXP_DATA(MO,YR,9)
@@ -3220,7 +3220,7 @@
          IPL_REG_EXP_DATA(:,:,7) =
      +            INCOME_ITEMS(1:12,:,mthy_state_atl_incm_tax_pd)  
          IPL_REG_EXP_DATA(:,:,8) =
-     +              INCOME_ITEMS(1:12,:,Monthly Income Tax Deferrals Cr)  
+     +              INCOME_ITEMS(1:12,:,Monthly_Income_Tax_Deferrals_Cr)  
          IPL_REG_EXP_DATA(:,:,9) =
      +                     INCOME_ITEMS(1:12,:,Monthly ITC Amortization)  
          IPL_REG_EXP_DATA(:,:,10) =

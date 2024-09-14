@@ -1,0 +1,12 @@
+grep "BTL Monthly Interest Income" ~/wrk/Midas/ABBICAP/*.*
+grep "BTL Monthly Total Other Income" ~/wrk/Midas/ABBICAP/*.*
+grep "Cash Interest on Notes Payable" ~/wrk/Midas/ABBICAP/*.*
+grep "Monthly Dividend 70 Earnings" ~/wrk/Midas/ABBICAP/*.*
+grep "Monthly Investment Earnings" ~/wrk/Midas/ABBICAP/*.*
+grep "Monthly Issue Expense Amorts" ~/wrk/Midas/ABBICAP/*.*
+grep "Monthly LTD Booked Interest" ~/wrk/Midas/ABBICAP/*.*
+grep "Monthly LTD Premium Amort" ~/wrk/Midas/ABBICAP/*.*
+grep "Monthly LTD Total Interest" ~/wrk/Midas/ABBICAP/*.*
+grep "Monthly PS Amort Dividends" ~/wrk/Midas/ABBICAP/*.*
+grep "Monthly PS Premium Amort" ~/wrk/Midas/ABBICAP/*.*
+grep "Monthly Total PS Dividends" ~/wrk/Midas/ABBICAP/*.*

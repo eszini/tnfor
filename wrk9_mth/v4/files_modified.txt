@@ -1,0 +1,7 @@
+/home/123-D56SW/wrk/Midas/ABBICAP/cla_objt.for:
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdfd.for:
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6b.f90:
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:
+/home/123-D56SW/wrk/Midas/ABBICAP/tf_objt.for:

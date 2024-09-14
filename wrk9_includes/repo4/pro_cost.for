@@ -1796,7 +1796,7 @@
                IF(CAPACITY_PLANNING_METHOD() == 'MX'  .AND.
      +                                  GREEN_MRX_METHOD() == 'GX') THEN
                   IF(HardWiredRetrofitProject(I)) THEN
-                     IF(HardWiredRetrofitProjectThisYear(I) .AND.
+                     IF(HWRetrofitProjectThisYear(I) .AND.
      +                                         GRX_ITERATIONS == 0) THEN
 !                      Add writting this report to ghe GRX output
                      ENDIF

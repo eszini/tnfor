@@ -1,0 +1,76 @@
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:!         R_INCOME_VARS(:,IPL Monthy OandM Expenses) =
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:            R_INCOME_VARS(MO,IPL Monthy OandM Expenses) =
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:     +            + R_INCOME_VARS(:,IPL Monthy OandM Expenses) 
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:         R_INCOME_VARS(:,IPL Monthy OandM Expenses) =
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:     +               R_INCOME_VARS(:,IPL Monthy OandM Expenses)
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:                     INCOME_ITEMS(MO,YR,IPL Monthy OandM Expenses) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:     +                    INCOME_ITEMS(1:12,:,IPL Monthy OandM Expenses)
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: IPL Monthy OandM Expenses=252
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:         R_INCOME_VARS(:,IPL Operating Income) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:                     INCOME_ITEMS(MO,YR,IPL Operating Income) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:     +                         INCOME_ITEMS(1:12,:,IPL Operating Income)  
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: IPL Operating Income=254
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:         R_INCOME_VARS(:,IPL Total Operating Expenses) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:     +                   - R_INCOME_VARS(:,IPL Total Operating Expenses)
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:                     INCOME_ITEMS(MO,YR,IPL Total Operating Expenses) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:     +                 INCOME_ITEMS(1:12,:,IPL Total Operating Expenses)  
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: IPL Total Operating Expenses=253
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:     +            + R_INCOME_VARS(:,Monthly ITC Amortization)
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:                     INCOME_ITEMS(MO,YR,Monthly ITC Amortization) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:     +                     INCOME_ITEMS(1:12,:,Monthly ITC Amortization)  
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:         INCOME_VARIABLES(0,Monthly ITC Amortization) = ANNUAL_VARS(50)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:            INCOME_VARIABLES(MO,Monthly ITC Amortization) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                  INCOME_VARIABLES(0,Monthly ITC Amortization)/12.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                   + INCOME_VARIABLES(MO,Monthly ITC Amortization)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                  + INCOME_VARIABLES(MO,Monthly ITC Amortization)     ! 83
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               INCOME_VARIABLES(MO,Monthly ITC Amortization),     ! 30
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               INCOME_VARIABLES(MO,Monthly ITC Amortization),     ! 30
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +          + INCOME_VARIABLES(MO,Monthly ITC Amortization)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +         + INCOME_VARIABLES(:,Monthly ITC Amortization)
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: Monthly ITC Amortization=83
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:     +            + R_INCOME_VARS(:,Monthly Operating Revenue Tax)
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:                     INCOME_ITEMS(MO,YR,Monthly Operating Revenue Tax) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:     +                INCOME_ITEMS(1:12,:,Monthly Operating Revenue Tax)  
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:            IF(VARIABLE == Monthly Operating Revenue Tax) CYCLE
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:               INCOME_VARIABLES(MO,Monthly Operating Revenue Tax) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:         INCOME_VARIABLES(0,Monthly Operating Revenue Tax) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +           SUM(INCOME_VARIABLES(1:,Monthly Operating Revenue Tax))
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                INCOME_VARIABLES(0,Monthly Operating Revenue Tax),
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:         INCOME_VARIABLES(:,Monthly Operating Revenue Tax) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                INCOME_VARIABLES(:,Monthly Operating Revenue Tax)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +              + INCOME_VARIABLES(0,Monthly Operating Revenue Tax)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:         R_OP_REV_TAX=INCOME_VARIABLES(0,Monthly Operating Revenue Tax)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                    Monthly Operating Revenue Tax)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                    Monthly Operating Revenue Tax)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                  VARIABLE == Monthly Operating Revenue Tax) CYCLE
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                    Monthly Operating Revenue Tax)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +             + INCOME_VARIABLES(MO,Monthly Operating Revenue Tax)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               INCOME_VARIABLES(MO,Monthly Operating Revenue Tax), ! 87
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +             + INCOME_VARIABLES(MO,Monthly Operating Revenue Tax)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               INCOME_VARIABLES(MO,Monthly Operating Revenue Tax), ! 87
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +          INCOME_VARIABLES(MO,Monthly Operating Revenue Tax)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +             INCOME_VARIABLES(0,Monthly Operating Revenue Tax)/
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +             INCOME_VARIABLES(0,Monthly Operating Revenue Tax)/12.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:               ALLOCATE_REVENUE_TAX =  ! INCOME_VARIABLES(MO,Monthly Operating Revenue Tax) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:               ALLOCATE_REVENUE_TAX = ! INCOME_VARIABLES(MO,Monthly Operating Revenue Tax) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +              + INCOME_VARIABLES(MO,Monthly Operating Revenue Tax)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +          + INCOME_VARIABLES(MO,Monthly Operating Revenue Tax)
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: Monthly Operating Revenue Tax=84
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:     +                           R_INCOME_VARS(:,Monthly Property Taxes) 
+/home/123-D56SW/wrk/Midas/ABBICAP/midasmod.for:!     +                           R_INCOME_VARS(:,Monthly Property Taxes)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:            IF(VARIABLE == Monthly Property Taxes) CYCLE
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:         INCOME_VARIABLES(:,Monthly Property Taxes) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +              + INCOME_VARIABLES(0,Monthly Property Taxes)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               + INCOME_VARIABLES(MO,Monthly Property Taxes)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               + INCOME_VARIABLES(MO,Monthly Property Taxes)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:                     IF(VARIABLE == Monthly Property Taxes) CYCLE
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:            INCOME_VARIABLES(:,Monthly Property Taxes) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               + INCOME_VARIABLES(MO,Monthly Property Taxes) ! REMOVE 8.3.04
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:            INCOME_VARIABLES(:,Monthly Property Taxes) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +             + INCOME_VARIABLES(MO,Monthly Property Taxes)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               INCOME_VARIABLES(MO,Monthly Property Taxes),        ! 86
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +             + INCOME_VARIABLES(MO,Monthly Property Taxes)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               INCOME_VARIABLES(MO,Monthly Property Taxes),        ! 86
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +          INCOME_VARIABLES(MO,Monthly Property Taxes) -
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +              + INCOME_VARIABLES(MO,Monthly Property Taxes)
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: Monthly Property Taxes=81

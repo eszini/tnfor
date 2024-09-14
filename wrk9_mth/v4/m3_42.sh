@@ -1,0 +1,13 @@
+grep -i  "BTL_Monthly_Income_Tax_Deferrals"           ~/wrk/Midas/ABBICAP/*.* >> check2.txt
+grep -i  "Cash_Commercial"                            ~/wrk/Midas/ABBICAP/*.* >> check2.txt
+grep -i  "Cash_Competitive_Sales"                     ~/wrk/Midas/ABBICAP/*.* >> check2.txt
+grep -i  "Cash_Industrial"                            ~/wrk/Midas/ABBICAP/*.* >> check2.txt
+grep -i  "Cash_Lighting"                              ~/wrk/Midas/ABBICAP/*.* >> check2.txt
+grep -i  "Cash_Residential"                           ~/wrk/Midas/ABBICAP/*.* >> check2.txt
+grep -i  "Cash_Utility_Sales"                         ~/wrk/Midas/ABBICAP/*.* >> check2.txt
+grep -i  "ICAP_Revenues"                              ~/wrk/Midas/ABBICAP/*.* >> check2.txt
+grep -i  "Monthly_FASB_109_Amort"                     ~/wrk/Midas/ABBICAP/*.* >> check2.txt
+grep -i  "Monthly_FASB_133_Amort"                     ~/wrk/Midas/ABBICAP/*.* >> check2.txt
+grep -i  "Monthly_Goodwill_Amort"                     ~/wrk/Midas/ABBICAP/*.* >> check2.txt
+grep -i  "Monthly_Income_Tax_Deferrals_Cr"            ~/wrk/Midas/ABBICAP/*.* >> check2.txt
+grep -i  "Monthly_Regulatory_Assets_Amort"            ~/wrk/Midas/ABBICAP/*.* >> check2.txt

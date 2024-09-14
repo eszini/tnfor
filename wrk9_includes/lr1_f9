@@ -16,6 +16,7 @@ repo1/annual_contracts.f90
 repo1/bfil_obj.f90
 repo1/cal_marginal_interface.f90
 repo1/calendar.f90
+repo1/cap_objt.f90
 repo1/cap_prod_costs.f90
 repo1/capacity_arrays.f90
 repo1/capacity_options_alloc_vars.f90
@@ -133,6 +134,7 @@ repo1/msgindex.f90
 repo1/msgmmadm.f90
 repo1/msgmmcom.f90
 repo1/msgmmexprevcash.f90
+repo1/msgmmfa.f90
 repo1/msgmmfv.f90
 repo1/msgmmsb6b.f90
 repo1/msgmmtax.f90
@@ -181,6 +183,7 @@ repo1/tran_c_variables.f90
 repo1/trans_peak_info.f90
 repo1/trans_slope.f90
 repo1/trans_weekend_peak_days.f90
+repo1/transobj.f90
 repo1/transobj2.f90
 repo1/trnsfrm3.f90
 repo1/up_objt.f90

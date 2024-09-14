@@ -11,6 +11,7 @@
  *
  */
 
+
 /*
  *	//header//
  *
@@ -369,6 +370,7 @@
 #include <unistd.h>
 #include <time.h>
 
+
 #define	DEBUG 0
 
 #define	MAXD	16	/* buffer de juguete */
@@ -545,6 +547,10 @@ char	fin2[MAXF];	/* archivo inp para entrada segun necesidad */
 char	fin3[MAXF];	/* archivo inp para entrada segun necesidad */
 char	fout[MAXF];
 char	fou2[MAXF];
+char	fou3[MAXF];
+char	fou4[MAXF];
+char	fou5[MAXF];
+char	fou6[MAXF];
 char	faux[MAXF];	/* archivo aux para salidas segun necesidad */
 char	flog[MAXF];	/* archivo log para salidas segun necesidad */
 char	fsta[MAXF];	/* archivo stats segun necesidad */
@@ -558,6 +564,10 @@ int	ffin2;
 int	ffin3;
 int	ffout;
 int	ffou2;
+int	ffou3;
+int	ffou4;
+int	ffou5;
+int	ffou6;
 int	ffaux;		/* archivo aux para output segun necesidad */
 int	fflog;		/* archivo log para output segun necesidad */
 int	ffcfg;		/* archivo de configuracion */
@@ -584,6 +594,10 @@ FILE	*hfin2;
 FILE	*hfin3;
 FILE	*hfout;
 FILE	*hfou2;
+FILE	*hfou3;
+FILE	*hfou4;
+FILE	*hfou5;
+FILE	*hfou6;
 FILE	*hfaux;
 FILE	*hflog;
 FILE	*hfsta;
@@ -625,11 +639,15 @@ int	ffchg_vcb  = 0;		/* cambia variables con blancos intermedios */
  *
  */
 
-#define	MAX_VCB		400	/* maxima cantidad de variables con blancos en codebase */
-#define	MAX_VSB		400	/* maxima cantidad de variables con blancos en codebase */
+#define	MAX_VCB		600	/* maxima cantidad de variables con blancos en codebase */
+#define	MAX_VSB		600	/* maxima cantidad de variables con blancos en codebase */
 
 int	q_vcb;
 char	vcb[MAX_VCB][MAXV];
+char	vcb_o[MAX_VCB][MAXV];
+char	vcb_p[MAX_VCB][MAXB];
+char	vcb_c[MAX_VCB][MAXB];
+char	vcb_d[MAX_VCB][MAXB];
 
 int	q_vsb;
 char	vsb[MAX_VSB][MAXV];
@@ -846,6 +864,8 @@ int	primer_char(char *, int *);
 char	*f_name(int);
 int	tiene_integer(char *);
 int	tiene_character(char *);
+int	rutina_v(char *, int *, char **);
+int	compare_vcb(char *, char *);
 
 
 
@@ -3328,8 +3348,10 @@ printf ("busco call |%s| \n",info[k]);
  */
 
 
+
 /* 
  *	pro_exec5
+ *	analiza include files como mthnmcom y namescom
  *	lista variables de fortran que tienen blancos intermedios 
  *
  */
@@ -3349,6 +3371,9 @@ int	pro_exec5()
 	int	sw1 = 0;		/* 0 grabo archivo normal, 1 grabo con marcas */
 	int	es_int;
 	int	es_chr;
+	int	qv1,qv2;
+	int	q1,q2;
+	int	f_sigo;
 	
 	int	tabla1[256];
 	int	tabla2[256];
@@ -3376,7 +3401,7 @@ int	pro_exec5()
 	if (!ffaux)
 		agregar_ffaux("parser.err");
 
-	if (!ffinp || !ffout || !fflog) 
+	if (!ffinp || !ffout || !fflog || !ffou3 || !ffou4) 
 		gp_uso(102);
 
 
@@ -3401,6 +3426,9 @@ int	pro_exec5()
 	sprintf (b5,"      character(len=1),parameter:: ");
 	sprintf (b6,"      integer(kind=4),parameter:: ");
 
+
+	qv1 = 0;
+	qv2 = 0;
 
 	/* reviso cada linea marco sobre las que hay que trabjar */
 	for (j = pf; j <= uf; j++)
@@ -3510,6 +3538,9 @@ int	pro_exec5()
 			if (f3 && ffou2)
 			{
 				fprintf (hfou2,"|%s|\n",b4);
+
+				sprintf (vcb[qv1],"|%s|",b4);
+				qv1++;
 			}
 
 			/* grabo la lista de variables con _ */
@@ -3573,6 +3604,36 @@ int	pro_exec5()
 	}
 #endif
 
+	/* ordeno las variables vcb segun la cantidad de blancos que tengan
+	 * y grabo
+	 */
+
+	if (ffou3)
+	{
+		qv2 = 0;
+
+		for (i=6; i; i--)
+		{
+			for (j=0; j<qv1; j++)
+			{
+				for (k=0, q1=0; k<strlen(vcb[j]) ; k++)
+					if (vcb[j][k] == ' ')
+						q1++;
+				
+				if (i == q1)
+				{
+					strcpy(vcb_o[qv2],vcb[j]);
+					qv2++;
+				}	
+			}
+		}
+
+
+		for (j=0; j<qv1; j++)
+		{
+			fprintf (hfou3,"%s\n",vcb_o[j]);
+		}
+	}
 
 	/* proceso */
 	if (gp_fverbose("d1"))
@@ -3581,6 +3642,9 @@ int	pro_exec5()
 
 
 }
+
+
+
 
 
 int	es_integer2(s)
@@ -3744,7 +3808,7 @@ int	pro_exec6()
 	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
 	}
 
-	if (!ffinp || !ffin2 || !ffin3 || !ffaux )
+	if (!ffinp || !ffin2 || !ffin3 || !ffaux || !ffout || !ffou4 || !ffou5 || !ffou6  )
 		gp_uso(105);
 
 
@@ -4007,10 +4071,13 @@ int	ex6_p1()
 	char	b4[MAXB];
 	char	b5[MAXB];
 	int	pf,uf,nf;
+	int	qv1,qv2;
+	int	qm1,qm2,qm3;
 
-
-/* EEE */
 	strcpy(base_name,"empty");
+
+	qv1 = 0;
+	qm1 = 0;
 
 	/* para todas las lineas */
 	for (i=0; i < qf_src; i++)
@@ -4091,11 +4158,36 @@ int	ex6_p1()
 							printf ("VV5 lin : (%6d) |%s|\n",lne(nf),b1);
 							printf ("VV6 \n");
 
+/* EEE */
 							if (fflog)
 							{
 								fprintf (hflog,"%-30.30s (%d) %05d |%s|\n",prog_name,c1,lne(nf),b0);
 								fprintf (hflog,"%-30.30s     %05d |%s|\n",prog_name,lne(nf),b1);
 								fprintf (hflog,"%s","\n");
+							}
+
+							if (ffaux)
+							{
+								fprintf (hfaux,"%-30.30s (%d) %05d |%s|\n",prog_name,c1,lne(nf),vcb[k]);
+							}
+
+							if (ffout)
+							{
+								strcpy(vcb_o[qv1],vcb[k]);
+								qv1++;
+							}
+
+							if (ffou4)
+							{
+								printf ("%4d %-30.30s |%s|\n",qm1,prog_name,vcb[k]);
+								sprintf (vcb_p[qm1],"%-30.30s,|%s|",prog_name,vcb[k]);
+     sprintf (vcb_c[qm1],"%-30.30s,grep -i \"%s\" %-*.*s  ~/wrk/Midas/ABBICAP/*.* ",
+           prog_name,vcb[k],40-strlen(vcb[k]), 40-strlen(vcb[k]), " " );
+     sprintf (vcb_d[qm1],"%-30.30s,grep -i \"%s\" %-*.*s  ~/wrk/Midas/ABBICAP/*.* ",
+           prog_name,b5,40-strlen(b5), 40-strlen(b5), " " );
+
+								qm1++;
+
 							}
 						}
 					}
@@ -4108,6 +4200,147 @@ int	ex6_p1()
 		nf++;
 
 	} /* for */
+
+
+
+	for (i=0; i<qm1; i++)
+		printf ("%4d |%s|\n",i,vcb_p[i]);
+
+/* EEE */
+
+
+	qsort(&vcb_o[0],qv1, MAXV, compare_vcb);
+
+#if 1
+    // Contador para elementos únicos
+    int unique_count = 1;
+
+    // Itera sobre el vector eliminando duplicados
+    for (int i = 1; i < qv1; ++i) 
+    {
+        // Compara el elemento actual con el anterior
+        if (strcmp(vcb_o[i], vcb_o[i - 1]) != 0) 
+        {
+            // Si son diferentes, mueve el elemento único al índice de `unique_count`
+            strcpy(vcb_o[unique_count], vcb_o[i]);
+            ++unique_count;
+        }
+    }
+
+    // Actualiza la cantidad de elementos únicos
+    qv2 = unique_count;
+#endif
+
+
+	if (ffout)
+	{
+		for (i=0; i<qv2; i++)
+			fprintf (hfout,"|%s|\n",vcb_o[i]);
+	}
+
+
+
+	qsort(&vcb_p[0],qm1, MAXB, compare_vcb);
+
+#if 1
+    // Contador para elementos únicos
+    unique_count = 1;
+
+    // Itera sobre el vector eliminando duplicados
+    for (int i = 1; i < qm1; ++i) 
+    {
+        // Compara el elemento actual con el anterior
+        if (strcmp(vcb_p[i], vcb_p[i - 1]) != 0) 
+        {
+            // Si son diferentes, mueve el elemento único al índice de `unique_count`
+            strcpy(vcb_p[unique_count], vcb_p[i]);
+            ++unique_count;
+        }
+    }
+
+    // Actualiza la cantidad de elementos únicos
+    qm2 = unique_count;
+#endif
+
+
+
+
+	if (ffou4)
+	{
+		for (i=0; i<qm2; i++)
+			fprintf (hfou4,"%s\n",vcb_p[i]);
+	}
+
+
+
+	qsort(&vcb_c[0],qm1, MAXB, compare_vcb);
+
+#if 1
+    // Contador para elementos únicos
+    unique_count = 1;
+
+    // Itera sobre el vector eliminando duplicados
+    for (int i = 1; i < qm1; ++i) 
+    {
+        // Compara el elemento actual con el anterior
+        if (strcmp(vcb_c[i], vcb_c[i - 1]) != 0) 
+        {
+            // Si son diferentes, mueve el elemento único al índice de `unique_count`
+            strcpy(vcb_c[unique_count], vcb_c[i]);
+            ++unique_count;
+        }
+    }
+
+    // Actualiza la cantidad de elementos únicos
+    qm2 = unique_count;
+#endif
+
+	qsort(&vcb_d[0],qm1, MAXB, compare_vcb);
+
+#if 1
+    // Contador para elementos únicos
+    unique_count = 1;
+
+    // Itera sobre el vector eliminando duplicados
+    for (int i = 1; i < qm1; ++i) 
+    {
+        // Compara el elemento actual con el anterior
+        if (strcmp(vcb_d[i], vcb_d[i - 1]) != 0) 
+        {
+            // Si son diferentes, mueve el elemento único al índice de `unique_count`
+            strcpy(vcb_d[unique_count], vcb_d[i]);
+            ++unique_count;
+        }
+    }
+
+    // Actualiza la cantidad de elementos únicos
+    qm3 = unique_count;
+#endif
+
+
+	if (qm2 != qm3 )
+		error(5555);
+
+
+
+
+	if (ffou5)
+	{
+		for (i=0; i<qm2; i++)
+			fprintf (hfou5,"%s\n",vcb_c[i]);
+
+	}
+
+	if (ffou6)
+	{
+		for (i=0; i<qm3; i++)
+			fprintf (hfou6,"%s\n",vcb_d[i]);
+	}
+
+
+
+
+
 }
 
 #if 0
@@ -4116,6 +4349,10 @@ int	ex6_p1()
 #endif
 
 
+int compare_vcb(char *a, char *b) 
+{
+    return strcmp(a,b);
+}
 
 
 
@@ -4158,10 +4395,12 @@ int	ex6_p2()
 	char	b4[MAXB];
 	char	b5[MAXB];
 	int	pf,uf,nf;
+	int	qv1,qv2;
 
 
-/* EEE */
 	strcpy(base_name,"empty");
+
+	qv1 = 0;
 
 	/* para todas las lineas */
 	for (i=0; i < qf_src; i++)
@@ -4242,6 +4481,7 @@ int	ex6_p2()
 								fprintf (hfaux,"%-40.40s %05d |%s|\n",prog_name,lne(nf),b0);
 								fprintf (hfaux,"%s","\n");
 							}
+
 						}
 					}
 				}		
@@ -4306,7 +4546,6 @@ int	ex6_p3()
 	int	pf,uf,nf;
 
 
-/* EEE */
 	memset(b4,'X',MAXB);
 	strcpy(base_name,"empty");
 
@@ -11023,7 +11262,6 @@ printf ("XXX cargue vcb |%s| \n",vcb[q_vcb]);
 
 
 
-/* EEE */
 
 	/* reviso cada linea */
 	for (j = pf; j <= uf; j++)
@@ -14861,6 +15099,26 @@ int	abro_files()
 		error(104);
 	}
 
+	if ( ffou3 && ((hfou3 = fopen (fou3,"w")) == NULL) )
+	{
+		error(134);
+	}
+
+	if ( ffou4 && ((hfou4 = fopen (fou4,"w")) == NULL) )
+	{
+		error(135);
+	}
+
+	if ( ffou5 && ((hfou5 = fopen (fou5,"w")) == NULL) )
+	{
+		error(136);
+	}
+
+	if ( ffou6 && ((hfou6 = fopen (fou6,"w")) == NULL) )
+	{
+		error(137);
+	}
+
 	if ( ffaux && ((hfaux = fopen (faux,"w")) == NULL) )
 	{
 		error(105);
@@ -14941,6 +15199,18 @@ int	cierro_files()
 
 	if ( ffou2)
 		fclose(hfou2);
+
+	if ( ffou3)
+		fclose(hfou3);
+
+	if ( ffou4)
+		fclose(hfou4);
+
+	if ( ffou5)
+		fclose(hfou5);
+
+	if ( ffou6)
+		fclose(hfou6);
 
 	if ( ffaux)
 		fclose(hfaux);
@@ -15810,9 +16080,89 @@ char	*bname;
 
 
 
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	devuelve variables fortran en un string
+ * -----------------------------------------------------------------------------------
+ */
+
+
+/* EEE */
+
+#if 1
+
+
+int rutina_v(string,nro,vector_ptr) 
+char	*string;
+int	*nro;
+char	**vector_ptr;
+{
+    int count = 0;
+    char *token;
+    char *separators = " _"; // Separadores permitidos (blancos y '_')
+    char *temp_string = strdup(string); // Hacemos una copia temporal del string
+    char *str_ptr = temp_string;
+
+    // Tokenizamos el string de acuerdo con los separadores
+    while ((token = strtok(str_ptr, separators)) != NULL) 
+    {
+        str_ptr = NULL; // Para continuar tokenizando el string original
+        
+        // Validamos la sintaxis de str1 (debe comenzar con una letra y puede seguir con letras o números)
+        if (isalpha(token[0])) 
+        {
+            int valid = 1;
+            for (int i = 1; i < strlen(token); i++) 
+            {
+                if (!isalnum(token[i])) 
+                {
+                    valid = 0; // No válido si tiene algo que no sea letra o número
+                    break;
+                }
+            }
+
+            if (valid) 
+            {
+                vector_ptr[count] = token; // Guardamos el puntero al token válido
+                count++;
+            }
+
+        }
+    }
+
+    // Liberamos la memoria temporal
+    free(temp_string);
+    
+    *nro = count; // Guardamos el número de variables encontradas
+
+    return count;     // Retornamos cant de variables encontradas
+}
 
 
 
+#if 0
+int main() {
+    char string[1024] = "str1 str2 str2_str2";
+    int nro = 0;
+    char *vector[100]; // Vector para almacenar punteros a las variables encontradas
+
+    // Llamada a la rutina
+    rutina_v(string, &nro, vector);
+
+    // Imprimimos los resultados
+    printf("Variables encontradas: %d\n", nro);
+    for (int i = 0; i < nro; i++) {
+        printf("Variable %d: %s\n", i + 1, vector[i]);
+    }
+
+    return 0;
+}
+
+#endif
+
+
+#endif
 
 
 
@@ -16184,6 +16534,30 @@ int	gp_parser()
 			{
 				strcpy(fou2,desde_igual( gp_fp(GP_GET,i,(char **)0)));
 				ffou2=1;
+			}
+
+			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+1,"ou3",3) )
+			{
+				strcpy(fou3,desde_igual( gp_fp(GP_GET,i,(char **)0)));
+				ffou3=1;
+			}
+
+			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+1,"ou4",3) )
+			{
+				strcpy(fou4,desde_igual( gp_fp(GP_GET,i,(char **)0)));
+				ffou4=1;
+			}
+
+			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+1,"ou5",3) )
+			{
+				strcpy(fou5,desde_igual( gp_fp(GP_GET,i,(char **)0)));
+				ffou5=1;
+			}
+
+			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+1,"ou6",3) )
+			{
+				strcpy(fou6,desde_igual( gp_fp(GP_GET,i,(char **)0)));
+				ffou6=1;
 			}
 
 			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+1,"aux",3) )
@@ -16930,6 +17304,10 @@ int	gp_default()
 	ffin2=0;
 	ffout=0;
 	ffou2=0;
+	ffou3=0;
+	ffou4=0;
+	ffou5=0;
+	ffou6=0;
 	ffaux=0;
 	fflog=0;
 	ffsta=0;
@@ -16973,8 +17351,8 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXV];
 
-	strcpy (ver,"0047");
-	strcpy (d," Fri Aug  9 00:44:21 -03 2024");
+	strcpy (ver,"0048");
+	strcpy (d," Sat Sep  7 09:51:27 -03 2024");
 
 	sprintf (z,"%s -- (%s)  %s", gp_fp(GP_GET,0,(char **)0), ver, d  );
 	memset (w,0,MAXV);
@@ -17663,3 +18041,164 @@ error....   CALL MG_LOCATE_WRITE(15,35,'error reading definition file!',
 
 
 #endif
+
+
+
+
+
+
+#if 0
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
+
+int rutina_v(char string[1024], int *nro, char **vector_ptr) {
+    int count = 0;
+    char *token;
+    char *separators = " _"; // Separadores permitidos (blancos y '_')
+    char *temp_string = strdup(string); // Hacemos una copia temporal del string
+    char *str_ptr = temp_string;
+
+    // Tokenizamos el string de acuerdo con los separadores
+    while ((token = strtok(str_ptr, separators)) != NULL) {
+        str_ptr = NULL; // Para continuar tokenizando el string original
+        
+        // Validamos la sintaxis de str1 (debe comenzar con una letra y puede seguir con letras o números)
+        if (isalpha(token[0])) {
+            int valid = 1;
+            for (int i = 1; i < strlen(token); i++) {
+                if (!isalnum(token[i])) {
+                    valid = 0; // No válido si tiene algo que no sea letra o número
+                    break;
+                }
+            }
+            if (valid) {
+                vector_ptr[count] = token; // Guardamos el puntero al token válido
+                count++;
+            }
+        }
+    }
+
+    // Liberamos la memoria temporal
+    free(temp_string);
+    
+    *nro = count; // Guardamos el número de variables encontradas
+    return 0;     // Retornamos 0 en caso de éxito
+}
+
+int main() {
+    char string[1024] = "str1 str2 str2_str2";
+    int nro = 0;
+    char *vector[100]; // Vector para almacenar punteros a las variables encontradas
+
+    // Llamada a la rutina
+    rutina_v(string, &nro, vector);
+
+    // Imprimimos los resultados
+    printf("Variables encontradas: %d\n", nro);
+    for (int i = 0; i < nro; i++) {
+        printf("Variable %d: %s\n", i + 1, vector[i]);
+    }
+
+    return 0;
+}
+
+
+
+#endif
+
+
+#if 0
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// Comparison function for qsort
+int compare(const void* a, const void* b) {
+    return (*(int*)a - *(int*)b);
+}
+
+// Function to remove duplicates from a sorted array
+int remove_duplicates(int* arr, int n) {
+    if (n == 0) return 0;
+
+    int j = 0;
+    for (int i = 1; i < n; i++) {
+        if (arr[j] != arr[i]) {
+            j++;
+            arr[j] = arr[i];
+        }
+    }
+    return j + 1; // New length of array without duplicates
+}
+
+int main() {
+    int arr[] = {4, 2, 9, 2, 4, 6, 9, 3};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    // Sorting the array
+    qsort(arr, n, sizeof(int), compare);
+
+    // Removing duplicates
+    int new_len = remove_duplicates(arr, n);
+
+    // Printing the unique elements
+    printf("Unique elements: ");
+    for (int i = 0; i < new_len; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+
+
+#endif
+
+
+
+#if 0
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_LINES 100
+#define MAX_LENGTH 1024
+
+char vcb_o[MAX_LINES][MAX_LENGTH];
+int qv1;
+
+int compare(const void *a, const void *b) {
+    return strcmp(*(const char **)a, *(const char **)b);
+}
+
+int main() {
+    // Suponiendo que qv1 ya está definido y vcb_o está lleno con datos
+
+    // Crear un array de punteros a las cadenas en vcb_o
+    char *pointers[MAX_LINES];
+    for (int i = 0; i < qv1; ++i) {
+        pointers[i] = vcb_o[i];
+    }
+
+    // Ordenar el array de punteros
+    qsort(pointers, qv1, sizeof(char *), compare);
+
+    // Copiar las cadenas ordenadas de vuelta a vcb_o
+    for (int i = 0; i < qv1; ++i) {
+        strcpy(vcb_o[i], pointers[i]);
+    }
+
+    // Imprimir el resultado
+    for (int i = 0; i < qv1; ++i) {
+        printf("%s\n", vcb_o[i]);
+    }
+
+    return 0;
+}
+
+
+#endif
+
