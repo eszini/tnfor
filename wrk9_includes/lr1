@@ -27,7 +27,6 @@ repo1/msgmmea.for
 repo1/msgmminp.for
 repo1/msgmmout.for
 repo1/msgmmpyb.for
-repo1/msgmmrev.for
 repo1/msgmmsb6.for
 repo1/msgnorm.for
 repo1/msgoutpt.for
@@ -178,6 +177,7 @@ repo1/msgmmcom.f90
 repo1/msgmmexprevcash.f90
 repo1/msgmmfa.f90
 repo1/msgmmfv.f90
+repo1/msgmmrev.f90
 repo1/msgmmsb6b.f90
 repo1/msgmmtax.f90
 repo1/msgold95rw.f90
