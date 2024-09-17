@@ -45,7 +45,7 @@ repo1/annual_contracts.f90
 repo1/bfil_obj.f90
 repo1/cal_marginal_interface.f90
 repo1/calendar.f90
-repo1/cap_objt.for
+repo1/cap_objt.f90
 repo1/cap_prod_costs.f90
 repo1/capacity_arrays.f90
 repo1/capacity_options_alloc_vars.f90
@@ -177,6 +177,7 @@ repo1/msgmmsb6b.f90
 repo1/msgnorm.for
 repo1/msgold95rw.f90
 repo1/msgoutpt.for
+repo1/mthnmcom.mon
 repo1/mwunih.f90
 repo1/namescom.mon
 repo1/newfred2.for

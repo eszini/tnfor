@@ -39,6 +39,6 @@ done < "$archivo_todos"
 # agrego repo... a lr1_solo_mth
 sed -i 's/^/repo1\//' lr1_solo_mth
 
-
+echo "repo1/mthnmcom.mon" >> lr1_solo_mth
 
 

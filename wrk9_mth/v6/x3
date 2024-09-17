@@ -1,0 +1,1545 @@
+Línea:          UNALLOCATED_AMOUNT(BTL Monthly Expenses) =
+1 (18) 0 |UNALLOCATED_AMOUNT|
+2 (20) 0 |BTL Monthly Expenses|
+
+Línea:      +                     INCOME_VARIABLES(0,BTL Monthly Expenses))
+1 (16) 0 |INCOME_VARIABLES|
+2 (20) 0 |BTL Monthly Expenses|
+
+Línea:      +          - INCOME_VARIABLES(MO,BTL Monthly Expenses)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (20) 0 |BTL Monthly Expenses|
+
+Línea:      +                         INCOME_VARIABLES(MO,BTL Monthly Expenses)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (20) 0 |BTL Monthly Expenses|
+
+Línea:      +          - INCOME_VARIABLES(MO,BTL Monthly Expenses)              ! 58
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (20) 0 |BTL Monthly Expenses|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:          INCOME_VARIABLES(0,BTL Monthly Income Taxes) = ANNUAL_VARS(36)
+1 (16) 0 |INCOME_VARIABLES|
+2 (24) 0 |BTL Monthly Income Taxes|
+3 (11) 0 |ANNUAL_VARS|
+
+Línea:                INCOME_VARIABLES(MO,BTL Monthly Income Taxes) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (24) 0 |BTL Monthly Income Taxes|
+
+Línea:             INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:                   IF(VARIABLE == BTL Monthly Income Taxes) CYCLE
+1 ( 2) 1 |IF|
+2 ( 9) 0 |VARIABLE |
+3 (24) 0 |BTL Monthly Income Taxes|
+4 ( 5) 0 |CYCLE|
+
+Línea:                IF(VARIABLE == BTL Monthly Income Taxes) THEN
+1 ( 2) 1 |IF|
+2 ( 9) 0 |VARIABLE |
+3 (24) 0 |BTL Monthly Income Taxes|
+4 ( 4) 0 |THEN|
+
+Línea:                   INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:      +          - INCOME_VARIABLES(MO,BTL Monthly Income Taxes)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (24) 0 |BTL Monthly Income Taxes|
+
+Línea:      +         + INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:      +                                   BTL Monthly NoTax Other Income) ! 16
+1 (30) 0 |BTL Monthly NoTax Other Income|
+
+Línea:      +                                  BTL Monthly NoTax Other Income), ! 27
+1 (30) 0 |BTL Monthly NoTax Other Income|
+
+Línea:      +                                  BTL Monthly NoTax Other Income), ! 27
+1 (30) 0 |BTL Monthly NoTax Other Income|
+
+Línea:      +          + INCOME_VARIABLES(MO,BTL Monthly NoTax Other Income)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (30) 0 |BTL Monthly NoTax Other Income|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:          INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:      +              INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:             INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:      +              INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:      +          + INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:      +                                   BTL Monthly STInvestmet Income)
+1 (30) 0 |BTL Monthly STInvestmet Income|
+
+Línea:                   IF(VARIABLE == BTL Monthly STInvestmet Income) CYCLE
+1 ( 2) 1 |IF|
+2 ( 9) 0 |VARIABLE |
+3 (30) 0 |BTL Monthly STInvestmet Income|
+4 ( 5) 0 |CYCLE|
+
+Línea:      +           + INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:      +                                   BTL Monthly STInvestmet Income)
+1 (30) 0 |BTL Monthly STInvestmet Income|
+
+Línea:      +              INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (30) 0 |BTL Monthly STInvestmet Income|
+
+Línea:      +                                   BTL Monthly STInvestmet Income) ! 36
+1 (30) 0 |BTL Monthly STInvestmet Income|
+
+Línea:      +          + INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (30) 0 |BTL Monthly STInvestmet Income|
+
+Línea:      +          + INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (30) 0 |BTL Monthly STInvestmet Income|
+
+Línea:      +                                   BTL Monthly STInvestmet Income)
+1 (30) 0 |BTL Monthly STInvestmet Income|
+
+Línea:      +          + INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (30) 0 |BTL Monthly STInvestmet Income|
+
+Línea:      +             + INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (30) 0 |BTL Monthly STInvestmet Income|
+
+Línea:      +                                   BTL Monthly STInvestmet Income)
+1 (30) 0 |BTL Monthly STInvestmet Income|
+
+Línea:      +                                   BTL Monthly STInvestmet Income)
+1 (30) 0 |BTL Monthly STInvestmet Income|
+
+Línea:      +              INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (30) 0 |BTL Monthly STInvestmet Income|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:             CASH_VARIABLES(MO,Cash Prior Years Method Adj) =
+1 (14) 0 |CASH_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Cash Prior Years Method Adj|
+
+Línea:      +                  + CASH_VARIABLES(MO,Cash Prior Years Method Adj)
+1 (14) 0 |CASH_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Cash Prior Years Method Adj|
+
+Línea:                      ELSEIF(VARIABLE==Cash Prior Years Method Adj .AND.
+1 ( 6) 0 |ELSEIF|
+2 ( 8) 0 |VARIABLE|
+3 (28) 0 |Cash Prior Years Method Adj |
+4 ( 3) 0 |AND|
+
+Línea:      +            + CASH_VARIABLES(MO,Cash Prior Years Method Adj)
+1 (14) 0 |CASH_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Cash Prior Years Method Adj|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:      +                  + CASH_VARIABLES(MO,Cash Prior level Method Adj)
+1 (14) 0 |CASH_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Cash Prior level Method Adj|
+
+Línea:                      IF(VARIABLE == Cash Prior level Method Adj .AND.
+1 ( 2) 1 |IF|
+2 ( 9) 0 |VARIABLE |
+3 (28) 0 |Cash Prior level Method Adj |
+4 ( 3) 0 |AND|
+
+Línea:      +            + CASH_VARIABLES(MO,Cash Prior level Method Adj)
+1 (14) 0 |CASH_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Cash Prior level Method Adj|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:             CASH_VARIABLES(MO,Cash TOTAL EXPENSE PAYMENTS) =
+1 (14) 0 |CASH_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Cash TOTAL EXPENSE PAYMENTS|
+
+Línea:      +                CASH_VARIABLES(MO,Cash TOTAL EXPENSE PAYMENTS)
+1 (14) 0 |CASH_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Cash TOTAL EXPENSE PAYMENTS|
+
+Línea:                CASH_VARIABLES(MO,Cash TOTAL EXPENSE PAYMENTS) =
+1 (14) 0 |CASH_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Cash TOTAL EXPENSE PAYMENTS|
+
+Línea:      +                CASH_VARIABLES(MO,Cash TOTAL EXPENSE PAYMENTS)
+1 (14) 0 |CASH_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Cash TOTAL EXPENSE PAYMENTS|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:             CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS) =
+1 (14) 0 |CASH_VARIABLES|
+2 ( 2) 0 |MO|
+3 (29) 0 |Cash TOTAL OPERATING RECEIPTS|
+
+Línea:             CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS) =
+1 (14) 0 |CASH_VARIABLES|
+2 ( 2) 0 |MO|
+3 (29) 0 |Cash TOTAL OPERATING RECEIPTS|
+
+Línea:      +                  CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS)
+1 (14) 0 |CASH_VARIABLES|
+2 ( 2) 0 |MO|
+3 (29) 0 |Cash TOTAL OPERATING RECEIPTS|
+
+Línea:      +                CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS) -
+1 (14) 0 |CASH_VARIABLES|
+2 ( 2) 0 |MO|
+3 (29) 0 |Cash TOTAL OPERATING RECEIPTS|
+
+Línea:                CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS) =
+1 (14) 0 |CASH_VARIABLES|
+2 ( 2) 0 |MO|
+3 (29) 0 |Cash TOTAL OPERATING RECEIPTS|
+
+Línea:      +                CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS) -
+1 (14) 0 |CASH_VARIABLES|
+2 ( 2) 0 |MO|
+3 (29) 0 |Cash TOTAL OPERATING RECEIPTS|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:             INCOME_VARIABLES(MO,IMPA Depreciation Add Back) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (26) 0 |IMPA Depreciation Add Back|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:             INCOME_VARIABLES(0,Monthly Booked PS Dividends) =
+1 (16) 0 |INCOME_VARIABLES|
+2 (27) 0 |Monthly Booked PS Dividends|
+
+Línea:             INCOME_VARIABLES(0,Monthly Booked PS Dividends) =
+1 (16) 0 |INCOME_VARIABLES|
+2 (27) 0 |Monthly Booked PS Dividends|
+
+Línea:             INCOME_VARIABLES(MO,Monthly Booked PS Dividends) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Monthly Booked PS Dividends|
+
+Línea:      +               + INCOME_VARIABLES(MO,Monthly Booked PS Dividends)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Monthly Booked PS Dividends|
+
+Línea:      +               + INCOME_VARIABLES(MO,Monthly Booked PS Dividends)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Monthly Booked PS Dividends|
+
+Línea:      +               + INCOME_VARIABLES(MO,Monthly Booked PS Dividends)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Monthly Booked PS Dividends|
+
+Línea:      +                                     Monthly Booked PS Dividends),
+1 (27) 0 |Monthly Booked PS Dividends|
+
+Línea:      +                  INCOME_VARIABLES(MO,Monthly Booked PS Dividends)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Monthly Booked PS Dividends|
+
+Línea:      +                                     Monthly Booked PS Dividends),
+1 (27) 0 |Monthly Booked PS Dividends|
+
+Línea:      +                  INCOME_VARIABLES(MO,Monthly Booked PS Dividends)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Monthly Booked PS Dividends|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:             ELSEIF(VARIABLE == Monthly CIAC Amort) THEN
+1 ( 6) 0 |ELSEIF|
+2 ( 9) 0 |VARIABLE |
+3 (18) 0 |Monthly CIAC Amort|
+4 ( 4) 0 |THEN|
+
+Línea:      +           - INCOME_VARIABLES(0,Monthly CIAC Amort)
+1 (16) 0 |INCOME_VARIABLES|
+2 (18) 0 |Monthly CIAC Amort|
+
+Línea:      +           - INCOME_VARIABLES(MO,Monthly CIAC Amort)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (18) 0 |Monthly CIAC Amort|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:             INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:             INCOME_VARIABLES(0,Monthly Common Dividends) =
+1 (16) 0 |INCOME_VARIABLES|
+2 (24) 0 |Monthly Common Dividends|
+
+Línea:                INCOME_VARIABLES(MO,Monthly Common Dividends) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (24) 0 |Monthly Common Dividends|
+
+Línea:      +                   + INCOME_VARIABLES(MO,Monthly Common Dividends)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (24) 0 |Monthly Common Dividends|
+
+Línea:      +                     INCOME_VARIABLES(MO,Monthly Common Dividends)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (24) 0 |Monthly Common Dividends|
+
+Línea:      +                     INCOME_VARIABLES(MO,Monthly Common Dividends)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (24) 0 |Monthly Common Dividends|
+
+Línea:      +                     INCOME_VARIABLES(MO,Monthly Common Dividends)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (24) 0 |Monthly Common Dividends|
+
+Línea:      +                     INCOME_VARIABLES(MO,Monthly Common Dividends)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (24) 0 |Monthly Common Dividends|
+
+Línea:      +                     INCOME_VARIABLES(MO,Monthly Common Dividends)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (24) 0 |Monthly Common Dividends|
+
+Línea:             INCOME_VARIABLES(0,Monthly Common Dividends) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 (24) 0 |Monthly Common Dividends|
+
+Línea:                   INCOME_VARIABLES(MO,Monthly Common Dividends) = 0.
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (24) 0 |Monthly Common Dividends|
+
+Línea:                      INCOME_VARIABLES(MO,Monthly Common Dividends) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (24) 0 |Monthly Common Dividends|
+
+Línea:      +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+1 (21) 0 |QUARTERY_CS_DIVIDENDS|
+2 ( 7) 0 |QUARTER|
+3 (16) 0 |INCOME_VARIABLES|
+4 (24) 0 |Monthly Common Dividends|
+
+Línea:      +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+1 (21) 0 |QUARTERY_CS_DIVIDENDS|
+2 ( 7) 0 |QUARTER|
+3 (16) 0 |INCOME_VARIABLES|
+4 (24) 0 |Monthly Common Dividends|
+
+Línea:      +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+1 (21) 0 |QUARTERY_CS_DIVIDENDS|
+2 ( 7) 0 |QUARTER|
+3 (16) 0 |INCOME_VARIABLES|
+4 (24) 0 |Monthly Common Dividends|
+
+Línea:      +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+1 (21) 0 |QUARTERY_CS_DIVIDENDS|
+2 ( 7) 0 |QUARTER|
+3 (16) 0 |INCOME_VARIABLES|
+4 (24) 0 |Monthly Common Dividends|
+
+Línea:                      INCOME_VARIABLES(MO,Monthly Common Dividends) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (24) 0 |Monthly Common Dividends|
+
+Línea:      +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+1 (21) 0 |QUARTERY_CS_DIVIDENDS|
+2 ( 7) 0 |QUARTER|
+3 (16) 0 |INCOME_VARIABLES|
+4 (24) 0 |Monthly Common Dividends|
+
+Línea:      +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+1 (21) 0 |QUARTERY_CS_DIVIDENDS|
+2 ( 7) 0 |QUARTER|
+3 (16) 0 |INCOME_VARIABLES|
+4 (24) 0 |Monthly Common Dividends|
+
+Línea:      +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+1 (21) 0 |QUARTERY_CS_DIVIDENDS|
+2 ( 7) 0 |QUARTER|
+3 (16) 0 |INCOME_VARIABLES|
+4 (24) 0 |Monthly Common Dividends|
+
+Línea:                      INCOME_VARIABLES(MO,Monthly Common Dividends) = 0.
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (24) 0 |Monthly Common Dividends|
+
+Línea:          INCOME_VARIABLES(0,Monthly Common Dividends) =
+1 (16) 0 |INCOME_VARIABLES|
+2 (24) 0 |Monthly Common Dividends|
+
+Línea:      +                SUM(INCOME_VARIABLES(1
+1 ( 3) 0 |SUM|
+2 (16) 0 |INCOME_VARIABLES|
+
+Línea:      +          INCOME_VARIABLES(0,Monthly Common Dividends)
+1 (16) 0 |INCOME_VARIABLES|
+2 (24) 0 |Monthly Common Dividends|
+
+Línea:      +                    - INCOME_VARIABLES(0,Monthly Common Dividends)
+1 (16) 0 |INCOME_VARIABLES|
+2 (24) 0 |Monthly Common Dividends|
+
+Línea:      +                   - INCOME_VARIABLES(MO,Monthly Common Dividends)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (24) 0 |Monthly Common Dividends|
+
+Línea:      +                  + INCOME_VARIABLES(MO,Monthly Common Dividends)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (24) 0 |Monthly Common Dividends|
+
+Línea:      +               + INCOME_VARIABLES(MO,Monthly Common Dividends)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (24) 0 |Monthly Common Dividends|
+
+Línea:                   IF(VARIABLE == Monthly Common Dividends) CYCLE
+1 ( 2) 1 |IF|
+2 ( 9) 0 |VARIABLE |
+3 (24) 0 |Monthly Common Dividends|
+4 ( 5) 0 |CYCLE|
+
+Línea:      +                      INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:                IF(VARIABLE == Monthly Common Dividends) THEN
+1 ( 2) 1 |IF|
+2 ( 9) 0 |VARIABLE |
+3 (24) 0 |Monthly Common Dividends|
+4 ( 4) 0 |THEN|
+
+Línea:                   INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:      +               + INCOME_VARIABLES(MO,Monthly Common Dividends)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (24) 0 |Monthly Common Dividends|
+
+Línea:      +                  INCOME_VARIABLES(MO,Monthly Common Dividends)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (24) 0 |Monthly Common Dividends|
+
+Línea:      +                  INCOME_VARIABLES(MO,Monthly Common Dividends)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (24) 0 |Monthly Common Dividends|
+
+Línea:      +          - INCOME_VARIABLES(MO,Monthly Common Dividends)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (24) 0 |Monthly Common Dividends|
+
+Línea:      +                 - INCOME_VARIABLES(MO,Monthly Common Dividends)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (24) 0 |Monthly Common Dividends|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:          INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:          INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:      +                   INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:          INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:          INCOME_VARIABLES(0,Monthly Earnings 2 Common) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 (25) 0 |Monthly Earnings 2 Common|
+
+Línea:      +          INCOME_VARIABLES(0,Monthly Earnings 2 Common) -
+1 (16) 0 |INCOME_VARIABLES|
+2 (25) 0 |Monthly Earnings 2 Common|
+
+Línea:          INCOME_VARIABLES(0,Monthly Earnings 2 Common) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 (25) 0 |Monthly Earnings 2 Common|
+
+Línea:      +                    INCOME_VARIABLES(0,Monthly Earnings 2 Common)
+1 (16) 0 |INCOME_VARIABLES|
+2 (25) 0 |Monthly Earnings 2 Common|
+
+Línea:             INCOME_VARIABLES(MO,Monthly Earnings 2 Common) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (25) 0 |Monthly Earnings 2 Common|
+
+Línea:      +                   INCOME_VARIABLES(MO,Monthly Earnings 2 Common)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (25) 0 |Monthly Earnings 2 Common|
+
+Línea:                   IF(VARIABLE == Monthly Earnings 2 Common) THEN
+1 ( 2) 1 |IF|
+2 ( 9) 0 |VARIABLE |
+3 (25) 0 |Monthly Earnings 2 Common|
+4 ( 4) 0 |THEN|
+
+Línea:      +                                        Monthly Earnings 2 Common)
+1 (25) 0 |Monthly Earnings 2 Common|
+
+Línea: C    +          Monthly Earnings 2 Common,
+1 ( 5) 0 |C    |
+2 (25) 0 |Monthly Earnings 2 Common|
+
+Línea:      +                   INCOME_VARIABLES(MO,Monthly Earnings 2 Common),
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (25) 0 |Monthly Earnings 2 Common|
+
+Línea:      +                    INCOME_VARIABLES(MO,Monthly Earnings 2 Common)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (25) 0 |Monthly Earnings 2 Common|
+
+Línea:             INCOME_VARIABLES(MO,Monthly Earnings 2 Common) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (25) 0 |Monthly Earnings 2 Common|
+
+Línea:      +          INCOME_VARIABLES(MO,Monthly Earnings 2 Common)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (25) 0 |Monthly Earnings 2 Common|
+
+Línea:             INCOME_VARIABLES(MO,Monthly Earnings 2 Common) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (25) 0 |Monthly Earnings 2 Common|
+
+Línea:      +                 INCOME_VARIABLES(MO,Monthly Earnings 2 Common)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (25) 0 |Monthly Earnings 2 Common|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:                 INCOME_VARIABLES(MO,Monthly Earnings per Share) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (26) 0 |Monthly Earnings per Share|
+
+Línea:      +                   INCOME_VARIABLES(MO,Monthly Earnings per Share)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (26) 0 |Monthly Earnings per Share|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:          INCOME_VARIABLES(0,Monthly Extraordinary Items) =
+1 (16) 0 |INCOME_VARIABLES|
+2 (27) 0 |Monthly Extraordinary Items|
+
+Línea:             INCOME_VARIABLES(MO,Monthly Extraordinary Items) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Monthly Extraordinary Items|
+
+Línea:      +           INCOME_VARIABLES(0,Monthly Extraordinary Items)/12.
+1 (16) 0 |INCOME_VARIABLES|
+2 (27) 0 |Monthly Extraordinary Items|
+
+Línea:      +             - INCOME_VARIABLES(MO,Monthly Extraordinary Items)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Monthly Extraordinary Items|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:          INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:      +           + INCOME_VARIABLES(0,Monthly FASB 143 Amort)
+1 (16) 0 |INCOME_VARIABLES|
+2 (22) 0 |Monthly FASB 143 Amort|
+
+Línea:      +           + INCOME_VARIABLES(MO,Monthly FASB 143 Amort)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (22) 0 |Monthly FASB 143 Amort|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:          INCOME_VARIABLES(0,Monthly Federal Tax on Capital) =
+1 (16) 0 |INCOME_VARIABLES|
+2 (30) 0 |Monthly Federal Tax on Capital|
+
+Línea:             INCOME_VARIABLES(MO,Monthly Federal Tax on Capital) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (30) 0 |Monthly Federal Tax on Capital|
+
+Línea:      +            INCOME_VARIABLES(0,Monthly Federal Tax on Capital)/12.
+1 (16) 0 |INCOME_VARIABLES|
+2 (30) 0 |Monthly Federal Tax on Capital|
+
+Línea:      +               INCOME_VARIABLES(0,Monthly Federal Tax on Capital),
+1 (16) 0 |INCOME_VARIABLES|
+2 (30) 0 |Monthly Federal Tax on Capital|
+
+Línea:      +              + INCOME_VARIABLES(0,Monthly Federal Tax on Capital)
+1 (16) 0 |INCOME_VARIABLES|
+2 (30) 0 |Monthly Federal Tax on Capital|
+
+Línea:      +                                   Monthly Federal Tax on Capital)
+1 (30) 0 |Monthly Federal Tax on Capital|
+
+Línea:      +                                   Monthly Federal Tax on Capital)
+1 (30) 0 |Monthly Federal Tax on Capital|
+
+Línea:      +                VARIABLE == Monthly Federal Tax on Capital)) CYCLE
+1 ( 9) 0 |VARIABLE |
+2 (30) 0 |Monthly Federal Tax on Capital|
+3 ( 5) 0 |CYCLE|
+
+Línea:      +                                   Monthly Federal Tax on Capital)
+1 (30) 0 |Monthly Federal Tax on Capital|
+
+Línea:      +             + INCOME_VARIABLES(MO,Monthly Federal Tax on Capital)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (30) 0 |Monthly Federal Tax on Capital|
+
+Línea:      +             + INCOME_VARIABLES(MO,Monthly Federal Tax on Capital)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (30) 0 |Monthly Federal Tax on Capital|
+
+Línea:      +          INCOME_VARIABLES(MO,Monthly Federal Tax on Capital) -
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (30) 0 |Monthly Federal Tax on Capital|
+
+Línea:      +          + INCOME_VARIABLES(MO,Monthly Federal Tax on Capital)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (30) 0 |Monthly Federal Tax on Capital|
+
+Línea:      +         + INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:          INCOME_VARIABLES(0,Monthly INCOME AFTER INTEREST) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 (29) 0 |Monthly INCOME AFTER INTEREST|
+
+Línea:          INCOME_VARIABLES(0,Monthly INCOME AFTER INTEREST) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 (29) 0 |Monthly INCOME AFTER INTEREST|
+
+Línea:             INCOME_VARIABLES(MO,Monthly INCOME AFTER INTEREST) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (29) 0 |Monthly INCOME AFTER INTEREST|
+
+Línea:             INCOME_VARIABLES(MO,Monthly INCOME AFTER INTEREST) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (29) 0 |Monthly INCOME AFTER INTEREST|
+
+Línea:      +             INCOME_VARIABLES(MO,Monthly INCOME AFTER INTEREST)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (29) 0 |Monthly INCOME AFTER INTEREST|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:          INCOME_VARIABLES(MO,Monthly INCOME BEFORE INTEREST) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (30) 0 |Monthly INCOME BEFORE INTEREST|
+
+Línea:          INCOME_VARIABLES(0,Monthly INCOME BEFORE INTEREST) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 (30) 0 |Monthly INCOME BEFORE INTEREST|
+
+Línea:             INCOME_VARIABLES(MO,Monthly INCOME BEFORE INTEREST) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (30) 0 |Monthly INCOME BEFORE INTEREST|
+
+Línea:             INCOME_VARIABLES(MO,Monthly INCOME BEFORE INTEREST) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (30) 0 |Monthly INCOME BEFORE INTEREST|
+
+Línea:      +          INCOME_VARIABLES(MO,Monthly INCOME BEFORE INTEREST)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (30) 0 |Monthly INCOME BEFORE INTEREST|
+
+Línea:      +         INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:          INCOME_VARIABLES(0,Monthly Income Tax Deferrals Dr) =
+1 (16) 0 |INCOME_VARIABLES|
+2 (31) 0 |Monthly Income Tax Deferrals Dr|
+
+Línea:           INCOME_VARIABLES(1
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:      +           INCOME_VARIABLES(0,Monthly Income Tax Deferrals Dr)/12.
+1 (16) 0 |INCOME_VARIABLES|
+2 (31) 0 |Monthly Income Tax Deferrals Dr|
+
+Línea:      +               INCOME_VARIABLES(0,Monthly Income Tax Deferrals Dr)
+1 (16) 0 |INCOME_VARIABLES|
+2 (31) 0 |Monthly Income Tax Deferrals Dr|
+
+Línea:                   INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Dr) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (31) 0 |Monthly Income Tax Deferrals Dr|
+
+Línea:                   INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Dr) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (31) 0 |Monthly Income Tax Deferrals Dr|
+
+Línea:      +          INCOME_VARIABLES(0,Monthly Income Tax Deferrals Dr))
+1 (16) 0 |INCOME_VARIABLES|
+2 (31) 0 |Monthly Income Tax Deferrals Dr|
+
+Línea:      +                                  Monthly Income Tax Deferrals Dr)
+1 (31) 0 |Monthly Income Tax Deferrals Dr|
+
+Línea:      +                                  Monthly Income Tax Deferrals Dr)
+1 (31) 0 |Monthly Income Tax Deferrals Dr|
+
+Línea:      +                                  Monthly Income Tax Deferrals Dr)
+1 (31) 0 |Monthly Income Tax Deferrals Dr|
+
+Línea:                IF(VARIABLE == Monthly Income Tax Deferrals Dr) THEN
+1 ( 2) 1 |IF|
+2 ( 9) 0 |VARIABLE |
+3 (31) 0 |Monthly Income Tax Deferrals Dr|
+4 ( 4) 0 |THEN|
+
+Línea:                   INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Dr) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (31) 0 |Monthly Income Tax Deferrals Dr|
+
+Línea:      +                                  Monthly Income Tax Deferrals Dr)
+1 (31) 0 |Monthly Income Tax Deferrals Dr|
+
+Línea:      +                                  Monthly Income Tax Deferrals Dr)
+1 (31) 0 |Monthly Income Tax Deferrals Dr|
+
+Línea:      +                                  Monthly Income Tax Deferrals Dr) ! 89
+1 (31) 0 |Monthly Income Tax Deferrals Dr|
+
+Línea:      +                                 Monthly Income Tax Deferrals Dr), ! 28
+1 (31) 0 |Monthly Income Tax Deferrals Dr|
+
+Línea:      +                                 Monthly Income Tax Deferrals Dr) 
+1 (31) 0 |Monthly Income Tax Deferrals Dr|
+
+Línea:      +          + INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Dr)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (31) 0 |Monthly Income Tax Deferrals Dr|
+
+Línea:      +         + INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea: c                  INCOME_VARIABLES(MO,Monthly LTD Amort Interest) =
+1 (35) 0 |c                  INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (26) 0 |Monthly LTD Amort Interest|
+
+Línea: c     +                   INCOME_VARIABLES(MO,Monthly LTD Amort Interest)
+1 ( 6) 0 |c     |
+2 (16) 0 |INCOME_VARIABLES|
+3 ( 2) 0 |MO|
+4 (26) 0 |Monthly LTD Amort Interest|
+
+Línea:                INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:                INCOME_VARIABLES(0,Monthly LTD Amort Interest) =
+1 (16) 0 |INCOME_VARIABLES|
+2 (26) 0 |Monthly LTD Amort Interest|
+
+Línea:      +              SUM(INCOME_VARIABLES(1
+1 ( 3) 0 |SUM|
+2 (16) 0 |INCOME_VARIABLES|
+
+Línea:             IF(VARIABLE == Monthly LTD Amort Interest) CYCLE 
+1 ( 2) 1 |IF|
+2 ( 9) 0 |VARIABLE |
+3 (26) 0 |Monthly LTD Amort Interest|
+4 ( 6) 0 |CYCLE |
+
+Línea:      +                 + INCOME_VARIABLES(MO,Monthly LTD Amort Interest)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (26) 0 |Monthly LTD Amort Interest|
+
+Línea:      +               - INCOME_VARIABLES(MO,Monthly LTD Amort Interest),  ! 84
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (26) 0 |Monthly LTD Amort Interest|
+
+Línea:      +               INCOME_VARIABLES(MO,Monthly LTD Amort Interest),    ! 89
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (26) 0 |Monthly LTD Amort Interest|
+
+Línea:      +               - INCOME_VARIABLES(MO,Monthly LTD Amort Interest),  ! 84
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (26) 0 |Monthly LTD Amort Interest|
+
+Línea:      +               INCOME_VARIABLES(MO,Monthly LTD Amort Interest),    ! 89
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (26) 0 |Monthly LTD Amort Interest|
+
+Línea:      +                   INCOME_VARIABLES(MO,Monthly LTD Amort Interest)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (26) 0 |Monthly LTD Amort Interest|
+
+Línea:      +               + INCOME_VARIABLES(MO,Monthly LTD Amort Interest)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (26) 0 |Monthly LTD Amort Interest|
+
+Línea:      +               + INCOME_VARIABLES(MO,Monthly LTD Amort Interest)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (26) 0 |Monthly LTD Amort Interest|
+
+Línea:      +                 - INCOME_VARIABLES(MO,Monthly LTD Amort Interest)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (26) 0 |Monthly LTD Amort Interest|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:      +               INCOME_VARIABLES(0,Monthly Lease BTL Amort Expense)
+1 (16) 0 |INCOME_VARIABLES|
+2 (31) 0 |Monthly Lease BTL Amort Expense|
+
+Línea:      +            + INCOME_VARIABLES(MO,Monthly Lease BTL Amort Expense)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (31) 0 |Monthly Lease BTL Amort Expense|
+
+Línea:      +                                  Monthly Lease BTL Amort Expense)
+1 (31) 0 |Monthly Lease BTL Amort Expense|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:      +              INCOME_VARIABLES(MO,Monthly Lease Interest Expense), ! 71
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (30) 0 |Monthly Lease Interest Expense|
+
+Línea:      +              INCOME_VARIABLES(MO,Monthly Lease Interest Expense), ! 71
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (30) 0 |Monthly Lease Interest Expense|
+
+Línea:      +           + INCOME_VARIABLES(MO,Monthly Lease Interest Expense)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (30) 0 |Monthly Lease Interest Expense|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:          INCOME_VARIABLES(0,Monthly Net Income) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 (18) 0 |Monthly Net Income|
+
+Línea:      +          INCOME_VARIABLES(0,Monthly Net Income) -
+1 (16) 0 |INCOME_VARIABLES|
+2 (18) 0 |Monthly Net Income|
+
+Línea:          INCOME_VARIABLES(0,Monthly Net Income) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 (18) 0 |Monthly Net Income|
+
+Línea:      +                 INCOME_VARIABLES(MO,Monthly Net Income)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (18) 0 |Monthly Net Income|
+
+Línea:             INCOME_VARIABLES(MO,Monthly Net Income) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (18) 0 |Monthly Net Income|
+
+Línea:      +          INCOME_VARIABLES(MO,Monthly Net Income) -
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (18) 0 |Monthly Net Income|
+
+Línea:      +                       INCOME_VARIABLES(MO,Monthly Net Income) ! 25
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (18) 0 |Monthly Net Income|
+
+Línea:      +               INCOME_VARIABLES(MO,Monthly Net Income),            ! 25
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (18) 0 |Monthly Net Income|
+
+Línea:      +               INCOME_VARIABLES(MO,Monthly Net Income),            ! 25
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (18) 0 |Monthly Net Income|
+
+Línea:             INCOME_VARIABLES(MO,Monthly Net Income) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (18) 0 |Monthly Net Income|
+
+Línea:      +          INCOME_VARIABLES(MO,Monthly Net Income)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (18) 0 |Monthly Net Income|
+
+Línea:             INCOME_VARIABLES(MO,Monthly Net Income) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (18) 0 |Monthly Net Income|
+
+Línea:      +               INCOME_VARIABLES(MO,Monthly Net Income)  
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (18) 0 |Monthly Net Income|
+
+Línea:      +               INCOME_VARIABLES(MO,Monthly Net Income)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (18) 0 |Monthly Net Income|
+
+Línea:      +            1. + INCOME_VARIABLES(MO,Monthly Net Income)/
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (18) 0 |Monthly Net Income|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:      +                  INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:             INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:      +                                     Monthly Nuclear Fuel Expense)
+1 (28) 0 |Monthly Nuclear Fuel Expense|
+
+Línea:      +            - INCOME_VARIABLES(MO,Monthly Nuclear Fuel Expense)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (28) 0 |Monthly Nuclear Fuel Expense|
+
+Línea:      +                 INCOME_VARIABLES(MO,Monthly Nuclear Fuel Expense)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (28) 0 |Monthly Nuclear Fuel Expense|
+
+Línea:      +           + INCOME_VARIABLES(MO,Monthly Nuclear Fuel Expense)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (28) 0 |Monthly Nuclear Fuel Expense|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:          INCOME_VARIABLES(0,Monthly Op Income) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 (17) 0 |Monthly Op Income|
+
+Línea:          INCOME_VARIABLES(0,Monthly Op Income) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 (17) 0 |Monthly Op Income|
+
+Línea:             INCOME_VARIABLES(MO,Monthly Op Income) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (17) 0 |Monthly Op Income|
+
+Línea:             INCOME_VARIABLES(MO,Monthly Op Income) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (17) 0 |Monthly Op Income|
+
+Línea:      +          INCOME_VARIABLES(MO,Monthly Op Income)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (17) 0 |Monthly Op Income|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:                INCOME_VARIABLES(MO,Monthly Other Debit Amort) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (25) 0 |Monthly Other Debit Amort|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:                INCOME_VARIABLES(MO,Monthly Other Debit Amort) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (25) 0 |Monthly Other Debit Amort|
+
+Línea:      +               INCOME_VARIABLES(MO,Monthly Other),
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (13) 0 |Monthly Other|
+
+Línea:      +           + INCOME_VARIABLES(MO,Monthly Other)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (13) 0 |Monthly Other|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:          INCOME_VARIABLES(0,Monthly RETAINED EARNINGS) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 (25) 0 |Monthly RETAINED EARNINGS|
+
+Línea:          INCOME_VARIABLES(0,Monthly RETAINED EARNINGS) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 (25) 0 |Monthly RETAINED EARNINGS|
+
+Línea:              INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (25) 0 |Monthly RETAINED EARNINGS|
+
+Línea:      +                + INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (25) 0 |Monthly RETAINED EARNINGS|
+
+Línea:      +                  + INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (25) 0 |Monthly RETAINED EARNINGS|
+
+Línea:             INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS) = 
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (25) 0 |Monthly RETAINED EARNINGS|
+
+Línea:             INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (25) 0 |Monthly RETAINED EARNINGS|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:             INCOME_VARIABLES(0,Monthly Shares Outstanding) =
+1 (16) 0 |INCOME_VARIABLES|
+2 (26) 0 |Monthly Shares Outstanding|
+
+Línea:                INCOME_VARIABLES(MO,Monthly Shares Outstanding) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (26) 0 |Monthly Shares Outstanding|
+
+Línea:      +                 INCOME_VARIABLES(MO-1,Monthly Shares Outstanding)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (26) 0 |Monthly Shares Outstanding|
+
+Línea:                   IF(VARIABLE == Monthly Shares Outstanding) CYCLE
+1 ( 2) 1 |IF|
+2 ( 9) 0 |VARIABLE |
+3 (26) 0 |Monthly Shares Outstanding|
+4 ( 5) 0 |CYCLE|
+
+Línea:                   IF(VARIABLE == Monthly Shares Outstanding) CYCLE
+1 ( 2) 1 |IF|
+2 ( 9) 0 |VARIABLE |
+3 (26) 0 |Monthly Shares Outstanding|
+4 ( 5) 0 |CYCLE|
+
+Línea:             INCOME_VARIABLES(0,Monthly Shares Outstanding) =
+1 (16) 0 |INCOME_VARIABLES|
+2 (26) 0 |Monthly Shares Outstanding|
+
+Línea:      +          SUM(INCOME_VARIABLES(1
+1 ( 3) 0 |SUM|
+2 (16) 0 |INCOME_VARIABLES|
+
+Línea:      +                  INCOME_VARIABLES(MO,Monthly Shares Outstanding))
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (26) 0 |Monthly Shares Outstanding|
+
+Línea:      +                  INCOME_VARIABLES(MO,Monthly Shares Outstanding))
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (26) 0 |Monthly Shares Outstanding|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:          INCOME_VARIABLES(0,Monthly State Tax on Capital) =
+1 (16) 0 |INCOME_VARIABLES|
+2 (28) 0 |Monthly State Tax on Capital|
+
+Línea:             INCOME_VARIABLES(MO,Monthly State Tax on Capital) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (28) 0 |Monthly State Tax on Capital|
+
+Línea:      +              INCOME_VARIABLES(0,Monthly State Tax on Capital)/12.
+1 (16) 0 |INCOME_VARIABLES|
+2 (28) 0 |Monthly State Tax on Capital|
+
+Línea: C Monthly State Tax on Capital
+1 (30) 0 |C Monthly State Tax on Capital|
+
+Línea:      +                INCOME_VARIABLES(0,Monthly State Tax on Capital),
+1 (16) 0 |INCOME_VARIABLES|
+2 (28) 0 |Monthly State Tax on Capital|
+
+Línea:      +              + INCOME_VARIABLES(0,Monthly State Tax on Capital)
+1 (16) 0 |INCOME_VARIABLES|
+2 (28) 0 |Monthly State Tax on Capital|
+
+Línea:      +               + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (28) 0 |Monthly State Tax on Capital|
+
+Línea:      +               + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (28) 0 |Monthly State Tax on Capital|
+
+Línea:      +               (VARIABLE == Monthly State Tax on Capital .OR.
+1 ( 9) 0 |VARIABLE |
+2 (29) 0 |Monthly State Tax on Capital |
+3 ( 2) 0 |OR|
+
+Línea:      +               + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (28) 0 |Monthly State Tax on Capital|
+
+Línea:      +             + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (28) 0 |Monthly State Tax on Capital|
+
+Línea:      +               INCOME_VARIABLES(MO,Monthly State Tax on Capital),  ! 88
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (28) 0 |Monthly State Tax on Capital|
+
+Línea:      +             + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (28) 0 |Monthly State Tax on Capital|
+
+Línea:      +               INCOME_VARIABLES(MO,Monthly State Tax on Capital),  ! 88
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (28) 0 |Monthly State Tax on Capital|
+
+Línea:      +          INCOME_VARIABLES(MO,Monthly State Tax on Capital) -
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (28) 0 |Monthly State Tax on Capital|
+
+Línea:      +              + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (28) 0 |Monthly State Tax on Capital|
+
+Línea:      +              + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (28) 0 |Monthly State Tax on Capital|
+
+Línea:      +          + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (28) 0 |Monthly State Tax on Capital|
+
+Línea:      +         + INCOME_VARIABLES(
+1 (16) 0 |INCOME_VARIABLES|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:                BALANCE_SHEET_VARIABLES(0,Monthly Strom Reserve) =
+1 (23) 0 |BALANCE_SHEET_VARIABLES|
+2 (21) 0 |Monthly Strom Reserve|
+
+Línea:                BALANCE_SHEET_VARIABLES(MO,Monthly Strom Reserve) =
+1 (23) 0 |BALANCE_SHEET_VARIABLES|
+2 ( 2) 0 |MO|
+3 (21) 0 |Monthly Strom Reserve|
+
+Línea:      +               BALANCE_SHEET_VARIABLES(MO-1,Monthly Strom Reserve)
+1 (23) 0 |BALANCE_SHEET_VARIABLES|
+2 ( 2) 0 |MO|
+3 (21) 0 |Monthly Strom Reserve|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:          INCOME_VARIABLES(0,Monthly Total Taxes Expense) =
+1 (16) 0 |INCOME_VARIABLES|
+2 (27) 0 |Monthly Total Taxes Expense|
+
+Línea:      +          INCOME_VARIABLES(0,Monthly Total Taxes Expense)
+1 (16) 0 |INCOME_VARIABLES|
+2 (27) 0 |Monthly Total Taxes Expense|
+
+Línea:             IF(INCOME_VARIABLES(0,Monthly Total Taxes Expense)/=0.) THEN
+1 ( 2) 1 |IF|
+2 (16) 0 |INCOME_VARIABLES|
+3 (27) 0 |Monthly Total Taxes Expense|
+4 ( 4) 0 |THEN|
+
+Línea:      +                   INCOME_VARIABLES(0,Monthly Total Taxes Expense)
+1 (16) 0 |INCOME_VARIABLES|
+2 (27) 0 |Monthly Total Taxes Expense|
+
+Línea:                INCOME_VARIABLES(MO,Monthly Total Taxes Expense) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Monthly Total Taxes Expense|
+
+Línea:      +                  INCOME_VARIABLES(MO,Monthly Total Taxes Expense)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Monthly Total Taxes Expense|
+
+Línea:      +                + INCOME_VARIABLES(MO,Monthly Total Taxes Expense)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Monthly Total Taxes Expense|
+
+Línea:          INCOME_VARIABLES(0,Monthly Total Taxes Expense) =
+1 (16) 0 |INCOME_VARIABLES|
+2 (27) 0 |Monthly Total Taxes Expense|
+
+Línea:      +                 - INCOME_VARIABLES(0,Monthly Total Taxes Expense)
+1 (16) 0 |INCOME_VARIABLES|
+2 (27) 0 |Monthly Total Taxes Expense|
+
+Línea:      +                - INCOME_VARIABLES(MO,Monthly Total Taxes Expense)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Monthly Total Taxes Expense|
+
+Línea:             INCOME_VARIABLES(0,Monthly Total Taxes Expense) =
+1 (16) 0 |INCOME_VARIABLES|
+2 (27) 0 |Monthly Total Taxes Expense|
+
+Línea:                INCOME_VARIABLES(MO,Monthly Total Taxes Expense) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Monthly Total Taxes Expense|
+
+Línea:             INCOME_VARIABLES(MO,Monthly Total Taxes Expense) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Monthly Total Taxes Expense|
+
+Línea:      +          - INCOME_VARIABLES(MO,Monthly Total Taxes Expense)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (27) 0 |Monthly Total Taxes Expense|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:      +             + INCOME_VARIABLES(MO,Monthly Unused Fed Tax Credits)
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (30) 0 |Monthly Unused Fed Tax Credits|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:                   CASH_VARIABLES(MO,Price of Issued Shares) =
+1 (14) 0 |CASH_VARIABLES|
+2 ( 2) 0 |MO|
+3 (22) 0 |Price of Issued Shares|
+
+Línea:                   CASH_VARIABLES(MO,Price of Issued Shares) = 0.
+1 (14) 0 |CASH_VARIABLES|
+2 ( 2) 0 |MO|
+3 (22) 0 |Price of Issued Shares|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:                   INCOME_VARIABLES(MO,Quarterly Earnings per Share) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (28) 0 |Quarterly Earnings per Share|
+
+Línea:                      INCOME_VARIABLES(MO,Quarterly Earnings per Share) =
+1 (16) 0 |INCOME_VARIABLES|
+2 ( 2) 0 |MO|
+3 (28) 0 |Quarterly Earnings per Share|
+
+Línea:      +                         Quarterly Earnings per Share) = NOT_AVAIL
+1 (28) 0 |Quarterly Earnings per Share|
+2 ( 9) 0 |NOT_AVAIL|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+
+Línea:       integer(kind=2),parameter
+1 ( 7) 0 |integer|
+2 ( 4) 0 |kind|
+3 ( 9) 0 |parameter|
+

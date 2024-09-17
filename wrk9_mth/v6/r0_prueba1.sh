@@ -1,5 +1,5 @@
 
-
+set -x
 
 # recorre todos los archivos
 # busca variables vcb o vsb segun indicado
@@ -14,5 +14,7 @@
 # lr1_todos_sin_mth  todos los files, menos los que tienen include
 
 
-./tfor -v -opciones=d5 -exec=6 -opt=1 -inp=lr1_solo_mth  -in2=vcb.txt -in3=vsb.txt -dato=repo4 -out=m1 -aux=m2 -log=m3 
+./tfor -v -opciones=d5 -exec=6 -opt=1 -inp=lr1_solo_mth  -in2=vcb2.txt -in3=vsb.txt -dato=repo4 -ou4=m0 -out=m1 -aux=m2 -log=m3 -ou5=check1.sh -ou6=check2.sh
 
+
+cat m0 | awk '{ print $1 }' | sort -u > m5

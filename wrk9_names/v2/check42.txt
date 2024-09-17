@@ -1,0 +1,6 @@
+/home/123-D56SW/wrk/Midas/ABBICAP/GAS_objt.for
+/home/123-D56SW/wrk/Midas/ABBICAP/coal_obj.for
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmexprevcash.f90
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for
+/home/123-D56SW/wrk/Midas/ABBICAP/tf_objt.for

@@ -132,7 +132,7 @@
 |TotalFuelDerivativeExpenses|
 |NetFuelDerivativeMargin|
 |tot_pwr_fl_deriv_mgn|
-|ICAP_Revenues|
+|ICAP_Revs_mth|
 |MonthlyGasWholesaleRevenues|
 |mty_wvpa_acrd_mbr_rvnues|
 |WVPA_NonMember_Power_Sales|
