@@ -1,0 +1,161 @@
+|Customer Revenues|
+|Competitive Sales|
+|Utility Sales|
+|Prior Years Method Adjustment|
+|Prior level Method Adjustment|
+|Operating Method Adjustment|
+|Total Base Revenues|
+|TOTAL OPERATING REVENUES|
+|Associated Company Interest|
+|PJM MISO Retail Transmission|
+|PJM MISO FES Transmission|
+|Associated Company|
+|PJM MISO Revenues|
+|Forfeited Discounts Rents|
+|Miscellaneous Service Revenues|
+|Retail Generation|
+|Wholesale Generation|
+|Energy Efficiency|
+|Net Interco Sale Leaseback|
+|SLB Wholesale Associated Co|
+|PJM Contra|
+|Interest Dividend Income|
+|Total Expenses B4 Taxes|
+|Exp Collection in Adj Clause|
+|Purchased Capacity to Level RM|
+|Preferred Dividends|
+|Decommissioning Fund|
+|Decommissioning Liability Chan|
+|Post Retirement Medical|
+|Retiree Medical Payments|
+|OUC Bond Sinking Fund|
+|OUC Long Term Investment|
+|OUC Debt Service Reserve|
+|OUC Customer Deposit Fund|
+|OUC Construction Trust Fund|
+|OUC Renewal Replacement Fund|
+|Dividend Subsidiary|
+|Net Income Subsidiary|
+|Investment in Subsidiary|
+|Other Investments|
+|Capitialized Lease Additions|
+|Cash for Assets|
+|Change in LTInvestments|
+|OUC Liability Reduction Fund|
+|OUC Self Insurance Fund|
+|OUC Base Stabilization Fund|
+|OUC Fuel Stabilization Fund|
+|OUC Water Stabilization Fund|
+|OUC Customer Retention Fund|
+|OUC Other|
+|OUC Withdraw Liab Reduct Fd|
+|Assets NEC Adjustment|
+|Rate Base Adjustment|
+|Deferred Tax Adjustment|
+|Plant in Service Adjustment|
+|CD Balance as PC of Revenues|
+|CD Addendum|
+|CIAC Cash Contributions|
+|CIAC Amortization Rate|
+|CIAC Addendum to Amortization|
+|Assets NEC Addendum|
+|Liabilities NEC Addendum|
+|Fuel Inventory Change|
+|Materials Supplies|
+|Gas Storage|
+|Rate Receivable Accounts|
+|Addendum Receivable Accounts|
+|Rate Payable Accounts|
+|Addendum Payable Accounts|
+|Rate Assets NEC|
+|Rate Liabilities NEC|
+|Fuel Inventory Change Out|
+|Materials Supplies Out|
+|Gas Storage Out|
+|Earnings Decommissioning Fund|
+|Earnings Post Retirement Fund|
+|Earnings ST Investments|
+|Earnings LT Investments|
+|Decommissioning Rate|
+|Post Retirement Rate|
+|STI Rate|
+|LTI Rate|
+|Customer Deposits Rate|
+|OCI Post Retirement Rate|
+|OCI Decommissioning Rate|
+|Net Removal|
+|Cash Received|
+|Gross Book Value|
+|Cumulative Depreciation|
+|Sale Deferred Taxes Adjustment|
+|Sale ATL Amortization|
+|Cost of Removal|
+|Salvage Value|
+|Addedum to Book Gain Loss|
+|Equity Risk Adjustment|
+|Economic Assets Adjustment|
+|Operating Profits Adjustment|
+|Capitial Recovery EXCLUDED OPAT|
+|NucDecom Discount Rate|
+|NucDecom Liability Addendum|
+|OCI Adjustment|
+|FASB87 Intangible Asset Adj|
+|FABS87 Pension Liab Adj|
+|OCI Deferred Tax Adj|
+|ARO Discount Rate|
+|ARO Accretion Amount|
+|ARO Cash Payment|
+|ARO Cash to Bal Sheet Trust|
+|Non Cash Pension|
+|Revenue Receipts|
+|Expense Payments|
+|Gross Plant Value|
+|Cumulated Plant Depreciation|
+|Balance Deferred Taxes|
+|Deferred Debit Adjustment|
+|ATL Debit Amortization|
+|BTL Debt Amortization|
+|Annual Deferred Taxes|
+|Deferred ITCs Balance|
+|Net Nuclear Fuel|
+|Retained Earnings|
+|Extra Ordinary Expense|
+|LT Liabilities Balance|
+|Balance Deferred Taxes Dr|
+|CWIP Balance|
+|Paid in Capital|
+|ARO Net Assets|
+|ARO Liabilities|
+|Other Deferred Credits|
+|Regulatory Deferred Credits|
+|Reaquired Debt Gain|
+|Actual Deferred Taxes Cr|
+|Actual Fed Income Taxes|
+|Actual State Income Taxes|
+|Actual Deferred Taxes Dr|
+|Actual ATL Fed Income Taxes|
+|Actual ATL State Income Taxes|
+|Actual BTL Fed Income Taxes|
+|Actual BTL State Income Taxes|
+|STD Minimum Balance|
+|Cash Minimum Balance|
+|OUC Fuel Inventory|
+|OUC Prepayments|
+|OUC Materials Inventory|
+|Dividend 70|
+|Interest Payments|
+|Interest Earnings|
+|Cash Interest Payments|
+|Cash Interest Earnings|
+|Cash Dividend Earnings|
+|Intra Company Interest Earnings|
+|Minibond Interest Payment|
+|Minibond Principal Payment|
+|Minibond Interest Deposit|
+|Minibond Principal Deposit|
+|Annualized Interest|
+|Minibond Annualized Interest|
+|BAAN Additions|
+|BAAN Reductions|
+|BAAN Interest Payments|
+|BAAN Annualized Interest|

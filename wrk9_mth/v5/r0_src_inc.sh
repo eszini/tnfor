@@ -9,11 +9,10 @@ archivo_todos_sin_mth="lr1_todos_sin_mth"
 # crear el archivo lr1_solo_mth
 grep -i include ~/wrk/Midas/ABBICAP/*.* | grep -i mthnmcom | awk -F/ '{print $NF}' | awk -F: '{print $1}' | sort -u > lr1_solo_mth
 
-sed -i 's/^/repo1\//' lr1_solo_mth
 
 
 # saco mthnmcom de todos
-cat "$archivo_lr1" | grep -v mthnmcom  > "$archivo_todos"
+# cat "$archivo_lr1" | grep -v mthnmcom  > "$archivo_todos"
 
 [ -d repo4 ] && rm -rf repo4
 mkdir repo4
@@ -36,4 +35,10 @@ while IFS= read -r line; do
         echo "$line" >> "$archivo_todos_sin_mth"
     fi
 done < "$archivo_todos"
+
+# agrego repo... a lr1_solo_mth
+sed -i 's/^/repo1\//' lr1_solo_mth
+
+echo "repo1/mthnmcom.mon" >> lr1_solo_mth
+
 

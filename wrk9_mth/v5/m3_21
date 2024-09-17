@@ -1,20 +1,6 @@
-midasmod.for                   (1) 02939 |     +                           R_INCOME_VARS(:,Monthly Property Taxes) |
-midasmod.for                   (1) 02945 |            R_INCOME_VARS(MO,IPL Monthy OandM Expenses) =|
-midasmod.for                   (1) 02956 |         R_INCOME_VARS(:,IPL Total Operating Expenses) = |
-midasmod.for                   (1) 02958 |     +            + R_INCOME_VARS(:,IPL Monthy OandM Expenses) |
-midasmod.for                   (1) 02960 |     +            + R_INCOME_VARS(:,Monthly Operating Revenue Tax)|
-midasmod.for                   (1) 02964 |     +            + R_INCOME_VARS(:,Monthly ITC Amortization)|
-midasmod.for                   (1) 02965 |         R_INCOME_VARS(:,IPL Operating Income) = |
-midasmod.for                   (1) 02967 |     +                   - R_INCOME_VARS(:,IPL Total Operating Expenses)|
-midasmod.for                   (1) 03047 |         R_INCOME_VARS(:,IPL Monthy OandM Expenses) =|
-midasmod.for                   (1) 03048 |     +               R_INCOME_VARS(:,IPL Monthy OandM Expenses)|
-midasmod.for                   (1) 03141 |                     INCOME_ITEMS(MO,YR,IPL Monthy OandM Expenses) = |
-midasmod.for                   (1) 03148 |                     INCOME_ITEMS(MO,YR,Monthly Operating Revenue Tax) = |
-midasmod.for                   (1) 03162 |                     INCOME_ITEMS(MO,YR,Monthly ITC Amortization) = |
-midasmod.for                   (1) 03164 |                     INCOME_ITEMS(MO,YR,IPL Total Operating Expenses) = |
-midasmod.for                   (1) 03166 |                     INCOME_ITEMS(MO,YR,IPL Operating Income) = |
-midasmod.for                   (1) 03209 |     +                    INCOME_ITEMS(1:12,:,IPL Monthy OandM Expenses)|
-midasmod.for                   (1) 03215 |     +                INCOME_ITEMS(1:12,:,Monthly Operating Revenue Tax)  |
-midasmod.for                   (1) 03225 |     +                     INCOME_ITEMS(1:12,:,Monthly ITC Amortization)  |
-midasmod.for                   (1) 03227 |     +                 INCOME_ITEMS(1:12,:,IPL Total Operating Expenses)  |
-midasmod.for                   (1) 03229 |     +                         INCOME_ITEMS(1:12,:,IPL Operating Income)  |
+midasmod.for                  ,|IPL Monthy OandM Expenses|
+midasmod.for                  ,|IPL Operating Income|
+midasmod.for                  ,|IPL Total Operating Expenses|
+midasmod.for                  ,|Monthly ITC Amortization|
+midasmod.for                  ,|Monthly Operating Revenue Tax|
+midasmod.for                  ,|Monthly Property Taxes|

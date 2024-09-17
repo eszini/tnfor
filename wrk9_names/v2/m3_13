@@ -1,0 +1,11 @@
+x     1 coal_obj.for
+      2 msgmmfa.f90
+      2 servicac.for
+      5 GAS_objt.for
+      5 msgmmexprevcash.f90
+     25 tf_objt.for
+     35 msgmmsb6.for
+     65 msgmmadm.f90
+     86 msgmmout.for
+     91 msgmmdbt.for
+    161 namescom.mon

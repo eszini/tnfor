@@ -202,7 +202,7 @@
       integer(kind=2),parameter:: TotalFuelDerivativeExpenses=221
       integer(kind=2),parameter:: NetFuelDerivativeMargin=222
       integer(kind=2),parameter:: tot_pwr_fl_deriv_mgn=223
-      integer(kind=2),parameter:: ICAP_Revenues=199
+      integer(kind=2),parameter:: ICAP_Revs_mth=199
       integer(kind=2),parameter:: Monthly EBITAD=201
       integer(kind=2),parameter:: MonthlyGasWholesaleRevenues=210
       integer(kind=2),parameter:: Monthly EBIT=202

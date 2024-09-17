@@ -1,27 +1,4 @@
-|IPL Monthy OandM Expenses|
-|IPL Total Operating Expenses|
-|IPL Operating Income|
-|WVPA Member Rates with SDI|
-|WVPA Member Rates without SDI|
-|WVPA Member Energy Sales|
-|WVPA SDI Energy Sales|
-|WVPA Member Margin|
-|WVPA Non Member Margin|
-|IMPA Depreciation Add Back|
-|BTL Monthly Total Other Income|
-|BTL Monthly NoTax Other Income|
-|BTL Monthly Interest Income|
-|BTL Monthly STInvestmet Income|
-|BTL Monthly Expenses|
-|BTL Monthly Income Taxes|
-|Cash Prior Years Method Adj|
-|Cash Prior level Method Adj|
-|Cash TOTAL OPERATING RECEIPTS|
-|Cash TOTAL EXPENSE PAYMENTS|
-|Cash ATL Lease Cash|
-|Cash From Trust Fund Earnings|
-|Cash Interest on Notes Payable|
-|Quarterly Earnings per Share|
+|Monthly Other|
 |Monthly Nuclear Fuel Expense|
 |Monthly Lease Interest Expense|
 |Monthly Lease BTL Amort Expense|
@@ -34,8 +11,14 @@
 |Monthly State Tax on Capital|
 |Monthly Federal Tax on Capital|
 |Monthly Income Tax Deferrals Dr|
+|BTL Monthly Total Other Income|
+|BTL Monthly NoTax Other Income|
+|BTL Monthly Interest Income|
 |Monthly Investment Earnings|
 |Monthly Dividend 70 Earnings|
+|BTL Monthly STInvestmet Income|
+|BTL Monthly Expenses|
+|BTL Monthly Income Taxes|
 |Monthly LTD Total Interest|
 |Monthly LTD Cash Interest|
 |Monthly LTD Amort Interest|
@@ -54,14 +37,31 @@
 |Monthly RETAINED EARNINGS|
 |Monthly Shares Outstanding|
 |Monthly Earnings per Share|
+|Quarterly Earnings per Share|
 |Monthly LTD Booked Interest|
 |Monthly Booked PS Dividends|
 |Monthly Issue Expense Amorts|
 |Monthly PS Amort Dividends|
 |Monthly LTD Premium Amort|
 |Monthly PS Premium Amort|
-|Monthly Strom Reserve|
 |Monthly EBITAD|
 |Monthly EBIT|
-|Monthly Other|
+|IPL Monthy OandM Expenses|
+|IPL Total Operating Expenses|
+|IPL Operating Income|
+|WVPA Member Rates with SDI|
+|WVPA Member Rates without SDI|
+|WVPA Member Energy Sales|
+|WVPA SDI Energy Sales|
+|WVPA Member Margin|
+|WVPA Non Member Margin|
+|IMPA Depreciation Add Back|
+|Cash Prior Years Method Adj|
+|Cash Prior level Method Adj|
+|Cash TOTAL OPERATING RECEIPTS|
+|Cash TOTAL EXPENSE PAYMENTS|
+|Cash ATL Lease Cash|
+|Cash From Trust Fund Earnings|
+|Cash Interest on Notes Payable|
 |Price of Issued Shares|
+|Monthly Strom Reserve|

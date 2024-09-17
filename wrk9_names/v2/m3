@@ -1,0 +1,36 @@
+GAS_objt.for                   (1) 00296 |            REVENUE_CLASS_CUST = 'Customer Revenues'|
+GAS_objt.for                       00296 |            REVENUE_CLASS_CUST = 'Customer_Revenues'|
+
+coal_obj.for                   (1) 00292 |            REVENUE_CLASS_CUST = 'Customer Revenues'|
+coal_obj.for                       00292 |            REVENUE_CLASS_CUST = 'Customer_Revenues'|
+
+msgmmexprevcash.f90            (1) 04680 |               'Customer Revenues','Customer Revenue')|
+msgmmexprevcash.f90                04680 |               'Customer_Revenues','Customer Revenue')|
+
+tf_objt.for                    (1) 00298 |            REVENUE_CLASS_CUST = 'Customer Revenues'|
+tf_objt.for                        00298 |            REVENUE_CLASS_CUST = 'Customer_Revenues'|
+
+tf_objt.for                    (1) 06756 |     +                                             Customer Revenues,1)|
+tf_objt.for                        06756 |     +                                             Customer_Revenues,1)|
+
+tf_objt.for                    (1) 06959 |                  MONTH_VARS(MO,Customer Revenues) =|
+tf_objt.for                        06959 |                  MONTH_VARS(MO,Customer_Revenues) =|
+
+tf_objt.for                    (1) 06960 |     +               MONTH_VARS(MO,Customer Revenues) + .000001 *|
+tf_objt.for                        06960 |     +               MONTH_VARS(MO,Customer_Revenues) + .000001 *|
+
+tf_objt.for                    (1) 06996 |                     MONTH_VARS(MO,Customer Revenues) =|
+tf_objt.for                        06996 |                     MONTH_VARS(MO,Customer_Revenues) =|
+
+tf_objt.for                    (1) 06997 |     +                MONTH_VARS(MO,Customer Revenues) + .000001 *|
+tf_objt.for                        06997 |     +                MONTH_VARS(MO,Customer_Revenues) + .000001 *|
+
+tf_objt.for                    (1) 06999 |     +                                             Customer Revenues,1)                |
+tf_objt.for                        06999 |     +                                             Customer_Revenues,1)                |
+
+tf_objt.for                    (1) 07089 |     +                                             Customer Revenues,1)                |
+tf_objt.for                        07089 |     +                                             Customer_Revenues,1)                |
+
+namescom.mon                   (1) 00040 |      integer(kind=2),parameter:: Customer Revenues=10|
+namescom.mon                       00040 |      integer(kind=2),parameter:: Customer_Revenues=10|
+
