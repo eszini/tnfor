@@ -1,0 +1,49 @@
+|Monthly Lease BTL Amort Expense|
+|Monthly State Tax on Capital|
+|Monthly Federal Tax on Capital|
+|Monthly Income Tax Deferrals Dr|
+|Monthly Unused Fed Tax Credits|
+|BTL Monthly NoTax Other Income|
+|BTL Monthly STInvestmet Income|
+|BTL Monthly Income Taxes|
+|BTL Monthly Expenses|
+|Cash Prior Years Method Adj|
+|Cash Prior level Method Adj|
+|Cash From Trust Fund Earnings|
+|Price of Issued Shares|
+|Monthly Nuclear Fuel Expense|
+|Monthly Lease Interest Expense|
+|Monthly FASB 143 Amort|
+|Monthly Other Debit Amort|
+|Monthly LTD Cash Interest|
+|Monthly LTD Amort Interest|
+|Monthly Regular PS Dividends|
+|Monthly Total Taxes Expense|
+|Monthly INCOME BEFORE INTEREST|
+|Monthly Earnings 2 Common|
+|Monthly Earnings per Share|
+|Monthly Booked PS Dividends|
+|IMPA Depreciation Add Back|
+|Cash TOTAL OPERATING RECEIPTS|
+|Cash TOTAL EXPENSE PAYMENTS|
+|Cash ATL Lease Cash|
+|Monthly CIAC Amort|
+|Monthly Extraordinary Items|
+|Monthly MIPS Dividends|
+|Monthly Op Income|
+|Monthly Shares Outstanding|
+|Monthly Strom Reserve|
+#|Monthly EBIT|
+#|Monthly EBITAD|
+#|Monthly INCOME AFTER INTEREST|
+#|Monthly Common Dividends|
+#|Monthly RETAINED EARNINGS|
+#|Monthly Net Income|
+#|Monthly Other|
+#|Quarterly Earnings per Share|
+#|WVPA Member Rates with SDI|
+#|WVPA Member Rates without SDI|
+#|WVPA Member Energy Sales|
+#|WVPA SDI Energy Sales|
+#|WVPA Non Member Margin|
+#|WVPA Member Margin|
