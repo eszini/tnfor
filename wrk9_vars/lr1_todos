@@ -137,7 +137,6 @@ repo1/ft_interfaces.f90
 repo1/fuel_types.f90
 repo1/fuelcat.f90
 repo1/fuelused_decs.f90
-repo1/global_variables_mod.f90
 repo1/globecom.f90
 repo1/group_prod.f90
 repo1/grx_captrade.f90

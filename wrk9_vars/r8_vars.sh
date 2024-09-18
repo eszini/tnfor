@@ -25,7 +25,7 @@ create_dir_if_not_exists "repo4"
 # ./tfor -v -opciones=d5 -exec=6 -opt=1 -inp=lr1_solo_mth  -in2=vcb2.txt -in3=vsb.txt -dato=repo4 -ou4=m0 -out=m1 -aux=m2 -log=m3 -ou5=check1.sh -ou6=check2.sh
 
 
-./tfor -v -opciones=d5 -exec=8 -opt=1 -inp=lr1 -dato=repo4 
+./tfor -v -opciones=d5 -exec=8 -opt=1 -inp=lr1 -out=prueba.txt  -dato=repo4 
 
 
 

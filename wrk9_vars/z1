@@ -1,0 +1,64 @@
+
+void rutina_x(s, n, vn, vp, k, dict, dict_size) 
+char	*s;
+int	*n;
+int	*vn;
+char	**vp;
+int	*k;
+DictionaryEntry *dict;
+int	dict_size;
+{
+
+    int start;
+    int len;
+    int i;
+
+    // Inicializar el contador de variables
+    *n = 0; 
+    len = strlen(s);
+    i = 0;
+
+    while (i < len) 
+    {
+        // Saltar espacios en blanco
+        while (i < len && isspace(s[i])) 
+        {
+            i++;
+        }
+
+        // Si encontramos una letra, es el inicio de una variable
+        if (i < len && isalpha(s[i])) 
+        {
+            // Guardar el puntero al inicio de la variable
+            vp[*n] = &s[i]; 
+            start = i;
+
+            // Avanzar hasta el final de la variable
+            while (i < len && (isalnum(s[i]) || s[i] == ' ' || s[i] == '_')) 
+            {
+                i++;
+            }
+
+            // Guardar la longitud de la variable
+            vn[*n] = i - start; 
+
+            // Verificar si la variable está en el diccionario
+            k[*n] = 0; 
+            for (int j = 0; j < dict_size; j++) 
+            {
+                if (strncmp(vp[*n], dict[j].word, vn[*n]) == 0 && strlen(dict[j].word) == vn[*n]) 
+                {
+                    k[*n] = dict[j].value;
+                    break;
+                }
+            }
+
+            (*n)++; 
+        } 
+        else 
+        {
+            i++;
+        }
+    }
+}
+
