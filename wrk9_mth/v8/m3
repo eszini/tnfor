@@ -1,0 +1,726 @@
+msgmmout.for                   (1) 00887 |     +                  INCOME_VARIABLES(:,Monthly Nuclear Fuel Expense)|
+msgmmout.for                       00887 |     +                  INCOME_VARIABLES(:,Monthly_Nuclear_Fuel_Expense)|
+
+msgmmout.for                   (1) 00888 |            INCOME_VARIABLES(:,Monthly Nuclear Fuel Expense) = |
+msgmmout.for                       00888 |            INCOME_VARIABLES(:,Monthly_Nuclear_Fuel_Expense) = |
+
+msgmmout.for                   (1) 00937 |     +                                     Monthly Nuclear Fuel Expense)|
+msgmmout.for                       00937 |     +                                     Monthly_Nuclear_Fuel_Expense)|
+
+msgmmout.for                   (1) 01081 |               INCOME_VARIABLES(:,Monthly LTD Amort Interest) =|
+msgmmout.for                       01081 |               INCOME_VARIABLES(:,Monthly_LTD_Amort_Interest) =|
+
+msgmmout.for                   (1) 01094 |               INCOME_VARIABLES(0,Monthly LTD Amort Interest) =|
+msgmmout.for                       01094 |               INCOME_VARIABLES(0,Monthly_LTD_Amort_Interest) =|
+
+msgmmout.for                   (1) 01095 |     +              SUM(INCOME_VARIABLES(1:,Monthly LTD Amort Interest))|
+msgmmout.for                       01095 |     +              SUM(INCOME_VARIABLES(1:,Monthly_LTD_Amort_Interest))|
+
+msgmmout.for                   (1) 01120 |            INCOME_VARIABLES(0,Monthly Shares Outstanding) =|
+msgmmout.for                       01120 |            INCOME_VARIABLES(0,Monthly_Shares_Outstanding) =|
+
+msgmmout.for                   (1) 01123 |               INCOME_VARIABLES(MO,Monthly Shares Outstanding) =|
+msgmmout.for                       01123 |               INCOME_VARIABLES(MO,Monthly_Shares_Outstanding) =|
+
+msgmmout.for                   (1) 01124 |     +                 INCOME_VARIABLES(MO-1,Monthly Shares Outstanding)|
+msgmmout.for                       01124 |     +                 INCOME_VARIABLES(MO-1,Monthly_Shares_Outstanding)|
+
+msgmmout.for                   (1) 01173 |         INCOME_VARIABLES(:,Monthly FASB 143 Amort) =|
+msgmmout.for                       01173 |         INCOME_VARIABLES(:,Monthly_FASB_143_Amort) =|
+
+msgmmout.for                   (1) 01216 |            IF(VARIABLE == Monthly LTD Amort Interest) CYCLE |
+msgmmout.for                       01216 |            IF(VARIABLE == Monthly_LTD_Amort_Interest) CYCLE |
+
+msgmmout.for                   (1) 01227 |            ELSEIF(VARIABLE == Monthly CIAC Amort) THEN|
+msgmmout.for                       01227 |            ELSEIF(VARIABLE == Monthly_CIAC_Amort) THEN|
+
+msgmmout.for                   (1) 01280 |            CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS) =|
+msgmmout.for                       01280 |            CASH_VARIABLES(MO,Cash_TOTAL_OPERATING_RECEIPTS) =|
+
+msgmmout.for                   (1) 01282 |            CASH_VARIABLES(MO,Cash TOTAL EXPENSE PAYMENTS) =|
+msgmmout.for                       01282 |            CASH_VARIABLES(MO,Cash_TOTAL_EXPENSE_PAYMENTS) =|
+
+msgmmout.for                   (1) 01299 |     +           + INCOME_VARIABLES(0,Monthly FASB 143 Amort)|
+msgmmout.for                       01299 |     +           + INCOME_VARIABLES(0,Monthly_FASB_143_Amort)|
+
+msgmmout.for                   (1) 01303 |     +           - INCOME_VARIABLES(0,Monthly CIAC Amort)|
+msgmmout.for                       01303 |     +           - INCOME_VARIABLES(0,Monthly_CIAC_Amort)|
+
+msgmmout.for                   (1) 01309 |     +               INCOME_VARIABLES(0,Monthly Lease BTL Amort Expense)|
+msgmmout.for                       01309 |     +               INCOME_VARIABLES(0,Monthly_Lease_BTL_Amort_Expense)|
+
+msgmmout.for                   (1) 01328 |     +           + INCOME_VARIABLES(MO,Monthly FASB 143 Amort)|
+msgmmout.for                       01328 |     +           + INCOME_VARIABLES(MO,Monthly_FASB_143_Amort)|
+
+msgmmout.for                   (1) 01332 |     +           - INCOME_VARIABLES(MO,Monthly CIAC Amort)|
+msgmmout.for                       01332 |     +           - INCOME_VARIABLES(MO,Monthly_CIAC_Amort)|
+
+msgmmout.for                   (1) 01336 |     +            + INCOME_VARIABLES(MO,Monthly Lease BTL Amort Expense)|
+msgmmout.for                       01336 |     +            + INCOME_VARIABLES(MO,Monthly_Lease_BTL_Amort_Expense)|
+
+msgmmout.for                   (1) 01392 |         UNALLOCATED_AMOUNT(BTL Monthly Expenses) =|
+msgmmout.for                       01392 |         UNALLOCATED_AMOUNT(BTL_Monthly_Expenses) =|
+
+msgmmout.for                   (1) 01394 |     +                     INCOME_VARIABLES(0,BTL Monthly Expenses))|
+msgmmout.for                       01394 |     +                     INCOME_VARIABLES(0,BTL_Monthly_Expenses))|
+
+msgmmout.for                   (1) 01410 |         INCOME_VARIABLES(:,BTL Monthly STInvestmet Income) =|
+msgmmout.for                       01410 |         INCOME_VARIABLES(:,BTL_Monthly_STInvestmet_Income) =|
+
+msgmmout.for                   (1) 01415 |     +              INCOME_VARIABLES(:,BTL Monthly STInvestmet Income)|
+msgmmout.for                       01415 |     +              INCOME_VARIABLES(:,BTL_Monthly_STInvestmet_Income)|
+
+msgmmout.for                   (1) 01476 |         INCOME_VARIABLES(0,Monthly State Tax on Capital) =|
+msgmmout.for                       01476 |         INCOME_VARIABLES(0,Monthly_State_Tax_on_Capital) =|
+
+msgmmout.for                   (1) 01480 |         INCOME_VARIABLES(0,Monthly Federal Tax on Capital) =|
+msgmmout.for                       01480 |         INCOME_VARIABLES(0,Monthly_Federal_Tax_on_Capital) =|
+
+msgmmout.for                   (1) 01482 |         INCOME_VARIABLES(0,Monthly Income Tax Deferrals Dr) =|
+msgmmout.for                       01482 |         INCOME_VARIABLES(0,Monthly_Income_Tax_Deferrals_Dr) =|
+
+msgmmout.for                   (1) 01485 |         INCOME_VARIABLES(0,BTL Monthly Income Taxes) = ANNUAL_VARS(36)|
+msgmmout.for                       01485 |         INCOME_VARIABLES(0,BTL_Monthly_Income_Taxes) = ANNUAL_VARS(36)|
+
+msgmmout.for                   (1) 01494 |         INCOME_VARIABLES(0,Monthly Extraordinary Items) =|
+msgmmout.for                       01494 |         INCOME_VARIABLES(0,Monthly_Extraordinary_Items) =|
+
+msgmmout.for                   (1) 01680 |         INCOME_VARIABLES(0,Monthly Total Taxes Expense) =|
+msgmmout.for                       01680 |         INCOME_VARIABLES(0,Monthly_Total_Taxes_Expense) =|
+
+msgmmout.for                   (1) 01721 |         INCOME_VARIABLES(0,Monthly Op Income) = |
+msgmmout.for                       01721 |         INCOME_VARIABLES(0,Monthly_Op_Income) = |
+
+msgmmout.for                   (1) 01723 |     +          INCOME_VARIABLES(0,Monthly Total Taxes Expense)|
+msgmmout.for                       01723 |     +          INCOME_VARIABLES(0,Monthly_Total_Taxes_Expense)|
+
+msgmmout.for                   (1) 01725 |         INCOME_VARIABLES(MO,Monthly INCOME BEFORE INTEREST) = |
+msgmmout.for                       01725 |         INCOME_VARIABLES(MO,Monthly_INCOME_BEFORE_INTEREST) = |
+
+msgmmout.for                   (1) 01804 |            INCOME_VARIABLES(0,Monthly Booked PS Dividends) =|
+msgmmout.for                       01804 |            INCOME_VARIABLES(0,Monthly_Booked_PS_Dividends) =|
+
+msgmmout.for                   (1) 01814 |            INCOME_VARIABLES(0,Monthly Booked PS Dividends) =|
+msgmmout.for                       01814 |            INCOME_VARIABLES(0,Monthly_Booked_PS_Dividends) =|
+
+msgmmout.for                   (1) 01833 |         INCOME_VARIABLES(0,Monthly Earnings 2 Common) = |
+msgmmout.for                       01833 |         INCOME_VARIABLES(0,Monthly_Earnings_2_Common) = |
+
+msgmmout.for                   (1) 01837 |     +          INCOME_VARIABLES(0,Monthly Earnings 2 Common) -|
+msgmmout.for                       01837 |     +          INCOME_VARIABLES(0,Monthly_Earnings_2_Common) -|
+
+msgmmout.for                   (1) 01850 |          INCOME_VARIABLES(1:,Monthly Income Tax Deferrals Dr) =|
+msgmmout.for                       01850 |          INCOME_VARIABLES(1:,Monthly_Income_Tax_Deferrals_Dr) =|
+
+msgmmout.for                   (1) 01851 |     +           INCOME_VARIABLES(0,Monthly Income Tax Deferrals Dr)/12.|
+msgmmout.for                       01851 |     +           INCOME_VARIABLES(0,Monthly_Income_Tax_Deferrals_Dr)/12.|
+
+msgmmout.for                   (1) 01869 |     +               INCOME_VARIABLES(0,Monthly Income Tax Deferrals Dr)|
+msgmmout.for                       01869 |     +               INCOME_VARIABLES(0,Monthly_Income_Tax_Deferrals_Dr)|
+
+msgmmout.for                   (1) 01887 |                  INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Dr) =|
+msgmmout.for                       01887 |                  INCOME_VARIABLES(MO,Monthly_Income_Tax_Deferrals_Dr) =|
+
+msgmmout.for                   (1) 01893 |                  INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Dr) =|
+msgmmout.for                       01893 |                  INCOME_VARIABLES(MO,Monthly_Income_Tax_Deferrals_Dr) =|
+
+msgmmout.for                   (1) 01907 |     +          INCOME_VARIABLES(0,Monthly Income Tax Deferrals Dr))|
+msgmmout.for                       01907 |     +          INCOME_VARIABLES(0,Monthly_Income_Tax_Deferrals_Dr))|
+
+msgmmout.for                   (1) 01929 |            INCOME_VARIABLES(MO,Monthly State Tax on Capital) =|
+msgmmout.for                       01929 |            INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital) =|
+
+msgmmout.for                   (1) 01930 |     +              INCOME_VARIABLES(0,Monthly State Tax on Capital)/12.|
+msgmmout.for                       01930 |     +              INCOME_VARIABLES(0,Monthly_State_Tax_on_Capital)/12.|
+
+msgmmout.for                   (1) 01931 |            INCOME_VARIABLES(MO,Monthly Federal Tax on Capital) =|
+msgmmout.for                       01931 |            INCOME_VARIABLES(MO,Monthly_Federal_Tax_on_Capital) =|
+
+msgmmout.for                   (1) 01932 |     +            INCOME_VARIABLES(0,Monthly Federal Tax on Capital)/12.|
+msgmmout.for                       01932 |     +            INCOME_VARIABLES(0,Monthly_Federal_Tax_on_Capital)/12.|
+
+msgmmout.for                   (1) 01951 |            IF(INCOME_VARIABLES(0,Monthly Total Taxes Expense)/=0.) THEN|
+msgmmout.for                       01951 |            IF(INCOME_VARIABLES(0,Monthly_Total_Taxes_Expense)/=0.) THEN|
+
+msgmmout.for                   (1) 01954 |     +                   INCOME_VARIABLES(0,Monthly Total Taxes Expense)|
+msgmmout.for                       01954 |     +                   INCOME_VARIABLES(0,Monthly_Total_Taxes_Expense)|
+
+msgmmout.for                   (1) 01999 |               INCOME_VARIABLES(MO,Monthly Total Taxes Expense) =|
+msgmmout.for                       01999 |               INCOME_VARIABLES(MO,Monthly_Total_Taxes_Expense) =|
+
+msgmmout.for                   (1) 02008 |     +                  INCOME_VARIABLES(MO,Monthly Total Taxes Expense)|
+msgmmout.for                       02008 |     +                  INCOME_VARIABLES(MO,Monthly_Total_Taxes_Expense)|
+
+msgmmout.for                   (1) 02016 |     +                + INCOME_VARIABLES(MO,Monthly Total Taxes Expense)|
+msgmmout.for                       02016 |     +                + INCOME_VARIABLES(MO,Monthly_Total_Taxes_Expense)|
+
+msgmmout.for                   (1) 02037 |         INCOME_VARIABLES(0,Monthly Total Taxes Expense) =|
+msgmmout.for                       02037 |         INCOME_VARIABLES(0,Monthly_Total_Taxes_Expense) =|
+
+msgmmout.for                   (1) 02040 |         INCOME_VARIABLES(0,Monthly Op Income) = |
+msgmmout.for                       02040 |         INCOME_VARIABLES(0,Monthly_Op_Income) = |
+
+msgmmout.for                   (1) 02042 |     +                 - INCOME_VARIABLES(0,Monthly Total Taxes Expense)|
+msgmmout.for                       02042 |     +                 - INCOME_VARIABLES(0,Monthly_Total_Taxes_Expense)|
+
+msgmmout.for                   (1) 02044 |         INCOME_VARIABLES(0,Monthly INCOME BEFORE INTEREST) = |
+msgmmout.for                       02044 |         INCOME_VARIABLES(0,Monthly_INCOME_BEFORE_INTEREST) = |
+
+msgmmout.for                   (1) 02050 |         INCOME_VARIABLES(0,Monthly Earnings 2 Common) = |
+msgmmout.for                       02050 |         INCOME_VARIABLES(0,Monthly_Earnings_2_Common) = |
+
+msgmmout.for                   (1) 02054 |     +                    INCOME_VARIABLES(0,Monthly Earnings 2 Common)|
+msgmmout.for                       02054 |     +                    INCOME_VARIABLES(0,Monthly_Earnings_2_Common)|
+
+msgmmout.for                   (1) 02060 |               INCOME_VARIABLES(MO,BTL Monthly Income Taxes) =|
+msgmmout.for                       02060 |               INCOME_VARIABLES(MO,BTL_Monthly_Income_Taxes) =|
+
+msgmmout.for                   (1) 02065 |            INCOME_VARIABLES(:,BTL Monthly Income Taxes) = 0.|
+msgmmout.for                       02065 |            INCOME_VARIABLES(:,BTL_Monthly_Income_Taxes) = 0.|
+
+msgmmout.for                   (1) 02073 |            INCOME_VARIABLES(MO,Monthly Op Income) = |
+msgmmout.for                       02073 |            INCOME_VARIABLES(MO,Monthly_Op_Income) = |
+
+msgmmout.for                   (1) 02075 |     +                - INCOME_VARIABLES(MO,Monthly Total Taxes Expense)|
+msgmmout.for                       02075 |     +                - INCOME_VARIABLES(MO,Monthly_Total_Taxes_Expense)|
+
+msgmmout.for                   (1) 02087 |     +                 + INCOME_VARIABLES(MO,Monthly LTD Amort Interest)|
+msgmmout.for                       02087 |     +                 + INCOME_VARIABLES(MO,Monthly_LTD_Amort_Interest)|
+
+msgmmout.for                   (1) 02089 |            INCOME_VARIABLES(MO,Monthly Booked PS Dividends) =|
+msgmmout.for                       02089 |            INCOME_VARIABLES(MO,Monthly_Booked_PS_Dividends) =|
+
+msgmmout.for                   (1) 02095 |            INCOME_VARIABLES(MO,Monthly Extraordinary Items) =|
+msgmmout.for                       02095 |            INCOME_VARIABLES(MO,Monthly_Extraordinary_Items) =|
+
+msgmmout.for                   (1) 02096 |     +           INCOME_VARIABLES(0,Monthly Extraordinary Items)/12.|
+msgmmout.for                       02096 |     +           INCOME_VARIABLES(0,Monthly_Extraordinary_Items)/12.|
+
+msgmmout.for                   (1) 02097 |            INCOME_VARIABLES(MO,Monthly INCOME BEFORE INTEREST) = |
+msgmmout.for                       02097 |            INCOME_VARIABLES(MO,Monthly_INCOME_BEFORE_INTEREST) = |
+
+msgmmout.for                   (1) 02103 |            INCOME_VARIABLES(MO,Monthly Earnings 2 Common) = |
+msgmmout.for                       02103 |            INCOME_VARIABLES(MO,Monthly_Earnings_2_Common) = |
+
+msgmmout.for                   (1) 02107 |     +                   INCOME_VARIABLES(MO,Monthly Earnings 2 Common)|
+msgmmout.for                       02107 |     +                   INCOME_VARIABLES(MO,Monthly_Earnings_2_Common)|
+
+msgmmout.for                   (1) 02277 |     +                INCOME_VARIABLES(0,Monthly State Tax on Capital),|
+msgmmout.for                       02277 |     +                INCOME_VARIABLES(0,Monthly_State_Tax_on_Capital),|
+
+msgmmout.for                   (1) 02285 |     +               INCOME_VARIABLES(0,Monthly Federal Tax on Capital),|
+msgmmout.for                       02285 |     +               INCOME_VARIABLES(0,Monthly_Federal_Tax_on_Capital),|
+
+msgmmout.for                   (1) 02439 |            CASH_VARIABLES(MO,Cash Prior Years Method Adj) =|
+msgmmout.for                       02439 |            CASH_VARIABLES(MO,Cash_Prior_Years_Method_Adj) =|
+
+msgmmout.for                   (1) 02445 |            CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS) =|
+msgmmout.for                       02445 |            CASH_VARIABLES(MO,Cash_TOTAL_OPERATING_RECEIPTS) =|
+
+msgmmout.for                   (1) 02446 |     +                  CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS)|
+msgmmout.for                       02446 |     +                  CASH_VARIABLES(MO,Cash_TOTAL_OPERATING_RECEIPTS)|
+
+msgmmout.for                   (1) 02450 |     +                  + CASH_VARIABLES(MO,Cash Prior level Method Adj)|
+msgmmout.for                       02450 |     +                  + CASH_VARIABLES(MO,Cash_Prior_level_Method_Adj)|
+
+msgmmout.for                   (1) 02455 |     +                  + CASH_VARIABLES(MO,Cash Prior Years Method Adj)|
+msgmmout.for                       02455 |     +                  + CASH_VARIABLES(MO,Cash_Prior_Years_Method_Adj)|
+
+msgmmout.for                   (1) 02458 |     +                CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS) -|
+msgmmout.for                       02458 |     +                CASH_VARIABLES(MO,Cash_TOTAL_OPERATING_RECEIPTS) -|
+
+msgmmout.for                   (1) 02459 |     +                CASH_VARIABLES(MO,Cash TOTAL EXPENSE PAYMENTS)|
+msgmmout.for                       02459 |     +                CASH_VARIABLES(MO,Cash_TOTAL_EXPENSE_PAYMENTS)|
+
+msgmmout.for                   (1) 02937 |            INCOME_VARIABLES(:,BTL Monthly STInvestmet Income) =|
+msgmmout.for                       02937 |            INCOME_VARIABLES(:,BTL_Monthly_STInvestmet_Income) =|
+
+msgmmout.for                   (1) 02942 |     +              INCOME_VARIABLES(:,BTL Monthly STInvestmet Income)|
+msgmmout.for                       02942 |     +              INCOME_VARIABLES(:,BTL_Monthly_STInvestmet_Income)|
+
+msgmmout.for                   (1) 03068 |     +              + INCOME_VARIABLES(0,Monthly State Tax on Capital)|
+msgmmout.for                       03068 |     +              + INCOME_VARIABLES(0,Monthly_State_Tax_on_Capital)|
+
+msgmmout.for                   (1) 03069 |     +              + INCOME_VARIABLES(0,Monthly Federal Tax on Capital)|
+msgmmout.for                       03069 |     +              + INCOME_VARIABLES(0,Monthly_Federal_Tax_on_Capital)|
+
+msgmmout.for                   (1) 03145 |     +          + INCOME_VARIABLES(:,BTL Monthly STInvestmet Income)|
+msgmmout.for                       03145 |     +          + INCOME_VARIABLES(:,BTL_Monthly_STInvestmet_Income)|
+
+msgmmout.for                   (1) 03590 |               BALANCE_SHEET_VARIABLES(0,Monthly Strom Reserve) =|
+msgmmout.for                       03590 |               BALANCE_SHEET_VARIABLES(0,Monthly_Strom_Reserve) =|
+
+msgmmout.for                   (1) 03662 |     +            - INCOME_VARIABLES(MO,Monthly Nuclear Fuel Expense)|
+msgmmout.for                       03662 |     +            - INCOME_VARIABLES(MO,Monthly_Nuclear_Fuel_Expense)|
+
+msgmmout.for                   (1) 03673 |     +                                  Monthly Lease BTL Amort Expense)|
+msgmmout.for                       03673 |     +                                  Monthly_Lease_BTL_Amort_Expense)|
+
+msgmmout.for                   (1) 03755 |     +                                  Monthly Income Tax Deferrals Dr)|
+msgmmout.for                       03755 |     +                                  Monthly_Income_Tax_Deferrals_Dr)|
+
+msgmmout.for                   (1) 03762 |     +                                  Monthly Income Tax Deferrals Dr)|
+msgmmout.for                       03762 |     +                                  Monthly_Income_Tax_Deferrals_Dr)|
+
+msgmmout.for                   (1) 03831 |     +               + INCOME_VARIABLES(MO,Monthly Booked PS Dividends)|
+msgmmout.for                       03831 |     +               + INCOME_VARIABLES(MO,Monthly_Booked_PS_Dividends)|
+
+msgmmout.for                   (1) 03842 |     +               + INCOME_VARIABLES(MO,Monthly State Tax on Capital)|
+msgmmout.for                       03842 |     +               + INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital)|
+
+msgmmout.for                   (1) 03844 |     +                                   Monthly Federal Tax on Capital)|
+msgmmout.for                       03844 |     +                                   Monthly_Federal_Tax_on_Capital)|
+
+msgmmout.for                   (1) 03884 |     +               + INCOME_VARIABLES(MO,Monthly Booked PS Dividends)|
+msgmmout.for                       03884 |     +               + INCOME_VARIABLES(MO,Monthly_Booked_PS_Dividends)|
+
+msgmmout.for                   (1) 03895 |     +               + INCOME_VARIABLES(MO,Monthly State Tax on Capital)|
+msgmmout.for                       03895 |     +               + INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital)|
+
+msgmmout.for                   (1) 03897 |     +                                   Monthly Federal Tax on Capital)|
+msgmmout.for                       03897 |     +                                   Monthly_Federal_Tax_on_Capital)|
+
+msgmmout.for                   (1) 03934 |     +                                   BTL Monthly STInvestmet Income)|
+msgmmout.for                       03934 |     +                                   BTL_Monthly_STInvestmet_Income)|
+
+msgmmout.for                   (1) 04041 |               BALANCE_SHEET_VARIABLES(MO,Monthly Strom Reserve) =|
+msgmmout.for                       04041 |               BALANCE_SHEET_VARIABLES(MO,Monthly_Strom_Reserve) =|
+
+msgmmout.for                   (1) 04042 |     +               BALANCE_SHEET_VARIABLES(MO-1,Monthly Strom Reserve)|
+msgmmout.for                       04042 |     +               BALANCE_SHEET_VARIABLES(MO-1,Monthly_Strom_Reserve)|
+
+msgmmout.for                   (1) 04280 |                  IF(VARIABLE == BTL Monthly STInvestmet Income) CYCLE|
+msgmmout.for                       04280 |                  IF(VARIABLE == BTL_Monthly_STInvestmet_Income) CYCLE|
+
+msgmmout.for                   (1) 04282 |                  IF(VARIABLE == BTL Monthly Income Taxes) CYCLE|
+msgmmout.for                       04282 |                  IF(VARIABLE == BTL_Monthly_Income_Taxes) CYCLE|
+
+msgmmout.for                   (1) 04283 |                  IF(VARIABLE == Monthly Shares Outstanding) CYCLE|
+msgmmout.for                       04283 |                  IF(VARIABLE == Monthly_Shares_Outstanding) CYCLE|
+
+msgmmout.for                   (1) 04312 |     +               (VARIABLE == Monthly State Tax on Capital .OR.|
+msgmmout.for                       04312 |     +               (VARIABLE == Monthly_State_Tax_on_Capital .OR.|
+
+msgmmout.for                   (1) 04313 |     +                VARIABLE == Monthly Federal Tax on Capital)) CYCLE|
+msgmmout.for                       04313 |     +                VARIABLE == Monthly_Federal_Tax_on_Capital)) CYCLE|
+
+msgmmout.for                   (1) 04317 |                  IF(VARIABLE == Monthly Shares Outstanding) CYCLE|
+msgmmout.for                       04317 |                  IF(VARIABLE == Monthly_Shares_Outstanding) CYCLE|
+
+msgmmout.for                   (1) 04318 |                  IF(VARIABLE == Monthly Earnings 2 Common) THEN|
+msgmmout.for                       04318 |                  IF(VARIABLE == Monthly_Earnings_2_Common) THEN|
+
+msgmmout.for                   (1) 04332 |     +                                        Monthly Earnings 2 Common)|
+msgmmout.for                       04332 |     +                                        Monthly_Earnings_2_Common)|
+
+msgmmout.for                   (1) 04595 |                     IF(VARIABLE == Cash Prior level Method Adj .AND.|
+msgmmout.for                       04595 |                     IF(VARIABLE == Cash_Prior_level_Method_Adj .AND.|
+
+msgmmout.for                   (1) 04608 |                     ELSEIF(VARIABLE==Cash Prior Years Method Adj .AND.|
+msgmmout.for                       04608 |                     ELSEIF(VARIABLE==Cash_Prior_Years_Method_Adj .AND.|
+
+msgmmout.for                   (1) 04689 |     +                                  Monthly Income Tax Deferrals Dr)|
+msgmmout.for                       04689 |     +                                  Monthly_Income_Tax_Deferrals_Dr)|
+
+msgmmout.for                   (1) 04726 |     +           + INCOME_VARIABLES(:,BTL Monthly STInvestmet Income)|
+msgmmout.for                       04726 |     +           + INCOME_VARIABLES(:,BTL_Monthly_STInvestmet_Income)|
+
+msgmmout.for                   (1) 04808 |               IF(VARIABLE == Monthly Income Tax Deferrals Dr) THEN|
+msgmmout.for                       04808 |               IF(VARIABLE == Monthly_Income_Tax_Deferrals_Dr) THEN|
+
+msgmmout.for                   (1) 04820 |               IF(VARIABLE == BTL Monthly Income Taxes) THEN|
+msgmmout.for                       04820 |               IF(VARIABLE == BTL_Monthly_Income_Taxes) THEN|
+
+msgmmout.for                   (1) 04821 |                  INCOME_VARIABLES(:,BTL Monthly Income Taxes) =|
+msgmmout.for                       04821 |                  INCOME_VARIABLES(:,BTL_Monthly_Income_Taxes) =|
+
+msgmmout.for                   (1) 04961 |               CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS) =|
+msgmmout.for                       04961 |               CASH_VARIABLES(MO,Cash_TOTAL_OPERATING_RECEIPTS) =|
+
+msgmmout.for                   (1) 04966 |     +            + CASH_VARIABLES(MO,Cash Prior level Method Adj)|
+msgmmout.for                       04966 |     +            + CASH_VARIABLES(MO,Cash_Prior_level_Method_Adj)|
+
+msgmmout.for                   (1) 04967 |     +            + CASH_VARIABLES(MO,Cash Prior Years Method Adj)|
+msgmmout.for                       04967 |     +            + CASH_VARIABLES(MO,Cash_Prior_Years_Method_Adj)|
+
+msgmmout.for                   (1) 04971 |               CASH_VARIABLES(MO,Cash TOTAL EXPENSE PAYMENTS) =|
+msgmmout.for                       04971 |               CASH_VARIABLES(MO,Cash_TOTAL_EXPENSE_PAYMENTS) =|
+
+msgmmout.for                   (1) 04975 |     +                CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS) -|
+msgmmout.for                       04975 |     +                CASH_VARIABLES(MO,Cash_TOTAL_OPERATING_RECEIPTS) -|
+
+msgmmout.for                   (1) 04976 |     +                CASH_VARIABLES(MO,Cash TOTAL EXPENSE PAYMENTS)|
+msgmmout.for                       04976 |     +                CASH_VARIABLES(MO,Cash_TOTAL_EXPENSE_PAYMENTS)|
+
+msgmmout.for                   (1) 05128 |                  INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Dr) =|
+msgmmout.for                       05128 |                  INCOME_VARIABLES(MO,Monthly_Income_Tax_Deferrals_Dr) =|
+
+msgmmout.for                   (1) 05151 |            INCOME_VARIABLES(0,Monthly Total Taxes Expense) =|
+msgmmout.for                       05151 |            INCOME_VARIABLES(0,Monthly_Total_Taxes_Expense) =|
+
+msgmmout.for                   (1) 05155 |               INCOME_VARIABLES(MO,Monthly Total Taxes Expense) =|
+msgmmout.for                       05155 |               INCOME_VARIABLES(MO,Monthly_Total_Taxes_Expense) =|
+
+msgmmout.for                   (1) 05245 |     +                                  Monthly Income Tax Deferrals Dr)|
+msgmmout.for                       05245 |     +                                  Monthly_Income_Tax_Deferrals_Dr)|
+
+msgmmout.for                   (1) 05279 |     +                                  Monthly Income Tax Deferrals Dr)|
+msgmmout.for                       05279 |     +                                  Monthly_Income_Tax_Deferrals_Dr)|
+
+msgmmout.for                   (1) 05334 |     +                                   BTL Monthly STInvestmet Income)|
+msgmmout.for                       05334 |     +                                   BTL_Monthly_STInvestmet_Income)|
+
+msgmmout.for                   (1) 05375 |     +               + INCOME_VARIABLES(MO,Monthly Booked PS Dividends)|
+msgmmout.for                       05375 |     +               + INCOME_VARIABLES(MO,Monthly_Booked_PS_Dividends)|
+
+msgmmout.for                   (1) 05386 |     +               + INCOME_VARIABLES(MO,Monthly State Tax on Capital)|
+msgmmout.for                       05386 |     +               + INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital)|
+
+msgmmout.for                   (1) 05388 |     +                                   Monthly Federal Tax on Capital)|
+msgmmout.for                       05388 |     +                                   Monthly_Federal_Tax_on_Capital)|
+
+msgmmout.for                   (1) 05493 |            INCOME_VARIABLES(0,Monthly Shares Outstanding) =|
+msgmmout.for                       05493 |            INCOME_VARIABLES(0,Monthly_Shares_Outstanding) =|
+
+msgmmout.for                   (1) 05494 |     +          SUM(INCOME_VARIABLES(1:,Monthly Shares Outstanding))/12.|
+msgmmout.for                       05494 |     +          SUM(INCOME_VARIABLES(1:,Monthly_Shares_Outstanding))/12.|
+
+msgmmout.for                   (1) 05518 |                  CASH_VARIABLES(MO,Price of Issued Shares) =|
+msgmmout.for                       05518 |                  CASH_VARIABLES(MO,Price_of_Issued_Shares) =|
+
+msgmmout.for                   (1) 05523 |                  CASH_VARIABLES(MO,Price of Issued Shares) = 0.|
+msgmmout.for                       05523 |                  CASH_VARIABLES(MO,Price_of_Issued_Shares) = 0.|
+
+msgmmout.for                   (1) 05546 |               INCOME_VARIABLES(MO,Monthly Other Debit Amort) =|
+msgmmout.for                       05546 |               INCOME_VARIABLES(MO,Monthly_Other_Debit_Amort) =|
+
+msgmmout.for                   (1) 05568 |                INCOME_VARIABLES(MO,Monthly Earnings per Share) =|
+msgmmout.for                       05568 |                INCOME_VARIABLES(MO,Monthly_Earnings_per_Share) =|
+
+msgmmout.for                   (1) 05570 |     +                   INCOME_VARIABLES(MO,Monthly Earnings 2 Common),|
+msgmmout.for                       05570 |     +                   INCOME_VARIABLES(MO,Monthly_Earnings_2_Common),|
+
+msgmmout.for                   (1) 05571 |     +                  INCOME_VARIABLES(MO,Monthly Shares Outstanding))|
+msgmmout.for                       05571 |     +                  INCOME_VARIABLES(MO,Monthly_Shares_Outstanding))|
+
+msgmmout.for                   (1) 05574 |     +                   INCOME_VARIABLES(MO,Monthly Earnings per Share)|
+msgmmout.for                       05574 |     +                   INCOME_VARIABLES(MO,Monthly_Earnings_per_Share)|
+
+msgmmout.for                   (1) 05577 |     +                    INCOME_VARIABLES(MO,Monthly Earnings 2 Common)|
+msgmmout.for                       05577 |     +                    INCOME_VARIABLES(MO,Monthly_Earnings_2_Common)|
+
+msgmmout.for                   (1) 05583 |     +                  INCOME_VARIABLES(MO,Monthly Shares Outstanding))|
+msgmmout.for                       05583 |     +                  INCOME_VARIABLES(MO,Monthly_Shares_Outstanding))|
+
+msgmmout.for                   (1) 05592 |     +              INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)|
+msgmmout.for                       05592 |     +              INCOME_VARIABLES(MO,BTL_Monthly_STInvestmet_Income)|
+
+msgmmout.for                   (1) 05614 |     +                                   BTL Monthly STInvestmet Income) ! 36|
+msgmmout.for                       05614 |     +                                   BTL_Monthly_STInvestmet_Income) ! 36|
+
+msgmmout.for                   (1) 05631 |     +                                  Monthly Income Tax Deferrals Dr) ! 89|
+msgmmout.for                       05631 |     +                                  Monthly_Income_Tax_Deferrals_Dr) ! 89|
+
+msgmmout.for                   (1) 05641 |     +                                   BTL Monthly NoTax Other Income) ! 16|
+msgmmout.for                       05641 |     +                                   BTL_Monthly_NoTax_Other_Income) ! 16|
+
+msgmmout.for                   (1) 05704 |     +                                     Monthly Booked PS Dividends),|
+msgmmout.for                       05704 |     +                                     Monthly_Booked_PS_Dividends),|
+
+msgmmout.for                   (1) 05719 |     +                  INCOME_VARIABLES(MO,Monthly Booked PS Dividends)|
+msgmmout.for                       05719 |     +                  INCOME_VARIABLES(MO,Monthly_Booked_PS_Dividends)|
+
+msgmmout.for                   (1) 05728 |     +             + INCOME_VARIABLES(MO,Monthly State Tax on Capital)|
+msgmmout.for                       05728 |     +             + INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital)|
+
+msgmmout.for                   (1) 05729 |     +             + INCOME_VARIABLES(MO,Monthly Federal Tax on Capital)|
+msgmmout.for                       05729 |     +             + INCOME_VARIABLES(MO,Monthly_Federal_Tax_on_Capital)|
+
+msgmmout.for                   (1) 05750 |     +          + INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)|
+msgmmout.for                       05750 |     +          + INCOME_VARIABLES(MO,BTL_Monthly_STInvestmet_Income)|
+
+msgmmout.for                   (1) 05804 |     +                                  BTL Monthly NoTax Other Income), ! 27|
+msgmmout.for                       05804 |     +                                  BTL_Monthly_NoTax_Other_Income), ! 27|
+
+msgmmout.for                   (1) 05806 |     +                                 Monthly Income Tax Deferrals Dr), ! 28|
+msgmmout.for                       05806 |     +                                 Monthly_Income_Tax_Deferrals_Dr), ! 28|
+
+msgmmout.for                   (1) 05864 |     +              INCOME_VARIABLES(MO,Monthly Lease Interest Expense), ! 71|
+msgmmout.for                       05864 |     +              INCOME_VARIABLES(MO,Monthly_Lease_Interest_Expense), ! 71|
+
+msgmmout.for                   (1) 05880 |     +               - INCOME_VARIABLES(MO,Monthly LTD Amort Interest),  ! 84|
+msgmmout.for                       05880 |     +               - INCOME_VARIABLES(MO,Monthly_LTD_Amort_Interest),  ! 84|
+
+msgmmout.for                   (1) 05884 |     +               INCOME_VARIABLES(MO,Monthly State Tax on Capital),  ! 88|
+msgmmout.for                       05884 |     +               INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital),  ! 88|
+
+msgmmout.for                   (1) 05885 |     +               INCOME_VARIABLES(MO,Monthly LTD Amort Interest),    ! 89|
+msgmmout.for                       05885 |     +               INCOME_VARIABLES(MO,Monthly_LTD_Amort_Interest),    ! 89|
+
+msgmmout.for                   (1) 06037 |     +                                     Monthly Booked PS Dividends),|
+msgmmout.for                       06037 |     +                                     Monthly_Booked_PS_Dividends),|
+
+msgmmout.for                   (1) 06052 |     +                  INCOME_VARIABLES(MO,Monthly Booked PS Dividends)|
+msgmmout.for                       06052 |     +                  INCOME_VARIABLES(MO,Monthly_Booked_PS_Dividends)|
+
+msgmmout.for                   (1) 06061 |     +             + INCOME_VARIABLES(MO,Monthly State Tax on Capital)|
+msgmmout.for                       06061 |     +             + INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital)|
+
+msgmmout.for                   (1) 06062 |     +             + INCOME_VARIABLES(MO,Monthly Federal Tax on Capital)|
+msgmmout.for                       06062 |     +             + INCOME_VARIABLES(MO,Monthly_Federal_Tax_on_Capital)|
+
+msgmmout.for                   (1) 06086 |     +          + INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)|
+msgmmout.for                       06086 |     +          + INCOME_VARIABLES(MO,BTL_Monthly_STInvestmet_Income)|
+
+msgmmout.for                   (1) 06140 |     +                                  BTL Monthly NoTax Other Income), ! 27|
+msgmmout.for                       06140 |     +                                  BTL_Monthly_NoTax_Other_Income), ! 27|
+
+msgmmout.for                   (1) 06142 |     +                                 Monthly Income Tax Deferrals Dr) |
+msgmmout.for                       06142 |     +                                 Monthly_Income_Tax_Deferrals_Dr) |
+
+msgmmout.for                   (1) 06213 |     +              INCOME_VARIABLES(MO,Monthly Lease Interest Expense), ! 71|
+msgmmout.for                       06213 |     +              INCOME_VARIABLES(MO,Monthly_Lease_Interest_Expense), ! 71|
+
+msgmmout.for                   (1) 06230 |     +               - INCOME_VARIABLES(MO,Monthly LTD Amort Interest),  ! 84|
+msgmmout.for                       06230 |     +               - INCOME_VARIABLES(MO,Monthly_LTD_Amort_Interest),  ! 84|
+
+msgmmout.for                   (1) 06234 |     +               INCOME_VARIABLES(MO,Monthly State Tax on Capital),  ! 88|
+msgmmout.for                       06234 |     +               INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital),  ! 88|
+
+msgmmout.for                   (1) 06235 |     +               INCOME_VARIABLES(MO,Monthly LTD Amort Interest),    ! 89|
+msgmmout.for                       06235 |     +               INCOME_VARIABLES(MO,Monthly_LTD_Amort_Interest),    ! 89|
+
+msgmmout.for                   (1) 06398 |     +                                   BTL Monthly STInvestmet Income)|
+msgmmout.for                       06398 |     +                                   BTL_Monthly_STInvestmet_Income)|
+
+msgmmout.for                   (1) 07201 |     +          INCOME_VARIABLES(MO,Monthly State Tax on Capital) -|
+msgmmout.for                       07201 |     +          INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital) -|
+
+msgmmout.for                   (1) 07203 |     +          INCOME_VARIABLES(MO,Monthly Federal Tax on Capital) -|
+msgmmout.for                       07203 |     +          INCOME_VARIABLES(MO,Monthly_Federal_Tax_on_Capital) -|
+
+msgmmout.for                   (1) 07227 |     +                   INCOME_VARIABLES(MO,Monthly LTD Amort Interest)|
+msgmmout.for                       07227 |     +                   INCOME_VARIABLES(MO,Monthly_LTD_Amort_Interest)|
+
+msgmmout.for                   (1) 07229 |     +                 INCOME_VARIABLES(MO,Monthly Nuclear Fuel Expense)|
+msgmmout.for                       07229 |     +                 INCOME_VARIABLES(MO,Monthly_Nuclear_Fuel_Expense)|
+
+msgmmout.for                   (1) 07247 |     +          + INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)|
+msgmmout.for                       07247 |     +          + INCOME_VARIABLES(MO,BTL_Monthly_STInvestmet_Income)|
+
+msgmmout.for                   (1) 07248 |     +          - INCOME_VARIABLES(MO,BTL Monthly Expenses)|
+msgmmout.for                       07248 |     +          - INCOME_VARIABLES(MO,BTL_Monthly_Expenses)|
+
+msgmmout.for                   (1) 08268 |     +             + INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)|
+msgmmout.for                       08268 |     +             + INCOME_VARIABLES(MO,BTL_Monthly_STInvestmet_Income)|
+
+msgmmout.for                   (1) 08274 |     +                         INCOME_VARIABLES(MO,BTL Monthly Expenses)|
+msgmmout.for                       08274 |     +                         INCOME_VARIABLES(MO,BTL_Monthly_Expenses)|
+
+msgmmout.for                   (1) 08287 |     +              + INCOME_VARIABLES(MO,Monthly State Tax on Capital)|
+msgmmout.for                       08287 |     +              + INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital)|
+
+msgmmout.for                   (1) 08288 |     +              + INCOME_VARIABLES(MO,Monthly State Tax on Capital)|
+msgmmout.for                       08288 |     +              + INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital)|
+
+msgmmout.for                   (1) 08323 |     +                                   BTL Monthly STInvestmet Income)|
+msgmmout.for                       08323 |     +                                   BTL_Monthly_STInvestmet_Income)|
+
+msgmmout.for                   (1) 08534 |     +                                   BTL Monthly STInvestmet Income)|
+msgmmout.for                       08534 |     +                                   BTL_Monthly_STInvestmet_Income)|
+
+msgmmout.for                   (1) 09047 |            INCOME_VARIABLES(MO,Monthly Total Taxes Expense) =|
+msgmmout.for                       09047 |            INCOME_VARIABLES(MO,Monthly_Total_Taxes_Expense) =|
+
+msgmmout.for                   (1) 09050 |            INCOME_VARIABLES(MO,Monthly Op Income) = |
+msgmmout.for                       09050 |            INCOME_VARIABLES(MO,Monthly_Op_Income) = |
+
+msgmmout.for                   (1) 09052 |     +          - INCOME_VARIABLES(MO,Monthly Total Taxes Expense)|
+msgmmout.for                       09052 |     +          - INCOME_VARIABLES(MO,Monthly_Total_Taxes_Expense)|
+
+msgmmout.for                   (1) 09053 |            INCOME_VARIABLES(MO,Monthly INCOME BEFORE INTEREST) = |
+msgmmout.for                       09053 |            INCOME_VARIABLES(MO,Monthly_INCOME_BEFORE_INTEREST) = |
+
+msgmmout.for                   (1) 09059 |            INCOME_VARIABLES(MO,Monthly Earnings 2 Common) = |
+msgmmout.for                       09059 |            INCOME_VARIABLES(MO,Monthly_Earnings_2_Common) = |
+
+msgmmout.for                   (1) 09063 |     +          INCOME_VARIABLES(MO,Monthly Earnings 2 Common)|
+msgmmout.for                       09063 |     +          INCOME_VARIABLES(MO,Monthly_Earnings_2_Common)|
+
+msgmmout.for                   (1) 09089 |     +              INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)|
+msgmmout.for                       09089 |     +              INCOME_VARIABLES(MO,BTL_Monthly_STInvestmet_Income)|
+
+msgmmout.for                   (1) 09097 |     +          INCOME_VARIABLES(MO,Monthly Op Income)|
+msgmmout.for                       09097 |     +          INCOME_VARIABLES(MO,Monthly_Op_Income)|
+
+msgmmout.for                   (1) 09102 |     +          + INCOME_VARIABLES(MO,BTL Monthly NoTax Other Income)|
+msgmmout.for                       09102 |     +          + INCOME_VARIABLES(MO,BTL_Monthly_NoTax_Other_Income)|
+
+msgmmout.for                   (1) 09106 |     +          - INCOME_VARIABLES(MO,BTL Monthly Expenses)              ! 58|
+msgmmout.for                       09106 |     +          - INCOME_VARIABLES(MO,BTL_Monthly_Expenses)              ! 58|
+
+msgmmout.for                   (1) 09107 |     +          - INCOME_VARIABLES(MO,BTL Monthly Income Taxes)|
+msgmmout.for                       09107 |     +          - INCOME_VARIABLES(MO,BTL_Monthly_Income_Taxes)|
+
+msgmmout.for                   (1) 09124 |     +          + INCOME_VARIABLES(MO,Monthly State Tax on Capital)|
+msgmmout.for                       09124 |     +          + INCOME_VARIABLES(MO,Monthly_State_Tax_on_Capital)|
+
+msgmmout.for                   (1) 09127 |     +          + INCOME_VARIABLES(MO,Monthly Federal Tax on Capital)|
+msgmmout.for                       09127 |     +          + INCOME_VARIABLES(MO,Monthly_Federal_Tax_on_Capital)|
+
+msgmmout.for                   (1) 09128 |     +          + INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Dr)|
+msgmmout.for                       09128 |     +          + INCOME_VARIABLES(MO,Monthly_Income_Tax_Deferrals_Dr)|
+
+msgmmout.for                   (1) 09136 |     +          INCOME_VARIABLES(MO,Monthly INCOME BEFORE INTEREST)|
+msgmmout.for                       09136 |     +          INCOME_VARIABLES(MO,Monthly_INCOME_BEFORE_INTEREST)|
+
+msgmmout.for                   (1) 09148 |     +             + INCOME_VARIABLES(MO,Monthly Unused Fed Tax Credits)|
+msgmmout.for                       09148 |     +             + INCOME_VARIABLES(MO,Monthly_Unused_Fed_Tax_Credits)|
+
+msgmmout.for                   (1) 09150 |     +             - INCOME_VARIABLES(MO,Monthly Extraordinary Items)|
+msgmmout.for                       09150 |     +             - INCOME_VARIABLES(MO,Monthly_Extraordinary_Items)|
+
+msgmmout.for                   (1) 09163 |     +           + INCOME_VARIABLES(MO,Monthly Nuclear Fuel Expense)|
+msgmmout.for                       09163 |     +           + INCOME_VARIABLES(MO,Monthly_Nuclear_Fuel_Expense)|
+
+msgmmout.for                   (1) 09272 |     +           + INCOME_VARIABLES(MO,Monthly Lease Interest Expense)|
+msgmmout.for                       09272 |     +           + INCOME_VARIABLES(MO,Monthly_Lease_Interest_Expense)|
+
+msgmmout.for                   (1) 09850 |     +         INCOME_VARIABLES(:,Monthly INCOME BEFORE INTEREST)|
+msgmmout.for                       09850 |     +         INCOME_VARIABLES(:,Monthly_INCOME_BEFORE_INTEREST)|
+
+msgmmout.for                   (1) 09853 |     +         + INCOME_VARIABLES(:,Monthly State Tax on Capital)|
+msgmmout.for                       09853 |     +         + INCOME_VARIABLES(:,Monthly_State_Tax_on_Capital)|
+
+msgmmout.for                   (1) 09855 |     +         + INCOME_VARIABLES(:,Monthly Federal Tax on Capital)|
+msgmmout.for                       09855 |     +         + INCOME_VARIABLES(:,Monthly_Federal_Tax_on_Capital)|
+
+msgmmout.for                   (1) 09856 |     +         + INCOME_VARIABLES(:,Monthly Income Tax Deferrals Dr)|
+msgmmout.for                       09856 |     +         + INCOME_VARIABLES(:,Monthly_Income_Tax_Deferrals_Dr)|
+
+msgmmout.for                   (1) 09859 |     +         + INCOME_VARIABLES(:,BTL Monthly Income Taxes)|
+msgmmout.for                       09859 |     +         + INCOME_VARIABLES(:,BTL_Monthly_Income_Taxes)|
+
+msgmmout.for                   (1) 09882 |            INCOME_VARIABLES(MO,IMPA Depreciation Add Back) =|
+msgmmout.for                       09882 |            INCOME_VARIABLES(MO,IMPA_Depreciation_Add_Back) =|
+
+msgmmout.for                   (1) 09884 |     +               + INCOME_VARIABLES(MO,Monthly LTD Amort Interest)|
+msgmmout.for                       09884 |     +               + INCOME_VARIABLES(MO,Monthly_LTD_Amort_Interest)|
+
+msgmmout.for                   (1) 09889 |     +               + INCOME_VARIABLES(MO,Monthly LTD Amort Interest)|
+msgmmout.for                       09889 |     +               + INCOME_VARIABLES(MO,Monthly_LTD_Amort_Interest)|
+
+msgmmout.for                   (1) 09891 |            INCOME_VARIABLES(MO,Monthly Earnings 2 Common) = |
+msgmmout.for                       09891 |            INCOME_VARIABLES(MO,Monthly_Earnings_2_Common) = |
+
+msgmmout.for                   (1) 09895 |     +                 INCOME_VARIABLES(MO,Monthly Earnings 2 Common)|
+msgmmout.for                       09895 |     +                 INCOME_VARIABLES(MO,Monthly_Earnings_2_Common)|
+
+msgmmout.for                   (1) 09902 |     +                 - INCOME_VARIABLES(MO,Monthly LTD Amort Interest)|
+msgmmout.for                       09902 |     +                 - INCOME_VARIABLES(MO,Monthly_LTD_Amort_Interest)|
+
+mthnmcom.mon                   (1) 00060 |      integer(kind=2),parameter:: Monthly Nuclear Fuel Expense=49|
+mthnmcom.mon                       00060 |      integer(kind=2),parameter:: Monthly_Nuclear_Fuel_Expense=49|
+
+mthnmcom.mon                   (1) 00081 |      integer(kind=2),parameter:: Monthly Lease Interest Expense=75|
+mthnmcom.mon                       00081 |      integer(kind=2),parameter:: Monthly_Lease_Interest_Expense=75|
+
+mthnmcom.mon                   (1) 00083 |      integer(kind=2),parameter:: Monthly Lease BTL Amort Expense=71|
+mthnmcom.mon                       00083 |      integer(kind=2),parameter:: Monthly_Lease_BTL_Amort_Expense=71|
+
+mthnmcom.mon                   (1) 00088 |      integer(kind=2),parameter:: Monthly FASB 143 Amort=234|
+mthnmcom.mon                       00088 |      integer(kind=2),parameter:: Monthly_FASB_143_Amort=234|
+
+mthnmcom.mon                   (1) 00089 |      integer(kind=2),parameter:: Monthly CIAC Amort=211|
+mthnmcom.mon                       00089 |      integer(kind=2),parameter:: Monthly_CIAC_Amort=211|
+
+mthnmcom.mon                   (1) 00096 |      integer(kind=2),parameter:: Monthly Other Debit Amort=185|
+mthnmcom.mon                       00096 |      integer(kind=2),parameter:: Monthly_Other_Debit_Amort=185|
+
+mthnmcom.mon                   (1) 00108 |      integer(kind=2),parameter:: Monthly State Tax on Capital=86|
+mthnmcom.mon                       00108 |      integer(kind=2),parameter:: Monthly_State_Tax_on_Capital=86|
+
+mthnmcom.mon                   (1) 00110 |      integer(kind=2),parameter:: Monthly Federal Tax on Capital=88|
+mthnmcom.mon                       00110 |      integer(kind=2),parameter:: Monthly_Federal_Tax_on_Capital=88|
+
+mthnmcom.mon                   (1) 00111 |      integer(kind=2),parameter:: Monthly Income Tax Deferrals Dr=89|
+mthnmcom.mon                       00111 |      integer(kind=2),parameter:: Monthly_Income_Tax_Deferrals_Dr=89|
+
+mthnmcom.mon                   (1) 00121 |      integer(kind=2),parameter:: BTL Monthly NoTax Other Income=16|
+mthnmcom.mon                       00121 |      integer(kind=2),parameter:: BTL_Monthly_NoTax_Other_Income=16|
+
+mthnmcom.mon                   (1) 00132 |      integer(kind=2),parameter:: BTL Monthly STInvestmet Income=103|
+mthnmcom.mon                       00132 |      integer(kind=2),parameter:: BTL_Monthly_STInvestmet_Income=103|
+
+mthnmcom.mon                   (1) 00135 |      integer(kind=2),parameter:: BTL Monthly Expenses=58|
+mthnmcom.mon                       00135 |      integer(kind=2),parameter:: BTL_Monthly_Expenses=58|
+
+mthnmcom.mon                   (1) 00136 |      integer(kind=2),parameter:: BTL Monthly Income Taxes=96|
+mthnmcom.mon                       00136 |      integer(kind=2),parameter:: BTL_Monthly_Income_Taxes=96|
+
+mthnmcom.mon                   (1) 00144 |      integer(kind=2),parameter:: Monthly LTD Cash Interest=118|
+mthnmcom.mon                       00144 |      integer(kind=2),parameter:: Monthly_LTD_Cash_Interest=118|
+
+mthnmcom.mon                   (1) 00146 |      integer(kind=2),parameter:: Monthly LTD Amort Interest=119|
+mthnmcom.mon                       00146 |      integer(kind=2),parameter:: Monthly_LTD_Amort_Interest=119|
+
+mthnmcom.mon                   (1) 00147 |      integer(kind=2),parameter:: Monthly Unused Fed Tax Credits=131|
+mthnmcom.mon                       00147 |      integer(kind=2),parameter:: Monthly_Unused_Fed_Tax_Credits=131|
+
+mthnmcom.mon                   (1) 00149 |      integer(kind=2),parameter:: Monthly Extraordinary Items=133|
+mthnmcom.mon                       00149 |      integer(kind=2),parameter:: Monthly_Extraordinary_Items=133|
+
+mthnmcom.mon                   (1) 00152 |      integer(kind=2),parameter:: Monthly Regular PS Dividends=123|
+mthnmcom.mon                       00152 |      integer(kind=2),parameter:: Monthly_Regular_PS_Dividends=123|
+
+mthnmcom.mon                   (1) 00153 |      integer(kind=2),parameter:: Monthly MIPS Dividends=124|
+mthnmcom.mon                       00153 |      integer(kind=2),parameter:: Monthly_MIPS_Dividends=124|
+
+mthnmcom.mon                   (1) 00154 |      integer(kind=2),parameter:: Monthly Total Taxes Expense=150|
+mthnmcom.mon                       00154 |      integer(kind=2),parameter:: Monthly_Total_Taxes_Expense=150|
+
+mthnmcom.mon                   (1) 00155 |      integer(kind=2),parameter:: Monthly Op Income=151|
+mthnmcom.mon                       00155 |      integer(kind=2),parameter:: Monthly_Op_Income=151|
+
+mthnmcom.mon                   (1) 00156 |      integer(kind=2),parameter:: Monthly INCOME BEFORE INTEREST=152|
+mthnmcom.mon                       00156 |      integer(kind=2),parameter:: Monthly_INCOME_BEFORE_INTEREST=152|
+
+mthnmcom.mon                   (1) 00159 |      integer(kind=2),parameter:: Monthly Earnings 2 Common=155|
+mthnmcom.mon                       00159 |      integer(kind=2),parameter:: Monthly_Earnings_2_Common=155|
+
+mthnmcom.mon                   (1) 00161 |      integer(kind=2),parameter:: Monthly Shares Outstanding=160|
+mthnmcom.mon                       00161 |      integer(kind=2),parameter:: Monthly_Shares_Outstanding=160|
+
+mthnmcom.mon                   (1) 00163 |      integer(kind=2),parameter:: Monthly Earnings per Share=224|
+mthnmcom.mon                       00163 |      integer(kind=2),parameter:: Monthly_Earnings_per_Share=224|
+
+mthnmcom.mon                   (1) 00172 |      integer(kind=2),parameter:: Monthly Booked PS Dividends=169|
+mthnmcom.mon                       00172 |      integer(kind=2),parameter:: Monthly_Booked_PS_Dividends=169|
+
+mthnmcom.mon                   (1) 00225 |      integer(kind=2),parameter:: IMPA Depreciation Add Back=279|
+mthnmcom.mon                       00225 |      integer(kind=2),parameter:: IMPA_Depreciation_Add_Back=279|
+
+mthnmcom.mon                   (1) 00286 |      integer(kind=2),parameter:: Cash Prior Years Method Adj=26|
+mthnmcom.mon                       00286 |      integer(kind=2),parameter:: Cash_Prior_Years_Method_Adj=26|
+
+mthnmcom.mon                   (1) 00287 |      integer(kind=2),parameter:: Cash Prior level Method Adj=27|
+mthnmcom.mon                       00287 |      integer(kind=2),parameter:: Cash_Prior_level_Method_Adj=27|
+
+mthnmcom.mon                   (1) 00290 |      integer(kind=2),parameter:: Cash TOTAL OPERATING RECEIPTS=30|
+mthnmcom.mon                       00290 |      integer(kind=2),parameter:: Cash_TOTAL_OPERATING_RECEIPTS=30|
+
+mthnmcom.mon                   (1) 00308 |      integer(kind=2),parameter:: Cash TOTAL EXPENSE PAYMENTS=31|
+mthnmcom.mon                       00308 |      integer(kind=2),parameter:: Cash_TOTAL_EXPENSE_PAYMENTS=31|
+
+mthnmcom.mon                   (1) 00310 |      integer(kind=2),parameter:: Cash ATL Lease Cash=172|
+mthnmcom.mon                       00310 |      integer(kind=2),parameter:: Cash_ATL_Lease_Cash=172|
+
+mthnmcom.mon                   (1) 00348 |      integer(kind=2),parameter:: Cash From Trust Fund Earnings=208|
+mthnmcom.mon                       00348 |      integer(kind=2),parameter:: Cash_From_Trust_Fund_Earnings=208|
+
+mthnmcom.mon                   (1) 00352 |      integer(kind=2),parameter:: Price of Issued Shares=159|
+mthnmcom.mon                       00352 |      integer(kind=2),parameter:: Price_of_Issued_Shares=159|
+
+mthnmcom.mon                   (1) 00551 |      integer(kind=2),parameter:: Monthly Strom Reserve=48|
+mthnmcom.mon                       00551 |      integer(kind=2),parameter:: Monthly_Strom_Reserve=48|
+
