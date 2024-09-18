@@ -891,7 +891,17 @@ int	info_cmp2(char *, char *);
 int 	info_cmp1(const void *, const void *);
 int 	info_cmp2(const void *, const void *);
 
+#if 0
+void v_pars(char *, int *, int *, char **, int *, DictionaryEntry *, int );
+#endif
 
+void v_pars(char *, int *, int *, char **);
+
+#define	MAX_VARS	100
+
+int	n_var;
+int	v_size[MAX_VARS];
+char	v_name[MAX_VARS][MAXP];
 
 int	borrar_stats();
 
@@ -5957,6 +5967,8 @@ int	ex8_p1()
 	int	pf,uf,nf;
 	int	qv1,qv2;
 	int	qm1,qm2,qm3;
+	int	n_var;
+
 
 	strcpy(base_name,"empty");
 
@@ -5987,12 +5999,16 @@ int	ex8_p1()
 		strcpy(b0,(*fnp[i]).l );
 		strcpy(b1,(*fnp[i]).l );
 
+		/* trabajemos con minusculas */
 		strcpy (b2, pasar_a_minusc(b1));
+
+
 		if ( !es_linea_comentario(b2) && tiene_coment_final (b2,&p1))
 		{
 			b2[p1] = 0;
 		}
 		l2 = strlen(b2);
+
 
 		f_proceso = 1;
 		if (linea_vacia(b2) || es_linea_comentario(b2))
@@ -6001,6 +6017,19 @@ int	ex8_p1()
 		/* solo proceso lineas que no son comentario ni vacias */
 		if (f_proceso)
 		{	
+
+			v_pars(b2,&n_var,v_size,v_name );
+
+			for (i=0; i<n_var; i++)
+			{
+				memset(b4,0,sizeof(b4));
+				strncpy(b4,v_name[i],v_size[i]);
+				fprintf (hfout,"%30.30s %2d |%s| \n",prog_name,i,b4);
+			}
+
+
+
+#if 0
 			c1 = 0;
 			f5 = 1;
 
@@ -6079,6 +6108,8 @@ int	ex8_p1()
 				}		
 	
 			} /* while f5 */
+#endif
+
 		} /* proceso */
 
 		strcpy( (*fnp[i]).l , b1 );
@@ -6091,6 +6122,66 @@ int	ex8_p1()
 }
 
 
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	v_pars
+ *
+ *	parser de lineas, devolviendo variables ... en lugar de tokens 
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+
+
+void v_pars(s, n, vn, vp) 
+char	*s;
+int	*n;
+int	*vn;
+char	**vp;
+{
+
+    int start;
+    int len;
+    int i;
+
+    // Inicializar el contador de variables
+    *n = 0; 
+    len = strlen(s);
+    i = 0;
+
+    while (i < len) 
+    {
+        // Saltar espacios en blanco
+        while (i < len && isspace(s[i])) 
+        {
+            i++;
+        }
+
+        // Si encontramos una letra, es el inicio de una variable
+        if (i < len && isalpha(s[i])) 
+        {
+            // Guardar el puntero al inicio de la variable
+            vp[*n] = &s[i]; 
+            start = i;
+
+            // Avanzar hasta el final de la variable
+            while (i < len && (isalnum(s[i]) || s[i] == ' ' || s[i] == '_')) 
+            {
+                i++;
+            }
+
+            // Guardar la longitud de la variable
+            vn[*n] = i - start; 
+
+            (*n)++; 
+        } 
+        else 
+        {
+            i++;
+        }
+    }
+}
 
 
 
