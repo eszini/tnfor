@@ -3,9 +3,7 @@ repo1/Finaclp2.for
 repo1/Fuelused.for
 repo1/GAS_objt.for
 repo1/LDPROB01.FOR
-repo1/LPMATINV.for
 repo1/LPSOLVER.for
-repo1/MSGProSymRevExp.for
 repo1/WVPARTRK.FOR
 repo1/WinFileFindData.for
 repo1/cla_objt.for
@@ -26,7 +24,6 @@ repo1/msgmmdfd.for
 repo1/msgmmea.for
 repo1/msgmminp.for
 repo1/msgmmout.for
-repo1/msgmmpyb.for
 repo1/msgmmsb6.for
 repo1/msgnorm.for
 repo1/msgoutpt.for
@@ -39,6 +36,7 @@ repo1/tf_objt.for
 repo1/tf_objt2.for
 repo1/wh_objt.for
 repo1/wvpacooprevenuecals.for
+repo1/8800com.f90
 repo1/ABBCapacityMarketRept.f90
 repo1/Abb_CapMarketRptData.f90
 repo1/COAL_VECTOR_OBJ.F90
@@ -151,6 +149,7 @@ repo1/hesi_i4.f90
 repo1/hourly_products_data.f90
 repo1/hourlyproductsdata.f90
 repo1/icap_results.f90
+repo1/icap_summary_report.f90
 repo1/in_objt.f90
 repo1/interg82.f90
 repo1/internal_operation_switches.f90
@@ -160,6 +159,7 @@ repo1/kepcocom.f90
 repo1/lmg_objt.f90
 repo1/logging.f90
 repo1/logging_decs.f90
+repo1/lpmatinv.f90
 repo1/mainovl.f90
 repo1/margnobj.f90
 repo1/mcbtnmcom.f90
@@ -176,10 +176,12 @@ repo1/msgmmcom.f90
 repo1/msgmmexprevcash.f90
 repo1/msgmmfa.f90
 repo1/msgmmfv.f90
+repo1/msgmmpyb.f90
 repo1/msgmmrev.f90
 repo1/msgmmsb6b.f90
 repo1/msgmmtax.f90
 repo1/msgold95rw.f90
+repo1/msgprosymrevexp.f90
 repo1/mwunih.f90
 repo1/newpkshf.f90
 repo1/objtfunc.f90
@@ -230,7 +232,6 @@ repo1/trnsfrm3.f90
 repo1/up_objt.f90
 repo1/weekscom.f90
 repo1/wvpa_data_bases.f90
-repo1/8800COM.MON
 repo1/ACRSLCOM.MON
 repo1/Ac_equiv.MON
 repo1/DSMCOM.MON

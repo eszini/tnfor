@@ -1,0 +1,2 @@
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon

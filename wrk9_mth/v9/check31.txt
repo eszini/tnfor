@@ -1,0 +1,88 @@
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:            INCOME_VARIABLES(:,Monthly Common Dividends) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:            INCOME_VARIABLES(0,Monthly Common Dividends) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:               INCOME_VARIABLES(MO,Monthly Common Dividends) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                   + INCOME_VARIABLES(MO,Monthly Common Dividends)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                     INCOME_VARIABLES(MO,Monthly Common Dividends)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                     INCOME_VARIABLES(MO,Monthly Common Dividends)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                     INCOME_VARIABLES(MO,Monthly Common Dividends)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                     INCOME_VARIABLES(MO,Monthly Common Dividends)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                     INCOME_VARIABLES(MO,Monthly Common Dividends)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:            INCOME_VARIABLES(0,Monthly Common Dividends) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:                  INCOME_VARIABLES(MO,Monthly Common Dividends) = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:                     INCOME_VARIABLES(MO,Monthly Common Dividends) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:                     INCOME_VARIABLES(MO,Monthly Common Dividends) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:                     INCOME_VARIABLES(MO,Monthly Common Dividends) = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:         INCOME_VARIABLES(0,Monthly Common Dividends) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                SUM(INCOME_VARIABLES(1:,Monthly Common Dividends))
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +          INCOME_VARIABLES(0,Monthly Common Dividends)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                    - INCOME_VARIABLES(0,Monthly Common Dividends)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                   - INCOME_VARIABLES(MO,Monthly Common Dividends)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                  + INCOME_VARIABLES(MO,Monthly Common Dividends)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               + INCOME_VARIABLES(MO,Monthly Common Dividends)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:                  IF(VARIABLE == Monthly Common Dividends) CYCLE
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                      INCOME_VARIABLES(:,Monthly Common Dividends)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:               IF(VARIABLE == Monthly Common Dividends) THEN
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:                  INCOME_VARIABLES(:,Monthly Common Dividends) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               + INCOME_VARIABLES(MO,Monthly Common Dividends)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                  INCOME_VARIABLES(MO,Monthly Common Dividends)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                  INCOME_VARIABLES(MO,Monthly Common Dividends)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +          - INCOME_VARIABLES(MO,Monthly Common Dividends)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                 - INCOME_VARIABLES(MO,Monthly Common Dividends)
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: Monthly Common Dividends=121
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:         INCOME_VARIABLES(:,Monthly EBIT) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:         INCOME_VARIABLES(:,Monthly EBITAD) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                   INCOME_VARIABLES(:,Monthly EBIT)
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: Monthly EBITAD=201
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: Monthly EBIT=202
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:         INCOME_VARIABLES(:,Monthly EBITAD) =
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: Monthly EBITAD=201
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:         INCOME_VARIABLES(0,Monthly INCOME AFTER INTEREST) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:         INCOME_VARIABLES(0,Monthly INCOME AFTER INTEREST) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:            INCOME_VARIABLES(MO,Monthly INCOME AFTER INTEREST) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:            INCOME_VARIABLES(MO,Monthly INCOME AFTER INTEREST) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +             INCOME_VARIABLES(MO,Monthly INCOME AFTER INTEREST)
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: Monthly INCOME AFTER INTEREST=153
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:         INCOME_VARIABLES(0,Monthly Net Income) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +          INCOME_VARIABLES(0,Monthly Net Income) -
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:         INCOME_VARIABLES(0,Monthly Net Income) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                 INCOME_VARIABLES(MO,Monthly Net Income)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:            INCOME_VARIABLES(MO,Monthly Net Income) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +          INCOME_VARIABLES(MO,Monthly Net Income) -
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                       INCOME_VARIABLES(MO,Monthly Net Income) ! 25
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               INCOME_VARIABLES(MO,Monthly Net Income),            ! 25
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               INCOME_VARIABLES(MO,Monthly Net Income),            ! 25
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:            INCOME_VARIABLES(MO,Monthly Net Income) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +          INCOME_VARIABLES(MO,Monthly Net Income)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:            INCOME_VARIABLES(MO,Monthly Net Income) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               INCOME_VARIABLES(MO,Monthly Net Income)  
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               INCOME_VARIABLES(MO,Monthly Net Income)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +            1. + INCOME_VARIABLES(MO,Monthly Net Income)/
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: Monthly Net Income=154
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               INCOME_VARIABLES(MO,Monthly Other),
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +           + INCOME_VARIABLES(MO,Monthly Other)
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: Monthly Other=47
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:         INCOME_VARIABLES(0,Monthly RETAINED EARNINGS) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:         INCOME_VARIABLES(0,Monthly RETAINED EARNINGS) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:             INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                + INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                  + INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:            INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:            INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS) =
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: Monthly RETAINED EARNINGS=156
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:                  INCOME_VARIABLES(MO,Quarterly Earnings per Share) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:                     INCOME_VARIABLES(MO,Quarterly Earnings per Share) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                         Quarterly Earnings per Share) = NOT_AVAIL
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: Quarterly Earnings per Share=225
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: WVPA Member Energy Sales=267
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: WVPA Member Margin=269
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: WVPA Member Rates with SDI=265
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: WVPA Member Rates without SDI=266
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: WVPA Non Member Margin=270
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: WVPA SDI Energy Sales=268
