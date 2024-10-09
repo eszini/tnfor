@@ -22,12 +22,8 @@ GAS_objt.for                         spinlib.mon
 GAS_objt.for                         spinlib.mon
 GAS_objt.for                         spinlib.mon
 GAS_objt.for                         spinlib.mon
-LDPROB01.FOR                         8800com.mon
-LPMATINV.for                         lpintcom.mon
-LPMATINV.for                         lpintcom.mon
 LPSOLVER.for                         lpintcom.mon
 LPSOLVER.for                         spinlib.mon
-MSGProSymRevExp.for                  mthnmcom.mon
 WVPARTRK.FOR                         mthnmcom.mon
 WVPARTRK.FOR                         namescom.mon
 cla_objt.for                         mthnmcom.mon
@@ -54,7 +50,6 @@ dsm_objt.for                         dsmfncom.mon
 dsm_objt.for                         dsmfrcom.mon
 dsm_objt.for                         dsmfrcom.mon
 dsm_objt.for                         dsmfrcom.mon
-dsslam.for                           8800com.mon
 ec_objt.f90                          spinlib.mon
 enrglimt.for                         mthnmcom.mon
 enrglimt.for                         namescom.mon
@@ -64,6 +59,8 @@ finanbse.for                         dsmfrcom.mon
 finanbse.for                         financom.mon
 finanbse.for                         mthnmcom.mon
 fn_objt.f90                          spinlib.mon
+lpmatinv.f90                         lpintcom.mon
+lpmatinv.f90                         lpintcom.mon
 mainovl.f90                          spinlib.mon
 midasmod.for                         dsmfrcom.mon
 midasmod.for                         mthnmcom.mon
@@ -118,8 +115,8 @@ msgmmout.for                         namescom.mon
 msgmmout.for                         namescom.mon
 msgmmout.for                         namescom.mon
 msgmmout.for                         namescom.mon
-msgmmpyb.for                         mthnmcom.mon
-msgmmpyb.for                         mthnmcom.mon
+msgmmpyb.f90                         mthnmcom.mon
+msgmmpyb.f90                         mthnmcom.mon
 msgmmrev.f90                         mthnmcom.mon
 msgmmrev.f90                         mthnmcom.mon
 msgmmrev.f90                         namescom.mon
@@ -135,6 +132,7 @@ msgoutpt.for                         dsmfrcom.mon
 msgoutpt.for                         dsmfrcom.mon
 msgoutpt.for                         financom.mon
 msgoutpt.for                         paltocom.mon
+msgprosymrevexp.f90                  mthnmcom.mon
 newfred2.for                         spinlib.mon
 newfred2.for                         spinlib.mon
 newfred2.for                         spinlib.mon
@@ -146,7 +144,6 @@ newfred2.for                         spinlib.mon
 newfred2.for                         spinlib.mon
 servicac.for                         mthnmcom.mon
 servicac.for                         namescom.mon
-snszmds.f90                          8800com.mon
 tf_objt.for                          mthnmcom.mon
 tf_objt.for                          namescom.mon
 tf_objt.for                          spinlib.mon

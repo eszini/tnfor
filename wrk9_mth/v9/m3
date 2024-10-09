@@ -1,0 +1,237 @@
+msgmmout.for                   (1) 01532 |            INCOME_VARIABLES(:,Monthly Common Dividends) =|
+msgmmout.for                       01532 |            INCOME_VARIABLES(:,Monthly_Common_Dividends) =|
+
+msgmmout.for                   (1) 01537 |            INCOME_VARIABLES(0,Monthly Common Dividends) =|
+msgmmout.for                       01537 |            INCOME_VARIABLES(0,Monthly_Common_Dividends) =|
+
+msgmmout.for                   (1) 01540 |               INCOME_VARIABLES(MO,Monthly Common Dividends) =|
+msgmmout.for                       01540 |               INCOME_VARIABLES(MO,Monthly_Common_Dividends) =|
+
+msgmmout.for                   (1) 01553 |     +                   + INCOME_VARIABLES(MO,Monthly Common Dividends)|
+msgmmout.for                       01553 |     +                   + INCOME_VARIABLES(MO,Monthly_Common_Dividends)|
+
+msgmmout.for                   (1) 01556 |     +                     INCOME_VARIABLES(MO,Monthly Common Dividends)|
+msgmmout.for                       01556 |     +                     INCOME_VARIABLES(MO,Monthly_Common_Dividends)|
+
+msgmmout.for                   (1) 01572 |     +                     INCOME_VARIABLES(MO,Monthly Common Dividends)|
+msgmmout.for                       01572 |     +                     INCOME_VARIABLES(MO,Monthly_Common_Dividends)|
+
+msgmmout.for                   (1) 01576 |     +                     INCOME_VARIABLES(MO,Monthly Common Dividends)|
+msgmmout.for                       01576 |     +                     INCOME_VARIABLES(MO,Monthly_Common_Dividends)|
+
+msgmmout.for                   (1) 01579 |     +                     INCOME_VARIABLES(MO,Monthly Common Dividends)|
+msgmmout.for                       01579 |     +                     INCOME_VARIABLES(MO,Monthly_Common_Dividends)|
+
+msgmmout.for                   (1) 01586 |     +                     INCOME_VARIABLES(MO,Monthly Common Dividends)|
+msgmmout.for                       01586 |     +                     INCOME_VARIABLES(MO,Monthly_Common_Dividends)|
+
+msgmmout.for                   (1) 01591 |            INCOME_VARIABLES(0,Monthly Common Dividends) = |
+msgmmout.for                       01591 |            INCOME_VARIABLES(0,Monthly_Common_Dividends) = |
+
+msgmmout.for                   (1) 01628 |                  INCOME_VARIABLES(MO,Monthly Common Dividends) = 0.|
+msgmmout.for                       01628 |                  INCOME_VARIABLES(MO,Monthly_Common_Dividends) = 0.|
+
+msgmmout.for                   (1) 01639 |                     INCOME_VARIABLES(MO,Monthly Common Dividends) =|
+msgmmout.for                       01639 |                     INCOME_VARIABLES(MO,Monthly_Common_Dividends) =|
+
+msgmmout.for                   (1) 01657 |                     INCOME_VARIABLES(MO,Monthly Common Dividends) =|
+msgmmout.for                       01657 |                     INCOME_VARIABLES(MO,Monthly_Common_Dividends) =|
+
+msgmmout.for                   (1) 01666 |                     INCOME_VARIABLES(MO,Monthly Common Dividends) = 0.|
+msgmmout.for                       01666 |                     INCOME_VARIABLES(MO,Monthly_Common_Dividends) = 0.|
+
+msgmmout.for                   (1) 01675 |         INCOME_VARIABLES(0,Monthly Common Dividends) =|
+msgmmout.for                       01675 |         INCOME_VARIABLES(0,Monthly_Common_Dividends) =|
+
+msgmmout.for                   (1) 01676 |     +                SUM(INCOME_VARIABLES(1:,Monthly Common Dividends))|
+msgmmout.for                       01676 |     +                SUM(INCOME_VARIABLES(1:,Monthly_Common_Dividends))|
+
+msgmmout.for                   (1) 01829 |         INCOME_VARIABLES(0,Monthly INCOME AFTER INTEREST) = |
+msgmmout.for                       01829 |         INCOME_VARIABLES(0,Monthly_INCOME_AFTER_INTEREST) = |
+
+msgmmout.for                   (1) 01831 |         INCOME_VARIABLES(0,Monthly Net Income) = |
+msgmmout.for                       01831 |         INCOME_VARIABLES(0,Monthly_Net_Income) = |
+
+msgmmout.for                   (1) 01834 |     +          INCOME_VARIABLES(0,Monthly Net Income) -|
+msgmmout.for                       01834 |     +          INCOME_VARIABLES(0,Monthly_Net_Income) -|
+
+msgmmout.for                   (1) 01836 |         INCOME_VARIABLES(0,Monthly RETAINED EARNINGS) = |
+msgmmout.for                       01836 |         INCOME_VARIABLES(0,Monthly_RETAINED_EARNINGS) = |
+
+msgmmout.for                   (1) 01838 |     +          INCOME_VARIABLES(0,Monthly Common Dividends)|
+msgmmout.for                       01838 |     +          INCOME_VARIABLES(0,Monthly_Common_Dividends)|
+
+msgmmout.for                   (1) 02046 |         INCOME_VARIABLES(0,Monthly INCOME AFTER INTEREST) = |
+msgmmout.for                       02046 |         INCOME_VARIABLES(0,Monthly_INCOME_AFTER_INTEREST) = |
+
+msgmmout.for                   (1) 02048 |         INCOME_VARIABLES(0,Monthly Net Income) = |
+msgmmout.for                       02048 |         INCOME_VARIABLES(0,Monthly_Net_Income) = |
+
+msgmmout.for                   (1) 02051 |     +                 INCOME_VARIABLES(MO,Monthly Net Income)|
+msgmmout.for                       02051 |     +                 INCOME_VARIABLES(MO,Monthly_Net_Income)|
+
+msgmmout.for                   (1) 02053 |         INCOME_VARIABLES(0,Monthly RETAINED EARNINGS) = |
+msgmmout.for                       02053 |         INCOME_VARIABLES(0,Monthly_RETAINED_EARNINGS) = |
+
+msgmmout.for                   (1) 02055 |     +                    - INCOME_VARIABLES(0,Monthly Common Dividends)|
+msgmmout.for                       02055 |     +                    - INCOME_VARIABLES(0,Monthly_Common_Dividends)|
+
+msgmmout.for                   (1) 02099 |            INCOME_VARIABLES(MO,Monthly INCOME AFTER INTEREST) = |
+msgmmout.for                       02099 |            INCOME_VARIABLES(MO,Monthly_INCOME_AFTER_INTEREST) = |
+
+msgmmout.for                   (1) 02101 |            INCOME_VARIABLES(MO,Monthly Net Income) = |
+msgmmout.for                       02101 |            INCOME_VARIABLES(MO,Monthly_Net_Income) = |
+
+msgmmout.for                   (1) 02104 |     +          INCOME_VARIABLES(MO,Monthly Net Income) -|
+msgmmout.for                       02104 |     +          INCOME_VARIABLES(MO,Monthly_Net_Income) -|
+
+msgmmout.for                   (1) 02106 |             INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS) =|
+msgmmout.for                       02106 |             INCOME_VARIABLES(MO,Monthly_RETAINED_EARNINGS) =|
+
+msgmmout.for                   (1) 02108 |     +                   - INCOME_VARIABLES(MO,Monthly Common Dividends)|
+msgmmout.for                       02108 |     +                   - INCOME_VARIABLES(MO,Monthly_Common_Dividends)|
+
+msgmmout.for                   (1) 03828 |     +                  + INCOME_VARIABLES(MO,Monthly Common Dividends)|
+msgmmout.for                       03828 |     +                  + INCOME_VARIABLES(MO,Monthly_Common_Dividends)|
+
+msgmmout.for                   (1) 03881 |     +               + INCOME_VARIABLES(MO,Monthly Common Dividends)|
+msgmmout.for                       03881 |     +               + INCOME_VARIABLES(MO,Monthly_Common_Dividends)|
+
+msgmmout.for                   (1) 04007 |     +                + INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS)|
+msgmmout.for                       04007 |     +                + INCOME_VARIABLES(MO,Monthly_RETAINED_EARNINGS)|
+
+msgmmout.for                   (1) 04271 |                  IF(VARIABLE == Monthly Common Dividends) CYCLE|
+msgmmout.for                       04271 |                  IF(VARIABLE == Monthly_Common_Dividends) CYCLE|
+
+msgmmout.for                   (1) 04670 |     +                      INCOME_VARIABLES(:,Monthly Common Dividends)|
+msgmmout.for                       04670 |     +                      INCOME_VARIABLES(:,Monthly_Common_Dividends)|
+
+msgmmout.for                   (1) 04815 |               IF(VARIABLE == Monthly Common Dividends) THEN|
+msgmmout.for                       04815 |               IF(VARIABLE == Monthly_Common_Dividends) THEN|
+
+msgmmout.for                   (1) 04816 |                  INCOME_VARIABLES(:,Monthly Common Dividends) =|
+msgmmout.for                       04816 |                  INCOME_VARIABLES(:,Monthly_Common_Dividends) =|
+
+msgmmout.for                   (1) 05210 |     +                  + INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS)|
+msgmmout.for                       05210 |     +                  + INCOME_VARIABLES(MO,Monthly_RETAINED_EARNINGS)|
+
+msgmmout.for                   (1) 05372 |     +               + INCOME_VARIABLES(MO,Monthly Common Dividends)|
+msgmmout.for                       05372 |     +               + INCOME_VARIABLES(MO,Monthly_Common_Dividends)|
+
+msgmmout.for                   (1) 05573 |                  INCOME_VARIABLES(MO,Quarterly Earnings per Share) =|
+msgmmout.for                       05573 |                  INCOME_VARIABLES(MO,Quarterly_Earnings_per_Share) =|
+
+msgmmout.for                   (1) 05580 |                     INCOME_VARIABLES(MO,Quarterly Earnings per Share) =|
+msgmmout.for                       05580 |                     INCOME_VARIABLES(MO,Quarterly_Earnings_per_Share) =|
+
+msgmmout.for                   (1) 05587 |     +                         Quarterly Earnings per Share) = NOT_AVAIL|
+msgmmout.for                       05587 |     +                         Quarterly_Earnings_per_Share) = NOT_AVAIL|
+
+msgmmout.for                   (1) 05638 |     +                       INCOME_VARIABLES(MO,Monthly Net Income) ! 25|
+msgmmout.for                       05638 |     +                       INCOME_VARIABLES(MO,Monthly_Net_Income) ! 25|
+
+msgmmout.for                   (1) 05716 |     +                  INCOME_VARIABLES(MO,Monthly Common Dividends)|
+msgmmout.for                       05716 |     +                  INCOME_VARIABLES(MO,Monthly_Common_Dividends)|
+
+msgmmout.for                   (1) 05801 |     +               INCOME_VARIABLES(MO,Monthly Net Income),            ! 25|
+msgmmout.for                       05801 |     +               INCOME_VARIABLES(MO,Monthly_Net_Income),            ! 25|
+
+msgmmout.for                   (1) 05850 |     +               INCOME_VARIABLES(MO,Monthly Other),|
+msgmmout.for                       05850 |     +               INCOME_VARIABLES(MO,Monthly_Other),|
+
+msgmmout.for                   (1) 06049 |     +                  INCOME_VARIABLES(MO,Monthly Common Dividends)|
+msgmmout.for                       06049 |     +                  INCOME_VARIABLES(MO,Monthly_Common_Dividends)|
+
+msgmmout.for                   (1) 06137 |     +               INCOME_VARIABLES(MO,Monthly Net Income),            ! 25|
+msgmmout.for                       06137 |     +               INCOME_VARIABLES(MO,Monthly_Net_Income),            ! 25|
+
+msgmmout.for                   (1) 09055 |            INCOME_VARIABLES(MO,Monthly INCOME AFTER INTEREST) = |
+msgmmout.for                       09055 |            INCOME_VARIABLES(MO,Monthly_INCOME_AFTER_INTEREST) = |
+
+msgmmout.for                   (1) 09057 |            INCOME_VARIABLES(MO,Monthly Net Income) = |
+msgmmout.for                       09057 |            INCOME_VARIABLES(MO,Monthly_Net_Income) = |
+
+msgmmout.for                   (1) 09060 |     +          INCOME_VARIABLES(MO,Monthly Net Income)|
+msgmmout.for                       09060 |     +          INCOME_VARIABLES(MO,Monthly_Net_Income)|
+
+msgmmout.for                   (1) 09062 |            INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS) = |
+msgmmout.for                       09062 |            INCOME_VARIABLES(MO,Monthly_RETAINED_EARNINGS) = |
+
+msgmmout.for                   (1) 09064 |     +          - INCOME_VARIABLES(MO,Monthly Common Dividends)|
+msgmmout.for                       09064 |     +          - INCOME_VARIABLES(MO,Monthly_Common_Dividends)|
+
+msgmmout.for                   (1) 09147 |     +             INCOME_VARIABLES(MO,Monthly INCOME AFTER INTEREST)|
+msgmmout.for                       09147 |     +             INCOME_VARIABLES(MO,Monthly_INCOME_AFTER_INTEREST)|
+
+msgmmout.for                   (1) 09262 |     +           + INCOME_VARIABLES(MO,Monthly Other)|
+msgmmout.for                       09262 |     +           + INCOME_VARIABLES(MO,Monthly_Other)|
+
+msgmmout.for                   (1) 09849 |         INCOME_VARIABLES(:,Monthly EBIT) =|
+msgmmout.for                       09849 |         INCOME_VARIABLES(:,Monthly_EBIT) =|
+
+msgmmout.for                   (1) 09861 |         INCOME_VARIABLES(:,Monthly EBITAD) =|
+msgmmout.for                       09861 |         INCOME_VARIABLES(:,Monthly_EBITAD) =|
+
+msgmmout.for                   (1) 09862 |     +                   INCOME_VARIABLES(:,Monthly EBIT)|
+msgmmout.for                       09862 |     +                   INCOME_VARIABLES(:,Monthly_EBIT)|
+
+msgmmout.for                   (1) 09886 |            INCOME_VARIABLES(MO,Monthly Net Income) =|
+msgmmout.for                       09886 |            INCOME_VARIABLES(MO,Monthly_Net_Income) =|
+
+msgmmout.for                   (1) 09887 |     +               INCOME_VARIABLES(MO,Monthly Net Income)  |
+msgmmout.for                       09887 |     +               INCOME_VARIABLES(MO,Monthly_Net_Income)  |
+
+msgmmout.for                   (1) 09892 |     +               INCOME_VARIABLES(MO,Monthly Net Income)|
+msgmmout.for                       09892 |     +               INCOME_VARIABLES(MO,Monthly_Net_Income)|
+
+msgmmout.for                   (1) 09894 |            INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS) =|
+msgmmout.for                       09894 |            INCOME_VARIABLES(MO,Monthly_RETAINED_EARNINGS) =|
+
+msgmmout.for                   (1) 09896 |     +                 - INCOME_VARIABLES(MO,Monthly Common Dividends)|
+msgmmout.for                       09896 |     +                 - INCOME_VARIABLES(MO,Monthly_Common_Dividends)|
+
+msgmmout.for                   (1) 09905 |     +            1. + INCOME_VARIABLES(MO,Monthly Net Income)/|
+msgmmout.for                       09905 |     +            1. + INCOME_VARIABLES(MO,Monthly_Net_Income)/|
+
+mthnmcom.mon                   (1) 00050 |      integer(kind=2),parameter:: Monthly Other=47|
+mthnmcom.mon                       00050 |      integer(kind=2),parameter:: Monthly_Other=47|
+
+mthnmcom.mon                   (1) 00150 |      integer(kind=2),parameter:: Monthly Common Dividends=121|
+mthnmcom.mon                       00150 |      integer(kind=2),parameter:: Monthly_Common_Dividends=121|
+
+mthnmcom.mon                   (1) 00157 |      integer(kind=2),parameter:: Monthly INCOME AFTER INTEREST=153|
+mthnmcom.mon                       00157 |      integer(kind=2),parameter:: Monthly_INCOME_AFTER_INTEREST=153|
+
+mthnmcom.mon                   (1) 00158 |      integer(kind=2),parameter:: Monthly Net Income=154|
+mthnmcom.mon                       00158 |      integer(kind=2),parameter:: Monthly_Net_Income=154|
+
+mthnmcom.mon                   (1) 00160 |      integer(kind=2),parameter:: Monthly RETAINED EARNINGS=156|
+mthnmcom.mon                       00160 |      integer(kind=2),parameter:: Monthly_RETAINED_EARNINGS=156|
+
+mthnmcom.mon                   (1) 00164 |      integer(kind=2),parameter:: Quarterly Earnings per Share=225|
+mthnmcom.mon                       00164 |      integer(kind=2),parameter:: Quarterly_Earnings_per_Share=225|
+
+mthnmcom.mon                   (1) 00206 |      integer(kind=2),parameter:: Monthly EBITAD=201|
+mthnmcom.mon                       00206 |      integer(kind=2),parameter:: Monthly_EBITAD=201|
+
+mthnmcom.mon                   (1) 00208 |      integer(kind=2),parameter:: Monthly EBIT=202|
+mthnmcom.mon                       00208 |      integer(kind=2),parameter:: Monthly_EBIT=202|
+
+mthnmcom.mon                   (1) 00219 |      integer(kind=2),parameter:: WVPA Member Rates with SDI=265|
+mthnmcom.mon                       00219 |      integer(kind=2),parameter:: WVPA_Member_Rates_with_SDI=265|
+
+mthnmcom.mon                   (1) 00220 |      integer(kind=2),parameter:: WVPA Member Rates without SDI=266|
+mthnmcom.mon                       00220 |      integer(kind=2),parameter:: WVPA_Member_Rates_without_SDI=266|
+
+mthnmcom.mon                   (1) 00221 |      integer(kind=2),parameter:: WVPA Member Energy Sales=267|
+mthnmcom.mon                       00221 |      integer(kind=2),parameter:: WVPA_Member_Energy_Sales=267|
+
+mthnmcom.mon                   (1) 00222 |      integer(kind=2),parameter:: WVPA SDI Energy Sales=268|
+mthnmcom.mon                       00222 |      integer(kind=2),parameter:: WVPA_SDI_Energy_Sales=268|
+
+mthnmcom.mon                   (1) 00223 |      integer(kind=2),parameter:: WVPA Member Margin=269|
+mthnmcom.mon                       00223 |      integer(kind=2),parameter:: WVPA_Member_Margin=269|
+
+mthnmcom.mon                   (1) 00224 |      integer(kind=2),parameter:: WVPA Non Member Margin=270|
+mthnmcom.mon                       00224 |      integer(kind=2),parameter:: WVPA_Non_Member_Margin=270|
+

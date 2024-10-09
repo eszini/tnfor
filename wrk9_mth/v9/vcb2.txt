@@ -1,0 +1,14 @@
+|WVPA Member Rates with SDI|
+|WVPA Member Rates without SDI|
+|Monthly INCOME AFTER INTEREST|
+|Quarterly Earnings per Share|
+|WVPA Member Energy Sales|
+|WVPA SDI Energy Sales|
+|WVPA Non Member Margin|
+|Monthly Common Dividends|
+|Monthly Net Income|
+|Monthly RETAINED EARNINGS|
+|WVPA Member Margin|
+|Monthly Other|
+|Monthly EBITAD|
+|Monthly EBIT|

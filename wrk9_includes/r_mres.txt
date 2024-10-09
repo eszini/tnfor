@@ -1,6 +1,3 @@
-8800com.mon      LDPROB01.FOR
-8800com.mon      dsslam.for
-8800com.mon      snszmds.f90
 ac_elmeq.mon     FINACELM.FOR
 ac_equiv.mon     msgmmsb6.for
 acrslcom.mon     Finaclp2.for
@@ -37,11 +34,10 @@ financom.mon     co_objt.for
 financom.mon     finanbse.for
 financom.mon     msgoutpt.for
 finascom.mon     msgmmasb.for
-lpintcom.mon     LPMATINV.for
-lpintcom.mon     LPMATINV.for
 lpintcom.mon     LPSOLVER.for
+lpintcom.mon     lpmatinv.f90
+lpintcom.mon     lpmatinv.f90
 mthnmcom.mon     GAS_objt.for
-mthnmcom.mon     MSGProSymRevExp.for
 mthnmcom.mon     WVPARTRK.FOR
 mthnmcom.mon     cla_objt.for
 mthnmcom.mon     coal_obj.for
@@ -70,11 +66,12 @@ mthnmcom.mon     msgmmout.for
 mthnmcom.mon     msgmmout.for
 mthnmcom.mon     msgmmout.for
 mthnmcom.mon     msgmmout.for
-mthnmcom.mon     msgmmpyb.for
-mthnmcom.mon     msgmmpyb.for
+mthnmcom.mon     msgmmpyb.f90
+mthnmcom.mon     msgmmpyb.f90
 mthnmcom.mon     msgmmrev.f90
 mthnmcom.mon     msgmmrev.f90
 mthnmcom.mon     msgmmtax.f90
+mthnmcom.mon     msgprosymrevexp.f90
 mthnmcom.mon     servicac.for
 mthnmcom.mon     tf_objt.for
 mthnmcom.mon     transobj2.f90

@@ -1,0 +1,225 @@
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                 MONTHLY_COMMON_DIVIDENDS,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:      REAL*4 QUARTERY_CS_DIVIDENDS(4),MONTHLY_COMMON_DIVIDENDS(0:12)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:      REAL*4 R_MONTHLY_COMMON_DIVIDENDS(0:12),
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                       MONTHLY_COMMON_DIVIDENDS(:)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                       MONTHLY_COMMON_DIVIDENDS(:)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                       MONTHLY_COMMON_DIVIDENDS(0)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                      MONTHLY_COMMON_DIVIDENDS(MO)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                       MONTHLY_COMMON_DIVIDENDS(0)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:      ENTRY COMMON_STOCK_DIVIDEND_ACCRUAL(R_MONTHLY_COMMON_DIVIDENDS,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                  + R_MONTHLY_COMMON_DIVIDENDS(MO)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:         R_COMMON_STOCK_DIV_ACCRUALS = R_MONTHLY_COMMON_DIVIDENDS(0)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:      REAL*4 MONTHLY_COMMON_DIVIDENDS(0:12)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:                  MONTHLY_COMMON_DIVIDENDS(1:) = COMMON_DIVIDENDS/12.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:                  MONTHLY_COMMON_DIVIDENDS(0) = COMMON_DIVIDENDS
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:                     MONTHLY_COMMON_DIVIDENDS = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:                        MONTHLY_COMMON_DIVIDENDS(MO) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:                        MONTHLY_COMMON_DIVIDENDS = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:                           MONTHLY_COMMON_DIVIDENDS(MO) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:                              MONTHLY_COMMON_DIVIDENDS(MO) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:                              MONTHLY_COMMON_DIVIDENDS(MO) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:                        MONTHLY_COMMON_DIVIDENDS(0) = COMMON_DIVIDENDS
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:                              MONTHLY_COMMON_DIVIDENDS(MO) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:                              MONTHLY_COMMON_DIVIDENDS(MO) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:               MONTHLY_COMMON_DIVIDENDS(0) = 
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                 SUM(MONTHLY_COMMON_DIVIDENDS(1:))
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:               COMMON_DIVIDENDS = MONTHLY_COMMON_DIVIDENDS(0) 
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:c     +                                      MONTHLY_COMMON_DIVIDENDS,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                               MONTHLY_COMMON_DIVIDENDS,
+/home/123-D56SW/wrk/Midas/ABBICAP/clreport.for:      REAL ::  MONTHLY_EBITDA
+/home/123-D56SW/wrk/Midas/ABBICAP/clreport.for:         MONTHLY_EBITDA = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/clreport.for:                  MONTHLY_EBITDA = MONTHLY_EBITDA + UNIT_EBITDA
+/home/123-D56SW/wrk/Midas/ABBICAP/clreport.for:     +               MONTHLY_EBITDA,
+/home/123-D56SW/wrk/Midas/ABBICAP/clreport.for:            MONTHLY_EBITDA = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/clreport.for:                  MONTHLY_EBITDA = MONTHLY_EBITDA + FISCAL_EBITDA(I)
+/home/123-D56SW/wrk/Midas/ABBICAP/clreport.for:     +               MONTHLY_EBITDA,
+/home/123-D56SW/wrk/Midas/ABBICAP/clreport.for:            MONTHLY_EBITDA = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/clreport.for:                  MONTHLY_EBITDA = MONTHLY_EBITDA +
+/home/123-D56SW/wrk/Midas/ABBICAP/clreport.for:     +               MONTHLY_EBITDA,
+/home/123-D56SW/wrk/Midas/ABBICAP/clreport.for:     +               MONTHLY_EBITDA,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +       MONTHLY_INCOME_AFTER_INTEREST,MONTHLY_NET_INCOME,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +           MONTHLY_INCOME_AFTER_INTEREST(INT2(0),INCOME_VARIABLES)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                MONTHLY_INCOME_AFTER_INTEREST(MO,INCOME_VARIABLES)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                MONTHLY_INCOME_AFTER_INTEREST(MO,INCOME_VARIABLES)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +       MONTHLY_INCOME_AFTER_INTEREST,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                MONTHLY_INCOME_AFTER_INTEREST(MO,INCOME_VARIABLES)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +       MONTHLY_INCOME_AFTER_INTEREST,MONTHLY_NET_INCOME,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:      ENTRY MONTHLY_INCOME_AFTER_INTEREST(MO,INCOME_VARIABLES)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:         MONTHLY_INCOME_AFTER_INTEREST =  
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +       MONTHLY_INCOME_AFTER_INTEREST,MONTHLY_NET_INCOME,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                      MONTHLY_NET_INCOME(INT2(0),INCOME_VARIABLES)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                           MONTHLY_NET_INCOME(MO,INCOME_VARIABLES)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                           MONTHLY_NET_INCOME(MO,INCOME_VARIABLES)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +       MONTHLY_NET_INCOME,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                           MONTHLY_NET_INCOME(MO,INCOME_VARIABLES)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +       MONTHLY_INCOME_AFTER_INTEREST,MONTHLY_NET_INCOME,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:      ENTRY MONTHLY_NET_INCOME(MO,INCOME_VARIABLES) 
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:         MONTHLY_NET_INCOME =  
+/home/123-D56SW/wrk/Midas/ABBICAP/MSGProSymRevExp.for:         INC_MONTH_VARS(:,monthly_other_revenue) =
+/home/123-D56SW/wrk/Midas/ABBICAP/MSGProSymRevExp.for:     +             INC_MONTH_VARS(:,monthly_other_revenue)
+/home/123-D56SW/wrk/Midas/ABBICAP/cla_objt.for:     +       MONTHLY_OTHER_AVAIL_MULT(12),
+/home/123-D56SW/wrk/Midas/ABBICAP/cla_objt.for:                  MONTHLY_OTHER_AVAIL_MULT(J) =
+/home/123-D56SW/wrk/Midas/ABBICAP/cla_objt.for:     +                                  MONTHLY_OTHER_AVAIL_MULT(J),1.0)
+/home/123-D56SW/wrk/Midas/ABBICAP/cla_objt.for:     +                                  MONTHLY_OTHER_AVAIL_MULT(J),1.0)
+/home/123-D56SW/wrk/Midas/ABBICAP/cla_objt.for:                  MONTH_VARS(MO,BTL_monthly_other_income) =
+/home/123-D56SW/wrk/Midas/ABBICAP/cla_objt.for:     +                      MONTH_VARS(MO,BTL_monthly_other_income)
+/home/123-D56SW/wrk/Midas/ABBICAP/enrglimt.for:                  MONTH_VARS(MO,BTL_monthly_other_income) =
+/home/123-D56SW/wrk/Midas/ABBICAP/enrglimt.for:     +                      MONTH_VARS(MO,BTL_monthly_other_income) +
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:                     R_INCOME_VALUES(MO,monthly_other_oandm) = R_INCOME_VALUES(MO,monthly_other_oandm) &
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:                  R_TRANSFER_VARIABLES(MO,monthly_other_long_term_liabs) = LT_LIAB_BAL_ADJ
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdfd.for:                  INCOME_VARIABLES(MO,monthly_other_oandm) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdfd.for:     +                          INCOME_VARIABLES(MO,monthly_other_oandm)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdfd.for:                  INCOME_VARIABLES(MO,monthly_other_btl_amort) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdfd.for:     +                                         monthly_other_btl_amort)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdfd.for:                  INCOME_VARIABLES(MO,monthly_other_atl_amort) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdfd.for:     +                      INCOME_VARIABLES(MO,monthly_other_atl_amort)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdfd.for:                  INCOME_VARIABLES(MO,monthly_other_atl_amort) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdfd.for:     +                      INCOME_VARIABLES(MO,monthly_other_atl_amort)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdfd.for:                  INCOME_VARIABLES(MO,monthly_other_oandm) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdfd.for:     +                          INCOME_VARIABLES(MO,monthly_other_oandm)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdfd.for:                  BALANCE_VARIABLES(MO,monthly_other_deferred_credits) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdfd.for:               BALANCE_VARIABLES(:,monthly_other_deferred_credits) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdfd.for:     +               BALANCE_VARIABLES(:,monthly_other_deferred_credits)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmexprevcash.f90:                        MONTH_VARS(MO,monthly_other_atl_amort-30) = &
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmexprevcash.f90:                        MONTH_VARS(MO,monthly_other_btl_amort-30) = &
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmexprevcash.f90:                        MONTH_VARS(:,monthly_other_atl_amort-30) = &
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmexprevcash.f90:                               MONTH_VARS(:,monthly_other_atl_amort-30) &
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmexprevcash.f90:                        MONTH_VARS(:,monthly_other_btl_amort-30) = &
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmexprevcash.f90:                               MONTH_VARS(:,monthly_other_btl_amort-30) &
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:      REAL*4 MONTHLY_OTHER_TAXES,MIDAS_ISSUED_COMMON,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +       MONTHLY_OTHER_REV_TAX_RATE(0:12),
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +       MONTHLY_OTHER_EXP_TAX_RATE(0:12)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                       MONTHLY_OTHER_REV_TAX_RATE,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                       MONTHLY_OTHER_EXP_TAX_RATE,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                 INCOME_VARIABLES(:,monthly_other_atl_amort)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                 + INCOME_VARIABLES(:,monthly_other_btl_amort)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                              monthly_other_atl_amort,CLASS_LEVEL)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                              monthly_other_btl_amort,CLASS_LEVEL)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +           + INCOME_VARIABLES(0,monthly_other_atl_amort)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               + INCOME_VARIABLES(0,monthly_other_btl_amort)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +           + INCOME_VARIABLES(MO,monthly_other_atl_amort)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +            INCOME_VARIABLES(MO,monthly_other_btl_amort)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                          MONTHLY_OTHER_TAXES(MO,CLASS_LEVEL,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                       MONTHLY_OTHER_REV_TAX_RATE,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                       MONTHLY_OTHER_EXP_TAX_RATE)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:               BALANCE_SHEET_VARIABLES(0,monthly_other_investments) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                            monthly_other_long_term_liabs) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                            monthly_other_long_term_liabs) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                              monthly_other_long_term_liabs)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                            monthly_other_long_term_liabs) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                              monthly_other_long_term_liabs)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:               BALANCE_SHEET_VARIABLES(MO,monthly_other_investments) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +           BALANCE_SHEET_VARIABLES(MO-1,monthly_other_investments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                            monthly_other_long_term_liabs) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                              monthly_other_long_term_liabs)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                              monthly_other_long_term_liabs)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                              monthly_other_long_term_liabs)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                            monthly_other_long_term_liabs) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:               IF(VARIABLE == monthly_other_investments) THEN
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:                  BALANCE_SHEET_VARIABLES(0,monthly_other_investments) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                      monthly_other_investments) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                        monthly_other_investments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:               IF(VARIABLE == monthly_other_long_term_liabs) THEN
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                            monthly_other_long_term_liabs) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                              monthly_other_long_term_liabs)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                            monthly_other_long_term_liabs) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                              monthly_other_long_term_liabs) 
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:               INCOME_VARIABLES(MO,Monthly_Other_Debit_Amort) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                    INCOME_VARIABLES(MO,monthly_other_atl_amort)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                    + INCOME_VARIABLES(MO,monthly_other_btl_amort)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               INCOME_VARIABLES(MO,monthly_other_oandm),
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               MONTHLY_OTHER_REV_TAX_RATE(MO)*100.,                ! 204 
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               MONTHLY_OTHER_EXP_TAX_RATE(MO)*100.,                ! 205
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               MONTHLY_OTHER_REV_TAX_RATE(MO)*100.,                ! 204 
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +               MONTHLY_OTHER_EXP_TAX_RATE(MO)*100.,                ! 205
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                              monthly_other_long_term_liabs)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +          INCOME_VARIABLES(MO,BTL_monthly_other_income)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:      REAL*4 MONTHLY_OTHER_TAXES,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +       MONTHLY_OTHER_REV_TAX_RATE(0:12),
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +       MONTHLY_OTHER_EXP_TAX_RATE(0:12)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:      ENTRY MONTHLY_OTHER_TAXES(MO,CLASS_LEVEL,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                          MONTHLY_OTHER_REV_TAX_RATE,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                          MONTHLY_OTHER_EXP_TAX_RATE)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +              MONTHLY_OTHER_REV_TAX_RATE(MO) *
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +              + MONTHLY_OTHER_EXP_TAX_RATE(MO) *
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:         MONTHLY_OTHER_TAXES = OTHER_TAXES(MO)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +             INCOME_VARIABLES(MO,BTL_monthly_other_income)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                     INCOME_VARIABLES(MO,BTL_monthly_other_income)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +          + INCOME_VARIABLES(MO,BTL_monthly_other_income)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +           + INCOME_VARIABLES(MO,monthly_other_oandm)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                   monthly_other_deferred_credits)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                   monthly_other_deferred_credits)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                 + INCOME_VARIABLES(MO,monthly_other_atl_amort)
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: monthly_other_revenue=4
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: monthly_other_oandm=45
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: monthly_other_atl_amort=205
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: monthly_other_btl_amort=206
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: Monthly_Other_Debit_Amort=185
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: BTL_monthly_other_income=5
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: monthly_other_investments=8
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: monthly_other_long_term_liabs=36
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: monthly_other_deferred_credits=89
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: monthly_other_credits=13
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:                  R_TRANSFER_VARIABLES(MO,monthly_retained_earnings_bal) = TRANSFER_VALUE(MO,YR,ASSET_CLASS,10)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:                     R_TRANSFER_VARIABLES(MO,monthly_retained_earnings_bal) = R_TRANSFER_VARIABLES(MO, &
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:                                         monthly_retained_earnings_bal) + TRANSFER_VALUE(MO,YR,ASSET_CLASS,10)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:               BALANCE_SHEET_VARIABLES(0,monthly_retained_earnings_bal)=
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                  monthly_retained_earnings_bal) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                    monthly_retained_earnings_bal)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:                  IF(VARIABLE == monthly_retained_earnings_bal) CYCLE
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:               IF(VARIABLE == monthly_retained_earnings_bal) THEN
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                  monthly_retained_earnings_bal) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                  monthly_retained_earnings_bal) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                    monthly_retained_earnings_bal)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +          BALANCE_SHEET_VARIABLES(:,monthly_retained_earnings_bal)
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.mon:      integer(kind=2),parameter:: monthly_retained_earnings_bal=32
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +       QUARTERLY_EARNINGS_PER_SHARE,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:            QUARTERLY_EARNINGS_PER_SHARE = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:                  QUARTERLY_EARNINGS_PER_SHARE =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                    + QUARTERLY_EARNINGS_PER_SHARE
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                     QUARTERLY_EARNINGS_PER_SHARE,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:                     QUARTERLY_EARNINGS_PER_SHARE = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +       WVPA_MEMBER_ENERGY_SALES, ! 751
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +            (VARIABLE(751),WVPA_MEMBER_ENERGY_SALES), ! 751
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:     +                  WVPA_MEMBER_ENERGY_SALES, ! 751
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:!            WVPA_MEMBER_ENERGY_SALES = ENERGY_SOLD_WO_SDI(0)/1000.! 751
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:     +                              WVPA_MEMBER_ENERGY_SALES, ! 751
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:         WVPA_MEMBER_ENERGY_SALES = ENERGY_SOLD_WO_SDI(0)/1000.! 751
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                    WVPA_MEMBER_ENERGY_SALES, ! 751
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                    WVPA_MEMBER_ENERGY_SALES, ! 751
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +       WVPA_MEMBER_MARGIN, ! 753
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +            (VARIABLE(753),WVPA_MEMBER_MARGIN), ! 753
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +       WVPA_MEMBER_RATES_WITH_SDI, !744
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +            (VARIABLE(744),WVPA_MEMBER_RATES_WITH_SDI), !744
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:     +                       WVPA_Member_Rates_with_SDI(0:12),
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:                  WVPA_Member_Rates_with_SDI(MO) = 1000000. *
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:                  WVPA_Member_Rates_with_SDI(MO) = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:!            R_W_SDI = WVPA_Member_Rates_with_SDI(0)
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:         R_W_SDI = WVPA_Member_Rates_with_SDI(0)
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:               WVPA_Member_Rates_with_SDI(MO) = 1000000. *
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:               WVPA_Member_Rates_with_SDI(MO) = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:         R_MONTHLY_VARIABLES(:,265) = WVPA_Member_Rates_with_SDI
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                    WVPA_MEMBER_RATES_WITH_SDI,    !744
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                    WVPA_MEMBER_RATES_WITH_SDI,    !744
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +       WVPA_MEMBER_RATES_WITHOUT_SDI, ! 745
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +            (VARIABLE(745),WVPA_MEMBER_RATES_WITHOUT_SDI), ! 745
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:      REAL (KIND=4), SAVE :: WVPA_Member_Rates_without_SDI(0:12),
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:                  WVPA_Member_Rates_without_SDI(MO) = 1000000. *
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:                  WVPA_Member_Rates_without_SDI(MO) = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:!            R_WO_SDI = WVPA_Member_Rates_without_SDI(0)
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:         R_WO_SDI = WVPA_Member_Rates_without_SDI(0)
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:               WVPA_Member_Rates_without_SDI(MO) = 1000000. *
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:               WVPA_Member_Rates_without_SDI(MO) = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:         R_MONTHLY_VARIABLES(:,266) = WVPA_Member_Rates_without_SDI
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                    WVPA_MEMBER_RATES_WITHOUT_SDI, ! 745
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                    WVPA_MEMBER_RATES_WITHOUT_SDI, ! 745
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +       WVPA_NON_MEMBER_MARGIN, ! 754
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +            (VARIABLE(754),WVPA_NON_MEMBER_MARGIN), ! 754
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +       WVPA_SDI_ENERGY_SALES, ! 752
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +            (VARIABLE(752),WVPA_SDI_ENERGY_SALES), ! 752
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:     +                  WVPA_SDI_ENERGY_SALES, ! 752
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:!            WVPA_SDI_ENERGY_SALES =  ENERGY_SOLD_TO_SDI(0)/1000.
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:     +                              WVPA_SDI_ENERGY_SALES) ! 752
+/home/123-D56SW/wrk/Midas/ABBICAP/WVPARTRK.FOR:         WVPA_SDI_ENERGY_SALES =  ENERGY_SOLD_TO_SDI(0)/1000.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                    WVPA_SDI_ENERGY_SALES) ! 752
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                    WVPA_SDI_ENERGY_SALES) ! 752
