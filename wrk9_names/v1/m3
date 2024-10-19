@@ -1,0 +1,12 @@
+msgmmexprevcash.f90            (1) 01126 |                  CASH_DRILLING_NAME = 'Revenue Receipts'|
+msgmmexprevcash.f90                01126 |                  CASH_DRILLING_NAME = 'Revenue_Receipts'|
+
+msgmmexprevcash.f90            (1) 01135 |                  CASH_DRILLING_NAME = 'Expense Payments'|
+msgmmexprevcash.f90                01135 |                  CASH_DRILLING_NAME = 'Expense_Payments'|
+
+namescom.mon                   (1) 00342 |      integer(kind=2),parameter:: Revenue Receipts=1|
+namescom.mon                       00342 |      integer(kind=2),parameter:: Revenue_Receipts=1|
+
+namescom.mon                   (1) 00343 |      integer(kind=2),parameter:: Expense Payments=2|
+namescom.mon                       00343 |      integer(kind=2),parameter:: Expense_Payments=2|
+

@@ -1,0 +1,37 @@
+!     ******************************************************************
+!     Namescom.mon
+!     Copyright(c) DrG Solutions 2011
+!
+!     Created: 7/2/2011 6:23:20 PM
+!     Author : Mark S Gerber
+!     Last change: MSG 11/2/2011 12:01:16 PM
+!     ******************************************************************
+
+!
+! DRILLING REPORT NAMES
+!
+
+      character(len=1),parameter:: BALANCE_SHEET_ITEM='B'
+      character(len=1),parameter:: INCOME_REPORT_ITEM='I'
+      character(len=1),parameter:: CASH_REPORT_ITEM='C'
+      character(len=1),parameter:: TAX_REPORT_ITEM='T'
+      character(len=1),parameter:: BALANCE_SHEET_ANNUAL_ITEM='A'
+
+!
+! NOTE IF THE EXPENSE FOR REVENUE IS IN THE EXPENSE FILE PUT THE NAME
+! HERE
+!
+      integer(kind=2),parameter:: ODEC_NA3_ID=401 ! ,BTL=2,ATL=1,Reg=0
+      integer(kind=2),parameter:: LAST_INCOME_LINE=80 !30)
+      integer(kind=4),parameter:: EXP_OFFSET_LINE=30
+!
+! REVENUES TYPES
+!
+      integer(kind=2),parameter:: BaseRates=1
+      integer(kind=2),parameter:: AdjustmentClause=2
+      integer(kind=2),parameter:: SecondarySales=3
+      integer(kind=2),parameter:: OtherRevenue=4
+      integer(kind=2),parameter:: BTLRevenues=5
+      integer(kind=2),parameter:: CatawbaRevenues=6
+      integer(kind=2),parameter:: GasRevenues=7
+      integer(kind=2),parameter:: UnbilledRevenues=8

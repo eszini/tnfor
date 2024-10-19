@@ -4084,7 +4084,7 @@ int	ex6_p1()
 	int 	i,j,k,k1,k2;
 	int	l1,l2;
 	int	c1,c2;
-	int	f1,f2,f3,f4,f5;
+	int	f1,f2,f3,f4,f5,f_var_ok;
 	int	p1,p2;
 	int	f_proceso;
 	int	n_f;
@@ -4159,6 +4159,76 @@ int	ex6_p1()
 					{
 						if (!strncmp(b2+k1,b3,strlen(b3)))
 						{
+							f_var_ok = 1;
+
+							printf ("VW1 lin : |%s|\n",b2);
+							printf ("VW2 var : |%s|\n",b3);
+							printf ("VW3 cn1 : (%6d)\n",k1-1);
+							printf ("VW4 cn2 : (%6d)\n",k1+strlen(b3));
+							printf ("VW5 ca1 : (%c) \n",b2[k1-1]);
+							printf ("VW6 ca2 : (%c) \n",b2[k1+strlen(b3)]);
+							printf ("VW7 . . .  \n");
+
+
+							/* la variable esta, pero dentro de un string ! 
+							 * esto detecta lo simple :
+							 * 'variable' ...
+							 * pero faltaria que detecte 
+							 * 'la variable esta dentro de mas caracteres '
+							 */
+
+
+							/* 'variable' */
+							if (b2[k1-1] == '\'' && b2[k1+strlen(b3)] == '\'')
+							{
+								f_var_ok = 0;
+							}
+
+							/* "variable" */
+							if (b2[k1-1] == '\"' && b2[k1+strlen(b3)] == '\"')
+							{
+								f_var_ok = 0;
+							}
+
+							/* 'variable,' */
+							if (b2[k1-1] == '\'' && b2[k1+strlen(b3)] == ',' && b2[k1+strlen(b3)+1] == '\'')
+							{
+								f_var_ok = 0;
+							}
+
+							/* ' variable' */
+							if (b2[k1-1] == ' ' && b2[k1+strlen(b3)] == '\'')
+							{
+								f_var_ok = 0;
+							}
+
+							/* 'variable ' */
+							if (b2[k1-1] == '\'' && b2[k1+strlen(b3)] == ' ')
+							{
+								f_var_ok = 0;
+							}
+
+							/* 'variable-cr' */
+							if (b2[k1-1] == '\'' && b2[k1+strlen(b3)] == '-' 
+                                                                             && b2[k1+strlen(b3)+1] == 'c' && b2[k1+strlen(b3)+2] == 'r')
+							{
+								f_var_ok = 0;
+							}
+
+
+							/* 'variable-dr' */
+							if (b2[k1-1] == '\'' && b2[k1+strlen(b3)] == '-' 
+                                                                             && b2[k1+strlen(b3)+1] == 'd' && b2[k1+strlen(b3)+2] == 'r')
+							{
+								f_var_ok = 0;
+							}
+
+
+
+
+							if (f_var_ok)
+							{
+
 							c1++;
 							f5 = 1;
 	
@@ -4182,7 +4252,7 @@ int	ex6_p1()
 							printf ("VV3 cnt : (%6d)\n",c1);
 							printf ("VV4 lin : (%6d) |%s|\n",lne(nf),b0);
 							printf ("VV5 lin : (%6d) |%s|\n",lne(nf),b1);
-							printf ("VV6 \n");
+							printf ("VV6 - - - - - - \n");
 
 							if (fflog)
 							{
@@ -4212,6 +4282,11 @@ int	ex6_p1()
            prog_name,b5,40-strlen(b5), 40-strlen(b5), " " );
 
 								qm1++;
+
+
+							}
+
+
 
 							}
 						}

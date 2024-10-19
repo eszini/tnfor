@@ -1,0 +1,247 @@
+GAS_objt.for                   (1) 08791 |Gas Storage|
+GAS_objt.for                   (1) 09020 |Gas Storage|
+GAS_objt.for                   (1) 13061 |Gas Storage|
+GAS_objt.for                   (1) 13070 |Gas Storage|
+msgmmadm.f90                   (1) 02222 |Post Retirement Rate|
+msgmmadm.f90                   (1) 02225 |Decommissioning Rate|
+msgmmadm.f90                   (1) 02261 |Gas Storage|
+msgmmadm.f90                   (1) 02279 |Gas Storage|
+msgmmadm.f90                   (1) 02284 |Salvage Value|
+msgmmadm.f90                   (1) 02307 |Equity Risk Adjustment|
+msgmmadm.f90                   (1) 02309 |Economic Assets Adjustment|
+msgmmadm.f90                   (1) 02311 |Operating Profits Adjustment|
+msgmmadm.f90                   (1) 02323 |Balance Deferred Taxes|
+msgmmadm.f90                   (1) 02345 |Balance Deferred Taxes|
+msgmmadm.f90                   (1) 02472 |Interest Payments|
+msgmmadm.f90                   (1) 02491 |ARO Accretion Amount|
+msgmmdbt.for                   (1) 02218 |Interest Payments|
+msgmmdbt.for                   (1) 02220 |Interest Payments|
+msgmmdbt.for                   (1) 02223 |Cash Interest Payments|
+msgmmdbt.for                   (1) 02225 |Cash Interest Payments|
+msgmmdbt.for                   (1) 02242 |Interest Earnings|
+msgmmdbt.for                   (1) 02244 |Interest Earnings|
+msgmmdbt.for                   (1) 02247 |Intra Company Interest Earnings|
+msgmmdbt.for                   (1) 02249 |Intra Company Interest Earnings|
+msgmmdbt.for                   (1) 02252 |Cash Interest Earnings|
+msgmmdbt.for                   (1) 02254 |Cash Interest Earnings|
+msgmmdbt.for                   (1) 02309 |Interest Payments|
+msgmmdbt.for                   (1) 02310 |Interest Payments|
+msgmmdbt.for                   (1) 02313 |Cash Interest Payments|
+msgmmdbt.for                   (1) 02315 |Cash Interest Payments|
+msgmmdbt.for                   (1) 02325 |Interest Earnings|
+msgmmdbt.for                   (1) 02327 |Interest Earnings|
+msgmmdbt.for                   (1) 02330 |Intra Company Interest Earnings|
+msgmmdbt.for                   (1) 02332 |Intra Company Interest Earnings|
+msgmmdbt.for                   (1) 02335 |Cash Interest Earnings|
+msgmmdbt.for                   (1) 02337 |Cash Interest Earnings|
+msgmmdbt.for                   (1) 02398 |Intra Company Interest Earnings|
+msgmmdbt.for                   (1) 02400 |Intra Company Interest Earnings|
+msgmmdbt.for                   (1) 02485 |Dividend 70|
+msgmmdbt.for                   (1) 02486 |Dividend 70|
+msgmmdbt.for                   (1) 02489 |Cash Dividend Earnings|
+msgmmdbt.for                   (1) 02491 |Cash Dividend Earnings|
+msgmmdbt.for                   (1) 02498 |Cash Dividend Earnings|
+msgmmdbt.for                   (1) 02500 |Cash Dividend Earnings|
+msgmmdbt.for                   (1) 02504 |Interest Earnings|
+msgmmdbt.for                   (1) 02506 |Interest Earnings|
+msgmmdbt.for                   (1) 02509 |Cash Interest Earnings|
+msgmmdbt.for                   (1) 02511 |Cash Interest Earnings|
+msgmmdbt.for                   (1) 02532 |Interest Earnings|
+msgmmdbt.for                   (1) 02534 |Interest Earnings|
+msgmmdbt.for                   (1) 02537 |Cash Interest Earnings|
+msgmmdbt.for                   (1) 02539 |Cash Interest Earnings|
+msgmmdbt.for                   (1) 02543 |Intra Company Interest Earnings|
+msgmmdbt.for                   (1) 02545 |Intra Company Interest Earnings|
+msgmmdbt.for                   (1) 02558 |Interest Payments|
+msgmmdbt.for                   (1) 02559 |Interest Payments|
+msgmmdbt.for                   (1) 02563 |Cash Interest Payments|
+msgmmdbt.for                   (1) 02565 |Cash Interest Payments|
+msgmmdbt.for                   (1) 02885 |Interest Earnings|
+msgmmdbt.for                   (1) 03631 |Dividend 70|
+msgmmdbt.for                   (1) 03634 |Interest Earnings|
+msgmmdbt.for                   (1) 03636 |Interest Earnings|
+msgmmdbt.for                   (1) 03639 |Intra Company Interest Earnings|
+msgmmdbt.for                   (1) 03641 |Dividend 70|
+msgmmdbt.for                   (1) 03649 |Cash Interest Earnings|
+msgmmdbt.for                   (1) 03656 |Interest Payments|
+msgmmdbt.for                   (1) 03658 |Cash Interest Payments|
+msgmmdbt.for                   (1) 03887 |Dividend 70|
+msgmmdbt.for                   (1) 03890 |Interest Earnings|
+msgmmdbt.for                   (1) 03895 |Dividend 70|
+msgmmdbt.for                   (1) 03901 |Interest Payments|
+msgmmdbt.for                   (1) 03911 |Interest Earnings|
+msgmmdbt.for                   (1) 03915 |Interest Earnings|
+msgmmdbt.for                   (1) 03982 |Cash Dividend Earnings|
+msgmmdbt.for                   (1) 03986 |Cash Interest Earnings|
+msgmmdbt.for                   (1) 03988 |Cash Interest Earnings|
+msgmmdbt.for                   (1) 03992 |Cash Interest Payments|
+msgmmdbt.for                   (1) 04622 |Dividend 70|
+msgmmdbt.for                   (1) 04624 |Interest Earnings|
+msgmmdbt.for                   (1) 04625 |Interest Earnings|
+msgmmdbt.for                   (1) 04628 |Dividend 70|
+msgmmdbt.for                   (1) 04629 |Interest Payments|
+msgmmdbt.for                   (1) 04632 |Cash Interest Payments|
+msgmmdbt.for                   (1) 04635 |Interest Payments|
+msgmmdbt.for                   (1) 04661 |Interest Earnings|
+msgmmdbt.for                   (1) 04689 |Cash Dividend Earnings|
+msgmmdbt.for                   (1) 04691 |Cash Interest Earnings|
+msgmmdbt.for                   (1) 04693 |Cash Interest Earnings|
+msgmmdbt.for                   (1) 04712 |Dividend 70|
+msgmmdbt.for                   (1) 04715 |Interest Earnings|
+msgmmdbt.for                   (1) 04717 |Interest Earnings|
+msgmmdbt.for                   (1) 04721 |Dividend 70|
+msgmmdbt.for                   (1) 04723 |Interest Payments|
+msgmmdbt.for                   (1) 04726 |Cash Interest Payments|
+msgmmdbt.for                   (1) 04751 |Interest Earnings|
+msgmmdbt.for                   (1) 04793 |Cash Dividend Earnings|
+msgmmdbt.for                   (1) 04795 |Cash Interest Earnings|
+msgmmdbt.for                   (1) 04797 |Cash Interest Earnings|
+msgmmdbt.for                   (1) 04817 |Interest Payments|
+msgmmdbt.for                   (1) 04826 |Intra Company Interest Earnings|
+msgmmdbt.for                   (1) 04847 |Cash Dividend Earnings|
+msgmmdbt.for                   (1) 04851 |Cash Interest Earnings|
+msgmmdbt.for                   (1) 04853 |Cash Interest Earnings|
+msgmmdbt.for                   (1) 04857 |Cash Interest Payments|
+msgmmsb6.for                   (1) 02687 |ARO Liabilities|
+msgmmsb6.for                   (1) 02707 |Regulatory Deferred Credits|
+msgmmsb6.for                   (1) 02711 |Other Deferred Credits|
+msgmmsb6.for                   (1) 02715 |Reaquired Debt Gain|
+msgmmsb6.for                   (1) 12089 |ARO Net Assets|
+msgmmsb6.for                   (1) 12092 |ARO Liabilities|
+msgmmsb6.for                   (1) 12108 |Other Deferred Credits|
+msgmmsb6.for                   (1) 12112 |Regulatory Deferred Credits|
+msgmmsb6.for                   (1) 12116 |Reaquired Debt Gain|
+msgmmsb6.for                   (1) 12250 |ARO Net Assets|
+msgmmsb6.for                   (1) 12254 |ARO Liabilities|
+msgmmsb6.for                   (1) 12537 |Other Deferred Credits|
+msgmmsb6.for                   (1) 12541 |Regulatory Deferred Credits|
+msgmmsb6.for                   (1) 12545 |Reaquired Debt Gain|
+msgmmsb6.for                   (1) 12862 |ARO Net Assets|
+msgmmsb6.for                   (1) 13680 |ARO Net Assets|
+msgmmsb6.for                   (1) 13681 |ARO Net Assets|
+msgmmsb6.for                   (1) 13683 |ARO Net Assets|
+msgmmsb6.for                   (1) 13684 |ARO Liabilities|
+msgmmsb6.for                   (1) 13685 |ARO Liabilities|
+msgmmsb6.for                   (1) 13687 |ARO Liabilities|
+msgmmsb6.for                   (1) 13689 |Other Deferred Credits|
+msgmmsb6.for                   (1) 13691 |Other Deferred Credits|
+msgmmsb6.for                   (1) 13694 |Other Deferred Credits|
+msgmmsb6.for                   (1) 13696 |Regulatory Deferred Credits|
+msgmmsb6.for                   (1) 13698 |Regulatory Deferred Credits|
+msgmmsb6.for                   (1) 13701 |Regulatory Deferred Credits|
+msgmmsb6.for                   (1) 13703 |Reaquired Debt Gain|
+msgmmsb6.for                   (1) 13705 |Reaquired Debt Gain|
+msgmmsb6.for                   (1) 13708 |Reaquired Debt Gain|
+msgmmsb6.for                   (1) 13713 |ARO Net Assets|
+msgmmsb6.for                   (1) 13714 |ARO Liabilities|
+msgmmsb6.for                   (1) 13715 |Other Deferred Credits|
+msgmmsb6.for                   (1) 13717 |Regulatory Deferred Credits|
+msgmmsb6.for                   (1) 13719 |Reaquired Debt Gain|
+namescom.f90                   (1) 00250 |Assets NEC Adjustment|
+namescom.f90                   (1) 00251 |Rate Base Adjustment|
+namescom.f90                   (1) 00252 |Deferred Tax Adjustment|
+namescom.f90                   (1) 00253 |Plant in Service Adjustment|
+namescom.f90                   (1) 00258 |CD Balance as PC of Revenues|
+namescom.f90                   (1) 00259 |CD Addendum|
+namescom.f90                   (1) 00260 |CIAC Cash Contributions|
+namescom.f90                   (1) 00261 |CIAC Amortization Rate|
+namescom.f90                   (1) 00262 |CIAC Addendum to Amortization|
+namescom.f90                   (1) 00267 |Assets NEC Addendum|
+namescom.f90                   (1) 00268 |Liabilities NEC Addendum|
+namescom.f90                   (1) 00269 |Fuel Inventory Change|
+namescom.f90                   (1) 00270 |Materials Supplies|
+namescom.f90                   (1) 00271 |Gas Storage|
+namescom.f90                   (1) 00272 |Rate Receivable Accounts|
+namescom.f90                   (1) 00273 |Addendum Receivable Accounts|
+namescom.f90                   (1) 00274 |Rate Payable Accounts|
+namescom.f90                   (1) 00275 |Addendum Payable Accounts|
+namescom.f90                   (1) 00276 |Rate Assets NEC|
+namescom.f90                   (1) 00277 |Rate Liabilities NEC|
+namescom.f90                   (1) 00278 |Fuel Inventory Change Out|
+namescom.f90                   (1) 00279 |Materials Supplies Out|
+namescom.f90                   (1) 00280 |Gas Storage Out|
+namescom.f90                   (1) 00285 |Earnings Decommissioning Fund|
+namescom.f90                   (1) 00286 |Earnings Post Retirement Fund|
+namescom.f90                   (1) 00287 |Earnings ST Investments|
+namescom.f90                   (1) 00288 |Earnings LT Investments|
+namescom.f90                   (1) 00290 |Decommissioning Rate|
+namescom.f90                   (1) 00291 |Post Retirement Rate|
+namescom.f90                   (1) 00292 |STI Rate|
+namescom.f90                   (1) 00293 |LTI Rate|
+namescom.f90                   (1) 00294 |Customer Deposits Rate|
+namescom.f90                   (1) 00295 |OCI Post Retirement Rate|
+namescom.f90                   (1) 00296 |OCI Decommissioning Rate|
+namescom.f90                   (1) 00302 |Net Removal|
+namescom.f90                   (1) 00303 |Cash Received|
+namescom.f90                   (1) 00304 |Gross Book Value|
+namescom.f90                   (1) 00305 |Cumulative Depreciation|
+namescom.f90                   (1) 00306 |Sale Deferred Taxes Adjustment|
+namescom.f90                   (1) 00307 |Sale ATL Amortization|
+namescom.f90                   (1) 00309 |Cost of Removal|
+namescom.f90                   (1) 00310 |Salvage Value|
+namescom.f90                   (1) 00311 |Addedum to Book Gain Loss|
+namescom.f90                   (1) 00316 |Equity Risk Adjustment|
+namescom.f90                   (1) 00317 |Economic Assets Adjustment|
+namescom.f90                   (1) 00318 |Operating Profits Adjustment|
+namescom.f90                   (1) 00319 |Capitial Recovery EXCLUDED OPAT|
+namescom.f90                   (1) 00324 |NucDecom Discount Rate|
+namescom.f90                   (1) 00325 |NucDecom Liability Addendum|
+namescom.f90                   (1) 00326 |OCI Adjustment|
+namescom.f90                   (1) 00327 |FASB87 Intangible Asset Adj|
+namescom.f90                   (1) 00328 |FABS87 Pension Liab Adj|
+namescom.f90                   (1) 00329 |OCI Deferred Tax Adj|
+namescom.f90                   (1) 00330 |ARO Discount Rate|
+namescom.f90                   (1) 00331 |ARO Accretion Amount|
+namescom.f90                   (1) 00332 |ARO Cash Payment|
+namescom.f90                   (1) 00333 |ARO Cash to Bal Sheet Trust|
+namescom.f90                   (1) 00338 |Non Cash Pension|
+namescom.f90                   (1) 00351 |Gross Plant Value|
+namescom.f90                   (1) 00352 |Cumulated Plant Depreciation|
+namescom.f90                   (1) 00353 |Balance Deferred Taxes|
+namescom.f90                   (1) 00354 |Deferred Debit Adjustment|
+namescom.f90                   (1) 00355 |ATL Debit Amortization|
+namescom.f90                   (1) 00356 |BTL Debt Amortization|
+namescom.f90                   (1) 00357 |Annual Deferred Taxes|
+namescom.f90                   (1) 00358 |Deferred ITCs Balance|
+namescom.f90                   (1) 00359 |Net Nuclear Fuel|
+namescom.f90                   (1) 00360 |Retained Earnings|
+namescom.f90                   (1) 00361 |Extra Ordinary Expense|
+namescom.f90                   (1) 00362 |LT Liabilities Balance|
+namescom.f90                   (1) 00363 |Balance Deferred Taxes Dr|
+namescom.f90                   (1) 00364 |CWIP Balance|
+namescom.f90                   (1) 00365 |Paid in Capital|
+namescom.f90                   (1) 00366 |ARO Net Assets|
+namescom.f90                   (1) 00367 |ARO Liabilities|
+namescom.f90                   (1) 00368 |Other Deferred Credits|
+namescom.f90                   (1) 00369 |Regulatory Deferred Credits|
+namescom.f90                   (1) 00370 |Reaquired Debt Gain|
+namescom.f90                   (1) 00380 |Actual Deferred Taxes Cr|
+namescom.f90                   (1) 00381 |Actual Fed Income Taxes|
+namescom.f90                   (1) 00382 |Actual State Income Taxes|
+namescom.f90                   (1) 00383 |Actual Deferred Taxes Dr|
+namescom.f90                   (1) 00384 |Actual ATL Fed Income Taxes|
+namescom.f90                   (1) 00385 |Actual ATL State Income Taxes|
+namescom.f90                   (1) 00386 |Actual BTL Fed Income Taxes|
+namescom.f90                   (1) 00387 |Actual BTL State Income Taxes|
+namescom.f90                   (1) 00393 |STD Minimum Balance|
+namescom.f90                   (1) 00394 |Cash Minimum Balance|
+namescom.f90                   (1) 00395 |OUC Fuel Inventory|
+namescom.f90                   (1) 00396 |OUC Prepayments|
+namescom.f90                   (1) 00397 |OUC Materials Inventory|
+namescom.f90                   (1) 00405 |Dividend 70|
+namescom.f90                   (1) 00407 |Interest Payments|
+namescom.f90                   (1) 00408 |Interest Earnings|
+namescom.f90                   (1) 00411 |Cash Interest Payments|
+namescom.f90                   (1) 00412 |Cash Interest Earnings|
+namescom.f90                   (1) 00413 |Cash Dividend Earnings|
+namescom.f90                   (1) 00414 |Intra Company Interest Earnings|
+namescom.f90                   (1) 00415 |Minibond Interest Payment|
+namescom.f90                   (1) 00416 |Minibond Principal Payment|
+namescom.f90                   (1) 00417 |Minibond Interest Deposit|
+namescom.f90                   (1) 00418 |Minibond Principal Deposit|
+namescom.f90                   (1) 00419 |Annualized Interest|
+namescom.f90                   (1) 00420 |Minibond Annualized Interest|
+namescom.f90                   (1) 00421 |BAAN Additions|
+namescom.f90                   (1) 00422 |BAAN Reductions|
+namescom.f90                   (1) 00423 |BAAN Interest Payments|
+namescom.f90                   (1) 00424 |BAAN Annualized Interest|

@@ -1,0 +1,7 @@
+/home/123-D56SW/wrk/Midas/ABBICAP/finanbse.for
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmfa.f90
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmminp.for
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.f90
+/home/123-D56SW/wrk/Midas/ABBICAP/wvpa_data_bases.f90

@@ -1,0 +1,79 @@
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:             R_ARO_NET_ASSETS,R_ARO_LIABILITY,R_DEFERRED_PURCHASE_POWER_ADJ,R_COI_EARNINGS
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:             R_MO_ARO_Trust_Cash_Payment(0:12),R_MO_ARO_NET_ASSETS(0:12),R_MO_ARO_LIABILITY(0:12),R_OCI_ADJ(0:12), &
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:                                      R_MO_ARO_Cash_Payment,R_MO_ARO_Trust_Cash_Payment,R_MO_ARO_NET_ASSETS,R_MO_ARO_LIABILITY)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:          R_MO_ARO_NET_ASSETS = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:                  R_MO_ARO_NET_ASSETS = TRANSFER_VALUE(:,YR,ASSET_CLASS,56)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:                                     R_ARO_NET_ASSETS,R_ARO_LIABILITY,R_DEFERRED_PURCHASE_POWER_ADJ,R_COI_EARNINGS)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:         R_ARO_NET_ASSETS = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:                  R_ARO_NET_ASSETS = TRANSFER_VALUE(0,YR,ASSET_CLASS,56)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmminp.for:     +       ARO_NET_ASSETS_BAL_ADJ,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmminp.for:     +                                ARO_NET_ASSETS_BAL_ADJ,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmminp.for:     +                                ARO_NET_ASSETS_BAL_ADJ,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +       ARO_NET_ASSETS_BAL_ADJ,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                 ARO_NET_ASSETS_BAL_ADJ,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                              + ARO_NET_ASSETS_BAL_ADJ
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                              + ARO_NET_ASSETS_BAL_ADJ
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                ARO_NET_ASSETS_BAL_ADJ,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                      + ARO_NET_ASSETS_BAL_ADJ
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +       OTHER_DEFERRED_CREDITS_BAL_EOY, ! 712
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +            (VARIABLE(712),OTHER_DEFERRED_CREDITS_BAL_EOY),       ! 712
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdfd.f90:                  BALANCE_VARIABLES(MO,monthly_other_deferred_credits) = &
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdfd.f90:               BALANCE_VARIABLES(:,monthly_other_deferred_credits) = &
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdfd.f90:                     BALANCE_VARIABLES(:,monthly_other_deferred_credits) &
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                   monthly_other_deferred_credits)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                   monthly_other_deferred_credits)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +       CONSOLD_BOY_OTHER_DEFERRED_CREDITS,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +       OTHER_DEFERRED_CREDITS_BAL_BOY
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +     OTHER_DEFERRED_CREDITS_BAL(:,:),
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                     OTHER_DEFERRED_CREDITS_BAL,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:         ALLOCATE(OTHER_DEFERRED_CREDITS_BAL(2,0:NUM_OF_ACTIVE_CLASSES))
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:         OTHER_DEFERRED_CREDITS_BAL = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                     OTHER_DEFERRED_CREDITS_BAL(2,CLASS_POS),
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:               OTHER_DEFERRED_CREDITS_BAL_EOY =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                 OTHER_DEFERRED_CREDITS_BAL(2,CLASS_POS)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                             + OTHER_DEFERRED_CREDITS_BAL_EOY      ! 712
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:               CONSOLD_BOY_OTHER_DEFERRED_CREDITS =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                             OTHER_DEFERRED_CREDITS_BAL(2,0),
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:                  VARIABLE(712) = OTHER_DEFERRED_CREDITS_BAL(2,0)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                      + OTHER_DEFERRED_CREDITS_BAL(2,0)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                     OTHER_DEFERRED_CREDITS_BAL(2,CLASS_POS),
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                     OTHER_DEFERRED_CREDITS_BAL_BOY,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                            OTHER_DEFERRED_CREDITS_BAL(2,0),
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:                  CONSOLD_BOY_OTHER_DEFERRED_CREDITS = VARIABLE(712)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:         OTHER_DEFERRED_CREDITS_BAL(1,R_CLASS_POS) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                         OTHER_DEFERRED_CREDITS_BAL(2,R_CLASS_POS)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:         OTHER_DEFERRED_CREDITS_BAL_BOY =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                 OTHER_DEFERRED_CREDITS_BAL(1,R_CLASS_POS)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:         OTHER_DEFERRED_CREDITS_BAL_EOY =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                 OTHER_DEFERRED_CREDITS_BAL(2,R_CLASS_POS)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                           + OTHER_DEFERRED_CREDITS_BAL_EOY      ! 712
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                 + OTHER_DEFERRED_CREDITS_BAL(I,CLASS_POS)
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.f90:      integer(kind=2),parameter:: monthly_other_deferred_credits=89
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +       REGULATORY_DEFERRED_CREDITS_BAL_EOY, ! 711
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +            (VARIABLE(711),REGULATORY_DEFERRED_CREDITS_BAL_EOY),  ! 711
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +       CONSOLD_BOY_REGULATORY_DEFERRED_CREDITS,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +       REGULATORY_DEFERRED_CREDITS_BAL_BOY,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +     REGULATORY_DEFERRED_CREDITS_BAL(:,:),
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                     REGULATORY_DEFERRED_CREDITS_BAL,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:         ALLOCATE(REGULATORY_DEFERRED_CREDITS_BAL
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:         REGULATORY_DEFERRED_CREDITS_BAL = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                     REGULATORY_DEFERRED_CREDITS_BAL(2,CLASS_POS),
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:               REGULATORY_DEFERRED_CREDITS_BAL_EOY =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +            REGULATORY_DEFERRED_CREDITS_BAL(2,CLASS_POS)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                             + REGULATORY_DEFERRED_CREDITS_BAL_EOY ! 711
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:               CONSOLD_BOY_REGULATORY_DEFERRED_CREDITS =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                             REGULATORY_DEFERRED_CREDITS_BAL(2,0),
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:                  VARIABLE(711) = REGULATORY_DEFERRED_CREDITS_BAL(2,0)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                      + REGULATORY_DEFERRED_CREDITS_BAL(2,0)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                     REGULATORY_DEFERRED_CREDITS_BAL(2,CLASS_POS),
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                     REGULATORY_DEFERRED_CREDITS_BAL_BOY,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                            REGULATORY_DEFERRED_CREDITS_BAL(2,0),
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:                  CONSOLD_BOY_REGULATORY_DEFERRED_CREDITS =VARIABLE(711)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:         REGULATORY_DEFERRED_CREDITS_BAL(1,R_CLASS_POS) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                    REGULATORY_DEFERRED_CREDITS_BAL(2,R_CLASS_POS)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:         REGULATORY_DEFERRED_CREDITS_BAL_BOY =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +            REGULATORY_DEFERRED_CREDITS_BAL(1,R_CLASS_POS)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:         REGULATORY_DEFERRED_CREDITS_BAL_EOY =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +            REGULATORY_DEFERRED_CREDITS_BAL(2,R_CLASS_POS)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                           + REGULATORY_DEFERRED_CREDITS_BAL_EOY ! 711
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +            + REGULATORY_DEFERRED_CREDITS_BAL(I,CLASS_POS)

@@ -4,7 +4,6 @@ repo1/Fuelused.for
 repo1/GAS_objt.for
 repo1/LDPROB01.FOR
 repo1/LPSOLVER.for
-repo1/WVPARTRK.FOR
 repo1/WinFileFindData.for
 repo1/cla_objt.for
 repo1/clreport.for
@@ -12,7 +11,6 @@ repo1/co_objt.for
 repo1/coal_obj.for
 repo1/dr_booth.for
 repo1/dsm_objt.for
-repo1/dsslam.for
 repo1/elreport.for
 repo1/enrglimt.for
 repo1/finanbse.for
@@ -20,7 +18,6 @@ repo1/midasmod.for
 repo1/msgandec.for
 repo1/msgmmasb.for
 repo1/msgmmdbt.for
-repo1/msgmmdfd.for
 repo1/msgmmea.for
 repo1/msgmminp.for
 repo1/msgmmout.for
@@ -34,5 +31,4 @@ repo1/rps_index_translate_mod.for
 repo1/servicac.for
 repo1/tf_objt.for
 repo1/tf_objt2.for
-repo1/wh_objt.for
 repo1/wvpacooprevenuecals.for
