@@ -59,6 +59,7 @@ repo1/drilling_rept_params.f90
 repo1/dsex_data.f90
 repo1/dsex_obj.f90
 repo1/dsscreen.f90
+repo1/dsslam.f90
 repo1/ec_objt.f90
 repo1/eco.f90
 repo1/econintr.f90
@@ -135,6 +136,7 @@ repo1/msg_win_api_calls.f90
 repo1/msgindex.f90
 repo1/msgmmadm.f90
 repo1/msgmmcom.f90
+repo1/msgmmdfd.f90
 repo1/msgmmexprevcash.f90
 repo1/msgmmfa.f90
 repo1/msgmmfv.f90
@@ -144,7 +146,9 @@ repo1/msgmmsb6b.f90
 repo1/msgmmtax.f90
 repo1/msgold95rw.f90
 repo1/msgprosymrevexp.f90
+repo1/mthnmcom.f90
 repo1/mwunih.f90
+repo1/namescom.f90
 repo1/newpkshf.f90
 repo1/objtfunc.f90
 repo1/p_fuel.f90
@@ -193,4 +197,6 @@ repo1/transobj2.f90
 repo1/trnsfrm3.f90
 repo1/up_objt.f90
 repo1/weekscom.f90
+repo1/wh_objt.f90
 repo1/wvpa_data_bases.f90
+repo1/wvpartrk.f90

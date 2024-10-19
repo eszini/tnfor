@@ -1,0 +1,9 @@
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:         CASE ('CWIP Balance')
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmcom.f90:!           ANNUAL YEAR END CWIP BALANCE                     CWIP      *
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmcom.f90:!     CALCULATE YEAR END CWIP BALANCE AND  CWIP IN RATE BASE
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmcom.f90:!           ANNUAL YEAR END CWIP BALANCE                     CWIP      *
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmcom.f90:!     CALCULATE YEAR END CWIP BALANCE AND  CWIP IN RATE BASE
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmcom.f90:!           ANNUAL YEAR END CWIP BALANCE                    CWIP       *
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmfa.f90:      RPT_TITLE(3) = "CWIP Balance"
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmfa.f90:                  DRILLING_NAME = 'CWIP Balance'
+/home/123-D56SW/wrk/Midas/ABBICAP/namescom.mon:      integer(kind=2),parameter:: CWIP Balance=14

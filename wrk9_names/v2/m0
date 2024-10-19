@@ -1,0 +1,131 @@
+GAS_objt.for                  ,|Gas Storage|
+msgmmadm.f90                  ,|ARO Accretion Amount|
+msgmmadm.f90                  ,|Balance Deferred Taxes|
+msgmmadm.f90                  ,|Decommissioning Rate|
+msgmmadm.f90                  ,|Economic Assets Adjustment|
+msgmmadm.f90                  ,|Equity Risk Adjustment|
+msgmmadm.f90                  ,|Gas Storage|
+msgmmadm.f90                  ,|Interest Payments|
+msgmmadm.f90                  ,|Operating Profits Adjustment|
+msgmmadm.f90                  ,|Post Retirement Rate|
+msgmmadm.f90                  ,|Salvage Value|
+msgmmdbt.for                  ,|Cash Dividend Earnings|
+msgmmdbt.for                  ,|Cash Interest Earnings|
+msgmmdbt.for                  ,|Cash Interest Payments|
+msgmmdbt.for                  ,|Dividend 70|
+msgmmdbt.for                  ,|Interest Earnings|
+msgmmdbt.for                  ,|Interest Payments|
+msgmmdbt.for                  ,|Intra Company Interest Earnings|
+msgmmsb6.for                  ,|ARO Liabilities|
+msgmmsb6.for                  ,|ARO Net Assets|
+msgmmsb6.for                  ,|Other Deferred Credits|
+msgmmsb6.for                  ,|Reaquired Debt Gain|
+msgmmsb6.for                  ,|Regulatory Deferred Credits|
+namescom.f90                  ,|ARO Accretion Amount|
+namescom.f90                  ,|ARO Cash Payment|
+namescom.f90                  ,|ARO Cash to Bal Sheet Trust|
+namescom.f90                  ,|ARO Discount Rate|
+namescom.f90                  ,|ARO Liabilities|
+namescom.f90                  ,|ARO Net Assets|
+namescom.f90                  ,|ATL Debit Amortization|
+namescom.f90                  ,|Actual ATL Fed Income Taxes|
+namescom.f90                  ,|Actual ATL State Income Taxes|
+namescom.f90                  ,|Actual BTL Fed Income Taxes|
+namescom.f90                  ,|Actual BTL State Income Taxes|
+namescom.f90                  ,|Actual Deferred Taxes Cr|
+namescom.f90                  ,|Actual Deferred Taxes Dr|
+namescom.f90                  ,|Actual Fed Income Taxes|
+namescom.f90                  ,|Actual State Income Taxes|
+namescom.f90                  ,|Addedum to Book Gain Loss|
+namescom.f90                  ,|Addendum Payable Accounts|
+namescom.f90                  ,|Addendum Receivable Accounts|
+namescom.f90                  ,|Annual Deferred Taxes|
+namescom.f90                  ,|Annualized Interest|
+namescom.f90                  ,|Assets NEC Addendum|
+namescom.f90                  ,|Assets NEC Adjustment|
+namescom.f90                  ,|BAAN Additions|
+namescom.f90                  ,|BAAN Annualized Interest|
+namescom.f90                  ,|BAAN Interest Payments|
+namescom.f90                  ,|BAAN Reductions|
+namescom.f90                  ,|BTL Debt Amortization|
+namescom.f90                  ,|Balance Deferred Taxes Dr|
+namescom.f90                  ,|Balance Deferred Taxes|
+namescom.f90                  ,|CD Addendum|
+namescom.f90                  ,|CD Balance as PC of Revenues|
+namescom.f90                  ,|CIAC Addendum to Amortization|
+namescom.f90                  ,|CIAC Amortization Rate|
+namescom.f90                  ,|CIAC Cash Contributions|
+namescom.f90                  ,|CWIP Balance|
+namescom.f90                  ,|Capitial Recovery EXCLUDED OPAT|
+namescom.f90                  ,|Cash Dividend Earnings|
+namescom.f90                  ,|Cash Interest Earnings|
+namescom.f90                  ,|Cash Interest Payments|
+namescom.f90                  ,|Cash Minimum Balance|
+namescom.f90                  ,|Cash Received|
+namescom.f90                  ,|Cost of Removal|
+namescom.f90                  ,|Cumulated Plant Depreciation|
+namescom.f90                  ,|Cumulative Depreciation|
+namescom.f90                  ,|Customer Deposits Rate|
+namescom.f90                  ,|Decommissioning Rate|
+namescom.f90                  ,|Deferred Debit Adjustment|
+namescom.f90                  ,|Deferred ITCs Balance|
+namescom.f90                  ,|Deferred Tax Adjustment|
+namescom.f90                  ,|Dividend 70|
+namescom.f90                  ,|Earnings Decommissioning Fund|
+namescom.f90                  ,|Earnings LT Investments|
+namescom.f90                  ,|Earnings Post Retirement Fund|
+namescom.f90                  ,|Earnings ST Investments|
+namescom.f90                  ,|Economic Assets Adjustment|
+namescom.f90                  ,|Equity Risk Adjustment|
+namescom.f90                  ,|Extra Ordinary Expense|
+namescom.f90                  ,|FABS87 Pension Liab Adj|
+namescom.f90                  ,|FASB87 Intangible Asset Adj|
+namescom.f90                  ,|Fuel Inventory Change Out|
+namescom.f90                  ,|Fuel Inventory Change|
+namescom.f90                  ,|Gas Storage Out|
+namescom.f90                  ,|Gas Storage|
+namescom.f90                  ,|Gross Book Value|
+namescom.f90                  ,|Gross Plant Value|
+namescom.f90                  ,|Interest Earnings|
+namescom.f90                  ,|Interest Payments|
+namescom.f90                  ,|Intra Company Interest Earnings|
+namescom.f90                  ,|LT Liabilities Balance|
+namescom.f90                  ,|LTI Rate|
+namescom.f90                  ,|Liabilities NEC Addendum|
+namescom.f90                  ,|Materials Supplies Out|
+namescom.f90                  ,|Materials Supplies|
+namescom.f90                  ,|Minibond Annualized Interest|
+namescom.f90                  ,|Minibond Interest Deposit|
+namescom.f90                  ,|Minibond Interest Payment|
+namescom.f90                  ,|Minibond Principal Deposit|
+namescom.f90                  ,|Minibond Principal Payment|
+namescom.f90                  ,|Net Nuclear Fuel|
+namescom.f90                  ,|Net Removal|
+namescom.f90                  ,|Non Cash Pension|
+namescom.f90                  ,|NucDecom Discount Rate|
+namescom.f90                  ,|NucDecom Liability Addendum|
+namescom.f90                  ,|OCI Adjustment|
+namescom.f90                  ,|OCI Decommissioning Rate|
+namescom.f90                  ,|OCI Deferred Tax Adj|
+namescom.f90                  ,|OCI Post Retirement Rate|
+namescom.f90                  ,|OUC Fuel Inventory|
+namescom.f90                  ,|OUC Materials Inventory|
+namescom.f90                  ,|OUC Prepayments|
+namescom.f90                  ,|Operating Profits Adjustment|
+namescom.f90                  ,|Other Deferred Credits|
+namescom.f90                  ,|Paid in Capital|
+namescom.f90                  ,|Plant in Service Adjustment|
+namescom.f90                  ,|Post Retirement Rate|
+namescom.f90                  ,|Rate Assets NEC|
+namescom.f90                  ,|Rate Base Adjustment|
+namescom.f90                  ,|Rate Liabilities NEC|
+namescom.f90                  ,|Rate Payable Accounts|
+namescom.f90                  ,|Rate Receivable Accounts|
+namescom.f90                  ,|Reaquired Debt Gain|
+namescom.f90                  ,|Regulatory Deferred Credits|
+namescom.f90                  ,|Retained Earnings|
+namescom.f90                  ,|STD Minimum Balance|
+namescom.f90                  ,|STI Rate|
+namescom.f90                  ,|Sale ATL Amortization|
+namescom.f90                  ,|Sale Deferred Taxes Adjustment|
+namescom.f90                  ,|Salvage Value|

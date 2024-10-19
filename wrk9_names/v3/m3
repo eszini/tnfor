@@ -1,0 +1,135 @@
+msgmmsb6.for                   (1) 02687 |     +            + BALANCE_SHEET_ROLLUPS(2,ARO Liabilities,CLASS_LEVEL)|
+msgmmsb6.for                       02687 |     +            + BALANCE_SHEET_ROLLUPS(2,ARO_Liabilities,CLASS_LEVEL)|
+
+msgmmsb6.for                   (1) 02707 |     +            + BALANCE_SHEET_ROLLUPS(2,Regulatory Deferred Credits,|
+msgmmsb6.for                       02707 |     +            + BALANCE_SHEET_ROLLUPS(2,Regulatory_Deferred_Credits,|
+
+msgmmsb6.for                   (1) 02711 |     +                 + BALANCE_SHEET_ROLLUPS(2,Other Deferred Credits,|
+msgmmsb6.for                       02711 |     +                 + BALANCE_SHEET_ROLLUPS(2,Other_Deferred_Credits,|
+
+msgmmsb6.for                   (1) 02715 |     +                    + BALANCE_SHEET_ROLLUPS(2,Reaquired Debt Gain,|
+msgmmsb6.for                       02715 |     +                    + BALANCE_SHEET_ROLLUPS(2,Reaquired_Debt_Gain,|
+
+msgmmsb6.for                   (1) 12089 |     +           + BALANCE_SHEET_ROLLUPS(2,ARO Net Assets,CLASS_LEVEL)|
+msgmmsb6.for                       12089 |     +           + BALANCE_SHEET_ROLLUPS(2,ARO_Net_Assets,CLASS_LEVEL)|
+
+msgmmsb6.for                   (1) 12092 |     +          + BALANCE_SHEET_ROLLUPS(2,ARO Liabilities,CLASS_LEVEL)|
+msgmmsb6.for                       12092 |     +          + BALANCE_SHEET_ROLLUPS(2,ARO_Liabilities,CLASS_LEVEL)|
+
+msgmmsb6.for                   (1) 12108 |     +                 + BALANCE_SHEET_ROLLUPS(1,Other Deferred Credits,|
+msgmmsb6.for                       12108 |     +                 + BALANCE_SHEET_ROLLUPS(1,Other_Deferred_Credits,|
+
+msgmmsb6.for                   (1) 12112 |     +            + BALANCE_SHEET_ROLLUPS(1,Regulatory Deferred Credits,|
+msgmmsb6.for                       12112 |     +            + BALANCE_SHEET_ROLLUPS(1,Regulatory_Deferred_Credits,|
+
+msgmmsb6.for                   (1) 12116 |     +                   + BALANCE_SHEET_ROLLUPS(1,Reaquired Debt Gain ,|
+msgmmsb6.for                       12116 |     +                   + BALANCE_SHEET_ROLLUPS(1,Reaquired_Debt_Gain ,|
+
+msgmmsb6.for                   (1) 12250 |     +             + BALANCE_SHEET_ROLLUPS(2,ARO Net Assets,CLASS_LEVEL)|
+msgmmsb6.for                       12250 |     +             + BALANCE_SHEET_ROLLUPS(2,ARO_Net_Assets,CLASS_LEVEL)|
+
+msgmmsb6.for                   (1) 12254 |     +            + BALANCE_SHEET_ROLLUPS(2,ARO Liabilities,CLASS_LEVEL)|
+msgmmsb6.for                       12254 |     +            + BALANCE_SHEET_ROLLUPS(2,ARO_Liabilities,CLASS_LEVEL)|
+
+msgmmsb6.for                   (1) 12537 |     +                 + BALANCE_SHEET_ROLLUPS(2,Other Deferred Credits,|
+msgmmsb6.for                       12537 |     +                 + BALANCE_SHEET_ROLLUPS(2,Other_Deferred_Credits,|
+
+msgmmsb6.for                   (1) 12541 |     +            + BALANCE_SHEET_ROLLUPS(2,Regulatory Deferred Credits,|
+msgmmsb6.for                       12541 |     +            + BALANCE_SHEET_ROLLUPS(2,Regulatory_Deferred_Credits,|
+
+msgmmsb6.for                   (1) 12545 |     +                   + BALANCE_SHEET_ROLLUPS(2,Reaquired Debt Gain ,|
+msgmmsb6.for                       12545 |     +                   + BALANCE_SHEET_ROLLUPS(2,Reaquired_Debt_Gain ,|
+
+msgmmsb6.for                   (1) 12862 |     +             + BALANCE_SHEET_ROLLUPS(2,ARO Net Assets,CLASS_LEVEL)|
+msgmmsb6.for                       12862 |     +             + BALANCE_SHEET_ROLLUPS(2,ARO_Net_Assets,CLASS_LEVEL)|
+
+msgmmsb6.for                   (1) 13680 |               BALANCE_SHEET_ROLLUPS(I,ARO Net Assets,CLASS_LEVEL-1) =|
+msgmmsb6.for                       13680 |               BALANCE_SHEET_ROLLUPS(I,ARO_Net_Assets,CLASS_LEVEL-1) =|
+
+msgmmsb6.for                   (1) 13681 |     +             BALANCE_SHEET_ROLLUPS(I,ARO Net Assets,CLASS_LEVEL-1)|
+msgmmsb6.for                       13681 |     +             BALANCE_SHEET_ROLLUPS(I,ARO_Net_Assets,CLASS_LEVEL-1)|
+
+msgmmsb6.for                   (1) 13683 |     +             + BALANCE_SHEET_ROLLUPS(I,ARO Net Assets,CLASS_LEVEL)|
+msgmmsb6.for                       13683 |     +             + BALANCE_SHEET_ROLLUPS(I,ARO_Net_Assets,CLASS_LEVEL)|
+
+msgmmsb6.for                   (1) 13684 |               BALANCE_SHEET_ROLLUPS(I,ARO Liabilities,CLASS_LEVEL-1) =|
+msgmmsb6.for                       13684 |               BALANCE_SHEET_ROLLUPS(I,ARO_Liabilities,CLASS_LEVEL-1) =|
+
+msgmmsb6.for                   (1) 13685 |     +            BALANCE_SHEET_ROLLUPS(I,ARO Liabilities,CLASS_LEVEL-1)|
+msgmmsb6.for                       13685 |     +            BALANCE_SHEET_ROLLUPS(I,ARO_Liabilities,CLASS_LEVEL-1)|
+
+msgmmsb6.for                   (1) 13687 |     +            + BALANCE_SHEET_ROLLUPS(I,ARO Liabilities,CLASS_LEVEL)|
+msgmmsb6.for                       13687 |     +            + BALANCE_SHEET_ROLLUPS(I,ARO_Liabilities,CLASS_LEVEL)|
+
+msgmmsb6.for                   (1) 13689 |               BALANCE_SHEET_ROLLUPS(I,Other Deferred Credits,|
+msgmmsb6.for                       13689 |               BALANCE_SHEET_ROLLUPS(I,Other_Deferred_Credits,|
+
+msgmmsb6.for                   (1) 13691 |     +                 BALANCE_SHEET_ROLLUPS(I,Other Deferred Credits,|
+msgmmsb6.for                       13691 |     +                 BALANCE_SHEET_ROLLUPS(I,Other_Deferred_Credits,|
+
+msgmmsb6.for                   (1) 13694 |     +                 + BALANCE_SHEET_ROLLUPS(I,Other Deferred Credits,|
+msgmmsb6.for                       13694 |     +                 + BALANCE_SHEET_ROLLUPS(I,Other_Deferred_Credits,|
+
+msgmmsb6.for                   (1) 13696 |               BALANCE_SHEET_ROLLUPS(I,Regulatory Deferred Credits,|
+msgmmsb6.for                       13696 |               BALANCE_SHEET_ROLLUPS(I,Regulatory_Deferred_Credits,|
+
+msgmmsb6.for                   (1) 13698 |     +            BALANCE_SHEET_ROLLUPS(I,Regulatory Deferred Credits,|
+msgmmsb6.for                       13698 |     +            BALANCE_SHEET_ROLLUPS(I,Regulatory_Deferred_Credits,|
+
+msgmmsb6.for                   (1) 13701 |     +            + BALANCE_SHEET_ROLLUPS(I,Regulatory Deferred Credits,|
+msgmmsb6.for                       13701 |     +            + BALANCE_SHEET_ROLLUPS(I,Regulatory_Deferred_Credits,|
+
+msgmmsb6.for                   (1) 13703 |               BALANCE_SHEET_ROLLUPS(I,Reaquired Debt Gain,|
+msgmmsb6.for                       13703 |               BALANCE_SHEET_ROLLUPS(I,Reaquired_Debt_Gain,|
+
+msgmmsb6.for                   (1) 13705 |     +                    BALANCE_SHEET_ROLLUPS(I,Reaquired Debt Gain,|
+msgmmsb6.for                       13705 |     +                    BALANCE_SHEET_ROLLUPS(I,Reaquired_Debt_Gain,|
+
+msgmmsb6.for                   (1) 13708 |     +                    + BALANCE_SHEET_ROLLUPS(I,Reaquired Debt Gain,|
+msgmmsb6.for                       13708 |     +                    + BALANCE_SHEET_ROLLUPS(I,Reaquired_Debt_Gain,|
+
+msgmmsb6.for                   (1) 13713 |            BALANCE_SHEET_ROLLUPS(I,ARO Net Assets,CLASS_LEVEL) = 0.|
+msgmmsb6.for                       13713 |            BALANCE_SHEET_ROLLUPS(I,ARO_Net_Assets,CLASS_LEVEL) = 0.|
+
+msgmmsb6.for                   (1) 13714 |            BALANCE_SHEET_ROLLUPS(I,ARO Liabilities,CLASS_LEVEL) = 0.|
+msgmmsb6.for                       13714 |            BALANCE_SHEET_ROLLUPS(I,ARO_Liabilities,CLASS_LEVEL) = 0.|
+
+msgmmsb6.for                   (1) 13715 |            BALANCE_SHEET_ROLLUPS(I,Other Deferred Credits,|
+msgmmsb6.for                       13715 |            BALANCE_SHEET_ROLLUPS(I,Other_Deferred_Credits,|
+
+msgmmsb6.for                   (1) 13717 |            BALANCE_SHEET_ROLLUPS(I,Regulatory Deferred Credits,|
+msgmmsb6.for                       13717 |            BALANCE_SHEET_ROLLUPS(I,Regulatory_Deferred_Credits,|
+
+msgmmsb6.for                   (1) 13719 |            BALANCE_SHEET_ROLLUPS(I,Reaquired Debt Gain,|
+msgmmsb6.for                       13719 |            BALANCE_SHEET_ROLLUPS(I,Reaquired_Debt_Gain,|
+
+namescom.f90                   (1) 00366 |      integer(kind=2),parameter:: ARO Net Assets=16|
+namescom.f90                       00366 |      integer(kind=2),parameter:: ARO_Net_Assets=16|
+
+namescom.f90                   (1) 00367 |      integer(kind=2),parameter:: ARO Liabilities=17|
+namescom.f90                       00367 |      integer(kind=2),parameter:: ARO_Liabilities=17|
+
+namescom.f90                   (1) 00368 |      integer(kind=2),parameter:: Other Deferred Credits=18|
+namescom.f90                       00368 |      integer(kind=2),parameter:: Other_Deferred_Credits=18|
+
+namescom.f90                   (1) 00369 |      integer(kind=2),parameter:: Regulatory Deferred Credits=19|
+namescom.f90                       00369 |      integer(kind=2),parameter:: Regulatory_Deferred_Credits=19|
+
+namescom.f90                   (1) 00370 |      integer(kind=2),parameter:: Reaquired Debt Gain=20|
+namescom.f90                       00370 |      integer(kind=2),parameter:: Reaquired_Debt_Gain=20|
+
+namescom.f90                   (1) 00366 |      integer(kind=2),parameter:: ARO Net Assets=16|
+namescom.f90                       00366 |      integer(kind=2),parameter:: ARO_Net_Assets=16|
+
+namescom.f90                   (1) 00367 |      integer(kind=2),parameter:: ARO Liabilities=17|
+namescom.f90                       00367 |      integer(kind=2),parameter:: ARO_Liabilities=17|
+
+namescom.f90                   (1) 00368 |      integer(kind=2),parameter:: Other Deferred Credits=18|
+namescom.f90                       00368 |      integer(kind=2),parameter:: Other_Deferred_Credits=18|
+
+namescom.f90                   (1) 00369 |      integer(kind=2),parameter:: Regulatory Deferred Credits=19|
+namescom.f90                       00369 |      integer(kind=2),parameter:: Regulatory_Deferred_Credits=19|
+
+namescom.f90                   (1) 00370 |      integer(kind=2),parameter:: Reaquired Debt Gain=20|
+namescom.f90                       00370 |      integer(kind=2),parameter:: Reaquired_Debt_Gain=20|
+

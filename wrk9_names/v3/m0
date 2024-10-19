@@ -1,0 +1,10 @@
+msgmmsb6.for                  ,|ARO Liabilities|
+msgmmsb6.for                  ,|ARO Net Assets|
+msgmmsb6.for                  ,|Other Deferred Credits|
+msgmmsb6.for                  ,|Reaquired Debt Gain|
+msgmmsb6.for                  ,|Regulatory Deferred Credits|
+namescom.f90                  ,|ARO Liabilities|
+namescom.f90                  ,|ARO Net Assets|
+namescom.f90                  ,|Other Deferred Credits|
+namescom.f90                  ,|Reaquired Debt Gain|
+namescom.f90                  ,|Regulatory Deferred Credits|

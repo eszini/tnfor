@@ -1,0 +1,41 @@
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:C     +            + BALANCE_SHEET_ROLLUPS(2,ARO Liabilities,CLASS_LEVEL)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +            + BALANCE_SHEET_ROLLUPS(2,ARO Liabilities,CLASS_LEVEL)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +          + BALANCE_SHEET_ROLLUPS(2,ARO Liabilities,CLASS_LEVEL)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +            + BALANCE_SHEET_ROLLUPS(2,ARO Liabilities,CLASS_LEVEL)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:               BALANCE_SHEET_ROLLUPS(I,ARO Liabilities,CLASS_LEVEL-1) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +            BALANCE_SHEET_ROLLUPS(I,ARO Liabilities,CLASS_LEVEL-1)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +            + BALANCE_SHEET_ROLLUPS(I,ARO Liabilities,CLASS_LEVEL)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:            BALANCE_SHEET_ROLLUPS(I,ARO Liabilities,CLASS_LEVEL) = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/namescom.f90:      integer(kind=2),parameter:: ARO Liabilities=17
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +           + BALANCE_SHEET_ROLLUPS(2,ARO Net Assets,CLASS_LEVEL)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +             + BALANCE_SHEET_ROLLUPS(2,ARO Net Assets,CLASS_LEVEL)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +             + BALANCE_SHEET_ROLLUPS(2,ARO Net Assets,CLASS_LEVEL)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:               BALANCE_SHEET_ROLLUPS(I,ARO Net Assets,CLASS_LEVEL-1) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +             BALANCE_SHEET_ROLLUPS(I,ARO Net Assets,CLASS_LEVEL-1)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +             + BALANCE_SHEET_ROLLUPS(I,ARO Net Assets,CLASS_LEVEL)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:            BALANCE_SHEET_ROLLUPS(I,ARO Net Assets,CLASS_LEVEL) = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/namescom.f90:      integer(kind=2),parameter:: ARO Net Assets=16
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                 + BALANCE_SHEET_ROLLUPS(2,Other Deferred Credits,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                 + BALANCE_SHEET_ROLLUPS(1,Other Deferred Credits,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                 + BALANCE_SHEET_ROLLUPS(2,Other Deferred Credits,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:               BALANCE_SHEET_ROLLUPS(I,Other Deferred Credits,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                 BALANCE_SHEET_ROLLUPS(I,Other Deferred Credits,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                 + BALANCE_SHEET_ROLLUPS(I,Other Deferred Credits,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:            BALANCE_SHEET_ROLLUPS(I,Other Deferred Credits,
+/home/123-D56SW/wrk/Midas/ABBICAP/namescom.f90:      integer(kind=2),parameter:: Other Deferred Credits=18
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                    + BALANCE_SHEET_ROLLUPS(2,Reaquired Debt Gain,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                   + BALANCE_SHEET_ROLLUPS(1,Reaquired Debt Gain ,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                   + BALANCE_SHEET_ROLLUPS(2,Reaquired Debt Gain ,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:               BALANCE_SHEET_ROLLUPS(I,Reaquired Debt Gain,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                    BALANCE_SHEET_ROLLUPS(I,Reaquired Debt Gain,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                    + BALANCE_SHEET_ROLLUPS(I,Reaquired Debt Gain,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:            BALANCE_SHEET_ROLLUPS(I,Reaquired Debt Gain,
+/home/123-D56SW/wrk/Midas/ABBICAP/namescom.f90:      integer(kind=2),parameter:: Reaquired Debt Gain=20
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +            + BALANCE_SHEET_ROLLUPS(2,Regulatory Deferred Credits,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +            + BALANCE_SHEET_ROLLUPS(1,Regulatory Deferred Credits,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +            + BALANCE_SHEET_ROLLUPS(2,Regulatory Deferred Credits,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:               BALANCE_SHEET_ROLLUPS(I,Regulatory Deferred Credits,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +            BALANCE_SHEET_ROLLUPS(I,Regulatory Deferred Credits,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +            + BALANCE_SHEET_ROLLUPS(I,Regulatory Deferred Credits,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:            BALANCE_SHEET_ROLLUPS(I,Regulatory Deferred Credits,
+/home/123-D56SW/wrk/Midas/ABBICAP/namescom.f90:      integer(kind=2),parameter:: Regulatory Deferred Credits=19

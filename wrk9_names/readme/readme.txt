@@ -8,8 +8,8 @@ Como trabajar con este punto
 
    primer paso, traerse el "copy"
 
-   cp ~/wrk/tnfor/A_src/r0_copy.sh .
-   sh r0_copy.sh 
+   cp ~/wrk/tnfor/A_src/r0_copy_nms.sh .
+   sh r0_copy_nms.sh 
 
 
 2) correr
@@ -32,7 +32,7 @@ Como trabajar con este punto
    en vcb.txt ... (ej las que tienen BTL ... al principio )
 
    opcion !!!
-   en tfor.c .. cambiar sw1 a 1 y marca las vars en nms.mon directamente
+   en tfor.c . cambiar sw1 a 1 y marca las vars en nms.mon direct
 
 
 
@@ -51,7 +51,7 @@ Como trabajar con este punto
 
 4) correr
 
-   sh r0_src_inc.sh
+   sh r0_src_inc_nms.sh
 
    esto genera
 
@@ -63,7 +63,7 @@ Como trabajar con este punto
 
 
    correr 
-   sh r0_prueba1.sh    (corre con lr1_solo_nms)
+   sh r0_prueba_nms1.sh    (corre con lr1_solo_nms)
 
    esto genera 
 
@@ -115,13 +115,12 @@ Como trabajar con este punto
 
 5) hacer prueba de cambio con las variables elegidas !
 
-
    en vcb2.txt ... 
    poner # como primer caracter en todas las lineas
    agregar al principio el m3_32 construido
 
    correr nuevamente:
-   sh r0_prueba1.sh
+   sh r0_prueba_nms1.sh
 
    esto genera
    

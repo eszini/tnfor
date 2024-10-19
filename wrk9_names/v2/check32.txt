@@ -1,0 +1,37 @@
+/home/123-D56SW/wrk/Midas/ABBICAP/finanbse.for:      REAL (kind=4) ::  CUM_AI_GPV,AI_LAGGED_GPV,AI_CWIP_BALANCE
+/home/123-D56SW/wrk/Midas/ABBICAP/finanbse.for:     +     CUSTOMER_DEPOSITS_BAL,AI_LAGGED_GPV,AI_CWIP_BALANCE
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:             R_CWIP_BALANCE_ADJ,R_DEFERRED_TAXES_DR,R_PAID_IN_CAPITAL,R_SUBSIDIARY_INVESTMENT_ADJ,R_GOODWILL_ADJUSTMENT, &
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:      REAL (KIND=4) :: GPV_ADJUSTMENT,DEF_TAX_ADJUSTMENT,DEF_DEBIT_ADJUSTMENT,CWIP_BALANCE_ADJ,LT_LIAB_BAL_ADJ,NET_NUC_FUEL_ADJ, &
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:                                     R_CWIP_BALANCE_ADJ,R_DEFERRED_TAXES_DR,R_PAID_IN_CAPITAL,R_SUBSIDIARY_INVESTMENT_ADJ, &
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:         R_CWIP_BALANCE_ADJ = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:                  R_CWIP_BALANCE_ADJ = R_CWIP_BALANCE_ADJ + TRANSFER_VALUE(0,YR,ASSET_CLASS,13)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:                        R_CWIP_BALANCE_ADJ = R_CWIP_BALANCE_ADJ + TRANSFER_VALUE(0,YR,ASSET_CLASS,13) ! CWIP ADJUSTMENTS
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:               CWIP_BALANCE_ADJ = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:                     CWIP_BALANCE_ADJ = CWIP_BALANCE_ADJ + TRANSFER_VALUE(MO,YR,ASSET_CLASS,13) ! CWIP ADJUSTMENTS
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:                  R_TRANSFER_VARIABLES(MO,mtly_cwip)=CWIP_BALANCE_ADJ ! CWIP ADJUSTMENTS
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmfa.f90:      REAL (KIND=4) :: BY_CWIP_BALANCE,REGULATORY_ALLOCATOR
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmfa.f90:                                        BY_CWIP_BALANCE, &
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmfa.f90:            MONTHLY_CWIP(12) = BY_CWIP_BALANCE*ALLOCATION_VALUE(0)/100.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmfa.f90:                     TOTAL_MONTHLY_FA_VALUES(MO,YR,CLASS,fa_cwip_balance) = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmfa.f90:                  TOTAL_MONTHLY_FA_VALUES(MO,YR,CLASS,fa_cwip_balance) = &
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmfa.f90:                    TOTAL_MONTHLY_FA_VALUES(MO,YR,CLASS,fa_cwip_balance) &
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmfa.f90:                                                        fa_cwip_balance)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmminp.for:     +       CWIP_BALANCE_ADJ,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmminp.for:     +                            CWIP_BALANCE_ADJ,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmminp.for:     +                                CWIP_BALANCE_ADJ,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +       EXTRA_ORDINARY_EXPENSE,LT_LIAB_BAL_ADJ,CWIP_BALANCE_ADJ,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:            CWIP_BALANCE_ADJ = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                 CWIP_BALANCE_ADJ,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                + CWIP_BALANCE_ADJ
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:            CWIP_BALANCE_ADJ = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                CWIP_BALANCE_ADJ,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                              + CWIP_BALANCE_ADJ
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.f90:      integer(kind=2),parameter:: fa_cwip_balance=10
+/home/123-D56SW/wrk/Midas/ABBICAP/wvpa_data_bases.f90:      REAL (KIND=4) :: CAPX_ADDITIONS(0:12,0:*),CASH_EXPENDITURES(0:12,0:*),CWIP_BALANCE(0:12,0:*), &
+/home/123-D56SW/wrk/Midas/ABBICAP/wvpa_data_bases.f90:                                   CASH_EXPENDITURES,CWIP_BALANCE)
+/home/123-D56SW/wrk/Midas/ABBICAP/wvpa_data_bases.f90:               REPORT_DATA(COMP_ID,ACCT_PTR,8,MO,YR) = REPORT_DATA(COMP_ID,ACCT_PTR,8,MO,YR) + CWIP_BALANCE(MO,YR)
+/home/123-D56SW/wrk/Midas/ABBICAP/wvpa_data_bases.f90:                                       FA_CUM_BOOK_DEP,FA_NPV,FA_BOKDP,CAPX_ADDITIONS,CASH_EXPENDITURES,CWIP_BALANCE,AFUDC_CASH)
+/home/123-D56SW/wrk/Midas/ABBICAP/wvpa_data_bases.f90:                      + CWIP_BALANCE(MO,YR)
+/home/123-D56SW/wrk/Midas/ABBICAP/wvpa_data_bases.f90:                      + CWIP_BALANCE(MO-1,YR)
+/home/123-D56SW/wrk/Midas/ABBICAP/wvpa_data_bases.f90:                      + CWIP_BALANCE(12,YR)
+/home/123-D56SW/wrk/Midas/ABBICAP/wvpa_data_bases.f90:                      + CWIP_BALANCE(MO,YR)

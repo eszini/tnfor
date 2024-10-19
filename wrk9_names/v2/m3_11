@@ -1,0 +1,248 @@
+GAS_objt.for                   (1) 08791 |      CHARACTER*16 FILE_TYPE/'GAS STORAGE FORECAST '/|
+GAS_objt.for                   (1) 09020 |     +                'Error reading the Gas Storage record. Look for'//|
+GAS_objt.for                   (1) 13061 |                     WRITE(4,*) 'A VALID GAS STORAGE ID'|
+GAS_objt.for                   (1) 13070 |                     WRITE(4,*) 'A VALID GAS STORAGE ID'|
+msgmmadm.f90                   (1) 02223 |         CASE ('OCI Post Retirement Rate')|
+msgmmadm.f90                   (1) 02226 |        CASE ('OCI Decommissioning Rate')|
+msgmmadm.f90                   (1) 02262 |         CASE ('In-Gas Storage','Gas Storage')|
+msgmmadm.f90                   (1) 02280 |         CASE ('Out-Gas Storage')|
+msgmmadm.f90                   (1) 02285 |         CASE ('Net Salvage Value','Net Removal')|
+msgmmadm.f90                   (1) 02308 |         CASE ('Equity Risk Adjustment,')|
+msgmmadm.f90                   (1) 02310 |         CASE ('Economic Assets Adjustment,')|
+msgmmadm.f90                   (1) 02312 |         CASE ('Operating Profits Adjustment,')|
+msgmmadm.f90                   (1) 02324 |         CASE ('Balance Deferred Taxes','Balance Deferred Taxes-Cr')|
+msgmmadm.f90                   (1) 02346 |         CASE ('Balance Deferred Taxes-Dr')|
+msgmmadm.f90                   (1) 02473 |         CASE ('GRE DSC Interest Payments')|
+msgmmadm.f90                   (1) 02492 |         CASE ('ARO Accretion Amount Addendum')|
+msgmmdbt.for                   (1) 02217 |     +                                              Interest Payments) =|
+msgmmdbt.for                   (1) 02219 |     +                                                Interest Payments)|
+msgmmdbt.for                   (1) 02222 |     +                                         Cash Interest Payments) =|
+msgmmdbt.for                   (1) 02224 |     +                                           Cash Interest Payments)|
+msgmmdbt.for                   (1) 02241 |     +                                              Interest Earnings) =|
+msgmmdbt.for                   (1) 02243 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 02246 |     +                                Intra Company Interest Earnings) =|
+msgmmdbt.for                   (1) 02248 |     +                                  Intra Company Interest Earnings)|
+msgmmdbt.for                   (1) 02251 |     +                                         Cash Interest Earnings) =|
+msgmmdbt.for                   (1) 02253 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 02308 |                              NOTES_PAYABLE(MO,I,-1,Interest Payments) =|
+msgmmdbt.for                   (1) 02309 |     +                          NOTES_PAYABLE(MO,I,-1,Interest Payments)|
+msgmmdbt.for                   (1) 02312 |     +                                         Cash Interest Payments) =|
+msgmmdbt.for                   (1) 02314 |     +                                           Cash Interest Payments)|
+msgmmdbt.for                   (1) 02324 |                           NOTES_RECEIVABLE(MO,I,-1,Interest Earnings) =|
+msgmmdbt.for                   (1) 02326 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 02329 |     +                                Intra Company Interest Earnings) =|
+msgmmdbt.for                   (1) 02331 |     +                                  Intra Company Interest Earnings)|
+msgmmdbt.for                   (1) 02334 |     +                                         Cash Interest Earnings) =|
+msgmmdbt.for                   (1) 02336 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 02397 |     +                                Intra Company Interest Earnings) =|
+msgmmdbt.for                   (1) 02399 |     +                                  Intra Company Interest Earnings)|
+msgmmdbt.for                   (1) 02484 |                        INVESTMENT_INCOME(MO,I,ASSET_CLASS,Dividend 70)=|
+msgmmdbt.for                   (1) 02485 |     +                   INVESTMENT_INCOME(MO,I,ASSET_CLASS,Dividend 70)|
+msgmmdbt.for                   (1) 02488 |     +                                         Cash Dividend Earnings) =|
+msgmmdbt.for                   (1) 02490 |     +                                           Cash Dividend Earnings)|
+msgmmdbt.for                   (1) 02497 |     +                                         Cash Dividend Earnings) =|
+msgmmdbt.for                   (1) 02499 |     +                                           Cash Dividend Earnings)|
+msgmmdbt.for                   (1) 02503 |     +                                              Interest Earnings) =|
+msgmmdbt.for                   (1) 02505 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 02508 |     +                                         Cash Interest Earnings) =|
+msgmmdbt.for                   (1) 02510 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 02531 |     +                                              Interest Earnings) =|
+msgmmdbt.for                   (1) 02533 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 02536 |     +                                         Cash Interest Earnings) =|
+msgmmdbt.for                   (1) 02538 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 02542 |     +                                Intra Company Interest Earnings) =|
+msgmmdbt.for                   (1) 02544 |     +                                  Intra Company Interest Earnings)|
+msgmmdbt.for                   (1) 02557 |                     NOTES_PAYABLE(MO,I,ASSET_CLASS,Interest Payments) =|
+msgmmdbt.for                   (1) 02558 |     +                 NOTES_PAYABLE(MO,I,ASSET_CLASS,Interest Payments)|
+msgmmdbt.for                   (1) 02562 |     +                                         Cash Interest Payments) =|
+msgmmdbt.for                   (1) 02564 |     +                                           Cash Interest Payments)|
+msgmmdbt.for                   (1) 02884 |                     DRILLING_NAME = 'Investment Interest Earnings'|
+msgmmdbt.for                   (1) 03630 |     +                   INVESTMENT_INCOME(0,YR,ASSET_CLASS,Dividend 70)|
+msgmmdbt.for                   (1) 03633 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 03635 |     +                                                Interest Earnings) |
+msgmmdbt.for                   (1) 03638 |     +                                  Intra Company Interest Earnings)|
+msgmmdbt.for                   (1) 03640 |     +                   INVESTMENT_INCOME(0,YR,ASSET_CLASS,Dividend 70)|
+msgmmdbt.for                   (1) 03648 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 03655 |     +                 NOTES_PAYABLE(0,YR,ASSET_CLASS,Interest Payments)|
+msgmmdbt.for                   (1) 03657 |     +            NOTES_PAYABLE(0,YR,ASSET_CLASS,Cash Interest Payments)|
+msgmmdbt.for                   (1) 03886 |     +                 + INVESTMENT_INCOME(:,YR,ASSET_CLASS,Dividend 70)|
+msgmmdbt.for                   (1) 03889 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 03894 |     +                  +INVESTMENT_INCOME(:,YR,ASSET_CLASS,Dividend 70)|
+msgmmdbt.for                   (1) 03900 |     +             + NOTES_PAYABLE(:,YR,ASSET_CLASS,Interest Payments)|
+msgmmdbt.for                   (1) 03910 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 03914 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 03981 |     +                                           Cash Dividend Earnings)|
+msgmmdbt.for                   (1) 03985 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 03987 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 03991 |     +                                           Cash Interest Payments)|
+msgmmdbt.for                   (1) 04621 |     +             INVESTMENT_INCOME(R_PERIOD,YR,-1,Dividend 70)|
+msgmmdbt.for                   (1) 04623 |     +             + INVESTMENT_INCOME(R_PERIOD,YR,-1,Interest Earnings)|
+msgmmdbt.for                   (1) 04624 |     +             + NOTES_RECEIVABLE(R_PERIOD,YR,-1,Interest Earnings)|
+msgmmdbt.for                   (1) 04627 |     +                     INVESTMENT_INCOME(R_PERIOD,YR,-1,Dividend 70)|
+msgmmdbt.for                   (1) 04628 |         R_STD_INTEREST=NOTES_PAYABLE(R_PERIOD,YR,-1,Interest Payments)|
+msgmmdbt.for                   (1) 04631 |     +                                           Cash Interest Payments)|
+msgmmdbt.for                   (1) 04634 |     +                                                Interest Payments)|
+msgmmdbt.for                   (1) 04660 |     +              + NOTES_RECEIVABLE(R_PERIOD,YR,-1,Interest Earnings)|
+msgmmdbt.for                   (1) 04688 |     +                                           Cash Dividend Earnings)|
+msgmmdbt.for                   (1) 04690 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 04692 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 04711 |     +                                                      Dividend 70)|
+msgmmdbt.for                   (1) 04714 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 04716 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 04720 |     +                                                      Dividend 70)|
+msgmmdbt.for                   (1) 04722 |     +          NOTES_PAYABLE(R_PERIOD,YR,ASSET_CLASS,Interest Payments)|
+msgmmdbt.for                   (1) 04725 |     +                                           Cash Interest Payments)|
+msgmmdbt.for                   (1) 04750 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 04792 |     +                                           Cash Dividend Earnings)|
+msgmmdbt.for                   (1) 04794 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 04796 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 04816 |     +             +  NOTES_PAYABLE(:,YR,ASSET_CLASS,Interest Payments)|
+msgmmdbt.for                   (1) 04825 |     +                                  Intra Company Interest Earnings)|
+msgmmdbt.for                   (1) 04846 |     +                                           Cash Dividend Earnings)|
+msgmmdbt.for                   (1) 04850 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 04852 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 04856 |     +                                           Cash Interest Payments)|
+msgmmfa.f90                    (1) 01257 |      RPT_TITLE(3) = "CWIP Balance"|
+msgmmsb6.for                   (1) 02686 |     +            + BALANCE_SHEET_ROLLUPS(2,ARO Liabilities,CLASS_LEVEL)|
+msgmmsb6.for                   (1) 02706 |     +            + BALANCE_SHEET_ROLLUPS(2,Regulatory Deferred Credits,|
+msgmmsb6.for                   (1) 02710 |     +                 + BALANCE_SHEET_ROLLUPS(2,Other Deferred Credits,|
+msgmmsb6.for                   (1) 02714 |     +                    + BALANCE_SHEET_ROLLUPS(2,Reaquired Debt Gain,|
+msgmmsb6.for                   (1) 12088 |     +           + BALANCE_SHEET_ROLLUPS(2,ARO Net Assets,CLASS_LEVEL)|
+msgmmsb6.for                   (1) 12091 |     +          + BALANCE_SHEET_ROLLUPS(2,ARO Liabilities,CLASS_LEVEL)|
+msgmmsb6.for                   (1) 12107 |     +                 + BALANCE_SHEET_ROLLUPS(1,Other Deferred Credits,|
+msgmmsb6.for                   (1) 12111 |     +            + BALANCE_SHEET_ROLLUPS(1,Regulatory Deferred Credits,|
+msgmmsb6.for                   (1) 12115 |     +                   + BALANCE_SHEET_ROLLUPS(1,Reaquired Debt Gain ,|
+msgmmsb6.for                   (1) 12249 |     +             + BALANCE_SHEET_ROLLUPS(2,ARO Net Assets,CLASS_LEVEL)|
+msgmmsb6.for                   (1) 12253 |     +            + BALANCE_SHEET_ROLLUPS(2,ARO Liabilities,CLASS_LEVEL)|
+msgmmsb6.for                   (1) 12536 |     +                 + BALANCE_SHEET_ROLLUPS(2,Other Deferred Credits,|
+msgmmsb6.for                   (1) 12540 |     +            + BALANCE_SHEET_ROLLUPS(2,Regulatory Deferred Credits,|
+msgmmsb6.for                   (1) 12544 |     +                   + BALANCE_SHEET_ROLLUPS(2,Reaquired Debt Gain ,|
+msgmmsb6.for                   (1) 12861 |     +             + BALANCE_SHEET_ROLLUPS(2,ARO Net Assets,CLASS_LEVEL)|
+msgmmsb6.for                   (1) 13679 |               BALANCE_SHEET_ROLLUPS(I,ARO Net Assets,CLASS_LEVEL-1) =|
+msgmmsb6.for                   (1) 13680 |     +             BALANCE_SHEET_ROLLUPS(I,ARO Net Assets,CLASS_LEVEL-1)|
+msgmmsb6.for                   (1) 13682 |     +             + BALANCE_SHEET_ROLLUPS(I,ARO Net Assets,CLASS_LEVEL)|
+msgmmsb6.for                   (1) 13683 |               BALANCE_SHEET_ROLLUPS(I,ARO Liabilities,CLASS_LEVEL-1) =|
+msgmmsb6.for                   (1) 13684 |     +            BALANCE_SHEET_ROLLUPS(I,ARO Liabilities,CLASS_LEVEL-1)|
+msgmmsb6.for                   (1) 13686 |     +            + BALANCE_SHEET_ROLLUPS(I,ARO Liabilities,CLASS_LEVEL)|
+msgmmsb6.for                   (1) 13688 |               BALANCE_SHEET_ROLLUPS(I,Other Deferred Credits,|
+msgmmsb6.for                   (1) 13690 |     +                 BALANCE_SHEET_ROLLUPS(I,Other Deferred Credits,|
+msgmmsb6.for                   (1) 13693 |     +                 + BALANCE_SHEET_ROLLUPS(I,Other Deferred Credits,|
+msgmmsb6.for                   (1) 13695 |               BALANCE_SHEET_ROLLUPS(I,Regulatory Deferred Credits,|
+msgmmsb6.for                   (1) 13697 |     +            BALANCE_SHEET_ROLLUPS(I,Regulatory Deferred Credits,|
+msgmmsb6.for                   (1) 13700 |     +            + BALANCE_SHEET_ROLLUPS(I,Regulatory Deferred Credits,|
+msgmmsb6.for                   (1) 13702 |               BALANCE_SHEET_ROLLUPS(I,Reaquired Debt Gain,|
+msgmmsb6.for                   (1) 13704 |     +                    BALANCE_SHEET_ROLLUPS(I,Reaquired Debt Gain,|
+msgmmsb6.for                   (1) 13707 |     +                    + BALANCE_SHEET_ROLLUPS(I,Reaquired Debt Gain,|
+msgmmsb6.for                   (1) 13712 |            BALANCE_SHEET_ROLLUPS(I,ARO Net Assets,CLASS_LEVEL) = 0.|
+msgmmsb6.for                   (1) 13713 |            BALANCE_SHEET_ROLLUPS(I,ARO Liabilities,CLASS_LEVEL) = 0.|
+msgmmsb6.for                   (1) 13714 |            BALANCE_SHEET_ROLLUPS(I,Other Deferred Credits,|
+msgmmsb6.for                   (1) 13716 |            BALANCE_SHEET_ROLLUPS(I,Regulatory Deferred Credits,|
+msgmmsb6.for                   (1) 13718 |            BALANCE_SHEET_ROLLUPS(I,Reaquired Debt Gain,|
+namescom.mon                   (1) 00249 |      integer(kind=2),parameter:: Assets NEC Adjustment=1|
+namescom.mon                   (1) 00250 |      integer(kind=2),parameter:: Rate Base Adjustment=2|
+namescom.mon                   (1) 00251 |      integer(kind=2),parameter:: Deferred Tax Adjustment=3|
+namescom.mon                   (1) 00252 |      integer(kind=2),parameter:: Plant in Service Adjustment=4|
+namescom.mon                   (1) 00257 |      integer(kind=2),parameter:: CD Balance as PC of Revenues=1|
+namescom.mon                   (1) 00258 |      integer(kind=2),parameter:: CD Addendum=2|
+namescom.mon                   (1) 00259 |      integer(kind=2),parameter:: CIAC Cash Contributions=3|
+namescom.mon                   (1) 00260 |      integer(kind=2),parameter:: CIAC Amortization Rate=4|
+namescom.mon                   (1) 00261 |      integer(kind=2),parameter:: CIAC Addendum to Amortization=5|
+namescom.mon                   (1) 00266 |      integer(kind=2),parameter:: Assets NEC Addendum=1|
+namescom.mon                   (1) 00267 |      integer(kind=2),parameter:: Liabilities NEC Addendum=2|
+namescom.mon                   (1) 00268 |      integer(kind=2),parameter:: Fuel Inventory Change=3|
+namescom.mon                   (1) 00269 |      integer(kind=2),parameter:: Materials Supplies=4|
+namescom.mon                   (1) 00270 |      integer(kind=2),parameter:: Gas Storage=5|
+namescom.mon                   (1) 00271 |      integer(kind=2),parameter:: Rate Receivable Accounts=6|
+namescom.mon                   (1) 00272 |      integer(kind=2),parameter:: Addendum Receivable Accounts=7|
+namescom.mon                   (1) 00273 |      integer(kind=2),parameter:: Rate Payable Accounts=8|
+namescom.mon                   (1) 00274 |      integer(kind=2),parameter:: Addendum Payable Accounts=9|
+namescom.mon                   (1) 00275 |      integer(kind=2),parameter:: Rate Assets NEC=10|
+namescom.mon                   (1) 00276 |      integer(kind=2),parameter:: Rate Liabilities NEC=11|
+namescom.mon                   (1) 00277 |      integer(kind=2),parameter:: Fuel Inventory Change Out=12|
+namescom.mon                   (1) 00278 |      integer(kind=2),parameter:: Materials Supplies Out=13|
+namescom.mon                   (1) 00279 |      integer(kind=2),parameter:: Gas Storage Out=14|
+namescom.mon                   (1) 00284 |      integer(kind=2),parameter:: Earnings Decommissioning Fund=1|
+namescom.mon                   (1) 00285 |      integer(kind=2),parameter:: Earnings Post Retirement Fund=2|
+namescom.mon                   (1) 00286 |      integer(kind=2),parameter:: Earnings ST Investments=3|
+namescom.mon                   (1) 00287 |      integer(kind=2),parameter:: Earnings LT Investments=4|
+namescom.mon                   (1) 00289 |      integer(kind=2),parameter:: Decommissioning Rate=6|
+namescom.mon                   (1) 00290 |      integer(kind=2),parameter:: Post Retirement Rate=7|
+namescom.mon                   (1) 00291 |      integer(kind=2),parameter:: STI Rate=8|
+namescom.mon                   (1) 00292 |      integer(kind=2),parameter:: LTI Rate=9|
+namescom.mon                   (1) 00293 |      integer(kind=2),parameter:: Customer Deposits Rate=10|
+namescom.mon                   (1) 00294 |      integer(kind=2),parameter:: OCI Post Retirement Rate=11|
+namescom.mon                   (1) 00295 |      integer(kind=2),parameter:: OCI Decommissioning Rate=12|
+namescom.mon                   (1) 00301 |      integer(kind=2),parameter:: Net Removal=1|
+namescom.mon                   (1) 00302 |      integer(kind=2),parameter:: Cash Received=2|
+namescom.mon                   (1) 00303 |      integer(kind=2),parameter:: Gross Book Value=3|
+namescom.mon                   (1) 00304 |      integer(kind=2),parameter:: Cumulative Depreciation=4|
+namescom.mon                   (1) 00305 |      integer(kind=2),parameter:: Sale Deferred Taxes Adjustment=5|
+namescom.mon                   (1) 00306 |      integer(kind=2),parameter:: Sale ATL Amortization=6|
+namescom.mon                   (1) 00308 |      integer(kind=2),parameter:: Cost of Removal=8|
+namescom.mon                   (1) 00309 |      integer(kind=2),parameter:: Salvage Value=9|
+namescom.mon                   (1) 00310 |      integer(kind=2),parameter:: Addedum to Book Gain Loss=10|
+namescom.mon                   (1) 00315 |      integer(kind=2),parameter:: Equity Risk Adjustment=1|
+namescom.mon                   (1) 00316 |      integer(kind=2),parameter:: Economic Assets Adjustment=2|
+namescom.mon                   (1) 00317 |      integer(kind=2),parameter:: Operating Profits Adjustment=3|
+namescom.mon                   (1) 00318 |      integer(kind=2),parameter:: Capitial Recovery EXCLUDED OPAT=4|
+namescom.mon                   (1) 00323 |      integer(kind=2),parameter:: NucDecom Discount Rate=1|
+namescom.mon                   (1) 00324 |      integer(kind=2),parameter:: NucDecom Liability Addendum=2|
+namescom.mon                   (1) 00325 |      integer(kind=2),parameter:: OCI Adjustment=3|
+namescom.mon                   (1) 00326 |      integer(kind=2),parameter:: FASB87 Intangible Asset Adj=4|
+namescom.mon                   (1) 00327 |      integer(kind=2),parameter:: FABS87 Pension Liab Adj=5|
+namescom.mon                   (1) 00328 |      integer(kind=2),parameter:: OCI Deferred Tax Adj=6|
+namescom.mon                   (1) 00329 |      integer(kind=2),parameter:: ARO Discount Rate=1|
+namescom.mon                   (1) 00330 |      integer(kind=2),parameter:: ARO Accretion Amount=2|
+namescom.mon                   (1) 00331 |      integer(kind=2),parameter:: ARO Cash Payment=7|
+namescom.mon                   (1) 00332 |      integer(kind=2),parameter:: ARO Cash to Bal Sheet Trust=8|
+namescom.mon                   (1) 00337 |      integer(kind=2),parameter:: Non Cash Pension=1|
+namescom.mon                   (1) 00350 |      integer(kind=2),parameter:: Gross Plant Value=1|
+namescom.mon                   (1) 00351 |      integer(kind=2),parameter:: Cumulated Plant Depreciation=2|
+namescom.mon                   (1) 00352 |      integer(kind=2),parameter:: Balance Deferred Taxes=3|
+namescom.mon                   (1) 00353 |      integer(kind=2),parameter:: Deferred Debit Adjustment=4|
+namescom.mon                   (1) 00354 |      integer(kind=2),parameter:: ATL Debit Amortization=5|
+namescom.mon                   (1) 00355 |      integer(kind=2),parameter:: BTL Debt Amortization=6|
+namescom.mon                   (1) 00356 |      integer(kind=2),parameter:: Annual Deferred Taxes=7|
+namescom.mon                   (1) 00357 |      integer(kind=2),parameter:: Deferred ITCs Balance=8|
+namescom.mon                   (1) 00358 |      integer(kind=2),parameter:: Net Nuclear Fuel=9|
+namescom.mon                   (1) 00359 |      integer(kind=2),parameter:: Retained Earnings=10|
+namescom.mon                   (1) 00360 |      integer(kind=2),parameter:: Extra Ordinary Expense=11|
+namescom.mon                   (1) 00361 |      integer(kind=2),parameter:: LT Liabilities Balance=12|
+namescom.mon                   (1) 00362 |      integer(kind=2),parameter:: Balance Deferred Taxes Dr=13|
+namescom.mon                   (1) 00363 |      integer(kind=2),parameter:: CWIP Balance=14|
+namescom.mon                   (1) 00364 |      integer(kind=2),parameter:: Paid in Capital=15|
+namescom.mon                   (1) 00365 |      integer(kind=2),parameter:: ARO Net Assets=16|
+namescom.mon                   (1) 00366 |      integer(kind=2),parameter:: ARO Liabilities=17|
+namescom.mon                   (1) 00367 |      integer(kind=2),parameter:: Other Deferred Credits=18|
+namescom.mon                   (1) 00368 |      integer(kind=2),parameter:: Regulatory Deferred Credits=19|
+namescom.mon                   (1) 00369 |      integer(kind=2),parameter:: Reaquired Debt Gain=20|
+namescom.mon                   (1) 00379 |      integer(kind=2),parameter:: Actual Deferred Taxes Cr=1|
+namescom.mon                   (1) 00380 |      integer(kind=2),parameter:: Actual Fed Income Taxes=2|
+namescom.mon                   (1) 00381 |      integer(kind=2),parameter:: Actual State Income Taxes=3|
+namescom.mon                   (1) 00382 |      integer(kind=2),parameter:: Actual Deferred Taxes Dr=4|
+namescom.mon                   (1) 00383 |      integer(kind=2),parameter:: Actual ATL Fed Income Taxes=5|
+namescom.mon                   (1) 00384 |      integer(kind=2),parameter:: Actual ATL State Income Taxes=6|
+namescom.mon                   (1) 00385 |      integer(kind=2),parameter:: Actual BTL Fed Income Taxes=7|
+namescom.mon                   (1) 00386 |      integer(kind=2),parameter:: Actual BTL State Income Taxes=8|
+namescom.mon                   (1) 00392 |      integer(kind=2),parameter:: STD Minimum Balance=2|
+namescom.mon                   (1) 00393 |      integer(kind=2),parameter:: Cash Minimum Balance=3|
+namescom.mon                   (1) 00394 |      integer(kind=2),parameter:: OUC Fuel Inventory=1|
+namescom.mon                   (1) 00395 |      integer(kind=2),parameter:: OUC Prepayments=2|
+namescom.mon                   (1) 00396 |      integer(kind=2),parameter:: OUC Materials Inventory=3|
+namescom.mon                   (1) 00404 |      integer(kind=2),parameter:: Dividend 70=1|
+namescom.mon                   (1) 00406 |      integer(kind=2),parameter:: Interest Payments=2|
+namescom.mon                   (1) 00407 |      integer(kind=2),parameter:: Interest Earnings=3|
+namescom.mon                   (1) 00410 |      integer(kind=2),parameter:: Cash Interest Payments=6|
+namescom.mon                   (1) 00411 |      integer(kind=2),parameter:: Cash Interest Earnings=7|
+namescom.mon                   (1) 00412 |      integer(kind=2),parameter:: Cash Dividend Earnings=8|
+namescom.mon                   (1) 00413 |      integer(kind=2),parameter:: Intra Company Interest Earnings=9|
+namescom.mon                   (1) 00414 |      integer(kind=2),parameter:: Minibond Interest Payment=6|
+namescom.mon                   (1) 00415 |      integer(kind=2),parameter:: Minibond Principal Payment=7|
+namescom.mon                   (1) 00416 |      integer(kind=2),parameter:: Minibond Interest Deposit=8|
+namescom.mon                   (1) 00417 |      integer(kind=2),parameter:: Minibond Principal Deposit=9|
+namescom.mon                   (1) 00418 |      integer(kind=2),parameter:: Annualized Interest=10|
+namescom.mon                   (1) 00419 |      integer(kind=2),parameter:: Minibond Annualized Interest=10|
+namescom.mon                   (1) 00420 |      integer(kind=2),parameter:: BAAN Additions=1|
+namescom.mon                   (1) 00421 |      integer(kind=2),parameter:: BAAN Reductions=2|
+namescom.mon                   (1) 00422 |      integer(kind=2),parameter:: BAAN Interest Payments=3|
+namescom.mon                   (1) 00423 |      integer(kind=2),parameter:: BAAN Annualized Interest=4|
