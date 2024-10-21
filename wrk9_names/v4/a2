@@ -1,0 +1,87 @@
+msgmmdbt.for                   (1) 02218 |     +                                              Interest Payments) =|
+msgmmdbt.for                   (1) 02220 |     +                                                Interest Payments)|
+msgmmdbt.for                   (1) 02223 |     +                                         Cash Interest Payments) =|
+msgmmdbt.for                   (1) 02225 |     +                                           Cash Interest Payments)|
+msgmmdbt.for                   (1) 02242 |     +                                              Interest Earnings) =|
+msgmmdbt.for                   (1) 02244 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 02247 |     +                                Intra Company Interest Earnings) =|
+msgmmdbt.for                   (1) 02249 |     +                                  Intra Company Interest Earnings)|
+msgmmdbt.for                   (1) 02252 |     +                                         Cash Interest Earnings) =|
+msgmmdbt.for                   (1) 02254 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 02309 |                              NOTES_PAYABLE(MO,I,-1,Interest Payments) =|
+msgmmdbt.for                   (1) 02310 |     +                          NOTES_PAYABLE(MO,I,-1,Interest Payments)|
+msgmmdbt.for                   (1) 02313 |     +                                         Cash Interest Payments) =|
+msgmmdbt.for                   (1) 02315 |     +                                           Cash Interest Payments)|
+msgmmdbt.for                   (1) 02325 |                           NOTES_RECEIVABLE(MO,I,-1,Interest Earnings) =|
+msgmmdbt.for                   (1) 02327 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 02330 |     +                                Intra Company Interest Earnings) =|
+msgmmdbt.for                   (1) 02332 |     +                                  Intra Company Interest Earnings)|
+msgmmdbt.for                   (1) 02335 |     +                                         Cash Interest Earnings) =|
+msgmmdbt.for                   (1) 02337 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 02398 |     +                                Intra Company Interest Earnings) =|
+msgmmdbt.for                   (1) 02400 |     +                                  Intra Company Interest Earnings)|
+msgmmdbt.for                   (1) 02485 |                        INVESTMENT_INCOME(MO,I,ASSET_CLASS,Dividend 70)=|
+msgmmdbt.for                   (1) 02486 |     +                   INVESTMENT_INCOME(MO,I,ASSET_CLASS,Dividend 70)|
+msgmmdbt.for                   (1) 02489 |     +                                         Cash Dividend Earnings) =|
+msgmmdbt.for                   (1) 02491 |     +                                           Cash Dividend Earnings)|
+msgmmdbt.for                   (1) 02498 |     +                                         Cash Dividend Earnings) =|
+msgmmdbt.for                   (1) 02500 |     +                                           Cash Dividend Earnings)|
+msgmmdbt.for                   (1) 02504 |     +                                              Interest Earnings) =|
+msgmmdbt.for                   (1) 02506 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 02509 |     +                                         Cash Interest Earnings) =|
+msgmmdbt.for                   (1) 02511 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 02532 |     +                                              Interest Earnings) =|
+msgmmdbt.for                   (1) 02534 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 02537 |     +                                         Cash Interest Earnings) =|
+msgmmdbt.for                   (1) 02539 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 02543 |     +                                Intra Company Interest Earnings) =|
+msgmmdbt.for                   (1) 02545 |     +                                  Intra Company Interest Earnings)|
+msgmmdbt.for                   (1) 02558 |                     NOTES_PAYABLE(MO,I,ASSET_CLASS,Interest Payments) =|
+msgmmdbt.for                   (1) 02559 |     +                 NOTES_PAYABLE(MO,I,ASSET_CLASS,Interest Payments)|
+msgmmdbt.for                   (1) 02563 |     +                                         Cash Interest Payments) =|
+msgmmdbt.for                   (1) 02565 |     +                                           Cash Interest Payments)|
+msgmmdbt.for                   (1) 03631 |     +                   INVESTMENT_INCOME(0,YR,ASSET_CLASS,Dividend 70)|
+msgmmdbt.for                   (1) 03634 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 03636 |     +                                                Interest Earnings) |
+msgmmdbt.for                   (1) 03639 |     +                                  Intra Company Interest Earnings)|
+msgmmdbt.for                   (1) 03641 |     +                   INVESTMENT_INCOME(0,YR,ASSET_CLASS,Dividend 70)|
+msgmmdbt.for                   (1) 03649 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 03656 |     +                 NOTES_PAYABLE(0,YR,ASSET_CLASS,Interest Payments)|
+msgmmdbt.for                   (1) 03658 |     +            NOTES_PAYABLE(0,YR,ASSET_CLASS,Cash Interest Payments)|
+msgmmdbt.for                   (1) 03887 |     +                 + INVESTMENT_INCOME(:,YR,ASSET_CLASS,Dividend 70)|
+msgmmdbt.for                   (1) 03890 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 03895 |     +                  +INVESTMENT_INCOME(:,YR,ASSET_CLASS,Dividend 70)|
+msgmmdbt.for                   (1) 03901 |     +             + NOTES_PAYABLE(:,YR,ASSET_CLASS,Interest Payments)|
+msgmmdbt.for                   (1) 03911 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 03915 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 03982 |     +                                           Cash Dividend Earnings)|
+msgmmdbt.for                   (1) 03986 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 03988 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 03992 |     +                                           Cash Interest Payments)|
+msgmmdbt.for                   (1) 04622 |     +             INVESTMENT_INCOME(R_PERIOD,YR,-1,Dividend 70)|
+msgmmdbt.for                   (1) 04624 |     +             + INVESTMENT_INCOME(R_PERIOD,YR,-1,Interest Earnings)|
+msgmmdbt.for                   (1) 04625 |     +             + NOTES_RECEIVABLE(R_PERIOD,YR,-1,Interest Earnings)|
+msgmmdbt.for                   (1) 04628 |     +                     INVESTMENT_INCOME(R_PERIOD,YR,-1,Dividend 70)|
+msgmmdbt.for                   (1) 04629 |         R_STD_INTEREST=NOTES_PAYABLE(R_PERIOD,YR,-1,Interest Payments)|
+msgmmdbt.for                   (1) 04632 |     +                                           Cash Interest Payments)|
+msgmmdbt.for                   (1) 04635 |     +                                                Interest Payments)|
+msgmmdbt.for                   (1) 04661 |     +              + NOTES_RECEIVABLE(R_PERIOD,YR,-1,Interest Earnings)|
+msgmmdbt.for                   (1) 04689 |     +                                           Cash Dividend Earnings)|
+msgmmdbt.for                   (1) 04691 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 04693 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 04712 |     +                                                      Dividend 70)|
+msgmmdbt.for                   (1) 04715 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 04717 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 04721 |     +                                                      Dividend 70)|
+msgmmdbt.for                   (1) 04723 |     +          NOTES_PAYABLE(R_PERIOD,YR,ASSET_CLASS,Interest Payments)|
+msgmmdbt.for                   (1) 04726 |     +                                           Cash Interest Payments)|
+msgmmdbt.for                   (1) 04751 |     +                                                Interest Earnings)|
+msgmmdbt.for                   (1) 04793 |     +                                           Cash Dividend Earnings)|
+msgmmdbt.for                   (1) 04795 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 04797 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 04817 |     +             +  NOTES_PAYABLE(:,YR,ASSET_CLASS,Interest Payments)|
+msgmmdbt.for                   (1) 04826 |     +                                  Intra Company Interest Earnings)|
+msgmmdbt.for                   (1) 04847 |     +                                           Cash Dividend Earnings)|
+msgmmdbt.for                   (1) 04851 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 04853 |     +                                           Cash Interest Earnings)|
+msgmmdbt.for                   (1) 04857 |     +                                           Cash Interest Payments)|

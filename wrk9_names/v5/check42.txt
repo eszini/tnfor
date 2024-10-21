@@ -1,0 +1,7 @@
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON
+/home/123-D56SW/wrk/Midas/ABBICAP/Finaclp2.for
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6b.f90
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.f90

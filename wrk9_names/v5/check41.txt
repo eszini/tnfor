@@ -1,0 +1,4 @@
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for
+/home/123-D56SW/wrk/Midas/ABBICAP/namescom.f90

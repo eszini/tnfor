@@ -1,0 +1,35 @@
+/msgmmdbt.for:     +       R_DIVIDEND_70_INCOME,
+/msgmmdbt.for:     +                                R_DIVIDEND_70_INCOME,
+/msgmmdbt.for:         R_DIVIDEND_70_INCOME = 0.
+/msgmmdbt.for:               R_DIVIDEND_70_INCOME =
+/msgmmdbt.for:               INCOME_VARIABLES(:,Monthly_Dividend_70_Earnings) =
+/msgmmdbt.for:     +                  INCOME_VARIABLES(:,Monthly_Dividend_70_Earnings)
+/msgmmdbt.for:     +                     R_DIVIDEND_70_INCOME,
+/msgmmdbt.for:         R_DIVIDEND_70_INCOME =
+/msgmmdbt.for:               R_DIVIDEND_70_INCOME = R_DIVIDEND_70_INCOME
+/msgmmout.for:     +            + INCOME_VARIABLES(:,Monthly_Dividend_70_Earnings)
+/msgmmout.for:     +            + INCOME_VARIABLES(:,Monthly_Dividend_70_Earnings)
+/msgmmout.for:     +             INCOME_VARIABLES(:,Monthly_Dividend_70_Earnings)
+/msgmmout.for:     +            + INCOME_VARIABLES(:,Monthly_Dividend_70_Earnings)
+/msgmmout.for:                  IF(VARIABLE == Monthly_Dividend_70_Earnings)CYCLE
+/msgmmout.for:     +                                     Monthly_Dividend_70_Earnings) ! 34
+/msgmmout.for:     +                                     Monthly_Dividend_70_Earnings)
+/msgmmout.for:     +                                     Monthly_Dividend_70_Earnings)
+/msgmmout.for:     +                                     Monthly_Dividend_70_Earnings)
+/msgmmout.for:     +                                     Monthly_Dividend_70_Earnings)
+/msgmmsb6.for:     +       DIVIDEND_70_NONTAXABLE,
+/msgmmsb6.for:     +                                     DIVIDEND_70_NONTAXABLE,
+/msgmmsb6.for:            DIVIDEND_70_NONTAXABLE = DIVIDEND_70_NONTAXABLE
+/msgmmsb6.for:     +                                  -.7*DIVIDEND_70_NONTAXABLE !ONLY 30% TAXABLE
+/msgmmsb6.for:     +                              DIVIDEND_70_NONTAXABLE,
+/msgmmsb6.for:     +                                      -.7*DIVIDEND_70_NONTAXABLE !ONLY 30% TAXABLE
+/mthnmcom.f90:      integer(kind=2),parameter:: Monthly_Dividend_70_Earnings=209
+/Ac_equiv.MON:     +                 GRE_INTEREST_PAYMENTS_MANUAL_ADJS, ! 767
+/Ac_equiv.MON:     +                 GRE_TOTAL_INTEREST_PAYMENTS, ! 768
+/Ac_equiv.MON:     +            (VARIABLE(767),GRE_INTEREST_PAYMENTS_MANUAL_ADJS), ! 767
+/Ac_equiv.MON:     +            (VARIABLE(768),GRE_TOTAL_INTEREST_PAYMENTS), ! 768
+/Finaclp2.for:     +                                     + R_VARIABLE(768))   ! GRE_TOTAL_INTEREST_PAYMENTS), ! 768
+/msgmmsb6.for:     +                                GRE_INTEREST_PAYMENTS_MANUAL_ADJS,
+/msgmmsb6b.f90:         R_VARIABLE(768) = & ! GRE_TOTAL_INTEREST_PAYMENTS), ! 768
+/msgmmsb6b.f90:                           + R_VARIABLE(767)  ! GRE_INTEREST_PAYMENTS_MANUAL_ADJS), ! 767
+/msgmmsb6b.f90:                            + R_VARIABLE(768) ! GRE_TOTAL_INTEREST_PAYMENTS), ! 768

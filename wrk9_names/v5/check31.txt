@@ -1,0 +1,142 @@
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                         Cash Dividend Earnings) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Dividend Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                         Cash Dividend Earnings) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Dividend Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Dividend Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Dividend Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Dividend Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Dividend Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/namescom.f90:      integer(kind=2),parameter:: Cash Dividend Earnings=8
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                         Cash Interest Earnings) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                         Cash Interest Earnings) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                         Cash Interest Earnings) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                         Cash Interest Earnings) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/namescom.f90:      integer(kind=2),parameter:: Cash Interest Earnings=7
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                         Cash Interest Payments) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                         Cash Interest Payments) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                         Cash Interest Payments) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +            NOTES_PAYABLE(0,YR,ASSET_CLASS,Cash Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:c     +                                      - LTD_INTEREST_CASH_PAYMENTS !CASH INTEREST PAYMENTS
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                    - LTD_INTEREST_CASH_PAYMENTS  !CASH INTEREST PAYMENTS
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                      - LTD_INTEREST_CASH_PAYMENTS !CASH INTEREST PAYMENTS
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                     - LTD_INTEREST_CASH_PAYMENTS ! CASH INTEREST PAYMENTS
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +           + LTD_INTEREST_CASH_PAYMENTS ! CASH INTEREST PAYMENTS
+/home/123-D56SW/wrk/Midas/ABBICAP/namescom.f90:      integer(kind=2),parameter:: Cash Interest Payments=6
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:                        INVESTMENT_INCOME(MO,I,ASSET_CLASS,Dividend 70)=
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                   INVESTMENT_INCOME(MO,I,ASSET_CLASS,Dividend 70)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                   INVESTMENT_INCOME(0,YR,ASSET_CLASS,Dividend 70)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                   INVESTMENT_INCOME(0,YR,ASSET_CLASS,Dividend 70)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                 + INVESTMENT_INCOME(:,YR,ASSET_CLASS,Dividend 70)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                  +INVESTMENT_INCOME(:,YR,ASSET_CLASS,Dividend 70)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +             INVESTMENT_INCOME(R_PERIOD,YR,-1,Dividend 70)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                     INVESTMENT_INCOME(R_PERIOD,YR,-1,Dividend 70)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                                      Dividend 70)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                                      Dividend 70)
+/home/123-D56SW/wrk/Midas/ABBICAP/namescom.f90:      integer(kind=2),parameter:: Dividend 70=1
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                              Interest Earnings) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                                Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                Intra Company Interest Earnings) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                  Intra Company Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                         Cash Interest Earnings) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:                           NOTES_RECEIVABLE(MO,I,-1,Interest Earnings) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                                Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                Intra Company Interest Earnings) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                  Intra Company Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                         Cash Interest Earnings) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                Intra Company Interest Earnings) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                  Intra Company Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                              Interest Earnings) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                                Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                         Cash Interest Earnings) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                              Interest Earnings) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                                Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                         Cash Interest Earnings) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                Intra Company Interest Earnings) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                  Intra Company Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:                     DRILLING_NAME = 'Investment Interest Earnings'
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                                Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                                Interest Earnings) 
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                  Intra Company Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                                Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:!     +                                                Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:!     +                                                Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:!     +                                                Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                                Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                                Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +             + INVESTMENT_INCOME(R_PERIOD,YR,-1,Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +             + NOTES_RECEIVABLE(R_PERIOD,YR,-1,Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +              + NOTES_RECEIVABLE(R_PERIOD,YR,-1,Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                                Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                                Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                                Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:!     +                                  Intra Company Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                  Intra Company Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/namescom.f90:      integer(kind=2),parameter:: Interest Earnings=3
+/home/123-D56SW/wrk/Midas/ABBICAP/namescom.f90:      integer(kind=2),parameter:: Cash Interest Earnings=7
+/home/123-D56SW/wrk/Midas/ABBICAP/namescom.f90:      integer(kind=2),parameter:: Intra Company Interest Earnings=9
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmadm.f90:         CASE ('GRE DSC Interest Payments')
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:! COMPUTE ANNUAL ADDITIONS, RETIREMENTS, AND INTEREST PAYMENTS
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                              Interest Payments) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                                Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                         Cash Interest Payments) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:                              NOTES_PAYABLE(MO,I,-1,Interest Payments) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                          NOTES_PAYABLE(MO,I,-1,Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                         Cash Interest Payments) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:                     NOTES_PAYABLE(MO,I,ASSET_CLASS,Interest Payments) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                 NOTES_PAYABLE(MO,I,ASSET_CLASS,Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                         Cash Interest Payments) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                 NOTES_PAYABLE(0,YR,ASSET_CLASS,Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +            NOTES_PAYABLE(0,YR,ASSET_CLASS,Cash Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +             + NOTES_PAYABLE(:,YR,ASSET_CLASS,Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:         R_STD_INTEREST=NOTES_PAYABLE(R_PERIOD,YR,-1,Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                                Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +          NOTES_PAYABLE(R_PERIOD,YR,ASSET_CLASS,Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +             +  NOTES_PAYABLE(:,YR,ASSET_CLASS,Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                           Cash Interest Payments)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:c     +                                      - LTD_INTEREST_CASH_PAYMENTS !CASH INTEREST PAYMENTS
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                    - LTD_INTEREST_CASH_PAYMENTS  !CASH INTEREST PAYMENTS
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                      - LTD_INTEREST_CASH_PAYMENTS !CASH INTEREST PAYMENTS
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                     - LTD_INTEREST_CASH_PAYMENTS ! CASH INTEREST PAYMENTS
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +           + LTD_INTEREST_CASH_PAYMENTS ! CASH INTEREST PAYMENTS
+/home/123-D56SW/wrk/Midas/ABBICAP/namescom.f90:      integer(kind=2),parameter:: Interest Payments=2
+/home/123-D56SW/wrk/Midas/ABBICAP/namescom.f90:      integer(kind=2),parameter:: Cash Interest Payments=6
+/home/123-D56SW/wrk/Midas/ABBICAP/namescom.f90:      integer(kind=2),parameter:: BAAN Interest Payments=3

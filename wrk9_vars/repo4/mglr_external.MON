@@ -1,0 +1,8 @@
+       interface
+        subroutine mglr_external(lt, tp, screen_message, 
+     +    version_code, someint)
+            use miscmod
+            integer :: lt, tp, someint, version_code
+            character*256 :: screen_message
+        end subroutine mglr_external
+       end interface

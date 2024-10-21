@@ -1,64 +1,192 @@
 
-void rutina_x(s, n, vn, vp, k, dict, dict_size) 
-char	*s;
-int	*n;
-int	*vn;
-char	**vp;
-int	*k;
-DictionaryEntry *dict;
-int	dict_size;
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	ex8_p1
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ * llamado por pro_exec8
+ * hace algo con todas las lineas cargadas en memoria
+ *
+ *
+ */
+
+int	ex8_p1()
 {
+	int 	i,j,k,k1,k2;
+	int	l1,l2;
+	int	c1,c2;
+	int	f1,f2,f3,f4,f5;
+	int	p1,p2;
+	int	f_proceso;
+	int	n_f;
+	char	base_name[MAXV];
+	char	prog_name[MAXV];
+	char	b0[MAXB];
+	char	b1[MAXB];
+	char	b2[MAXB];
+	char	b3[MAXB];
+	char	b4[MAXB];
+	char	b5[MAXB];
+	int	pf,uf,nf;
+	int	qv1,qv2;
+	int	qm1,qm2,qm3;
+	int	n_var;
 
-    int start;
-    int len;
-    int i;
 
-    // Inicializar el contador de variables
-    *n = 0; 
-    len = strlen(s);
-    i = 0;
+	strcpy(base_name,"empty");
 
-    while (i < len) 
-    {
-        // Saltar espacios en blanco
-        while (i < len && isspace(s[i])) 
-        {
-            i++;
-        }
+	qv1 = 0;
+	qm1 = 0;
 
-        // Si encontramos una letra, es el inicio de una variable
-        if (i < len && isalpha(s[i])) 
-        {
-            // Guardar el puntero al inicio de la variable
-            vp[*n] = &s[i]; 
-            start = i;
+	/* para todas las lineas */
+	for (i=0; i < qf_src; i++)
+	{
+		/* me fijo que archivo es */
+		strcpy(prog_name,f_name(i));
 
-            // Avanzar hasta el final de la variable
-            while (i < len && (isalnum(s[i]) || s[i] == ' ' || s[i] == '_')) 
-            {
-                i++;
-            }
+		/* me fijo lineas */
+		for (j=0, f1=1, n_f=0; f1 && j<qf_ff; j++)
+			if ( i >= (*tb[j]).pf && i <= (*tb[j]).uf )
+			{	n_f = j;
+				pf = (*tb[j]).pf;
+				uf = (*tb[j]).uf;
+				f1=0;
+			}
 
-            // Guardar la longitud de la variable
-            vn[*n] = i - start; 
+		if (strcmp(base_name,prog_name))
+		{	strcpy(base_name,prog_name);
+			nf = 0;
+		}
 
-            // Verificar si la variable está en el diccionario
-            k[*n] = 0; 
-            for (int j = 0; j < dict_size; j++) 
-            {
-                if (strncmp(vp[*n], dict[j].word, vn[*n]) == 0 && strlen(dict[j].word) == vn[*n]) 
-                {
-                    k[*n] = dict[j].value;
-                    break;
-                }
-            }
+		/* proceso linea i */
+		strcpy(b0,(*fnp[i]).l );
+		strcpy(b1,(*fnp[i]).l );
 
-            (*n)++; 
-        } 
-        else 
-        {
-            i++;
-        }
-    }
+		/* trabajemos con minusculas */
+		strcpy (b2, pasar_a_minusc(b1));
+
+
+		if ( !es_linea_comentario(b2) && tiene_coment_final (b2,&p1))
+		{
+			b2[p1] = 0;
+		}
+		l2 = strlen(b2);
+
+
+		f_proceso = 1;
+		if (linea_vacia(b2) || es_linea_comentario(b2))
+			f_proceso = 0;
+
+		/* solo proceso lineas que no son comentario ni vacias */
+		if (f_proceso)
+		{	
+
+			v_pars(b2,&n_var,v_size,v_name );
+
+			for (i=0; i<n_var; i++)
+			{
+				memset(b4,0,sizeof(b4));
+				strncpy(b4,v_name[i],v_size[i]);
+				fprintf (hfout,"%30.30s %2d |%s| \n",prog_name,i,b4);
+			}
+
+
+
+#if 0
+			c1 = 0;
+			f5 = 1;
+
+			while (f5)
+			{
+				f5 = 0;
+	
+				/* veo si encuentro alguna variable ! */
+				for (k=0; k< q_vcb; k++)
+				{
+					strcpy(b3,pasar_a_minusc(vcb[k]));
+	
+					for (k1=0; k1 < l2; k1++)
+					{
+						if (!strncmp(b2+k1,b3,strlen(b3)))
+						{
+							c1++;
+							f5 = 1;
+	
+							/* cambiazos */
+							strcpy(b4,b3);
+							strcpy(b5,vcb[k]);
+							for (k2 = 0; k2 < strlen(b4); k2++)
+							{
+								if( b4[k2] == ' ')
+								{
+									b4[k2] = '_';
+									b5[k2] = '_';
+								}
+							}
+
+							strncpy(b1+k1,b5,strlen(b5));
+							strncpy(b2+k1,b4,strlen(b4));
+	
+							printf ("VV1 Prog:          |%s|\n",prog_name);
+							printf ("VV2 var :          |%s|\n",b3);
+							printf ("VV3 cnt : (%6d)\n",c1);
+							printf ("VV4 lin : (%6d) |%s|\n",lne(nf),b0);
+							printf ("VV5 lin : (%6d) |%s|\n",lne(nf),b1);
+							printf ("VV6 \n");
+
+#if 0
+							if (fflog)
+							{
+								fprintf (hflog,"%-30.30s (%d) %05d |%s|\n",prog_name,c1,lne(nf),b0);
+								fprintf (hflog,"%-30.30s     %05d |%s|\n",prog_name,lne(nf),b1);
+								fprintf (hflog,"%s","\n");
+							}
+
+							if (ffaux)
+							{
+								fprintf (hfaux,"%-30.30s (%d) %05d |%s|\n",prog_name,c1,lne(nf),vcb[k]);
+							}
+
+							if (ffout)
+							{
+								strcpy(vcb_o[qv1],vcb[k]);
+								qv1++;
+							}
+
+							if (ffou4)
+							{
+								printf ("%4d %-30.30s |%s|\n",qm1,prog_name,vcb[k]);
+								sprintf (vcb_p[qm1],"%-30.30s,|%s|",prog_name,vcb[k]);
+     sprintf (vcb_c[qm1],"%-30.30s,grep -i \"%s\" %-*.*s  ~/wrk/Midas/ABBICAP/*.* ",
+           prog_name,vcb[k],40-strlen(vcb[k]), 40-strlen(vcb[k]), " " );
+     sprintf (vcb_d[qm1],"%-30.30s,grep -i \"%s\" %-*.*s  ~/wrk/Midas/ABBICAP/*.* ",
+           prog_name,b5,40-strlen(b5), 40-strlen(b5), " " );
+
+								qm1++;
+
+							}
+#endif
+						}
+					}
+				}		
+	
+			} /* while f5 */
+#endif
+
+		} /* proceso */
+
+		strcpy( (*fnp[i]).l , b1 );
+		nf++;
+
+	} /* for */
+
+
+
 }
+
 

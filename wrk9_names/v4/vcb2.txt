@@ -1,0 +1,65 @@
+|ARO Cash to Bal Sheet Trust|
+|Addedum to Book Gain Loss|
+|Actual ATL Fed Income Taxes|
+|Actual ATL State Income Taxes|
+|Actual BTL Fed Income Taxes|
+|Actual BTL State Income Taxes|
+|Sale Deferred Taxes Adjustment|
+|Capitial Recovery EXCLUDED OPAT|
+|FASB87 Intangible Asset Adj|
+|FABS87 Pension Liab Adj|
+|OCI Deferred Tax Adj|
+|Balance Deferred Taxes Dr|
+|Actual Deferred Taxes Cr|
+|Actual Fed Income Taxes|
+|Actual State Income Taxes|
+|Actual Deferred Taxes Dr|
+|Intra Company Interest Earnings|
+|Sale ATL Amortization|
+|Cost of Removal|
+|Equity Risk Adjustment|
+|Economic Assets Adjustment|
+|Operating Profits Adjustment|
+|NucDecom Discount Rate|
+|NucDecom Liability Addendum|
+|ARO Discount Rate|
+|ARO Accretion Amount|
+|ARO Cash Payment|
+|Non Cash Pension|
+|Gross Plant Value|
+|Cumulated Plant Depreciation|
+|Balance Deferred Taxes|
+|Deferred Debit Adjustment|
+|ATL Debit Amortization|
+|BTL Debt Amortization|
+|Annual Deferred Taxes|
+|Deferred ITCs Balance|
+|Net Nuclear Fuel|
+|Extra Ordinary Expense|
+|LT Liabilities Balance|
+|Paid in Capital|
+|STD Minimum Balance|
+|Cash Minimum Balance|
+|OUC Fuel Inventory|
+|OUC Materials Inventory|
+|Cash Interest Payments|
+|Cash Interest Earnings|
+|Cash Dividend Earnings|
+|Minibond Interest Payment|
+|Minibond Principal Payment|
+|Minibond Interest Deposit|
+|Minibond Principal Deposit|
+|Minibond Annualized Interest|
+|BAAN Interest Payments|
+|BAAN Annualized Interest|
+|Salvage Value|
+|OCI Adjustment|
+|Retained Earnings|
+|CWIP Balance|
+|OUC Prepayments|
+|Dividend 70|
+|Interest Payments|
+|Interest Earnings|
+|Annualized Interest|
+|BAAN Additions|
+|BAAN Reductions|

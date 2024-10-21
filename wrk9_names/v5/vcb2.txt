@@ -1,0 +1,52 @@
+|Cash Dividend Earnings|
+|Cash Interest Earnings|
+|Cash Interest Payments|
+|Dividend 70|
+|Interest Earnings|
+|Interest Payments|
+|Intra Company Interest Earnings|
+#|Actual ATL Fed Income Taxes|
+#|Actual ATL State Income Taxes|
+#|Actual BTL Fed Income Taxes|
+#|Actual BTL State Income Taxes|
+#|Balance Deferred Taxes Dr|
+#|Actual Deferred Taxes Cr|
+#|Actual Fed Income Taxes|
+#|Actual State Income Taxes|
+#|Actual Deferred Taxes Dr|
+#|Intra Company Interest Earnings|
+#|Gross Plant Value|
+#|Cumulated Plant Depreciation|
+#|Balance Deferred Taxes|
+#|Deferred Debit Adjustment|
+#|ATL Debit Amortization|
+#|BTL Debt Amortization|
+#|Annual Deferred Taxes|
+#|Deferred ITCs Balance|
+#|Net Nuclear Fuel|
+#|Extra Ordinary Expense|
+#|LT Liabilities Balance|
+#|Paid in Capital|
+#|STD Minimum Balance|
+#|Cash Minimum Balance|
+#|OUC Fuel Inventory|
+#|OUC Materials Inventory|
+#|Cash Interest Payments|
+#|Cash Interest Earnings|
+#|Cash Dividend Earnings|
+#|Minibond Interest Payment|
+#|Minibond Principal Payment|
+#|Minibond Interest Deposit|
+#|Minibond Principal Deposit|
+#|Minibond Annualized Interest|
+#|BAAN Interest Payments|
+#|BAAN Annualized Interest|
+#|Retained Earnings|
+#|CWIP Balance|
+#|OUC Prepayments|
+#|Dividend 70|
+#|Interest Payments|
+#|Interest Earnings|
+#|Annualized Interest|
+#|BAAN Additions|
+#|BAAN Reductions|

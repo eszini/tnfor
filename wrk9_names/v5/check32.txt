@@ -1,0 +1,35 @@
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +       R_DIVIDEND_70_INCOME,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                                R_DIVIDEND_70_INCOME,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:         R_DIVIDEND_70_INCOME = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:               R_DIVIDEND_70_INCOME =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:               INCOME_VARIABLES(:,Monthly_Dividend_70_Earnings) =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                  INCOME_VARIABLES(:,Monthly_Dividend_70_Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:     +                     R_DIVIDEND_70_INCOME,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:         R_DIVIDEND_70_INCOME =
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmdbt.for:               R_DIVIDEND_70_INCOME = R_DIVIDEND_70_INCOME
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +            + INCOME_VARIABLES(:,Monthly_Dividend_70_Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +            + INCOME_VARIABLES(:,Monthly_Dividend_70_Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +             INCOME_VARIABLES(:,Monthly_Dividend_70_Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +            + INCOME_VARIABLES(:,Monthly_Dividend_70_Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:                  IF(VARIABLE == Monthly_Dividend_70_Earnings)CYCLE
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                     Monthly_Dividend_70_Earnings) ! 34
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                     Monthly_Dividend_70_Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                     Monthly_Dividend_70_Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                     Monthly_Dividend_70_Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmout.for:     +                                     Monthly_Dividend_70_Earnings)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +       DIVIDEND_70_NONTAXABLE,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                     DIVIDEND_70_NONTAXABLE,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:            DIVIDEND_70_NONTAXABLE = DIVIDEND_70_NONTAXABLE
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                  -.7*DIVIDEND_70_NONTAXABLE !ONLY 30% TAXABLE
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                              DIVIDEND_70_NONTAXABLE,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                      -.7*DIVIDEND_70_NONTAXABLE !ONLY 30% TAXABLE
+/home/123-D56SW/wrk/Midas/ABBICAP/mthnmcom.f90:      integer(kind=2),parameter:: Monthly_Dividend_70_Earnings=209
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +                 GRE_INTEREST_PAYMENTS_MANUAL_ADJS, ! 767
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +                 GRE_TOTAL_INTEREST_PAYMENTS, ! 768
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +            (VARIABLE(767),GRE_INTEREST_PAYMENTS_MANUAL_ADJS), ! 767
+/home/123-D56SW/wrk/Midas/ABBICAP/Ac_equiv.MON:     +            (VARIABLE(768),GRE_TOTAL_INTEREST_PAYMENTS), ! 768
+/home/123-D56SW/wrk/Midas/ABBICAP/Finaclp2.for:     +                                     + R_VARIABLE(768))   ! GRE_TOTAL_INTEREST_PAYMENTS), ! 768
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                GRE_INTEREST_PAYMENTS_MANUAL_ADJS,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6b.f90:         R_VARIABLE(768) = & ! GRE_TOTAL_INTEREST_PAYMENTS), ! 768
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6b.f90:                           + R_VARIABLE(767)  ! GRE_INTEREST_PAYMENTS_MANUAL_ADJS), ! 767
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6b.f90:                            + R_VARIABLE(768) ! GRE_TOTAL_INTEREST_PAYMENTS), ! 768
