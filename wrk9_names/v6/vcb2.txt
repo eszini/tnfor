@@ -1,0 +1,34 @@
+|Intra Company Interest Earnings|
+|Cash Dividend Earnings|
+|Cash Interest Earnings|
+|Cash Interest Payments|
+|Interest Earnings|
+|Interest Payments|
+|Dividend 70|
+#|Actual ATL Fed Income Taxes|
+#|Actual ATL State Income Taxes|
+#|Actual BTL Fed Income Taxes|
+#|Actual BTL State Income Taxes|
+#|Actual Deferred Taxes Dr|
+#|Intra Company Interest Earnings|
+#|STD Minimum Balance|
+#|Cash Minimum Balance|
+#|OUC Fuel Inventory|
+#|OUC Materials Inventory|
+#|Cash Interest Payments|
+#|Cash Interest Earnings|
+#|Cash Dividend Earnings|
+#|Minibond Interest Payment|
+#|Minibond Principal Payment|
+#|Minibond Interest Deposit|
+#|Minibond Principal Deposit|
+#|Minibond Annualized Interest|
+#|BAAN Interest Payments|
+#|BAAN Annualized Interest|
+#|OUC Prepayments|
+#|Dividend 70|
+#|Interest Payments|
+#|Interest Earnings|
+#|Annualized Interest|
+#|BAAN Additions|
+#|BAAN Reductions|
