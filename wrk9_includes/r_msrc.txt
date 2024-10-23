@@ -6,10 +6,6 @@ Finaclp2.for                         finaccom.mon
 Finaclp2.for                         finaccom.mon
 Finaclp2.for                         spinlib.mon
 Finaclp2.for                         spinlib.mon
-Fuelused.for                         spinlib.mon
-Fuelused.for                         spinlib.mon
-LPSOLVER.for                         lpintcom.mon
-LPSOLVER.for                         spinlib.mon
 co_objt.for                          financom.mon
 dsm_objt.for                         dsmcom.mon
 dsm_objt.for                         dsmfncom.mon
@@ -24,8 +20,6 @@ fi_objt.f90                          spinlib.mon
 finanbse.for                         dsmfrcom.mon
 finanbse.for                         financom.mon
 fn_objt.f90                          spinlib.mon
-lpmatinv.f90                         lpintcom.mon
-lpmatinv.f90                         lpintcom.mon
 mainovl.f90                          spinlib.mon
 midasmod.for                         dsmfrcom.mon
 msgandec.for                         dsmfrcom.mon

@@ -34,16 +34,10 @@ financom.mon     co_objt.for
 financom.mon     finanbse.for
 financom.mon     msgoutpt.for
 finascom.mon     msgmmasb.for
-lpintcom.mon     LPSOLVER.for
-lpintcom.mon     lpmatinv.f90
-lpintcom.mon     lpmatinv.f90
 paltocom.mon     msgoutpt.for
 spinlib.mon      FINACELM.FOR
 spinlib.mon      Finaclp2.for
 spinlib.mon      Finaclp2.for
-spinlib.mon      Fuelused.for
-spinlib.mon      Fuelused.for
-spinlib.mon      LPSOLVER.for
 spinlib.mon      ec_objt.f90
 spinlib.mon      fc_objt.f90
 spinlib.mon      fi_objt.f90

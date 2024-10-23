@@ -1,9 +1,7 @@
 repo1/FINACELM.FOR
 repo1/Finaclp2.for
-repo1/Fuelused.for
 repo1/GAS_objt.for
 repo1/LDPROB01.FOR
-repo1/LPSOLVER.for
 repo1/WinFileFindData.for
 repo1/cla_objt.for
 repo1/clreport.for
@@ -14,11 +12,11 @@ repo1/dsm_objt.for
 repo1/elreport.for
 repo1/enrglimt.for
 repo1/finanbse.for
+repo1/fuelused.for
 repo1/midasmod.for
 repo1/msgandec.for
 repo1/msgmmasb.for
 repo1/msgmmdbt.for
-repo1/msgmmea.for
 repo1/msgmminp.for
 repo1/msgmmout.for
 repo1/msgmmsb6.for
@@ -156,7 +154,9 @@ repo1/kepcocom.f90
 repo1/lmg_objt.f90
 repo1/logging.f90
 repo1/logging_decs.f90
+repo1/lpintcom.f90
 repo1/lpmatinv.f90
+repo1/lpsolver.f90
 repo1/mainovl.f90
 repo1/margnobj.f90
 repo1/mcbtnmcom.f90
@@ -171,6 +171,7 @@ repo1/msgindex.f90
 repo1/msgmmadm.f90
 repo1/msgmmcom.f90
 repo1/msgmmdfd.f90
+repo1/msgmmea.f90
 repo1/msgmmexprevcash.f90
 repo1/msgmmfa.f90
 repo1/msgmmfv.f90
@@ -246,7 +247,6 @@ repo1/FINACSTW.MON
 repo1/FINANCOM.MON
 repo1/FINASCOM.MON
 repo1/LMGRPCOM.MON
-repo1/LPINTCOM.MON
 repo1/MMM_COM.MON
 repo1/OVLYCOM.MON
 repo1/PALTOCOM.MON

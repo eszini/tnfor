@@ -1,9 +1,7 @@
 repo1/FINACELM.FOR
 repo1/Finaclp2.for
-repo1/Fuelused.for
 repo1/GAS_objt.for
 repo1/LDPROB01.FOR
-repo1/LPSOLVER.for
 repo1/WinFileFindData.for
 repo1/cla_objt.for
 repo1/clreport.for
@@ -14,11 +12,11 @@ repo1/dsm_objt.for
 repo1/elreport.for
 repo1/enrglimt.for
 repo1/finanbse.for
+repo1/fuelused.for
 repo1/midasmod.for
 repo1/msgandec.for
 repo1/msgmmasb.for
 repo1/msgmmdbt.for
-repo1/msgmmea.for
 repo1/msgmminp.for
 repo1/msgmmout.for
 repo1/msgmmsb6.for
