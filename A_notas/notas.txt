@@ -1,0 +1,11 @@
+
+origin/feature testable bin 3
+
+
+
+$ git status
+On branch feature/testable_bin_3
+Your branch is up to date with 'origin/feature/testable_bin_3'.
+
+
+

@@ -1,0 +1,193 @@
+|Monthly Other|
+|Monthly Pension Expense|
+|Monthly Storm Expense|
+|Monthly Nuclear Fuel Expense|
+|Monthly DSM Expense|
+|Monthly DSM Rebate|
+|Monthly Service Transactions|
+|Monthly Emission Credits|
+|Monthly DOE Decommissioning|
+|Monthly DOE Disposal|
+|Monthly Transmission Operation|
+|Monthly Distribution Operation|
+|Monthly Distribution Maintenance|
+|Monthly Customer Accounts|
+|Monthly Customer Services|
+|Monthly Sales Expense|
+|Monthly AG Operations|
+|Monthly AG Maintenance|
+|Monthly Deferred Fuel Expense|
+|Monthly ATL Lease Payment|
+|Monthly Lease Interest Expense|
+|Monthly Lease BTL Amort Expense|
+|Monthly Goodwill Amort|
+|Monthly Regulatory Assets Amort|
+|Monthly FASB 109 Amort|
+|Monthly FASB 133 Amort|
+|Monthly FASB 143 Amort|
+|Monthly CIAC Amort|
+|Monthly Other Debit Amort|
+|Monthly Book Depreciation|
+|Monthly Property Taxes|
+|Monthly Exp File Property Taxes|
+|Monthly Exp File Other Taxes|
+|Monthly ITC Amortization|
+|Monthly Operating Revenue Tax|
+|Monthly State Tax on Capital|
+|Monthly Federal Tax on Capital|
+|Monthly Income Tax Deferrals Dr|
+|Monthly Income Tax Deferrals Cr|
+|mth_othr_incm_tax_dfrls Cr|
+|BTL Monthly Total Other Income|
+|BTL monthly_other_income|
+|BTL Monthly NoTax Other Income|
+|BTL Monthly Interest Income|
+|Monthly Investment Earnings|
+|Monthly Dividend 70 Earnings|
+|BTL Monthly STInvestmet Income|
+|BTL Monthly Expenses|
+|BTL Monthly Income Taxes|
+|BTL Monthly Income Tax Deferrals|
+|Monthly AFUDC Total|
+|Monthly AFUDC Equity|
+|Monthly AFUDC Borrowed|
+|Monthly LTD Total Interest|
+|Monthly STD Interest|
+|Monthly LTD Cash Interest|
+|Monthly LTD Amort Interest|
+|Monthly Unused Fed Tax Credits|
+|Monthly Extraordinary Items|
+|Monthly Common Dividends|
+|Monthly Total PS Dividends|
+|Monthly Regular PS Dividends|
+|Monthly MIPS Dividends|
+|Monthly Total Taxes Expense|
+|Monthly Op Income|
+|Monthly INCOME BEFORE INTEREST|
+|Monthly INCOME AFTER INTEREST|
+|Monthly Net Income|
+|Monthly Earnings 2 Common|
+|Monthly RETAINED EARNINGS|
+|Monthly Shares Outstanding|
+|Monthly Earnings per Share|
+|Quarterly Earnings per Share|
+|Monthly LTD Booked Interest|
+|Monthly Booked PS Dividends|
+|Monthly Issue Expense Amorts|
+|Monthly PS Amort Dividends|
+|Monthly LTD Premium Amort|
+|Monthly PS Premium Amort|
+|Physical Revenue Variable|
+|Physical Revenue Fixed|
+|Physical Expense Variable|
+|Physical Expense Fixed|
+|Financial Revenue Variable|
+|Financial Revenue Fixed|
+|Financial Expense Variable|
+|Financial Expense Fixed|
+|Total Derivative Revenues|
+|Total Derivative Expenses|
+|Net Derivative Margin|
+|Physical Fuel Deriv Rev Var|
+|Physical Fuel Deriv Rev Fix|
+|Physical Fuel Deriv Exp Var|
+|Physical Fuel Deriv Exp Fix|
+|Financial Fuel Deriv Rev Var|
+|Financial Fuel Deriv Rev Fix|
+|Financial Fuel Deriv Exp Var|
+|Financial Fuel Deriv Exp Fix|
+|Total Fuel Derivative Revenues|
+|Total Fuel Derivative Expenses|
+|Net Fuel Derivative Margin|
+|ICAP Revenues|
+|Monthly EBITAD|
+|Monthly Gas Wholesale Revenues|
+|Monthly EBIT|
+|IPL Monthy OandM Expenses|
+|IPL Total Operating Expenses|
+|IPL Operating Income|
+|WVPA NonMember Power Sales|
+|WVPA Member Cost of Services|
+|WVPA Member Rates with SDI|
+|WVPA Member Rates without SDI|
+|WVPA Member Energy Sales|
+|WVPA SDI Energy Sales|
+|WVPA Member Margin|
+|WVPA Non Member Margin|
+|IMPA Depreciation Add Back|
+|Monthly Catawba Revenues|
+|Monthly Catawba Expenses|
+|Cash Secondary Sales|
+|Cash Other Revenue|
+|Cash BTL Revenues|
+|Cash Gas Revenues|
+|Cash Unbilled Revenues|
+|Cash Deferred Revenues|
+|Cash Relationship Revenues|
+|Cash Residential|
+|Cash Commercial|
+|Cash Industrial|
+|Cash Lighting|
+|Cash Bulk Power|
+|Cash Net of Tax BTL Revenues|
+|Cash Capacity Sales|
+|Cash Government|
+|Cash PGA Adjustment|
+|Total Cash Derivative Revenues|
+|Cash ICAP Revenues|
+|Cash Prior Years Method Adj|
+|Cash Prior level Method Adj|
+|Cash Total Base Revenues|
+|Cash TOTAL OPERATING RECEIPTS|
+|Cash Gas Wholesale Revenues|
+|Cash Utility Sales|
+|Cash Competitive Sales|
+|Cash Physical Revenue Variable|
+|Cash Physical Revenue Fixed|
+|Cash Financial Revenue Fixed|
+|Cash Physical Fuel Deriv Rev Fix|
+|Cash Financial Fuel Deriv Rev Fix|
+|Cash TOTAL EXPENSE PAYMENTS|
+|Cash BTL Lease Cash|
+|Cash ATL Lease Cash|
+|Cash Fossil Fuel|
+|Cash Purchased Power|
+|Cash Variable OandM|
+|Cash Fixed OandM|
+|Cash Other OandM|
+|Cash Purchased Gas|
+|Cash Other|
+|Cash Leased Nuclear Fuel|
+|Cash DSM Expense|
+|Cash DSM Rebate|
+|Cash Lease Expense|
+|Cash Service Transactions|
+|Cash Emission Credits|
+|Cash DOE Decommissioning|
+|Cash DOE Disposal|
+|Cash BTL Expenses|
+|Cash Transmission Operation|
+|Cash Transmission Maintenance|
+|Cash Distribution Operation|
+|Cash Distribution Maintenance|
+|Cash Customer Accounts|
+|Cash Customer Services|
+|Cash Sales Expense|
+|Cash AG Operations|
+|Cash AG Maintenance|
+|Cash Lease Interest Payments|
+|Cash From Trust Fund Earnings|
+|Cash Interest on Notes Payable|
+|Cash Paid on Accounts Payable|
+|Price of Issued Shares|
+|Total Cash Derivative Expenses|
+|Cash Physical Expense Variable|
+|Cash Physical Expense Fixed|
+|Cash Financial Expense Variable|
+|Cash Financial Expense Fixed|
+|Cash Physical Fuel Deriv Exp Var|
+|Cash Physical Fuel Deriv Exp Fix|
+|Cash Financial Fuel Deriv Exp Var|
+|Cash Financial Fuel Deriv Exp Fix|
+|WVPA Cash Member Cost of Power|
+|Monthly Strom Reserve|

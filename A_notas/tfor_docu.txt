@@ -1,0 +1,120 @@
+#
+#
+#
+#	tfor ... some tools for fortran conversion
+#
+#	to compile:
+#	gcc -o tfor tfor.c
+#
+#
+#
+#
+
+# 01---------------------------------------------------------------
+show version
+
+./tfor --version
+
+
+some help (not complete and still in spanish ! )
+
+./tfor 
+
+
+# 02---------------------------------------------------------------
+character count (1 file)
+
+./tfor -exec=1 p2.for p2.chr
+
+./tfor -exec=1 -inp=p2.for -out=p2.chr
+
+
+Character count (2 files)
+
+./tfor -exec=1 -inp=p2.for -in2=p3.for -out=p2_3.chr
+
+
+# 03---------------------------------------------------------------
+Change fortran comments
+
+./tfor -tool=6 --chgcom p1.for p2.for
+
+./tfor -tool=6 --chgcom -inp=p1.for -out=p2.for  -aux=parser.err
+
+
+
+# 04---------------------------------------------------------------
+Change fortran cont lines
+
+./tfor -tool=6 --chglco -inp=p1.for -out=p2.for  -aux=parser.err
+
+
+
+# 05---------------------------------------------------------------
+Change fortran vars type selector
+
+./tfor -tool=6 --chgtyp p1.for p2.for
+
+
+
+
+# 06---------------------------------------------------------------
+Extracts all files in a makefile
+
+./tfor -tool=2 make_file mf_list
+
+./tfor -tool=2 -inp=make_file -out=mf_list
+
+
+
+# 07---------------------------------------------------------------
+Takes two lists, mf_list and list_src ...
+l_si are items from list_src that are in mf_list 
+l_no are items from list_src that are not in mf_list 
+-m ... compares everything changed to lower case
+
+
+./tfor -m -tool=1 -inp=mf_list -in2=list_src -out=l_si -ou2=l_no
+
+./tfor    -tool=1 -inp=mf_list -in2=list_src -out=l_si -ou2=l_no
+
+
+# 08---------------------------------------------------------------
+Examples using structures, pointers to structures , ptrs to ptrs .. 
+
+./tfor  -prue=1 
+
+
+
+# 09---------------------------------------------------------------
+Process every file in list_src, and generates new one 
+in new_repo directory. (WIP)
+
+note: loads all the files in memory to allow, for example,
+      to search dependencies, change long names etc
+
+
+list_src   list of files to process
+l_names    (this is WIP ... meant to extract long names 
+new_repo   generates new file in new_repo (same name as original)
+
+could be used, for example, to :
+for every file in list_src ...  
+change:
+- comments
+- var type selector
+- continuation lines 
+generates changed file in new_repo dir (it must exist !! )
+
+
+./tfor  -prue=2 -inp=list_src -out=l_names -aux=run.log -dato=new_repo
+
+
+
+# -----------------------------------------------------------------
+verbose ...
+
+logs activity, diverse levels of info
+
+./tfor -v -opciones=[d1,d2,d3,d4,d5]
+

@@ -1,0 +1,67 @@
+Impresionante chatgpt
+
+
+
+
+
+
+:%s/\<[a-zA-Z][a-zA-Z0-9]*\(_[a-zA-Z0-9]\+\)\+//g
+
+
+esto me permite eliminar de una tabla,
+todo lo que parezca una variable
+
+str1_str2_str2_str2 ... etc
+
+
+
+
+En `vi` (o `vim`), ciertos caracteres especiales deben 
+ser "escapados" con una barra invertida (`\`) para ser 
+interpretados literalmente en comandos de sustitución. 
+Aquí tienes una lista de esos caracteres:
+
+1. `.` (punto) - Representa cualquier carácter excepto una nueva línea.
+2. `*` (asterisco) - Significa "cero o más" de la expresión anterior.
+3. `[]` (corchetes) - Se usan para definir un rango de caracteres.
+4. `^` (caret) - Indica el comienzo de una línea.
+5. `$` (signo de dólar) - Indica el final de una línea.
+6. `\` (barra invertida) - Utilizada para escapar otros caracteres.
+7. `/` (barra diagonal) - Utilizada como delimitador de expresiones en los comandos de sustitución.
+8. `~` (tilde) - Se utiliza para referirse a la cadena de reemplazo en el último comando de sustitución.
+9. `&` (ampersand) - Se refiere a la cadena coincidente en el comando de sustitución.
+10. `\n` - Nueva línea.
+11. `\t` - Tabulación.
+12. `+` - Significa "uno o más" de la expresión anterior (en versiones compatibles con `+`).
+13. `?` - Significa "cero o uno" de la expresión anterior (en versiones compatibles con `?`).
+14. `{}` (llaves) - Utilizadas para definir un número específico de repeticiones (en versiones compatibles con `{}`).
+15. `(` y `)` (paréntesis) - Utilizados para agrupar expresiones (en versiones compatibles con `()`).
+
+Un comando de sustitución en `vi` generalmente se ve así:
+
+:s/patrón/reemplazo/g
+
+
+Aquí, `patrón` es la exp reg que estás buscando, y `reemplazo` es el texto con el que deseas sust las coincidencias.
+
+Por ejemplo, si quisieras buscar puntos (.) y reemplazarlos con comas (,), usarías:
+
+:s/./,/g
+
+Pero debido a que `.` es un carácter especial, deberías escaparlo:
+
+:s/\./,/g
+
+
+Aquí tienes un ejemplo con más caracteres escapados:
+
+:s/\.\*\[\]\^\$\~\/\&/reemplazo/g
+
+
+En este comando, 
+  `\.\*\[\]\^\$\~\/\&` son caracteres escapados 
+que representan los caracteres literales `.`, `*`, `[`, `]`, `^`, `$`, `~`, `/`, y `&`.
+
+
+
+

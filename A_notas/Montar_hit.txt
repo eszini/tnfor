@@ -1,0 +1,3 @@
+Para montar el hit del usb al ~/hit ...
+
+mount -o bind /cygdrive/e/cygwin64/home/123-D56SW/hit /home/Ernesto/hit

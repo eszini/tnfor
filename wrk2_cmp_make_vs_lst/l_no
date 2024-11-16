@@ -1,0 +1,34 @@
+#
+#
+#	achivos que no estan
+#	X ya eleminados
+#	O los .MON son includes ! no estan en el makefile
+#	- en proceso (falta merge)
+#
+   Ac_equiv.MON
+X  BINAndOverlayFileTemplate.F95
+   FAIFFCOM.MON
+   FAINTCOM.MON
+   InterfaceExamples.F90
+   MEMTEST.FOR
+   MMM_COM.MON
+   MSGCoalModel.mak
+   Obj
+   OptObj
+O  ROLLSCOM.MON
+   RealWin
+   SPINLIB.MON
+   Sizecom.mon
+   WEEKSCOM.MON
+   addl_obj
+   cn_objt.map
+   compare
+   files
+   filesearch
+   hourly_products_data.f90
+   m3active.mon
+   mglr_external.MON
+   midas_extend
+   msgindx
+   prngener.MON
+   util
