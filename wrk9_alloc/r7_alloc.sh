@@ -26,24 +26,24 @@ case "$param" in
     j)
         echo "Ejecutando con opción 'j'..."
         create_dir_if_not_exists "repo_4j"
-        ./tfor -v -opciones=d5 -exec=3 -inp=lrj -dato=repo_4j -out=r_jres.txt -aux=r_jinc.txt -log=r_jsrc.txt > log8j
+        ./tfor -v -opciones=d5 -exec=6 -opt=4 -inp=lrj -dato=repo_4j -out=r_jres.txt -aux=r_jinc.txt -log=r_jsrc.txt > log7j
         ;;
     k)
         echo "Ejecutando con opción 'k'..."
         create_dir_if_not_exists "repo_4k"
-        ./tfor -v -opciones=d5 -exec=3 -inp=lrk -dato=repo_4k -out=r_kres.txt -aux=r_kinc.txt -log=r_ksrc.txt > log8k
+        ./tfor -v -opciones=d5 -exec=6 -opt=4 -inp=lrk -dato=repo_4k -out=r_kres.txt -aux=r_kinc.txt -log=r_ksrc.txt > log7k
         ;;
     2)
         echo "Ejecutando con opción '2' (j y k)..."
         create_dir_if_not_exists "repo_4j"
-        ./tfor -v -opciones=d5 -exec=3 -inp=lrj -dato=repo_4j -out=r_jres.txt -aux=r_jinc.txt -log=r_jsrc.txt > log8j
+        ./tfor -v -opciones=d5 -exec=6 -opt=4 -inp=lrj -dato=repo_4j -out=r_jres.txt -aux=r_jinc.txt -log=r_jsrc.txt > log7j
         create_dir_if_not_exists "repo_4k"
-        ./tfor -v -opciones=d5 -exec=3 -inp=lrk -dato=repo_4k -out=r_kres.txt -aux=r_kinc.txt -log=r_ksrc.txt > log8k
+        ./tfor -v -opciones=d5 -exec=6 -opt=4 -inp=lrk -dato=repo_4k -out=r_kres.txt -aux=r_kinc.txt -log=r_ksrc.txt > log7k
         ;;
     m)
         echo "Ejecutando con opción 'm'..."
         create_dir_if_not_exists "repo4"
-        ./tfor -v -opciones=d5 -exec=3 -inp=lr1 -dato=repo4 -out=r_mres.txt -aux=r_minc.txt -log=r_msrc.txt > log8
+        ./tfor -v -opciones=d5 -exec=6 -opt=4 -inp=lr1 -dato=repo4 -out=r_mres.txt -aux=r_minc.txt -log=r_msrc.txt > log7
         ;;
 esac
 

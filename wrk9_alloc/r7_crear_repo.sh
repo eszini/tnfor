@@ -33,7 +33,6 @@ case "$param" in
         create_or_clean_dir "repo1"
         cp $REPO_M/*.f* $REPO_M/*.F* $REPO_M/*.mon $REPO_M/*.MON repo1/ 2>/dev/null
         ls -1 repo1/*.* > lr1
-        cp lr1 lr1_todos
         ;;
     j)
         echo "Ejecutando con opción 'j'..."

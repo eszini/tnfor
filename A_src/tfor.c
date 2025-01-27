@@ -385,6 +385,9 @@
 #define	HUG2	4096	/* huge buffer */
 #define MSTR	24000	/* monster buffer */
 
+#define TRUE 1
+#define FALSE 0
+
 /*
  *
  *	Funciones, variables y estructuras para manejo de parametros globales
@@ -478,6 +481,7 @@ char	*gsh(char *);			/* string para imprimir hora */
 
 char	*desde_igual(char *s);
 char	*pasar_a_minusc(char *s);
+char	*minusculas(char *s);
 char	*df(char *);
 int	clear_screen();
 
@@ -514,6 +518,7 @@ int	pro_exec5();	/* carga file con definicion de variables de fort con blancos i
 int	pro_exec6();	/* carga todos los src en mem en vec de ptr para procesos - version nueva - var con blanks */
 int	pro_exec7();	/* pone bonita la salida de check1 y check2 ... */
 int	pro_exec8();	/* carga todo el codebase en memo - busca variables fortran */
+int	pro_exec9();	/* carga todo el codebase en memo - busca allocate */
 
 int	pro_proc1();
 int	pro_proc2();
@@ -835,9 +840,11 @@ int	ex4_p1();
 int	ex6_p1();
 int	ex6_p2();
 int	ex6_p3();
+int	ex6_p4();
 int	ex8_p1();
 int	ex8_p2();
 int	ex8_p3();
+int	ex9_p1();
 int	es_cadena_valida(int,char *);
 int	es_cadena_interesante(char *);
 int	es_cadena_int_src3(char *,int *);
@@ -862,7 +869,9 @@ bool	tiene_include_v3(char *, char *);
 bool	tiene_include_v4(char *, char *);
 int	tiene_entry_v1(char *, char *);
 int	tiene_call_a_entry(char *, char *);
+int	tiene_function_a_entry(char *, char *);
 int	tiene_coment_final(char *, int*);
+int 	tiene_entry(const char *); 
 int	complejidad_mon(int, int, int *, int *);
 int	es_mon(char *);
 int	len_linea_src(char *,int *,int *,int *);
@@ -874,6 +883,7 @@ int	tiene_character(char *);
 int	rutina_v(char *, int *, char **);
 int	rutina_w(char *, int *, int *,char **);
 int	compare_vcb(const void *, const void *);
+int	primer_caracter_es_mas(char *);
 
 #if 0
 int	compare_vcb(char *, char *);
@@ -1342,6 +1352,8 @@ int	proceso_principal()
 			pro_exec7();
 		if (ffexc == 8)
 			pro_exec8();
+		if (ffexc == 9)
+			pro_exec9();
 	}
 
 	if ( ffpro)
@@ -3218,6 +3230,7 @@ int	ex4_p1()
 	char	b3[MAXB];
 	char	b4[MAXB];
 	char	b5[MAXB];
+	char	b6[MAXB];
 	char	info[300][MAXB];
 	int	s_info[300];
 	char	nro[128];
@@ -3252,7 +3265,7 @@ printf ("ex4_p1: proceso file %2d |%s| \n",strlen(b3),b3);
 		{
 			strcpy(b1,(*fnp[i]).l );
 
-			if (!es_linea_comentario(b1) && tiene_entry_v1(b1,b2))
+			if (!es_linea_comentario(b1) && tiene_entry_v1(b1,b2) && !primer_caracter_es_mas(b1) )
 			{
 				n_info++;
 				strcpy(info[n_info],b2);
@@ -3298,6 +3311,24 @@ printf ("busco call |%s| \n",info[k]);
 						strcpy(b5,f_name(l));
 						fprintf (hfaux,"%-8.8s%-20.20s |%s\n"," ",b5,b4+p1);
 					}
+
+					strcpy(b4,(*fnp[l]).l );
+					if (!es_linea_comentario(b4) && tiene_funcion_a_entry(b4,info[k]) )
+					{
+						strcpy(b6,minusculas(b4));
+
+						if (!tiene_entry(b6) )
+						{
+						primer_char(b4,&p1);
+						strcpy(b5,f_name(l));
+						fprintf (hfaux,"%-8.8s%-20.20s |%s\n"," ",b5,b4+p1);
+						}
+					}
+
+
+
+
+
 				}
 #endif
 
@@ -4029,6 +4060,12 @@ printf ("XXX cargue vsb |%s| \n",vsb[q_vsb]);
 	{
 		/* chequeo ... estas variables con blancos reemp x _, ... estan en los fuentes que  t el include ? */
 		ex6_p3();
+	}
+
+	if (gp_suboption == 4 )
+	{
+		/* chequeo ... estas variables con blancos reemp x _, ... estan en los fuentes que  t el include ? */
+		ex6_p4();
 	}
 
 	/* grabo new file */
@@ -4767,6 +4804,157 @@ int	ex6_p3()
 
 
 
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	ex6_p4
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ * llamado por pro_exec6
+ * hace algo con todas las lineas cargadas en memoria
+ *
+ * v4
+ * toma las variables vcb (var con blanks ) 
+ * reemp blanks con _
+ * y busca en todos los programas cargados
+ * trabaja sobre todos los fuentes cargados en vector 
+ * (la idea es buscar estas variables en programas que tienen 
+ * el include mthnmcom.mon )
+ *
+ */
+
+int	ex6_p4()
+{
+	
+}
+
+
+#if 0
+
+int	ex6_p4()
+{
+	int 	i,j,k,k1,k2;
+	int	l1,l2;
+	int	c1,c2;
+	int	f1,f2,f3,f4,f5;
+	int	f_proceso;
+	int	n_f;
+	char	base_name[MAXV];
+	char	prog_name[MAXV];
+	char	b0[MAXB];
+	char	b1[MAXB];
+	char	b2[MAXB];
+	char	b3[MAXB];
+	char	b4[MAXB];
+	char	b5[MAXB];
+	int	pf,uf,nf;
+
+
+	memset(b4,'X',MAXB);
+	strcpy(base_name,"empty");
+
+	/* para todas las lineas */
+	for (i=0; i < qf_src; i++)
+	{
+
+		/* me fijo que archivo es */
+		strcpy(prog_name,f_name(i));
+
+		/* me fijo lineas */
+		for (j=0, f1=1, n_f=0; f1 && j<qf_ff; j++)
+			if ( i >= (*tb[j]).pf && i <= (*tb[j]).uf )
+			{	n_f = j;
+				pf = (*tb[j]).pf;
+				uf = (*tb[j]).uf;
+				f1=0;
+			}
+
+		if (strcmp(base_name,prog_name))
+		{	strcpy(base_name,prog_name);
+			nf = 0;
+
+			printf ("Trabajo con ... |%s|\n",prog_name);
+		}
+
+		/* proceso linea i */
+		strcpy(b0,(*fnp[i]).l );
+		strcpy(b1,(*fnp[i]).l );
+		strcpy(b2,(*fnp[i]).l );
+#if 0
+		strcpy (b2, pasar_a_minusc(b1));
+#endif
+		l2 = strlen(b1);
+
+		f_proceso = 1;
+		if (linea_vacia(b1) || es_linea_comentario(b1))
+			f_proceso = 0;
+
+		/* solo proceso lineas que no son comentario ni vacias */
+		if (f_proceso)
+		{	
+			c1 = 0;
+			f5 = 1;
+
+			while (f5)
+			{
+				f5 = 0;
+	
+				/* veo si encuentro alguna variable ! */
+				for (k=0; k< q_vcb; k++)
+				{
+					/* copio la variable vcb a buscar */
+#if 0
+					strcpy(b3,pasar_a_minusc(vcb[k]));
+#endif
+					strcpy(b3,vcb[k]);
+					strcpy(b5,vcb[k]);
+
+					/* cambio blanks x underscore */
+					for (k2 = 0; k2 < strlen(b3); k2++)
+						if (b3[k2] == ' ')
+							b3[k2] = '_';
+	
+					for (k1=0; k1 < l2; k1++)
+					{
+						if (!strncmp(b2+k1,b3,strlen(b3)))
+						{
+							c1++;
+							f5 = 1;
+	
+							/* cambiazos */
+							strncpy(b2+k1,b4,strlen(b3));
+	
+							printf ("VV1 Prog:          |%s|\n",prog_name);
+							printf ("VV2 var :          |%s|\n",b3);
+							printf ("VV3 cnt : (%6d)\n",c1);
+							printf ("VV4 lin : (%6d) |%s|\n",lne(nf),b0);
+							printf ("VV6 \n");
+
+							if (fflog)
+							{
+								fprintf (hfaux,"%-40.40s  var: |%s| \n",prog_name,b5);
+								fprintf (hfaux,"(%5d) |%s|\n",lne(nf),b0);
+								fprintf (hfaux,"%s","\n");
+							}
+						}
+					}
+				}		
+	
+			} /* while f5 */
+		} /* proceso */
+
+		strcpy( (*fnp[i]).l , b1 );
+		nf++;
+
+	} /* for */
+}
+
+
+#endif
+
 
 /*
  * -----------------------------------------------------------------------------------
@@ -5318,6 +5506,101 @@ int main()
 
 
 
+// Subrutina que verifica si "nombre_valido" es invocada como función en la línea
+int tiene_funcion_a_entry(char *linea, char *nombre_valido) {
+    char b1[MAXB];
+    strcpy(b1, pasar_a_minusc(linea));
+
+    char *ptr = b1;
+    char *func_pos = strstr(ptr, nombre_valido);
+
+    while (func_pos) {
+        ptr = func_pos + strlen(nombre_valido);
+
+        // Saltar espacios en blanco después del nombre de la función
+        while (*ptr && isspace(*ptr))
+            ptr++;
+
+        // Verificar si está seguido de un paréntesis de apertura
+        if (*ptr == '(') {
+            ptr++; // Avanzar después de "("
+            int paren_count = 1;
+
+            // Verificar el contenido dentro de los paréntesis
+            while (*ptr && paren_count > 0) {
+                if (*ptr == '(')
+                    paren_count++;
+                else if (*ptr == ')')
+                    paren_count--;
+                ptr++;
+            }
+
+            // Si se cerraron todos los paréntesis, es una invocación válida
+            if (paren_count == 0)
+                return 1;
+        }
+
+        // Buscar la próxima aparición de nombre_valido
+        func_pos = strstr(func_pos + 1, nombre_valido);
+    }
+
+    return 0; // No se encontró una invocación válida
+}
+
+
+
+int tiene_entry(const char *linea) 
+{
+    const char *ptr = linea;
+    int	f1;
+
+
+    // Convertir a minúsculas para hacer la búsqueda insensible a mayúsculas
+    char buffer[MAXB];
+    int i = 0;
+
+    while (*ptr && i < MAXB) 
+    {
+        buffer[i++] = tolower(*ptr++);
+    }
+    buffer[i] = '\0';
+
+    // Buscar "entry" en el string
+    char *entry_pos = strstr(buffer, "entry");
+    while (entry_pos) 
+    {
+        // Verificar que "entry" no esté precedido ni seguido por caracteres alfanuméricos o guiones bajos
+        if ((entry_pos == buffer || !isalnum(*(entry_pos - 1)) && *(entry_pos - 1) != '_') &&
+            isspace(*(entry_pos + 5))) 
+        {
+            return TRUE;
+        }
+        // Buscar la próxima aparición de "entry"
+        entry_pos = strstr(entry_pos + 1, "entry");
+    }
+
+    return FALSE;
+}
+
+int	primer_caracter_es_mas(s)
+char	*s;
+{
+	int	i,j,k;
+	int	f_res, f_cont;
+
+	f_res = 0;
+
+
+	/* caso     "+   entry at ...." */
+	if (!f_res)
+	{
+		for (i=0, f_cont=1; f_cont && i<strlen(s); i++)
+			if (s[i] == '+')
+				f_res=1, f_cont=0;
+	}
+
+	return f_res;
+}
 
 
 /*
@@ -6202,6 +6485,753 @@ int	ex8_p1()
 
 
 }
+
+
+
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	pro_exec 9
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ *
+ *	exec 9
+ *
+ *	abre archivo con lista de archivos a procesar 
+ *	x cada archivo, abre y carga a memoria en vector de estructuras
+ *	deja listo todo el contenido para procesos
+ *	termina y vuelve a grabar los archivos con mismo nombre, en otro dir
+ */
+
+
+#if 0
+
+#define	MAX_QSRC		500	/* cant max de archivos fuentes a manejar */
+int	qf_ff;
+
+typedef	struct tff	*ffptr;
+typedef	struct tff
+{	char	n[MAXB];		/* nombre de file */
+	int	pf,uf;			/* primera - ultima fila */
+	int	f1,f2,f3;		/* flags prop general */
+}	ff;
+
+ffptr	ffp1,ffp2,*ffq1,*ffq2;		/* punteros varios */
+
+ffptr	tb[MAX_QSRC];
+
+#endif
+
+
+int	pro_exec9()
+{
+
+	int	i,j,k,flag;
+	int	ql,qlf,q_ptr;
+	char	d1[MAXB];
+	char	d2[MAXB];
+	char	b1[MAXB];
+
+
+	FILE	*hwi,*hwo;
+
+	char	z[MAXV];
+	sprintf (z,"exec4");
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
+	}
+
+	if (!ffinp || !ffaux )
+		gp_uso(105);
+
+
+
+	/* cantidad de archivos y lineas totales cargadas  */
+	qf_ff = 0;
+	q_ptr = 0;
+
+	while (fgets(d1,MAXB,hfinp) != NULL)
+	{
+		if (!linea_vacia(d1)  && d1[0] != '#' )
+		{
+			/* saco el fin de linea - contemplo 13 x fuentes fortran */
+			for ( flag=0, j=strlen(d1); !flag && j >= 0; j--)
+				if (d1[j] == '\n' )
+				{	
+					flag=1;
+					if ( j && d1[j-1] == 13)
+						d1[j-1]=0;
+					else
+						d1[j]=0;
+				}
+
+			/* proceso file */
+			if (gp_fverbose("d3"))
+				printf ("Archivo a cargar:  |%s|\n",d1);
+
+			if ( 1 && ((hwi = fopen (d1,"r")) == NULL) )
+				error(601);
+
+			fnq1 = &fnp[q_ptr];
+			qfv_load(hwi,fnq1,&qlf);
+
+			fclose (hwi);
+
+			/* procese file */
+			if (gp_fverbose("d3"))
+				printf ("Archivo cargado:  %5d |%s|\n\n",qlf,d1);
+
+
+			/* registro datos del archivo */
+			tb[qf_ff] = (ffptr ) malloc (sizeof (ff));
+			if ( tb[qf_ff] == NULL )
+				error(904);
+
+			strcpy ( (*tb[qf_ff]).n, extract_fname(d1));
+			(*tb[qf_ff]).pf = q_ptr;
+			(*tb[qf_ff]).uf = q_ptr+qlf-1;
+
+			if (gp_fverbose("d1"))
+			{
+				printf ("load: %5d %5d |%s|\n",
+					(*tb[qf_ff]).pf,(*tb[qf_ff]).uf,(*tb[qf_ff]).n);
+			}
+
+			qf_ff++;
+			q_ptr += qlf;
+		}
+	}
+
+
+	/* cantidad de lineas totales en vector (global) */
+	qf_src = q_ptr;
+
+	if (gp_fverbose("d3"))
+	{
+		printf ("Cantidad de archivos cargados :  %5d \n",qf_ff);
+		printf ("Cantidad de lineas cargadas   :  %5d \n",q_ptr);
+		printf ("\n");
+	}
+
+#if 1
+	if (gp_fverbose("d3"))
+	{
+		printf ("\n\nComprobando integridad de la carga: \n\n");
+	
+		for ( i=0; i< q_ptr; i++)
+		{
+			printf ("i: %5d  |%s| \n",
+				i,(*fnp[i]).l );
+		}
+	}
+
+	printf ("\n");
+
+#endif
+
+	/*
+	 * A este punto, todas las lineas de archivos cargados en vector
+	 * Hay otro vector, con nombre y lineas desde/hasta para indentificar
+	 * a que archivo pertenece una linea determinada 
+	 *
+	 */
+
+	if (gp_suboption == 1 )
+	{
+		/* hace el cambio de variables con blancos x misma version con _ */
+		ex9_p1();
+	}
+
+
+
+	/* grabo new file */
+	for (i = 0; i < qf_ff; i++)
+	{
+		/* nombre del archivo de salida */
+		sprintf (d2,"%s/%s",gp_dato,extract_fname( (*tb[i]).n));
+
+		if ( 1 && ((hwo = fopen (d2,"w")) == NULL) )
+			error(602);
+
+		for (j = (*tb[i]).pf ; j<= (*tb[i]).uf; j++)
+		{
+			fprintf (hwo,"%s\n", (*fnp[j]).l );
+		}
+	}
+
+
+	fclose(hwo);
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[1],z);
+	}
+}
+
+
+
+
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	ex9_p1
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ * llamado por pro_exec9
+ * hace algo con todas las lineas cargadas en memoria
+ *
+ *
+ */
+
+#if 0
+int	ex9_p1()
+{
+
+}
+#endif
+
+
+#if 1
+int	ex9_p1()
+{
+	int 	i,j,k,k1,k2;
+	int	l1,l2;
+	int	c1,c2;
+	int	f1,f2,f3,f4,f5;
+	int	f_proceso;
+	int	n_f;
+	char	base_name[MAXV];
+	char	prog_name[MAXV];
+	char	b0[MAXB];
+	char	b1[MAXB];
+	char	b2[MAXB];
+	char	b3[MAXB];
+	char	b4[MAXB];
+	char	b5[MAXB];
+	int	pf,uf,nf;
+
+
+	memset(b4,'X',MAXB);
+	strcpy(base_name,"empty");
+
+	c2 = 0;
+
+	/* para todas las lineas */
+	for (i=0; i < qf_src; i++)
+	{
+
+
+		/* me fijo que archivo es */
+		strcpy(prog_name,f_name(i));
+
+		/* me fijo lineas */
+		for (j=0, f1=1, n_f=0; f1 && j<qf_ff; j++)
+			if ( i >= (*tb[j]).pf && i <= (*tb[j]).uf )
+			{	n_f = j;
+				pf = (*tb[j]).pf;
+				uf = (*tb[j]).uf;
+				f1=0;
+			}
+
+		if (strcmp(base_name,prog_name))
+		{	strcpy(base_name,prog_name);
+			nf = 0;
+
+			printf ("Trabajo con ... |%s|\n",prog_name);
+		}
+
+		/* proceso linea i */
+		strcpy(b0,(*fnp[i]).l );
+		strcpy(b1, pasar_a_minusc(b0));
+
+		l2 = strlen(b1);
+
+		f_proceso = 1;
+		if (linea_vacia(b1) || es_linea_comentario(b1))
+			f_proceso = 0;
+
+		/* solo proceso lineas que no son comentario ni vacias */
+		if (f_proceso)
+		{	
+
+			if (tiene_allocate(b1))
+			{
+				fprintf (hfout,"%05d %-30.30s %05d |%s|\n",
+                                        ++c2,
+					prog_name,
+					i-pf+1,
+					b0);
+
+				fprintf (hfaux,"%s\n",b0);
+
+			}
+
+		} /* proceso */
+
+		strcpy( (*fnp[i]).l , b1 );
+		nf++;
+
+	} /* for */
+}
+
+
+#endif
+
+int	tiene_allocate(s)
+char	*s;
+{
+	int	i,j,k,l1;
+	int	f_res,f_sig,f_try;
+
+	int	k1;
+
+	k1 = 8;
+	l1 = strlen(s);
+
+#if 0
+	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
+#endif
+	for (i=0, f_res=0         ;          i < l1 - k1; i++)
+	{	
+		if (!strncmp(s+i,"allocate",k1))
+		{
+			f_try = 1;
+
+			if (f_try && s[i+k1] == 'd' )
+				f_try = 0;
+
+			if (f_try && s[i+k1] == 'a' )
+				f_try = 0;
+
+			if (f_try && s[i+k1] == '_' )
+				f_try = 0;
+
+			if (f_try && tiene_deallocate(s))
+				f_try = 0;
+
+			if (f_try && tiene_call(s))
+				f_try = 0;
+
+			if (f_try && tiene_pentry(s))
+				f_try = 0;
+
+			if (f_try && tiene__allocate(s))
+				f_try = 0;
+
+			if (f_try && tiene_er_message(s))
+				f_try = 0;
+
+			if (f_try && tiene_amazingly(s))
+				f_try = 0;
+
+			if (f_try && tiene_3possible(s))
+				f_try = 0;
+
+			if (f_try && tiene_allocatex(s))
+				f_try = 0;
+
+			if (f_try && tiene_remainder(s))
+				f_try = 0;
+
+			if (f_try && tiene_proport(s))
+				f_try = 0;
+
+			if (f_try && tiene_room(s))
+				f_try = 0;
+
+			if (f_try && tiene_arrays(s))
+				f_try = 0;
+
+			if (f_try)
+			{	f_res=1;
+#if 0
+				f_sig=0;
+#endif
+			}
+		}
+	}
+
+	return (f_res);
+}
+	
+
+
+
+
+
+int	tiene_deallocate(s)
+char	*s;
+{
+	int	i,j,k,l1;
+	int	f_res,f_sig,f_try;
+
+	int	k1;
+
+	k1 = 10;
+	l1 = strlen(s);
+
+	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
+	{	
+		if (!strncmp(s+i,"deallocate",k1))
+		{
+			f_try = 1;
+
+
+			if (f_try)
+				f_res=1, f_sig=0;
+		}
+	}
+
+	return (f_res);
+}
+
+
+
+
+
+int	tiene_call(s)
+char	*s;
+{
+	int	i,j,k,l1;
+	int	f_res,f_sig,f_try;
+
+	int	k1;
+
+	k1 = 4;
+	l1 = strlen(s);
+
+	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
+	{	
+		if (!strncmp(s+i,"call",k1))
+		{
+			f_try = 1;
+
+
+			if (f_try)
+				f_res=1, f_sig=0;
+		}
+	}
+
+	return (f_res);
+}
+
+
+
+
+
+int	tiene_pentry(s)
+char	*s;
+{
+	int	i,j,k,l1;
+	int	f_res,f_sig,f_try;
+
+	int	k1;
+
+	k1 = 5;
+	l1 = strlen(s);
+
+	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
+	{	
+		if (!strncmp(s+i,"entry",k1))
+		{
+			f_try = 1;
+
+
+			if (f_try)
+				f_res=1, f_sig=0;
+		}
+	}
+
+	return (f_res);
+}
+
+
+int	tiene__allocate(s)
+char	*s;
+{
+	int	i,j,k,l1;
+	int	f_res,f_sig,f_try;
+
+	int	k1;
+
+	k1 = 9;
+	l1 = strlen(s);
+
+	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
+	{	
+		if (!strncmp(s+i,"_allocate",k1))
+		{
+			f_try = 1;
+
+
+			if (f_try)
+				f_res=1, f_sig=0;
+		}
+	}
+
+	return (f_res);
+}
+
+
+int	tiene_er_message(s)
+char	*s;
+{
+	int	i,j,k,l1;
+	int	f_res,f_sig,f_try;
+
+	int	k1;
+
+	k1 = 10;
+	l1 = strlen(s);
+
+	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
+	{	
+		if (!strncmp(s+i,"er_message",k1))
+		{
+			f_try = 1;
+
+
+			if (f_try)
+				f_res=1, f_sig=0;
+		}
+	}
+
+	return (f_res);
+}
+
+
+
+int	tiene_amazingly(s)
+char	*s;
+{
+	int	i,j,k,l1;
+	int	f_res,f_sig,f_try;
+
+	int	k1;
+
+	k1 = 9;
+	l1 = strlen(s);
+
+	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
+	{	
+		if (!strncmp(s+i,"amazingly",k1))
+		{
+			f_try = 1;
+
+
+			if (f_try)
+				f_res=1, f_sig=0;
+		}
+	}
+
+	return (f_res);
+}
+
+
+
+
+int	tiene_3possible(s)
+char	*s;
+{
+	int	i,j,k,l1;
+	int	f_res,f_sig,f_try;
+
+	int	k1;
+
+	k1 = 10;
+	l1 = strlen(s);
+
+	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
+	{	
+		if (!strncmp(s+i,"3 possible",k1))
+		{
+			f_try = 1;
+
+
+			if (f_try)
+				f_res=1, f_sig=0;
+		}
+	}
+
+	return (f_res);
+}
+
+
+
+
+
+int	tiene_allocatex(s)
+char	*s;
+{
+	int	i,j,k,l1;
+	int	f_res,f_sig,f_try;
+
+	int	k1;
+
+	k1 = 10;
+	l1 = strlen(s);
+
+	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
+	{	
+		if (!strncmp(s+i,"allocate x",k1))
+		{
+			f_try = 1;
+
+
+			if (f_try)
+				f_res=1, f_sig=0;
+		}
+	}
+
+	return (f_res);
+}
+
+
+
+
+
+int	tiene_remainder(s)
+char	*s;
+{
+	int	i,j,k,l1;
+	int	f_res,f_sig,f_try;
+
+	int	k1;
+
+	k1 = 18;
+	l1 = strlen(s);
+
+	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
+	{	
+		if (!strncmp(s+i,"allocate remainder",k1))
+		{
+			f_try = 1;
+
+
+			if (f_try)
+				f_res=1, f_sig=0;
+		}
+	}
+
+	return (f_res);
+}
+
+
+
+
+
+int	tiene_proport(s)
+char	*s;
+{
+	int	i,j,k,l1;
+	int	f_res,f_sig,f_try;
+
+	int	k1;
+
+	k1 = 16;
+	l1 = strlen(s);
+
+	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
+	{	
+		if (!strncmp(s+i,"allocate proport",k1))
+		{
+			f_try = 1;
+
+
+			if (f_try)
+				f_res=1, f_sig=0;
+		}
+	}
+
+	return (f_res);
+}
+
+
+
+
+
+int	tiene_room(s)
+char	*s;
+{
+	int	i,j,k,l1;
+	int	f_res,f_sig,f_try;
+
+	int	k1;
+
+	k1 = 13;
+	l1 = strlen(s);
+
+	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
+	{	
+		if (!strncmp(s+i,"allocate room",k1))
+		{
+			f_try = 1;
+
+
+			if (f_try)
+				f_res=1, f_sig=0;
+		}
+	}
+
+	return (f_res);
+}
+
+
+
+
+
+int	tiene_arrays(s)
+char	*s;
+{
+	int	i,j,k,l1;
+	int	f_res,f_sig,f_try;
+
+	int	k1;
+
+	k1 = 15;
+	l1 = strlen(s);
+
+	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
+	{	
+		if (!strncmp(s+i,"allocate arrays",k1))
+		{
+			f_try = 1;
+
+
+			if (f_try)
+				f_res=1, f_sig=0;
+		}
+	}
+
+	return (f_res);
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*
@@ -18474,6 +19504,26 @@ int	x;
 
 
 
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ * 	minusculas (version chatgpt )
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+// Función auxiliar para convertir una cadena a minúsculas
+
+char *minusculas(char *s) 
+{
+    char *ptr = s;
+    while (*ptr) 
+    {
+        *ptr = tolower(*ptr);
+        ptr++;
+    }
+    return s;
+}
 
 /*
  * -----------------------------------------------------------------------------------
@@ -19500,3 +20550,169 @@ int main(int argc, char *argv[])
 
 
 #endif
+
+
+
+
+#if 0
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+#define MAXB 1024
+
+// Función auxiliar para convertir una cadena a minúsculas
+char *pasar_a_minusc(char *s) {
+    char *ptr = s;
+    while (*ptr) {
+        *ptr = tolower(*ptr);
+        ptr++;
+    }
+    return s;
+}
+
+// Subrutina que verifica la combinación "= nombre_valido ( ... )"
+int tiene_funcion_a_entry(char *linea, char *nombre_valido) {
+    char b1[MAXB];
+    strcpy(b1, pasar_a_minusc(linea));
+
+    char *ptr = b1;
+    char *igual_pos = strstr(ptr, "=");
+
+    if (!igual_pos)
+        return 0; // No hay "=" en la línea
+
+    ptr = igual_pos + 1; // Avanzar después de "="
+    while (*ptr && isspace(*ptr)) // Saltar espacios en blanco
+        ptr++;
+
+    // Verificar si el nombre válido coincide después de "="
+    if (strncmp(ptr, nombre_valido, strlen(nombre_valido)) == 0) {
+        ptr += strlen(nombre_valido);
+        while (*ptr && isspace(*ptr)) // Saltar espacios en blanco después de nombre_valido
+            ptr++;
+
+        if (*ptr == '(') {
+            ptr++; // Avanzar después de "("
+            while (*ptr && *ptr != ')') // Ignorar contenido entre paréntesis
+                ptr++;
+
+            if (*ptr == ')') // Verificar si hay un paréntesis de cierre
+                return 1;
+        }
+    }
+
+    return 0; // No se cumple la condición
+}
+
+#endif
+
+
+#if 0
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+#define MAXB 1024
+
+// Función auxiliar para convertir una cadena a minúsculas
+char *pasar_a_minusc(char *s) {
+    char *ptr = s;
+    while (*ptr) {
+        *ptr = tolower(*ptr);
+        ptr++;
+    }
+    return s;
+}
+
+// Subrutina que verifica si "nombre_valido" es invocada como función en la línea
+int tiene_funcion_a_entry(char *linea, char *nombre_valido) {
+    char b1[MAXB];
+    strcpy(b1, pasar_a_minusc(linea));
+
+    char *ptr = b1;
+    char *func_pos = strstr(ptr, nombre_valido);
+
+    while (func_pos) {
+        ptr = func_pos + strlen(nombre_valido);
+
+        // Saltar espacios en blanco después del nombre de la función
+        while (*ptr && isspace(*ptr))
+            ptr++;
+
+        // Verificar si está seguido de un paréntesis de apertura
+        if (*ptr == '(') {
+            ptr++; // Avanzar después de "("
+            int paren_count = 1;
+
+            // Verificar el contenido dentro de los paréntesis
+            while (*ptr && paren_count > 0) {
+                if (*ptr == '(')
+                    paren_count++;
+                else if (*ptr == ')')
+                    paren_count--;
+                ptr++;
+            }
+
+            // Si se cerraron todos los paréntesis, es una invocación válida
+            if (paren_count == 0)
+                return 1;
+        }
+
+        // Buscar la próxima aparición de nombre_valido
+        func_pos = strstr(func_pos + 1, nombre_valido);
+    }
+
+    return 0; // No se encontró una invocación válida
+}
+
+
+
+
+#endif
+
+#if 0
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+#define TRUE 1
+#define FALSE 0
+
+int tiene_entry(const char *linea) {
+    const char *ptr = linea;
+
+    // Convertir a minúsculas para hacer la búsqueda insensible a mayúsculas
+    char buffer[1024];
+    int i = 0;
+    while (*ptr && i < 1023) {
+        buffer[i++] = tolower(*ptr++);
+    }
+    buffer[i] = '\0';
+
+    // Buscar "entry" en el string
+    char *entry_pos = strstr(buffer, "entry");
+    while (entry_pos) {
+        // Verificar que "entry" no esté precedido ni seguido por caracteres alfanuméricos o guiones bajos
+        if ((entry_pos == buffer || !isalnum(*(entry_pos - 1)) && *(entry_pos - 1) != '_') &&
+            isspace(*(entry_pos + 5))) {
+            return TRUE;
+        }
+        // Buscar la próxima aparición de "entry"
+        entry_pos = strstr(entry_pos + 1, "entry");
+    }
+
+    return FALSE;
+}
+
+
+
+#endif
+
+
+/* end of file  */
+/* end of file  */
+/* end of file  */
+

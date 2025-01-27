@@ -1,12 +1,14 @@
 #!/bin/bash
 
+
 clear_file="clear.cfg"
 parser_log="parser.err"
 statis_log="tool.sta"
 checks_log="check.log"
 
-arc1="t5.for"
-arc2="t6.for"
+arc1="t1.for"
+arc2="t2.for"
+
 
 # Borrar pantalla segun clear.cfg .... 
 if [ -f "$clear_file" ]; then
@@ -21,7 +23,12 @@ if [ -f "$clear_file" ]; then
     fi
 fi
 
-./tfor -v -opciones=d5 -tool=6 -inp="$arc1" -out="$arc2"  --chglco  > log5
+
+./tfor -v -opciones=d5 -tool=6 -inp="$arc1" -out="$arc2" --chgdec -t -log=p.log  > log0
+
+# ./tfor -exec=1 -inp="$arc1" -in2="$arc2" -out=d1.chr
+
+
 
 echo "Cantidad de lineas"
 for file in "$arc1"  "$arc2"; do
@@ -29,6 +36,9 @@ for file in "$arc1"  "$arc2"; do
 done
 
 
+#echo
+#echo "Mapeo chars  file1   file2"
+#grep ^X d1.chr
 
 echo
 if [ -e "$parser_log" ] && [ -s "$parser_log" ]; then
@@ -56,18 +66,6 @@ fi
 
 
 
-
-
-
-
-
-echo
-if [ -e "$arc2" ] ; then
-    echo "cp t6.for a t7.for para modificar y probar en test"
-    cp t6.for t7.for
-else
-    echo "No se genero t6.for !!"
-fi
 
 
 

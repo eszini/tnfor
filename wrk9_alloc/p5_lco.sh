@@ -1,15 +1,12 @@
 #!/bin/bash
 
-
 clear_file="clear.cfg"
 parser_log="parser.err"
 statis_log="tool.sta"
 checks_log="check.log"
-checks_lo2="p.log"
 
-arc1="t1.for"
-arc2="t2.for"
-
+arc1="t5.for"
+arc2="t6.for"
 
 # Borrar pantalla segun clear.cfg .... 
 if [ -f "$clear_file" ]; then
@@ -24,12 +21,7 @@ if [ -f "$clear_file" ]; then
     fi
 fi
 
-
-./tfor -v -opciones=d5 -tool=6 -inp="$arc1" -out="$arc2" --chgdec -cab=1 -log=p.log  > log0
-
-# ./tfor -exec=1 -inp="$arc1" -in2="$arc2" -out=d1.chr
-
-
+./tfor -v -opciones=d5 -tool=6 -inp="$arc1" -out="$arc2"  --chglco  > log5
 
 echo "Cantidad de lineas"
 for file in "$arc1"  "$arc2"; do
@@ -37,9 +29,6 @@ for file in "$arc1"  "$arc2"; do
 done
 
 
-#echo
-#echo "Mapeo chars  file1   file2"
-#grep ^X d1.chr
 
 echo
 if [ -e "$parser_log" ] && [ -s "$parser_log" ]; then
@@ -64,16 +53,6 @@ if [ -e "$checks_log" ] && [ -s "$checks_log" ]; then
 else
     echo "No hay datos en check file"
 fi
-
-echo
-if [ -e "$checks_lo2" ] && [ -s "$checks_lo2" ]; then
-    echo "Revise lineas cambiadas en file: $checks_lo2"
-else
-    echo "No hay datos en log file"
-fi
-
-
-
 
 
 

@@ -43,7 +43,7 @@ case "$param" in
     m)
         echo "Ejecutando con opción 'm'..."
         create_dir_if_not_exists "repo4"
-        ./tfor -v -opciones=d5 -exec=4 -inp=lr1 -dato=repo4 -out=r_mres.txt -aux=r_minc.txt -log=r_msrc.txt > log8
+        ./tfor -v -opciones=d5 -exec=4 -inp=lr1 -dato=repo4 -out=r_mres.txt -aux=r_minc.txt -log=r_msrc.txt 
         ;;
 esac
 
