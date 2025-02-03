@@ -1,3 +1,4 @@
 00001 COAL_VECTOR_OBJ.F90            (f90) 00155 |               ALLOCATE (COAL_VECTOR_MAP(-1:MaxVectorNum))|
 00002 COAL_VECTOR_OBJ.F90            (f90) 00162 |               ALLOCATE (COAL_VECTOR_TYPE_IS_VALUE(-1:nArray), &|
+00002 COAL_VECTOR_OBJ.F90            (f90) 00163 |                         COAL_VECTOR_VALUES(31,-1:nArray))|
 00003 Coal_Model_Modules.f90         (f90) 00470 |                  allocate(AllArray(LowB1:UpB1))|

@@ -427,7 +427,6 @@ int	gp_niveldes=0;		/* nivel de descripcion que se vuelca en archivo de salida (
 int	gp_cborrar=0;		/* comentarios a borrar 0 nada, 1 al final de lineas 2 lineas comentadas 3 todos     */
 int	gp_suboption=0;		/* sub opciones para pro_xxxx algo  valores 1 2 3 ... etc  */
 int	gp_debug=0;		/* flag extra para debug especifico */
-int	gp_proceed=0;		/* flag para anadir extra proceso dentro de un modulo general ... ej: exec9 .. ex9_p1 ... */
 
 int	gp_help=0;		/* help 0 no 1 si */
 int	gp_vers=0;		/* version 0 no 1 si */
@@ -868,7 +867,6 @@ int	tiene_include_v2(char *, char *);
 int	es_nombre_de_include(char *s);
 int	lne(int );
 char	*trim_blanks(char *);
-char	*trim_blanks_beg(char *);
 char	*limpiar_mas(char *);
 char	*analisis_comentario(char *);
 bool	tiene_include_v3(char *, char *);
@@ -893,9 +891,7 @@ int	compare_vcb(const void *, const void *);
 int	primer_caracter_es_mas(char *);
 int	tiene_allocate(char *);
 char	*trim_beg(char *);
-char	*trim_beg_f90(char *);
 char	*trim_end(char *);
-char	*trim_end_f90(char *);
 
 #if 0
 int	compare_vcb(char *, char *);
@@ -949,26 +945,17 @@ int	sq_lineas_con_mas_elim;		/* lineas con cont de linea mas eliminadas */
 int	sq_comentarios_elim;   		/* lineas de codigo comentadas  eliminadas */
 int	sq_coment_al_final_elim;	/* comentarios al final de lineas de codigo validas eliminadas */
 int	sq_q_alloc;			/* cantidad total de allocs */
-
-int	sq_q_alloc_for_sta;		/* cantidad total de lineas allocate con stat ya incorporado */
 int	sq_q_alloc_for_slc;		/* cantidad total de allocs en f77 sin lineas de continuacion */
 int	sq_q_alloc_for_clc;		/* cantidad total de allocs en f77 con lineas de continuacion */
+int	sq_q_alloc_f90_slc;		/* cantidad total de allocs en f90 sin lineas de continuacion */
+int	sq_q_alloc_f90_clc;		/* cantidad total de allocs en f90 con lineas de continuacion */
 int	sq_q_alloc_for_sav;		/* cantidad total de lineas allocate con single var */
 int	sq_q_alloc_for_mav;		/* cantidad total de lineas allocate con multiple var */
 int	sq_q_alloc_for_slc_sav;		/* cant tot de lineas sin cont con allocate single var */
 int	sq_q_alloc_for_clc_sav;		/* cant tot de lineas con cont con allocate single var */
 int	sq_q_alloc_for_slc_mav;		/* cant tot de lineas sin cont con allocate multi var */
 int	sq_q_alloc_for_clc_mav;		/* cant tot de lineas con cont con allocate multi var */
-
-int	sq_q_alloc_f90_sta;		/* cantidad total de lineas allocate con stat ya incorporado  */
-int	sq_q_alloc_f90_slc;		/* cantidad total de allocs en f90 sin lineas de continuacion */
-int	sq_q_alloc_f90_clc;		/* cantidad total de allocs en f90 con lineas de continuacion */
-int	sq_q_alloc_f90_sav;		/* cantidad total de lineas allocate con single var */
-int	sq_q_alloc_f90_mav;		/* cantidad total de lineas allocate con multiple var */
-int	sq_q_alloc_f90_slc_sav;		/* cant tot de lineas sin cont con allocate single var */
-int	sq_q_alloc_f90_clc_sav;		/* cant tot de lineas con cont con allocate single var */
-int	sq_q_alloc_f90_slc_mav;		/* cant tot de lineas sin cont con allocate multi var */
-int	sq_q_alloc_f90_clc_mav;		/* cant tot de lineas con cont con allocate multi var */
+int	sq_q_alloc_for_sta;		/* cantidad total de lineas allocate con stat ya incorporado */
 
 
 /*
@@ -1268,55 +1255,33 @@ char	*s;
 	if (n == 11 )
 	{
 		printf ("Cant de alloc totales               %6d \n", sq_q_alloc);
-		printf ("Cant de alloc totales for con stat  %6d \n", sq_q_alloc_for_sta);		/* for con stat ya hecho */
-		printf ("Cant de alloc totales for f90 stat  %6d \n", sq_q_alloc_f90_sta);		/* for con stat ya hecho */
-
-		printf ("                                        \n");
 		printf ("Cant de alloc totales for slc       %6d \n", sq_q_alloc_for_slc);
 		printf ("Cant de alloc totales for clc       %6d \n", sq_q_alloc_for_clc);
+		printf ("Cant de alloc totales f90 slc       %6d \n", sq_q_alloc_f90_slc);
+		printf ("Cant de alloc totales f90 clc       %6d \n", sq_q_alloc_f90_clc);
 		printf ("Cant de alloc totales for sav       %6d \n", sq_q_alloc_for_sav);		/* single var allocated */
 		printf ("Cant de alloc totales for mav       %6d \n", sq_q_alloc_for_mav);		/* multip var allocated */
+		printf ("Cant de alloc totales con stat      %6d \n", sq_q_alloc_for_sta);		/* for con stat ya hecho */
 		printf ("Cant de alloc tot sin cont sing var %6d \n", sq_q_alloc_for_slc_sav);
 		printf ("Cant de alloc tot con cont sing var %6d \n", sq_q_alloc_for_clc_sav);
 		printf ("Cant de alloc tot sin cont mult var %6d \n", sq_q_alloc_for_slc_mav);
 		printf ("Cant de alloc tot con cont mult var %6d \n", sq_q_alloc_for_clc_mav);
 
-		printf ("                                        \n");
-		printf ("Cant de alloc totales f90 slc       %6d \n", sq_q_alloc_f90_slc);
-		printf ("Cant de alloc totales f90 clc       %6d \n", sq_q_alloc_f90_clc);
-		printf ("Cant de alloc totales f90 sav       %6d \n", sq_q_alloc_f90_sav);
-		printf ("Cant de alloc totales f90 mav       %6d \n", sq_q_alloc_f90_mav);
-		printf ("Cant de alloc tot sin cont sing var %6d \n", sq_q_alloc_f90_slc_sav);
-		printf ("Cant de alloc tot con cont sing var %6d \n", sq_q_alloc_f90_clc_sav);
-		printf ("Cant de alloc tot sin cont mult var %6d \n", sq_q_alloc_f90_slc_mav);
-		printf ("Cant de alloc tot con cont mult var %6d \n", sq_q_alloc_f90_clc_mav);
- 
-
 
 		if (ffsta)
 		{
 		fprintf (hfsta,"Cant de alloc totales               %6d \n", sq_q_alloc);
-		fprintf (hfsta,"Cant de alloc totales for con stat  %6d \n", sq_q_alloc_for_sta);		/* for con stat ya hecho */
-		fprintf (hfsta,"Cant de alloc totales f90 con stat  %6d \n", sq_q_alloc_f90_sta);		/* for con stat ya hecho */
-
 		fprintf (hfsta,"Cant de alloc totales for slc       %6d \n", sq_q_alloc_for_slc);
 		fprintf (hfsta,"Cant de alloc totales for clc       %6d \n", sq_q_alloc_for_clc);
+		fprintf (hfsta,"Cant de alloc totales f90 slc       %6d \n", sq_q_alloc_f90_slc);
+		fprintf (hfsta,"Cant de alloc totales f90 clc       %6d \n", sq_q_alloc_f90_clc);
 		fprintf (hfsta,"Cant de alloc totales for sav       %6d \n", sq_q_alloc_for_sav);		/* single var allocated */
 		fprintf (hfsta,"Cant de alloc totales for mav       %6d \n", sq_q_alloc_for_mav);		/* multip var allocated */
+		fprintf (hfsta,"Cant de alloc totales con stat      %6d \n", sq_q_alloc_for_sta);		/* for con stat ya hecho */
 		fprintf (hfsta,"Cant de alloc tot sin cont sing var %6d \n", sq_q_alloc_for_slc_sav);
 		fprintf (hfsta,"Cant de alloc tot con cont sing var %6d \n", sq_q_alloc_for_clc_sav);
 		fprintf (hfsta,"Cant de alloc tot sin cont mult var %6d \n", sq_q_alloc_for_slc_mav);
 		fprintf (hfsta,"Cant de alloc tot con cont mult var %6d \n", sq_q_alloc_for_clc_mav);
-
-		fprintf (hfsta,"Cant de alloc totales f90 slc       %6d \n", sq_q_alloc_f90_slc);
-		fprintf (hfsta,"Cant de alloc totales f90 clc       %6d \n", sq_q_alloc_f90_clc);
-		fprintf (hfsta,"Cant de alloc totales f90 sav       %6d \n", sq_q_alloc_f90_sav);
-		fprintf (hfsta,"Cant de alloc totales f90 mav       %6d \n", sq_q_alloc_f90_mav);
-		fprintf (hfsta,"Cant de alloc tot sin cont sing var %6d \n", sq_q_alloc_f90_slc_sav);
-		fprintf (hfsta,"Cant de alloc tot con cont sing var %6d \n", sq_q_alloc_f90_clc_sav);
-		fprintf (hfsta,"Cant de alloc tot sin cont mult var %6d \n", sq_q_alloc_f90_slc_mav);
-		fprintf (hfsta,"Cant de alloc tot con cont mult var %6d \n", sq_q_alloc_f90_clc_mav);
-
 		}
 	}
 
@@ -6943,7 +6908,6 @@ int	ex9_p1()
 	int	tipo_ext;
 
 	char	m0[MSTR];
-	char	m1[MSTR];
 
 	memset(b4,'X',MAXB);
 	memset(m0,0,MSTR);
@@ -6956,26 +6920,19 @@ int	ex9_p1()
 
 	/* stats */
 	sq_q_alloc         = 0;
-	sq_q_alloc_for_sta = 0;
-	sq_q_alloc_f90_sta = 0;
-
 	sq_q_alloc_for_slc = 0;
 	sq_q_alloc_for_clc = 0;
+	sq_q_alloc_f90_slc = 0;
+	sq_q_alloc_f90_clc = 0;
 	sq_q_alloc_for_sav = 0;
 	sq_q_alloc_for_mav = 0;
+	sq_q_alloc_for_sta = 0;
 	sq_q_alloc_for_slc_sav = 0;		/* cant tot de lineas sin cont con allocate single var */
 	sq_q_alloc_for_clc_sav = 0;		/* cant tot de lineas con cont con allocate single var */
 	sq_q_alloc_for_slc_mav = 0;		/* cant tot de lineas sin cont con allocate multi var */
 	sq_q_alloc_for_clc_mav = 0;		/* cant tot de lineas con cont con allocate multi var */
 
-	sq_q_alloc_f90_slc = 0;
-	sq_q_alloc_f90_clc = 0;
-	sq_q_alloc_f90_sav = 0;			/* cantidad total de lineas allocate con single var */
-	sq_q_alloc_f90_mav = 0;			/* cantidad total de lineas allocate con multiple var */
-	sq_q_alloc_f90_slc_sav = 0;		/* cant tot de lineas sin cont con allocate single var */
-	sq_q_alloc_f90_clc_sav = 0;		/* cant tot de lineas con cont con allocate single var */
-	sq_q_alloc_f90_slc_mav = 0;		/* cant tot de lineas sin cont con allocate multi var */
-	sq_q_alloc_f90_clc_mav = 0;		/* cant tot de lineas con cont con allocate multi var */
+
 
 	/* para todas las lineas */
 	for (i=0; i < qf_src; i++)
@@ -7058,33 +7015,25 @@ int	ex9_p1()
 
 						if (!tiene_multiple_vars(b1))  
 						{
-							/* Es un allocate en una linea con una sola variable */
+							/* es un allocate en una linea con una sola variable */
 							sq_q_alloc_for_sav++;
 							sq_q_alloc_for_slc_sav++;
 
 							/* verifico si ya tiene stat */
 							if (!f_stat)
 							{
-								/* TIPO-1 alloc - una linea - una sola variable - sin stat */
-								strcpy(m1,trim_blanks_beg(b1));
-								fprintf (hfou4,"( 1) sl sv %-30.30s |%s|\n",prog_name,m1);
+
 							}
 							else
 							{
-								/* TIPO-2 alloc - una linea - una sola variable - con stat */
 								sq_q_alloc_for_sta++;
-								strcpy(m1,trim_blanks_beg(b1));
-								fprintf (hfou4,"( 2) stat  %-30.30s |%s|\n",prog_name,m1);
 							}
 						}
 						else
 						{
-							/* TIPO-3 es un allocate en una linea con mas de una variable */
+							/* es un allocate en una linea con mas de una variable */
 							sq_q_alloc_for_mav++;
 							sq_q_alloc_for_slc_mav++;
-
-							strcpy(m1,trim_blanks_beg(b1));
-							fprintf (hfou4,"( 3) sl mv %-30.30s |%s|\n",prog_name,m1);
 						}
 					}
 					else
@@ -7092,7 +7041,6 @@ int	ex9_p1()
 						sq_q_alloc_for_clc++;
 						k=0;
 						memset(m0,0,MSTR);
-
 						do
 						{
 							fprintf (hfou2,"%05d %-30.30s (%s) %05d |%s|\n",
@@ -7100,42 +7048,39 @@ int	ex9_p1()
 
 							if (!es_linea_comentario( (*fnp[i+k]).l ))
 							{
-								strcpy(b1, pasar_a_minusc( (*fnp[i+k]).l) );
-								strcpy(b1, trim_beg(b1));
-								strcpy(b1, trim_end(b1));
-								strcpy(b1, trim_blanks(b1));
-								strcat(m0,b1);
+							strcpy(b1, pasar_a_minusc( (*fnp[i+k]).l) );
+							strcpy(b1, trim_beg(b1));
+							strcpy(b1, trim_end(b1));
+							strcpy(b1, trim_blanks(b1));
+							strcat(m0,b1);
 							}
 							k++;
 						}
 						while ( tiene_mas(  (*fnp[i+k]).l ) || 
                                                         (es_linea_comentario( (*fnp[i+k]).l) && tiene_mas( (*fnp[i+k+1]).l))   );
+
 					
-if (gp_debug)
-{
 printf ("RRR10 |%s| \n",m0);
-}
 						if (!tiene_multiple_vars(m0))
 						{
-							/* TIPO-4 es un allocate en varias lineas con una sola variable (poco probable) */
+							/* es un allocate en varias lineas con una sola variable (poco probable) */
 							sq_q_alloc_for_sav++;
 							sq_q_alloc_for_clc_sav++;
 
-							strcpy(m1,trim_blanks_beg(m0));
-							fprintf (hfou4,"( 4) ml sv %-30.30s |%s|\n",prog_name,m1);
 						}
 						else
 						{
-							/* TIPO-5 es un allocate en varias lineas con varias variables  */
+							/* es un allocate en varias lineas con varias variables  */
 							sq_q_alloc_for_mav++;
 							sq_q_alloc_for_clc_mav++;
 
-							strcpy(m1,trim_blanks_beg(m0));
-							fprintf (hfou4,"( 5) ml mv %-30.30s |%s|\n",prog_name,m1);
 						}
-					}
-				}
+	
 
+/* EEE */					
+					}
+					
+				}
 
 				/* es .f90 */
 				if(tipo_ext == 2)
@@ -7144,108 +7089,39 @@ printf ("RRR10 |%s| \n",m0);
 
 					if (!tiene_amper( (*fnp[i]).l ) )
 					{
-						sq_q_alloc_f90_slc++;
-						fprintf (hfou3,"%05d %-30.30s (%s) %05d |%s|\n",
-       	                                		c4, prog_name, exte_name, i-pf+1, (*fnp[i]).l);
-
-						strcpy(b1, pasar_a_minusc( (*fnp[i]).l) );
-						f_stat = tiene_stat(b1);
-
-						if (!tiene_multiple_vars(b1))  
-						{
-							/* es un allocate en una linea con una sola variable */
-							sq_q_alloc_f90_sav++;
-							sq_q_alloc_f90_slc_sav++;
-
-							/* verifico si ya tiene stat */
-							if (!f_stat)
-							{
-								/* TIPO-6 alloc en una sola linea una sola variable sin stat */
-								strcpy(m1,trim_blanks_beg(b1));
-								fprintf (hfou4,"( 6) sl sv %-30.30s |%s|\n",prog_name,m1);
-
-								if (gp_proceed == 6 )
-								{
-									printf ("PPP1 proceed !! tipo 6 \n");
-
-									chg_alloc_t06(n_f);
-								}
-							}
-							else
-							{
-								/* TIPO-7 alloc en una sola linea una sola variable con stat */
-								sq_q_alloc_f90_sta++;
-
-								strcpy(m1,trim_blanks_beg(b1));
-								fprintf (hfou4,"( 7) stat  %-30.30s |%s|\n",prog_name,m1);
-							}
-						}
-						else
-						{
-							/* TIPO-8 es un allocate en una linea con mas de una variable */
-							sq_q_alloc_f90_mav++;
-							sq_q_alloc_f90_slc_mav++;
-
-							strcpy(m1,trim_blanks_beg(b1));
-							fprintf (hfou4,"( 8) sl mv %-30.30s |%s|\n",prog_name,m1);
-						}
+					sq_q_alloc_f90_slc++;
+					fprintf (hfou3,"%05d %-30.30s (%s) %05d |%s|\n",
+                                       		c4,
+						prog_name,
+						exte_name,
+						i-pf+1,
+						(*fnp[i]).l);
 					}
 					else
 					{
-						sq_q_alloc_f90_clc++;
-						k=0;
-						memset(m0,0,MSTR);
-
-						while ( tiene_amper(  (*fnp[i+k]).l )   )
-						{
-							fprintf (hfou3,"%05d %-30.30s (%s) %05d |%s|\n",
-       		                                		c4, prog_name, exte_name, i-pf+1+k, (*fnp[i+k]).l);
-
-							if (1)
-							{
-								strcpy(b1, pasar_a_minusc( (*fnp[i+k]).l) );
-								strcpy(b1, trim_beg_f90(b1));
-								strcpy(b1, trim_end_f90(b1));
-								strcpy(b1, trim_blanks(b1));
-								strcat(m0,b1);
-							}
-							k++;
-						}
-
-						strcpy(b1, pasar_a_minusc( (*fnp[i+k]).l) );
-						strcpy(b1, trim_beg_f90(b1));
-						strcpy(b1, trim_end_f90(b1));
-						strcpy(b1, trim_blanks(b1));
-						strcat(m0,b1);
-
+					sq_q_alloc_f90_clc++;
+					k=0;
+					while ( tiene_amper(  (*fnp[i+k]).l )   )
+					{
+					fprintf (hfou3,"%05d %-30.30s (%s) %05d |%s|\n",
+                                       		c4,
+						prog_name,
+						exte_name,
+						i-pf+1+k,
+						(*fnp[i+k]).l);
+					k++;
+					}
 					
-						fprintf (hfou3,"%05d %-30.30s (%s) %05d |%s|\n",
-       	                                		c4, prog_name, exte_name, i-pf+1+k, (*fnp[i+k]).l);
-
-if (gp_debug)
-{
-printf ("RRR11 |%s| \n",m0);
-}
-						if (!tiene_multiple_vars(m0))
-						{
-							/* TIPO-9 es un allocate en varias lineas con una sola variable (poco probable) */
-							sq_q_alloc_f90_sav++;
-							sq_q_alloc_f90_clc_sav++;
-
-							strcpy(m1,trim_blanks_beg(m0));
-							fprintf (hfou4,"( 9) ml sv %-30.30s |%s|\n",prog_name,m1);
-						}
-						else
-						{
-							/* TIPO-10 es un allocate en varias lineas con varias variables  */
-							sq_q_alloc_f90_mav++;
-							sq_q_alloc_f90_clc_mav++;
-
-							strcpy(m1,trim_blanks_beg(m0));
-							fprintf (hfou4,"(10) ml mv %-30.30s |%s|\n",prog_name,m1);
-						}
+					fprintf (hfou3,"%05d %-30.30s (%s) %05d |%s|\n",
+                                       		c4,
+						prog_name,
+						exte_name,
+						i-pf+1+k,
+						(*fnp[i+k]).l);
 					}
 				}
+
+
 			}
 
 		} /* proceso */
@@ -7258,363 +7134,6 @@ printf ("RRR11 |%s| \n",m0);
 
 
 #endif
-
-
-/*
- * -----------------------------------------------------------------------------------
- *
- *	chg_alloc_t06
- *
- *
- * -----------------------------------------------------------------------------------
- */
-
-
-/*
- *	chg_alloc_t06
- *	agregar check alloc de sentencias con allocate tipo 06 
- *	recibe numero de file
- */
-
-int	chg_alloc_t06(num_f)
-int	num_f;
-{
-
-	int 	i,j,k,k1,k2;
-	int	l1,l2;
-	int	c1,c2,c3,c4;
-	int	f1,f2,f3,f4,f5;
-	int	f_proceso;
-	int	f_stat;
-	int	f_hay_alloc;
-	int	f_try;
-	int	n_f;
-	char	base_name[MAXV];
-	char	prog_name[MAXV];
-	char	exte_name[MAXV];
-	char	b0[MAXB];
-	char	b1[MAXB];
-	char	b2[MAXB];
-	char	b3[MAXB];
-	char	b4[MAXB];
-	char	b5[MAXB];
-	int	pf,uf,nf;
-	int	tipo_ext;
-
-	int	pri_l,ult_l;
-	int	ult_u,pri_d;	/* ultimo use, primera declaracion */
-	int	mod_type;	/* 0 no se, 1 subroutine 2 function */
-	int	linea_use;	/* linea en la que hay que poner el use */
-
-	char	m0[MSTR];
-
-	memset(b4,'X',MAXB);
-	memset(m0,0,MSTR);
-	strcpy(base_name,"empty");
-
-	nf = num_f;
-
-	tipo_ext = 0;
-	c2 = 0;
-	c3 = 0;
-	c4 = 0;
-
-	/* primera y ultima linea del fuente */
-	pf = (*tb[nf]).pf;
-	uf = (*tb[nf]).uf;
-
-	/* nombre y ext del file  */
-	strcpy(prog_name,f_name(pf));
-	strcpy(exte_name,e_name(pf));
-
-	if (!strncmp(exte_name,"for",3))
-		tipo_ext = 1;
-
-	if (!strncmp(exte_name,"f90",3))
-		tipo_ext = 2;
-
-	printf ("PPP2 Trabajo con %3d %-30.30s %s %6d %6d \n",
-		nf,prog_name,exte_name,lne(pf),lne(uf));
-
-
-	for (i=pf; i<= uf; i++)
-	{
-		printf ("PPP3 |%s|\n",(*fnp[i]).l );
-	}
-
-	f_hay_alloc = 1;
-	i = pf;
-
-	do
-	{
-
-		/* proceso linea i */
-		strcpy(b0,(*fnp[i]).l );
-		strcpy(b1, pasar_a_minusc(b0));
-		strcpy(b2, pasar_a_minusc(b0));
-
-		l2 = strlen(b1);
-
-		f_proceso = 1;
-		if (linea_vacia(b1) || es_linea_comentario(b1))
-			f_proceso = 0;
-
-		/* solo proceso lineas que no son comentario ni vacias */
-		if (f_proceso)
-		{	
-		
-			if (tiene_allocate(b1))
-			{
-				printf ("PPP4 |%s|\n",b1);
-
-				if (!busco_pri_l(pf,uf,i,&pri_l,&mod_type))
-					error(9001);
-
-				printf ("PPP4 comienza bloque:  %6d (%d) |%s! \n",
-					lne(pri_l),mod_type,(*fnp[pri_l]).l );
-
-				if (!busco_ult_l(pf,uf,i,&ult_l,mod_type))
-					error(9002);
-
-				printf ("PPP4 termina  bloque:  %6d |%s! \n",
-					lne(ult_l),(*fnp[ult_l]).l );
-
-				/* busco donde colocar el use ... allocate_vars */
-				ult_u = 0;
-				busco_ult_u(pri_l,ult_l,pri_l,&ult_u);
-
-				printf ("PPP4 ultim use detec:  %6d |%s! \n",
-					lne(ult_u),(*fnp[ult_u]).l );
-
-				/* busco primer declaracion de variables */
-				pri_d = 0;
-				busco_pri_d(pri_l,ult_l,pri_l,&pri_d);
-
-				printf ("PPP4 prim declar det:  %6d |%s! \n",
-					lne(pri_d),(*fnp[pri_d]).l );
-
-				f_try = 0;
-
-				if (!f_try && ult_u)
-				{
-					linea_use = ult_u;
-					f_try = 1;
-				}
-
-				if (!f_try && pri_d)
-				{
-					linea_use = pri_d;
-					f_try = 1;
-				}
-
-				if (!f_try)
-					error(9003);
-
-				printf ("PPP4 linea_use va en %d (%6d-%6d) \n",linea_use,pri_l,ult_l );
-
-		
-			}
-		}
-
-
-
-		i++;
-		if (i > uf)
-			f_hay_alloc = 0;
-
-	}
-	while (f_hay_alloc);
-
-	
-
-
-}
-
-/*
- *	busco_pri_l
- *	buscar la primera linea del bloque
- *	en el que esta la linea en cuestion 
- */
-
-int	busco_pri_l(pf,uf,spt,v,mod_type)
-int	pf,uf,spt,*v,*mod_type;
-{
-	int	i;
-	int	f_proceso;
-	int	f_sigo;
-	int	f_res;
-	char	b1[MAXB];
-
-
-	for (i=spt, f_res=0, f_sigo=1 ; f_sigo && i>=pf; i--)
-	{
-
-		strcpy(b1, pasar_a_minusc( (*fnp[i]).l) );
-
-		f_proceso = 1;
-		if (linea_vacia(b1) || es_linea_comentario(b1))
-			f_proceso = 0;
-
-		if (f_proceso)
-		{
-
-			if (tiene_subroutine(b1) )
-			{
-				f_sigo = 0;
-				f_res  = 1;
-				*v     = i;
-				*mod_type = 1;
-			}
-
-			if (tiene_function(b1) )
-			{
-				f_sigo = 0;
-				f_res  = 1;
-				*v     = i;
-				*mod_type = 2;
-			}
-		}
-	}
-
-	return (f_res);
-}
-		
-	
-/*
- *	busco_ult_l
- *	buscar la ultima linea del bloque
- *	en el que esta la linea en cuestion 
- */
-
-
-int	busco_ult_l(pf,uf,spt,v,mod_type)
-int	pf,uf,spt,*v,mod_type;
-{
-	int	i;
-	int	f_proceso;
-	int	f_sigo;
-	int	f_res;
-	char	b1[MAXB];
-
-
-	for (i=spt, f_res=0, f_sigo=1 ; f_sigo && i<=uf; i++)
-	{
-
-		strcpy(b1, pasar_a_minusc( (*fnp[i]).l) );
-
-		f_proceso = 1;
-		if (linea_vacia(b1) || es_linea_comentario(b1))
-			f_proceso = 0;
-
-		if (f_proceso)
-		{
-			if (tiene_end(b1,mod_type) )
-			{
-				f_sigo = 0;
-				f_res  = 1;
-				*v     = i;
-			}
-		}
-	}
-
-	return (f_res);
-}
-		
-	
-
-/*
- *	busco_ult_u
- *	buscar la ultima linea del bloque
- *	que tenga un use 
- *	en el que esta la linea en cuestion 
- */
-
-
-int	busco_ult_u(pf,uf,spt,v)
-int	pf,uf,spt,*v;
-{
-	int	i;
-	int	f_proceso;
-	int	f_sigo;
-	int	f_res;
-	char	b1[MAXB];
-
-
-	*v = 0;
-
-	for (i=spt, f_res=0, f_sigo=1 ; f_sigo && i<=uf; i++)
-	{
-
-		strcpy(b1, pasar_a_minusc( (*fnp[i]).l) );
-
-		f_proceso = 1;
-		if (linea_vacia(b1) || es_linea_comentario(b1))
-			f_proceso = 0;
-
-		if (f_proceso)
-		{
-			if (tiene_use(b1) )
-			{
-printf ("PPP8 detecto use: %d |%s| \n",lne(i),b1);
-#if 0
-				f_sigo = 0;
-#endif
-				f_res  = 1;
-				*v     = i;
-			}
-		}
-	}
-
-	return (f_res);
-}
-		
-	
-
-/*
- *	busco_pri_d
- *	buscar la primera linea del bloque
- *	que tenga una declaracion de variable
- *	en el que esta la linea en cuestion 
- */
-
-
-int	busco_pri_d(pf,uf,spt,v)
-int	pf,uf,spt,*v;
-{
-	int	i;
-	int	f_proceso;
-	int	f_sigo;
-	int	f_res;
-	char	b1[MAXB];
-
-
-	*v = 0;
-
-	for (i=spt, f_res=0, f_sigo=1 ; f_sigo && i<=uf; i++)
-	{
-
-		strcpy(b1, pasar_a_minusc( (*fnp[i]).l) );
-
-		f_proceso = 1;
-		if (linea_vacia(b1) || es_linea_comentario(b1))
-			f_proceso = 0;
-
-		if (f_proceso)
-		{
-			if (tiene_logical_2(b1) )
-			{
-printf ("PPP9 detecto dec: %d |%s| \n",lne(i),b1);
-				f_sigo = 0;
-				f_res  = 1;
-				*v     = i;
-			}
-		}
-	}
-
-	return (f_res);
-}
-		
-	
 
 
 /*
@@ -7695,13 +7214,10 @@ char	*s;
 		}
 	}
 	
-if (gp_debug)
-{
 printf ("RRR0 paso 1 - rimer palabra es allocate          \n");
 printf ("RRR1 s           |%s| \n",s);
 printf ("RRR2 b1          |%s| \n",b0);
 printf ("RRR3 st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
-}
 
 
 	/* puede haber blancos entre allocate y ( ... los quito */
@@ -7715,13 +7231,10 @@ printf ("RRR3 st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
 	}
 
 
-if (gp_debug)
-{
 printf ("RRR0 paso 2 - si hay blancos corro la linea          \n");
 printf ("RRR1 s           |%s| \n",s);
 printf ("RRR2 b1          |%s| \n",b0);
 printf ("RRR3 st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
-}
 
 	/* el ultimo caracter salvo blancos, es un parentesis que cierra */
 	st2 = 0;
@@ -7743,8 +7256,6 @@ printf ("RRR3 st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
 			}
 		}
 
-if (gp_debug)
-{
 printf ("RRR0 paso 3 - el ultimo caracter salvo blanco es )           \n");
 printf ("RRR1 s           |%s| \n",s);
 printf ("RRR2 b1          |%s| \n",b0);
@@ -7752,7 +7263,6 @@ printf ("RRR3 st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
 printf ("RRR4 p1 p2       |%2d,%2d|  \n",p1,p2);
 printf ("RRR5 b0[p1]      |%c| \n",b0[p1]);
 printf ("RRR6 b0[p2]      |%c| \n",b0[p2]);
-}
 
 
 	/* caracteres especificos de allocate entre ( y ) */
@@ -7771,8 +7281,6 @@ printf ("RRR6 b0[p2]      |%c| \n",b0[p2]);
 	}
 
 	
-if (gp_debug)
-{
 printf ("RRR0 paso 4 - caracteres especificos entre ( y )          \n");
 printf ("RRR1 s           |%s| \n",s);
 printf ("RRR9 b1          |%s| \n",b0);
@@ -7780,7 +7288,6 @@ printf ("RRR9 st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
 printf ("RRR4 p1 p2       |%2d,%2d|  \n",p1,p2);
 printf ("RRR5 b0[p1]      |%c| \n",b0[p1]);
 printf ("RRR6 b0[p2]      |%c| \n",b0[p2]);
-}
 
 
 
@@ -7842,8 +7349,6 @@ printf ("RRR6 b0[p2]      |%c| \n",b0[p2]);
 	}
 
 
-if (gp_debug)
-{
 printf ("RRR0 paso 5 - hay comas sin estar entre    ( y )  \n");
 printf ("RRRA s           |%s| \n",s);
 printf ("RRR2 b1          |%s| \n",b0);
@@ -7851,7 +7356,6 @@ printf ("RRRA st1 st2 st3 |%d,%d,%d,%d| \n",st1,st2,st3,st4);
 printf ("RRR4 p1 p2       |%2d,%2d|  \n",p1,p2);
 printf ("RRR5 b0[p1]      |%c| \n",b0[p1]);
 printf ("RRR6 b0[p2]      |%c| \n",b0[p2]);
-}
 
 
 	if (st1 && st2 && st3 && st4)
@@ -7860,21 +7364,17 @@ printf ("RRR6 b0[p2]      |%c| \n",b0[p2]);
 	
 			
 	
-if (gp_debug)
-{
 printf ("RRR0 paso 5           \n");
 printf ("RRR7 f_res      |%d| \n",f_res);
-}
 
 
-if (gp_debug)
-{
 	if (f_res == 0)
 		printf ("RR11 |%s|\n",s);
 
 	if (f_res == 1)
 		printf ("RR12 |%s|\n",s);
-}
+
+
 
 	return (f_res);
 
@@ -7903,29 +7403,7 @@ char	*s;
 	return (b0);
 }
 
-char	*trim_beg_f90(s)
-char	*s;
-{
-	static	char	b0[MAXB];
-	int	i,j,k;
-	int	p1;
-	int	l1;
-	int	f_sig;
-
-	l1=strlen(s);
-
-	p1 = 0;
-
-	for (i=0, f_sig=1; f_sig && i<l1; i++)
-		if (s[i] != ' ' && s[i] != '\t' )
-			p1=i, f_sig=0;
-
-	strcpy(b0,s+p1);
 	
-	return (b0);
-}
-
-
 char	*trim_end(s)
 char	*s;
 {
@@ -7945,36 +7423,6 @@ char	*s;
 	for (i=l2-1, f_sigo=1; f_sigo && i; i--)
 	{	if (b0[i] == '!' && b0[i-1] != '4')
 			f_sigo = 0, b0[i] = 0;
-	}
-	
-	return (b0);
-}
-	
-char	*trim_end_f90(s)
-char	*s;
-{
-	static	char	b0[MAXB];
-	int	i,j,k;
-	int	p1;
-	int	l1,l2;
-	int	f_sigo;
-
-	l2=strlen(s);
-	strcpy(b0,s);
-
-
-	/* recorto si hay comentarios al final de la linea
-	 * hay un solo caso con allocate  ... !real *4! .... 
-	 */
-	for (i=l2-1, f_sigo=1; f_sigo && i; i--)
-	{	if (b0[i] == '!' && b0[i-1] != '4')
-			f_sigo = 0, b0[i] = 0;
-	}
-
-	l2=strlen(b0);
-	for (i=l2-1, f_sigo=1; f_sigo && i; i--)
-	{	if (b0[i] == '&')
-			f_sigo=0, b0[i] = 0;
 	}
 	
 	return (b0);
@@ -8440,236 +7888,13 @@ char	*s;
 }
 
 
-/*
- *	chanchada ... !
- *	hacer una unica rutina ...
- *	tiene que esar str en linea, 
- *	si linea no es comentario,
- *	si str no esta en comentario al fondo 
- *	etc
- */
 
 
-int	tiene_subroutine(s)
-char	*s;
-{
-	int	i,j,k,l1;
-	int	f_res,f_sig,f_try;
 
-	int	k1;
 
-	k1 = 10;
-	l1 = strlen(s);
 
-	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
-	{	
-		if (!strncmp(s+i,"subroutine",k1))
-		{
-			f_try = 1;
 
 
-			if (f_try)
-				f_res=1, f_sig=0;
-		}
-	}
-
-	return (f_res);
-}
-
-
-
-int	tiene_function(s)
-char	*s;
-{
-	int	i,j,k,l1;
-	int	f_res,f_sig,f_try;
-
-	int	k1;
-
-	k1 = 8;
-	l1 = strlen(s);
-
-	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
-	{	
-		if (!strncmp(s+i,"function",k1))
-		{
-			f_try = 1;
-
-
-			if (f_try)
-				f_res=1, f_sig=0;
-		}
-	}
-
-	return (f_res);
-}
-
-
-/*
- *	tiene_end
- *	tiene que encontrar un end solito !!!
- */
-
-int	tiene_end(s,mod_type)
-char	*s,mod_type;
-{
-	int	i,j,k,l1,l2;
-	int	f_res,f_sig,f_try;
-
-	int	k1;
-
-	k1 = 3;
-	l1 = strlen(s);
-
-printf ("PPP5 tiene_end en: |%s|\n",s);
-
-	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1 + 1; i++)
-	{	
-
-		if (!strncmp(s+i,"end",k1))
-		{
-			f_try = 1;
-		
-printf ("PPP6 k: %2d  l1: %2d  \n",i+3,l1);
-
-			for (k=i+3; k<l1; k++)
-			{	printf ("PPP7 k %2d s[k] %c %2d \n",k,s[k],s[k]);
-
-				if (s[k] != ' ' && s[k] != '\t' && s[k] != 0 )
-					f_try = 0, f_sig = 0;
-			}
-
-			if (f_try)
-				f_res=1, f_sig=0;
-		}
-
-		if (mod_type == 1)
-		{
-			if (!strncmp(s+i,"end subroutine",14))
-				f_try = 1;
-
-			if (f_try)
-				f_res=1, f_sig=0;
-		}
-
-		if (mod_type == 2)
-		{
-			if (!strncmp(s+i,"end function",12))
-				f_try = 1;
-
-			if (f_try)
-				f_res=1, f_sig=0;
-		}
-
-	}
-
-	return (f_res);
-}
-
-
-/*
- *	tiene_use
- *	tiene que encontrar un use con algun string valido ...
- */
-
-int	tiene_use(s)
-char	*s;
-{
-	int	i,j,k,l1,l2;
-	int	f_res,f_sig,f_try;
-
-	int	k1;
-
-	k1 = 4;
-	l1 = strlen(s);
-
-printf ("PPP5 tiene_use en: |%s|\n",s);
-
-	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1 + 1; i++)
-	{	
-
-		if (!strncmp(s+i,"use ",k1))
-		{
-			f_try = 1;
-		
-printf ("PPP6 k: %2d  l1: %2d  \n",i+3,l1);
-
-			for (k=i+3; k<l1; k++)
-			{	printf ("PPP7 k %2d s[k] %c %2d \n",k,s[k],s[k]);
-
-#if 0
-				if (s[k] != ' ' && s[k] != '\t' && s[k] != 0 )
-#endif
-				if (!( s[k] == ' ' || 
-                                       s[k] == '_' || 
-                                      (s[k] >= 'a' && s[k] <= 'z') || 
-                                      (s[k] >= '0' && s[k] <= '9')     ) )
-
-					f_try = 0, f_sig = 0;
-			}
-
-			if (f_try)
-				f_res=1, f_sig=0;
-		}
-	}
-
-	return (f_res);
-}
-
-
-int	tiene_integer_2(s)
-char	*s;
-{
-	int	i,j,k,l1;
-	int	f_res,f_sig,f_try;
-
-	int	k1;
-
-	k1 = 8;
-	l1 = strlen(s);
-
-	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
-	{	
-		if (!strncmp(s+i,"integer ",k1))
-		{
-			f_try = 1;
-
-
-			if (f_try)
-				f_res=1, f_sig=0;
-		}
-	}
-
-	return (f_res);
-}
-
-
-
-int	tiene_logical_2(s)
-char	*s;
-{
-	int	i,j,k,l1;
-	int	f_res,f_sig,f_try;
-
-	int	k1;
-
-	k1 = 8;
-	l1 = strlen(s);
-
-	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
-	{	
-		if (!strncmp(s+i,"logical ",k1))
-		{
-			f_try = 1;
-
-
-			if (f_try)
-				f_res=1, f_sig=0;
-		}
-	}
-
-	return (f_res);
-}
 
 
 
@@ -10793,49 +10018,6 @@ char	*s;
 			f4=0;
 
 	return (b);
-}
-
-
- 
-
-/*
- * -----------------------------------------------------------------------------------
- *
- *	trim_blanks_beg         
- *
- *	elimina blancos al final de una linea
- *
- * -----------------------------------------------------------------------------------
- */
-
-
-char	*trim_blanks_beg(s)
-char	*s;
-{
-	static	char	b[MSTR];
-	int	i;
-	int	f4;
-	int	l2;
-	int	f_sigo;
-	int	p1;
-	int	offset;
-
-
-	strcpy(b,s);
-	l2 = strlen(b);
-	offset=0;
-
-	/* blancos al principio */
-	for (i=0, p1=0, f_sigo=1; f_sigo && i<l2; i++ )
-	{	if (b[i] == ' ' || b[i] == '\t'  )
-		{	p1=i;
-			offset = 1;
-		}
-		else
-			f_sigo = 0;
-	}
-	
-	return (b+p1+offset);
 }
 
 
@@ -20657,11 +19839,6 @@ int	gp_parser()
 			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+1,"debug",5) )
 			{	
 				gp_debug = *desde_igual( gp_fp(GP_GET,i,(char **)0)) - '0';
-			}
-
-			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+1,"proceed",7) )
-			{	
-				gp_proceed = *desde_igual( gp_fp(GP_GET,i,(char **)0)) - '0';
 			}
 
 			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+1,"dato",4) )

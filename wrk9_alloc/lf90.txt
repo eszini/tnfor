@@ -1,0 +1,3 @@
+               ALLOCATE (COAL_VECTOR_MAP(-1:MaxVectorNum))
+               ALLOCATE (COAL_VECTOR_TYPE_IS_VALUE(-1:nArray), &
+                  allocate(AllArray(LowB1:UpB1))

@@ -1,0 +1,48 @@
+/*
+ *	busco_ult_u
+ *	buscar la ultima linea del bloque
+ *	que tenga un use 
+ *	en el que esta la linea en cuestion 
+ */
+
+
+int	busco_ult_u(pf,uf,spt,v)
+int	pf,uf,spt,*v;
+{
+	int	i;
+	int	f_proceso;
+	int	f_sigo;
+	int	f_res;
+	char	b1[MAXB];
+
+
+	*v = 0;
+
+	for (i=spt, f_res=0, f_sigo=1 ; f_sigo && i<=uf; i++)
+	{
+
+		strcpy(b1, pasar_a_minusc( (*fnp[i]).l) );
+
+		f_proceso = 1;
+		if (linea_vacia(b1) || es_linea_comentario(b1))
+			f_proceso = 0;
+
+		if (f_proceso)
+		{
+			if (tiene_use(b1) )
+			{
+printf ("PPP8 detecto use: %d |%s| \n",lne(i),b1);
+#if 0
+				f_sigo = 0;
+#endif
+				f_res  = 1;
+				*v     = i;
+			}
+		}
+	}
+
+	return (f_res);
+}
+		
+	
+
