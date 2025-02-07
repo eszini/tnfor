@@ -1,1 +1,0 @@
-( 6) sl sv startovl.f90                   |      allocate (data_record(min(help,out_rec_length-int(4,4))))|

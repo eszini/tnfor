@@ -1,3 +1,0 @@
-( 6) sl sv COAL_VECTOR_OBJ.F90            |allocate (coal_vector_map(-1:maxvectornum))|
-(10) ml mv COAL_VECTOR_OBJ.F90            |allocate (coal_vector_type_is_value(-1:narray),coal_vector_values(31,-1:narray))|
-( 6) sl sv Coal_Model_Modules.f90         |allocate(allarray(lowb1:upb1))|

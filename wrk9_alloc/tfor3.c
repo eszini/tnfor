@@ -6970,7 +6970,6 @@ int	ex9_p1()
 	int	pf,uf,nf;
 	int	tipo_ext;
 	int	add_lines;		/* cant de lineas que hay que sumar al fuente al corregir un allocate */
-	int	num_alloc;		/* numero de alloc encontrado en src */
 
 	char	m0[MSTR];
 	char	m1[MSTR];
@@ -7007,10 +7006,10 @@ int	ex9_p1()
 	sq_q_alloc_f90_slc_mav = 0;		/* cant tot de lineas sin cont con allocate multi var */
 	sq_q_alloc_f90_clc_mav = 0;		/* cant tot de lineas con cont con allocate multi var */
 
-
 	/* para todas las lineas */
 	for (i=0; i < qf_src; i++)
 	{
+
 
 		/* me fijo que archivo es */
 		strcpy(prog_name,f_name(i));
@@ -7036,9 +7035,8 @@ int	ex9_p1()
 		if (strcmp(base_name,prog_name))
 		{	strcpy(base_name,prog_name);
 			nf = 0;
-			num_alloc = 0;
 
-printf ("Trabajo con ... (%s) |%s|\n",exte_name,prog_name);
+			printf ("Trabajo con ... (%s) |%s|\n",exte_name,prog_name);
 		}
 
 
@@ -7062,7 +7060,6 @@ printf ("Trabajo con ... (%s) |%s|\n",exte_name,prog_name);
 
 			if (tiene_allocate(b1))
 			{
-				num_alloc++;
 				sq_q_alloc++;
 
 				c2++;
@@ -7246,9 +7243,10 @@ printf ("Trabajo con ... (%s) |%s|\n",exte_name,prog_name);
 								{
 									flag_alloc_ok = 0;
 
-									grabar_mapa(1,9,prog_name,0,0,0);
+									printf ("HHH1 proceed (t06) SRC: |%s| \n",prog_name);
+									grabar_mapa(1,6,prog_name);
 
-									chg_alloc_t06(n_f,i,&add_lines,num_alloc);
+									chg_alloc_t06(n_f,i,&add_lines);
 
 									/* atenti:
 									 * chg_alloc_t06 debe procesar 1 solo allocate por vez...
@@ -7278,7 +7276,7 @@ printf ("Trabajo con ... (%s) |%s|\n",exte_name,prog_name);
 
 #if 1
 									/* agrego el check_alloc */
-									chg_alloc_g01(n_f,i,&add_lines,num_alloc);
+									chg_alloc_g01(n_f,i,&add_lines);
 
 									/* actualizo variables de contexto */
 									if (flag_alloc_ok)
@@ -7441,59 +7439,15 @@ printf ("Trabajo con ... (%s) |%s|\n",exte_name,prog_name);
 }
 
 
-int	grabar_mapa(n_men,tipo,s1,n1,pf,uf)
+int	grabar_mapa(n_men,tipo,prog_name)
 int	n_men;
-int	tipo;
-char	*s1;
-int	n1,pf,uf;
+char	*tipo;
+char	*prog_name;
 {
-	char	m0[MSTR];
-
-
 	if (n_men == 1)
-	{
-		fprintf (hfou5,"Type (%2d)          src:                       |%s|\n",tipo,s1);
-	}
-
-	if (n_men == 6)
-	{
-		fprintf (hfou5,"Allocate number       :   %3d                 | \n",n1);
-	}
-
+		fprintf (hfou5,"%s  src:                           |%s|\n","(T06)",prog_name);
 	if (n_men == 2)
-	{	
-		strcpy(m0,trim_blanks_beg(s1));
-		fprintf (hfou5,"alloc sentence in line: %5d (%5d - %5d) |%s|\n",n1,pf,uf,m0);
-	}
-
-	if (n_men == 3)
-	{
-		strcpy(m0,trim_blanks_beg(s1));
-		fprintf (hfou5,"block starts at line  : %5d                 |%s|\n",pf,m0);
-	}
-	
-	if (n_men == 4)
-	{
-		strcpy(m0,trim_blanks_beg(s1));
-		fprintf (hfou5,"block ends   at line  : %5d                 |%s|\n",uf,m0);
-	}
-
-	if (n_men == 5)
-	{
-		strcpy(m0,trim_blanks_beg(s1));
-		fprintf (hfou5,"line to insert use all: %5d (%5d - %5d) |%s|\n",n1,pf,uf,m0);
-	}
-
-	if (n_men == 7)
-	{
-		strcpy(m0,trim_blanks_beg(s1));
-		fprintf (hfou5,"line to insert check  : %5d (%5d - %5d) |%s|\n",n1,pf,uf,m0);
-	}
-
-#if 0
-
-#endif
-		
+		fprintf (hfou5,"%s  src:                           |%s|\n","(T08)",prog_name);
 
 }
 
@@ -7517,16 +7471,15 @@ int	n1,pf,uf;
  *
  */
 
-int	chg_alloc_t06(num_f,nf_alloc,add_lines,num_alloc)
+int	chg_alloc_t06(num_f,nf_alloc,add_lines)
 int	num_f;
 int	nf_alloc;
 int	*add_lines;
-int	num_alloc;
 {
 
 	int 	h,i,j,k,k1,k2;
 	int	l1,l2;
-	int	c1,c2,c3,c4,c5;
+	int	c1,c2,c3,c4;
 	int	f1,f2,f3,f4,f5;
 	int	f_proceso;
 	int	f_stat;
@@ -7542,7 +7495,6 @@ int	num_alloc;
 	char	b3[MAXB];
 	char	b4[MAXB];
 	char	b5[MAXB];
-	char	blanks[64];
 	int	pf,uf,nf,qf;
 	int	tipo_ext;
 
@@ -7580,6 +7532,9 @@ int	num_alloc;
 	if (!strncmp(exte_name,"f90",3))
 		tipo_ext = 2;
 
+	printf ("PPP2 Trabajo con %3d %-30.30s %s %6d %6d \n",
+		nf,prog_name,exte_name,lne(pf),lne(uf));
+
 
 	/* proceso linea i */
 	strcpy(b0,(*fnp[nf_alloc]).l );
@@ -7596,37 +7551,29 @@ int	num_alloc;
 	if (f_proceso)
 	{	
 
-
-		grabar_mapa(6,0," ",num_alloc,0,0);
-		grabar_mapa(2,0,b1,lne(nf_alloc),pf,uf);
-
+		fprintf (hfou5,"allocat en: %6d (%6d - %6d)  |%s|\n",lne(nf_alloc),pf,uf,b1);
 
 		if (!busco_pri_l(pf,uf,nf_alloc,&pri_l,&mod_type))
 			error(9001);
 
-		grabar_mapa(3,0,(*fnp[pri_l]).l,0,lne(pri_l),0);
+		fprintf (hfou5,"com bloque: %6d                    |%s|\n",lne(pri_l),(*fnp[pri_l]).l);
 
 		if (!busco_ult_l(pf,uf,nf_alloc,&ult_l,mod_type))
 			error(9002);
 
-		grabar_mapa(4,0,(*fnp[ult_l]).l,0,0,lne(ult_l));
-
+		fprintf (hfou5,"ter bloque: %6d                    |%s|\n",lne(ult_l),(*fnp[ult_l]).l);
 
 		/* busco donde colocar el use ... allocate_vars */
 		ult_u = 0;
 		busco_ult_u(pri_l,ult_l,pri_l,&ult_u);
 
-#if 0
 		fprintf (hfou5,"ult l use : %6d                    |%s|\n",lne(ult_u),(*fnp[ult_u]).l);
-#endif
 
 		/* busco primer declaracion de variables */
 		pri_d = 0;
 		busco_pri_d(pri_l,ult_l,pri_l,&pri_d);
 
-#if 0
 		fprintf (hfou5,"pri l dec : %6d                    |%s|\n",lne(pri_d),(*fnp[pri_d]).l);
-#endif
 
 		f_try = 0;
 
@@ -7639,7 +7586,6 @@ int	num_alloc;
 		if (!f_try && pri_d)
 		{
 			linea_use = pri_d;
-			grabar_mapa(5,0,(*fnp[linea_use]).l,lne(linea_use),lne(pri_l),lne(ult_l));
 			f_try = 1;
 		}
 
@@ -7649,6 +7595,8 @@ int	num_alloc;
 				fprintf (hfou6,"%6d,|%s|\n",h,(*fnp[h]).l);
 			error(9003);
 		}
+
+		fprintf (hfou5,"lin use va: %6d (%6d - %6d)  |%s|\n",linea_use,pri_l,ult_l,(*fnp[linea_use]).l );
 
 
 		/* a partir de aqui ... a hacer los cambios !! 
@@ -7681,12 +7629,7 @@ int	num_alloc;
 #endif
 			hacer_lugar(pf,qf_src-1,linea_use,2);
 
-			c5 = n_blanks_beg( (*fnp[pri_l]).l );
-			memset(blanks,0,sizeof(blanks));
-			memset(blanks,32,c5);
-
-			strcpy( (*fnp[linea_use]).l  ,blanks);
-			strcat( (*fnp[linea_use]).l  ,"use allocate_vars");
+			strcpy( (*fnp[linea_use]).l  ,"      use allocate_vars");
 			strcpy( (*fnp[linea_use+1]).l,"     ");
 			*add_lines = 2;
 		}
@@ -7697,6 +7640,7 @@ int	num_alloc;
 	}
 
 	
+	fprintf (hfou5,"---------------------------------------\n");
 }
 
 
@@ -8095,7 +8039,7 @@ char	*s;
 		}
 	}
 	
-if (gp_debug == 3)
+if (gp_debug)
 {
 printf ("RRR0 paso 1 - rimer palabra es allocate          \n");
 printf ("RRR1 s           |%s| \n",s);
@@ -8115,7 +8059,7 @@ printf ("RRR3 st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
 	}
 
 
-if (gp_debug == 3)
+if (gp_debug)
 {
 printf ("RRR0 paso 2 - si hay blancos corro la linea          \n");
 printf ("RRR1 s           |%s| \n",s);
@@ -8143,7 +8087,7 @@ printf ("RRR3 st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
 			}
 		}
 
-if (gp_debug == 3)
+if (gp_debug)
 {
 printf ("RRR0 paso 3 - el ultimo caracter salvo blanco es )           \n");
 printf ("RRR1 s           |%s| \n",s);
@@ -8171,7 +8115,7 @@ printf ("RRR6 b0[p2]      |%c| \n",b0[p2]);
 	}
 
 	
-if (gp_debug == 3)
+if (gp_debug)
 {
 printf ("RRR0 paso 4 - caracteres especificos entre ( y )          \n");
 printf ("RRR1 s           |%s| \n",s);
@@ -8235,7 +8179,7 @@ printf ("RRR6 b0[p2]      |%c| \n",b0[p2]);
 			st4 = 0;
 	}
 
-if (gp_debug == 3)
+if (gp_debug)
 {
 printf ("RRR0 paso 5 - hay comas sin estar entre    ( y )  \n");
 printf ("RRRA s           |%s| \n",s);
@@ -8253,14 +8197,14 @@ printf ("RRR6 b0[p2]      |%c| \n",b0[p2]);
 	
 			
 	
-if (gp_debug == 3)
+if (gp_debug)
 {
 printf ("RRR0 paso 5           \n");
 printf ("RRR7 f_res      |%d| \n",f_res);
 }
 
 
-if (gp_debug == 3)
+if (gp_debug)
 {
 	if (f_res == 0)
 		printf ("RR11 |%s|\n",s);
@@ -8917,6 +8861,8 @@ char	*s,mod_type;
 	k1 = 3;
 	l1 = strlen(s);
 
+printf ("PPP5 tiene_end en: |%s|\n",s);
+printf ("PPP5 mod_type    : |%d|\n",mod_type);
 
 	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1 + 1; i++)
 	{	
@@ -8925,9 +8871,14 @@ char	*s,mod_type;
 		{
 			f_try = 1;
 		
+if (gp_debug)
+{
+printf ("PPP6 k: %2d  l1: %2d  \n",i+3,l1);
+}
 
 			for (k=i+3; k<l1; k++)
-			{	
+			{	printf ("PPP7 k %2d s[k] %c %2d \n",k,s[k],s[k]);
+
 				if (s[k] != ' ' && s[k] != '\t' && s[k] != 0 )
 					f_try = 0, f_sig = 0;
 			}
@@ -8936,6 +8887,7 @@ char	*s,mod_type;
 				f_res=1, f_sig=0;
 		}
 
+#if 1
 		if (mod_type == 1)
 		{
 			f_t1 = 0;
@@ -8955,6 +8907,7 @@ char	*s,mod_type;
 			if (f_t2)
 				f_res=1, f_sig=0;
 		}
+#endif
 
 	}
 
@@ -8978,6 +8931,7 @@ char	*s;
 	k1 = 4;
 	l1 = strlen(s);
 
+printf ("PPP5 tiene_use en: |%s|\n",s);
 
 	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1 + 1; i++)
 	{	
@@ -8986,6 +8940,7 @@ char	*s;
 		{
 			f_try = 1;
 		
+printf ("PPP6 k: %2d  l1: %2d  \n",i+3,l1);
 
 			for (k=i+3; k<l1; k++)
 			{	
@@ -8995,6 +8950,9 @@ char	*s;
 					printf ("PPP7 k %2d s[k] %c %2d \n",k,s[k],s[k]);
 				}
 
+#if 0
+				if (s[k] != ' ' && s[k] != '\t' && s[k] != 0 )
+#endif
 				if (!( s[k] == ' ' || 
                                        s[k] == '_' || 
                                       (s[k] >= 'a' && s[k] <= 'z') || 
@@ -9029,6 +8987,7 @@ char	*s;
 		{
 			f_try = 1;
 
+
 			if (f_try)
 				f_res=1, f_sig=0;
 		}
@@ -9055,6 +9014,7 @@ char	*s;
 		if (!strncmp(s+i,"logical ",k1))
 		{
 			f_try = 1;
+
 
 			if (f_try)
 				f_res=1, f_sig=0;
@@ -9138,6 +9098,7 @@ char	*s;
 		{
 			f_try = 1;
 
+
 			if (f_try)
 				f_res=1, f_sig=0;
 		}
@@ -9168,6 +9129,7 @@ char	*s;
 		{
 			f_try = 1;
 
+
 			if (f_try)
 				f_res=1, f_sig=0;
 		}
@@ -9175,6 +9137,12 @@ char	*s;
 
 	return (f_res);
 }
+
+
+
+
+
+
 
 
 /*
@@ -9186,6 +9154,8 @@ char	*s;
  *
  * -----------------------------------------------------------------------------------
  */
+
+
 
 void v_pars(s, n, vn, vp) 
 char	*s;
@@ -11338,47 +11308,6 @@ char	*s;
 	}
 	
 	return (b+p1+offset);
-}
-
-
-/*
- * -----------------------------------------------------------------------------------
- *
- *	n_blanks_beg         
- *
- *	elimina blancos al final de una linea
- *
- * -----------------------------------------------------------------------------------
- */
-
-
-int	n_blanks_beg(s)
-char	*s;
-{
-	static	char	b[MSTR];
-	int	i;
-	int	f4;
-	int	l2;
-	int	f_sigo;
-	int	p1;
-	int	offset;
-
-
-	strcpy(b,s);
-	l2 = strlen(b);
-	offset=0;
-
-	/* blancos al principio */
-	for (i=0, p1=0, f_sigo=1; f_sigo && i<l2; i++ )
-	{	if (b[i] == ' ' || b[i] == '\t'  )
-		{	p1=i;
-			offset = 1;
-		}
-		else
-			f_sigo = 0;
-	}
-	
-	return (p1+offset);
 }
 
 
@@ -23175,9 +23104,6 @@ int tiene_entry(const char *linea) {
 /* end of file  */
 /* end of file  */
 
-
-
-
 /*
  * -----------------------------------------------------------------------------------
  *
@@ -23200,16 +23126,15 @@ int tiene_entry(const char *linea) {
  *
  */
 
-int	chg_alloc_g01(num_f,nf_alloc,add_lines,num_alloc)
+int	chg_alloc_g01(num_f,nf_alloc,add_lines)
 int	num_f;
 int	nf_alloc;
 int	*add_lines;
-int	num_alloc;
 {
 
 	int 	h,i,j,k,k1,k2;
 	int	l1,l2;
-	int	c1,c2,c3,c4,c5;
+	int	c1,c2,c3,c4;
 	int	f1,f2,f3,f4,f5;
 	int	f_proceso;
 	int	f_stat;
@@ -23227,13 +23152,15 @@ int	num_alloc;
 	char	b3[MAXB];
 	char	b4[MAXB];
 	char	b5[MAXB];
-	char	blanks[64];
 	int	pf,uf,nf,qf;
 	int	tipo_ext;
 
 	int	pri_l,ult_l;
 	int	ult_u,pri_d;	/* ultimo use, primera declaracion */
 	int	mod_type;	/* 0 no se, 1 subroutine 2 function */
+#if 0
+	int	linea_use;	/* linea en la que hay que poner el use */
+#endif
 	int	linea_check;	/* linea en la que hay que poner el check_alloc */
 
 	char	m0[MSTR];
@@ -23265,6 +23192,9 @@ int	num_alloc;
 	if (!strncmp(exte_name,"f90",3))
 		tipo_ext = 2;
 
+	printf ("PPP2 Trabajo con %3d %-30.30s %s %6d %6d \n",
+		nf,prog_name,exte_name,lne(pf),lne(uf));
+
 
 	/* proceso linea i */
 	strcpy(b0,(*fnp[nf_alloc]).l );
@@ -23281,24 +23211,65 @@ int	num_alloc;
 	if (f_proceso)
 	{	
 
-#if 0
+		printf ("MMM3 %06d |%s|\n",i,b1);
 		fprintf (hfou5,"allocat en: %6d (%6d - %6d)  |%s|\n",lne(nf_alloc),pf,uf,b1);
-#endif
 
 		if (!busco_pri_l(pf,uf,nf_alloc,&pri_l,&mod_type))
 			error(9001);
 
-#if 0
+		printf ("HHH4 comienza bloque:  %06d (%d) |%s! \n",
+			lne(pri_l),mod_type,(*fnp[pri_l]).l );
 		fprintf (hfou5,"com bloque: %6d                    |%s|\n",lne(pri_l),(*fnp[pri_l]).l);
-#endif
 
 		if (!busco_ult_l(pf,uf,nf_alloc,&ult_l,mod_type))
 			error(9002);
 
-#if 0
+		printf ("HHH4 term bloque: %6d            |%s! \n",
+			lne(ult_l),(*fnp[ult_l]).l );
 		fprintf (hfou5,"ter bloque: %6d                    |%s|\n",lne(ult_l),(*fnp[ult_l]).l);
-#endif
 
+#if 0
+		/* busco donde colocar el use ... allocate_vars */
+		ult_u = 0;
+		busco_ult_u(pri_l,ult_l,pri_l,&ult_u);
+
+		printf ("PPP4 ultim use detec:  %6d |%s! \n",
+			lne(ult_u),(*fnp[ult_u]).l );
+		fprintf (hfou5,"ult l use : %6d                    |%s|\n",lne(ult_u),(*fnp[ult_u]).l);
+
+		/* busco primer declaracion de variables */
+		pri_d = 0;
+		busco_pri_d(pri_l,ult_l,pri_l,&pri_d);
+
+		printf ("PPP4 prim declar det:  %6d |%s! \n",
+			lne(pri_d),(*fnp[pri_d]).l );
+		fprintf (hfou5,"pri l dec : %6d                    |%s|\n",lne(pri_d),(*fnp[pri_d]).l);
+
+		f_try = 0;
+
+		if (!f_try && ult_u)
+		{
+			linea_use = ult_u+1;
+			f_try = 1;
+		}
+
+		if (!f_try && pri_d)
+		{
+			linea_use = pri_d;
+			f_try = 1;
+		}
+
+		if (!f_try)
+		{	
+			for (h=pf; h<=uf; h++)
+				fprintf (hfou6,"%6d,|%s|\n",h,(*fnp[h]).l);
+			error(9003);
+		}
+
+		printf ("PPP4 linea_use va en %d (%6d-%6d) \n",linea_use,pri_l,ult_l );
+		fprintf (hfou5,"lin use va: %6d (%6d - %6d)  |%s|\n",linea_use,pri_l,ult_l,(*fnp[linea_use]).l );
+
+#endif
 
 		/* a partir de aqui ... a hacer los cambios !! 
 		 *
@@ -23322,27 +23293,19 @@ int	num_alloc;
 		linea_check = nf_alloc + 1;
 		*add_lines = 0;
 
-
-		grabar_mapa(7,0,(*fnp[linea_check]).l,lne(linea_check),lne(pri_l),lne(ult_l));
-
 #if 0
 		/* esta es la que va !! */
 		hacer_lugar(pf,uf,linea_check,2);
 #endif
 		hacer_lugar(pf,qf_src-1,linea_check,2);
 
-		c5 = n_blanks_beg( (*fnp[nf_alloc]).l );
-		memset(blanks,0,sizeof(blanks));
-		memset(blanks,32,c5);
-printf ("fnp:    |%s|\n", (*fnp[nf_alloc]).l );
-printf ("c5 :    %2d\n",c5);
-	
+printf ("nf_alloc .. (%d) |%s| \n",nf_alloc,(*fnp[nf_alloc]).l );
+
 		strcpy(var_name,extract_var_name( (*fnp[nf_alloc]).l ) );
 		strcpy(src_name,b_name(nf));
 		memset(b5,0,sizeof(b5));
-		sprintf (b5,"(\"%s:%03d\",\"%s\",STV_ER)",src_name,num_alloc,var_name);
-		strcpy( (*fnp[linea_check]).l  ,blanks);
-		strcat( (*fnp[linea_check]).l  ,"call check_alloc");
+		sprintf (b5,"(\"%s:%03d\",\"%s\",STV_ER)",src_name,1,var_name);
+		strcpy( (*fnp[linea_check]).l  ,"      call check_alloc");
 		strcat( (*fnp[linea_check]).l  ,b5);
 
 		strcpy( (*fnp[linea_check+1]).l,"     ");
@@ -23351,8 +23314,10 @@ printf ("c5 :    %2d\n",c5);
 	  	 * esto va a ser un lio cuando tenga que meter 
 		 * lineas compuestas ! 
 		 */
-
+#if 1
 		agregar_stv (nf_alloc);
+#endif
+
 
 		*add_lines = 2;
 		flag_alloc_ok = 1;
@@ -23360,12 +23325,13 @@ printf ("c5 :    %2d\n",c5);
 	}
 
 	
-	fprintf (hfou5,"-----------------------------------------------\n");
+	fprintf (hfou5,"---------------------------------------\n");
 }
 
 
 
 
+#if 1
 char	*extract_var_name(s)
 char	*s;
 {
@@ -23377,12 +23343,15 @@ char	*s;
 	int	f_sigo;
 	int	f_open_par;
 	int	f_opt;
+
 	int	caso;
 	int	p1,p2,p3;
 	int	i,j,k;
 	int	l1,l2;
 	int	c1,c2,c3;
+
 	int	f1;
+
 	int	st1,st2,st3,st4;
 
 	/* copio string para trabajar local */
@@ -23428,7 +23397,7 @@ char	*s;
 		}
 	}
 	
-if (gp_debug == 4)
+if (gp_debug)
 {
 printf ("RRR0 paso 1 - rimer palabra es allocate          \n");
 printf ("RRR1 s           |%s| \n",s);
@@ -23451,7 +23420,7 @@ printf ("RRR3 st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
 	}
 
 
-if (gp_debug == 4)
+if (gp_debug)
 {
 printf ("RRR0 paso 2 - si hay blancos corro la linea          \n");
 printf ("RRR1 s           |%s| \n",s);
@@ -23479,7 +23448,7 @@ printf ("RRR3 st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
 			}
 		}
 
-if (gp_debug == 4)
+if (gp_debug)
 {
 printf ("RRR0 paso 3 - el ultimo caracter salvo blanco es )           \n");
 printf ("RRR1 s           |%s| \n",s);
@@ -23507,7 +23476,7 @@ printf ("RRR6 b0[p2]      |%c| \n",b0[p2]);
 	}
 
 	
-if (gp_debug == 4)
+if (gp_debug)
 {
 printf ("RRR0 paso 4 - caracteres especificos entre ( y )          \n");
 printf ("RRR1 s           |%s| \n",s);
@@ -23571,7 +23540,7 @@ printf ("RRR6 b0[p2]      |%c| \n",b0[p2]);
 			st4 = 0;
 	}
 
-if (gp_debug == 4)
+if (gp_debug)
 {
 printf ("RRR0 paso 5 - hay comas sin estar entre    ( y )  \n");
 printf ("RRRA s           |%s| \n",s);
@@ -23595,11 +23564,8 @@ printf ("RRR6 b0[p2]      |%c| \n",b0[p2]);
 	
 	if (f_res = 1 && caso == 1)
 	{
-if (gp_debug == 4)
-{
 printf ("ext_var_name p1: %d %c p2: %d %c\n",p1,b0[p1],p2,b0[p2]);
 printf ("ext_var_name |%s| \n",b0);
-}
 
 		memset(b2,0,sizeof(b2));
 
@@ -23614,16 +23580,13 @@ printf ("ext_var_name |%s| \n",b0);
 			}
 			else
 				f_sigo=0, f_res=1;
-if (gp_debug == 4)
-{
 printf ("ext_var_name p1 p2 p3, %2d %2d %2d i %2d |%s| \n",p1,p2,p3,i,b1);
-}
 		}
 	}
 	else
 		error(9004);		
 	
-if (gp_debug == 4)
+if (gp_debug)
 {
 printf ("RRR0 paso 5           \n");
 printf ("RRR7 f_res %d var: |%s| \n",f_res,b0);
@@ -23634,8 +23597,26 @@ printf ("RRR7 f_res %d var: |%s| \n",f_res,b0);
 
 }
 
+#endif
+
+#if 0
+
+int	agregar_stv(nf_alloc)
+int	nf_alloc;
+{
+	char	b0[MSTR];
+
+	strcpy(b0,(*fnp[nf_alloc]).l);
+
+	printf ("agregar_stv:  |%s| \n",b0);
+
+}
+#endif
 
 
+
+
+#if 1
 int	agregar_stv(nf_alloc)
 int	nf_alloc;
 {
@@ -23708,7 +23689,7 @@ int	nf_alloc;
 		}
 	}
 	
-if (gp_debug == 5)
+if (gp_debug)
 {
 printf ("RRR0 paso 1 - rimer palabra es allocate          \n");
 printf ("RRR1 b0          |%s| \n",b0);
@@ -23731,7 +23712,7 @@ printf ("RRR3 st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
 	}
 
 
-if (gp_debug == 5)
+if (gp_debug)
 {
 printf ("RRR0 paso 2 - si hay blancos corro la linea          \n");
 printf ("RRR1 b0          |%s| \n",b0);
@@ -23759,7 +23740,7 @@ printf ("RRR3 st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
 			}
 		}
 
-if (gp_debug == 5)
+if (gp_debug)
 {
 printf ("RRR0 paso 3 - el ultimo caracter salvo blanco es )           \n");
 printf ("RRR1 b0          |%s| \n",b0);
@@ -23787,7 +23768,7 @@ printf ("RRR6 b0[p2]      |%c| \n",b0[p2]);
 	}
 
 	
-if (gp_debug == 5)
+if (gp_debug)
 {
 printf ("RRR0 paso 4 - caracteres especificos entre ( y )          \n");
 printf ("RRR1 b0          |%s| \n",b0);
@@ -23849,7 +23830,7 @@ printf ("RRR6 b0[p2]      |%c| \n",b0[p2]);
 			st4 = 0;
 	}
 
-if (gp_debug == 5)
+if (gp_debug)
 {
 printf ("RRR0 paso 5 - hay comas sin estar entre    ( y )  \n");
 printf ("RRRA b0          |%s| \n",b0);
@@ -23875,12 +23856,9 @@ printf ("RRR6 b0[p2]      |%c| \n",b0[p2]);
 	
 	if (f_res = 1 && caso == 1)
 	{
-if (gp_debug == 5)
-{
 printf ("agregar_stv   p1: %d %c p2: %d %c\n",p1,b0[p1],p2,b0[p2]);
 printf ("agregar_stv |%s| \n",b0);
 printf ("agregar_stv |%s| \n",b1);
-}
 
 		
 		l4 = strlen(b0);
@@ -23893,15 +23871,10 @@ printf ("agregar_stv |%s| \n",b1);
 		strcat(b5,cp_str);
 		strcat(b5,b1+p2);
 
-if (gp_debug == 5)
-{
 printf ("ext_var_name p1 p2 p3, %2d %2d %2d i %2d  \n",p1,p2,p3,i);
 printf ("agregar_stv b0: |%s| \n",b0);
 printf ("agregar_stv b1: |%s| \n",b1);
 printf ("agregar_stv b5: |%s| \n",b5);
-}
-
-		strcpy( (*fnp[nf_alloc]).l, b5);
 
 #if 0
 		/* en p1,p2 estan los ( ) */
@@ -23922,7 +23895,7 @@ printf ("agregar_stv b5: |%s| \n",b5);
 		error(9004);		
 	
 
-if (gp_debug == 5)
+if (gp_debug)
 {
 printf ("RRR0 paso 5           \n");
 printf ("RRR7 f_res %d var: |%s| \n",f_res,b0);
@@ -23933,11 +23906,4 @@ printf ("RRR7 f_res %d var: |%s| \n",f_res,b0);
 
 }
 
-
-
-
-
-
-/* end of file  */
-/* end of file  */
-/* end of file  */
+#endif
