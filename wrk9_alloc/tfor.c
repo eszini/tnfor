@@ -358,6 +358,18 @@
 
 
 /*
+ *	gp_debug
+ *
+ *	3	tiene_multiple_vars	chequea si sente allac tiene mas de una variable 
+ *	4	extraer_var_names	extra nombre de vars de sent allocate	
+ *	5	agregar_stv		agrega stat=stv en sentencia allocate 
+ *	6	hacer_lugar		corre todo el vector de lineas para hacer lugar 
+ *	7	e_name			extrae extension de file - src
+ *	8	tiene_use		chequea si hay un verdadero use algo en sent
+ */
+
+
+/*
  *	//programa//
  */
 
@@ -5270,7 +5282,7 @@ int	nl;
 		pf =  (*tb[j]).pf;
 		uf =  (*tb[j]).uf;
 
-if (gp_debug)
+if (gp_debug == 7)
 {
 printf ("WWW4:  nl |%d| \n",nl);
 printf ("WWW4:  j  |%d| \n",j);
@@ -5284,7 +5296,7 @@ printf ("WWW4:  n  |%s| \n", (*tb[j]).n );
 		{
 			strcpy (b1, (*tb[j]).n );
 			f1 = 0;
-if (gp_debug)
+if (gp_debug == 7)
 {
 printf ("WWW4:  if |%s| \n", b1 );
 }
@@ -5293,7 +5305,7 @@ printf ("WWW4:  if |%s| \n", b1 );
 
 	strcpy (b3,pasar_a_minusc(b1));
 
-if (gp_debug)
+if (gp_debug == 7)
 {
 printf ("WWW5: b1 |%s| \n",b1);
 printf ("WWW6: b3 |%s| \n",b3);
@@ -5325,7 +5337,7 @@ printf ("WWW6: b3 |%s| \n",b3);
 	}
 
 		
-if (gp_debug)
+if (gp_debug == 7)
 {
 printf ("WWW7: b2 |%s| \n",b2);
 }
@@ -7276,6 +7288,7 @@ printf ("Trabajo con ... (%s) |%s|\n",exte_name,prog_name);
 										flag_alloc_ok = 0;
 									}
 
+/* chg_alloc_g01 */
 #if 1
 									/* agrego el check_alloc */
 									chg_alloc_g01(n_f,i,&add_lines,num_alloc);
@@ -7297,6 +7310,7 @@ printf ("Trabajo con ... (%s) |%s|\n",exte_name,prog_name);
 										flag_alloc_ok = 0;
 									}
 #endif
+/* chg_alloc_g01 */
 
 
 	
@@ -7550,6 +7564,7 @@ int	num_alloc;
 	int	ult_u,pri_d;	/* ultimo use, primera declaracion */
 	int	mod_type;	/* 0 no se, 1 subroutine 2 function */
 	int	linea_use;	/* linea en la que hay que poner el use */
+	int	agrego_lines;	/* lineas que se agregan al final x hacer_lugar */
 
 	char	m0[MSTR];
 
@@ -7665,11 +7680,12 @@ int	num_alloc;
 
 
 		/*
-		 * La linea para ponder use allocate_vars es linea_use
+		 * La linea para poner use allocate_vars es linea_use
 		 * correr todo para abajo una linea desde ahi ...
 		 *
 		 */
  
+		agrego_lines = 3;
 		*add_lines = 0;
 
 
@@ -7679,7 +7695,7 @@ int	num_alloc;
 			/* esta es la que va */
 			hacer_lugar(pf,uf,linea_use,2);
 #endif
-			hacer_lugar(pf,qf_src-1,linea_use,2);
+			hacer_lugar(pf,qf_src-1,linea_use,agrego_lines);
 
 			c5 = n_blanks_beg( (*fnp[pri_l]).l );
 			memset(blanks,0,sizeof(blanks));
@@ -7687,8 +7703,12 @@ int	num_alloc;
 
 			strcpy( (*fnp[linea_use]).l  ,blanks);
 			strcat( (*fnp[linea_use]).l  ,"use allocate_vars");
-			strcpy( (*fnp[linea_use+1]).l,"     ");
-			*add_lines = 2;
+
+			strcpy( (*fnp[linea_use+1]).l  ,blanks);
+			strcat( (*fnp[linea_use+1]).l  ,"use miscmod");
+
+			strcpy( (*fnp[linea_use+2]).l,"     ");
+			*add_lines = agrego_lines;
 		}
 
 
@@ -7700,9 +7720,18 @@ int	num_alloc;
 }
 
 
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	hacer_lugar
+ *	mueve lineas de vector de lineas fnp para hacer lugar
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
 
 /*
- *	correr todas las lineas en el vector n lugares
+ *	correr todas las lineas en el vector fnp n lugares
  *	hay que agregar lineas al final 
  */
 
@@ -7716,12 +7745,24 @@ int	qlin;
 	int	i,j,k;
 	int	new_uf;
 
+	char	z[MAXV];
+	sprintf (z,"hacer_lugar");
+
 	new_uf = uf + qlin;
 
+if (gp_debug == 6)
+{
+printf ("%-20.20s: pf %d uf %d linea %d q_lin %d new_uf %d   \n",z,pf,uf,linea,qlin,new_uf);
+}
 
 	for (i=1; i<=qlin; i++)
 	{
 		k = uf+i;
+
+if (gp_debug == 6)
+{
+printf ("%-20.20s: agrego linea al final k %d   \n",z,k);
+}
 
 
 		/* agrego lineas al final */
@@ -7735,12 +7776,22 @@ int	qlin;
 		(*fnp[k]).f3 = 0;
 	}
 
+if (gp_debug == 6)
+{
+printf ("%-20.20s: corro lin desde %d a %d tot %d lin   \n",z,new_uf,linea+qlin,new_uf - (linea+qlin)  +1  );
+
+}
 
 	for (j=new_uf; j >= linea+qlin; j-- )
 	{
 		memcpy ( fnp[j],fnp[j-qlin], sizeof (node) );
 	}
 
+if (gp_debug == 6)
+{
+printf ("%-20.20s: vacio lin desde %d a %d tot %d lin   \n",z,linea,linea+qlin-1, linea+qlin-1 -linea + 1  );
+
+}
 	for (i=linea; i< linea+qlin; i++)
 	{
 
@@ -7751,6 +7802,15 @@ int	qlin;
 
 		strcpy( (*fnp[i]).l,"    ");
 	}
+
+if (gp_debug == 6)
+{
+printf ("%-20.20s: listado de lineas %d a %d   \n",z,pf,new_uf );
+for (i=pf; i<= new_uf; i++)
+	printf ("%-20.20s(%3d)|%s|\n",z,i,(*fnp[i]).l);
+printf ("%-20.20s: salgo ...   \n",z );
+}
+
 }
 
 
@@ -8990,7 +9050,7 @@ char	*s;
 			for (k=i+3; k<l1; k++)
 			{	
 
-				if (gp_debug)
+				if (gp_debug == 8)
 				{
 					printf ("PPP7 k %2d s[k] %c %2d \n",k,s[k],s[k]);
 				}
@@ -23235,6 +23295,7 @@ int	num_alloc;
 	int	ult_u,pri_d;	/* ultimo use, primera declaracion */
 	int	mod_type;	/* 0 no se, 1 subroutine 2 function */
 	int	linea_check;	/* linea en la que hay que poner el check_alloc */
+	int	agrego_lines;	/* lineas a agregar al final x hacer_lugar */
 
 	char	m0[MSTR];
 
@@ -23320,6 +23381,7 @@ int	num_alloc;
 		 */
 
 		linea_check = nf_alloc + 1;
+		agrego_lines=2;
 		*add_lines = 0;
 
 
@@ -23329,7 +23391,7 @@ int	num_alloc;
 		/* esta es la que va !! */
 		hacer_lugar(pf,uf,linea_check,2);
 #endif
-		hacer_lugar(pf,qf_src-1,linea_check,2);
+		hacer_lugar(pf,qf_src-1,linea_check,agrego_lines);
 
 		c5 = n_blanks_beg( (*fnp[nf_alloc]).l );
 		memset(blanks,0,sizeof(blanks));
@@ -23354,7 +23416,7 @@ printf ("c5 :    %2d\n",c5);
 
 		agregar_stv (nf_alloc);
 
-		*add_lines = 2;
+		*add_lines = agrego_lines;
 		flag_alloc_ok = 1;
 
 	}
