@@ -1,0 +1,53 @@
+								if (gp_proceed == 13 )
+								{
+									flag_alloc_ok = 0;
+									grabar_mapa(1,13,prog_name,0,0,0);
+									chg_alloc_t06(n_f,i,&add_lines,num_alloc);
+
+									/* atenti:
+									 * chg_alloc_t06 debe procesar 1 solo allocate por vez...
+									 * si lo proceso efectivamente
+									 * aumenta la cantidad de lineas del fuente ...
+									 * n_f es el numbero de file dentro de tb
+									 * i   es la fila que estamos procesando
+									 */
+
+									/* actualizo variables de contexto */
+									if (flag_alloc_ok)
+									{
+										i+= add_lines;
+										for (h=0; h<qf_ff; h++)
+										{	if (h)
+												(*tb[h]).pf += add_lines;
+											(*tb[h]).uf += add_lines;
+										}
+
+										uf = (*tb[n_f]).uf;
+										qf_src += add_lines;
+										flag_alloc_ok = 0;
+									}
+
+/* chg_alloc_g02 */
+#if 1
+									/* agrego el check_alloc */
+									chg_alloc_g02(n_f,i,&add_lines,num_alloc);
+
+									/* actualizo variables de contexto */
+									if (flag_alloc_ok)
+									{
+										i+= add_lines;
+										for (h=0; h<qf_ff; h++)
+										{	if (h)
+												(*tb[h]).pf += add_lines;
+											(*tb[h]).uf += add_lines;
+										}
+										uf = (*tb[n_f]).uf;
+										qf_src += add_lines;
+										flag_alloc_ok = 0;
+									}
+#endif
+/* chg_alloc_g02 */
+
+								}
+
+

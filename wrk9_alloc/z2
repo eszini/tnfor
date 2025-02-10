@@ -1,0 +1,298 @@
+int	agregar_stv(nf_alloc)
+int	nf_alloc;
+{
+	char	b0[MSTR];
+	char	b1[MSTR];
+	char	b5[MSTR];
+	char	b2[MAXV];
+
+	char	cp_str[16];
+
+	int	f_res;
+	int	f_sigo;
+	int	f_open_par;
+	int	f_opt;
+
+	int	caso;
+	int	p1,p2,p3;
+	int	i,j,k;
+	int	l1,l2,l3,l4;
+	int	c1,c2,c3;
+
+	int	f1;
+
+	int	st1,st2,st3,st4;
+
+	/* copio string para trabajar local */
+	strcpy(b0,pasar_a_minusc( (*fnp[nf_alloc]).l ));
+	strcpy(b1, (*fnp[nf_alloc]).l );
+
+	l2 = strlen(b0);
+
+
+	strcpy(cp_str,",stat=stv_er");
+	l3 = strlen(cp_str);
+
+	/* recorto si hay comentarios al final de la linea
+	 * hay un solo caso con allocate  ... !real *4! .... 
+	 */
+	for (i=l2-1, f_sigo=1; f_sigo && i; i--)
+	{	if (b0[i] == '!' && b0[i-1] != '4')
+			f_sigo = 0, b0[i] = 0;
+	}
+
+	/* largo definitivo de la sentencia */
+	l2 = strlen(b0);
+	
+
+	f_res = 0;
+	p1    = 0;
+	p2    = l2 -1;
+
+	st1 = 0;
+	st2 = 0;
+	st3 = 0;
+
+		
+	/* la primer palabra tiene que ser allocate */
+	st1 = 0;
+	for (i=0, f_sigo=1 ; f_sigo && i<=p2; i++)
+	{	if (b0[i] == ' ' || b0[i] == '\t')
+			p1++;
+		else
+		{	
+			if (!strncmp(b0+i,"allocate",8))
+			{
+				f_sigo = 0;
+				st1 = 1;
+				p1 = i+8;
+			}
+		}
+	}
+	
+if (gp_debug == 5)
+{
+printf ("RRR0 paso 1 - rimer palabra es allocate          \n");
+printf ("RRR1 b0          |%s| \n",b0);
+printf ("RRR2 b1          |%s| \n",b1);
+printf ("RRR3 st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
+}
+
+
+	/* puede haber blancos entre allocate y ( ... los quito */
+	while (b0[p1] == ' ')
+	{
+		l2 = strlen(b0)-1;
+		for (k=p1; k<l2; k++)
+		{	b0[k] = b0[k+1];
+			b1[k] = b1[k+1];
+		}
+		b0[l2]=0;
+		b1[l2]=0;
+		p2--;
+	}
+
+
+if (gp_debug == 5)
+{
+printf ("RRR0 paso 2 - si hay blancos corro la linea          \n");
+printf ("RRR1 b0          |%s| \n",b0);
+printf ("RRR2 b1          |%s| \n",b1);
+printf ("RRR3 st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
+}
+
+	/* el ultimo caracter salvo blancos, es un parentesis que cierra */
+	st2 = 0;
+	l2 = strlen(b0);
+	for (i=l2-1, f_sigo=1; f_sigo && i; i-- )
+		if (b0[i] == ' ')
+			p2--;
+		else
+		{
+			if (b0[i] == ')')
+			{
+				f_sigo = 0;
+				st2 = 1;
+				p2  = i;
+			}
+			else
+			{
+				f_sigo = 0;
+			}
+		}
+
+if (gp_debug == 5)
+{
+printf ("RRR0 paso 3 - el ultimo caracter salvo blanco es )           \n");
+printf ("RRR1 b0          |%s| \n",b0);
+printf ("RRR2 b1          |%s| \n",b1);
+printf ("RRR3 st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
+printf ("RRR4 p1 p2       |%2d,%2d|  \n",p1,p2);
+printf ("RRR5 b0[p1]      |%c| \n",b0[p1]);
+printf ("RRR6 b0[p2]      |%c| \n",b0[p2]);
+}
+
+
+	/* caracteres especificos de allocate entre ( y ) */
+	st3 = 1;
+	for (i=p1; i<=p2; i++)
+	{
+		if (!((b0[i] >= 'a' && b0[i] <= 'z') || 
+                      (b0[i] >= '0' && b0[i] <= '9') || 
+		      b0[i] == '=' ||						/* por lineas con el bendito stat= */
+                      b0[i] == ' ' || b0[i] == ':' || b0[i] == ',' || 
+                      b0[i] == '-' || b0[i] == '(' || b0[i] == ')' || 
+	              b0[i] == '_' || b0[i] == '*' || b0[i] == '+'    )  )
+		{
+			st3 = 0;
+		}
+	}
+
+	
+if (gp_debug == 5)
+{
+printf ("RRR0 paso 4 - caracteres especificos entre ( y )          \n");
+printf ("RRR1 b0          |%s| \n",b0);
+printf ("RRR9 b1          |%s| \n",b1);
+printf ("RRR9 st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
+printf ("RRR4 p1 p2       |%2d,%2d|  \n",p1,p2);
+printf ("RRR5 b0[p1]      |%c| \n",b0[p1]);
+printf ("RRR6 b0[p2]      |%c| \n",b0[p2]);
+}
+
+	f_sigo = 1;
+	c2  = 0;
+	c3  = 0;
+	st4 = 0;
+	i   = p1;
+
+	while (f_sigo)
+	{
+		f_opt = 1;
+
+		if (f_opt && c2 == 0 && b0[i] == '(' )
+		{
+			c2 = 1;
+			f_opt = 0;
+		}
+
+		if (f_opt && c2 >= 1 && b0[i] == '(' )
+		{
+			c2++;
+			f_opt = 0;
+		}
+
+		if (f_opt && c2 > 1 && b0[i] == ')' )
+		{
+			c2--;
+			f_opt = 0;
+		}
+
+		if (f_opt && c2 == 1 && b0[i] == ',')
+		{
+			c3++;
+			f_opt = 0;
+		}
+ 
+		i++;
+
+		if (i> p2)
+		{
+			f_sigo = 0;
+		}
+
+	}
+
+	if (c3)
+	{
+		st4 = 1;
+		
+		if (tiene_stat(b0) && c3 == 1 )
+			st4 = 0;
+	}
+
+if (gp_debug == 5)
+{
+printf ("RRR0 paso 5 - hay comas sin estar entre    ( y )  \n");
+printf ("RRRA b0          |%s| \n",b0);
+printf ("RRR2 b1          |%s| \n",b1);
+printf ("RRRA st1 st2 st3 |%d,%d,%d,%d| \n",st1,st2,st3,st4);
+printf ("RRR4 p1 p2       |%2d,%2d|  \n",p1,p2);
+printf ("RRR5 b0[p1]      |%c| \n",b0[p1]);
+printf ("RRR6 b0[p2]      |%c| \n",b0[p2]);
+}
+
+
+	if (st1 && st2 && st3 && st4)
+		f_res = 1;
+
+	/*
+	 * ver despues como manejar los diferentes casos !!
+	 * caso 1 - allocate en una linea, con una sola variable 
+	 *
+	 * STAT=STV_ER
+	 */
+ 	
+	caso = 1;
+	
+	if (f_res = 1 && caso == 1)
+	{
+if (gp_debug == 5)
+{
+printf ("agregar_stv   p1: %d %c p2: %d %c\n",p1,b0[p1],p2,b0[p2]);
+printf ("agregar_stv |%s| \n",b0);
+printf ("agregar_stv |%s| \n",b1);
+}
+
+		
+		l4 = strlen(b0);
+		memset(b2,0,sizeof(b2));
+		memset(b5,0,sizeof(b5));
+
+
+		strcpy(b5,b1);
+		b5[p2]=0;
+		strcat(b5,cp_str);
+		strcat(b5,b1+p2);
+
+if (gp_debug == 5)
+{
+printf ("ext_var_name p1 p2 p3, %2d %2d %2d i %2d  \n",p1,p2,p3,i);
+printf ("agregar_stv b0: |%s| \n",b0);
+printf ("agregar_stv b1: |%s| \n",b1);
+printf ("agregar_stv b5: |%s| \n",b5);
+}
+
+		strcpy( (*fnp[nf_alloc]).l, b5);
+
+#if 0
+		/* en p1,p2 estan los ( ) */
+		for (i=p1+1, p3=0, f_sigo=1, f_res = 0; f_sigo && i<= p2-1; i++)
+		{
+			if ( (b0[i] >= 'a' && b0[i] <= 'z') || (b0[i] >= '0' && b0[i] <= '9') ||
+                              b0[i] == '_' )
+			{
+				b2[p3] = b1[i];
+				p3++;
+			}
+			else
+				f_sigo=0, f_res=1;
+		}
+#endif
+	}
+	else
+		error(9004);		
+	
+
+if (gp_debug == 5)
+{
+printf ("RRR0 paso 5           \n");
+printf ("RRR7 f_res %d var: |%s| \n",f_res,b0);
+}
+
+
+	return (f_res);
+
+}
+
+
