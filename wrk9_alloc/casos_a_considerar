@@ -1,9 +1,0 @@
-          er_message="cn_objt:0001 - unable to allocate " // &
-         ELSE ! allocate "month"'s 1 "day" to 3 possible spanning months
-       do iMult=1,Multiplicity ! allocate x(j) across Multiplicity units
-      IF(.NOT. ALLOCATED(TEMP_RETIRED_UNIT_NO)) ALLOCATE(TEMP_RETIRED_UNIT_NO(20),TEMP_RETIRED_OFF_LINE(20))
-   IF(INTERP_WT(JMO)<WEEK_FR) THEN ! allocate remainder of days to JCM+1
-   IF(N_AVAIL_SEGS==2) THEN ! allocate proportional to segment length
-   nExpU=nMaxGenericCoalDemand ! allocate room sufficient for expansion
-   write(DbgU,'(/a,7i6)') ' sizes used to allocate arrays  : ', &
-  +  nNode,nLink,nCCSegs ! amazingly required for the allocate()s to work

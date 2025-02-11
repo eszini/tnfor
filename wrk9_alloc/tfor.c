@@ -19,7 +19,6 @@
  *
  */
 
-
 /*
  *	//header//
  *
@@ -929,6 +928,8 @@ char	*trim_beg_f90(char *);
 char	*trim_end(char *);
 char	*trim_end_f90(char *);
 char	*extract_var_name(char *);
+char	*chanchada(char *);
+
 
 #if 0
 int	compare_vcb(char *, char *);
@@ -6983,6 +6984,9 @@ int	pro_exec9()
 
 int	ex9_p1()
 {
+	static	int	f_miscmod1 = 0;
+	static	int	f_miscmod2 = 0;
+
 	int 	h,i,j,k,k1,k2;
 	int	l1,l2;
 	int	c1,c2,c3,c4;
@@ -7090,6 +7094,29 @@ printf ("Trabajo con ... (%s) |%s|\n",exte_name,prog_name);
 		if (linea_vacia(b1) || es_linea_comentario(b1))
 			f_proceso = 0;
 
+
+		if (f_proceso)
+		{
+			/* temas especificos */	
+			if (!strncmp(prog_name,"cap_objt.f90",12))
+			{
+				if (f_miscmod1 == 0 && !strncmp( (*fnp[i]).l,"      SUBROUTINE MIX_RATIOS",27))
+				{
+					f_miscmod1 = 1;
+					strcpy( (*fnp[i+1]).l  ,"  ");
+				}
+			}
+
+			if (!strncmp(prog_name,"cap_objt.f90",12))
+			{
+				if (f_miscmod2 == 0 && !strncmp( (*fnp[i]).l,"      FUNCTION PLANNING_DEC",27))
+				{
+					f_miscmod1 = 2;
+					strcpy( (*fnp[i+1]).l, (*fnp[i+2]).l);
+					strcpy( (*fnp[i+2]).l,"      use miscmod");
+				}
+			}
+		}
 
 
 		/* solo proceso lineas que no son comentario ni vacias */
@@ -7468,6 +7495,8 @@ printf ("RRR0 desp de trim_end_f90: |%s|\n",b1);
 printf ("RRR0 desp de trim_blanks : |%s|\n",b1);
 								strcat(m0,b1);
 printf ("RRR0 desp de strcat m0   : |%s|\n",m0);
+								strcpy(m0,chanchada(m0));
+printf ("RRR0 desp de chanchada   : |%s|\n",m0);
 							}
 							k++;
 						}
@@ -7876,6 +7905,9 @@ int	*add_lines;
 int	num_alloc;
 {
 
+	static	int	f_miscmod1 = 0;
+	static	int	f_miscmod2 = 0;
+
 	int 	h,i,j,k,k1,k2;
 	int	l1,l2;
 	int	c1,c2,c3,c4,c5;
@@ -8063,7 +8095,9 @@ printf ("chg_alloc_t06: sali de busco_pri_l pri_l: %d |%s| \n",pri_l,(*fnp[pri_l
 
 			strcpy( (*fnp[linea_use+2]).l,"     ");
 			*add_lines = agrego_lines;
+
 		}
+
 
 
 		flag_alloc_ok = 1;
@@ -8288,6 +8322,21 @@ printf ("chg_alloc_t07: voy a c5 = b_blanks_beg \n");
 
 			strcpy( (*fnp[linea_use+2]).l,"     ");
 			*add_lines = agrego_lines;
+
+
+#if 0
+			/* temas especificos */	
+			if (!strncmp(prog_name,"cap_objt.f90",12))
+			{
+				if (strncmp( (*fnp[pri_l]).l,"      SUBROUTINE MIX_RATIOS",27))
+				{
+					strcpy( (*fnp[linea_use+1]).l  ,blanks);
+					strcat( (*fnp[linea_use+1]).l  ,"use miscmod");
+
+					strcpy( (*fnp[pri_l+1]).l,"   ");
+				}
+			}
+#endif
 		}
 
 
@@ -13636,20 +13685,12 @@ int	pro_prue9()
 			printf ("L: (%3d) #: %d |%s| \n",ql,n1,b1);
 
 
-#if 1
     			for (int i = 0; i < n1; i++) 
 			{
-
 				strncpy(d1,v_var[i],l_var[i]);
 				d1[l_var[i]] = 0;
 
-				printf("VVV: (%2d) %3d |%s|\n", i, l_var[i], d1 );
-#if 0
-				printf("VVV: (%2d) |%s|\n", i, d1);
-#endif
     			}
-
-#endif
 
 			ql++;
 		}
@@ -25639,6 +25680,23 @@ opcion ml mv ... la mas compleja
 
 #endif
 
+
+char	*chanchada(s)
+char	*s;
+{
+	static	char	b0[MSTR];
+	int	i,j,k;
+	int	l1,l2;
+
+	strcpy(b0,s);
+	l2=strlen(b0);
+
+	for (i=0; i<l2; i++)
+		if (b0[i] == '&')
+			b0[i] = ' ';
+
+	return (b0);
+}
 
 /* end of file  */
 /* end of file  */

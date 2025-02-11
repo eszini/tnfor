@@ -1,61 +1,48 @@
-00001 enrglimt.f90                   (f90) 00698 |         ALLOCATE(TRANS_ROR_CAPACITY(0:R_NUMBER_OF_TRANS_GROUPS))|
-00002 enrglimt.f90                   (f90) 00704 |         ALLOCATE(TRANS_PEAK_CAPACITY(0:R_NUMBER_OF_TRANS_GROUPS))|
-00003 enrglimt.f90                   (f90) 00707 |         ALLOCATE(TRANS_PUMP_CAPACITY(0:R_NUMBER_OF_TRANS_GROUPS))|
-00004 enrglimt.f90                   (f90) 02462 |            ALLOCATE( &|
-00005 enrglimt.f90                   (f90) 02480 |            ALLOCATE(MON_MDS_EL_ENERGY(HYDRO_UNITS,2,0:12))|
-00006 enrglimt.f90                   (f90) 02483 |            ALLOCATE(MON_MDS_EL_CAPACITY(HYDRO_UNITS,2,0:12))|
-00007 enrglimt.f90                   (f90) 02486 |            ALLOCATE(MON_MDS_EL_VAR_COST(HYDRO_UNITS,2,0:12))|
-00008 enrglimt.f90                   (f90) 02489 |            ALLOCATE(MON_MDS_EL_FIXED_COST(HYDRO_UNITS,2,0:12))|
-00009 enrglimt.f90                   (f90) 02492 |            ALLOCATE(MON_MDS_EL_SO2_EMIS(HYDRO_UNITS,2,0:12))|
-00010 enrglimt.f90                   (f90) 02495 |            ALLOCATE(MON_MDS_EL_MARKET_REVENUE(HYDRO_UNITS,2,0:12))|
-00011 enrglimt.f90                   (f90) 02505 |            ALLOCATE(ANNUAL_EL_ENERGY(HYDRO_UNITS,2))|
-00012 enrglimt.f90                   (f90) 02508 |            ALLOCATE(ANNUAL_EL_CAPACITY(HYDRO_UNITS,2))|
-00013 enrglimt.f90                   (f90) 02511 |            ALLOCATE(ANNUAL_EL_VAR_COST(HYDRO_UNITS,2))|
-00014 enrglimt.f90                   (f90) 02514 |            ALLOCATE(ANNUAL_EL_FIXED_COST(HYDRO_UNITS,2))|
-00015 enrglimt.f90                   (f90) 02517 |            ALLOCATE(ANNUAL_EL_SO2_EMIS(HYDRO_UNITS,2))|
-00016 enrglimt.f90                   (f90) 03188 |            ALLOCATE(MONTHLY_EL_GROUP_REPORT(0:12,0:MAX_MONTHLY_GROUPS, &|
-00017 enrglimt.f90                   (f90) 03217 |               ALLOCATE(FISCAL_EL_ENERGY(HYDRO_UNITS,2))|
-00018 enrglimt.f90                   (f90) 03220 |               ALLOCATE(FISCAL_EL_CAPACITY(HYDRO_UNITS,2))|
-00019 enrglimt.f90                   (f90) 03223 |               ALLOCATE(FISCAL_EL_VAR_COST(HYDRO_UNITS,2))|
-00020 enrglimt.f90                   (f90) 03226 |               ALLOCATE(FISCAL_EL_FIXED_COST(HYDRO_UNITS,2))|
-00021 enrglimt.f90                   (f90) 03229 |               ALLOCATE(FISCAL_EL_SO2_EMIS(HYDRO_UNITS,2))|
-00022 enrglimt.f90                   (f90) 03232 |               ALLOCATE(FISCAL_EL_MARKET_REVENUE(HYDRO_UNITS,2))|
-00023 enrglimt.f90                   (f90) 03288 |         ALLOCATE(ASSET_CLASS_NUM(MAX_EL_UNITS))|
-00024 enrglimt.f90                   (f90) 03291 |         ALLOCATE(INTRA_COMPANY_CLASS_ID(MAX_EL_UNITS))|
-00025 enrglimt.f90                   (f90) 03294 |         ALLOCATE(ASSET_CLASS_VECTOR(MAX_EL_UNITS))|
-00026 enrglimt.f90                   (f90) 03900 |            ALLOCATE(ASSET_CLASS_POINTER(MAX_HYDRO_CLASS_NUM))|
-00027 enrglimt.f90                   (f90) 03921 |         ALLOCATE(EL_ANN_CLASS_VAR_COST(0:NUM_OF_HYDRO_CLASSES,4))|
-00028 enrglimt.f90                   (f90) 03924 |         ALLOCATE(EL_ANN_CLASS_FIXED_COST(0:NUM_OF_HYDRO_CLASSES,4))|
-00029 enrglimt.f90                   (f90) 03927 |         ALLOCATE(EL_ANN_CLASS_REVENUE(0:NUM_OF_HYDRO_CLASSES,4))|
-00030 enrglimt.f90                   (f90) 03930 |         ALLOCATE(EL_ANN_CLASS_CAPACITY(0:NUM_OF_HYDRO_CLASSES,4))|
-00031 enrglimt.f90                   (f90) 03933 |         ALLOCATE(EL_ANN_CLASS_ENERGY(0:NUM_OF_HYDRO_CLASSES,4))|
-00032 enrglimt.f90                   (f90) 03936 |         ALLOCATE(EL_ANN_CLASS_SELL_CAPACITY(0:NUM_OF_HYDRO_CLASSES,4))|
-00033 enrglimt.f90                   (f90) 03939 |         ALLOCATE(EL_ANN_CLASS_SELL_ENERGY(0:NUM_OF_HYDRO_CLASSES,4))|
-00034 enrglimt.f90                   (f90) 03942 |         ALLOCATE(EL_ANN_CLASS_PURCHASES(0:NUM_OF_HYDRO_CLASSES,4))|
-00035 enrglimt.f90                   (f90) 03945 |         ALLOCATE(EL_ANN_CLASS_SO2(0:NUM_OF_HYDRO_CLASSES))|
-00036 enrglimt.f90                   (f90) 03948 |         ALLOCATE(INTRA_COMPANY_SALES_REVENUE(0:1024))|
-00037 enrglimt.f90                   (f90) 03951 |         ALLOCATE(INTRA_COMPANY_PURCHASE_EXPENSE(0:1024))|
-00038 enrglimt.f90                   (f90) 03955 |         ALLOCATE(EL_ANN_CLASS_MARKET_REVENUES(0:NUM_OF_HYDRO_CLASSES))|
-00039 enrglimt.f90                   (f90) 03958 |         ALLOCATE(EL_ANN_CLASS_MARKET_PURCHASE(0:NUM_OF_HYDRO_CLASSES))|
-00040 enrglimt.f90                   (f90) 03981 |         ALLOCATE(EL_MON_MDS_VAR_COST(0:NUM_OF_HYDRO_CLASSES,4,0:12))|
-00041 enrglimt.f90                   (f90) 03987 |         ALLOCATE(EL_MON_MDS_FIXED_COST(0:NUM_OF_HYDRO_CLASSES,4,0:12))|
-00042 enrglimt.f90                   (f90) 03990 |         ALLOCATE(EL_MON_MDS_REVENUE(0:NUM_OF_HYDRO_CLASSES,4,0:12))|
-00043 enrglimt.f90                   (f90) 03993 |         ALLOCATE(EL_MON_MDS_CAPACITY(0:NUM_OF_HYDRO_CLASSES,4,0:12))|
-00044 enrglimt.f90                   (f90) 03996 |         ALLOCATE(EL_MON_MDS_ENERGY(0:NUM_OF_HYDRO_CLASSES,4,0:12))|
-00045 enrglimt.f90                   (f90) 03999 |         ALLOCATE(EL_MON_MDS_SELL_CAPACITY( &|
-00046 enrglimt.f90                   (f90) 04003 |         ALLOCATE(EL_MON_MDS_SELL_ENERGY(0:NUM_OF_HYDRO_CLASSES,4,0:12))|
-00047 enrglimt.f90                   (f90) 04006 |         ALLOCATE(EL_MON_MDS_PURCHASES(0:NUM_OF_HYDRO_CLASSES,4,0:12))|
-00048 enrglimt.f90                   (f90) 04009 |         ALLOCATE(EL_MON_MDS_SO2(0:NUM_OF_HYDRO_CLASSES,0:12))|
-00049 enrglimt.f90                   (f90) 04012 |         ALLOCATE(MON_MDS_INCO_SALES_REVENUE(0:1024,0:12))|
-00050 enrglimt.f90                   (f90) 04015 |         ALLOCATE(MON_MDS_INCO_PURCHASE_EXPENSE(0:1024,0:12))|
-00051 enrglimt.f90                   (f90) 04018 |         ALLOCATE(MON_MDS_IN_SALES_REVENUE(0:12))|
-00052 enrglimt.f90                   (f90) 04021 |         ALLOCATE(MON_MDS_IN_PURCHASE_EXPENSES(0:12))|
-00053 enrglimt.f90                   (f90) 04024 |         ALLOCATE(MON_MDS_IN_VARIABLE_EXPENSES(0:12))|
-00054 enrglimt.f90                   (f90) 04027 |         ALLOCATE(MON_MDS_IN_FIXED_EXPENSES(0:12))|
-00055 enrglimt.f90                   (f90) 04031 |         ALLOCATE(EL_MON_MDS_MARKET_REVENUES( &|
-00056 enrglimt.f90                   (f90) 04035 |         ALLOCATE(EL_MON_MDS_MARKET_PURCHASE( &|
-00057 enrglimt.f90                   (f90) 04043 |         ALLOCATE(ASSET_CLASS_LIST(AVAIL_DATA_YEARS))|
-00058 enrglimt.f90                   (f90) 04046 |         ALLOCATE(ASSET_ALLOCATION_LIST(AVAIL_DATA_YEARS))|
-00059 enrglimt.f90                   (f90) 05072 |            ALLOCATE(CLASS_NAME(0:MAX_CLASS_NUM))|
-00060 enrglimt.f90                   (f90) 05372 |      ALLOCATE(SORT_POS(LOAD_HOURS_IN_PERIOD))|
-00061 enrglimt.f90                   (f90) 05598 |         ALLOCATE(HOURLY_HYDRO(LOAD_HOURS_IN_PERIOD, &|
+00001 cap_objt.f90                   (f90) 00233 |      ALLOCATE(DSM_CAP(3,STUDY_PERIOD))|
+00002 cap_objt.f90                   (f90) 00292 |         ALLOCATE(PLAN_IDENTIFIER(0:MAX_NUMBER_OF_PLANS_TO_SAVE), &|
+00003 cap_objt.f90                   (f90) 00360 |            ALLOCATE(ACTIVE_OPTIONS(OPTION_DEPTH))|
+00004 cap_objt.f90                   (f90) 00521 |      ALLOCATE(DSM_CAP(3,STUDY_PERIOD))|
+00005 cap_objt.f90                   (f90) 00982 |         ALLOCATE(COMMITTED_OPTION_POINTERS(MAX_COMMITTED_OPTIONS), STAT=allocstat)|
+00006 cap_objt.f90                   (f90) 00984 |         ALLOCATE(COMMITTED_OPTION_START_YEAR(MAX_COMMITTED_OPTIONS), STAT=allocstat)|
+00007 cap_objt.f90                   (f90) 00986 |         ALLOCATE(COMMITTED_OPTION_ON_LINE_YR(MAX_COMMITTED_OPTIONS), STAT=allocstat)|
+00008 cap_objt.f90                   (f90) 00988 |         ALLOCATE(COMMITTED_OPTION_ORG_ON_LINE_YR(MAX_COMMITTED_OPTIONS), STAT=allocstat)|
+00009 cap_objt.f90                   (f90) 00990 |         ALLOCATE(COMMITTED_OPTION_TIMES_DELAYED(MAX_COMMITTED_OPTIONS), STAT=allocstat)|
+00010 cap_objt.f90                   (f90) 00992 |         ALLOCATE(OPTION_PERCENT_COMPLETED(MAX_COMMITTED_OPTIONS), STAT=allocstat)|
+00011 cap_objt.f90                   (f90) 00994 |         ALLOCATE(REC_LOCATOR(MAX_COMMITTED_OPTIONS), STAT=allocstat)|
+00012 cap_objt.f90                   (f90) 00996 |         ALLOCATE(HAS_BEEN_ACCELERATED(MAX_COMMITTED_OPTIONS), STAT=allocstat)|
+00013 cap_objt.f90                   (f90) 00998 |         ALLOCATE(PLANNED_OPTION_POINTERS(MAX_PLANNED_OPTIONS), STAT=allocstat)|
+00014 cap_objt.f90                   (f90) 01000 |         ALLOCATE(PLANNED_OPTION_START_YEAR(MAX_PLANNED_OPTIONS), STAT=allocstat)|
+00015 cap_objt.f90                   (f90) 01002 |         ALLOCATE(PLANNED_OPTION_ON_LINE_YR(MAX_PLANNED_OPTIONS), STAT=allocstat)|
+00016 cap_objt.f90                   (f90) 01042 |      ALLOCATE(DSM_CAP(3,STUDY_PERIOD))|
+00017 cap_objt.f90                   (f90) 01060 |         ALLOCATE(DELAYED_ON_LINE_DATE(NEXT_COMMITTED_OPTION))|
+00018 cap_objt.f90                   (f90) 01580 |         ALLOCATE(TEMP_I2_ARRAY(NEXT_COMMITTED_OPTION))|
+00019 cap_objt.f90                   (f90) 01586 |         ALLOCATE(COMMITTED_OPTION_POINTERS(MAX_COMMITTED_OPTIONS))|
+00020 cap_objt.f90                   (f90) 01595 |         ALLOCATE(COMMITTED_OPTION_TIMES_DELAYED(MAX_COMMITTED_OPTIONS))|
+00021 cap_objt.f90                   (f90) 01605 |         ALLOCATE(COMMITTED_OPTION_START_YEAR(MAX_COMMITTED_OPTIONS))|
+00022 cap_objt.f90                   (f90) 01615 |         ALLOCATE(COMMITTED_OPTION_ON_LINE_YR(MAX_COMMITTED_OPTIONS))|
+00023 cap_objt.f90                   (f90) 01625 |         ALLOCATE( &|
+00024 cap_objt.f90                   (f90) 01636 |         ALLOCATE(REC_LOCATOR(MAX_COMMITTED_OPTIONS))|
+00025 cap_objt.f90                   (f90) 01645 |         ALLOCATE(TEMP_R4_ARRAY(NEXT_COMMITTED_OPTION))|
+00026 cap_objt.f90                   (f90) 01651 |         ALLOCATE(OPTION_PERCENT_COMPLETED(MAX_COMMITTED_OPTIONS))|
+00027 cap_objt.f90                   (f90) 01659 |         ALLOCATE(TEMP_L1_ARRAY(NEXT_COMMITTED_OPTION))|
+00028 cap_objt.f90                   (f90) 01665 |         ALLOCATE(HAS_BEEN_ACCELERATED(MAX_COMMITTED_OPTIONS))|
+00029 cap_objt.f90                   (f90) 01678 |         ALLOCATE(TEMP_I2_ARRAY(NEXT_PLANNED_OPTION))|
+00030 cap_objt.f90                   (f90) 01685 |         ALLOCATE(PLANNED_OPTION_POINTERS(MAX_COMMITTED_OPTIONS))|
+00031 cap_objt.f90                   (f90) 01694 |         ALLOCATE(PLANNED_OPTION_START_YEAR(MAX_COMMITTED_OPTIONS))|
+00032 cap_objt.f90                   (f90) 01703 |         ALLOCATE(PLANNED_OPTION_ON_LINE_YR(MAX_COMMITTED_OPTIONS))|
+00033 cap_objt.f90                   (f90) 01811 |            ALLOCATE(RECLN(2))|
+00034 cap_objt.f90                   (f90) 01834 |            ALLOCATE(RECLN(200))|
+00035 cap_objt.f90                   (f90) 01880 |         ALLOCATE(OVER_COST_LEVELS(MAX_OVER_TABLE_ROWS, &|
+00036 cap_objt.f90                   (f90) 01896 |         ALLOCATE(UNDER_COST_LEVELS(MAX_UNDER_TABLE_ROWS, &|
+00037 cap_objt.f90                   (f90) 03067 |        ALLOCATE(LAST_RESOURCE_ADDED(MAX(INT(1,2),UPPER_TRANS_GROUP)), &|
+00038 cap_objt.f90                   (f90) 03096 |            ALLOCATE(OPTION_NAME(TOTAL_ALL_OPTIONS), &|
+00039 cap_objt.f90                   (f90) 03101 |            ALLOCATE(ResourceIDtoOptionPosPrt(MaxProductionProinter))|
+00040 cap_objt.f90                   (f90) 03112 |         ALLOCATE(SCREEN_SLOPE(TOTAL_ALL_OPTIONS), &|
+00041 cap_objt.f90                   (f90) 03380 |         ALLOCATE(SCREEN_SLOPE(TOTAL_ALL_OPTIONS), &|
+00042 cap_objt.f90                   (f90) 04107 |         ALLOCATE(MULTI_AREA_NAME(0:UPPER_TRANS_GROUP), &|
+00043 cap_objt.f90                   (f90) 06459 |            ALLOCATE(MRX_RPS_MX_CURVE_MARGIN(HO,PA), &|
+00044 cap_objt.f90                   (f90) 10182 |         ALLOCATE(LAST_RESOURCE_ADDED(MAX(INT(1,2),UPPER_TRANS_GROUP)))|
+00045 cap_objt.f90                   (f90) 10195 |            ALLOCATE(OPTION_NAME(TOTAL_ALL_OPTIONS), &|
+00046 cap_objt.f90                   (f90) 10320 |         ALLOCATE(SCREEN_SLOPE(TOTAL_ALL_OPTIONS), &|
+00047 cap_objt.f90                   (f90) 10753 |         ALLOCATE(MULTI_AREA_NAME(0:UPPER_TRANS_GROUP), &|
+00048 cap_objt.f90                   (f90) 11925 |         ALLOCATE(CO2_EMISSIONS_CAP(0:UPPER_TRANS_GROUP), &|
