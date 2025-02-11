@@ -1,0 +1,488 @@
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:   698 (    0 -  5499) |allocate(trans_ror_capacity(0:r_number_of_trans_groups))|
+block starts at line  :    42                 |SUBROUTINE ENRGLIMT(LPROB4,LODDUR4,DX,PEAK, & !  caller's REAL(kind=4 variables|
+block ends   at line  :   778                 |END|
+line to insert check  :   702 (   42 -   781) |ALLOCATE(TRANS_PEAK_CAPACITY(0:R_NUMBER_OF_TRANS_GROUPS))|
+key used              :     1                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:   704 (    0 -  5504) |allocate(trans_peak_capacity(0:r_number_of_trans_groups))|
+block starts at line  :    42                 |SUBROUTINE ENRGLIMT(LPROB4,LODDUR4,DX,PEAK, & !  caller's REAL(kind=4 variables|
+block ends   at line  :   783                 |END|
+line to insert check  :   705 (   42 -   783) |ALLOCATE(TRANS_PUMP_CAPACITY(0:R_NUMBER_OF_TRANS_GROUPS))|
+key used              :     2                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:   707 (    0 -  5506) |allocate(trans_pump_capacity(0:r_number_of_trans_groups))|
+block starts at line  :    42                 |SUBROUTINE ENRGLIMT(LPROB4,LODDUR4,DX,PEAK, & !  caller's REAL(kind=4 variables|
+block ends   at line  :   785                 |END|
+line to insert check  :   708 (   42 -   785) |TRANS_ROR_CAPACITY = 0.|
+key used              :     3                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |enrglimt.f90|
+Allocate number       :     4                 | 
+alloc sentence in line:  2462 (    0 -  5508) |allocate( &|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4543                 |END|
+line to insert check  :  2468 ( 1936 -  4546) |DO I = 1, MAX_TRANS_GROUP_NUMBER|
+key used              :     4                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :     5                 | 
+alloc sentence in line:  2480 (    0 -  5513) |allocate(mon_mds_el_energy(hydro_units,2,0:12))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4548                 |END|
+line to insert check  :  2481 ( 1936 -  4548) |ALLOCATE(MON_MDS_EL_CAPACITY(HYDRO_UNITS,2,0:12))|
+key used              :     5                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :     6                 | 
+alloc sentence in line:  2483 (    0 -  5515) |allocate(mon_mds_el_capacity(hydro_units,2,0:12))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4550                 |END|
+line to insert check  :  2484 ( 1936 -  4550) |ALLOCATE(MON_MDS_EL_VAR_COST(HYDRO_UNITS,2,0:12))|
+key used              :     6                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :     7                 | 
+alloc sentence in line:  2486 (    0 -  5517) |allocate(mon_mds_el_var_cost(hydro_units,2,0:12))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4552                 |END|
+line to insert check  :  2487 ( 1936 -  4552) |ALLOCATE(MON_MDS_EL_FIXED_COST(HYDRO_UNITS,2,0:12))|
+key used              :     7                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :     8                 | 
+alloc sentence in line:  2489 (    0 -  5519) |allocate(mon_mds_el_fixed_cost(hydro_units,2,0:12))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4554                 |END|
+line to insert check  :  2490 ( 1936 -  4554) |ALLOCATE(MON_MDS_EL_SO2_EMIS(HYDRO_UNITS,2,0:12))|
+key used              :     8                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :     9                 | 
+alloc sentence in line:  2492 (    0 -  5521) |allocate(mon_mds_el_so2_emis(hydro_units,2,0:12))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4556                 |END|
+line to insert check  :  2493 ( 1936 -  4556) |ALLOCATE(MON_MDS_EL_MARKET_REVENUE(HYDRO_UNITS,2,0:12))|
+key used              :     9                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    10                 | 
+alloc sentence in line:  2495 (    0 -  5523) |allocate(mon_mds_el_market_revenue(hydro_units,2,0:12))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4558                 |END|
+line to insert check  :  2496 ( 1936 -  4558) |MON_MDS_EL_ENERGY = 0.|
+key used              :    10                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    11                 | 
+alloc sentence in line:  2505 (    0 -  5525) |allocate(annual_el_energy(hydro_units,2))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4560                 |END|
+line to insert check  :  2506 ( 1936 -  4560) |ALLOCATE(ANNUAL_EL_CAPACITY(HYDRO_UNITS,2))|
+key used              :    11                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    12                 | 
+alloc sentence in line:  2508 (    0 -  5527) |allocate(annual_el_capacity(hydro_units,2))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4562                 |END|
+line to insert check  :  2509 ( 1936 -  4562) |ALLOCATE(ANNUAL_EL_VAR_COST(HYDRO_UNITS,2))|
+key used              :    12                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    13                 | 
+alloc sentence in line:  2511 (    0 -  5529) |allocate(annual_el_var_cost(hydro_units,2))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4564                 |END|
+line to insert check  :  2512 ( 1936 -  4564) |ALLOCATE(ANNUAL_EL_FIXED_COST(HYDRO_UNITS,2))|
+key used              :    13                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    14                 | 
+alloc sentence in line:  2514 (    0 -  5531) |allocate(annual_el_fixed_cost(hydro_units,2))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4566                 |END|
+line to insert check  :  2515 ( 1936 -  4566) |ALLOCATE(ANNUAL_EL_SO2_EMIS(HYDRO_UNITS,2))|
+key used              :    14                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    15                 | 
+alloc sentence in line:  2517 (    0 -  5533) |allocate(annual_el_so2_emis(hydro_units,2))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4568                 |END|
+line to insert check  :  2518 ( 1936 -  4568) |ANNUAL_EL_ENERGY = 0.|
+key used              :    15                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |enrglimt.f90|
+Allocate number       :    16                 | 
+alloc sentence in line:  3188 (    0 -  5535) |allocate(monthly_el_group_report(0:12,0:max_monthly_groups, &|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4570                 |END|
+line to insert check  :  3190 ( 1936 -  4570) |MONTHLY_EL_GROUP_REPORT = 0.|
+key used              :    16                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    17                 | 
+alloc sentence in line:  3217 (    0 -  5537) |allocate(fiscal_el_energy(hydro_units,2))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4572                 |END|
+line to insert check  :  3218 ( 1936 -  4572) |ALLOCATE(FISCAL_EL_CAPACITY(HYDRO_UNITS,2))|
+key used              :    17                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    18                 | 
+alloc sentence in line:  3220 (    0 -  5539) |allocate(fiscal_el_capacity(hydro_units,2))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4574                 |END|
+line to insert check  :  3221 ( 1936 -  4574) |ALLOCATE(FISCAL_EL_VAR_COST(HYDRO_UNITS,2))|
+key used              :    18                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    19                 | 
+alloc sentence in line:  3223 (    0 -  5541) |allocate(fiscal_el_var_cost(hydro_units,2))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4576                 |END|
+line to insert check  :  3224 ( 1936 -  4576) |ALLOCATE(FISCAL_EL_FIXED_COST(HYDRO_UNITS,2))|
+key used              :    19                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    20                 | 
+alloc sentence in line:  3226 (    0 -  5543) |allocate(fiscal_el_fixed_cost(hydro_units,2))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4578                 |END|
+line to insert check  :  3227 ( 1936 -  4578) |ALLOCATE(FISCAL_EL_SO2_EMIS(HYDRO_UNITS,2))|
+key used              :    20                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    21                 | 
+alloc sentence in line:  3229 (    0 -  5545) |allocate(fiscal_el_so2_emis(hydro_units,2))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4580                 |END|
+line to insert check  :  3230 ( 1936 -  4580) |ALLOCATE(FISCAL_EL_MARKET_REVENUE(HYDRO_UNITS,2))|
+key used              :    21                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    22                 | 
+alloc sentence in line:  3232 (    0 -  5547) |allocate(fiscal_el_market_revenue(hydro_units,2))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4582                 |END|
+line to insert check  :  3233 ( 1936 -  4582) |!            ENDIF|
+key used              :    22                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    23                 | 
+alloc sentence in line:  3288 (    0 -  5549) |allocate(asset_class_num(max_el_units))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4584                 |END|
+line to insert check  :  3289 ( 1936 -  4584) |ALLOCATE(INTRA_COMPANY_CLASS_ID(MAX_EL_UNITS))|
+key used              :    23                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    24                 | 
+alloc sentence in line:  3291 (    0 -  5551) |allocate(intra_company_class_id(max_el_units))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4586                 |END|
+line to insert check  :  3292 ( 1936 -  4586) |ALLOCATE(ASSET_CLASS_VECTOR(MAX_EL_UNITS))|
+key used              :    24                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    25                 | 
+alloc sentence in line:  3294 (    0 -  5553) |allocate(asset_class_vector(max_el_units))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4588                 |END|
+line to insert check  :  3295 ( 1936 -  4588) |LAST_EL_UNIT = R_BASE_EL_UNITS|
+key used              :    25                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    26                 | 
+alloc sentence in line:  3900 (    0 -  5555) |allocate(asset_class_pointer(max_hydro_class_num))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4590                 |END|
+line to insert check  :  3901 ( 1936 -  4590) |MAX_HYDRO_CLASS_NUM = &|
+key used              :    26                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    27                 | 
+alloc sentence in line:  3921 (    0 -  5557) |allocate(el_ann_class_var_cost(0:num_of_hydro_classes,4))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4592                 |END|
+line to insert check  :  3922 ( 1936 -  4592) |ALLOCATE(EL_ANN_CLASS_FIXED_COST(0:NUM_OF_HYDRO_CLASSES,4))|
+key used              :    27                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    28                 | 
+alloc sentence in line:  3924 (    0 -  5559) |allocate(el_ann_class_fixed_cost(0:num_of_hydro_classes,4))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4594                 |END|
+line to insert check  :  3925 ( 1936 -  4594) |ALLOCATE(EL_ANN_CLASS_REVENUE(0:NUM_OF_HYDRO_CLASSES,4))|
+key used              :    28                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    29                 | 
+alloc sentence in line:  3927 (    0 -  5561) |allocate(el_ann_class_revenue(0:num_of_hydro_classes,4))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4596                 |END|
+line to insert check  :  3928 ( 1936 -  4596) |ALLOCATE(EL_ANN_CLASS_CAPACITY(0:NUM_OF_HYDRO_CLASSES,4))|
+key used              :    29                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    30                 | 
+alloc sentence in line:  3930 (    0 -  5563) |allocate(el_ann_class_capacity(0:num_of_hydro_classes,4))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4598                 |END|
+line to insert check  :  3931 ( 1936 -  4598) |ALLOCATE(EL_ANN_CLASS_ENERGY(0:NUM_OF_HYDRO_CLASSES,4))|
+key used              :    30                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    31                 | 
+alloc sentence in line:  3933 (    0 -  5565) |allocate(el_ann_class_energy(0:num_of_hydro_classes,4))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4600                 |END|
+line to insert check  :  3934 ( 1936 -  4600) |ALLOCATE(EL_ANN_CLASS_SELL_CAPACITY(0:NUM_OF_HYDRO_CLASSES,4))|
+key used              :    31                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    32                 | 
+alloc sentence in line:  3936 (    0 -  5567) |allocate(el_ann_class_sell_capacity(0:num_of_hydro_classes,4))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4602                 |END|
+line to insert check  :  3937 ( 1936 -  4602) |ALLOCATE(EL_ANN_CLASS_SELL_ENERGY(0:NUM_OF_HYDRO_CLASSES,4))|
+key used              :    32                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    33                 | 
+alloc sentence in line:  3939 (    0 -  5569) |allocate(el_ann_class_sell_energy(0:num_of_hydro_classes,4))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4604                 |END|
+line to insert check  :  3940 ( 1936 -  4604) |ALLOCATE(EL_ANN_CLASS_PURCHASES(0:NUM_OF_HYDRO_CLASSES,4))|
+key used              :    33                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    34                 | 
+alloc sentence in line:  3942 (    0 -  5571) |allocate(el_ann_class_purchases(0:num_of_hydro_classes,4))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4606                 |END|
+line to insert check  :  3943 ( 1936 -  4606) |ALLOCATE(EL_ANN_CLASS_SO2(0:NUM_OF_HYDRO_CLASSES))|
+key used              :    34                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    35                 | 
+alloc sentence in line:  3945 (    0 -  5573) |allocate(el_ann_class_so2(0:num_of_hydro_classes))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4608                 |END|
+line to insert check  :  3946 ( 1936 -  4608) |ALLOCATE(INTRA_COMPANY_SALES_REVENUE(0:1024))|
+key used              :    35                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    36                 | 
+alloc sentence in line:  3948 (    0 -  5575) |allocate(intra_company_sales_revenue(0:1024))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4610                 |END|
+line to insert check  :  3949 ( 1936 -  4610) |ALLOCATE(INTRA_COMPANY_PURCHASE_EXPENSE(0:1024))|
+key used              :    36                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    37                 | 
+alloc sentence in line:  3951 (    0 -  5577) |allocate(intra_company_purchase_expense(0:1024))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4612                 |END|
+line to insert check  :  3952 ( 1936 -  4612) |!|
+key used              :    37                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    38                 | 
+alloc sentence in line:  3955 (    0 -  5579) |allocate(el_ann_class_market_revenues(0:num_of_hydro_classes))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4614                 |END|
+line to insert check  :  3956 ( 1936 -  4614) |ALLOCATE(EL_ANN_CLASS_MARKET_PURCHASE(0:NUM_OF_HYDRO_CLASSES))|
+key used              :    38                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    39                 | 
+alloc sentence in line:  3958 (    0 -  5581) |allocate(el_ann_class_market_purchase(0:num_of_hydro_classes))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4616                 |END|
+line to insert check  :  3959 ( 1936 -  4616) |! MONTHLY|
+key used              :    39                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    40                 | 
+alloc sentence in line:  3981 (    0 -  5583) |allocate(el_mon_mds_var_cost(0:num_of_hydro_classes,4,0:12))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4618                 |END|
+line to insert check  :  3982 ( 1936 -  4618) ||
+key used              :    40                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    41                 | 
+alloc sentence in line:  3987 (    0 -  5585) |allocate(el_mon_mds_fixed_cost(0:num_of_hydro_classes,4,0:12))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4620                 |END|
+line to insert check  :  3988 ( 1936 -  4620) |ALLOCATE(EL_MON_MDS_REVENUE(0:NUM_OF_HYDRO_CLASSES,4,0:12))|
+key used              :    41                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    42                 | 
+alloc sentence in line:  3990 (    0 -  5587) |allocate(el_mon_mds_revenue(0:num_of_hydro_classes,4,0:12))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4622                 |END|
+line to insert check  :  3991 ( 1936 -  4622) |ALLOCATE(EL_MON_MDS_CAPACITY(0:NUM_OF_HYDRO_CLASSES,4,0:12))|
+key used              :    42                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    43                 | 
+alloc sentence in line:  3993 (    0 -  5589) |allocate(el_mon_mds_capacity(0:num_of_hydro_classes,4,0:12))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4624                 |END|
+line to insert check  :  3994 ( 1936 -  4624) |ALLOCATE(EL_MON_MDS_ENERGY(0:NUM_OF_HYDRO_CLASSES,4,0:12))|
+key used              :    43                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    44                 | 
+alloc sentence in line:  3996 (    0 -  5591) |allocate(el_mon_mds_energy(0:num_of_hydro_classes,4,0:12))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4626                 |END|
+line to insert check  :  3997 ( 1936 -  4626) |ALLOCATE(EL_MON_MDS_SELL_CAPACITY( &|
+key used              :    44                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |enrglimt.f90|
+Allocate number       :    45                 | 
+alloc sentence in line:  3999 (    0 -  5593) |allocate(el_mon_mds_sell_capacity( &|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4628                 |END|
+line to insert check  :  4001 ( 1936 -  4628) |ALLOCATE(EL_MON_MDS_SELL_ENERGY(0:NUM_OF_HYDRO_CLASSES,4,0:12))|
+key used              :    45                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    46                 | 
+alloc sentence in line:  4003 (    0 -  5595) |allocate(el_mon_mds_sell_energy(0:num_of_hydro_classes,4,0:12))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4630                 |END|
+line to insert check  :  4004 ( 1936 -  4630) |ALLOCATE(EL_MON_MDS_PURCHASES(0:NUM_OF_HYDRO_CLASSES,4,0:12))|
+key used              :    46                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    47                 | 
+alloc sentence in line:  4006 (    0 -  5597) |allocate(el_mon_mds_purchases(0:num_of_hydro_classes,4,0:12))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4632                 |END|
+line to insert check  :  4007 ( 1936 -  4632) |ALLOCATE(EL_MON_MDS_SO2(0:NUM_OF_HYDRO_CLASSES,0:12))|
+key used              :    47                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    48                 | 
+alloc sentence in line:  4009 (    0 -  5599) |allocate(el_mon_mds_so2(0:num_of_hydro_classes,0:12))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4634                 |END|
+line to insert check  :  4010 ( 1936 -  4634) |ALLOCATE(MON_MDS_INCO_SALES_REVENUE(0:1024,0:12))|
+key used              :    48                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    49                 | 
+alloc sentence in line:  4012 (    0 -  5601) |allocate(mon_mds_inco_sales_revenue(0:1024,0:12))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4636                 |END|
+line to insert check  :  4013 ( 1936 -  4636) |ALLOCATE(MON_MDS_INCO_PURCHASE_EXPENSE(0:1024,0:12))|
+key used              :    49                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    50                 | 
+alloc sentence in line:  4015 (    0 -  5603) |allocate(mon_mds_inco_purchase_expense(0:1024,0:12))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4638                 |END|
+line to insert check  :  4016 ( 1936 -  4638) |ALLOCATE(MON_MDS_IN_SALES_REVENUE(0:12))|
+key used              :    50                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    51                 | 
+alloc sentence in line:  4018 (    0 -  5605) |allocate(mon_mds_in_sales_revenue(0:12))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4640                 |END|
+line to insert check  :  4019 ( 1936 -  4640) |ALLOCATE(MON_MDS_IN_PURCHASE_EXPENSES(0:12))|
+key used              :    51                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    52                 | 
+alloc sentence in line:  4021 (    0 -  5607) |allocate(mon_mds_in_purchase_expenses(0:12))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4642                 |END|
+line to insert check  :  4022 ( 1936 -  4642) |ALLOCATE(MON_MDS_IN_VARIABLE_EXPENSES(0:12))|
+key used              :    52                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    53                 | 
+alloc sentence in line:  4024 (    0 -  5609) |allocate(mon_mds_in_variable_expenses(0:12))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4644                 |END|
+line to insert check  :  4025 ( 1936 -  4644) |ALLOCATE(MON_MDS_IN_FIXED_EXPENSES(0:12))|
+key used              :    53                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    54                 | 
+alloc sentence in line:  4027 (    0 -  5611) |allocate(mon_mds_in_fixed_expenses(0:12))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4646                 |END|
+line to insert check  :  4028 ( 1936 -  4646) |!|
+key used              :    54                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |enrglimt.f90|
+Allocate number       :    55                 | 
+alloc sentence in line:  4031 (    0 -  5613) |allocate(el_mon_mds_market_revenues( &|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4648                 |END|
+line to insert check  :  4033 ( 1936 -  4648) |ALLOCATE(EL_MON_MDS_MARKET_PURCHASE( &|
+key used              :    55                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |enrglimt.f90|
+Allocate number       :    56                 | 
+alloc sentence in line:  4035 (    0 -  5615) |allocate(el_mon_mds_market_purchase( &|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4650                 |END|
+line to insert check  :  4037 ( 1936 -  4650) |!|
+key used              :    56                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    57                 | 
+alloc sentence in line:  4043 (    0 -  5617) |allocate(asset_class_list(avail_data_years))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4652                 |END|
+line to insert check  :  4044 ( 1936 -  4652) |ALLOCATE(ASSET_ALLOCATION_LIST(AVAIL_DATA_YEARS))|
+key used              :    57                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    58                 | 
+alloc sentence in line:  4046 (    0 -  5619) |allocate(asset_allocation_list(avail_data_years))|
+block starts at line  :  1936                 |SUBROUTINE EL_POOL_COSTS_AND_UNIT_REPORTS(UNIT_NO, &|
+block ends   at line  :  4654                 |END|
+line to insert check  :  4047 ( 1936 -  4654) ||
+key used              :    58                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    59                 | 
+alloc sentence in line:  5072 (    0 -  5621) |allocate(class_name(0:max_class_num))|
+block starts at line  :  5018                 |SUBROUTINE WRITE_ASSET_PROD_REPORT|
+block ends   at line  :  5134                 |END|
+line to insert check  :  5076 ( 5018 -  5137) |CLASS_NAME(0) = "Consolidated                  "|
+key used              :    59                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |enrglimt.f90|
+Allocate number       :    60                 | 
+alloc sentence in line:  5372 (    0 -  5626) |allocate(sort_pos(load_hours_in_period))|
+block starts at line  :  5145                 |subroutine Integrate(Energy,LoadVal,LoadPrb,nPts,Duratn,BaseLoad)|
+block ends   at line  :  5625                 |END|
+line to insert check  :  5376 ( 5145 -  5628) |!|
+key used              :    60                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |enrglimt.f90|
+Allocate number       :    61                 | 
+alloc sentence in line:  5598 (    0 -  5631) |allocate(hourly_hydro(load_hours_in_period, &|
+block starts at line  :  5145                 |subroutine Integrate(Energy,LoadVal,LoadPrb,nPts,Duratn,BaseLoad)|
+block ends   at line  :  5630                 |END|
+line to insert check  :  5600 ( 5145 -  5630) |HOURLY_HYDRO = REAL8_ZERO|
+key used              :    61                 | 
+------------------------------------------( 4)-

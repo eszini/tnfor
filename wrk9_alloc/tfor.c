@@ -16,6 +16,9 @@
  *	ojo .. con un ! en colummna 10 ... no detecta que es comentario ...
  *	en cap_objt.f90 ... sigue sumando cantidad de allocate ..
  *
+ *      ojo .. en grx_planning_routines ... 
+ *	aparecio un caso con INTEGER*2 , y metio el allocate_vars en cualquier lugar 
+ *
  *
  */
 
