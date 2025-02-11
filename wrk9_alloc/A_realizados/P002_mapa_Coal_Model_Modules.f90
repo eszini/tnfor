@@ -1,0 +1,408 @@
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:   470 (    0 -   973) |allocate(allarray(lowb1:upb1))|
+block starts at line  :   463                 |subroutine AllArrayL1MinMaxD1(AllArray,LowB1,UpB1) ! AGT: incon|
+block ends   at line  :   475                 |end subroutine|
+line to insert use all:   464 (  463 -   475) |logical (kind=1), allocatable :: AllArray(:)|
+line to insert check  :   474 (  463 -   478) |endif|
+key used              :     1                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:   478 (    0 -   978) |allocate(allarray(lowb1:upb1))|
+block starts at line  :   463                 |subroutine AllArrayL1MinMaxD1(AllArray,LowB1,UpB1) ! AGT: incon|
+block ends   at line  :   480                 |end subroutine|
+line to insert check  :   479 (  463 -   480) |endif|
+key used              :     2                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:   491 (    0 -   980) |allocate(allarray(upb1))|
+block starts at line  :   484                 |subroutine AllArrayL4(AllArray,UpB1)|
+block ends   at line  :   496                 |end subroutine|
+line to insert use all:   485 (  484 -   496) |logical (kind=4), allocatable :: AllArray(:)|
+line to insert check  :   495 (  484 -   499) |endif|
+key used              :     3                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :     4                 | 
+alloc sentence in line:   499 (    0 -   985) |allocate(allarray(upb1))|
+block starts at line  :   484                 |subroutine AllArrayL4(AllArray,UpB1)|
+block ends   at line  :   501                 |end subroutine|
+line to insert check  :   500 (  484 -   501) |endif|
+key used              :     4                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :     5                 | 
+alloc sentence in line:   511 (    0 -   987) |allocate(allarray(upb1))|
+block starts at line  :   504                 |subroutine AllArrayL4M4(AllArray,UpB1)|
+block ends   at line  :   516                 |end subroutine|
+line to insert use all:   505 (  504 -   516) |logical (kind=4), allocatable :: AllArray(:)|
+line to insert check  :   515 (  504 -   519) |endif|
+key used              :     5                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :     6                 | 
+alloc sentence in line:   519 (    0 -   992) |allocate(allarray(upb1))|
+block starts at line  :   504                 |subroutine AllArrayL4M4(AllArray,UpB1)|
+block ends   at line  :   521                 |end subroutine|
+line to insert check  :   520 (  504 -   521) |endif|
+key used              :     6                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :     7                 | 
+alloc sentence in line:   531 (    0 -   994) |allocate(allarray(lowb1:upb1))|
+block starts at line  :   524                 |subroutine AllArrayL4MinMaxD1(AllArray,LowB1,UpB1) ! AGT: incon|
+block ends   at line  :   536                 |end subroutine|
+line to insert use all:   525 (  524 -   536) |logical (kind=4), allocatable :: AllArray(:)|
+line to insert check  :   535 (  524 -   539) |endif|
+key used              :     7                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :     8                 | 
+alloc sentence in line:   539 (    0 -   999) |allocate(allarray(lowb1:upb1))|
+block starts at line  :   524                 |subroutine AllArrayL4MinMaxD1(AllArray,LowB1,UpB1) ! AGT: incon|
+block ends   at line  :   541                 |end subroutine|
+line to insert check  :   540 (  524 -   541) |endif|
+key used              :     8                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :     9                 | 
+alloc sentence in line:   552 (    0 -  1001) |allocate(allarray(upb1))|
+block starts at line  :   545                 |subroutine AllArrayI1(AllArray,UpB1)|
+block ends   at line  :   557                 |end subroutine|
+line to insert use all:   546 (  545 -   557) |integer (kind=1), allocatable :: AllArray(:)|
+line to insert check  :   556 (  545 -   560) |endif|
+key used              :     9                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    10                 | 
+alloc sentence in line:   560 (    0 -  1006) |allocate(allarray(upb1))|
+block starts at line  :   545                 |subroutine AllArrayI1(AllArray,UpB1)|
+block ends   at line  :   562                 |end subroutine|
+line to insert check  :   561 (  545 -   562) |endif|
+key used              :    10                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    11                 | 
+alloc sentence in line:   574 (    0 -  1008) |allocate(allarray(upb1,upb2))|
+block starts at line  :   565                 |subroutine AllD2ArrayI1(AllArray,UpB1,UpB2)|
+block ends   at line  :   579                 |end subroutine|
+line to insert use all:   566 (  565 -   579) |integer (kind=1), allocatable :: AllArray(:,:)|
+line to insert check  :   578 (  565 -   582) |endif|
+key used              :    11                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    12                 | 
+alloc sentence in line:   582 (    0 -  1013) |allocate(allarray(upb1,upb2))|
+block starts at line  :   565                 |subroutine AllD2ArrayI1(AllArray,UpB1,UpB2)|
+block ends   at line  :   584                 |end subroutine|
+line to insert check  :   583 (  565 -   584) |endif|
+key used              :    12                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    13                 | 
+alloc sentence in line:   595 (    0 -  1015) |allocate(allarray(upb1))|
+block starts at line  :   588                 |subroutine AllArrayI2(AllArray,UpB1)|
+block ends   at line  :   600                 |end subroutine|
+line to insert use all:   589 (  588 -   600) |integer (kind=2), allocatable :: AllArray(:)|
+line to insert check  :   599 (  588 -   603) |endif|
+key used              :    13                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    14                 | 
+alloc sentence in line:   603 (    0 -  1020) |allocate(allarray(upb1))|
+block starts at line  :   588                 |subroutine AllArrayI2(AllArray,UpB1)|
+block ends   at line  :   605                 |end subroutine|
+line to insert check  :   604 (  588 -   605) |endif|
+key used              :    14                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    15                 | 
+alloc sentence in line:   615 (    0 -  1022) |allocate(allarray(upb1))|
+block starts at line  :   608                 |subroutine AllArrayI2I4(AllArray,UpB1)|
+block ends   at line  :   620                 |end subroutine|
+line to insert use all:   609 (  608 -   620) |integer (kind=2), allocatable :: AllArray(:)|
+line to insert check  :   619 (  608 -   623) |endif|
+key used              :    15                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    16                 | 
+alloc sentence in line:   623 (    0 -  1027) |allocate(allarray(upb1))|
+block starts at line  :   608                 |subroutine AllArrayI2I4(AllArray,UpB1)|
+block ends   at line  :   625                 |end subroutine|
+line to insert check  :   624 (  608 -   625) |endif|
+key used              :    16                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    17                 | 
+alloc sentence in line:   637 (    0 -  1029) |allocate(allarray(lowb1:upb1,lowb2:upb2))|
+block starts at line  :   628                 |subroutine AllI2LowBUpBR8(AllArray,LowB1,UpB1,LowB2,UpB2) ! AGT|
+block ends   at line  :   642                 |end subroutine|
+line to insert use all:   629 (  628 -   642) |integer (kind=2), allocatable :: AllArray(:,:)|
+line to insert check  :   641 (  628 -   645) |endif|
+key used              :    17                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    18                 | 
+alloc sentence in line:   645 (    0 -  1034) |allocate(allarray(lowb1:upb1,lowb2:upb2))|
+block starts at line  :   628                 |subroutine AllI2LowBUpBR8(AllArray,LowB1,UpB1,LowB2,UpB2) ! AGT|
+block ends   at line  :   647                 |end subroutine|
+line to insert check  :   646 (  628 -   647) |endif|
+key used              :    18                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    19                 | 
+alloc sentence in line:   658 (    0 -  1036) |allocate(allarray(upb1))|
+block starts at line  :   651                 |subroutine AllArrayI4(AllArray,UpB1)|
+block ends   at line  :   663                 |end subroutine|
+line to insert use all:   652 (  651 -   663) |integer (kind=4), allocatable :: AllArray(:)|
+line to insert check  :   662 (  651 -   666) |endif|
+key used              :    19                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    20                 | 
+alloc sentence in line:   666 (    0 -  1041) |allocate(allarray(upb1))|
+block starts at line  :   651                 |subroutine AllArrayI4(AllArray,UpB1)|
+block ends   at line  :   668                 |end subroutine|
+line to insert check  :   667 (  651 -   668) |endif|
+key used              :    20                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    21                 | 
+alloc sentence in line:   678 (    0 -  1043) |allocate(allarray(upb1))|
+block starts at line  :   671                 |subroutine AllArrayI4I4(AllArray,UpB1)|
+block ends   at line  :   683                 |end subroutine|
+line to insert use all:   672 (  671 -   683) |integer (kind=4), allocatable :: AllArray(:)|
+line to insert check  :   682 (  671 -   686) |endif|
+key used              :    21                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    22                 | 
+alloc sentence in line:   686 (    0 -  1048) |allocate(allarray(upb1))|
+block starts at line  :   671                 |subroutine AllArrayI4I4(AllArray,UpB1)|
+block ends   at line  :   688                 |end subroutine|
+line to insert check  :   687 (  671 -   688) |endif|
+key used              :    22                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    23                 | 
+alloc sentence in line:   700 (    0 -  1050) |allocate(allarray(lowb1:upb1,lowb2:upb2))|
+block starts at line  :   691                 |subroutine AllI4LowBUpBR8(AllArray,LowB1,UpB1,LowB2,UpB2) ! AGT|
+block ends   at line  :   705                 |end subroutine|
+line to insert use all:   692 (  691 -   705) |integer (kind=4), allocatable :: AllArray(:,:)|
+line to insert check  :   704 (  691 -   708) |endif|
+key used              :    23                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    24                 | 
+alloc sentence in line:   708 (    0 -  1055) |allocate(allarray(lowb1:upb1,lowb2:upb2))|
+block starts at line  :   691                 |subroutine AllI4LowBUpBR8(AllArray,LowB1,UpB1,LowB2,UpB2) ! AGT|
+block ends   at line  :   710                 |end subroutine|
+line to insert check  :   709 (  691 -   710) |endif|
+key used              :    24                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    25                 | 
+alloc sentence in line:   721 (    0 -  1057) |allocate(allarray(upb1))|
+block starts at line  :   714                 |subroutine AllArrayI8(AllArray,UpB1)|
+block ends   at line  :   726                 |end subroutine|
+line to insert use all:   715 (  714 -   726) |integer (kind=8), allocatable :: AllArray(:)|
+line to insert check  :   725 (  714 -   729) |endif|
+key used              :    25                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    26                 | 
+alloc sentence in line:   729 (    0 -  1062) |allocate(allarray(upb1))|
+block starts at line  :   714                 |subroutine AllArrayI8(AllArray,UpB1)|
+block ends   at line  :   731                 |end subroutine|
+line to insert check  :   730 (  714 -   731) |endif|
+key used              :    26                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    27                 | 
+alloc sentence in line:   742 (    0 -  1064) |allocate(allarray(upb1))|
+block starts at line  :   735                 |subroutine AllArrayR4(AllArray,UpB1)|
+block ends   at line  :   747                 |end subroutine|
+line to insert use all:   736 (  735 -   747) |real (kind=4), allocatable :: AllArray(:)|
+line to insert check  :   746 (  735 -   750) |endif|
+key used              :    27                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    28                 | 
+alloc sentence in line:   750 (    0 -  1069) |allocate(allarray(upb1))|
+block starts at line  :   735                 |subroutine AllArrayR4(AllArray,UpB1)|
+block ends   at line  :   752                 |end subroutine|
+line to insert check  :   751 (  735 -   752) |endif|
+key used              :    28                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    29                 | 
+alloc sentence in line:   762 (    0 -  1071) |allocate(allarray(upb1))|
+block starts at line  :   755                 |subroutine AllArrayR4I4(AllArray,UpB1)|
+block ends   at line  :   767                 |end subroutine|
+line to insert use all:   756 (  755 -   767) |real (kind=4), allocatable :: AllArray(:)|
+line to insert check  :   766 (  755 -   770) |endif|
+key used              :    29                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    30                 | 
+alloc sentence in line:   770 (    0 -  1076) |allocate(allarray(upb1))|
+block starts at line  :   755                 |subroutine AllArrayR4I4(AllArray,UpB1)|
+block ends   at line  :   772                 |end subroutine|
+line to insert check  :   771 (  755 -   772) |endif|
+key used              :    30                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    31                 | 
+alloc sentence in line:   784 (    0 -  1078) |allocate(allarray(upb1,upb2))|
+block starts at line  :   775                 |subroutine AllD2ArrayI2(AllArray,UpB1,UpB2) ! AGT: suggests I2(|
+block ends   at line  :   789                 |end subroutine|
+line to insert use all:   776 (  775 -   789) |real (kind=4), allocatable :: AllArray(:,:)|
+line to insert check  :   788 (  775 -   792) |endif|
+key used              :    31                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    32                 | 
+alloc sentence in line:   792 (    0 -  1083) |allocate(allarray(upb1,upb2))|
+block starts at line  :   775                 |subroutine AllD2ArrayI2(AllArray,UpB1,UpB2) ! AGT: suggests I2(|
+block ends   at line  :   794                 |end subroutine|
+line to insert check  :   793 (  775 -   794) |endif|
+key used              :    32                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    33                 | 
+alloc sentence in line:   804 (    0 -  1085) |allocate(allarray(lowb1:upb1))|
+block starts at line  :   797                 |subroutine AllD1LowBUpBR4(AllArray,LowB1,UpB1)|
+block ends   at line  :   809                 |end subroutine|
+line to insert use all:   798 (  797 -   809) |real (kind=4), allocatable :: AllArray(:)|
+line to insert check  :   808 (  797 -   812) |endif|
+key used              :    33                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    34                 | 
+alloc sentence in line:   812 (    0 -  1090) |allocate(allarray(lowb1:upb1))|
+block starts at line  :   797                 |subroutine AllD1LowBUpBR4(AllArray,LowB1,UpB1)|
+block ends   at line  :   814                 |end subroutine|
+line to insert check  :   813 (  797 -   814) |endif|
+key used              :    34                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    35                 | 
+alloc sentence in line:   826 (    0 -  1092) |allocate(allarray(lowb1:upb1,lowb2:upb2))|
+block starts at line  :   817                 |subroutine AllD2LowBUpBR4(AllArray,LowB1,UpB1,LowB2,UpB2)|
+block ends   at line  :   831                 |end subroutine|
+line to insert use all:   818 (  817 -   831) |real (kind=4), allocatable :: AllArray(:,:)|
+line to insert check  :   830 (  817 -   834) |endif|
+key used              :    35                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    36                 | 
+alloc sentence in line:   834 (    0 -  1097) |allocate(allarray(lowb1:upb1,lowb2:upb2))|
+block starts at line  :   817                 |subroutine AllD2LowBUpBR4(AllArray,LowB1,UpB1,LowB2,UpB2)|
+block ends   at line  :   836                 |end subroutine|
+line to insert check  :   835 (  817 -   836) |endif|
+key used              :    36                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    37                 | 
+alloc sentence in line:   851 (    0 -  1099) |allocate(allarray(lowb1:upb1,lowb2:upb2,lowb3:upb3))|
+block starts at line  :   839                 |subroutine AllD3LowBUpBR4(AllArray, &|
+block ends   at line  :   856                 |end subroutine|
+line to insert use all:   841 (  839 -   856) |real (kind=4), allocatable :: AllArray(:,:,:)|
+line to insert check  :   855 (  839 -   859) |endif|
+key used              :    37                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    38                 | 
+alloc sentence in line:   859 (    0 -  1104) |allocate(allarray(lowb1:upb1,lowb2:upb2,lowb3:upb3))|
+block starts at line  :   839                 |subroutine AllD3LowBUpBR4(AllArray, &|
+block ends   at line  :   861                 |end subroutine|
+line to insert check  :   860 (  839 -   861) |endif|
+key used              :    38                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    39                 | 
+alloc sentence in line:   872 (    0 -  1106) |allocate(allarray(upb1))|
+block starts at line  :   865                 |subroutine AllArrayR8(AllArray,UpB1)|
+block ends   at line  :   877                 |end subroutine|
+line to insert use all:   866 (  865 -   877) |real (kind=8), allocatable :: AllArray(:)|
+line to insert check  :   876 (  865 -   880) |endif|
+key used              :    39                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    40                 | 
+alloc sentence in line:   880 (    0 -  1111) |allocate(allarray(upb1))|
+block starts at line  :   865                 |subroutine AllArrayR8(AllArray,UpB1)|
+block ends   at line  :   882                 |end subroutine|
+line to insert check  :   881 (  865 -   882) |endif|
+key used              :    40                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    41                 | 
+alloc sentence in line:   894 (    0 -  1113) |allocate(allarray(lowb1:upb1,lowb2:upb2))|
+block starts at line  :   885                 |subroutine AllLowBUpBR8(AllArray,LowB1,UpB1,LowB2,UpB2)|
+block ends   at line  :   899                 |end subroutine|
+line to insert use all:   886 (  885 -   899) |real (kind=8), allocatable :: AllArray(:,:)|
+line to insert check  :   898 (  885 -   902) |endif|
+key used              :    41                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    42                 | 
+alloc sentence in line:   902 (    0 -  1118) |allocate(allarray(lowb1:upb1,lowb2:upb2))|
+block starts at line  :   885                 |subroutine AllLowBUpBR8(AllArray,LowB1,UpB1,LowB2,UpB2)|
+block ends   at line  :   904                 |end subroutine|
+line to insert check  :   903 (  885 -   904) |endif|
+key used              :    42                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    43                 | 
+alloc sentence in line:   916 (    0 -  1120) |allocate(allarray(upb1))|
+block starts at line  :   908                 |subroutine AllArrayChrI2(AllArray,UpB1)|
+block ends   at line  :   921                 |end subroutine|
+line to insert use all:   909 (  908 -   921) |Allocatable  AllArray(:)|
+line to insert check  :   920 (  908 -   924) |endif|
+key used              :    43                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    44                 | 
+alloc sentence in line:   924 (    0 -  1125) |allocate(allarray(upb1))|
+block starts at line  :   908                 |subroutine AllArrayChrI2(AllArray,UpB1)|
+block ends   at line  :   926                 |end subroutine|
+line to insert check  :   925 (  908 -   926) |endif|
+key used              :    44                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    45                 | 
+alloc sentence in line:   937 (    0 -  1127) |allocate(allarray(upb1))|
+block starts at line  :   929                 |subroutine AllArrayChrI4(AllArray,UpB1)|
+block ends   at line  :   942                 |end subroutine|
+line to insert use all:   930 (  929 -   942) |Allocatable  AllArray(:)|
+line to insert check  :   941 (  929 -   945) |endif|
+key used              :    45                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    46                 | 
+alloc sentence in line:   945 (    0 -  1132) |allocate(allarray(upb1))|
+block starts at line  :   929                 |subroutine AllArrayChrI4(AllArray,UpB1)|
+block ends   at line  :   947                 |end subroutine|
+line to insert check  :   946 (  929 -   947) |endif|
+key used              :    46                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    47                 | 
+alloc sentence in line:   959 (    0 -  1134) |allocate(allarray(lowb1:upb1,lowb2:upb2))|
+block starts at line  :   950                 |subroutine AllL4LB1UB1LB2UB2(AllArray,LowB1,UpB1,LowB2,UpB2)|
+block ends   at line  :   964                 |end subroutine|
+line to insert use all:   951 (  950 -   964) |logical (kind=4), allocatable :: AllArray(:,:)|
+line to insert check  :   963 (  950 -   967) |endif|
+key used              :    47                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |Coal_Model_Modules.f90|
+Allocate number       :    48                 | 
+alloc sentence in line:   967 (    0 -  1139) |allocate(allarray(lowb1:upb1,lowb2:upb2))|
+block starts at line  :   950                 |subroutine AllL4LB1UB1LB2UB2(AllArray,LowB1,UpB1,LowB2,UpB2)|
+block ends   at line  :   969                 |end subroutine|
+line to insert check  :   968 (  950 -   969) |endif|
+key used              :    48                 | 
+------------------------------------------( 1)-

@@ -22895,8 +22895,8 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXB];
 
-	strcpy (ver,"0049");
-	strcpy (d," Wed Sep 18 05:53:47 -03 2024");
+	strcpy (ver,"0059");
+	strcpy (d," Tue Feb 11 14:09:13 -03 2025");
 
 	sprintf (z,"%s -- (%s)  %s", gp_fp(GP_GET,0,(char **)0), ver, d  );
 	memset (w,0,MAXV);
