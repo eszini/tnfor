@@ -1,6 +1,6 @@
-Cant de alloc totales                   48 
+Cant de alloc totales                    9 
 Cant de alloc totales for con stat       0 
-Cant de alloc totales f90 con stat      11 
+Cant de alloc totales f90 con stat       0 
 Cant de alloc totales for slc            0 
 Cant de alloc totales for clc            0 
 Cant de alloc totales for sav            0 
@@ -9,11 +9,11 @@ Cant de alloc tot sin cont sing var      0
 Cant de alloc tot con cont sing var      0 
 Cant de alloc tot sin cont mult var      0 
 Cant de alloc tot con cont mult var      0 
-Cant de alloc totales f90 slc           34 
-Cant de alloc totales f90 clc           14 
-Cant de alloc totales f90 sav           35 
-Cant de alloc totales f90 mav           13 
-Cant de alloc tot sin cont sing var     34 
+Cant de alloc totales f90 slc            8 
+Cant de alloc totales f90 clc            1 
+Cant de alloc totales f90 sav            9 
+Cant de alloc totales f90 mav            0 
+Cant de alloc tot sin cont sing var      8 
 Cant de alloc tot con cont sing var      1 
 Cant de alloc tot sin cont mult var      0 
-Cant de alloc tot con cont mult var     13 
+Cant de alloc tot con cont mult var      0 

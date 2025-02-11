@@ -7205,7 +7205,10 @@ if (1)
 							{
 								/* TIPO-3 es un alloc en una linea con mas de una var - sin stat */
 								strcpy(m1,trim_blanks_beg(b1));
+								grabar_plan(3,1,2,0,0,prog_name,m1);
+#if 0
 								fprintf (hfou4,"( 3) sl mv    %-30.30s |%s|\n",prog_name,m1);
+#endif
 							}	
 							else
 							{
@@ -7254,14 +7257,22 @@ if (1)
 							{
 								/* TIPO-5 es un alloc en varias lineas con una sola variable - sin stat  */
 								strcpy(m1,trim_blanks_beg(m0));
+								grabar_plan(5,2,1,0,0,prog_name,m1);
+#if 0
 								fprintf (hfou4,"( 5) ml sv    %-30.30s |%s|\n",prog_name,m1);
+#endif
 							}
 							else
 							{
 								/* TIPO-6 es un alloc en varias lineas con una sola variable - con stat  */
 								sq_q_alloc_for_sta++;
 								strcpy(m1,trim_blanks_beg(m0));
+
+								/* ojo, aca falta ver si el stat esta ok */
+								grabar_plan(6,2,1,1,0,prog_name,m1);
+#if 0
 								fprintf (hfou4,"( 6) ml sv st %-30.30s |%s|\n",prog_name,m1);
+#endif
 
 							}
 						}
@@ -7275,7 +7286,10 @@ if (1)
 							{
 								/* TIPO-7 es un alloc en varias lineas con varias variables - sin stat */
 								strcpy(m1,trim_blanks_beg(m0));
+								grabar_plan(9,2,2,0,0,prog_name,m1);
+#if 0
 								fprintf (hfou4,"( 7) ml mv    %-30.30s |%s|\n",prog_name,m1);
+#endif
 							}
 							else
 							{
@@ -7429,11 +7443,9 @@ printf ("ex9_p1: sale de        chg_alloc_t06  i: %d b1: |%s| \n",i,b1);
 								}
 								else
 								{	
-									grabar_plan(10,1,1,1,0,prog_name,m1);
+									/* tiene stat= ... pero no tiene check alloc, hay que revisar */
+									grabar_plan(10,1,1,1,2,prog_name,m1);
 								}
-#if 0
-								fprintf (hfou4,"(10) sl sv st %-30.30s |%s|\n",prog_name,m1);
-#endif
 
 							}
 						}
@@ -7484,19 +7496,12 @@ printf ("ex9_p1: sale de        chg_alloc_t06  i: %d b1: |%s| \n",i,b1);
 
 							if (1)
 							{
-printf ("RRR0 desp de if(1)       : |%s|\n",b1);
 								strcpy(b1, pasar_a_minusc( (*fnp[i+k]).l) );
-printf ("RRR0 desp de pasar a min : |%s|\n",b1);
 								strcpy(b1, trim_beg_f90(b1));
-printf ("RRR0 desp de trim_beg_f90: |%s|\n",b1);
 								strcpy(b1, trim_end_f90(b1));
-printf ("RRR0 desp de trim_end_f90: |%s|\n",b1);
 								strcpy(b1, trim_blanks(b1));
-printf ("RRR0 desp de trim_blanks : |%s|\n",b1);
 								strcat(m0,b1);
-printf ("RRR0 desp de strcat m0   : |%s|\n",m0);
 								strcpy(m0,chanchada(m0));
-printf ("RRR0 desp de chanchada   : |%s|\n",m0);
 							}
 							k++;
 						}
@@ -7507,7 +7512,6 @@ printf ("RRR0 desp de chanchada   : |%s|\n",m0);
 						strcpy(b1, trim_blanks(b1));
 						strcat(m0,b1);
 
-printf ("ZZZ1 m0: |%s|\n",m0);
 					
 						fprintf (hfou3,"%05d %-30.30s (%s) %05d |%s|\n",
        	                                		c4, prog_name, exte_name, i-pf+1+k, (*fnp[i+k]).l);
@@ -7517,7 +7521,6 @@ printf ("ZZZ1 m0: |%s|\n",m0);
 
 						if (!tiene_multiple_vars(m0))
 						{
-printf ("ZZZ2 entro a NO tiene mult vars  m0: |%s|\n",m0);
 							sq_q_alloc_f90_sav++;
 							sq_q_alloc_f90_clc_sav++;
 
@@ -7599,7 +7602,6 @@ printf ("ZZZ2 entro a NO tiene mult vars  m0: |%s|\n",m0);
 						}
 						else /* if (!tiene_multiple_vars ... ) */
 						{
-printf ("ZZZ2 entro a SI tiene mult vars  m0: |%s|\n",m0);
 							sq_q_alloc_f90_mav++;
 							sq_q_alloc_f90_clc_mav++;
 
@@ -7857,7 +7859,7 @@ char	*prog_name,*m0;
 	char	stl[3][4] = { "  ","sl","ml" };
 	char	stv[3][4] = { "  ","sv","mv" };
 	char	sst[3][4] = { "  ","st","  " };
-	char	sok[3][4] = { "  ","ok","  " };
+	char	sok[3][4] = { "  ","ok","no" };
 
 #if 0
 	if (n_men == 1 || n_men == 9)
@@ -7872,6 +7874,8 @@ char	*prog_name,*m0;
 #if 0
 								grabar_plan(1,1,1,0,0,prog_name,m1);
 								grabar_plan(9,1,1,0,0,prog_name,m1);
+									grabar_plan(10,1,1,1,0,prog_name,m1);  2 !!! si es no ok
+								grabar_plan(9,2,2,0,0,prog_name,m1);
 #endif
 
 
@@ -9190,16 +9194,10 @@ char	*s;
 	strcpy(b0,s);
 
 
-printf ("trim_end_f90: antes de if linea f_proceso: %d  |%s|\n",f_proceso,b0);
 
 	f_proceso = 1;
 	if (linea_vacia(b0) || es_linea_comentario(b0))
 		f_proceso = 0;
-
-printf ("trim_end_f90: desp  de if linea f_proceso: %d  |%s|\n",f_proceso,b0);
-printf ("trim_end_f90: desp  de if linea f_proceso: %d  linea_vacia : %d \n",f_proceso,linea_vacia(b0));
-printf ("trim_end_f90: desp  de if linea f_proceso: %d  es_linea_com: %d \n",f_proceso,es_linea_comentario(b0));
-printf ("trim_end_f90: ------ \n");
 
 
 	if (f_proceso)
@@ -22496,7 +22494,6 @@ char	*s;
 		if (s[i] != ' ' && s[i] != '\t' && s[i] != '\n' )
 			flag=0;
 
-printf ("VVV linea vacia flag: %d |%s|\n",flag,s);
 	return flag;
 }
 
@@ -25659,8 +25656,15 @@ int	*nkey;
 
 	} while (f_sigo);
 		
+#if 0
+	/*
+	 * si no tiene check alloc ok ...
+	 * entonces hay que grabar en plan un "no" en la parte de stat, para revisar el fuente 
+	 */
+
 	if (!f_res)
 		error(9006);
+#endif
 
 	return (f_res);
 }
