@@ -1,0 +1,3 @@
+00001 p1.f90                         (f90) 00155 |               ALLOCATE (COAL_VECTOR_MAP(-1:MaxVectorNum))|
+00002 p1.f90                         (f90) 00167 |               ALLOCATE (COAL_VECTOR_TYPE_IS_VALUE(-1:nArray), &|
+00002 p1.f90                         (f90) 00168 |                         COAL_VECTOR_VALUES(31,-1:nArray))|

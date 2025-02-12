@@ -1,0 +1,2 @@
+(09) sl sv       p1.f90                         |allocate (coal_vector_map(-1:maxvectornum))|
+(15) ml mv       p1.f90                         |allocate (coal_vector_type_is_value(-1:narray),coal_vector_values(31,-1:narray))|
