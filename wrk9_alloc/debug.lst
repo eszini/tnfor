@@ -4,3 +4,5 @@
 1,chg_alloc_g15
 0,busco_use_miscmod
 0,busco_pri_l
+0,tiene_use
+0,tiene_multiple_vars

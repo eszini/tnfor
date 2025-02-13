@@ -23,6 +23,7 @@
  */
 
 
+
 /*
  *	//header//
  *
@@ -9087,6 +9088,11 @@ char	*s;
 
 	int	st1,st2,st3,st4;
 
+	char	z[MAXV];
+	int	w;
+	sprintf (z,"tiene_multiple_vars");
+	w = g_dbg(z);
+
 	/* copio string para trabajar local */
 	strcpy(b0,s);
 	l2 = strlen(b0);
@@ -9128,12 +9134,12 @@ char	*s;
 		}
 	}
 	
-if (gp_debug == 1 || gp_debug == 3)
+if (gp_debug && w)
 {
-printf ("tiene_multiple_vars:  paso 1 - primer palabra es allocate          \n");
-printf ("tiene_multiple_vars:  s           |%s| \n",s);
-printf ("tiene_multiple_vars:  b0          |%s| \n",b0);
-printf ("tiene_multiple_vars:  st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
+mprintf (z,"paso 1 - primer palabra es allocate          \n");
+mprintf (z,"s           |%s| \n",s);
+mprintf (z,"b0          |%s| \n",b0);
+mprintf (z,"st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
 }
 
 
@@ -9148,12 +9154,12 @@ printf ("tiene_multiple_vars:  st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
 	}
 
 
-if (gp_debug == 1 || gp_debug == 3)
+if (gp_debug && w)
 {
-printf ("tiene_multiple_vars:  paso 2 - si hay blancos corro la linea          \n");
-printf ("tiene_multiple_vars:  s           |%s| \n",s);
-printf ("tiene_multiple_vars:  b1          |%s| \n",b0);
-printf ("tiene_multiple_vars:  st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
+mprintf (z,"paso 2 - si hay blancos corro la linea          \n");
+mprintf (z,"s           |%s| \n",s);
+mprintf (z,"b1          |%s| \n",b0);
+mprintf (z,"st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
 }
 
 	/* el ultimo caracter salvo blancos, es un parentesis que cierra */
@@ -9176,15 +9182,15 @@ printf ("tiene_multiple_vars:  st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
 			}
 		}
 
-if (gp_debug == 1 || gp_debug == 3)
+if (gp_debug && w)
 {
-printf ("tiene_multiple_vars:  paso 3 - el ultimo caracter salvo blanco es )           \n");
-printf ("tiene_multiple_vars:  s           |%s| \n",s);
-printf ("tiene_multiple_vars:  b1          |%s| \n",b0);
-printf ("tiene_multiple_vars:  st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
-printf ("tiene_multiple_vars:  p1 p2       |%2d,%2d|  \n",p1,p2);
-printf ("tiene_multiple_vars:  b0[p1]      |%c| \n",b0[p1]);
-printf ("tiene_multiple_vars:  b0[p2]      |%c| \n",b0[p2]);
+mprintf (z,"paso 3 - el ultimo caracter salvo blanco es )           \n");
+mprintf (z,"s           |%s| \n",s);
+mprintf (z,"b1          |%s| \n",b0);
+mprintf (z,"st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
+mprintf (z,"p1 p2       |%2d,%2d|  \n",p1,p2);
+mprintf (z,"b0[p1]      |%c| \n",b0[p1]);
+mprintf (z,"b0[p2]      |%c| \n",b0[p2]);
 }
 
 
@@ -9204,15 +9210,15 @@ printf ("tiene_multiple_vars:  b0[p2]      |%c| \n",b0[p2]);
 	}
 
 	
-if (gp_debug == 1 || gp_debug == 3)
+if (gp_debug && w)
 {
-printf ("tiene_multiple_vars:  paso 4 - caracteres especificos entre ( y )          \n");
-printf ("tiene_multiple_vars:  s           |%s| \n",s);
-printf ("tiene_multiple_vars:  b1          |%s| \n",b0);
-printf ("tiene_multiple_vars:  st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
-printf ("tiene_multiple_vars:  p1 p2       |%2d,%2d|  \n",p1,p2);
-printf ("tiene_multiple_vars:  b0[p1]      |%c| \n",b0[p1]);
-printf ("tiene_multiple_vars:  b0[p2]      |%c| \n",b0[p2]);
+mprintf (z,"paso 4 - caracteres especificos entre ( y )          \n");
+mprintf (z,"s           |%s| \n",s);
+mprintf (z,"b1          |%s| \n",b0);
+mprintf (z,"st1 st2 st3 |%d,%d,%d| \n",st1,st2,st3);
+mprintf (z,"p1 p2       |%2d,%2d|  \n",p1,p2);
+mprintf (z,"b0[p1]      |%c| \n",b0[p1]);
+mprintf (z,"b0[p2]      |%c| \n",b0[p2]);
 }
 
 
@@ -9268,15 +9274,15 @@ printf ("tiene_multiple_vars:  b0[p2]      |%c| \n",b0[p2]);
 			st4 = 0;
 	}
 
-if (gp_debug == 1 || gp_debug == 3)
+if (gp_debug && w)
 {
-printf ("tiene_multiple_vars:  paso 5 - hay comas sin estar entre    ( y )  \n");
-printf ("tiene_multiple_vars:  s           |%s| \n",s);
-printf ("tiene_multiple_vars:  b1          |%s| \n",b0);
-printf ("tiene_multiple_vars:  st1 st2 st3 |%d,%d,%d,%d| \n",st1,st2,st3,st4);
-printf ("tiene_multiple_vars:  p1 p2       |%2d,%2d|  \n",p1,p2);
-printf ("tiene_multiple_vars:  b0[p1]      |%c| \n",b0[p1]);
-printf ("tiene_multiple_vars:  b0[p2]      |%c| \n",b0[p2]);
+mprintf (z,"paso 5 - hay comas sin estar entre    ( y )  \n");
+mprintf (z,"s           |%s| \n",s);
+mprintf (z,"b1          |%s| \n",b0);
+mprintf (z,"st1 st2 st3 |%d,%d,%d,%d| \n",st1,st2,st3,st4);
+mprintf (z,"p1 p2       |%2d,%2d|  \n",p1,p2);
+mprintf (z,"b0[p1]      |%c| \n",b0[p1]);
+mprintf (z,"b0[p2]      |%c| \n",b0[p2]);
 }
 
 
@@ -9286,32 +9292,38 @@ printf ("tiene_multiple_vars:  b0[p2]      |%c| \n",b0[p2]);
 	
 			
 	
-if (gp_debug == 1 || gp_debug == 3)
+if (gp_debug && w)
 {
-printf ("tiene_multiple_vars:  paso 5           \n");
-printf ("tiene_multiple_vars:  f_res      |%d| \n",f_res);
-printf ("tiene_multiple_vars:  ----- \n");
+mprintf (z,"paso 5           \n");
+mprintf (z,"f_res      |%d| \n",f_res);
+mprintf (z,"----- \n");
 }
 
 
-if (gp_debug == 1 || gp_debug == 3)
+if (gp_debug && w)
 {
 	if (f_res == 0)
-		printf ("tiene_multiple_vars: if .. f_res %d s: |%s|\n",f_res,s);
+		mprintf (z,"f .. f_res %d s: |%s|\n",f_res,s);
 
 	if (f_res == 1)
-		printf ("tiene_multiple_vars: if .. f_res %d s: |%s|\n",f_res,s);
+		mprintf (z,"f .. f_res %d s: |%s|\n",f_res,s);
 }
 
 
-if (gp_debug == 1 || gp_debug == 3)
+if (gp_debug && w)
 {
-printf ("tiene_multiple_vars:  ----- \n");
+mprintf (z,"----- \n");
 }
 
 	return (f_res);
 
 }
+
+
+
+
+
+
 
 
 char	*trim_beg(s)
@@ -10100,6 +10112,11 @@ char	*s;
 
 	int	k1;
 
+	char	z[MAXV];
+	int	w;
+	sprintf (z,"tiene_use");
+	w = g_dbg(z);
+
 	k1 = 4;
 	l1 = strlen(s);
 
@@ -10115,9 +10132,9 @@ char	*s;
 			for (k=i+3; k<l1; k++)
 			{	
 
-				if (gp_debug == 1 || gp_debug == 8)
+				if (gp_debug && w)
 				{
-					printf ("PPP7 k %2d s[k] %c %2d \n",k,s[k],s[k]);
+					mprintf (z,"k %2d s[k] %c %2d \n",k,s[k],s[k]);
 				}
 
 				if (!( s[k] == ' ' || 
@@ -25263,6 +25280,11 @@ char	*s;
 	int	c1,c2,c3;
 	int	f1;
 	int	st1,st2,st3,st4;
+
+	char	z[MAXV];
+	int	w;
+	sprintf (z,"extract_var_name");
+	w = g_dbg(z);
 
 	/* copio string para trabajar local */
 	strcpy(b0,pasar_a_minusc(s));
