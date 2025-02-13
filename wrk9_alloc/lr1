@@ -1,4 +1,4 @@
-repo1/p1.f90
+#repo1/p1.f90
 #repo1/8800com.f90
 #repo1/ABBCapacityMarketRept.f90
 #repo1/ACRSLCOM.MON
@@ -32,7 +32,7 @@ repo1/p1.f90
 #repo1/block_summary_items_handler.f90
 #repo1/cal_marginal_interface.f90
 #repo1/calendar.f90
-#repo1/cap_objt.f90
+repo1/cap_objt.f90
 #repo1/cap_prod_costs.f90
 #repo1/capacity_arrays.f90
 #repo1/capacity_options_alloc_vars.f90
@@ -99,7 +99,6 @@ repo1/p1.f90
 #repo1/enrg_prod_costsi4.f90
 #repo1/enrg_prod_costsr8.f90
 #repo1/enrglimt.f90
-#repo1/enrglimt.for
 #repo1/envircom.f90
 #repo1/error_central.f90
 #repo1/errormsg.f90

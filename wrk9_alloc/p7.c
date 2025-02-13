@@ -1,0 +1,86 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_LINE 1024
+#define MAX_VARS 100
+#define STAT_DEFAULT "stv_er"
+
+// Función para extraer variables de una sentencia allocate
+void process_allocate_statement(const char *allocate_stmt, char **output, int *count) {
+    char buffer[MAX_LINE];
+    strcpy(buffer, allocate_stmt);
+
+    // Buscar el inicio del allocate (
+    char *start = strchr(buffer, '(');
+    if (!start) return;
+    start++; // Mover a después de '('
+
+    // Buscar el final del allocate )
+    char *end = strrchr(start, ')');
+    if (!end) return;
+    *end = '\0'; // Reemplazar con terminador de string
+
+    // Buscar si ya hay un `stat=` en la sentencia
+    char *stat_pos = strstr(start, "stat=");
+    char stat_var[MAX_LINE] = STAT_DEFAULT;
+    if (stat_pos) {
+        // Si ya existe un stat=variable, lo eliminamos y usamos "stv_er"
+        *stat_pos = '\0'; // Cortar la parte de stat=
+    }
+
+    // Separar variables correctamente
+    char *token = strtok(start, ",");
+    *count = 0;
+    while (token) {
+        char var[MAX_LINE];
+
+        // Eliminar espacios en blanco alrededor
+        while (*token == ' ') token++; // Saltar espacios iniciales
+        strcpy(var, token);
+
+        // Crear la nueva sentencia allocate
+        snprintf(output[*count], MAX_LINE, "allocate(%s, stat=%s)", var, STAT_DEFAULT);
+        (*count)++;
+
+        token = strtok(NULL, ",");
+    }
+}
+
+int main() {
+    FILE *file = fopen("plan.txt", "r");
+    if (!file) {
+        perror("Error abriendo el archivo");
+        return EXIT_FAILURE;
+    }
+
+    char line[MAX_LINE];
+    while (fgets(line, sizeof(line), file)) {
+        // Buscar la sentencia allocate entre |...|
+        char *start = strchr(line, '|');
+        if (!start) continue;
+        start++;
+        char *end = strchr(start, '|');
+        if (!end) continue;
+        *end = '\0';
+
+        // Procesar la sentencia allocate
+        char *alloc_statements[MAX_VARS];
+        for (int i = 0; i < MAX_VARS; i++) {
+            alloc_statements[i] = malloc(MAX_LINE);
+        }
+
+        int count = 0;
+        process_allocate_statement(start, alloc_statements, &count);
+
+        // Imprimir resultados
+        for (int i = 0; i < count; i++) {
+            printf("%s\n", alloc_statements[i]);
+            free(alloc_statements[i]);
+        }
+    }
+
+    fclose(file);
+    return 0;
+}
+

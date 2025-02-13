@@ -1,3 +1,302 @@
-00001 p1.f90                         (f90) 00155 |               ALLOCATE (COAL_VECTOR_MAP(-1:MaxVectorNum))|
-00002 p1.f90                         (f90) 00167 |               ALLOCATE (COAL_VECTOR_TYPE_IS_VALUE(-1:nArray), &|
-00002 p1.f90                         (f90) 00168 |                         COAL_VECTOR_VALUES(31,-1:nArray))|
+00001 cap_objt.f90                   (f90) 00233 |      ALLOCATE(DSM_CAP(3,STUDY_PERIOD))|
+00002 cap_objt.f90                   (f90) 00292 |         ALLOCATE(PLAN_IDENTIFIER(0:MAX_NUMBER_OF_PLANS_TO_SAVE), &|
+00002 cap_objt.f90                   (f90) 00293 |              PLAN_OBJECT_FUNCTION_VALUE(0:MAX_NUMBER_OF_PLANS_TO_SAVE))|
+00003 cap_objt.f90                   (f90) 00364 |            ALLOCATE(ACTIVE_OPTIONS(OPTION_DEPTH))|
+00004 cap_objt.f90                   (f90) 00528 |      ALLOCATE(DSM_CAP(3,STUDY_PERIOD))|
+00005 cap_objt.f90                   (f90) 00991 |         ALLOCATE(COMMITTED_OPTION_POINTERS(MAX_COMMITTED_OPTIONS), STAT=stv_er)|
+00006 cap_objt.f90                   (f90) 00993 |         ALLOCATE(COMMITTED_OPTION_START_YEAR(MAX_COMMITTED_OPTIONS), STAT=stv_er)|
+00007 cap_objt.f90                   (f90) 00995 |         ALLOCATE(COMMITTED_OPTION_ON_LINE_YR(MAX_COMMITTED_OPTIONS), STAT=stv_er)|
+00008 cap_objt.f90                   (f90) 00997 |         ALLOCATE(COMMITTED_OPTION_ORG_ON_LINE_YR(MAX_COMMITTED_OPTIONS), STAT=stv_er)|
+00009 cap_objt.f90                   (f90) 00999 |         ALLOCATE(COMMITTED_OPTION_TIMES_DELAYED(MAX_COMMITTED_OPTIONS), STAT=stv_er)|
+00010 cap_objt.f90                   (f90) 01001 |         ALLOCATE(OPTION_PERCENT_COMPLETED(MAX_COMMITTED_OPTIONS), STAT=stv_er)|
+00011 cap_objt.f90                   (f90) 01003 |         ALLOCATE(REC_LOCATOR(MAX_COMMITTED_OPTIONS), STAT=stv_er)|
+00012 cap_objt.f90                   (f90) 01005 |         ALLOCATE(HAS_BEEN_ACCELERATED(MAX_COMMITTED_OPTIONS), STAT=stv_er)|
+00013 cap_objt.f90                   (f90) 01007 |         ALLOCATE(PLANNED_OPTION_POINTERS(MAX_PLANNED_OPTIONS), STAT=stv_er)|
+00014 cap_objt.f90                   (f90) 01009 |         ALLOCATE(PLANNED_OPTION_START_YEAR(MAX_PLANNED_OPTIONS), STAT=stv_er)|
+00015 cap_objt.f90                   (f90) 01011 |         ALLOCATE(PLANNED_OPTION_ON_LINE_YR(MAX_PLANNED_OPTIONS), STAT=stv_er)|
+00016 cap_objt.f90                   (f90) 01051 |      ALLOCATE(DSM_CAP(3,STUDY_PERIOD))  !0028|
+00017 cap_objt.f90                   (f90) 01066 |         ALLOCATE(DELAYED_ON_LINE_DATE(NEXT_COMMITTED_OPTION)) !0029|
+00018 cap_objt.f90                   (f90) 01586 |         ALLOCATE(TEMP_I2_ARRAY(NEXT_COMMITTED_OPTION)) !0032|
+00019 cap_objt.f90                   (f90) 01592 |         ALLOCATE(COMMITTED_OPTION_POINTERS(MAX_COMMITTED_OPTIONS)) !0034|
+00020 cap_objt.f90                   (f90) 01601 |         ALLOCATE(COMMITTED_OPTION_TIMES_DELAYED(MAX_COMMITTED_OPTIONS)) !0036|
+00021 cap_objt.f90                   (f90) 01611 |         ALLOCATE(COMMITTED_OPTION_START_YEAR(MAX_COMMITTED_OPTIONS)) !0038|
+00022 cap_objt.f90                   (f90) 01621 |         ALLOCATE(COMMITTED_OPTION_ON_LINE_YR(MAX_COMMITTED_OPTIONS)) !0040|
+00023 cap_objt.f90                   (f90) 01631 |         ALLOCATE( &|
+00023 cap_objt.f90                   (f90) 01632 |                 COMMITTED_OPTION_ORG_ON_LINE_YR(MAX_COMMITTED_OPTIONS)) !0041|
+00024 cap_objt.f90                   (f90) 01641 |         ALLOCATE(REC_LOCATOR(MAX_COMMITTED_OPTIONS))  !0043|
+00025 cap_objt.f90                   (f90) 01650 |         ALLOCATE(TEMP_R4_ARRAY(NEXT_COMMITTED_OPTION))   !0045|
+00026 cap_objt.f90                   (f90) 01656 |         ALLOCATE(OPTION_PERCENT_COMPLETED(MAX_COMMITTED_OPTIONS))  !0047|
+00027 cap_objt.f90                   (f90) 01664 |         ALLOCATE(TEMP_L1_ARRAY(NEXT_COMMITTED_OPTION))  !0049|
+00028 cap_objt.f90                   (f90) 01670 |         ALLOCATE(HAS_BEEN_ACCELERATED(MAX_COMMITTED_OPTIONS))  !0051|
+00029 cap_objt.f90                   (f90) 01683 |         ALLOCATE(TEMP_I2_ARRAY(NEXT_PLANNED_OPTION))  !0053|
+00030 cap_objt.f90                   (f90) 01690 |         ALLOCATE(PLANNED_OPTION_POINTERS(MAX_COMMITTED_OPTIONS))|
+00031 cap_objt.f90                   (f90) 01699 |         ALLOCATE(PLANNED_OPTION_START_YEAR(MAX_COMMITTED_OPTIONS)) !0057|
+00032 cap_objt.f90                   (f90) 01708 |         ALLOCATE(PLANNED_OPTION_ON_LINE_YR(MAX_COMMITTED_OPTIONS)) ! 0059|
+00033 cap_objt.f90                   (f90) 01818 |            ALLOCATE(RECLN(2))       !0061|
+00034 cap_objt.f90                   (f90) 01841 |            ALLOCATE(RECLN(200))   !0062|
+00035 cap_objt.f90                   (f90) 01887 |         ALLOCATE(OVER_COST_LEVELS(MAX_OVER_TABLE_ROWS,& |
+00035 cap_objt.f90                   (f90) 01888 |                  NUMBER_OF_OVER_TABLES), STAT=stv_er)|
+00036 cap_objt.f90                   (f90) 01890 |         ALLOCATE(OVER_COMPLETION_LEVELS(MAX_OVER_TABLE_COLS, &|
+00036 cap_objt.f90                   (f90) 01891 |                  NUMBER_OF_OVER_TABLES), STAT=stv_er)|
+00037 cap_objt.f90                   (f90) 01893 |         ALLOCATE(OVER_CAPACITY_ACTIONS(MAX_OVER_TABLE_COLS, &|
+00037 cap_objt.f90                   (f90) 01894 |                  MAX_OVER_TABLE_ROWS,NUMBER_OF_OVER_TABLES), STAT=stv_er)|
+00038 cap_objt.f90                   (f90) 01896 |         ALLOCATE(OVER_TABLE_CROSS_REF(MAX_OVER_TABLE_NUM), STAT=stv_er)|
+00039 cap_objt.f90                   (f90) 01898 |         ALLOCATE(ROWS_IN_OVER_TABLE(NUMBER_OF_OVER_TABLES), STAT=stv_er)|
+00040 cap_objt.f90                   (f90) 01900 |         ALLOCATE(CANCEL_BECAUSE_OF_DELAYS(NUMBER_OF_OVER_TABLES), STAT=stv_er)|
+00041 cap_objt.f90                   (f90) 01902 |         ALLOCATE(CANCEL_4_DELAYS_AND_COST(NUMBER_OF_OVER_TABLES), STAT=stv_er)|
+00042 cap_objt.f90                   (f90) 01904 |         ALLOCATE(COST_LEVEL_TO_COMPLETE(NUMBER_OF_OVER_TABLES), STAT=stv_er)|
+00043 cap_objt.f90                   (f90) 01906 |         ALLOCATE(COLUMNS_IN_OVER_TABLE(NUMBER_OF_OVER_TABLES), STAT=stv_er)|
+00044 cap_objt.f90                   (f90) 01911 |         ALLOCATE(UNDER_COST_LEVELS(MAX_UNDER_TABLE_ROWS,NUMBER_OF_UNDER_TABLES), STAT=stv_er)|
+00045 cap_objt.f90                   (f90) 01913 |         ALLOCATE(UNDER_COMPLETION_LEVELS(MAX_UNDER_TABLE_COLS,NUMBER_OF_UNDER_TABLES), STAT=stv_er)|
+00046 cap_objt.f90                   (f90) 01915 |         ALLOCATE(UNDER_CAPACITY_ACTIONS(MAX_UNDER_TABLE_COLS,MAX_UNDER_TABLE_ROWS,NUMBER_OF_UNDER_TABLES), STAT=stv_er)|
+00047 cap_objt.f90                   (f90) 01917 |         ALLOCATE(UNDER_TABLE_CROSS_REF(MAX_UNDER_TABLE_NUM), STAT=stv_er)|
+00048 cap_objt.f90                   (f90) 01919 |         ALLOCATE(ROWS_IN_UNDER_TABLE(NUMBER_OF_UNDER_TABLES), STAT=stv_er)|
+00049 cap_objt.f90                   (f90) 01921 |         ALLOCATE(COLUMNS_IN_UNDER_TABLE(NUMBER_OF_UNDER_TABLES), STAT=stv_er)|
+00050 cap_objt.f90                   (f90) 03121 |        ALLOCATE(LAST_RESOURCE_ADDED(MAX(INT(1,2),UPPER_TRANS_GROUP)),STAT=stv_er)|
+00051 cap_objt.f90                   (f90) 03123 |        ALLOCATE(LAST_PA_RESOURCE_ADDED(MAX(INT(1,2),UPPER_TRANS_GROUP)),STAT=stv_er)|
+00052 cap_objt.f90                   (f90) 03125 |        ALLOCATE(LAST_CM_RESOURCE_ADDED(MAX(INT(1,2),UPPER_TRANS_GROUP)),STAT=stv_er)|
+00053 cap_objt.f90                   (f90) 03127 |        ALLOCATE(FIRST_CT_EAS(MAX(INT(1,2),UPPER_TRANS_GROUP)),STAT=stv_er)|
+00054 cap_objt.f90                   (f90) 03129 |        ALLOCATE(FIRST_CT_4_EAS_INDEX(MAX(INT(1,2),UPPER_TRANS_GROUP)),STAT=stv_er)|
+00055 cap_objt.f90                   (f90) 03131 |        ALLOCATE(LOWEST_FIXED_COST_PA(MAX(INT(1,2),UPPER_TRANS_GROUP)),STAT=stv_er)|
+00056 cap_objt.f90                   (f90) 03133 |        ALLOCATE(LOWEST_FIXED_COST_BY_PA(MAX(INT(1,2),UPPER_TRANS_GROUP)),STAT=stv_er)|
+00057 cap_objt.f90                   (f90) 03135 |        ALLOCATE(LOWEST_FIXED_COST_BY_CM(MAX(INT(1,2),UPPER_TRANS_GROUP)),STAT=stv_er)|
+00058 cap_objt.f90                   (f90) 03137 |        ALLOCATE(LOWEST_CONE_COST_BY_CM(MAX(INT(1,2),UPPER_TRANS_GROUP)),STAT=stv_er)|
+00059 cap_objt.f90                   (f90) 03139 |        ALLOCATE(EAS_REVENUE_OFFSET_BY_CM(MAX(INT(1,2),UPPER_TRANS_GROUP)),STAT=stv_er)|
+00060 cap_objt.f90                   (f90) 03141 |        ALLOCATE(MARGINAL_ICAP_PER_KWYR_BY_TG(MAX(INT(1,2),UPPER_TRANS_GROUP)),STAT=stv_er)|
+00061 cap_objt.f90                   (f90) 03143 |        ALLOCATE(INSTALL_CAP_VALUE_LAST_PA_UNIT(MAX(INT(1,2),UPPER_TRANS_GROUP)),STAT=stv_er)|
+00062 cap_objt.f90                   (f90) 03145 |        ALLOCATE(INSTALL_CAP_VALUE_LAST_CM_UNIT(MAX(INT(1,2),UPPER_TRANS_GROUP)),STAT=stv_er)|
+00063 cap_objt.f90                   (f90) 03161 |            ALLOCATE(OPTION_NAME(TOTAL_ALL_OPTIONS), &|
+00063 cap_objt.f90                   (f90) 03162 |                                     OPTION_POSITION(TOTAL_ALL_OPTIONS))|
+00064 cap_objt.f90                   (f90) 03170 |            ALLOCATE(ResourceIDtoOptionPosPrt(MaxProductionProinter))|
+00065 cap_objt.f90                   (f90) 03181 |         ALLOCATE(SCREEN_SLOPE(TOTAL_ALL_OPTIONS), &|
+00065 cap_objt.f90                   (f90) 03182 |                  SCREEN_INTERCEPT(TOTAL_ALL_OPTIONS))|
+00066 cap_objt.f90                   (f90) 03453 |         ALLOCATE(SCREEN_SLOPE(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03454 |                  SCREEN_INTERCEPT(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03455 |                  SCREEN_CAPACITY(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03456 |                  ANNUAL_ENERGY_REVENUE(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03457 |                  EQUIVALENT_CAPACITY(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03458 |                  BLOCK_CAPACITY(5,TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03459 |                  BLOCK_HEAT_RATE(5,TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03460 |                  ANNUAL_FIXED_COST(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03461 |                  STRIKE_PRICE(TOTAL_ALL_OPTIONS,13), &|
+00066 cap_objt.f90                   (f90) 03462 |                  TRANSACTION_GROUP(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03463 |                  STATE_PROVINCE(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03464 |                  LOCAL_ANNUAL_UNITS(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03465 |                  RFT(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03466 |                  ACTIVE_OPTION(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03467 |                  FIRST_CN(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03468 |                  ACTIVE_INSTANCE(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03469 |                  MIN_UP_TIME(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03470 |                  MIN_DOWN_TIME(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03471 |                  RPS_PROGRAM_NUMBER(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03472 |                  START_UP_COSTS(12,TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03473 |                  MUST_RUN_UNIT(12,TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03474 |                  RPM(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03475 |                  LOCAL_LEAD_TIME(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03476 |                  FILE_SOURCE_INDEX(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03477 |                  ANNUAL_LEVELIZED_CAPITAL(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03478 |                  OP_LIFE(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03479 |                  ICAP_SWITCH_INDEX(0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03480 |                  ICAP_CONE_PRICE(0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03481 |                  HIGHEST_ANN_LEVEL_CAP(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03482 |                  ANNUAL_FUEL_COST(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03483 |                  HIGHEST_FUEL_COST(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03484 |                  FUEL_COST_PER_MWH(12,TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03485 |                  MONTHLY_CAP_MULT(12,TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03486 |                  AVERAGE_FUEL_PRICE(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03487 |                  VAR_OM_PER_MWH(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03488 |                  FUEL_COST_PER_MMBTU(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03489 |                  REVENUE_PER_MWH(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03490 |                  CAPACITY_REVENUE_PER_MWH(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03491 |                  CAPACITY_REVENUE_MM(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03492 |                  RPS_REVENUE_MM(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03493 |                  MRX_RPS_MX_UNIT_CLEARED(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03494 |                  RPS_REVENUE_PER_MWH(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03495 |                  ENERGY_REVENUE_MM(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03496 |                  ENERGY_REVENUE_PER_MWH(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03497 |                  HIGHEST_ENERGY_REV_PER_MWH(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03498 |                  HIGHEST_STRIKE_PRICE(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03499 |                  HIGHEST_MRX_MARGIN(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03500 |                  HIGHEST_MRX_CF(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03501 |                  HIGHEST_MARKET_COST(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03502 |                  HIGHEST_MRX_ENERGY(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03503 |                  HIGHEST_RFT(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03504 |                  HIGHEST_RPM(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03505 |                  EMISSIONS_PER_MWH(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03506 |                  FOM_PER_MWH(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03507 |                  LEVELIZED_CAP_PER_MWH(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03508 |                  FIXED_COST_PER_MWH(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03509 |                  MRX_ICAP_INDEX(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03510 |                  LOCAL_CHRONO_MARKET_PRICES(8784,UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03511 |                  RESET_CHRONO_MARKET_PRICES(8784,UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03512 |                  VOM_COST_MM(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03513 |                  EMISSIONS_COST_MM(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03514 |                  FOM_COST_MM(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03515 |                  IOTA_BY_CN(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03516 |                  TRANS_GROUP_ID(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03517 |                  TG_CAPACITY_MW(0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03518 |                  TG_PEAK_MW(0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03519 |                FirmTransfer(0:UPPER_TRANS_GROUP,0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03520 |                  CM_Net_Transfer(0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03521 |                  TG_Net_Transfer(0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03522 |                  PA_Net_Transfer(0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03523 |                  NUMBER_DIRECT_INTERCONNECTS(0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03524 |                  DIRECT_INTERCONNECT_TG(0:UPPER_TRANS_GROUP, &|
+00066 cap_objt.f90                   (f90) 03525 |                                               0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03526 |                  HIGHEST_TG_ICAP_REV_PER_KWYR(0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03527 |                  HIGHEST_OPTION_FOR_TG(0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03528 |                  TransmissionConstraint(0:UPPER_TRANS_GROUP, &|
+00066 cap_objt.f90                   (f90) 03529 |                                                 0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03530 |                  MaxTransmissionConstraint(0:UPPER_TRANS_GROUP, &|
+00066 cap_objt.f90                   (f90) 03531 |                                                 0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03532 |                  TransferValue(0:UPPER_TRANS_GROUP, &|
+00066 cap_objt.f90                   (f90) 03533 |                                                 0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03534 |                  TG_RESERVE_MARGIN(0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03535 |                  PLANNING_AREA_ID(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03536 |                  PA_CAPACITY_MW(0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03537 |                  CM_CAPACITY_MW(0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03538 |                  PA_PEAK_MW(0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03539 |                  CM_PEAK_MW(0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03540 |                  PA_RESERVE_MARGIN(0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03541 |                  CM_RESERVE_MARGIN(0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03542 |                  CM_MAX_NET_ENRG_MARG_PER_KWYR(0:UPPER_TRANS_GROUP), &|
+00066 cap_objt.f90                   (f90) 03543 |                  ICAP_DEMAND_CURVE_MULT(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03544 |                  HIGHEST_CF(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03545 |                  CONE_COST_PER_KWYR(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03546 |                  CONE_DEMAND_CURVE_ADJ_PER_KWYR( &|
+00066 cap_objt.f90                   (f90) 03547 |                                                MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03548 |                  EAS_PROFIT_PER_KWYR(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03549 |                  NET_MARGIN_PER_KWYR(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03550 |                  ICAP_REVENUE_PER_KWYR(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03551 |                  HEAT_RATE(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03552 |                  HIGHEST_HEAT_RATE(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03553 |                  HIGHEST_ANNUAL_UNITS(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03554 |                  HIGHEST_MARKET_REVENUE(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03555 |                  HIGHEST_MARGIN_PER_KWYR(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03556 |                  HIGHEST_FUEL_COST_PER_MWH(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03557 |                  HIGHEST_VAR_OM_PER_MWH(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03558 |                  HIGHEST_FUEL_COST_PER_MMBTU(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03559 |                  HIGHEST_EMISSIONS_PER_MWH(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03560 |                  HIGHEST_FOM_PER_MWH(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03561 |                  HIGHEST_LEVEL_CAP_PER_MWH(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03562 |                  HIGHEST_VOM_COST_MM(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03563 |                  HIGHEST_EMISSIONS_COST_MM(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03564 |                  HIGHEST_FOM_COST_MM(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03565 |                  FIX_OM_COST(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03566 |                  CAPACITY_PLANNING_MW(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03567 |                  RPS_PERCENT(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03568 |                  FIRST_CF(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03569 |                  ANNUAL_VARIABLE_COST(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03570 |                  VARIABLE_COST_MM(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03571 |                  FIXED_COST_MM(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03572 |                  HIGHEST_SCREEN_CAPACITY(MX_RES_P_YEAR), &|
+00066 cap_objt.f90                   (f90) 03573 |                  MARKET_REVENUE(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03574 |                  HIGHEST_ENERGY(-1:TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03575 |                  MARKET_COST(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03576 |                  NET_MARGIN(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03577 |                  NET_MARGIN_INTERVAL(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03578 |                  THIS_YEAR_PLUS_LEAD_TIME(TOTAL_ALL_OPTIONS), &|
+00066 cap_objt.f90                   (f90) 03579 |                  MARKET_CUM_REVENUE(0:HIGHEST_INTERVAL), &|
+00066 cap_objt.f90                   (f90) 03580 |                  MARKET_DURATION(0:HIGHEST_INTERVAL), &|
+00066 cap_objt.f90                   (f90) 03581 |                  MARKET_PRICE(0:HIGHEST_INTERVAL))|
+00067 cap_objt.f90                   (f90) 04184 |         ALLOCATE(MULTI_AREA_NAME(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04185 |                      PA_PLANNING_RESERVE_MARGIN(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04186 |                      CM_PLANNING_RESERVE_MARGIN(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04187 |                     PA_PEAK_AFTER_INTERRUPTIBLE(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04188 |                     PEAK_AFTER_INTERRUPTIBLE_TG(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04189 |                      TG_PLANNING_RESERVE_MARGIN(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04190 |                     CM_PEAK_AFTER_INTERRUPTIBLE(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04191 |                        PA_PLANNING_CAPACITY(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04192 |                        CM_PLANNING_CAPACITY(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04193 |                        CM_IOTA(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04194 |                           MAXIMUM_RM_PA(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04195 |                         CURRENT_TARGET_RATIO_PA(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04196 |                            PA_ICAP_REVENUE_MULT(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04197 |                            CM_ICAP_REVENUE_MULT(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04198 |                       CM_TOT_ANN_CAPACITY_ADDED(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04199 |                           TG_PLANNING_CAPACITY(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04200 |                           TG_2_PLANNING_AREA(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04201 |                           TG_2_CAPACITY_MARKET(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04202 |                     TOTAL_ANNUAL_CAPACITY_ADDED(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04203 |                  TG_TOTAL_ANNUAL_CAPACITY_ADDED(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04204 |                          MAXIMUM_ANNUAL_MRX_CAP(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04205 |                          MINIMUM_ANNUAL_MRX_CAP(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04206 |                            MINIMUM_TG_MRX_CAP(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04207 |                            MAXIMUM_TG_MRX_CAP(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04208 |                            CO2_EMISSIONS_CAP(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04209 |                    CO2_EMISS_REDUCTION_REQUIRED(0:UPPER_TRANS_GROUP), &|
+00067 cap_objt.f90                   (f90) 04210 |                            CO2_EMISSIONS(0:UPPER_TRANS_GROUP))|
+00068 cap_objt.f90                   (f90) 06540 |            ALLOCATE(MRX_RPS_MX_CURVE_MARGIN(HO,PA), &|
+00068 cap_objt.f90                   (f90) 06541 |                     MRX_RPS_MX_CURVE_REVENUE(HO,PA), &|
+00068 cap_objt.f90                   (f90) 06542 |                     MRX_RPS_MX_CURVE_COST(HO,PA), &|
+00068 cap_objt.f90                   (f90) 06543 |                     MRX_RPS_MX_CURVE_UMWH(HO,PA), &|
+00068 cap_objt.f90                   (f90) 06544 |                     MRX_RPS_MX_CURVE_MWH(HO,PA), &|
+00068 cap_objt.f90                   (f90) 06545 |                     MRX_RPS_MX_OPTION_NO(PA), &|
+00068 cap_objt.f90                   (f90) 06546 |                     MRX_RPS_MX_CURVE_INDEX(HO,PA), &|
+00068 cap_objt.f90                   (f90) 06547 |                     MRX_RPS_MX_OPTION_INDEX(HO,PA), &|
+00068 cap_objt.f90                   (f90) 06548 |                     MRX_RPS_MX_NEXT_CN_INDEX(HO,PA), &|
+00068 cap_objt.f90                   (f90) 06549 |                     RPS_REC_PRICE_BY(PA), &|
+00068 cap_objt.f90                   (f90) 06550 |                     RPS_GEN_PRICE_BY(PA))|
+00069 cap_objt.f90                   (f90) 10267 |         ALLOCATE(LAST_RESOURCE_ADDED(MAX(INT(1,2),UPPER_TRANS_GROUP)))|
+00070 cap_objt.f90                   (f90) 10280 |            ALLOCATE(OPTION_NAME(TOTAL_ALL_OPTIONS), &|
+00070 cap_objt.f90                   (f90) 10281 |                                     OPTION_POSITION(TOTAL_ALL_OPTIONS))|
+00071 cap_objt.f90                   (f90) 10409 |         ALLOCATE(SCREEN_SLOPE(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10410 |                  SCREEN_INTERCEPT(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10411 |                  SCREEN_CAPACITY(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10412 |                  EQUIVALENT_CAPACITY(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10413 |                  RPS_HOURS(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10414 |                  RPS_OPTION(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10415 |                  RPS_ENERGY(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10416 |                  RPS_MULT(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10417 |                  ANNUAL_FIXED_COST(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10418 |                  STRIKE_PRICE(TOTAL_ALL_OPTIONS,13), &|
+00071 cap_objt.f90                   (f90) 10419 |                  TRANSACTION_GROUP(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10420 |                  STATE_PROVINCE(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10421 |                  FILE_SOURCE_INDEX(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10422 |                  RESOURCE_TYPE_INDEX(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10423 |                  LOCAL_RESOURCE_INDEX(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10424 |                  LOCAL_ANNUAL_UNITS(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10425 |                  RESOURCE_COUNTER(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10426 |                  LOCAL_LEAD_TIME(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10427 |                  ANNUAL_LEVELIZED_CAPITAL(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10428 |                  ANNUAL_FUEL_COST(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10429 |                  FUEL_COST_PER_MWH(TOTAL_ALL_OPTIONS,13), &|
+00071 cap_objt.f90                   (f90) 10430 |                  EXPANSION_CO2(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10431 |                  VAR_OM_PER_MWH(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10432 |                  FIX_OM_COST(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10433 |                  ANNUAL_ENERGY(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10434 |                  ANNUAL_VARIABLE_COST(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10435 |                  MARKET_REVENUE(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10436 |                  HIGHEST_ENERGY(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10437 |                  MARKET_COST(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10438 |                  NET_MARGIN(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10439 |                  NET_MARGIN_PER_KWYR(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10440 |                  NET_MARGIN_INTERVAL(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10441 |                  THIS_YEAR_PLUS_LEAD_TIME(TOTAL_ALL_OPTIONS), &|
+00071 cap_objt.f90                   (f90) 10442 |                  MARKET_CUM_REVENUE(0:HIGHEST_INTERVAL, &|
+00071 cap_objt.f90                   (f90) 10443 |                                                   UPPER_TRANS_GROUP), &|
+00071 cap_objt.f90                   (f90) 10444 |                  MARKET_DURATION(0:HIGHEST_INTERVAL, &|
+00071 cap_objt.f90                   (f90) 10445 |                                                   UPPER_TRANS_GROUP), &|
+00071 cap_objt.f90                   (f90) 10446 |                  MARKET_PRICE(0:HIGHEST_INTERVAL, &|
+00071 cap_objt.f90                   (f90) 10447 |                                                   UPPER_TRANS_GROUP), &|
+00071 cap_objt.f90                   (f90) 10448 |                  MRX_ICAP_UNIT_LINK(0:UPPER_TRANS_GROUP))|
+00072 cap_objt.f90                   (f90) 10846 |         ALLOCATE(MULTI_AREA_NAME(0:UPPER_TRANS_GROUP), &|
+00072 cap_objt.f90                   (f90) 10847 |                   PLANNING_RESERVE_MARGIN(0:UPPER_TRANS_GROUP), &|
+00072 cap_objt.f90                   (f90) 10848 |                   PEAK_AFTER_INTERRUPTIBLE(0:UPPER_TRANS_GROUP), &|
+00072 cap_objt.f90                   (f90) 10849 |                   PLANNING_CAPACITY(0:UPPER_TRANS_GROUP), &|
+00072 cap_objt.f90                   (f90) 10850 |                   TG_2_PLANNING_AREA(0:UPPER_TRANS_GROUP), &|
+00072 cap_objt.f90                   (f90) 10851 |                   CURRENT_TARGET_RATIO_PA(0:UPPER_TRANS_GROUP), &|
+00072 cap_objt.f90                   (f90) 10852 |                   MAXIMUM_RM_PA(0:UPPER_TRANS_GROUP), &|
+00072 cap_objt.f90                   (f90) 10853 |                   TOTAL_ANNUAL_CAPACITY_ADDED(0:UPPER_TRANS_GROUP), &|
+00072 cap_objt.f90                   (f90) 10854 |                  TG_TOTAL_ANNUAL_CAPACITY_ADDED(0:UPPER_TRANS_GROUP), &|
+00072 cap_objt.f90                   (f90) 10855 |                   MAXIMUM_ANNUAL_MRX_CAP(0:UPPER_TRANS_GROUP), &|
+00072 cap_objt.f90                   (f90) 10856 |                   ICAP_REVENUE_MULT(0:UPPER_TRANS_GROUP), &|
+00072 cap_objt.f90                   (f90) 10857 |                   MINIMUM_ANNUAL_MRX_CAP(0:UPPER_TRANS_GROUP), &|
+00072 cap_objt.f90                   (f90) 10858 |                   MINIMUM_TG_MRX_CAP(0:UPPER_TRANS_GROUP), &|
+00072 cap_objt.f90                   (f90) 10859 |                   MAXIMUM_TG_MRX_CAP(0:UPPER_TRANS_GROUP), &|
+00072 cap_objt.f90                   (f90) 10860 |                   CO2_EMISSIONS_CAP(0:UPPER_TRANS_GROUP), &|
+00072 cap_objt.f90                   (f90) 10861 |                   CO2_EMISS_REDUCTION_REQUIRED(0:UPPER_TRANS_GROUP), &|
+00072 cap_objt.f90                   (f90) 10862 |                   CO2_EMISSIONS(0:UPPER_TRANS_GROUP))|
+00073 cap_objt.f90                   (f90) 12022 |         ALLOCATE(CO2_EMISSIONS_CAP(0:UPPER_TRANS_GROUP), &|
+00073 cap_objt.f90                   (f90) 12023 |                  CO2_EMISS_REDUCTION_REQUIRED(0:UPPER_TRANS_GROUP), &|
+00073 cap_objt.f90                   (f90) 12024 |                  CO2_EMISSIONS(0:UPPER_TRANS_GROUP))|
