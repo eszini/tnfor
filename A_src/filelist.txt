@@ -9,6 +9,7 @@ p3_mas.sh
 p4_ini.sh
 p5_lco.sh
 r1_todos.sh
+r7_crear_repo.sh
 r8_borrar.sh
 r8_crear_repo.sh
 r8_includes.sh
