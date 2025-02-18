@@ -1,0 +1,135 @@
+Type ( 9)          src:                       |cat2objt.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:   102 (    0 -  5254) |allocate(temp_asset_class_pointer(1024))|
+block starts at line  :    20                 |SUBROUTINE CAT2_OBJECT|
+block ends   at line  :   362                 |END|
+line to insert check  :   106 (   20 -   365) |TEMP_ASSET_CLASS_POINTER = 0|
+key used              :     1                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |cat2objt.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:   178 (    0 -  5259) |allocate(bc_asset_class_pointer(max_bc_class_id_num))|
+block starts at line  :    20                 |SUBROUTINE CAT2_OBJECT|
+block ends   at line  :   367                 |END|
+line to insert check  :   179 (   20 -   367) |BC_ASSET_CLASS_POINTER(1:MAX_BC_CLASS_ID_NUM) = &|
+key used              :     2                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |cat2objt.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:   216 (    0 -  5261) |allocate(temp_asset_class_pointer(1024))|
+block starts at line  :    20                 |SUBROUTINE CAT2_OBJECT|
+block ends   at line  :   369                 |END|
+line to insert check  :   217 (   20 -   369) |TEMP_ASSET_CLASS_POINTER = 0|
+key used              :     3                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |cat2objt.f90|
+Allocate number       :     4                 | 
+alloc sentence in line:   302 (    0 -  5263) |allocate(ol_asset_class_pointer(max_ol_class_id_num))|
+block starts at line  :    20                 |SUBROUTINE CAT2_OBJECT|
+block ends   at line  :   371                 |END|
+line to insert check  :   303 (   20 -   371) |OL_ASSET_CLASS_POINTER(1:MAX_OL_CLASS_ID_NUM) = &|
+key used              :     4                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |cat2objt.f90|
+Allocate number       :     5                 | 
+alloc sentence in line:   486 (    0 -  5265) |allocate(asset_class_pointer(max_asset_class_num))|
+block starts at line  :   375                 |FUNCTION UPDATE_CATAWBA_CONTRACT_DATA()|
+block ends   at line  :   825                 |END|
+line to insert check  :   490 (  375 -   828) |CALL RETURN_CATAWBA_POINTERS(ASSET_CLASS_POINTER)|
+key used              :     5                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |cat2objt.f90|
+Allocate number       :     6                 | 
+alloc sentence in line:   504 (    0 -  5270) |allocate(catawba_revenues(0:num_of_asset_classes, &|
+block starts at line  :   375                 |FUNCTION UPDATE_CATAWBA_CONTRACT_DATA()|
+block ends   at line  :   830                 |END|
+line to replace allocs:   503  (  8 allocs)   |ALLOCATE(CATAWBA_REVENUES(0:NUM_OF_ASSET_CLASSES, &| 
+key used              :     6                 | 
+allocate added        :     1                 |allocate(catawba_revenues(0:num_of_asset_classes,avail_data_years),stat=stv_er)|
+allocate added        :     2                 |allocate(catawba_expenses(0:num_of_asset_classes,avail_data_years),stat=stv_er)|
+allocate added        :     3                 |allocate(catawba_capacity_payments(0:num_of_asset_classes,avail_data_years),stat=stv_er)|
+allocate added        :     4                 |allocate(catawba_level_cap_payments(0:num_of_asset_classes,avail_data_years),stat=stv_er)|
+allocate added        :     5                 |allocate(catawba_other_net_revenues(0:num_of_asset_classes,avail_data_years),stat=stv_er)|
+allocate added        :     6                 |allocate(catawba_deferred_taxes_cr(0:num_of_asset_classes,avail_data_years),stat=stv_er)|
+allocate added        :     7                 |allocate(catawba_deferred_debits(0:num_of_asset_classes,0:avail_data_years),stat=stv_er)|
+allocate added        :     8                 |allocate(catawba_deferred_taxes_bal_cr(0:num_of_asset_classes,0:avail_data_years),stat=stv_er)|
+------------------------------------------( 5)-
+Type (15)          src:                       |cat2objt.f90|
+Allocate number       :     7                 | 
+alloc sentence in line:   530 (    0 -  5271) |allocate(asset_class_list(avail_data_years), &|
+block starts at line  :   375                 |FUNCTION UPDATE_CATAWBA_CONTRACT_DATA()|
+block ends   at line  :   831                 |END|
+line to replace allocs:   529  (  2 allocs)   |ALLOCATE(ASSET_CLASS_LIST(AVAIL_DATA_YEARS), &| 
+key used              :    14                 | 
+allocate added        :     1                 |allocate(asset_class_list(avail_data_years),stat=stv_er)|
+allocate added        :     2                 |allocate(asset_allocation_list(avail_data_years),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 9)          src:                       |cat2objt.f90|
+Allocate number       :     8                 | 
+alloc sentence in line:   928 (    0 -  5274) |allocate(asset_class_pointer(max_asset_class_num))|
+block starts at line  :   845                 |SUBROUTINE READ_CPL_DATA(R_YEAR) ! PER SKIP. 8/96. KATHY ANDERSON. 8/11/97. GAT.|
+block ends   at line  :  1080                 |END|
+line to insert check  :   932 (  845 -  1083) |CALL RETURN_CPL_POINTERS(ASSET_CLASS_POINTER)|
+key used              :    16                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |cat2objt.f90|
+Allocate number       :     9                 | 
+alloc sentence in line:   938 (    0 -  5279) |allocate(asset_class_list(avail_data_years), &|
+block starts at line  :   845                 |SUBROUTINE READ_CPL_DATA(R_YEAR) ! PER SKIP. 8/96. KATHY ANDERSON. 8/11/97. GAT.|
+block ends   at line  :  1085                 |END|
+line to replace allocs:   937  (  2 allocs)   |ALLOCATE(ASSET_CLASS_LIST(AVAIL_DATA_YEARS), &| 
+key used              :    17                 | 
+allocate added        :     1                 |allocate(asset_class_list(avail_data_years),stat=stv_er)|
+allocate added        :     2                 |allocate(asset_allocation_list(avail_data_years),stat=stv_er)|
+------------------------------------------( 5)-
+Type (15)          src:                       |cat2objt.f90|
+Allocate number       :    10                 | 
+alloc sentence in line:  2109 (    0 -  5282) |allocate(pa_hourly_loads(hours_increment), &|
+block starts at line  :  1555                 |RECURSIVE SUBROUTINE CPL_PA_DISPATCH(LPROB2,SYSTEM_LODDUR, &|
+block ends   at line  :  4393                 |END|
+line to replace allocs:  2111  (  3 allocs)   |ALLOCATE(PA_HOURLY_LOADS(HOURS_INCREMENT), &| 
+key used              :    19                 | 
+allocate added        :     1                 |allocate(pa_hourly_loads(hours_increment),stat=stv_er)|
+allocate added        :     2                 |allocate(sorted_hour(hours_increment),stat=stv_er)|
+allocate added        :     3                 |allocate(pa_sepa_hour(hours_increment),stat=stv_er)|
+------------------------------------------( 5)-
+Type (15)          src:                       |cat2objt.f90|
+Allocate number       :    11                 | 
+alloc sentence in line:  2135 (    0 -  5289) |allocate(pa_unit_index(no_pa_resources), &|
+block starts at line  :  1555                 |RECURSIVE SUBROUTINE CPL_PA_DISPATCH(LPROB2,SYSTEM_LODDUR, &|
+block ends   at line  :  4400                 |END|
+line to replace allocs:  2134  (  5 allocs)   |ALLOCATE(PA_UNIT_INDEX(NO_PA_RESOURCES), &| 
+key used              :    22                 | 
+allocate added        :     1                 |allocate(pa_unit_index(no_pa_resources),stat=stv_er)|
+allocate added        :     2                 |allocate(pa_energy(2,no_pa_resources),stat=stv_er)|
+allocate added        :     3                 |allocate(effective_capacity(2,no_pa_resources),stat=stv_er)|
+allocate added        :     4                 |allocate(left(no_pa_resources),stat=stv_er)|
+allocate added        :     5                 |allocate(right(no_pa_resources),stat=stv_er)|
+------------------------------------------( 5)-
+Type (15)          src:                       |cat2objt.f90|
+Allocate number       :    12                 | 
+alloc sentence in line:  2157 (    0 -  5295) |allocate(ann_pa_energy(0:no_pa_resources+1), &|
+block starts at line  :  1555                 |RECURSIVE SUBROUTINE CPL_PA_DISPATCH(LPROB2,SYSTEM_LODDUR, &|
+block ends   at line  :  4406                 |END|
+line to replace allocs:  2156  ( 11 allocs)   |ALLOCATE(ANN_PA_ENERGY(0:NO_PA_RESOURCES+1), &| 
+key used              :    27                 | 
+allocate added        :     1                 |allocate(ann_pa_energy(0:no_pa_resources+1),stat=stv_er)|
+allocate added        :     2                 |allocate(ann_sys_energy(no_pa_units+no_pa_accts),stat=stv_er)|
+allocate added        :     3                 |allocate(ann_pa_cap(0:no_pa_resources+1),stat=stv_er)|
+allocate added        :     4                 |allocate(ann_sys_cap(no_pa_units+no_pa_accts),stat=stv_er)|
+allocate added        :     5                 |allocate(ann_pa_cost(0:no_pa_resources+1),stat=stv_er)|
+allocate added        :     6                 |allocate(ann_sys_cost(no_pa_units+no_pa_accts),stat=stv_er)|
+allocate added        :     7                 |allocate(mon_sys_energy(no_pa_units+no_pa_accts,0:12),stat=stv_er)|
+allocate added        :     8                 |allocate(mon_sys_cost(no_pa_units+no_pa_accts,0:12),stat=stv_er)|
+allocate added        :     9                 |allocate(mon_pa_cap(0:no_pa_resources+1,0:12),stat=stv_er)|
+allocate added        :    10                 |allocate(mon_pa_energy(0:no_pa_resources+1,0:12),stat=stv_er)|
+allocate added        :    11                 |allocate(mon_pa_cost(no_pa_units+no_pa_accts,0:12),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 9)          src:                       |cat2objt.f90|
+Allocate number       :    13                 | 
+alloc sentence in line:  4505 (    0 -  5307) |allocate(monthly_pa_loads(local_hours))|
+block starts at line  :  4423                 |SUBROUTINE CREATE_CPL_LDC( ISEAS, &|
+block ends   at line  :  4618                 |END|
+line to insert check  :  4509 ( 4423 -  4621) |!|
+key used              :    38                 | 
+------------------------------------------( 1)-

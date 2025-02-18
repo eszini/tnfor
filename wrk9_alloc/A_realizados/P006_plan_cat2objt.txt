@@ -1,0 +1,13 @@
+(09) sl sv       cat2objt.f90                   |allocate(temp_asset_class_pointer(1024))|
+(09) sl sv       cat2objt.f90                   |allocate(bc_asset_class_pointer(max_bc_class_id_num))|
+(09) sl sv       cat2objt.f90                   |allocate(temp_asset_class_pointer(1024))|
+(09) sl sv       cat2objt.f90                   |allocate(ol_asset_class_pointer(max_ol_class_id_num))|
+(09) sl sv       cat2objt.f90                   |allocate(asset_class_pointer(max_asset_class_num))|
+(15) ml mv       cat2objt.f90                   |allocate(catawba_revenues(0:num_of_asset_classes,avail_data_years),catawba_expenses(0:num_of_asset_classes,  avail_data_years),catawba_capacity_payments(0:num_of_asset_classes,  avail_data_years),catawba_level_cap_payments(0:num_of_asset_classes,  avail_data_years),catawba_other_net_revenues(0:num_of_asset_classes,  avail_data_years),catawba_deferred_taxes_cr(0:num_of_asset_classes,  avail_data_years),catawba_deferred_debits(0:num_of_asset_classes,  0:avail_data_years),catawba_deferred_taxes_bal_cr(0:num_of_asset_classes,  0:avail_data_years))|
+(15) ml mv       cat2objt.f90                   |allocate(asset_class_list(avail_data_years),asset_allocation_list(avail_data_years))|
+(09) sl sv       cat2objt.f90                   |allocate(asset_class_pointer(max_asset_class_num))|
+(15) ml mv       cat2objt.f90                   |allocate(asset_class_list(avail_data_years),asset_allocation_list(avail_data_years))|
+(15) ml mv       cat2objt.f90                   |allocate(pa_hourly_loads(hours_increment),sorted_hour(hours_increment),pa_sepa_hour(hours_increment))|
+(15) ml mv       cat2objt.f90                   |allocate(pa_unit_index(no_pa_resources),pa_energy(2,no_pa_resources),effective_capacity(2,no_pa_resources),left(no_pa_resources),right(no_pa_resources))|
+(15) ml mv       cat2objt.f90                   |allocate(ann_pa_energy(0:no_pa_resources+1),ann_sys_energy(no_pa_units+no_pa_accts),ann_pa_cap(0:no_pa_resources+1),ann_sys_cap(no_pa_units+no_pa_accts),ann_pa_cost(0:no_pa_resources+1),ann_sys_cost(no_pa_units+no_pa_accts),mon_sys_energy(no_pa_units+no_pa_accts,0:12),mon_sys_cost(no_pa_units+no_pa_accts,0:12),mon_pa_cap(0:no_pa_resources+1,0:12),mon_pa_energy(0:no_pa_resources+1,0:12),mon_pa_cost(no_pa_units+no_pa_accts,0:12))|
+(09) sl sv       cat2objt.f90                   |allocate(monthly_pa_loads(local_hours))|

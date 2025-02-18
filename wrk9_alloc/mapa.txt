@@ -1,0 +1,10 @@
+Type (11)          src:                       |p1.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:    12 (    0 -    17) |allocate(var1,var2)|
+block starts at line  :     5                 |subroutine pepe()|
+block ends   at line  :    16                 |end|
+line to replace allocs:    14  (  2 allocs)   |allocate(var1,var2)| 
+key used              :     1                 | 
+allocate added        :     1                 |allocate(,stat=stv_er)|
+allocate added        :     2                 |allocate(,stat=stv_er)|
+------------------------------------------( 5)-

@@ -1,0 +1,1 @@
+00001 p1.f90                         (f90) 00012 |    allocate(var1,var2)|

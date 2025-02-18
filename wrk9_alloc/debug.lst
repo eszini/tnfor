@@ -1,10 +1,10 @@
 0,pro_exec9
 0,ex9_p1
-0,ex9_p2
-0,hacer_lugar
+1,ex9_p2
+1,hacer_lugar
 0,cantidad_de_vars
 0,e_name
-0,chg_alloc_g15
+1,chg_alloc_g15
 0,busco_use_miscmod
 0,busco_pri_l
 0,tiene_use
@@ -13,4 +13,4 @@
 0,es_alloc_t1
 0,agregar_stv
 0,agregar_stv_2
-0,mover_bulk
+1,mover_bulk
