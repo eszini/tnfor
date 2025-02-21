@@ -1,0 +1,2098 @@
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:  1343 (    0 - 10768) |allocate(multi_area_name(0:max_trans_groups))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10769                 |END|
+line to insert check  :  1347 (    6 - 10772) |ALLOCATE(TRANS_GROUP_LOAD_ACTIVE(MAX_TRANS_GROUP_NUMBER))|
+key used              :     1                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:  1349 (    0 - 10773) |allocate(trans_group_load_active(max_trans_group_number))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10774                 |END|
+line to insert check  :  1350 (    6 - 10774) |ALLOCATE(REPORT_AREA_ACTIVE(MAX_TRANS_GROUPS))|
+key used              :     2                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:  1352 (    0 - 10775) |allocate(report_area_active(max_trans_groups))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10776                 |END|
+line to insert check  :  1353 (    6 - 10776) |!|
+key used              :     3                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :     4                 | 
+alloc sentence in line:  1475 (    0 - 10777) |allocate(monthly_market_prices(hours_in_month))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10778                 |END|
+line to insert check  :  1476 (    6 - 10778) |MONTHLY_MARKET_PRICES = 0.0|
+key used              :     4                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :     5                 | 
+alloc sentence in line:  1662 (    0 - 10779) |allocate(annual_market_prices(annual_hours)) |
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10780                 |END|
+line to insert check  :  1663 (    6 - 10780) |!|
+key used              :     5                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :     6                 | 
+alloc sentence in line:  1804 (    0 - 10781) |allocate(annual_market_prices(annual_hours)) |
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10782                 |END|
+line to insert check  :  1805 (    6 - 10782) |ANNUAL_MARKET_PRICES = 0.|
+key used              :     6                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :     7                 | 
+alloc sentence in line:  2006 (    0 - 10783) |allocate( &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10784                 |END|
+line to insert check  :  2008 (    6 - 10784) |ALLOCATE( &|
+key used              :     7                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :     8                 | 
+alloc sentence in line:  2010 (    0 - 10785) |allocate( &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10786                 |END|
+line to insert check  :  2012 (    6 - 10786) |ALLOCATE(MAX_USER_W_PRICE(UPPER_TRANS_GROUP))|
+key used              :     8                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :     9                 | 
+alloc sentence in line:  2014 (    0 - 10787) |allocate(max_user_w_price(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10788                 |END|
+line to insert check  :  2015 (    6 - 10788) |ALLOCATE(MIN_USER_W_PRICE(UPPER_TRANS_GROUP))|
+key used              :     9                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    10                 | 
+alloc sentence in line:  2017 (    0 - 10789) |allocate(min_user_w_price(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10790                 |END|
+line to insert check  :  2018 (    6 - 10790) |ALLOCATE(MONTH_MAX_USER_W_PRICE(12,UPPER_TRANS_GROUP))|
+key used              :    10                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    11                 | 
+alloc sentence in line:  2020 (    0 - 10791) |allocate(month_max_user_w_price(12,upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10792                 |END|
+line to insert check  :  2021 (    6 - 10792) |ALLOCATE(MONTH_MIN_USER_W_PRICE(12,UPPER_TRANS_GROUP))|
+key used              :    11                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    12                 | 
+alloc sentence in line:  2023 (    0 - 10793) |allocate(month_min_user_w_price(12,upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10794                 |END|
+line to insert check  :  2024 (    6 - 10794) |ALLOCATE(SUM_USER_W_PRICES(UPPER_TRANS_GROUP))|
+key used              :    12                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    13                 | 
+alloc sentence in line:  2026 (    0 - 10795) |allocate(sum_user_w_prices(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10796                 |END|
+line to insert check  :  2027 (    6 - 10796) |ALLOCATE(MONTH_SUM_USER_W_PRICES(12,UPPER_TRANS_GROUP))|
+key used              :    13                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    14                 | 
+alloc sentence in line:  2029 (    0 - 10797) |allocate(month_sum_user_w_prices(12,upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10798                 |END|
+line to insert check  :  2030 (    6 - 10798) |TEMP_I4 = INT(ANNUAL_HOURS)*INT(UPPER_TRANS_GROUP)|
+key used              :    14                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :    15                 | 
+alloc sentence in line:  2513 (    0 - 10799) |allocate( &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10800                 |END|
+line to insert check  :  2515 (    6 - 10800) |ALLOCATE(MAX_USER_W_PRICE(UPPER_TRANS_GROUP))|
+key used              :    15                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    16                 | 
+alloc sentence in line:  2517 (    0 - 10801) |allocate(max_user_w_price(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10802                 |END|
+line to insert check  :  2518 (    6 - 10802) |ALLOCATE(MIN_USER_W_PRICE(UPPER_TRANS_GROUP))|
+key used              :    16                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    17                 | 
+alloc sentence in line:  2520 (    0 - 10803) |allocate(min_user_w_price(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10804                 |END|
+line to insert check  :  2521 (    6 - 10804) |ALLOCATE(MONTH_MAX_USER_W_PRICE(12,UPPER_TRANS_GROUP))|
+key used              :    17                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    18                 | 
+alloc sentence in line:  2523 (    0 - 10805) |allocate(month_max_user_w_price(12,upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10806                 |END|
+line to insert check  :  2524 (    6 - 10806) |ALLOCATE(MONTH_MIN_USER_W_PRICE(12,UPPER_TRANS_GROUP))|
+key used              :    18                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    19                 | 
+alloc sentence in line:  2526 (    0 - 10807) |allocate(month_min_user_w_price(12,upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10808                 |END|
+line to insert check  :  2527 (    6 - 10808) |ALLOCATE(SUM_USER_W_PRICES(UPPER_TRANS_GROUP))|
+key used              :    19                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    20                 | 
+alloc sentence in line:  2529 (    0 - 10809) |allocate(sum_user_w_prices(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10810                 |END|
+line to insert check  :  2530 (    6 - 10810) |ALLOCATE(MONTH_SUM_USER_W_PRICES(12,UPPER_TRANS_GROUP))|
+key used              :    20                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    21                 | 
+alloc sentence in line:  2532 (    0 - 10811) |allocate(month_sum_user_w_prices(12,upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10812                 |END|
+line to insert check  :  2533 (    6 - 10812) |USER_MARKET_PRICES = 0.|
+key used              :    21                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    22                 | 
+alloc sentence in line:  2911 (    0 - 10813) |allocate(m_annual_purchase_energy(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10814                 |END|
+line to insert check  :  2912 (    6 - 10814) |ALLOCATE(M_ANNUAL_PURCHASE_COSTS(UPPER_TRANS_GROUP))|
+key used              :    22                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    23                 | 
+alloc sentence in line:  2914 (    0 - 10815) |allocate(m_annual_purchase_costs(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10816                 |END|
+line to insert check  :  2915 (    6 - 10816) |ALLOCATE(M_ANNUAL_SALES_ENERGY(UPPER_TRANS_GROUP))|
+key used              :    23                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    24                 | 
+alloc sentence in line:  2917 (    0 - 10817) |allocate(m_annual_sales_energy(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10818                 |END|
+line to insert check  :  2918 (    6 - 10818) |ALLOCATE(M_ANNUAL_SALES_REVENUES(UPPER_TRANS_GROUP))|
+key used              :    24                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    25                 | 
+alloc sentence in line:  2920 (    0 - 10819) |allocate(m_annual_sales_revenues(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10820                 |END|
+line to insert check  :  2921 (    6 - 10820) |ALLOCATE(M_ANNUAL_NATIVE_COST(UPPER_TRANS_GROUP))|
+key used              :    25                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    26                 | 
+alloc sentence in line:  2923 (    0 - 10821) |allocate(m_annual_native_cost(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10822                 |END|
+line to insert check  :  2924 (    6 - 10822) |ALLOCATE(M_ANNUAL_LOAD_B4_SALES(UPPER_TRANS_GROUP))|
+key used              :    26                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    27                 | 
+alloc sentence in line:  2926 (    0 - 10823) |allocate(m_annual_load_b4_sales(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10824                 |END|
+line to insert check  :  2927 (    6 - 10824) |ALLOCATE(M_ANNUAL_PRO_COST_B4_SALES(UPPER_TRANS_GROUP))|
+key used              :    27                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    28                 | 
+alloc sentence in line:  2929 (    0 - 10825) |allocate(m_annual_pro_cost_b4_sales(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10826                 |END|
+line to insert check  :  2930 (    6 - 10826) |ALLOCATE(M_ANNUAL_LOAD_AFTER_SALES(UPPER_TRANS_GROUP))|
+key used              :    28                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    29                 | 
+alloc sentence in line:  2932 (    0 - 10827) |allocate(m_annual_load_after_sales(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10828                 |END|
+line to insert check  :  2933 (    6 - 10828) |ALLOCATE(M_ANNUAL_PRO_COST_AFTER_SALES(UPPER_TRANS_GROUP))|
+key used              :    29                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    30                 | 
+alloc sentence in line:  2935 (    0 - 10829) |allocate(m_annual_pro_cost_after_sales(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10830                 |END|
+line to insert check  :  2936 (    6 - 10830) |ALLOCATE(ANNUAL_TL_MWH(UPPER_TRANS_GROUP))|
+key used              :    30                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    31                 | 
+alloc sentence in line:  2938 (    0 - 10831) |allocate(annual_tl_mwh(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10832                 |END|
+line to insert check  :  2939 (    6 - 10832) |ALLOCATE(ANNUAL_TL_PEAK(UPPER_TRANS_GROUP))|
+key used              :    31                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    32                 | 
+alloc sentence in line:  2941 (    0 - 10833) |allocate(annual_tl_peak(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10834                 |END|
+line to insert check  :  2942 (    6 - 10834) |ALLOCATE(ANNUAL_COIN_PEAK(0:UPPER_TRANS_GROUP))|
+key used              :    32                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    33                 | 
+alloc sentence in line:  2944 (    0 - 10835) |allocate(annual_coin_peak(0:upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10836                 |END|
+line to insert check  :  2945 (    6 - 10836) |ALLOCATE(ANNUAL_TL_BASE(UPPER_TRANS_GROUP))|
+key used              :    33                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    34                 | 
+alloc sentence in line:  2947 (    0 - 10837) |allocate(annual_tl_base(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10838                 |END|
+line to insert check  :  2948 (    6 - 10838) |ALLOCATE(ANNUAL_TL_HYDRO_MWH(UPPER_TRANS_GROUP))|
+key used              :    34                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    35                 | 
+alloc sentence in line:  2950 (    0 - 10839) |allocate(annual_tl_hydro_mwh(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10840                 |END|
+line to insert check  :  2951 (    6 - 10840) |ALLOCATE(ANNUAL_TL_HYDRO_MW(UPPER_TRANS_GROUP))|
+key used              :    35                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    36                 | 
+alloc sentence in line:  2953 (    0 - 10841) |allocate(annual_tl_hydro_mw(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10842                 |END|
+line to insert check  :  2954 (    6 - 10842) |ALLOCATE(ANNUAL_TL_HYDRO_ROR(UPPER_TRANS_GROUP))|
+key used              :    36                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    37                 | 
+alloc sentence in line:  2956 (    0 - 10843) |allocate(annual_tl_hydro_ror(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10844                 |END|
+line to insert check  :  2957 (    6 - 10844) |ALLOCATE(ANNUAL_SPINNING_MWH(UPPER_TRANS_GROUP))|
+key used              :    37                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    38                 | 
+alloc sentence in line:  2959 (    0 - 10845) |allocate(annual_spinning_mwh(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10846                 |END|
+line to insert check  :  2960 (    6 - 10846) |ALLOCATE(ANNUAL_EFFECTIVE_CAPACITY(UPPER_TRANS_GROUP))|
+key used              :    38                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    39                 | 
+alloc sentence in line:  2962 (    0 - 10847) |allocate(annual_effective_capacity(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10848                 |END|
+line to insert check  :  2963 (    6 - 10848) |ALLOCATE(ANNUAL_UNSERVED_ENERGY(UPPER_TRANS_GROUP,0:12))|
+key used              :    39                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    40                 | 
+alloc sentence in line:  2965 (    0 - 10849) |allocate(annual_unserved_energy(upper_trans_group,0:12))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10850                 |END|
+line to insert check  :  2966 (    6 - 10850) |ALLOCATE(ANNUAL_ABOVE_RESOURCES(UPPER_TRANS_GROUP,0:12))|
+key used              :    40                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    41                 | 
+alloc sentence in line:  2968 (    0 - 10851) |allocate(annual_above_resources(upper_trans_group,0:12))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10852                 |END|
+line to insert check  :  2969 (    6 - 10852) |ALLOCATE(ANNUAL_UNSERVED_ENERGY_COST(UPPER_TRANS_GROUP))|
+key used              :    41                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    42                 | 
+alloc sentence in line:  2971 (    0 - 10853) |allocate(annual_unserved_energy_cost(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10854                 |END|
+line to insert check  :  2972 (    6 - 10854) |ALLOCATE(ANNUAL_COST_ABOVE_RESOURCES(UPPER_TRANS_GROUP, &|
+key used              :    42                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :    43                 | 
+alloc sentence in line:  2974 (    0 - 10855) |allocate(annual_cost_above_resources(upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10856                 |END|
+line to insert check  :  2976 (    6 - 10856) |!|
+key used              :    43                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :    44                 | 
+alloc sentence in line:  2979 (    0 - 10857) |allocate(annual_product_price(0:upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10858                 |END|
+line to insert check  :  2981 (    6 - 10858) |ALLOCATE(ANNUAL_PRODUCT_QUANTITY(0:UPPER_TRANS_GROUP, &|
+key used              :    44                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :    45                 | 
+alloc sentence in line:  2983 (    0 - 10859) |allocate(annual_product_quantity(0:upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10860                 |END|
+line to insert check  :  2985 (    6 - 10860) |ALLOCATE(ANNUAL_PRODUCT_HEATRATE(0:UPPER_TRANS_GROUP, &|
+key used              :    45                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :    46                 | 
+alloc sentence in line:  2987 (    0 - 10861) |allocate(annual_product_heatrate(0:upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10862                 |END|
+line to insert check  :  2989 (    6 - 10862) |ALLOCATE(ANNUAL_PRODUCT_MARGINAL_FUEL(0:UPPER_TRANS_GROUP, &|
+key used              :    46                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :    47                 | 
+alloc sentence in line:  2991 (    0 - 10863) |allocate(annual_product_marginal_fuel(0:upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10864                 |END|
+line to insert check  :  2993 (    6 - 10864) |ALLOCATE(ANNUAL_PRODUCT_FUEL_PRICE(0:UPPER_TRANS_GROUP, &|
+key used              :    47                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :    48                 | 
+alloc sentence in line:  2995 (    0 - 10865) |allocate(annual_product_fuel_price(0:upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10866                 |END|
+line to insert check  :  2997 (    6 - 10866) |ALLOCATE(ANNUAL_PRODUCT_HOURS(NUM_PRODUCTS))|
+key used              :    48                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    49                 | 
+alloc sentence in line:  2999 (    0 - 10867) |allocate(annual_product_hours(num_products))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10868                 |END|
+line to insert check  :  3000 (    6 - 10868) ||
+key used              :    49                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |transobj.f90|
+Allocate number       :    50                 | 
+alloc sentence in line:  3019 (    0 - 10869) |allocate(system_hourly_loads( &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10870                 |END|
+line to replace allocs:  3018  (  2 allocs)   |ALLOCATE(SYSTEM_HOURLY_LOADS( &| 
+key used              :    50                 | 
+allocate added        :     1                 |allocate(system_hourly_loads(r_hours_in_month,0:max_trans_loads),stat=stv_er)|
+allocate added        :     2                 |allocate(day_of_week(31,0:max_trans_loads),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    51                 | 
+alloc sentence in line:  3144 (    0 - 10871) |allocate(m_monthly_pro_cost_after_sales(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10872                 |END|
+line to insert check  :  3145 (    6 - 10872) |ALLOCATE(M_MONTHLY_PRO_COST_B4_SALES(UPPER_TRANS_GROUP))|
+key used              :    52                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    52                 | 
+alloc sentence in line:  3147 (    0 - 10873) |allocate(m_monthly_pro_cost_b4_sales(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10874                 |END|
+line to insert check  :  3148 (    6 - 10874) |ALLOCATE(M_MONTHLY_LOAD_B4_SALES(UPPER_TRANS_GROUP))|
+key used              :    53                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    53                 | 
+alloc sentence in line:  3150 (    0 - 10875) |allocate(m_monthly_load_b4_sales(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10876                 |END|
+line to insert check  :  3151 (    6 - 10876) |ALLOCATE(M_MONTHLY_LOAD_AFTER_SALES(UPPER_TRANS_GROUP))|
+key used              :    54                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    54                 | 
+alloc sentence in line:  3153 (    0 - 10877) |allocate(m_monthly_load_after_sales(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10878                 |END|
+line to insert check  :  3154 (    6 - 10878) |ALLOCATE(M_PURCHASE_ENERGY(UPPER_TRANS_GROUP))|
+key used              :    55                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    55                 | 
+alloc sentence in line:  3156 (    0 - 10879) |allocate(m_purchase_energy(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10880                 |END|
+line to insert check  :  3157 (    6 - 10880) |ALLOCATE(M_PURCHASE_COSTS(UPPER_TRANS_GROUP))|
+key used              :    56                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    56                 | 
+alloc sentence in line:  3159 (    0 - 10881) |allocate(m_purchase_costs(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10882                 |END|
+line to insert check  :  3160 (    6 - 10882) |ALLOCATE(MARKET_COST_ABOVE_RESOURCES(UPPER_TRANS_GROUP))|
+key used              :    57                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    57                 | 
+alloc sentence in line:  3162 (    0 - 10883) |allocate(market_cost_above_resources(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10884                 |END|
+line to insert check  :  3163 (    6 - 10884) |ALLOCATE(M_SALES_ENERGY(UPPER_TRANS_GROUP))|
+key used              :    58                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    58                 | 
+alloc sentence in line:  3165 (    0 - 10885) |allocate(m_sales_energy(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10886                 |END|
+line to insert check  :  3166 (    6 - 10886) |ALLOCATE(M_SALES_REVENUES(UPPER_TRANS_GROUP))|
+key used              :    59                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    59                 | 
+alloc sentence in line:  3168 (    0 - 10887) |allocate(m_sales_revenues(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10888                 |END|
+line to insert check  :  3169 (    6 - 10888) |ALLOCATE(M_NATIVE_COST(UPPER_TRANS_GROUP))|
+key used              :    60                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    60                 | 
+alloc sentence in line:  3171 (    0 - 10889) |allocate(m_native_cost(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10890                 |END|
+line to insert check  :  3172 (    6 - 10890) |ALLOCATE(M_SPINNING_MWH(UPPER_TRANS_GROUP))|
+key used              :    61                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    61                 | 
+alloc sentence in line:  3174 (    0 - 10891) |allocate(m_spinning_mwh(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10892                 |END|
+line to insert check  :  3175 (    6 - 10892) |ALLOCATE(M_UNSERVED_ENERGY(UPPER_TRANS_GROUP))|
+key used              :    62                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    62                 | 
+alloc sentence in line:  3177 (    0 - 10893) |allocate(m_unserved_energy(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10894                 |END|
+line to insert check  :  3178 (    6 - 10894) |ALLOCATE(M_ABOVE_RESOURCES(UPPER_TRANS_GROUP))|
+key used              :    63                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    63                 | 
+alloc sentence in line:  3180 (    0 - 10895) |allocate(m_above_resources(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10896                 |END|
+line to insert check  :  3181 (    6 - 10896) |ALLOCATE(M_UNSERVED_ENERGY_COST(UPPER_TRANS_GROUP))|
+key used              :    64                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    64                 | 
+alloc sentence in line:  3183 (    0 - 10897) |allocate(m_unserved_energy_cost(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10898                 |END|
+line to insert check  :  3184 (    6 - 10898) |ALLOCATE(TRANS_ROR_CAPACITY(0:UPPER_TRANS_GROUP))|
+key used              :    65                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    65                 | 
+alloc sentence in line:  3186 (    0 - 10899) |allocate(trans_ror_capacity(0:upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10900                 |END|
+line to insert check  :  3187 (    6 - 10900) |ALLOCATE(HOURLY_DUMP_CAPACITY(UPPER_TRANS_GROUP))|
+key used              :    66                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    66                 | 
+alloc sentence in line:  3189 (    0 - 10901) |allocate(hourly_dump_capacity(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10902                 |END|
+line to insert check  :  3190 (    6 - 10902) |ALLOCATE(TRANS_MUST_CAPACITY(UPPER_TRANS_GROUP))|
+key used              :    67                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    67                 | 
+alloc sentence in line:  3192 (    0 - 10903) |allocate(trans_must_capacity(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10904                 |END|
+line to insert check  :  3193 (    6 - 10904) |ALLOCATE(TRANS_SPINNING_CAPACITY(UPPER_TRANS_GROUP))|
+key used              :    68                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    68                 | 
+alloc sentence in line:  3195 (    0 - 10905) |allocate(trans_spinning_capacity(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10906                 |END|
+line to insert check  :  3196 (    6 - 10906) |ALLOCATE(AREA_PRICE_MULT(UPPER_TRANS_GROUP))|
+key used              :    69                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    69                 | 
+alloc sentence in line:  3198 (    0 - 10907) |allocate(area_price_mult(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10908                 |END|
+line to insert check  :  3199 (    6 - 10908) |ALLOCATE(TG_USING_PRICE_DISTN(UPPER_TRANS_GROUP))|
+key used              :    70                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    70                 | 
+alloc sentence in line:  3201 (    0 - 10909) |allocate(tg_using_price_distn(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10910                 |END|
+line to insert check  :  3202 (    6 - 10910) |ALLOCATE(HOURLY_SPINNING_CAPACITY(UPPER_TRANS_GROUP))|
+key used              :    71                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    71                 | 
+alloc sentence in line:  3204 (    0 - 10911) |allocate(hourly_spinning_capacity(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10912                 |END|
+line to insert check  :  3205 (    6 - 10912) |ALLOCATE(DAILY_PEAK(UPPER_TRANS_GROUP))|
+key used              :    72                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    72                 | 
+alloc sentence in line:  3207 (    0 - 10913) |allocate(daily_peak(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10914                 |END|
+line to insert check  :  3208 (    6 - 10914) |ALLOCATE(OFF_PEAK_SPINNING_CAPACITY(UPPER_TRANS_GROUP))|
+key used              :    73                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    73                 | 
+alloc sentence in line:  3210 (    0 - 10915) |allocate(off_peak_spinning_capacity(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10916                 |END|
+line to insert check  :  3211 (    6 - 10916) |ALLOCATE(TRANS_RAMP_UP(UPPER_TRANS_GROUP))|
+key used              :    74                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    74                 | 
+alloc sentence in line:  3213 (    0 - 10917) |allocate(trans_ramp_up(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10918                 |END|
+line to insert check  :  3214 (    6 - 10918) |ALLOCATE(TRANS_RAMP_DOWN(UPPER_TRANS_GROUP))|
+key used              :    75                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    75                 | 
+alloc sentence in line:  3216 (    0 - 10919) |allocate(trans_ramp_down(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10920                 |END|
+line to insert check  :  3217 (    6 - 10920) |ALLOCATE(TRANS_MAX_IMPORT(UPPER_TRANS_GROUP))|
+key used              :    76                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    76                 | 
+alloc sentence in line:  3219 (    0 - 10921) |allocate(trans_max_import(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10922                 |END|
+line to insert check  :  3220 (    6 - 10922) |ALLOCATE(TRANS_MAX_EXPORT(UPPER_TRANS_GROUP))|
+key used              :    77                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    77                 | 
+alloc sentence in line:  3222 (    0 - 10923) |allocate(trans_max_export(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10924                 |END|
+line to insert check  :  3223 (    6 - 10924) |ALLOCATE(LAST_HOUR_SELL(UPPER_TRANS_GROUP))|
+key used              :    78                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    78                 | 
+alloc sentence in line:  3225 (    0 - 10925) |allocate(last_hour_sell(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10926                 |END|
+line to insert check  :  3226 (    6 - 10926) |ALLOCATE(MONTH_COIN_PEAK(0:UPPER_TRANS_GROUP))|
+key used              :    79                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    79                 | 
+alloc sentence in line:  3228 (    0 - 10927) |allocate(month_coin_peak(0:upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10928                 |END|
+line to insert check  :  3229 (    6 - 10928) |ALLOCATE(MONTH_NON_COIN_PEAK(0:UPPER_TRANS_GROUP))|
+key used              :    80                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    80                 | 
+alloc sentence in line:  3231 (    0 - 10929) |allocate(month_non_coin_peak(0:upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10930                 |END|
+line to insert check  :  3232 (    6 - 10930) |ALLOCATE(HOURLY_TRANSACTION(UPPER_TRANS_GROUP))|
+key used              :    81                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    81                 | 
+alloc sentence in line:  3234 (    0 - 10931) |allocate(hourly_transaction(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10932                 |END|
+line to insert check  :  3235 (    6 - 10932) |ALLOCATE(MAX_HOURLY_IMPORT(UPPER_TRANS_GROUP))|
+key used              :    82                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    82                 | 
+alloc sentence in line:  3237 (    0 - 10933) |allocate(max_hourly_import(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10934                 |END|
+line to insert check  :  3238 (    6 - 10934) |ALLOCATE(MAX_HOURLY_EXPORT(UPPER_TRANS_GROUP))|
+key used              :    83                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    83                 | 
+alloc sentence in line:  3240 (    0 - 10935) |allocate(max_hourly_export(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10936                 |END|
+line to insert check  :  3241 (    6 - 10936) |ALLOCATE(SCARCITY_MULT(0:UPPER_TRANS_GROUP))|
+key used              :    84                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    84                 | 
+alloc sentence in line:  3243 (    0 - 10937) |allocate(scarcity_mult(0:upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10938                 |END|
+line to insert check  :  3244 (    6 - 10938) |ALLOCATE(SYSTEM_STORAGE(0:800,0:UPPER_TRANS_GROUP))|
+key used              :    85                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    85                 | 
+alloc sentence in line:  3246 (    0 - 10939) |allocate(system_storage(0:800,0:upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10940                 |END|
+line to insert check  :  3247 (    6 - 10940) |ALLOCATE(SYSTEM_DERIVATIVES(0:800,UPPER_TRANS_GROUP))|
+key used              :    86                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    86                 | 
+alloc sentence in line:  3249 (    0 - 10941) |allocate(system_derivatives(0:800,upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10942                 |END|
+line to insert check  :  3250 (    6 - 10942) |entry market_price_transactions_init|
+key used              :    87                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    87                 | 
+alloc sentence in line:  3383 (    0 - 10943) |allocate(fiscal_purchase_energy(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10944                 |END|
+line to insert check  :  3384 (    6 - 10944) |ALLOCATE(FISCAL_PURCHASE_COSTS(UPPER_TRANS_GROUP))|
+key used              :    88                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    88                 | 
+alloc sentence in line:  3386 (    0 - 10945) |allocate(fiscal_purchase_costs(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10946                 |END|
+line to insert check  :  3387 (    6 - 10946) |ALLOCATE(FISCAL_SALES_ENERGY(UPPER_TRANS_GROUP))|
+key used              :    89                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    89                 | 
+alloc sentence in line:  3389 (    0 - 10947) |allocate(fiscal_sales_energy(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10948                 |END|
+line to insert check  :  3390 (    6 - 10948) |ALLOCATE(FISCAL_SALES_REVENUES(UPPER_TRANS_GROUP))|
+key used              :    90                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    90                 | 
+alloc sentence in line:  3392 (    0 - 10949) |allocate(fiscal_sales_revenues(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10950                 |END|
+line to insert check  :  3393 (    6 - 10950) |ALLOCATE(FISCAL_NATIVE_COST(UPPER_TRANS_GROUP))|
+key used              :    91                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    91                 | 
+alloc sentence in line:  3395 (    0 - 10951) |allocate(fiscal_native_cost(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10952                 |END|
+line to insert check  :  3396 (    6 - 10952) |ALLOCATE(FISCAL_LOAD_B4_SALES(UPPER_TRANS_GROUP))|
+key used              :    92                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    92                 | 
+alloc sentence in line:  3398 (    0 - 10953) |allocate(fiscal_load_b4_sales(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10954                 |END|
+line to insert check  :  3399 (    6 - 10954) |ALLOCATE(FISCAL_PRO_COST_B4_SALES(UPPER_TRANS_GROUP))|
+key used              :    93                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    93                 | 
+alloc sentence in line:  3401 (    0 - 10955) |allocate(fiscal_pro_cost_b4_sales(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10956                 |END|
+line to insert check  :  3402 (    6 - 10956) |ALLOCATE(FISCAL_LOAD_AFTER_SALES(UPPER_TRANS_GROUP))|
+key used              :    94                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    94                 | 
+alloc sentence in line:  3404 (    0 - 10957) |allocate(fiscal_load_after_sales(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10958                 |END|
+line to insert check  :  3405 (    6 - 10958) |ALLOCATE(FISCAL_PRO_COST_AFTER_SALES(UPPER_TRANS_GROUP))|
+key used              :    95                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    95                 | 
+alloc sentence in line:  3407 (    0 - 10959) |allocate(fiscal_pro_cost_after_sales(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10960                 |END|
+line to insert check  :  3408 (    6 - 10960) |ALLOCATE(FISCAL_TL_MWH(UPPER_TRANS_GROUP))|
+key used              :    96                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    96                 | 
+alloc sentence in line:  3410 (    0 - 10961) |allocate(fiscal_tl_mwh(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10962                 |END|
+line to insert check  :  3411 (    6 - 10962) |ALLOCATE(FISCAL_TL_PEAK(UPPER_TRANS_GROUP))|
+key used              :    97                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    97                 | 
+alloc sentence in line:  3413 (    0 - 10963) |allocate(fiscal_tl_peak(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10964                 |END|
+line to insert check  :  3414 (    6 - 10964) |ALLOCATE(FISCAL_COIN_PEAK(0:UPPER_TRANS_GROUP))|
+key used              :    98                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    98                 | 
+alloc sentence in line:  3416 (    0 - 10965) |allocate(fiscal_coin_peak(0:upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10966                 |END|
+line to insert check  :  3417 (    6 - 10966) |ALLOCATE(FISCAL_TL_BASE(UPPER_TRANS_GROUP))|
+key used              :    99                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :    99                 | 
+alloc sentence in line:  3419 (    0 - 10967) |allocate(fiscal_tl_base(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10968                 |END|
+line to insert check  :  3420 (    6 - 10968) |ALLOCATE(FISCAL_TL_HYDRO_MWH(UPPER_TRANS_GROUP))|
+key used              :   100                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   100                 | 
+alloc sentence in line:  3422 (    0 - 10969) |allocate(fiscal_tl_hydro_mwh(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10970                 |END|
+line to insert check  :  3423 (    6 - 10970) |ALLOCATE(FISCAL_TL_HYDRO_MW(UPPER_TRANS_GROUP))|
+key used              :   101                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   101                 | 
+alloc sentence in line:  3425 (    0 - 10971) |allocate(fiscal_tl_hydro_mw(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10972                 |END|
+line to insert check  :  3426 (    6 - 10972) |ALLOCATE(FISCAL_TL_HYDRO_ROR(UPPER_TRANS_GROUP))|
+key used              :   102                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   102                 | 
+alloc sentence in line:  3428 (    0 - 10973) |allocate(fiscal_tl_hydro_ror(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10974                 |END|
+line to insert check  :  3429 (    6 - 10974) |ALLOCATE(FISCAL_SPINNING_MWH(UPPER_TRANS_GROUP))|
+key used              :   103                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   103                 | 
+alloc sentence in line:  3431 (    0 - 10975) |allocate(fiscal_spinning_mwh(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10976                 |END|
+line to insert check  :  3432 (    6 - 10976) |ALLOCATE(FISCAL_EFFECTIVE_CAPACITY(UPPER_TRANS_GROUP))|
+key used              :   104                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   104                 | 
+alloc sentence in line:  3434 (    0 - 10977) |allocate(fiscal_effective_capacity(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10978                 |END|
+line to insert check  :  3435 (    6 - 10978) |ALLOCATE(FISCAL_UNSERVED_ENERGY(UPPER_TRANS_GROUP))|
+key used              :   105                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   105                 | 
+alloc sentence in line:  3437 (    0 - 10979) |allocate(fiscal_unserved_energy(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10980                 |END|
+line to insert check  :  3438 (    6 - 10980) |ALLOCATE(FISCAL_ABOVE_RESOURCES(UPPER_TRANS_GROUP))|
+key used              :   106                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   106                 | 
+alloc sentence in line:  3440 (    0 - 10981) |allocate(fiscal_above_resources(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10982                 |END|
+line to insert check  :  3441 (    6 - 10982) |ALLOCATE(FISCAL_UNSERVED_ENERGY_COST(UPPER_TRANS_GROUP))|
+key used              :   107                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   107                 | 
+alloc sentence in line:  3443 (    0 - 10983) |allocate(fiscal_unserved_energy_cost(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10984                 |END|
+line to insert check  :  3444 (    6 - 10984) |ALLOCATE(FISCAL_COST_ABOVE_RESOURCES(UPPER_TRANS_GROUP))|
+key used              :   108                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   108                 | 
+alloc sentence in line:  3446 (    0 - 10985) |allocate(fiscal_cost_above_resources(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10986                 |END|
+line to insert check  :  3447 (    6 - 10986) ||
+key used              :   109                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   109                 | 
+alloc sentence in line:  3484 (    0 - 10987) |allocate(all_month_prices(r_hours_in_month, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10988                 |END|
+line to insert check  :  3486 (    6 - 10988) |ALL_MONTH_PRICES = 0.|
+key used              :   110                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   110                 | 
+alloc sentence in line:  3495 (    0 - 10989) |allocate(hourly_marginal_cost(0:upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10990                 |END|
+line to insert check  :  3496 (    6 - 10990) |ALLOCATE(HOURLY_LAST_PRICE(0:UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   111                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   111                 | 
+alloc sentence in line:  3498 (    0 - 10991) |allocate(hourly_last_price(0:upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10992                 |END|
+line to insert check  :  3499 (    6 - 10992) |ALLOCATE(DAILY_PRODUCTS_CAPACITY( &|
+key used              :   112                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   112                 | 
+alloc sentence in line:  3501 (    0 - 10993) |allocate(daily_products_capacity( &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10994                 |END|
+line to insert check  :  3503 (    6 - 10994) |ALLOCATE(HOURLY_IN_PRICE(0:UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   113                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   113                 | 
+alloc sentence in line:  3505 (    0 - 10995) |allocate(hourly_in_price(0:upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10996                 |END|
+line to insert check  :  3506 (    6 - 10996) |ALLOCATE(HOURLY_MC_AFTER(0:UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   114                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   114                 | 
+alloc sentence in line:  3508 (    0 - 10997) |allocate(hourly_mc_after(0:upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 10998                 |END|
+line to insert check  :  3509 (    6 - 10998) |ALLOCATE(SYSTEM_OUTPUT(DAILY_HOURS))|
+key used              :   115                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   115                 | 
+alloc sentence in line:  3511 (    0 - 10999) |allocate(system_output(daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11000                 |END|
+line to insert check  :  3512 (    6 - 11000) |ALLOCATE(TIE_FLOW(0:UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   116                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   116                 | 
+alloc sentence in line:  3514 (    0 - 11001) |allocate(tie_flow(0:upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11002                 |END|
+line to insert check  :  3515 (    6 - 11002) |ALLOCATE(HOURLY_LOAD_B4_SALES(0:UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   117                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   117                 | 
+alloc sentence in line:  3517 (    0 - 11003) |allocate(hourly_load_b4_sales(0:upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11004                 |END|
+line to insert check  :  3518 (    6 - 11004) |ALLOCATE(HOURLY_TRANSFER_MWH(UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   118                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   118                 | 
+alloc sentence in line:  3520 (    0 - 11005) |allocate(hourly_transfer_mwh(upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11006                 |END|
+line to insert check  :  3521 (    6 - 11006) |ALLOCATE(HOURLY_FORWARDS_4_MONTH(UPPER_TRANS_GROUP, &|
+key used              :   119                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   119                 | 
+alloc sentence in line:  3523 (    0 - 11007) |allocate(hourly_forwards_4_month(upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11008                 |END|
+line to insert check  :  3525 (    6 - 11008) |ALLOCATE(DAILY_MARKET_PRICE(DAILY_HOURS))|
+key used              :   120                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   120                 | 
+alloc sentence in line:  3527 (    0 - 11009) |allocate(daily_market_price(daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11010                 |END|
+line to insert check  :  3528 (    6 - 11010) |ALLOCATE(HOURLY_LOADS(0:UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   121                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   121                 | 
+alloc sentence in line:  3530 (    0 - 11011) |allocate(hourly_loads(0:upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11012                 |END|
+line to insert check  :  3531 (    6 - 11012) |ALLOCATE(TEST_HOURLY_REVENUE(0:UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   122                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   122                 | 
+alloc sentence in line:  3533 (    0 - 11013) |allocate(test_hourly_revenue(0:upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11014                 |END|
+line to insert check  :  3534 (    6 - 11014) |ALLOCATE(MARGINAL_COST_DELTA(0:UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   123                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   123                 | 
+alloc sentence in line:  3536 (    0 - 11015) |allocate(marginal_cost_delta(0:upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11016                 |END|
+line to insert check  :  3537 (    6 - 11016) |ALLOCATE(HOURLY_PRO_COST_AFTER_SALES(0:UPPER_TRANS_GROUP, &|
+key used              :   124                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   124                 | 
+alloc sentence in line:  3539 (    0 - 11017) |allocate(hourly_pro_cost_after_sales(0:upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11018                 |END|
+line to insert check  :  3541 (    6 - 11018) |ALLOCATE(HOURLY_CAPACITY(0:UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   125                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   125                 | 
+alloc sentence in line:  3543 (    0 - 11019) |allocate(hourly_capacity(0:upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11020                 |END|
+line to insert check  :  3544 (    6 - 11020) |ALLOCATE(HOURLY_EUE(0:UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   126                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   126                 | 
+alloc sentence in line:  3546 (    0 - 11021) |allocate(hourly_eue(0:upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11022                 |END|
+line to insert check  :  3547 (    6 - 11022) |ALLOCATE(HOURLY_DERIVATIVES(0:UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   127                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   127                 | 
+alloc sentence in line:  3549 (    0 - 11023) |allocate(hourly_derivatives(0:upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11024                 |END|
+line to insert check  :  3550 (    6 - 11024) |ALLOCATE(HOURLY_PRO_COST_B4_SALES(0:UPPER_TRANS_GROUP, &|
+key used              :   128                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   128                 | 
+alloc sentence in line:  3552 (    0 - 11025) |allocate(hourly_pro_cost_b4_sales(0:upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11026                 |END|
+line to insert check  :  3554 (    6 - 11026) |ALLOCATE(HOURLY_INCREMENTAL_COST(0:UPPER_TRANS_GROUP, &|
+key used              :   129                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   129                 | 
+alloc sentence in line:  3556 (    0 - 11027) |allocate(hourly_incremental_cost(0:upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11028                 |END|
+line to insert check  :  3558 (    6 - 11028) |ALLOCATE(HOURLY_LAMDA(0:UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   130                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   130                 | 
+alloc sentence in line:  3560 (    0 - 11029) |allocate(hourly_lamda(0:upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11030                 |END|
+line to insert check  :  3561 (    6 - 11030) |ALLOCATE(PRODUCT_PRICE(0:UPPER_TRANS_GROUP,NUM_PRODUCTS))|
+key used              :   131                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   131                 | 
+alloc sentence in line:  3563 (    0 - 11031) |allocate(product_price(0:upper_trans_group,num_products))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11032                 |END|
+line to insert check  :  3564 (    6 - 11032) |ALLOCATE(PRODUCT_VOLATILITY(0:UPPER_TRANS_GROUP,NUM_PRODUCTS))|
+key used              :   132                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   132                 | 
+alloc sentence in line:  3566 (    0 - 11033) |allocate(product_volatility(0:upper_trans_group,num_products))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11034                 |END|
+line to insert check  :  3567 (    6 - 11034) |ALLOCATE(PRODUCT_QUANTITY(0:UPPER_TRANS_GROUP,NUM_PRODUCTS))|
+key used              :   133                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   133                 | 
+alloc sentence in line:  3569 (    0 - 11035) |allocate(product_quantity(0:upper_trans_group,num_products))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11036                 |END|
+line to insert check  :  3570 (    6 - 11036) |ALLOCATE(PRODUCT_HEATRATE(0:UPPER_TRANS_GROUP,NUM_PRODUCTS))|
+key used              :   134                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   134                 | 
+alloc sentence in line:  3572 (    0 - 11037) |allocate(product_heatrate(0:upper_trans_group,num_products))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11038                 |END|
+line to insert check  :  3573 (    6 - 11038) |ALLOCATE(PRODUCT_MARGINAL_FUEL(0:UPPER_TRANS_GROUP, &|
+key used              :   135                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   135                 | 
+alloc sentence in line:  3575 (    0 - 11039) |allocate(product_marginal_fuel(0:upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11040                 |END|
+line to insert check  :  3577 (    6 - 11040) |ALLOCATE(PRODUCT_FUEL_PRICE(0:UPPER_TRANS_GROUP,NUM_PRODUCTS))|
+key used              :   136                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   136                 | 
+alloc sentence in line:  3579 (    0 - 11041) |allocate(product_fuel_price(0:upper_trans_group,num_products))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11042                 |END|
+line to insert check  :  3580 (    6 - 11042) |ALLOCATE(PRODUCT_HOURS(NUM_PRODUCTS))|
+key used              :   137                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   137                 | 
+alloc sentence in line:  3582 (    0 - 11043) |allocate(product_hours(num_products))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11044                 |END|
+line to insert check  :  3583 (    6 - 11044) |ALLOCATE(PRODUCT_MEAN_RETURN(0:UPPER_TRANS_GROUP,NUM_PRODUCTS))|
+key used              :   138                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   138                 | 
+alloc sentence in line:  3585 (    0 - 11045) |allocate(product_mean_return(0:upper_trans_group,num_products))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11046                 |END|
+line to insert check  :  3586 (    6 - 11046) |ALLOCATE(SUM_SQUARED_DEVIATIONS( &|
+key used              :   139                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   139                 | 
+alloc sentence in line:  3588 (    0 - 11047) |allocate(sum_squared_deviations( &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11048                 |END|
+line to insert check  :  3590 (    6 - 11048) |ALLOCATE(PRODUCT_DAILY_RETURN( &|
+key used              :   140                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   140                 | 
+alloc sentence in line:  3592 (    0 - 11049) |allocate(product_daily_return( &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11050                 |END|
+line to insert check  :  3594 (    6 - 11050) |ALLOCATE(SCARCITY_COST(0:UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   141                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   141                 | 
+alloc sentence in line:  3596 (    0 - 11051) |allocate(scarcity_cost(0:upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11052                 |END|
+line to insert check  :  3597 (    6 - 11052) |ALLOCATE(ENERGY_COST(0:UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   142                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   142                 | 
+alloc sentence in line:  3599 (    0 - 11053) |allocate(energy_cost(0:upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11054                 |END|
+line to insert check  :  3600 (    6 - 11054) |!|
+key used              :   143                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   143                 | 
+alloc sentence in line:  3621 (    0 - 11055) |allocate(product_last_price( &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11056                 |END|
+line to insert check  :  3623 (    6 - 11056) |PRODUCT_LAST_PRICE = 0.|
+key used              :   144                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   144                 | 
+alloc sentence in line:  6604 (    0 - 11057) |allocate(hourly_marginal_cost(0:upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11058                 |END|
+line to insert check  :  6605 (    6 - 11058) |ALLOCATE(LAST_TRANS_MC(0:UPPER_TRANS_GROUP))|
+key used              :   145                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   145                 | 
+alloc sentence in line:  6607 (    0 - 11059) |allocate(last_trans_mc(0:upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11060                 |END|
+line to insert check  :  6608 (    6 - 11060) |ALLOCATE(HOURLY_LAST_PRICE(0:UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   146                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   146                 | 
+alloc sentence in line:  6610 (    0 - 11061) |allocate(hourly_last_price(0:upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11062                 |END|
+line to insert check  :  6611 (    6 - 11062) |ALLOCATE(M_HOURLY_MC_B4_SALES(0:UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   147                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   147                 | 
+alloc sentence in line:  6613 (    0 - 11063) |allocate(m_hourly_mc_b4_sales(0:upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11064                 |END|
+line to insert check  :  6614 (    6 - 11064) |ALLOCATE(LAST_BUYER(UPPER_TRANS_GROUP))|
+key used              :   148                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   148                 | 
+alloc sentence in line:  6616 (    0 - 11065) |allocate(last_buyer(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11066                 |END|
+line to insert check  :  6617 (    6 - 11066) |ALLOCATE(LAST_SELLER(UPPER_TRANS_GROUP))|
+key used              :   149                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   149                 | 
+alloc sentence in line:  6619 (    0 - 11067) |allocate(last_seller(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11068                 |END|
+line to insert check  :  6620 (    6 - 11068) |ALLOCATE(PRICE_ANCHORED(UPPER_TRANS_GROUP))|
+key used              :   150                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   150                 | 
+alloc sentence in line:  6622 (    0 - 11069) |allocate(price_anchored(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11070                 |END|
+line to insert check  :  6623 (    6 - 11070) |ALLOCATE(HOURLY_LAMDA(UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   151                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   151                 | 
+alloc sentence in line:  6625 (    0 - 11071) |allocate(hourly_lamda(upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11072                 |END|
+line to insert check  :  6626 (    6 - 11072) |ALLOCATE(TRANSACTIONS_WITHIN_HOUR(DAILY_HOURS))|
+key used              :   152                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   152                 | 
+alloc sentence in line:  6628 (    0 - 11073) |allocate(transactions_within_hour(daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11074                 |END|
+line to insert check  :  6629 (    6 - 11074) |ALLOCATE(BUY_FOR_TRANSACTION(MAX_TRANS_WITHIN_HOUR))|
+key used              :   153                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   153                 | 
+alloc sentence in line:  6631 (    0 - 11075) |allocate(buy_for_transaction(max_trans_within_hour))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11076                 |END|
+line to insert check  :  6632 (    6 - 11076) |ALLOCATE(SELL_FOR_TRANSACTION(MAX_TRANS_WITHIN_HOUR))|
+key used              :   154                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   154                 | 
+alloc sentence in line:  6634 (    0 - 11077) |allocate(sell_for_transaction(max_trans_within_hour))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11078                 |END|
+line to insert check  :  6635 (    6 - 11078) |ALLOCATE(CUM_REDUNDANT_TRANSACTION(MAX_TRANS_WITHIN_HOUR))|
+key used              :   155                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   155                 | 
+alloc sentence in line:  6637 (    0 - 11079) |allocate(cum_redundant_transaction(max_trans_within_hour))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11080                 |END|
+line to insert check  :  6638 (    6 - 11080) |ALLOCATE(LAST_BUY_FOR_TRANSACTION(MAX_TRANS_WITHIN_HOUR))|
+key used              :   156                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   156                 | 
+alloc sentence in line:  6640 (    0 - 11081) |allocate(last_buy_for_transaction(max_trans_within_hour))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11082                 |END|
+line to insert check  :  6641 (    6 - 11082) |ALLOCATE(LAST_SELL_FOR_TRANSACTION(MAX_TRANS_WITHIN_HOUR))|
+key used              :   157                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   157                 | 
+alloc sentence in line:  6643 (    0 - 11083) |allocate(last_sell_for_transaction(max_trans_within_hour))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11084                 |END|
+line to insert check  :  6644 (    6 - 11084) |ALLOCATE(LONG_PATH_TRANSACTION(MAX_TRANS_WITHIN_HOUR))|
+key used              :   158                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   158                 | 
+alloc sentence in line:  6646 (    0 - 11085) |allocate(long_path_transaction(max_trans_within_hour))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11086                 |END|
+line to insert check  :  6647 (    6 - 11086) |ALLOCATE(MARGIN_FOR_TRANSACTION(MAX_TRANS_WITHIN_HOUR))|
+key used              :   159                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   159                 | 
+alloc sentence in line:  6649 (    0 - 11087) |allocate(margin_for_transaction(max_trans_within_hour))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11088                 |END|
+line to insert check  :  6650 (    6 - 11088) |ALLOCATE(MW_FOR_TRANSACTION(MAX_TRANS_WITHIN_HOUR))|
+key used              :   160                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   160                 | 
+alloc sentence in line:  6652 (    0 - 11089) |allocate(mw_for_transaction(max_trans_within_hour))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11090                 |END|
+line to insert check  :  6653 (    6 - 11090) |ALLOCATE(LAST_MW_FOR_TRANSACTION(MAX_TRANS_WITHIN_HOUR))|
+key used              :   161                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   161                 | 
+alloc sentence in line:  6655 (    0 - 11091) |allocate(last_mw_for_transaction(max_trans_within_hour))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11092                 |END|
+line to insert check  :  6656 (    6 - 11092) |ALLOCATE(TIE_FLOW(UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   162                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   162                 | 
+alloc sentence in line:  6658 (    0 - 11093) |allocate(tie_flow(upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11094                 |END|
+line to insert check  :  6659 (    6 - 11094) |ALLOCATE(MARGINAL_COST_DELTA(UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   163                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   163                 | 
+alloc sentence in line:  6661 (    0 - 11095) |allocate(marginal_cost_delta(upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11096                 |END|
+line to insert check  :  6662 (    6 - 11096) |ALLOCATE(M_HOURLY_LOADS(UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   164                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   164                 | 
+alloc sentence in line:  6664 (    0 - 11097) |allocate(m_hourly_loads(upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11098                 |END|
+line to insert check  :  6665 (    6 - 11098) |ALLOCATE(TEST_HOUR_TIE_LIMIT(UPPER_TRANS_GROUP, &|
+key used              :   165                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   165                 | 
+alloc sentence in line:  6667 (    0 - 11099) |allocate(test_hour_tie_limit(upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11100                 |END|
+line to insert check  :  6669 (    6 - 11100) |ALLOCATE(M_HOURLY_PRO_COST_AFTER_SALES(UPPER_TRANS_GROUP, &|
+key used              :   166                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   166                 | 
+alloc sentence in line:  6671 (    0 - 11101) |allocate(m_hourly_pro_cost_after_sales(upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11102                 |END|
+line to insert check  :  6673 (    6 - 11102) |ALLOCATE(HOURLY_CAPACITY(UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   167                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   167                 | 
+alloc sentence in line:  6675 (    0 - 11103) |allocate(hourly_capacity(upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11104                 |END|
+line to insert check  :  6676 (    6 - 11104) |ALLOCATE(HOURLY_DERIVATIVES(UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   168                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   168                 | 
+alloc sentence in line:  6678 (    0 - 11105) |allocate(hourly_derivatives(upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11106                 |END|
+line to insert check  :  6679 (    6 - 11106) |ALLOCATE(HOURLY_EUE(UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   169                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   169                 | 
+alloc sentence in line:  6681 (    0 - 11107) |allocate(hourly_eue(upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11108                 |END|
+line to insert check  :  6682 (    6 - 11108) |ALLOCATE(M_HOURLY_PRO_COST_B4_SALES(UPPER_TRANS_GROUP, &|
+key used              :   170                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   170                 | 
+alloc sentence in line:  6684 (    0 - 11109) |allocate(m_hourly_pro_cost_b4_sales(upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11110                 |END|
+line to insert check  :  6686 (    6 - 11110) |ALLOCATE(M_HOURLY_INCREMENTAL_COST(UPPER_TRANS_GROUP, &|
+key used              :   171                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   171                 | 
+alloc sentence in line:  6688 (    0 - 11111) |allocate(m_hourly_incremental_cost(upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11112                 |END|
+line to insert check  :  6690 (    6 - 11112) |ALLOCATE(HOURLY_SELL_MWH(TOTAL_BUYER_INDEX,TOTAL_BUYER_INDEX))|
+key used              :   172                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   172                 | 
+alloc sentence in line:  6692 (    0 - 11113) |allocate(hourly_sell_mwh(total_buyer_index,total_buyer_index))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11114                 |END|
+line to insert check  :  6693 (    6 - 11114) |ALLOCATE(MONTHLY_TRANSACTION_MWH(UPPER_TRANS_GROUP, &|
+key used              :   173                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   173                 | 
+alloc sentence in line:  6695 (    0 - 11115) |allocate(monthly_transaction_mwh(upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11116                 |END|
+line to insert check  :  6697 (    6 - 11116) |ALLOCATE(TOTAL_DELIVERED_COST(UPPER_TRANS_GROUP, &|
+key used              :   174                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   174                 | 
+alloc sentence in line:  6699 (    0 - 11117) |allocate(total_delivered_cost(upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11118                 |END|
+line to insert check  :  6701 (    6 - 11118) |ALLOCATE(SELLERS_LOCAL_CAPACITY(UPPER_TRANS_GROUP, &|
+key used              :   175                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   175                 | 
+alloc sentence in line:  6703 (    0 - 11119) |allocate(sellers_local_capacity(upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11120                 |END|
+line to insert check  :  6705 (    6 - 11120) |ALLOCATE(M_MONTHLY_PRO_COST_AFTER_SALES(UPPER_TRANS_GROUP))|
+key used              :   176                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   176                 | 
+alloc sentence in line:  6707 (    0 - 11121) |allocate(m_monthly_pro_cost_after_sales(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11122                 |END|
+line to insert check  :  6708 (    6 - 11122) |ALLOCATE(M_MONTHLY_PRO_COST_B4_SALES(UPPER_TRANS_GROUP))|
+key used              :   177                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   177                 | 
+alloc sentence in line:  6710 (    0 - 11123) |allocate(m_monthly_pro_cost_b4_sales(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11124                 |END|
+line to insert check  :  6711 (    6 - 11124) |ALLOCATE(M_MONTHLY_LOAD_B4_SALES(UPPER_TRANS_GROUP))|
+key used              :   178                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   178                 | 
+alloc sentence in line:  6713 (    0 - 11125) |allocate(m_monthly_load_b4_sales(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11126                 |END|
+line to insert check  :  6714 (    6 - 11126) |ALLOCATE(M_MONTHLY_LOAD_AFTER_SALES(UPPER_TRANS_GROUP))|
+key used              :   179                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   179                 | 
+alloc sentence in line:  6716 (    0 - 11127) |allocate(m_monthly_load_after_sales(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11128                 |END|
+line to insert check  :  6717 (    6 - 11128) |ALLOCATE(M_PURCHASE_ENERGY(UPPER_TRANS_GROUP))|
+key used              :   180                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   180                 | 
+alloc sentence in line:  6719 (    0 - 11129) |allocate(m_purchase_energy(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11130                 |END|
+line to insert check  :  6720 (    6 - 11130) |ALLOCATE(M_PURCHASE_COSTS(UPPER_TRANS_GROUP))|
+key used              :   181                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   181                 | 
+alloc sentence in line:  6722 (    0 - 11131) |allocate(m_purchase_costs(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11132                 |END|
+line to insert check  :  6723 (    6 - 11132) |ALLOCATE(MARKET_COST_ABOVE_RESOURCES(UPPER_TRANS_GROUP))|
+key used              :   182                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   182                 | 
+alloc sentence in line:  6725 (    0 - 11133) |allocate(market_cost_above_resources(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11134                 |END|
+line to insert check  :  6726 (    6 - 11134) |ALLOCATE(M_SALES_ENERGY(UPPER_TRANS_GROUP))|
+key used              :   183                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   183                 | 
+alloc sentence in line:  6728 (    0 - 11135) |allocate(m_sales_energy(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11136                 |END|
+line to insert check  :  6729 (    6 - 11136) |ALLOCATE(M_SALES_REVENUES(UPPER_TRANS_GROUP))|
+key used              :   184                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   184                 | 
+alloc sentence in line:  6731 (    0 - 11137) |allocate(m_sales_revenues(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11138                 |END|
+line to insert check  :  6732 (    6 - 11138) |ALLOCATE(M_NATIVE_COST(UPPER_TRANS_GROUP))|
+key used              :   185                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   185                 | 
+alloc sentence in line:  6734 (    0 - 11139) |allocate(m_native_cost(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11140                 |END|
+line to insert check  :  6735 (    6 - 11140) |ALLOCATE(M_SPINNING_MWH(UPPER_TRANS_GROUP))|
+key used              :   186                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   186                 | 
+alloc sentence in line:  6737 (    0 - 11141) |allocate(m_spinning_mwh(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11142                 |END|
+line to insert check  :  6738 (    6 - 11142) |ALLOCATE(ALLOWED_TRANSACTION_PAIR(UPPER_TRANS_GROUP, &|
+key used              :   187                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   187                 | 
+alloc sentence in line:  6740 (    0 - 11143) |allocate(allowed_transaction_pair(upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11144                 |END|
+line to insert check  :  6742 (    6 - 11144) |ALLOCATE(TRANSACTIONS_PER_HOUR(UPPER_TRANS_GROUP, &|
+key used              :   188                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   188                 | 
+alloc sentence in line:  6744 (    0 - 11145) |allocate(transactions_per_hour(upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11146                 |END|
+line to insert check  :  6746 (    6 - 11146) |ALLOCATE(LONG_PATH_TRANSACTION_PAIR(UPPER_TRANS_GROUP, &|
+key used              :   189                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   189                 | 
+alloc sentence in line:  6748 (    0 - 11147) |allocate(long_path_transaction_pair(upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11148                 |END|
+line to insert check  :  6750 (    6 - 11148) |ALLOCATE(M_UNSERVED_ENERGY(UPPER_TRANS_GROUP))|
+key used              :   190                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   190                 | 
+alloc sentence in line:  6752 (    0 - 11149) |allocate(m_unserved_energy(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11150                 |END|
+line to insert check  :  6753 (    6 - 11150) |ALLOCATE(M_ABOVE_RESOURCES(UPPER_TRANS_GROUP))|
+key used              :   191                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   191                 | 
+alloc sentence in line:  6755 (    0 - 11151) |allocate(m_above_resources(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11152                 |END|
+line to insert check  :  6756 (    6 - 11152) |! 09/05/01         |
+key used              :   192                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   192                 | 
+alloc sentence in line:  6759 (    0 - 11153) |allocate(capped_price(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11154                 |END|
+line to insert check  :  6760 (    6 - 11154) |ALLOCATE(PRICE_MINIMUM(UPPER_TRANS_GROUP))|
+key used              :   193                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   193                 | 
+alloc sentence in line:  6762 (    0 - 11155) |allocate(price_minimum(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11156                 |END|
+line to insert check  :  6763 (    6 - 11156) |ALLOCATE(M_UNSERVED_ENERGY_COST(UPPER_TRANS_GROUP))|
+key used              :   194                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   194                 | 
+alloc sentence in line:  6765 (    0 - 11157) |allocate(m_unserved_energy_cost(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11158                 |END|
+line to insert check  :  6766 (    6 - 11158) |ALLOCATE(NET_MARGIN(UPPER_TRANS_GROUP))|
+key used              :   195                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   195                 | 
+alloc sentence in line:  6768 (    0 - 11159) |allocate(net_margin(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11160                 |END|
+line to insert check  :  6769 (    6 - 11160) |ALLOCATE(BEST_PRICE_TO_BUYER(UPPER_TRANS_GROUP,2))|
+key used              :   196                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   196                 | 
+alloc sentence in line:  6771 (    0 - 11161) |allocate(best_price_to_buyer(upper_trans_group,2))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11162                 |END|
+line to insert check  :  6772 (    6 - 11162) |ALLOCATE(M_HOURLY_LOAD_B4_SALES( &|
+key used              :   197                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   197                 | 
+alloc sentence in line:  6774 (    0 - 11163) |allocate(m_hourly_load_b4_sales( &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11164                 |END|
+line to insert check  :  6776 (    6 - 11164) |ALLOCATE(TRANS_ROR_CAPACITY(0:UPPER_TRANS_GROUP))|
+key used              :   198                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   198                 | 
+alloc sentence in line:  6778 (    0 - 11165) |allocate(trans_ror_capacity(0:upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11166                 |END|
+line to insert check  :  6779 (    6 - 11166) |ALLOCATE(HOURLY_DUMP_CAPACITY(UPPER_TRANS_GROUP))|
+key used              :   199                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   199                 | 
+alloc sentence in line:  6781 (    0 - 11167) |allocate(hourly_dump_capacity(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11168                 |END|
+line to insert check  :  6782 (    6 - 11168) |ALLOCATE(HOURLY_DUMP_BEFORE(UPPER_TRANS_GROUP))|
+key used              :   200                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   200                 | 
+alloc sentence in line:  6784 (    0 - 11169) |allocate(hourly_dump_before(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11170                 |END|
+line to insert check  :  6785 (    6 - 11170) |ALLOCATE(TRANS_MUST_CAPACITY(UPPER_TRANS_GROUP))|
+key used              :   201                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   201                 | 
+alloc sentence in line:  6787 (    0 - 11171) |allocate(trans_must_capacity(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11172                 |END|
+line to insert check  :  6788 (    6 - 11172) |ALLOCATE(TRANS_SPINNING_CAPACITY(UPPER_TRANS_GROUP))|
+key used              :   202                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   202                 | 
+alloc sentence in line:  6790 (    0 - 11173) |allocate(trans_spinning_capacity(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11174                 |END|
+line to insert check  :  6791 (    6 - 11174) |ALLOCATE(HOURLY_SPINNING_CAPACITY(UPPER_TRANS_GROUP))|
+key used              :   203                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   203                 | 
+alloc sentence in line:  6793 (    0 - 11175) |allocate(hourly_spinning_capacity(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11176                 |END|
+line to insert check  :  6794 (    6 - 11176) |ALLOCATE(DAILY_PEAK(UPPER_TRANS_GROUP))|
+key used              :   204                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   204                 | 
+alloc sentence in line:  6796 (    0 - 11177) |allocate(daily_peak(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11178                 |END|
+line to insert check  :  6797 (    6 - 11178) |ALLOCATE(OFF_PEAK_SPINNING_CAPACITY(UPPER_TRANS_GROUP))|
+key used              :   205                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   205                 | 
+alloc sentence in line:  6799 (    0 - 11179) |allocate(off_peak_spinning_capacity(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11180                 |END|
+line to insert check  :  6800 (    6 - 11180) |ALLOCATE(TRANS_RAMP_UP(UPPER_TRANS_GROUP))|
+key used              :   206                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   206                 | 
+alloc sentence in line:  6802 (    0 - 11181) |allocate(trans_ramp_up(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11182                 |END|
+line to insert check  :  6803 (    6 - 11182) |ALLOCATE(TRANS_RAMP_DOWN(UPPER_TRANS_GROUP))|
+key used              :   207                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   207                 | 
+alloc sentence in line:  6805 (    0 - 11183) |allocate(trans_ramp_down(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11184                 |END|
+line to insert check  :  6806 (    6 - 11184) |ALLOCATE(TRANS_MAX_IMPORT(UPPER_TRANS_GROUP))|
+key used              :   208                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   208                 | 
+alloc sentence in line:  6808 (    0 - 11185) |allocate(trans_max_import(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11186                 |END|
+line to insert check  :  6809 (    6 - 11186) |ALLOCATE(TRANS_MAX_EXPORT(UPPER_TRANS_GROUP))|
+key used              :   209                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   209                 | 
+alloc sentence in line:  6811 (    0 - 11187) |allocate(trans_max_export(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11188                 |END|
+line to insert check  :  6812 (    6 - 11188) |ALLOCATE(LAST_HOUR_SELL(UPPER_TRANS_GROUP))|
+key used              :   210                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   210                 | 
+alloc sentence in line:  6814 (    0 - 11189) |allocate(last_hour_sell(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11190                 |END|
+line to insert check  :  6815 (    6 - 11190) |ALLOCATE(MONTH_COIN_PEAK(0:UPPER_TRANS_GROUP))|
+key used              :   211                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   211                 | 
+alloc sentence in line:  6817 (    0 - 11191) |allocate(month_coin_peak(0:upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11192                 |END|
+line to insert check  :  6818 (    6 - 11192) |ALLOCATE(MONTH_NON_COIN_PEAK(0:UPPER_TRANS_GROUP))|
+key used              :   212                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   212                 | 
+alloc sentence in line:  6820 (    0 - 11193) |allocate(month_non_coin_peak(0:upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11194                 |END|
+line to insert check  :  6821 (    6 - 11194) |ALLOCATE(HOURLY_TRANSACTION(UPPER_TRANS_GROUP))|
+key used              :   213                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   213                 | 
+alloc sentence in line:  6823 (    0 - 11195) |allocate(hourly_transaction(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11196                 |END|
+line to insert check  :  6824 (    6 - 11196) |ALLOCATE(MAX_HOURLY_IMPORT(UPPER_TRANS_GROUP))|
+key used              :   214                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   214                 | 
+alloc sentence in line:  6826 (    0 - 11197) |allocate(max_hourly_import(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11198                 |END|
+line to insert check  :  6827 (    6 - 11198) |ALLOCATE(MAX_HOURLY_EXPORT(UPPER_TRANS_GROUP))|
+key used              :   215                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   215                 | 
+alloc sentence in line:  6829 (    0 - 11199) |allocate(max_hourly_export(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11200                 |END|
+line to insert check  :  6830 (    6 - 11200) |ALLOCATE(SCARCITY_MULT(0:UPPER_TRANS_GROUP))|
+key used              :   216                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   216                 | 
+alloc sentence in line:  6832 (    0 - 11201) |allocate(scarcity_mult(0:upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11202                 |END|
+line to insert check  :  6833 (    6 - 11202) |ALLOCATE(HOURLY_TRANS_GROUP_LOAD_ACTIVE(UPPER_TRANS_GROUP))|
+key used              :   217                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   217                 | 
+alloc sentence in line:  6835 (    0 - 11203) |allocate(hourly_trans_group_load_active(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11204                 |END|
+line to insert check  :  6836 (    6 - 11204) |ALLOCATE(HOURLY_TRANS_GROUP_GEN_ACTIVE(UPPER_TRANS_GROUP))|
+key used              :   218                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   218                 | 
+alloc sentence in line:  6838 (    0 - 11205) |allocate(hourly_trans_group_gen_active(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11206                 |END|
+line to insert check  :  6839 (    6 - 11206) |!|
+key used              :   219                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   219                 | 
+alloc sentence in line:  6842 (    0 - 11207) |allocate(product_price(0:upper_trans_group,num_products))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11208                 |END|
+line to insert check  :  6843 (    6 - 11208) |ALLOCATE(PRODUCT_VOLATILITY(0:UPPER_TRANS_GROUP,NUM_PRODUCTS))|
+key used              :   220                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   220                 | 
+alloc sentence in line:  6845 (    0 - 11209) |allocate(product_volatility(0:upper_trans_group,num_products))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11210                 |END|
+line to insert check  :  6846 (    6 - 11210) |ALLOCATE(PRODUCT_QUANTITY(0:UPPER_TRANS_GROUP,NUM_PRODUCTS))|
+key used              :   221                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   221                 | 
+alloc sentence in line:  6848 (    0 - 11211) |allocate(product_quantity(0:upper_trans_group,num_products))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11212                 |END|
+line to insert check  :  6849 (    6 - 11212) |ALLOCATE(PRODUCT_HEATRATE(0:UPPER_TRANS_GROUP,NUM_PRODUCTS))|
+key used              :   222                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   222                 | 
+alloc sentence in line:  6851 (    0 - 11213) |allocate(product_heatrate(0:upper_trans_group,num_products))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11214                 |END|
+line to insert check  :  6852 (    6 - 11214) |ALLOCATE(PRODUCT_MARGINAL_FUEL( &|
+key used              :   223                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   223                 | 
+alloc sentence in line:  6854 (    0 - 11215) |allocate(product_marginal_fuel( &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11216                 |END|
+line to insert check  :  6856 (    6 - 11216) |ALLOCATE(PRODUCT_FUEL_PRICE(0:UPPER_TRANS_GROUP,NUM_PRODUCTS))|
+key used              :   224                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   224                 | 
+alloc sentence in line:  6858 (    0 - 11217) |allocate(product_fuel_price(0:upper_trans_group,num_products))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11218                 |END|
+line to insert check  :  6859 (    6 - 11218) |ALLOCATE(PRODUCT_HOURS(NUM_PRODUCTS))|
+key used              :   225                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   225                 | 
+alloc sentence in line:  6861 (    0 - 11219) |allocate(product_hours(num_products))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11220                 |END|
+line to insert check  :  6862 (    6 - 11220) |ALLOCATE(PRODUCT_MEAN_RETURN(0:UPPER_TRANS_GROUP,NUM_PRODUCTS))|
+key used              :   226                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   226                 | 
+alloc sentence in line:  6864 (    0 - 11221) |allocate(product_mean_return(0:upper_trans_group,num_products))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11222                 |END|
+line to insert check  :  6865 (    6 - 11222) |ALLOCATE(PRODUCT_SCARCITY(0:UPPER_TRANS_GROUP,NUM_PRODUCTS))|
+key used              :   227                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   227                 | 
+alloc sentence in line:  6867 (    0 - 11223) |allocate(product_scarcity(0:upper_trans_group,num_products))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11224                 |END|
+line to insert check  :  6868 (    6 - 11224) |ALLOCATE(SUM_SQUARED_DEVIATIONS( &|
+key used              :   228                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   228                 | 
+alloc sentence in line:  6870 (    0 - 11225) |allocate(sum_squared_deviations( &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11226                 |END|
+line to insert check  :  6872 (    6 - 11226) |ALLOCATE(SCARCITY_COST(0:UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   229                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   229                 | 
+alloc sentence in line:  6874 (    0 - 11227) |allocate(scarcity_cost(0:upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11228                 |END|
+line to insert check  :  6875 (    6 - 11228) |ALLOCATE(ENERGY_COST(0:UPPER_TRANS_GROUP,DAILY_HOURS))|
+key used              :   230                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   230                 | 
+alloc sentence in line:  6877 (    0 - 11229) |allocate(energy_cost(0:upper_trans_group,daily_hours))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11230                 |END|
+line to insert check  :  6878 (    6 - 11230) |ALLOCATE(PRODUCT_DAILY_RETURN(0:UPPER_TRANS_GROUP, &|
+key used              :   231                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   231                 | 
+alloc sentence in line:  6880 (    0 - 11231) |allocate(product_daily_return(0:upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11232                 |END|
+line to insert check  :  6882 (    6 - 11232) |!|
+key used              :   232                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   232                 | 
+alloc sentence in line:  6975 (    0 - 11233) |allocate( &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11234                 |END|
+line to insert check  :  6977 (    6 - 11234) |ALLOCATE(M_ANNUAL_PURCHASE_ENERGY(UPPER_TRANS_GROUP))|
+key used              :   233                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   233                 | 
+alloc sentence in line:  6979 (    0 - 11235) |allocate(m_annual_purchase_energy(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11236                 |END|
+line to insert check  :  6980 (    6 - 11236) |ALLOCATE(M_ANNUAL_PURCHASE_COSTS(UPPER_TRANS_GROUP))|
+key used              :   234                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   234                 | 
+alloc sentence in line:  6982 (    0 - 11237) |allocate(m_annual_purchase_costs(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11238                 |END|
+line to insert check  :  6983 (    6 - 11238) |ALLOCATE(M_ANNUAL_SALES_ENERGY(UPPER_TRANS_GROUP))|
+key used              :   235                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   235                 | 
+alloc sentence in line:  6985 (    0 - 11239) |allocate(m_annual_sales_energy(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11240                 |END|
+line to insert check  :  6986 (    6 - 11240) |ALLOCATE(M_ANNUAL_SALES_REVENUES(UPPER_TRANS_GROUP))|
+key used              :   236                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   236                 | 
+alloc sentence in line:  6988 (    0 - 11241) |allocate(m_annual_sales_revenues(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11242                 |END|
+line to insert check  :  6989 (    6 - 11242) |ALLOCATE(M_ANNUAL_NATIVE_COST(UPPER_TRANS_GROUP))|
+key used              :   237                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   237                 | 
+alloc sentence in line:  6991 (    0 - 11243) |allocate(m_annual_native_cost(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11244                 |END|
+line to insert check  :  6992 (    6 - 11244) |ALLOCATE(M_ANNUAL_LOAD_B4_SALES(UPPER_TRANS_GROUP))|
+key used              :   238                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   238                 | 
+alloc sentence in line:  6994 (    0 - 11245) |allocate(m_annual_load_b4_sales(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11246                 |END|
+line to insert check  :  6995 (    6 - 11246) |ALLOCATE(M_ANNUAL_PRO_COST_B4_SALES(UPPER_TRANS_GROUP))|
+key used              :   239                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   239                 | 
+alloc sentence in line:  6997 (    0 - 11247) |allocate(m_annual_pro_cost_b4_sales(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11248                 |END|
+line to insert check  :  6998 (    6 - 11248) |ALLOCATE(M_ANNUAL_LOAD_AFTER_SALES(UPPER_TRANS_GROUP))|
+key used              :   240                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   240                 | 
+alloc sentence in line:  7000 (    0 - 11249) |allocate(m_annual_load_after_sales(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11250                 |END|
+line to insert check  :  7001 (    6 - 11250) |ALLOCATE(M_ANNUAL_PRO_COST_AFTER_SALES(UPPER_TRANS_GROUP))|
+key used              :   241                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   241                 | 
+alloc sentence in line:  7003 (    0 - 11251) |allocate(m_annual_pro_cost_after_sales(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11252                 |END|
+line to insert check  :  7004 (    6 - 11252) |ALLOCATE(ANNUAL_TL_MWH(UPPER_TRANS_GROUP))|
+key used              :   242                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   242                 | 
+alloc sentence in line:  7006 (    0 - 11253) |allocate(annual_tl_mwh(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11254                 |END|
+line to insert check  :  7007 (    6 - 11254) |ALLOCATE(ANNUAL_TL_PEAK(UPPER_TRANS_GROUP))|
+key used              :   243                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   243                 | 
+alloc sentence in line:  7009 (    0 - 11255) |allocate(annual_tl_peak(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11256                 |END|
+line to insert check  :  7010 (    6 - 11256) |ALLOCATE(ANNUAL_COIN_PEAK(0:UPPER_TRANS_GROUP))|
+key used              :   244                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   244                 | 
+alloc sentence in line:  7012 (    0 - 11257) |allocate(annual_coin_peak(0:upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11258                 |END|
+line to insert check  :  7013 (    6 - 11258) |ALLOCATE(ANNUAL_TL_BASE(UPPER_TRANS_GROUP))|
+key used              :   245                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   245                 | 
+alloc sentence in line:  7015 (    0 - 11259) |allocate(annual_tl_base(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11260                 |END|
+line to insert check  :  7016 (    6 - 11260) |ALLOCATE(ANNUAL_TL_HYDRO_MWH(UPPER_TRANS_GROUP))|
+key used              :   246                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   246                 | 
+alloc sentence in line:  7018 (    0 - 11261) |allocate(annual_tl_hydro_mwh(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11262                 |END|
+line to insert check  :  7019 (    6 - 11262) |ALLOCATE(ANNUAL_TL_HYDRO_MW(UPPER_TRANS_GROUP))|
+key used              :   247                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   247                 | 
+alloc sentence in line:  7021 (    0 - 11263) |allocate(annual_tl_hydro_mw(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11264                 |END|
+line to insert check  :  7022 (    6 - 11264) |ALLOCATE(ANNUAL_TL_HYDRO_ROR(UPPER_TRANS_GROUP))|
+key used              :   248                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   248                 | 
+alloc sentence in line:  7024 (    0 - 11265) |allocate(annual_tl_hydro_ror(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11266                 |END|
+line to insert check  :  7025 (    6 - 11266) |ALLOCATE(ANNUAL_SPINNING_MWH(UPPER_TRANS_GROUP))|
+key used              :   249                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   249                 | 
+alloc sentence in line:  7027 (    0 - 11267) |allocate(annual_spinning_mwh(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11268                 |END|
+line to insert check  :  7028 (    6 - 11268) |ALLOCATE(ANNUAL_EFFECTIVE_CAPACITY(UPPER_TRANS_GROUP))|
+key used              :   250                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   250                 | 
+alloc sentence in line:  7030 (    0 - 11269) |allocate(annual_effective_capacity(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11270                 |END|
+line to insert check  :  7031 (    6 - 11270) |ALLOCATE(ANNUAL_UNSERVED_ENERGY(UPPER_TRANS_GROUP,0:12))|
+key used              :   251                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   251                 | 
+alloc sentence in line:  7033 (    0 - 11271) |allocate(annual_unserved_energy(upper_trans_group,0:12))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11272                 |END|
+line to insert check  :  7034 (    6 - 11272) |ALLOCATE(ANNUAL_ABOVE_RESOURCES(UPPER_TRANS_GROUP,0:12))|
+key used              :   252                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   252                 | 
+alloc sentence in line:  7036 (    0 - 11273) |allocate(annual_above_resources(upper_trans_group,0:12))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11274                 |END|
+line to insert check  :  7037 (    6 - 11274) |ALLOCATE(ANNUAL_UNSERVED_ENERGY_COST(UPPER_TRANS_GROUP))|
+key used              :   253                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   253                 | 
+alloc sentence in line:  7039 (    0 - 11275) |allocate(annual_unserved_energy_cost(upper_trans_group))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11276                 |END|
+line to insert check  :  7040 (    6 - 11276) |ALLOCATE(ANNUAL_COST_ABOVE_RESOURCES(UPPER_TRANS_GROUP, &|
+key used              :   254                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   254                 | 
+alloc sentence in line:  7042 (    0 - 11277) |allocate(annual_cost_above_resources(upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11278                 |END|
+line to insert check  :  7044 (    6 - 11278) |ALLOCATE(ANNUAL_TRANSACTION_MWH(UPPER_TRANS_GROUP, &|
+key used              :   255                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   255                 | 
+alloc sentence in line:  7046 (    0 - 11279) |allocate(annual_transaction_mwh(upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11280                 |END|
+line to insert check  :  7048 (    6 - 11280) |ANNUAL_TL_BASE = 999999.|
+key used              :   256                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   256                 | 
+alloc sentence in line:  7074 (    0 - 11281) |allocate(annual_product_price(0:upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11282                 |END|
+line to insert check  :  7076 (    6 - 11282) |ALLOCATE(ANNUAL_PRODUCT_SCARCITY(0:UPPER_TRANS_GROUP, &|
+key used              :   257                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   257                 | 
+alloc sentence in line:  7078 (    0 - 11283) |allocate(annual_product_scarcity(0:upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11284                 |END|
+line to insert check  :  7080 (    6 - 11284) |ALLOCATE(ANNUAL_PRODUCT_QUANTITY(0:UPPER_TRANS_GROUP, &|
+key used              :   258                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   258                 | 
+alloc sentence in line:  7082 (    0 - 11285) |allocate(annual_product_quantity(0:upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11286                 |END|
+line to insert check  :  7084 (    6 - 11286) |ALLOCATE(ANNUAL_PRODUCT_HEATRATE(0:UPPER_TRANS_GROUP, &|
+key used              :   259                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   259                 | 
+alloc sentence in line:  7086 (    0 - 11287) |allocate(annual_product_heatrate(0:upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11288                 |END|
+line to insert check  :  7088 (    6 - 11288) |ALLOCATE(ANNUAL_PRODUCT_MARGINAL_FUEL(0:UPPER_TRANS_GROUP, &|
+key used              :   260                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   260                 | 
+alloc sentence in line:  7090 (    0 - 11289) |allocate(annual_product_marginal_fuel(0:upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11290                 |END|
+line to insert check  :  7092 (    6 - 11290) |ALLOCATE(ANNUAL_PRODUCT_FUEL_PRICE(0:UPPER_TRANS_GROUP, &|
+key used              :   261                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj.f90|
+Allocate number       :   261                 | 
+alloc sentence in line:  7094 (    0 - 11291) |allocate(annual_product_fuel_price(0:upper_trans_group, &|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11292                 |END|
+line to insert check  :  7096 (    6 - 11292) |ALLOCATE(ANNUAL_PRODUCT_HOURS(NUM_PRODUCTS))|
+key used              :   262                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj.f90|
+Allocate number       :   262                 | 
+alloc sentence in line:  7098 (    0 - 11293) |allocate(annual_product_hours(num_products))|
+block starts at line  :     6                 |RECURSIVE SUBROUTINE REGIONAL_TRANSACTION_ANALYSIS(ISEAS, &|
+block ends   at line  : 11294                 |END|
+line to insert check  :  7099 (    6 - 11294) |ANNUAL_PRODUCT_PRICE = 0.|
+key used              :   263                 | 
+------------------------------------------( 1)-

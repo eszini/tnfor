@@ -11,7 +11,6 @@
  *
  */
 
-
 /*
  *	next ...
  *	ojo .. con un ! en colummna 10 ... no detecta que es comentario ...
@@ -22,6 +21,7 @@
  *
  *
  */
+
 
 /*
  *	//header//
@@ -7232,11 +7232,6 @@ int	ex9_p1()
 	int	nf_check;		/* linea donde esta el check alloc encontrado en el fuente */
 	int	r1;
 	int	k_amp;
-	
-	int	tipo09;
-	int	tipo11;
-	int	tipo13;
-	int	tipo15;
 
 	char	m0[MSTR];
 	char	m1[MSTR];
@@ -7281,11 +7276,6 @@ int	ex9_p1()
 
 	/* para todas las lineas */
 	
-	tipo09 = 0;
-	tipo11 = 0;
-	tipo13 = 0;
-	tipo15 = 0;
-
 	i = 0;
 	f_keep = 1;
 
@@ -7632,7 +7622,6 @@ mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 							{
 
 								/* TIPO-9 alloc en una sola linea una sola variable sin stat */
-								tipo09++;
 								strcpy(m1,trim_blanks_beg(b1));
 								grabar_plan(9,1,1,0,0,prog_name,m1);
 
@@ -7747,7 +7736,6 @@ mprintf (z,"TIPO-9 desp de chg_alloc ... add_lines: %d\n",add_lines);
 							if (!f_stat)
 							{
 								/* TIPO-11 alloc en una linea con varias vars - sin stat */
-								tipo11++;
 								strcpy(m1,trim_blanks_beg(b1));
 
 								grabar_plan(11,1,2,0,0,prog_name,m1);
@@ -7946,7 +7934,6 @@ mprintf (z,"g15_2, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lin
 							if (!f_stat)
 							{
 								/* TIPO-13 es un alloc en varias lineas con una var - sin stat */
-								tipo13++;
 								strcpy(m1,trim_blanks_beg(m0));
 								grabar_plan(13,2,1,0,0,prog_name,m1);
 
@@ -8038,7 +8025,6 @@ mprintf (z,"g02_2, volvi de chg_alloc_g02 num_alloc %d add_lines: %d  \n",num_al
 							if (!f_stat)
 							{
 								/* TIPO-15 es un alloc en varias lineas con varias vars - sin stat  */
-								tipo15++;
 								strcpy(m1,trim_blanks_beg(m0));
 								grabar_plan(15,2,2,0,0,prog_name,m1);
 #if 0
@@ -8168,16 +8154,6 @@ mprintf (z,"..... \n\n");
 			f_keep = 0;
 
 	} /* for */
-
-if (1)
-{
-	printf ("\n");
-	printf ("tipo 09 %3d \n",tipo09);
-	printf ("tipo 11 %3d \n",tipo11);
-	printf ("tipo 13 %3d \n",tipo13);
-	printf ("tipo 15 %3d \n",tipo15);
-	printf ("\n");
-}
 
 
 }
@@ -8367,13 +8343,12 @@ char	*prog_name,*m0;
 
 /*
  *	chg_alloc_t09
- *	agregar check alloc de sentencias con allocate 
- *	tipo 09 sl sv
- *
+ *	agregar check alloc de sentencias con allocate tipo 09 
  *	recibe numero de file donde encontro allocate y la linea del allocate
  *
  *	Atenti:
  *	esto corrije un solo allocate x vez !!!
+ *
  */
 
 int	chg_alloc_t09(num_f,nf_alloc,add_lines,num_alloc)
@@ -8393,7 +8368,6 @@ int	num_alloc;
 	int	f_stat;
 	int	f_hay_alloc;
 	int	f_try;
-	int	f_tengo;
 	int	n_f;
 	char	base_name[MAXV];
 	char	prog_name[MAXV];
@@ -8407,11 +8381,9 @@ int	num_alloc;
 	char	blanks[64];
 	int	pf,uf,nf,qf;
 	int	tipo_ext;
-	int	vl[5],kvl,vl_min,vl_max;
 
 	int	pri_l,ult_l;
 	int	ult_u,pri_d;	/* ultimo use, primera declaracion */
-	int	pri_s;		/* primer save */
 	int	mod_type;	/* 0 no se, 1 subroutine 2 function */
 	int	linea_use;	/* linea en la que hay que poner el use */
 	int	agrego_lines;	/* lineas que se agregan al final x hacer-lugar */
@@ -8489,60 +8461,21 @@ mprintf (z,"sali de busco_pri_l pri_l: %d |%s| \n",pri_l,(*fnp[pri_l]).l);
 		grabar_mapa(4,0,(*fnp[ult_l]).l,0,0,lne(ult_l));
 
 
-		/* busco donde colocar el use allocate_vars */
-		f_tengo = 0;
-
-
-		/* busco el ultim use ... */
+		/* busco donde colocar el use ... allocate_vars */
 		ult_u = 0;
 		busco_ult_u(pri_l,ult_l,pri_l,&ult_u);
 
-		/* busco primer declaracion de variables ... */
+
+		/* busco primer declaracion de variables */
 		pri_d = 0;
 		busco_pri_d(pri_l,ult_l,pri_l,&pri_d);
 
-		/* busco primer save */
-		pri_s = 0;
-		busco_pri_s(pri_l,ult_l,pri_l,&pri_s);
 
-		/* solo para los que salieron distinto de 0 .. busco el minimo valor de linea */
-		kvl=0;
-		if (ult_u)
-			vl[kvl++] = ult_u+1;
-		if (pri_d)
-			vl[kvl++] = pri_d;
-		if (pri_s)
-			vl[kvl++] = pri_s;
-
-		/* no encontre donde poner el allocate_vars ! */
-		if (kvl == 0)
-			error(9003);
-
-
-		vl_min = 100000;
-		for (k=0; k<kvl; k++)
-			if (vl[k] < vl_min)
-				vl_min = vl[k];
-			
-		/* use allocate_vars va en la primer linea que cumple condicion */
-		linea_use = vl_min;
-		grabar_mapa(5,0,(*fnp[linea_use]).l,lne(linea_use),lne(pri_l),lne(ult_l));
-
-
-#if 0
 		f_try = 0;
 
 		if (!f_try && ult_u)
 		{
 			linea_use = ult_u+1;
-			grabar_mapa(5,0,(*fnp[linea_use]).l,lne(linea_use),lne(pri_l),lne(ult_l));
-			f_try = 1;
-		}
-
-		if (!f_try && pri_s)
-		{
-			linea_use = pri_s;
-			grabar_mapa(5,0,(*fnp[linea_use]).l,lne(linea_use),lne(pri_l),lne(ult_l));
 			f_try = 1;
 		}
 
@@ -8568,7 +8501,6 @@ mprintf (z,"sali de busco_pri_l pri_l: %d |%s| \n",pri_l,(*fnp[pri_l]).l);
 #endif
 		}
 
-#endif
 
 		/* a partir de aqui ... a hacer los cambios !! 
 		 *
@@ -9162,12 +9094,7 @@ if (gp_debug && w)
 		(*fnp[i]).f2 = 0;
 		(*fnp[i]).f3 = 0;
 
-#if 1
 		sprintf (d0,"agregada x hacer lugar i: %d",i);
-#endif
-#if 0
-		sprintf (d0,"    ");
-#endif
 
 		strcpy( (*fnp[i]).l,d0);
 	}
@@ -9323,13 +9250,10 @@ int	pf,uf,spt,*v,mod_type;
 	int	f_res;
 	char	b1[MAXB];
 
-	char	z[MAXV];
-	int	w;
-	sprintf (z,"busco_ult_l");
-	w = g_dbg(z);
 
 	for (i=spt, f_res=0, f_sigo=1 ; f_sigo && i<=uf; i++)
 	{
+
 		strcpy(b1, pasar_a_minusc( (*fnp[i]).l) );
 
 		f_proceso = 1;
@@ -9377,18 +9301,13 @@ int	pf,uf,spt,*v;
 	int	f_res;
 	char	b1[MAXB];
 
-	char	z[MAXV];
-	int	w;
-	sprintf (z,"busco_ult_u");
-	w = g_dbg(z);
 
-	f_res = 0;
 	*v = 0;
 
-	for (i=pf, f_sigo=1 ; f_sigo && i<=uf; i++)
+	for (i=pf, f_res=0, f_sigo=1 ; f_sigo && i<=uf; i++)
 	{
+
 		strcpy(b1, pasar_a_minusc( (*fnp[i]).l) );
-		strcpy(b1, trim_end_f90(b1));
 
 		f_proceso = 1;
 		if (linea_vacia(b1) || es_linea_comentario(b1))
@@ -9396,20 +9315,10 @@ int	pf,uf,spt,*v;
 
 		if (f_proceso)
 		{
-
-if (gp_debug && w)
-{
-	mprintf(z,"voy a tiene use con i: %d |%s| \n",i,b1);
-}
-
 			if (tiene_use(b1) )
 			{
-				f_res  = i;
+				f_res  = 1;
 				*v     = i;
-if (gp_debug && w)
-{
-	mprintf(z,"encontre use en i: %d |%s| \n",i,b1);
-}
 			}
 		}
 	}
@@ -9616,79 +9525,6 @@ int	pf,uf,spt,*v;
 		
 	
 
-/*
- * -----------------------------------------------------------------------------------
- *
- *	busco_pri_s 
- *
- * -----------------------------------------------------------------------------------
- */
-
-
-/*
- *	busco_pri_s
- *	buscar la primera linea del bloque
- *	que tenga un un SAVE
- */
-
-
-int	busco_pri_s(pf,uf,spt,v)
-int	pf,uf,spt,*v;
-{
-	int	i;
-	int	f_proceso;
-	int	f_sigo;
-	int	f_res;
-	char	b1[MAXB];
-
-	char	z[MAXV];
-	int	w;
-	sprintf (z,"busco_pri_s");
-	w = g_dbg(z);
-
-	*v = 0;
-
-	for (i=spt, f_res=0, f_sigo=1 ; f_sigo && i<=uf; i++)
-	{
-
-		strcpy(b1, pasar_a_minusc( (*fnp[i]).l) );
-		strcpy(b1, trim_end_f90(b1));
-
-if (gp_debug && w)
-{
-	mprintf(z,"busco    SAVE en: i %d |%s|\n",i,b1);
-}
-
-		f_proceso = 1;
-		if (linea_vacia(b1) || es_linea_comentario(b1))
-			f_proceso = 0;
-
-		if (f_proceso)
-		{
-if (gp_debug && w)
-{
-	mprintf(z,"entre a f_proces: i %d |%s|\n",i,b1);
-}
-			if (tiene_save(b1) )
-			{
-				f_sigo = 0;
-				f_res  = 1;
-				*v     = i;
-if (gp_debug && w)
-{
-	mprintf(z,"encontre SAVE en: i %d |%s|\n",i,b1);
-}
-
-			}
-		}
-	}
-
-	return (f_res);
-}
-		
-	
-
-	
 	
 
 
@@ -10129,96 +9965,66 @@ char	*s;
 {
 	int	i,j,k,l1;
 	int	f_res,f_sig,f_try;
-	int	k2_key;
 
-	int	k1,k2;
-
-	char	z[MAXV];
-	int	w;
-	sprintf (z,"tiene_allocate");
-	w = g_dbg(z);
+	int	k1;
 
 	k1 = 8;
-	k2 = 0;
 	l1 = strlen(s);
 
-if (gp_debug && w)
-{
-mprintf(z,"voy a ver si tiene_allocate |%s| \n",s);
-}
-
-
-	for (i=0, f_res=0; i < l1 - k1; i++)
+#if 0
+	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
+#endif
+	for (i=0, f_res=0         ;          i < l1 - k1; i++)
 	{	
 		if (!strncmp(s+i,"allocate",k1))
 		{
-			k2_key = 0;
 			f_try = 1;
 
-			k2++;
 			if (f_try && s[i+k1] == 'd' )
-				f_try = 0, k2_key=k2;
+				f_try = 0;
 
-			k2++;
 			if (f_try && s[i+k1] == 'a' )
-				f_try = 0, k2_key=k2;
+				f_try = 0;
 
-			k2++;
 			if (f_try && s[i+k1] == '_' )
-				f_try = 0, k2_key=k2;
+				f_try = 0;
 
-			k2++;
 			if (f_try && tiene_deallocate(s))
-				f_try = 0, k2_key=k2;
+				f_try = 0;
 
-			k2++;
 			if (f_try && tiene_call(s))
-				f_try = 0, k2_key=k2;
+				f_try = 0;
 
-			k2++;
 			if (f_try && tiene_pentry(s))
-				f_try = 0, k2_key=k2;
+				f_try = 0;
 
-			k2++;
 			if (f_try && tiene__allocate(s))
-				f_try = 0, k2_key=k2;
+				f_try = 0;
 
-			k2++;
 			if (f_try && tiene_er_message(s))
-				f_try = 0, k2_key=k2;
+				f_try = 0;
 
-			k2++;
 			if (f_try && tiene_amazingly(s))
-				f_try = 0, k2_key=k2;
+				f_try = 0;
 
-			k2++;
 			if (f_try && tiene_3possible(s))
-				f_try = 0, k2_key=k2;
+				f_try = 0;
 
-			k2++;
 			if (f_try && tiene_allocatex(s))
-				f_try = 0, k2_key=k2;
+				f_try = 0;
 
-			k2++;
 			if (f_try && tiene_remainder(s))
-				f_try = 0, k2_key=k2;
+				f_try = 0;
 
-			k2++;
 			if (f_try && tiene_proport(s))
-				f_try = 0, k2_key=k2;
+				f_try = 0;
 
-			k2++;
 			if (f_try && tiene_room(s))
-				f_try = 0, k2_key=k2;
+				f_try = 0;
 
-			k2++;
 			if (f_try && tiene_arrays(s))
-				f_try = 0, k2_key=k2;
+				f_try = 0;
 
-if (gp_debug && w)
-{
-mprintf(z,"voy a ver si tiene_allocate f_try: %d k2_key: %d |%s| \n",f_try,k2_key,s);
-}
 			if (f_try)
 			{	f_res=1;
 #if 0
@@ -10282,9 +10088,6 @@ char	*s;
 		if (!strncmp(s+i,"call",k1))
 		{
 			f_try = 1;
-
-			if (!strncmp(s+i,"calls",k1+1))
-				f_try = 0;
 
 
 			if (f_try)
@@ -11015,35 +10818,6 @@ char	*s;
 
 	return (f_res);
 }
-
-
-
-
-int	tiene_save(s)
-char	*s;
-{
-	int	i,j,k,l1;
-	int	f_res,f_sig,f_try;
-
-	int	k1;
-
-	k1 = 4;
-	l1 = strlen(s);
-
-	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1 + 1; i++)
-	{	
-		if (!strncmp(s+i,"save",k1))
-		{
-			f_try = 1;
-
-			if (f_try)
-				f_res=1, f_sig=0;
-		}
-	}
-
-	return (f_res);
-}
-
 
 
 /*
@@ -25741,7 +25515,7 @@ mprintf (z,"ult_l |%s| \n", (*fnp[ult_l]).l );
 		 *
 		 */
 
-		agrego_lines=2;		/* ojo ! solo sirve para tipo-13 */
+		agrego_lines=2;
 		*add_lines = 0;
 
 		linea_check = nf_alloc;
@@ -25847,22 +25621,10 @@ if (gp_debug && w)
 		strcpy(m1,chanchada(m1));
 
 
-		/*
-		 * combinaciones:
-		 * 1) agrego_lines = k y saco el strcpy al final de "    "
-		 * 2) agrego_lines = k+1 .. y dejo el strcpy .. esto deja una linea vacia desp de cada allocte
-		 *
-		 */
-
-#if 0
-		agrego_lines = k+1;
-#endif
-#if 0
+					
 		agrego_lines = k;
-#endif
-		agrego_lines = 2;
-		linea_stat   = nf_alloc + k;
-		linea_check  = linea_stat + 1;
+		linea_stat += k;
+		linea_check = linea_stat + 1;
 
 		grabar_mapa(7,0,(*fnp[linea_check]).l,lne(linea_check),lne(pri_l),lne(ult_l));
 
@@ -25883,9 +25645,7 @@ if (gp_debug && w)
 		strcat( (*fnp[linea_check]).l  ,"call check_alloc");
 		strcat( (*fnp[linea_check]).l  ,b5);
 
-#if 1
 		strcpy( (*fnp[linea_check+1]).l,"     ");
-#endif
 
 		/* aca tengo que modificar la linea nf_alloc ... 
 	  	 * esto va a ser un lio cuando tenga que meter 
@@ -26220,13 +25980,12 @@ if (gp_debug && w)
 
 		/* calculo cuantas lineas tengo que agregar por desdoblar el allocate */
 		q_vars = 200;
-		if (!cantidad_de_vars(m1,&q_vars))
+		if (!cantidad_de_vars(m0,&q_vars))
 			error(9011);
 
 if (gp_debug && w)
 {
-mprintf (z,"q_vars   : %4d m0: |%s| \n",q_vars,m0);
-mprintf (z,"q_vars   : %4d m1: |%s| \n",q_vars,m1);
+mprintf (z,"q_vars   : %4d |%s| \n",q_vars,m0);
 mprintf (z,"nf_alloc : %4d |%s| \n",nf_alloc,(*fnp[nf_alloc]).l );
 
 }
@@ -27861,65 +27620,6 @@ mprintf (z,"salgo de mover_bulk    \n",pf-qlin, pf-1, qlin   );
 
 #endif
 
-
-/* end of file  */
-
-#if 0
-
-#include <stdio.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-
-int main() {
-    const char *dir = "./repo4";  // Directorio a crear
-
-    // Crear el directorio con permisos 0755 (lectura y ejecución para todos, escritura para el dueño)
-    if (mkdir(dir, 0755) == 0) {
-        printf("Directorio creado: %s\n", dir);
-    } else {
-        perror("Error al crear el directorio");
-    }
-
-    return 0;
-}
-
-#include <stdio.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <errno.h>
-
-int main() {
-    const char *dir = "./repo4";
-    struct stat st = {0};
-
-    // Verificar si el directorio ya existe
-    if (stat(dir, &st) == 0 && S_ISDIR(st.st_mode)) {
-        printf("El directorio ya existe: %s\n", dir);
-    } else {
-        char respuesta;
-        printf("El directorio %s no existe. ¿Deseas crearlo? (s/n): ", dir);
-        scanf(" %c", &respuesta);
-
-        if (respuesta == 's' || respuesta == 'S') {
-            // Intentar crear el directorio
-            if (mkdir(dir, 0755) == 0) {
-                printf("Directorio creado: %s\n", dir);
-            } else {
-                perror("Error al crear el directorio");
-            }
-        } else {
-            printf("No se creó el directorio.\n");
-        }
-    }
-
-    return 0;
-}
-
-
-
-
-
-#endif
 
 /* end of file  */
 /* end of file  */

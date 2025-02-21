@@ -1,0 +1,2185 @@
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:   372 (    0 - 18182) |allocate(hourly_trans_revenue(max_tie_groups,daily_hours))|
+block starts at line  :   223                 |FUNCTION READ_TRANSACT_TIE_DATA()|
+block ends   at line  :   553                 |END|
+line to insert use all:   233 (  223 -   553) |SAVE|
+line to insert check  :   376 (  223 -   556) |!|
+key used              :     1                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |transobj2.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:  1048 (    0 - 18187) |allocate(trans_class_pointer(0:1023), &|
+block starts at line  :   830                 |SUBROUTINE ENERGY_PRODUCTS_OBJECT|
+block ends   at line  :  2061                 |END|
+line to replace allocs:  1050  (  2 allocs)   |ALLOCATE(TRANS_CLASS_POINTER(0:1023), &| 
+key used              :     2                 | 
+allocate added        :     1                 |allocate(TRANS_CLASS_POINTER(0:1023),stat=stv_er)|
+allocate added        :     2                 |allocate(ASSET_CLASS_POINTER(0:1023),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:  3267 (    0 - 18193) |allocate(transaction_name(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11298                 |END|
+line to insert use all:  2113 ( 2083 - 11298) |SAVE|
+line to insert check  :  3271 ( 2083 - 11301) |ALLOCATE(MONTHLY_USER_CF(NUM_TRANSACTIONS))|
+key used              :     4                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :     4                 | 
+alloc sentence in line:  3273 (    0 - 18198) |allocate(monthly_user_cf(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11303                 |END|
+line to insert use all:  2115 ( 2083 - 11303) ||
+line to insert check  :  3274 ( 2083 - 11303) |ALLOCATE(MONTHLY_USER_CF_COUNTER(NUM_TRANSACTIONS))|
+key used              :     5                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :     5                 | 
+alloc sentence in line:  3276 (    0 - 18200) |allocate(monthly_user_cf_counter(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11305                 |END|
+line to insert use all:  2115 ( 2083 - 11305) ||
+line to insert check  :  3277 ( 2083 - 11305) |ALLOCATE(MONTHLY_CF_TRANS(NUM_TRANSACTIONS))|
+key used              :     6                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :     6                 | 
+alloc sentence in line:  3279 (    0 - 18202) |allocate(monthly_cf_trans(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11307                 |END|
+line to insert use all:  2115 ( 2083 - 11307) ||
+line to insert check  :  3280 ( 2083 - 11307) |ALLOCATE(USER_CF(NUM_TRANSACTIONS))|
+key used              :     7                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :     7                 | 
+alloc sentence in line:  3282 (    0 - 18204) |allocate(user_cf(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11309                 |END|
+line to insert use all:  2115 ( 2083 - 11309) ||
+line to insert check  :  3283 ( 2083 - 11309) |ALLOCATE(COUNTERPARTY_NAME(NUM_TRANSACTIONS))|
+key used              :     8                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :     8                 | 
+alloc sentence in line:  3285 (    0 - 18206) |allocate(counterparty_name(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11311                 |END|
+line to insert use all:  2115 ( 2083 - 11311) ||
+line to insert check  :  3286 ( 2083 - 11311) |ALLOCATE(TRANSACTION_ID(NUM_TRANSACTIONS))|
+key used              :     9                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :     9                 | 
+alloc sentence in line:  3288 (    0 - 18208) |allocate(transaction_id(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11313                 |END|
+line to insert use all:  2115 ( 2083 - 11313) ||
+line to insert check  :  3289 ( 2083 - 11313) |ALLOCATE(TRANSACTION_GROUP(NUM_TRANSACTIONS))|
+key used              :    10                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    10                 | 
+alloc sentence in line:  3291 (    0 - 18210) |allocate(transaction_group(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11315                 |END|
+line to insert use all:  2115 ( 2083 - 11315) ||
+line to insert check  :  3292 ( 2083 - 11315) |ALLOCATE(TRANSACTION_TYPE(NUM_TRANSACTIONS))|
+key used              :    11                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    11                 | 
+alloc sentence in line:  3294 (    0 - 18212) |allocate(transaction_type(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11317                 |END|
+line to insert use all:  2115 ( 2083 - 11317) ||
+line to insert check  :  3295 ( 2083 - 11317) |ALLOCATE(DERIVATIVE_TYPE(NUM_TRANSACTIONS))|
+key used              :    12                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    12                 | 
+alloc sentence in line:  3297 (    0 - 18214) |allocate(derivative_type(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11319                 |END|
+line to insert use all:  2115 ( 2083 - 11319) ||
+line to insert check  :  3298 ( 2083 - 11319) |ALLOCATE(PRODUCT_INDEX(NUM_TRANSACTIONS))|
+key used              :    13                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    13                 | 
+alloc sentence in line:  3300 (    0 - 18216) |allocate(product_index(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11321                 |END|
+line to insert use all:  2115 ( 2083 - 11321) ||
+line to insert check  :  3301 ( 2083 - 11321) |ALLOCATE(TRANSACTION_CLASS(NUM_TRANSACTIONS))|
+key used              :    14                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    14                 | 
+alloc sentence in line:  3303 (    0 - 18218) |allocate(transaction_class(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11323                 |END|
+line to insert use all:  2115 ( 2083 - 11323) ||
+line to insert check  :  3304 ( 2083 - 11323) |ALLOCATE(PRODUCT_TYPE(NUM_TRANSACTIONS))|
+key used              :    15                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    15                 | 
+alloc sentence in line:  3306 (    0 - 18220) |allocate(product_type(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11325                 |END|
+line to insert use all:  2115 ( 2083 - 11325) ||
+line to insert check  :  3307 ( 2083 - 11325) |ALLOCATE(OPTION_POSITION(NUM_TRANSACTIONS))|
+key used              :    16                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    16                 | 
+alloc sentence in line:  3309 (    0 - 18222) |allocate(option_position(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11327                 |END|
+line to insert use all:  2115 ( 2083 - 11327) ||
+line to insert check  :  3310 ( 2083 - 11327) |ALLOCATE(PRODUCT_ACTIVE(NUM_TRANSACTIONS))|
+key used              :    17                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    17                 | 
+alloc sentence in line:  3312 (    0 - 18224) |allocate(product_active(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11329                 |END|
+line to insert use all:  2115 ( 2083 - 11329) ||
+line to insert check  :  3313 ( 2083 - 11329) |ALLOCATE(STRIKE_FREQUENCY(NUM_TRANSACTIONS))|
+key used              :    18                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    18                 | 
+alloc sentence in line:  3315 (    0 - 18226) |allocate(strike_frequency(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11331                 |END|
+line to insert use all:  2115 ( 2083 - 11331) ||
+line to insert check  :  3316 ( 2083 - 11331) |ALLOCATE(REPORT_PRODUCT(NUM_TRANSACTIONS))|
+key used              :    19                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    19                 | 
+alloc sentence in line:  3318 (    0 - 18228) |allocate(report_product(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11333                 |END|
+line to insert use all:  2115 ( 2083 - 11333) ||
+line to insert check  :  3319 ( 2083 - 11333) |ALLOCATE(UNIT_CONTINGENCY(NUM_TRANSACTIONS))|
+key used              :    20                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    20                 | 
+alloc sentence in line:  3321 (    0 - 18230) |allocate(unit_contingency(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11335                 |END|
+line to insert use all:  2115 ( 2083 - 11335) ||
+line to insert check  :  3322 ( 2083 - 11335) |ALLOCATE(UNIT_CONTINGENT_LINK(NUM_TRANSACTIONS))|
+key used              :    21                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    21                 | 
+alloc sentence in line:  3324 (    0 - 18232) |allocate(unit_contingent_link(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11337                 |END|
+line to insert use all:  2115 ( 2083 - 11337) ||
+line to insert check  :  3325 ( 2083 - 11337) |ALLOCATE(ENERGY_MULTIPLIER(NUM_TRANSACTIONS))|
+key used              :    22                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    22                 | 
+alloc sentence in line:  3327 (    0 - 18234) |allocate(energy_multiplier(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11339                 |END|
+line to insert use all:  2115 ( 2083 - 11339) ||
+line to insert check  :  3328 ( 2083 - 11339) |ALLOCATE(TRANS_ACTIVE_IN_ENDPOINT(NUM_TRANSACTIONS))|
+key used              :    23                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    23                 | 
+alloc sentence in line:  3330 (    0 - 18236) |allocate(trans_active_in_endpoint(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11341                 |END|
+line to insert use all:  2115 ( 2083 - 11341) ||
+line to insert check  :  3331 ( 2083 - 11341) |ALLOCATE(HEAT_RATE_FOR_SPREAD(NUM_TRANSACTIONS))|
+key used              :    24                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    24                 | 
+alloc sentence in line:  3333 (    0 - 18238) |allocate(heat_rate_for_spread(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11343                 |END|
+line to insert use all:  2115 ( 2083 - 11343) ||
+line to insert check  :  3334 ( 2083 - 11343) |ALLOCATE(USER_DAY_TYPES_ID(NUM_TRANSACTIONS))|
+key used              :    25                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    25                 | 
+alloc sentence in line:  3336 (    0 - 18240) |allocate(user_day_types_id(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11345                 |END|
+line to insert use all:  2115 ( 2083 - 11345) ||
+line to insert check  :  3337 ( 2083 - 11345) |ALLOCATE(PUMPING_CAPACITY(NUM_TRANSACTIONS))|
+key used              :    26                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    26                 | 
+alloc sentence in line:  3339 (    0 - 18242) |allocate(pumping_capacity(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11347                 |END|
+line to insert use all:  2115 ( 2083 - 11347) ||
+line to insert check  :  3340 ( 2083 - 11347) |ALLOCATE(PUMPING_STORAGE_EFFICIENCY(NUM_TRANSACTIONS))|
+key used              :    27                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    27                 | 
+alloc sentence in line:  3342 (    0 - 18244) |allocate(pumping_storage_efficiency(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11349                 |END|
+line to insert use all:  2115 ( 2083 - 11349) ||
+line to insert check  :  3343 ( 2083 - 11349) |ALLOCATE(DAILY_PUMPING_MULT(NUM_TRANSACTIONS))|
+key used              :    28                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    28                 | 
+alloc sentence in line:  3345 (    0 - 18246) |allocate(daily_pumping_mult(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11351                 |END|
+line to insert use all:  2115 ( 2083 - 11351) ||
+line to insert check  :  3346 ( 2083 - 11351) |ALLOCATE(FUEL_TYPE(NUM_TRANSACTIONS))|
+key used              :    29                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    29                 | 
+alloc sentence in line:  3348 (    0 - 18248) |allocate(fuel_type(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11353                 |END|
+line to insert use all:  2115 ( 2083 - 11353) ||
+line to insert check  :  3349 ( 2083 - 11353) |ALLOCATE(FUEL_PRICE_TYPE(NUM_TRANSACTIONS))|
+key used              :    30                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    30                 | 
+alloc sentence in line:  3351 (    0 - 18250) |allocate(fuel_price_type(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11355                 |END|
+line to insert use all:  2115 ( 2083 - 11355) ||
+line to insert check  :  3352 ( 2083 - 11355) |ALLOCATE(FUEL_PRICE(NUM_TRANSACTIONS))|
+key used              :    31                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    31                 | 
+alloc sentence in line:  3354 (    0 - 18252) |allocate(fuel_price(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11357                 |END|
+line to insert use all:  2115 ( 2083 - 11357) ||
+line to insert check  :  3355 ( 2083 - 11357) |ALLOCATE(TRANSPORTATION_BASIS_TYPE(NUM_TRANSACTIONS))|
+key used              :    32                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    32                 | 
+alloc sentence in line:  3357 (    0 - 18254) |allocate(transportation_basis_type(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11359                 |END|
+line to insert use all:  2115 ( 2083 - 11359) ||
+line to insert check  :  3358 ( 2083 - 11359) |ALLOCATE(TRANSPORTATION_BASIS(NUM_TRANSACTIONS))|
+key used              :    33                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    33                 | 
+alloc sentence in line:  3360 (    0 - 18256) |allocate(transportation_basis(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11361                 |END|
+line to insert use all:  2115 ( 2083 - 11361) ||
+line to insert check  :  3361 ( 2083 - 11361) |ALLOCATE(DELIVERY_ADDER(NUM_TRANSACTIONS))|
+key used              :    34                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    34                 | 
+alloc sentence in line:  3363 (    0 - 18258) |allocate(delivery_adder(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11363                 |END|
+line to insert use all:  2115 ( 2083 - 11363) ||
+line to insert check  :  3364 ( 2083 - 11363) |ALLOCATE(COUNTERPARTY_BOND_RATING(NUM_TRANSACTIONS))|
+key used              :    35                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    35                 | 
+alloc sentence in line:  3366 (    0 - 18260) |allocate(counterparty_bond_rating(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11365                 |END|
+line to insert use all:  2115 ( 2083 - 11365) ||
+line to insert check  :  3367 ( 2083 - 11365) |ALLOCATE(DOLLAR_MWH(NUM_TRANSACTIONS))|
+key used              :    36                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    36                 | 
+alloc sentence in line:  3369 (    0 - 18262) |allocate(dollar_mwh(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11367                 |END|
+line to insert use all:  2115 ( 2083 - 11367) ||
+line to insert check  :  3370 ( 2083 - 11367) |ALLOCATE(WVPA_RATE_TRACKER(NUM_TRANSACTIONS))|
+key used              :    37                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    37                 | 
+alloc sentence in line:  3372 (    0 - 18264) |allocate(wvpa_rate_tracker(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11369                 |END|
+line to insert use all:  2115 ( 2083 - 11369) ||
+line to insert check  :  3373 ( 2083 - 11369) |ALLOCATE(WVPA_MEM_TRACKER(NUM_TRANSACTIONS), &|
+key used              :    38                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |transobj2.f90|
+Allocate number       :    38                 | 
+alloc sentence in line:  3375 (    0 - 18266) |allocate(wvpa_mem_tracker(num_transactions), &|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11371                 |END|
+line to replace allocs:  3374  (  6 allocs)   |ALLOCATE(WVPA_MEM_TRACKER(NUM_TRANSACTIONS), &| 
+key used              :    39                 | 
+allocate added        :     1                 |allocate(WVPA_MEM_TRACKER(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :     2                 |allocate(UNIT_CONTING_MARKET_SUPPLEMENT(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :     3                 |allocate(DERIV_PRIMARY_MOVER(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :     4                 |allocate(CAPACITY_PLANNING_FACTOR(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :     5                 |allocate(UNIT_CATEGORY(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :     6                 |allocate(DERIV_ZONE_ID(NUM_TRANSACTIONS),stat=stv_er)|
+------------------------------------------( 5)-
+Type (15)          src:                       |transobj2.f90|
+Allocate number       :    39                 | 
+alloc sentence in line:  3388 (    0 - 18273) |allocate(tax_credit_begin_date(num_transactions), &|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11378                 |END|
+line to replace allocs:  3387  ( 15 allocs)   |ALLOCATE(Tax_Credit_Begin_Date(NUM_TRANSACTIONS), &| 
+key used              :    45                 | 
+allocate added        :     1                 |allocate(Tax_Credit_Begin_Date(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :     2                 |allocate(Tax_Credit_End_Date(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :     3                 |allocate(LHS_INDEX(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :     4                 |allocate(External_Unit_ID(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :     5                 |allocate(Holding_Company_ID(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :     6                 |allocate(Production_Tax_Credit(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :     7                 |allocate(RPS_Contribution(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :     8                 |allocate(Percentage_Owned(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :     9                 |allocate(Fuel_Category(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :    10                 |allocate(GRX_ID(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :    11                 |allocate(GRX_ID_INDEX(10000),stat=stv_er)|
+allocate added        :    12                 |allocate(State_TG_Index(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :    13                 |allocate(State_Index(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :    14                 |allocate(PROPOSED_RESOURCE_INDEX(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :    15                 |allocate(PROPOSED_RESOURCE_POSITION(NUM_TRANSACTIONS),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    40                 | 
+alloc sentence in line:  3420 (    0 - 18289) |allocate(grx_rps_capacity(num_transactions,30))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11394                 |END|
+line to insert use all:  2115 ( 2083 - 11394) ||
+line to insert check  :  3421 ( 2083 - 11394) |ALLOCATE(SAVE_GRX_RPS_CAPACITY(NUM_TRANSACTIONS,30))|
+key used              :    60                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    41                 | 
+alloc sentence in line:  3423 (    0 - 18291) |allocate(save_grx_rps_capacity(num_transactions,30))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11396                 |END|
+line to insert use all:  2115 ( 2083 - 11396) ||
+line to insert check  :  3424 ( 2083 - 11396) |ALLOCATE(GRX_STORAGE_PATTERN(NUM_OF_TRANS_CLASSES,8760))|
+key used              :    61                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    42                 | 
+alloc sentence in line:  3426 (    0 - 18293) |allocate(grx_storage_pattern(num_of_trans_classes,8760))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11398                 |END|
+line to insert use all:  2115 ( 2083 - 11398) ||
+line to insert check  :  3427 ( 2083 - 11398) |ALLOCATE(GRX_INDEP_PATTERN(NUM_OF_TRANS_CLASSES,8760))|
+key used              :    62                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    43                 | 
+alloc sentence in line:  3429 (    0 - 18295) |allocate(grx_indep_pattern(num_of_trans_classes,8760))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11400                 |END|
+line to insert use all:  2115 ( 2083 - 11400) ||
+line to insert check  :  3430 ( 2083 - 11400) |ALLOCATE(SAVE_GRX_STORAGE_PATTERN &|
+key used              :    63                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :    44                 | 
+alloc sentence in line:  3432 (    0 - 18297) |allocate(save_grx_storage_pattern &|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11402                 |END|
+line to insert check  :  3434 ( 2083 - 11402) |ALLOCATE(ENERGY_PRICE_MULTIPLIER(NUM_TRANSACTIONS))|
+key used              :    64                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    45                 | 
+alloc sentence in line:  3436 (    0 - 18299) |allocate(energy_price_multiplier(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11404                 |END|
+line to insert use all:  2115 ( 2083 - 11404) ||
+line to insert check  :  3437 ( 2083 - 11404) |ALLOCATE(MAX_QUANTITY_OF_PRODUCT(NUM_TRANSACTIONS))|
+key used              :    65                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    46                 | 
+alloc sentence in line:  3439 (    0 - 18301) |allocate(max_quantity_of_product(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11406                 |END|
+line to insert use all:  2115 ( 2083 - 11406) ||
+line to insert check  :  3440 ( 2083 - 11406) |ALLOCATE(MONTHLY_ENERGY_MULT(NUM_TRANSACTIONS))|
+key used              :    66                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    47                 | 
+alloc sentence in line:  3442 (    0 - 18303) |allocate(monthly_energy_mult(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11408                 |END|
+line to insert use all:  2115 ( 2083 - 11408) ||
+line to insert check  :  3443 ( 2083 - 11408) |ALLOCATE(CONTRACT_DATE(NUM_TRANSACTIONS))|
+key used              :    67                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    48                 | 
+alloc sentence in line:  3445 (    0 - 18305) |allocate(contract_date(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11410                 |END|
+line to insert use all:  2115 ( 2083 - 11410) ||
+line to insert check  :  3446 ( 2083 - 11410) |ALLOCATE(DISTINGUISHING(NUM_TRANSACTIONS))|
+key used              :    68                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    49                 | 
+alloc sentence in line:  3448 (    0 - 18307) |allocate(distinguishing(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11412                 |END|
+line to insert use all:  2115 ( 2083 - 11412) ||
+line to insert check  :  3449 ( 2083 - 11412) |ALLOCATE(REPORTING_GENERATION_GROUP(NUM_TRANSACTIONS))|
+key used              :    69                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    50                 | 
+alloc sentence in line:  3451 (    0 - 18309) |allocate(reporting_generation_group(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11414                 |END|
+line to insert use all:  2115 ( 2083 - 11414) ||
+line to insert check  :  3452 ( 2083 - 11414) |ALLOCATE(EXPENSE_ASSIGNMENT(NUM_TRANSACTIONS))|
+key used              :    70                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    51                 | 
+alloc sentence in line:  3454 (    0 - 18311) |allocate(expense_assignment(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11416                 |END|
+line to insert use all:  2115 ( 2083 - 11416) ||
+line to insert check  :  3455 ( 2083 - 11416) |ALLOCATE(EXPENSE_COLLECTION(NUM_TRANSACTIONS))|
+key used              :    71                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    52                 | 
+alloc sentence in line:  3457 (    0 - 18313) |allocate(expense_collection(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11418                 |END|
+line to insert use all:  2115 ( 2083 - 11418) ||
+line to insert check  :  3458 ( 2083 - 11418) |ALLOCATE(ASSET_CLASS_ID(NUM_TRANSACTIONS))|
+key used              :    72                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    53                 | 
+alloc sentence in line:  3460 (    0 - 18315) |allocate(asset_class_id(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11420                 |END|
+line to insert use all:  2115 ( 2083 - 11420) ||
+line to insert check  :  3461 ( 2083 - 11420) |ALLOCATE(ASSET_ALLOCATION_VECTOR(NUM_TRANSACTIONS))|
+key used              :    73                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    54                 | 
+alloc sentence in line:  3463 (    0 - 18317) |allocate(asset_allocation_vector(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11422                 |END|
+line to insert use all:  2115 ( 2083 - 11422) ||
+line to insert check  :  3464 ( 2083 - 11422) |ALLOCATE(QUANTITY_OF_PRODUCT(NUM_TRANSACTIONS))|
+key used              :    74                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    55                 | 
+alloc sentence in line:  3466 (    0 - 18319) |allocate(quantity_of_product(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11424                 |END|
+line to insert use all:  2115 ( 2083 - 11424) ||
+line to insert check  :  3467 ( 2083 - 11424) |ALLOCATE(PROPOSED_QUANT_OF_PRODUCT(NUM_TRANSACTIONS))|
+key used              :    75                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    56                 | 
+alloc sentence in line:  3469 (    0 - 18321) |allocate(proposed_quant_of_product(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11426                 |END|
+line to insert use all:  2115 ( 2083 - 11426) ||
+line to insert check  :  3470 ( 2083 - 11426) |ALLOCATE(SAVED_QUANT_OF_PRODUCT(NUM_TRANSACTIONS))|
+key used              :    76                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    57                 | 
+alloc sentence in line:  3472 (    0 - 18323) |allocate(saved_quant_of_product(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11428                 |END|
+line to insert use all:  2115 ( 2083 - 11428) ||
+line to insert check  :  3473 ( 2083 - 11428) |ALLOCATE(HOURLY_QUANTITY(NUM_TRANSACTIONS))|
+key used              :    77                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    58                 | 
+alloc sentence in line:  3475 (    0 - 18325) |allocate(hourly_quantity(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11430                 |END|
+line to insert use all:  2115 ( 2083 - 11430) ||
+line to insert check  :  3476 ( 2083 - 11430) |ALLOCATE(ENERGY_PRICE(NUM_TRANSACTIONS))|
+key used              :    78                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    59                 | 
+alloc sentence in line:  3478 (    0 - 18327) |allocate(energy_price(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11432                 |END|
+line to insert use all:  2115 ( 2083 - 11432) ||
+line to insert check  :  3479 ( 2083 - 11432) |ALLOCATE(MONTHLY_ENERGY_PRICE(NUM_TRANSACTIONS))|
+key used              :    79                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    60                 | 
+alloc sentence in line:  3481 (    0 - 18329) |allocate(monthly_energy_price(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11434                 |END|
+line to insert use all:  2115 ( 2083 - 11434) ||
+line to insert check  :  3482 ( 2083 - 11434) |ALLOCATE(CONTINGENT_CAPACITY(24,NUM_TRANSACTIONS))|
+key used              :    80                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    61                 | 
+alloc sentence in line:  3484 (    0 - 18331) |allocate(contingent_capacity(24,num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11436                 |END|
+line to insert use all:  2115 ( 2083 - 11436) ||
+line to insert check  :  3485 ( 2083 - 11436) |ALLOCATE(MONTHLY_2ND_ENERGY_PRICE(NUM_TRANSACTIONS))|
+key used              :    81                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    62                 | 
+alloc sentence in line:  3487 (    0 - 18333) |allocate(monthly_2nd_energy_price(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11438                 |END|
+line to insert use all:  2115 ( 2083 - 11438) ||
+line to insert check  :  3488 ( 2083 - 11438) |ALLOCATE(PRICE_TYPE(NUM_TRANSACTIONS))|
+key used              :    82                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    63                 | 
+alloc sentence in line:  3490 (    0 - 18335) |allocate(price_type(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11440                 |END|
+line to insert use all:  2115 ( 2083 - 11440) ||
+line to insert check  :  3491 ( 2083 - 11440) |ALLOCATE(SECOND_ENERGY_PRICE(NUM_TRANSACTIONS))|
+key used              :    83                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    64                 | 
+alloc sentence in line:  3493 (    0 - 18337) |allocate(second_energy_price(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11442                 |END|
+line to insert use all:  2115 ( 2083 - 11442) ||
+line to insert check  :  3494 ( 2083 - 11442) |ALLOCATE(MAXIMUM_STRIKES(NUM_TRANSACTIONS))|
+key used              :    84                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    65                 | 
+alloc sentence in line:  3496 (    0 - 18339) |allocate(maximum_strikes(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11444                 |END|
+line to insert use all:  2115 ( 2083 - 11444) ||
+line to insert check  :  3497 ( 2083 - 11444) |ALLOCATE(BILLING_LAG(NUM_TRANSACTIONS))|
+key used              :    85                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    66                 | 
+alloc sentence in line:  3499 (    0 - 18341) |allocate(billing_lag(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11446                 |END|
+line to insert use all:  2115 ( 2083 - 11446) ||
+line to insert check  :  3500 ( 2083 - 11446) |ALLOCATE(MINIMUM_STRIKES(NUM_TRANSACTIONS))|
+key used              :    86                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    67                 | 
+alloc sentence in line:  3502 (    0 - 18343) |allocate(minimum_strikes(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11448                 |END|
+line to insert use all:  2115 ( 2083 - 11448) ||
+line to insert check  :  3503 ( 2083 - 11448) |ALLOCATE(DOLLAR_KW_DAY(NUM_TRANSACTIONS))|
+key used              :    87                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    68                 | 
+alloc sentence in line:  3505 (    0 - 18345) |allocate(dollar_kw_day(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11450                 |END|
+line to insert use all:  2115 ( 2083 - 11450) ||
+line to insert check  :  3506 ( 2083 - 11450) |ALLOCATE(DOLLAR_KW_DAY_ESC(NUM_TRANSACTIONS))|
+key used              :    88                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    69                 | 
+alloc sentence in line:  3508 (    0 - 18347) |allocate(dollar_kw_day_esc(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11452                 |END|
+line to insert use all:  2115 ( 2083 - 11452) ||
+line to insert check  :  3509 ( 2083 - 11452) |ALLOCATE(DOLLAR_KW_MONTH(NUM_TRANSACTIONS))|
+key used              :    89                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    70                 | 
+alloc sentence in line:  3511 (    0 - 18349) |allocate(dollar_kw_month(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11454                 |END|
+line to insert use all:  2115 ( 2083 - 11454) ||
+line to insert check  :  3512 ( 2083 - 11454) |ALLOCATE(DOLLAR_KW_MONTH_ESC(NUM_TRANSACTIONS))|
+key used              :    90                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    71                 | 
+alloc sentence in line:  3514 (    0 - 18351) |allocate(dollar_kw_month_esc(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11456                 |END|
+line to insert use all:  2115 ( 2083 - 11456) ||
+line to insert check  :  3515 ( 2083 - 11456) |ALLOCATE(DOLLAR_KW_YEAR(NUM_TRANSACTIONS))|
+key used              :    91                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    72                 | 
+alloc sentence in line:  3517 (    0 - 18353) |allocate(dollar_kw_year(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11458                 |END|
+line to insert use all:  2115 ( 2083 - 11458) ||
+line to insert check  :  3518 ( 2083 - 11458) |ALLOCATE(GRX_DOLLAR_KW_YEAR(NUM_TRANSACTIONS))|
+key used              :    92                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    73                 | 
+alloc sentence in line:  3520 (    0 - 18355) |allocate(grx_dollar_kw_year(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11460                 |END|
+line to insert use all:  2115 ( 2083 - 11460) ||
+line to insert check  :  3521 ( 2083 - 11460) |ALLOCATE(GRX_DOLLAR_KW_MONTH(NUM_TRANSACTIONS))|
+key used              :    93                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    74                 | 
+alloc sentence in line:  3523 (    0 - 18357) |allocate(grx_dollar_kw_month(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11462                 |END|
+line to insert use all:  2115 ( 2083 - 11462) ||
+line to insert check  :  3524 ( 2083 - 11462) |ALLOCATE(DOLLAR_KW_YEAR_ESC(NUM_TRANSACTIONS))|
+key used              :    94                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    75                 | 
+alloc sentence in line:  3526 (    0 - 18359) |allocate(dollar_kw_year_esc(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11464                 |END|
+line to insert use all:  2115 ( 2083 - 11464) ||
+line to insert check  :  3527 ( 2083 - 11464) |ALLOCATE(DOLLAR_MONTH(NUM_TRANSACTIONS))|
+key used              :    95                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    76                 | 
+alloc sentence in line:  3529 (    0 - 18361) |allocate(dollar_month(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11466                 |END|
+line to insert use all:  2115 ( 2083 - 11466) ||
+line to insert check  :  3530 ( 2083 - 11466) |ALLOCATE(DOLLAR_MONTH_ESC(NUM_TRANSACTIONS))|
+key used              :    96                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    77                 | 
+alloc sentence in line:  3532 (    0 - 18363) |allocate(dollar_month_esc(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11468                 |END|
+line to insert use all:  2115 ( 2083 - 11468) ||
+line to insert check  :  3533 ( 2083 - 11468) |ALLOCATE(DOLLAR_DEAL(NUM_TRANSACTIONS))|
+key used              :    97                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    78                 | 
+alloc sentence in line:  3535 (    0 - 18365) |allocate(dollar_deal(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11470                 |END|
+line to insert use all:  2115 ( 2083 - 11470) ||
+line to insert check  :  3536 ( 2083 - 11470) |ALLOCATE(DOLLAR_DEAL_ESC(NUM_TRANSACTIONS))|
+key used              :    98                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    79                 | 
+alloc sentence in line:  3538 (    0 - 18367) |allocate(dollar_deal_esc(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11472                 |END|
+line to insert use all:  2115 ( 2083 - 11472) ||
+line to insert check  :  3539 ( 2083 - 11472) |ALLOCATE(BEGIN_DAY(NUM_TRANSACTIONS))|
+key used              :    99                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    80                 | 
+alloc sentence in line:  3541 (    0 - 18369) |allocate(begin_day(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11474                 |END|
+line to insert use all:  2115 ( 2083 - 11474) ||
+line to insert check  :  3542 ( 2083 - 11474) |ALLOCATE(BEGIN_DAY_IN_MONTH(NUM_TRANSACTIONS))|
+key used              :   100                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    81                 | 
+alloc sentence in line:  3544 (    0 - 18371) |allocate(begin_day_in_month(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11476                 |END|
+line to insert use all:  2115 ( 2083 - 11476) ||
+line to insert check  :  3545 ( 2083 - 11476) |ALLOCATE(BEGIN_EP(NUM_TRANSACTIONS))|
+key used              :   101                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    82                 | 
+alloc sentence in line:  3547 (    0 - 18373) |allocate(begin_ep(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11478                 |END|
+line to insert use all:  2115 ( 2083 - 11478) ||
+line to insert check  :  3548 ( 2083 - 11478) |ALLOCATE(END_DAY(NUM_TRANSACTIONS))|
+key used              :   102                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    83                 | 
+alloc sentence in line:  3550 (    0 - 18375) |allocate(end_day(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11480                 |END|
+line to insert use all:  2115 ( 2083 - 11480) ||
+line to insert check  :  3551 ( 2083 - 11480) |ALLOCATE(END_DAY_IN_MONTH(NUM_TRANSACTIONS))|
+key used              :   103                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    84                 | 
+alloc sentence in line:  3553 (    0 - 18377) |allocate(end_day_in_month(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11482                 |END|
+line to insert use all:  2115 ( 2083 - 11482) ||
+line to insert check  :  3554 ( 2083 - 11482) |ALLOCATE(END_EP(NUM_TRANSACTIONS))|
+key used              :   104                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    85                 | 
+alloc sentence in line:  3556 (    0 - 18379) |allocate(end_ep(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11484                 |END|
+line to insert use all:  2115 ( 2083 - 11484) ||
+line to insert check  :  3557 ( 2083 - 11484) |ALLOCATE(ACTIVE_IN_MONTH(NUM_TRANSACTIONS))|
+key used              :   105                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    86                 | 
+alloc sentence in line:  3559 (    0 - 18381) |allocate(active_in_month(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11486                 |END|
+line to insert use all:  2115 ( 2083 - 11486) ||
+line to insert check  :  3560 ( 2083 - 11486) |ALLOCATE(TRANS_TO_ACTIVE_MONTH(NUM_TRANSACTIONS))|
+key used              :   106                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    87                 | 
+alloc sentence in line:  3562 (    0 - 18383) |allocate(trans_to_active_month(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11488                 |END|
+line to insert use all:  2115 ( 2083 - 11488) ||
+line to insert check  :  3563 ( 2083 - 11488) |ALLOCATE(ACTIVE_IN_YEAR(NUM_TRANSACTIONS))|
+key used              :   107                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    88                 | 
+alloc sentence in line:  3565 (    0 - 18385) |allocate(active_in_year(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11490                 |END|
+line to insert use all:  2115 ( 2083 - 11490) ||
+line to insert check  :  3566 ( 2083 - 11490) |ALLOCATE(ACTIVE_IN_YEAR_INDEX(NUM_TRANSACTIONS))|
+key used              :   108                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    89                 | 
+alloc sentence in line:  3568 (    0 - 18387) |allocate(active_in_year_index(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11492                 |END|
+line to insert use all:  2115 ( 2083 - 11492) ||
+line to insert check  :  3569 ( 2083 - 11492) |ALLOCATE(ASSET_CLASS_GROUPS_INDEX(0:MAX_ASSET_GROUPS))|
+key used              :   109                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    90                 | 
+alloc sentence in line:  3571 (    0 - 18389) |allocate(asset_class_groups_index(0:max_asset_groups))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11494                 |END|
+line to insert use all:  2115 ( 2083 - 11494) ||
+line to insert check  :  3572 ( 2083 - 11494) |ALLOCATE(ASSET_2_TRANS_INDEX(0:MAX_ASSET_GROUPS, &|
+key used              :   110                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :    91                 | 
+alloc sentence in line:  3574 (    0 - 18391) |allocate(asset_2_trans_index(0:max_asset_groups, &|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11496                 |END|
+line to insert check  :  3576 ( 2083 - 11496) |ALLOCATE(NUMBER_ASSET_2_TRANS(MAX_TRANS_GROUPS))|
+key used              :   111                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    92                 | 
+alloc sentence in line:  3578 (    0 - 18393) |allocate(number_asset_2_trans(max_trans_groups))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11498                 |END|
+line to insert use all:  2115 ( 2083 - 11498) ||
+line to insert check  :  3579 ( 2083 - 11498) |ALLOCATE(FIRST_AC_TG(0:MAX_ASSET_GROUPS))|
+key used              :   112                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    93                 | 
+alloc sentence in line:  3581 (    0 - 18395) |allocate(first_ac_tg(0:max_asset_groups))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11500                 |END|
+line to insert use all:  2115 ( 2083 - 11500) ||
+line to insert check  :  3582 ( 2083 - 11500) |ALLOCATE(NUM_FORWARDS(NUM_OF_TRANS_CLASSES))|
+key used              :   113                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    94                 | 
+alloc sentence in line:  3584 (    0 - 18397) |allocate(num_forwards(num_of_trans_classes))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11502                 |END|
+line to insert use all:  2115 ( 2083 - 11502) ||
+line to insert check  :  3585 ( 2083 - 11502) |ALLOCATE(MONTHLY_CONTINGENT_CAPACITY(NUM_OF_TRANS_CLASSES))|
+key used              :   114                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    95                 | 
+alloc sentence in line:  3587 (    0 - 18399) |allocate(monthly_contingent_capacity(num_of_trans_classes))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11504                 |END|
+line to insert use all:  2115 ( 2083 - 11504) ||
+line to insert check  :  3588 ( 2083 - 11504) |ALLOCATE(ANNUAL_INTERRUPTIBLE_CAPACITY( &|
+key used              :   115                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :    96                 | 
+alloc sentence in line:  3590 (    0 - 18401) |allocate(annual_interruptible_capacity( &|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11506                 |END|
+line to insert check  :  3592 ( 2083 - 11506) |ALLOCATE(ANNU_PLANNING_INTRPT_CAPACITY( &|
+key used              :   116                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :    97                 | 
+alloc sentence in line:  3594 (    0 - 18403) |allocate(annu_planning_intrpt_capacity( &|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11508                 |END|
+line to insert check  :  3596 ( 2083 - 11508) |ALLOCATE(ANNUAL_STORAGE_CAPACITY(NUM_OF_TRANS_CLASSES))|
+key used              :   117                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    98                 | 
+alloc sentence in line:  3598 (    0 - 18405) |allocate(annual_storage_capacity(num_of_trans_classes))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11510                 |END|
+line to insert use all:  2115 ( 2083 - 11510) ||
+line to insert check  :  3599 ( 2083 - 11510) |ALLOCATE(NUM_CALLS(NUM_OF_TRANS_CLASSES))|
+key used              :   118                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :    99                 | 
+alloc sentence in line:  3601 (    0 - 18407) |allocate(num_calls(num_of_trans_classes))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11512                 |END|
+line to insert use all:  2115 ( 2083 - 11512) ||
+line to insert check  :  3602 ( 2083 - 11512) |ALLOCATE(NUM_MONTH_CALLS(NUM_OF_TRANS_CLASSES))|
+key used              :   119                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   100                 | 
+alloc sentence in line:  3604 (    0 - 18409) |allocate(num_month_calls(num_of_trans_classes))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11514                 |END|
+line to insert use all:  2115 ( 2083 - 11514) ||
+line to insert check  :  3605 ( 2083 - 11514) |ALLOCATE(NUM_ANNUAL_CALLS(NUM_OF_TRANS_CLASSES))|
+key used              :   120                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   101                 | 
+alloc sentence in line:  3607 (    0 - 18411) |allocate(num_annual_calls(num_of_trans_classes))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11516                 |END|
+line to insert use all:  2115 ( 2083 - 11516) ||
+line to insert check  :  3608 ( 2083 - 11516) |ALLOCATE(ANNUAL_CAPACITY(744,12,NUM_OF_TRANS_CLASSES))|
+key used              :   121                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   102                 | 
+alloc sentence in line:  3610 (    0 - 18413) |allocate(annual_capacity(744,12,num_of_trans_classes))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11518                 |END|
+line to insert use all:  2115 ( 2083 - 11518) ||
+line to insert check  :  3611 ( 2083 - 11518) |ALLOCATE(NUM_PUTS(NUM_OF_TRANS_CLASSES))|
+key used              :   122                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   103                 | 
+alloc sentence in line:  3613 (    0 - 18415) |allocate(num_puts(num_of_trans_classes))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11520                 |END|
+line to insert use all:  2115 ( 2083 - 11520) ||
+line to insert check  :  3614 ( 2083 - 11520) |ALLOCATE(NUM_STORAGE(NUM_OF_TRANS_CLASSES))|
+key used              :   123                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   104                 | 
+alloc sentence in line:  3616 (    0 - 18417) |allocate(num_storage(num_of_trans_classes))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11522                 |END|
+line to insert use all:  2115 ( 2083 - 11522) ||
+line to insert check  :  3617 ( 2083 - 11522) |ALLOCATE(ANN_NUM_STOR(NUM_OF_TRANS_CLASSES))|
+key used              :   124                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   105                 | 
+alloc sentence in line:  3619 (    0 - 18419) |allocate(ann_num_stor(num_of_trans_classes))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11524                 |END|
+line to insert use all:  2115 ( 2083 - 11524) ||
+line to insert check  :  3620 ( 2083 - 11524) |ALLOCATE(SCEN_NUM_STOR(NUM_OF_TRANS_CLASSES))|
+key used              :   125                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   106                 | 
+alloc sentence in line:  3622 (    0 - 18421) |allocate(scen_num_stor(num_of_trans_classes))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11526                 |END|
+line to insert use all:  2115 ( 2083 - 11526) ||
+line to insert check  :  3623 ( 2083 - 11526) |ALLOCATE(ANN_STOR_POS(NUM_TRANSACTIONS, &|
+key used              :   126                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   107                 | 
+alloc sentence in line:  3625 (    0 - 18423) |allocate(ann_stor_pos(num_transactions, &|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11528                 |END|
+line to insert check  :  3627 ( 2083 - 11528) |ALLOCATE(SCEN_STOR_POS(NUM_TRANSACTIONS, &|
+key used              :   127                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   108                 | 
+alloc sentence in line:  3629 (    0 - 18425) |allocate(scen_stor_pos(num_transactions, &|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11530                 |END|
+line to insert check  :  3631 ( 2083 - 11530) |ALLOCATE(NUM_LF_CALLS(NUM_OF_TRANS_CLASSES))|
+key used              :   128                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   109                 | 
+alloc sentence in line:  3633 (    0 - 18427) |allocate(num_lf_calls(num_of_trans_classes))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11532                 |END|
+line to insert use all:  2115 ( 2083 - 11532) ||
+line to insert check  :  3634 ( 2083 - 11532) |ALLOCATE(NUM_LF_PUTS(NUM_OF_TRANS_CLASSES))|
+key used              :   129                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   110                 | 
+alloc sentence in line:  3636 (    0 - 18429) |allocate(num_lf_puts(num_of_trans_classes))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11534                 |END|
+line to insert use all:  2115 ( 2083 - 11534) ||
+line to insert check  :  3637 ( 2083 - 11534) |ALLOCATE(NUM_MONTH_PUTS(NUM_OF_TRANS_CLASSES))|
+key used              :   130                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   111                 | 
+alloc sentence in line:  3639 (    0 - 18431) |allocate(num_month_puts(num_of_trans_classes))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11536                 |END|
+line to insert use all:  2115 ( 2083 - 11536) ||
+line to insert check  :  3640 ( 2083 - 11536) |ALLOCATE(NUM_ANNUAL_PUTS(NUM_OF_TRANS_CLASSES))|
+key used              :   131                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   112                 | 
+alloc sentence in line:  3642 (    0 - 18433) |allocate(num_annual_puts(num_of_trans_classes))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11538                 |END|
+line to insert use all:  2115 ( 2083 - 11538) ||
+line to insert check  :  3643 ( 2083 - 11538) |ALLOCATE(NUM_INTER_PUTS(NUM_OF_TRANS_CLASSES))|
+key used              :   132                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   113                 | 
+alloc sentence in line:  3645 (    0 - 18435) |allocate(num_inter_puts(num_of_trans_classes))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11540                 |END|
+line to insert use all:  2115 ( 2083 - 11540) ||
+line to insert check  :  3646 ( 2083 - 11540) |ALLOCATE(NUM_INTER_CALLS(NUM_OF_TRANS_CLASSES))|
+key used              :   133                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   114                 | 
+alloc sentence in line:  3648 (    0 - 18437) |allocate(num_inter_calls(num_of_trans_classes))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11542                 |END|
+line to insert use all:  2115 ( 2083 - 11542) ||
+line to insert check  :  3649 ( 2083 - 11542) |ALLOCATE(FORWARD_POSITION(NUM_TRANSACTIONS, &|
+key used              :   134                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   115                 | 
+alloc sentence in line:  3651 (    0 - 18439) |allocate(forward_position(num_transactions, &|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11544                 |END|
+line to insert check  :  3653 ( 2083 - 11544) |ALLOCATE(CALL_POSITION(NUM_TRANSACTIONS, &|
+key used              :   135                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   116                 | 
+alloc sentence in line:  3661 (    0 - 18441) |allocate(put_position(num_transactions, &|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11546                 |END|
+line to insert check  :  3663 ( 2083 - 11546) |ALLOCATE(MONTH_PUT_POSITION(NUM_TRANSACTIONS, &|
+key used              :   136                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   117                 | 
+alloc sentence in line:  3665 (    0 - 18443) |allocate(month_put_position(num_transactions, &|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11548                 |END|
+line to insert check  :  3667 ( 2083 - 11548) |ALLOCATE(ANNUAL_PUT_POSITION(NUM_TRANSACTIONS, &|
+key used              :   137                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   118                 | 
+alloc sentence in line:  3669 (    0 - 18445) |allocate(annual_put_position(num_transactions, &|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11550                 |END|
+line to insert check  :  3671 ( 2083 - 11550) |ALLOCATE(STORAGE_POSITION(NUM_TRANSACTIONS, &|
+key used              :   138                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   119                 | 
+alloc sentence in line:  3673 (    0 - 18447) |allocate(storage_position(num_transactions, &|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11552                 |END|
+line to insert check  :  3675 ( 2083 - 11552) |ALLOCATE(BATTERY_POSITION(NUM_TRANSACTIONS, &|
+key used              :   139                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   120                 | 
+alloc sentence in line:  3677 (    0 - 18449) |allocate(battery_position(num_transactions, &|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11554                 |END|
+line to insert check  :  3679 ( 2083 - 11554) |ALLOCATE(LF_CALL_POSITION(NUM_TRANSACTIONS, &|
+key used              :   140                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   121                 | 
+alloc sentence in line:  3683 (    0 - 18451) |allocate(lf_put_position(num_transactions, &|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11556                 |END|
+line to insert check  :  3685 ( 2083 - 11556) |ALLOCATE(INTER_PUT_POSITION(NUM_TRANSACTIONS, &|
+key used              :   141                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   122                 | 
+alloc sentence in line:  3687 (    0 - 18453) |allocate(inter_put_position(num_transactions, &|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11558                 |END|
+line to insert check  :  3689 ( 2083 - 11558) |ALLOCATE(INTER_CALL_POSITION(NUM_TRANSACTIONS, &|
+key used              :   142                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   123                 | 
+alloc sentence in line:  3693 (    0 - 18455) |allocate(trans_e_p_index(max_trans_group_num))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11560                 |END|
+line to insert use all:  2115 ( 2083 - 11560) ||
+line to insert check  :  3694 ( 2083 - 11560) |ALLOCATE(TRANS_EP_2_TRANS_GROUPS(MAX_TRANS_GROUP_NUM))|
+key used              :   143                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   124                 | 
+alloc sentence in line:  3696 (    0 - 18457) |allocate(trans_ep_2_trans_groups(max_trans_group_num))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11562                 |END|
+line to insert use all:  2115 ( 2083 - 11562) ||
+line to insert check  :  3697 ( 2083 - 11562) |ALLOCATE(TRANS_EP_2_TG(MAX_TRANS_GROUP_NUM))|
+key used              :   144                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   125                 | 
+alloc sentence in line:  3699 (    0 - 18459) |allocate(trans_ep_2_tg(max_trans_group_num))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11564                 |END|
+line to insert use all:  2115 ( 2083 - 11564) ||
+line to insert check  :  3700 ( 2083 - 11564) |ALLOCATE(YEARS_BEG_DAY_IN_MO(NUM_TRANSACTIONS,0:12))|
+key used              :   145                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   126                 | 
+alloc sentence in line:  3702 (    0 - 18461) |allocate(years_beg_day_in_mo(num_transactions,0:12))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11566                 |END|
+line to insert use all:  2115 ( 2083 - 11566) ||
+line to insert check  :  3703 ( 2083 - 11566) |ALLOCATE(YEARS_END_DAY_IN_MO(NUM_TRANSACTIONS,0:12))|
+key used              :   146                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   127                 | 
+alloc sentence in line:  3705 (    0 - 18463) |allocate(years_end_day_in_mo(num_transactions,0:12))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11568                 |END|
+line to insert use all:  2115 ( 2083 - 11568) ||
+line to insert check  :  3706 ( 2083 - 11568) |! 072119.|
+key used              :   147                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |transobj2.f90|
+Allocate number       :   128                 | 
+alloc sentence in line:  3722 (    0 - 18465) |allocate(rps_program_number(num_transactions), &|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11570                 |END|
+line to replace allocs:  3721  (  9 allocs)   |ALLOCATE(RPS_PROGRAM_NUMBER(NUM_TRANSACTIONS), &| 
+key used              :   148                 | 
+allocate added        :     1                 |allocate(RPS_PROGRAM_NUMBER(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :     2                 |allocate(DailyStorageDischargeLimit(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :     3                 |allocate(EV_ID_HYBRID_BATTERY(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :     4                 |allocate(HYBRID_BATTERY(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :     5                 |allocate(BATTERY(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :     6                 |allocate(ANNUAL_HYBRID_BATTERY(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :     7                 |allocate(ANNUAL_HYBRID_INDEX(10000),stat=stv_er)|
+allocate added        :     8                 |allocate(RenewableEnergyPercent(NUM_TRANSACTIONS),stat=stv_er)|
+allocate added        :     9                 |allocate(HYBRID_INDEX(10000),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   129                 | 
+alloc sentence in line:  4205 (    0 - 18475) |allocate(fiscal_energy_cost(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11580                 |END|
+line to insert use all:  2115 ( 2083 - 11580) ||
+line to insert check  :  4206 ( 2083 - 11580) |ALLOCATE(FISCAL_ENERGY(NUM_TRANSACTIONS))|
+key used              :   157                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   130                 | 
+alloc sentence in line:  4208 (    0 - 18477) |allocate(fiscal_energy(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11582                 |END|
+line to insert use all:  2115 ( 2083 - 11582) ||
+line to insert check  :  4209 ( 2083 - 11582) |ALLOCATE(FISCAL_CAPACITY(NUM_TRANSACTIONS))|
+key used              :   158                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   131                 | 
+alloc sentence in line:  4211 (    0 - 18479) |allocate(fiscal_capacity(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11584                 |END|
+line to insert use all:  2115 ( 2083 - 11584) ||
+line to insert check  :  4212 ( 2083 - 11584) |ALLOCATE(FISCAL_ENERGY_REVENUE(NUM_TRANSACTIONS))|
+key used              :   159                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   132                 | 
+alloc sentence in line:  4214 (    0 - 18481) |allocate(fiscal_energy_revenue(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11586                 |END|
+line to insert use all:  2115 ( 2083 - 11586) ||
+line to insert check  :  4215 ( 2083 - 11586) |ALLOCATE(FISCAL_TRANS_HOURS(NUM_TRANSACTIONS))|
+key used              :   160                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   133                 | 
+alloc sentence in line:  4217 (    0 - 18483) |allocate(fiscal_trans_hours(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11588                 |END|
+line to insert use all:  2115 ( 2083 - 11588) ||
+line to insert check  :  4218 ( 2083 - 11588) |ALLOCATE(FISCAL_PRODUCT_HOURS(NUM_TRANSACTIONS))|
+key used              :   161                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   134                 | 
+alloc sentence in line:  4220 (    0 - 18485) |allocate(fiscal_product_hours(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11590                 |END|
+line to insert use all:  2115 ( 2083 - 11590) ||
+line to insert check  :  4221 ( 2083 - 11590) |ALLOCATE(FISCAL_PRODUCT_DAYS(NUM_TRANSACTIONS))|
+key used              :   162                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   135                 | 
+alloc sentence in line:  4223 (    0 - 18487) |allocate(fiscal_product_days(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11592                 |END|
+line to insert use all:  2115 ( 2083 - 11592) ||
+line to insert check  :  4224 ( 2083 - 11592) |ALLOCATE(FISCAL_PRODUCT_MONTHS(NUM_TRANSACTIONS))|
+key used              :   163                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   136                 | 
+alloc sentence in line:  4226 (    0 - 18489) |allocate(fiscal_product_months(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11594                 |END|
+line to insert use all:  2115 ( 2083 - 11594) ||
+line to insert check  :  4227 ( 2083 - 11594) |ALLOCATE(FISCAL_STRIKES(NUM_TRANSACTIONS))|
+key used              :   164                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   137                 | 
+alloc sentence in line:  4229 (    0 - 18491) |allocate(fiscal_strikes(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11596                 |END|
+line to insert use all:  2115 ( 2083 - 11596) ||
+line to insert check  :  4230 ( 2083 - 11596) |ALLOCATE(FISCAL_ACTIVE_IN_YEAR_INDEX(NUM_TRANSACTIONS))|
+key used              :   165                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   138                 | 
+alloc sentence in line:  4232 (    0 - 18493) |allocate(fiscal_active_in_year_index(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11598                 |END|
+line to insert use all:  2115 ( 2083 - 11598) ||
+line to insert check  :  4233 ( 2083 - 11598) |ALLOCATE(FISCAL_ACTIVE_IN_YEAR(NUM_TRANSACTIONS))|
+key used              :   166                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   139                 | 
+alloc sentence in line:  4235 (    0 - 18495) |allocate(fiscal_active_in_year(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11600                 |END|
+line to insert use all:  2115 ( 2083 - 11600) ||
+line to insert check  :  4236 ( 2083 - 11600) |ALLOCATE(FISCAL_TRANSACTION_COST(NUM_TRANSACTIONS))|
+key used              :   167                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   140                 | 
+alloc sentence in line:  4238 (    0 - 18497) |allocate(fiscal_transaction_cost(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11602                 |END|
+line to insert use all:  2115 ( 2083 - 11602) ||
+line to insert check  :  4239 ( 2083 - 11602) |ALLOCATE(FISCAL_TRANSACTION_REVENUE(NUM_TRANSACTIONS))|
+key used              :   168                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   141                 | 
+alloc sentence in line:  4241 (    0 - 18499) |allocate(fiscal_transaction_revenue(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11604                 |END|
+line to insert use all:  2115 ( 2083 - 11604) ||
+line to insert check  :  4242 ( 2083 - 11604) |FISCAL_ENERGY_COST = 0.|
+key used              :   169                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   142                 | 
+alloc sentence in line:  4996 (    0 - 18501) |allocate(monthly_energy_cost(num_transactions,0:12))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11606                 |END|
+line to insert use all:  2115 ( 2083 - 11606) ||
+line to insert check  :  4997 ( 2083 - 11606) |ALLOCATE(MONTHLY_ENERGY(NUM_TRANSACTIONS,0:12))|
+key used              :   170                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   143                 | 
+alloc sentence in line:  4999 (    0 - 18503) |allocate(monthly_energy(num_transactions,0:12))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11608                 |END|
+line to insert use all:  2115 ( 2083 - 11608) ||
+line to insert check  :  5000 ( 2083 - 11608) |ALLOCATE(MONTHLY_CHARGE(NUM_TRANSACTIONS,0:12))|
+key used              :   171                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   144                 | 
+alloc sentence in line:  5002 (    0 - 18505) |allocate(monthly_charge(num_transactions,0:12))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11610                 |END|
+line to insert use all:  2115 ( 2083 - 11610) ||
+line to insert check  :  5003 ( 2083 - 11610) |ALLOCATE(MONTHLY_ENR_FOR_REV(NUM_TRANSACTIONS,0:12))|
+key used              :   172                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   145                 | 
+alloc sentence in line:  5005 (    0 - 18507) |allocate(monthly_enr_for_rev(num_transactions,0:12))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11612                 |END|
+line to insert use all:  2115 ( 2083 - 11612) ||
+line to insert check  :  5006 ( 2083 - 11612) |ALLOCATE(MONTHLY_ENR_FOR_EXP(NUM_TRANSACTIONS,0:12))|
+key used              :   173                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   146                 | 
+alloc sentence in line:  5008 (    0 - 18509) |allocate(monthly_enr_for_exp(num_transactions,0:12))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11614                 |END|
+line to insert use all:  2115 ( 2083 - 11614) ||
+line to insert check  :  5009 ( 2083 - 11614) |ALLOCATE(MONTHLY_CAPACITY(NUM_TRANSACTIONS,0:12))|
+key used              :   174                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   147                 | 
+alloc sentence in line:  5011 (    0 - 18511) |allocate(monthly_capacity(num_transactions,0:12))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11616                 |END|
+line to insert use all:  2115 ( 2083 - 11616) ||
+line to insert check  :  5012 ( 2083 - 11616) |ALLOCATE(MONTHLY_ENERGY_REVENUE(NUM_TRANSACTIONS,0:12))|
+key used              :   175                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   148                 | 
+alloc sentence in line:  5014 (    0 - 18513) |allocate(monthly_energy_revenue(num_transactions,0:12))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11618                 |END|
+line to insert use all:  2115 ( 2083 - 11618) ||
+line to insert check  :  5015 ( 2083 - 11618) |ALLOCATE(MONTHLY_AC_REVENUE(0:MAX_ASSET_CLASS_GROUPS,4,0:12))|
+key used              :   176                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   149                 | 
+alloc sentence in line:  5017 (    0 - 18515) |allocate(monthly_ac_revenue(0:max_asset_class_groups,4,0:12))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11620                 |END|
+line to insert use all:  2115 ( 2083 - 11620) ||
+line to insert check  :  5018 ( 2083 - 11620) |ALLOCATE(MONTHLY_AC_REVENUE_ENERGY( &|
+key used              :   177                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   150                 | 
+alloc sentence in line:  5020 (    0 - 18517) |allocate(monthly_ac_revenue_energy( &|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11622                 |END|
+line to insert check  :  5022 ( 2083 - 11622) |ALLOCATE(MONTHLY_AC_EXPENSE(0:MAX_ASSET_CLASS_GROUPS,4,0:12))|
+key used              :   178                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   151                 | 
+alloc sentence in line:  5024 (    0 - 18519) |allocate(monthly_ac_expense(0:max_asset_class_groups,4,0:12))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11624                 |END|
+line to insert use all:  2115 ( 2083 - 11624) ||
+line to insert check  :  5025 ( 2083 - 11624) |ALLOCATE(MONTHLY_AC_EXPENSE_ENERGY( &|
+key used              :   179                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   152                 | 
+alloc sentence in line:  5027 (    0 - 18521) |allocate(monthly_ac_expense_energy( &|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11626                 |END|
+line to insert check  :  5029 ( 2083 - 11626) |ALLOCATE(MONTHLY_TRANS_HOURS(NUM_TRANSACTIONS,0:12))|
+key used              :   180                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   153                 | 
+alloc sentence in line:  5031 (    0 - 18523) |allocate(monthly_trans_hours(num_transactions,0:12))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11628                 |END|
+line to insert use all:  2115 ( 2083 - 11628) ||
+line to insert check  :  5032 ( 2083 - 11628) |ALLOCATE(MONTHLY_PRODUCT_HOURS(NUM_TRANSACTIONS,0:12))|
+key used              :   181                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   154                 | 
+alloc sentence in line:  5034 (    0 - 18525) |allocate(monthly_product_hours(num_transactions,0:12))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11630                 |END|
+line to insert use all:  2115 ( 2083 - 11630) ||
+line to insert check  :  5035 ( 2083 - 11630) |ALLOCATE(MONTHLY_PRODUCT_DAYS(NUM_TRANSACTIONS,0:12))|
+key used              :   182                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   155                 | 
+alloc sentence in line:  5037 (    0 - 18527) |allocate(monthly_product_days(num_transactions,0:12))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11632                 |END|
+line to insert use all:  2115 ( 2083 - 11632) ||
+line to insert check  :  5038 ( 2083 - 11632) |ALLOCATE(MONTHLY_PRODUCT_MONTHS(NUM_TRANSACTIONS))|
+key used              :   183                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   156                 | 
+alloc sentence in line:  5040 (    0 - 18529) |allocate(monthly_product_months(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11634                 |END|
+line to insert use all:  2115 ( 2083 - 11634) ||
+line to insert check  :  5041 ( 2083 - 11634) |ALLOCATE(MONTHLY_STRIKES(NUM_TRANSACTIONS,0:12))|
+key used              :   184                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   157                 | 
+alloc sentence in line:  5043 (    0 - 18531) |allocate(monthly_strikes(num_transactions,0:12))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11636                 |END|
+line to insert use all:  2115 ( 2083 - 11636) ||
+line to insert check  :  5044 ( 2083 - 11636) |ALLOCATE(MONTHLY_TRANSACTION_COST(NUM_TRANSACTIONS,0:12))|
+key used              :   185                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   158                 | 
+alloc sentence in line:  5046 (    0 - 18533) |allocate(monthly_transaction_cost(num_transactions,0:12))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11638                 |END|
+line to insert use all:  2115 ( 2083 - 11638) ||
+line to insert check  :  5047 ( 2083 - 11638) |ALLOCATE(MONTHLY_TRANSACTION_REVENUE(NUM_TRANSACTIONS,0:12))|
+key used              :   186                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   159                 | 
+alloc sentence in line:  5049 (    0 - 18535) |allocate(monthly_transaction_revenue(num_transactions,0:12))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11640                 |END|
+line to insert use all:  2115 ( 2083 - 11640) ||
+line to insert check  :  5050 ( 2083 - 11640) |!|
+key used              :   187                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   160                 | 
+alloc sentence in line:  5428 (    0 - 18537) |allocate(strikes_available(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11642                 |END|
+line to insert use all:  2115 ( 2083 - 11642) ||
+line to insert check  :  5429 ( 2083 - 11642) |ALLOCATE(STRIKES_REQUIRED(NUM_TRANSACTIONS))|
+key used              :   188                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   161                 | 
+alloc sentence in line:  5431 (    0 - 18539) |allocate(strikes_required(num_transactions))|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11644                 |END|
+line to insert use all:  2115 ( 2083 - 11644) ||
+line to insert check  :  5432 ( 2083 - 11644) |STRIKES_AVAILABLE = 0|
+key used              :   189                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   162                 | 
+alloc sentence in line:  5666 (    0 - 18541) |allocate(monthly_ct_group_report(0:12,0:max_monthly_groups, &|
+block starts at line  :  2083                 |RECURSIVE FUNCTION READ_ENERGY_PRODUCTS_DATA()|
+block ends   at line  : 11646                 |END|
+line to insert check  :  5668 ( 2083 - 11646) |MONTHLY_CT_GROUP_REPORT = 0.|
+key used              :   190                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   163                 | 
+alloc sentence in line: 12515 (    0 - 18543) |allocate(hrly_tg_scen_elect_mult(744,12,r_tg))|
+block starts at line  : 12479                 |RECURSIVE FUNCTION MANAGE_ELECT_HOUR_TG_MULT()|
+block ends   at line  : 12564                 |END|
+line to insert use all: 12482 (12479 - 12564) |SAVE|
+line to insert check  : 12519 (12479 - 12567) |!|
+key used              :   191                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   164                 | 
+alloc sentence in line: 13600 (    0 - 18548) |allocate(obs(price_points,r_max_trans_groups)) ! don't need monthly|
+block starts at line  : 13139                 |SUBROUTINE USER_MARKET_PRICE_PROB(R_TRANS_GROUP, &|
+block ends   at line  : 13758                 |END|
+line to insert use all: 13152 (13139 - 13758) |SAVE|
+line to insert check  : 13604 (13139 - 13761) |ALLOCATE(LPROB(PRICE_POINTS,R_MAX_TRANS_GROUPS)) ! DON'T NEED MONTHLY|
+key used              :   192                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   165                 | 
+alloc sentence in line: 13606 (    0 - 18553) |allocate(lprob(price_points,r_max_trans_groups)) ! don't need monthly|
+block starts at line  : 13139                 |SUBROUTINE USER_MARKET_PRICE_PROB(R_TRANS_GROUP, &|
+block ends   at line  : 13763                 |END|
+line to insert use all: 13154 (13139 - 13763) ||
+line to insert check  : 13607 (13139 - 13763) |ALLOCATE(LODDUR(PRICE_POINTS,R_MAX_TRANS_GROUPS,13)) !  DONE.|
+key used              :   193                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   166                 | 
+alloc sentence in line: 13609 (    0 - 18555) |allocate(loddur(price_points,r_max_trans_groups,13)) !  done.|
+block starts at line  : 13139                 |SUBROUTINE USER_MARKET_PRICE_PROB(R_TRANS_GROUP, &|
+block ends   at line  : 13765                 |END|
+line to insert use all: 13154 (13139 - 13765) ||
+line to insert check  : 13610 (13139 - 13765) |ALLOCATE(CUM_HOURS(PRICE_POINTS,R_MAX_TRANS_GROUPS,13)) ! DONE.|
+key used              :   194                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   167                 | 
+alloc sentence in line: 13612 (    0 - 18557) |allocate(cum_hours(price_points,r_max_trans_groups,13)) ! done.|
+block starts at line  : 13139                 |SUBROUTINE USER_MARKET_PRICE_PROB(R_TRANS_GROUP, &|
+block ends   at line  : 13767                 |END|
+line to insert use all: 13154 (13139 - 13767) ||
+line to insert check  : 13613 (13139 - 13767) |ALLOCATE(CUM_REVENUE(PRICE_POINTS,R_MAX_TRANS_GROUPS,13)) ! NEED MONTHLY|
+key used              :   195                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   168                 | 
+alloc sentence in line: 13615 (    0 - 18559) |allocate(cum_revenue(price_points,r_max_trans_groups,13)) ! need monthly|
+block starts at line  : 13139                 |SUBROUTINE USER_MARKET_PRICE_PROB(R_TRANS_GROUP, &|
+block ends   at line  : 13769                 |END|
+line to insert use all: 13154 (13139 - 13769) ||
+line to insert check  : 13616 (13139 - 13769) |ALLOCATE(ENERGY(PRICE_POINTS,R_MAX_TRANS_GROUPS)) ! DON'T NEED MONTHLY|
+key used              :   196                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   169                 | 
+alloc sentence in line: 13618 (    0 - 18561) |allocate(energy(price_points,r_max_trans_groups)) ! don't need monthly|
+block starts at line  : 13139                 |SUBROUTINE USER_MARKET_PRICE_PROB(R_TRANS_GROUP, &|
+block ends   at line  : 13771                 |END|
+line to insert use all: 13154 (13139 - 13771) ||
+line to insert check  : 13619 (13139 - 13771) |!|
+key used              :   197                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   170                 | 
+alloc sentence in line: 14934 (    0 - 18563) |allocate(trans_group_position(-1:max_trans_group_number))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16696                 |END|
+line to insert use all: 14613 (14602 - 16696) |SAVE|
+line to insert check  : 14938 (14602 - 16699) |!|
+key used              :   198                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   171                 | 
+alloc sentence in line: 14999 (    0 - 18568) |allocate(seller_transaction_group(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16701                 |END|
+line to insert use all: 14615 (14602 - 16701) ||
+line to insert check  : 15000 (14602 - 16701) |ALLOCATE(LONG_PATH_PATH(MAX_PATHS))|
+key used              :   199                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   172                 | 
+alloc sentence in line: 15002 (    0 - 18570) |allocate(long_path_path(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16703                 |END|
+line to insert use all: 14615 (14602 - 16703) ||
+line to insert check  : 15003 (14602 - 16703) |ALLOCATE(ACTIVE_PATH_FOR_LONG_PATH(MAX_PATHS))|
+key used              :   200                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   173                 | 
+alloc sentence in line: 15005 (    0 - 18572) |allocate(active_path_for_long_path(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16705                 |END|
+line to insert use all: 14615 (14602 - 16705) ||
+line to insert check  : 15006 (14602 - 16705) |ALLOCATE(BELONGS_TO_A_LONG_PATH(MAX_PATHS))|
+key used              :   201                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   174                 | 
+alloc sentence in line: 15008 (    0 - 18574) |allocate(belongs_to_a_long_path(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16707                 |END|
+line to insert use all: 14615 (14602 - 16707) ||
+line to insert check  : 15009 (14602 - 16707) |ALLOCATE(BUYER_TRANSACTION_GROUP(MAX_PATHS))|
+key used              :   202                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   175                 | 
+alloc sentence in line: 15011 (    0 - 18576) |allocate(buyer_transaction_group(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16709                 |END|
+line to insert use all: 14615 (14602 - 16709) ||
+line to insert check  : 15012 (14602 - 16709) |ALLOCATE(PATH_PERCENT(MAX_PATHS))|
+key used              :   203                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   176                 | 
+alloc sentence in line: 15014 (    0 - 18578) |allocate(path_percent(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16711                 |END|
+line to insert use all: 14615 (14602 - 16711) ||
+line to insert check  : 15015 (14602 - 16711) |ALLOCATE(WHEEL_PATH(MAX_PATHS,MAX_WHEELS))|
+key used              :   204                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   177                 | 
+alloc sentence in line: 15017 (    0 - 18580) |allocate(wheel_path(max_paths,max_wheels))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16713                 |END|
+line to insert use all: 14615 (14602 - 16713) ||
+line to insert check  : 15018 (14602 - 16713) |ALLOCATE(PATHS_PER_PAIR(-1:NUM_TRANS_GROUPS, &|
+key used              :   205                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   178                 | 
+alloc sentence in line: 15020 (    0 - 18582) |allocate(paths_per_pair(-1:num_trans_groups, &|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16715                 |END|
+line to insert check  : 15022 (14602 - 16715) |ALLOCATE(LONG_PATH_FOR_PAIR(-1:NUM_TRANS_GROUPS, &|
+key used              :   206                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   179                 | 
+alloc sentence in line: 15024 (    0 - 18584) |allocate(long_path_for_pair(-1:num_trans_groups, &|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16717                 |END|
+line to insert check  : 15026 (14602 - 16717) |ALLOCATE(HOUR_LONG_PATH_FOR_PAIR(-1:NUM_TRANS_GROUPS, &|
+key used              :   207                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   180                 | 
+alloc sentence in line: 15028 (    0 - 18586) |allocate(hour_long_path_for_pair(-1:num_trans_groups, &|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16719                 |END|
+line to insert check  : 15030 (14602 - 16719) |ALLOCATE(HOUR_PATHS_PER_PAIR(-1:NUM_TRANS_GROUPS, &|
+key used              :   208                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   181                 | 
+alloc sentence in line: 15032 (    0 - 18588) |allocate(hour_paths_per_pair(-1:num_trans_groups, &|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16721                 |END|
+line to insert check  : 15034 (14602 - 16721) |ALLOCATE(HOUR_PATH_FOR_LONG_PATH(MAX_PATHS))|
+key used              :   209                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   182                 | 
+alloc sentence in line: 15036 (    0 - 18590) |allocate(hour_path_for_long_path(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16723                 |END|
+line to insert use all: 14615 (14602 - 16723) ||
+line to insert check  : 15037 (14602 - 16723) |ALLOCATE(HOUR_WHEEL_PATH(MAX(INT(1,2),MAX_HOURLY_LONG_PATHS), &|
+key used              :   210                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   183                 | 
+alloc sentence in line: 15039 (    0 - 18592) |allocate(hour_wheel_path(max(int(1,2),max_hourly_long_paths), &|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16725                 |END|
+line to insert check  : 15041 (14602 - 16725) |ALLOCATE(PATHS_INDEX(-1:NUM_TRANS_GROUPS,-1:NUM_TRANS_GROUPS, &|
+key used              :   211                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   184                 | 
+alloc sentence in line: 15043 (    0 - 18594) |allocate(paths_index(-1:num_trans_groups,-1:num_trans_groups, &|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16727                 |END|
+line to insert check  : 15045 (14602 - 16727) |ALLOCATE(HOUR_PATHS_INDEX( &|
+key used              :   212                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   185                 | 
+alloc sentence in line: 15047 (    0 - 18596) |allocate(hour_paths_index( &|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16729                 |END|
+line to insert check  : 15050 (14602 - 16729) |ALLOCATE(TIES_PER_PAIR(-1:NUM_TRANS_GROUPS, &|
+key used              :   213                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   186                 | 
+alloc sentence in line: 15052 (    0 - 18598) |allocate(ties_per_pair(-1:num_trans_groups, &|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16731                 |END|
+line to insert check  : 15054 (14602 - 16731) |ALLOCATE(TIE_INDEX(-1:NUM_TRANS_GROUPS,-1:NUM_TRANS_GROUPS, &|
+key used              :   214                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   187                 | 
+alloc sentence in line: 15056 (    0 - 18600) |allocate(tie_index(-1:num_trans_groups,-1:num_trans_groups, &|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16733                 |END|
+line to insert check  : 15058 (14602 - 16733) |ALLOCATE(TIE_WHEEL_INDEX(-1:NUM_TRANS_GROUPS, &|
+key used              :   215                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   188                 | 
+alloc sentence in line: 15060 (    0 - 18602) |allocate(tie_wheel_index(-1:num_trans_groups, &|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16735                 |END|
+line to insert check  : 15063 (14602 - 16735) |ALLOCATE(SEASON_PATH_LIMIT(-1:NUM_TRANS_GROUPS, &|
+key used              :   216                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   189                 | 
+alloc sentence in line: 15065 (    0 - 18604) |allocate(season_path_limit(-1:num_trans_groups, &|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16737                 |END|
+line to insert check  : 15067 (14602 - 16737) |ALLOCATE(HOUR_PATH_LIMIT(-1:NUM_TRANS_GROUPS, &|
+key used              :   217                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   190                 | 
+alloc sentence in line: 15069 (    0 - 18606) |allocate(hour_path_limit(-1:num_trans_groups, &|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16739                 |END|
+line to insert check  : 15071 (14602 - 16739) |ALLOCATE(HOUR_PATH_MW(-1:NUM_TRANS_GROUPS, &|
+key used              :   218                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   191                 | 
+alloc sentence in line: 15073 (    0 - 18608) |allocate(hour_path_mw(-1:num_trans_groups, &|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16741                 |END|
+line to insert check  : 15075 (14602 - 16741) |ALLOCATE(SAVE_HOUR_PATH_LIMIT(-1:NUM_TRANS_GROUPS, &|
+key used              :   219                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   192                 | 
+alloc sentence in line: 15077 (    0 - 18610) |allocate(save_hour_path_limit(-1:num_trans_groups, &|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16743                 |END|
+line to insert check  : 15079 (14602 - 16743) |ALLOCATE(HOUR_TIE_LOADING(-1:NUM_TRANS_GROUPS, &|
+key used              :   220                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   193                 | 
+alloc sentence in line: 15081 (    0 - 18612) |allocate(hour_tie_loading(-1:num_trans_groups, &|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16745                 |END|
+line to insert check  : 15083 (14602 - 16745) |ALLOCATE(DAILY_TIE_LOADING(MAX_PATHS,24))|
+key used              :   221                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   194                 | 
+alloc sentence in line: 15085 (    0 - 18614) |allocate(daily_tie_loading(max_paths,24))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16747                 |END|
+line to insert use all: 14615 (14602 - 16747) ||
+line to insert check  : 15086 (14602 - 16747) |ALLOCATE(DAILY_TIE_CONSTRAINT(MAX_PATHS,24))|
+key used              :   222                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   195                 | 
+alloc sentence in line: 15088 (    0 - 18616) |allocate(daily_tie_constraint(max_paths,24))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16749                 |END|
+line to insert use all: 14615 (14602 - 16749) ||
+line to insert check  : 15089 (14602 - 16749) |ALLOCATE(PATH_NAME(MAX_PATHS))|
+key used              :   223                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   196                 | 
+alloc sentence in line: 15091 (    0 - 18618) |allocate(path_name(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16751                 |END|
+line to insert use all: 14615 (14602 - 16751) ||
+line to insert check  : 15092 (14602 - 16751) |ALLOCATE(LONG_PATH_NAME(MAX_PATHS))|
+key used              :   224                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   197                 | 
+alloc sentence in line: 15094 (    0 - 18620) |allocate(long_path_name(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16753                 |END|
+line to insert use all: 14615 (14602 - 16753) ||
+line to insert check  : 15095 (14602 - 16753) |ALLOCATE(PATH_WHEEL_RATE(MAX_PATHS))|
+key used              :   225                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   198                 | 
+alloc sentence in line: 15097 (    0 - 18622) |allocate(path_wheel_rate(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16755                 |END|
+line to insert use all: 14615 (14602 - 16755) ||
+line to insert check  : 15098 (14602 - 16755) |ALLOCATE(PATH_SPREAD(MAX_PATHS))|
+key used              :   226                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   199                 | 
+alloc sentence in line: 15100 (    0 - 18624) |allocate(path_spread(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16757                 |END|
+line to insert use all: 14615 (14602 - 16757) ||
+line to insert check  : 15101 (14602 - 16757) |ALLOCATE(PATH_OWNER(MAX_PATHS))|
+key used              :   227                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   200                 | 
+alloc sentence in line: 15103 (    0 - 18626) |allocate(path_owner(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16759                 |END|
+line to insert use all: 14615 (14602 - 16759) ||
+line to insert check  : 15104 (14602 - 16759) |ALLOCATE(PATH_KV_RATING(MAX_PATHS))|
+key used              :   228                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   201                 | 
+alloc sentence in line: 15106 (    0 - 18628) |allocate(path_kv_rating(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16761                 |END|
+line to insert use all: 14615 (14602 - 16761) ||
+line to insert check  : 15107 (14602 - 16761) |ALLOCATE(PATH_INDUCTANCE(MAX_PATHS))|
+key used              :   229                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   202                 | 
+alloc sentence in line: 15109 (    0 - 18630) |allocate(path_inductance(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16763                 |END|
+line to insert use all: 14615 (14602 - 16763) ||
+line to insert check  : 15110 (14602 - 16763) |ALLOCATE(PATH_WHEEL_MULT(MAX_PATHS))|
+key used              :   230                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   203                 | 
+alloc sentence in line: 15112 (    0 - 18632) |allocate(path_wheel_mult(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16765                 |END|
+line to insert use all: 14615 (14602 - 16765) ||
+line to insert check  : 15113 (14602 - 16765) |ALLOCATE(PATH_SPREAD_MULT(MAX_PATHS))|
+key used              :   231                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   204                 | 
+alloc sentence in line: 15115 (    0 - 18634) |allocate(path_spread_mult(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16767                 |END|
+line to insert use all: 14615 (14602 - 16767) ||
+line to insert check  : 15116 (14602 - 16767) |ALLOCATE(PATH_SPREAD_OFF_MULT(MAX_PATHS))|
+key used              :   232                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   205                 | 
+alloc sentence in line: 15118 (    0 - 18636) |allocate(path_spread_off_mult(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16769                 |END|
+line to insert use all: 14615 (14602 - 16769) ||
+line to insert check  : 15119 (14602 - 16769) |ALLOCATE(PATH_WHEEL_OFF_MULT(MAX_PATHS))|
+key used              :   233                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   206                 | 
+alloc sentence in line: 15121 (    0 - 18638) |allocate(path_wheel_off_mult(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16771                 |END|
+line to insert use all: 14615 (14602 - 16771) ||
+line to insert check  : 15122 (14602 - 16771) |ALLOCATE(MARKET_PRICE_ID(MAX_PATHS))|
+key used              :   234                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   207                 | 
+alloc sentence in line: 15124 (    0 - 18640) |allocate(market_price_id(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16773                 |END|
+line to insert use all: 14615 (14602 - 16773) ||
+line to insert check  : 15125 (14602 - 16773) |ALLOCATE(SCENARIO_NUM(MAX_PATHS))|
+key used              :   235                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   208                 | 
+alloc sentence in line: 15127 (    0 - 18642) |allocate(scenario_num(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16775                 |END|
+line to insert use all: 14615 (14602 - 16775) ||
+line to insert check  : 15128 (14602 - 16775) |ALLOCATE(MARKET_PRICE_DELTA(MAX_PATHS))|
+key used              :   236                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   209                 | 
+alloc sentence in line: 15130 (    0 - 18644) |allocate(market_price_delta(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16777                 |END|
+line to insert use all: 14615 (14602 - 16777) ||
+line to insert check  : 15131 (14602 - 16777) |ALLOCATE(TRANS_LINE_CONSTRAINT(MAX_PATHS))|
+key used              :   237                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   210                 | 
+alloc sentence in line: 15133 (    0 - 18646) |allocate(trans_line_constraint(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16779                 |END|
+line to insert use all: 14615 (14602 - 16779) ||
+line to insert check  : 15134 (14602 - 16779) |ALLOCATE(PEAK_PRICE_DELTA_MULT(MAX_PATHS))|
+key used              :   238                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   211                 | 
+alloc sentence in line: 15136 (    0 - 18648) |allocate(peak_price_delta_mult(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16781                 |END|
+line to insert use all: 14615 (14602 - 16781) ||
+line to insert check  : 15137 (14602 - 16781) |ALLOCATE(OFF_PEAK_PRICE_DELTA_MULT(MAX_PATHS))|
+key used              :   239                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   212                 | 
+alloc sentence in line: 15139 (    0 - 18650) |allocate(off_peak_price_delta_mult(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16783                 |END|
+line to insert use all: 14615 (14602 - 16783) ||
+line to insert check  : 15140 (14602 - 16783) |ALLOCATE(TRANS_LINE_INDEX(MAX_PATHS))|
+key used              :   240                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   213                 | 
+alloc sentence in line: 15142 (    0 - 18652) |allocate(trans_line_index(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16785                 |END|
+line to insert use all: 14615 (14602 - 16785) ||
+line to insert check  : 15143 (14602 - 16785) |ALLOCATE(GRX_ID(MAX_PATHS))|
+key used              :   241                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   214                 | 
+alloc sentence in line: 15145 (    0 - 18654) |allocate(grx_id(max_paths))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16787                 |END|
+line to insert use all: 14615 (14602 - 16787) ||
+line to insert check  : 15146 (14602 - 16787) |ALLOCATE(TG_USED_IN_PATH(-1:MAX_TRANS_GROUP_NUMBER))|
+key used              :   242                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   215                 | 
+alloc sentence in line: 15148 (    0 - 18656) |allocate(tg_used_in_path(-1:max_trans_group_number))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16789                 |END|
+line to insert use all: 14615 (14602 - 16789) ||
+line to insert check  : 15149 (14602 - 16789) |ALLOCATE(REVERSE_PATH(-1:NUM_TRANS_GROUPS, &|
+key used              :   243                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   216                 | 
+alloc sentence in line: 15151 (    0 - 18658) |allocate(reverse_path(-1:num_trans_groups, &|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16791                 |END|
+line to insert check  : 15153 (14602 - 16791) |! FOR LGE|
+key used              :   244                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   217                 | 
+alloc sentence in line: 15505 (    0 - 18660) |allocate(multi_area_month_price(r_hours_in_month,temp_i2))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16793                 |END|
+line to insert use all: 14615 (14602 - 16793) ||
+line to insert check  : 15506 (14602 - 16793) |ALLOCATE(SELL_BEG_FO_HR_TL(ACTIVE_PATH_NUMBER))|
+key used              :   245                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   218                 | 
+alloc sentence in line: 15508 (    0 - 18662) |allocate(sell_beg_fo_hr_tl(active_path_number))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16795                 |END|
+line to insert use all: 14615 (14602 - 16795) ||
+line to insert check  : 15509 (14602 - 16795) |ALLOCATE(SELL_END_FO_HR_TL(ACTIVE_PATH_NUMBER))|
+key used              :   246                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   219                 | 
+alloc sentence in line: 15511 (    0 - 18664) |allocate(sell_end_fo_hr_tl(active_path_number))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16797                 |END|
+line to insert use all: 14615 (14602 - 16797) ||
+line to insert check  : 15512 (14602 - 16797) |!     +                            BUY_BEG_FO_HR_TL(ACTIVE_PATH_NUMBER),|
+key used              :   247                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   220                 | 
+alloc sentence in line: 15643 (    0 - 18666) |allocate(multi_area_buy_month_price(r_hours_in_month,temp_i2))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16799                 |END|
+line to insert use all: 14615 (14602 - 16799) ||
+line to insert check  : 15644 (14602 - 16799) |ALLOCATE(BUY_BEG_FO_HR_TL(ACTIVE_PATH_NUMBER))|
+key used              :   248                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   221                 | 
+alloc sentence in line: 15646 (    0 - 18668) |allocate(buy_beg_fo_hr_tl(active_path_number))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16801                 |END|
+line to insert use all: 14615 (14602 - 16801) ||
+line to insert check  : 15647 (14602 - 16801) |ALLOCATE(BUY_END_FO_HR_TL(ACTIVE_PATH_NUMBER))|
+key used              :   249                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   222                 | 
+alloc sentence in line: 15649 (    0 - 18670) |allocate(buy_end_fo_hr_tl(active_path_number))|
+block starts at line  : 14602                 |RECURSIVE FUNCTION READ_TRANS_PATH_DATA()|
+block ends   at line  : 16803                 |END|
+line to insert use all: 14615 (14602 - 16803) ||
+line to insert check  : 15650 (14602 - 16803) |MULTI_AREA_BUY_MONTH_PRICE = 0. ! 12/22/03.|
+key used              :   250                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   223                 | 
+alloc sentence in line: 17330 (    0 - 18672) |allocate(trans_group_position(-1:max_trans_group_number))|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17818                 |END|
+line to insert use all: 17173 (17165 - 17818) |SAVE|
+line to insert check  : 17334 (17165 - 17821) |!|
+key used              :   251                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   224                 | 
+alloc sentence in line: 17357 (    0 - 18677) |allocate(constraint_id(max_constraints))|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17823                 |END|
+line to insert use all: 17175 (17165 - 17823) ||
+line to insert check  : 17358 (17165 - 17823) |ALLOCATE(SEASON(MAX_CONSTRAINTS))|
+key used              :   252                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   225                 | 
+alloc sentence in line: 17360 (    0 - 18679) |allocate(season(max_constraints))|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17825                 |END|
+line to insert use all: 17175 (17165 - 17825) ||
+line to insert check  : 17361 (17165 - 17825) |ALLOCATE(MW_LIMIT(MAX_CONSTRAINTS))|
+key used              :   253                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   226                 | 
+alloc sentence in line: 17363 (    0 - 18681) |allocate(mw_limit(max_constraints))|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17827                 |END|
+line to insert use all: 17175 (17165 - 17827) ||
+line to insert check  : 17364 (17165 - 17827) |ALLOCATE(FROM_AREA(MAX_CONSTRAINTS,MAX_CONSTRAINT_AREAS))|
+key used              :   254                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   227                 | 
+alloc sentence in line: 17366 (    0 - 18683) |allocate(from_area(max_constraints,max_constraint_areas))|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17829                 |END|
+line to insert use all: 17175 (17165 - 17829) ||
+line to insert check  : 17367 (17165 - 17829) |ALLOCATE(TO_AREA(MAX_CONSTRAINTS,MAX_CONSTRAINT_AREAS))|
+key used              :   255                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   228                 | 
+alloc sentence in line: 17369 (    0 - 18685) |allocate(to_area(max_constraints,max_constraint_areas))|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17831                 |END|
+line to insert use all: 17175 (17165 - 17831) ||
+line to insert check  : 17370 (17165 - 17831) |ALLOCATE(PEAK_MULT(MAX_CONSTRAINTS))|
+key used              :   256                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   229                 | 
+alloc sentence in line: 17372 (    0 - 18687) |allocate(peak_mult(max_constraints))|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17833                 |END|
+line to insert use all: 17175 (17165 - 17833) ||
+line to insert check  : 17373 (17165 - 17833) |ALLOCATE(OFF_PEAK_MULT(MAX_CONSTRAINTS))|
+key used              :   257                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   230                 | 
+alloc sentence in line: 17375 (    0 - 18689) |allocate(off_peak_mult(max_constraints))|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17835                 |END|
+line to insert use all: 17175 (17165 - 17835) ||
+line to insert check  : 17376 (17165 - 17835) |ALLOCATE(FORCED_OUTAGE_RATE(MAX_CONSTRAINTS))|
+key used              :   258                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   231                 | 
+alloc sentence in line: 17378 (    0 - 18691) |allocate(forced_outage_rate(max_constraints))|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17837                 |END|
+line to insert use all: 17175 (17165 - 17837) ||
+line to insert check  : 17379 (17165 - 17837) |ALLOCATE(FORCED_OUTAGE_DERATE_MW(MAX_CONSTRAINTS))|
+key used              :   259                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   232                 | 
+alloc sentence in line: 17381 (    0 - 18693) |allocate(forced_outage_derate_mw(max_constraints))|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17839                 |END|
+line to insert use all: 17175 (17165 - 17839) ||
+line to insert check  : 17382 (17165 - 17839) |ALLOCATE(TRANS_LINE_POSITION(0:MAX_TRANS_LINE_INDEX))|
+key used              :   260                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   233                 | 
+alloc sentence in line: 17384 (    0 - 18695) |allocate(trans_line_position(0:max_trans_line_index))|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17841                 |END|
+line to insert use all: 17175 (17165 - 17841) ||
+line to insert check  : 17385 (17165 - 17841) |!|
+key used              :   261                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   234                 | 
+alloc sentence in line: 17412 (    0 - 18697) |allocate(constraint_percent(max_constraints))|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17843                 |END|
+line to insert use all: 17175 (17165 - 17843) ||
+line to insert check  : 17413 (17165 - 17843) |ALLOCATE(CapTransMultiplier(0:NUM_TRANS_GROUPS, &|
+key used              :   262                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |transobj2.f90|
+Allocate number       :   235                 | 
+alloc sentence in line: 17415 (    0 - 18699) |allocate(captransmultiplier(0:num_trans_groups, &|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17845                 |END|
+line to replace allocs: 17414  (  3 allocs)   |ALLOCATE(CapTransMultiplier(0:NUM_TRANS_GROUPS, &| 
+key used              :   263                 | 
+allocate added        :     1                 |allocate(CapTransMultiplier(0:NUM_TRANS_GROUPS,0:NUM_TRANS_GROUPS),stat=stv_er)|
+allocate added        :     2                 |allocate(TRANS_DERATE(MAX_CONSTRAINTS),stat=stv_er)|
+allocate added        :     3                 |allocate(TRANS_DERATE_DIST(MAX_CONSTRAINTS),stat=stv_er)|
+------------------------------------------( 5)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   236                 | 
+alloc sentence in line: 17422 (    0 - 18702) |allocate(constraints_per_pair( &|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17848                 |END|
+line to insert check  : 17424 (17165 - 17848) |ALLOCATE(LOCAL_SEASON(MAX_CONSTRAINTS))|
+key used              :   266                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |transobj2.f90|
+Allocate number       :   237                 | 
+alloc sentence in line: 17426 (    0 - 18704) |allocate(local_season(max_constraints))|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17850                 |END|
+line to insert use all: 17175 (17165 - 17850) ||
+line to insert check  : 17427 (17165 - 17850) |ALLOCATE(CONSTRAINTS_INDEX( &|
+key used              :   267                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   238                 | 
+alloc sentence in line: 17429 (    0 - 18706) |allocate(constraints_index( &|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17852                 |END|
+line to insert check  : 17432 (17165 - 17852) |ALLOCATE(TIES_PER_PAIR(-1:NUM_TRANS_GROUPS, &|
+key used              :   268                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   239                 | 
+alloc sentence in line: 17434 (    0 - 18708) |allocate(ties_per_pair(-1:num_trans_groups, &|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17854                 |END|
+line to insert check  : 17436 (17165 - 17854) |ALLOCATE(TIE_INDEX(-1:NUM_TRANS_GROUPS,-1:NUM_TRANS_GROUPS, &|
+key used              :   269                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   240                 | 
+alloc sentence in line: 17438 (    0 - 18710) |allocate(tie_index(-1:num_trans_groups,-1:num_trans_groups, &|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17856                 |END|
+line to insert check  : 17440 (17165 - 17856) |ALLOCATE(TIE_WHEEL_INDEX(-1:NUM_TRANS_GROUPS, &|
+key used              :   270                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   241                 | 
+alloc sentence in line: 17442 (    0 - 18712) |allocate(tie_wheel_index(-1:num_trans_groups, &|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17858                 |END|
+line to insert check  : 17445 (17165 - 17858) |ALLOCATE(SEASON_CONSTRAINT_LIMIT( &|
+key used              :   271                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   242                 | 
+alloc sentence in line: 17447 (    0 - 18714) |allocate(season_constraint_limit( &|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17860                 |END|
+line to insert check  : 17450 (17165 - 17860) |ALLOCATE(HOUR_CONSTRAINT_LIMIT( &|
+key used              :   272                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   243                 | 
+alloc sentence in line: 17452 (    0 - 18716) |allocate(hour_constraint_limit( &|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17862                 |END|
+line to insert check  : 17455 (17165 - 17862) |ALLOCATE(HOUR_TIE_LOADING(-1:NUM_TRANS_GROUPS, &|
+key used              :   273                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |transobj2.f90|
+Allocate number       :   244                 | 
+alloc sentence in line: 17457 (    0 - 18718) |allocate(hour_tie_loading(-1:num_trans_groups, &|
+block starts at line  : 17165                 |FUNCTION READ_TRANS_CONSTRAINT_DATA()|
+block ends   at line  : 17864                 |END|
+line to insert check  : 17459 (17165 - 17864) |!|
+key used              :   274                 | 
+------------------------------------------( 4)-

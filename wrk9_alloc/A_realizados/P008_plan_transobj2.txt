@@ -96,6 +96,9 @@
 (13) ml sv       transobj2.f90                  |allocate(annual_interruptible_capacity(num_of_trans_classes))|
 (13) ml sv       transobj2.f90                  |allocate(annu_planning_intrpt_capacity(num_of_trans_classes))|
 (09) sl sv       transobj2.f90                  |allocate(annual_storage_capacity(num_of_trans_classes))|
+(09) sl sv       transobj2.f90                  |allocate(num_calls(num_of_trans_classes))|
+(09) sl sv       transobj2.f90                  |allocate(num_month_calls(num_of_trans_classes))|
+(09) sl sv       transobj2.f90                  |allocate(num_annual_calls(num_of_trans_classes))|
 (09) sl sv       transobj2.f90                  |allocate(annual_capacity(744,12,num_of_trans_classes))|
 (09) sl sv       transobj2.f90                  |allocate(num_puts(num_of_trans_classes))|
 (09) sl sv       transobj2.f90                  |allocate(num_storage(num_of_trans_classes))|
@@ -103,10 +106,12 @@
 (09) sl sv       transobj2.f90                  |allocate(scen_num_stor(num_of_trans_classes))|
 (13) ml sv       transobj2.f90                  |allocate(ann_stor_pos(num_transactions,num_of_trans_classes))|
 (13) ml sv       transobj2.f90                  |allocate(scen_stor_pos(num_transactions,num_of_trans_classes))|
+(09) sl sv       transobj2.f90                  |allocate(num_lf_calls(num_of_trans_classes))|
 (09) sl sv       transobj2.f90                  |allocate(num_lf_puts(num_of_trans_classes))|
 (09) sl sv       transobj2.f90                  |allocate(num_month_puts(num_of_trans_classes))|
 (09) sl sv       transobj2.f90                  |allocate(num_annual_puts(num_of_trans_classes))|
 (09) sl sv       transobj2.f90                  |allocate(num_inter_puts(num_of_trans_classes))|
+(09) sl sv       transobj2.f90                  |allocate(num_inter_calls(num_of_trans_classes))|
 (13) ml sv       transobj2.f90                  |allocate(forward_position(num_transactions,num_of_trans_classes))|
 (13) ml sv       transobj2.f90                  |allocate(put_position(num_transactions,num_of_trans_classes))|
 (13) ml sv       transobj2.f90                  |allocate(month_put_position(num_transactions,num_of_trans_classes))|

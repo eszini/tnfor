@@ -1,0 +1,7 @@
+
+borrar los primeros 48 chars de cada linea
+:%s/^.\{48\}//
+
+
+reemplazar ",stat=xxxxxx" por nada (o blanco)
+:%s/,stat=[a-zA-Z_][a-zA-Z0-9_]*/ /

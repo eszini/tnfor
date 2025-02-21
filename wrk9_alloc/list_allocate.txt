@@ -1,1 +1,244 @@
-00001 p1.f90                         (f90) 00012 |    allocate(var1,var2)|
+00001 transobj2.f90                  (f90) 00372 |         ALLOCATE(HOURLY_TRANS_REVENUE(MAX_TIE_GROUPS,DAILY_HOURS))|
+00002 transobj2.f90                  (f90) 01048 |      ALLOCATE(TRANS_CLASS_POINTER(0:1023), &|
+00003 transobj2.f90                  (f90) 03267 |            ALLOCATE(TRANSACTION_NAME(NUM_TRANSACTIONS))|
+00004 transobj2.f90                  (f90) 03273 |            ALLOCATE(MONTHLY_USER_CF(NUM_TRANSACTIONS))|
+00005 transobj2.f90                  (f90) 03276 |            ALLOCATE(MONTHLY_USER_CF_COUNTER(NUM_TRANSACTIONS))|
+00006 transobj2.f90                  (f90) 03279 |            ALLOCATE(MONTHLY_CF_TRANS(NUM_TRANSACTIONS))|
+00007 transobj2.f90                  (f90) 03282 |            ALLOCATE(USER_CF(NUM_TRANSACTIONS))|
+00008 transobj2.f90                  (f90) 03285 |            ALLOCATE(COUNTERPARTY_NAME(NUM_TRANSACTIONS))|
+00009 transobj2.f90                  (f90) 03288 |            ALLOCATE(TRANSACTION_ID(NUM_TRANSACTIONS))|
+00010 transobj2.f90                  (f90) 03291 |            ALLOCATE(TRANSACTION_GROUP(NUM_TRANSACTIONS))|
+00011 transobj2.f90                  (f90) 03294 |            ALLOCATE(TRANSACTION_TYPE(NUM_TRANSACTIONS))|
+00012 transobj2.f90                  (f90) 03297 |            ALLOCATE(DERIVATIVE_TYPE(NUM_TRANSACTIONS))|
+00013 transobj2.f90                  (f90) 03300 |            ALLOCATE(PRODUCT_INDEX(NUM_TRANSACTIONS))|
+00014 transobj2.f90                  (f90) 03303 |            ALLOCATE(TRANSACTION_CLASS(NUM_TRANSACTIONS))|
+00015 transobj2.f90                  (f90) 03306 |            ALLOCATE(PRODUCT_TYPE(NUM_TRANSACTIONS))|
+00016 transobj2.f90                  (f90) 03309 |            ALLOCATE(OPTION_POSITION(NUM_TRANSACTIONS))|
+00017 transobj2.f90                  (f90) 03312 |            ALLOCATE(PRODUCT_ACTIVE(NUM_TRANSACTIONS))|
+00018 transobj2.f90                  (f90) 03315 |            ALLOCATE(STRIKE_FREQUENCY(NUM_TRANSACTIONS))|
+00019 transobj2.f90                  (f90) 03318 |            ALLOCATE(REPORT_PRODUCT(NUM_TRANSACTIONS))|
+00020 transobj2.f90                  (f90) 03321 |            ALLOCATE(UNIT_CONTINGENCY(NUM_TRANSACTIONS))|
+00021 transobj2.f90                  (f90) 03324 |            ALLOCATE(UNIT_CONTINGENT_LINK(NUM_TRANSACTIONS))|
+00022 transobj2.f90                  (f90) 03327 |            ALLOCATE(ENERGY_MULTIPLIER(NUM_TRANSACTIONS))|
+00023 transobj2.f90                  (f90) 03330 |            ALLOCATE(TRANS_ACTIVE_IN_ENDPOINT(NUM_TRANSACTIONS))|
+00024 transobj2.f90                  (f90) 03333 |            ALLOCATE(HEAT_RATE_FOR_SPREAD(NUM_TRANSACTIONS))|
+00025 transobj2.f90                  (f90) 03336 |            ALLOCATE(USER_DAY_TYPES_ID(NUM_TRANSACTIONS))|
+00026 transobj2.f90                  (f90) 03339 |            ALLOCATE(PUMPING_CAPACITY(NUM_TRANSACTIONS))|
+00027 transobj2.f90                  (f90) 03342 |            ALLOCATE(PUMPING_STORAGE_EFFICIENCY(NUM_TRANSACTIONS))|
+00028 transobj2.f90                  (f90) 03345 |            ALLOCATE(DAILY_PUMPING_MULT(NUM_TRANSACTIONS))|
+00029 transobj2.f90                  (f90) 03348 |            ALLOCATE(FUEL_TYPE(NUM_TRANSACTIONS))|
+00030 transobj2.f90                  (f90) 03351 |            ALLOCATE(FUEL_PRICE_TYPE(NUM_TRANSACTIONS))|
+00031 transobj2.f90                  (f90) 03354 |            ALLOCATE(FUEL_PRICE(NUM_TRANSACTIONS))|
+00032 transobj2.f90                  (f90) 03357 |            ALLOCATE(TRANSPORTATION_BASIS_TYPE(NUM_TRANSACTIONS))|
+00033 transobj2.f90                  (f90) 03360 |            ALLOCATE(TRANSPORTATION_BASIS(NUM_TRANSACTIONS))|
+00034 transobj2.f90                  (f90) 03363 |            ALLOCATE(DELIVERY_ADDER(NUM_TRANSACTIONS))|
+00035 transobj2.f90                  (f90) 03366 |            ALLOCATE(COUNTERPARTY_BOND_RATING(NUM_TRANSACTIONS))|
+00036 transobj2.f90                  (f90) 03369 |            ALLOCATE(DOLLAR_MWH(NUM_TRANSACTIONS))|
+00037 transobj2.f90                  (f90) 03372 |            ALLOCATE(WVPA_RATE_TRACKER(NUM_TRANSACTIONS))|
+00038 transobj2.f90                  (f90) 03375 |            ALLOCATE(WVPA_MEM_TRACKER(NUM_TRANSACTIONS), &|
+00039 transobj2.f90                  (f90) 03388 |            ALLOCATE(Tax_Credit_Begin_Date(NUM_TRANSACTIONS), &|
+00040 transobj2.f90                  (f90) 03420 |            ALLOCATE(GRX_RPS_CAPACITY(NUM_TRANSACTIONS,30))|
+00041 transobj2.f90                  (f90) 03423 |            ALLOCATE(SAVE_GRX_RPS_CAPACITY(NUM_TRANSACTIONS,30))|
+00042 transobj2.f90                  (f90) 03426 |            ALLOCATE(GRX_STORAGE_PATTERN(NUM_OF_TRANS_CLASSES,8760))|
+00043 transobj2.f90                  (f90) 03429 |            ALLOCATE(GRX_INDEP_PATTERN(NUM_OF_TRANS_CLASSES,8760))|
+00044 transobj2.f90                  (f90) 03432 |            ALLOCATE(SAVE_GRX_STORAGE_PATTERN &|
+00045 transobj2.f90                  (f90) 03436 |            ALLOCATE(ENERGY_PRICE_MULTIPLIER(NUM_TRANSACTIONS))|
+00046 transobj2.f90                  (f90) 03439 |            ALLOCATE(MAX_QUANTITY_OF_PRODUCT(NUM_TRANSACTIONS))|
+00047 transobj2.f90                  (f90) 03442 |            ALLOCATE(MONTHLY_ENERGY_MULT(NUM_TRANSACTIONS))|
+00048 transobj2.f90                  (f90) 03445 |            ALLOCATE(CONTRACT_DATE(NUM_TRANSACTIONS))|
+00049 transobj2.f90                  (f90) 03448 |            ALLOCATE(DISTINGUISHING(NUM_TRANSACTIONS))|
+00050 transobj2.f90                  (f90) 03451 |            ALLOCATE(REPORTING_GENERATION_GROUP(NUM_TRANSACTIONS))|
+00051 transobj2.f90                  (f90) 03454 |            ALLOCATE(EXPENSE_ASSIGNMENT(NUM_TRANSACTIONS))|
+00052 transobj2.f90                  (f90) 03457 |            ALLOCATE(EXPENSE_COLLECTION(NUM_TRANSACTIONS))|
+00053 transobj2.f90                  (f90) 03460 |            ALLOCATE(ASSET_CLASS_ID(NUM_TRANSACTIONS))|
+00054 transobj2.f90                  (f90) 03463 |            ALLOCATE(ASSET_ALLOCATION_VECTOR(NUM_TRANSACTIONS))|
+00055 transobj2.f90                  (f90) 03466 |            ALLOCATE(QUANTITY_OF_PRODUCT(NUM_TRANSACTIONS))|
+00056 transobj2.f90                  (f90) 03469 |            ALLOCATE(PROPOSED_QUANT_OF_PRODUCT(NUM_TRANSACTIONS))|
+00057 transobj2.f90                  (f90) 03472 |            ALLOCATE(SAVED_QUANT_OF_PRODUCT(NUM_TRANSACTIONS))|
+00058 transobj2.f90                  (f90) 03475 |            ALLOCATE(HOURLY_QUANTITY(NUM_TRANSACTIONS))|
+00059 transobj2.f90                  (f90) 03478 |            ALLOCATE(ENERGY_PRICE(NUM_TRANSACTIONS))|
+00060 transobj2.f90                  (f90) 03481 |            ALLOCATE(MONTHLY_ENERGY_PRICE(NUM_TRANSACTIONS))|
+00061 transobj2.f90                  (f90) 03484 |            ALLOCATE(CONTINGENT_CAPACITY(24,NUM_TRANSACTIONS))|
+00062 transobj2.f90                  (f90) 03487 |            ALLOCATE(MONTHLY_2ND_ENERGY_PRICE(NUM_TRANSACTIONS))|
+00063 transobj2.f90                  (f90) 03490 |            ALLOCATE(PRICE_TYPE(NUM_TRANSACTIONS))|
+00064 transobj2.f90                  (f90) 03493 |            ALLOCATE(SECOND_ENERGY_PRICE(NUM_TRANSACTIONS))|
+00065 transobj2.f90                  (f90) 03496 |            ALLOCATE(MAXIMUM_STRIKES(NUM_TRANSACTIONS))|
+00066 transobj2.f90                  (f90) 03499 |            ALLOCATE(BILLING_LAG(NUM_TRANSACTIONS))|
+00067 transobj2.f90                  (f90) 03502 |            ALLOCATE(MINIMUM_STRIKES(NUM_TRANSACTIONS))|
+00068 transobj2.f90                  (f90) 03505 |            ALLOCATE(DOLLAR_KW_DAY(NUM_TRANSACTIONS))|
+00069 transobj2.f90                  (f90) 03508 |            ALLOCATE(DOLLAR_KW_DAY_ESC(NUM_TRANSACTIONS))|
+00070 transobj2.f90                  (f90) 03511 |            ALLOCATE(DOLLAR_KW_MONTH(NUM_TRANSACTIONS))|
+00071 transobj2.f90                  (f90) 03514 |            ALLOCATE(DOLLAR_KW_MONTH_ESC(NUM_TRANSACTIONS))|
+00072 transobj2.f90                  (f90) 03517 |            ALLOCATE(DOLLAR_KW_YEAR(NUM_TRANSACTIONS))|
+00073 transobj2.f90                  (f90) 03520 |            ALLOCATE(GRX_DOLLAR_KW_YEAR(NUM_TRANSACTIONS))|
+00074 transobj2.f90                  (f90) 03523 |            ALLOCATE(GRX_DOLLAR_KW_MONTH(NUM_TRANSACTIONS))|
+00075 transobj2.f90                  (f90) 03526 |            ALLOCATE(DOLLAR_KW_YEAR_ESC(NUM_TRANSACTIONS))|
+00076 transobj2.f90                  (f90) 03529 |            ALLOCATE(DOLLAR_MONTH(NUM_TRANSACTIONS))|
+00077 transobj2.f90                  (f90) 03532 |            ALLOCATE(DOLLAR_MONTH_ESC(NUM_TRANSACTIONS))|
+00078 transobj2.f90                  (f90) 03535 |            ALLOCATE(DOLLAR_DEAL(NUM_TRANSACTIONS))|
+00079 transobj2.f90                  (f90) 03538 |            ALLOCATE(DOLLAR_DEAL_ESC(NUM_TRANSACTIONS))|
+00080 transobj2.f90                  (f90) 03541 |            ALLOCATE(BEGIN_DAY(NUM_TRANSACTIONS))|
+00081 transobj2.f90                  (f90) 03544 |            ALLOCATE(BEGIN_DAY_IN_MONTH(NUM_TRANSACTIONS))|
+00082 transobj2.f90                  (f90) 03547 |            ALLOCATE(BEGIN_EP(NUM_TRANSACTIONS))|
+00083 transobj2.f90                  (f90) 03550 |            ALLOCATE(END_DAY(NUM_TRANSACTIONS))|
+00084 transobj2.f90                  (f90) 03553 |            ALLOCATE(END_DAY_IN_MONTH(NUM_TRANSACTIONS))|
+00085 transobj2.f90                  (f90) 03556 |            ALLOCATE(END_EP(NUM_TRANSACTIONS))|
+00086 transobj2.f90                  (f90) 03559 |            ALLOCATE(ACTIVE_IN_MONTH(NUM_TRANSACTIONS))|
+00087 transobj2.f90                  (f90) 03562 |            ALLOCATE(TRANS_TO_ACTIVE_MONTH(NUM_TRANSACTIONS))|
+00088 transobj2.f90                  (f90) 03565 |            ALLOCATE(ACTIVE_IN_YEAR(NUM_TRANSACTIONS))|
+00089 transobj2.f90                  (f90) 03568 |            ALLOCATE(ACTIVE_IN_YEAR_INDEX(NUM_TRANSACTIONS))|
+00090 transobj2.f90                  (f90) 03571 |            ALLOCATE(ASSET_CLASS_GROUPS_INDEX(0:MAX_ASSET_GROUPS))|
+00091 transobj2.f90                  (f90) 03574 |            ALLOCATE(ASSET_2_TRANS_INDEX(0:MAX_ASSET_GROUPS, &|
+00092 transobj2.f90                  (f90) 03578 |            ALLOCATE(NUMBER_ASSET_2_TRANS(MAX_TRANS_GROUPS))|
+00093 transobj2.f90                  (f90) 03581 |            ALLOCATE(FIRST_AC_TG(0:MAX_ASSET_GROUPS))|
+00094 transobj2.f90                  (f90) 03584 |            ALLOCATE(NUM_FORWARDS(NUM_OF_TRANS_CLASSES))|
+00095 transobj2.f90                  (f90) 03587 |            ALLOCATE(MONTHLY_CONTINGENT_CAPACITY(NUM_OF_TRANS_CLASSES))|
+00096 transobj2.f90                  (f90) 03590 |            ALLOCATE(ANNUAL_INTERRUPTIBLE_CAPACITY( &|
+00097 transobj2.f90                  (f90) 03594 |            ALLOCATE(ANNU_PLANNING_INTRPT_CAPACITY( &|
+00098 transobj2.f90                  (f90) 03598 |            ALLOCATE(ANNUAL_STORAGE_CAPACITY(NUM_OF_TRANS_CLASSES))|
+00099 transobj2.f90                  (f90) 03601 |            ALLOCATE(NUM_CALLS(NUM_OF_TRANS_CLASSES))|
+00100 transobj2.f90                  (f90) 03604 |            ALLOCATE(NUM_MONTH_CALLS(NUM_OF_TRANS_CLASSES))|
+00101 transobj2.f90                  (f90) 03607 |            ALLOCATE(NUM_ANNUAL_CALLS(NUM_OF_TRANS_CLASSES))|
+00102 transobj2.f90                  (f90) 03610 |            ALLOCATE(ANNUAL_CAPACITY(744,12,NUM_OF_TRANS_CLASSES))|
+00103 transobj2.f90                  (f90) 03613 |            ALLOCATE(NUM_PUTS(NUM_OF_TRANS_CLASSES))|
+00104 transobj2.f90                  (f90) 03616 |            ALLOCATE(NUM_STORAGE(NUM_OF_TRANS_CLASSES))|
+00105 transobj2.f90                  (f90) 03619 |            ALLOCATE(ANN_NUM_STOR(NUM_OF_TRANS_CLASSES))|
+00106 transobj2.f90                  (f90) 03622 |            ALLOCATE(SCEN_NUM_STOR(NUM_OF_TRANS_CLASSES))|
+00107 transobj2.f90                  (f90) 03625 |            ALLOCATE(ANN_STOR_POS(NUM_TRANSACTIONS, &|
+00108 transobj2.f90                  (f90) 03629 |            ALLOCATE(SCEN_STOR_POS(NUM_TRANSACTIONS, &|
+00109 transobj2.f90                  (f90) 03633 |            ALLOCATE(NUM_LF_CALLS(NUM_OF_TRANS_CLASSES))|
+00110 transobj2.f90                  (f90) 03636 |            ALLOCATE(NUM_LF_PUTS(NUM_OF_TRANS_CLASSES))|
+00111 transobj2.f90                  (f90) 03639 |            ALLOCATE(NUM_MONTH_PUTS(NUM_OF_TRANS_CLASSES))|
+00112 transobj2.f90                  (f90) 03642 |            ALLOCATE(NUM_ANNUAL_PUTS(NUM_OF_TRANS_CLASSES))|
+00113 transobj2.f90                  (f90) 03645 |            ALLOCATE(NUM_INTER_PUTS(NUM_OF_TRANS_CLASSES))|
+00114 transobj2.f90                  (f90) 03648 |            ALLOCATE(NUM_INTER_CALLS(NUM_OF_TRANS_CLASSES))|
+00115 transobj2.f90                  (f90) 03651 |            ALLOCATE(FORWARD_POSITION(NUM_TRANSACTIONS, &|
+00116 transobj2.f90                  (f90) 03661 |            ALLOCATE(PUT_POSITION(NUM_TRANSACTIONS, &|
+00117 transobj2.f90                  (f90) 03665 |            ALLOCATE(MONTH_PUT_POSITION(NUM_TRANSACTIONS, &|
+00118 transobj2.f90                  (f90) 03669 |            ALLOCATE(ANNUAL_PUT_POSITION(NUM_TRANSACTIONS, &|
+00119 transobj2.f90                  (f90) 03673 |            ALLOCATE(STORAGE_POSITION(NUM_TRANSACTIONS, &|
+00120 transobj2.f90                  (f90) 03677 |            ALLOCATE(BATTERY_POSITION(NUM_TRANSACTIONS, &|
+00121 transobj2.f90                  (f90) 03683 |            ALLOCATE(LF_PUT_POSITION(NUM_TRANSACTIONS, &|
+00122 transobj2.f90                  (f90) 03687 |            ALLOCATE(INTER_PUT_POSITION(NUM_TRANSACTIONS, &|
+00123 transobj2.f90                  (f90) 03693 |            ALLOCATE(TRANS_E_P_INDEX(MAX_TRANS_GROUP_NUM))|
+00124 transobj2.f90                  (f90) 03696 |            ALLOCATE(TRANS_EP_2_TRANS_GROUPS(MAX_TRANS_GROUP_NUM))|
+00125 transobj2.f90                  (f90) 03699 |            ALLOCATE(TRANS_EP_2_TG(MAX_TRANS_GROUP_NUM))|
+00126 transobj2.f90                  (f90) 03702 |            ALLOCATE(YEARS_BEG_DAY_IN_MO(NUM_TRANSACTIONS,0:12))|
+00127 transobj2.f90                  (f90) 03705 |            ALLOCATE(YEARS_END_DAY_IN_MO(NUM_TRANSACTIONS,0:12))|
+00128 transobj2.f90                  (f90) 03722 |            ALLOCATE(RPS_PROGRAM_NUMBER(NUM_TRANSACTIONS), &|
+00129 transobj2.f90                  (f90) 04205 |            ALLOCATE(FISCAL_ENERGY_COST(NUM_TRANSACTIONS))|
+00130 transobj2.f90                  (f90) 04208 |            ALLOCATE(FISCAL_ENERGY(NUM_TRANSACTIONS))|
+00131 transobj2.f90                  (f90) 04211 |            ALLOCATE(FISCAL_CAPACITY(NUM_TRANSACTIONS))|
+00132 transobj2.f90                  (f90) 04214 |            ALLOCATE(FISCAL_ENERGY_REVENUE(NUM_TRANSACTIONS))|
+00133 transobj2.f90                  (f90) 04217 |            ALLOCATE(FISCAL_TRANS_HOURS(NUM_TRANSACTIONS))|
+00134 transobj2.f90                  (f90) 04220 |            ALLOCATE(FISCAL_PRODUCT_HOURS(NUM_TRANSACTIONS))|
+00135 transobj2.f90                  (f90) 04223 |            ALLOCATE(FISCAL_PRODUCT_DAYS(NUM_TRANSACTIONS))|
+00136 transobj2.f90                  (f90) 04226 |            ALLOCATE(FISCAL_PRODUCT_MONTHS(NUM_TRANSACTIONS))|
+00137 transobj2.f90                  (f90) 04229 |            ALLOCATE(FISCAL_STRIKES(NUM_TRANSACTIONS))|
+00138 transobj2.f90                  (f90) 04232 |            ALLOCATE(FISCAL_ACTIVE_IN_YEAR_INDEX(NUM_TRANSACTIONS))|
+00139 transobj2.f90                  (f90) 04235 |            ALLOCATE(FISCAL_ACTIVE_IN_YEAR(NUM_TRANSACTIONS))|
+00140 transobj2.f90                  (f90) 04238 |            ALLOCATE(FISCAL_TRANSACTION_COST(NUM_TRANSACTIONS))|
+00141 transobj2.f90                  (f90) 04241 |            ALLOCATE(FISCAL_TRANSACTION_REVENUE(NUM_TRANSACTIONS))|
+00142 transobj2.f90                  (f90) 04996 |         ALLOCATE(MONTHLY_ENERGY_COST(NUM_TRANSACTIONS,0:12))|
+00143 transobj2.f90                  (f90) 04999 |         ALLOCATE(MONTHLY_ENERGY(NUM_TRANSACTIONS,0:12))|
+00144 transobj2.f90                  (f90) 05002 |         ALLOCATE(MONTHLY_CHARGE(NUM_TRANSACTIONS,0:12))|
+00145 transobj2.f90                  (f90) 05005 |         ALLOCATE(MONTHLY_ENR_FOR_REV(NUM_TRANSACTIONS,0:12))|
+00146 transobj2.f90                  (f90) 05008 |         ALLOCATE(MONTHLY_ENR_FOR_EXP(NUM_TRANSACTIONS,0:12))|
+00147 transobj2.f90                  (f90) 05011 |         ALLOCATE(MONTHLY_CAPACITY(NUM_TRANSACTIONS,0:12))|
+00148 transobj2.f90                  (f90) 05014 |         ALLOCATE(MONTHLY_ENERGY_REVENUE(NUM_TRANSACTIONS,0:12))|
+00149 transobj2.f90                  (f90) 05017 |         ALLOCATE(MONTHLY_AC_REVENUE(0:MAX_ASSET_CLASS_GROUPS,4,0:12))|
+00150 transobj2.f90                  (f90) 05020 |         ALLOCATE(MONTHLY_AC_REVENUE_ENERGY( &|
+00151 transobj2.f90                  (f90) 05024 |         ALLOCATE(MONTHLY_AC_EXPENSE(0:MAX_ASSET_CLASS_GROUPS,4,0:12))|
+00152 transobj2.f90                  (f90) 05027 |         ALLOCATE(MONTHLY_AC_EXPENSE_ENERGY( &|
+00153 transobj2.f90                  (f90) 05031 |         ALLOCATE(MONTHLY_TRANS_HOURS(NUM_TRANSACTIONS,0:12))|
+00154 transobj2.f90                  (f90) 05034 |         ALLOCATE(MONTHLY_PRODUCT_HOURS(NUM_TRANSACTIONS,0:12))|
+00155 transobj2.f90                  (f90) 05037 |         ALLOCATE(MONTHLY_PRODUCT_DAYS(NUM_TRANSACTIONS,0:12))|
+00156 transobj2.f90                  (f90) 05040 |         ALLOCATE(MONTHLY_PRODUCT_MONTHS(NUM_TRANSACTIONS))|
+00157 transobj2.f90                  (f90) 05043 |         ALLOCATE(MONTHLY_STRIKES(NUM_TRANSACTIONS,0:12))|
+00158 transobj2.f90                  (f90) 05046 |         ALLOCATE(MONTHLY_TRANSACTION_COST(NUM_TRANSACTIONS,0:12))|
+00159 transobj2.f90                  (f90) 05049 |         ALLOCATE(MONTHLY_TRANSACTION_REVENUE(NUM_TRANSACTIONS,0:12))|
+00160 transobj2.f90                  (f90) 05428 |         ALLOCATE(STRIKES_AVAILABLE(NUM_TRANSACTIONS))|
+00161 transobj2.f90                  (f90) 05431 |         ALLOCATE(STRIKES_REQUIRED(NUM_TRANSACTIONS))|
+00162 transobj2.f90                  (f90) 05666 |            ALLOCATE(MONTHLY_CT_GROUP_REPORT(0:12,0:MAX_MONTHLY_GROUPS, &|
+00163 transobj2.f90                  (f90) 12515 |         ALLOCATE(HRLY_TG_SCEN_ELECT_MULT(744,12,R_TG))|
+00164 transobj2.f90                  (f90) 13600 |         ALLOCATE(OBS(PRICE_POINTS,R_MAX_TRANS_GROUPS)) ! DON'T NEED MONTHLY|
+00165 transobj2.f90                  (f90) 13606 |         ALLOCATE(LPROB(PRICE_POINTS,R_MAX_TRANS_GROUPS)) ! DON'T NEED MONTHLY|
+00166 transobj2.f90                  (f90) 13609 |         ALLOCATE(LODDUR(PRICE_POINTS,R_MAX_TRANS_GROUPS,13)) !  DONE.|
+00167 transobj2.f90                  (f90) 13612 |         ALLOCATE(CUM_HOURS(PRICE_POINTS,R_MAX_TRANS_GROUPS,13)) ! DONE.|
+00168 transobj2.f90                  (f90) 13615 |         ALLOCATE(CUM_REVENUE(PRICE_POINTS,R_MAX_TRANS_GROUPS,13)) ! NEED MONTHLY|
+00169 transobj2.f90                  (f90) 13618 |         ALLOCATE(ENERGY(PRICE_POINTS,R_MAX_TRANS_GROUPS)) ! DON'T NEED MONTHLY|
+00170 transobj2.f90                  (f90) 14934 |         ALLOCATE(TRANS_GROUP_POSITION(-1:MAX_TRANS_GROUP_NUMBER))|
+00171 transobj2.f90                  (f90) 14999 |         ALLOCATE(SELLER_TRANSACTION_GROUP(MAX_PATHS))|
+00172 transobj2.f90                  (f90) 15002 |         ALLOCATE(LONG_PATH_PATH(MAX_PATHS))|
+00173 transobj2.f90                  (f90) 15005 |         ALLOCATE(ACTIVE_PATH_FOR_LONG_PATH(MAX_PATHS))|
+00174 transobj2.f90                  (f90) 15008 |         ALLOCATE(BELONGS_TO_A_LONG_PATH(MAX_PATHS))|
+00175 transobj2.f90                  (f90) 15011 |         ALLOCATE(BUYER_TRANSACTION_GROUP(MAX_PATHS))|
+00176 transobj2.f90                  (f90) 15014 |         ALLOCATE(PATH_PERCENT(MAX_PATHS))|
+00177 transobj2.f90                  (f90) 15017 |         ALLOCATE(WHEEL_PATH(MAX_PATHS,MAX_WHEELS))|
+00178 transobj2.f90                  (f90) 15020 |         ALLOCATE(PATHS_PER_PAIR(-1:NUM_TRANS_GROUPS, &|
+00179 transobj2.f90                  (f90) 15024 |         ALLOCATE(LONG_PATH_FOR_PAIR(-1:NUM_TRANS_GROUPS, &|
+00180 transobj2.f90                  (f90) 15028 |         ALLOCATE(HOUR_LONG_PATH_FOR_PAIR(-1:NUM_TRANS_GROUPS, &|
+00181 transobj2.f90                  (f90) 15032 |         ALLOCATE(HOUR_PATHS_PER_PAIR(-1:NUM_TRANS_GROUPS, &|
+00182 transobj2.f90                  (f90) 15036 |         ALLOCATE(HOUR_PATH_FOR_LONG_PATH(MAX_PATHS))|
+00183 transobj2.f90                  (f90) 15039 |         ALLOCATE(HOUR_WHEEL_PATH(MAX(INT(1,2),MAX_HOURLY_LONG_PATHS), &|
+00184 transobj2.f90                  (f90) 15043 |         ALLOCATE(PATHS_INDEX(-1:NUM_TRANS_GROUPS,-1:NUM_TRANS_GROUPS, &|
+00185 transobj2.f90                  (f90) 15047 |         ALLOCATE(HOUR_PATHS_INDEX( &|
+00186 transobj2.f90                  (f90) 15052 |         ALLOCATE(TIES_PER_PAIR(-1:NUM_TRANS_GROUPS, &|
+00187 transobj2.f90                  (f90) 15056 |         ALLOCATE(TIE_INDEX(-1:NUM_TRANS_GROUPS,-1:NUM_TRANS_GROUPS, &|
+00188 transobj2.f90                  (f90) 15060 |         ALLOCATE(TIE_WHEEL_INDEX(-1:NUM_TRANS_GROUPS, &|
+00189 transobj2.f90                  (f90) 15065 |         ALLOCATE(SEASON_PATH_LIMIT(-1:NUM_TRANS_GROUPS, &|
+00190 transobj2.f90                  (f90) 15069 |         ALLOCATE(HOUR_PATH_LIMIT(-1:NUM_TRANS_GROUPS, &|
+00191 transobj2.f90                  (f90) 15073 |         ALLOCATE(HOUR_PATH_MW(-1:NUM_TRANS_GROUPS, &|
+00192 transobj2.f90                  (f90) 15077 |         ALLOCATE(SAVE_HOUR_PATH_LIMIT(-1:NUM_TRANS_GROUPS, &|
+00193 transobj2.f90                  (f90) 15081 |         ALLOCATE(HOUR_TIE_LOADING(-1:NUM_TRANS_GROUPS, &|
+00194 transobj2.f90                  (f90) 15085 |         ALLOCATE(DAILY_TIE_LOADING(MAX_PATHS,24))|
+00195 transobj2.f90                  (f90) 15088 |         ALLOCATE(DAILY_TIE_CONSTRAINT(MAX_PATHS,24))|
+00196 transobj2.f90                  (f90) 15091 |         ALLOCATE(PATH_NAME(MAX_PATHS))|
+00197 transobj2.f90                  (f90) 15094 |         ALLOCATE(LONG_PATH_NAME(MAX_PATHS))|
+00198 transobj2.f90                  (f90) 15097 |         ALLOCATE(PATH_WHEEL_RATE(MAX_PATHS))|
+00199 transobj2.f90                  (f90) 15100 |         ALLOCATE(PATH_SPREAD(MAX_PATHS))|
+00200 transobj2.f90                  (f90) 15103 |         ALLOCATE(PATH_OWNER(MAX_PATHS))|
+00201 transobj2.f90                  (f90) 15106 |         ALLOCATE(PATH_KV_RATING(MAX_PATHS))|
+00202 transobj2.f90                  (f90) 15109 |         ALLOCATE(PATH_INDUCTANCE(MAX_PATHS))|
+00203 transobj2.f90                  (f90) 15112 |         ALLOCATE(PATH_WHEEL_MULT(MAX_PATHS))|
+00204 transobj2.f90                  (f90) 15115 |         ALLOCATE(PATH_SPREAD_MULT(MAX_PATHS))|
+00205 transobj2.f90                  (f90) 15118 |         ALLOCATE(PATH_SPREAD_OFF_MULT(MAX_PATHS))|
+00206 transobj2.f90                  (f90) 15121 |         ALLOCATE(PATH_WHEEL_OFF_MULT(MAX_PATHS))|
+00207 transobj2.f90                  (f90) 15124 |         ALLOCATE(MARKET_PRICE_ID(MAX_PATHS))|
+00208 transobj2.f90                  (f90) 15127 |         ALLOCATE(SCENARIO_NUM(MAX_PATHS))|
+00209 transobj2.f90                  (f90) 15130 |         ALLOCATE(MARKET_PRICE_DELTA(MAX_PATHS))|
+00210 transobj2.f90                  (f90) 15133 |         ALLOCATE(TRANS_LINE_CONSTRAINT(MAX_PATHS))|
+00211 transobj2.f90                  (f90) 15136 |         ALLOCATE(PEAK_PRICE_DELTA_MULT(MAX_PATHS))|
+00212 transobj2.f90                  (f90) 15139 |         ALLOCATE(OFF_PEAK_PRICE_DELTA_MULT(MAX_PATHS))|
+00213 transobj2.f90                  (f90) 15142 |         ALLOCATE(TRANS_LINE_INDEX(MAX_PATHS))|
+00214 transobj2.f90                  (f90) 15145 |         ALLOCATE(GRX_ID(MAX_PATHS))|
+00215 transobj2.f90                  (f90) 15148 |         ALLOCATE(TG_USED_IN_PATH(-1:MAX_TRANS_GROUP_NUMBER))|
+00216 transobj2.f90                  (f90) 15151 |         ALLOCATE(REVERSE_PATH(-1:NUM_TRANS_GROUPS, &|
+00217 transobj2.f90                  (f90) 15505 |         ALLOCATE(MULTI_AREA_MONTH_PRICE(R_HOURS_IN_MONTH,TEMP_I2))|
+00218 transobj2.f90                  (f90) 15508 |         ALLOCATE(SELL_BEG_FO_HR_TL(ACTIVE_PATH_NUMBER))|
+00219 transobj2.f90                  (f90) 15511 |         ALLOCATE(SELL_END_FO_HR_TL(ACTIVE_PATH_NUMBER))|
+00220 transobj2.f90                  (f90) 15643 |         ALLOCATE(MULTI_AREA_BUY_MONTH_PRICE(R_HOURS_IN_MONTH,TEMP_I2))|
+00221 transobj2.f90                  (f90) 15646 |         ALLOCATE(BUY_BEG_FO_HR_TL(ACTIVE_PATH_NUMBER))|
+00222 transobj2.f90                  (f90) 15649 |         ALLOCATE(BUY_END_FO_HR_TL(ACTIVE_PATH_NUMBER))|
+00223 transobj2.f90                  (f90) 17330 |         ALLOCATE(TRANS_GROUP_POSITION(-1:MAX_TRANS_GROUP_NUMBER))|
+00224 transobj2.f90                  (f90) 17357 |         ALLOCATE(CONSTRAINT_ID(MAX_CONSTRAINTS))|
+00225 transobj2.f90                  (f90) 17360 |         ALLOCATE(SEASON(MAX_CONSTRAINTS))|
+00226 transobj2.f90                  (f90) 17363 |         ALLOCATE(MW_LIMIT(MAX_CONSTRAINTS))|
+00227 transobj2.f90                  (f90) 17366 |         ALLOCATE(FROM_AREA(MAX_CONSTRAINTS,MAX_CONSTRAINT_AREAS))|
+00228 transobj2.f90                  (f90) 17369 |         ALLOCATE(TO_AREA(MAX_CONSTRAINTS,MAX_CONSTRAINT_AREAS))|
+00229 transobj2.f90                  (f90) 17372 |         ALLOCATE(PEAK_MULT(MAX_CONSTRAINTS))|
+00230 transobj2.f90                  (f90) 17375 |         ALLOCATE(OFF_PEAK_MULT(MAX_CONSTRAINTS))|
+00231 transobj2.f90                  (f90) 17378 |         ALLOCATE(FORCED_OUTAGE_RATE(MAX_CONSTRAINTS))|
+00232 transobj2.f90                  (f90) 17381 |         ALLOCATE(FORCED_OUTAGE_DERATE_MW(MAX_CONSTRAINTS))|
+00233 transobj2.f90                  (f90) 17384 |         ALLOCATE(TRANS_LINE_POSITION(0:MAX_TRANS_LINE_INDEX))|
+00234 transobj2.f90                  (f90) 17412 |         ALLOCATE(CONSTRAINT_PERCENT(MAX_CONSTRAINTS))|
+00235 transobj2.f90                  (f90) 17415 |         ALLOCATE(CapTransMultiplier(0:NUM_TRANS_GROUPS, &|
+00236 transobj2.f90                  (f90) 17422 |         ALLOCATE(CONSTRAINTS_PER_PAIR( &|
+00237 transobj2.f90                  (f90) 17426 |         ALLOCATE(LOCAL_SEASON(MAX_CONSTRAINTS))|
+00238 transobj2.f90                  (f90) 17429 |         ALLOCATE(CONSTRAINTS_INDEX( &|
+00239 transobj2.f90                  (f90) 17434 |         ALLOCATE(TIES_PER_PAIR(-1:NUM_TRANS_GROUPS, &|
+00240 transobj2.f90                  (f90) 17438 |         ALLOCATE(TIE_INDEX(-1:NUM_TRANS_GROUPS,-1:NUM_TRANS_GROUPS, &|
+00241 transobj2.f90                  (f90) 17442 |         ALLOCATE(TIE_WHEEL_INDEX(-1:NUM_TRANS_GROUPS, &|
+00242 transobj2.f90                  (f90) 17447 |         ALLOCATE(SEASON_CONSTRAINT_LIMIT( &|
+00243 transobj2.f90                  (f90) 17452 |         ALLOCATE(HOUR_CONSTRAINT_LIMIT( &|
+00244 transobj2.f90                  (f90) 17457 |         ALLOCATE(HOUR_TIE_LOADING(-1:NUM_TRANS_GROUPS, &|
