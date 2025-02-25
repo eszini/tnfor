@@ -1,0 +1,207 @@
+Type (15)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:   131 (    0 -   924) |allocate(dimension_name(dimensions),      &|
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   847                 |END|
+line to replace allocs:   133  (  3 allocs)   |ALLOCATE(DIMENSION_NAME(DIMENSIONS),      &| 
+key used              :     1                 | 
+allocate added        :     1                 |allocate(DIMENSION_NAME(DIMENSIONS),stat=stv_er)|
+allocate added        :     2                 |allocate(DIMENSION_TYPE(DIMENSIONS),stat=stv_er)|
+allocate added        :     3                 |allocate(DIMENSION_LENGHT(DIMENSIONS),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 9)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:   176 (    0 -   931) |allocate(dem_1_ptr(max_unique_values))|
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   854                 |END|
+line to insert use all:    11 (   11 -   854) |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+line to insert check  :   177 (   11 -   854) |DEM_1_PTR = 0|
+key used              :     4                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:   180 (    0 -   933) |allocate(dem_1_name_storage(max_unique_values))|
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   856                 |END|
+line to insert use all:    11 (   11 -   856) |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+line to insert check  :   181 (   11 -   856) |!|
+key used              :     5                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :     4                 | 
+alloc sentence in line:   184 (    0 -   935) |allocate(dem_2_ptr(max_unique_values))|
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   858                 |END|
+line to insert use all:    11 (   11 -   858) |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+line to insert check  :   185 (   11 -   858) |DEM_2_PTR = 0|
+key used              :     6                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :     5                 | 
+alloc sentence in line:   188 (    0 -   937) |allocate(dem_2_name_storage(max_unique_values))|
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   860                 |END|
+line to insert use all:    11 (   11 -   860) |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+line to insert check  :   189 (   11 -   860) |!|
+key used              :     7                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :     6                 | 
+alloc sentence in line:   193 (    0 -   939) |allocate(dem_3_ptr(max_unique_values))|
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   862                 |END|
+line to insert use all:    11 (   11 -   862) |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+line to insert check  :   194 (   11 -   862) |DEM_3_PTR = 0|
+key used              :     8                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :     7                 | 
+alloc sentence in line:   197 (    0 -   941) |allocate(dem_3_name_storage(max_unique_values))|
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   864                 |END|
+line to insert use all:    11 (   11 -   864) |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+line to insert check  :   198 (   11 -   864) |ENDIF|
+key used              :     9                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :     8                 | 
+alloc sentence in line:   202 (    0 -   943) |allocate(dem_4_ptr(max_unique_values))|
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   866                 |END|
+line to insert use all:    11 (   11 -   866) |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+line to insert check  :   203 (   11 -   866) |DEM_4_PTR = 0|
+key used              :    10                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :     9                 | 
+alloc sentence in line:   206 (    0 -   945) |allocate(dem_4_name_storage(max_unique_values))|
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   868                 |END|
+line to insert use all:    11 (   11 -   868) |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+line to insert check  :   207 (   11 -   868) |ENDIF|
+key used              :    11                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :    10                 | 
+alloc sentence in line:   211 (    0 -   947) |allocate(dem_5_ptr(max_unique_values))|
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   870                 |END|
+line to insert use all:    11 (   11 -   870) |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+line to insert check  :   212 (   11 -   870) |DEM_5_PTR = 0|
+key used              :    12                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :    11                 | 
+alloc sentence in line:   215 (    0 -   949) |allocate(dem_5_name_storage(max_unique_values))|
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   872                 |END|
+line to insert use all:    11 (   11 -   872) |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+line to insert check  :   216 (   11 -   872) |ENDIF|
+key used              :    13                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :    12                 | 
+alloc sentence in line:   220 (    0 -   951) |allocate(dem_6_ptr(max_unique_values))|
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   874                 |END|
+line to insert use all:    11 (   11 -   874) |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+line to insert check  :   221 (   11 -   874) |DEM_6_PTR = 0|
+key used              :    14                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :    13                 | 
+alloc sentence in line:   224 (    0 -   953) |allocate(dem_6_name_storage(max_unique_values))|
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   876                 |END|
+line to insert use all:    11 (   11 -   876) |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+line to insert check  :   225 (   11 -   876) |ENDIF|
+key used              :    15                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :    14                 | 
+alloc sentence in line:   229 (    0 -   955) |allocate(dem_7_ptr(max_unique_values))|
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   878                 |END|
+line to insert use all:    11 (   11 -   878) |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+line to insert check  :   230 (   11 -   878) |DEM_7_PTR = 0|
+key used              :    16                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :    15                 | 
+alloc sentence in line:   233 (    0 -   957) |allocate(dem_7_name_storage(max_unique_values))|
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   880                 |END|
+line to insert use all:    11 (   11 -   880) |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+line to insert check  :   234 (   11 -   880) |ENDIF|
+key used              :    17                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :    16                 | 
+alloc sentence in line:   387 (    0 -   959) |allocate(dem_1_ptr(dem_1_unique_values),           &|
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   882                 |END|
+line to replace allocs:   386  (  2 allocs)   |ALLOCATE(DEM_1_PTR(DEM_1_UNIQUE_VALUES),           &| 
+key used              :    18                 | 
+allocate added        :     1                 |allocate(DEM_1_PTR(DEM_1_UNIQUE_VALUES),stat=stv_er)|
+allocate added        :     2                 |allocate(DEM_1_REC_POS(DEM_1_UNIQUE_VALUES,DEM_1_MAX_VALUES),stat=stv_er)|
+------------------------------------------( 5)-
+Type (15)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :    17                 | 
+alloc sentence in line:   398 (    0 -   962) |allocate(dem_2_ptr(dem_2_unique_values),           & |
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   885                 |END|
+line to replace allocs:   397  (  2 allocs)   |ALLOCATE(DEM_2_PTR(DEM_2_UNIQUE_VALUES),           & | 
+key used              :    20                 | 
+allocate added        :     1                 |allocate(DEM_2_PTR(DEM_2_UNIQUE_VALUES),stat=stv_er)|
+allocate added        :     2                 |allocate(DEM_2_REC_POS(DEM_2_UNIQUE_VALUES,DEM_2_MAX_VALUES),stat=stv_er)|
+------------------------------------------( 5)-
+Type (15)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :    18                 | 
+alloc sentence in line:   411 (    0 -   965) |allocate(dem_3_ptr(dem_3_unique_values),        &|
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   888                 |END|
+line to replace allocs:   410  (  2 allocs)   |ALLOCATE(DEM_3_PTR(DEM_3_UNIQUE_VALUES),        &| 
+key used              :    22                 | 
+allocate added        :     1                 |allocate(DEM_3_PTR(DEM_3_UNIQUE_VALUES),stat=stv_er)|
+allocate added        :     2                 |allocate(DEM_3_REC_POS(DEM_3_UNIQUE_VALUES,DEM_3_MAX_VALUES),stat=stv_er)|
+------------------------------------------( 5)-
+Type (15)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :    19                 | 
+alloc sentence in line:   423 (    0 -   968) |allocate(dem_4_ptr(dem_4_unique_values),        &|
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   891                 |END|
+line to replace allocs:   422  (  2 allocs)   |ALLOCATE(DEM_4_PTR(DEM_4_UNIQUE_VALUES),        &| 
+key used              :    24                 | 
+allocate added        :     1                 |allocate(DEM_4_PTR(DEM_4_UNIQUE_VALUES),stat=stv_er)|
+allocate added        :     2                 |allocate(DEM_4_REC_POS(DEM_4_UNIQUE_VALUES,DEM_4_MAX_VALUES),stat=stv_er)|
+------------------------------------------( 5)-
+Type (15)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :    20                 | 
+alloc sentence in line:   436 (    0 -   971) |allocate(dem_5_ptr(dem_5_unique_values),        &|
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   894                 |END|
+line to replace allocs:   435  (  2 allocs)   |ALLOCATE(DEM_5_PTR(DEM_5_UNIQUE_VALUES),        &| 
+key used              :    26                 | 
+allocate added        :     1                 |allocate(DEM_5_PTR(DEM_5_UNIQUE_VALUES),stat=stv_er)|
+allocate added        :     2                 |allocate(DEM_5_REC_POS(DEM_5_UNIQUE_VALUES,DEM_5_MAX_VALUES),stat=stv_er)|
+------------------------------------------( 5)-
+Type (15)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :    21                 | 
+alloc sentence in line:   448 (    0 -   974) |allocate(dem_6_ptr(dem_6_unique_values),        &|
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   897                 |END|
+line to replace allocs:   447  (  2 allocs)   |ALLOCATE(DEM_6_PTR(DEM_6_UNIQUE_VALUES),        &| 
+key used              :    28                 | 
+allocate added        :     1                 |allocate(DEM_6_PTR(DEM_6_UNIQUE_VALUES),stat=stv_er)|
+allocate added        :     2                 |allocate(DEM_6_REC_POS(DEM_6_UNIQUE_VALUES,DEM_6_MAX_VALUES),stat=stv_er)|
+------------------------------------------( 5)-
+Type (15)          src:                       |MIDASFileIndexingRoutines.f90|
+Allocate number       :    22                 | 
+alloc sentence in line:   460 (    0 -   977) |allocate(dem_7_ptr(dem_7_unique_values),        &|
+block starts at line  :    11                 |LOGICAL FUNCTION INDEX_THIS_DETAILED_REPORT(StudyName,        &|
+block ends   at line  :   900                 |END|
+line to replace allocs:   459  (  2 allocs)   |ALLOCATE(DEM_7_PTR(DEM_7_UNIQUE_VALUES),        &| 
+key used              :    30                 | 
+allocate added        :     1                 |allocate(DEM_7_PTR(DEM_7_UNIQUE_VALUES),stat=stv_er)|
+allocate added        :     2                 |allocate(DEM_7_REC_POS(DEM_7_UNIQUE_VALUES,DEM_7_MAX_VALUES),stat=stv_er)|
+------------------------------------------( 5)-

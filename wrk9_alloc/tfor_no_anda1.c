@@ -11,6 +11,14 @@
  *
  */
 
+/*
+ *	status ...
+ *	acabo de introducir "mover_bulk" y "hacer_espacio" ...
+ *	hay que chequear como combinarlos
+ *	mover_bulk mueve los archivos necesarios (enteros)
+ *	y hacer_espacio, solo mueve lineas dentro del scope de un src 
+ */
+
 
 /*
  *	next ...
@@ -897,6 +905,7 @@ int	ex8_p3();
 int	ex9_p1();
 int	ex9_p2();
 int	ex9_p3();
+int	ex9_p4();
 int	es_cadena_valida(int,char *);
 int	es_cadena_interesante(char *);
 int	es_cadena_int_src3(char *,int *);
@@ -1125,7 +1134,7 @@ char	**mis_argv = &mis_args[0];
  *	200 deberia alcanzar !!!
  */
 
-#define MAX_VARS 200
+#define MAX_VARS 300
 #define MAX_LEN 1024
 
 char	*gv_str[MAX_VARS][MAXB];
@@ -1145,8 +1154,11 @@ int	tflg[MAX_DBG];
  */
 
 
+#if 0
 char	cpt[18000][MAXB];
+#endif
 
+char	cpt[20][MAXB];
 	
 
 /*
@@ -7142,8 +7154,13 @@ int	pro_exec9()
 
 	if (gp_suboption == 3 )
 	{
-		/* prueba de mover todas las lineas         */
+		/* busco lineas largas en codebase         */
 		ex9_p3();
+	}
+	if (gp_suboption == 4 )
+	{
+		/* prueba de mover todas las lineas         */
+		ex9_p4();
 	}
 
 
@@ -7228,6 +7245,7 @@ int	ex9_p1()
 	int	f_stat;
 	int	f_keep;
 	int	f_act;
+	int	fs1,fs2,fs3,fs_sig;
 	int	n_f;
 	char	base_name[MAXV];
 	char	prog_name[MAXV];
@@ -7248,6 +7266,7 @@ int	ex9_p1()
 	int	r1;
 	int	k_amp;
 	int	n1,n2;
+	int	w1;
 	
 	int	tipo01;
 	int	tipo03;
@@ -7303,6 +7322,9 @@ int	ex9_p1()
 	/* para todas las lineas */
 	
 	tipo01 = 0;
+	tipo03 = 0;
+	tipo05 = 0;
+	tipo07 = 0;
 
 	tipo09 = 0;
 	tipo11 = 0;
@@ -7351,6 +7373,7 @@ if (gp_debug && w)
 			num_alloc = 0;
 			num_alloc_key = 1;
 
+
 if (1)
 {
 printf ("Trabajo con ... (%s) |%s|\n",exte_name,prog_name);
@@ -7370,6 +7393,8 @@ printf ("Trabajo con ... (%s) |%s|\n",exte_name,prog_name);
 		f_proceso = 1;
 		if (linea_vacia(b1) || es_linea_comentario(b1))
 			f_proceso = 0;
+
+
 
 
 		if (f_proceso)
@@ -7426,13 +7451,26 @@ if (gp_debug && w)
 				if (tipo_ext == 2)
 					fprintf (hflog,"%s\n",b0);
 
+if (gp_debug && w)
+{
+	mprintf (z,"tipo_ext : %d \n",tipo_ext);
+}
+
 				/* es .for EFOR ------------------------------------  */
 				if(tipo_ext == 1 ) 
 				{
 					c3++;
 
+if (gp_debug && w)
+{
+	mprintf (z,"ingrese a es tipo for \n");
+}
 					if (!tiene_mas( (*fnp[i+1]).l ) )
 					{
+if (gp_debug && w)
+{
+	mprintf (z,"ingrese a no tiene mas \n");
+}
 						/* no tiene lineas de continuacion ... */
 						sq_q_alloc_for_slc++;
 	
@@ -7456,6 +7494,10 @@ if (gp_debug && w)
 								strcpy(m1,trim_blanks_beg(b1));
 								grabar_plan(1,1,1,0,0,prog_name,m1);
 
+if (gp_debug && w)
+{
+	mprintf (z,"llegue a es tipo 1 \n");
+}
 								f_act = 1;
 #if 1
 
@@ -7468,29 +7510,44 @@ if (gp_debug && w)
 #endif
 								{
 									flag_alloc_ok = 0;
+
 									grabar_mapa(1,1,prog_name,0,0,0);
 
-									/*
-									 * chg_alloc_t09 procesa 1 allocate por vez
-									 * n_f		es el numero de file en tb
-									 * i		es la fila que estamos procesando
-									 * add_lines	son las lineas que hay que agregar a indice 'i'
-									 * num_alloc	es el numero de alloc consecutivo en src
-									 * num_alloc_key  es la base para actualizar en check_alloc
-									 */
 									chg_alloc_t09(n_f,i,&add_lines,num_alloc,num_alloc_key,f_act);
-
-									/* actualizo variables de contexto */
-									if (flag_alloc_ok)
-									{
-										i+= add_lines;
-										flag_alloc_ok = 0;
-									}
+if (gp_debug && w)
+{
+	mprintf (z,"volvi de chg_alloc_t09 a \n");
+}
 
 if (gp_debug && w)
 {
 mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 }
+									/* atenti:
+									 * chg_alloc_t09 debe procesar 1 solo allocate por vez...
+									 * si lo proceso efectivamente
+									 * aumenta la cantidad de lineas del fuente ...
+									 * n_f es el numbero de file dentro de tb
+									 * i   es la fila que estamos procesando
+									 */
+
+									/* actualizo variables de contexto */
+									if (flag_alloc_ok)
+									{
+										i+= add_lines;
+										if (!f_act)
+										{
+										for (h=0; h<qf_ff; h++)
+										{	if (h)
+												(*tb[h]).pf += add_lines;
+											(*tb[h]).uf += add_lines;
+										}
+
+										uf = (*tb[n_f]).uf;
+										qf_src += add_lines;
+										}
+										flag_alloc_ok = 0;
+									}
 
 #if 1
 									/* agrego el check_alloc */
@@ -7500,12 +7557,26 @@ mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 									if (flag_alloc_ok)
 									{
 										i+= add_lines;
+										if (!f_act)
+										{
+										for (h=0; h<qf_ff; h++)
+										{	if (h)
+												(*tb[h]).pf += add_lines;
+											(*tb[h]).uf += add_lines;
+										}
+										uf = (*tb[n_f]).uf;
+										qf_src += add_lines;
+										}
 										flag_alloc_ok = 0;
 									}
 
 									num_alloc_key++;
 #endif
 								}
+
+
+
+
 #endif
 
 							}
@@ -7531,10 +7602,9 @@ mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 								tipo03++;
 								strcpy(m1,trim_blanks_beg(b1));
 								grabar_plan(3,1,2,0,0,prog_name,m1);
-
+#if 0
 
 								f_act = 1;
-#if 1
 
 
 #if 0
@@ -7548,41 +7618,85 @@ mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 
 									grabar_mapa(1,3,prog_name,0,0,0);
 
-									/*
-									 * chg_alloc_t09 procesa 1 allocate por vez
-									 * n_f		es el numero de file en tb
-									 * i		es la fila que estamos procesando
-									 * add_lines	son las lineas que hay que agregar a indice 'i'
-									 * num_alloc	es el numero de alloc consecutivo en src
-									 * num_alloc_key  es la base para actualizar en check_alloc
-									 */
 									chg_alloc_t09(n_f,i,&add_lines,num_alloc,num_alloc_key,f_act);
 
-									/* actualizo variables de contexto */
-									if (flag_alloc_ok)
-									{
-										i+= add_lines;
-										flag_alloc_ok = 0;
-									}
 if (gp_debug && w)
 {
-mprintf (z,"TIPO-3 desp de chg_alloc ... add_lines: %d\n",add_lines);
+mprintf (z,"TIPO-11 desp de chg_alloc ... add_lines: %d\n",add_lines);
 }
-
-#if 0
-									/* agrego el check_alloc */
-									chg_alloc_g15(n_f,i,&add_lines,num_alloc,num_alloc_key,f_act);
+									/* atenti:
+									 * chg_alloc_t09 debe procesar 1 solo allocate por vez...
+									 * si lo proceso efectivamente
+									 * aumenta la cantidad de lineas del fuente ...
+									 * n_f es el numbero de file dentro de tb
+									 * i   es la fila que estamos procesando
+									 */
 
 									/* actualizo variables de contexto */
 									if (flag_alloc_ok)
 									{
 										i+= add_lines;
+										if (!f_act)
+										{
+										for (h=0; h<qf_ff; h++)
+										{	if (h)
+												(*tb[h]).pf += add_lines;
+											(*tb[h]).uf += add_lines;
+										}
+
+										uf = (*tb[n_f]).uf;
+										qf_src += add_lines;
+										}
 										flag_alloc_ok = 0;
 									}
 
-									num_alloc_key++;
-#endif
+									/* agrego el check_alloc */
+									chg_alloc_g15(n_f,i,&add_lines,num_alloc,num_alloc_key,&num_alloc_fnd,&k_amp,f_act);
+
+if (gp_debug && w)
+{
+mprintf (z,"g15_A, volvi de chg_alloc_g15 add_lines: %d  \n",add_lines);
+} 
+
+									/* actualizo variables de contexto */
+									if (flag_alloc_ok)
+									{
+if (gp_debug && w)
+{
+mprintf (z,"g15_2, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lines,qf_src,(*fnp[i+add_lines]).l);
+} 
+
+										i+= ( add_lines + k_amp);
+										if (!f_act)
+										{
+										for (h=0; h<qf_ff; h++)
+										{	if (h)
+												(*tb[h]).pf += add_lines;
+											(*tb[h]).uf += add_lines;
+										}
+										uf = (*tb[n_f]).uf;
+										qf_src += add_lines;
+										}
+if (gp_debug && w)
+{
+mprintf (z,"Termine ajustar valores de tb \n");
+mprintf (z,"Cantidad de archivos cargados:   %5d \n",qf_ff);
+mprintf (z,"Cantidad de lineas   cargadas:   %5d \n",qf_src);
+	
+for (r1=0; r1<qf_ff; r1++)
+{
+mprintf (z,"%3d  de %6d a %6d  |%s| \n",r1,(*tb[r1]).pf,(*tb[r1]).uf,(*tb[r1]).n );
+}
+
+mprintf (z,"----------\n\n");
+}
+										flag_alloc_ok = 0;
+									}
+
+									num_alloc_key = num_alloc_fnd+1;
 								}
+
+
 #endif
 							}	
 							else
@@ -7590,7 +7704,7 @@ mprintf (z,"TIPO-3 desp de chg_alloc ... add_lines: %d\n",add_lines);
 								/* TIPO-4 alloc - una linea - una sola variable - con stat */
 								sq_q_alloc_for_sta++;
 								strcpy(m1,trim_blanks_beg(b1));
-								grabar_plan(4,1,2,1,0,prog_name,m1);
+								grabar_plan(4,1,1,1,0,prog_name,m1);
 
 							}
 						}
@@ -7616,10 +7730,24 @@ mprintf (z,"TIPO-3 desp de chg_alloc ... add_lines: %d\n",add_lines);
 								strcat(m0,b1);
 							}
 							k++;
+
+							fs1 = tiene_mas( (*fnp[i+k]).l );
+							fs2 = es_linea_comentario( (*fnp[i+k]).l );
+							fs3 = tiene_mas( (*fnp[i+k+1]).l );
+
+							if (fs1 || (fs2 && fs3))
+							{
+								fs_sig = 1;
+							}
+							else
+								fs_sig = 0;
 						}
+						while (fs_sig);							
+#if 0
 						while ( tiene_mas(  (*fnp[i+k]).l ) || 
                                                         (es_linea_comentario( (*fnp[i+k]).l) && tiene_mas( (*fnp[i+k+1]).l))   );
-					
+#endif
+
 						f_stat = tiene_stat(b1);
 
 						if (!tiene_multiple_vars(m0))
@@ -7635,8 +7763,87 @@ mprintf (z,"TIPO-3 desp de chg_alloc ... add_lines: %d\n",add_lines);
 								strcpy(m1,trim_blanks_beg(m0));
 								grabar_plan(5,2,1,0,0,prog_name,m1);
 
+/* tipo-5 */
+#if 0
 
 
+								f_act = 1;
+#if 0
+								if (gp_proceed == 5 )
+#endif
+#if 1
+								if (gp_proceed)
+#endif
+								{
+									flag_alloc_ok = 0;
+									grabar_mapa(1,5,prog_name,0,0,0);
+									chg_alloc_t05(n_f,i,&add_lines,num_alloc,f_act);
+
+									/* atenti:
+									 * chg_alloc_t05 debe procesar 1 solo allocate por vez...
+									 * si lo proceso efectivamente
+									 * aumenta la cantidad de lineas del fuente ...
+									 * n_f es el numbero de file dentro de tb
+									 * i   es la fila que estamos procesando
+									 */
+
+									/* actualizo variables de contexto */
+									if (flag_alloc_ok)
+									{
+										i+= add_lines;
+										if (!f_act)
+										{
+										for (h=0; h<qf_ff; h++)
+										{	if (h)
+												(*tb[h]).pf += add_lines;
+											(*tb[h]).uf += add_lines;
+										}
+
+										uf = (*tb[n_f]).uf;
+										qf_src += add_lines;
+										}
+										flag_alloc_ok = 0;
+									}
+
+/* chg_alloc_g05 */
+#if 1
+									/* agrego el check_alloc */
+if (gp_debug && w)
+{
+mprintf (z,"g05_1, entro a  chg_alloc_g05 num_alloc %d add_lines: %d  \n",num_alloc,add_lines);
+} 
+									chg_alloc_g05(n_f,i,&add_lines,num_alloc,num_alloc_key,f_act);
+if (gp_debug && w)
+{
+mprintf (z,"g05_2, volvi de chg_alloc_g05 num_alloc %d add_lines: %d  \n",num_alloc,add_lines);
+} 
+
+									/* actualizo variables de contexto */
+									if (flag_alloc_ok)
+									{
+										i+= add_lines;
+										if (!f_act)
+										{
+										for (h=0; h<qf_ff; h++)
+										{	if (h)
+												(*tb[h]).pf += add_lines;
+											(*tb[h]).uf += add_lines;
+										}
+										uf = (*tb[n_f]).uf;
+										qf_src += add_lines;
+										}
+										flag_alloc_ok = 0;
+									}
+#endif
+/* chg_alloc_g05 */
+
+									num_alloc_key++;
+								}
+
+
+
+#endif
+/* tipo-5 */
 
 							}
 							else
@@ -7662,18 +7869,105 @@ mprintf (z,"TIPO-3 desp de chg_alloc ... add_lines: %d\n",add_lines);
 								tipo07++;
 								strcpy(m1,trim_blanks_beg(m0));
 								grabar_plan(7,2,2,0,0,prog_name,m1);
+
+
+
+
+/* tipo-7 */
+#if 0
+
+
+								f_act = 1;
+#if 0
+								if (gp_proceed == 7 )
+#endif
+#if 1
+								if (gp_proceed)
+#endif
+								{
+									flag_alloc_ok = 0;
+									grabar_mapa(1,7,prog_name,0,0,0);
+									chg_alloc_t05(n_f,i,&add_lines,num_alloc,f_act);
+
+									/* atenti:
+									 * chg_alloc_t05 debe procesar 1 solo allocate por vez...
+									 * si lo proceso efectivamente
+									 * aumenta la cantidad de lineas del fuente ...
+									 * n_f es el numbero de file dentro de tb
+									 * i   es la fila que estamos procesando
+									 */
+
+									/* actualizo variables de contexto */
+									if (flag_alloc_ok)
+									{
+										i+= add_lines;
+										if (!f_act)
+										{
+										for (h=0; h<qf_ff; h++)
+										{	if (h)
+												(*tb[h]).pf += add_lines;
+											(*tb[h]).uf += add_lines;
+										}
+
+										uf = (*tb[n_f]).uf;
+										qf_src += add_lines;
+										}
+										flag_alloc_ok = 0;
+									}
+
+/* chg_alloc_g05 */
+#if 0
+									/* agrego el check_alloc */
+if (gp_debug && w)
+{
+mprintf (z,"g05_1, entro a  chg_alloc_g05 num_alloc %d add_lines: %d  \n",num_alloc,add_lines);
+} 
+									chg_alloc_g05(n_f,i,&add_lines,num_alloc,num_alloc_key,f_act);
+if (gp_debug && w)
+{
+mprintf (z,"g05_2, volvi de chg_alloc_g05 num_alloc %d add_lines: %d  \n",num_alloc,add_lines);
+} 
+
+									/* actualizo variables de contexto */
+									if (flag_alloc_ok)
+									{
+										i+= add_lines;
+										if (!f_act)
+										{
+										for (h=0; h<qf_ff; h++)
+										{	if (h)
+												(*tb[h]).pf += add_lines;
+											(*tb[h]).uf += add_lines;
+										}
+										uf = (*tb[n_f]).uf;
+										qf_src += add_lines;
+										}
+										flag_alloc_ok = 0;
+									}
+#endif
+/* chg_alloc_g05 */
+
+									num_alloc_key++;
+								}
+
+
+
+#endif
+/* tipo-7 */
+
+
+
 							}
 							else
 							{
 								/* TIPO-8 es un alloc en varias lineas con varias variables - con stat */
 								sq_q_alloc_for_sta++;
 								strcpy(m1,trim_blanks_beg(m0));
-								grabar_plan(7,2,2,0,0,prog_name,m1);
+								grabar_plan(8,2,2,1,0,prog_name,m1);
 							}
 						}
 					}
 				}
-
 
 				/* es .f90 EF90 ------------------------------------  */
 				if(tipo_ext == 2)
@@ -7844,15 +8138,34 @@ mprintf (z,"TIPO-9 desp de chg_alloc ... add_lines: %d\n",add_lines);
 									grabar_mapa(1,11,prog_name,0,0,0);
 
 									chg_alloc_t09(n_f,i,&add_lines,num_alloc,num_alloc_key,f_act);
+
 if (gp_debug && w)
 {
 mprintf (z,"TIPO-11 desp de chg_alloc ... add_lines: %d\n",add_lines);
 }
+									/* atenti:
+									 * chg_alloc_t09 debe procesar 1 solo allocate por vez...
+									 * si lo proceso efectivamente
+									 * aumenta la cantidad de lineas del fuente ...
+									 * n_f es el numbero de file dentro de tb
+									 * i   es la fila que estamos procesando
+									 */
 
 									/* actualizo variables de contexto */
 									if (flag_alloc_ok)
 									{
 										i+= add_lines;
+										if (!f_act)
+										{
+										for (h=0; h<qf_ff; h++)
+										{	if (h)
+												(*tb[h]).pf += add_lines;
+											(*tb[h]).uf += add_lines;
+										}
+
+										uf = (*tb[n_f]).uf;
+										qf_src += add_lines;
+										}
 										flag_alloc_ok = 0;
 									}
 
@@ -7873,7 +8186,16 @@ mprintf (z,"g15_2, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lin
 } 
 
 										i+= ( add_lines + k_amp);
-										flag_alloc_ok = 0;
+										if (!f_act)
+										{
+										for (h=0; h<qf_ff; h++)
+										{	if (h)
+												(*tb[h]).pf += add_lines;
+											(*tb[h]).uf += add_lines;
+										}
+										uf = (*tb[n_f]).uf;
+										qf_src += add_lines;
+										}
 if (gp_debug && w)
 {
 mprintf (z,"Termine ajustar valores de tb \n");
@@ -7887,6 +8209,7 @@ mprintf (z,"%3d  de %6d a %6d  |%s| \n",r1,(*tb[r1]).pf,(*tb[r1]).uf,(*tb[r1]).n
 
 mprintf (z,"----------\n\n");
 }
+										flag_alloc_ok = 0;
 									}
 
 									num_alloc_key = num_alloc_fnd+1;
@@ -8161,6 +8484,7 @@ mprintf (z,"----------\n\n");
 
 		} /* proceso */
 
+
 		/* atenti !!! que pasa con los multi lineas !! 
 		 * ver cambios de variables ... i ?
 		 */
@@ -8183,22 +8507,28 @@ mprintf (z,"..... \n\n");
 		if (i >= qf_src)
 			f_keep = 0;
 
+		strcpy(b0,(*fnp[i]).l );
+
 	} /* for */
+
 
 if (1)
 {
 	printf ("\n");
+	printf ("for:\n");
 	printf ("tipo 01 %3d \n",tipo01);
 	printf ("tipo 03 %3d \n",tipo03);
 	printf ("tipo 05 %3d \n",tipo05);
 	printf ("tipo 07 %3d \n",tipo07);
 
+	printf ("f90:\n");
 	printf ("tipo 09 %3d \n",tipo09);
 	printf ("tipo 11 %3d \n",tipo11);
 	printf ("tipo 13 %3d \n",tipo13);
 	printf ("tipo 15 %3d \n",tipo15);
 	printf ("\n");
 }
+
 
 #if 0
 int	tiene_check_alloc_ok(nf_alloc,nf_check,nkey)
@@ -8237,6 +8567,7 @@ int	*nkey;
 
 		if (tiene_string(b0,"check_alloc"))
 		{
+
 if (gp_debug && w)
 {
 mprintf (z,"(1)entre a check_alloc_ok con  ... |%s| \n", (*fnp[i]).l );
@@ -8287,6 +8618,7 @@ mprintf (z,"hice  strcpy 1 i: %d str: |%s| \n",i,(*fnp[i]).l );
 			f_keep = 0;
 	}
 
+printf ("WW 11 \n");
 
 
 if (gp_debug && w)
@@ -8514,6 +8846,263 @@ char	*prog_name,*m0;
 
 }
 
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	chg_alloc_t05
+ *
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+
+/*
+ *	chg_alloc_t05
+ *	agregar check alloc de sentencias con allocate:
+ *
+ *	tipo 05 for, ml sv no stat
+ *
+ *	recibe numero de file donde encontro allocate y la linea del allocate
+ *	f_act 0 no actualiza numeros de tb 1 si los actualiza 
+ *	(f_act existe mientras migramos a version donde f_act es 1 en todos los casos)
+ *
+ */
+
+int	chg_alloc_t05(num_f,nf_alloc,add_lines,num_alloc,f_act)
+int	num_f;
+int	nf_alloc;
+int	*add_lines;
+int	num_alloc;
+int	f_act;
+{
+	static	int	f_miscmod1 = 0;
+	static	int	f_miscmod2 = 0;
+
+	int 	h,i,j,k,k1,k2;
+	int	l1,l2;
+	int	c1,c2,c3,c4,c5;
+	int	f1,f2,f3,f4,f5;
+	int	f_proceso;
+	int	f_stat;
+	int	f_hay_alloc;
+	int	f_try;
+	int	n_f;
+	char	base_name[MAXV];
+	char	prog_name[MAXV];
+	char	exte_name[MAXV];
+	char	b0[MAXB];
+	char	b1[MAXB];
+	char	b2[MAXB];
+	char	b3[MAXB];
+	char	b4[MAXB];
+	char	b5[MAXB];
+	char	blanks[64];
+	int	pf,uf,nf,qf;
+	int	tipo_ext;
+	int	vl[5],kvl,vl_min,vl_max;
+	int	pri_l,ult_l;
+	int	ult_u,pri_d;	/* ultimo use, primera declaracion */
+	int	pri_s;		/* primer save */
+	int	mod_type;	/* 0 no se, 1 subroutine 2 function */
+	int	linea_use;	/* linea en la que hay que poner el use */
+	int	agrego_lines;	/* lineas que se agregan al final x hacer-lugar */
+
+	char	m0[MSTR];
+
+	char	z[MAXV];
+	int	w;
+	sprintf (z,"chg_alloc_t05");
+	w = g_dbg(z);
+
+	memset(b4,'X',MAXB);
+	memset(m0,0,MSTR);
+	strcpy(base_name,"empty");
+
+	nf = num_f;
+
+	tipo_ext = 0;
+	c2 = 0;
+	c3 = 0;
+	c4 = 0;
+
+	/* primera y ultima linea del fuente */
+	pf = (*tb[nf]).pf;
+	uf = (*tb[nf]).uf;
+	qf = uf - pf +1;
+
+
+	/* nombre y ext del file  */
+	strcpy(prog_name,f_name(pf));
+	strcpy(exte_name,e_name(pf));
+
+	if (!strncmp(exte_name,"for",3))
+		tipo_ext = 1;
+
+	if (!strncmp(exte_name,"f90",3))
+		tipo_ext = 2;
+
+
+	/* proceso linea i */
+	strcpy(b0,(*fnp[nf_alloc]).l );
+	strcpy(b1, pasar_a_minusc(b0));
+
+	l2 = strlen(b1);
+
+	f_proceso = 1;
+	if (linea_vacia(b1) || es_linea_comentario(b1))
+		f_proceso = 0;
+
+	/* solo proceso lineas que no son comentario ni vacias */
+	if (f_proceso)
+	{	
+		grabar_mapa(6,0," ",num_alloc,0,0);
+		grabar_mapa(2,0,b1,lne(nf_alloc),pf,uf);
+
+if (gp_debug && w)
+{
+mprintf (z,"entro a busco_pri_l pf: %d uf: %d nf_alloc: %d \n",pf,uf,nf_alloc);
+}
+		if (!busco_pri_l(pf,uf,nf_alloc,&pri_l,&mod_type))
+			error(9016);
+
+if (gp_debug && w)
+{
+mprintf (z,"sali de busco_pri_l pf: %d uf: %d nf_alloc: %d \n",pf,uf,nf_alloc);
+mprintf (z,"sali de busco_pri_l pri_l: %d mod_type: %d \n",pri_l,mod_type);
+mprintf (z,"sali de busco_pri_l pri_l: %d |%s| \n",pri_l,(*fnp[pri_l]).l);
+}
+
+		grabar_mapa(3,0,(*fnp[pri_l]).l,0,lne(pri_l),0);
+
+		if (!busco_ult_l(pf,uf,nf_alloc,&ult_l,mod_type))
+			error(9002);
+
+		grabar_mapa(4,0,(*fnp[ult_l]).l,0,0,lne(ult_l));
+
+
+		/* busco donde colocar el use ... allocate_vars */
+		ult_u = 0;
+		busco_ult_u(pri_l,ult_l,pri_l,&ult_u);
+
+
+		/* busco primer declaracion de variables */
+		pri_d = 0;
+		busco_pri_d(pri_l,ult_l,pri_l,&pri_d);
+
+		/* solo para los que salieron distinto de 0 .. busco el minimo valor de linea */
+		kvl=0;
+		if (ult_u)
+			vl[kvl++] = ult_u+1;
+		if (pri_d)
+			vl[kvl++] = pri_d;
+		if (pri_s)
+			vl[kvl++] = pri_s;
+
+		/* no encontre donde poner el allocate_vars ! */
+		if (kvl == 0)
+			error(9003);
+
+		vl_min = 100000;
+		for (k=0; k<kvl; k++)
+			if (vl[k] < vl_min)
+				vl_min = vl[k];
+			
+		/* use allocate_vars va en la primer linea que cumple condicion */
+		linea_use = vl_min;
+		grabar_mapa(5,0,(*fnp[linea_use]).l,lne(linea_use),lne(pri_l),lne(ult_l));
+
+#if 0
+		f_try = 0;
+
+		if (!f_try && ult_u)
+		{
+			linea_use = ult_u+1;
+			f_try = 1;
+		}
+
+		if (!f_try && pri_d)
+		{
+			linea_use = pri_d;
+			grabar_mapa(5,0,(*fnp[linea_use]).l,lne(linea_use),lne(pri_l),lne(ult_l));
+			f_try = 1;
+		}
+
+		/* si no encontro donde colocar el use .. usamos la pri_l */
+		if (!f_try)
+		{	
+			linea_use = pri_l + 1;
+#if 0
+			for (h=pf; h<=uf; h++)
+				fprintf (hfou6,"%6d,|%s|\n",h,(*fnp[h]).l);
+			printf ("allocate: |%s| \n",(*fnp[nf_alloc]).l );
+			printf ("pri_l  %d |%s| \n",pri_l,(*fnp[pri_l]).l );
+			printf ("ult_l  %d |%s| \n",ult_l,(*fnp[ult_l]).l );
+			error(9014);
+#endif
+		}
+
+#endif
+
+		/* a partir de aqui ... a hacer los cambios !! 
+		 *
+		 * 1) correr todo 1 linea para abajo, y agregar el use allocate_vars.f90 
+		 * 2) en la linea del allocate, agregar  stat= ... var de error 
+		 * 3) correr todo 1 linea para abajo, y agregar call check_alloc ...
+		 *    con variables :
+		 *    identificador (string ... nombre de programa con un numero de allocate )
+		 *    nombre de la variable ...	
+		 *    variable de error 
+		 *    opcional ... extra_info ?? 
+		 */
+
+
+		/*
+		 * La linea para poner use allocate_vars es linea_use
+		 * correr todo para abajo una linea desde ahi ...
+		 */
+ 
+		agrego_lines = 3;
+		*add_lines = 0;
+
+
+		if (!busco_use_allocate(pri_l,ult_l))
+		{
+			hacer_lugar(pf,qf_src-1,linea_use,agrego_lines,f_act);
+
+			c5 = n_blanks_beg( (*fnp[pri_l]).l );
+			memset(blanks,0,sizeof(blanks));
+			memset(blanks,32,c5);
+
+			strcpy( (*fnp[linea_use]).l  ,blanks);
+			strcat( (*fnp[linea_use]).l  ,"use allocate_vars");
+
+			if (!busco_use_miscmod(pri_l,ult_l))
+			{
+				strcpy( (*fnp[linea_use+1]).l  ,blanks);
+				strcat( (*fnp[linea_use+1]).l  ,"use miscmod");
+			}
+			else
+			{
+				strcpy( (*fnp[linea_use+1]).l  ,"     ");
+			}
+
+			strcpy( (*fnp[linea_use+2]).l,"     ");
+			*add_lines = agrego_lines;
+
+		}
+
+		flag_alloc_ok = 1;
+	}
+}
+
+
+
+
+
+
 /*
  * -----------------------------------------------------------------------------------
  *
@@ -8648,7 +9237,14 @@ mprintf (z,"sali de busco_pri_l pri_l: %d |%s| \n",pri_l,(*fnp[pri_l]).l);
 		grabar_mapa(3,0,(*fnp[pri_l]).l,0,lne(pri_l),0);
 
 		if (!busco_ult_l(pf,uf,nf_alloc,&ult_l,mod_type))
-			error(9002);
+			error(9020);
+
+if (gp_debug && w)
+{
+mprintf (z,"sali de busco_ult_l pf: %d uf: %d nf_alloc: %d \n",pf,uf,nf_alloc);
+mprintf (z,"sali de busco_ult_l ult_l: %d mod_type: %d \n",ult_l,mod_type);
+mprintf (z,"sali de busco_ult_l ult_l: %d |%s| \n",ult_l,(*fnp[ult_l]).l);
+}
 
 		grabar_mapa(4,0,(*fnp[ult_l]).l,0,0,lne(ult_l));
 
@@ -8689,16 +9285,39 @@ mprintf (z,"sali de busco_pri_l pri_l: %d |%s| \n",pri_l,(*fnp[pri_l]).l);
 		linea_use = vl_min;
 		grabar_mapa(5,0,(*fnp[linea_use]).l,lne(linea_use),lne(pri_l),lne(ult_l));
 
+if (gp_debug && w)
+{
+mprintf (z,"termine de buscar lugar para use ... pf: %d uf: %d nf_alloc: %d linea_use: %d \n",pf,uf,nf_alloc,linea_use);
+mprintf (z,"estoy procesado alloc nro:  num_alloc: %d |%s|\n", num_alloc,(*fnp[nf_alloc]).l);
+mprintf (z,"lineas de referencia ...  linea_use - 1  |%s| \n",(*fnp[linea_use-1]).l );
+mprintf (z,"lineas de referencia ...  linea_use      |%s| \n",(*fnp[linea_use+0]).l );
+mprintf (z,"lineas de referencia ...  linea_use + 1  |%s| \n",(*fnp[linea_use+1]).l );
+mprintf (z,"pri_l :  %d |%s| \n",pri_l,(*fnp[pri_l]).l );
+mprintf (z,"ult_l :  %d |%s| \n",ult_l,(*fnp[ult_l]).l );
+mprintf (z,"ult_u :  %d |%s| \n",ult_u,(*fnp[ult_u]).l );
+mprintf (z,"pri_d :  %d |%s| \n",pri_d,(*fnp[pri_d]).l );
+mprintf (z,"pri_s :  %d |%s| \n",pri_s,(*fnp[pri_s]).l );
+mprintf (z,"vl_min:  %d |%s| \n",vl_min,(*fnp[vl_min]).l );
+mprintf (z," ... \n");
+}
 
-		/* 
-		 * a partir de aqui ... a hacer los cambios !! 
-		 * correr todo 1 linea para abajo, y agregar el use allocate_vars.f90 
+		/* a partir de aqui ... a hacer los cambios !! 
+		 *
+		 * 1) correr todo 1 linea para abajo, y agregar el use allocate_vars.f90 
+		 * 2) en la linea del allocate, agregar  stat= ... var de error 
+		 * 3) correr todo 1 linea para abajo, y agregar call check_alloc ...
+		 *    con variables :
+		 *    identificador (string ... nombre de programa con un numero de allocate )
+		 *    nombre de la variable ...	
+		 *    variable de error 
+		 *    opcional ... extra_info ?? 
 		 */
 
 
 		/*
 		 * La linea para poner use allocate_vars es linea_use
 		 * correr todo para abajo una linea desde ahi ...
+		 *
 		 */
  
 		agrego_lines = 3;
@@ -8862,7 +9481,7 @@ mprintf (z,"sali de busco_pri_l pri_l: %d |%s| \n",pri_l,(*fnp[pri_l]).l);
 		grabar_mapa(3,0,(*fnp[pri_l]).l,0,lne(pri_l),0);
 
 		if (!busco_ult_l(pf,uf,nf_alloc,&ult_l,mod_type))
-			error(9002);
+			error(9021);
 
 		grabar_mapa(4,0,(*fnp[ult_l]).l,0,0,lne(ult_l));
 
@@ -9079,7 +9698,7 @@ int	f_act;
 		grabar_mapa(3,0,(*fnp[pri_l]).l,0,lne(pri_l),0);
 
 		if (!busco_ult_l(pf,uf,nf_alloc,&ult_l,mod_type))
-			error(9002);
+			error(9023);
 
 		grabar_mapa(4,0,(*fnp[ult_l]).l,0,0,lne(ult_l));
 
@@ -9339,6 +9958,168 @@ mprintf (z,"-----   \n\n" );
 }
 
 
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	hacer_espacio
+ *	mueve lineas dentro del espacio de un src concreto
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+
+/*
+ *	funciona en combinacion con mover_bulk
+ *	solo mueve lineas en un vector donde ya estan asignados los espacions
+ *
+ *	pf		primera fila del bloque
+ *	uf		ultima fila del bloque
+ *	linea		linea desde la que corro
+ *	qlin		cant de lineas que corro
+ *	f_act		0 no actualizo tabla tb 1 si (no tiene mucho sentido )
+ */
+
+int	hacer_espacio(pf,uf,linea,qlin,f_act)
+int	pf;
+int	uf;
+int	linea;
+int	qlin;
+int	f_act;
+{
+	int	i,j,k,h;
+	int	new_uf;
+	int	add_lines;
+	int	f1,n_f;
+	int	d0[MAXV];
+
+	char	z[MAXV];
+	int	w;
+	sprintf (z,"hacer_espacio");
+	w = g_dbg(z);
+
+	add_lines = qlin;
+	new_uf    = uf + qlin;
+
+
+	i = linea;
+	/* me fijo lineas */
+	for (j=0, f1=1, n_f=0; f1 && j<qf_ff; j++)
+		if ( i >= (*tb[j]).pf && i <= (*tb[j]).uf )
+		{	n_f = j;
+			pf = (*tb[j]).pf;
+			uf = (*tb[j]).uf;
+			f1=0;
+		}
+
+
+if (gp_debug && w)
+{
+mprintf (z,"pf %d uf %d linea %d q_lin %d new_uf %d \n",pf,uf,linea,qlin,new_uf);
+}
+
+#if 0
+	for (i=1; i<=qlin; i++)
+	{
+		k = uf+i;
+
+if (gp_debug && w)
+{
+mprintf (z,"agrego linea al final k: %d   \n",k);
+}
+
+
+		/* agrego lineas al final */
+		fnp[k] = (fnptr  ) malloc (sizeof (node));
+		if ( fnp[k] == NULL)
+			error(917);
+
+		(*fnp[k]).l[0] = 0;
+		(*fnp[k]).f1 = 0;
+		(*fnp[k]).f2 = 0;
+		(*fnp[k]).f3 = 0;
+	}
+
+#endif
+
+
+if (gp_debug && w)
+{
+mprintf (z,"corro lin desde %d a %d tot %d lin   \n",new_uf,linea+qlin,new_uf - (linea+qlin)  +1  );
+
+}
+
+	for (j=new_uf; j >= linea+qlin; j-- )
+	{
+if (gp_debug && w)
+{
+	mprintf (z,"copio de  %d |%s a %d |%s| \n",j,fnp[j-qlin],j-qlin,fnp[j]);
+}
+		memcpy ( fnp[j],fnp[j-qlin], sizeof (node) );
+	}
+
+if (gp_debug && w)
+{
+mprintf (z,"vacio lin desde %d a %d tot %d lin   \n",linea,linea+qlin-1, linea+qlin-1 -linea + 1  );
+
+}
+#if 1
+	for (i=linea ; i< linea+qlin; i++)
+	{
+
+if (gp_debug && w)
+{
+	mprintf (z,"Voy a limpiar %d |%s| \n",i,(*fnp[i]).l);
+}
+
+		(*fnp[i]).l[0] = 0;
+		(*fnp[i]).f1 = 0;
+		(*fnp[i]).f2 = 0;
+		(*fnp[i]).f3 = 0;
+
+#if 1
+		sprintf (d0,"agregada x hacer lugar i: %d",i);
+#endif
+#if 0
+		sprintf (d0,"    ");
+#endif
+
+		strcpy( (*fnp[i]).l,d0);
+	}
+#endif
+
+#if 0
+	/* esto ya lo hizo mover_bulk */
+
+	/* tengo que actualizar situacion de numeros en tablas */
+	if (f_act)
+	{
+		for (h=0; h<qf_ff; h++)
+		{	if (h)
+			(*tb[h]).pf += add_lines;
+			(*tb[h]).uf += add_lines;
+		}
+
+		uf = (*tb[n_f]).uf;
+		qf_src += add_lines;
+	}
+
+#endif
+
+
+if (gp_debug && w)
+{
+mprintf (z,"listado de lineas %d a %d   \n",pf,new_uf );
+#if 0
+for (i=pf; i<= new_uf; i++)
+	mprintf (z,"(%3d)|%s|\n",i,(*fnp[i]).l);
+#endif
+mprintf (z,"salgo   \n" );
+mprintf (z,"-----   \n\n" );
+}
+
+}
+
+
 
 /*
  * -----------------------------------------------------------------------------------
@@ -9480,6 +10261,11 @@ int	pf,uf,spt,*v,mod_type;
 	sprintf (z,"busco_ult_l");
 	w = g_dbg(z);
 
+if (gp_debug && w)
+{
+mprintf (z,"pf %d uf %d spt %d \n",pf,uf,spt);
+}
+
 	for (i=spt, f_res=0, f_sigo=1 ; f_sigo && i<=uf; i++)
 	{
 		strcpy(b1, pasar_a_minusc( (*fnp[i]).l) );
@@ -9492,13 +10278,16 @@ int	pf,uf,spt,*v,mod_type;
 		{
 			if (tiene_end(b1,mod_type) )
 			{
+if (gp_debug && w)
+{
+mprintf (z,"entre a if(tiene_end ... \n");
+}
 				f_sigo = 0;
 				f_res  = 1;
 				*v     = i;
 			}
 		}
 	}
-
 
 	return (f_res);
 }
@@ -9713,10 +10502,6 @@ int	pf,uf,spt,*v;
 	int	f_res;
 	char	b1[MAXB];
 
-	char	z[MAXV];
-	int	w;
-	sprintf (z,"busco_pri_d");
-	w = g_dbg(z);
 
 	*v = 0;
 
@@ -10243,6 +11028,7 @@ char	*s;
 	strcpy(b0,s);
 
 
+
 	f_proceso = 1;
 	if (linea_vacia(b0) || es_linea_comentario(b0))
 		f_proceso = 0;
@@ -10281,6 +11067,11 @@ char	*s;
  *
  *
  * -----------------------------------------------------------------------------------
+ */
+
+/*
+ *	solo sirve para f90
+ *	cambia '&' por ' ' en linea
  */
 
 char	*chanchada(s)
@@ -10941,10 +11732,10 @@ char	*s;
  *	end [ function / subroutine ]
  */
 
-int	tiene_end(s,mod_type)
-char	*s,mod_type;
+int	tiene_end(s_arg,mod_type)
+char	*s_arg,mod_type;
 {
-	static	char	b0[MAXB];
+	char	s[MSTR];
 
 	int	i,j,k,l1,l2;
 	int	f_res,f_sig,f_try;
@@ -10956,24 +11747,26 @@ char	*s,mod_type;
 	sprintf (z,"tiene_end");
 	w = g_dbg(z);
 
-	strcpy(b0,s);
-	strcpy(b0,trim_end(b0));
+	strcpy(s,s_arg);
+#if 0
+	strcpy(s,trim_end(s));
+#endif
 
 	k1 = 3;
-	l1 = strlen(b0);
+	l1 = strlen(s);
 
 
 	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1 + 1; i++)
 	{	
 
-		if (!strncmp(b0+i,"end",k1))
+		if (!strncmp(s+i,"end",k1))
 		{
 			f_try = 1;
 		
 
 			for (k=i+3; k<l1; k++)
 			{	
-				if (b0[k] != ' ' && b0[k] != '\t' && b0[k] != 0 )
+				if (s[k] != ' ' && s[k] != '\t' && s[k] != 0 )
 					f_try = 0, f_sig = 0;
 			}
 
@@ -10984,7 +11777,7 @@ char	*s,mod_type;
 		if (mod_type == 1)
 		{
 			f_t1 = 0;
-			if (!strncmp(b0+i,"end subroutine",14))
+			if (!strncmp(s+i,"end subroutine",14))
 				f_t1 = 1;
 
 			if (f_t1)
@@ -10994,7 +11787,7 @@ char	*s,mod_type;
 		if (mod_type == 2)
 		{
 			f_t2 = 0;
-			if (!strncmp(b0+i,"end function",12))
+			if (!strncmp(s+i,"end function",12))
 				f_t2 = 1;
 
 			if (f_t2)
@@ -11002,19 +11795,6 @@ char	*s,mod_type;
 		}
 
 	}
-
-	/* este caso no cuenta */
-	if (!strncmp(b0+i,"end do",6))
-		f_res = 0;
-
-if (gp_debug && w)
-{
-	if (f_res)
-	{
-		mprintf (z,"encontre end. s : |%s| \n",s);
-		mprintf (z,"encontre end. b0: |%s| \n",b0);
-	}
-}
 
 	return (f_res);
 }
@@ -11075,6 +11855,11 @@ char	*s;
 }
 
 
+/*
+ *	tiene_integer_2
+ *	tratamos de que encuentre integer tanto de f90 como de for ... 
+ */
+
 int	tiene_integer_2(s)
 char	*s;
 {
@@ -11088,7 +11873,12 @@ char	*s;
 
 	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
 	{	
-		if (!strncmp(s+i,"integer ",k1))
+#if 1
+		if (!strncmp(s+i,"integer ",k1) || !strncmp(s+i,"integer*",k1)  )
+#endif
+#if 0
+		if (!strncmp(s+i,"integer ",k1)) 
+#endif
 		{
 			f_try = 1;
 
@@ -11115,7 +11905,12 @@ char	*s;
 
 	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
 	{	
+#if 1
 		if (!strncmp(s+i,"logical ",k1) || !strncmp(s+i,"logical*",k1) )
+#endif
+#if 0
+		if (!strncmp(s+i,"logical ",k1) )
+#endif
 		{
 			f_try = 1;
 
@@ -11633,7 +12428,7 @@ int	ex9_p2()
 	}
 
 
-	num_f = 3;
+	num_f = 2;
 	q_lin = 3;
 
 	mover_bulk(num_f,q_lin);
@@ -11670,6 +12465,8 @@ int	ex9_p2()
 /*
  *	num_f es el numero de file desde donde quiero mover
  *	qlin  es el numero de lineas que vamos a mover
+ *	
+ *	
  */
 
 int	mover_bulk(num_f,qlin)
@@ -11680,6 +12477,7 @@ int	qlin;
 	int	pf,uf;
 	int	ln;
 	int	new_uf;
+	int	f_try;
 
 	char	z[MAXV];
 	int	w;
@@ -11688,74 +12486,206 @@ int	qlin;
 
 
 	/* no se puede mover desde num_f igual a 0 */
+#if 0
 	if (num_f == 0 )
 		error(703);
+#endif
+
 #if 1
 	if (num_f >= qf_ff )
 		error(704);
 #endif
 
 
-	pf = (*tb[num_f]).pf;
-	uf = (*tb[qf_ff-1]).uf;
-	new_uf = uf + qlin;
-
-	for (i=1; i<=qlin; i++)
+	/*
+	 * caso para num_f == 0 
+	 *
+	 */
+	if (num_f == 0 )
 	{
-		k = uf+i;
+		/* pf y uf del bloque a mover  */
+		pf = (*tb[num_f+1]).pf;
+		uf = (*tb[qf_ff-1]).uf;
+		new_uf = uf + qlin;
+		
+		/* agrego qlin lineas al final */
+		for (i=1; i<=qlin; i++)
+		{
+			k = uf+i;
+	
+			if (gp_debug && w)
+			{
+				mprintf (z,"agrego linea al final k %d   \n",k);
+			}
+	
+			/* agrego lineas al final */
+			fnp[k] = (fnptr  ) malloc (sizeof (node));
+			if ( fnp[k] == NULL)
+				error(918);
+	
+			(*fnp[k]).l[0] = 0;
+			(*fnp[k]).f1 = 0;
+			(*fnp[k]).f2 = 0;
+			(*fnp[k]).f3 = 0;
+		}
 
-if (gp_debug && w)
-{
-mprintf (z,"agrego linea al final k %d   \n",k);
-}
+		if (gp_debug && w)
+		{
+			mprintf (z,"corro lin desde %d a %d tot %d lin   \n",
+				new_uf,pf, new_uf - pf   +1  );
+		}
+	
+		for (j=new_uf; j >= pf; j-- )
+		{
+			memcpy ( fnp[j],fnp[j-qlin], sizeof (node) );
+		}
 
-		/* agrego lineas al final */
-		fnp[k] = (fnptr  ) malloc (sizeof (node));
-		if ( fnp[k] == NULL)
-			error(918);
+		/* actualizo la tabla de pf uf */
+		for (i= num_f+1; i< qf_ff; i++)
+		{
+			(*tb[i]).pf += qlin;
+			(*tb[i]).uf += qlin;
+		}
+		
+		(*tb[num_f]).uf += qlin;
+		qf_src += qlin;
 
-		(*fnp[k]).l[0] = 0;
-		(*fnp[k]).f1 = 0;
-		(*fnp[k]).f2 = 0;
-		(*fnp[k]).f3 = 0;
+		if (gp_debug && w)
+		{
+			mprintf (z,"vacio lin desde %d a %d tot %d lin   \n",
+				pf-qlin, pf-1, qlin   );
+		}
+
+		/* vacio las lineas que quedaron disponibles */
+		for (i= (*tb[num_f]).uf ; i > (*tb[num_f]).uf - qlin ; i--)
+		{
+			strcpy ( (*fnp[i]).l, "linea_vacia");
+			(*fnp[i]).f1 = 0;
+			(*fnp[i]).f2 = 0;
+			(*fnp[i]).f3 = 0;
+		}
 	}
 
 
-if (gp_debug && w)
-{
-mprintf (z,"corro lin desde %d a %d tot %d lin   \n",new_uf,pf, new_uf - pf   +1  );
-
-}
-
-	for (j=new_uf; j >= pf; j-- )
+	/*
+	 * caso para num_f >= 1 y <= qf-1
+	 *
+	 */
+	if (num_f >= 1 && num_f < qf_ff - 1 )
 	{
-		memcpy ( fnp[j],fnp[j-qlin], sizeof (node) );
+		/* pf y uf del bloque a mover  */
+		pf = (*tb[num_f]).pf;
+		uf = (*tb[qf_ff-1]).uf;
+		new_uf = uf + qlin;
+	
+		/* agrego qlin lineas al final */
+		for (i=1; i<=qlin; i++)
+		{
+			k = uf+i;
+	
+			if (gp_debug && w)
+			{
+				mprintf (z,"agrego linea al final k %d   \n",k);
+			}
+	
+			/* agrego lineas al final */
+			fnp[k] = (fnptr  ) malloc (sizeof (node));
+			if ( fnp[k] == NULL)
+				error(918);
+	
+			(*fnp[k]).l[0] = 0;
+			(*fnp[k]).f1 = 0;
+			(*fnp[k]).f2 = 0;
+			(*fnp[k]).f3 = 0;
+		}
+	
+	
+		if (gp_debug && w)
+		{
+			mprintf (z,"corro lin desde %d a %d tot %d lin   \n",
+			new_uf,pf, new_uf - pf   +1  );
+		}
+	
+		for (j=new_uf; j >= pf; j-- )
+		{
+			memcpy ( fnp[j],fnp[j-qlin], sizeof (node) );
+		}
+	
+	
+	
+		/* actualizo la tabla de pf uf */
+		for (i= num_f; i< qf_ff; i++)
+		{
+			(*tb[i]).pf += qlin;
+			(*tb[i]).uf += qlin;
+		}
+		
+		(*tb[num_f-1]).uf += qlin;
+		qf_src += qlin;
+	
+		if (gp_debug && w)
+		{
+			mprintf (z,"vacio lin desde %d a %d tot %d lin   \n",
+				pf-qlin, pf-1, qlin   );
+		}
+	
+		/* vacio las lineas que quedaron disponibles */
+		for (i= (*tb[num_f-1]).uf ; i > (*tb[num_f-1]).uf - qlin ; i--)
+		{
+			strcpy ( (*fnp[i]).l, "linea_vacia");
+			(*fnp[i]).f1 = 0;
+			(*fnp[i]).f2 = 0;
+			(*fnp[i]).f3 = 0;
+		}
+	
+	
+		f_try = 1;
 	}
 
+	/*
+	 * caso para num_f == qf_ff -1  
+	 *
+	 */
 
-
-	/* actualizo la tabla de pf uf */
-	for (i= num_f; i< qf_ff; i++)
+	if (num_f == qf_ff -1 )
 	{
-		(*tb[i]).pf += qlin;
-		(*tb[i]).uf += qlin;
+		/* pf y uf del bloque a mover  */
+		pf = (*tb[num_f]).pf;
+		uf = (*tb[qf_ff-1]).uf;
+		new_uf = uf + qlin;
+	
+		/* agrego qlin lineas al final */
+		for (i=1; i<=qlin; i++)
+		{
+			k = uf+i;
+	
+			if (gp_debug && w)
+			{
+				mprintf (z,"agrego linea al final k %d   \n",k);
+			}
+	
+			/* agrego lineas al final */
+			fnp[k] = (fnptr  ) malloc (sizeof (node));
+			if ( fnp[k] == NULL)
+				error(918);
+	
+			(*fnp[k]).l[0] = 0;
+			(*fnp[k]).f1 = 0;
+			(*fnp[k]).f2 = 0;
+			(*fnp[k]).f3 = 0;
+
+			strcpy ( (*fnp[k]).l, "linea_vacia");
+			(*fnp[k]).f1 = 0;
+			(*fnp[k]).f2 = 0;
+			(*fnp[k]).f3 = 0;
+		}
+	
+	
+		(*tb[num_f]).uf += qlin;
+		qf_src += qlin;
 	}
 	
-	(*tb[num_f-1]).uf += qlin;
-	qf_src += qlin;
 
-if (gp_debug && w)
-{
-mprintf (z,"vacio lin desde %d a %d tot %d lin   \n",pf-qlin, pf-1, qlin   );
-}
-	/* vacio las lineas que quedaron disponibles */
-	for (i= (*tb[num_f-1]).uf ; i > (*tb[num_f-1]).uf - qlin ; i--)
-	{
-		strcpy ( (*fnp[i]).l, "linea_vacia");
-		(*fnp[i]).f1 = 0;
-		(*fnp[i]).f2 = 0;
-		(*fnp[i]).f3 = 0;
-	}
 
 if (gp_debug && w)
 {
@@ -11783,6 +12713,7 @@ mprintf (z,"salgo de mover_bulk    \n",pf-qlin, pf-1, qlin   );
  * llamado por pro_exec9
  * hace algo con todas las lineas cargadas en memoria
  *
+ * busco lineas mayores a ... 83 ?
  */
 
 
@@ -11826,7 +12757,7 @@ int	ex9_p3()
 
 	char	z[MAXV];
 	int	w;
-	sprintf (z,"ex9_p1");
+	sprintf (z,"ex9_p3");
 	w = g_dbg(z);
 
 	memset(b4,'X',MAXB);
@@ -11926,6 +12857,174 @@ printf ("Trabajo con ... (%s) |%s|\n",exte_name,prog_name);
 			f_keep = 0;
 
 	} /* for */
+
+}
+
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	ex9_p4
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/*
+ * llamado por pro_exec9
+ * hace algo con todas las lineas cargadas en memoria
+ *
+ * pruebas de mover_bulk y hacer lugar 
+ */
+
+
+
+int	ex9_p4()
+{
+	int 	h,i,j,k,k1,k2;
+	int	l1,l2;
+	int	c1,c2,c3,c4;
+	int	f1,f2,f3,f4,f5;
+	int	f_proceso;
+	int	f_stat;
+	int	f_keep;
+	int	n_f;
+	char	base_name[MAXV];
+	char	prog_name[MAXV];
+	char	exte_name[MAXV];
+	char	b0[MAXB];
+	char	b1[MAXB];
+	char	b2[MAXB];
+	char	b3[MAXB];
+	char	b4[MAXB];
+	char	b5[MAXB];
+	int	pf,uf,nf;
+	int	tipo_ext;
+	int	add_lines;		/* cant de lineas que hay que sumar al fuente al corregir un allocate */
+	int	num_alloc;		/* numero de alloc encontrado en src */
+	int	num_alloc_key;		/* numero de key usado en file para identificar alloc en fuente */
+	int	num_alloc_fnd;		/* num de alloc cuando es encontrado en src */
+	int	nf_check;		/* linea donde esta el check alloc encontrado en el fuente */
+	int	r1;
+	int	k_amp;
+	
+	int	tipo09;
+	int	tipo11;
+	int	tipo13;
+	int	tipo15;
+
+	char	m0[MSTR];
+	char	m1[MSTR];
+
+	char	z[MAXV];
+	int	w;
+	sprintf (z,"ex9_p4");
+	w = g_dbg(z);
+
+	memset(b4,'X',MAXB);
+	memset(m0,0,MSTR);
+	strcpy(base_name,"empty");
+
+	tipo_ext = 0;
+	c2 = 0;
+	c3 = 0;
+	c4 = 0;
+
+
+	/* prueba de agregar 10 lin en archivo 0 */
+	mover_bulk(0,10);
+
+
+#if 0
+
+	i = 0;
+	f_keep = 1;
+
+	while (f_keep)
+	{
+		strcpy(b0,(*fnp[i]).l );
+
+if (gp_debug && w)
+{
+	mprintf (z,"FOR prin (%3d) |%s| \n",i,b0);
+	mprintf (z,"... \n\n");
+}
+
+
+		/* me fijo que archivo es */
+		strcpy(prog_name,f_name(i));
+		strcpy(exte_name,e_name(i));
+
+		if (!strncmp(exte_name,"for",3))
+			tipo_ext = 1;
+
+		if (!strncmp(exte_name,"f90",3))
+			tipo_ext = 2;
+
+		/* me fijo lineas */
+		for (j=0, f1=1, n_f=0; f1 && j<qf_ff; j++)
+			if ( i >= (*tb[j]).pf && i <= (*tb[j]).uf )
+			{	n_f = j;
+				pf = (*tb[j]).pf;
+				uf = (*tb[j]).uf;
+				f1=0;
+			}
+
+
+
+		if (strcmp(base_name,prog_name))
+		{	strcpy(base_name,prog_name);
+			nf = 0;
+			num_alloc = 0;
+			num_alloc_key = 1;
+
+if (1)
+{
+printf ("Trabajo con ... (%s) |%s|\n",exte_name,prog_name);
+}
+
+		}
+
+
+		/* proceso linea i */
+		strcpy(b0,(*fnp[i]).l );
+		strcpy(b1, pasar_a_minusc(b0));
+		strcpy(b2, pasar_a_minusc(b0));
+
+
+		l2 = strlen(b1);
+
+		f_proceso = 1;
+		if (linea_vacia(b1) || es_linea_comentario(b1))
+			f_proceso = 0;
+
+
+		/* solo proceso lineas que no son comentario ni vacias */
+		if (f_proceso)
+		{	
+
+			strcpy(b0,trim_end_f90(b0));
+			strcpy(b0,trim_blanks(b0));
+			l2 = strlen(b0);
+
+			strcpy(b4,"_");
+			if (l2 > 83)
+				strcpy(b4,"L");
+
+			fprintf (hfout,"%s %-30.30s |%s|\n",b4,prog_name,b0);
+
+		} /* proceso */
+
+
+		strcpy( (*fnp[i]).l , b0 );
+
+		i++;
+		if (i >= qf_src)
+			f_keep = 0;
+
+	} /* for */
+#endif
 
 }
 
@@ -17978,8 +19077,6 @@ int	*ql_f;
 	if (!strncmp(d3,"f90",3))
 		tipo_ext = 2;
 	
-	printf ("WWW1: |%s| \n",(*tb[fl_n]).n );
-	printf ("WWW2: |%s| \n",d3);
 
 
 	/* reviso cada linea */
@@ -20588,6 +21685,8 @@ printf ("LLL: strlen     %3d |%s| \n",strlen(s),s);
  *
  *	2) si el primer caracter es distinto de '!'
  *
+ *	
+ *
  *
  * -----------------------------------------------------------------------------------
  */
@@ -20596,9 +21695,11 @@ printf ("LLL: strlen     %3d |%s| \n",strlen(s),s);
 int	linea_vacia_for(s)
 char	*s;
 {
-	int f1;
-	int i,flag;
+	int 	f1;
+	int 	i,flag;
+	int	l2;
 
+	l2 = strlen(s);
 	f1 = 1;
 	i=0;
 	flag=1;
@@ -20607,7 +21708,7 @@ char	*s;
 	if (f1 && s[0] == '!')
 		f1=0;
 
-	for (i=0; f1 && flag && i< strlen(s); i++)
+	for (i=0; f1 && flag && i< l2; i++)
 		if (s[i] != ' ' && s[i] != '\t' && s[i] != '\n' )
 			flag=0 , f1=0;
 
@@ -21721,9 +22822,8 @@ mprintf (z,"b1: |%s| \n",b1);
 
 if (gp_debug && w)
 {
-mprintf (z,"b1: |%s| \n",b1);
-mprintf (z,"f2: %d   \n",f2);
-mprintf (z,"salgo ...\n");
+mprintf (z,"f2: %d b1: |%s| \n",f2,b1);
+mprintf (z,"salgo ....\n");
 }
 	return f2;
 }
@@ -24607,12 +25707,14 @@ int	gp_test()
 int	linea_vacia(s)
 char	*s;
 {
-	int i,flag;
+	int 	i,flag;
+	int	l2;
 
+	l2 = strlen(s);
 	i=0;
 	flag=1;
 
-	for (i=0; flag && i< strlen(s); i++)
+	for (i=0; flag && i< l2; i++)
 		if (s[i] != ' ' && s[i] != '\t' && s[i] != '\n' )
 			flag=0;
 
@@ -26250,10 +27352,11 @@ int tiene_entry(const char *linea) {
 
 
 
+
 /*
  * -----------------------------------------------------------------------------------
  *
- *	chg_alloc_g03
+ *	chg_alloc_g05
  *
  *
  * -----------------------------------------------------------------------------------
@@ -26261,28 +27364,27 @@ int tiene_entry(const char *linea) {
 
 
 /*
- *	chg_alloc_g03
+ *	chg_alloc_g05
  *	agregar check alloc de sentencias con allocate 
- *	tipo 03 for, sl mv no stat
-
+ *	tipo 05 for, ml sv no stat
+ * 
  *	recibe numero de file donde encontro allocate y la linea del allocate
  *
- *	num_f	es el numero de file en la tabla tb
+ *	Atenti:
+ *	esto corrije un solo allocate x vez !!!
  *
  */
 
-int	chg_alloc_g03(num_f,nf_alloc,add_lines,num_alloc,num_alloc_key,num_alloc_fnd,k_amp_g,f_act)
+int	chg_alloc_g05(num_f,nf_alloc,add_lines,num_alloc,num_alloc_key,f_act)
 int	num_f;
 int	nf_alloc;
 int	*add_lines;
 int	num_alloc;
 int	num_alloc_key;
-int	*num_alloc_fnd;
-int	*k_amp_g;
 int	f_act;
 {
 
-	int 	h,i,j,k,k1,k2,k_amp;
+	int 	h,i,j,k,k1,k2;
 	int	l1,l2;
 	int	c1,c2,c3,c4,c5;
 	int	f1,f2,f3,f4,f5;
@@ -26297,17 +27399,12 @@ int	f_act;
 	char	exte_name[MAXV];
 	char	src_name[MAXV];
 	char	var_name[MAXV];
-
-	char	m0[MSTR];
-	char	m1[MSTR];
-
 	char	b0[MAXB];
 	char	b1[MAXB];
 	char	b2[MAXB];
 	char	b3[MAXB];
 	char	b4[MAXB];
 	char	b5[MAXB];
-	char	b6[MAXB];
 	char	blanks[64];
 	int	pf,uf,nf,qf;
 	int	tipo_ext;
@@ -26317,13 +27414,14 @@ int	f_act;
 	int	mod_type;	/* 0 no se, 1 subroutine 2 function */
 	int	linea_check;	/* linea en la que hay que poner el check_alloc */
 	int	linea_stat;	/* linea donde pongo el stat=stv_er */
-	int	linea_b;	/* linea desde donde correr */
 	int	agrego_lines;	/* lineas a agregar al final x hacer-lugar */
-	int	q_vars;		/* cantidad de vars en alloc multi vars ... */
+
+	char	m0[MSTR];
+	char	m1[MSTR];
 
 	char	z[MAXV];
 	int	w;
-	sprintf (z,"chg_alloc_g15");
+	sprintf (z,"chg_alloc_g05");
 	w = g_dbg(z);
 
 	memset(b4,'X',MAXB);
@@ -26370,14 +27468,31 @@ int	f_act;
 	if (f_proceso)
 	{	
 
+if (gp_debug && w)
+{
+mprintf (z,"entro  a busco_pri_l  pf %d uf %d nf_alloc %d \n",pf,uf,nf_alloc);
+}
+
 		if (!busco_pri_l(pf,uf,nf_alloc,&pri_l,&mod_type))
-			error(9010);
+			error(9009);
+
+if (gp_debug && w)
+{
+mprintf (z,"volvi de busco_pri_l  pf %d uf %d nf_alloc %d \n",pf,uf,nf_alloc);
+mprintf (z,"entro  a busco_ult_l  pf %d uf %d nf_alloc %d \n",pf,uf,nf_alloc);
+}
 
 		if (!busco_ult_l(pf,uf,nf_alloc,&ult_l,mod_type))
-			error(9002);
+			error(9024);
+
+if (gp_debug && w)
+{
+mprintf (z,"volvi de busco_pri_l  pf %d uf %d nf_alloc %d ult_l %d\n",pf,uf,nf_alloc,ult_l);
+mprintf (z,"ult_l |%s| \n", (*fnp[ult_l]).l );
+}
 
 		/* 
-		 * chg_alloc_g15
+		 * chg_alloc_g05
 		 *
 		 * a partir de aqui ... a hacer los cambios !! 
 		 *
@@ -26392,243 +27507,189 @@ int	f_act;
 		 */
 
 		/*
-		 * La linea para poner use allocate_vars es linea_use
+		 * La linea para ponder use allocate_vars es linea_use
 		 * correr todo para abajo una linea desde ahi ...
 		 *
 		 */
 
-		agrego_lines=0;
+		agrego_lines=2;		/* ojo ! solo sirve para tipo-13 */
 		*add_lines = 0;
 
 		linea_check = nf_alloc;
 		linea_stat  = nf_alloc;
 
 		k=0;
-		k_amp = 0;
 		memset(m0,0,MSTR);
 		memset(m1,0,MSTR);
 
-		fs_sig = 1;
-
-
+		/*
+		 * m0	contiene la linea pasada a minusculas 
+		 * m1	contiene la linea original para mostrar
+		 *
+		 */
 #if 0
-		while ( tiene_amper( (*fnp[linea_check+k]).l ) || 
-                        (es_linea_comentario( (*fnp[linea_check+k]).l && tiene_amper( (*fnp[linea_check+k+1]).l)  )))
-		{
+
+
+						do
+						{
+							fprintf (hfou2,"%05d %-30.30s (%s) %05d |%s|\n",
+		                                       		c3, prog_name, exte_name, i-pf+1+k, (*fnp[i+k]).l);
+
+							if (!es_linea_comentario( (*fnp[i+k]).l ))
+							{
+								strcpy(b1, pasar_a_minusc( (*fnp[i+k]).l) );
+								strcpy(b1, trim_beg(b1));
+								strcpy(b1, trim_end(b1));
+								strcpy(b1, trim_blanks(b1));
+								strcat(m0,b1);
+							}
+							k++;
+						}
+						while ( tiene_mas(  (*fnp[i+k]).l ) || 
+                                                        (es_linea_comentario( (*fnp[i+k]).l) && tiene_mas( (*fnp[i+k+1]).l))   );
+					
+
+#endif
+
+		fs_sig = 1;
 
 if (gp_debug && w)
 {
-	mprintf (z,"1\n");
+mprintf (z,"entro al while   linea_check %d \n",linea_check);
+mprintf (z,"linea_check       |%s| \n", (*fnp[linea_check]).l );
+}
+
+		do
+		{
+
+			fs1 = tiene_mas( (*fnp[linea_check+k]).l );
+			fs2 = es_linea_comentario( (*fnp[linea_check+k]).l );
+			fs3 = tiene_mas( (*fnp[linea_check+k+1]).l ) ;
+
+
+if (gp_debug && w)
+{
+	mprintf (z,"en el while ... (1)\n");
 	mprintf (z,"k: %d  |%s| \n",k,m0);
 	mprintf (z,"k: %d  |%s| \n",k,m1);
 	mprintf (z,"linea_check %d \n",linea_check);
+	mprintf (z,"linea_check+k : |%s| \n", (*fnp[linea_check+k]).l );
+	mprintf (z,"fs1 %d \n",fs1);
+	mprintf (z,"fs2 %d \n",fs2);
+	mprintf (z,"fs3 %d \n",fs3);
 	mprintf (z," . . . \n");
 }
+
+
 
 			if (!es_linea_comentario( (*fnp[linea_check+k]).l  ))
 			{
-				strcpy(b2, pasar_a_minusc( (*fnp[linea_check+k]).l) );
-				strcpy(b2, trim_beg_f90(b2));
-				strcpy(b2, trim_end_f90(b2));
-				strcpy(b2, trim_blanks(b2));
-				strcat(m0,b2);
-
-				strcpy(b3, (*fnp[linea_check+k]).l );
-				strcpy(b3, trim_beg_f90(b3));
-				strcpy(b3, trim_end_f90(b3));
-				strcpy(b3, trim_blanks(b3));
-				strcat(m1,b3);
-
-			}
-			k_amp++;
-			k++;
-
 if (gp_debug && w)
 {
-	mprintf (z,"2\n");
-	mprintf (z,"k: %d  |%s| \n",k,m0);
-	mprintf (z,"k: %d  |%s| \n",k,m1);
-	mprintf (z," . . . \n");
-}
-		}
-
-if (gp_debug && w)
-{
-	mprintf (z,"3\n");
-	mprintf (z,"k: %d  |%s| \n",k,m0);
-	mprintf (z,"k: %d  |%s| \n",k,m1);
-	mprintf (z," . . . \n");
-}
-		strcpy(b2, pasar_a_minusc( (*fnp[linea_check+k]).l) );
-		strcpy(b2, trim_beg_f90(b2));
-		strcpy(b2, trim_end_f90(b2));
-		strcpy(b2, trim_blanks(b2));
-		strcat(m0,b2);
-if (gp_debug && w)
-{
-	mprintf (z,"4\n");
-	mprintf (z,"k: %d  |%s| \n",k,m0);
-	mprintf (z,"k: %d  |%s| \n",k,m1);
-	mprintf (z," . . . \n");
-}
-
-		strcpy(b3, (*fnp[linea_check+k]).l );
-		strcpy(b3, trim_beg_f90(b3));
-		strcpy(b3, trim_end_f90(b3));
-		strcpy(b3, trim_blanks(b3));
-		strcat(m1,b3);
-if (gp_debug && w)
-{
-	mprintf (z,"5\n");
-	mprintf (z,"k: %d  |%s| \n",k,m0);
-	mprintf (z,"k: %d  |%s| \n",k,m1);
-	mprintf (z," . . . \n");
-}
-#endif
-
-
-
-/* FFF aqui hay que evitar el ! entre las lineas del alloc */
-#if 1
-		while (fs_sig)
-		{
-
-			fs1 = tiene_amper( (*fnp[linea_check+k]).l );
-			fs2 = es_linea_comentario( (*fnp[linea_check+k]).l );
-			fs3 = tiene_amper( (*fnp[linea_check+k+1]).l ) ;
-
-			if (fs1 || (fs2 && fs3))
-			{
-#if 0
-		while ( tiene_amper(  (*fnp[linea_check+k]).l )   )
-		{
-#endif
-
-
-if (gp_debug && w)
-{
-	mprintf (z,"1\n");
+	mprintf (z,"entre a if (es_linea_comentario ... \n");
 	mprintf (z,"k: %d  |%s| \n",k,m0);
 	mprintf (z,"k: %d  |%s| \n",k,m1);
 	mprintf (z,"linea_check %d \n",linea_check);
+	mprintf (z,"linea_check+k : |%s| \n", (*fnp[linea_check+k]).l );
 	mprintf (z," . . . \n");
 }
-
-			if (!es_linea_comentario( (*fnp[linea_check+k]).l ))
-			{
 				strcpy(b2, pasar_a_minusc( (*fnp[linea_check+k]).l) );
-				strcpy(b2, trim_beg_f90(b2));
-				strcpy(b2, trim_end_f90(b2));
+				strcpy(b2, trim_beg(b2));
+				strcpy(b2, trim_end(b2));
 				strcpy(b2, trim_blanks(b2));
 				strcat(m0,b2);
+				strcpy(m0,chanchada(m0));
 
 				strcpy(b3, (*fnp[linea_check+k]).l );
-				strcpy(b3, trim_beg_f90(b3));
-				strcpy(b3, trim_end_f90(b3));
+				strcpy(b3, trim_beg(b3));
+				strcpy(b3, trim_end(b3));
 				strcpy(b3, trim_blanks(b3));
 				strcat(m1,b3);
-
+				strcpy(m1,chanchada(m1));
 			}
-			k_amp++;
 			k++;
+
+			fs1 = tiene_mas( (*fnp[linea_check+k]).l );
+			fs2 = es_linea_comentario( (*fnp[linea_check+k]).l );
+			fs3 = tiene_mas( (*fnp[linea_check+k+1]).l ) ;
+
+			if (fs1 || (fs2 && fs3))
+			{
+				fs_sig = 1;
 			}
 			else
 				fs_sig = 0;
-		}
 
-		strcpy(b2, pasar_a_minusc( (*fnp[linea_check+k]).l) );
-		strcpy(b2, trim_beg_f90(b2));
-		strcpy(b2, trim_end_f90(b2));
-		strcpy(b2, trim_blanks(b2));
-		strcat(m0,b2);
-
-		strcpy(b3, (*fnp[linea_check+k]).l );
-		strcpy(b3, trim_beg_f90(b3));
-		strcpy(b3, trim_end_f90(b3));
-		strcpy(b3, trim_blanks(b3));
-		strcat(m1,b3);
 if (gp_debug && w)
 {
-	mprintf (z,"5\n");
+	mprintf (z,"pie de while ... (2)\n");
 	mprintf (z,"k: %d  |%s| \n",k,m0);
 	mprintf (z,"k: %d  |%s| \n",k,m1);
 	mprintf (z," . . . \n");
 }
 
+		}
+		while (fs_sig);
+
+
+
+		/*
+		 * combinaciones:
+		 * 1) agrego_lines = k y saco el strcpy al final de "    "
+		 * 2) agrego_lines = k+1 .. y dejo el strcpy .. esto deja una linea vacia desp de cada allocte
+		 *
+		 */
+
+#if 0
+		agrego_lines = k+1;
 #endif
+#if 0
+		agrego_lines = k;
+#endif
+		agrego_lines = 2;
+		linea_stat   = nf_alloc + k;
+		linea_check  = linea_stat + 1;
+		
+		/* para .for ... verificar si anda para todo el codebase !!  */
+		linea_stat--;
 
+		grabar_mapa(7,0,(*fnp[linea_check]).l,lne(linea_check),lne(pri_l),lne(ult_l));
 
-		/* calculo cuantas lineas tengo que agregar por desdoblar el allocate */
-		q_vars = 200;
-		if (!cantidad_de_vars(m1,&q_vars))
-			error(9011);
+		hacer_lugar(pf,qf_src-1,linea_check,agrego_lines,f_act);
 
-if (gp_debug && w)
-{
-mprintf (z,"q_vars   : %4d m0: |%s| \n",q_vars,m0);
-mprintf (z,"q_vars   : %4d m1: |%s| \n",q_vars,m1);
-mprintf (z,"nf_alloc : %4d |%s| \n",nf_alloc,(*fnp[nf_alloc]).l );
-
-}
-					
-		agrego_lines = q_vars*2-(k+1)+1;		/* depende de la cant de vars que hay en el alloc !! */
-
-		strcpy(b6,trim_blanks_beg( (*fnp[nf_alloc]).l ));
-
-		grabar_mapa(11,0,b6,nf_alloc,q_vars,0);
-
-		linea_b = nf_alloc+k+1;
-
-if (gp_debug && w)
-{
-mprintf (z,"llamo a hacer_lugar  pf: %d  qf_src-1: %d linea_b: %d agrego_lines: %d \n",
-	pf,qf_src-1,linea_b,agrego_lines);
-mprintf (z,"linea:  |%s| \n", (*fnp[linea_b]).l );
-mprintf (z,"-------- \n");
-}
-		hacer_lugar(pf,qf_src-1,linea_b,agrego_lines,f_act);
-
-		grabar_mapa(10,0," ",num_alloc_key,0,6);
-
-		strcpy(src_name,b_name(nf));
 		c5 = n_blanks_beg( (*fnp[nf_alloc]).l );
 		memset(blanks,0,sizeof(blanks));
 		memset(blanks,32,c5);
+	
+		grabar_mapa(10,0," ",num_alloc_key,0,6);
+
+		strcpy(var_name,extract_var_name( m1 ) );
+		strcpy(src_name,b_name(nf));
+
+		memset(b5,0,sizeof(b5));
+		sprintf (b5,"(\"%s:%04d\",\"%s\",stv_er)",src_name,num_alloc_key,var_name);
+		strcpy( (*fnp[linea_check]).l  ,blanks);
+		strcat( (*fnp[linea_check]).l  ,"call check_alloc");
+		strcat( (*fnp[linea_check]).l  ,b5);
 
 #if 1
-		/* armo lineas allocate / check_alloc x cada variable en allocate original */
-		for (i=0; i<q_vars; i++)
-		{
-			/* contruyo nuevo allocate */
-			strcpy( (*fnp[nf_alloc+2*i]).l    ,blanks);
-			strcat( (*fnp[nf_alloc+2*i]).l    ,"allocate(" );
-			strcat( (*fnp[nf_alloc+2*i]).l    ,gv_str[i]);
-			strcat( (*fnp[nf_alloc+2*i]).l    ,",stat=stv_er)");
-
-			/* contruyo check alloc */
-			strcpy(var_name,extract_var_name( (*fnp[nf_alloc+2*i]).l ) );
-			memset(b5,0,sizeof(b5));
-			sprintf (b5,"(\"%s:%04d\",\"%s\",stv_er)",src_name,num_alloc_key+i,var_name);
-			strcpy( (*fnp[nf_alloc+2*i+1]).l  ,blanks);
-			strcat( (*fnp[nf_alloc+2*i+1]).l  ,"call check_alloc");
-			strcat( (*fnp[nf_alloc+2*i+1]).l  ,b5);
-
-			strcpy(b6,trim_blanks_beg( (*fnp[nf_alloc+2*i]).l ));
-			grabar_mapa(12,i+1,b6,0,0,0);
-
-			*num_alloc_fnd = num_alloc_key+i;
-		}
-	
+		strcpy( (*fnp[linea_check+1]).l,"     ");
 #endif
-		strcpy( (*fnp[nf_alloc+2*q_vars]).l,"      ");
 
-		*add_lines = agrego_lines ;
-		*k_amp_g = k_amp;
+		/* aca tengo que modificar la linea nf_alloc ... 
+	  	 * esto va a ser un lio cuando tenga que meter 
+		 * lineas compuestas ! 
+		 */
+
+		agregar_stv_2 (linea_stat);
+
+		*add_lines = agrego_lines;
 		flag_alloc_ok = 1;
+
 	}
 
 	
-	grabar_mapa(0,0,"-",0,0,5);
+	grabar_mapa(0,0,"-",0,0,4);
 }
 
 
@@ -26744,7 +27805,7 @@ int	f_act;
 			error(9008);
 
 		if (!busco_ult_l(pf,uf,nf_alloc,&ult_l,mod_type))
-			error(9002);
+			error(9025);
 
 		/* a partir de aqui ... a hacer los cambios !! 
 		 *
@@ -26936,7 +27997,7 @@ mprintf (z,"entro  a busco_ult_l  pf %d uf %d nf_alloc %d \n",pf,uf,nf_alloc);
 }
 
 		if (!busco_ult_l(pf,uf,nf_alloc,&ult_l,mod_type))
-			error(9002);
+			error(9026);
 
 if (gp_debug && w)
 {
@@ -27258,7 +28319,7 @@ int	f_act;
 			error(9010);
 
 		if (!busco_ult_l(pf,uf,nf_alloc,&ult_l,mod_type))
-			error(9002);
+			error(9027);
 
 		/* 
 		 * chg_alloc_g15

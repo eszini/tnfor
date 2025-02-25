@@ -4,11 +4,13 @@
 0,hacer_lugar
 0,cantidad_de_vars
 0,e_name
+0,chg_alloc_t05
 0,chg_alloc_t09
 0,chg_alloc_g02
 0,chg_alloc_g15
 0,busco_use_miscmod
 0,busco_pri_l
+0,busco_ult_l
 0,busco_pri_s
 0,busco_ult_u
 0,tiene_allocate
@@ -21,3 +23,4 @@
 0,mover_bulk
 0,es_linea_comentario
 0,tiene_amper
+0,tiene_end
