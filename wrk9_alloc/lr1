@@ -1,8 +1,6 @@
-#repo1/p5.for
-#repo1/p4.for
-#repo1/p3.for
-#repo1/p2.for
 #repo1/p1.for
+#repo1/cla_objt.for
+repo1/gas_objt.for
 #repo1/8800com.f90
 #repo1/ABBCapacityMarketRept.f90
 #repo1/ACRSLCOM.MON
@@ -50,7 +48,6 @@
 #repo1/cl_units_read_data.f90
 #repo1/cla_decs.f90
 #repo1/cla_fuel.f90
-#repo1/cla_objt.for
 #repo1/cla_objt_arrays.f90
 #repo1/class_run_switchesc.f90
 #repo1/class_run_switchesl1.f90
@@ -136,7 +133,6 @@
 #repo1/fuelcat.f90
 #repo1/fuelused.f90
 #repo1/fuelused_decs.f90
-repo1/gas_objt.for
 #repo1/globecom.f90
 #repo1/group_prod.f90
 #repo1/grx_captrade.f90

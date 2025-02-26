@@ -1,12 +1,14 @@
 0,pro_exec9
-0,ex9_p1
+1,ex9_p1
 0,ex9_p2
 0,hacer_lugar
 0,cantidad_de_vars
 0,e_name
 0,chg_alloc_t05
 0,chg_alloc_t09
+1,chg_alloc_g03
 0,chg_alloc_g02
+1,chg_alloc_g05
 0,chg_alloc_g15
 0,busco_use_miscmod
 0,busco_pri_l
@@ -16,7 +18,7 @@
 0,tiene_allocate
 0,tiene_use
 0,tiene_multiple_vars
-0,extract_var_names
+1,extract_var_name
 0,es_alloc_t1
 0,agregar_stv
 0,agregar_stv_2

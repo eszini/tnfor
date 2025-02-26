@@ -1,0 +1,393 @@
+(07) ml mv       gas_objt.for                   |allocate(temp_trans_class_pointer(0:1023),temp_asset_class_pointer(0:1023),temp_cust_class_pointer(0:1023))|
+(07) ml mv       gas_objt.for                   |allocate(temp_trans_class_pointer(0:1023),temp_asset_class_pointer(0:1023),temp_cust_class_pointer(0:1023))|
+(05) ml sv       gas_objt.for                   |allocate(power_daily_volume_by_month(0:12,0:max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(customer_group(max_trans_load_tables)) ! int2|
+(07) ml mv       gas_objt.for                   |allocate(iport(max_trans_load_tables),snamepos(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(customer_group_2(max_trans_load_tables))|
+(07) ml mv       gas_objt.for                   |allocate(special_customer_type(max_trans_load_tables),interruptible_markup_perent(max_trans_load_tables),interruptible_markup_cap(max_trans_load_tables),interruptible_max_capacity(max_trans_load_tables),interruptible_min_capacity(max_trans_load_tables),interruptible_markup_adder(max_trans_load_tables),interruptible_percent(max_trans_load_tables),hourly_interrupible_revenue(max_trans_load_tables,24,4))|
+(01) sl sv       gas_objt.for                   |allocate(gas_group_id(max_trans_load_tables)) ! int2|
+(01) sl sv       gas_objt.for                   |allocate(reference_load_number(max_trans_load_tables)) ! int2|
+(01) sl sv       gas_objt.for                   |allocate(market_energy_price(max_trans_load_tables)) ! real4|
+(01) sl sv       gas_objt.for                   |allocate(annual_tg_peak(0:12,max_trans_groups))|
+(01) sl sv       gas_objt.for                   |allocate(annual_tg_volume(0:max_trans_groups))|
+(01) sl sv       gas_objt.for                   |allocate(annual_tg_power_volume(0:max_trans_groups))|
+(05) ml sv       gas_objt.for                   |allocate(monthly_energy_price_pattern(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(market_demand_price(max_trans_load_tables)) ! real4|
+(05) ml sv       gas_objt.for                   |allocate(monthly_demand_price_pattern(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(market_customer_price(max_trans_load_tables)) ! real4|
+(01) sl sv       gas_objt.for                   |allocate(asset_class_id(max_trans_load_tables)) ! real4|
+(05) ml sv       gas_objt.for                   |allocate(asset_class_rev_alloc_vector(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(annual_energy(max_trans_load_tables)) ! real4|
+(01) sl sv       gas_objt.for                   |allocate(annual_peak(max_trans_load_tables)) ! real4|
+(01) sl sv       gas_objt.for                   |allocate(annual_customers(max_trans_load_tables)) ! real4|
+(01) sl sv       gas_objt.for                   |allocate(annual_multiplier(max_trans_load_tables)) ! real4|
+(01) sl sv       gas_objt.for                   |allocate(monthly_energy(12,max_trans_load_tables)) ! (12) real4|
+(01) sl sv       gas_objt.for                   |allocate(monthly_peak(12,max_trans_load_tables)) ! (12) real4|
+(01) sl sv       gas_objt.for                   |allocate(monthly_customers(12,max_trans_load_tables)) ! (12) real4|
+(01) sl sv       gas_objt.for                   |allocate(dist_energy_loss_factor(max_trans_load_tables)) ! real4|
+(01) sl sv       gas_objt.for                   |allocate(trans_energy_loss_factor(max_trans_load_tables)) ! real4|
+(01) sl sv       gas_objt.for                   |allocate(peak_loss_factor(max_trans_load_tables)) ! real4|
+(01) sl sv       gas_objt.for                   |allocate(peak_coin_factor(max_trans_load_tables)) ! real4|
+(01) sl sv       gas_objt.for                   |allocate(distribution_price(max_trans_load_tables)) ! real4|
+(01) sl sv       gas_objt.for                   |allocate(transmission_price(max_trans_load_tables)) !real4!|
+(01) sl sv       gas_objt.for                   |allocate(customer_class_name(max_trans_load_tables)) ! char*30|
+(01) sl sv       gas_objt.for                   |allocate(calculation_mode(max_trans_load_tables)) ! char*1|
+(01) sl sv       gas_objt.for                   |allocate(reference_load_name(max_trans_load_tables)) ! char*5|
+(01) sl sv       gas_objt.for                   |allocate(trans_monthly_energy(12,max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(demand_group_available(max_trans_groups))|
+(05) ml sv       gas_objt.for                   |allocate(wh_trans_monthly_energy(12,max_trans_groups_from_tg))|
+(05) ml sv       gas_objt.for                   |allocate(wh_trans_monthly_capacity(12,max_trans_groups_from_tg))|
+(01) sl sv       gas_objt.for                   |allocate(trans_monthly_peak(12,max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(trans_monthly_customers(12,max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(table_active(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(basecase_market_area_id(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(wd_index(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(gw_index(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(basecase_trans_area_id(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(basecase_nerc_sub_id(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(monthly_units(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(price_index_active(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(three_factor_transform(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(jurisdictional_customer(max_trans_load_tables))|
+(05) ml sv       gas_objt.for                   |allocate(fuel_cost_recovery_through_fac(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(base_cost_of_fac_fuel(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(minimum_market_price(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(maximum_market_price(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(indexed_energy_price(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(tg_counter(max_trans_groups))|
+(05) ml sv       gas_objt.for                   |allocate(load_dispatch_position(max_trans_load_tables,max_trans_groups))|
+(05) ml sv       gas_objt.for                   |allocate(load_dispatch_index(max_trans_load_tables,max_trans_groups))|
+(01) sl sv       gas_objt.for                   |allocate(gas_load_groups_index(max_trans_groups))|
+(01) sl sv       gas_objt.for                   |allocate(cust_class_groups_index(0:max_class_groups))|
+(01) sl sv       gas_objt.for                   |allocate(cust2_class_groups_index(0:max_class2_groups))|
+(01) sl sv       gas_objt.for                   |allocate(asset_class_groups_index(0:max_asset_groups))|
+(05) ml sv       gas_objt.for                   |allocate(asset_2_trans_index(0:max_asset_groups,max_trans_groups))|
+(01) sl sv       gas_objt.for                   |allocate(number_asset_2_trans(max_trans_groups))|
+(05) ml sv       gas_objt.for                   |allocate(asset_transaction_cross_index(0:max_asset_groups,max_trans_groups))|
+(05) ml sv       gas_objt.for                   |allocate(number_trans_per_ac_tg(0:max_asset_groups,max_trans_groups))|
+(05) ml sv       gas_objt.for                   |allocate(trans_within_ac_tg(0:max_asset_groups,max_trans_groups,max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(first_ac_tg(0:max_asset_groups))|
+(01) sl sv       gas_objt.for                   |allocate(first_table_tg(0:max_trans_groups))|
+(01) sl sv       gas_objt.for                   |allocate(gas_load_2_trans_groups(max_trans_groups))|
+(01) sl sv       gas_objt.for                   |allocate(gas_load_group_2_tg(max_trans_groups))|
+(01) sl sv       gas_objt.for                   |allocate(cust_class_group_2_cg(max_class_groups+1))|
+(01) sl sv       gas_objt.for                   |allocate(cust2_class_group_2_cg(max_class_groups+1))|
+(01) sl sv       gas_objt.for                   |allocate(asset_class_group_2_ac(0:max_asset_groups+1))|
+(01) sl sv       gas_objt.for                   |allocate(last_table_for_tg(max_trans_groups))|
+(01) sl sv       gas_objt.for                   |allocate(last_table_for_cg(max_class_groups+1))|
+(01) sl sv       gas_objt.for                   |allocate(last_table_for_cg2(max_class_groups+1))|
+(05) ml sv       gas_objt.for                   |allocate(tg_cg_database(0:12,0:max_trans_groups,0:max_class_groups,3))|
+(05) ml sv       gas_objt.for                   |allocate(tg_cg2_database(0:12,0:max_trans_groups,0:max_class_groups,3))|
+(01) sl sv       gas_objt.for                   |allocate(table_day_shift(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(gas_demand_planning_peak(0:max_trans_groups,12))|
+(01) sl sv       gas_objt.for                   |allocate(pa_planning_peak(0:number_of_active_groups,12))|
+(01) sl sv       gas_objt.for                   |allocate(global_pa_peak(0:number_of_active_groups))|
+(01) sl sv       gas_objt.for                   |allocate(global_pa_peak_month(0:number_of_active_groups))|
+(01) sl sv       gas_objt.for                   |allocate(tg_2_planning_area(max_trans_groups_from_tg))|
+(01) sl sv       gas_objt.for                   |allocate(rev_class_index(0:max_trans_load_tables,4))|
+(01) sl sv       gas_objt.for                   |allocate(energy_loss_mult(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(ref_leap_year_day_shift(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(demand_pricing_method(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(monthly_table_peak_sales(max_trans_load_tables,12))|
+(01) sl sv       gas_objt.for                   |allocate(intra_company_transaction(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(intra_asset_class_id(max_trans_load_tables))|
+(05) ml sv       gas_objt.for                   |allocate(intra_asset_class_allocation(max_trans_load_tables))|
+(05) ml sv       gas_objt.for                   |allocate(intra_account_classification(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(intra_expense_collection(max_trans_load_tables))|
+(07) ml mv       gas_objt.for                   |allocate(target_daily_storage(0:12,0:max_trans_load_tables),ave_daily_volume(0:12,0:max_trans_load_tables))|
+(05) ml sv       gas_objt.for                   |allocate(monthly_interruptible_revenue(0:max_asset_groups+1,0:12))|
+(01) sl sv       gas_objt.for                   |allocate(last_this_yr_energy(2,12,0:max_trans_load_tables)) ! 1=last_year, 2=this year|
+(01) sl sv       gas_objt.for                   |allocate(last_this_yr_peak(2,12,0:max_trans_load_tables))|
+(05) ml sv       gas_objt.for                   |allocate(monthly_ac_cost_at_market(0:max_asset_class_groups,0:12))|
+(05) ml sv       gas_objt.for                   |allocate(monthly_ac_contract_revenue(-1:max_asset_class_groups,4,0:12,0:last_income_line,3))|
+(05) ml sv       gas_objt.for                   |allocate(monthly_ac_contract_expense(-1:max_asset_class_groups,0:12,0:last_expense_item))|
+(01) sl sv       gas_objt.for                   |allocate(day_of_week(31,0:max_trans_load_tables))|
+(05) ml sv       gas_objt.for                   |allocate(annual_class_energy_revenue(0:max_cust_class_groups))|
+(05) ml sv       gas_objt.for                   |allocate(annual_class_peak_revenue(0:max_cust_class_groups))|
+(05) ml sv       gas_objt.for                   |allocate(annual_class_customer_revenue(0:max_cust_class_groups))|
+(05) ml sv       gas_objt.for                   |allocate(annual_class_energy(0:max_cust_class_groups))|
+(05) ml sv       gas_objt.for                   |allocate(annual_class_peak(0:max_cust_class_groups))|
+(05) ml sv       gas_objt.for                   |allocate(annual_class_customers(0:max_cust_class_groups))|
+(05) ml sv       gas_objt.for                   |allocate(annual_trans_indexed_revenue(0:max_cust_class_groups))|
+(05) ml sv       gas_objt.for                   |allocate(trans_hourly_load(max_hours_in_month,0:max_gas_load_groups))|
+(05) ml sv       gas_objt.for                   |allocate(trans_daily_load(0:max_days_in_month,0:max_gas_load_groups))|
+(05) ml sv       gas_objt.for                   |allocate(inter_daily_avail(max_days_in_month,0:max_gas_load_groups))|
+(05) ml sv       gas_objt.for                   |allocate(customer_daily_load(max_days_in_month,0:max_cust_class_groups))|
+(05) ml sv       gas_objt.for                   |allocate(wh_loads_per_hour(max_hours_in_month,0:max_gas_load_groups))|
+(05) ml sv       gas_objt.for                   |allocate(hydro_hourly_load(max_hours_in_month,0:number_of_hydro_groups))|
+(05) ml sv       gas_objt.for                   |allocate(table_hourly_load(max_hours_in_month,0:max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(monthly_trans_energy(0:max_gas_load_groups))|
+(01) sl sv       gas_objt.for                   |allocate(monthly_hydro_energy(0:number_of_hydro_groups))|
+(01) sl sv       gas_objt.for                   |allocate(monthly_trans_peak(0:max_gas_load_groups))|
+(01) sl sv       gas_objt.for                   |allocate(monthly_trans_base(0:max_gas_load_groups))|
+(01) sl sv       gas_objt.for                   |allocate(monthly_hydro_peak(0:number_of_hydro_groups))|
+(01) sl sv       gas_objt.for                   |allocate(monthly_hydro_base(0:number_of_hydro_groups))|
+(01) sl sv       gas_objt.for                   |allocate(monthly_table_energy(0:max_trans_load_tables))|
+(05) ml sv       gas_objt.for                   |allocate(monthly_table_sales_energy(0:max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(monthly_table_peak(0:max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(table_energy_price(max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(table_energy_revenue(0:max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(table_demand_revenue(0:max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(table_customer_revenue(0:max_trans_load_tables))|
+(01) sl sv       gas_objt.for                   |allocate(trans_energy_revenue(0:max_gas_load_groups))|
+(01) sl sv       gas_objt.for                   |allocate(trans_demand_revenue(0:max_gas_load_groups))|
+(01) sl sv       gas_objt.for                   |allocate(trans_customer_revenue(0:max_gas_load_groups))|
+(01) sl sv       gas_objt.for                   |allocate(class_energy_revenue(0:max_cust_class_groups))|
+(01) sl sv       gas_objt.for                   |allocate(trans_indexed_revenue(0:max_cust_class_groups))|
+(01) sl sv       gas_objt.for                   |allocate(class_peak_revenue(0:max_cust_class_groups))|
+(01) sl sv       gas_objt.for                   |allocate(class_customer_revenue(0:max_cust_class_groups))|
+(01) sl sv       gas_objt.for                   |allocate(monthly_class_energy(0:max_cust_class_groups))|
+(01) sl sv       gas_objt.for                   |allocate(monthly_class_peak(0:max_cust_class_groups))|
+(01) sl sv       gas_objt.for                   |allocate(monthly_class_customers(0:max_cust_class_groups))|
+(01) sl sv       gas_objt.for                   |allocate(local_customer_name(0:max_cust_class_groups))|
+(05) ml sv       gas_objt.for                   |allocate(asset_class_hourly_load(max_hours_in_month,0:max_asset_class_groups,0:max_gas_load_groups))|
+(05) ml sv       gas_objt.for                   |allocate (wh_trans_alloc(0:max_trans_load_tables,max_gas_load_groups))|
+(01) sl sv       gas_objt.for                   |allocate(supply_group_available(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(gs_group_index(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(gs_scenario_variable_index(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(hydro_group_2_gs(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(gas_group_position(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(report_this_group(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(gs_2_hydro_group(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(gs_2_planning_area(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(hydro_aggregation_position(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(hydro_aggregation_index(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(planning_area_position(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(planning_area_index(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(asset_class_groups_index(0:max_asset_groups))|
+(01) sl sv       gas_objt.for                   |allocate(asset_class_2_gs(0:max_asset_groups))|
+(01) sl sv       gas_objt.for                   |allocate(asset_class_group_2_ac(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(group_name(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(group_active(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(gas_group_id(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(gas_group_id_position(0:gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(basecase_market_area_id(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(base_case_gas_area_id(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(basecase_subregion_id(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(spinning_units(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(off_peak_spinning_units(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(spinning_reserve(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(off_peak_spinning_reserve(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(max_hourly_ramp_up(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(max_hourly_ramp_down(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(first_capacity_value(0:gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(first_capacity_percent(0:gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(second_capacity_value(0:gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(second_capacity_percent(0:gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(third_capacity_value(0:gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(third_capacity_percent(0:gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(additional_capacity_value(0:gas_groups_records,7))|
+(01) sl sv       gas_objt.for                   |allocate(additional_capacity_percent(0:gas_groups_records,7))|
+(01) sl sv       gas_objt.for                   |allocate(rto_group(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(nox_year(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(end_nox_year(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(basin_start_year(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(st_lhs_for_prices(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(mrx_volatility_mult(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(night_scarcity_mult(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(weekend_scarcity_mult(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(price_cap(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(max_hourly_gs_import(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(max_hourly_gs_export(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(hydro_load_aggregation(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(gs_regional_planning_area(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(report_cl_capacity(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(asset_class_id(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(asset_class_rev_alloc_vector(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(time_zone(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(capacity_adder(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(nox_season(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(purchase_power_assign(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(create_hourly_price(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(supply_type(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(hourly_price_name(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(purchase_asset_class_id(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(purchase_asset_alloc_vector(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(operating_costs(30,gas_groups_records)) ! (25,gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(capacity_values(30,gas_groups_records)) ! (25,gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(int_res_remain(30,gas_groups_records)) ! (25,gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(potential_reserves(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(proven_reserves(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(max_daily_extraction_rate(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(max_daily_extraction_in_month(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(max_monthly_extraction_rate(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(shrinkage_percent(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(shrinkage_cost(gas_groups_records)) |
+(01) sl sv       gas_objt.for                   |allocate(extraction_cost_esc_rate(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(reserve_appreciation_percent(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(cumulative_reserve_impact(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(max_daily_hard_limit(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(min_daily_limit(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(dynamic_extract_rate(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(min_basin_cost(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(x_supply_curve_coefficient(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(x2_supply_curve_coefficient(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(x2_supply_curve_intercept(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(supply_curve_mult(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(supply_basis_differential(0:gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(dyn_supply_basis_diff(0:gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(annual_supply_quantity(0:gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(annual_supply_price(0:gas_groups_records))|
+(07) ml mv       gas_objt.for                   |allocate(first_gs(gs),groups_per_gs(gs),points_per_gs(gs),last_k(gs))|
+(07) ml mv       gas_objt.for                   |allocate(temp_gs_supply_capacity_curve(max_points_in_gs),temp_system_supply_capacity_curve(max_points_in_gs),temp_gs_supply_cost_curve(max_points_in_gs),temp_gs_supply_position(max_points_in_gs),interval_index(max_points_in_gs))|
+(07) ml mv       gas_objt.for                   |allocate(   gs_supply_capacity_curve(max_points_in_gs,gs),gs_supply_extract_curve(max_points_in_gs,gs),gs_supply_position(max_points_in_gs,gs),gs_supply_cost_curve(max_points_in_gs,gs))|
+(07) ml mv       gas_objt.for                   |allocate(storage_name(max_out_gas_storage),gas_storage_active(max_out_gas_storage),storage_id_number(max_out_gas_storage),num_storage_demand_markets(max_out_gas_storage),num_storage_alloc_markets(max_out_gas_storage),storage_demand_index(max_out_gas_storage,30),storage_alloc_index(max_out_gas_storage,30),daily_storage_by_gs(0:max_gas_group_number),storage_initial_capacity(0:max_out_gas_storage),storage_current_capacity(0:max_out_gas_storage),daily_inject_withdrawal(0:max_out_gas_storage),storage_demand_markets(max_out_gas_storage),storage_demand_allocation(max_out_gas_storage),storage_maximum_capacity(0:max_out_gas_storage),storage_demand_slope(max_out_gas_storage),storage_demand_intercept(max_out_gas_storage),maximum_daily_injection(max_out_gas_storage),maximum_daily_withdrawal(max_out_gas_storage),storage_weekly_min_capacity(max_out_gas_storage),storage_weekly_max_capacity(max_out_gas_storage),storage_scalar(max_out_gas_storage),storage_start_year(max_out_gas_storage),storage_id_index(100))|
+(07) ml mv       gas_objt.for                   |allocate(trans_group_position(-1:max_gas_group_number),tieid(max_out_gas_links),tieid_index(max_gas_group_number,max_gas_group_number),expansioncost(max_out_gas_links),expansioncostescalation(max_out_gas_links),max_c_for_(max_out_gas_links),min_c_for_(0:max_out_gas_links),line_losses_a_to_b(max_out_gas_links),line_losses_b_to_a(max_out_gas_links),congestion_percent(max_out_gas_links,10),congestion_cost(max_out_gas_links,10),maximumexpansion(max_out_gas_links),pipeexpansioncapacity(max_out_gas_links),temppipeexpancapacity(max_out_gas_links),pipelinedistance(max_out_gas_links),expansionccrf(max_out_gas_links),congestion_cost_esc(max_out_gas_links),congestion_cost_nominal(max_out_gas_links),monthly_congest_percent(max_out_gas_links,10),monthly_congest_cost(max_out_gas_links,10),zone_a_to_b_peak_ties(max_out_gas_links),zone__a_to_b_off_peak_ties(max_out_gas_links),zone__a_to_b_wheeling_rates(max_out_gas_links),zone_b_to_a_peak_ties(max_out_gas_links),zone__b_to_a_off_peak_ties(max_out_gas_links),zone__b_to_a_wheeling_rates(max_out_gas_links),escalation_rate(max_out_gas_links),zone_a_group_id(max_out_gas_links),zone_b_group_id(max_out_gas_links),zone_a(max_out_gas_links),zone_b(max_out_gas_links),tiedescription(max_out_gas_links),iport(max_out_gas_links),snamepos(max_out_gas_links),link_pair(max_gas_group_number,max_gas_group_number),link_index(max_gas_group_number,max_gas_group_number),i_to_k_paths(max_gas_group_number,max_gas_group_number),j_to_k_paths(max_gas_group_number,max_gas_group_number),path_for_j_to_k(max_j_to_k_paths,max_out_gas_links),vli(max_gas_group_number,max_gas_group_number),active_demand_node(max_gas_group_number),active_supply_node(max_gas_group_number))|
+(07) ml mv       gas_objt.for                   |allocate(j_path(0:100000),k_path(0:100000),set_of_j(100000),set_of_k(100000),path(0:512000),parent(0:512000),node(0:512000),i_path(0:512000),i_parent(0:512000),number_of_paths_for_i(max_gas_group_number))|
+(01) sl sv       gas_objt.for                   |allocate(gas_group_index(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(gn_scenario_variable_index(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(hydro_group_2_gn(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(gas_group_position(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(gas_group_state_position(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(node_from_state_position(max_gas_region_no))|
+(01) sl sv       gas_objt.for                   |allocate(report_this_group(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(gn_2_hydro_group(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(gn_2_planning_area(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(hydro_aggregation_position(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(hydro_aggregation_index(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(planning_area_position(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(planning_area_index(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(asset_class_groups_index(0:max_asset_groups))|
+(01) sl sv       gas_objt.for                   |allocate(asset_class_2_gn(0:max_asset_groups))|
+(01) sl sv       gas_objt.for                   |allocate(asset_class_group_2_ac(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(group_name(gas_groups_records))|
+(07) ml mv       gas_objt.for                   |allocate(iport(gas_groups_records),snamepos(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(world_database_index(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(group_active(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(gas_node_group(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(gas_id_2_gsp(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(country_node_index(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(basecase_market_area_id(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(base_case_gas_area_id(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(basecase_subregion_id(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(spinning_units(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(off_peak_spinning_units(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(spinning_reserve(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(off_peak_spinning_reserve(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(max_hourly_ramp_up(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(max_hourly_ramp_down(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(first_capacity_value(0:gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(first_capacity_percent(0:gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(second_capacity_value(0:gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(second_capacity_percent(0:gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(third_capacity_value(0:gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(third_capacity_percent(0:gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(additional_capacity_value(0:gas_groups_records,7))|
+(01) sl sv       gas_objt.for                   |allocate(additional_capacity_percent(0:gas_groups_records,7))|
+(01) sl sv       gas_objt.for                   |allocate(rto_group(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(nox_year(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(end_nox_year(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(st_lhs_for_prices(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(gas_node_latitude(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(gas_node_longitude(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(gas_node_state_province(max_gas_group_index)) |
+(01) sl sv       gas_objt.for                   |allocate(gas_node_country(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(gas_storage_alloc_factor(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(gas_node_type_index(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(gas_storage_index(max_gas_group_index,2))|
+(01) sl sv       gas_objt.for                   |allocate(gas_storage_position(700,2))|
+(01) sl sv       gas_objt.for                   |allocate(gas_hub_reference_index(max_gas_group_index))|
+(01) sl sv       gas_objt.for                   |allocate(mrx_volatility_mult(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(night_scarcity_mult(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(weekend_scarcity_mult(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(price_cap(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(max_hourly_gn_import(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(max_hourly_gn_export(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(hydro_load_aggregation(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(gn_regional_planning_area(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(report_cl_capacity(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(asset_class_id(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(asset_class_rev_alloc_vector(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(time_zone(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(capacity_adder(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(nox_season(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(purchase_power_assign(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(create_hourly_price(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(hourly_price_name(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(purchase_asset_class_id(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(purchase_asset_alloc_vector(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(operating_costs(25,gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(capacity_values(25,gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(cum_res_remain(25,gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(potential_reserves(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(proven_reserves(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(max_daily_extraction_rate(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(max_monthly_extraction_rate(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(shrinkage_percent(gas_groups_records))|
+(01) sl sv       gas_objt.for                   |allocate(shrinkage_cost(gas_groups_records)) |
+(03) sl mv       gas_objt.for                   |allocate(gs_pos(max_node_id),gt_pos(max_link_id))|
+(07) ml mv       gas_objt.for                   |allocate(   lng_scenario_price(num_lng,12,30),lng_index(num_lng),lng_hub_index(num_lng),storage_inj_index(num_storage_inj),storage_inj_hub_index(num_storage_inj),storage_wd_index(num_storage_wd),storage_wd_hub_index(num_storage_wd),node_type(max_nodes),node_country(max_nodes),monthly_12_node_price(max_nodes,12),mon_basis_price_diff(max_nodes))|
+(07) ml mv       gas_objt.for                   |allocate(annual_node_price(max_nodes),annual_node_volume(max_nodes),annual_link_price(max_active_gas_links),annual_link_volume(max_active_gas_links),annualgascumsumpricediff(max_active_gas_links))|
+(05) ml sv       gas_objt.for                   |allocate(monthly_gas_balance(balance_vars,0:12,0:max_country_num))|
+(07) ml mv       gas_objt.for                   |allocate (daily_demand(max_nodes),daily_input_demand(max_nodes),daily_demand_index(max_nodes),daily_inter_avail(max_nodes),daily_marg_node_price(max_nodes),daily_ave_node_price(max_nodes),monthly_node_price(max_nodes),monthly_node_reserve(max_nodes),lp_daily_demand(max_node_id),lp_node_cost(max_node_id),local_cost_curve(max_node_id),local_capacity_curve(max_node_id),local_annual_production_target(max_node_id),production_scarcity(max_node_id),local_extract_in_day(max_node_id),local_hard_extract_in_day(max_node_id),local_min_extract_in_day(max_node_id),constant_extract_in_day(max_node_id),constant_hard_extract_in_day(max_node_id),daily_link_volume(max_active_gas_links),daily_link_price(max_active_gas_links),daily_link_cf(max_active_gas_links),daily_link_limit(max_active_gas_links),daily_link_commod_cost(max_active_gas_links),daily_node_volume(max_nodes),daily_gas_sur_def_volume(max_nodes),monthly_node_volume(max_nodes),monthly_node_vol_current_basin(max_nodes),monthly_link_volume(max_active_gas_links),monthly_link_price(max_active_gas_links),a_coefficient_storage(max_node_id),b_coefficient_storage(max_node_id),storage_withdrawal(max_nodes),storage_injection(max_nodes),supply_active(max_nodes))|
+(07) ml mv       gas_objt.for                   |allocate(   temp_trans_class_pointer(0:1023),temp_asset_class_pointer(0:1023),temp_cust_class_pointer(0:1023))|
+(07) ml mv       gas_objt.for                   |allocate(temp_trans_class_pointer(0:1023),temp_asset_class_pointer(0:1023),temp_cust_class_pointer(0:1023))|
+(05) ml sv       gas_objt.for                   |allocate(gw_load(local_max_hours,gas_weather_demand_records))|
+(05) ml sv       gas_objt.for                   |allocate(gw_index(0:local_max_num_market_areas-1,local_max_months,local_max_days,local_max_years))|
+(01) sl sv       gas_objt.for                   |allocate(nodeid  (nnode))|
+(01) sl sv       gas_objt.for                   |allocate(nodetype(nnode))|
+(01) sl sv       gas_objt.for                   |allocate(nodeqtylob(nnode)) ! min quantity at supply mmcf/d|
+(01) sl sv       gas_objt.for                   |allocate(nodeqtylim(nnode)) ! max quantity at supply mmcf/d|
+(01) sl sv       gas_objt.for                   |allocate(nodeqtyhardlim(nnode)) ! max quantity at supply mmcf/d|
+(01) sl sv       gas_objt.for                   |allocate(nodeqty (nnode)) ! quantity demand or supply mmcf/d|
+(01) sl sv       gas_objt.for                   |allocate(nodeqtyoflr(nnode)) ! to/from lastresort; useful only if amortizeue|
+(01) sl sv       gas_objt.for                   |allocate(nodepri (nnode)) ! $/mcf|
+(01) sl sv       gas_objt.for                   |allocate(nodemgc (nnode)) ! $/mcf|
+(01) sl sv       gas_objt.for                   |allocate(nodename(nnode))|
+(01) sl sv       gas_objt.for                   |allocate(linkid (nlink))|
+(01) sl sv       gas_objt.for                   |allocate(linkcap(nlink)) ! a-to-b capacity (nominal 100%)|
+(01) sl sv       gas_objt.for                   |allocate(linkchg(nlink)) ! a-to-b commodity charge at 0%|
+(01) sl sv       gas_objt.for                   |allocate(linkeff(nlink)) ! a-to_b fractional retention of inlet quantity|
+(01) sl sv       gas_objt.for                   |allocate(linkavc(nlink)) ! weighted average cost $/mcf|
+(01) sl sv       gas_objt.for                   |allocate(linkmgc(nlink)) ! marginal cost $/mcf|
+(01) sl sv       gas_objt.for                   |allocate(linkndid(0:1,nlink)) ! a-to-b ids|
+(01) sl sv       gas_objt.for                   |allocate(linkndsn(0:1,nlink)) ! a-to-b ids' serial numbers (contiguous)|
+(01) sl sv       gas_objt.for                   |allocate(linkqty(nlink)) ! a-to-b quantity at inlet in mmcf|
+(01) sl sv       gas_objt.for                   |allocate(linkqof(nlink)) ! a-to-b over-limit quantity at inlet in mmcf|
+(01) sl sv       gas_objt.for                   |allocate(linkexpqty(nlink)) ! economic expansion quantity|
+(01) sl sv       gas_objt.for                   |allocate(linkqtyseg(nccsegs,nlink)) ! segment usage in mmcf|
+(01) sl sv       gas_objt.for                   |allocate(linkavqseg(nccsegs,nlink)) ! segment usage in mmcf, accumulated|
+(01) sl sv       gas_objt.for                   |allocate(linkfunc(nccsegs,0:2,nlink)) ! segment x(eos fract cap),y($/mcf),deltax|
+(01) sl sv       gas_objt.for                   |allocate(nodesnofdfrank(nnode))|
+(01) sl sv       gas_objt.for                   |allocate(dnodname(nnode))|
+(01) sl sv       gas_objt.for                   |allocate(linkexpcst(nlink))|
+(01) sl sv       gas_objt.for                   |allocate(linkexplim(nlink))|
+(01) sl sv       gas_objt.for                   |allocate(linkccrf  (nlink))|
+(01) sl sv       gas_objt.for                   |allocate(dfvalue(supdfrank))|
+(01) sl sv       gas_objt.for                   |allocate(lkcstnode(nnode))|
+(01) sl sv       gas_objt.for                   |allocate(spqtynode(nnode))|
+(01) sl sv       gas_objt.for                   |allocate(lkusdfrom(nnode))|
+(01) sl sv       gas_objt.for                   |allocate(nlinkinto(nnode))|
+(01) sl sv       gas_objt.for                   |allocate(ndlkdinto(supnlkatnd,nnode))|
+(01) sl sv       gas_objt.for                   |allocate(lkusdinto(supnlkatnd,nnode))|
+(01) sl sv       gas_objt.for                   |allocate(npriorsegs(nlink))|
+(01) sl sv       gas_objt.for                   |allocate(linktype  (nlink))|
+(01) sl sv       gas_objt.for                   |allocate(linkchgorg(nlink))|
+(01) sl sv       gas_objt.for                   |allocate(lnkqtyp   (nlink))|
+(01) sl sv       gas_objt.for                   |allocate(linkndbi  (nlink))|
+(01) sl sv       gas_objt.for                   |allocate(a4equiv(nvar))|
+(01) sl sv       gas_objt.for                   |allocate(vardesc(nvar))|
+(01) sl sv       gas_objt.for                   |allocate(tnofvar(ntvar))|
+(01) sl sv       gas_objt.for                   |allocate(cvect(nvar))|
+(01) sl sv       gas_objt.for                   |allocate(xvect(nvar))|
+(01) sl sv       gas_objt.for                   |allocate(bvect(mreq))|
+(01) sl sv       gas_objt.for                   |allocate(spvec(mreq))|
+(01) sl sv       gas_objt.for                   |allocate(revec(mreq))|
+(01) sl sv       gas_objt.for                   |allocate(consmtxnze(consmtslim))|
+(01) sl sv       gas_objt.for                   |allocate(zbcolofnze(consmtslim))|
+(01) sl sv       gas_objt.for                   |allocate(zbrowofnze(consmtslim))|
+(01) sl sv       gas_objt.for                   |allocate(jubvec(nubv))|
+(01) sl sv       gas_objt.for                   |allocate(ubvalu(nubv))|
+(01) sl sv       gas_objt.for                   |allocate(ubvorg(nubv))|
+(01) sl sv       gas_objt.for                   |allocate(jlbvec(nlbv))|
+(01) sl sv       gas_objt.for                   |allocate(lbvalu(nlbv))|
+(01) sl sv       gas_objt.for                   |allocate(nodesrcnip(mnode,nsnod)) ! number of source paths in cost pool for inode with isnod as supply|
+(01) sl sv       gas_objt.for                   |allocate(nodesrcqty(mnode,nsnod))|
+(01) sl sv       gas_objt.for                   |allocate(nodesrccst(mnode,nsnod))|
+(01) sl sv       gas_objt.for                   |allocate(cycleorgd(mnode))|
+(01) sl sv       gas_objt.for                   |allocate(zbcolhold(consmtslim)) ! temporary swap-space|
+(01) sl sv       gas_objt.for                   |allocate(zbrowhold(consmtslim))|
+(01) sl sv       gas_objt.for                   |allocate(consehold(consmtslim))|
+(01) sl sv       gas_objt.for                   |allocate(zbcolofnze(consmtslim))|
+(01) sl sv       gas_objt.for                   |allocate(zbrowofnze(consmtslim))|
+(01) sl sv       gas_objt.for                   |allocate(consmtxnze(consmtslim))|

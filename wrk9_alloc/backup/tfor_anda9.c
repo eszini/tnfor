@@ -4099,7 +4099,7 @@ int	pro_exec6()
 
 
 
- 	/* cargo las variables vcb */	
+	/* cargo las variables vcb */	
 	q_vcb = 0;
 
 	while (fgets(b1,MAXV,hfin2) != NULL)
@@ -4139,7 +4139,7 @@ printf ("XXX cargue vcb |%s| \n",vcb[q_vcb]);
 
 
 
- 	/* cargo las variables vsb */	
+	/* cargo las variables vsb */	
 	q_vsb = 0;
 
 	while (fgets(b1,MAXV,hfin3) != NULL)
@@ -4476,7 +4476,7 @@ int	ex6_p1()
 
 							/* 'variable-cr' */
 							if (b2[k1-1] == '\'' && b2[k1+strlen(b3)] == '-' 
-                                                                             && b2[k1+strlen(b3)+1] == 'c' && b2[k1+strlen(b3)+2] == 'r')
+									     && b2[k1+strlen(b3)+1] == 'c' && b2[k1+strlen(b3)+2] == 'r')
 							{
 								f_var_ok = 0;
 							}
@@ -4484,7 +4484,7 @@ int	ex6_p1()
 
 							/* 'variable-dr' */
 							if (b2[k1-1] == '\'' && b2[k1+strlen(b3)] == '-' 
-                                                                             && b2[k1+strlen(b3)+1] == 'd' && b2[k1+strlen(b3)+2] == 'r')
+									     && b2[k1+strlen(b3)+1] == 'd' && b2[k1+strlen(b3)+2] == 'r')
 							{
 								f_var_ok = 0;
 							}
@@ -4543,9 +4543,9 @@ int	ex6_p1()
 								printf ("%4d %-30.30s |%s|\n",qm1,prog_name,vcb[k]);
 								sprintf (vcb_p[qm1],"%-30.30s,|%s|",prog_name,vcb[k]);
      sprintf (vcb_c[qm1],"%-30.30s,grep -i \"%s\" %-*.*s  ~/wrk/Midas/ABBICAP/*.* ",
-           prog_name,vcb[k],40-strlen(vcb[k]), 40-strlen(vcb[k]), " " );
+	   prog_name,vcb[k],40-strlen(vcb[k]), 40-strlen(vcb[k]), " " );
      sprintf (vcb_d[qm1],"%-30.30s,grep -i \"%s\" %-*.*s  ~/wrk/Midas/ABBICAP/*.* ",
-           prog_name,b5,40-strlen(b5), 40-strlen(b5), " " );
+	   prog_name,b5,40-strlen(b5), 40-strlen(b5), " " );
 
 								qm1++;
 
@@ -4583,13 +4583,13 @@ int	ex6_p1()
     // Itera sobre el vector eliminando duplicados
     for (int i = 1; i < qv1; ++i) 
     {
-        // Compara el elemento actual con el anterior
-        if (strcmp(vcb_o[i], vcb_o[i - 1]) != 0) 
-        {
-            // Si son diferentes, mueve el elemento único al índice de `unique_count`
-            strcpy(vcb_o[unique_count], vcb_o[i]);
-            ++unique_count;
-        }
+	// Compara el elemento actual con el anterior
+	if (strcmp(vcb_o[i], vcb_o[i - 1]) != 0) 
+	{
+	    // Si son diferentes, mueve el elemento único al índice de `unique_count`
+	    strcpy(vcb_o[unique_count], vcb_o[i]);
+	    ++unique_count;
+	}
     }
 
     // Actualiza la cantidad de elementos únicos
@@ -4614,13 +4614,13 @@ int	ex6_p1()
     // Itera sobre el vector eliminando duplicados
     for (int i = 1; i < qm1; ++i) 
     {
-        // Compara el elemento actual con el anterior
-        if (strcmp(vcb_p[i], vcb_p[i - 1]) != 0) 
-        {
-            // Si son diferentes, mueve el elemento único al índice de `unique_count`
-            strcpy(vcb_p[unique_count], vcb_p[i]);
-            ++unique_count;
-        }
+	// Compara el elemento actual con el anterior
+	if (strcmp(vcb_p[i], vcb_p[i - 1]) != 0) 
+	{
+	    // Si son diferentes, mueve el elemento único al índice de `unique_count`
+	    strcpy(vcb_p[unique_count], vcb_p[i]);
+	    ++unique_count;
+	}
     }
 
     // Actualiza la cantidad de elementos únicos
@@ -4647,13 +4647,13 @@ int	ex6_p1()
     // Itera sobre el vector eliminando duplicados
     for (int i = 1; i < qm1; ++i) 
     {
-        // Compara el elemento actual con el anterior
-        if (strcmp(vcb_c[i], vcb_c[i - 1]) != 0) 
-        {
-            // Si son diferentes, mueve el elemento único al índice de `unique_count`
-            strcpy(vcb_c[unique_count], vcb_c[i]);
-            ++unique_count;
-        }
+	// Compara el elemento actual con el anterior
+	if (strcmp(vcb_c[i], vcb_c[i - 1]) != 0) 
+	{
+	    // Si son diferentes, mueve el elemento único al índice de `unique_count`
+	    strcpy(vcb_c[unique_count], vcb_c[i]);
+	    ++unique_count;
+	}
     }
 
     // Actualiza la cantidad de elementos únicos
@@ -4669,13 +4669,13 @@ int	ex6_p1()
     // Itera sobre el vector eliminando duplicados
     for (int i = 1; i < qm1; ++i) 
     {
-        // Compara el elemento actual con el anterior
-        if (strcmp(vcb_d[i], vcb_d[i - 1]) != 0) 
-        {
-            // Si son diferentes, mueve el elemento único al índice de `unique_count`
-            strcpy(vcb_d[unique_count], vcb_d[i]);
-            ++unique_count;
-        }
+	// Compara el elemento actual con el anterior
+	if (strcmp(vcb_d[i], vcb_d[i - 1]) != 0) 
+	{
+	    // Si son diferentes, mueve el elemento único al índice de `unique_count`
+	    strcpy(vcb_d[unique_count], vcb_d[i]);
+	    ++unique_count;
+	}
     }
 
     // Actualiza la cantidad de elementos únicos
@@ -5743,10 +5743,10 @@ char	*t;
 		    char *end = strchr(start, '\'');
 		    if (end != NULL) 
 		    {
-		        // Copia el nombre de archivo sin las comillas en t
-		        strncpy(t, start, end - start);
-		        t[end - start] = '\0';
-		        r =  true;
+			// Copia el nombre de archivo sin las comillas en t
+			strncpy(t, start, end - start);
+			t[end - start] = '\0';
+			r =  true;
 		    }
 		}
 	}
@@ -5776,12 +5776,12 @@ int primer_char(char *s, int *p)
     int pos = 0;
     while (s[pos])
     {
-        if (!isspace(s[pos]))
-        {
-            *p = pos;
-            return 1;
-        }
-        pos++;
+	if (!isspace(s[pos]))
+	{
+	    *p = pos;
+	    return 1;
+	}
+	pos++;
     }
     return 0;
 }
@@ -5796,11 +5796,11 @@ int main()
 
     if (resultado)
     {
-        printf("La posición del primer carácter distinto de blanco es: %d\n", p);
+	printf("La posición del primer carácter distinto de blanco es: %d\n", p);
     }
     else
     {
-        printf("No se encontró ningún carácter distinto de blanco.\n");
+	printf("No se encontró ningún carácter distinto de blanco.\n");
     }
 
     return 0;
@@ -5836,29 +5836,29 @@ int main()
 int es_nombre_valido2(const char *str)
 {
     if (!isalpha(*str)) // El primer carácter debe ser una letra
-        return 0;
+	return 0;
     
     while (*str && *str != '_')
     {
-        if (!isalnum(*str))
-            return 0;
-        str++;
+	if (!isalnum(*str))
+	    return 0;
+	str++;
     }
     
     // Si encontramos un '_', verificar la siguiente parte
     while (*str)
     {
-        if (*str == '_')
-        {
-            str++;
-            if (!isalnum(*str)) // Después de '_' debe haber al menos una letra o número
-                return 0;
-        }
-        else if (!isalnum(*str))
-        {
-            return 0;
-        }
-        str++;
+	if (*str == '_')
+	{
+	    str++;
+	    if (!isalnum(*str)) // Después de '_' debe haber al menos una letra o número
+		return 0;
+	}
+	else if (!isalnum(*str))
+	{
+	    return 0;
+	}
+	str++;
     }
 
     return 1;
@@ -5887,21 +5887,21 @@ int tiene_call_a_entry(char *s, char *t)
     char *call_pos = strstr(ptr, "call");
 
     if (!call_pos)
-        return 0;
+	return 0;
 
     ptr = call_pos + 4; // Avanzar después de "call"
     while (*ptr && isspace(*ptr)) // Saltar espacios en blanco
-        ptr++;
+	ptr++;
 
     // Verificar si el nombre válido después de "call" coincide con el nombre válido en t
     if (strncmp(ptr, t, strlen(t)) == 0)
     {
-        ptr += strlen(t);
-        while (*ptr && isspace(*ptr)) // Saltar espacios en blanco después de nombre_valido
-            ptr++;
-        
-        if (*ptr == '\0' || *ptr == '(' || *ptr == '!') // Asegurarse de que no hay caracteres extra después del nombre válido
-            return 1;
+	ptr += strlen(t);
+	while (*ptr && isspace(*ptr)) // Saltar espacios en blanco después de nombre_valido
+	    ptr++;
+	
+	if (*ptr == '\0' || *ptr == '(' || *ptr == '!') // Asegurarse de que no hay caracteres extra después del nombre válido
+	    return 1;
     }
 
     return 0;
@@ -5917,11 +5917,11 @@ int main()
 
     if (resultado)
     {
-        printf("Se encontró la expresión 'call %s' en la línea.\n", t);
+	printf("Se encontró la expresión 'call %s' en la línea.\n", t);
     }
     else
     {
-        printf("No se encontró la expresión 'call %s' en la línea.\n", t);
+	printf("No se encontró la expresión 'call %s' en la línea.\n", t);
     }
 
     return 0;
@@ -5951,33 +5951,33 @@ int tiene_funcion_a_entry(char *linea, char *nombre_valido) {
     char *func_pos = strstr(ptr, nombre_valido);
 
     while (func_pos) {
-        ptr = func_pos + strlen(nombre_valido);
+	ptr = func_pos + strlen(nombre_valido);
 
-        // Saltar espacios en blanco después del nombre de la función
-        while (*ptr && isspace(*ptr))
-            ptr++;
+	// Saltar espacios en blanco después del nombre de la función
+	while (*ptr && isspace(*ptr))
+	    ptr++;
 
-        // Verificar si está seguido de un paréntesis de apertura
-        if (*ptr == '(') {
-            ptr++; // Avanzar después de "("
-            int paren_count = 1;
+	// Verificar si está seguido de un paréntesis de apertura
+	if (*ptr == '(') {
+	    ptr++; // Avanzar después de "("
+	    int paren_count = 1;
 
-            // Verificar el contenido dentro de los paréntesis
-            while (*ptr && paren_count > 0) {
-                if (*ptr == '(')
-                    paren_count++;
-                else if (*ptr == ')')
-                    paren_count--;
-                ptr++;
-            }
+	    // Verificar el contenido dentro de los paréntesis
+	    while (*ptr && paren_count > 0) {
+		if (*ptr == '(')
+		    paren_count++;
+		else if (*ptr == ')')
+		    paren_count--;
+		ptr++;
+	    }
 
-            // Si se cerraron todos los paréntesis, es una invocación válida
-            if (paren_count == 0)
-                return 1;
-        }
+	    // Si se cerraron todos los paréntesis, es una invocación válida
+	    if (paren_count == 0)
+		return 1;
+	}
 
-        // Buscar la próxima aparición de nombre_valido
-        func_pos = strstr(func_pos + 1, nombre_valido);
+	// Buscar la próxima aparición de nombre_valido
+	func_pos = strstr(func_pos + 1, nombre_valido);
     }
 
     return 0; // No se encontró una invocación válida
@@ -6006,7 +6006,7 @@ int tiene_entry(const char *linea)
 
     while (*ptr && i < MAXB) 
     {
-        buffer[i++] = tolower(*ptr++);
+	buffer[i++] = tolower(*ptr++);
     }
     buffer[i] = '\0';
 
@@ -6014,14 +6014,14 @@ int tiene_entry(const char *linea)
     char *entry_pos = strstr(buffer, "entry");
     while (entry_pos) 
     {
-        // Verificar que "entry" no esté precedido ni seguido por caracteres alfanuméricos o guiones bajos
-        if ((entry_pos == buffer || !isalnum(*(entry_pos - 1)) && *(entry_pos - 1) != '_') &&
-            isspace(*(entry_pos + 5))) 
-        {
-            return TRUE;
-        }
-        // Buscar la próxima aparición de "entry"
-        entry_pos = strstr(entry_pos + 1, "entry");
+	// Verificar que "entry" no esté precedido ni seguido por caracteres alfanuméricos o guiones bajos
+	if ((entry_pos == buffer || !isalnum(*(entry_pos - 1)) && *(entry_pos - 1) != '_') &&
+	    isspace(*(entry_pos + 5))) 
+	{
+	    return TRUE;
+	}
+	// Buscar la próxima aparición de "entry"
+	entry_pos = strstr(entry_pos + 1, "entry");
     }
 
     return FALSE;
@@ -6105,29 +6105,29 @@ char	*t;
 int es_nombre_valido(const char *str)
 {
     if (!isalpha(*str)) // El primer carácter debe ser una letra
-        return 0;
+	return 0;
     
     while (*str && *str != '_')
     {
-        if (!isalnum(*str))
-            return 0;
-        str++;
+	if (!isalnum(*str))
+	    return 0;
+	str++;
     }
     
     // Si encontramos un '_', verificar la siguiente parte
     while (*str)
     {
-        if (*str == '_')
-        {
-            str++;
-            if (!isalnum(*str)) // Después de '_' debe haber al menos una letra o número
-                return 0;
-        }
-        else if (!isalnum(*str))
-        {
-            return 0;
-        }
-        str++;
+	if (*str == '_')
+	{
+	    str++;
+	    if (!isalnum(*str)) // Después de '_' debe haber al menos una letra o número
+		return 0;
+	}
+	else if (!isalnum(*str))
+	{
+	    return 0;
+	}
+	str++;
     }
 
     return 1;
@@ -6155,37 +6155,37 @@ int tiene_entry_v1(char *s, char *t)
     char *entry_pos = strstr(ptr, "entry");
 
     if (!entry_pos)
-        return 0;
+	return 0;
 
     ptr = entry_pos + 5; // Avanzar después de "entry"
     while (*ptr && isspace(*ptr)) // Saltar espacios en blanco
-        ptr++;
+	ptr++;
 
     char nombre_valido[256];
     int i = 0;
 
     while (*ptr && (isalnum(*ptr) || *ptr == '_'))
     {
-        nombre_valido[i++] = *ptr++;
+	nombre_valido[i++] = *ptr++;
     }
 
     nombre_valido[i] = '\0';
 
     if (!es_nombre_valido(nombre_valido))
-        return 0;
+	return 0;
 
     while (*ptr && isspace(*ptr)) // Saltar espacios en blanco
-        ptr++;
+	ptr++;
 
     if (*ptr == '(')
     {
-        ptr++;
-        while (*ptr && isspace(*ptr)) // Saltar espacios en blanco
-            ptr++;
+	ptr++;
+	while (*ptr && isspace(*ptr)) // Saltar espacios en blanco
+	    ptr++;
     }
 
     if (strstr(ptr, "return"))
-        return 0;
+	return 0;
 
     strcpy(t, nombre_valido);
     return 1;
@@ -6202,11 +6202,11 @@ int main()
 
     if (resultado)
     {
-        printf("Se encontró la expresión. Nombre válido: %s\n", t);
+	printf("Se encontró la expresión. Nombre válido: %s\n", t);
     }
     else
     {
-        printf("No se encontró la expresión o contiene 'return'.\n");
+	printf("No se encontró la expresión o contiene 'return'.\n");
     }
 
     return 0;
@@ -6250,7 +6250,7 @@ printf ("TIENE1:  r: %d  b1: |%s| \n",r,b1);
 		// Encuentra el inicio del nombre de archivo
 		start += l1;
 		char *end = strchr(start, '\'');
-        
+	
 		if (end != NULL) 
 		{
 			// Copia el nombre de archivo sin las comillas en t
@@ -6939,9 +6939,9 @@ int	ex8_p1()
 								printf ("%4d %-30.30s |%s|\n",qm1,prog_name,vcb[k]);
 								sprintf (vcb_p[qm1],"%-30.30s,|%s|",prog_name,vcb[k]);
      sprintf (vcb_c[qm1],"%-30.30s,grep -i \"%s\" %-*.*s  ~/wrk/Midas/ABBICAP/*.* ",
-           prog_name,vcb[k],40-strlen(vcb[k]), 40-strlen(vcb[k]), " " );
+	   prog_name,vcb[k],40-strlen(vcb[k]), 40-strlen(vcb[k]), " " );
      sprintf (vcb_d[qm1],"%-30.30s,grep -i \"%s\" %-*.*s  ~/wrk/Midas/ABBICAP/*.* ",
-           prog_name,b5,40-strlen(b5), 40-strlen(b5), " " );
+	   prog_name,b5,40-strlen(b5), 40-strlen(b5), " " );
 
 								qm1++;
 
@@ -7227,6 +7227,7 @@ int	ex9_p1()
 	int	f_proceso;
 	int	f_stat;
 	int	f_keep;
+	int	f_act;
 	int	n_f;
 	char	base_name[MAXV];
 	char	prog_name[MAXV];
@@ -7246,7 +7247,13 @@ int	ex9_p1()
 	int	nf_check;		/* linea donde esta el check alloc encontrado en el fuente */
 	int	r1;
 	int	k_amp;
+	int	n1,n2;
 	
+	int	tipo01;
+	int	tipo03;
+	int	tipo05;
+	int	tipo07;
+
 	int	tipo09;
 	int	tipo11;
 	int	tipo13;
@@ -7295,6 +7302,8 @@ int	ex9_p1()
 
 	/* para todas las lineas */
 	
+	tipo01 = 0;
+
 	tipo09 = 0;
 	tipo11 = 0;
 	tipo13 = 0;
@@ -7302,6 +7311,7 @@ int	ex9_p1()
 
 	i = 0;
 	f_keep = 1;
+	f_act  = 0;
 
 	while (f_keep)
 	{
@@ -7404,7 +7414,7 @@ if (gp_debug && w)
 				c2++;
 
 				fprintf (hfout,"%05d %-30.30s (%s) %05d |%s|\n",
-                                        c2,
+					c2,
 					prog_name,
 					exte_name,
 					i-pf+1,
@@ -7427,7 +7437,7 @@ if (gp_debug && w)
 						sq_q_alloc_for_slc++;
 	
 						fprintf (hfou2,"%05d %-30.30s (%s) %05d |%s|\n",
-	                                       		c3, prog_name, exte_name, i-pf+1, (*fnp[i]).l);
+							c3, prog_name, exte_name, i-pf+1, (*fnp[i]).l);
 
 						strcpy(b1, pasar_a_minusc( (*fnp[i]).l) );
 						f_stat = tiene_stat(b1);
@@ -7442,9 +7452,13 @@ if (gp_debug && w)
 							if (!f_stat)
 							{
 								/* TIPO-1 alloc - una linea - una sola variable - sin stat */
+								tipo01++;
 								strcpy(m1,trim_blanks_beg(b1));
 								grabar_plan(1,1,1,0,0,prog_name,m1);
-#if 0
+
+								f_act = 1;
+#if 1
+
 
 #if 0
 								if (gp_proceed == 1 )
@@ -7454,61 +7468,44 @@ if (gp_debug && w)
 #endif
 								{
 									flag_alloc_ok = 0;
-
 									grabar_mapa(1,1,prog_name,0,0,0);
 
-									chg_alloc_t09(n_f,i,&add_lines,num_alloc,num_alloc_key);
+									/*
+									 * chg_alloc_t09 procesa 1 allocate por vez
+									 * n_f		es el numero de file en tb
+									 * i		es la fila que estamos procesando
+									 * add_lines	son las lineas que hay que agregar a indice 'i'
+									 * num_alloc	es el numero de alloc consecutivo en src
+									 * num_alloc_key  es la base para actualizar en check_alloc
+									 */
+									chg_alloc_t09(n_f,i,&add_lines,num_alloc,num_alloc_key,f_act);
+
+									/* actualizo variables de contexto */
+									if (flag_alloc_ok)
+									{
+										i+= add_lines;
+										flag_alloc_ok = 0;
+									}
 
 if (gp_debug && w)
 {
 mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 }
-									/* atenti:
-									 * chg_alloc_t09 debe procesar 1 solo allocate por vez...
-									 * si lo proceso efectivamente
-									 * aumenta la cantidad de lineas del fuente ...
-									 * n_f es el numbero de file dentro de tb
-									 * i   es la fila que estamos procesando
-									 */
 
-									/* actualizo variables de contexto */
-									if (flag_alloc_ok)
-									{
-										i+= add_lines;
-										for (h=0; h<qf_ff; h++)
-										{	if (h)
-												(*tb[h]).pf += add_lines;
-											(*tb[h]).uf += add_lines;
-										}
-
-										uf = (*tb[n_f]).uf;
-										qf_src += add_lines;
-										flag_alloc_ok = 0;
-									}
-
+#if 1
 									/* agrego el check_alloc */
-									chg_alloc_g09(n_f,i,&add_lines,num_alloc,num_alloc_key);
+									chg_alloc_g09(n_f,i,&add_lines,num_alloc,num_alloc_key,f_act);
 
 									/* actualizo variables de contexto */
 									if (flag_alloc_ok)
 									{
 										i+= add_lines;
-										for (h=0; h<qf_ff; h++)
-										{	if (h)
-												(*tb[h]).pf += add_lines;
-											(*tb[h]).uf += add_lines;
-										}
-										uf = (*tb[n_f]).uf;
-										qf_src += add_lines;
 										flag_alloc_ok = 0;
 									}
 
 									num_alloc_key++;
+#endif
 								}
-
-
-
-
 #endif
 
 							}
@@ -7531,8 +7528,61 @@ mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 							if (!f_stat)
 							{
 								/* TIPO-3 es un alloc en una linea con mas de una var - sin stat */
+								tipo03++;
 								strcpy(m1,trim_blanks_beg(b1));
 								grabar_plan(3,1,2,0,0,prog_name,m1);
+
+
+								f_act = 1;
+#if 1
+
+#if 0
+								if (gp_proceed == 3 )
+#endif
+#if 1
+								if (gp_proceed)
+#endif
+								{
+									flag_alloc_ok = 0;
+
+									grabar_mapa(1,3,prog_name,0,0,0);
+
+									/*
+									 * chg_alloc_t09 procesa 1 allocate por vez
+									 * n_f		es el numero de file en tb
+									 * i		es la fila que estamos procesando
+									 * add_lines	son las lineas que hay que agregar a indice 'i'
+									 * num_alloc	es el numero de alloc consecutivo en src
+									 * num_alloc_key  es la base para actualizar en check_alloc
+									 */
+									chg_alloc_t09(n_f,i,&add_lines,num_alloc,num_alloc_key,f_act);
+
+									/* actualizo variables de contexto */
+									if (flag_alloc_ok)
+									{
+										i+= add_lines;
+										flag_alloc_ok = 0;
+									}
+if (gp_debug && w)
+{
+mprintf (z,"TIPO-3 desp de chg_alloc ... add_lines: %d\n",add_lines);
+}
+
+#if 1
+									/* agrego el check_alloc */
+									chg_alloc_g03(n_f,i,&add_lines,num_alloc,num_alloc_key,&num_alloc_fnd,&k_amp,f_act);
+
+									/* actualizo variables de contexto */
+									if (flag_alloc_ok)
+									{
+										i+= ( add_lines + k_amp);
+										flag_alloc_ok = 0;
+									}
+
+									num_alloc_key = num_alloc_fnd+1;
+#endif
+								}
+#endif
 							}	
 							else
 							{
@@ -7554,7 +7604,7 @@ mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 						do
 						{
 							fprintf (hfou2,"%05d %-30.30s (%s) %05d |%s|\n",
-		                                       		c3, prog_name, exte_name, i-pf+1+k, (*fnp[i+k]).l);
+								c3, prog_name, exte_name, i-pf+1+k, (*fnp[i+k]).l);
 
 							if (!es_linea_comentario( (*fnp[i+k]).l ))
 							{
@@ -7567,7 +7617,7 @@ mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 							k++;
 						}
 						while ( tiene_mas(  (*fnp[i+k]).l ) || 
-                                                        (es_linea_comentario( (*fnp[i+k]).l) && tiene_mas( (*fnp[i+k+1]).l))   );
+							(es_linea_comentario( (*fnp[i+k]).l) && tiene_mas( (*fnp[i+k+1]).l))   );
 					
 						f_stat = tiene_stat(b1);
 
@@ -7580,8 +7630,64 @@ mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 							if (!f_stat)
 							{
 								/* TIPO-5 es un alloc en varias lineas con una sola variable - sin stat  */
+								tipo05++;
 								strcpy(m1,trim_blanks_beg(m0));
 								grabar_plan(5,2,1,0,0,prog_name,m1);
+
+								f_act = 1;
+#if 1
+
+
+#if 0
+								if (gp_proceed == 5 )
+#endif
+#if 1
+								if (gp_proceed)
+#endif
+								{
+									flag_alloc_ok = 0;
+									grabar_mapa(1,5,prog_name,0,0,0);
+
+									/*
+									 * chg_alloc_t09 procesa 1 allocate por vez
+									 * n_f		es el numero de file en tb
+									 * i		es la fila que estamos procesando
+									 * add_lines	son las lineas que hay que agregar a indice 'i'
+									 * num_alloc	es el numero de alloc consecutivo en src
+									 * num_alloc_key  es la base para actualizar en check_alloc
+									 */
+									chg_alloc_t09(n_f,i,&add_lines,num_alloc,num_alloc_key,f_act);
+
+									/* actualizo variables de contexto */
+									if (flag_alloc_ok)
+									{
+										i+= add_lines;
+										flag_alloc_ok = 0;
+									}
+
+if (gp_debug && w)
+{
+mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
+}
+
+#if 1
+									/* agrego el check_alloc */
+									chg_alloc_g05(n_f,i,&add_lines,num_alloc,num_alloc_key,f_act);
+
+									/* actualizo variables de contexto */
+									if (flag_alloc_ok)
+									{
+										i+= add_lines;
+										flag_alloc_ok = 0;
+									}
+
+									num_alloc_key++;
+#endif
+								}
+#endif
+
+
+
 							}
 							else
 							{
@@ -7603,6 +7709,7 @@ mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 							if (!f_stat)
 							{
 								/* TIPO-7 es un alloc en varias lineas con varias variables - sin stat */
+								tipo07++;
 								strcpy(m1,trim_blanks_beg(m0));
 								grabar_plan(7,2,2,0,0,prog_name,m1);
 							}
@@ -7629,7 +7736,7 @@ mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 						/* es un allocate sin linea de continuacion */
 						sq_q_alloc_f90_slc++;
 						fprintf (hfou3,"%05d %-30.30s (%s) %05d |%s|\n",
-       	                                		c4, prog_name, exte_name, i-pf+1, (*fnp[i]).l);
+							c4, prog_name, exte_name, i-pf+1, (*fnp[i]).l);
 
 						strcpy(b1, pasar_a_minusc( (*fnp[i]).l) );
 						f_stat = tiene_stat(b1);
@@ -7650,6 +7757,7 @@ mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 								strcpy(m1,trim_blanks_beg(b1));
 								grabar_plan(9,1,1,0,0,prog_name,m1);
 
+								f_act = 1;
 
 #if 0
 								if (gp_proceed == 9 )
@@ -7662,7 +7770,7 @@ mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 
 									grabar_mapa(1,9,prog_name,0,0,0);
 
-									chg_alloc_t09(n_f,i,&add_lines,num_alloc,num_alloc_key);
+									chg_alloc_t09(n_f,i,&add_lines,num_alloc,num_alloc_key,f_act);
 
 if (gp_debug && w)
 {
@@ -7680,6 +7788,8 @@ mprintf (z,"TIPO-9 desp de chg_alloc ... add_lines: %d\n",add_lines);
 									if (flag_alloc_ok)
 									{
 										i+= add_lines;
+										if (!f_act)
+										{
 										for (h=0; h<qf_ff; h++)
 										{	if (h)
 												(*tb[h]).pf += add_lines;
@@ -7688,16 +7798,19 @@ mprintf (z,"TIPO-9 desp de chg_alloc ... add_lines: %d\n",add_lines);
 
 										uf = (*tb[n_f]).uf;
 										qf_src += add_lines;
+										}
 										flag_alloc_ok = 0;
 									}
 
 									/* agrego el check_alloc */
-									chg_alloc_g09(n_f,i,&add_lines,num_alloc,num_alloc_key);
+									chg_alloc_g09(n_f,i,&add_lines,num_alloc,num_alloc_key,f_act);
 
 									/* actualizo variables de contexto */
 									if (flag_alloc_ok)
 									{
 										i+= add_lines;
+										if (!f_act)
+										{
 										for (h=0; h<qf_ff; h++)
 										{	if (h)
 												(*tb[h]).pf += add_lines;
@@ -7705,6 +7818,7 @@ mprintf (z,"TIPO-9 desp de chg_alloc ... add_lines: %d\n",add_lines);
 										}
 										uf = (*tb[n_f]).uf;
 										qf_src += add_lines;
+										}
 										flag_alloc_ok = 0;
 									}
 
@@ -7766,6 +7880,7 @@ mprintf (z,"TIPO-9 desp de chg_alloc ... add_lines: %d\n",add_lines);
 
 								grabar_plan(11,1,2,0,0,prog_name,m1);
 
+								f_act = 1;
 
 #if 0
 								if (gp_proceed == 11 )
@@ -7778,59 +7893,21 @@ mprintf (z,"TIPO-9 desp de chg_alloc ... add_lines: %d\n",add_lines);
 
 									grabar_mapa(1,11,prog_name,0,0,0);
 
-									chg_alloc_t09(n_f,i,&add_lines,num_alloc,num_alloc_key);
-
+									chg_alloc_t09(n_f,i,&add_lines,num_alloc,num_alloc_key,f_act);
 if (gp_debug && w)
 {
 mprintf (z,"TIPO-11 desp de chg_alloc ... add_lines: %d\n",add_lines);
 }
-									/* atenti:
-									 * chg_alloc_t09 debe procesar 1 solo allocate por vez...
-									 * si lo proceso efectivamente
-									 * aumenta la cantidad de lineas del fuente ...
-									 * n_f es el numbero de file dentro de tb
-									 * i   es la fila que estamos procesando
-									 */
 
 									/* actualizo variables de contexto */
 									if (flag_alloc_ok)
 									{
 										i+= add_lines;
-										for (h=0; h<qf_ff; h++)
-										{	if (h)
-												(*tb[h]).pf += add_lines;
-											(*tb[h]).uf += add_lines;
-										}
-
-										uf = (*tb[n_f]).uf;
-										qf_src += add_lines;
-										flag_alloc_ok = 0;
-									}
-#if 0
-
-									/* agrego el check_alloc */
-									chg_alloc_g09(n_f,i,&add_lines,num_alloc,num_alloc_key);
-
-									/* actualizo variables de contexto */
-									if (flag_alloc_ok)
-									{
-										i+= add_lines;
-										for (h=0; h<qf_ff; h++)
-										{	if (h)
-												(*tb[h]).pf += add_lines;
-											(*tb[h]).uf += add_lines;
-										}
-										uf = (*tb[n_f]).uf;
-										qf_src += add_lines;
 										flag_alloc_ok = 0;
 									}
 
-									num_alloc_key++;
-#endif
-
-
 									/* agrego el check_alloc */
-									chg_alloc_g15(n_f,i,&add_lines,num_alloc,num_alloc_key,&num_alloc_fnd,&k_amp);
+									chg_alloc_g15(n_f,i,&add_lines,num_alloc,num_alloc_key,&num_alloc_fnd,&k_amp,f_act);
 
 if (gp_debug && w)
 {
@@ -7846,34 +7923,23 @@ mprintf (z,"g15_2, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lin
 } 
 
 										i+= ( add_lines + k_amp);
-										for (h=0; h<qf_ff; h++)
-										{	if (h)
-												(*tb[h]).pf += add_lines;
-											(*tb[h]).uf += add_lines;
-										}
-										uf = (*tb[n_f]).uf;
-										qf_src += add_lines;
-	if (gp_debug && w)
-	{
-		mprintf (z,"Termine ajustar valores de tb \n");
-		mprintf (z,"Cantidad de archivos cargados:   %5d \n",qf_ff);
-		mprintf (z,"Cantidad de lineas   cargadas:   %5d \n",qf_src);
-		
-		for (r1=0; r1<qf_ff; r1++)
-		{
-			mprintf (z,"%3d  de %6d a %6d  |%s| \n",r1,(*tb[r1]).pf,(*tb[r1]).uf,(*tb[r1]).n );
-		}
-
-		mprintf (z,"----------\n\n");
-	}
 										flag_alloc_ok = 0;
+if (gp_debug && w)
+{
+mprintf (z,"Termine ajustar valores de tb \n");
+mprintf (z,"Cantidad de archivos cargados:   %5d \n",qf_ff);
+mprintf (z,"Cantidad de lineas   cargadas:   %5d \n",qf_src);
+	
+for (r1=0; r1<qf_ff; r1++)
+{
+mprintf (z,"%3d  de %6d a %6d  |%s| \n",r1,(*tb[r1]).pf,(*tb[r1]).uf,(*tb[r1]).n );
+}
+
+mprintf (z,"----------\n\n");
+}
 									}
 
 									num_alloc_key = num_alloc_fnd+1;
-
-
-
-
 								}
 							}
 							else
@@ -7884,9 +7950,6 @@ mprintf (z,"g15_2, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lin
 								strcpy(m1,trim_blanks_beg(b1));
 
 								grabar_plan(12,1,2,1,0,prog_name,m1);
-#if 0
-								fprintf (hfou4,"(12) sl mv st %-30.30s |%s|\n",prog_name,m1);
-#endif
 							}
 						}
 					}
@@ -7899,33 +7962,13 @@ mprintf (z,"g15_2, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lin
 						k=0;
 						memset(m0,0,MSTR);
 
-#if 0
-						while ( tiene_amper(  (*fnp[i+k]).l ) ||
-                                                        es_linea_comentario( (*fnp[i+k]).l ) && tiene_amper( (*fnp[i+k+1]).l )  )
-						{
-							fprintf (hfou3,"%05d %-30.30s (%s) %05d |%s|\n",
-       		                                		c4, prog_name, exte_name, i-pf+1+k, (*fnp[i+k]).l);
-
-                                                        if (!es_linea_comentario( (*fnp[i+k]).l ) )
-							{
-								strcpy(b1, pasar_a_minusc( (*fnp[i+k]).l) );
-								strcpy(b1, trim_beg_f90(b1));
-								strcpy(b1, trim_end_f90(b1));
-								strcpy(b1, trim_blanks(b1));
-								strcat(m0,b1);
-								strcpy(m0,chanchada(m0));
-							}
-							k++;
-						}
-#endif
-
 						while ( tiene_amper(  (*fnp[i+k]).l ) ||
 							(es_linea_comentario ( (*fnp[i+k]).l ) && tiene_amper( (*fnp[i+k+1]).l ))  )
 						{
 							fprintf (hfou3,"%05d %-30.30s (%s) %05d |%s|\n",
-       		                                		c4, prog_name, exte_name, i-pf+1+k, (*fnp[i+k]).l);
+								c4, prog_name, exte_name, i-pf+1+k, (*fnp[i+k]).l);
 
-                                                        if (!es_linea_comentario( (*fnp[i+k]).l ) )
+							if (!es_linea_comentario( (*fnp[i+k]).l ) )
 							{
 								strcpy(b1, pasar_a_minusc( (*fnp[i+k]).l) );
 								strcpy(b1, trim_beg_f90(b1));
@@ -7936,7 +7979,6 @@ mprintf (z,"g15_2, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lin
 							}
 							k++;
 						}
-
 
 						strcpy(b1, pasar_a_minusc( (*fnp[i+k]).l) );
 						strcpy(b1, trim_beg_f90(b1));
@@ -7946,7 +7988,7 @@ mprintf (z,"g15_2, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lin
 
 					
 						fprintf (hfou3,"%05d %-30.30s (%s) %05d |%s|\n",
-       	                                		c4, prog_name, exte_name, i-pf+1+k, (*fnp[i+k]).l);
+							c4, prog_name, exte_name, i-pf+1+k, (*fnp[i+k]).l);
 
 						/* verifico si tiene STAT= */
 						f_stat = tiene_stat(b1);
@@ -7964,7 +8006,7 @@ mprintf (z,"g15_2, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lin
 								strcpy(m1,trim_blanks_beg(m0));
 								grabar_plan(13,2,1,0,0,prog_name,m1);
 
-
+								f_act = 1;
 #if 0
 								if (gp_proceed == 13 )
 #endif
@@ -7974,7 +8016,7 @@ mprintf (z,"g15_2, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lin
 								{
 									flag_alloc_ok = 0;
 									grabar_mapa(1,13,prog_name,0,0,0);
-									chg_alloc_t13(n_f,i,&add_lines,num_alloc);
+									chg_alloc_t13(n_f,i,&add_lines,num_alloc,f_act);
 
 									/* atenti:
 									 * chg_alloc_t13 debe procesar 1 solo allocate por vez...
@@ -7988,6 +8030,8 @@ mprintf (z,"g15_2, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lin
 									if (flag_alloc_ok)
 									{
 										i+= add_lines;
+										if (!f_act)
+										{
 										for (h=0; h<qf_ff; h++)
 										{	if (h)
 												(*tb[h]).pf += add_lines;
@@ -7996,10 +8040,10 @@ mprintf (z,"g15_2, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lin
 
 										uf = (*tb[n_f]).uf;
 										qf_src += add_lines;
+										}
 										flag_alloc_ok = 0;
 									}
 
-/* EEE */
 /* chg_alloc_g02 */
 #if 1
 									/* agrego el check_alloc */
@@ -8007,7 +8051,7 @@ if (gp_debug && w)
 {
 mprintf (z,"g02_1, entro a  chg_alloc_g02 num_alloc %d add_lines: %d  \n",num_alloc,add_lines);
 } 
-									chg_alloc_g02(n_f,i,&add_lines,num_alloc,num_alloc_key);
+									chg_alloc_g02(n_f,i,&add_lines,num_alloc,num_alloc_key,f_act);
 if (gp_debug && w)
 {
 mprintf (z,"g02_2, volvi de chg_alloc_g02 num_alloc %d add_lines: %d  \n",num_alloc,add_lines);
@@ -8017,6 +8061,8 @@ mprintf (z,"g02_2, volvi de chg_alloc_g02 num_alloc %d add_lines: %d  \n",num_al
 									if (flag_alloc_ok)
 									{
 										i+= add_lines;
+										if (!f_act)
+										{
 										for (h=0; h<qf_ff; h++)
 										{	if (h)
 												(*tb[h]).pf += add_lines;
@@ -8024,6 +8070,7 @@ mprintf (z,"g02_2, volvi de chg_alloc_g02 num_alloc %d add_lines: %d  \n",num_al
 										}
 										uf = (*tb[n_f]).uf;
 										qf_src += add_lines;
+										}
 										flag_alloc_ok = 0;
 									}
 #endif
@@ -8055,6 +8102,8 @@ mprintf (z,"g02_2, volvi de chg_alloc_g02 num_alloc %d add_lines: %d  \n",num_al
 								tipo15++;
 								strcpy(m1,trim_blanks_beg(m0));
 								grabar_plan(15,2,2,0,0,prog_name,m1);
+
+								f_act = 1;
 #if 0
 								if (gp_proceed == 15 )
 #endif
@@ -8073,7 +8122,7 @@ mprintf (z,"g02_2, volvi de chg_alloc_g02 num_alloc %d add_lines: %d  \n",num_al
 									 * i   es la fila que estamos procesando
 									 */
 
-									chg_alloc_t15(n_f,i,&add_lines,num_alloc);
+									chg_alloc_t15(n_f,i,&add_lines,num_alloc,f_act);
 
 
 									/* actualizo variables de contexto */
@@ -8084,6 +8133,8 @@ if (gp_debug && w)
 mprintf (z,"g15_1, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lines,qf_src,(*fnp[i+add_lines]).l);
 } 
 										i+= add_lines;
+										if (!f_act)
+										{
 										for (h=0; h<qf_ff; h++)
 										{	if (h)
 												(*tb[h]).pf += add_lines;
@@ -8092,15 +8143,13 @@ mprintf (z,"g15_1, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lin
 
 										uf = (*tb[n_f]).uf;
 										qf_src += add_lines;
+										}
 										flag_alloc_ok = 0;
 									}
 
-#if 0
-									grabar_mapa(0,0," ",0,0,5);
-#endif
 
 									/* agrego el check_alloc */
-									chg_alloc_g15(n_f,i,&add_lines,num_alloc,num_alloc_key,&num_alloc_fnd,&k_amp);
+									chg_alloc_g15(n_f,i,&add_lines,num_alloc,num_alloc_key,&num_alloc_fnd,&k_amp,f_act);
 
 if (gp_debug && w)
 {
@@ -8116,6 +8165,8 @@ mprintf (z,"g15_3, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lin
 } 
 
 										i+= ( add_lines + k_amp);
+										if (!f_act)
+										{
 										for (h=0; h<qf_ff; h++)
 										{	if (h)
 												(*tb[h]).pf += add_lines;
@@ -8123,19 +8174,20 @@ mprintf (z,"g15_3, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lin
 										}
 										uf = (*tb[n_f]).uf;
 										qf_src += add_lines;
-	if (gp_debug && w)
-	{
-		mprintf (z,"Termine ajustar valores de tb \n");
-		mprintf (z,"Cantidad de archivos cargados:   %5d \n",qf_ff);
-		mprintf (z,"Cantidad de lineas   cargadas:   %5d \n",qf_src);
+										}
+if (gp_debug && w)
+{
+mprintf (z,"Termine ajustar valores de tb \n");
+mprintf (z,"Cantidad de archivos cargados:   %5d \n",qf_ff);
+mprintf (z,"Cantidad de lineas   cargadas:   %5d \n",qf_src);
 		
-		for (r1=0; r1<qf_ff; r1++)
-		{
-			mprintf (z,"%3d  de %6d a %6d  |%s| \n",r1,(*tb[r1]).pf,(*tb[r1]).uf,(*tb[r1]).n );
-		}
+for (r1=0; r1<qf_ff; r1++)
+{
+mprintf (z,"%3d  de %6d a %6d  |%s| \n",r1,(*tb[r1]).pf,(*tb[r1]).uf,(*tb[r1]).n );
+}
 
-		mprintf (z,"----------\n\n");
-	}
+mprintf (z,"----------\n\n");
+}
 										flag_alloc_ok = 0;
 									}
 
@@ -8186,6 +8238,11 @@ mprintf (z,"..... \n\n");
 if (1)
 {
 	printf ("\n");
+	printf ("tipo 01 %3d \n",tipo01);
+	printf ("tipo 03 %3d \n",tipo03);
+	printf ("tipo 05 %3d \n",tipo05);
+	printf ("tipo 07 %3d \n",tipo07);
+
 	printf ("tipo 09 %3d \n",tipo09);
 	printf ("tipo 11 %3d \n",tipo11);
 	printf ("tipo 13 %3d \n",tipo13);
@@ -8193,22 +8250,93 @@ if (1)
 	printf ("\n");
 }
 
-
 #if 0
+int	tiene_check_alloc_ok(nf_alloc,nf_check,nkey)
+int	nf_alloc;
+int	*nf_check;
+int	*nkey;
+#endif
+
+/* EEE */
+
+#if 1
 	/* se supone que a esta altura ... 
 	 * tengo todo el src ya modificado en fnp ... 
 	 *
-	 * se puede trabajar para ves si queremos separar las lineas 
+	 * se puede trabajar aqui para ver si queremos separar las lineas 
 	 * muy largas 
-	 *
 	 */
 
 	/* probamos a ver como funca hacer lugar ... */
+
+	i = 0;
+	f_keep = 1;
+	f_act  = 1;
+
+	while (f_keep)
+	{
+
 	pf = (*tb[n_f]).pf;
 	uf = (*tb[n_f]).uf;
 
-	hacer_lugar(pf,uf,300,10);
-	(*tb[n_f]).uf += 10;
+		strcpy(b0, pasar_a_minusc( (*fnp[i]).l) );
+		strcpy(b1,  (*fnp[i]).l );
+
+		strcpy(b0,trim_end_f90(b0));
+		strcpy(b0,trim_blanks(b0));
+
+		if (tiene_string(b0,"check_alloc"))
+		{
+if (gp_debug && w)
+{
+mprintf (z,"(1)entre a check_alloc_ok con  ... |%s| \n", (*fnp[i]).l );
+mprintf (z,"(2)entre a check_alloc_ok con  ... |%s| \n", b0 );
+}
+			l2 = strlen(b0);
+
+			if (l2 > 82 )
+			{
+if (gp_debug && w)
+{
+mprintf (z,"voy a hacer lugar: pf %d uf %d i %d \n",pf,uf,i);
+mprintf (z,"linea: len: %3d |%s|\n", l2, (*fnp[i]).l );
+}
+				hacer_lugar(pf,uf,i,1,f_act);
+
+				memset(b5,0,sizeof(b5));
+				sprintf (b5,"agregado ... check_alloc :%4d",n2);
+	
+				memset(b2,0,sizeof(b2));
+				memset(b3,0,sizeof(b3));
+
+				arma_dos_lineas_con_check(b1,b2,b3);
+#if 0
+				strcpy(b2,b1);
+				strcpy(b3,b1);
+#endif
+
+if (gp_debug && w)
+{
+mprintf (z,"voy a strcpy 1 i: %d str: |%s| \n",i,(*fnp[i]).l );
+}
+				strcpy( (*fnp[i+0]).l, b2);
+if (gp_debug && w)
+{
+mprintf (z,"hice  strcpy 1 i: %d str: |%s| \n",i,(*fnp[i]).l );
+}
+
+				strcpy( (*fnp[i+1]).l, b3);
+
+				i+= 1;
+			}
+		}
+
+
+		i++;
+		if (i >= qf_src)
+			f_keep = 0;
+	}
+
 
 
 if (gp_debug && w)
@@ -8255,9 +8383,6 @@ int	grabar_a_disco()
 
 	vuelta++;
 
-#if 0
-	if (flag_alloc_ok)
-#endif
 	if (1)
 	{
 
@@ -8274,7 +8399,38 @@ int	grabar_a_disco()
 	fflush(hfou6); fsync(fileno(hfou6));
 
 	}
-	
+}
+
+int	arma_dos_lineas_con_check(s,b1,b2)
+char	*s;
+char	*b1;
+char	*b2;
+{
+	char	blanks[MAXB];
+	int	i,j,k;
+	int	p1,p2;
+	int	f1;
+	int	l2;
+
+
+	memset(blanks,32,sizeof(blanks));
+	l2=strlen(s);
+
+	for (i=0, f1=1, p1=0; f1 && i<l2; i++)
+		if (s[i] == ',')
+			f1=0, p1=i;
+
+	if (p1 == 0)
+		error (9019);
+
+	strcpy(b1,s);
+	b1[p1+1] = 0;
+	strcat(b1," &");
+
+	strncpy(b2,blanks,74-strlen(s+p1+1));
+	strcat(b2,s+p1+1);
+
+	return (0);
 }
 
 
@@ -8424,16 +8580,22 @@ char	*prog_name,*m0;
  *	tipo 09 sl sv
  *
  *	recibe numero de file donde encontro allocate y la linea del allocate
+ *	num_f		numero de file en tabla tb
+ *	nf_alloc	numero de fila donde esta el alloc
+ *	add_lines	cuantas lineas agrego al file
+ *	num_alloc	el numero de alloc real secuencual en archivo
+ *	f_act		0 no actualiza numeros de lineas, 1 si 
  *
  *	Atenti:
  *	esto corrije un solo allocate x vez !!!
  */
 
-int	chg_alloc_t09(num_f,nf_alloc,add_lines,num_alloc)
+int	chg_alloc_t09(num_f,nf_alloc,add_lines,num_alloc,f_act)
 int	num_f;
 int	nf_alloc;
 int	*add_lines;
 int	num_alloc;
+int	f_act;
 {
 	static	int	f_miscmod1 = 0;
 	static	int	f_miscmod2 = 0;
@@ -8503,7 +8665,6 @@ int	num_alloc;
 	if (!strncmp(exte_name,"f90",3))
 		tipo_ext = 2;
 
-
 	/* proceso linea i */
 	strcpy(b0,(*fnp[nf_alloc]).l );
 	strcpy(b1, pasar_a_minusc(b0));
@@ -8541,10 +8702,8 @@ mprintf (z,"sali de busco_pri_l pri_l: %d |%s| \n",pri_l,(*fnp[pri_l]).l);
 
 		grabar_mapa(4,0,(*fnp[ult_l]).l,0,0,lne(ult_l));
 
-
 		/* busco donde colocar el use allocate_vars */
 		f_tengo = 0;
-
 
 		/* busco el ultim use ... */
 		ult_u = 0;
@@ -8571,7 +8730,6 @@ mprintf (z,"sali de busco_pri_l pri_l: %d |%s| \n",pri_l,(*fnp[pri_l]).l);
 		if (kvl == 0)
 			error(9003);
 
-
 		vl_min = 100000;
 		for (k=0; k<kvl; k++)
 			if (vl[k] < vl_min)
@@ -8582,64 +8740,15 @@ mprintf (z,"sali de busco_pri_l pri_l: %d |%s| \n",pri_l,(*fnp[pri_l]).l);
 		grabar_mapa(5,0,(*fnp[linea_use]).l,lne(linea_use),lne(pri_l),lne(ult_l));
 
 
-#if 0
-		f_try = 0;
-
-		if (!f_try && ult_u)
-		{
-			linea_use = ult_u+1;
-			grabar_mapa(5,0,(*fnp[linea_use]).l,lne(linea_use),lne(pri_l),lne(ult_l));
-			f_try = 1;
-		}
-
-		if (!f_try && pri_s)
-		{
-			linea_use = pri_s;
-			grabar_mapa(5,0,(*fnp[linea_use]).l,lne(linea_use),lne(pri_l),lne(ult_l));
-			f_try = 1;
-		}
-
-		if (!f_try && pri_d)
-		{
-			linea_use = pri_d;
-			grabar_mapa(5,0,(*fnp[linea_use]).l,lne(linea_use),lne(pri_l),lne(ult_l));
-			f_try = 1;
-		}
-
-		/* no encontro lugar para colocar el use ... entonces es lo que sigue a pri_l ... */
-		if (!f_try)
-		{	
-			linea_use = pri_l +1;
-
-#if 0
-			for (h=pf; h<=uf; h++)
-				fprintf (hfou6,"%6d,|%s|\n",h,(*fnp[h]).l);
-			printf ("allocate: |%s| \n",(*fnp[nf_alloc]).l );
-			printf ("pri_l  %d |%s| \n",pri_l,(*fnp[pri_l]).l );
-			printf ("ult_l  %d |%s| \n",ult_l,(*fnp[ult_l]).l );
-			error(9003);
-#endif
-		}
-
-#endif
-
-		/* a partir de aqui ... a hacer los cambios !! 
-		 *
-		 * 1) correr todo 1 linea para abajo, y agregar el use allocate_vars.f90 
-		 * 2) en la linea del allocate, agregar  stat= ... var de error 
-		 * 3) correr todo 1 linea para abajo, y agregar call check_alloc ...
-		 *    con variables :
-		 *    identificador (string ... nombre de programa con un numero de allocate )
-		 *    nombre de la variable ...	
-		 *    variable de error 
-		 *    opcional ... extra_info ?? 
+		/* 
+		 * a partir de aqui ... a hacer los cambios !! 
+		 * correr todo 1 linea para abajo, y agregar el use allocate_vars.f90 
 		 */
 
 
 		/*
 		 * La linea para poner use allocate_vars es linea_use
 		 * correr todo para abajo una linea desde ahi ...
-		 *
 		 */
  
 		agrego_lines = 3;
@@ -8648,7 +8757,7 @@ mprintf (z,"sali de busco_pri_l pri_l: %d |%s| \n",pri_l,(*fnp[pri_l]).l);
 
 		if (!busco_use_allocate(pri_l,ult_l))
 		{
-			hacer_lugar(pf,qf_src-1,linea_use,agrego_lines);
+			hacer_lugar(pf,qf_src-1,linea_use,agrego_lines,f_act);
 
 			c5 = n_blanks_beg( (*fnp[pri_l]).l );
 			memset(blanks,0,sizeof(blanks));
@@ -8697,11 +8806,12 @@ mprintf (z,"sali de busco_pri_l pri_l: %d |%s| \n",pri_l,(*fnp[pri_l]).l);
  *
  */
 
-int	chg_alloc_t13(num_f,nf_alloc,add_lines,num_alloc)
+int	chg_alloc_t13(num_f,nf_alloc,add_lines,num_alloc,f_act)
 int	num_f;
 int	nf_alloc;
 int	*add_lines;
 int	num_alloc;
+int	f_act;
 {
 	static	int	f_miscmod1 = 0;
 	static	int	f_miscmod2 = 0;
@@ -8816,6 +8926,7 @@ mprintf (z,"sali de busco_pri_l pri_l: %d |%s| \n",pri_l,(*fnp[pri_l]).l);
 		pri_d = 0;
 		busco_pri_d(pri_l,ult_l,pri_l,&pri_d);
 
+		/* TO_DO  aqui habria que utilizar el mismo metodo que en t09 */
 
 		f_try = 0;
 
@@ -8863,7 +8974,6 @@ mprintf (z,"sali de busco_pri_l pri_l: %d |%s| \n",pri_l,(*fnp[pri_l]).l);
 		/*
 		 * La linea para poner use allocate_vars es linea_use
 		 * correr todo para abajo una linea desde ahi ...
-		 *
 		 */
  
 		agrego_lines = 3;
@@ -8872,7 +8982,7 @@ mprintf (z,"sali de busco_pri_l pri_l: %d |%s| \n",pri_l,(*fnp[pri_l]).l);
 
 		if (!busco_use_allocate(pri_l,ult_l))
 		{
-			hacer_lugar(pf,qf_src-1,linea_use,agrego_lines);
+			hacer_lugar(pf,qf_src-1,linea_use,agrego_lines,f_act);
 
 			c5 = n_blanks_beg( (*fnp[pri_l]).l );
 			memset(blanks,0,sizeof(blanks));
@@ -8923,11 +9033,12 @@ mprintf (z,"sali de busco_pri_l pri_l: %d |%s| \n",pri_l,(*fnp[pri_l]).l);
  *
  */
 
-int	chg_alloc_t15(num_f,nf_alloc,add_lines,num_alloc)
+int	chg_alloc_t15(num_f,nf_alloc,add_lines,num_alloc,f_act)
 int	num_f;
 int	nf_alloc;
 int	*add_lines;
 int	num_alloc;
+int	f_act;
 {
 
 	int 	h,i,j,k,k1,k2;
@@ -9031,6 +9142,8 @@ int	num_alloc;
 		pri_d = 0;
 		busco_pri_d(pri_l,ult_l,pri_l,&pri_d);
 
+		/* TO_DO  aqui habria que utilizar el mismo metodo que en t09 */
+
 		f_try = 0;
 
 		if (!f_try && ult_u)
@@ -9084,7 +9197,7 @@ mprintf (z,"pf %d qf_src-1 %d linea_use %d agrego_lines %d \n",z,pf,qf_src-1,lin
 mprintf (z,"entro a hacer lugar \n",z);
 }
 
-			hacer_lugar(pf,qf_src-1,linea_use,agrego_lines);
+			hacer_lugar(pf,qf_src-1,linea_use,agrego_lines,f_act);
 if (gp_debug && w)
 {
 mprintf (z,"volvi de hacer lugar \n",z);
@@ -9136,16 +9249,25 @@ mprintf (z,"voy a c5 = b_blanks_beg \n",z);
 /*
  *	correr todas las lineas en el vector fnp n lugares
  *	hay que agregar lineas al final 
+ *
+ *	pf		primera fila del bloque que condiero
+ *	uf		ultima fila del bloque
+ *	linea		linea desde la que corro
+ *	qlin		cant de lineas que corro
+ *	f_act		0 no actualizo tabla tb 1 si
  */
 
-int	hacer_lugar(pf,uf,linea,qlin)
+int	hacer_lugar(pf,uf,linea,qlin,f_act)
 int	pf;
 int	uf;
 int	linea;
 int	qlin;
+int	f_act;
 {
-	int	i,j,k;
+	int	i,j,k,h;
 	int	new_uf;
+	int	add_lines;
+	int	f1,n_f;
 	int	d0[MAXV];
 
 	char	z[MAXV];
@@ -9153,7 +9275,20 @@ int	qlin;
 	sprintf (z,"hacer_lugar");
 	w = g_dbg(z);
 
-	new_uf = uf + qlin;
+	add_lines = qlin;
+	new_uf    = uf + qlin;
+
+
+	i = linea;
+	/* me fijo lineas */
+	for (j=0, f1=1, n_f=0; f1 && j<qf_ff; j++)
+		if ( i >= (*tb[j]).pf && i <= (*tb[j]).uf )
+		{	n_f = j;
+			pf = (*tb[j]).pf;
+			uf = (*tb[j]).uf;
+			f1=0;
+		}
+
 
 if (gp_debug && w)
 {
@@ -9225,6 +9360,20 @@ if (gp_debug && w)
 		strcpy( (*fnp[i]).l,d0);
 	}
 #endif
+
+	/* tengo que actualizar situacion de numeros en tablas */
+	if (f_act)
+	{
+		for (h=0; h<qf_ff; h++)
+		{	if (h)
+			(*tb[h]).pf += add_lines;
+			(*tb[h]).uf += add_lines;
+		}
+
+		uf = (*tb[n_f]).uf;
+		qf_src += add_lines;
+	}
+
 
 if (gp_debug && w)
 {
@@ -9399,6 +9548,7 @@ int	pf,uf,spt,*v,mod_type;
 			}
 		}
 	}
+
 
 	return (f_res);
 }
@@ -9613,6 +9763,10 @@ int	pf,uf,spt,*v;
 	int	f_res;
 	char	b1[MAXB];
 
+	char	z[MAXV];
+	int	w;
+	sprintf (z,"busco_pri_d");
+	w = g_dbg(z);
 
 	*v = 0;
 
@@ -9893,11 +10047,11 @@ mprintf (z,"b0[p2]      |%c| \n",b0[p2]);
 	for (i=p1; i<=p2; i++)
 	{
 		if (!((b0[i] >= 'a' && b0[i] <= 'z') || 
-                      (b0[i] >= '0' && b0[i] <= '9') || 
+		      (b0[i] >= '0' && b0[i] <= '9') || 
 		      b0[i] == '=' ||						/* por lineas con el bendito stat= */
-                      b0[i] == ' ' || b0[i] == ':' || b0[i] == ',' || 
-                      b0[i] == '-' || b0[i] == '(' || b0[i] == ')' || 
-	              b0[i] == '_' || b0[i] == '*' || b0[i] == '+'    )  )
+		      b0[i] == ' ' || b0[i] == ':' || b0[i] == ',' || 
+		      b0[i] == '-' || b0[i] == '(' || b0[i] == ')' || 
+		      b0[i] == '_' || b0[i] == '*' || b0[i] == '+'    )  )
 		{
 			st3 = 0;
 		}
@@ -10137,7 +10291,6 @@ char	*s;
 
 	l2=strlen(s);
 	strcpy(b0,s);
-
 
 
 	f_proceso = 1;
@@ -10819,6 +10972,9 @@ char	*s;
 			if (f_try && tiene_string(s,"_function"))
 				f_try = 0;
 
+			if (f_try && tiene_string(s,"function_"))
+				f_try = 0;
+
 			if (f_try)
 				f_res=1, f_sig=0;
 		}
@@ -10838,27 +10994,36 @@ char	*s;
 int	tiene_end(s,mod_type)
 char	*s,mod_type;
 {
+	static	char	b0[MAXB];
+
 	int	i,j,k,l1,l2;
 	int	f_res,f_sig,f_try;
 	int	f_t1,f_t2;
-
 	int	k1;
 
+	char	z[MAXV];
+	int	w;
+	sprintf (z,"tiene_end");
+	w = g_dbg(z);
+
+	strcpy(b0,s);
+	strcpy(b0,trim_end(b0));
+
 	k1 = 3;
-	l1 = strlen(s);
+	l1 = strlen(b0);
 
 
 	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1 + 1; i++)
 	{	
 
-		if (!strncmp(s+i,"end",k1))
+		if (!strncmp(b0+i,"end",k1))
 		{
 			f_try = 1;
 		
 
 			for (k=i+3; k<l1; k++)
 			{	
-				if (s[k] != ' ' && s[k] != '\t' && s[k] != 0 )
+				if (b0[k] != ' ' && b0[k] != '\t' && b0[k] != 0 )
 					f_try = 0, f_sig = 0;
 			}
 
@@ -10869,7 +11034,7 @@ char	*s,mod_type;
 		if (mod_type == 1)
 		{
 			f_t1 = 0;
-			if (!strncmp(s+i,"end subroutine",14))
+			if (!strncmp(b0+i,"end subroutine",14))
 				f_t1 = 1;
 
 			if (f_t1)
@@ -10879,7 +11044,7 @@ char	*s,mod_type;
 		if (mod_type == 2)
 		{
 			f_t2 = 0;
-			if (!strncmp(s+i,"end function",12))
+			if (!strncmp(b0+i,"end function",12))
 				f_t2 = 1;
 
 			if (f_t2)
@@ -10887,6 +11052,19 @@ char	*s,mod_type;
 		}
 
 	}
+
+	/* este caso no cuenta */
+	if (!strncmp(b0+i,"end do",6))
+		f_res = 0;
+
+if (gp_debug && w)
+{
+	if (f_res)
+	{
+		mprintf (z,"encontre end. s : |%s| \n",s);
+		mprintf (z,"encontre end. b0: |%s| \n",b0);
+	}
+}
 
 	return (f_res);
 }
@@ -10931,9 +11109,9 @@ char	*s;
 				}
 
 				if (!( s[k] == ' ' || 
-                                       s[k] == '_' || 
-                                      (s[k] >= 'a' && s[k] <= 'z') || 
-                                      (s[k] >= '0' && s[k] <= '9')     ) )
+				       s[k] == '_' || 
+				      (s[k] >= 'a' && s[k] <= 'z') || 
+				      (s[k] >= '0' && s[k] <= '9')     ) )
 
 					f_try = 0, f_sig = 0;
 			}
@@ -10987,7 +11165,7 @@ char	*s;
 
 	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
 	{	
-		if (!strncmp(s+i,"logical ",k1))
+		if (!strncmp(s+i,"logical ",k1) || !strncmp(s+i,"logical*",k1) )
 		{
 			f_try = 1;
 
@@ -11227,7 +11405,6 @@ int	*qv;
 	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
 	}
 
-/* EEE */
 
 	for (i=0; i<MAX_VARS; i++)
 		gv_str[i][0]=0;
@@ -11840,34 +12017,34 @@ char	**vp;
 
     while (i < len) 
     {
-        // Saltar espacios en blanco
-        while (i < len && isspace(s[i])) 
-        {
-            i++;
-        }
+	// Saltar espacios en blanco
+	while (i < len && isspace(s[i])) 
+	{
+	    i++;
+	}
 
-        // Si encontramos una letra, es el inicio de una variable
-        if (i < len && isalpha(s[i])) 
-        {
-            // Guardar el puntero al inicio de la variable
-            vp[*n] = &s[i]; 
-            start = i;
+	// Si encontramos una letra, es el inicio de una variable
+	if (i < len && isalpha(s[i])) 
+	{
+	    // Guardar el puntero al inicio de la variable
+	    vp[*n] = &s[i]; 
+	    start = i;
 
-            // Avanzar hasta el final de la variable
-            while (i < len && (isalnum(s[i]) || s[i] == ' ' || s[i] == '_')) 
-            {
-                i++;
-            }
+	    // Avanzar hasta el final de la variable
+	    while (i < len && (isalnum(s[i]) || s[i] == ' ' || s[i] == '_')) 
+	    {
+		i++;
+	    }
 
-            // Guardar la longitud de la variable
-            vn[*n] = i - start; 
+	    // Guardar la longitud de la variable
+	    vn[*n] = i - start; 
 
-            (*n)++; 
-        } 
-        else 
-        {
-            i++;
-        }
+	    (*n)++; 
+	} 
+	else 
+	{
+	    i++;
+	}
     }
 
 
@@ -12027,9 +12204,9 @@ int	ex8_p2()
 								printf ("%4d %-30.30s |%s|\n",qm1,prog_name,vcb[k]);
 								sprintf (vcb_p[qm1],"%-30.30s,|%s|",prog_name,vcb[k]);
      sprintf (vcb_c[qm1],"%-30.30s,grep -i \"%s\" %-*.*s  ~/wrk/Midas/ABBICAP/*.* ",
-           prog_name,vcb[k],40-strlen(vcb[k]), 40-strlen(vcb[k]), " " );
+	   prog_name,vcb[k],40-strlen(vcb[k]), 40-strlen(vcb[k]), " " );
      sprintf (vcb_d[qm1],"%-30.30s,grep -i \"%s\" %-*.*s  ~/wrk/Midas/ABBICAP/*.* ",
-           prog_name,b5,40-strlen(b5), 40-strlen(b5), " " );
+	   prog_name,b5,40-strlen(b5), 40-strlen(b5), " " );
 
 								qm1++;
 
@@ -12237,9 +12414,9 @@ int	ex8_p3()
 								printf ("%4d %-30.30s |%s|\n",qm1,prog_name,vcb[k]);
 								sprintf (vcb_p[qm1],"%-30.30s,|%s|",prog_name,vcb[k]);
      sprintf (vcb_c[qm1],"%-30.30s,grep -i \"%s\" %-*.*s  ~/wrk/Midas/ABBICAP/*.* ",
-           prog_name,vcb[k],40-strlen(vcb[k]), 40-strlen(vcb[k]), " " );
+	   prog_name,vcb[k],40-strlen(vcb[k]), 40-strlen(vcb[k]), " " );
      sprintf (vcb_d[qm1],"%-30.30s,grep -i \"%s\" %-*.*s  ~/wrk/Midas/ABBICAP/*.* ",
-           prog_name,b5,40-strlen(b5), 40-strlen(b5), " " );
+	   prog_name,b5,40-strlen(b5), 40-strlen(b5), " " );
 
 								qm1++;
 
@@ -15365,18 +15542,18 @@ int	pro_prue9()
 
 
 			/* verifico cuantas variables tengo */
-    			n1 = 0;
-    			rutina_w(b1, &n1, l_var,v_var);
+			n1 = 0;
+			rutina_w(b1, &n1, l_var,v_var);
 
 			printf ("L: (%3d) #: %d |%s| \n",ql,n1,b1);
 
 
-    			for (int i = 0; i < n1; i++) 
+			for (int i = 0; i < n1; i++) 
 			{
 				strncpy(d1,v_var[i],l_var[i]);
 				d1[l_var[i]] = 0;
 
-    			}
+			}
 
 			ql++;
 		}
@@ -18131,10 +18308,10 @@ mprintf (z,"b0[p2]      |%c| \n",b0[p2]);
 	for (i=p1; i<=p2; i++)
 	{
 		if (!((b0[i] >= 'a' && b0[i] <= 'z') || 
-                      (b0[i] >= '0' && b0[i] <= '9') || 
-                      b0[i] == ' ' || b0[i] == ':' || b0[i] == ',' || 
-                      b0[i] == '-' || b0[i] == '(' || b0[i] == ')' || 
-	              b0[i] == '_' || b0[i] == '*' || b0[i] == '+'    )  )
+		      (b0[i] >= '0' && b0[i] <= '9') || 
+		      b0[i] == ' ' || b0[i] == ':' || b0[i] == ',' || 
+		      b0[i] == '-' || b0[i] == '(' || b0[i] == ')' || 
+		      b0[i] == '_' || b0[i] == '*' || b0[i] == '+'    )  )
 		{
 			st3 = 0;
 		}
@@ -18415,7 +18592,7 @@ int	*ql_f;
 	/* cargo archivo con lista de variables vcb */
 	if (!ffin2)
 		gp_uso(1001);
- 	
+	
 	q_vcb = 0;
 
 	while (fgets(b1,MAXV,hfin2) != NULL)
@@ -19804,7 +19981,7 @@ no anda ... hay que mejorar esto del ultimo ...
 	 * tiene dbl
 	 * no es function
 	 *
- 	 * type (kind=n) pepe
+	 * type (kind=n) pepe
 	 *
 	 * no tiene aster
 	 * tiene kind
@@ -19862,7 +20039,7 @@ no anda ... hay que mejorar esto del ultimo ...
 	 * tiene aster
 	 * no tiene kind
 	 * no tiene dbl
- 	 * tiene intent
+	 * tiene intent
 	 * no es function
 	 */
 
@@ -20155,7 +20332,7 @@ printf ("ZZZfix_dec_var2: estoy en caso 0 ... |%s| \n",b2);
 	 * no tiene len
 	 * no es funcion 
 	 * character esta solo en la linea (variables siguen en otra linea)
- 	 *
+	 *
 	 * character 
 	 */
 
@@ -20610,7 +20787,7 @@ int	pro_tool5()
 				case TC_LET:
 					p2=0;
 					while ( (j=tipo_char(b1[p1])) == TC_LET || \
-					        (j == TC_NUM && !char_demed(b1[p1-1])  ) )
+						(j == TC_NUM && !char_demed(b1[p1-1])  ) )
 						tk[q_tk][p2++]=b1[p1++];
 					tk[q_tk][p2]=0;
 					q_tk++;
@@ -20642,7 +20819,7 @@ int	pro_tool5()
 #if 0
 					while ( (j=tipo_char(b1[p1])) == TC_CHO)
 					{	printf ("estoy perdido en choto %d \n",p1);
-					 	p1++;	
+						p1++;	
 					}
 
 #endif
@@ -21316,7 +21493,7 @@ int	*p;
 	c4 = 0;
 	f4 = 1;
 	j  = 8;
-       	p2 = 0;
+	p2 = 0;
 
 	while ( f4 && j < i)
 	{	if (s[j] == '!')
@@ -21337,7 +21514,7 @@ int	*p;
 	if (f_sig)
 	{
 		c1 = 0;
-	 	c2 = 0;
+		c2 = 0;
 		c3 = 0;
 
 		for (i=0; i < strlen(s); i++)
@@ -21531,7 +21708,6 @@ int	*ql_f;
  * -----------------------------------------------------------------------------------
  */
 
-/* EEE */
 
 /*
  *	recibe una linea completa
@@ -21855,7 +22031,6 @@ char	*s;
  * -----------------------------------------------------------------------------------
  */
 
-/* EEE */
 
 int	tiene_amper(s)
 char	*s;
@@ -22936,7 +23111,7 @@ int	*qt;
 				case TC_LET:
 					p2=0;
 					while ( (j=tipo_char(b1[p1])) == TC_LET || \
-					        (j == TC_NUM && !char_demed(b1[p1-1])  ) )
+						(j == TC_NUM && !char_demed(b1[p1-1])  ) )
 						tk[q_tk][p2++]=b1[p1++];
 					tk[q_tk][p2]=0;
 					q_tk++;
@@ -22968,7 +23143,7 @@ int	*qt;
 #if 0
 					while ( (j=tipo_char(b1[p1])) == TC_CHO)
 					{	printf ("estoy perdido en choto %d \n",p1);
-					 	p1++;	
+						p1++;	
 					}
 
 #endif
@@ -23616,28 +23791,28 @@ char	**vector_ptr;
     // Tokenizamos el string de acuerdo con los separadores
     while ((token = strtok(str_ptr, separators)) != NULL) 
     {
-        str_ptr = NULL; // Para continuar tokenizando el string original
-        
-        // Validamos la sintaxis de str1 (debe comenzar con una letra y puede seguir con letras o números)
-        if (isalpha(token[0])) 
-        {
-            int valid = 1;
-            for (int i = 1; i < strlen(token); i++) 
-            {
-                if (!isalnum(token[i])) 
-                {
-                    valid = 0; // No válido si tiene algo que no sea letra o número
-                    break;
-                }
-            }
+	str_ptr = NULL; // Para continuar tokenizando el string original
+	
+	// Validamos la sintaxis de str1 (debe comenzar con una letra y puede seguir con letras o números)
+	if (isalpha(token[0])) 
+	{
+	    int valid = 1;
+	    for (int i = 1; i < strlen(token); i++) 
+	    {
+		if (!isalnum(token[i])) 
+		{
+		    valid = 0; // No válido si tiene algo que no sea letra o número
+		    break;
+		}
+	    }
 
-            if (valid) 
-            {
-                vector_ptr[count] = token; // Guardamos el puntero al token válido
-                count++;
-            }
+	    if (valid) 
+	    {
+		vector_ptr[count] = token; // Guardamos el puntero al token válido
+		count++;
+	    }
 
-        }
+	}
     }
 
     // Liberamos la memoria temporal
@@ -23662,7 +23837,7 @@ int main() {
     // Imprimimos los resultados
     printf("Variables encontradas: %d\n", nro);
     for (int i = 0; i < nro; i++) {
-        printf("Variable %d: %s\n", i + 1, vector[i]);
+	printf("Variable %d: %s\n", i + 1, vector[i]);
     }
 
     return 0;
@@ -23806,7 +23981,7 @@ int	gp_parser()
 
 		/* parameter type 3 ... "-someoption=somename" */
 		if ( i && fl && *( gp_fp(GP_GET,i,(char **)0) + 0) == '-' && 
-		                *( gp_fp(GP_GET,i,(char **)0) + 1) != '-' && tiene_igual( gp_fp(GP_GET,i,(char **)0) ) )
+				*( gp_fp(GP_GET,i,(char **)0) + 1) != '-' && tiene_igual( gp_fp(GP_GET,i,(char **)0) ) )
 		{
 			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+1,"cfg",3) )
 			{
@@ -23967,7 +24142,7 @@ int	gp_parser()
 
 		/* parameter type 2 ... "-something" */
 		if ( i && fl && *( gp_fp(GP_GET,i,(char **)0) + 0) == '-' && 
-		                *( gp_fp(GP_GET,i,(char **)0) + 1) != '-' && !tiene_igual( gp_fp(GP_GET,i,(char **)0) ) )
+				*( gp_fp(GP_GET,i,(char **)0) + 1) != '-' && !tiene_igual( gp_fp(GP_GET,i,(char **)0) ) )
 		{
 			fl = 0;
 			gp_q_partype2++;
@@ -24009,7 +24184,7 @@ int	gp_parser()
 
 		/* parameter type 3 ... "-someoption=somename" */
 		if ( i && fl && *( gp_fp(GP_GET,i,(char **)0) + 0) == '-' && 
-		                *( gp_fp(GP_GET,i,(char **)0) + 1) != '-' && tiene_igual( gp_fp(GP_GET,i,(char **)0) ) )
+				*( gp_fp(GP_GET,i,(char **)0) + 1) != '-' && tiene_igual( gp_fp(GP_GET,i,(char **)0) ) )
 		{
 			fl = 0;
 			gp_q_partype3++;
@@ -24197,7 +24372,7 @@ int	gp_parser()
 
 		/* parameter type 4 ... "--something" */
 		if ( i && fl && *( gp_fp(GP_GET,i,(char **)0) + 0) == '-' && 
-		                *( gp_fp(GP_GET,i,(char **)0) + 1) == '-' && !tiene_igual( gp_fp(GP_GET,i,(char **)0) ) )
+				*( gp_fp(GP_GET,i,(char **)0) + 1) == '-' && !tiene_igual( gp_fp(GP_GET,i,(char **)0) ) )
 		{
 			fl = 0;
 			gp_q_partype4++;
@@ -24796,7 +24971,7 @@ int	x;
 	printf ("%s -v -opciones=d5 -tool=2 -inp=makefile -out=l1 -m             (in lower case)                   \n",z);
 	printf ("                                                                                                  \n");
 	printf ("tool3:         carga file con listado de archivos y genera mismo pasado a minusculas              \n");
- 	printf ("%s -v -opciones=d5 -tool=3 -inp=file  -out=file_to_min                                            \n",z);
+	printf ("%s -v -opciones=d5 -tool=3 -inp=file  -out=file_to_min                                            \n",z);
 	printf ("                                                                                                  \n");
 	printf ("tool5:         carga un fuente - procesos varios - genera nuewvo fuente                           \n");
 	printf ("%s -v -opciones=d5 -tool=5 -inp=f_org -out=f_new -aux=parser.err -f                               \n",z);
@@ -24809,7 +24984,7 @@ int	x;
 	printf ("      --chglcp  arregla lineas de continuacion ... reemplaza + por &                              \n");
 	printf ("                                                                                                  \n");
 	printf ("prue2:         carga todos los archivos en list_src a  memo y los genera en new_repo              \n");
- 	printf ("%s -v -opciones=d5 -prue=2 -inp=list_src -out=l_names -aux=p.err -dato=new_repo                   \n",z);
+	printf ("%s -v -opciones=d5 -prue=2 -inp=list_src -out=l_names -aux=p.err -dato=new_repo                   \n",z);
 	printf ("                                                                                                  \n");
 	printf ("                                                                                                  \n");
 
@@ -24926,8 +25101,8 @@ char *minusculas(char *s)
     char *ptr = s;
     while (*ptr) 
     {
-        *ptr = tolower(*ptr);
-        ptr++;
+	*ptr = tolower(*ptr);
+	ptr++;
     }
     return s;
 }
@@ -25080,7 +25255,7 @@ char	*situacion;
 char	*gp_tm()
 {
 	time_t t;
-  	struct tm *tm;
+	struct tm *tm;
 
 	t=time(NULL);
 	tm=localtime(&t);
@@ -25238,8 +25413,8 @@ char* archivo_log(char *nombre_log)
     // Formatear la fecha y hora
     char fecha_hora[20];
     snprintf(fecha_hora, sizeof(fecha_hora), "_%02d%02d%02d_%02d%02d",
-             tm.tm_year % 100, tm.tm_mon + 1, tm.tm_mday,
-             tm.tm_hour, tm.tm_min);
+	     tm.tm_year % 100, tm.tm_mon + 1, tm.tm_mday,
+	     tm.tm_hour, tm.tm_min);
 
     // Crear el nombre completo
     snprintf(nombre_completo, sizeof(nombre_completo), "%s%s", nombre_log, fecha_hora);
@@ -25285,17 +25460,17 @@ bool tiene_include(char *s, char *t)
 
     if (start != NULL) 
     {
-        // Encuentra el inicio del nombre de archivo
-        start += pattern_len;
-        char *end = strchr(start, '\'');
-        
-        if (end != NULL) 
-        {
-            // Copia el nombre de archivo sin las comillas en t
-            strncpy(t, start, end - start);
-            t[end - start] = '\0';
-            return true;
-        }
+	// Encuentra el inicio del nombre de archivo
+	start += pattern_len;
+	char *end = strchr(start, '\'');
+	
+	if (end != NULL) 
+	{
+	    // Copia el nombre de archivo sin las comillas en t
+	    strncpy(t, start, end - start);
+	    t[end - start] = '\0';
+	    return true;
+	}
     }
 
     // No se encontró el patrón
@@ -25309,11 +25484,11 @@ int main()
 
     if (tiene_include(s, t)) 
     {
-        printf("Se encontró la sentencia. El nombre de archivo es: %s\n", t);
+	printf("Se encontró la sentencia. El nombre de archivo es: %s\n", t);
     }
     else 
     {
-        printf("No se encontró la sentencia.\n");
+	printf("No se encontró la sentencia.\n");
     }
 
     return 0;
@@ -25341,27 +25516,27 @@ bool tiene_include(char *s, char *t) {
     char *start = strstr(s, keyword);
 
     if (start != NULL) {
-        // Avanza el puntero más allá de "include"
-        start += strlen(keyword);
+	// Avanza el puntero más allá de "include"
+	start += strlen(keyword);
 
-        // Salta los espacios en blanco
-        while (isspace(*start)) {
-            start++;
-        }
+	// Salta los espacios en blanco
+	while (isspace(*start)) {
+	    start++;
+	}
 
-        // Verifica si el siguiente carácter es un apóstrofe
-        if (*start == '\'') {
-            start++; // Salta el apóstrofe inicial
+	// Verifica si el siguiente carácter es un apóstrofe
+	if (*start == '\'') {
+	    start++; // Salta el apóstrofe inicial
 
-            // Encuentra el apóstrofe final
-            char *end = strchr(start, '\'');
-            if (end != NULL) {
-                // Copia el nombre de archivo sin las comillas en t
-                strncpy(t, start, end - start);
-                t[end - start] = '\0';
-                return true;
-            }
-        }
+	    // Encuentra el apóstrofe final
+	    char *end = strchr(start, '\'');
+	    if (end != NULL) {
+		// Copia el nombre de archivo sin las comillas en t
+		strncpy(t, start, end - start);
+		t[end - start] = '\0';
+		return true;
+	    }
+	}
     }
 
     // No se encontró el patrón
@@ -25373,9 +25548,9 @@ int main() {
     char t[100];
 
     if (tiene_include(s, t)) {
-        printf("Se encontró la sentencia. El nombre de archivo es: %s\n", t);
+	printf("Se encontró la sentencia. El nombre de archivo es: %s\n", t);
     } else {
-        printf("No se encontró la sentencia.\n");
+	printf("No se encontró la sentencia.\n");
     }
 
     return 0;
@@ -25538,14 +25713,14 @@ int main()
 
 #if 0
 
-            CALL MG_LOCATE_WRITE(14,35,
+	    CALL MG_LOCATE_WRITE(14,35,
      +                             'Base Case Definition is missing or',
      +                                                   ALL_VERSIONS,1)
 error....   CALL MG_LOCATE_WRITE(15,35,'error reading definition file!',
      +                                                   ALL_VERSIONS,1)
-            er_message="bfil.0001 - Base case definition missing or "
+	    er_message="bfil.0001 - Base case definition missing or "
      + //"error reading definition file."
-            call end_program(er_message)
+	    call end_program(er_message)
 #endif
 
 
@@ -25624,22 +25799,22 @@ int rutina_v(char string[1024], int *nro, char **vector_ptr) {
 
     // Tokenizamos el string de acuerdo con los separadores
     while ((token = strtok(str_ptr, separators)) != NULL) {
-        str_ptr = NULL; // Para continuar tokenizando el string original
-        
-        // Validamos la sintaxis de str1 (debe comenzar con una letra y puede seguir con letras o números)
-        if (isalpha(token[0])) {
-            int valid = 1;
-            for (int i = 1; i < strlen(token); i++) {
-                if (!isalnum(token[i])) {
-                    valid = 0; // No válido si tiene algo que no sea letra o número
-                    break;
-                }
-            }
-            if (valid) {
-                vector_ptr[count] = token; // Guardamos el puntero al token válido
-                count++;
-            }
-        }
+	str_ptr = NULL; // Para continuar tokenizando el string original
+	
+	// Validamos la sintaxis de str1 (debe comenzar con una letra y puede seguir con letras o números)
+	if (isalpha(token[0])) {
+	    int valid = 1;
+	    for (int i = 1; i < strlen(token); i++) {
+		if (!isalnum(token[i])) {
+		    valid = 0; // No válido si tiene algo que no sea letra o número
+		    break;
+		}
+	    }
+	    if (valid) {
+		vector_ptr[count] = token; // Guardamos el puntero al token válido
+		count++;
+	    }
+	}
     }
 
     // Liberamos la memoria temporal
@@ -25660,7 +25835,7 @@ int main() {
     // Imprimimos los resultados
     printf("Variables encontradas: %d\n", nro);
     for (int i = 0; i < nro; i++) {
-        printf("Variable %d: %s\n", i + 1, vector[i]);
+	printf("Variable %d: %s\n", i + 1, vector[i]);
     }
 
     return 0;
@@ -25687,10 +25862,10 @@ int remove_duplicates(int* arr, int n) {
 
     int j = 0;
     for (int i = 1; i < n; i++) {
-        if (arr[j] != arr[i]) {
-            j++;
-            arr[j] = arr[i];
-        }
+	if (arr[j] != arr[i]) {
+	    j++;
+	    arr[j] = arr[i];
+	}
     }
     return j + 1; // New length of array without duplicates
 }
@@ -25708,7 +25883,7 @@ int main() {
     // Printing the unique elements
     printf("Unique elements: ");
     for (int i = 0; i < new_len; i++) {
-        printf("%d ", arr[i]);
+	printf("%d ", arr[i]);
     }
     printf("\n");
 
@@ -25741,7 +25916,7 @@ int main() {
     // Crear un array de punteros a las cadenas en vcb_o
     char *pointers[MAX_LINES];
     for (int i = 0; i < qv1; ++i) {
-        pointers[i] = vcb_o[i];
+	pointers[i] = vcb_o[i];
     }
 
     // Ordenar el array de punteros
@@ -25749,12 +25924,12 @@ int main() {
 
     // Copiar las cadenas ordenadas de vuelta a vcb_o
     for (int i = 0; i < qv1; ++i) {
-        strcpy(vcb_o[i], pointers[i]);
+	strcpy(vcb_o[i], pointers[i]);
     }
 
     // Imprimir el resultado
     for (int i = 0; i < qv1; ++i) {
-        printf("%s\n", vcb_o[i]);
+	printf("%s\n", vcb_o[i]);
     }
 
     return 0;
@@ -25842,45 +26017,45 @@ int	dict_size;
 
     while (i < len) 
     {
-        // Saltar espacios en blanco
-        while (i < len && isspace(s[i])) 
-        {
-            i++;
-        }
+	// Saltar espacios en blanco
+	while (i < len && isspace(s[i])) 
+	{
+	    i++;
+	}
 
-        // Si encontramos una letra, es el inicio de una variable
-        if (i < len && isalpha(s[i])) 
-        {
-            // Guardar el puntero al inicio de la variable
-            vp[*n] = &s[i]; 
-            start = i;
+	// Si encontramos una letra, es el inicio de una variable
+	if (i < len && isalpha(s[i])) 
+	{
+	    // Guardar el puntero al inicio de la variable
+	    vp[*n] = &s[i]; 
+	    start = i;
 
-            // Avanzar hasta el final de la variable
-            while (i < len && (isalnum(s[i]) || s[i] == ' ' || s[i] == '_')) 
-            {
-                i++;
-            }
+	    // Avanzar hasta el final de la variable
+	    while (i < len && (isalnum(s[i]) || s[i] == ' ' || s[i] == '_')) 
+	    {
+		i++;
+	    }
 
-            // Guardar la longitud de la variable
-            vn[*n] = i - start; 
+	    // Guardar la longitud de la variable
+	    vn[*n] = i - start; 
 
-            // Verificar si la variable está en el diccionario
-            k[*n] = 0; 
-            for (int j = 0; j < dict_size; j++) 
-            {
-                if (strncmp(vp[*n], dict[j].word, vn[*n]) == 0 && strlen(dict[j].word) == vn[*n]) 
-                {
-                    k[*n] = dict[j].value;
-                    break;
-                }
-            }
+	    // Verificar si la variable está en el diccionario
+	    k[*n] = 0; 
+	    for (int j = 0; j < dict_size; j++) 
+	    {
+		if (strncmp(vp[*n], dict[j].word, vn[*n]) == 0 && strlen(dict[j].word) == vn[*n]) 
+		{
+		    k[*n] = dict[j].value;
+		    break;
+		}
+	    }
 
-            (*n)++; 
-        } 
-        else 
-        {
-            i++;
-        }
+	    (*n)++; 
+	} 
+	else 
+	{
+	    i++;
+	}
     }
 }
 
@@ -25890,57 +26065,57 @@ int main(int argc, char *argv[])
 
     if (argc != 4) 
     {
-        fprintf(stderr, "Uso: %s <archivo_diccionario> <archivo_entrada> <archivo_salida>\n", argv[0]);
-        return 1;
+	fprintf(stderr, "Uso: %s <archivo_diccionario> <archivo_entrada> <archivo_salida>\n", argv[0]);
+	return 1;
     }
 
     // Leer el archivo de diccionario
     FILE *file_dict = fopen(argv[1], "r");
     if (file_dict == NULL) 
     {
-        perror("Error al abrir el archivo de diccionario");
-        return 1;
+	perror("Error al abrir el archivo de diccionario");
+	return 1;
     }
 
     int dict_size = 0;
     while (fscanf(file_dict, "%49[^,],%d\n", dict[dict_size].word, &dict[dict_size].value) == 2) {
-        dict_size++;
+	dict_size++;
     }
     fclose(file_dict);
 
     // Leer el archivo de entrada
     FILE *file_in = fopen(argv[2], "r");
     if (file_in == NULL) {
-        perror("Error al abrir el archivo de entrada");
-        return 1;
+	perror("Error al abrir el archivo de entrada");
+	return 1;
     }
 
     // Abrir el archivo de salida
     FILE *file_out = fopen(argv[3], "w");
     if (file_out == NULL) {
-        perror("Error al abrir el archivo de salida");
-        fclose(file_in);
-        return 1;
+	perror("Error al abrir el archivo de salida");
+	fclose(file_in);
+	return 1;
     }
 
     char line[MAX_LINE_LENGTH];
     while (fgets(line, sizeof(line), file_in)) {
-        int n;
-        int vn[MAX_VARS];
-        char *vp[MAX_VARS];
-        int k[MAX_VARS];
+	int n;
+	int vn[MAX_VARS];
+	char *vp[MAX_VARS];
+	int k[MAX_VARS];
 
-        // Escribir la línea original en el archivo de salida
-        fprintf(file_out, "Línea: %s", line);
+	// Escribir la línea original en el archivo de salida
+	fprintf(file_out, "Línea: %s", line);
 
-        // Procesar la línea para encontrar variables
-        rutina_x(line, &n, vn, vp, k, dict, dict_size);
+	// Procesar la línea para encontrar variables
+	rutina_x(line, &n, vn, vp, k, dict, dict_size);
 
-        // Escribir las variables encontradas en el archivo de salida
-        for (int i = 0; i < n; i++) {
-            fprintf(file_out, "%d (%2d) %d |%-*.*s|\n", i + 1, vn[i], k[i], vn[i], vn[i], vp[i]);
-        }
-        fprintf(file_out, "\n");
+	// Escribir las variables encontradas en el archivo de salida
+	for (int i = 0; i < n; i++) {
+	    fprintf(file_out, "%d (%2d) %d |%-*.*s|\n", i + 1, vn[i], k[i], vn[i], vn[i], vp[i]);
+	}
+	fprintf(file_out, "\n");
     }
 
     fclose(file_in);
@@ -25972,8 +26147,8 @@ int main(int argc, char *argv[])
 char *pasar_a_minusc(char *s) {
     char *ptr = s;
     while (*ptr) {
-        *ptr = tolower(*ptr);
-        ptr++;
+	*ptr = tolower(*ptr);
+	ptr++;
     }
     return s;
 }
@@ -25987,26 +26162,26 @@ int tiene_funcion_a_entry(char *linea, char *nombre_valido) {
     char *igual_pos = strstr(ptr, "=");
 
     if (!igual_pos)
-        return 0; // No hay "=" en la línea
+	return 0; // No hay "=" en la línea
 
     ptr = igual_pos + 1; // Avanzar después de "="
     while (*ptr && isspace(*ptr)) // Saltar espacios en blanco
-        ptr++;
+	ptr++;
 
     // Verificar si el nombre válido coincide después de "="
     if (strncmp(ptr, nombre_valido, strlen(nombre_valido)) == 0) {
-        ptr += strlen(nombre_valido);
-        while (*ptr && isspace(*ptr)) // Saltar espacios en blanco después de nombre_valido
-            ptr++;
+	ptr += strlen(nombre_valido);
+	while (*ptr && isspace(*ptr)) // Saltar espacios en blanco después de nombre_valido
+	    ptr++;
 
-        if (*ptr == '(') {
-            ptr++; // Avanzar después de "("
-            while (*ptr && *ptr != ')') // Ignorar contenido entre paréntesis
-                ptr++;
+	if (*ptr == '(') {
+	    ptr++; // Avanzar después de "("
+	    while (*ptr && *ptr != ')') // Ignorar contenido entre paréntesis
+		ptr++;
 
-            if (*ptr == ')') // Verificar si hay un paréntesis de cierre
-                return 1;
-        }
+	    if (*ptr == ')') // Verificar si hay un paréntesis de cierre
+		return 1;
+	}
     }
 
     return 0; // No se cumple la condición
@@ -26027,8 +26202,8 @@ int tiene_funcion_a_entry(char *linea, char *nombre_valido) {
 char *pasar_a_minusc(char *s) {
     char *ptr = s;
     while (*ptr) {
-        *ptr = tolower(*ptr);
-        ptr++;
+	*ptr = tolower(*ptr);
+	ptr++;
     }
     return s;
 }
@@ -26042,33 +26217,33 @@ int tiene_funcion_a_entry(char *linea, char *nombre_valido) {
     char *func_pos = strstr(ptr, nombre_valido);
 
     while (func_pos) {
-        ptr = func_pos + strlen(nombre_valido);
+	ptr = func_pos + strlen(nombre_valido);
 
-        // Saltar espacios en blanco después del nombre de la función
-        while (*ptr && isspace(*ptr))
-            ptr++;
+	// Saltar espacios en blanco después del nombre de la función
+	while (*ptr && isspace(*ptr))
+	    ptr++;
 
-        // Verificar si está seguido de un paréntesis de apertura
-        if (*ptr == '(') {
-            ptr++; // Avanzar después de "("
-            int paren_count = 1;
+	// Verificar si está seguido de un paréntesis de apertura
+	if (*ptr == '(') {
+	    ptr++; // Avanzar después de "("
+	    int paren_count = 1;
 
-            // Verificar el contenido dentro de los paréntesis
-            while (*ptr && paren_count > 0) {
-                if (*ptr == '(')
-                    paren_count++;
-                else if (*ptr == ')')
-                    paren_count--;
-                ptr++;
-            }
+	    // Verificar el contenido dentro de los paréntesis
+	    while (*ptr && paren_count > 0) {
+		if (*ptr == '(')
+		    paren_count++;
+		else if (*ptr == ')')
+		    paren_count--;
+		ptr++;
+	    }
 
-            // Si se cerraron todos los paréntesis, es una invocación válida
-            if (paren_count == 0)
-                return 1;
-        }
+	    // Si se cerraron todos los paréntesis, es una invocación válida
+	    if (paren_count == 0)
+		return 1;
+	}
 
-        // Buscar la próxima aparición de nombre_valido
-        func_pos = strstr(func_pos + 1, nombre_valido);
+	// Buscar la próxima aparición de nombre_valido
+	func_pos = strstr(func_pos + 1, nombre_valido);
     }
 
     return 0; // No se encontró una invocación válida
@@ -26095,20 +26270,20 @@ int tiene_entry(const char *linea) {
     char buffer[1024];
     int i = 0;
     while (*ptr && i < 1023) {
-        buffer[i++] = tolower(*ptr++);
+	buffer[i++] = tolower(*ptr++);
     }
     buffer[i] = '\0';
 
     // Buscar "entry" en el string
     char *entry_pos = strstr(buffer, "entry");
     while (entry_pos) {
-        // Verificar que "entry" no esté precedido ni seguido por caracteres alfanuméricos o guiones bajos
-        if ((entry_pos == buffer || !isalnum(*(entry_pos - 1)) && *(entry_pos - 1) != '_') &&
-            isspace(*(entry_pos + 5))) {
-            return TRUE;
-        }
-        // Buscar la próxima aparición de "entry"
-        entry_pos = strstr(entry_pos + 1, "entry");
+	// Verificar que "entry" no esté precedido ni seguido por caracteres alfanuméricos o guiones bajos
+	if ((entry_pos == buffer || !isalnum(*(entry_pos - 1)) && *(entry_pos - 1) != '_') &&
+	    isspace(*(entry_pos + 5))) {
+	    return TRUE;
+	}
+	// Buscar la próxima aparición de "entry"
+	entry_pos = strstr(entry_pos + 1, "entry");
     }
 
     return FALSE;
@@ -26122,6 +26297,616 @@ int tiene_entry(const char *linea) {
 /* end of file  */
 /* end of file  */
 /* end of file  */
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	chg_alloc_g03
+ *
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+
+/*
+ *	chg_alloc_g03
+ *	agregar check alloc de sentencias con allocate 
+ *	tipo 03 for, sl mv no stat
+
+ *	recibe numero de file donde encontro allocate y la linea del allocate
+ *
+ *	num_f	es el numero de file en la tabla tb
+ *
+ */
+
+int	chg_alloc_g03(num_f,nf_alloc,add_lines,num_alloc,num_alloc_key,num_alloc_fnd,k_amp_g,f_act)
+int	num_f;
+int	nf_alloc;
+int	*add_lines;
+int	num_alloc;
+int	num_alloc_key;
+int	*num_alloc_fnd;
+int	*k_amp_g;
+int	f_act;
+{
+
+	int 	h,i,j,k,k1,k2,k_amp;
+	int	l1,l2;
+	int	c1,c2,c3,c4,c5;
+	int	f1,f2,f3,f4,f5;
+	int	fs_sig,fs1,fs2,fs3;
+	int	f_proceso;
+	int	f_stat;
+	int	f_hay_alloc;
+	int	f_try;
+	int	n_f;
+	char	base_name[MAXV];
+	char	prog_name[MAXV];
+	char	exte_name[MAXV];
+	char	src_name[MAXV];
+	char	var_name[MAXV];
+
+	char	m0[MSTR];
+	char	m1[MSTR];
+
+	char	b0[MAXB];
+	char	b1[MAXB];
+	char	b2[MAXB];
+	char	b3[MAXB];
+	char	b4[MAXB];
+	char	b5[MAXB];
+	char	b6[MAXB];
+	char	blanks[64];
+	int	pf,uf,nf,qf;
+	int	tipo_ext;
+
+	int	pri_l,ult_l;
+	int	ult_u,pri_d;	/* ultimo use, primera declaracion */
+	int	mod_type;	/* 0 no se, 1 subroutine 2 function */
+	int	linea_check;	/* linea en la que hay que poner el check_alloc */
+	int	linea_stat;	/* linea donde pongo el stat=stv_er */
+	int	linea_b;	/* linea desde donde correr */
+	int	agrego_lines;	/* lineas a agregar al final x hacer-lugar */
+	int	q_vars;		/* cantidad de vars en alloc multi vars ... */
+
+	char	z[MAXV];
+	int	w;
+	sprintf (z,"chg_alloc_g03");
+	w = g_dbg(z);
+
+if (gp_debug && w)
+{
+	mprintf (z,"alloc |%s|\n", (*fnp[nf_alloc]).l );
+}
+
+
+	memset(b4,'X',MAXB);
+	memset(m0,0,MSTR);
+	memset(m1,0,MSTR);
+	strcpy(base_name,"empty");
+
+	nf = num_f;
+
+	tipo_ext = 0;
+	c2 = 0;
+	c3 = 0;
+	c4 = 0;
+
+	/* primera y ultima linea del fuente */
+	pf = (*tb[nf]).pf;
+	uf = (*tb[nf]).uf;
+	qf = uf - pf +1;
+
+
+	/* nombre y ext del file  */
+	strcpy(prog_name,f_name(pf));
+	strcpy(exte_name,e_name(pf));
+
+	if (!strncmp(exte_name,"for",3))
+		tipo_ext = 1;
+
+	if (!strncmp(exte_name,"f90",3))
+		tipo_ext = 2;
+
+
+	/* proceso linea i */
+	strcpy(b0,(*fnp[nf_alloc]).l );
+	strcpy(b1, pasar_a_minusc(b0));
+
+	l2 = strlen(b1);
+
+	f_proceso = 1;
+	if (linea_vacia(b1) || es_linea_comentario(b1))
+		f_proceso = 0;
+
+
+	/* solo proceso lineas que no son comentario ni vacias */
+	if (f_proceso)
+	{	
+
+		if (!busco_pri_l(pf,uf,nf_alloc,&pri_l,&mod_type))
+			error(9010);
+if (gp_debug && w)
+{
+	mprintf (z,"sali de busco_pri_l  pri_l: %d\n",pri_l);
+}
+
+		if (!busco_ult_l(pf,uf,nf_alloc,&ult_l,mod_type))
+			error(9002);
+
+if (gp_debug && w)
+{
+	mprintf (z,"sali de busco_ult_l  ult_l: %d\n",ult_l);
+}
+
+		/* 
+		 * chg_alloc_g03
+		 *
+		 * a partir de aqui ... a hacer los cambios !! 
+		 *
+		 * 1) correr todo n lineas para abajo 
+		 * 2) en la ulitma linea del allocate, agregar  stat= ... var de error 
+		 * 3) agregar call check_alloc ...
+		 *    con variables :
+		 *    identificador (string ... nombre de programa con un numero de allocate )
+		 *    nombre de la variable ...	
+		 *    variable de error 
+		 *    opcional ... extra_info ?? 
+		 */
+
+		/*
+		 * La linea para poner use allocate_vars es linea_use
+		 * correr todo para abajo una linea desde ahi ...
+		 *
+		 */
+
+		agrego_lines=0;
+		*add_lines = 0;
+
+		linea_check = nf_alloc;
+		linea_stat  = nf_alloc;
+
+		k=0;
+		k_amp = 0;
+		memset(m0,0,MSTR);
+		memset(m1,0,MSTR);
+
+		fs_sig = 1;
+
+
+
+/* FFF aqui hay que evitar el ! entre las lineas del alloc */
+
+		do
+		{
+
+
+if (gp_debug && w)
+{
+	mprintf (z,"1\n");
+	mprintf (z,"k: %d  |%s| \n",k,m0);
+	mprintf (z,"k: %d  |%s| \n",k,m1);
+	mprintf (z,"linea_check %d \n",linea_check);
+	mprintf (z," . . . \n");
+}
+
+			if (!es_linea_comentario( (*fnp[linea_check+k]).l ))
+			{
+				strcpy(b2, pasar_a_minusc( (*fnp[linea_check+k]).l) );
+				strcpy(b2, trim_beg(b2));
+				strcpy(b2, trim_end(b2));
+				strcpy(b2, trim_blanks(b2));
+				strcat(m0,b2);
+
+				strcpy(b3, (*fnp[linea_check+k]).l );
+				strcpy(b3, trim_beg(b3));
+				strcpy(b3, trim_end(b3));
+				strcpy(b3, trim_blanks(b3));
+				strcat(m1,b3);
+
+			}
+			k_amp++;
+			k++;
+
+			fs1 = tiene_mas( (*fnp[linea_check+k]).l );
+			fs2 = es_linea_comentario( (*fnp[linea_check+k]).l );
+			fs3 = tiene_mas( (*fnp[linea_check+k+1]).l ) ;
+
+			if (fs1 || (fs2 && fs3))
+			{
+				fs_sig = 1;
+			}
+			else
+				fs_sig = 0;
+		}
+		while (fs_sig);
+
+
+if (gp_debug && w)
+{
+	mprintf (z,"5\n");
+	mprintf (z,"k: %d  |%s| \n",k,m0);
+	mprintf (z,"k: %d  |%s| \n",k,m1);
+	mprintf (z," . . . \n");
+}
+
+
+		/* calculo cuantas lineas tengo que agregar por desdoblar el allocate */
+		q_vars = 200;
+		if (!cantidad_de_vars(m1,&q_vars))
+			error(9011);
+
+if (gp_debug && w)
+{
+mprintf (z,"q_vars   : %4d m0: |%s| \n",q_vars,m0);
+mprintf (z,"q_vars   : %4d m1: |%s| \n",q_vars,m1);
+mprintf (z,"nf_alloc : %4d |%s| \n",nf_alloc,(*fnp[nf_alloc]).l );
+
+}
+					
+		agrego_lines = q_vars*2-(k+1)+1;		/* depende de la cant de vars que hay en el alloc !! */
+		strcpy(b6,trim_blanks_beg( (*fnp[nf_alloc]).l ));
+		grabar_mapa(11,0,b6,nf_alloc,q_vars,0);
+		linea_b = nf_alloc+k+1;
+
+if (gp_debug && w)
+{
+mprintf (z,"llamo a hacer_lugar  pf: %d  qf_src-1: %d linea_b: %d agrego_lines: %d \n",
+	pf,qf_src-1,linea_b,agrego_lines);
+mprintf (z,"linea:  |%s| \n", (*fnp[linea_b]).l );
+mprintf (z,"-------- \n");
+}
+		hacer_lugar(pf,qf_src-1,linea_b,agrego_lines,f_act);
+
+		grabar_mapa(10,0," ",num_alloc_key,0,6);
+
+		strcpy(src_name,b_name(nf));
+		c5 = n_blanks_beg( (*fnp[nf_alloc]).l );
+		memset(blanks,0,sizeof(blanks));
+		memset(blanks,32,c5);
+
+if (gp_debug && w)
+{
+	mprintf (z,"sali de hace lugar  agrego_lines: %d \n", agrego_lines);
+}
+
+		/* armo lineas allocate / check_alloc x cada variable en allocate original */
+		for (i=0; i<q_vars; i++)
+		{
+			/* contruyo nuevo allocate */
+			strcpy( (*fnp[nf_alloc+2*i]).l    ,blanks);
+			strcat( (*fnp[nf_alloc+2*i]).l    ,"allocate(" );
+			strcat( (*fnp[nf_alloc+2*i]).l    ,gv_str[i]);
+			strcat( (*fnp[nf_alloc+2*i]).l    ,",stat=stv_er)");
+
+			/* contruyo check alloc */
+			strcpy(var_name,extract_var_name( (*fnp[nf_alloc+2*i]).l ) );
+			memset(b5,0,sizeof(b5));
+			sprintf (b5,"(\"%s:%04d\",\"%s\",stv_er)",src_name,num_alloc_key+i,var_name);
+			strcpy( (*fnp[nf_alloc+2*i+1]).l  ,blanks);
+			strcat( (*fnp[nf_alloc+2*i+1]).l  ,"call check_alloc");
+			strcat( (*fnp[nf_alloc+2*i+1]).l  ,b5);
+
+			strcpy(b6,trim_blanks_beg( (*fnp[nf_alloc+2*i]).l ));
+
+			grabar_mapa(12,i+1,b6,0,0,0);
+
+			*num_alloc_fnd = num_alloc_key+i;
+	
+		}
+
+		strcpy( (*fnp[nf_alloc+2*q_vars]).l,"      ");
+
+		*add_lines = agrego_lines ;
+		*k_amp_g = k_amp;
+		flag_alloc_ok = 1;
+	}
+
+	grabar_mapa(0,0,"-",0,0,5);
+}
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	chg_alloc_g05
+ *
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+
+/*
+ *	chg_alloc_g05
+ *	agregar check alloc de sentencias con allocate 
+ *	tipo 05 for, ml sv no stat
+ * 
+ *	recibe numero de file donde encontro allocate y la linea del allocate
+ *
+ *
+ */
+
+int	chg_alloc_g05(num_f,nf_alloc,add_lines,num_alloc,num_alloc_key,f_act)
+int	num_f;
+int	nf_alloc;
+int	*add_lines;
+int	num_alloc;
+int	num_alloc_key;
+int	f_act;
+{
+
+	int 	h,i,j,k,k1,k2;
+	int	l1,l2;
+	int	c1,c2,c3,c4,c5;
+	int	f1,f2,f3,f4,f5;
+	int	f_proceso;
+	int	f_stat;
+	int	f_hay_alloc;
+	int	f_try;
+	int	fs1,fs2,fs3,fs_sig;
+	int	n_f;
+	char	base_name[MAXV];
+	char	prog_name[MAXV];
+	char	exte_name[MAXV];
+	char	src_name[MAXV];
+	char	var_name[MAXV];
+	char	b0[MAXB];
+	char	b1[MAXB];
+	char	b2[MAXB];
+	char	b3[MAXB];
+	char	b4[MAXB];
+	char	b5[MAXB];
+	char	blanks[64];
+	int	pf,uf,nf,qf;
+	int	tipo_ext;
+
+	int	pri_l,ult_l;
+	int	ult_u,pri_d;	/* ultimo use, primera declaracion */
+	int	mod_type;	/* 0 no se, 1 subroutine 2 function */
+	int	linea_check;	/* linea en la que hay que poner el check_alloc */
+	int	linea_stat;	/* linea donde pongo el stat=stv_er */
+	int	agrego_lines;	/* lineas a agregar al final x hacer-lugar */
+
+	char	m0[MSTR];
+	char	m1[MSTR];
+
+	char	z[MAXV];
+	int	w;
+	sprintf (z,"chg_alloc_g05");
+	w = g_dbg(z);
+
+	memset(b4,'X',MAXB);
+	memset(m0,0,MSTR);
+	memset(m1,0,MSTR);
+	strcpy(base_name,"empty");
+
+	nf = num_f;
+
+	tipo_ext = 0;
+	c2 = 0;
+	c3 = 0;
+	c4 = 0;
+
+	/* primera y ultima linea del fuente */
+	pf = (*tb[nf]).pf;
+	uf = (*tb[nf]).uf;
+	qf = uf - pf +1;
+
+
+	/* nombre y ext del file  */
+	strcpy(prog_name,f_name(pf));
+	strcpy(exte_name,e_name(pf));
+
+	if (!strncmp(exte_name,"for",3))
+		tipo_ext = 1;
+
+	if (!strncmp(exte_name,"f90",3))
+		tipo_ext = 2;
+
+
+	/* proceso linea i */
+	strcpy(b0,(*fnp[nf_alloc]).l );
+	strcpy(b1, pasar_a_minusc(b0));
+
+	l2 = strlen(b1);
+
+	f_proceso = 1;
+	if (linea_vacia(b1) || es_linea_comentario(b1))
+		f_proceso = 0;
+
+
+	/* solo proceso lineas que no son comentario ni vacias */
+	if (f_proceso)
+	{	
+
+if (gp_debug && w)
+{
+mprintf (z,"entro  a busco_pri_l  pf %d uf %d nf_alloc %d \n",pf,uf,nf_alloc);
+}
+
+		if (!busco_pri_l(pf,uf,nf_alloc,&pri_l,&mod_type))
+			error(9009);
+
+if (gp_debug && w)
+{
+mprintf (z,"volvi de busco_pri_l  pf %d uf %d nf_alloc %d \n",pf,uf,nf_alloc);
+mprintf (z,"entro  a busco_ult_l  pf %d uf %d nf_alloc %d \n",pf,uf,nf_alloc);
+}
+
+		if (!busco_ult_l(pf,uf,nf_alloc,&ult_l,mod_type))
+			error(9002);
+
+if (gp_debug && w)
+{
+mprintf (z,"volvi de busco_pri_l  pf %d uf %d nf_alloc %d ult_l %d\n",pf,uf,nf_alloc,ult_l);
+mprintf (z,"ult_l |%s| \n", (*fnp[ult_l]).l );
+}
+
+		/* 
+		 * chg_alloc_g05
+		 *
+		 * a partir de aqui ... a hacer los cambios !! 
+		 *
+		 * 1) correr todo n lineas para abajo 
+		 * 2) en la ulitma linea del allocate, agregar  stat= ... var de error 
+		 * 3) agregar call check_alloc ...
+		 *    con variables :
+		 *    identificador (string ... nombre de programa con un numero de allocate )
+		 *    nombre de la variable ...	
+		 *    variable de error 
+		 *    opcional ... extra_info ?? 
+		 */
+
+		/*
+		 * La linea para ponder use allocate_vars es linea_use
+		 * correr todo para abajo una linea desde ahi ...
+		 *
+		 */
+
+		agrego_lines=2;		/* ojo ! solo sirve para tipo-13 */
+		*add_lines = 0;
+
+		linea_check = nf_alloc;
+		linea_stat  = nf_alloc;
+
+		k=0;
+		memset(m0,0,MSTR);
+		memset(m1,0,MSTR);
+
+		/*
+		 * m0	contiene la linea pasada a minusculas 
+		 * m1	contiene la linea original para mostrar
+		 *
+		 */
+
+		fs_sig = 1;
+
+if (gp_debug && w)
+{
+mprintf (z,"entro al while   linea_check %d \n",linea_check);
+mprintf (z,"linea_check       |%s| \n", (*fnp[linea_check]).l );
+}
+
+		do
+		{
+
+
+
+if (gp_debug && w)
+{
+	mprintf (z,"en el while ... (1)\n");
+	mprintf (z,"k: %d  |%s| \n",k,m0);
+	mprintf (z,"k: %d  |%s| \n",k,m1);
+	mprintf (z,"linea_check %d \n",linea_check);
+	mprintf (z,"linea_check+k : |%s| \n", (*fnp[linea_check+k]).l );
+	mprintf (z,"fs1 %d \n",fs1);
+	mprintf (z,"fs2 %d \n",fs2);
+	mprintf (z,"fs3 %d \n",fs3);
+	mprintf (z," . . . \n");
+}
+
+
+
+			if (!es_linea_comentario( (*fnp[linea_check+k]).l  ))
+			{
+if (gp_debug && w)
+{
+	mprintf (z,"entre a if (es_linea_comentario ... \n");
+	mprintf (z,"k: %d  |%s| \n",k,m0);
+	mprintf (z,"k: %d  |%s| \n",k,m1);
+	mprintf (z,"linea_check %d \n",linea_check);
+	mprintf (z,"linea_check+k : |%s| \n", (*fnp[linea_check+k]).l );
+	mprintf (z," . . . \n");
+}
+				strcpy(b2, pasar_a_minusc( (*fnp[linea_check+k]).l) );
+				strcpy(b2, trim_beg_f90(b2));
+				strcpy(b2, trim_end_f90(b2));
+				strcpy(b2, trim_blanks(b2));
+				strcat(m0,b2);
+				strcpy(m0,chanchada(m0));
+
+				strcpy(b3, (*fnp[linea_check+k]).l );
+				strcpy(b3, trim_beg_f90(b3));
+				strcpy(b3, trim_end_f90(b3));
+				strcpy(b3, trim_blanks(b3));
+				strcat(m1,b3);
+				strcpy(m1,chanchada(m1));
+			}
+			k++;
+
+			fs1 = tiene_mas( (*fnp[linea_check+k]).l );
+			fs2 = es_linea_comentario( (*fnp[linea_check+k]).l );
+			fs3 = tiene_mas( (*fnp[linea_check+k+1]).l ) ;
+
+
+			if ( fs1 || (fs2 && fs3))
+			{
+				fs_sig = 1;
+			}
+			else
+				fs_sig = 0;
+
+if (gp_debug && w)
+{
+	mprintf (z,"pie de while ... (2)\n");
+	mprintf (z,"k: %d  |%s| \n",k,m0);
+	mprintf (z,"k: %d  |%s| \n",k,m1);
+	mprintf (z," . . . \n");
+}
+
+		}
+		while (fs_sig);
+
+		k2 = k-1;
+
+
+		agrego_lines = 2;
+		linea_stat   = nf_alloc + k2;
+		linea_check  = linea_stat + 1;
+
+		grabar_mapa(7,0,(*fnp[linea_check]).l,lne(linea_check),lne(pri_l),lne(ult_l));
+
+		hacer_lugar(pf,qf_src-1,linea_check,agrego_lines,f_act);
+
+		c5 = n_blanks_beg( (*fnp[nf_alloc]).l );
+		memset(blanks,0,sizeof(blanks));
+		memset(blanks,32,c5);
+	
+		grabar_mapa(10,0," ",num_alloc_key,0,6);
+
+		strcpy(var_name,extract_var_name( m1 ) );
+		strcpy(src_name,b_name(nf));
+
+		memset(b5,0,sizeof(b5));
+		sprintf (b5,"(\"%s:%04d\",\"%s\",stv_er)",src_name,num_alloc_key,var_name);
+		strcpy( (*fnp[linea_check]).l  ,blanks);
+		strcat( (*fnp[linea_check]).l  ,"call check_alloc");
+		strcat( (*fnp[linea_check]).l  ,b5);
+
+#if 1
+		strcpy( (*fnp[linea_check+1]).l,"     ");
+#endif
+
+		/* aca tengo que modificar la linea nf_alloc ... 
+	  	 * esto va a ser un lio cuando tenga que meter 
+		 * lineas compuestas ! 
+		 */
+
+		/* para version de src 'for' */
+		agregar_stv_2 (linea_stat);
+
+		*add_lines = agrego_lines;
+		flag_alloc_ok = 1;
+
+	}
+
+	
+	grabar_mapa(0,0,"-",0,0,4);
+}
+
+
 
 
 
@@ -26148,12 +26933,13 @@ int tiene_entry(const char *linea) {
  *	esto corrije un solo allocate x vez !!!
  */
 
-int	chg_alloc_g09(num_f,nf_alloc,add_lines,num_alloc,num_alloc_key)
+int	chg_alloc_g09(num_f,nf_alloc,add_lines,num_alloc,num_alloc_key,f_act)
 int	num_f;
 int	nf_alloc;
 int	*add_lines;
 int	num_alloc;
 int	num_alloc_key;
+int	f_act;
 {
 	int 	h,i,j,k,k1,k2;
 	int	l1,l2;
@@ -26263,7 +27049,7 @@ int	num_alloc_key;
 
 		grabar_mapa(7,0,(*fnp[linea_check]).l,lne(linea_check),lne(pri_l),lne(ult_l));
 
-		hacer_lugar(pf,qf_src-1,linea_check,agrego_lines);
+		hacer_lugar(pf,qf_src-1,linea_check,agrego_lines,f_act);
 
 		c5 = n_blanks_beg( (*fnp[nf_alloc]).l );
 		memset(blanks,0,sizeof(blanks));
@@ -26319,12 +27105,13 @@ int	num_alloc_key;
  *
  */
 
-int	chg_alloc_g02(num_f,nf_alloc,add_lines,num_alloc,num_alloc_key)
+int	chg_alloc_g02(num_f,nf_alloc,add_lines,num_alloc,num_alloc_key,f_act)
 int	num_f;
 int	nf_alloc;
 int	*add_lines;
 int	num_alloc;
 int	num_alloc_key;
+int	f_act;
 {
 
 	int 	h,i,j,k,k1,k2;
@@ -26580,7 +27367,7 @@ if (gp_debug && w)
 
 		grabar_mapa(7,0,(*fnp[linea_check]).l,lne(linea_check),lne(pri_l),lne(ult_l));
 
-		hacer_lugar(pf,qf_src-1,linea_check,agrego_lines);
+		hacer_lugar(pf,qf_src-1,linea_check,agrego_lines,f_act);
 
 		c5 = n_blanks_beg( (*fnp[nf_alloc]).l );
 		memset(blanks,0,sizeof(blanks));
@@ -26645,7 +27432,7 @@ if (gp_debug && w)
  *
  */
 
-int	chg_alloc_g15(num_f,nf_alloc,add_lines,num_alloc,num_alloc_key,num_alloc_fnd,k_amp_g)
+int	chg_alloc_g15(num_f,nf_alloc,add_lines,num_alloc,num_alloc_key,num_alloc_fnd,k_amp_g,f_act)
 int	num_f;
 int	nf_alloc;
 int	*add_lines;
@@ -26653,6 +27440,7 @@ int	num_alloc;
 int	num_alloc_key;
 int	*num_alloc_fnd;
 int	*k_amp_g;
+int	f_act;
 {
 
 	int 	h,i,j,k,k1,k2,k_amp;
@@ -26783,7 +27571,6 @@ int	*k_amp_g;
 
 		fs_sig = 1;
 
-/* EEE */
 
 #if 0
 		while ( tiene_amper( (*fnp[linea_check+k]).l ) || 
@@ -26960,7 +27747,7 @@ mprintf (z,"llamo a hacer_lugar  pf: %d  qf_src-1: %d linea_b: %d agrego_lines: 
 mprintf (z,"linea:  |%s| \n", (*fnp[linea_b]).l );
 mprintf (z,"-------- \n");
 }
-		hacer_lugar(pf,qf_src-1,linea_b,agrego_lines);
+		hacer_lugar(pf,qf_src-1,linea_b,agrego_lines,f_act);
 
 		grabar_mapa(10,0," ",num_alloc_key,0,6);
 
