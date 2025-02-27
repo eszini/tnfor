@@ -20,8 +20,9 @@
  *      ojo .. en grx_planning_routines ... 
  *	aparecio un caso con INTEGER*2 , y metio el allocate_vars en cualquier lugar 
  *
- *	hay que agregar chanchada2 ... que saque los '+'
+ *
  */
+
 
 /*
  *	//header//
@@ -493,6 +494,7 @@ char	gp_pruebas[MAXV];	/* pruebas ...    -prue=[nro]   ej:  -prue=1    */
 char	gp_exec[MAXV];		/* execs ...      -exec=[rnp]   ej:  -exec=1    */
 char	gp_proc[MAXV];		/* procs ...      -proc=[rnp]   ej:  -proc=1    */
 char	gp_tool[MAXV];		/* procs ...      -tool=[rnp]   ej:  -tool=1    */
+char	gp_util[MAXV];		/* util  ...      -util=[rnp]   ej:  -util=1    */
 char	gp_fyh[MAXR];		/* fecha y hora */
 
 char	gp_reportes[MAXV];	/* reportes a mostrar */
@@ -577,6 +579,16 @@ int	pro_tool7();
 int	pro_tool8();
 int	pro_tool9();
 
+int	pro_util1();
+int	pro_util2();
+int	pro_util3();
+int	pro_util4();
+int	pro_util5();
+int	pro_util6();
+int	pro_util7();
+int	pro_util8();
+int	pro_util9();
+
 
 
 
@@ -634,6 +646,7 @@ int	ffprb;		/* utilizo -prueba=1 ... 2 .. 3 etc */
 int	ffexc;		/* utilizo -exec=1 .. 2  .. 3 etc   */
 int	ffpro;		/* utilizo -proceso=1 .. 2 .. 3 etc */
 int	fftoo;		/* utilizo -tool=1 .. 2 .. 3 etc */
+int	ffuti;		/* utilizo -tool=1 .. 2 .. 3 etc */
 
 int	ffdat;		/* utilizo -dato */
 
@@ -1563,6 +1576,27 @@ int	proceso_principal()
 			pro_tool9();
 	}
 
+	if ( ffuti)
+	{
+		if (ffuti == 1)	
+			pro_util1();
+		if (ffuti == 2)
+			pro_util2();
+		if (ffuti == 3)
+			pro_util3();
+		if (ffuti == 4)
+			pro_util4();
+		if (ffuti == 5)
+			pro_util5();
+		if (ffuti == 6)
+			pro_util6();
+		if (ffuti == 7)
+			pro_util7();
+		if (ffuti == 8)
+			pro_util8();
+		if (ffuti == 9)
+			pro_util9();
+	}
 
 
 	/* proceso */
@@ -1962,7 +1996,359 @@ int	proc_principal()
 }
 	
 	
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	pro_util 1
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/* 
+ *	pro_util
+ */
+
+
+int	pro_util1()
+{
+	int	i,j,k;
+	int	m1,m2,m3;
+	int	f1,f2,f3,f4;
 	
+	char	b0[MAXB];
+	char	b1[MAXB];
+
+	char	z[MAXV];
+	int	w;
+	sprintf (z,"pro_util1");
+	w = g_dbg(z);
+
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s Entra proceso util 1 \n\n",gp_tm());
+	}
+		
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s Sale proceso util 1 \n\n",gp_tm());
+	}
+
+}
+
+
+	
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	pro_util2
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/* 
+ *	pro_util2
+ */
+
+int	pro_util2()
+{
+	int	i,j,k;
+	int	m1,m2,m3;
+	int	f1,f2,f3,f4;
+	
+	char	b0[MAXB];
+	char	b1[MAXB];
+
+	char	z[MAXV];
+	int	w;
+	sprintf (z,"pro_util2");
+	w = g_dbg(z);
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s Entra proceso %s \n\n",gp_tm(),z);
+	}
+		
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s Sale  proceso %s \n\n",gp_tm(),z);
+	}
+}
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	pro_util3
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/* 
+ *	pro_util3
+ */
+
+int	pro_util3()
+{
+	int	i,j,k;
+	int	m1,m2,m3;
+	int	f1,f2,f3,f4;
+	
+	char	b0[MAXB];
+	char	b1[MAXB];
+
+	char	z[MAXV];
+	int	w;
+	sprintf (z,"pro_util3");
+	w = g_dbg(z);
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s Entra proceso %s \n\n",gp_tm(),z);
+	}
+		
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s Sale  proceso %s \n\n",gp_tm(),z);
+	}
+}
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	pro_util4
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/* 
+ *	pro_util4
+ */
+
+int	pro_util4()
+{
+	int	i,j,k;
+	int	m1,m2,m3;
+	int	f1,f2,f3,f4;
+	
+	char	b0[MAXB];
+	char	b1[MAXB];
+
+	char	z[MAXV];
+	int	w;
+	sprintf (z,"pro_util4");
+	w = g_dbg(z);
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s Entra proceso %s \n\n",gp_tm(),z);
+	}
+		
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s Sale  proceso %s \n\n",gp_tm(),z);
+	}
+}
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	pro_util5
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/* 
+ *	pro_util5
+ */
+
+int	pro_util5()
+{
+	int	i,j,k;
+	int	m1,m2,m3;
+	int	f1,f2,f3,f4;
+	
+	char	b0[MAXB];
+	char	b1[MAXB];
+
+	char	z[MAXV];
+	int	w;
+	sprintf (z,"pro_util5");
+	w = g_dbg(z);
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s Entra proceso %s \n\n",gp_tm(),z);
+	}
+		
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s Sale  proceso %s \n\n",gp_tm(),z);
+	}
+}
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	pro_util6
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/* 
+ *	pro_util6
+ */
+
+int	pro_util6()
+{
+	int	i,j,k;
+	int	m1,m2,m3;
+	int	f1,f2,f3,f4;
+	
+	char	b0[MAXB];
+	char	b1[MAXB];
+
+	char	z[MAXV];
+	int	w;
+	sprintf (z,"pro_util6");
+	w = g_dbg(z);
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s Entra proceso %s \n\n",gp_tm(),z);
+	}
+		
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s Sale  proceso %s \n\n",gp_tm(),z);
+	}
+}
+
+
+	
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	pro_util7
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/* 
+ *	pro_util7
+ */
+
+int	pro_util7()
+{
+	int	i,j,k;
+	int	m1,m2,m3;
+	int	f1,f2,f3,f4;
+	
+	char	b0[MAXB];
+	char	b1[MAXB];
+
+	char	z[MAXV];
+	int	w;
+	sprintf (z,"pro_util7");
+	w = g_dbg(z);
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s Entra proceso %s \n\n",gp_tm(),z);
+	}
+		
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s Sale  proceso %s \n\n",gp_tm(),z);
+	}
+}
+
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	pro_util8
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/* 
+ *	pro_util8
+ */
+
+int	pro_util8()
+{
+	int	i,j,k;
+	int	m1,m2,m3;
+	int	f1,f2,f3,f4;
+	
+	char	b0[MAXB];
+	char	b1[MAXB];
+
+	char	z[MAXV];
+	int	w;
+	sprintf (z,"pro_util8");
+	w = g_dbg(z);
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s Entra proceso %s \n\n",gp_tm(),z);
+	}
+		
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s Sale  proceso %s \n\n",gp_tm(),z);
+	}
+}
+
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	pro_util9
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+/* 
+ *	pro_util9
+ */
+
+int	pro_util9()
+{
+	int	i,j,k;
+	int	m1,m2,m3;
+	int	f1,f2,f3,f4;
+	
+	char	b0[MAXB];
+	char	b1[MAXB];
+
+	char	z[MAXV];
+	int	w;
+	sprintf (z,"pro_util9");
+	w = g_dbg(z);
+
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s Entra proceso %s \n\n",gp_tm(),z);
+	}
+		
+	/* proceso */
+	if (gp_fverbose("d1"))
+	{	printf ("%s Sale  proceso %s \n\n",gp_tm(),z);
+	}
+}
+
+
+
+
+
 	
 /*
  * -----------------------------------------------------------------------------------
@@ -7459,7 +7845,6 @@ if (gp_debug && w)
 								f_act = 1;
 #if 1
 
-
 #if 0
 								if (gp_proceed == 1 )
 #endif
@@ -7667,7 +8052,7 @@ mprintf (z,"TIPO-3 desp de chg_alloc ... add_lines: %d\n",add_lines);
 
 if (gp_debug && w)
 {
-mprintf (z,"TIPO-5 desp de chg_alloc ... add_lines: %d\n",add_lines);
+mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 }
 
 #if 1
@@ -7713,17 +8098,14 @@ mprintf (z,"TIPO-5 desp de chg_alloc ... add_lines: %d\n",add_lines);
 								strcpy(m1,trim_blanks_beg(m0));
 								grabar_plan(7,2,2,0,0,prog_name,m1);
 
-
 								f_act = 1;
-#if 1
-
-
 #if 0
 								if (gp_proceed == 7 )
 #endif
 #if 1
-								if (gp_proceed)
+								if (gp_proceed )
 #endif
+
 								{
 									flag_alloc_ok = 0;
 									grabar_mapa(1,7,prog_name,0,0,0);
@@ -7747,13 +8129,17 @@ mprintf (z,"TIPO-5 desp de chg_alloc ... add_lines: %d\n",add_lines);
 
 if (gp_debug && w)
 {
-mprintf (z,"TIPO-7 desp de chg_alloc ... add_lines: %d\n",add_lines);
-}
+mprintf (z,"g7_1, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lines,qf_src,(*fnp[i+add_lines]).l);
+} 
 
 #if 1
+
 									/* agrego el check_alloc */
 									chg_alloc_g03(n_f,i,&add_lines,num_alloc,num_alloc_key,&num_alloc_fnd,&k_amp,f_act);
-
+if (gp_debug && w)
+{
+mprintf (z,"g7_2, volvi de chg_alloc_g15 add_lines: %d  \n",add_lines);
+} 
 									/* actualizo variables de contexto */
 									if (flag_alloc_ok)
 									{
@@ -7762,8 +8148,8 @@ mprintf (z,"TIPO-7 desp de chg_alloc ... add_lines: %d\n",add_lines);
 									}
 
 									num_alloc_key = num_alloc_fnd+1;
-#endif
 								}
+
 #endif
 
 							}
@@ -8166,19 +8552,6 @@ mprintf (z,"g15_3, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lin
 } 
 
 										i+= ( add_lines + k_amp);
-if (gp_debug && w)
-{
-mprintf (z,"Termine ajustar valores de tb \n");
-mprintf (z,"Cantidad de archivos cargados:   %5d \n",qf_ff);
-mprintf (z,"Cantidad de lineas   cargadas:   %5d \n",qf_src);
-		
-for (r1=0; r1<qf_ff; r1++)
-{
-mprintf (z,"%3d  de %6d a %6d  |%s| \n",r1,(*tb[r1]).pf,(*tb[r1]).uf,(*tb[r1]).n );
-}
-
-mprintf (z,"----------\n\n");
-}
 										flag_alloc_ok = 0;
 									}
 
@@ -8259,6 +8632,7 @@ int	*nkey;
 	 */
 
 	/* probamos a ver como funca hacer lugar ... */
+
 	if (tipo_ext == 2)
 	{
 
@@ -8303,10 +8677,6 @@ mprintf (z,"linea: len: %3d |%s|\n", l2, (*fnp[i]).l );
 				memset(b3,0,sizeof(b3));
 
 				arma_dos_lineas_con_check(b1,b2,b3);
-#if 0
-				strcpy(b2,b1);
-				strcpy(b3,b1);
-#endif
 
 if (gp_debug && w)
 {
@@ -8330,97 +8700,64 @@ mprintf (z,"hice  strcpy 1 i: %d str: |%s| \n",i,(*fnp[i]).l );
 			f_keep = 0;
 	}
 
-	}
+	} /* if (tipo_ext == 2.... */
 
 
-	/*
-	 * en los .for ... es mas complejo
-	 * agregar el ,stat=st_ver muchas veces
-	 * hace que la linea pase de 72
-	 * y el compilador chilla
-	 */
 
 	if (tipo_ext == 1)
 	{
 
-	i = 0;
-	f_keep = 1;
-	f_act  = 1;
+	printf ("Listo lineas con mas de 72 chars \n");
 
-	while (f_keep)
+	for (i = (*tb[n_f]).pf ; i<= (*tb[n_f]).uf ; i++)
 	{
-
-	pf = (*tb[n_f]).pf;
-	uf = (*tb[n_f]).uf;
-
-		strcpy(b0, pasar_a_minusc( (*fnp[i]).l) );
-		strcpy(b1,  (*fnp[i]).l );
-
-		strcpy(b0,trim_end(b0));
-		strcpy(b0,trim_blanks(b0));
-
-		if (tiene_string(b0,"check_alloc"))
+		strcpy(b0,(*fnp[i]).l);
+	
+		if (!es_linea_comentario(b0))
 		{
-if (gp_debug && w)
-{
-mprintf (z,"(1)entre a check_alloc_ok con  ... |%s| \n", (*fnp[i]).l );
-mprintf (z,"(2)entre a check_alloc_ok con  ... |%s| \n", b0 );
-}
+
+			strcpy(b0,trim_end_f90(b0));
+			strcpy(b0,trim_blanks(b0));
+
 			l2 = strlen(b0);
 
-			if (l2 > 72 )
+			if (l2 > 72)
 			{
-if (gp_debug && w)
-{
-mprintf (z,"voy a hacer lugar: pf %d uf %d i %d \n",pf,uf,i);
-mprintf (z,"linea: len: %3d |%s|\n", l2, (*fnp[i]).l );
-}
-				hacer_lugar(pf,uf,i,1,f_act);
+				printf ("%3d |%s|\n",l2,b0);
+				if (tiene_string(b0,"check alloc"))
+				{
+					f_act = 1;
 
-				memset(b5,0,sizeof(b5));
-				sprintf (b5,"agregado ... check_alloc :%4d",n2);
+					hacer_lugar(pf,uf,i,1,f_act);
+
+					memset(b5,0,sizeof(b5));
+					sprintf (b5,"agregado ... check_alloc :%4d",n2);
 	
-				memset(b2,0,sizeof(b2));
-				memset(b3,0,sizeof(b3));
+					memset(b2,0,sizeof(b2));
+					memset(b3,0,sizeof(b3));
 
-				arma_dos_lineas_con_check(b1,b2,b3);
-#if 0
-				strcpy(b2,b1);
-				strcpy(b3,b1);
-#endif
+					arma_dos_lineas_con_check_for(b1,b2,b3);
+	
+					strcpy( (*fnp[i+0]).l, b2);
+					strcpy( (*fnp[i+1]).l, b3);
 
-if (gp_debug && w)
-{
-mprintf (z,"voy a strcpy 1 i: %d str: |%s| \n",i,(*fnp[i]).l );
-}
-				strcpy( (*fnp[i+0]).l, b2);
-if (gp_debug && w)
-{
-mprintf (z,"hice  strcpy 1 i: %d str: |%s| \n",i,(*fnp[i]).l );
-}
+					i+= 1;
 
-				strcpy( (*fnp[i+1]).l, b3);
+				}
 
-				i+= 1;
+
 			}
 		}
-
-
-		i++;
-		if (i >= qf_src)
-			f_keep = 0;
 	}
 
+	printf ("\n\n");
+
 	}
-
-
-	/* termine de splitear filas */
-
 
 
 if (gp_debug && w)
 {
-	printf ("listado de lineas \n");
+	printf ("Listo las lineas del fuente \n");
 	for (i = (*tb[n_f]).pf ; i<= (*tb[n_f]).uf ; i++)
 	{
 		strcpy(b0,(*fnp[i]).l);
@@ -8433,7 +8770,7 @@ if (gp_debug && w)
 		printf ("%3d |%s|\n",l2,b0);
 	}
 
-	printf ("\n");
+	printf ("\n\n");
 	
 }
 
@@ -8508,6 +8845,39 @@ char	*b2;
 
 	strncpy(b2,blanks,74-strlen(s+p1+1));
 	strcat(b2,s+p1+1);
+
+	return (0);
+}
+
+
+int	arma_dos_lineas_con_check_for(s,b1,b2)
+char	*s;
+char	*b1;
+char	*b2;
+{
+	char	blanks[MAXB];
+	int	i,j,k;
+	int	p1,p2;
+	int	f1;
+	int	l2;
+
+
+	memset(blanks,32,sizeof(blanks));
+	l2=strlen(s);
+
+	for (i=0, f1=1, p1=0; f1 && i<l2; i++)
+		if (s[i] == ',')
+			f1=0, p1=i;
+
+	if (p1 == 0)
+		error (9019);
+
+	strcpy(b1,s);
+	b1[p1+1] = 0;
+
+	strncpy(b2,blanks,74-strlen(s+p1+1));
+	strcat(b2,s+p1+1);
+	b2[5] = '+';
 
 	return (0);
 }
@@ -10435,7 +10805,6 @@ char	*s;
 }
 
 
-
 /*
  * -----------------------------------------------------------------------------------
  *
@@ -10451,6 +10820,7 @@ char	*s;
 	static	char	b0[MSTR];
 	int	i,j,k;
 	int	l1,l2;
+	int	f_sig;
 
 	char	z[MAXV];
 	int	w;
@@ -10460,9 +10830,13 @@ char	*s;
 	strcpy(b0,s);
 	l2=strlen(b0);
 
-	for (i=0; i<l2; i++)
-		if (b0[i] == '+')
-			b0[i] = ' ';
+	i=0;
+	while (b0[i] == ' ' || b0[i] == '\t')
+		i++;
+
+	if (b0[i] == '+')
+		b0[i] = ' ';
+
 
 	return (b0);
 }
@@ -24472,6 +24846,12 @@ int	gp_parser()
 				fftoo=gp_tool[0]-'0';
 			}
 
+			if (!strncmp(gp_fp(GP_GET,i,(char **)0)+1,"util",4) )
+			{	
+				strcpy(gp_util,desde_igual( gp_fp(GP_GET,i,(char **)0)));
+				ffuti=gp_util[0]-'0';
+			}
+
 
 
 			if (gp_fverbose("d5"))
@@ -25152,6 +25532,7 @@ int	gp_default()
 	sprintf (gp_exec    , "%s","______");
 	sprintf (gp_proc    , "%s","______");
 	sprintf (gp_tool    , "%s","______");
+	sprintf (gp_util    , "%s","______");
 	sprintf (gp_reportes, "%s","saludo");
 
 
@@ -26607,18 +26988,16 @@ if (gp_debug && w)
 			if (!es_linea_comentario( (*fnp[linea_check+k]).l ))
 			{
 				strcpy(b2, pasar_a_minusc( (*fnp[linea_check+k]).l) );
-				strcpy(b2, trim_beg_f90(b2));
-				strcpy(b2, trim_end_f90(b2));
+				strcpy(b2, trim_beg(b2));
+				strcpy(b2, trim_end(b2));
 				strcpy(b2, trim_blanks(b2));
 				strcat(m0,b2);
-				strcat(m0,chanchada_for(m0));
 
 				strcpy(b3, (*fnp[linea_check+k]).l );
-				strcpy(b3, trim_beg_f90(b3));
-				strcpy(b3, trim_end_f90(b3));
+				strcpy(b3, trim_beg(b3));
+				strcpy(b3, trim_end(b3));
 				strcpy(b3, trim_blanks(b3));
 				strcat(m1,b3);
-				strcat(m1,chanchada_for(m1));
 
 			}
 			k_amp++;
@@ -26636,9 +27015,6 @@ if (gp_debug && w)
 				fs_sig = 0;
 		}
 		while (fs_sig);
-
-		k2 = k - 1;
-		k_amp--;
 
 
 if (gp_debug && w)
@@ -26663,10 +27039,10 @@ mprintf (z,"nf_alloc : %4d |%s| \n",nf_alloc,(*fnp[nf_alloc]).l );
 
 }
 					
-		agrego_lines = q_vars*2-(k2+1)+1;		/* depende de la cant de vars que hay en el alloc !! */
+		agrego_lines = q_vars*2-(k+1)+1;		/* depende de la cant de vars que hay en el alloc !! */
 		strcpy(b6,trim_blanks_beg( (*fnp[nf_alloc]).l ));
 		grabar_mapa(11,0,b6,nf_alloc,q_vars,0);
-		linea_b = nf_alloc+k2+1;
+		linea_b = nf_alloc+k+1;
 
 if (gp_debug && w)
 {
@@ -26938,18 +27314,18 @@ if (gp_debug && w)
 	mprintf (z," . . . \n");
 }
 				strcpy(b2, pasar_a_minusc( (*fnp[linea_check+k]).l) );
-				strcpy(b2, trim_beg(b2));
-				strcpy(b2, trim_end(b2));
+				strcpy(b2,chanchada_for(b2));
+				strcpy(b2, trim_beg_f90(b2));
+				strcpy(b2, trim_end_f90(b2));
 				strcpy(b2, trim_blanks(b2));
 				strcat(m0,b2);
-				strcpy(m0,chanchada_for(m0));
 
 				strcpy(b3, (*fnp[linea_check+k]).l );
-				strcpy(b3, trim_beg(b3));
-				strcpy(b3, trim_end(b3));
+				strcpy(b3,chanchada_for(b3));
+				strcpy(b3, trim_beg_f90(b3));
+				strcpy(b3, trim_end_f90(b3));
 				strcpy(b3, trim_blanks(b3));
 				strcat(m1,b3);
-				strcpy(m1,chanchada_for(m1));
 			}
 			k++;
 
@@ -26978,6 +27354,7 @@ if (gp_debug && w)
 
 		k2 = k-1;
 
+
 		agrego_lines = 2;
 		linea_stat   = nf_alloc + k2;
 		linea_check  = linea_stat + 1;
@@ -26992,14 +27369,12 @@ if (gp_debug && w)
 	
 		grabar_mapa(10,0," ",num_alloc_key,0,6);
 
-		strcpy(var_name,extract_var_name( m1 ) );
-		strcpy(src_name,b_name(nf));
 if (gp_debug && w)
 {
-mprintf (z,"m1: |%s| \n",m1);
-mprintf (z,"var_name: |%s| \n",var_name);
+mprintf (z,"voy a extract name con m1: |%s| \n",m1);
 }
-
+		strcpy(var_name,extract_var_name( m1 ) );
+		strcpy(src_name,b_name(nf));
 
 		memset(b5,0,sizeof(b5));
 		sprintf (b5,"(\"%s:%04d\",\"%s\",stv_er)",src_name,num_alloc_key,var_name);
@@ -27970,10 +28345,6 @@ char	*s;
 	/* largo definitivo de la sentencia */
 	l2 = strlen(b0);
 	
-if (gp_debug && w)
-{
-mprintf (z,"l2: %d b0: |%s| \n",l2,b0);
-}
 
 	f_res = 0;
 	p1    = 0;
@@ -28208,9 +28579,11 @@ mprintf (z,"f_res %d var: b0: |%s| \n",f_res,b0);
 
 if (gp_debug && w)
 {
-mprintf (z,"var extraida: |%s| \n",b2);
-mprintf (z,"vuelvo .... \n");
+mprintf (z,"var ext: b2: |%s| \n",b2);
+mprintf (z,"salgo ... \n");
 }
+
+
 	return (b2);
 
 }

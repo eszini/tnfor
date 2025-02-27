@@ -7610,7 +7610,6 @@ int	ex9_p1()
 	int	l1,l2;
 	int	c1,c2,c3,c4;
 	int	f1,f2,f3,f4,f5;
-	int	p1,p2,p3,p4;
 	int	f_proceso;
 	int	f_stat;
 	int	f_keep;
@@ -7625,8 +7624,6 @@ int	ex9_p1()
 	char	b3[MAXB];
 	char	b4[MAXB];
 	char	b5[MAXB];
-	char	b6[MAXB];
-	char	b7[MAXB];
 	int	pf,uf,nf;
 	int	tipo_ext;
 	int	add_lines;		/* cant de lineas que hay que sumar al fuente al corregir un allocate */
@@ -7692,9 +7689,6 @@ int	ex9_p1()
 	/* para todas las lineas */
 	
 	tipo01 = 0;
-	tipo03 = 0;
-	tipo05 = 0;
-	tipo07 = 0;
 
 	tipo09 = 0;
 	tipo11 = 0;
@@ -8829,138 +8823,6 @@ mprintf (z,"linea2         |%s| \n",b3);
 
 
 
-#if 1
-		/* reviso los los stat=stv_er que no estan en la linea del allocate  */
-
-		pf =  (*tb[n_f]).pf ;
-		uf =  (*tb[n_f]).uf ;
-
-		i      = pf;
-		f_keep = 1;
-
-		do
-		{
-printf ("AAA i: %d |%s| \n",i, (*fnp[i]).l );
-
-			strcpy(b0,(*fnp[i]).l);
-			strcpy(b1,pasar_a_minusc ( (*fnp[i]).l) );
-			strcpy(b1,trim_end_f90(b1));
-	
-			f_proceso = 1;
-			if (linea_vacia(b1) || es_linea_comentario(b1))
-				f_proceso = 0;
-
-			if (f_proceso)
-			{
-				l2 = strlen(b1);
-
-				if (l2 > 72)
-				{
-#if 1
-					if (tiene_string(b1,"stat=stv_er") && !tiene_string(b1,"allocate") )
-					{
-
-printf ("BBB i: %d |%s| \n",i, (*fnp[i]).l );
-						/* pos del primer caracter de sentencia ... */
-						for (j=7, p1=0, l2=strlen(b0), f1=1; f1 && j<l2; j++)
-							if (b0[j] != ' ')
-								f1 = 0, p1 = j;
-
-						/* pos del stat=stv_er */
-						for (j=0, p2=0, f1=1; f1 && j<l2; j++)
-							if (!strncmp(b0+j,",stat=stv_er",12))
-								f1 = 0, p2 = j;
-
-						/* si hay comentario ... pos del comentario ... */
-						for (j=p2+12, p3=0, f1=1; f1 && j<l2; j++)
-							if (b0[j] == '!')
-								f1 = 0, p3 = j;
- 
-
-printf ("CCC p1: %2d  |%s|\n",p1,b0+p1);
-printf ("CCC p2: %2d  |%s|\n",p2,b0+p2);
-printf ("CCC p3: %2d  |%s|\n",p3,b0+p3);
-
-
-						/* copio la sentencia pura, sin el stat= ... */
-						memset(b2,0,sizeof(b2));
-						strncpy(b2,b0+p1,p2-p1+1);
-printf ("CCC 0 : %2d  |%s|\n",0,b2);
-
-						/* copio si tiene comentarios  ... */
-						memset(b3,0,sizeof(b3));
-						if (p3)
-							strcpy(b3,b0+p3);
-						else
-							strcpy(b3," ");
-
-printf ("CCC 1 : %2d |%s|\n",1,b3);
-
-						
-						/* dos casos 
-						 * 1) puedo correr toda la linea ... 
-						 * 2) no entra !! tengo que armar una tercera linea !!
-						 */
-
-						/* caso 1 ... */
-						if (p2-p1+1 <= 46)
-						{
-							memset(b4,32,sizeof(b4));
-							memset(b5,0 ,sizeof(b5));
-							strcpy(b5,"     +");
-							strncat(b5,b4,50-(p2-p1+1));
-							strcat(b5,b2);
-							strcat(b5,"stat=stv_er) ");
-							if (p3)
-								strcat(b5,b3);
-						
-							strcpy( (*fnp[i+0]).l, b5);
-printf ("DDD 2 : %2d |%s|\n",2,b5);
-
-						}
-						else
-						{
-							memset(b5,0,sizeof(b5));
-							memset(b6,0,sizeof(b6));
-							strcpy(b5,"     +");
-							strncat(b5,b4,62-(p2-p1+1));
-							strcat(b5,b2);
-
-							strcat(b6,"     +");
-							strncat(b6,b4,50);
-							strcat(b6,"stat=stv_er) ");
-							if (p3)
-								strcat(b6,b3);
-
-
-							pf =  (*tb[n_f]).pf ;
-							uf =  (*tb[n_f]).uf ;
-
-							hacer_lugar(pf,uf,i,1,1);
-
-							strcpy( (*fnp[i+0]).l,b5);
-							strcpy( (*fnp[i+1]).l,b6);
-						
-							i+= 1;
-printf ("DDD 3 : %2d |%s|\n",3,b0+p1);
-printf ("DDD 5 : %2d |%s|\n",5,b5);
-printf ("DDD 6 : %2d |%s|\n",6,b6);
-
-						}
-						
-
-					}
-#endif
-				}
-			}
-
-			i++;
-			if (i >= uf)
-				f_keep = 0;
-		}
-		while (f_keep);
-
-#endif
 
 
 		printf ("\n\n");
@@ -8979,33 +8841,6 @@ if (gp_debug && w)
 		l2 = strlen(b0);
 
 		printf ("%3d |%s|\n",l2,b0);
-	}
-
-	printf ("\n\n");
-	
-}
-
-
-
-if (gp_debug && w)
-{
-	printf ("Listo las lineas largas del fuente \n");
-	for (i = (*tb[n_f]).pf ; i<= (*tb[n_f]).uf ; i++)
-	{
-		strcpy(b0,(*fnp[i]).l);
-
-		f_proceso = 1;
-		if (linea_vacia(b0) || es_linea_comentario(b0))
-			f_proceso = 0;
-
-		if (f_proceso)
-		{
-			strcpy(b0,trim_end_f90(b0));
-			l2 = strlen(b0);
-
-			if (l2 > 72)
-				printf ("%3d|%s|\n",l2,b0);
-		}
 	}
 
 	printf ("\n\n");
