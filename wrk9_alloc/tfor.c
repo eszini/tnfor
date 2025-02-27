@@ -7849,8 +7849,6 @@ if (gp_debug && w)
 								grabar_plan(1,1,1,0,0,prog_name,m1);
 
 								f_act = 1;
-#if 1
-
 #if 0
 								if (gp_proceed == 1 )
 #endif
@@ -7877,13 +7875,11 @@ if (gp_debug && w)
 										i+= add_lines;
 										flag_alloc_ok = 0;
 									}
-
 if (gp_debug && w)
 {
 mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 }
 
-#if 1
 									/* agrego el check_alloc */
 									chg_alloc_g09(n_f,i,&add_lines,num_alloc,num_alloc_key,f_act);
 
@@ -7895,9 +7891,7 @@ mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 									}
 
 									num_alloc_key++;
-#endif
 								}
-#endif
 
 							}
 							else
@@ -7922,7 +7916,6 @@ mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 								tipo03++;
 								strcpy(m1,trim_blanks_beg(b1));
 								grabar_plan(3,1,2,0,0,prog_name,m1);
-
 
 								f_act = 1;
 #if 1
@@ -7959,7 +7952,6 @@ if (gp_debug && w)
 mprintf (z,"TIPO-3 desp de chg_alloc ... add_lines: %d\n",add_lines);
 }
 
-#if 1
 									/* agrego el check_alloc */
 									chg_alloc_g03(n_f,i,&add_lines,num_alloc,num_alloc_key,&num_alloc_fnd,&k_amp,f_act);
 
@@ -7971,7 +7963,6 @@ mprintf (z,"TIPO-3 desp de chg_alloc ... add_lines: %d\n",add_lines);
 									}
 
 									num_alloc_key = num_alloc_fnd+1;
-#endif
 								}
 #endif
 							}	
@@ -8028,7 +8019,6 @@ mprintf (z,"TIPO-3 desp de chg_alloc ... add_lines: %d\n",add_lines);
 								f_act = 1;
 #if 1
 
-
 #if 0
 								if (gp_proceed == 5 )
 #endif
@@ -8061,7 +8051,6 @@ if (gp_debug && w)
 mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 }
 
-#if 1
 									/* agrego el check_alloc */
 									chg_alloc_g05(n_f,i,&add_lines,num_alloc,num_alloc_key,f_act);
 
@@ -8073,11 +8062,8 @@ mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 									}
 
 									num_alloc_key++;
-#endif
 								}
 #endif
-
-
 
 							}
 							else
@@ -8138,14 +8124,10 @@ if (gp_debug && w)
 mprintf (z,"g7_1, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lines,qf_src,(*fnp[i+add_lines]).l);
 } 
 
-#if 1
 
 									/* agrego el check_alloc */
 									chg_alloc_g03(n_f,i,&add_lines,num_alloc,num_alloc_key,&num_alloc_fnd,&k_amp,f_act);
-if (gp_debug && w)
-{
-mprintf (z,"g7_2, volvi de chg_alloc_g15 add_lines: %d  \n",add_lines);
-} 
+
 									/* actualizo variables de contexto */
 									if (flag_alloc_ok)
 									{
@@ -8155,8 +8137,6 @@ mprintf (z,"g7_2, volvi de chg_alloc_g15 add_lines: %d  \n",add_lines);
 
 									num_alloc_key = num_alloc_fnd+1;
 								}
-
-#endif
 
 							}
 							else
@@ -8349,19 +8329,6 @@ mprintf (z,"g15_2, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lin
 
 										i+= ( add_lines + k_amp);
 										flag_alloc_ok = 0;
-if (gp_debug && w)
-{
-mprintf (z,"Termine ajustar valores de tb \n");
-mprintf (z,"Cantidad de archivos cargados:   %5d \n",qf_ff);
-mprintf (z,"Cantidad de lineas   cargadas:   %5d \n",qf_src);
-	
-for (r1=0; r1<qf_ff; r1++)
-{
-mprintf (z,"%3d  de %6d a %6d  |%s| \n",r1,(*tb[r1]).pf,(*tb[r1]).uf,(*tb[r1]).n );
-}
-
-mprintf (z,"----------\n\n");
-}
 									}
 
 									num_alloc_key = num_alloc_fnd+1;
@@ -8458,8 +8425,6 @@ mprintf (z,"----------\n\n");
 										flag_alloc_ok = 0;
 									}
 
-/* chg_alloc_g02 */
-#if 1
 									/* agrego el check_alloc */
 if (gp_debug && w)
 {
@@ -8477,12 +8442,9 @@ mprintf (z,"g02_2, volvi de chg_alloc_g02 num_alloc %d add_lines: %d  \n",num_al
 										i+= add_lines;
 										flag_alloc_ok = 0;
 									}
-#endif
-/* chg_alloc_g02 */
 
 									num_alloc_key++;
 								}
-
 
 							}
 							else /* if (!f_stat ... ) */
@@ -8552,10 +8514,6 @@ mprintf (z,"g15_2, volvi de chg_alloc_g15 add_lines: %d  \n",add_lines);
 									/* actualizo variables de contexto */
 									if (flag_alloc_ok)
 									{
-if (gp_debug && w)
-{
-mprintf (z,"g15_3, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lines,qf_src,(*fnp[i+add_lines]).l);
-} 
 
 										i+= ( add_lines + k_amp);
 										flag_alloc_ok = 0;
@@ -8620,16 +8578,10 @@ if (1)
 	printf ("\n");
 }
 
-#if 0
-int	tiene_check_alloc_ok(nf_alloc,nf_check,nkey)
-int	nf_alloc;
-int	*nf_check;
-int	*nkey;
-#endif
 
 /* EEE */
 
-#if 0
+#if 1
 	/* se supone que a esta altura ... 
 	 * tengo todo el src ya modificado en fnp ... 
 	 *
@@ -8840,7 +8792,6 @@ mprintf (z,"linea2         |%s| \n",b3);
 
 		do
 		{
-printf ("AAA i: %d |%s| \n",i, (*fnp[i]).l );
 
 			strcpy(b0,(*fnp[i]).l);
 			strcpy(b1,pasar_a_minusc ( (*fnp[i]).l) );
@@ -8860,7 +8811,6 @@ printf ("AAA i: %d |%s| \n",i, (*fnp[i]).l );
 					if (tiene_string(b1,"stat=stv_er") && !tiene_string(b1,"allocate") )
 					{
 
-printf ("BBB i: %d |%s| \n",i, (*fnp[i]).l );
 						/* pos del primer caracter de sentencia ... */
 						for (j=7, p1=0, l2=strlen(b0), f1=1; f1 && j<l2; j++)
 							if (b0[j] != ' ')
@@ -8875,11 +8825,6 @@ printf ("BBB i: %d |%s| \n",i, (*fnp[i]).l );
 						for (j=p2+12, p3=0, f1=1; f1 && j<l2; j++)
 							if (b0[j] == '!')
 								f1 = 0, p3 = j;
- 
-
-printf ("CCC p1: %2d  |%s|\n",p1,b0+p1);
-printf ("CCC p2: %2d  |%s|\n",p2,b0+p2);
-printf ("CCC p3: %2d  |%s|\n",p3,b0+p3);
 
 
 						/* copio la sentencia pura, sin el stat= ... */
@@ -8965,6 +8910,7 @@ printf ("DDD 6 : %2d |%s|\n",6,b6);
 
 		printf ("\n\n");
 	}
+
 
 
 if (gp_debug && w)
@@ -9054,6 +9000,15 @@ int	grabar_a_disco()
 
 	}
 }
+
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	arma_dos_lineas_con_check 
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
 
 int	arma_dos_lineas_con_check(s,b1,b2)
 char	*s;
@@ -25831,8 +25786,8 @@ int	x;
 	char	w[MAXV];
 	char	z[MAXB];
 
-	strcpy (ver,"0060");
-	strcpy (d," Mon Feb 17 11:59:54 -03 2025");
+	strcpy (ver,"0061");
+	strcpy (d," Thu Feb 27 07:04:09 -03 2025");
 
 	sprintf (z,"%s -- (%s)  %s", gp_fp(GP_GET,0,(char **)0), ver, d  );
 	memset (w,0,MAXV);
