@@ -11544,10 +11544,9 @@ int	*nf_check;
 int	*nkey;
 {
 	char	m0[MSTR];
-	char	m1[MSTR];
 	char	b1[MAXB];
 	int	i,j,k;
-	int	l1,l2,l3;
+	int	l1,l2;
 	int	f1,f2;
 
 	int	f_res;
@@ -11567,14 +11566,11 @@ int	*nkey;
 
 	do
 	{
-		strcpy(m0,pasar_a_minusc ( (*fnp[nf_alloc + k+0]).l ));
-		strcpy(m1,pasar_a_minusc ( (*fnp[nf_alloc + k+1]).l ));
+		strcpy(m0,pasar_a_minusc ( (*fnp[nf_alloc + k]).l ));
 		l2 = strlen(m0);
-		l3 = strlen(m1);
 		
 		/* el check alloc esta ok, si estoy utilizando la variable stv_er ... */
-		if (tiene_string(m0,"check_alloc") && 
-		   (tiene_string(m0,"stv_er") || tiene_string(m1,"stv_er")  )   )
+		if (tiene_string(m0,"check_alloc"))
 		{
 			f_sigo = 0;
 			f_res = 1;

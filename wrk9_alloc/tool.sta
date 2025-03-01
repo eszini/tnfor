@@ -1,19 +1,19 @@
-Cant de alloc totales                   99 
-Cant de alloc totales for con stat       0 
-Cant de alloc totales f90 con stat       0 
-Cant de alloc totales for slc           44 
-Cant de alloc totales for clc           55 
-Cant de alloc totales for sav           96 
-Cant de alloc totales for mav            3 
-Cant de alloc tot sin cont sing var     44 
-Cant de alloc tot con cont sing var     52 
-Cant de alloc tot sin cont mult var      0 
-Cant de alloc tot con cont mult var      3 
-Cant de alloc totales f90 slc            0 
-Cant de alloc totales f90 clc            0 
-Cant de alloc totales f90 sav            0 
-Cant de alloc totales f90 mav            0 
-Cant de alloc tot sin cont sing var      0 
-Cant de alloc tot con cont sing var      0 
-Cant de alloc tot sin cont mult var      0 
-Cant de alloc tot con cont mult var      0 
+Cant de alloc totales                 3003 
+Cant de alloc totales for con stat       2 
+Cant de alloc totales f90 con stat    1123 
+Cant de alloc totales for slc          691 
+Cant de alloc totales for clc          199 
+Cant de alloc totales for sav          837 
+Cant de alloc totales for mav           53 
+Cant de alloc tot sin cont sing var    689 
+Cant de alloc tot con cont sing var    148 
+Cant de alloc tot sin cont mult var      2 
+Cant de alloc tot con cont mult var     51 
+Cant de alloc totales f90 slc         1776 
+Cant de alloc totales f90 clc          337 
+Cant de alloc totales f90 sav         1993 
+Cant de alloc totales f90 mav          120 
+Cant de alloc tot sin cont sing var   1767 
+Cant de alloc tot con cont sing var    226 
+Cant de alloc tot sin cont mult var      9 
+Cant de alloc tot con cont mult var    111 
