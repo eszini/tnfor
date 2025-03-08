@@ -1,0 +1,6 @@
+(09) sl sv       rdi_objt.f90                   |allocate (rdi_variable_name(number_of_rdi_variables))|
+(15) ml mv       rdi_objt.f90                   |allocate(months_per_plant(max_rdi_plants),check_plant_name(max_rdi_plants))|
+(09) sl sv       rdi_objt.f90                   |allocate (rbc_variable_name(number_of_rbc_variables))|
+(09) sl sv       rdi_objt.f90                   |allocate(months_per_plant(max_rbc_plants))|
+(09) sl sv       snszmds.f90                    |allocate (temp_chrono_load(temp_hours))|
+(15) ml mv       up_objt.f90                    |allocate(vector_values(active_vectors,avail_data_years),vector_pointr(max_valid_vector))|

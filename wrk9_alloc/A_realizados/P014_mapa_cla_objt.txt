@@ -1,0 +1,915 @@
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :     1                 | 
+alloc sentence in line:  2996 (    0 - 12388) |allocate(tg_2_planning_area(0:max(1,upper_trans_group)))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 11958                 |END function cl_units_read|
+line to insert use all:  1884 ( 1840 - 11958) |implicit none|
+line to insert check  :  3000 ( 1840 - 11961) |IF(ALLOCATED(DAY_TYPE_TRANS_GROUP_PAIR))|
+key used              :     1                 | 
+------------------------------------------( 1)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :     2                 | 
+alloc sentence in line:  3005 (    0 - 12393) |allocate(day_type_trans_group_pair(max_day_types,|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 11963                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 11963) ||
+line to insert check  :  3007 ( 1840 - 11963) |ALLOCATE(DATA_BASE_POSITION(2*MAX_DAY_TYPES,MAX_CL_UNITS))|
+key used              :     2                 | 
+------------------------------------------( 4)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :     3                 | 
+alloc sentence in line:  3009 (    0 - 12395) |allocate(data_base_position(2*max_day_types,max_cl_units))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 11965                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 11965) ||
+line to insert check  :  3010 ( 1840 - 11965) |IF(ALLOCATED(MAINT_DAYS)) DEALLOCATE(MAINT_DAYS)|
+key used              :     3                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :     4                 | 
+alloc sentence in line:  3013 (    0 - 12397) |allocate(maint_days(max_cl_units))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 11967                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 11967) ||
+line to insert check  :  3014 ( 1840 - 11967) |IF(ALLOCATED(CL_ANN_CAP)) DEALLOCATE(CL_ANN_CAP,CL_TG_CAP,|
+key used              :     4                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :     5                 | 
+alloc sentence in line:  3022 (    0 - 12399) |allocate(cl_ann_cap(3,study_period,2))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 11969                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 11969) ||
+line to insert check  :  3023 ( 1840 - 11969) |ALLOCATE(CL_TG_CAP(0:6,0:MAX(1,UPPER_TRANS_GROUP),STUDY_PERIOD,2))|
+key used              :     5                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :     6                 | 
+alloc sentence in line:  3025 (    0 - 12401) |allocate(cl_tg_cap(0:6,0:max(1,upper_trans_group),study_period,2))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 11971                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 11971) ||
+line to insert check  :  3026 ( 1840 - 11971) |ALLOCATE(NEWGEN_CAP_BY_INDEX(MAX_NEWGEN_INDEX,|
+key used              :     6                 | 
+------------------------------------------( 1)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :     7                 | 
+alloc sentence in line:  3028 (    0 - 12403) |allocate(newgen_cap_by_index(max_newgen_index,|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 11973                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 11973) ||
+line to insert check  :  3031 ( 1840 - 11973) |ALLOCATE(CL_TG_AFTER_PEAK(0:UPPER_TRANS_GROUP,STUDY_PERIOD))|
+key used              :     7                 | 
+------------------------------------------( 4)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :     8                 | 
+alloc sentence in line:  3033 (    0 - 12405) |allocate(cl_tg_after_peak(0:upper_trans_group,study_period))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 11975                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 11975) ||
+line to insert check  :  3034 ( 1840 - 11975) |ALLOCATE(CL_TG_CAP_MARKET_MW(0:UPPER_TRANS_GROUP),|
+key used              :     8                 | 
+------------------------------------------( 1)-
+Type ( 7)          src:                       |cla_objt.for|
+Allocate number       :     9                 | 
+alloc sentence in line:  3036 (    0 - 12407) |allocate(cl_tg_cap_market_mw(0:upper_trans_group),|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 11977                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 11977) ||
+line to replace allocs:  3035  (  2 allocs)   |ALLOCATE(CL_TG_CAP_MARKET_MW(0:UPPER_TRANS_GROUP),| 
+key used              :     9                 | 
+allocate added        :     1                 |allocate(CL_TG_CAP_MARKET_MW(0:UPPER_TRANS_GROUP),stat=stv_er)|
+allocate added        :     2                 |allocate(CL_TG_CAP_MARKET_REV(0:UPPER_TRANS_GROUP),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    10                 | 
+alloc sentence in line:  3041 (    0 - 12410) |allocate(cl_tg_retire(0:upper_trans_group,study_period))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 11980                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 11980) ||
+line to insert check  :  3042 ( 1840 - 11980) |IF(ALLOCATED(CL_ANNUAL_LOAD_REDUCTION))|
+key used              :    11                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    11                 | 
+alloc sentence in line:  3046 (    0 - 12412) |allocate(cl_annual_load_reduction(study_period))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 11982                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 11982) ||
+line to insert check  :  3047 ( 1840 - 11982) |HIGHEST_ID = 1|
+key used              :    12                 | 
+------------------------------------------( 1)-
+Type ( 7)          src:                       |cla_objt.for|
+Allocate number       :    12                 | 
+alloc sentence in line:  4554 (    0 - 12414) |allocate(retire_retro_co2_price(retire_retro_counter),|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 11984                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 11984) ||
+line to replace allocs:  4553  (  8 allocs)   |ALLOCATE(RETIRE_RETRO_CO2_PRICE(RETIRE_RETRO_COUNTER),| 
+key used              :    13                 | 
+allocate added        :     1                 |allocate(RETIRE_RETRO_CO2_PRICE(RETIRE_RETRO_COUNTER),stat=stv_er)|
+allocate added        :     2                 |allocate(RETIRE_RETRO_UPLIFT_PER_TON(RETIRE_RETRO_COUNTER),stat=stv_er)|
+allocate added        :     3                 |allocate(RETIRE_RETRO_CUM_CO2(0:RETIRE_RETRO_COUNTER),stat=stv_er)|
+allocate added        :     4                 |allocate(NEW_UNIT_RETIRE_VALUE_BY_CM(UPPER_TRANS_GROUP),stat=stv_er)|
+allocate added        :     5                 |allocate(RETIRE_RETRO_INDEX(RETIRE_RETRO_COUNTER),stat=stv_er)|
+allocate added        :     6                 |allocate(RETIRE_OR_RETRO(RETIRE_RETRO_COUNTER),stat=stv_er)|
+allocate added        :     7                 |allocate(RETIRE_RETRO_POSITION(RETIRE_RETRO_COUNTER),stat=stv_er)|
+allocate added        :     8                 |allocate(RETIRE_RETRO_ABATE_INDEX(RETIRE_RETRO_COUNTER),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 7)          src:                       |cla_objt.for|
+Allocate number       :    13                 | 
+alloc sentence in line:  5462 (    0 - 12423) |allocate(mrx_rps_cl_curve_mwh(nunits,pg),|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 11993                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 11993) ||
+line to replace allocs:  5461  ( 14 allocs)   |ALLOCATE(MRX_RPS_CL_CURVE_MWH(NUNITS,PG),| 
+key used              :    21                 | 
+allocate added        :     1                 |allocate(MRX_RPS_CL_CURVE_MWH(NUNITS,PG),stat=stv_er)|
+allocate added        :     2                 |allocate(MRX_RPS_CL_CURVE_CUM_MWH(NUNITS,PG),stat=stv_er)|
+allocate added        :     3                 |allocate(MRX_RPS_CL_CURVE_MARGIN(NUNITS,PG),stat=stv_er)|
+allocate added        :     4                 |allocate(MRX_RPS_CL_CURVE_CUM_MARGIN(NUNITS,PG),stat=stv_er)|
+allocate added        :     5                 |allocate(MRX_RPS_CL_CURVE_INDEX(NUNITS,PG),stat=stv_er)|
+allocate added        :     6                 |allocate(MRX_RPS_CL_UNIT_NO(PG),stat=stv_er)|
+allocate added        :     7                 |allocate(MRX_RPS_CL_UNIT_INDEX(NUNITS,PG),stat=stv_er)|
+allocate added        :     8                 |allocate(MRX_RPS_DV_CURVE_MWH(NUM_TRANS,PG),stat=stv_er)|
+allocate added        :     9                 |allocate(MRX_RPS_DV_CURVE_CUM_MWH(NUM_TRANS,PG),stat=stv_er)|
+allocate added        :    10                 |allocate(MRX_RPS_DV_CURVE_MARGIN(NUM_TRANS,PG),stat=stv_er)|
+allocate added        :    11                 |allocate(MRX_RPS_DV_CURVE_CUM_MARGIN(NUM_TRANS,PG),stat=stv_er)|
+allocate added        :    12                 |allocate(MRX_RPS_DV_CURVE_INDEX(NUM_TRANS,PG),stat=stv_er)|
+allocate added        :    13                 |allocate(MRX_RPS_DV_UNIT_NO(PG),stat=stv_er)|
+allocate added        :    14                 |allocate(MRX_RPS_DV_UNIT_INDEX(NUM_TRANS,PG),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    14                 | 
+alloc sentence in line:  6245 (    0 - 12438) |allocate(trans_group_for_data_base(max_trans_data_bases))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12008                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12008) ||
+line to insert check  :  6246 ( 1840 - 12008) |TRANS_GROUP_FOR_DATA_BASE = 0|
+key used              :    35                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    15                 | 
+alloc sentence in line:  8101 (    0 - 12440) |allocate(annual_cl_capacity(2,nunits,12))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12010                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12010) ||
+line to insert check  :  8102 ( 1840 - 12010) |ALLOCATE(ANNUAL_CL_MAINTENANCE(NUNITS,13))|
+key used              :    36                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    16                 | 
+alloc sentence in line:  8104 (    0 - 12442) |allocate(annual_cl_maintenance(nunits,13))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12012                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12012) ||
+line to insert check  :  8105 ( 1840 - 12012) |ALLOCATE(ANNUAL_CL_MAINT_MW(NUNITS))|
+key used              :    37                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    17                 | 
+alloc sentence in line:  8107 (    0 - 12444) |allocate(annual_cl_maint_mw(nunits))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12014                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12014) ||
+line to insert check  :  8108 ( 1840 - 12014) |ALLOCATE(MAINT_DIVISIBLE(NUNITS))|
+key used              :    38                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    18                 | 
+alloc sentence in line:  8110 (    0 - 12446) |allocate(maint_divisible(nunits))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12016                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12016) ||
+line to insert check  :  8111 ( 1840 - 12016) |!|
+key used              :    39                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    19                 | 
+alloc sentence in line:  8118 (    0 - 12448) |allocate(maint_index(nunits))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12018                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12018) ||
+line to insert check  :  8119 ( 1840 - 12018) |ALLOCATE(MAINT_INDEX_MW(NUNITS))|
+key used              :    40                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    20                 | 
+alloc sentence in line:  8121 (    0 - 12450) |allocate(maint_index_mw(nunits))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12020                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12020) ||
+line to insert check  :  8122 ( 1840 - 12020) |ALLOCATE(MAINT_INDEX_DAYS(NUNITS))|
+key used              :    41                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    21                 | 
+alloc sentence in line:  8124 (    0 - 12452) |allocate(maint_index_days(nunits))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12022                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12022) ||
+line to insert check  :  8125 ( 1840 - 12022) |ALLOCATE(MAINT_INDEX_MONTHLY_MW(NUNITS,13))|
+key used              :    42                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    22                 | 
+alloc sentence in line:  8127 (    0 - 12454) |allocate(maint_index_monthly_mw(nunits,13))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12024                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12024) ||
+line to insert check  :  8128 ( 1840 - 12024) |!|
+key used              :    43                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    23                 | 
+alloc sentence in line:  8133 (    0 - 12456) |allocate(maintenance_days(nunits))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12026                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12026) ||
+line to insert check  :  8134 ( 1840 - 12026) |MAINTENANCE_DAYS = 0.|
+key used              :    44                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    24                 | 
+alloc sentence in line:  8148 (    0 - 12458) |allocate(market_resource_index(nunits))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12028                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12028) ||
+line to insert check  :  8149 ( 1840 - 12028) |ALLOCATE(MARKET_RESOURCE_COUNTER(NUNITS))|
+key used              :    45                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    25                 | 
+alloc sentence in line:  8151 (    0 - 12460) |allocate(market_resource_counter(nunits))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12030                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12030) ||
+line to insert check  :  8152 ( 1840 - 12030) ||
+key used              :    46                 | 
+------------------------------------------( 1)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    26                 | 
+alloc sentence in line:  9011 (    0 - 12462) |allocate(mon_mds_cl_unit_emissions(|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12032                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12032) ||
+line to insert check  :  9013 ( 1840 - 12032) |ALLOCATE(MON_MDS_CL_UNIT_EMISSIONS_COST(|
+key used              :    47                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    27                 | 
+alloc sentence in line:  9015 (    0 - 12464) |allocate(mon_mds_cl_unit_emissions_cost(|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12034                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12034) ||
+line to insert check  :  9017 ( 1840 - 12034) |ALLOCATE(MON_MDS_CL_UNIT_CAPACITY(R_NUNITS,0:12))|
+key used              :    48                 | 
+------------------------------------------( 4)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    28                 | 
+alloc sentence in line:  9019 (    0 - 12466) |allocate(mon_mds_cl_unit_capacity(r_nunits,0:12))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12036                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12036) ||
+line to insert check  :  9020 ( 1840 - 12036) |ALLOCATE(MON_MDS_CL_UNIT_ENERGY(R_NUNITS,0:12))|
+key used              :    49                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    29                 | 
+alloc sentence in line:  9022 (    0 - 12468) |allocate(mon_mds_cl_unit_energy(r_nunits,0:12))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12038                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12038) ||
+line to insert check  :  9023 ( 1840 - 12038) |ALLOCATE(MON_MDS_CL_UNIT_FUEL_COST(R_NUNITS,0:12))|
+key used              :    50                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    30                 | 
+alloc sentence in line:  9025 (    0 - 12470) |allocate(mon_mds_cl_unit_fuel_cost(r_nunits,0:12))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12040                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12040) ||
+line to insert check  :  9026 ( 1840 - 12040) |ALLOCATE(MON_MDS_CL_UNIT_VAR_COST(R_NUNITS,0:12))|
+key used              :    51                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    31                 | 
+alloc sentence in line:  9028 (    0 - 12472) |allocate(mon_mds_cl_unit_var_cost(r_nunits,0:12))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12042                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12042) ||
+line to insert check  :  9029 ( 1840 - 12042) |ALLOCATE(MON_MDS_CL_UNIT_FIXED_COST(R_NUNITS,0:12))|
+key used              :    52                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    32                 | 
+alloc sentence in line:  9031 (    0 - 12474) |allocate(mon_mds_cl_unit_fixed_cost(r_nunits,0:12))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12044                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12044) ||
+line to insert check  :  9032 ( 1840 - 12044) |ALLOCATE(MON_MDS_NUC_FUEL_ADDER_COST(R_NUNITS,0:12))|
+key used              :    53                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    33                 | 
+alloc sentence in line:  9034 (    0 - 12476) |allocate(mon_mds_nuc_fuel_adder_cost(r_nunits,0:12))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12046                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12046) ||
+line to insert check  :  9035 ( 1840 - 12046) |ALLOCATE(MON_MDS_ECO_SALES_REV_FROM(R_NUNITS,0:12))|
+key used              :    54                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    34                 | 
+alloc sentence in line:  9037 (    0 - 12478) |allocate(mon_mds_eco_sales_rev_from(r_nunits,0:12))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12048                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12048) ||
+line to insert check  :  9038 ( 1840 - 12048) |ALLOCATE(MON_MDS_ECO_SALES_ENRG_FROM(R_NUNITS,0:12))|
+key used              :    55                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    35                 | 
+alloc sentence in line:  9040 (    0 - 12480) |allocate(mon_mds_eco_sales_enrg_from(r_nunits,0:12))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12050                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12050) ||
+line to insert check  :  9041 ( 1840 - 12050) |ALLOCATE(MON_MDS_ECO_PUCH_COST_FROM(R_NUNITS,0:12))|
+key used              :    56                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    36                 | 
+alloc sentence in line:  9043 (    0 - 12482) |allocate(mon_mds_eco_puch_cost_from(r_nunits,0:12))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12052                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12052) ||
+line to insert check  :  9044 ( 1840 - 12052) |ALLOCATE(MON_MDS_ECO_PUCH_ENRG_FROM(R_NUNITS,0:12))|
+key used              :    57                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    37                 | 
+alloc sentence in line:  9046 (    0 - 12484) |allocate(mon_mds_eco_puch_enrg_from(r_nunits,0:12))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12054                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12054) ||
+line to insert check  :  9047 ( 1840 - 12054) |ALLOCATE(MON_MDS_ICAP_REVENUES(R_NUNITS,0:12))|
+key used              :    58                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    38                 | 
+alloc sentence in line:  9049 (    0 - 12486) |allocate(mon_mds_icap_revenues(r_nunits,0:12))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12056                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12056) ||
+line to insert check  :  9050 ( 1840 - 12056) |ALLOCATE(MON_MDS_CL_UNIT_MMBTUS(R_NUNITS,0:12))|
+key used              :    59                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    39                 | 
+alloc sentence in line:  9052 (    0 - 12488) |allocate(mon_mds_cl_unit_mmbtus(r_nunits,0:12))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12058                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12058) ||
+line to insert check  :  9053 ( 1840 - 12058) ||
+key used              :    60                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    40                 | 
+alloc sentence in line:  9226 (    0 - 12490) |allocate(asset_class_pointer(max_cap_limited_class_id_num))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12060                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12060) ||
+line to insert check  :  9227 ( 1840 - 12060) |CALL RETURN_INITIALIZATION_POINTER(ASSET_CLASS_POINTER)|
+key used              :    61                 | 
+------------------------------------------( 1)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    41                 | 
+alloc sentence in line:  9285 (    0 - 12492) |allocate(|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12062                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12062) ||
+line to insert check  :  9287 ( 1840 - 12062) |ALLOCATE(CL_ANN_MULT_FUEL_COST(0:NUMBER_OF_CAP_LIMITED_CLASSES,|
+key used              :    62                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    42                 | 
+alloc sentence in line:  9289 (    0 - 12494) |allocate(cl_ann_mult_fuel_cost(0:number_of_cap_limited_classes,|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12064                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12064) ||
+line to insert check  :  9291 ( 1840 - 12064) |ALLOCATE(FE_ANN_MULT_FUEL_COST(0:NUMBER_OF_CAP_LIMITED_CLASSES,|
+key used              :    63                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    43                 | 
+alloc sentence in line:  9293 (    0 - 12496) |allocate(fe_ann_mult_fuel_cost(0:number_of_cap_limited_classes,|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12066                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12066) ||
+line to insert check  :  9295 ( 1840 - 12066) |ALLOCATE(NF_FUEL_LEASED_BY_CLASS(|
+key used              :    64                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    44                 | 
+alloc sentence in line:  9297 (    0 - 12498) |allocate(nf_fuel_leased_by_class(|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12068                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12068) ||
+line to insert check  :  9299 ( 1840 - 12068) |ALLOCATE(NF_FUEL_OWNED_BY_CLASS(|
+key used              :    65                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    45                 | 
+alloc sentence in line:  9301 (    0 - 12500) |allocate(nf_fuel_owned_by_class(|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12070                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12070) ||
+line to insert check  :  9303 ( 1840 - 12070) |ALLOCATE(CL_ANN_CLASS_VAR_COST(|
+key used              :    66                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    46                 | 
+alloc sentence in line:  9305 (    0 - 12502) |allocate(cl_ann_class_var_cost(|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12072                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12072) ||
+line to insert check  :  9307 ( 1840 - 12072) |ALLOCATE(CL_ANN_CLASS_FIXED_COST(|
+key used              :    67                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    47                 | 
+alloc sentence in line:  9309 (    0 - 12504) |allocate(cl_ann_class_fixed_cost(|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12074                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12074) ||
+line to insert check  :  9311 ( 1840 - 12074) |ALLOCATE(CL_ANN_CLASS_CAPACITY(|
+key used              :    68                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    48                 | 
+alloc sentence in line:  9313 (    0 - 12506) |allocate(cl_ann_class_capacity(|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12076                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12076) ||
+line to insert check  :  9315 ( 1840 - 12076) |ALLOCATE(CL_ANN_CLASS_ENERGY(|
+key used              :    69                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    49                 | 
+alloc sentence in line:  9317 (    0 - 12508) |allocate(cl_ann_class_energy(|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12078                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12078) ||
+line to insert check  :  9319 ( 1840 - 12078) |ALLOCATE(CL_ANN_CLASS_REVENUE(|
+key used              :    70                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    50                 | 
+alloc sentence in line:  9321 (    0 - 12510) |allocate(cl_ann_class_revenue(|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12080                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12080) ||
+line to insert check  :  9323 ( 1840 - 12080) |ALLOCATE(CL_ANN_CLASS_PURCHASES(|
+key used              :    71                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    51                 | 
+alloc sentence in line:  9325 (    0 - 12512) |allocate(cl_ann_class_purchases(|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12082                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12082) ||
+line to insert check  :  9327 ( 1840 - 12082) |ALLOCATE(CL_ANN_CLASS_EMISSIONS(NUMBER_OF_EMISSION_TYPES,|
+key used              :    72                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    52                 | 
+alloc sentence in line:  9329 (    0 - 12514) |allocate(cl_ann_class_emissions(number_of_emission_types,|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12084                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12084) ||
+line to insert check  :  9331 ( 1840 - 12084) |ALLOCATE(CL_ANN_MULT_VAR_COST(0:NUMBER_OF_CAP_LIMITED_CLASSES,|
+key used              :    73                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    53                 | 
+alloc sentence in line:  9333 (    0 - 12516) |allocate(cl_ann_mult_var_cost(0:number_of_cap_limited_classes,|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12086                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12086) ||
+line to insert check  :  9335 ( 1840 - 12086) |ALLOCATE(|
+key used              :    74                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    54                 | 
+alloc sentence in line:  9337 (    0 - 12518) |allocate(|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12088                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12088) ||
+line to insert check  :  9340 ( 1840 - 12088) |ALLOCATE(CL_ANN_MULT_REVENUE(0:NUMBER_OF_CAP_LIMITED_CLASSES,|
+key used              :    75                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    55                 | 
+alloc sentence in line:  9342 (    0 - 12520) |allocate(cl_ann_mult_revenue(0:number_of_cap_limited_classes,|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12090                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12090) ||
+line to insert check  :  9344 ( 1840 - 12090) |ALLOCATE(CL_ANN_MULT_CAPACITY(0:NUMBER_OF_CAP_LIMITED_CLASSES,|
+key used              :    76                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    56                 | 
+alloc sentence in line:  9346 (    0 - 12522) |allocate(cl_ann_mult_capacity(0:number_of_cap_limited_classes,|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12092                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12092) ||
+line to insert check  :  9348 ( 1840 - 12092) |ALLOCATE(CL_ANN_MULT_ENERGY(0:NUMBER_OF_CAP_LIMITED_CLASSES,|
+key used              :    77                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    57                 | 
+alloc sentence in line:  9350 (    0 - 12524) |allocate(cl_ann_mult_energy(0:number_of_cap_limited_classes,|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12094                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12094) ||
+line to insert check  :  9352 ( 1840 - 12094) |ALLOCATE(CL_ANN_MULT_PURCHASES(0:|
+key used              :    78                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    58                 | 
+alloc sentence in line:  9354 (    0 - 12526) |allocate(cl_ann_mult_purchases(0:|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12096                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12096) ||
+line to insert check  :  9357 ( 1840 - 12096) |ALLOCATE(NUC_FUEL_LEASED_BURN_BY_CLASS(|
+key used              :    79                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    59                 | 
+alloc sentence in line:  9359 (    0 - 12528) |allocate(nuc_fuel_leased_burn_by_class(|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12098                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12098) ||
+line to insert check  :  9361 ( 1840 - 12098) |ALLOCATE(NUC_FUEL_OWNED_BURN_BY_CLASS(|
+key used              :    80                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    60                 | 
+alloc sentence in line:  9363 (    0 - 12530) |allocate(nuc_fuel_owned_burn_by_class(|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12100                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12100) ||
+line to insert check  :  9365 ( 1840 - 12100) |ALLOCATE(NUCLEAR_MWH_BY_CLASS(0:NUMBER_OF_CAP_LIMITED_CLASSES))|
+key used              :    81                 | 
+------------------------------------------( 4)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    61                 | 
+alloc sentence in line:  9367 (    0 - 12532) |allocate(nuclear_mwh_by_class(0:number_of_cap_limited_classes))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12102                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12102) ||
+line to insert check  :  9368 ( 1840 - 12102) |ALLOCATE(NUCLEAR_MMBTU_BY_CLASS(|
+key used              :    82                 | 
+------------------------------------------( 1)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    62                 | 
+alloc sentence in line:  9370 (    0 - 12534) |allocate(nuclear_mmbtu_by_class(|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12104                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12104) ||
+line to insert check  :  9372 ( 1840 - 12104) |ALLOCATE(INTRA_COMPANY_REVENUES(0:1024,0:3))|
+key used              :    83                 | 
+------------------------------------------( 4)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    63                 | 
+alloc sentence in line:  9374 (    0 - 12536) |allocate(intra_company_revenues(0:1024,0:3))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12106                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12106) ||
+line to insert check  :  9375 ( 1840 - 12106) |ALLOCATE(INTRA_COMPANY_NF_BURN(0:1024))|
+key used              :    84                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    64                 | 
+alloc sentence in line:  9377 (    0 - 12538) |allocate(intra_company_nf_burn(0:1024))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12108                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12108) ||
+line to insert check  :  9378 ( 1840 - 12108) |ALLOCATE(MON_MDS_CL_CLASS_FUEL_COST|
+key used              :    85                 | 
+------------------------------------------( 1)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    65                 | 
+alloc sentence in line:  9380 (    0 - 12540) |allocate(mon_mds_cl_class_fuel_cost|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12110                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12110) ||
+line to insert check  :  9382 ( 1840 - 12110) |ALLOCATE(MON_MDS_CL_MULT_FUEL_COST|
+key used              :    86                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    66                 | 
+alloc sentence in line:  9384 (    0 - 12542) |allocate(mon_mds_cl_mult_fuel_cost|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12112                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12112) ||
+line to insert check  :  9387 ( 1840 - 12112) |ALLOCATE(MON_MDS_CL_MULT_VAR_COST|
+key used              :    87                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    67                 | 
+alloc sentence in line:  9389 (    0 - 12544) |allocate(mon_mds_cl_mult_var_cost|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12114                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12114) ||
+line to insert check  :  9392 ( 1840 - 12114) |ALLOCATE(MON_MDS_CL_MULT_FIXED_COST|
+key used              :    88                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    68                 | 
+alloc sentence in line:  9394 (    0 - 12546) |allocate(mon_mds_cl_mult_fixed_cost|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12116                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12116) ||
+line to insert check  :  9397 ( 1840 - 12116) |ALLOCATE(MON_MDS_CL_MULT_CAPACITY|
+key used              :    89                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    69                 | 
+alloc sentence in line:  9399 (    0 - 12548) |allocate(mon_mds_cl_mult_capacity|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12118                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12118) ||
+line to insert check  :  9402 ( 1840 - 12118) |ALLOCATE(MON_MDS_CL_MULT_ENERGY|
+key used              :    90                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    70                 | 
+alloc sentence in line:  9404 (    0 - 12550) |allocate(mon_mds_cl_mult_energy|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12120                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12120) ||
+line to insert check  :  9407 ( 1840 - 12120) |ALLOCATE(MON_MDS_CL_MULT_PURCHASES|
+key used              :    91                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    71                 | 
+alloc sentence in line:  9409 (    0 - 12552) |allocate(mon_mds_cl_mult_purchases|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12122                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12122) ||
+line to insert check  :  9412 ( 1840 - 12122) |ALLOCATE(MON_MDS_CL_CLASS_VAR_COST|
+key used              :    92                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    72                 | 
+alloc sentence in line:  9414 (    0 - 12554) |allocate(mon_mds_cl_class_var_cost|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12124                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12124) ||
+line to insert check  :  9416 ( 1840 - 12124) |ALLOCATE(MON_MDS_CL_CLASS_FIXED_COST|
+key used              :    93                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    73                 | 
+alloc sentence in line:  9418 (    0 - 12556) |allocate(mon_mds_cl_class_fixed_cost|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12126                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12126) ||
+line to insert check  :  9420 ( 1840 - 12126) |ALLOCATE(MON_MDS_CL_CLASS_REVENUE|
+key used              :    94                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    74                 | 
+alloc sentence in line:  9422 (    0 - 12558) |allocate(mon_mds_cl_class_revenue|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12128                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12128) ||
+line to insert check  :  9424 ( 1840 - 12128) |ALLOCATE(MON_MDS_CL_CAP_REVENUE|
+key used              :    95                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    75                 | 
+alloc sentence in line:  9426 (    0 - 12560) |allocate(mon_mds_cl_cap_revenue|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12130                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12130) ||
+line to insert check  :  9428 ( 1840 - 12130) |ALLOCATE(MON_MDS_CL_CLASS_CAPACITY|
+key used              :    96                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    76                 | 
+alloc sentence in line:  9430 (    0 - 12562) |allocate(mon_mds_cl_class_capacity|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12132                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12132) ||
+line to insert check  :  9432 ( 1840 - 12132) |ALLOCATE(MON_MDS_CL_CLASS_PURCHASES|
+key used              :    97                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    77                 | 
+alloc sentence in line:  9434 (    0 - 12564) |allocate(mon_mds_cl_class_purchases|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12134                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12134) ||
+line to insert check  :  9436 ( 1840 - 12134) |ALLOCATE(MON_MDS_CL_CAP_PURCHASES|
+key used              :    98                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    78                 | 
+alloc sentence in line:  9438 (    0 - 12566) |allocate(mon_mds_cl_cap_purchases|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12136                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12136) ||
+line to insert check  :  9440 ( 1840 - 12136) |ALLOCATE(MON_MDS_CL_CLASS_ENERGY|
+key used              :    99                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    79                 | 
+alloc sentence in line:  9442 (    0 - 12568) |allocate(mon_mds_cl_class_energy|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12138                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12138) ||
+line to insert check  :  9444 ( 1840 - 12138) |ALLOCATE(MON_MDS_CL_CLASS_EMISSIONS(NUMBER_OF_EMISSION_TYPES,|
+key used              :   100                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    80                 | 
+alloc sentence in line:  9446 (    0 - 12570) |allocate(mon_mds_cl_class_emissions(number_of_emission_types,|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12140                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12140) ||
+line to insert check  :  9448 ( 1840 - 12140) |ALLOCATE(MON_MDS_CL_CLASS_EMISSIONS_COST(|
+key used              :   101                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    81                 | 
+alloc sentence in line:  9450 (    0 - 12572) |allocate(mon_mds_cl_class_emissions_cost(|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12142                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12142) ||
+line to insert check  :  9453 ( 1840 - 12142) |!|
+key used              :   102                 | 
+------------------------------------------( 4)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    82                 | 
+alloc sentence in line:  9456 (    0 - 12574) |allocate(mon_mds_intra_company_revenues(0:1024,0:3,0:12))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12144                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12144) ||
+line to insert check  :  9457 ( 1840 - 12144) |ALLOCATE(MON_MDS_INTRA_COMPANY_NF_BURN(0:1024,0:12))|
+key used              :   103                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    83                 | 
+alloc sentence in line:  9459 (    0 - 12576) |allocate(mon_mds_intra_company_nf_burn(0:1024,0:12))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12146                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12146) ||
+line to insert check  :  9460 ( 1840 - 12146) |ALLOCATE(MON_MDS_NF_FUEL_LEASED_BC|
+key used              :   104                 | 
+------------------------------------------( 1)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    84                 | 
+alloc sentence in line:  9462 (    0 - 12578) |allocate(mon_mds_nf_fuel_leased_bc|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12148                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12148) ||
+line to insert check  :  9464 ( 1840 - 12148) |ALLOCATE(MON_MDS_NF_FUEL_OWNED_BC|
+key used              :   105                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    85                 | 
+alloc sentence in line:  9466 (    0 - 12580) |allocate(mon_mds_nf_fuel_owned_bc|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12150                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12150) ||
+line to insert check  :  9468 ( 1840 - 12150) |ALLOCATE(MON_MDS_NUC_FUEL_LEASE_BURN_BC|
+key used              :   106                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    86                 | 
+alloc sentence in line:  9470 (    0 - 12582) |allocate(mon_mds_nuc_fuel_lease_burn_bc|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12152                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12152) ||
+line to insert check  :  9472 ( 1840 - 12152) |ALLOCATE(MON_MDS_NUC_FUEL_OWNED_BURN_BC|
+key used              :   107                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    87                 | 
+alloc sentence in line:  9474 (    0 - 12584) |allocate(mon_mds_nuc_fuel_owned_burn_bc|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12154                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12154) ||
+line to insert check  :  9476 ( 1840 - 12154) |ALLOCATE(MON_MDS_NUCLEAR_MWH_BY_CLASS|
+key used              :   108                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    88                 | 
+alloc sentence in line:  9478 (    0 - 12586) |allocate(mon_mds_nuclear_mwh_by_class|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12156                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12156) ||
+line to insert check  :  9480 ( 1840 - 12156) |ALLOCATE(MON_MDS_NUCLEAR_MMBTU_BY_CLASS|
+key used              :   109                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    89                 | 
+alloc sentence in line:  9482 (    0 - 12588) |allocate(mon_mds_nuclear_mmbtu_by_class|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12158                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12158) ||
+line to insert check  :  9484 ( 1840 - 12158) |ALLOCATE(MON_MDS_ICAP_REV_BY_CLASS|
+key used              :   110                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    90                 | 
+alloc sentence in line:  9486 (    0 - 12590) |allocate(mon_mds_icap_rev_by_class|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12160                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12160) ||
+line to insert check  :  9488 ( 1840 - 12160) |ALLOCATE(MONTHLY_AC_WHOLESALE_PROD_COST|
+key used              :   111                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    91                 | 
+alloc sentence in line:  9490 (    0 - 12592) |allocate(monthly_ac_wholesale_prod_cost|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12162                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12162) ||
+line to insert check  :  9492 ( 1840 - 12162) |ALLOCATE(MONTHLY_AC_ECITY_VAR_PROD_COST|
+key used              :   112                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    92                 | 
+alloc sentence in line:  9494 (    0 - 12594) |allocate(monthly_ac_ecity_var_prod_cost|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12164                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12164) ||
+line to insert check  :  9496 ( 1840 - 12164) |ALLOCATE(MONTHLY_AC_ECITY_NEW_FIX_COST|
+key used              :   113                 | 
+------------------------------------------( 4)-
+Type ( 5)          src:                       |cla_objt.for|
+Allocate number       :    93                 | 
+alloc sentence in line:  9498 (    0 - 12596) |allocate(monthly_ac_ecity_new_fix_cost|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12166                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12166) ||
+line to insert check  :  9500 ( 1840 - 12166) |!|
+key used              :   114                 | 
+------------------------------------------( 4)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    94                 | 
+alloc sentence in line:  9509 (    0 - 12598) |allocate(purchase_asset_class_id(0:upper_trans_group))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12168                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12168) ||
+line to insert check  :  9510 ( 1840 - 12168) |ALLOCATE(PURCHASE_POWER_ASSIGN(0:UPPER_TRANS_GROUP))|
+key used              :   115                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    95                 | 
+alloc sentence in line:  9512 (    0 - 12600) |allocate(purchase_power_assign(0:upper_trans_group))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12170                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12170) ||
+line to insert check  :  9513 ( 1840 - 12170) |DO I = 1, UPPER_TRANS_GROUP|
+key used              :   116                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    96                 | 
+alloc sentence in line:  9575 (    0 - 12602) |allocate(asset_class_list(avail_data_years))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12172                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12172) ||
+line to insert check  :  9576 ( 1840 - 12172) |ALLOCATE(ASSET_ALLOCATION_LIST(AVAIL_DATA_YEARS))|
+key used              :   117                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    97                 | 
+alloc sentence in line:  9578 (    0 - 12604) |allocate(asset_allocation_list(avail_data_years))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12174                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12174) ||
+line to insert check  :  9579 ( 1840 - 12174) |CURRENT_YEAR = YEAR+BASE_YEAR|
+key used              :   118                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    98                 | 
+alloc sentence in line: 10779 (    0 - 12606) |allocate(asset_class_list(avail_data_years))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12176                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12176) ||
+line to insert check  : 10780 ( 1840 - 12176) |ALLOCATE(ASSET_ALLOCATION_LIST(AVAIL_DATA_YEARS))|
+key used              :   119                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |cla_objt.for|
+Allocate number       :    99                 | 
+alloc sentence in line: 10782 (    0 - 12608) |allocate(asset_allocation_list(avail_data_years))|
+block starts at line  :  1840                 |FUNCTION CL_UNITS_READ()|
+block ends   at line  : 12178                 |END function cl_units_read|
+line to insert use all:  1885 ( 1840 - 12178) ||
+line to insert check  : 10783 ( 1840 - 12178) |CURRENT_YEAR = YEAR+BASE_YEAR|
+key used              :   120                 | 
+------------------------------------------( 1)-

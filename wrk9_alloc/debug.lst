@@ -1,12 +1,16 @@
 0,pro_exec9
-0,ex9_p1
+0,ex9_p1_a
+0,ex9_p1_b
 0,ex9_p2
+0,ex9_p4
 0,hacer_lugar
+0,hacer_lugar_mf
 0,cantidad_de_vars
 0,e_name
 0,chg_alloc_t05
 0,chg_alloc_t09
 0,chg_alloc_g03
+0,chg_alloc_g07
 0,chg_alloc_g02
 0,chg_alloc_g05
 0,chg_alloc_g15
@@ -26,3 +30,4 @@
 0,es_linea_comentario
 0,tiene_amper
 0,tiene_end
+0,tiene_use_allocate

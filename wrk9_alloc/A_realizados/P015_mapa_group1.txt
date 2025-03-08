@@ -1,0 +1,58 @@
+Type ( 9)          src:                       |rdi_objt.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:   143 (    0 -  2035) |allocate (rdi_variable_name(number_of_rdi_variables))|
+block starts at line  :    23                 |RECURSIVE SUBROUTINE RDI_OBJECT|
+block ends   at line  :  1162                 |END|
+line to insert use all:    30 (   23 -  1162) |SAVE|
+line to insert check  :   147 (   23 -  1165) |!|
+key used              :     1                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |rdi_objt.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:   567 (    0 -  2040) |allocate(months_per_plant(max_rdi_plants), &|
+block starts at line  :    23                 |RECURSIVE SUBROUTINE RDI_OBJECT|
+block ends   at line  :  1167                 |END|
+line to insert use all:    32 (   23 -  1167) ||
+line to replace allocs:   566  (  2 allocs)   |ALLOCATE(MONTHS_PER_PLANT(MAX_RDI_PLANTS), &| 
+key used              :     2                 | 
+allocate added        :     1                 |allocate(MONTHS_PER_PLANT(MAX_RDI_PLANTS),stat=stv_er)|
+allocate added        :     2                 |allocate(CHECK_PLANT_NAME(MAX_RDI_PLANTS),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 9)          src:                       |rdi_objt.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:  1395 (    0 -  2043) |allocate (rbc_variable_name(number_of_rbc_variables))|
+block starts at line  :  1187                 |RECURSIVE SUBROUTINE RBC_OBJECT|
+block ends   at line  :  2043                 |END|
+line to insert use all:  1198 ( 1187 -  2043) |SAVE|
+line to insert check  :  1399 ( 1187 -  2046) |!|
+key used              :     4                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |rdi_objt.f90|
+Allocate number       :     4                 | 
+alloc sentence in line:  1856 (    0 -  2048) |allocate(months_per_plant(max_rbc_plants))|
+block starts at line  :  1187                 |RECURSIVE SUBROUTINE RBC_OBJECT|
+block ends   at line  :  2048                 |END|
+line to insert use all:  1200 ( 1187 -  2048) ||
+line to insert check  :  1857 ( 1187 -  2048) |!|
+key used              :     5                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |snszmds.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:  2779 ( 2051 -  3173) |allocate (temp_chrono_load(temp_hours))|
+block starts at line  :  2065                 |SUBROUTINE SYNSIZ(YEAR,LDMGT_ACTIVE, &|
+block ends   at line  :  2825                 |END|
+line to insert use all:  2086 ( 2065 -  2825) ||
+line to insert check  :  2783 ( 2065 -  2828) |!|
+key used              :     1                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |up_objt.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:  3469 ( 3179 -  3650) |allocate(vector_values(active_vectors,avail_data_years), &|
+block starts at line  :  3417                 |FUNCTION VARIABLE_UNITS_OBJECT()|
+block ends   at line  :  3650                 |END|
+line to insert use all:  3424 ( 3417 -  3650) |!|
+line to replace allocs:  3471  (  2 allocs)   |ALLOCATE(VECTOR_VALUES(ACTIVE_VECTORS,AVAIL_DATA_YEARS), &| 
+key used              :     1                 | 
+allocate added        :     1                 |allocate(VECTOR_VALUES(ACTIVE_VECTORS,AVAIL_DATA_YEARS),stat=stv_er)|
+allocate added        :     2                 |allocate(VECTOR_POINTR(MAX_VALID_VECTOR),stat=stv_er)|
+------------------------------------------( 5)-

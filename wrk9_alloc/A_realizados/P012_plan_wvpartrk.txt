@@ -1,0 +1,5 @@
+(15) ml mv       wvpartrk.f90                   |allocate(rate_code_list(0:num_rate_tables),rate_name(0:num_rate_tables),rate_code(0:num_rate_tables),rate_tracker(0:num_rate_tables),rate_option(0:num_rate_tables),rate_qualifier(0:num_rate_tables),trans_dist(0:num_rate_tables),fuel_tracker_use(0:num_rate_tables),non_fuel_tracker_use(0:num_rate_tables),enrg_rates(12,0:num_rate_tables),demand_rates(12,0:num_rate_tables),fuel_rate_in_enrg_rate(12,0:num_rate_tables),fuel_rates(12,0:num_rate_tables),nonfuel_rates(12,0:num_rate_tables),scr_rates(12,0:num_rate_tables),non_fuel_base_rate(12,0:num_rate_tables))|
+(09) sl sv       wvpartrk.f90                   |allocate(temp_asset_class_pointer(1024))|
+(09) sl sv       wvpartrk.f90                   |allocate(bc_asset_class_pointer(max_bc_class_id_num))|
+(15) ml mv       wvpartrk.f90                   |allocate(wvpa_tracked_expenses(0:12,30,0:4),wvpa_tracked_deferred_debits(0:12,30,0:4))|
+(15) ml mv       wvpartrk.f90                   |allocate(actual_values(12,7,200),total_monthly_values(12,0:5,3),id_number(12,200))|

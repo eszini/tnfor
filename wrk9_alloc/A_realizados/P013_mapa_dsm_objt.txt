@@ -1,0 +1,181 @@
+Type ( 7)          src:                       |dsm_objt.for|
+Allocate number       :     1                 | 
+alloc sentence in line:   344 (    0 -  3846) |allocate(device_application(max_dsm_device_num),|
+block starts at line  :     9                 |RECURSIVE SUBROUTINE MDSLDCAP|
+block ends   at line  :  2521                 |END|
+line to insert use all:    27 (    9 -  2521) |SAVE|
+line to replace allocs:   346  ( 14 allocs)   |ALLOCATE(DEVICE_APPLICATION(MAX_DSM_DEVICE_NUM),| 
+key used              :     1                 | 
+allocate added        :     1                 |allocate(DEVICE_APPLICATION(MAX_DSM_DEVICE_NUM),stat=stv_er)|
+allocate added        :     2                 |allocate(CUSTOMERS_BY_DAY_TYPE(3,DSM_DEVICE_RECORDS),stat=stv_er)|
+allocate added        :     3                 |allocate(APPLICATION_ID(DSM_DEVICE_RECORDS),stat=stv_er)|
+allocate added        :     4                 |allocate(APPLICATION_CLASS(DSM_DEVICE_RECORDS),stat=stv_er)|
+allocate added        :     5                 |allocate(OPERATING_METHOD(DSM_DEVICE_RECORDS),stat=stv_er)|
+allocate added        :     6                 |allocate(DSM_CAP_PLAN_FACTOR(DSM_DEVICE_RECORDS),stat=stv_er)|
+allocate added        :     7                 |allocate(DSM_ENERGY_CLASSIFICATION(DSM_DEVICE_RECORDS),stat=stv_er)|
+allocate added        :     8                 |allocate(FREE_RIDERS(DSM_DEVICE_RECORDS),stat=stv_er)|
+allocate added        :     9                 |allocate(FREE_DRIVERS(DSM_DEVICE_RECORDS),stat=stv_er)|
+allocate added        :    10                 |allocate(PROGRAM_LOSS_FACTOR(DSM_DEVICE_RECORDS),stat=stv_er)|
+allocate added        :    11                 |allocate(DSM_START_YEAR(DSM_DEVICE_RECORDS),stat=stv_er)|
+allocate added        :    12                 |allocate(DSM_DEVICE_NAME(DSM_DEVICE_RECORDS),stat=stv_er)|
+allocate added        :    13                 |allocate(RESPONSE_POINTER_FOR(3,DSM_DEVICE_RECORDS),stat=stv_er)|
+allocate added        :    14                 |allocate(PROGRAM_DSM_ALLOCATION_METHOD(DSM_DEVICE_RECORDS),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 1)          src:                       |dsm_objt.for|
+Allocate number       :     2                 | 
+alloc sentence in line:   378 (    0 -  3864) |allocate(device_application(max_dsm_device_num))|
+block starts at line  :     9                 |RECURSIVE SUBROUTINE MDSLDCAP|
+block ends   at line  :  2539                 |END|
+line to insert use all:    29 (    9 -  2539) ||
+line to insert check  :   379 (    9 -  2539) |ENDIF|
+key used              :    15                 | 
+------------------------------------------( 1)-
+Type ( 7)          src:                       |dsm_objt.for|
+Allocate number       :     3                 | 
+alloc sentence in line:   489 (    0 -  3866) |allocate(basdev(24,dsm_response_curves),|
+block starts at line  :     9                 |RECURSIVE SUBROUTINE MDSLDCAP|
+block ends   at line  :  2541                 |END|
+line to insert use all:    29 (    9 -  2541) ||
+line to replace allocs:   488  (  9 allocs)   |ALLOCATE(BASDEV(24,DSM_RESPONSE_CURVES),| 
+key used              :    16                 | 
+allocate added        :     1                 |allocate(BASDEV(24,DSM_RESPONSE_CURVES),stat=stv_er)|
+allocate added        :     2                 |allocate(LMGDEV(24,DSM_RESPONSE_CURVES),stat=stv_er)|
+allocate added        :     3                 |allocate(BEFORE_LM_ADJUSTMENT(DSM_RESPONSE_CURVES),stat=stv_er)|
+allocate added        :     4                 |allocate(AFTER_LM_ADJUSTMENT(DSM_RESPONSE_CURVES),stat=stv_er)|
+allocate added        :     5                 |allocate(LM_LOAD_UNITS(DSM_RESPONSE_CURVES),stat=stv_er)|
+allocate added        :     6                 |allocate(RESPONSE_LOCATION_POINTER(MAX_RESPONSE_NUM),stat=stv_er)|
+allocate added        :     7                 |allocate(RESPONSE_DATA_LOCATION(12,MAX_RESPONSE_NUM),stat=stv_er)|
+allocate added        :     8                 |allocate(AFTER_LM_FACTOR(DSM_RESPONSE_CURVES),stat=stv_er)|
+allocate added        :     9                 |allocate(BEFORE_LM_FACTOR(DSM_RESPONSE_CURVES),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 7)          src:                       |dsm_objt.for|
+Allocate number       :     4                 | 
+alloc sentence in line:   511 (    0 -  3876) |allocate(response_data_location(12,max_response_num),|
+block starts at line  :     9                 |RECURSIVE SUBROUTINE MDSLDCAP|
+block ends   at line  :  2551                 |END|
+line to insert use all:    29 (    9 -  2551) ||
+line to replace allocs:   510  (  2 allocs)   |ALLOCATE(RESPONSE_DATA_LOCATION(12,MAX_RESPONSE_NUM),| 
+key used              :    25                 | 
+allocate added        :     1                 |allocate(RESPONSE_DATA_LOCATION(12,MAX_RESPONSE_NUM),stat=stv_er)|
+allocate added        :     2                 |allocate(RESPONSE_LOCATION_POINTER(MAX_RESPONSE_NUM),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 7)          src:                       |dsm_objt.for|
+Allocate number       :     5                 | 
+alloc sentence in line:   710 (    0 -  3879) |allocate(base_prog_exp_save(dsm_financial_records),|
+block starts at line  :     9                 |RECURSIVE SUBROUTINE MDSLDCAP|
+block ends   at line  :  2554                 |END|
+line to insert use all:    29 (    9 -  2554) ||
+line to replace allocs:   709  ( 29 allocs)   |ALLOCATE(BASE_PROG_EXP_SAVE(DSM_FINANCIAL_RECORDS),| 
+key used              :    27                 | 
+allocate added        :     1                 |allocate(BASE_PROG_EXP_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :     2                 |allocate(ONGO_PROG_EXP_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :     3                 |allocate(BASE_CUST_EXP_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :     4                 |allocate(ONGO_CUST_EXP_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :     5                 |allocate(ONGO_NEW_CUST_EXP_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :     6                 |allocate(ONGO_KWH_EXP_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :     7                 |allocate(ONGO_KW_EXP_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :     8                 |allocate(BASE_PROG_CAP_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :     9                 |allocate(ONGO_PROG_CAP_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :    10                 |allocate(BASE_CUST_CAP_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :    11                 |allocate(ONGO_CUST_CAP_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :    12                 |allocate(ONGO_NEW_CUST_CAP_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :    13                 |allocate(ONGO_KWH_CAP_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :    14                 |allocate(ONGO_KW_CAP_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :    15                 |allocate(REBATE_CUST_EXP_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :    16                 |allocate(REBATE_NEW_CUST_EXP_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :    17                 |allocate(REBATE_CUST_CAP_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :    18                 |allocate(REBATE_NEW_CUST_CAP_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :    19                 |allocate(PARTICIPANT_CUST_COST_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :    20                 |allocate(PARTICIPANT_NEW_CUST_COST_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :    21                 |allocate(PARTICIPANT_COSTS_BY(APPLICATION_NUM),stat=stv_er)|
+allocate added        :    22                 |allocate(UTIL_NON_ELEC_CUST_COST_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :    23                 |allocate(UTIL_NON_ELEC_NEW_COST_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :    24                 |allocate(THIRD_PARTY_CUST_COST_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :    25                 |allocate(THIRD_PARTY_NEW_CUST_COST_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :    26                 |allocate(OTH_PARTICIPANT_CUST_COST_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :    27                 |allocate(OTH_PARTICIPANT_NEW_COST_SAVE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+allocate added        :    28                 |allocate(DSM_ASSET_CLASS_POINTER(1024),stat=stv_er)|
+allocate added        :    29                 |allocate(LF_DELETE(DSM_FINANCIAL_RECORDS),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 1)          src:                       |dsm_objt.for|
+Allocate number       :     6                 | 
+alloc sentence in line:  1076 (    0 -  3909) |allocate(monthly_dsm_data_base(25,application_num,3))|
+block starts at line  :     9                 |RECURSIVE SUBROUTINE MDSLDCAP|
+block ends   at line  :  2584                 |END|
+line to insert use all:    29 (    9 -  2584) ||
+line to insert check  :  1077 (    9 -  2584) ||
+key used              :    56                 | 
+------------------------------------------( 1)-
+Type ( 1)          src:                       |dsm_objt.for|
+Allocate number       :     7                 | 
+alloc sentence in line:  3615 (    0 -  3911) |allocate(asset_class_pointer(max_dsm_class_num))|
+block starts at line  :  3056                 |SUBROUTINE DSM_ASSET_ALLOCATION(DSM_ACCTS,TOTAL_DSM_EXPENSES,|
+block ends   at line  :  3910                 |END|
+line to insert use all:  3073 ( 3056 -  3910) ||
+line to insert check  :  3619 ( 3056 -  3913) |CALL RETURN_DSM_CLASS_POINTER(ASSET_CLASS_POINTER)|
+key used              :    57                 | 
+------------------------------------------( 1)-
+Type ( 7)          src:                       |dsm_objt.for|
+Allocate number       :     8                 | 
+alloc sentence in line:  3644 (    0 -  3916) |allocate(dsm_class_expenses(0:num_of_dsm_classes),|
+block starts at line  :  3056                 |SUBROUTINE DSM_ASSET_ALLOCATION(DSM_ACCTS,TOTAL_DSM_EXPENSES,|
+block ends   at line  :  3915                 |END|
+line to insert use all:  3075 ( 3056 -  3915) ||
+line to replace allocs:  3643  ( 18 allocs)   |ALLOCATE(DSM_CLASS_EXPENSES(0:NUM_OF_DSM_CLASSES),| 
+key used              :    58                 | 
+allocate added        :     1                 |allocate(DSM_CLASS_EXPENSES(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+allocate added        :     2                 |allocate(DSM_CLASS_REBATES(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+allocate added        :     3                 |allocate(DSM_CLASS_PURCHASE_POWER(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+allocate added        :     4                 |allocate(DSM_CLASS_SALES_REVENUE(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+allocate added        :     5                 |allocate(DSM_BTL_EXPENSE(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+allocate added        :     6                 |allocate(DSM_BTL_REVENUE(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+allocate added        :     7                 |allocate(DSM_ADJ_CLAUSE_COLLECTIONS(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+allocate added        :     8                 |allocate(DSM_CLASS_CAPITIAL(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+allocate added        :     9                 |allocate(DSM_CLASS_CAPACITY(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+allocate added        :    10                 |allocate(DSM_CLASS_ENERGY(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+allocate added        :    11                 |allocate(DSM_CLASS_PARTICIPANT_COSTS(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+allocate added        :    12                 |allocate(DSM_CLASS_UTIL_NON_ELEC_COSTS(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+allocate added        :    13                 |allocate(DSM_CLASS_THIRD_PARTY_COSTS(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+allocate added        :    14                 |allocate(DSM_CLASS_OTH_PARTICIPANT_COSTS(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+allocate added        :    15                 |allocate(DSM_TAX_EXPENSE(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+allocate added        :    16                 |allocate(DSM_AFUDC(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+allocate added        :    17                 |allocate(RB_DSM_AFUDC(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+allocate added        :    18                 |allocate(RB_DSM_TAX_EXPENSE(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 7)          src:                       |dsm_objt.for|
+Allocate number       :     9                 | 
+alloc sentence in line:  3684 (    0 -  3934) |allocate(asset_class_list(avail_data_years),|
+block starts at line  :  3056                 |SUBROUTINE DSM_ASSET_ALLOCATION(DSM_ACCTS,TOTAL_DSM_EXPENSES,|
+block ends   at line  :  3933                 |END|
+line to insert use all:  3075 ( 3056 -  3933) ||
+line to replace allocs:  3683  (  2 allocs)   |ALLOCATE(ASSET_CLASS_LIST(AVAIL_DATA_YEARS),| 
+key used              :    76                 | 
+allocate added        :     1                 |allocate(ASSET_CLASS_LIST(AVAIL_DATA_YEARS),stat=stv_er)|
+allocate added        :     2                 |allocate(ASSET_ALLOCATION_LIST(AVAIL_DATA_YEARS),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 7)          src:                       |dsm_objt.for|
+Allocate number       :    10                 | 
+alloc sentence in line:  3737 (    0 -  3937) |allocate(dsm_book_dep(0:num_of_dsm_classes,|
+block starts at line  :  3056                 |SUBROUTINE DSM_ASSET_ALLOCATION(DSM_ACCTS,TOTAL_DSM_EXPENSES,|
+block ends   at line  :  3936                 |END|
+line to insert use all:  3075 ( 3056 -  3936) ||
+line to replace allocs:  3736  ( 17 allocs)   |ALLOCATE(DSM_BOOK_DEP(0:NUM_OF_DSM_CLASSES,| 
+key used              :    78                 | 
+allocate added        :     1                 |allocate(DSM_BOOK_DEP(0:NUM_OF_DSM_CLASSES,MAX_FINANCIAL_SIMULATION_YEARS),stat=stv_er)|
+allocate added        :     2                 |allocate(DSM_CUM_BOOK_DEP(0:NUM_OF_DSM_CLASSES,MAX_FINANCIAL_SIMULATION_YEARS),stat=stv_er)|
+allocate added        :     3                 |allocate(DSM_GPV(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+allocate added        :     4                 |allocate(DSM_TAX_DEP(0:NUM_OF_DSM_CLASSES,MAX_FINANCIAL_SIMULATION_YEARS),stat=stv_er)|
+allocate added        :     5                 |allocate(DSM_AMORT(0:NUM_OF_DSM_CLASSES,MAX_FINANCIAL_SIMULATION_YEARS),stat=stv_er)|
+allocate added        :     6                 |allocate(DSM_DEFERRED_DEBIT(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+allocate added        :     7                 |allocate(DSM_DEFERRED_TAX_BASIS(0:NUM_OF_DSM_CLASSES,MAX_FINANCIAL_SIMULATION_YEARS),stat=stv_er)|
+allocate added        :     8                 |allocate(DSM_TAX_PREF_DEP(0:NUM_OF_DSM_CLASSES,MAX_FINANCIAL_SIMULATION_YEARS),stat=stv_er)|
+allocate added        :     9                 |allocate(RB_DSM_AMORT(0:NUM_OF_DSM_CLASSES,MAX_FINANCIAL_SIMULATION_YEARS),stat=stv_er)|
+allocate added        :    10                 |allocate(RB_DSM_DEFERRED_TAX_BASIS(0:NUM_OF_DSM_CLASSES,MAX_FINANCIAL_SIMULATION_YEARS),stat=stv_er)|
+allocate added        :    11                 |allocate(DSM_REGULATED_BOOK_DEP(0:NUM_OF_DSM_CLASSES,MAX_FINANCIAL_SIMULATION_YEARS),stat=stv_er)|
+allocate added        :    12                 |allocate(DSM_REGULATED_TAX_DEP(0:NUM_OF_DSM_CLASSES,MAX_FINANCIAL_SIMULATION_YEARS),stat=stv_er)|
+allocate added        :    13                 |allocate(DSM_REGULATED_DEFERRED_DEBIT(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+allocate added        :    14                 |allocate(DSM_REGULATED_NPV(0:NUM_OF_DSM_CLASSES),stat=stv_er)|
+allocate added        :    15                 |allocate(DSM_GPV_PROPERTY_TAX(0:NUM_OF_DSM_CLASSES,MAX_FINANCIAL_SIMULATION_YEARS),stat=stv_er)|
+allocate added        :    16                 |allocate(DSM_NPV_PROPERTY_TAX(0:NUM_OF_DSM_CLASSES,MAX_FINANCIAL_SIMULATION_YEARS),stat=stv_er)|
+allocate added        :    17                 |allocate(DSM_SL_TAX_DEP(0:NUM_OF_DSM_CLASSES,MAX_FINANCIAL_SIMULATION_YEARS),stat=stv_er)|
+------------------------------------------( 5)-
