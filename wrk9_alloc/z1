@@ -1,0 +1,95 @@
+/* file tipo 2 */
+#if 0
+	f_proceso = 1;
+	if (!gp_debug)
+		f_proceso=0;
+
+	if (f_proceso)
+	{
+
+	/* se supone que a esta altura ... 
+	 * tengo todo el src ya modificado en fnp ... 
+	 *
+	 * se puede trabajar aqui para ver si queremos separar las lineas 
+	 * muy largas 
+	 */
+
+	/* probamos a ver como funca hacer lugar ... */
+
+	if (tipo_ext == 2)
+	{
+
+	i = 0;
+	f_keep = 1;
+	f_act  = 1;
+
+	while (f_keep)
+	{
+
+	pf = (*tb[n_f]).pf;
+	uf = (*tb[n_f]).uf;
+
+		strcpy(b0, pasar_a_minusc( (*fnp[i]).l) );
+		strcpy(b1,  (*fnp[i]).l );
+
+		strcpy(b0,trim_end_f90(b0));
+		strcpy(b0,trim_blanks(b0));
+
+		if (tiene_string(b0,"check_alloc"))
+		{
+if (gp_debug && w)
+{
+mprintf (z,"(1)entre a check_alloc_ok con  ... |%s| \n", (*fnp[i]).l );
+mprintf (z,"(2)entre a check_alloc_ok con  ... |%s| \n", b0 );
+}
+			l2 = strlen(b0);
+
+			if (l2 > 82 )
+			{
+if (gp_debug && w)
+{
+mprintf (z,"voy a hacer lugar: pf %d uf %d i %d \n",pf,uf,i);
+mprintf (z,"linea: len: %3d |%s|\n", l2, (*fnp[i]).l );
+}
+				hacer_lugar_itz(pf,uf,i,1,f_act);
+
+				memset(b5,0,sizeof(b5));
+				sprintf (b5,"agregado ... check_alloc :%4d",n2);
+	
+				memset(b2,0,sizeof(b2));
+				memset(b3,0,sizeof(b3));
+
+				arma_dos_lineas_con_check(b1,b2,b3);
+
+if (gp_debug && w)
+{
+mprintf (z,"voy a strcpy 1 i: %d str: |%s| \n",i,(*fnp[i]).l );
+}
+				strcpy( (*fnp[i+0]).l, b2);
+if (gp_debug && w)
+{
+mprintf (z,"hice  strcpy 1 i: %d str: |%s| \n",i,(*fnp[i]).l );
+}
+
+				strcpy( (*fnp[i+1]).l, b3);
+
+				i+= 1;
+			}
+		}
+
+
+		i++;
+		if (i >= qf_src)
+			f_keep = 0;
+	}
+
+	} /* if (tipo_ext == 2.... */
+
+
+
+	} /* f_proceso ... */
+
+
+#endif
+/* file tipo 2 */
+

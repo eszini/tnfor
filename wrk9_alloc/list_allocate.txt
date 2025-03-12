@@ -1,0 +1,23 @@
+00001 capacity_arrays.f90            (f90) 00064 |    ALLOCATE(RPS_HYDRO_DB(2,400,NUMPMS,0:12))|
+00002 capacity_arrays.f90            (f90) 00083 |    allocate(QUALIFYING_GEN_DB(ACTIVE_RPS,0:NUMPMS,2))|
+00003 capacity_arrays.f90            (f90) 00089 |	allocate(GRX_QUAL_GEN_DB(ACTIVE_RPS,0:NUMPMS,2))|
+00004 capacity_arrays.f90            (f90) 00092 |	allocate(SAVE_GRX_QUAL_GEN_DB(ACTIVE_RPS,0:NUMPMS,2))|
+00005 capacity_arrays.f90            (f90) 00104 |     ALLOCATE(DEV_TG_CAP(0:16,0:MAX(1,nr_trans_classes), &|
+00006 capacity_arrays.f90            (f90) 00115 |     ALLOCATE (DEV_NEW_TG_CAP(0:21,0:MAX(1,nr_trans_classes), &|
+00007 capacity_arrays.f90            (f90) 00122 |     allocate(SAVED_DEV_NEW_TG_CAP(0:21,0:MAX(1, &|
+00008 cf_objt.f90                    (f90) 00751 |         ALLOCATE(SUM_CLASS_PEAKS(12,2,FORECAST_GROWTH_YEARS, &|
+00009 cf_objt.f90                    (f90) 00761 |         ALLOCATE(CLASS_ANN_COIN_PEAK(MAX_LOAD_CLASSES, &|
+00010 cf_objt.f90                    (f90) 00866 |            ALLOCATE(SUM_CLASS_PEAKS(12,2,FORECAST_GROWTH_YEARS,1))|
+00011 cla_objt_arrays.f90            (f90) 00170 |            ALLOCATE(cl_tg_cap(0:max_technology_counters, 0:MaxVariable, STUDY_PERIOD,2))|
+00012 cls_runs.f90                   (f90) 00231 |         ALLOCATE(BC_TABLE_POSITION_FOR(0:MAX_BC_CLASS_NUMBER))|
+00013 cls_runs.f90                   (f90) 00398 |         ALLOCATE(OL_TABLE_POSITION_FOR(0:MAX_OL_CLASS_NUMBER))|
+00014 cls_runs.f90                   (f90) 00540 |            ALLOCATE(   &|
+00015 coal_main_prg.f90              (f90) 01573 |            ALLOCATE (Supply_Production_By_Year(20,nArray,0:30), &|
+00016 coal_main_prg.f90              (f90) 01769 |            ALLOCATE(GenericTransportPtrToTG(0:256,20)) ! TG,1 = paths TG,>1 pointer|
+00017 coal_main_prg.f90              (f90) 01864 |               ALLOCATE(GenericPlantPtrByTG(0:256))|
+00018 cpl_objt.f90                   (f90) 00134 |         ALLOCATE(TEMP_ASSET_CLASS_POINTER(1024))|
+00019 cpl_objt.f90                   (f90) 00241 |            ALLOCATE(BC_ASSET_CLASS_POINTER(MAX_BC_CLASS_ID_NUM))|
+00020 cpl_objt.f90                   (f90) 00283 |      ALLOCATE(TEMP_ASSET_CLASS_POINTER(1024))|
+00021 cpl_objt.f90                   (f90) 00414 |         ALLOCATE(OL_ASSET_CLASS_POINTER(MAX_OL_CLASS_ID_NUM))|
+00022 ct_objt.f90                    (f90) 00438 |      ALLOCATE(CONTRACT_ADJUSTMENTS_TO_PEAK(STUDY_PERIOD), &|
+00023 ct_objt.f90                    (f90) 00661 |      ALLOCATE(CONTRACT_BUY_CAPACITY(0:MAX_CONTRACT_CLASS_ID_NUM), &|

@@ -1,0 +1,62 @@
+00001 capacity_arrays.f90            (f90) 00064 |    ALLOCATE(RPS_HYDRO_DB(2,400,NUMPMS,0:12))|
+00002 capacity_arrays.f90            (f90) 00083 |    allocate(QUALIFYING_GEN_DB(ACTIVE_RPS,0:NUMPMS,2))|
+00003 capacity_arrays.f90            (f90) 00089 |	allocate(GRX_QUAL_GEN_DB(ACTIVE_RPS,0:NUMPMS,2))|
+00004 capacity_arrays.f90            (f90) 00092 |	allocate(SAVE_GRX_QUAL_GEN_DB(ACTIVE_RPS,0:NUMPMS,2))|
+00005 capacity_arrays.f90            (f90) 00104 |     ALLOCATE(DEV_TG_CAP(0:16,0:MAX(1,nr_trans_classes), &|
+00005 capacity_arrays.f90            (f90) 00105 |       STUDY_PERIOD))|
+00006 capacity_arrays.f90            (f90) 00115 |     ALLOCATE (DEV_NEW_TG_CAP(0:21,0:MAX(1,nr_trans_classes), &|
+00006 capacity_arrays.f90            (f90) 00116 |                                                  STUDY_PERIOD))|
+00007 capacity_arrays.f90            (f90) 00122 |     allocate(SAVED_DEV_NEW_TG_CAP(0:21,0:MAX(1, &|
+00007 capacity_arrays.f90            (f90) 00123 |                     nr_trans_classes), STUDY_PERIOD)) |
+00008 cf_objt.f90                    (f90) 00751 |         ALLOCATE(SUM_CLASS_PEAKS(12,2,FORECAST_GROWTH_YEARS, &|
+00008 cf_objt.f90                    (f90) 00752 |                                                         TOTAL_CLASSES))|
+00009 cf_objt.f90                    (f90) 00761 |         ALLOCATE(CLASS_ANN_COIN_PEAK(MAX_LOAD_CLASSES, &|
+00009 cf_objt.f90                    (f90) 00762 |                                                 FORECAST_GROWTH_YEARS))|
+00010 cf_objt.f90                    (f90) 00866 |            ALLOCATE(SUM_CLASS_PEAKS(12,2,FORECAST_GROWTH_YEARS,1))|
+00011 cla_objt_arrays.f90            (f90) 00170 |            ALLOCATE(cl_tg_cap(0:max_technology_counters, 0:MaxVariable, STUDY_PERIOD,2))|
+00012 cls_runs.f90                   (f90) 00231 |         ALLOCATE(BC_TABLE_POSITION_FOR(0:MAX_BC_CLASS_NUMBER))|
+00013 cls_runs.f90                   (f90) 00398 |         ALLOCATE(OL_TABLE_POSITION_FOR(0:MAX_OL_CLASS_NUMBER))|
+00014 cls_runs.f90                   (f90) 00540 |            ALLOCATE(   &|
+00014 cls_runs.f90                   (f90) 00541 |                    CLASS_TABLE_POINTER(0:MAX_SWITCH_FILE_CLASS_NUMBER))|
+00015 coal_main_prg.f90              (f90) 01573 |            ALLOCATE (Supply_Production_By_Year(20,nArray,0:30), &|
+00015 coal_main_prg.f90              (f90) 01574 |                      Supply_Cost_By_Year(20,nArray,0:30))|
+00016 coal_main_prg.f90              (f90) 01769 |            ALLOCATE(GenericTransportPtrToTG(0:256,20)) ! TG,1 = paths TG,>1 pointer|
+00017 coal_main_prg.f90              (f90) 01864 |               ALLOCATE(GenericPlantPtrByTG(0:256))|
+00018 cpl_objt.f90                   (f90) 00134 |         ALLOCATE(TEMP_ASSET_CLASS_POINTER(1024))|
+00019 cpl_objt.f90                   (f90) 00241 |            ALLOCATE(BC_ASSET_CLASS_POINTER(MAX_BC_CLASS_ID_NUM))|
+00020 cpl_objt.f90                   (f90) 00283 |      ALLOCATE(TEMP_ASSET_CLASS_POINTER(1024))|
+00021 cpl_objt.f90                   (f90) 00414 |         ALLOCATE(OL_ASSET_CLASS_POINTER(MAX_OL_CLASS_ID_NUM))|
+00022 ct_objt.f90                    (f90) 00438 |      ALLOCATE(CONTRACT_ADJUSTMENTS_TO_PEAK(STUDY_PERIOD), &|
+00022 ct_objt.f90                    (f90) 00439 |               ON_LINE_MONTH(CT_RECORDS),ON_LINE_YEAR(CT_RECORDS), &|
+00022 ct_objt.f90                    (f90) 00440 |               OFF_LINE_MONTH(CT_RECORDS),OFF_LINE_YEAR(CT_RECORDS), &|
+00022 ct_objt.f90                    (f90) 00441 |               CT_ANN_CAP(3,STUDY_PERIOD), &|
+00022 ct_objt.f90                    (f90) 00442 |               CT_ID_TO_RECORD_POINTER(MAX_CT_ID_NUM), &|
+00022 ct_objt.f90                    (f90) 00443 |               SAVE_CT_FIRST_ENERGY_PRICE(CT_RECORDS), &|
+00022 ct_objt.f90                    (f90) 00444 |               SAVE_MIN_CONTRACT_FIXED_COST(CT_RECORDS), &|
+00022 ct_objt.f90                    (f90) 00445 |               SAVE_CONTRACT_FIXED_COST(CT_RECORDS), &|
+00022 ct_objt.f90                    (f90) 00446 |               SAVE_CT_SECOND_ENERGY_PRICE(CT_RECORDS), &|
+00022 ct_objt.f90                    (f90) 00447 |               SAVE_CT_ENERGY_COST_ADDER(CT_RECORDS), &|
+00022 ct_objt.f90                    (f90) 00448 |               SAVE_CT_ANNUAL_FIXED_COST(CT_RECORDS), &|
+00022 ct_objt.f90                    (f90) 00449 |               CT_ANNUAL_LOAD_REDUCTION(STUDY_PERIOD), &|
+00022 ct_objt.f90                    (f90) 00450 |               ASSET_CLASS_NUM(CT_RECORDS), &|
+00022 ct_objt.f90                    (f90) 00451 |               ASSET_CLASS_VECTOR(CT_RECORDS), &|
+00022 ct_objt.f90                    (f90) 00452 |               INTRA_ASSET_CLASS_ID(CT_RECORDS), &|
+00022 ct_objt.f90                    (f90) 00453 |               INTRA_ASSET_CLASS_ALLOCATION(CT_RECORDS), &|
+00022 ct_objt.f90                    (f90) 00454 |               INTRA_COMPANY_TRANSACTION(CT_RECORDS), &|
+00022 ct_objt.f90                    (f90) 00455 |               INTRA_REVENUE_CLASS(CT_RECORDS), &|
+00022 ct_objt.f90                    (f90) 00456 |               CONTRACT_ASSET_CLASS_POINTER(1024))|
+00023 ct_objt.f90                    (f90) 00661 |      ALLOCATE(CONTRACT_BUY_CAPACITY(0:MAX_CONTRACT_CLASS_ID_NUM), &|
+00023 ct_objt.f90                    (f90) 00662 |            CONTRACT_BUY_ENERGY(0:MAX_CONTRACT_CLASS_ID_NUM), &|
+00023 ct_objt.f90                    (f90) 00663 |            CONTRACT_BUY_SO2_EMISSIONS(0:MAX_CONTRACT_CLASS_ID_NUM), &|
+00023 ct_objt.f90                    (f90) 00664 |            CONTRACT_BUY_FIXED_COST(-1:MAX_CONTRACT_CLASS_ID_NUM), &|
+00023 ct_objt.f90                    (f90) 00665 |            CONTRACT_BUY_VARIABLE_COST(-1:MAX_CONTRACT_CLASS_ID_NUM), &|
+00023 ct_objt.f90                    (f90) 00666 |            CONTRACT_INTRA_CAPACITY(0:MAX_CONTRACT_CLASS_ID_NUM), &|
+00023 ct_objt.f90                    (f90) 00667 |            CONTRACT_INTRA_ENERGY(0:MAX_CONTRACT_CLASS_ID_NUM), &|
+00023 ct_objt.f90                    (f90) 00668 |            CONTRACT_INTRA_SO2_EMISSIONS(0:MAX_CONTRACT_CLASS_ID_NUM),&|
+00023 ct_objt.f90                    (f90) 00669 |            CONTRACT_SELLING_REVENUES(-1:MAX_CONTRACT_CLASS_ID_NUM,20),&|
+00023 ct_objt.f90                    (f90) 00670 |            CONTRACT_BTL_EXPENSES(-1:MAX_CONTRACT_CLASS_ID_NUM), &|
+00023 ct_objt.f90                    (f90) 00671 |            CONTRACT_PURCHASE_EXPENSES(-1:MAX_CONTRACT_CLASS_ID_NUM), &|
+00023 ct_objt.f90                    (f90) 00672 |            CONTRACT_ADJ_CLAUSE_COLLECTIONS &|
+00023 ct_objt.f90                    (f90) 00673 |                                        (-1:MAX_CONTRACT_CLASS_ID_NUM),&|
+00023 ct_objt.f90                    (f90) 00674 |            CONTRACT_SECONDARY_SALES_REVS &|
+00023 ct_objt.f90                    (f90) 00675 |                                         (-1:MAX_CONTRACT_CLASS_ID_NUM))|

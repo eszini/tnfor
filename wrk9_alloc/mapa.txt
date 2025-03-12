@@ -1,0 +1,237 @@
+Type ( 9)          src:                       |capacity_arrays.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:    64 (    0 -   104) |allocate(rps_hydro_db(2,400,numpms,0:12))|
+block starts at line  :    59                 |subroutine allocate_rps_hydro_db()|
+block ends   at line  :    65                 |end subroutine allocate_rps_hydro_db|
+line to insert use all:    60 (   59 -    65) |if(allocated(RPS_HYDRO_DB)) Then|
+line to insert check  :    68 (   59 -    68) |end subroutine allocate_rps_hydro_db|
+key used              :     1                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |capacity_arrays.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:    83 (    0 -   109) |allocate(qualifying_gen_db(active_rps,0:numpms,2))|
+block starts at line  :    71                 |subroutine  allocate_grx_db_arrays(active_rps)|
+block ends   at line  :    87                 |end subroutine allocate_grx_db_arrays|
+line to insert use all:    72 (   71 -    87) |integer (kind=2), intent(in) :: active_rps|
+line to insert check  :    87 (   71 -    90) |allocate(GRX_QUAL_GEN_DB(ACTIVE_RPS,0:NUMPMS,2))|
+key used              :     2                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |capacity_arrays.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:    89 (    0 -   114) |allocate(grx_qual_gen_db(active_rps,0:numpms,2))|
+block starts at line  :    71                 |subroutine  allocate_grx_db_arrays(active_rps)|
+block ends   at line  :    92                 |end subroutine allocate_grx_db_arrays|
+line to insert use all:    74 (   71 -    92) ||
+line to insert check  :    90 (   71 -    92) |allocate(SAVE_GRX_QUAL_GEN_DB(ACTIVE_RPS,0:NUMPMS,2))|
+key used              :     3                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |capacity_arrays.f90|
+Allocate number       :     4                 | 
+alloc sentence in line:    92 (    0 -   116) |allocate(save_grx_qual_gen_db(active_rps,0:numpms,2))|
+block starts at line  :    71                 |subroutine  allocate_grx_db_arrays(active_rps)|
+block ends   at line  :    94                 |end subroutine allocate_grx_db_arrays|
+line to insert use all:    74 (   71 -    94) ||
+line to insert check  :    93 (   71 -    94) ||
+key used              :     4                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |capacity_arrays.f90|
+Allocate number       :     5                 | 
+alloc sentence in line:   104 (    0 -   118) |allocate(dev_tg_cap(0:16,0:max(1,nr_trans_classes), &|
+block starts at line  :    98                 |subroutine allocate_dev_tg_cap(nr_trans_classes, STUDY_PERIOD)|
+block ends   at line  :   118                 |end subroutine allocate_dev_tg_cap|
+line to insert check  :   109 (   98 -   121) ||
+key used              :     5                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |capacity_arrays.f90|
+Allocate number       :     6                 | 
+alloc sentence in line:   115 (    0 -   123) |allocate (dev_new_tg_cap(0:21,0:max(1,nr_trans_classes), &|
+block starts at line  :    98                 |subroutine allocate_dev_tg_cap(nr_trans_classes, STUDY_PERIOD)|
+block ends   at line  :   123                 |end subroutine allocate_dev_tg_cap|
+line to insert check  :   117 (   98 -   123) |if (allocated(SAVED_DEV_NEW_TG_CAP)) then|
+key used              :     6                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |capacity_arrays.f90|
+Allocate number       :     7                 | 
+alloc sentence in line:   122 (    0 -   125) |allocate(saved_dev_new_tg_cap(0:21,0:max(1, &|
+block starts at line  :    98                 |subroutine allocate_dev_tg_cap(nr_trans_classes, STUDY_PERIOD)|
+block ends   at line  :   125                 |end subroutine allocate_dev_tg_cap|
+line to insert check  :   124 (   98 -   125) ||
+key used              :     7                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |cf_objt.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:   879 (  128 -  1034) |allocate(sum_class_peaks(12,2,forecast_growth_years, &|
+block starts at line  :   844                 |SUBROUTINE CALCULATE_CLASS_PEAKS(IYR,CLASS_COIN_LOSS_FACTOR, &|
+block ends   at line  :  1034                 |END|
+line to insert check  :   884 (  844 -  1037) |SUM_CLASS_PEAKS = 0.|
+key used              :     1                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |cf_objt.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:   889 (  128 -  1039) |allocate(class_ann_coin_peak(max_load_classes, &|
+block starts at line  :   844                 |SUBROUTINE CALCULATE_CLASS_PEAKS(IYR,CLASS_COIN_LOSS_FACTOR, &|
+block ends   at line  :  1039                 |END|
+line to insert check  :   891 (  844 -  1039) |CLASS_ANN_COIN_PEAK = 0.|
+key used              :     2                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |cf_objt.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:   994 (  128 -  1041) |allocate(sum_class_peaks(12,2,forecast_growth_years,1))|
+block starts at line  :   844                 |SUBROUTINE CALCULATE_CLASS_PEAKS(IYR,CLASS_COIN_LOSS_FACTOR, &|
+block ends   at line  :  1041                 |END|
+line to insert use all:   853 (  844 -  1041) ||
+line to insert check  :   995 (  844 -  1041) |SUM_CLASS_PEAKS = 0.|
+key used              :     3                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |cla_objt_arrays.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:  1214 ( 1044 -  1218) |allocate(cl_tg_cap(0:max_technology_counters, 0:maxvariable, study_period,2))|
+block starts at line  :  1206                 |subroutine allocate_cl_tg_cap(study_period, upper_trans_group)|
+block ends   at line  :  1216                 |end subroutine allocate_cl_tg_cap|
+line to insert use all:  1207 ( 1206 -  1216) |integer (kind=2) :: MaxVariable|
+line to insert check  :  1218 ( 1206 -  1219) ||
+key used              :     1                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |cls_runs.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:  1455 ( 1224 -  1969) |allocate(bc_table_position_for(0:max_bc_class_number))|
+block starts at line  :  1230                 |SUBROUTINE CLASS_RUN_SWITCHES_OBJECT|
+block ends   at line  :  1686                 |END|
+line to insert use all:  1234 ( 1230 -  1686) ||
+line to insert check  :  1459 ( 1230 -  1689) |MAX_TABLE_NUMBER = PASS_TABLE_POINTER(BC_TABLE_POSITION_FOR)|
+key used              :     1                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |cls_runs.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:  1622 ( 1224 -  1974) |allocate(ol_table_position_for(0:max_ol_class_number))|
+block starts at line  :  1230                 |SUBROUTINE CLASS_RUN_SWITCHES_OBJECT|
+block ends   at line  :  1691                 |END|
+line to insert use all:  1236 ( 1230 -  1691) ||
+line to insert check  :  1623 ( 1230 -  1691) |MAX_TABLE_NUMBER = PASS_TABLE_POINTER(OL_TABLE_POSITION_FOR)|
+key used              :     2                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |cls_runs.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:  1764 ( 1224 -  1976) |allocate(   &|
+block starts at line  :  1707                 |SUBROUTINE INIT_CLASS_RUN_SWITCH_FILE(MAX_CLASS_NUM)|
+block ends   at line  :  1975                 |END|
+line to insert check  :  1769 ( 1707 -  1978) |CLASS_TABLE_POINTER = -1|
+key used              :     3                 | 
+------------------------------------------( 4)-
+Type (15)          src:                       |coal_main_prg.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:  3555 ( 1982 -  4452) |allocate (supply_production_by_year(20,narray,0:30), &|
+block starts at line  :  2983                 |LOGICAL FUNCTION READ_PLANT_CONT_DEMAND_LINK_DTA(BaseYr, &|
+block ends   at line  :  3681                 |END FUNCTION|
+line to insert use all:  2992 ( 2983 -  3681) |CHARACTER (LEN=256) :: OUTPUT_DIRECTORY|
+line to replace allocs:  3557  (  2 allocs)   |ALLOCATE (Supply_Production_By_Year(20,nArray,0:30), &| 
+key used              :     1                 | 
+allocate added        :     1                 |allocate(Supply_Production_By_Year(20,nArray,0:30),stat=stv_er)|
+allocate added        :     2                 |allocate(Supply_Cost_By_Year(20,nArray,0:30),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 9)          src:                       |coal_main_prg.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:  3751 ( 1982 -  4458) |allocate(generictransportptrtotg(0:256,20)) ! tg,1 = paths tg,>1 pointer|
+block starts at line  :  3689                 |LOGICAL FUNCTION READ_GEN_PLANT_DEMAND_LINK_DATA(BaseYr)|
+block ends   at line  :  3915                 |END FUNCTION|
+line to insert use all:  3696 ( 3689 -  3915) |CHARACTER (LEN=256) :: OUTPUT_DIRECTORY|
+line to insert check  :  3755 ( 3689 -  3918) |ENDIF|
+key used              :     3                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |coal_main_prg.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:  3846 ( 1982 -  4463) |allocate(genericplantptrbytg(0:256))|
+block starts at line  :  3689                 |LOGICAL FUNCTION READ_GEN_PLANT_DEMAND_LINK_DATA(BaseYr)|
+block ends   at line  :  3920                 |END FUNCTION|
+line to insert use all:  3698 ( 3689 -  3920) ||
+line to insert check  :  3847 ( 3689 -  3920) |ENDIF|
+key used              :     4                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |cpl_objt.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:  4600 ( 4466 -  5015) |allocate(temp_asset_class_pointer(1024))|
+block starts at line  :  4487                 |SUBROUTINE CPL_OBJECT|
+block ends   at line  :  5015                 |END|
+line to insert use all:  4493 ( 4487 -  5015) ||
+line to insert check  :  4604 ( 4487 -  5018) |TEMP_ASSET_CLASS_POINTER = 0|
+key used              :     1                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |cpl_objt.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:  4707 ( 4466 -  5020) |allocate(bc_asset_class_pointer(max_bc_class_id_num))|
+block starts at line  :  4487                 |SUBROUTINE CPL_OBJECT|
+block ends   at line  :  5020                 |END|
+line to insert use all:  4495 ( 4487 -  5020) ||
+line to insert check  :  4708 ( 4487 -  5020) |BC_ASSET_CLASS_POINTER = &|
+key used              :     2                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |cpl_objt.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:  4749 ( 4466 -  5022) |allocate(temp_asset_class_pointer(1024))|
+block starts at line  :  4487                 |SUBROUTINE CPL_OBJECT|
+block ends   at line  :  5022                 |END|
+line to insert use all:  4495 ( 4487 -  5022) ||
+line to insert check  :  4750 ( 4487 -  5022) |TEMP_ASSET_CLASS_POINTER = 0|
+key used              :     3                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |cpl_objt.f90|
+Allocate number       :     4                 | 
+alloc sentence in line:  4880 ( 4466 -  5024) |allocate(ol_asset_class_pointer(max_ol_class_id_num))|
+block starts at line  :  4487                 |SUBROUTINE CPL_OBJECT|
+block ends   at line  :  5024                 |END|
+line to insert use all:  4495 ( 4487 -  5024) ||
+line to insert check  :  4881 ( 4487 -  5024) |OL_ASSET_CLASS_POINTER = &|
+key used              :     4                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |ct_objt.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:  5465 ( 5027 -  6073) |allocate(contract_adjustments_to_peak(study_period), &|
+block starts at line  :  5316                 |RECURSIVE FUNCTION CONTRACTS_READ()|
+block ends   at line  :  5587                 |DO YR = YEAR_START, YEAR_END|
+line to insert use all:  5325 ( 5316 -  5587) |SAVE|
+line to replace allocs:  5467  ( 21 allocs)   |ALLOCATE(CONTRACT_ADJUSTMENTS_TO_PEAK(STUDY_PERIOD), &| 
+key used              :     1                 | 
+allocate added        :     1                 |allocate(CONTRACT_ADJUSTMENTS_TO_PEAK(STUDY_PERIOD),stat=stv_er)|
+allocate added        :     2                 |allocate(ON_LINE_MONTH(CT_RECORDS),stat=stv_er)|
+allocate added        :     3                 |allocate(ON_LINE_YEAR(CT_RECORDS),stat=stv_er)|
+allocate added        :     4                 |allocate(OFF_LINE_MONTH(CT_RECORDS),stat=stv_er)|
+allocate added        :     5                 |allocate(OFF_LINE_YEAR(CT_RECORDS),stat=stv_er)|
+allocate added        :     6                 |allocate(CT_ANN_CAP(3,STUDY_PERIOD),stat=stv_er)|
+allocate added        :     7                 |allocate(CT_ID_TO_RECORD_POINTER(MAX_CT_ID_NUM),stat=stv_er)|
+allocate added        :     8                 |allocate(SAVE_CT_FIRST_ENERGY_PRICE(CT_RECORDS),stat=stv_er)|
+allocate added        :     9                 |allocate(SAVE_MIN_CONTRACT_FIXED_COST(CT_RECORDS),stat=stv_er)|
+allocate added        :    10                 |allocate(SAVE_CONTRACT_FIXED_COST(CT_RECORDS),stat=stv_er)|
+allocate added        :    11                 |allocate(SAVE_CT_SECOND_ENERGY_PRICE(CT_RECORDS),stat=stv_er)|
+allocate added        :    12                 |allocate(SAVE_CT_ENERGY_COST_ADDER(CT_RECORDS),stat=stv_er)|
+allocate added        :    13                 |allocate(SAVE_CT_ANNUAL_FIXED_COST(CT_RECORDS),stat=stv_er)|
+allocate added        :    14                 |allocate(CT_ANNUAL_LOAD_REDUCTION(STUDY_PERIOD),stat=stv_er)|
+allocate added        :    15                 |allocate(ASSET_CLASS_NUM(CT_RECORDS),stat=stv_er)|
+allocate added        :    16                 |allocate(ASSET_CLASS_VECTOR(CT_RECORDS),stat=stv_er)|
+allocate added        :    17                 |allocate(INTRA_ASSET_CLASS_ID(CT_RECORDS),stat=stv_er)|
+allocate added        :    18                 |allocate(INTRA_ASSET_CLASS_ALLOCATION(CT_RECORDS),stat=stv_er)|
+allocate added        :    19                 |allocate(INTRA_COMPANY_TRANSACTION(CT_RECORDS),stat=stv_er)|
+allocate added        :    20                 |allocate(INTRA_REVENUE_CLASS(CT_RECORDS),stat=stv_er)|
+allocate added        :    21                 |allocate(CONTRACT_ASSET_CLASS_POINTER(1024),stat=stv_er)|
+------------------------------------------( 5)-
+Type (15)          src:                       |ct_objt.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:  5688 ( 5027 -  6100) |allocate(contract_buy_capacity(0:max_contract_class_id_num), &|
+block starts at line  :  5316                 |RECURSIVE FUNCTION CONTRACTS_READ()|
+block ends   at line  :  5731                 |DO YR = YEAR_START, YEAR_END|
+line to insert use all:  5327 ( 5316 -  5731) ||
+line to replace allocs:  5687  ( 13 allocs)   |ALLOCATE(CONTRACT_BUY_CAPACITY(0:MAX_CONTRACT_CLASS_ID_NUM), &| 
+key used              :    22                 | 
+allocate added        :     1                 |allocate(CONTRACT_BUY_CAPACITY(0:MAX_CONTRACT_CLASS_ID_NUM),stat=stv_er)|
+allocate added        :     2                 |allocate(CONTRACT_BUY_ENERGY(0:MAX_CONTRACT_CLASS_ID_NUM),stat=stv_er)|
+allocate added        :     3                 |allocate(CONTRACT_BUY_SO2_EMISSIONS(0:MAX_CONTRACT_CLASS_ID_NUM),stat=stv_er)|
+allocate added        :     4                 |allocate(CONTRACT_BUY_FIXED_COST(-1:MAX_CONTRACT_CLASS_ID_NUM),stat=stv_er)|
+allocate added        :     5                 |allocate(CONTRACT_BUY_VARIABLE_COST(-1:MAX_CONTRACT_CLASS_ID_NUM),stat=stv_er)|
+allocate added        :     6                 |allocate(CONTRACT_INTRA_CAPACITY(0:MAX_CONTRACT_CLASS_ID_NUM),stat=stv_er)|
+allocate added        :     7                 |allocate(CONTRACT_INTRA_ENERGY(0:MAX_CONTRACT_CLASS_ID_NUM),stat=stv_er)|
+allocate added        :     8                 |allocate(CONTRACT_INTRA_SO2_EMISSIONS(0:MAX_CONTRACT_CLASS_ID_NUM),stat=stv_er)|
+allocate added        :     9                 |allocate(CONTRACT_SELLING_REVENUES(-1:MAX_CONTRACT_CLASS_ID_NUM,20),stat=stv_er)|
+allocate added        :    10                 |allocate(CONTRACT_BTL_EXPENSES(-1:MAX_CONTRACT_CLASS_ID_NUM),stat=stv_er)|
+allocate added        :    11                 |allocate(CONTRACT_PURCHASE_EXPENSES(-1:MAX_CONTRACT_CLASS_ID_NUM),stat=stv_er)|
+allocate added        :    12                 |allocate(CONTRACT_ADJ_CLAUSE_COLLECTIONS(-1:MAX_CONTRACT_CLASS_ID_NUM),stat=stv_er)|
+allocate added        :    13                 |allocate(CONTRACT_SECONDARY_SALES_REVS(-1:MAX_CONTRACT_CLASS_ID_NUM),stat=stv_er)|
+------------------------------------------( 5)-

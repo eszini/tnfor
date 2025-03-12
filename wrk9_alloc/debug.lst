@@ -1,6 +1,7 @@
 0,pro_exec9
 0,ex9_p1_a
 0,ex9_p1_b
+1,ex9_p1_c
 0,ex9_p2
 0,ex9_p4
 0,hacer_lugar
@@ -11,6 +12,7 @@
 0,chg_alloc_t09
 0,chg_alloc_g03
 0,chg_alloc_g07
+1,chg_alloc_g09
 0,chg_alloc_g02
 0,chg_alloc_g05
 0,chg_alloc_g15
