@@ -1,0 +1,11 @@
+si algo falla en la ultima version de tfor
+cosas que toque:
+
+a) agregue el busco_pri_i en dos rutinas ...
+   para que ponga el allocate_vars antes que implicit nont, si esta
+ 
+b) tiene_allocate, se fija si esta la frase "desallocated at bottom" ...
+   se agrego ese if 
+
+
+

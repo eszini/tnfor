@@ -19,7 +19,10 @@
  *      ojo .. en grx_planning_routines ... 
  *	aparecio un caso con INTEGER*2 , y metio el allocate_vars en cualquier lugar 
  *
- *
+ *	atenti ...
+ *	en la serie "busco_pri_d" ... etc
+ *	hay que incluir ir tambien "implicit none" ... y va en la linea anterior
+ *	(dr_booth ... )
  */
 
 
@@ -7585,6 +7588,9 @@ int	pro_exec9()
 		ex9_p1_b();
 
 #if 1
+		if (gp_proceed)
+		{
+
 		/* desdoabla lineas largas en los progs     */
 		/*
 		 * esta habilitado y parece que funcionando bien para f90
@@ -7592,6 +7598,7 @@ int	pro_exec9()
 		 *
 		 */
 		ex9_p1_c();
+		}
 #endif
 	}
 
@@ -10469,7 +10476,7 @@ int	ex9_p1_c()
 	static	int	f_msgmmsb6 = 0;
 
 	int 	h,i,j,k,k1,k2;
-	int	l1,l2;
+	int	l1,l2,l3;
 	int	c1,c2,c3,c4;
 	int	f1,f2,f3,f4,f5;
 	int	p1,p2,p3,p4;
@@ -11660,7 +11667,7 @@ if (1)
 /* bloque while principal */
 
 
-/* EEE */
+/* EEE1 */
 
 
 /* desdoblar lineas largas ex9_p1_c */
@@ -11783,7 +11790,7 @@ mprintf (z,"linea2         |%s| \n",b3);
 						/* puedo armar dos lineas, poniendo stat=stv_er aparte */
 						if (l2 > 72 && l2 < 86)
 						{
-							printf ("EEE1:%03d|%s|\n",l2,b0);
+							printf ("EEEa:%03d|%s|\n",l2,b0);
 
 							hacer_lugar_itz(pf,uf,i,1,1);
 							memset(b2,0,sizeof(b2));
@@ -11801,7 +11808,7 @@ mprintf (z,"linea2         |%s| \n",b3);
 						/* necesito dos lineas, pero cortar en algun lugar en el medio */
 						if (l2 >= 86)
 						{
-							printf ("EEE2:%03d|%s|\n",l2,b0);
+							printf ("EEEb:%03d|%s|\n",l2,b0);
 
 #if 1
 							hacer_lugar_itz(pf,uf,i,1,1);
@@ -11965,6 +11972,7 @@ printf ("DDD 6 : %2d |%s|\n",6,b6);
 
 
 
+/* EEE2 */
 
 
 /* file tipo 2 */
@@ -12002,6 +12010,106 @@ printf ("DDD 6 : %2d |%s|\n",6,b6);
 
 		strcpy(b0,trim_end_f90(b0));
 		strcpy(b0,trim_blanks(b0));
+
+		l2 = strlen(b0);
+		l3 = strlen(b1);
+
+		if (l2 > 83)
+		{
+
+
+			if (tiene_string(b0,"stat=stv_er") && tiene_string(b0,"allocate") )
+			{
+
+if (gp_debug && w)
+{
+	mprintf(z,"CCC1 l2:(%3d) b0:|%s|\n",l2,b0);
+	mprintf(z,"CCC2 l3:(%3d) b1:|%s|\n",l3,b1);
+}
+
+				/* pos del primer caracter de sentencia ... */
+				for (j=0, p1=0, l2=strlen(b1), f1=1; f1 && j<l2; j++)
+					if (b1[j] != ' ')
+						f1 = 0, p1 = j;
+
+				/* pos del stat=stv_er */
+				for (j=0, p2=0, f1=1; f1 && j<l2; j++)
+					if (!strncmp(b1+j,",stat=stv_er",12))
+						f1 = 0, p2 = j;
+
+				/* si hay comentario ... pos del comentario ... */
+				for (j=p2+12, p3=0, f1=1; f1 && j<l2; j++)
+					if (b1[j] == '!')
+						f1 = 0, p3 = j;
+
+
+				/* cuantos blancos hay al princpio ... */
+				for (j=0, p4=0, f1=1; f1 && j<l2; j++)
+					if (b1[j] != ' ')
+						f1 = 0, p4 = j ;
+
+				/* copio la sentencia pura, sin el stat= ... */
+				memset(b2,0,sizeof(b2));
+				strncpy(b2,b1+p1,p2-p1+1);
+
+				/* copio si tiene comentarios  ... */
+				memset(b3,0,sizeof(b3));
+				if (p3)
+					strcpy(b3,b1+p3);
+				else
+					strcpy(b3," ");
+
+if (gp_debug && w)
+{
+mprintf (z,"CCC3 : %2d |%s|\n",0,b2);
+mprintf (z,"CCC4 : %2d |%s|\n",1,b3);
+mprintf (z,"CCC5 : p1 %2d p2 %2d p3 %2d p2-p1+1: %2d\n",p1,p2,p3,p2-p1+1);
+}
+
+				
+				/* 
+				 * desdoblo el allocate( ..... ,stat=stv_er)
+				 * en dos lineas ....
+				 */
+
+				if (1)
+				{
+					memset(b4,32,sizeof(b4));
+					memset(b5,0,sizeof(b5));
+					memset(b6,0,sizeof(b6));
+					strncpy(b5,b4,p4);
+					strcat(b5,b2);
+					strcat(b5," &");
+
+					strncpy(b6,b4,71);
+#if 0
+					strncat(b6,b4,65-p4);
+#endif
+					strcat(b6,"stat=stv_er) ");
+					if (p3)
+						strcat(b6,b3);
+
+					pf =  (*tb[n_f]).pf ;
+					uf =  (*tb[n_f]).uf ;
+
+					hacer_lugar_itz(pf,uf,i,1,1);
+
+					strcpy( (*fnp[i+0]).l,b5);
+					strcpy( (*fnp[i+1]).l,b6);
+				
+					i+= 1;
+printf ("CCC6 : %2d |%s|\n",3,b0+p1);
+printf ("CCC7 : %2d |%s|\n",5,b5);
+printf ("CCC8 : %2d |%s|\n",6,b6);
+
+				}
+				
+
+			}
+		}
+
+
+
 
 		if (tiene_string(b0,"check_alloc"))
 		{
@@ -12044,6 +12152,7 @@ mprintf (z,"hice  strcpy 1 i: %d str: |%s| \n",i,(*fnp[i]).l );
 				i+= 1;
 			}
 		}
+
 
 
 
@@ -15524,6 +15633,7 @@ int	f_act;
 	int	pri_l,ult_l;
 	int	ult_u,pri_d;	/* ultimo use, primera declaracion */
 	int	pri_s;		/* primer save */
+	int	pri_i;		/* implicit none */
 	int	mod_type;	/* 0 no se, 1 subroutine 2 function */
 	int	linea_use;	/* linea en la que hay que poner el use */
 	int	agrego_lines;	/* lineas que se agregan al final x hacer-lugar */
@@ -15624,6 +15734,13 @@ mprintf (z,"sali de busco_ult_l ult_l: %d |%s| \n",ult_l,(*fnp[ult_l]).l);
 		pri_s = 0;
 		busco_pri_s(pri_l,ult_l,pri_l,&pri_s);
 
+#if 1
+		/* busco si esta implicit none */
+		pri_i = 0;
+		busco_pri_i(pri_l,ult_l,pri_l,&pri_i);
+#endif
+
+
 		/* solo para los que salieron distinto de 0 .. busco el minimo valor de linea */
 		kvl=0;
 		if (ult_u)
@@ -15632,6 +15749,8 @@ mprintf (z,"sali de busco_ult_l ult_l: %d |%s| \n",ult_l,(*fnp[ult_l]).l);
 			vl[kvl++] = pri_d;
 		if (pri_s)
 			vl[kvl++] = pri_s;
+		if (pri_i)
+			vl[kvl++] = pri_i;
 
 
 if (gp_debug && w)
@@ -16008,6 +16127,7 @@ int	f_act;
 	int	pri_l,ult_l;
 	int	ult_u,pri_d;	/* ultimo use, primera declaracion */
 	int	pri_s;		/* primer save */
+	int	pri_i;		/* implicit none */
 	int	mod_type;	/* 0 no se, 1 subroutine 2 function */
 	int	linea_use;	/* linea en la que hay que poner el use */
 	int	agrego_lines;	/* lineas que se agregan al final x hacer-lugar */
@@ -16090,6 +16210,12 @@ int	f_act;
 		pri_s = 0;
 		busco_pri_s(pri_l,ult_l,pri_l,&pri_s);
 
+#if 1
+		/* busco si esta implicit none */
+		pri_i = 0;
+		busco_pri_i(pri_l,ult_l,pri_l,&pri_i);
+#endif
+
 		/* solo para los que salieron distinto de 0 .. busco el minimo valor de linea */
 		kvl=0;
 		if (ult_u)
@@ -16098,6 +16224,8 @@ int	f_act;
 			vl[kvl++] = pri_d;
 		if (pri_s)
 			vl[kvl++] = pri_s;
+		if (pri_i)
+			vl[kvl++] = pri_i;
 
 		/* no encontre donde poner el allocate_vars ! */
 		if (kvl == 0)
@@ -17066,6 +17194,78 @@ if (gp_debug && w)
 	
 
 	
+/*
+ * -----------------------------------------------------------------------------------
+ *
+ *	busco_pri_i 
+ *
+ * -----------------------------------------------------------------------------------
+ */
+
+
+/*
+ *	busco_pri_i
+ *	buscar la primera linea con implicit none, si hay ...
+ */
+
+
+int	busco_pri_i(pf,uf,spt,v)
+int	pf,uf,spt,*v;
+{
+	int	i;
+	int	f_proceso;
+	int	f_sigo;
+	int	f_res;
+	char	b1[MAXB];
+
+	char	z[MAXV];
+	int	w;
+	sprintf (z,"busco_pri_i");
+	w = g_dbg(z);
+
+	*v = 0;
+
+	for (i=spt, f_res=0, f_sigo=1 ; f_sigo && i<=uf; i++)
+	{
+
+		strcpy(b1, pasar_a_minusc( (*fnp[i]).l) );
+		strcpy(b1, trim_end_f90(b1));
+
+if (gp_debug && w)
+{
+	mprintf(z,"busco    IMPLICIT NONE en: i %d |%s|\n",i,b1);
+}
+
+		f_proceso = 1;
+		if (linea_vacia(b1) || es_linea_comentario(b1))
+			f_proceso = 0;
+
+		if (f_proceso)
+		{
+if (gp_debug && w)
+{
+	mprintf(z,"entre a f_proces: i %d |%s|\n",i,b1);
+}
+			if (tiene_implicit(b1) )
+			{
+				f_sigo = 0;
+				f_res  = 1;
+				*v     = i;
+if (gp_debug && w)
+{
+	mprintf(z,"encontre IMPLICIT NONE en: i %d |%s|\n",i,b1);
+}
+
+			}
+		}
+	}
+
+	return (f_res);
+}
+		
+	
+
+	
 	
 
 
@@ -17575,6 +17775,15 @@ char	*s;
  * -----------------------------------------------------------------------------------
  */
 
+/*
+ *	pending ...
+ *	habria que mirar solo en la sentencia sin comentario al fondo ....
+ *	esta fallando por "deallocated at bottom" .... (econintr ... )
+ *
+ *      ALLOCATE(BLOCK_DISP_COST(NUNITS,2)) ! DEALLOCATED AT BOTTOM
+ *
+ */
+
 
 int	tiene_allocate(s)
 char	*s;
@@ -17621,7 +17830,10 @@ mprintf(z,"voy a ver si tiene_allocate |%s| \n",s);
 
 			k2++;
 			if (f_try && tiene_deallocate(s))
-				f_try = 0, k2_key=k2;
+			{	f_try = 0, k2_key=k2;
+				if (tiene_deallocated_at(s))
+					f_try = 1;
+			}
 
 			k2++;
 			if (f_try && tiene_call(s))
@@ -17702,6 +17914,34 @@ char	*s;
 	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
 	{	
 		if (!strncmp(s+i,"deallocate",k1))
+		{
+			f_try = 1;
+
+
+			if (f_try)
+				f_res=1, f_sig=0;
+		}
+	}
+
+	return (f_res);
+}
+
+
+
+int	tiene_deallocated_at(s)
+char	*s;
+{
+	int	i,j,k,l1;
+	int	f_res,f_sig,f_try;
+
+	int	k1;
+
+	k1 = 16;
+	l1 = strlen(s);
+
+	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1; i++)
+	{	
+		if (!strncmp(s+i,"deallocated at b",k1))
 		{
 			f_try = 1;
 
@@ -18547,6 +18787,40 @@ char	*s;
 			if (f_try)
 				if (!strncmp(s+i,"save_",k1+1))
 					f_try = 0, f_res = 0, f_sig = 0;
+
+
+			if (f_try)
+				f_res=1, f_sig=0;
+		}
+	}
+
+	return (f_res);
+}
+
+
+int	tiene_implicit(s)
+char	*s;
+{
+	int	i,j,k,l1;
+	int	f_res,f_sig,f_try;
+
+	int	k1;
+
+	k1 = 13;
+	l1 = strlen(s);
+
+	for (i=0, f_res=0, f_sig=1; f_sig && i < l1 - k1 + 1; i++)
+	{	
+		if (!strncmp(s+i,"implicit none",k1))
+		{
+			f_try = 1;
+
+#if 0
+			/* excepciones ... */
+			if (f_try)
+				if (!strncmp(s+i,"save_",k1+1))
+					f_try = 0, f_res = 0, f_sig = 0;
+#endif
 
 
 			if (f_try)

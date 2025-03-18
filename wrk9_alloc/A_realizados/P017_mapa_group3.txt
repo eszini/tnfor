@@ -1,0 +1,393 @@
+Type ( 9)          src:                       |el_objt.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:   546 (    0 -  1305) |allocate(peak_adj_2_off_system_sales(study_period))|
+block starts at line  :   415                 |RECURSIVE FUNCTION EL_UNITS_READ()|
+block ends   at line  :  1087                 |OFF_LINE_YEAR(UNIT_NO) = YEAR_END|
+line to insert use all:   427 (  415 -  1087) |SAVE|
+line to insert check  :   550 (  415 -  1090) |PEAK_ADJ_2_OFF_SYSTEM_SALES = 0.|
+key used              :     1                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |el_objt.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:   565 (    0 -  1310) |allocate(on_line_month(max_el_units),on_line_year(max_el_units),off_line_month(max_el_units),off_line_year(max_el_units), &|
+block starts at line  :   415                 |RECURSIVE FUNCTION EL_UNITS_READ()|
+block ends   at line  :  1092                 |OFF_LINE_YEAR(UNIT_NO) = YEAR_END|
+line to insert use all:   428 (  415 -  1092) ||
+line to replace allocs:   564  ( 20 allocs)   |ALLOCATE(ON_LINE_MONTH(MAX_EL_UNITS),ON_LINE_YEAR(MAX_EL_UNITS),OFF_LINE_MONTH(MAX_EL_UNITS),OFF_LINE_YEAR(MAX_EL_UNITS), &| 
+key used              :     2                 | 
+allocate added        :     1                 |allocate(ON_LINE_MONTH(MAX_EL_UNITS),stat=stv_er)|
+allocate added        :     2                 |allocate(ON_LINE_YEAR(MAX_EL_UNITS),stat=stv_er)|
+allocate added        :     3                 |allocate(OFF_LINE_MONTH(MAX_EL_UNITS),stat=stv_er)|
+allocate added        :     4                 |allocate(OFF_LINE_YEAR(MAX_EL_UNITS),stat=stv_er)|
+allocate added        :     5                 |allocate(PRIMARY_MOVER_INDEX(MAX_EL_UNITS),stat=stv_er)|
+allocate added        :     6                 |allocate(RPS_PM_INDEX(MAX_EL_UNITS),stat=stv_er)|
+allocate added        :     7                 |allocate(EL_UNIT_ID(MAX_EL_UNITS),stat=stv_er)|
+allocate added        :     8                 |allocate(EL_ANN_CAP(3,STUDY_PERIOD,2),stat=stv_er)|
+allocate added        :     9                 |allocate(EL_TG_CAP(0:MAX(int(1,2),UPPER_TRANS_GROUP),STUDY_PERIOD,2),stat=stv_er)|
+allocate added        :    10                 |allocate(LATITUDE(MAX_EL_UNITS),stat=stv_er)|
+allocate added        :    11                 |allocate(LONGITUDE(MAX_EL_UNITS),stat=stv_er)|
+allocate added        :    12                 |allocate(BASECASE_PLANT_ID(MAX_EL_UNITS),stat=stv_er)|
+allocate added        :    13                 |allocate(BASECASE_UNIT_ID(MAX_EL_UNITS),stat=stv_er)|
+allocate added        :    14                 |allocate(BASECASE_MARKET_AREA_ID(MAX_EL_UNITS),stat=stv_er)|
+allocate added        :    15                 |allocate(BASECASE_TRANS_AREA_ID(MAX_EL_UNITS),stat=stv_er)|
+allocate added        :    16                 |allocate(BASECASE_PLANT_NERC_SUB_ID(MAX_EL_UNITS),stat=stv_er)|
+allocate added        :    17                 |allocate(BASECASE_PLANT_OWNER_ID(MAX_EL_UNITS),stat=stv_er)|
+allocate added        :    18                 |allocate(TRANSACTION_GROUP_ID(MAX_EL_UNITS),stat=stv_er)|
+allocate added        :    19                 |allocate(REPORT_THIS_UNIT(MAX_EL_UNITS),stat=stv_er)|
+allocate added        :    20                 |allocate(UTILITY_OWNED(MAX_EL_UNITS),stat=stv_er)|
+------------------------------------------( 5)-
+Type (11)          src:                       |el_objt.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:   622 (    0 -  1345) |allocate(el_options_id_num(el_options),el_options_pointr(el_options))|
+block starts at line  :   415                 |RECURSIVE FUNCTION EL_UNITS_READ()|
+block ends   at line  :  1127                 |OFF_LINE_YEAR(UNIT_NO) = YEAR_END|
+line to insert use all:   428 (  415 -  1127) ||
+line to replace allocs:   621  (  2 allocs)   |ALLOCATE(EL_OPTIONS_ID_NUM(EL_OPTIONS),EL_OPTIONS_POINTR(EL_OPTIONS))| 
+key used              :    22                 | 
+allocate added        :     1                 |allocate(EL_OPTIONS_ID_NUM(EL_OPTIONS),stat=stv_er)|
+allocate added        :     2                 |allocate(EL_OPTIONS_POINTR(EL_OPTIONS),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 9)          src:                       |el_objt.f90|
+Allocate number       :     4                 | 
+alloc sentence in line:   632 (    0 -  1349) |allocate(peak_adj_2_off_system_sales(study_period))|
+block starts at line  :   415                 |RECURSIVE FUNCTION EL_UNITS_READ()|
+block ends   at line  :  1131                 |OFF_LINE_YEAR(UNIT_NO) = YEAR_END|
+line to insert use all:   428 (  415 -  1131) ||
+line to insert check  :   633 (  415 -  1131) |PEAK_ADJ_2_OFF_SYSTEM_SALES = 0.|
+key used              :    24                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |el_objt.f90|
+Allocate number       :     5                 | 
+alloc sentence in line:  1259 (    0 -  1351) |allocate(temp_retired_unit_no(20))|
+block starts at line  :   415                 |RECURSIVE FUNCTION EL_UNITS_READ()|
+block ends   at line  :  1320                 |END|
+line to insert use all:   428 (  415 -  1320) ||
+line to insert check  :  1260 (  415 -  1320) |ENDIF|
+key used              :    25                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |el_objt.f90|
+Allocate number       :     6                 | 
+alloc sentence in line:  1264 (    0 -  1353) |allocate(temp_retired_off_line(20))|
+block starts at line  :   415                 |RECURSIVE FUNCTION EL_UNITS_READ()|
+block ends   at line  :  1322                 |END|
+line to insert use all:   428 (  415 -  1322) ||
+line to insert check  :  1265 (  415 -  1322) |ENDIF|
+key used              :    26                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |en_objt.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:  1513 ( 1356 -  2775) |allocate(bc_table_position_for(0:max_bc_class_number))|
+block starts at line  :  1364                 |SUBROUTINE EN_OBJECT()|
+block ends   at line  :  1658                 |END|
+line to insert use all:  1370 ( 1364 -  1658) ||
+line to insert check  :  1517 ( 1364 -  1661) |MAX_BC_TABLE_NUMBER = PASS_TABLE_POINTER(BC_TABLE_POSITION_FOR)|
+key used              :     1                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |en_objt.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:  1604 ( 1356 -  2780) |allocate(ol_table_position_for(0:max_ol_class_number))|
+block starts at line  :  1364                 |SUBROUTINE EN_OBJECT()|
+block ends   at line  :  1663                 |END|
+line to insert use all:  1372 ( 1364 -  1663) ||
+line to insert check  :  1605 ( 1364 -  1663) |MAX_OL_TABLE_NUMBER = PASS_TABLE_POINTER(OL_TABLE_POSITION_FOR)|
+key used              :     2                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |en_objt.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:  1838 ( 1356 -  2782) |allocate(envir_class_2_table(0:max_class_num))|
+block starts at line  :  1675                 |FUNCTION ENVIR_DATA_READ()|
+block ends   at line  :  2703                 |END|
+line to insert use all:  1685 ( 1675 -  2703) ||
+line to insert check  :  1842 ( 1675 -  2706) |CALL RETURN_ENVIR_FILE_CLASS_INFO(ENVIR_CLASS_2_TABLE,   &|
+key used              :     3                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |en_objt.f90|
+Allocate number       :     4                 | 
+alloc sentence in line:  1878 ( 1356 -  2787) |allocate(class_epa_eas(0:max_table_num),   &|
+block starts at line  :  1675                 |FUNCTION ENVIR_DATA_READ()|
+block ends   at line  :  2708                 |END|
+line to insert use all:  1687 ( 1675 -  2708) ||
+line to replace allocs:  1877  ( 18 allocs)   |ALLOCATE(CLASS_EPA_EAS(0:MAX_TABLE_NUM),   &| 
+key used              :     4                 | 
+allocate added        :     1                 |allocate(CLASS_EPA_EAS(0:MAX_TABLE_NUM),stat=stv_er)|
+allocate added        :     2                 |allocate(DEFINED_CLASS(0:9999),stat=stv_er)|
+allocate added        :     3                 |allocate(CLASS_EPA_SETASIDE_RATE(0:MAX_TABLE_NUM),stat=stv_er)|
+allocate added        :     4                 |allocate(CLASS_EMIS_DISPATCH_ADDER(NUMBER_OF_EMISSION_TYPES,0:MAX_TABLE_NUM),stat=stv_er)|
+allocate added        :     5                 |allocate(MONTH_EMIS_DISPATCH_ADDER(NUMBER_OF_EMISSION_TYPES,0:MAX_TABLE_NUM,0:12),stat=stv_er)|
+allocate added        :     6                 |allocate(CLASS_EMIS_CAP(NUMBER_OF_EMISSION_TYPES,0:MAX_TABLE_NUM),stat=stv_er)|
+allocate added        :     7                 |allocate(CLASS_PURCH_CRED_PRICE(NUMBER_OF_EMISSION_TYPES,0:MAX_TABLE_NUM),stat=stv_er)|
+allocate added        :     8                 |allocate(CLASS_SELL_CRED_PRICE(NUMBER_OF_EMISSION_TYPES,0:MAX_TABLE_NUM),stat=stv_er)|
+allocate added        :     9                 |allocate(MONTH_PURCH_CRED_PRICE(NUMBER_OF_EMISSION_TYPES,0:MAX_TABLE_NUM,0:12),stat=stv_er)|
+allocate added        :    10                 |allocate(MONTH_SELL_CRED_PRICE(NUMBER_OF_EMISSION_TYPES,0:MAX_TABLE_NUM,0:12),stat=stv_er)|
+allocate added        :    11                 |allocate(CLASS_EMIS_STRAT(NUMBER_OF_EMISSION_TYPES,0:MAX_TABLE_NUM),stat=stv_er)|
+allocate added        :    12                 |allocate(CLASS_MIN_BANK(NUMBER_OF_EMISSION_TYPES,0:MAX_TABLE_NUM),stat=stv_er)|
+allocate added        :    13                 |allocate(CLASS_MAX_BANK(NUMBER_OF_EMISSION_TYPES,0:MAX_TABLE_NUM),stat=stv_er)|
+allocate added        :    14                 |allocate(EMIS_DISPATCH_ADDER_ESC(NUMBER_OF_EMISSION_TYPES,0:MAX_TABLE_NUM),stat=stv_er)|
+allocate added        :    15                 |allocate(PURCH_CRED_PRICE_ESC(NUMBER_OF_EMISSION_TYPES,0:MAX_TABLE_NUM),stat=stv_er)|
+allocate added        :    16                 |allocate(SELL_CRED_PRICE_ESC(NUMBER_OF_EMISSION_TYPES,0:MAX_TABLE_NUM),stat=stv_er)|
+allocate added        :    17                 |allocate(ACCEPT_CO2_PUSH(0:MAX_TABLE_NUM),stat=stv_er)|
+allocate added        :    18                 |allocate(ACCEPT_SO2_PUSH(0:MAX_TABLE_NUM),stat=stv_er)|
+------------------------------------------( 5)-
+Type (15)          src:                       |en_objt.f90|
+Allocate number       :     5                 | 
+alloc sentence in line:  1918 ( 1356 -  2797) |allocate(class_net_ann_emis(number_of_emission_types),   &|
+block starts at line  :  1675                 |FUNCTION ENVIR_DATA_READ()|
+block ends   at line  :  2718                 |END|
+line to insert use all:  1687 ( 1675 -  2718) ||
+line to replace allocs:  1917  ( 12 allocs)   |ALLOCATE(CLASS_NET_ANN_EMIS(NUMBER_OF_EMISSION_TYPES),   &| 
+key used              :    22                 | 
+allocate added        :     1                 |allocate(CLASS_NET_ANN_EMIS(NUMBER_OF_EMISSION_TYPES),stat=stv_er)|
+allocate added        :     2                 |allocate(CLASS_EMIS_EXPENSE(NUMBER_OF_EMISSION_TYPES),stat=stv_er)|
+allocate added        :     3                 |allocate(CLASS_EMIS_REVENUE(NUMBER_OF_EMISSION_TYPES),stat=stv_er)|
+allocate added        :     4                 |allocate(CLASS_EMISSION_CAP(NUMBER_OF_EMISSION_TYPES),stat=stv_er)|
+allocate added        :     5                 |allocate(CLASS_CL_EMISSIONS(NUMBER_OF_EMISSION_TYPES),stat=stv_er)|
+allocate added        :     6                 |allocate(CLASS_EMISSIONS(NUMBER_OF_EMISSION_TYPES),stat=stv_er)|
+allocate added        :     7                 |allocate(RPT_CUM_ANN_EMIS(NUMBER_OF_EMISSION_TYPES),stat=stv_er)|
+allocate added        :     8                 |allocate(CLASS_EMIS_SELL(NUMBER_OF_EMISSION_TYPES),stat=stv_er)|
+allocate added        :     9                 |allocate(CLASS_EMIS_PURCH(NUMBER_OF_EMISSION_TYPES),stat=stv_er)|
+allocate added        :    10                 |allocate(AVE_PURCH_CRED_PRICE(NUMBER_OF_EMISSION_TYPES),stat=stv_er)|
+allocate added        :    11                 |allocate(AVE_SELL_CRED_PRICE(NUMBER_OF_EMISSION_TYPES),stat=stv_er)|
+allocate added        :    12                 |allocate(CLASS_CUM_ANN_EMIS(NUMBER_OF_EMISSION_TYPES,0:MAX_INIT_CLASS_NUM),stat=stv_er)|
+------------------------------------------( 5)-
+Type (15)          src:                       |esrn_obj.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:  3195 ( 2810 -  3942) |allocate(i4_vector_map(-1:max_vector_num),vector_values(avail_data_years+1,-1:max_vectors),i4_reference_vector_map(0:9), &|
+block starts at line  :  3111                 |FUNCTION READ_ESCALATION_FILE()|
+block ends   at line  :  3918                 |END|
+line to insert use all:  3122 ( 3111 -  3918) |LOGICAL (KIND=1) :: READ_ESCALATION_FILE,SET_RNV_ESCALATION_VECTORS|
+line to replace allocs:  3197  ( 10 allocs)   |ALLOCATE(I4_VECTOR_MAP(-1:MAX_VECTOR_NUM),VECTOR_VALUES(AVAIL_DATA_YEARS+1,-1:MAX_VECTORS),I4_REFERENCE_VECTOR_MAP(0:9), &| 
+key used              :     1                 | 
+allocate added        :     1                 |allocate(I4_VECTOR_MAP(-1:MAX_VECTOR_NUM),stat=stv_er)|
+allocate added        :     2                 |allocate(VECTOR_VALUES(AVAIL_DATA_YEARS+1,-1:MAX_VECTORS),stat=stv_er)|
+allocate added        :     3                 |allocate(I4_REFERENCE_VECTOR_MAP(0:9),stat=stv_er)|
+allocate added        :     4                 |allocate(CUMULATIVE_VALUES(-1:MAX_VECTORS),stat=stv_er)|
+allocate added        :     5                 |allocate(VECTOR_TYPE_IS_VALUE(-1:MAX_VECTORS),stat=stv_er)|
+allocate added        :     6                 |allocate(GROWTH_RATE_YR(-1:MAX_VECTORS),stat=stv_er)|
+allocate added        :     7                 |allocate(ESCALATION_RATE_IS_REAL(-1:MAX_VECTORS),stat=stv_er)|
+allocate added        :     8                 |allocate(POSITION_IS_ANNUAL_VECTOR(-1:MAX_VECTORS),stat=stv_er)|
+allocate added        :     9                 |allocate(I4_MONTHLY_VECTOR_MAP(-1:MAX_VECTOR_NUM,12),stat=stv_er)|
+allocate added        :    10                 |allocate(VECTOR_PERIOD_IS_ANNUAL(-1:MAX_VECTOR_NUM),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 9)          src:                       |esrn_obj.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:  3383 ( 2810 -  3962) |allocate(active_vector_values(-1:maximum_vectors))|
+block starts at line  :  3111                 |FUNCTION READ_ESCALATION_FILE()|
+block ends   at line  :  3938                 |END|
+line to insert use all:  3124 ( 3111 -  3938) ||
+line to insert check  :  3384 ( 3111 -  3938) |DO I4 = -1, MAXIMUM_VECTORS|
+key used              :    11                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |fc_objt.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:  4102 ( 3965 -  4292) |allocate(fuel_price(0:avail_data_years))|
+block starts at line  :  3975                 |SUBROUTINE FC_OBJECT|
+block ends   at line  :  4292                 |END|
+line to insert use all:  3981 ( 3975 -  4292) |LOGICAL(kind=1) :: LOAD_FUEL_PRICES|
+line to insert check  :  4106 ( 3975 -  4295) |ALLOCATE(WRITE_FUEL_PRICE(0:AVAIL_DATA_YEARS))|
+key used              :     1                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |fc_objt.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:  4108 ( 3965 -  4297) |allocate(write_fuel_price(0:avail_data_years))|
+block starts at line  :  3975                 |SUBROUTINE FC_OBJECT|
+block ends   at line  :  4297                 |END|
+line to insert use all:  3983 ( 3975 -  4297) ||
+line to insert check  :  4109 ( 3975 -  4297) |DO|
+key used              :     2                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |fc_objt.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:  4196 ( 3965 -  4299) |allocate(fuel_price(0:avail_data_years))|
+block starts at line  :  3975                 |SUBROUTINE FC_OBJECT|
+block ends   at line  :  4299                 |END|
+line to insert use all:  3983 ( 3975 -  4299) ||
+line to insert check  :  4197 ( 3975 -  4299) |IREC = 0|
+key used              :     3                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |fe_objt.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:  4557 ( 4302 -  4869) |allocate(p_emis_report(max_emission_report_groups,nunits))|
+block starts at line  :  4508                 |SUBROUTINE SET_EMISSIONS_RATES(NUNITS)|
+block ends   at line  :  4869                 |END|
+line to insert use all:  4519 ( 4508 -  4869) ||
+line to insert check  :  4561 ( 4508 -  4872) |ALLOCATE(S_EMIS_REPORT(MAX_EMISSION_REPORT_GROUPS,NUNITS))|
+key used              :     1                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |fe_objt.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:  4563 ( 4302 -  4874) |allocate(s_emis_report(max_emission_report_groups,nunits))|
+block starts at line  :  4508                 |SUBROUTINE SET_EMISSIONS_RATES(NUNITS)|
+block ends   at line  :  4874                 |END|
+line to insert use all:  4521 ( 4508 -  4874) ||
+line to insert check  :  4564 ( 4508 -  4874) |ALLOCATE(EMISS_FUEL_EMIS_REPORT(MAX_EMISSION_REPORT_GROUPS,NUNITS))|
+key used              :     2                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |fe_objt.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:  4566 ( 4302 -  4876) |allocate(emiss_fuel_emis_report(max_emission_report_groups,nunits))|
+block starts at line  :  4508                 |SUBROUTINE SET_EMISSIONS_RATES(NUNITS)|
+block ends   at line  :  4876                 |END|
+line to insert use all:  4521 ( 4508 -  4876) ||
+line to insert check  :  4567 ( 4508 -  4876) |!|
+key used              :     3                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |fe_objt.f90|
+Allocate number       :     4                 | 
+alloc sentence in line:  4716 ( 4302 -  4878) |allocate(pointr_record(0:1024)) ! save pointr_record|
+block starts at line  :  4508                 |SUBROUTINE SET_EMISSIONS_RATES(NUNITS)|
+block ends   at line  :  4878                 |END|
+line to insert use all:  4521 ( 4508 -  4878) ||
+line to insert check  :  4717 ( 4508 -  4878) |POINTR_RECORD = 0|
+key used              :     4                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |fe_objt.f90|
+Allocate number       :     5                 | 
+alloc sentence in line:  4722 ( 4302 -  4880) |allocate(emission_rates(0:r_records,total_emission_groups)) ! save pointr_record|
+block starts at line  :  4508                 |SUBROUTINE SET_EMISSIONS_RATES(NUNITS)|
+block ends   at line  :  4880                 |END|
+line to insert use all:  4521 ( 4508 -  4880) ||
+line to insert check  :  4723 ( 4508 -  4880) |EMISSION_RATES = 0.|
+key used              :     5                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |findovls.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:  6295 ( 4883 -  6362) |allocate(family_names(number_of_definitions),overlay_files_in_family(number_of_data_files,number_of_definitions),   &|
+block starts at line  :  4892                 |RECURSIVE SUBROUTINE FINDOVLS(OVLNAME,MATCH_FOUND,END_POINT,   &|
+block ends   at line  :  6361                 |END|
+line to insert use all:  4901 ( 4892 -  6361) |SAVE|
+line to replace allocs:  6297  (  4 allocs)   |ALLOCATE(FAMILY_NAMES(NUMBER_OF_DEFINITIONS),OVERLAY_FILES_IN_FAMILY(NUMBER_OF_DATA_FILES,NUMBER_OF_DEFINITIONS),   &| 
+key used              :     1                 | 
+allocate added        :     1                 |allocate(FAMILY_NAMES(NUMBER_OF_DEFINITIONS),stat=stv_er)|
+allocate added        :     2                 |allocate(OVERLAY_FILES_IN_FAMILY(NUMBER_OF_DATA_FILES,NUMBER_OF_DEFINITIONS),stat=stv_er)|
+allocate added        :     3                 |allocate(OVERLAY_FILE_EXISTS(NUMBER_OF_DATA_FILES,NUMBER_OF_DEFINITIONS),stat=stv_er)|
+allocate added        :     4                 |allocate(OVERLAY_FAMILY_ACTIVE(NUMBER_OF_DEFINITIONS),stat=stv_er)|
+------------------------------------------( 5)-
+Type (15)          src:                       |in_objt.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:  6538 ( 6373 -  7126) |allocate(temp_asset_class_pointer(1024),sbu_linked_counter(1024),bc_class_linkage(0:1024), &|
+block starts at line  :  6382                 |SUBROUTINE IN_OBJECT|
+block ends   at line  :  7114                 |END|
+line to insert use all:  6390 ( 6382 -  7114) ||
+line to replace allocs:  6540  (  4 allocs)   |ALLOCATE(TEMP_ASSET_CLASS_POINTER(1024),SBU_LINKED_COUNTER(1024),BC_CLASS_LINKAGE(0:1024), &| 
+key used              :     1                 | 
+allocate added        :     1                 |allocate(TEMP_ASSET_CLASS_POINTER(1024),stat=stv_er)|
+allocate added        :     2                 |allocate(SBU_LINKED_COUNTER(1024),stat=stv_er)|
+allocate added        :     3                 |allocate(BC_CLASS_LINKAGE(0:1024),stat=stv_er)|
+allocate added        :     4                 |allocate(BC_MASTER_DEFINED_CLASS_IDS(0:1024),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 9)          src:                       |in_objt.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:  6728 ( 6373 -  7136) |allocate(bc_init_class_pointer(max_bc_init_class_id_num))|
+block starts at line  :  6382                 |SUBROUTINE IN_OBJECT|
+block ends   at line  :  7124                 |END|
+line to insert use all:  6392 ( 6382 -  7124) ||
+line to insert check  :  6729 ( 6382 -  7124) |BC_INIT_CLASS_POINTER = TEMP_ASSET_CLASS_POINTER(1:MAX_BC_INIT_CLASS_ID_NUM)|
+key used              :     5                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |in_objt.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:  6785 ( 6373 -  7138) |allocate(temp_asset_class_pointer(1024),sbu_linked_counter(1024),ol_class_linkage(0:1024), &|
+block starts at line  :  6382                 |SUBROUTINE IN_OBJECT|
+block ends   at line  :  7126                 |END|
+line to insert use all:  6392 ( 6382 -  7126) ||
+line to replace allocs:  6784  (  4 allocs)   |ALLOCATE(TEMP_ASSET_CLASS_POINTER(1024),SBU_LINKED_COUNTER(1024),OL_CLASS_LINKAGE(0:1024), &| 
+key used              :     6                 | 
+allocate added        :     1                 |allocate(TEMP_ASSET_CLASS_POINTER(1024),stat=stv_er)|
+allocate added        :     2                 |allocate(SBU_LINKED_COUNTER(1024),stat=stv_er)|
+allocate added        :     3                 |allocate(OL_CLASS_LINKAGE(0:1024),stat=stv_er)|
+allocate added        :     4                 |allocate(OL_MASTER_DEFINED_CLASS_IDS(0:1024),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 9)          src:                       |in_objt.f90|
+Allocate number       :     4                 | 
+alloc sentence in line:  6931 ( 6373 -  7145) |allocate(ol_init_class_pointer(max_ol_init_class_id_num))|
+block starts at line  :  6382                 |SUBROUTINE IN_OBJECT|
+block ends   at line  :  7133                 |END|
+line to insert use all:  6392 ( 6382 -  7133) ||
+line to insert check  :  6932 ( 6382 -  7133) |OL_INIT_CLASS_POINTER = TEMP_ASSET_CLASS_POINTER(1:MAX_OL_INIT_CLASS_ID_NUM)|
+key used              :    10                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |msgmmadm.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:  7233 ( 7148 -  9692) |allocate(temp_asset_class_pointer(1024))|
+block starts at line  :  7158                 |SUBROUTINE ADDENDUMS_OBJECT|
+block ends   at line  :  7508                 |END subroutine ADDENDUMS_OBJECT|
+line to insert use all:  7164 ( 7158 -  7508) |INTEGER (KIND=2) :: MO,YR|
+line to insert check  :  7237 ( 7158 -  7511) |TEMP_ASSET_CLASS_POINTER = 0|
+key used              :     1                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |msgmmadm.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:  7332 ( 7148 -  9697) |allocate(addendum_bc_asset_class_pointer(max_bc_addendum_class_id_num))|
+block starts at line  :  7158                 |SUBROUTINE ADDENDUMS_OBJECT|
+block ends   at line  :  7513                 |END subroutine ADDENDUMS_OBJECT|
+line to insert use all:  7166 ( 7158 -  7513) ||
+line to insert check  :  7333 ( 7158 -  7513) |ADDENDUM_BC_ASSET_CLASS_POINTER = TEMP_ASSET_CLASS_POINTER(1:MAX_BC_ADDENDUM_CLASS_ID_NUM)|
+key used              :     2                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |msgmmadm.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:  7375 ( 7148 -  9699) |allocate(temp_asset_class_pointer(1024))|
+block starts at line  :  7158                 |SUBROUTINE ADDENDUMS_OBJECT|
+block ends   at line  :  7515                 |END subroutine ADDENDUMS_OBJECT|
+line to insert use all:  7166 ( 7158 -  7515) ||
+line to insert check  :  7376 ( 7158 -  7515) |TEMP_ASSET_CLASS_POINTER = 0|
+key used              :     3                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |msgmmadm.f90|
+Allocate number       :     4                 | 
+alloc sentence in line:  7449 ( 7148 -  9701) |allocate(addendum_ol_asset_class_pointer(max_ol_addendum_class_id_num))|
+block starts at line  :  7158                 |SUBROUTINE ADDENDUMS_OBJECT|
+block ends   at line  :  7517                 |END subroutine ADDENDUMS_OBJECT|
+line to insert use all:  7166 ( 7158 -  7517) ||
+line to insert check  :  7450 ( 7158 -  7517) |ADDENDUM_OL_ASSET_CLASS_POINTER = TEMP_ASSET_CLASS_POINTER(1:MAX_OL_ADDENDUM_CLASS_ID_NUM)|
+key used              :     4                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |msgmmadm.f90|
+Allocate number       :     5                 | 
+alloc sentence in line:  7685 ( 7148 -  9703) |allocate(escalation_rates(avail_data_years),addendum_values(0:max(financial_simulation_years,avail_data_years)), &|
+block starts at line  :  7529                 |RECURSIVE SUBROUTINE ADDENDUMS(SAVE_BASE_CASE)|
+block ends   at line  :  9328                 |END|
+line to insert use all:  7538 ( 7529 -  9328) |SAVE|
+line to replace allocs:  7687  (  6 allocs)   |ALLOCATE(ESCALATION_RATES(AVAIL_DATA_YEARS),ADDENDUM_VALUES(0:MAX(FINANCIAL_SIMULATION_YEARS,AVAIL_DATA_YEARS)), &| 
+key used              :     5                 | 
+allocate added        :     1                 |allocate(ESCALATION_RATES(AVAIL_DATA_YEARS),stat=stv_er)|
+allocate added        :     2                 |allocate(ADDENDUM_VALUES(0:MAX(FINANCIAL_SIMULATION_YEARS,AVAIL_DATA_YEARS)),stat=stv_er)|
+allocate added        :     3                 |allocate(ADDENDUM(0:FINANCIAL_SIMULATION_YEARS),stat=stv_er)|
+allocate added        :     4                 |allocate(ALLOC_EXPEN(0:FINANCIAL_SIMULATION_YEARS,0:12),stat=stv_er)|
+allocate added        :     5                 |allocate(ASSET_CLASS_LIST(AVAIL_DATA_YEARS),stat=stv_er)|
+allocate added        :     6                 |allocate(ASSET_ALLOCATION_LIST(AVAIL_DATA_YEARS),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 9)          src:                       |msgmmadm.f90|
+Allocate number       :     6                 | 
+alloc sentence in line:  8000 ( 7148 -  9716) |allocate(asset_class_pointer(max_asset_class_num))|
+block starts at line  :  7529                 |RECURSIVE SUBROUTINE ADDENDUMS(SAVE_BASE_CASE)|
+block ends   at line  :  9341                 |END|
+line to insert use all:  7540 ( 7529 -  9341) ||
+line to insert check  :  8001 ( 7529 -  9341) |CALL RETURN_INITIALIZATION_POINTER(ASSET_CLASS_POINTER)|
+key used              :    11                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |msgmmadm.f90|
+Allocate number       :     7                 | 
+alloc sentence in line:  8023 ( 7148 -  9718) |allocate(payments(0:12,0:financial_simulation_years,-1:num_of_asset_classes,last_payment_item), &|
+block starts at line  :  7529                 |RECURSIVE SUBROUTINE ADDENDUMS(SAVE_BASE_CASE)|
+block ends   at line  :  9343                 |END|
+line to insert use all:  7540 ( 7529 -  9343) ||
+line to replace allocs:  8022  ( 16 allocs)   |ALLOCATE(PAYMENTS(0:12,0:FINANCIAL_SIMULATION_YEARS,-1:NUM_OF_ASSET_CLASSES,LAST_PAYMENT_ITEM), &| 
+key used              :    12                 | 
+allocate added        :     1                 |allocate(PAYMENTS(0:12,0:FINANCIAL_SIMULATION_YEARS,-1:NUM_OF_ASSET_CLASSES,LAST_PAYMENT_ITEM),stat=stv_er)|
+allocate added        :     2                 |allocate(INVESTMENTS(0:12,0:FINANCIAL_SIMULATION_YEARS,-1:NUM_OF_ASSET_CLASSES,LAST_INVESTMENT_ITEM),stat=stv_er)|
+allocate added        :     3                 |allocate(RATE_BASE(0:12,0:FINANCIAL_SIMULATION_YEARS,-1:NUM_OF_ASSET_CLASSES,LAST_RATE_BASE_ITEM),stat=stv_er)|
+allocate added        :     4                 |allocate(WORKING_CAPITAL(0:12,0:FINANCIAL_SIMULATION_YEARS,-1:NUM_OF_ASSET_CLASSES,LAST_WORKING_CAPITAL_ITEM),stat=stv_er)|
+allocate added        :     5                 |allocate(CD_CIAC(0:12,0:FINANCIAL_SIMULATION_YEARS,-1:NUM_OF_ASSET_CLASSES,LAST_CD_CIAC_ITEM),stat=stv_er)|
+allocate added        :     6                 |allocate(SALE_REMOVAL(0:12,0:FINANCIAL_SIMULATION_YEARS,-1:NUM_OF_ASSET_CLASSES,LAST_SALE_REMOVAL_ITEM),stat=stv_er)|
+allocate added        :     7                 |allocate(SHAREHOLDER_VALUE(0:12,0:FINANCIAL_SIMULATION_YEARS,-1:NUM_OF_ASSET_CLASSES,LAST_SHAREHOLDER_VALUE_ITEM),stat=stv_er)|
+allocate added        :     8                 |allocate(TRANSFER_VALUE(0:12,0:FINANCIAL_SIMULATION_YEARS,-1:NUM_OF_ASSET_CLASSES,LAST_TRANSFER_ITEM),stat=stv_er)|
+allocate added        :     9                 |allocate(CASH_MONTHLY_VALUES(0:12,0:FINANCIAL_SIMULATION_YEARS,-1:NUM_OF_ASSET_CLASSES,LAST_CASH_TO_ITEMS),stat=stv_er)|
+allocate added        :    10                 |allocate(FUNDS_EARNINGS(0:12,0:FINANCIAL_SIMULATION_YEARS,-1:NUM_OF_ASSET_CLASSES,LAST_EARNINGS_ITEM),stat=stv_er)|
+allocate added        :    11                 |allocate(OTHER_VALUE(0:12,0:FINANCIAL_SIMULATION_YEARS,-1:NUM_OF_ASSET_CLASSES,LAST_OTHER_ITEM),stat=stv_er)|
+allocate added        :    12                 |allocate(ACTUAL_MONTHLY_VALUES(0:12,0:FINANCIAL_SIMULATION_YEARS,-1:NUM_OF_ASSET_CLASSES,LAST_ACTUAL_ITEM),stat=stv_er)|
+allocate added        :    13                 |allocate(FASB143_ARO_VALUE(0:12,0:FINANCIAL_SIMULATION_YEARS,-1:NUM_OF_ASSET_CLASSES,LAST_FASB_ITEM),stat=stv_er)|
+allocate added        :    14                 |allocate(CapX_Values(0:12,0:FINANCIAL_SIMULATION_YEARS,-1:NUM_OF_ASSET_CLASSES,LAST_CAPX_ITEM),stat=stv_er)|
+allocate added        :    15                 |allocate(WVPA_ADDENDUM_ITEMS(0:12,0:FINANCIAL_SIMULATION_YEARS,-1:NUM_OF_ASSET_CLASSES,LAST_CAPX_ITEM),stat=stv_er)|
+allocate added        :    16                 |allocate(ACTUAL_VALUE_FOUND(-1:NUM_OF_ASSET_CLASSES,LAST_ACTUAL_ITEM),stat=stv_er)|
+------------------------------------------( 5)-

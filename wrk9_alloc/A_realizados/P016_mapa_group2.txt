@@ -149,47 +149,47 @@ key used              :     4                 |
 ------------------------------------------( 1)-
 Type ( 9)          src:                       |cpl_objt.f90|
 Allocate number       :     1                 | 
-alloc sentence in line:  4600 ( 4466 -  5015) |allocate(temp_asset_class_pointer(1024))|
+alloc sentence in line:  4600 ( 4466 -  5021) |allocate(temp_asset_class_pointer(1024))|
 block starts at line  :  4487                 |SUBROUTINE CPL_OBJECT|
-block ends   at line  :  5015                 |END|
-line to insert use all:  4493 ( 4487 -  5015) ||
-line to insert check  :  4604 ( 4487 -  5018) |TEMP_ASSET_CLASS_POINTER = 0|
+block ends   at line  :  5021                 |END|
+line to insert use all:  4493 ( 4487 -  5021) ||
+line to insert check  :  4604 ( 4487 -  5024) |TEMP_ASSET_CLASS_POINTER = 0|
 key used              :     1                 | 
 ------------------------------------------( 1)-
 Type ( 9)          src:                       |cpl_objt.f90|
 Allocate number       :     2                 | 
-alloc sentence in line:  4707 ( 4466 -  5020) |allocate(bc_asset_class_pointer(max_bc_class_id_num))|
+alloc sentence in line:  4709 ( 4466 -  5026) |allocate(bc_asset_class_pointer(max_bc_class_id_num))|
 block starts at line  :  4487                 |SUBROUTINE CPL_OBJECT|
-block ends   at line  :  5020                 |END|
-line to insert use all:  4495 ( 4487 -  5020) ||
-line to insert check  :  4708 ( 4487 -  5020) |BC_ASSET_CLASS_POINTER = &|
+block ends   at line  :  5026                 |END|
+line to insert use all:  4495 ( 4487 -  5026) ||
+line to insert check  :  4710 ( 4487 -  5026) |BC_ASSET_CLASS_POINTER = &|
 key used              :     2                 | 
 ------------------------------------------( 1)-
 Type ( 9)          src:                       |cpl_objt.f90|
 Allocate number       :     3                 | 
-alloc sentence in line:  4749 ( 4466 -  5022) |allocate(temp_asset_class_pointer(1024))|
+alloc sentence in line:  4751 ( 4466 -  5028) |allocate(temp_asset_class_pointer(1024))|
 block starts at line  :  4487                 |SUBROUTINE CPL_OBJECT|
-block ends   at line  :  5022                 |END|
-line to insert use all:  4495 ( 4487 -  5022) ||
-line to insert check  :  4750 ( 4487 -  5022) |TEMP_ASSET_CLASS_POINTER = 0|
+block ends   at line  :  5028                 |END|
+line to insert use all:  4495 ( 4487 -  5028) ||
+line to insert check  :  4752 ( 4487 -  5028) |TEMP_ASSET_CLASS_POINTER = 0|
 key used              :     3                 | 
 ------------------------------------------( 1)-
 Type ( 9)          src:                       |cpl_objt.f90|
 Allocate number       :     4                 | 
-alloc sentence in line:  4880 ( 4466 -  5024) |allocate(ol_asset_class_pointer(max_ol_class_id_num))|
+alloc sentence in line:  4884 ( 4466 -  5030) |allocate(ol_asset_class_pointer(max_ol_class_id_num))|
 block starts at line  :  4487                 |SUBROUTINE CPL_OBJECT|
-block ends   at line  :  5024                 |END|
-line to insert use all:  4495 ( 4487 -  5024) ||
-line to insert check  :  4881 ( 4487 -  5024) |OL_ASSET_CLASS_POINTER = &|
+block ends   at line  :  5030                 |END|
+line to insert use all:  4495 ( 4487 -  5030) ||
+line to insert check  :  4885 ( 4487 -  5030) |OL_ASSET_CLASS_POINTER = &|
 key used              :     4                 | 
 ------------------------------------------( 1)-
 Type (15)          src:                       |ct_objt.f90|
 Allocate number       :     1                 | 
-alloc sentence in line:  5465 ( 5027 -  6073) |allocate(contract_adjustments_to_peak(study_period), &|
-block starts at line  :  5316                 |RECURSIVE FUNCTION CONTRACTS_READ()|
-block ends   at line  :  5587                 |DO YR = YEAR_START, YEAR_END|
-line to insert use all:  5325 ( 5316 -  5587) |SAVE|
-line to replace allocs:  5467  ( 21 allocs)   |ALLOCATE(CONTRACT_ADJUSTMENTS_TO_PEAK(STUDY_PERIOD), &| 
+alloc sentence in line:  5475 ( 5033 -  6095) |allocate(contract_adjustments_to_peak(study_period), &|
+block starts at line  :  5326                 |RECURSIVE FUNCTION CONTRACTS_READ()|
+block ends   at line  :  5601                 |DO YR = YEAR_START, YEAR_END|
+line to insert use all:  5335 ( 5326 -  5601) |SAVE|
+line to replace allocs:  5477  ( 21 allocs)   |ALLOCATE(CONTRACT_ADJUSTMENTS_TO_PEAK(STUDY_PERIOD), &| 
 key used              :     1                 | 
 allocate added        :     1                 |allocate(CONTRACT_ADJUSTMENTS_TO_PEAK(STUDY_PERIOD),stat=stv_er)|
 allocate added        :     2                 |allocate(ON_LINE_MONTH(CT_RECORDS),stat=stv_er)|
@@ -215,11 +215,11 @@ allocate added        :    21                 |allocate(CONTRACT_ASSET_CLASS_POI
 ------------------------------------------( 5)-
 Type (15)          src:                       |ct_objt.f90|
 Allocate number       :     2                 | 
-alloc sentence in line:  5688 ( 5027 -  6100) |allocate(contract_buy_capacity(0:max_contract_class_id_num), &|
-block starts at line  :  5316                 |RECURSIVE FUNCTION CONTRACTS_READ()|
-block ends   at line  :  5731                 |DO YR = YEAR_START, YEAR_END|
-line to insert use all:  5327 ( 5316 -  5731) ||
-line to replace allocs:  5687  ( 13 allocs)   |ALLOCATE(CONTRACT_BUY_CAPACITY(0:MAX_CONTRACT_CLASS_ID_NUM), &| 
+alloc sentence in line:  5702 ( 5033 -  6122) |allocate(contract_buy_capacity(0:max_contract_class_id_num), &|
+block starts at line  :  5326                 |RECURSIVE FUNCTION CONTRACTS_READ()|
+block ends   at line  :  5745                 |DO YR = YEAR_START, YEAR_END|
+line to insert use all:  5337 ( 5326 -  5745) ||
+line to replace allocs:  5701  ( 13 allocs)   |ALLOCATE(CONTRACT_BUY_CAPACITY(0:MAX_CONTRACT_CLASS_ID_NUM), &| 
 key used              :    22                 | 
 allocate added        :     1                 |allocate(CONTRACT_BUY_CAPACITY(0:MAX_CONTRACT_CLASS_ID_NUM),stat=stv_er)|
 allocate added        :     2                 |allocate(CONTRACT_BUY_ENERGY(0:MAX_CONTRACT_CLASS_ID_NUM),stat=stv_er)|
@@ -234,4 +234,62 @@ allocate added        :    10                 |allocate(CONTRACT_BTL_EXPENSES(-1
 allocate added        :    11                 |allocate(CONTRACT_PURCHASE_EXPENSES(-1:MAX_CONTRACT_CLASS_ID_NUM),stat=stv_er)|
 allocate added        :    12                 |allocate(CONTRACT_ADJ_CLAUSE_COLLECTIONS(-1:MAX_CONTRACT_CLASS_ID_NUM),stat=stv_er)|
 allocate added        :    13                 |allocate(CONTRACT_SECONDARY_SALES_REVS(-1:MAX_CONTRACT_CLASS_ID_NUM),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 9)          src:                       |dr_booth.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:  6669 ( 6135 -  9866) |allocate(available_shadow_capacity(max(nunits,int(1,2))))|
+block starts at line  :  6202                 |SUBROUTINE DR_BOOTH(YR,ISEAS,FUELCOST,TENRG,TMMBTUS,VARCOST, &|
+block ends   at line  :  8801                 |END SUBROUTINE DR_BOOTH|
+line to insert use all:  6255 ( 6202 -  8801) |!|
+line to insert check  :  6673 ( 6202 -  8804) |!|
+key used              :     1                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |dr_booth.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:  7431 ( 6135 -  9871) |allocate(cl_losses(nunits))|
+block starts at line  :  6202                 |SUBROUTINE DR_BOOTH(YR,ISEAS,FUELCOST,TENRG,TMMBTUS,VARCOST, &|
+block ends   at line  :  8806                 |END SUBROUTINE DR_BOOTH|
+line to insert use all:  6256 ( 6202 -  8806) ||
+line to insert check  :  7432 ( 6202 -  8806) |CL_LOSSES = 0.|
+key used              :     2                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |dr_booth.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:  7442 ( 6135 -  9873) |allocate(ct_losses(number_of_contracts))|
+block starts at line  :  6202                 |SUBROUTINE DR_BOOTH(YR,ISEAS,FUELCOST,TENRG,TMMBTUS,VARCOST, &|
+block ends   at line  :  8808                 |END SUBROUTINE DR_BOOTH|
+line to insert use all:  6256 ( 6202 -  8808) ||
+line to insert check  :  7443 ( 6202 -  8808) |CT_LOSSES = 0.|
+key used              :     3                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |dr_booth.f90|
+Allocate number       :     4                 | 
+alloc sentence in line:  9087 ( 6135 -  9875) |allocate(sox_by_fuel_type(3,local_max_cl_units), &|
+block starts at line  :  9068                 |SUBROUTINE CREATE_EMISSIONS_BY_FUEL_TYPE(R_CL_UNITS)|
+block ends   at line  :  9099                 |END SUBROUTINE CREATE_EMISSIONS_BY_FUEL_TYPE|
+line to insert use all:  9071 ( 9068 -  9099) |integer (kind=2) , intent(in) :: R_CL_UNITS|
+line to replace allocs:  9089  ( 11 allocs)   |ALLOCATE(SOX_BY_FUEL_TYPE(3,LOCAL_MAX_CL_UNITS), &| 
+key used              :     4                 | 
+allocate added        :     1                 |allocate(SOX_BY_FUEL_TYPE(3,LOCAL_MAX_CL_UNITS),stat=stv_er)|
+allocate added        :     2                 |allocate(NOX_BY_FUEL_TYPE(3,LOCAL_MAX_CL_UNITS),stat=stv_er)|
+allocate added        :     3                 |allocate(CO2_BY_FUEL_TYPE(3,LOCAL_MAX_CL_UNITS),stat=stv_er)|
+allocate added        :     4                 |allocate(OTH2_BY_FUEL_TYPE(3,LOCAL_MAX_CL_UNITS),stat=stv_er)|
+allocate added        :     5                 |allocate(OTH3_BY_FUEL_TYPE(3,LOCAL_MAX_CL_UNITS),stat=stv_er)|
+allocate added        :     6                 |allocate(SOX_BY_BLOCK(2,LOCAL_MAX_CL_UNITS),stat=stv_er)|
+allocate added        :     7                 |allocate(NOX_BY_BLOCK(2,LOCAL_MAX_CL_UNITS),stat=stv_er)|
+allocate added        :     8                 |allocate(CO2_BY_BLOCK(2,LOCAL_MAX_CL_UNITS),stat=stv_er)|
+allocate added        :     9                 |allocate(OTH2_BY_BLOCK(2,LOCAL_MAX_CL_UNITS),stat=stv_er)|
+allocate added        :    10                 |allocate(OTH3_BY_BLOCK(2,LOCAL_MAX_CL_UNITS),stat=stv_er)|
+allocate added        :    11                 |allocate(UNIT_HEAT_BY_FUEL(3,LOCAL_MAX_CL_UNITS),stat=stv_er)|
+------------------------------------------( 5)-
+Type (11)          src:                       |dsslam.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:  9955 ( 9891 - 10288) |allocate(frclod(8800),forecast_loads(24,3,12,system_class_num))|
+block starts at line  :  9909                 |SUBROUTINE LODANAL|
+block ends   at line  : 10118                 |END|
+line to insert use all:  9924 ( 9909 - 10118) ||
+line to replace allocs:  9957  (  2 allocs)   |ALLOCATE(FRCLOD(8800),FORECAST_LOADS(24,3,12,SYSTEM_CLASS_NUM))| 
+key used              :     1                 | 
+allocate added        :     1                 |allocate(FRCLOD(8800),stat=stv_er)|
+allocate added        :     2                 |allocate(FORECAST_LOADS(24,3,12,SYSTEM_CLASS_NUM),stat=stv_er)|
 ------------------------------------------( 5)-
