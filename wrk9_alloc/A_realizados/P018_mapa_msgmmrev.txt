@@ -1,0 +1,326 @@
+Type ( 9)          src:                       |msgmmrev.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:   118 (    0 -  7089) |allocate(temp_asset_class_pointer(1024))|
+block starts at line  :    10                 |SUBROUTINE CLASS_SALES_OBJECT|
+block ends   at line  :   437                 |END|
+line to insert use all:    16 (   10 -   437) ||
+line to insert check  :   122 (   10 -   440) |TEMP_ASSET_CLASS_POINTER = 0|
+key used              :     1                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |msgmmrev.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:   245 (    0 -  7094) |allocate(bc_asset_class_pointer(max_bc_class_id_num))|
+block starts at line  :    10                 |SUBROUTINE CLASS_SALES_OBJECT|
+block ends   at line  :   442                 |END|
+line to insert use all:    18 (   10 -   442) ||
+line to insert check  :   246 (   10 -   442) |BC_ASSET_CLASS_POINTER(:) = TEMP_ASSET_CLASS_POINTER(1:MAX_BC_CLASS_ID_NUM)|
+key used              :     2                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |msgmmrev.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:   275 (    0 -  7096) |allocate(temp_asset_class_pointer(1024))|
+block starts at line  :    10                 |SUBROUTINE CLASS_SALES_OBJECT|
+block ends   at line  :   444                 |END|
+line to insert use all:    18 (   10 -   444) ||
+line to insert check  :   276 (   10 -   444) |TEMP_ASSET_CLASS_POINTER = 0|
+key used              :     3                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |msgmmrev.f90|
+Allocate number       :     4                 | 
+alloc sentence in line:   383 (    0 -  7098) |allocate(ol_asset_class_pointer(max_ol_class_id_num))|
+block starts at line  :    10                 |SUBROUTINE CLASS_SALES_OBJECT|
+block ends   at line  :   446                 |END|
+line to insert use all:    18 (   10 -   446) ||
+line to insert check  :   384 (   10 -   446) |OL_ASSET_CLASS_POINTER(:) = TEMP_ASSET_CLASS_POINTER(1:MAX_OL_CLASS_ID_NUM)|
+key used              :     4                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |msgmmrev.f90|
+Allocate number       :     5                 | 
+alloc sentence in line:   815 (    0 -  7100) |allocate(asset_class_list(avail_data_years), &|
+block starts at line  :   454                 |RECURSIVE SUBROUTINE INIT_SALES_REVENUE_BY_CLASS|
+block ends   at line  :  2531                 |END|
+line to insert use all:   470 (  454 -  2531) |SAVE|
+line to replace allocs:   817  ( 10 allocs)   |ALLOCATE(ASSET_CLASS_LIST(AVAIL_DATA_YEARS), &| 
+key used              :     5                 | 
+allocate added        :     1                 |allocate(ASSET_CLASS_LIST(AVAIL_DATA_YEARS),stat=stv_er)|
+allocate added        :     2                 |allocate(ASSET_ALLOCATION_LIST(AVAIL_DATA_YEARS),stat=stv_er)|
+allocate added        :     3                 |allocate(RATE_CLASS_NAME(FILE_TABLES),stat=stv_er)|
+allocate added        :     4                 |allocate(CLASS_ALLOCATION_ID(FILE_TABLES),stat=stv_er)|
+allocate added        :     5                 |allocate(CLASS_ALLOCATION_VECTOR(FILE_TABLES),stat=stv_er)|
+allocate added        :     6                 |allocate(CLASS_ENERGY(0:12,FILE_TABLES),stat=stv_er)|
+allocate added        :     7                 |allocate(CLASS_DEMAND(0:12,FILE_TABLES),stat=stv_er)|
+allocate added        :     8                 |allocate(CLASS_CUSTOMERS(0:12,FILE_TABLES),stat=stv_er)|
+allocate added        :     9                 |allocate(CPL_JURISDICTIONAL_INFOR(0:12,CPL_JURISDICTIONS,CPL_FUEL_VARS),stat=stv_er)|
+allocate added        :    10                 |allocate(STATE_RPS_DB(12,600,0:12),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 9)          src:                       |msgmmrev.f90|
+Allocate number       :     6                 | 
+alloc sentence in line:   852 (    0 -  7114) |allocate(asset_class_pointer(max_asset_class_num))|
+block starts at line  :   454                 |RECURSIVE SUBROUTINE INIT_SALES_REVENUE_BY_CLASS|
+block ends   at line  :  2545                 |END|
+line to insert use all:   472 (  454 -  2545) ||
+line to insert check  :   853 (  454 -  2545) |CALL RETURN_CLASS_SALES_POINTERS(ASSET_CLASS_POINTER, &|
+key used              :    15                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |msgmmrev.f90|
+Allocate number       :     7                 | 
+alloc sentence in line:   871 (    0 -  7116) |allocate(revenues_monthly(0:12,-1:num_of_asset_classes,last_income_line), &|
+block starts at line  :   454                 |RECURSIVE SUBROUTINE INIT_SALES_REVENUE_BY_CLASS|
+block ends   at line  :  2547                 |END|
+line to insert use all:   472 (  454 -  2547) ||
+line to replace allocs:   870  (  7 allocs)   |ALLOCATE(REVENUES_MONTHLY(0:12,-1:NUM_OF_ASSET_CLASSES,LAST_INCOME_LINE), &| 
+key used              :    16                 | 
+allocate added        :     1                 |allocate(REVENUES_MONTHLY(0:12,-1:NUM_OF_ASSET_CLASSES,LAST_INCOME_LINE),stat=stv_er)|
+allocate added        :     2                 |allocate(EXPENSES_MONTHLY(0:12,-1:NUM_OF_ASSET_CLASSES,LAST_EXPENSE_ITEM),stat=stv_er)|
+allocate added        :     3                 |allocate(CASH_AMOUNTS_RECEIVABLE(0:12,-1:NUM_OF_ASSET_CLASSES,LAST_INCOME_LINE),stat=stv_er)|
+allocate added        :     4                 |allocate(CASH_AMOUNTS_PAYABLE(0:12,-1:NUM_OF_ASSET_CLASSES,LAST_EXPENSE_ITEM),stat=stv_er)|
+allocate added        :     5                 |allocate(CASH_CARRY_OVER_RECEIVABLE(1:12,-1:NUM_OF_ASSET_CLASSES,LAST_INCOME_LINE),stat=stv_er)|
+allocate added        :     6                 |allocate(CASH_CARRY_OVER_PAYABLE(1:12,-1:NUM_OF_ASSET_CLASSES,LAST_EXPENSE_ITEM),stat=stv_er)|
+allocate added        :     7                 |allocate(ENERGY_MONTHLY(0:12,-1:NUM_OF_ASSET_CLASSES,LAST_INCOME_LINE),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 9)          src:                       |msgmmrev.f90|
+Allocate number       :     8                 | 
+alloc sentence in line:   887 (    0 -  7124) |allocate(asset_class_customers(0:12,-1:num_of_asset_classes))|
+block starts at line  :   454                 |RECURSIVE SUBROUTINE INIT_SALES_REVENUE_BY_CLASS|
+block ends   at line  :  2555                 |END|
+line to insert use all:   472 (  454 -  2555) ||
+line to insert check  :   888 (  454 -  2555) ||
+key used              :    23                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |msgmmrev.f90|
+Allocate number       :     9                 | 
+alloc sentence in line:   892 (    0 -  7126) |allocate(asset_class_energy(0:12,-1:num_of_asset_classes))|
+block starts at line  :   454                 |RECURSIVE SUBROUTINE INIT_SALES_REVENUE_BY_CLASS|
+block ends   at line  :  2557                 |END|
+line to insert use all:   472 (  454 -  2557) ||
+line to insert check  :   893 (  454 -  2557) |ASSET_CLASS_CUSTOMERS = 0.|
+key used              :    24                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |msgmmrev.f90|
+Allocate number       :    10                 | 
+alloc sentence in line:  3719 (    0 -  7128) |allocate(state_rps_db(13,600,0:12), &|
+block starts at line  :  3606                 |RECURSIVE SUBROUTINE MANAGE_RPS_STATE_DEMAND|
+block ends   at line  :  4026                 |END|
+line to insert use all:  3617 ( 3606 -  4026) |SAVE|
+line to replace allocs:  3721  (  3 allocs)   |ALLOCATE(STATE_RPS_DB(13,600,0:12), &| 
+key used              :    25                 | 
+allocate added        :     1                 |allocate(STATE_RPS_DB(13,600,0:12),stat=stv_er)|
+allocate added        :     2                 |allocate(RPS_SURPLUS(0:7,0:61),stat=stv_er)|
+allocate added        :     3                 |allocate(ANNUAL_SURPLUS_OR_DEFICIT(2,61,0:7),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 9)          src:                       |msgmmrev.f90|
+Allocate number       :    11                 | 
+alloc sentence in line:  3875 (    0 -  7135) |allocate(ann_rps_intra_region_surplus(0:6,0:rps_region_count))|
+block starts at line  :  3606                 |RECURSIVE SUBROUTINE MANAGE_RPS_STATE_DEMAND|
+block ends   at line  :  4033                 |END|
+line to insert use all:  3619 ( 3606 -  4033) ||
+line to insert check  :  3876 ( 3606 -  4033) |ANN_RPS_INTRA_REGION_SURPLUS = 0.0|
+key used              :    28                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |msgmmrev.f90|
+Allocate number       :    12                 | 
+alloc sentence in line:  4526 (    0 -  7137) |allocate( &|
+block starts at line  :  4389                 |RECURSIVE SUBROUTINE MANAGE_THERMAL_RETROFIT|
+block ends   at line  :  4771                 |END|
+line to insert use all:  4397 ( 4389 -  4771) |SAVE|
+line to replace allocs:  4528  ( 29 allocs)   |ALLOCATE( &| 
+key used              :    29                 | 
+allocate added        :     1                 |allocate(Project_Name(RECORD_NUM),stat=stv_er)|
+allocate added        :     2                 |allocate(Project_Active(RECORD_NUM),stat=stv_er)|
+allocate added        :     3                 |allocate(Project_Type(RECORD_NUM),stat=stv_er)|
+allocate added        :     4                 |allocate(Project_ID(RECORD_NUM),stat=stv_er)|
+allocate added        :     5                 |allocate(First_Year_Available(RECORD_NUM),stat=stv_er)|
+allocate added        :     6                 |allocate(Last_Year_Available(RECORD_NUM),stat=stv_er)|
+allocate added        :     7                 |allocate(Learning_Curve(RECORD_NUM),stat=stv_er)|
+allocate added        :     8                 |allocate(Capital_Cost_CCS(RECORD_NUM),stat=stv_er)|
+allocate added        :     9                 |allocate(Capital_Cost_Trans(RECORD_NUM),stat=stv_er)|
+allocate added        :    10                 |allocate(Capital_Cost_Esc(RECORD_NUM),stat=stv_er)|
+allocate added        :    11                 |allocate(CRR_On_Project(RECORD_NUM),stat=stv_er)|
+allocate added        :    12                 |allocate(Var_OM_Adder(RECORD_NUM),stat=stv_er)|
+allocate added        :    13                 |allocate(Var_Storage_OM_Adder(RECORD_NUM),stat=stv_er)|
+allocate added        :    14                 |allocate(Var_OM_Esc(RECORD_NUM),stat=stv_er)|
+allocate added        :    15                 |allocate(Fixed_OM_Capture_Adder(RECORD_NUM),stat=stv_er)|
+allocate added        :    16                 |allocate(Fixed_OM_Trans(RECORD_NUM),stat=stv_er)|
+allocate added        :    17                 |allocate(Fixed_OM_Esc(RECORD_NUM),stat=stv_er)|
+allocate added        :    18                 |allocate(SO2_Control_Percent(RECORD_NUM),stat=stv_er)|
+allocate added        :    19                 |allocate(NOx_Control_Percent(RECORD_NUM),stat=stv_er)|
+allocate added        :    20                 |allocate(CO2_Control_Percent(RECORD_NUM),stat=stv_er)|
+allocate added        :    21                 |allocate(HG_Control_Percent(RECORD_NUM),stat=stv_er)|
+allocate added        :    22                 |allocate(Other_Control_Percent(RECORD_NUM),stat=stv_er)|
+allocate added        :    23                 |allocate(Replacement_Fuel(RECORD_NUM),stat=stv_er)|
+allocate added        :    24                 |allocate(Ave_Heat_Rate_Mult(RECORD_NUM),stat=stv_er)|
+allocate added        :    25                 |allocate(Forced_Outage_Adder(RECORD_NUM),stat=stv_er)|
+allocate added        :    26                 |allocate(Dispatch_Adder(RECORD_NUM),stat=stv_er)|
+allocate added        :    27                 |allocate(Min_Capacity_Change(RECORD_NUM),stat=stv_er)|
+allocate added        :    28                 |allocate(Max_Capacity_Change(RECORD_NUM),stat=stv_er)|
+allocate added        :    29                 |allocate(RETROFIT_POSITION(MAX_PROJECT_ID),stat=stv_er)|
+------------------------------------------( 5)-
+Type (15)          src:                       |msgmmrev.f90|
+Allocate number       :    13                 | 
+alloc sentence in line:  5503 (    0 -  7179) |allocate(trans_group_position(-1:max_gas_group_number), &|
+block starts at line  :  5160                 |RECURSIVE FUNCTION MANAGE_TRAN_EXP_FORECASTS()|
+block ends   at line  :  5646                 |END|
+line to insert use all:  5168 ( 5160 -  5646) ||
+line to replace allocs:  5505  ( 39 allocs)   |ALLOCATE(TRANS_GROUP_POSITION(-1:MAX_GAS_GROUP_NUMBER), &| 
+key used              :    58                 | 
+allocate added        :     1                 |allocate(TRANS_GROUP_POSITION(-1:MAX_GAS_GROUP_NUMBER),stat=stv_er)|
+allocate added        :     2                 |allocate(TieID(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :     3                 |allocate(TieID_INDEX(MAX_GAS_GROUP_NUMBER,MAX_GAS_GROUP_NUMBER),stat=stv_er)|
+allocate added        :     4                 |allocate(ExpansionCost(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :     5                 |allocate(ExpansionCostEscalation(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :     6                 |allocate(MAX_C_FOR_(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :     7                 |allocate(MIN_C_FOR_(0:MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :     8                 |allocate(LINE_LOSSES_A_TO_B(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :     9                 |allocate(LINE_LOSSES_B_TO_A(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :    10                 |allocate(CONGESTION_PERCENT(MAX_OUT_TRAN_EXPS,10),stat=stv_er)|
+allocate added        :    11                 |allocate(CONGESTION_COST(MAX_OUT_TRAN_EXPS,10),stat=stv_er)|
+allocate added        :    12                 |allocate(MaximumExpansion(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :    13                 |allocate(ExpansionCCRF(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :    14                 |allocate(CONGESTION_COST_ESC(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :    15                 |allocate(CONGESTION_COST_NOMINAL(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :    16                 |allocate(MONTHLY_CONGEST_PERCENT(MAX_OUT_TRAN_EXPS,10),stat=stv_er)|
+allocate added        :    17                 |allocate(MONTHLY_CONGEST_COST(MAX_OUT_TRAN_EXPS,10),stat=stv_er)|
+allocate added        :    18                 |allocate(ZONE_A_TO_B_PEAK_TIES(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :    19                 |allocate(ZONE__A_TO_B_OFF_PEAK_TIES(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :    20                 |allocate(ZONE__A_TO_B_WHEELING_RATES(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :    21                 |allocate(ZONE_B_TO_A_PEAK_TIES(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :    22                 |allocate(ZONE__B_TO_A_OFF_PEAK_TIES(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :    23                 |allocate(ZONE__B_TO_A_WHEELING_RATES(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :    24                 |allocate(ESCALATION_RATE(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :    25                 |allocate(ZONE_A_GROUP_ID(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :    26                 |allocate(ZONE_B_GROUP_ID(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :    27                 |allocate(ZONE_A(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :    28                 |allocate(ZONE_B(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :    29                 |allocate(TieDescription(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :    30                 |allocate(iPort(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :    31                 |allocate(SNamePos(MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :    32                 |allocate(LINK_PAIR(MAX_GAS_GROUP_NUMBER,MAX_GAS_GROUP_NUMBER),stat=stv_er)|
+allocate added        :    33                 |allocate(LINK_INDEX(MAX_GAS_GROUP_NUMBER,MAX_GAS_GROUP_NUMBER),stat=stv_er)|
+allocate added        :    34                 |allocate(I_TO_K_PATHS(MAX_GAS_GROUP_NUMBER,MAX_GAS_GROUP_NUMBER),stat=stv_er)|
+allocate added        :    35                 |allocate(J_TO_K_PATHS(MAX_GAS_GROUP_NUMBER,MAX_GAS_GROUP_NUMBER),stat=stv_er)|
+allocate added        :    36                 |allocate(PATH_FOR_J_TO_K(MAX_J_TO_K_PATHS,MAX_OUT_TRAN_EXPS),stat=stv_er)|
+allocate added        :    37                 |allocate(VLI(MAX_GAS_GROUP_NUMBER,MAX_GAS_GROUP_NUMBER),stat=stv_er)|
+allocate added        :    38                 |allocate(ACTIVE_DEMAND_NODE(MAX_GAS_GROUP_NUMBER),stat=stv_er)|
+allocate added        :    39                 |allocate(ACTIVE_SUPPLY_NODE(MAX_GAS_GROUP_NUMBER),stat=stv_er)|
+------------------------------------------( 5)-
+Type (11)          src:                       |msgmmrev.f90|
+Allocate number       :    14                 | 
+alloc sentence in line:  5758 (    0 -  7222) |allocate(resources_per_type(max_states),rps_resources_index(r_resource_num))|
+block starts at line  :  5694                 |RECURSIVE FUNCTION MANAGE_RPS_SUPPLY_CURVES()|
+block ends   at line  :  5833                 |END|
+line to insert use all:  5702 ( 5694 -  5833) |SAVE|
+line to replace allocs:  5760  (  2 allocs)   |ALLOCATE(RESOURCES_PER_TYPE(MAX_STATES),RPS_RESOURCES_INDEX(R_RESOURCE_NUM))| 
+key used              :    97                 | 
+allocate added        :     1                 |allocate(RESOURCES_PER_TYPE(MAX_STATES),stat=stv_er)|
+allocate added        :     2                 |allocate(RPS_RESOURCES_INDEX(R_RESOURCE_NUM),stat=stv_er)|
+------------------------------------------( 5)-
+Type (15)          src:                       |msgmmrev.f90|
+Allocate number       :    15                 | 
+alloc sentence in line:  5785 (    0 -  7229) |allocate(rps_supply_curves( &|
+block starts at line  :  5694                 |RECURSIVE FUNCTION MANAGE_RPS_SUPPLY_CURVES()|
+block ends   at line  :  5840                 |END|
+line to insert use all:  5704 ( 5694 -  5840) ||
+line to replace allocs:  5784  (  2 allocs)   |ALLOCATE(RPS_SUPPLY_CURVES( &| 
+key used              :    99                 | 
+allocate added        :     1                 |allocate(RPS_SUPPLY_CURVES(MAX_STATES,MAX_TECH,MAX_RESOURCES_PER_TYPE),stat=stv_er)|
+allocate added        :     2                 |allocate(SYSTEM_RPS_SUPPLY_CURVES(NUM_RPS_RESOURCES),stat=stv_er)|
+------------------------------------------( 5)-
+Type (15)          src:                       |msgmmrev.f90|
+Allocate number       :    16                 | 
+alloc sentence in line:  5794 (    0 -  7231) |allocate(rps_net_rev(num_rps_resources), &|
+block starts at line  :  5694                 |RECURSIVE FUNCTION MANAGE_RPS_SUPPLY_CURVES()|
+block ends   at line  :  5842                 |END|
+line to insert use all:  5704 ( 5694 -  5842) ||
+line to replace allocs:  5793  (  4 allocs)   |ALLOCATE(RPS_NET_REV(NUM_RPS_RESOURCES), &| 
+key used              :   101                 | 
+allocate added        :     1                 |allocate(RPS_NET_REV(NUM_RPS_RESOURCES),stat=stv_er)|
+allocate added        :     2                 |allocate(RPS_MWHS(NUM_RPS_RESOURCES),stat=stv_er)|
+allocate added        :     3                 |allocate(RPS_RESOURCES_POSITION(NUM_RPS_RESOURCES),stat=stv_er)|
+allocate added        :     4                 |allocate(RPS_OPTION_NAME(NUM_RPS_RESOURCES),stat=stv_er)|
+------------------------------------------( 5)-
+Type (15)          src:                       |msgmmrev.f90|
+Allocate number       :    17                 | 
+alloc sentence in line:  6254 (    0 -  7236) |allocate(co2_emission_cap(yr1_data:yr2_data),residential_emissions(yr1_data:yr2_data), &|
+block starts at line  :  6212                 |FUNCTION MANAGE_CO2_PARAM_FORECASTS()|
+block ends   at line  :  6321                 |END|
+line to insert use all:  6221 ( 6212 -  6321) ||
+line to replace allocs:  6256  ( 42 allocs)   |ALLOCATE(CO2_Emission_Cap(YR1_DATA:YR2_DATA),Residential_Emissions(YR1_DATA:YR2_DATA), &| 
+key used              :   105                 | 
+allocate added        :     1                 |allocate(CO2_Emission_Cap(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :     2                 |allocate(Residential_Emissions(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :     3                 |allocate(Commercial_Emission(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :     4                 |allocate(Industrial_Emissions(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :     5                 |allocate(Transportation_Emissions(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :     6                 |allocate(Dom_Min_Off_Sets_To_Buy(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :     7                 |allocate(Dom_Max_Off_Sets_To_Buy(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :     8                 |allocate(Int_Min_Off_Sets_To_Buy(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :     9                 |allocate(Int_Max_Off_Sets_To_Buy(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    10                 |allocate(Non_Elect_Min_Reductions(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    11                 |allocate(Non_Elect_Max_Reductions(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    12                 |allocate(CO2_Banking(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    13                 |allocate(Dom_Price_Equation_1_Type(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    14                 |allocate(Dom_1_A_Coefficient(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    15                 |allocate(Dom_1_B_Coefficient(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    16                 |allocate(Dom_Price_Break(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    17                 |allocate(Dom_Price_Equation_2_Type(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    18                 |allocate(Dom_2_A_Coefficient(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    19                 |allocate(Dom_2_B_Coefficient(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    20                 |allocate(Int_Price_Equation_1_Type(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    21                 |allocate(Int_1_A_Coefficient(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    22                 |allocate(Int_1_B_Coefficient(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    23                 |allocate(Int_Price_Break(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    24                 |allocate(Int_Price_Equation_2_Type(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    25                 |allocate(Int_2_A_Coefficient(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    26                 |allocate(Int_2_B_Coefficient(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    27                 |allocate(Non_El_Price_Equation_1_Type(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    28                 |allocate(Non_El_1_A_Coefficient(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    29                 |allocate(Non_El_1_B_Coefficient(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    30                 |allocate(Non_El_Price_Break(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    31                 |allocate(Non_El_Price_Equation_2_Type(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    32                 |allocate(Non_El_2_A_Coefficient(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    33                 |allocate(Non_El_2_B_Coefficient(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    34                 |allocate(CO2_Price_Forecast(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    35                 |allocate(CO2_Price_Evaluation(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    36                 |allocate(CO2_Max_Price_Cap(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    37                 |allocate(CO2_Min_Price(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    38                 |allocate(CO2_Min_GRX_Iterations(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    39                 |allocate(CO2_Max_GRX_Iterations(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    40                 |allocate(CO2_Market_Available(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    41                 |allocate(CO2_GRX_Iter_After_Converg(YR1_DATA:YR2_DATA),stat=stv_er)|
+allocate added        :    42                 |allocate(POKE_CURRENT_CO2_DISPATCH_COST(YR1_DATA:YR2_DATA),stat=stv_er)|
+------------------------------------------( 5)-
+Type (15)          src:                       |msgmmrev.f90|
+Allocate number       :    18                 | 
+alloc sentence in line:  6827 (    0 -  7300) |allocate(      initial_bank(num_rps_programs), &|
+block starts at line  :  6667                 |RECURSIVE FUNCTION MANAGE_RPS_PROGRAM_FORECASTS()|
+block ends   at line  :  7299                 |END|
+line to insert use all:  6683 ( 6667 -  7299) |implicit none|
+line to replace allocs:  6829  ( 17 allocs)   |ALLOCATE(      Initial_Bank(NUM_RPS_PROGRAMS), &| 
+key used              :   147                 | 
+allocate added        :     1                 |allocate(Initial_Bank(NUM_RPS_PROGRAMS),stat=stv_er)|
+allocate added        :     2                 |allocate(Maximum_Bank(NUM_RPS_PROGRAMS),stat=stv_er)|
+allocate added        :     3                 |allocate(Alt_Compliance_Price(NUM_RPS_PROGRAMS),stat=stv_er)|
+allocate added        :     4                 |allocate(Annual_Requirement(NUM_RPS_PROGRAMS,30),stat=stv_er)|
+allocate added        :     5                 |allocate(REC_Price(NUM_RPS_PROGRAMS),stat=stv_er)|
+allocate added        :     6                 |allocate(Program_Number(NUM_RPS_PROGRAMS),stat=stv_er)|
+allocate added        :     7                 |allocate(Program_Active(NUM_RPS_PROGRAMS),stat=stv_er)|
+allocate added        :     8                 |allocate(Program_Name(NUM_RPS_PROGRAMS),stat=stv_er)|
+allocate added        :     9                 |allocate(PROGRAM_INDEX(NUM_RPS_PROGRAMS),stat=stv_er)|
+allocate added        :    10                 |allocate(LAST_YEAR_BANK(NUM_RPS_PROGRAMS),stat=stv_er)|
+allocate added        :    11                 |allocate(LOCAL_ENDING_BALANCE(NUM_RPS_PROGRAMS),stat=stv_er)|
+allocate added        :    12                 |allocate(LOCAL_ALT_PRICE(NUM_RPS_PROGRAMS),stat=stv_er)|
+allocate added        :    13                 |allocate(LOCAL_REC_PRICE(NUM_RPS_PROGRAMS),stat=stv_er)|
+allocate added        :    14                 |allocate(MRX_GEN_WEIGHTED_REC_PRICE(NUM_RPS_PROGRAMS),stat=stv_er)|
+allocate added        :    15                 |allocate(MRX_REC_PRICE(NUM_RPS_PROGRAMS),stat=stv_er)|
+allocate added        :    16                 |allocate(NEXT_ITER_REQUIREMENT(NUM_RPS_PROGRAMS),stat=stv_er)|
+allocate added        :    17                 |allocate(MRX_TEST_REQUIREMENT(NUM_RPS_PROGRAMS),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 9)          src:                       |msgmmrev.f90|
+Allocate number       :    19                 | 
+alloc sentence in line:  6904 (    0 -  7321) |allocate(program_position(max_program_number))|
+block starts at line  :  6667                 |RECURSIVE FUNCTION MANAGE_RPS_PROGRAM_FORECASTS()|
+block ends   at line  :  7320                 |END|
+line to insert use all:  6685 ( 6667 -  7320) ||
+line to insert check  :  6905 ( 6667 -  7320) |call allocate_grx_db_arrays(ACTIVE_RPS)|
+key used              :   164                 | 
+------------------------------------------( 1)-

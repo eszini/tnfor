@@ -1048,6 +1048,22 @@ int	sq_q_alloc_f90_clc_sav;		/* cant tot de lineas con cont con allocate single 
 int	sq_q_alloc_f90_slc_mav;		/* cant tot de lineas sin cont con allocate multi var */
 int	sq_q_alloc_f90_clc_mav;		/* cant tot de lineas con cont con allocate multi var */
 
+int	sg_q_alloc_t01;			/* cant tot de allocs tipo ... */
+int	sg_q_alloc_t02;			/* cant tot de allocs tipo ... */
+int	sg_q_alloc_t03;			/* cant tot de allocs tipo ... */
+int	sg_q_alloc_t04;			/* cant tot de allocs tipo ... */
+int	sg_q_alloc_t05;			/* cant tot de allocs tipo ... */
+int	sg_q_alloc_t06;			/* cant tot de allocs tipo ... */
+int	sg_q_alloc_t07;			/* cant tot de allocs tipo ... */
+int	sg_q_alloc_t08;			/* cant tot de allocs tipo ... */
+int	sg_q_alloc_t09;			/* cant tot de allocs tipo ... */
+int	sg_q_alloc_t10;			/* cant tot de allocs tipo ... */
+int	sg_q_alloc_t11;			/* cant tot de allocs tipo ... */
+int	sg_q_alloc_t12;			/* cant tot de allocs tipo ... */
+int	sg_q_alloc_t13;			/* cant tot de allocs tipo ... */
+int	sg_q_alloc_t14;			/* cant tot de allocs tipo ... */
+int	sg_q_alloc_t15;			/* cant tot de allocs tipo ... */
+int	sg_q_alloc_t16;			/* cant tot de allocs tipo ... */
 
 /*
  *	prueba loca
@@ -1359,7 +1375,80 @@ char	*s;
 	}
 
 
+
+
+
+
 	if (n == 11 )
+	{
+		printf ("Cant de alloc TIPO-01   for sl sv no stat    %6d \n", sg_q_alloc_t01);
+		printf ("Cant de alloc TIPO-02   for sl sv w/ stat    %6d \n", sg_q_alloc_t02);
+		printf ("Cant de alloc TIPO-03   for sl mv no stat    %6d \n", sg_q_alloc_t03);
+		printf ("Cant de alloc TIPO-04   for sl mv w/ stat    %6d \n", sg_q_alloc_t04);
+		printf ("Cant de alloc TIPO-05   for ml sv no stat    %6d \n", sg_q_alloc_t05);
+		printf ("Cant de alloc TIPO-06   for ml sv w/ stat    %6d \n", sg_q_alloc_t06);
+		printf ("Cant de alloc TIPO-07   for ml mv no stat    %6d \n", sg_q_alloc_t07);
+		printf ("Cant de alloc TIPO-08   for ml mv w/ stat    %6d \n", sg_q_alloc_t08);
+
+		printf ("   \n");
+
+		printf ("Cant de alloc TIPO-09   f90 sl sv no stat    %6d \n", sg_q_alloc_t09);
+		printf ("Cant de alloc TIPO-10   f90 sl sv w/ stat    %6d \n", sg_q_alloc_t10);
+		printf ("Cant de alloc TIPO-11   f90 sl mv no stat    %6d \n", sg_q_alloc_t11);
+		printf ("Cant de alloc TIPO-12   f90 sl mv w/ stat    %6d \n", sg_q_alloc_t12);
+		printf ("Cant de alloc TIPO-13   f90 ml sv no stat    %6d \n", sg_q_alloc_t13);
+		printf ("Cant de alloc TIPO-14   f90 ml sv w/ stat    %6d \n", sg_q_alloc_t14);
+		printf ("Cant de alloc TIPO-15   f90 ml mv no stat    %6d \n", sg_q_alloc_t15);
+		printf ("Cant de alloc TIPO-16   f90 ml mv w/ stat    %6d \n", sg_q_alloc_t16);
+
+		printf ("   \n");
+
+#if 0
+		if (ffsta)
+		{
+		fprintf (hfsta,"Cant de alloc totales               %6d \n", sq_q_alloc);
+		fprintf (hfsta,"Cant de alloc totales for con stat  %6d \n", sq_q_alloc_for_sta);		/* for con stat ya hecho */
+		fprintf (hfsta,"Cant de alloc totales f90 con stat  %6d \n", sq_q_alloc_f90_sta);		/* for con stat ya hecho */
+
+		fprintf (hfsta,"Cant de alloc totales for slc       %6d \n", sq_q_alloc_for_slc);
+		fprintf (hfsta,"Cant de alloc totales for clc       %6d \n", sq_q_alloc_for_clc);
+		fprintf (hfsta,"Cant de alloc totales for sav       %6d \n", sq_q_alloc_for_sav);		/* single var allocated */
+		fprintf (hfsta,"Cant de alloc totales for mav       %6d \n", sq_q_alloc_for_mav);		/* multip var allocated */
+		fprintf (hfsta,"Cant de alloc tot sin cont sing var %6d \n", sq_q_alloc_for_slc_sav);
+		fprintf (hfsta,"Cant de alloc tot con cont sing var %6d \n", sq_q_alloc_for_clc_sav);
+		fprintf (hfsta,"Cant de alloc tot sin cont mult var %6d \n", sq_q_alloc_for_slc_mav);
+		fprintf (hfsta,"Cant de alloc tot con cont mult var %6d \n", sq_q_alloc_for_clc_mav);
+
+		fprintf (hfsta,"Cant de alloc totales f90 slc       %6d \n", sq_q_alloc_f90_slc);
+		fprintf (hfsta,"Cant de alloc totales f90 clc       %6d \n", sq_q_alloc_f90_clc);
+		fprintf (hfsta,"Cant de alloc totales f90 sav       %6d \n", sq_q_alloc_f90_sav);
+		fprintf (hfsta,"Cant de alloc totales f90 mav       %6d \n", sq_q_alloc_f90_mav);
+		fprintf (hfsta,"Cant de alloc tot sin cont sing var %6d \n", sq_q_alloc_f90_slc_sav);
+		fprintf (hfsta,"Cant de alloc tot con cont sing var %6d \n", sq_q_alloc_f90_clc_sav);
+		fprintf (hfsta,"Cant de alloc tot sin cont mult var %6d \n", sq_q_alloc_f90_slc_mav);
+		fprintf (hfsta,"Cant de alloc tot con cont mult var %6d \n", sq_q_alloc_f90_clc_mav);
+
+		}
+#endif
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	if (n == 13 )
 	{
 		printf ("Cant de alloc totales               %6d \n", sq_q_alloc);
 		printf ("Cant de alloc totales for con stat  %6d \n", sq_q_alloc_for_sta);		/* for con stat ya hecho */
@@ -1413,6 +1502,14 @@ char	*s;
 
 		}
 	}
+
+
+
+
+
+
+
+
 
 	if (n == 0)
 	{
@@ -7591,13 +7688,14 @@ int	pro_exec9()
 		if (gp_proceed)
 		{
 
-		/* desdoabla lineas largas en los progs     */
-		/*
-		 * esta habilitado y parece que funcionando bien para f90
-		 * faltaria para for ...
-		 *
-		 */
-		ex9_p1_c();
+			/* desdoabla lineas largas en los progs     */
+			/*
+			 * esta habilitado y parece que funcionando bien para f90
+			 * faltaria para for ...
+			 *
+			 */
+
+			ex9_p1_c();
 		}
 #endif
 	}
@@ -8774,7 +8872,7 @@ mprintf (z,"g15_2, volvi de chg_alloc_g15 add_lines: %d  \n",add_lines);
 
 
 
-if (1)
+if (0)
 {
 	printf ("\n");
 	printf ("tipo 01 %3d \n",tipo01);
@@ -8884,6 +8982,12 @@ int	ex9_p1_b()
 	sprintf (z,"ex9_p1_b");
 	w = g_dbg(z);
 
+
+	/* proceso */
+	if (gp_fverbose("d2"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
+	}
+
 	memset(b4,'X',MAXB);
 	memset(m0,0,MSTR);
 	strcpy(base_name,"empty");
@@ -8916,6 +9020,22 @@ int	ex9_p1_b()
 	sq_q_alloc_f90_slc_mav = 0;		/* cant tot de lineas sin cont con allocate multi var */
 	sq_q_alloc_f90_clc_mav = 0;		/* cant tot de lineas con cont con allocate multi var */
 
+	sg_q_alloc_t01 = 0;			/* cant tot de allocs tipo ... */
+	sg_q_alloc_t02 = 0;			/* cant tot de allocs tipo ... */
+	sg_q_alloc_t03 = 0;			/* cant tot de allocs tipo ... */
+	sg_q_alloc_t04 = 0;			/* cant tot de allocs tipo ... */
+	sg_q_alloc_t05 = 0;			/* cant tot de allocs tipo ... */
+	sg_q_alloc_t06 = 0;			/* cant tot de allocs tipo ... */
+	sg_q_alloc_t07 = 0;			/* cant tot de allocs tipo ... */
+	sg_q_alloc_t08 = 0;			/* cant tot de allocs tipo ... */
+	sg_q_alloc_t09 = 0;			/* cant tot de allocs tipo ... */
+	sg_q_alloc_t10 = 0;			/* cant tot de allocs tipo ... */
+	sg_q_alloc_t11 = 0;			/* cant tot de allocs tipo ... */
+	sg_q_alloc_t12 = 0;			/* cant tot de allocs tipo ... */
+	sg_q_alloc_t13 = 0;			/* cant tot de allocs tipo ... */
+	sg_q_alloc_t14 = 0;			/* cant tot de allocs tipo ... */
+	sg_q_alloc_t15 = 0;			/* cant tot de allocs tipo ... */
+	sg_q_alloc_t16 = 0;			/* cant tot de allocs tipo ... */
 
 	/* para todas las lineas */
 	
@@ -9077,6 +9197,7 @@ if (gp_debug && w)
 							if (!f_stat)
 							{
 								/* TIPO-1 alloc - una linea - una sola variable - sin stat */
+								sg_q_alloc_t01++;
 								es_tipo=1;
 								tipo[es_tipo]++;
 
@@ -9133,6 +9254,7 @@ mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 							else
 							{
 								/* TIPO-2 alloc - una linea - una sola variable - con stat */
+								sg_q_alloc_t02++;
 								es_tipo=2;
 								tipo[es_tipo]++;
 
@@ -9181,6 +9303,7 @@ mprintf (z,"TIPO-1 desp de chg_alloc ... add_lines: %d\n",add_lines);
 							if (!f_stat)
 							{
 								/* TIPO-3 es un alloc en una linea con mas de una var - sin stat */
+								sg_q_alloc_t03++;
 								es_tipo=3;
 								tipo[es_tipo]++;
 
@@ -9240,6 +9363,7 @@ mprintf (z,"TIPO-3 desp de chg_alloc ... add_lines: %d\n",add_lines);
 							else
 							{
 								/* TIPO-4 alloc - una linea - una sola variable - con stat */
+								sg_q_alloc_t04++;
 								es_tipo=4;
 								tipo[es_tipo]++;
 
@@ -9290,6 +9414,7 @@ mprintf (z,"alloc: 1 m0: |%s|\n",m0);
 							if (!f_stat)
 							{
 								/* TIPO-5 es un alloc en varias lineas con una sola variable - sin stat  */
+								sg_q_alloc_t05++;
 								es_tipo=5;
 								tipo[es_tipo]++;
 
@@ -9355,6 +9480,7 @@ mprintf (z,"TIPO-5 desp de chg_alloc ... add_lines: %d\n",add_lines);
 							else
 							{
 								/* TIPO-6 es un alloc en varias lineas con una sola variable - con stat  */
+								sg_q_alloc_t06++;
 								es_tipo=6;
 								tipo[es_tipo]++;
 
@@ -9410,6 +9536,7 @@ mprintf (z,"TIPO-5 desp de chg_alloc ... add_lines: %d\n",add_lines);
 							if (!f_stat)
 							{
 								/* TIPO-7 es un alloc en varias lineas con varias variables - sin stat */
+								sg_q_alloc_t07++;
 								es_tipo=7;
 								tipo[es_tipo]++;
 
@@ -9469,6 +9596,7 @@ mprintf (z,"g7_1, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_line
 							else
 							{
 								/* TIPO-8 es un alloc en varias lineas con varias variables - con stat */
+								sg_q_alloc_t08++;
 								es_tipo=8;
 								tipo[es_tipo]++;
 
@@ -9509,6 +9637,7 @@ mprintf (z,"g7_1, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_line
 							{
 
 								/* TIPO-9 alloc en una sola linea una sola variable sin stat */
+								sg_q_alloc_t09++;
 								es_tipo=9;
 								tipo[es_tipo]++;
 
@@ -9567,6 +9696,7 @@ mprintf (z,"TIPO-9 desp de chg_alloc ... add_lines: %d\n",add_lines);
 							else   /* if (!f_stat) ... */
 							{
 								/* TIPO-10 alloc en una sola linea una sola variable con stat */
+								sg_q_alloc_t10++;
 								es_tipo=10;
 								tipo[es_tipo]++;
 
@@ -9613,6 +9743,7 @@ mprintf (z,"TIPO-9 desp de chg_alloc ... add_lines: %d\n",add_lines);
 							if (!f_stat)
 							{
 								/* TIPO-11 alloc en una linea con varias vars - sin stat */
+								sg_q_alloc_t11++;
 								es_tipo=11;
 								tipo[es_tipo]++;
 
@@ -9674,6 +9805,7 @@ mprintf (z,"g15_2, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lin
 							{
 
 								/* TIPO-12 alloc en una sola linea con varias vars - con stat */
+								sg_q_alloc_t12++;
 								es_tipo=12;
 								tipo[es_tipo]++;
 
@@ -9701,6 +9833,7 @@ mprintf (z,"g15_2, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lin
 
 							if (!es_linea_comentario( (*fnp[i+k]).l ) )
 							{
+/* EEE */
 								strcpy(b1, pasar_a_minusc( (*fnp[i+k]).l) );
 								strcpy(b1, trim_beg_f90(b1));
 								strcpy(b1, trim_end_f90(b1));
@@ -9733,6 +9866,7 @@ mprintf (z,"g15_2, agrego a i: %d  add_lines: %d  qf_src %d b: |%s|\n",i,add_lin
 							if (!f_stat)
 							{
 								/* TIPO-13 es un alloc en varias lineas con una var - sin stat */
+								sg_q_alloc_t13++;
 								es_tipo=13;
 								tipo[es_tipo]++;
 
@@ -9792,6 +9926,7 @@ mprintf (z,"g02_2, volvi de chg_alloc_g02 num_alloc %d add_lines: %d  \n",num_al
 							else /* if (!f_stat ... ) */
 							{
 								/* TIPO-14 es un alloc en varias lineas con una var - con stat */
+								sg_q_alloc_t14++;
 								es_tipo=14;
 								tipo[es_tipo]++;
 
@@ -9843,6 +9978,7 @@ mprintf (z,"g02_2, volvi de chg_alloc_g02 num_alloc %d add_lines: %d  \n",num_al
 							if (!f_stat)
 							{
 								/* TIPO-15 es un alloc en varias lineas con varias vars - sin stat  */
+								sg_q_alloc_t15++;
 								es_tipo=15;
 								tipo[es_tipo]++;
 
@@ -9907,6 +10043,7 @@ mprintf (z,"g15_2, volvi de chg_alloc_g15 add_lines: %d  \n",add_lines);
 							else
 							{
 								/* TIPO-16 es un alloc en varias lineas con varias vars - con stat  */
+								sg_q_alloc_t16++;
 								es_tipo=16;
 								tipo[es_tipo]++;
 
@@ -9986,7 +10123,7 @@ mprintf (z,"..... \n\n");
 
 
 
-if (1)
+if (0)
 {
 	printf ("\n");
 	printf ("tipo 01 %3d \n",tipo01);
@@ -10445,6 +10582,11 @@ if (gp_debug && w)
 /* desdoblar lineas largas */
 
 
+	/* proceso */
+	if (gp_fverbose("d2"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[1],z);
+	}
+
 }
 
 
@@ -10530,6 +10672,12 @@ int	ex9_p1_c()
 	int	w;
 	sprintf (z,"ex9_p1_c");
 	w = g_dbg(z);
+
+
+	/* proceso */
+	if (gp_fverbose("d2"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[0],z);
+	}
 
 	memset(b4,'X',MAXB);
 	memset(m0,0,MSTR);
@@ -12098,9 +12246,22 @@ mprintf (z,"CCC5 : p1 %2d p2 %2d p3 %2d p2-p1+1: %2d\n",p1,p2,p3,p2-p1+1);
 					strcpy( (*fnp[i+1]).l,b6);
 				
 					i+= 1;
-printf ("CCC6 : %2d |%s|\n",3,b0+p1);
-printf ("CCC7 : %2d |%s|\n",5,b5);
-printf ("CCC8 : %2d |%s|\n",6,b6);
+if (gp_debug && w)
+{
+mprintf (z,"CCC6 : %2d |%s|\n",3,b0+p1);
+mprintf (z,"CCC7 : %2d |%s|\n",5,b5);
+mprintf (z,"CCC8 : %2d |%s|\n",6,b6);
+}
+
+					/* resumen del proceso */
+					if (gp_fverbose("d3"))
+					{
+						printf ("Program  : |%s|\n",prog_name);
+						printf ("linea    : |%s|\n",b0+p1);
+						printf ("new lin1 : |%s|\n",b5);
+						printf ("new lin2 : |%s|\n",b6);
+						printf (" ... \n");
+					}
 
 				}
 				
@@ -12236,6 +12397,11 @@ if (gp_debug && w)
 #endif
 /* desdoblar lineas largas ex9_p1_c */
 
+
+	/* proceso */
+	if (gp_fverbose("d2"))
+	{	printf ("%s%s%s\n\n",gp_tm(),gp_m[1],z);
+	}
 
 }
 
@@ -17581,6 +17747,10 @@ char	*s;
  * -----------------------------------------------------------------------------------
  */
 
+/*
+ * recorta blancos y tabs al comienzo de la linea
+ *
+ */
 
 char	*trim_beg_f90(s)
 char	*s;
@@ -17648,11 +17818,12 @@ char	*s;
  * -----------------------------------------------------------------------------------
  */
 
+/* EEE */
 
 char	*trim_end_f90(s)
 char	*s;
 {
-	static	char	b0[MAXB];
+	static	char	b0[MSTR];
 	int	i,j,k;
 	int	p1;
 	int	l1,l2;
@@ -17664,7 +17835,16 @@ char	*s;
 
 
 	f_proceso = 1;
+#if 0
+	/*
+	 * es_linea_comentario aca no sirve ...
+	 * analiza cosas como |ccr_esta_variable ... | y la marca como comentario 
+	 */
+
 	if (linea_vacia(b0) || es_linea_comentario(b0))
+		f_proceso = 0;
+#endif
+	if (linea_vacia(b0) )
 		f_proceso = 0;
 
 
@@ -17687,6 +17867,7 @@ char	*s;
 
 	}
 	
+
 	return (b0);
 }
 
@@ -19090,6 +19271,17 @@ if (gp_debug && w)
 }
 
 	*qv = c2;
+
+
+	/* resumen del proceso */
+	if (gp_fverbose("d3"))
+	{
+		printf ("s len: (%03d)  str: |%s|\n",strlen(s),s);
+		printf ("q var: (%03d) \n",c2);
+		for (j=0; j<c2; j++)
+			printf ("--%03d |%s|\n",j,gv_str[j]);
+		printf (" ... \n");
+	}
 
 	/* proceso */
 	if (gp_fverbose("d2"))
@@ -21818,6 +22010,8 @@ printf ("while: i: %d f9: %d k/c: %c%c |%s| \n",i,f9,c,b1[1+i+1],s);
  *
  * -----------------------------------------------------------------------------------
  */
+
+/* EEE */
 
 
 char	*trim_blanks(s)
@@ -32208,13 +32402,7 @@ int	gp_parser()
 			{
 				printf ("Param tipo 4: %s\n", gp_fp(GP_GET,i,(char **)0 ) );
 			}
-
-
 		}
-
-
-
-
 
 
 		/* program name */
@@ -32254,7 +32442,6 @@ int	gp_parser()
 		printf ("\n\n");
 	}
 } 
-
 
 
 
@@ -32301,7 +32488,6 @@ char	*s;
 
 	return s+i;
 }
-
 
 
 
