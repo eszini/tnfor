@@ -1,0 +1,292 @@
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:   217 (    0 -  1522) |allocate(plan_identifier(0:max_number_of_plans_to_save))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1225                 |END|
+line to insert use all:    28 (   20 -  1225) |SAVE|
+line to insert check  :   221 (   20 -  1228) ||
+key used              :     1                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:   224 (    0 -  1527) |allocate(plan_object_function_value(0:max_number_of_plans_to_save))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1230                 |END|
+line to insert use all:    30 (   20 -  1230) ||
+line to insert check  :   225 (   20 -  1230) ||
+key used              :     2                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:   228 (    0 -  1529) |allocate(plan_has_mut_exc_units(0:max_number_of_plans_to_save))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1232                 |END|
+line to insert use all:    30 (   20 -  1232) ||
+line to insert check  :   229 (   20 -  1232) ||
+key used              :     3                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :     4                 | 
+alloc sentence in line:   232 (    0 -  1531) |allocate(plan_option_sequence(50, max_number_of_plans_to_save))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1234                 |END|
+line to insert use all:    30 (   20 -  1234) ||
+line to insert check  :   233 (   20 -  1234) ||
+key used              :     4                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :     5                 | 
+alloc sentence in line:   271 (    0 -  1533) |allocate(option_pointr(active_options))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1236                 |END|
+line to insert use all:    30 (   20 -  1236) ||
+line to insert check  :   272 (   20 -  1236) ||
+key used              :     5                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :     6                 | 
+alloc sentence in line:   275 (    0 -  1535) |allocate(option_ann_units(active_options))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1238                 |END|
+line to insert use all:    30 (   20 -  1238) ||
+line to insert check  :   276 (   20 -  1238) ||
+key used              :     6                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :     7                 | 
+alloc sentence in line:   279 (    0 -  1537) |allocate(avail_annual_units(active_options))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1240                 |END|
+line to insert use all:    30 (   20 -  1240) ||
+line to insert check  :   280 (   20 -  1240) ||
+key used              :     7                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :     8                 | 
+alloc sentence in line:   283 (    0 -  1539) |allocate(option_avail_units(active_options))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1242                 |END|
+line to insert use all:    30 (   20 -  1242) ||
+line to insert check  :   284 (   20 -  1242) ||
+key used              :     8                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :     9                 | 
+alloc sentence in line:   287 (    0 -  1541) |allocate(avail_cum_units(active_options))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1244                 |END|
+line to insert use all:    30 (   20 -  1244) ||
+line to insert check  :   288 (   20 -  1244) ||
+key used              :     9                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :    10                 | 
+alloc sentence in line:   291 (    0 -  1543) |allocate(option_cap(active_options))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1246                 |END|
+line to insert use all:    30 (   20 -  1246) ||
+line to insert check  :   292 (   20 -  1246) ||
+key used              :    10                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :    11                 | 
+alloc sentence in line:   295 (    0 -  1545) |allocate(option_loading_type(active_options))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1248                 |END|
+line to insert use all:    30 (   20 -  1248) ||
+line to insert check  :   296 (   20 -  1248) ||
+key used              :    11                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :    12                 | 
+alloc sentence in line:   299 (    0 -  1547) |allocate(option_is_active(active_options))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1250                 |END|
+line to insert use all:    30 (   20 -  1250) ||
+line to insert check  :   300 (   20 -  1250) ||
+key used              :    12                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :    13                 | 
+alloc sentence in line:   303 (    0 -  1549) |allocate(plan_being_tested(50))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1252                 |END|
+line to insert use all:    30 (   20 -  1252) ||
+line to insert check  :   304 (   20 -  1252) ||
+key used              :    13                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :    14                 | 
+alloc sentence in line:   424 (    0 -  1551) |allocate(bad_odd_plans(option_depth,max_bad_plans))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1254                 |END|
+line to insert use all:    30 (   20 -  1254) ||
+line to insert check  :   425 (   20 -  1254) |ENDIF|
+key used              :    14                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :    15                 | 
+alloc sentence in line:   495 (    0 -  1553) |allocate(bad_even_plans(option_depth,max_bad_plans))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1256                 |END|
+line to insert use all:    30 (   20 -  1256) ||
+line to insert check  :   496 (   20 -  1256) |! REMEMBERS PREVIOUS DEPTHS|
+key used              :    15                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :    16                 | 
+alloc sentence in line:   531 (    0 -  1555) |allocate(depth_best_plans(option_depth, depth_plans_2_save))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1258                 |END|
+line to insert use all:    30 (   20 -  1258) ||
+line to insert check  :   532 (   20 -  1258) ||
+key used              :    16                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :    17                 | 
+alloc sentence in line:   535 (    0 -  1557) |allocate(depth_plan_objective_value(depth_plans_2_save))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1260                 |END|
+line to insert use all:    30 (   20 -  1260) ||
+line to insert check  :   536 (   20 -  1260) ||
+key used              :    17                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :    18                 | 
+alloc sentence in line:   539 (    0 -  1559) |allocate(plans_2_test_at_next_depth(option_depth, max_plans_2_test))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1262                 |END|
+line to insert use all:    30 (   20 -  1262) ||
+line to insert check  :   540 (   20 -  1262) ||
+key used              :    18                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :    19                 | 
+alloc sentence in line:   567 (    0 -  1561) |allocate(bad_odd_plans(option_depth,max_bad_plans))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1264                 |END|
+line to insert use all:    30 (   20 -  1264) ||
+line to insert check  :   568 (   20 -  1264) |! REMEMBERS PREVIOUS DEPTHS|
+key used              :    19                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |andecomp.f90|
+Allocate number       :    20                 | 
+alloc sentence in line:   583 (    0 -  1563) |allocate(   &|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1266                 |END|
+line to insert check  :   585 (   20 -  1266) |! REMEMBERS PREVIOUS DEPTHS|
+key used              :    20                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |andecomp.f90|
+Allocate number       :    21                 | 
+alloc sentence in line:   608 (    0 -  1565) |allocate(list_of_combinations(option_depth-1,   &|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1268                 |END|
+line to insert check  :   610 (   20 -  1268) |!|
+key used              :    21                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |andecomp.f90|
+Allocate number       :    22                 | 
+alloc sentence in line:   637 (    0 -  1567) |allocate(list_of_combinations(option_depth-1,   &|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1270                 |END|
+line to insert check  :   639 (   20 -  1270) |!|
+key used              :    22                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :    23                 | 
+alloc sentence in line:   675 (    0 -  1569) |allocate(depth_best_plans(option_depth, depth_plans_2_save))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1272                 |END|
+line to insert use all:    30 (   20 -  1272) ||
+line to insert check  :   676 (   20 -  1272) ||
+key used              :    23                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :    24                 | 
+alloc sentence in line:   679 (    0 -  1571) |allocate(depth_plan_objective_value(depth_plans_2_save))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1274                 |END|
+line to insert use all:    30 (   20 -  1274) ||
+line to insert check  :   680 (   20 -  1274) ||
+key used              :    24                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :    25                 | 
+alloc sentence in line:   683 (    0 -  1573) |allocate(plans_2_test_at_next_depth(option_depth, max_plans_2_test))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1276                 |END|
+line to insert use all:    30 (   20 -  1276) ||
+line to insert check  :   684 (   20 -  1276) ||
+key used              :    25                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :    26                 | 
+alloc sentence in line:   757 (    0 -  1575) |allocate(temp_bad_array(option_depth, max_bad_plans))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1278                 |END|
+line to insert use all:    30 (   20 -  1278) ||
+line to insert check  :   758 (   20 -  1278) ||
+key used              :    26                 | 
+------------------------------------------( 1)-
+Type (13)          src:                       |andecomp.f90|
+Allocate number       :    27                 | 
+alloc sentence in line:   771 (    0 -  1577) |allocate(bad_odd_plans(option_depth,   &|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1280                 |END|
+line to insert check  :   773 (   20 -  1280) |DO PLANS = 1, MAX_BAD_PLANS|
+key used              :    27                 | 
+------------------------------------------( 4)-
+Type (13)          src:                       |andecomp.f90|
+Allocate number       :    28                 | 
+alloc sentence in line:   789 (    0 -  1579) |allocate(bad_even_plans(option_depth,   &|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1282                 |END|
+line to insert check  :   791 (   20 -  1282) |DO PLANS = 1, MAX_BAD_PLANS|
+key used              :    28                 | 
+------------------------------------------( 4)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :    29                 | 
+alloc sentence in line:  1027 (    0 -  1581) |allocate(sorted_pointer(number_of_saved_plans))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1284                 |END|
+line to insert use all:    30 (   20 -  1284) ||
+line to insert check  :  1028 (   20 -  1284) |CALL QUICKR(INT(NUMBER_OF_SAVED_PLANS),   &|
+key used              :    29                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :    30                 | 
+alloc sentence in line:  1078 (    0 -  1583) |allocate(position_matched(option_depth-1))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1286                 |END|
+line to insert use all:    30 (   20 -  1286) ||
+line to insert check  :  1079 (   20 -  1286) |DO I = 1, LAST_LEVEL_PLANS|
+key used              :    30                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :    31                 | 
+alloc sentence in line:  1127 (    0 -  1585) |allocate(position_matched(option_depth-1))|
+block starts at line  :    20                 |RECURSIVE FUNCTION ANNUAL_DECOMPOSITION_START_UP()|
+block ends   at line  :  1288                 |END|
+line to insert use all:    30 (   20 -  1288) ||
+line to insert check  :  1128 (   20 -  1288) |DO I = 1, NUM_OF_BAD_PLANS_LAST_DEPTH|
+key used              :    31                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :    32                 | 
+alloc sentence in line:  1415 (    0 -  1587) |allocate(active_option_list(total_options))|
+block starts at line  :  1385                 |FUNCTION CREATE_ANN_DECOMP_COMBINATIONS(OPTION_DEPTH,   &|
+block ends   at line  :  1461                 |END|
+line to insert use all:  1392 ( 1385 -  1461) ||
+line to insert check  :  1419 ( 1385 -  1464) |IF(ALLOCATED(COMBINATION_ARRAYS)) DEALLOCATE(COMBINATION_ARRAYS)|
+key used              :    32                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |andecomp.f90|
+Allocate number       :    33                 | 
+alloc sentence in line:  1429 (    0 -  1592) |allocate(combination_arrays(depth))|
+block starts at line  :  1385                 |FUNCTION CREATE_ANN_DECOMP_COMBINATIONS(OPTION_DEPTH,   &|
+block ends   at line  :  1466                 |END|
+line to insert use all:  1394 ( 1385 -  1466) ||
+line to insert check  :  1430 ( 1385 -  1466) |COMBINATION_ARRAYS = 1|
+key used              :    33                 | 
+------------------------------------------( 1)-

@@ -1,0 +1,33 @@
+(09) sl sv       andecomp.f90                   |allocate(plan_identifier(0:max_number_of_plans_to_save))|
+(09) sl sv       andecomp.f90                   |allocate(plan_object_function_value(0:max_number_of_plans_to_save))|
+(09) sl sv       andecomp.f90                   |allocate(plan_has_mut_exc_units(0:max_number_of_plans_to_save))|
+(09) sl sv       andecomp.f90                   |allocate(plan_option_sequence(50, max_number_of_plans_to_save))|
+(09) sl sv       andecomp.f90                   |allocate(option_pointr(active_options))|
+(09) sl sv       andecomp.f90                   |allocate(option_ann_units(active_options))|
+(09) sl sv       andecomp.f90                   |allocate(avail_annual_units(active_options))|
+(09) sl sv       andecomp.f90                   |allocate(option_avail_units(active_options))|
+(09) sl sv       andecomp.f90                   |allocate(avail_cum_units(active_options))|
+(09) sl sv       andecomp.f90                   |allocate(option_cap(active_options))|
+(09) sl sv       andecomp.f90                   |allocate(option_loading_type(active_options))|
+(09) sl sv       andecomp.f90                   |allocate(option_is_active(active_options))|
+(09) sl sv       andecomp.f90                   |allocate(plan_being_tested(50))|
+(09) sl sv       andecomp.f90                   |allocate(bad_odd_plans(option_depth,max_bad_plans))|
+(09) sl sv       andecomp.f90                   |allocate(bad_even_plans(option_depth,max_bad_plans))|
+(09) sl sv       andecomp.f90                   |allocate(depth_best_plans(option_depth, depth_plans_2_save))|
+(09) sl sv       andecomp.f90                   |allocate(depth_plan_objective_value(depth_plans_2_save))|
+(09) sl sv       andecomp.f90                   |allocate(plans_2_test_at_next_depth(option_depth, max_plans_2_test))|
+(09) sl sv       andecomp.f90                   |allocate(bad_odd_plans(option_depth,max_bad_plans))|
+(13) ml sv       andecomp.f90                   |allocate(bad_even_plans(option_depth,max_bad_plans))|
+(13) ml sv       andecomp.f90                   |allocate(list_of_combinations(option_depth-1,last_level_plans))|
+(13) ml sv       andecomp.f90                   |allocate(list_of_combinations(option_depth-1,last_level_plans))|
+(09) sl sv       andecomp.f90                   |allocate(depth_best_plans(option_depth, depth_plans_2_save))|
+(09) sl sv       andecomp.f90                   |allocate(depth_plan_objective_value(depth_plans_2_save))|
+(09) sl sv       andecomp.f90                   |allocate(plans_2_test_at_next_depth(option_depth, max_plans_2_test))|
+(09) sl sv       andecomp.f90                   |allocate(temp_bad_array(option_depth, max_bad_plans))|
+(13) ml sv       andecomp.f90                   |allocate(bad_odd_plans(option_depth,max_bad_plans))|
+(13) ml sv       andecomp.f90                   |allocate(bad_even_plans(option_depth,max_bad_plans))|
+(09) sl sv       andecomp.f90                   |allocate(sorted_pointer(number_of_saved_plans))|
+(09) sl sv       andecomp.f90                   |allocate(position_matched(option_depth-1))|
+(09) sl sv       andecomp.f90                   |allocate(position_matched(option_depth-1))|
+(09) sl sv       andecomp.f90                   |allocate(active_option_list(total_options))|
+(09) sl sv       andecomp.f90                   |allocate(combination_arrays(depth))|

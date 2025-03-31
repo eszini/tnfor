@@ -1,0 +1,24 @@
+
+
+
+Para correr el proceso que agrega check_allocs
+
+sh r7_crepo.sh m
+archivos a procesar en lr1
+sh test.sh 
+
+
+Para correr el proceso que hace un "plan.txt"
+para revisar el estado de los check_allocs
+
+sh r7_crepo.sh m
+archivos a procesar en lr1
+r7_mkplan.sh
+
+
+Para hacer pruebas combinando mover y bulk
+para el proceso de listas de archivos 
+
+tt4.sh
+
+
