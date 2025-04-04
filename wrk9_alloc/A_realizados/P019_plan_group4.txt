@@ -47,3 +47,16 @@
 (09) sl sv       msgprosymrevexp.f90            |allocate(resourcelistids(resourcesinfile))|
 (15) ml mv       objtfunc.f90                   |allocate(operation_type(que_stack_pointr),operation_info(que_stack_pointr),operate_on_vector(que_stack_pointr),operation_variabel_pointr(que_stack_pointr))|
 (15) ml mv       objtfunc.f90                   |allocate(partial_objfunc_des(num_of_variables),group_string(num_of_variables),variable_string(num_of_variables),variable_num(num_of_variables),function_operator(num_of_variables),start_year(num_of_variables),end_year(num_of_variables),group_num(num_of_variables),sum_for(num_of_variables),num_periods(num_of_variables),accumlator_for(num_of_variables),discount_for_year(num_of_variables,100),sum_of_yearly_discount(num_of_variables,100))|
+(09) sl sv       pf_objt.f90                    |allocate(bc_table_position_for(0:max_bc_class_number))|
+(09) sl sv       pf_objt.f90                    |allocate(ol_table_position_for(0:max_ol_class_number))|
+(15) ml mv       postfix.f90                    |allocate(partial_objfunc_des(50),group_string(50),variable_string(50),linkage_operator(50),discount_start_period(50),variable_num(50),function_operator(50),start_year(50),end_year(50),left_bracket_count(50),right_bracket_count(50),group_num(50),multiplier(50),discount_rate(50))|
+(15) ml mv       postfix.f90                    |allocate(operator_stack(0:256),operator_obj_line_num(0:256),que_type(500),que_vector(500),que_info(500),que_pointr(500))|
+(15) ml mv       pro_cost.f90                   |allocate(energy(max_simulation_years),tenrg(max_simulation_years),tmmbtus(max_simulation_years),fuelcost(max_simulation_years),varcost(max_simulation_years))|
+(15) ml mv       pro_cost.f90                   |allocate(nox_season_region(max_trans_group_number),nox_active_in_tg(max_trans_group_number),nox_year_active_in_tg(max_trans_group_number),nox_year(max_trans_group_number),end_nox_year(max_trans_group_number))|
+(09) sl sv       pro_cost.f90                   |allocate(blended_btu_cost(max(nunits,int(1,2))))|
+(09) sl sv       pro_cost.f90                   |allocate(annual_blended_btu_cost(max(nunits,int(1,2))))|
+(09) sl sv       pro_cost.f90                   |allocate(annual_fuel_btu_cost(max(nunits,int(1,2))))|
+(09) sl sv       pro_cost.f90                   |allocate(annual_disp_btu_cost(max(nunits,int(1,2))))|
+(15) ml mv       pro_cost.f90                   |allocate(first_hydro_load_no(0:number_of_hydro_load_groups),hydro_ag_ipntx(0:number_of_hydro_load_groups))|
+(15) ml mv       wvpa_data_bases.f90            |allocate(report_data(0:max_comp_id,0:max_accounts_tracked,0:15,0:12,0:30),construction_database(0:max_accounts_tracked,0:10,0:12,0:30,0:150),active_workorders(0:max_accounts_tracked,0:30),workorder_4_comp(0:max_accounts_tracked,0:30,0:150),construction_workorder_names(0:max_accounts_tracked,0:30,0:150))|
+(09) sl sv       wvpa_data_bases.f90            |allocate(out_record(0:max_accounts_tracked,plant_bal_rept_cols))|

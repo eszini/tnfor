@@ -1,0 +1,122 @@
+Type ( 9)          src:                       |clm_objt.f90|
+Allocate number       :     1                 | 
+alloc sentence in line:   255 (    0 -  1911) |allocate(maint_rq_da_dec(n_active_units))|
+block starts at line  :     8                 |RECURSIVE SUBROUTINE MAINT_SCHEDULER(   &|
+block ends   at line  :  1401                 |END ! SUBROUTINE MAINT_SCHEDULER|
+line to insert use all:    36 (    8 -  1401) ||
+line to insert check  :   259 (    8 -  1404) |!|
+key used              :     1                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |clm_objt.f90|
+Allocate number       :     2                 | 
+alloc sentence in line:   262 (    0 -  1916) |allocate(maint_weight(n_active_units))|
+block starts at line  :     8                 |RECURSIVE SUBROUTINE MAINT_SCHEDULER(   &|
+block ends   at line  :  1406                 |END ! SUBROUTINE MAINT_SCHEDULER|
+line to insert use all:    38 (    8 -  1406) ||
+line to insert check  :   263 (    8 -  1406) |!|
+key used              :     2                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |clm_objt.f90|
+Allocate number       :     3                 | 
+alloc sentence in line:   266 (    0 -  1918) |allocate(order_dec(n_active_units))|
+block starts at line  :     8                 |RECURSIVE SUBROUTINE MAINT_SCHEDULER(   &|
+block ends   at line  :  1408                 |END ! SUBROUTINE MAINT_SCHEDULER|
+line to insert use all:    38 (    8 -  1408) ||
+line to insert check  :   267 (    8 -  1408) |!|
+key used              :     3                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |clm_objt.f90|
+Allocate number       :     4                 | 
+alloc sentence in line:   270 (    0 -  1920) |allocate(opt_range_ofs(n_active_units))|
+block starts at line  :     8                 |RECURSIVE SUBROUTINE MAINT_SCHEDULER(   &|
+block ends   at line  :  1410                 |END ! SUBROUTINE MAINT_SCHEDULER|
+line to insert use all:    38 (    8 -  1410) ||
+line to insert check  :   271 (    8 -  1410) |!|
+key used              :     4                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |clm_objt.f90|
+Allocate number       :     5                 | 
+alloc sentence in line:   274 (    0 -  1922) |allocate(opt_range_dur(n_active_units))|
+block starts at line  :     8                 |RECURSIVE SUBROUTINE MAINT_SCHEDULER(   &|
+block ends   at line  :  1412                 |END ! SUBROUTINE MAINT_SCHEDULER|
+line to insert use all:    38 (    8 -  1412) ||
+line to insert check  :   275 (    8 -  1412) ||
+key used              :     5                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |clm_objt.f90|
+Allocate number       :     6                 | 
+alloc sentence in line:   616 (    0 -  1924) |allocate(hrstostate(0:1,12*max_fo_per_month))|
+block starts at line  :     8                 |RECURSIVE SUBROUTINE MAINT_SCHEDULER(   &|
+block ends   at line  :  1414                 |END ! SUBROUTINE MAINT_SCHEDULER|
+line to insert use all:    38 (    8 -  1414) ||
+line to insert check  :   617 (    8 -  1414) |END IF|
+key used              :     6                 | 
+------------------------------------------( 1)-
+Type (15)          src:                       |clm_objt.f90|
+Allocate number       :     7                 | 
+alloc sentence in line:   706 (    0 -  1926) |allocate(   &|
+block starts at line  :     8                 |RECURSIVE SUBROUTINE MAINT_SCHEDULER(   &|
+block ends   at line  :  1416                 |END ! SUBROUTINE MAINT_SCHEDULER|
+line to insert use all:    38 (    8 -  1416) ||
+line to replace allocs:   705  (  5 allocs)   |ALLOCATE(   &| 
+key used              :     7                 | 
+allocate added        :     1                 |allocate(UNIT_FO_ONCE(12,NUNITS),stat=stv_er)|
+allocate added        :     2                 |allocate(UNIT_OUT_SCHD(12,NUNITS*2),stat=stv_er)|
+allocate added        :     3                 |allocate(UNIT_OUT_FORC(12,NUNITS*MAX_FO_PER_MONTH),stat=stv_er)|
+allocate added        :     4                 |allocate(UNIT_OUT_DRAT(12,NUNITS),stat=stv_er)|
+allocate added        :     5                 |allocate(UNIT_OUT_FRAC(13,5,NUNITS),stat=stv_er)|
+------------------------------------------( 5)-
+Type ( 9)          src:                       |clm_objt.f90|
+Allocate number       :     8                 | 
+alloc sentence in line:   723 (    0 -  1931) |allocate(so_beg_moda(2,nunits))|
+block starts at line  :     8                 |RECURSIVE SUBROUTINE MAINT_SCHEDULER(   &|
+block ends   at line  :  1421                 |END ! SUBROUTINE MAINT_SCHEDULER|
+line to insert use all:    38 (    8 -  1421) ||
+line to insert check  :   724 (    8 -  1421) |SO_BEG_MODA = 0|
+key used              :    12                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |clm_objt.f90|
+Allocate number       :     9                 | 
+alloc sentence in line:   728 (    0 -  1933) |allocate(so_end_moda(2,nunits))|
+block starts at line  :     8                 |RECURSIVE SUBROUTINE MAINT_SCHEDULER(   &|
+block ends   at line  :  1423                 |END ! SUBROUTINE MAINT_SCHEDULER|
+line to insert use all:    38 (    8 -  1423) ||
+line to insert check  :   729 (    8 -  1423) |SO_END_MODA = 0|
+key used              :    13                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |clm_objt.f90|
+Allocate number       :    10                 | 
+alloc sentence in line:   733 (    0 -  1935) |allocate(fo_beg_hr(max_fo_per_month,12,nunits))|
+block starts at line  :     8                 |RECURSIVE SUBROUTINE MAINT_SCHEDULER(   &|
+block ends   at line  :  1425                 |END ! SUBROUTINE MAINT_SCHEDULER|
+line to insert use all:    38 (    8 -  1425) ||
+line to insert check  :   734 (    8 -  1425) |FO_BEG_HR = 0|
+key used              :    14                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |clm_objt.f90|
+Allocate number       :    11                 | 
+alloc sentence in line:   738 (    0 -  1937) |allocate(fo_end_hr(max_fo_per_month,12,nunits))|
+block starts at line  :     8                 |RECURSIVE SUBROUTINE MAINT_SCHEDULER(   &|
+block ends   at line  :  1427                 |END ! SUBROUTINE MAINT_SCHEDULER|
+line to insert use all:    38 (    8 -  1427) ||
+line to insert check  :   739 (    8 -  1427) |FO_END_HR = 0|
+key used              :    15                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |clm_objt.f90|
+Allocate number       :    12                 | 
+alloc sentence in line:   743 (    0 -  1939) |allocate(pd_beg_hr(max_pd_per_month,12,nunits))|
+block starts at line  :     8                 |RECURSIVE SUBROUTINE MAINT_SCHEDULER(   &|
+block ends   at line  :  1429                 |END ! SUBROUTINE MAINT_SCHEDULER|
+line to insert use all:    38 (    8 -  1429) ||
+line to insert check  :   744 (    8 -  1429) |PD_BEG_HR = 0.|
+key used              :    16                 | 
+------------------------------------------( 1)-
+Type ( 9)          src:                       |clm_objt.f90|
+Allocate number       :    13                 | 
+alloc sentence in line:   748 (    0 -  1941) |allocate(pd_end_hr(max_pd_per_month,12,nunits))|
+block starts at line  :     8                 |RECURSIVE SUBROUTINE MAINT_SCHEDULER(   &|
+block ends   at line  :  1431                 |END ! SUBROUTINE MAINT_SCHEDULER|
+line to insert use all:    38 (    8 -  1431) ||
+line to insert check  :   749 (    8 -  1431) |PD_END_HR = 0|
+key used              :    17                 | 
+------------------------------------------( 1)-

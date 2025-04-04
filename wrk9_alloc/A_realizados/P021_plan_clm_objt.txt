@@ -1,0 +1,13 @@
+(09) sl sv       clm_objt.f90                   |allocate(maint_rq_da_dec(n_active_units))|
+(09) sl sv       clm_objt.f90                   |allocate(maint_weight(n_active_units))|
+(09) sl sv       clm_objt.f90                   |allocate(order_dec(n_active_units))|
+(09) sl sv       clm_objt.f90                   |allocate(opt_range_ofs(n_active_units))|
+(09) sl sv       clm_objt.f90                   |allocate(opt_range_dur(n_active_units))|
+(09) sl sv       clm_objt.f90                   |allocate(hrstostate(0:1,12*max_fo_per_month))|
+(15) ml mv       clm_objt.f90                   |allocate(unit_fo_once (12,nunits),unit_out_schd(12,nunits*2),unit_out_forc(12,nunits*max_fo_per_month),unit_out_drat(12,nunits),unit_out_frac(13,5,nunits))|
+(09) sl sv       clm_objt.f90                   |allocate(so_beg_moda(2,nunits))|
+(09) sl sv       clm_objt.f90                   |allocate(so_end_moda(2,nunits))|
+(09) sl sv       clm_objt.f90                   |allocate(fo_beg_hr(max_fo_per_month,12,nunits))|
+(09) sl sv       clm_objt.f90                   |allocate(fo_end_hr(max_fo_per_month,12,nunits))|
+(09) sl sv       clm_objt.f90                   |allocate(pd_beg_hr(max_pd_per_month,12,nunits))|
+(09) sl sv       clm_objt.f90                   |allocate(pd_end_hr(max_pd_per_month,12,nunits))|
