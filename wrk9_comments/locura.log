@@ -1,0 +1,1397 @@
+ABB_CapacityMarketReport                         |  EXTENSION ABD AND UNIT 8327 IS USE IN ABB_CapacityMarketReport
+ACTIVE_LINK                                      |          I = ACTIVE_LINK
+ACTIVE_NODES                                     |          J = ACTIVE_NODES
+ACTIVE_NODES                                     |      +               LINK_MEMORY(J,J,J),            ! ACTIVE_NODES
+ACTIVE_NODES                                     |      +               LINK_MEMORY,            ! ACTIVE_NODES
+ACTIVE_NODES                                     |      +            LINK_MEMORY(:,:,:),          ! ACTIVE_NODES
+ACTIVE_OPTIONS                                   |  7/28/00. FROM TOTAL_ALL_OPTIONS TO TOTAL_ACTIVE_OPTIONS
+ACTUAL_TAX_VALUES                                |       SAVE ACTUAL_TAX_VALUES
+ACTUAL_VALUE_FOUND                               |      +     ACTUAL_VALUE_FOUND
+ADDEDUM_TO_BOOK_GAIN_LOSS                        |     +                                    ADDEDUM_TO_BOOK_GAIN_LOSS
+ADDEDUM_TO_BOOK_GAIN_LOSS                        |     +                                   ADDEDUM_TO_BOOK_GAIN_LOSS
+ADDENUM_2_ASSETS_NEC                             |      +                                              ADDENUM_2_ASSETS_NEC
+ADDENUM_2_LIBS_NEC                               |      +                                                ADDENUM_2_LIBS_NEC
+ADDITIONAL_REVENUES                              |     +                                               ADDITIONAL_REVENUES
+ADDITIONAL_REVENUES                              |     +              (1. + RETURN_ON_RESERVES/200.) * ADDITIONAL_REVENUES
+ADD_CAPACITY_TO_DSM_CAP                          |            ADD_CAPACITY_TO_DSM_CAP
+ADD_DSM_EXPENDITURES                             |      SAVE ADD_OTHER_DEBT_SERVICE,ADD_DSM_EXPENDITURES
+ADJUSTED_DEMAND                                  |      +                                                   ADJUSTED_DEMAND
+ADJUSTMENT_2_OP_REV_TAX                          |      +                               + ADJUSTMENT_2_OP_REV_TAX
+ADJUSTMENT_2_OP_REV_TAX                          |     +                                           ADJUSTMENT_2_OP_REV_TAX
+ADJUSTMENT_CLAUSE_REVENUES                       |                  ADJUSTMENT_CLAUSE_REVENUES=ADJUSTMENT_CLAUSE_REVENUES
+ADJUSTMENT_CLAUSE_REVENUES                       |                  DEFERRED_FUEL_EXPENSE=ADJUSTMENT_CLAUSE_REVENUES
+ADJ_PK2                                          |                PEAK_ADJUSTMENTS(I) = ADJ_PK1 + ADJ_PK2
+AEL_BASEMIN                                      |            READ(LOAD_UNIT,REC=368) AEL_BASE,AEL_BASEMIN
+AEL_ENRGYEAR                                     |            READ(LOAD_UNIT,REC=369) AEL_ENERGY,AEL_ENRGYEAR
+AFILIATE_PURCHASE_POWER_EXPENSE                  |      +                                 + AFILIATE_PURCHASE_POWER_EXPENSE
+AI_CLASS_EXPENSE                                 |      +     AI_CLASS_EXPENSE
+AMT_CREDITS_USED                                 |      +                                   - CONSOLID_AMT_CREDITS_USED
+ANNUAL_EMIS_COST                                 | !            INDEP_EMIS_COST = ANNUAL_EMIS_COST
+ANNUAL_ENERGY                                    |                      CONSTRAIN_ANNUAL_ENERGY = ANNUAL_ENERGY
+ANNUAL_ENERGY                                    | !               VAR_OM_PER_MWH(CN) = ANNUAL_VOM_COST/ ANNUAL_ENERGY
+ANNUAL_ENERGY                                    | !            INDEP_ANNUAL_ENERGY = ANNUAL_ENERGY
+ANNUAL_LEASOR_MARK_UP                            |       SAVE NUC_FUEL_COST,ANNUAL_LEASOR_MARK_UP
+ANNUAL_RESERVE_APPRECIATION                      |      +                           ANNUAL_RESERVE_APPRECIATION
+ANNUAL_SUM                                       |                     SINKING_FUND(0,I) = ANNUAL_SUM
+ANNUAL_VOM_COST                                  |                         HYBRID_MARKET_VOM_COST = ANNUAL_VOM_COST
+ANNUAL_VOM_COST                                  |                      CONSTRAIN_VOM_COST = ANNUAL_VOM_COST
+ANNUAL_VOM_COST                                  | !            INDEP_ANNUAL_VOM_COST = ANNUAL_VOM_COST
+AREA_NAME                                        |                   TEMP_TWO_DIGIT_NAME = R_MULTI_AREA_NAME
+AREA_NAME                                        |  092806. ADDED TEMP_MULTI_AREA_NAME
+AREA_PRICE                                       |  090806. ADDED REGIONAL_AREA_PRICE
+ARTICLES_OF_INCORPORATION                        |  ARTICLES_OF_INCORPORATION
+ASSETS_NEC                                       |      +                                              ADDENUM_2_ASSETS_NEC
+ASSETS_NEC_BAL_ADJ                               |      +                         - ASSETS_NEC_BAL_ADJ
+ASSET_ALLOCATION_LIST                            |       SAVE ASSET_CLASS_LIST,ASSET_ALLOCATION_LIST
+ASSET_ALLOCATION_LIST                            |      +               ASSET_ALLOCATION_LIST
+ASSET_ALLOCATOR                                  |            AMORT = INT_CAMORT * ASSET_ALLOCATOR
+ASSET_ALLOCATOR                                  |     +                               CUM_BOOK_DEP(0,I) * ASSET_ALLOCATOR
+ASSET_ALLOCATOR                                  |       REAL ASSET_ALLOCATION_LIST(:),ASSET_ALLOCATOR
+ASSET_CLASS                                      |               ASSET_CLASS_LIST(1) = ASSET_CLASS
+ASSET_CLASS                                      |            ASSET_CLASS_LIST(1) = ASSET_CLASS
+ASSET_CLASS                                      |            ASSET_CLASS_LIST(1) = R_ASSET_CLASS
+ASSET_CLASS                                      |         ASSET_CLASS = R_ASSET_CLASS
+ASSET_CLASS                                      |         ASSET_CLASS_LIST(1) = ASSET_CLASS
+ASSET_CLASS                                      |         ASSET_CLASS_LIST(1) = R_ASSET_CLASS
+ASSET_CLASS                                      |      ASSET_CLASS = R_ASSET_CLASS
+ASSET_CLASS                                      |         ASSET_CLASS_LIST(1) = R_ASSET_CLASS
+ASSET_CLASS_ANALYSIS                             |  ASSET_CLASS_ANALYSIS
+ASSET_CLASS_ID                                   |       INTEGER*2 RM_ASSET_CLASS_ID
+ASSET_CLASS_ID                                   |               PARENT_CLASS_ID_NUM = ASSET_CLASS_ID
+ASSET_CLASS_NUM                                  |                   EMISSION_MARKET_LINK = ASSET_CLASS_NUM
+ASSET_CLASS_NUM                                  |       SAVE ASSET_CLASS_POINTER,MAX_ASSET_CLASS_NUM
+ASSET_CLASS_NUM                                  |       SAVE ASSET_CLASS_POINTER,NUM_OF_ASSET_CLASSES,MAX_ASSET_CLASS_NUM
+ASSET_CLASS_NUM                                  |       SAVE MAX_ASSET_CLASS_NUM
+ASSET_CLASS_NUM                                  |      +     NUM_OF_ASSET_CLASSES,MAX_ASSET_CLASS_NUM
+ASSET_CLASS_POINTER                              |       ALLOCATABLE :: HYDRO_ASSET_CLASS_POINTER
+ASSET_CLASS_POINTER                              |      +               TEMP_ASSET_CLASS_POINTER
+ASSET_CLASS_POINTER                              |                ALLOCATE(EXPENSE_BC_ASSET_CLASS_POINTER
+ASSET_CLASS_POINTER                              |            ALLOCATE(PAYABLES_BC_ASSET_CLASS_POINTER
+ASSET_CLASS_POINTER                              |          ALLOCATE(EXPENSE_OL_ASSET_CLASS_POINTER
+ASSET_CLASS_POINTER                              |       SAVE ASSET_CLASS_POINTER
+ASSET_CLASS_POINTER                              |      +     RATE_ASSET_CLASS_POINTER
+ASSET_CLASS_POINTER                              |     +               TEMP_ASSET_CLASS_POINTER
+ASSET_CLASS_POINTER                              |     +     PAYABLES_OL_ASSET_CLASS_POINTER
+ASSET_CLASS_TYPE                                 |               IF(CLASS_TYPE(CLASS_POS) == SBU) THEN ! ASSET_CLASS_TYPE
+ASSET_CLASS_VECTOR                               |       ALLOCATABLE :: ASSET_CLASS_NUM,ASSET_CLASS_VECTOR
+ASSET_CLASS_VECTOR                               |       SAVE ASSET_CLASS_NUM,ASSET_CLASS_VECTOR
+ATL_FEDERAL_TAXES                                |               BTL_FEDERAL_TAXES = FEDERAL_TAXES - ATL_FEDERAL_TAXES
+ATL_FEDERAL_TAXES                                |      +                                    + ATL_FEDERAL_TAXES
+ATL_LEASE_AMORTIZATION                           |      +                                - ATL_LEASE_AMORTIZATION
+ATL_LEASE_INTEREST                               |      +                             + ATL_LEASE_INTEREST
+ATL_LEASE_PAYMENTS                               |      +                                - ATL_LEASE_PAYMENTS
+ATL_STATE_TAXES                                  |               BTL_STATE_TAXES = STATE_TAXES - ATL_STATE_TAXES
+ATL_STATE_TAXES                                  |      +                                    + ATL_STATE_TAXES
+AVAILABLE_AMT_CREDITS                            |         AVAILABLE_AMT_CREDITS = AMT_CREDITS_USED-AVAILABLE_AMT_CREDITS
+AVAILABLE_CONTRACT_ENRG                          |             ENERGY = AVAILABLE_CONTRACT_ENRG
+AVAILABLE_CONTRACT_ENRG                          |             OFF_LOAD_ENRG = ENERGY - AVAILABLE_CONTRACT_ENRG
+AVAILABLE_CONTRACT_ENRG                          |          B = A + TOTAL_AVAILABLE_CONTRACT_ENRG
+AVAILABLE_CONTRACT_ENRG                          |          ENERGY = AVAILABLE_CONTRACT_ENRG
+AVAILABLE_CONTRACT_ENRG                          |          ENERGY = TOTAL_AVAILABLE_CONTRACT_ENRG
+AVAILABLE_CONTRACT_ENRG                          |          OFF_LOAD_ENRG = ENERGY - AVAILABLE_CONTRACT_ENRG
+AVAILABLE_CONTRACT_ENRG                          |         ENERGY = AVAILABLE_CONTRACT_ENRG
+AVAILABLE_CONTRACT_ENRG                          |       OFF_LOAD_ENRG = ENERGY - AVAILABLE_CONTRACT_ENRG
+AVAIL_DATA_YEARS                                 |            DO I = OPERATION_LIFE + 1 , AVAIL_DATA_YEARS
+AVAIL_DATA_YEARS                                 |             DO YR = 10, AVAIL_DATA_YEARS
+AVAIL_DATA_YEARS                                 |      FORECAST_GROWTH_YEARS = AVAIL_DATA_YEARS
+AVERAGE_MULTIPLIER                               |       REAL (KIND=4) :: AVERAGE_MULTIPLIER
+AVE_DAILY_PEAK                                   |      +            AVE_DAILY_PEAK
+AV_GEN                                           |  US_GEN = US_GEN + AV_GEN
+A_ID                                             |             LOCAL_NAME = R_BASECASE_MARKET_AREA_ID
+B2_4AC                                           |          WRITE(6,*) 'B**2-4AC =',B2_4AC
+BAL_SHEET_OPTIONS                                |                DO B_POS = 1, BAL_SHEET_OPTIONS
+BAL_SHEET_RE_SUB_ADJ                             |     +                                      - BAL_SHEET_RE_SUB_ADJ
+BASECASE_MARKET_AREA_ID                          |             LOCAL_NAME = R_BASECASE_MARKET_AREA_ID
+BASE_CASE_MAX_CLASS_NUM                          |      +     BASE_CASE_MAX_CLASS_NUM
+BASE_FILE_DIRECTORY                              |  CHECK FOR VALID BASE_FILE_DIRECTORY
+BASE_FILE_NAME                                   |          R_TEMP_NAME = SAVE_BASE_FILE_NAME
+BASE_FILE_NAME                                   |             WRITE(6,1010) BASE_FILE_NAME
+BASE_PN_RECORDS                                  |          WRITE(4,*) "BASE EXP PLANT REC = ",BASE_PN_RECORDS
+BASE_RATES_REVENUES                              |      +                                - TOTAL_BASE_RATES_REVENUES
+BASE_RATES_REVENUES                              |            REFERENCE_BASE_REVENUES = TOTAL_BASE_RATES_REVENUES
+BASE_REVENUE                                     |     +                                  CLASS_BASE_REVENUE
+BASE_YEAR                                        |                LOCAL_YR = R_YEAR - BASE_YEAR
+BASE_YEAR                                        |          LOCAL_YR = R_YEAR - BASE_YEAR
+BASE_YEAR                                        |          THIS_YEAR = R_START_YEAR + BASE_YEAR
+BASE_YEAR                                        |            YEAR_START = R_YEAR - BASE_YEAR
+BASE_YEAR                                        |      +                                                  STUDY_BASE_YEAR
+BASE_YEAR                                        |      +                                                 STUDY_BASE_YEAR
+BASE_YEAR                                        |      +                                              STUDY_BASE_YEAR
+BASE_YEAR                                        |      +                                                 STUDY_BASE_YEAR
+BASE_YR                                          |      +     BASE_YR
+BEGIN_ASSET_ANALYST_TRANSFER                     |       SAVE BEGIN_ASSET_ANALYST_TRANSFER
+BEST_OBJECT_FUNCTION_VALUE                       |             WRITE(6,"('&',F7.1/)") BEST_OBJECT_FUNCTION_VALUE
+BLT_EXPENSES                                     |  NOTE OTNINC IS NET OF BLT_EXPENSES
+BLT_EXPENSES                                     |  NOTE OTNINC IS NET OF BLT_EXPENSES
+BOOK_DEP                                         |      +                      FA_WO_ADJUSTMENT_2_CUM_BOOK_DEP
+BOOK_DEP                                         |      +     EA_DEF_TAX_BASIS,CUMULATIVE_BOOK_DEP
+BOTTOM_PROB                                      |                            LEFT_HEAT(U) = BOTTOM_PROB
+BOTTOM_PROB                                      |                            RIGHT_HEAT(U) = BOTTOM_PROB
+BOTTOM_PROB                                      |                           LEFT_HEAT(U) = BOTTOM_PROB
+BOTTOM_PROB                                      |                     LEFT(S) = BOTTOM_PROB
+BTL_AMORTIZATION                                 |         NET_OF_TAX_EXEXP = NET_OF_TAX_EXEXP + BTL_AMORTIZATION
+BTL_AMORTIZATION                                 |     +                                 + BTL_AMORTIZATION
+BTL_AMORTIZATION                                 |     +                             + BTL_AMORTIZATION
+BTL_AMORTIZATION                                 |     +                           -  BTL_AMORTIZATION
+BTL_AMORTIZATION                                 |     +                 - BTL_AMORTIZATION
+BTL_AMORTIZATION_IN_EXPENSES                     |         VARIABLE(350) = SBU_VARIABLES(350) + VARIABLE(350)  ! BTL_AMORTIZATION_IN_EXPENSES
+BTL_AMORT_OF_BOOK                                |     +                             - BTL_AMORT_OF_BOOK
+BTL_AMORT_OF_BOOK                                |     +                              - BTL_AMORT_OF_BOOK
+BTL_CASH_EARNINGS                                |      +                                   - BTL_CASH_EARNINGS
+BTL_CASH_EARNINGS                                |      +                             + BTL_CASH_EARNINGS
+BTL_DEFERRED_TAXES_DR                            |      +                                       + BTL_DEFERRED_TAXES_DR
+BTL_DEFERRED_TAXES_DR                            |      +                                 + BTL_DEFERRED_TAXES_DR
+BTL_FEDERAL_TAXES                                |               BTL_INCOME_TAXES = BTL_STATE_TAXES + BTL_FEDERAL_TAXES
+BTL_INCOME_TAXES                                 |      +                                    + BTL_INCOME_TAXES
+BTL_LEASE_AMORTIZATION                           |      +                                - BTL_LEASE_AMORTIZATION
+BTL_LEASE_PAYMENTS                               |      +                                - BTL_LEASE_PAYMENTS
+BTL_NUC_FUEL_DECOM_LIABILITY                     |     +                                 - BTL_NUC_FUEL_DECOM_LIABILITY
+BTL_NUC_FUEL_DECOM_LIABILITY                     |     +                           - BTL_NUC_FUEL_DECOM_LIABILITY
+BTU_CONTENT                                      |                E_BTU_CONTENT(I) = 1000.0/ BTU_CONTENT
+BTU_CONTENT                                      |                E_BTU_CONTENT(I) = 500.0 / BTU_CONTENT
+BTU_CONTENT                                      |                P_BTU_CONTENT(I) = 1000.0/ BTU_CONTENT
+BTU_CONTENT                                      |                P_BTU_CONTENT(I) = 500.0 / BTU_CONTENT
+BTU_CONTENT                                      |                S_BTU_CONTENT(I) = 1000.0/ BTU_CONTENT
+BTU_CONTENT                                      |                S_BTU_CONTENT(I) = 500.0 / BTU_CONTENT
+BUDGET_EXPENSE                                   |      +     BUDGET_EXPENSE
+BUILD_NUM                                        | HARACTER (LEN=25) :: BUILD_NUM
+BUYERS_COST                                      |                            MAX_PRICE = BUYERS_COST
+BYTE_SIZE                                        |       INTEGER (kind=4) ::   BYTE_SIZE
+CALCULATED_2_ACTUAL_FED_ADJ                      |     +                                 + CALCULATED_2_ACTUAL_FED_ADJ
+CALCULATED_2_ACTUAL_STATE_ADJ                    |     +                          + CALCULATED_2_ACTUAL_STATE_ADJ
+CALCULATED_BASE                                  |                write(4,*) CALCULATED_BASE
+CALCULATED_PEAK                                  |                write(4,*) CALCULATED_PEAK
+CALC_CONTRACT_ENERGY                             |                            CALC_CONTRACT_ENERGY
+CALUCLATE_NUC_FUEL_PRICES                        |       SAVE CALUCLATE_NUC_FUEL_PRICES
+CALWEEK_DA                                       |     +    CALWEEK_DA
+CAL_ENRGY_ISTART                                 |       ARG_ISTART = CAL_ENRGY_ISTART
+CAL_ENRGY_ISTART                                 |       SAVE ISTOP,CAL_ENRGY_ISTART
+CAL_MARGINAL_COST                                |  ADDED HERE 7/1/02 FOR MODIFICATIONS IN CAL_MARGINAL_COST
+CAPACITY_ADDER                                   |          TOTAL_SCARCITY_MW = DB_CAP_AFTER_OUTAGES(I) + CAPACITY_ADDER
+CAPACITY_AFTER_LOSSES                            |             ANNUAL_MD_MAX_DISPATCHED_CAP(I)= UNIT_CAPACITY_AFTER_LOSSES
+CAPACITY_AFTER_LOSSES                            |      +                                        UNIT_CAPACITY_AFTER_LOSSES
+CAPACITY_BEING_TESTED                            |      +                        CAPACITY_BEING_TESTED
+CAPACITY_MARKETS                                 |  091407. FOR CAPACITY_MARKETS
+CAPACITY_OPTIONS_FIXED_VARIABLES                 | 	from  CAPACITY_OPTIONS_FIXED_VARIABLES
+CAPACITY_OPTIONS_FIXED_VARIABLES                 |          CAPACITY_OPTIONS_FIXED_VARIABLES
+CAPACITY_OPTIONS_FIXED_VARS                      | 	to    CAPACITY_OPTIONS_FIXED_VARS
+CAPACITY_PLANNING_FACTOR                         |  ADD CAPACITY_PLANNING_FACTOR
+CAPACITY_PLANNING_TRIGGER_VALUE                  |          PLANNING_TRIGGER = CAPACITY_PLANNING_TRIGGER_VALUE
+CAPACITY_TO_LEVELIZE_RM                          |      +     CAPACITY_TO_LEVELIZE_RM
+CAPITIALIZED_LEASE_ADDITIONS                     |      +                                + CAPITIALIZED_LEASE_ADDITIONS
+CAPTURED_OPT_METHOD_REVENUES                     |      +                                    + CAPTURED_OPT_METHOD_REVENUES
+CAP_EFFECTIVE                                    |          ADDEND=ADDEND+CAP_EFFECTIVE
+CAP_EFFECTIVE                                    |        WRITE(4,'(4I4,F8.1)') I,INIT_DA,DURA_DA,FINA_DA,CAP_EFFECTIVE
+CAP_LEASES_BAL_ADJ                               |      +                                + CAP_LEASES_BAL_ADJ
+CAP_OBJT                                         |  CAP_OBJT
+CAP_PLANNING_FAC                                 |      REAL CAP_FRAC_OWN,CAP_PLANNING_FAC
+CARRY_OVER                                       |                 CASH_PAYMENTS(MO,YR) = CASH_PAYMENTS(MO,YR)+CARRY_OVER
+CASH_2_LT_INVESTMENTS                            |     +                          + CASH_2_LT_INVESTMENTS
+CASH_EXPENDITURES                                |      ALLOCATABLE :: CASH_EXPENDITURES
+CASH_EXPENDITURES                                |      SAVE CASH_EXPENDITURES
+CASH_FROM_SALE_OF_ASSETS                         |      +                     - CASH_FROM_SALE_OF_ASSETS
+CASH_PAYMENTS                                    |  last variable used 658-659 9/28/98 MSG CASH CS DIVIDENDS,PS_DIVIDEND_CASH_PAYMENTS
+CASH_TIMING_ADJUSTMENTS                          |                  VARIABLE(759) = CASH_TIMING_ADJUSTMENTS
+CASH_TIMING_ADJUSTMENTS                          |          CASH_TIMING_ADJUSTMENTS = CASH_TIMING_ADJUSTMENTS
+CATAWBA_BY_DEF_TAX_BALANCE                       |      REAL*4 CATAWBA_BY_DEBITS_BALANCE,CATAWBA_BY_DEF_TAX_BALANCE
+CATAWBA_OTHER_NET_REVENUES                       |     +                                 + CATAWBA_OTHER_NET_REVENUES
+CHANGED_REFERENCE_LOADS                          |     +          CHANGED_REFERENCE_LOADS
+CHANGE_2_DECOMMISSIONING_LIAB                    |     +                         + CHANGE_2_DECOMMISSIONING_LIAB
+CHANGE_IN_ACCOUNTS_RECEIVABLE                    |      +                                   + CHANGE_IN_ACCOUNTS_RECEIVABLE
+CHANGE_IN_CASH                                   |     +                               STI_CHANGE_IN_CASH
+CHANGE_IN_COMMON_EQUITY                          |       REAL*4 CHANGE_IN_COMMON_EQUITY
+CHANGE_IN_FUNDS_B4_FINANCING                     |              CHANGE_IN_FUNDS_B4_FINANCING = CHANGE_IN_FUNDS_B4_FINANCING
+CHANGE_IN_LONG_TERM_INVESTMENTS                  |     +                                   CHANGE_IN_LONG_TERM_INVESTMENTS
+CIAC_CASH                                        |      +                     - CIAC_CASH
+CLASS_ADDENDUM_2_OTHER_TAXES                     |      +                       + CLASS_ADDENDUM_2_OTHER_TAXES
+CLASS_ADDENDUM_TO_PROPERTY_TAX                   |     +                                    CLASS_ADDENDUM_TO_PROPERTY_TAX
+CLASS_AFUDC_IN_CWIP                              |      +     CLASS_AFUDC_IN_CWIP
+CLASS_BASE_REVENUE                               |     +                                  CLASS_BASE_REVENUE
+CLASS_FINANCE_DETAIL_RPT                         |  NOTE EXTENSIONS BCD USED IN CLASS_FINANCE_DETAIL_RPT
+CLASS_FINANCE_DETAIL_RPT                         |  NOTE: UNIT NUMBER 7337 USED IN CLASS_FINANCE_DETAIL_RPT
+CLASS_FORECAST_REVENUES                          |     +                                  CLASS_FORECAST_REVENUES
+CLASS_NAME                                       |         SAVE SAVE_CLASS_NAME
+CLASS_NON_VARIABLE_EXPENSE                       |      +                          (CLASS_NON_VARIABLE_EXPENSE
+CLASS_NUM                                        |                   EMISSION_MARKET_LINK = ASSET_CLASS_NUM
+CLASS_NUM                                        |       DO CLASS = 1, SYSTEM_CLASS_NUM
+CLASS_NUM                                        |       SAVE ASSET_CLASS_POINTER,MAX_ASSET_CLASS_NUM
+CLASS_NUM                                        |       SAVE ASSET_CLASS_POINTER,NUM_OF_ASSET_CLASSES,MAX_ASSET_CLASS_NUM
+CLASS_NUM                                        |       SAVE MAX_ASSET_CLASS_NUM
+CLASS_NUM                                        |       SAVE NUM_OF_CLASSES,MAX_CLASS_NUM
+CLASS_NUM                                        |      +     BASE_CASE_MAX_CLASS_NUM
+CLASS_NUM                                        |      +     NUM_OF_ASSET_CLASSES,MAX_ASSET_CLASS_NUM
+CLASS_OTH_LIAB_SALE_ASSETS                       |      +                             + CLASS_OTH_LIAB_SALE_ASSETS
+CLASS_OTH_LIAB_SALE_ASSETS                       |     +                                + CLASS_OTH_LIAB_SALE_ASSETS
+CLASS_OTH_LIAB_SALE_ASSETS                       |      +                                + CLASS_OTH_LIAB_SALE_ASSETS
+CLASS_PEAKS                                      |       CALL DEALLOCATE_SUM_CLASS_PEAKS
+CLASS_POINTER                                    |       ALLOCATABLE :: HYDRO_ASSET_CLASS_POINTER
+CLASS_POINTER                                    |      +               TEMP_ASSET_CLASS_POINTER
+CLASS_POINTER                                    |                ALLOCATE(EXPENSE_BC_ASSET_CLASS_POINTER
+CLASS_POINTER                                    |            ALLOCATE(PAYABLES_BC_ASSET_CLASS_POINTER
+CLASS_POINTER                                    |          ALLOCATE(EXPENSE_OL_ASSET_CLASS_POINTER
+CLASS_POINTER                                    |       SAVE ASSET_CLASS_POINTER
+CLASS_POINTER                                    |      +     RATE_ASSET_CLASS_POINTER
+CLASS_POINTER                                    |     +               TEMP_ASSET_CLASS_POINTER
+CLASS_POINTER                                    |     +     PAYABLES_OL_ASSET_CLASS_POINTER
+CLASS_PROPERTY_TAXES                             |      +                                    + CLASS_PROPERTY_TAXES
+CLASS_RATES                                      |      +     CLASS_RATES
+CLASS_REVENUE_TAX_REVENUES                       |      +                               CLASS_REVENUE_TAX_REVENUES
+CLASS_TOTAL_ADJUSTER                             |      +      SAVE_PRICE_FEEDBACK,Q_INPUT,Q_OUTPUT,CLASS_TOTAL_ADJUSTER
+CLASS_TYPE                                       |               IF(CLASS_TYPE(CLASS_POS) == SBU) THEN ! ASSET_CLASS_TYPE
+CLA_OBJT                                         |  CLA_OBJT
+CLOSE_ASSET_VECTOR_FILE                          |                  CALL CLOSE_ASSET_VECTOR_FILE
+CLOSE_ASSET_VECTOR_FILE                          |            CALL CLOSE_ASSET_VECTOR_FILE
+CLOSE_ASSET_VECTOR_FILE                          |         CALL CLOSE_ASSET_VECTOR_FILE
+CLOSE_EXISTING_ASSET_FILE                        |       CALL CLOSE_EXISTING_ASSET_FILE
+CLOSE_FUEL_PRICE_FILE                            |       CALL CLOSE_FUEL_PRICE_FILE
+CLOSE_FUTURE_ASSET_FILE                          |            CALL CLOSE_FUTURE_ASSET_FILE
+CLOSE_FUTURE_ASSET_FILE                          |          CALL CLOSE_FUTURE_ASSET_FILE
+CLOSE_NEWPLT_FILE                                |          CALL CLOSE_NEWPLT_FILE
+CLOSE_SCREENING_INFORMATION                      |     +                                  CALL CLOSE_SCREENING_INFORMATION
+CLOSE_SERVICE_TRANSACTIONS                       |            CALL CLOSE_SERVICE_TRANSACTIONS
+CLOSE_SERVICE_TRANSACTIONS                       |       CALL CLOSE_SERVICE_TRANSACTIONS
+CLS_HIST_SHAPE                                   |         IF(CLASS_BASED_FORECAST() .AND. YEAR == 1) CALL CLS_HIST_SHAPE
+CL_FIXED_MARKET_PURCHASES                        |      +                             + CL_FIXED_MARKET_PURCHASES
+CL_MARKET_REVENUES                               |      +                                    + CL_MARKET_REVENUES
+CL_PLANNING_REMOVALS                             |            CALL CL_PLANNING_REMOVALS
+CL_REPORT                                        |  IN CL_REPORT
+CO2_PARAM                                        |      MAINTAINS LIST OF FROM/TO CO2_PARAM AS WELL AS MW LOADING ON CO2_PARAM
+COAL_BASIN_READ_DATA                             |  COAL_BASIN_READ_DATA
+COAL_CONTRACTS_READ_DATA                         |  COAL_CONTRACTS_READ_DATA
+COAL_DEMAND_BASE_NAME                            |          BASE_FILE_NAME = COAL_DEMAND_BASE_NAME
+COAL_DEMAND_PLANNING_PEAK                        |      +     COAL_DEMAND_PLANNING_PEAK
+COAL_ESCALATIONS_READ_DATA                       |  COAL_ESCALATIONS_READ_DATA
+COAL_GROUPS_DATA                                 |       SAVE      COAL_GROUPS_DATA
+COAL_LINKS                                       |      MAINTAINS LIST OF FROM/TO COAL_LINKS AS WELL AS MW LOADING ON COAL_LINKS
+COAL_PRICING_ROUTINE                             |       SUBROUTINE COAL_PRICING_ROUTINE
+COAL_REGIONS                                     |   072106. BIG DIMENSIONING CHANGE: COAL_GROUPS AGGREGATE TO COAL_REGIONS
+COAL_SO2_Scrubber_READ_DATA                      |  COAL_SO2_Scrubber_READ_DATA
+COAL_STORAGE                                     |      MAINTAINS LIST OF FROM/TO COAL_STORAGE AS WELL AS MW LOADING ON COAL_STORAGE
+COAL_SUPPLY_READ_DATA                            |  COAL_SUPPLY_READ_DATA
+COAL_TRANSPORTATION_READ_DATA                    |  COAL_TRANSPORTATION_READ_DATA
+COAL_cnw_FILES_READ_INPUT                        |       USE COAL_cnw_FILES_READ_INPUT
+CODE_LOCATION                                    |           WRITE(3,*) SYMSTOP,'  ',CODE_LOCATION
+COMMON_DIVIDENDS                                 |                     COMMON_STOCK_CASH_DIVIDENDS = COMMON_DIVIDENDS
+COMMON_DIVIDENDS                                 |      +                                    + COMMON_DIVIDENDS
+COMMON_EARNINGS                                  |         DIVIDEND_PAYOUT = 100.*CSDIV/COMMON_EARNINGS
+COMMON_EQUITY                                    |               SUBSIDARY_VARIABLES(77) = EXCLUDE_SUB_COMMON_EQUITY
+COMMON_EQUITY                                    |       REAL*4 CHANGE_IN_COMMON_EQUITY
+COMMON_EQUITY                                    |     +                                 EXCLUDE_SUB_COMMON_EQUITY
+COMMON_EQUITY                                    |     +                                +    EXCLUDE_SUB_COMMON_EQUITY
+COMMON_EQUITY_BAL_IN_CAP                         |          VARIABLE(366) = NOT_AVAIL ! COMMON_EQUITY_BAL_IN_CAP
+COMMON_ISSUED_4_ACQUISITION                      |      +                                     + COMMON_ISSUED_4_ACQUISITION
+COMMON_STOCK_BOUGHT                              |     +                 + SBU_COMMON_STOCK_BOUGHT
+COMMON_STOCK_BOUGHT                              |      +                         + COMMON_STOCK_BOUGHT
+COMMON_STOCK_BUY_FROM_EQUITY                     |                   DEBT_COMMON_STOCK_BUYBACK=COMMON_STOCK_BUY_FROM_EQUITY
+COMMON_STOCK_ISSUED                              |                  SUBSIDARY_VARIABLES(101) = PARENT_COMMON_STOCK_ISSUED
+COMMON_STOCK_ISSUED                              |          COMMON_STOCK_ISSUED = COMMON_STOCK_ISSUED
+COMMON_STOCK_ISSUED_2_EQUITY                     |                   DEBT_COMMON_STOCK_ISSUED=COMMON_STOCK_ISSUED_2_EQUITY
+CONSOLD_FED_TAXES_B4_CREDITS                     |      +                                   CONSOLD_FED_TAXES_B4_CREDITS
+CONSOLIDATED_FEDERAL_TAXES                       |     +                                 - CONSOLIDATED_FEDERAL_TAXES
+CONSOLIDATED_FEDERAL_TAXES                       |     +                                 - CONSOLIDATED_FEDERAL_TAXES_PAID !CONSOLIDATED_FEDERAL_TAXES
+CONSOLIDATED_FEDERAL_TAXES_PAID                  |     +                                   CONSOLIDATED_FEDERAL_TAXES_PAID
+CONSOLIDATED_FED_CREDITS_USED                    |      +                                   - CONSOLIDATED_FED_CREDITS_USED
+CONSOLIDATED_FED_TAX_ADJ                         |      +                                   + CONSOLIDATED_FED_TAX_ADJ
+CONSOLIDATED_STATE_TAXES_PAID                    |      +                                   + CONSOLIDATED_STATE_TAXES_PAID
+CONSOLIDATED_TAX_ADJUSTMENT                      |      +                                  - CONSOLIDATED_TAX_ADJUSTMENT
+CONSOLIDATED_TAX_ADJUSTMENT                      |     +                                       CONSOLIDATED_TAX_ADJUSTMENT
+CONSOLIDATED_TAX_ADJUSTMENT                      |  10/1/02     +                                 - CONSOLIDATED_TAX_ADJUSTMENT
+CONSOLID_AMT_CREDITS_CREATED                     |      +                                   + CONSOLID_AMT_CREDITS_CREATED
+CONSOLID_AMT_CREDITS_USED                        |      +                                   - CONSOLID_AMT_CREDITS_USED
+CONSOLID_FED_INCOME_TAX_ACCRUAL                  |  9/29/02     +                                 - CONSOLID_FED_INCOME_TAX_ACCRUAL
+CONSOLID_SEC_29_CREDITS_USED                     |      +                                   - CONSOLID_SEC_29_CREDITS_USED
+CONSOLID_SEC_29_CREDITS_USED                     |     +                                   CONSOLID_SEC_29_CREDITS_USED
+CONSTRAINT_MULT                                  |      +                                                   CONSTRAINT_MULT
+CONTRACT_ENERGY                                  |                            CALC_CONTRACT_ENERGY
+CONTRACT_ENERGY                                  |      +      HOURLY_FORWARD_CONTRACT_ENERGY
+CONTRACT_ENERGY                                  |      B PLUS CONTRACT_CAPACITY, OR UNTIL MAXIMUM_CONTRACT_ENERGY
+CONVERT_ALL                                      |      LOGICAL*1 CONVERT_ALL
+CONVOLUTION_POINTS                               |       do I=1,CONVOLUTION_POINTS
+COST_OF_POWER_SOLD                               |      +                                                COST_OF_POWER_SOLD
+COST_SERVICE_ALLOCATORS                          |          IF(INDEX(COST_ALLOC_OL,'BC') == 0) CALL COST_SERVICE_ALLOCATORS
+CPL_FUEL_REVENUES                                |     +                                       + CPL_FUEL_REVENUES
+CPL_JURISDICTIONAL_INFOR                         |          TEMP_PEAK = CPL_JURISDICTIONAL_INFOR
+CRITICAL_ERROR_MSG7                              |          CALL CRITICAL_ERROR_MSG7
+CRITICAL_ERROR_MSG8                              |         CALL CRITICAL_ERROR_MSG8
+CS_ISSUE_EXP_AMORT                               |     +                                 + CS_ISSUE_EXP_AMORT
+CS_ISSUE_EXP_BAL                                 |             DEBT_FILE_UNAMORT_ISS_EXP_BAL(CLASS_POS) = CS_ISSUE_EXP_BAL
+CT_LOSSES                                        |          ANNUAL_MD_LOSSES(I) = ANNUAL_MD_LOSSES(I) + CT_LOSSES
+CT_LOSSES                                        |          DISPATCHED_ENERGY = ENRG - CT_LOSSES
+CUMULATIVE_BOOK_DEP                              |      +     EA_DEF_TAX_BASIS,CUMULATIVE_BOOK_DEP
+CUM_BOOK_DEP                                     |      +                      FA_WO_ADJUSTMENT_2_CUM_BOOK_DEP
+CUM_GEN                                          |  MOVED FROM BELOW CUM_GEN
+CUM_REVENUE                                      |       SAVE LODDUR,LPROB,CUM_HOURS,CUM_REVENUE
+CURRENT_BLOCK_NUMBER                             |                OUTAGE_B4_MARKET(NEW_POINT) = CURRENT_BLOCK_NUMBER
+CURRENT_GUESS                                    |          LAST_GUESS = CURRENT_GUESS
+CURRENT_PATH_MW                                  |      +                  HOUR_PATH_LIMIT(L1,L2) - CURRENT_PATH_MW
+CURRENT_PLANNING_YEAR                            |             WRITE(6,"('&',I4/)") BASE_YEAR + CURRENT_PLANNING_YEAR
+CURRENT_SINKING_FUND_PAYMENT                     |                        LTDRET(I) = LTDRET(I)+CURRENT_SINKING_FUND_PAYMENT
+CURRENT_SINKING_FUND_PAYMENT                     |                  PSRED(I) = PSRED(I) + CURRENT_SINKING_FUND_PAYMENT
+CURRENT_STATE                                    |                      UNIT_UP_LAST_HOUR(OPTION_INDEX) = CURRENT_STATE
+CURRENT_TARGET_RATIO                             |  CURRENT_TARGET_RATIO
+CURRENT_TARGET_RATIO                             |      +                  CURRENT_CAPACITY_RATIO >= CURRENT_TARGET_RATIO
+CURRENT_TARGET_RATIO                             |     +                                              CURRENT_TARGET_RATIO
+CURRENT_TARGET_RATIO                             |     +                                           >= CURRENT_TARGET_RATIO
+CURRENT_TIE                                      |                WHEEL_PATH(PATH,J) = CURRENT_TIE
+CUSTOMER_DEPOSITS                                |      +                     - CUSTOMER_DEPOSITS
+CUSTOMER_DEPOSITS_BAL1                           |       VARIABLE_VALUE(458)=CUSTOMER_DEPOSITS_BAL2-CUSTOMER_DEPOSITS_BAL1
+CUSTOMER_DEPOSITS_BAL2                           |       VARIABLE_VALUE(457)=CUSTOMER_DEPOSITS_BAL2
+CUSTOMER_DEPOSIT_INTEREST_ON                     |     +                                      CUSTOMER_DEPOSIT_INTEREST_ON
+CUSTOMER_DEPOSIT_INTEREST_ON                     |     +                                   + CUSTOMER_DEPOSIT_INTEREST_ON
+CWIP_BALANCE_ADJ                                 |                     CWIP_BALANCE_ADJ = CWIP_BALANCE_ADJ
+Calendar_Year                                    |             WRITE(39,*) " Source Year",FileYear,"Run Year",Calendar_Year
+DAILY_LOADS_I4                                   |      +                               DELTMP,DAILY_LOADS_I4
+DAILY_MAX                                        |      +                           DAILY_INJECT_WITHDRAWAL(I)) - DAILY_MAX
+DAILY_OPTION_REVENUE                             |      +                                             DAILY_OPTION_REVENUE
+DAILY_OPTION_STATUS                              |               3. DAILY_OPTION_STATUS
+DAMPENING_FACTOR                                 |                TEMP_R4 = DAILY_INJECT_WITHDRAWAL(I) * DAMPENING_FACTOR
+DATA_BASE                                        |      INTEGER*2 GET_DATA_BASE
+DATA_BASES                                       |             R_DATA_BASES = R_DATA_BASES
+DATA_BASES                                       |       SAVE_MAX_DATA_BASES = MAX_DATA_BASES
+DAYS_IN_MONTH                                    |                DO DA = 1, DAYS_IN_MONTH
+DAYS_PER_MONTH                                   |             CAL_DAYS_PER_MONTH = DAYS_PER_MONTH
+DAY_OF_WEEK                                      |      +               WRITE_DAY_OF_WEEK
+DAY_TYPE_DATA                                    |       SAVE      DAY_TYPE_DATA
+DBLE_INT_CAP                                     |             INT_CAP = DBLE_INT_CAP
+DBLE_MAX_CAP                                     |     +         DBLE_MAX_CAP
+DBLE_MIN_CAP                                     |          INTERCEPT = MAX_PROB - SLOPE * DBLE_MIN_CAP
+DD_DEFERRED_EXPENSE_CASH                         |     +                                    + DD_DEFERRED_EXPENSE_CASH
+DD_DEFERRED_EXPENSE_CASH                         |     +                                  + DD_DEFERRED_EXPENSE_CASH
+DEALLOCATE_SUM_CLASS_PEAKS                       |       CALL DEALLOCATE_SUM_CLASS_PEAKS
+DEALLOC_ANNUAL                                   |  ARRAYS IN DEALLOC_ANNUAL
+DEALLO_MONTH_MARG_COST_ARRAYS                    |  ARRAYS IN DEALLO_MONTH_MARG_COST_ARRAYS
+DEBT_COMMON_STOCK_BUYBACK                        |                  CSMIN = CSMIN - DEBT_COMMON_STOCK_BUYBACK
+DEFERRED_EXPENSE_AMORT                           |     +                            DEFERRED_EXPENSE_AMORT
+DEFERRED_EXPENSE_AMORT                           |  DEFERRED_EXPENSE_AMORT
+DEFERRED_EXPENSE_CASH                            |     +                                    + DD_DEFERRED_EXPENSE_CASH
+DEFERRED_EXPENSE_CASH                            |     +                                  + DD_DEFERRED_EXPENSE_CASH
+DEFERRED_FUEL_EXPENSE                            |               DEFERRED_FUEL_EXPENSE = DEFERRED_FUEL_EXPENSE
+DEFERRED_FUEL_EXPENSE                            |     +                                DEFERRED_FUEL_EXPENSE
+DEFERRED_FUEL_EXPENSE                            |      +                                  - DEFERRED_FUEL_EXPENSE
+DEFERRED_TAXES_CR                                |                DEFERRED_TAXES_ROLLUP_CR = DEFERRED_TAXES_CR
+DEFERRED_TAXES_CR                                |      +                              + NF_DEFERRED_TAXES_CR
+DEFERRED_TAXES_CR                                |      +                          + NF_DEFERRED_TAXES_CR
+DEFERRED_TAXES_ROLLUP_CR                         |                DEFERRED_TAXES_ROLLUP_CR = DEFERRED_TAXES_ROLLUP_CR
+DEFERRED_TAXES_ROLLUP_CR                         |             DEFERRED_TAXES_CR = DEFERRED_TAXES_ROLLUP_CR
+DEFERRED_TAX_BASIS                               |             DEFERRED_TAX_BASIS=DEFERRED_TAX_BASIS+NF_DEFERRED_TAX_BASIS
+DEF_REVENUES                                     |         SUM_AFUDC = AFDC1 + DEF_REVENUES
+DEF_TAXES_AMT_CREDITS                            |       DEF_TAXES_AMT_CREDITS = R_DEF_TAXES_AMT_CREDITS
+DEF_TAXES_AMT_CREDITS                            |       REAL*4 DEF_TAXES_AMT_CREDITS
+DEF_TAXES_AMT_CREDITS                            |       SAVE DEF_TAXES_AMT_CREDITS
+DEF_TAXES_AMT_CREDITS                            |     +                                  - DEF_TAXES_AMT_CREDITS
+DEF_TAXES_AMT_CREDITS                            |     +                + DEF_TAXES_AMT_CREDITS
+DEF_TAXES_AMT_CREDITS                            |     +               - DEF_TAXES_AMT_CREDITS
+DEF_TAXES_FROM_NOLS_AMT_CREDITS                  |     +                          - DEF_TAXES_FROM_NOLS_AMT_CREDITS
+DEF_TAXES_FROM_NOLS_AMT_CREDITS                  |     +                 +DEF_TAXES_FROM_NOLS_AMT_CREDITS
+DEF_TAXES_FROM_NOLS_AMT_CREDITS                  |     +                 +DEF_TAXES_FROM_NOLS_AMT_CREDITS
+DELTA_PROB                                       |            LPROB(COUNT+1) = LPROB(COUNT-1) - DELTA_PROB
+DEMAND_ON_TRANSMISSION_SYSTEM                    |      +         DEMAND_ON_TRANSMISSION_SYSTEM
+DEMAND_VOLUME                                    |                 XD(2) = LAST_DEMAND_VOLUME
+DEPTH_MARGINAL_COST                              |             TEMP_R = R_DEPTH_MARGINAL_COST
+DEPTH_MARGINAL_COST                              |      +                                             R_DEPTH_MARGINAL_COST
+DEPTH_MARKET_INTERVAL_SIZE                       |      +                                        DEPTH_MARKET_INTERVAL_SIZE
+DEPTH_PRICE                                      |                   R_DEPTH_PRICE = LOCAL_DEPTH_PRICE
+DEPTH_PRICE                                      |                R_DEPTH_PRICE = LOCAL_DEPTH_PRICE
+DEPTH_PRICE                                      |             TEMP_R = R_DEPTH_PRICE
+DEPTH_PRICE                                      |      +                     DEPTH_MONTH_PRICE(J,INTERVAL) + R_DEPTH_PRICE
+DEPTH_QUANTITY                                   |                   R_DEPTH_QUANTITY = LOCAL_DEPTH_QUANTITY
+DEPTH_QUANTITY                                   |                R_DEPTH_QUANTITY = LOCAL_DEPTH_QUANTITY
+DEPTH_QUANTITY                                   |      +                          LOCAL_DEPTH_PRICE * LOCAL_DEPTH_QUANTITY
+DISPATCHED_ENERGY                                |             LOSS_RATE = 100. * CT_LOSSES/DISPATCHED_ENERGY
+DISPATCHED_ENERGY                                |      +                                                 DISPATCHED_ENERGY
+DIVIDENDS_DECLARED                               |                  INTEREST(MO,YR) = DIVIDENDS_DECLARED
+DIVIDEND_PLUS_CURRENT_CASH                       |       DIVIDEND_CASH_POLICY = DIVIDEND_PLUS_CURRENT_CASH
+DO_EMISSIONS_BY_FUEL_TYPE                        |      SUBROUTINE DO_EMISSIONS_BY_FUEL_TYPE
+DRILLING_ACCOUNT_NAME                            |       CHARACTER*40 DRILLING_ACCOUNT_NAME
+DR_BOOTH                                         |      CALLED MONTHLY IN DR_BOOTH
+DR_BOOTH                                         |  DR_BOOTH
+DR_BOOTH                                         |  PULLED IN FROM DR_BOOTH
+DSM_CAP                                          |            ADD_CAPACITY_TO_DSM_CAP
+DSM_DEFERRED_DEBIT                               |      +                       + DSM_DEFERRED_DEBIT
+DSM_FIN                                          |       ENTRY DSM_FIN
+DSM_FINANCIAL_COST                               |      DECLARES FOR DSM_FINANCIAL_COST
+DUKE_WHEELING_CHARGES                            |       LOGICAL*1 DUKE_WHEELING_CHARGES
+DUKE_WHEELING_RATE                               |       SAVE S_DUKE_WHEELING_RATE
+EA_REPORTING_UNIT                                |      INTEGER*2 EA_REPORTING_UNIT
+ELECT_HOUR_MULT                                  |  ELECT_HOUR_MULT
+EL_AI_INVESTMENT                                 |      REAL CL_AI_INVESTMENT,EL_AI_INVESTMENT
+EL_CAPACITY_PLANNING_REMOVAL_10                  |      ENTRY EL_CAPACITY_PLANNING_REMOVAL_10
+EL_MAKEBIN                                       |       CALL EL_MAKEBIN
+EL_MARKET_REVENUES                               |      +                                    + EL_MARKET_REVENUES
+EL_OPTIONS                                       |          DO I = 1, EL_OPTIONS
+EL_RESOURCE_ID                                   |       INTEGER*2 EL_RESOURCE_ID
+END_OF_STUDY_FLAG                                |  FOR A ONE BRANCH TREE NEED TO UNSET THE END_OF_STUDY_FLAG
+END_POINT                                        |                TEMP_I = END_POINT
+END_POINT                                        |       WRITE(END_POINT_STR,'(I4)') END_POINT
+END_POINT                                        |  CALLED ONCE PER END_POINT
+ENERGY_COST                                      |      ENERGY_COST
+ENERGY_REVENUE                                   |                      ENERGY_REVENUE
+ENRG_BY_FISCAL_YEAR                              |       SAVE MAINTENANCE_RATE,ENRG_BY_FISCAL_YEAR
+ENRG_ONLY_ENRG_USED                              |      +                                               ENRG_ONLY_ENRG_USED
+ENVIRONMENTAL_TAX                                |                  AMTINCOME = AMTINCOME - ENVIRONMENTAL_TAX
+ENVIRONMENTAL_TAX                                |     +                                       ENVIRONMENTAL_TAX
+ENVIRONMENTAL_TAX                                |     +                               -ENVIRONMENTAL_TAX
+ENVIRONMENTAL_TAX                                |      +                                    + ENVIRONMENTAL_TAX
+ENVIR_OUTPUT                                     |      common: ENVIR, ENVIRC, ENVIR_OUTPUT
+ENV_COM_OL                                       |          GET_ENV_COM_OL = ENV_COM_OL
+ENV_COM_OL                                       |       ENTRY GET_ENV_COM_OL
+ESCALATED_MONTHLY_VALUE                          |  END ENTRY ESCALATED_MONTHLY_VALUE
+ESCALATION_RATES                                 |      ALLOCATABLE :: ESCALATION_RATES
+EXCLUDE_SUB_COMMON_EQUITY                        |               SUBSIDARY_VARIABLES(77) = EXCLUDE_SUB_COMMON_EQUITY
+EXCLUDE_SUB_COMMON_EQUITY                        |     +                                 EXCLUDE_SUB_COMMON_EQUITY
+EXCLUDE_SUB_COMMON_EQUITY                        |     +                                +    EXCLUDE_SUB_COMMON_EQUITY
+EXCLUDE_SUB_INVESTMENT                           |     +                                    EXCLUDE_SUB_INVESTMENT
+EXCLUDE_SUB_RETAINED_EARNINGS                    |               SUBSIDARY_VARIABLES(78)=EXCLUDE_SUB_RETAINED_EARNINGS
+EXCLUDE_SUB_RETAINED_EARNINGS                    |     +                                +    EXCLUDE_SUB_RETAINED_EARNINGS
+EXCLUDE_SUB_TAX_DEFERRALS_DR                     |     +                              EXCLUDE_SUB_TAX_DEFERRALS_DR
+EXPENDITURES_ProjToDate                          |      +                                         + EXPENDITURES_ProjToDate
+EXPENSE_BC_ASSET_CLASS_POINTER                   |                ALLOCATE(EXPENSE_BC_ASSET_CLASS_POINTER
+EXPENSE_OL_ASSET_CLASS_POINTER                   |          ALLOCATE(EXPENSE_OL_ASSET_CLASS_POINTER
+EXPENSING_GAS_INVENTORY                          |                EXPENSING_GAS_INVENTORY = EXPENSING_GAS_INVENTORY
+EXPENSING_MATRIALS_INVENTORY                     |                EXPENSING_MATRIALS_INVENTORY=EXPENSING_MATRIALS_INVENTORY
+EXP_FILE_FIXED_EXPENSE                           |                FIXED_EXPENSE = EXP_FILE_FIXED_EXPENSE
+EXP_FILE_VARIABLE_EXPENSE                        |                VARIABLE_EXPENSE = EXP_FILE_VARIABLE_EXPENSE
+EXP_PURCHASE_POWER_EXPENSE                       |                EXP_PURCHASE_POWER_EXPENSE = EXP_PURCHASE_POWER_EXPENSE
+EXP_PURCHASE_POWER_EXPENSE                       |     +                                        EXP_PURCHASE_POWER_EXPENSE
+EXP_SERVICE_TRANSACTIONS                         |      +                                       + EXP_SERVICE_TRANSACTIONS
+Exp_AFDCBorrowed                                 |      +                             + Exp_AFDCBorrowed
+Exp_AFDCEquity                                   |      +                             + Exp_AFDCEquity
+FASB143_ARO_LIABLILITY_BAL                       |          VARIABLE(637) = SBU_VARIABLES(637) + VARIABLE(637)  ! FASB143_ARO_LIABLILITY_BAL
+FASB143_ARO_NET_ASSET_BAL                        |          VARIABLE(636) = SBU_VARIABLES(636) + VARIABLE(636)  ! FASB143_ARO_NET_ASSET_BAL
+FA_WO_ADJUSTMENT_2_CUM_BOOK_DEP                  |      +                      FA_WO_ADJUSTMENT_2_CUM_BOOK_DEP
+FEDERAL_TAXES                                    |                EXCLUDE_FED_TAXES = EXCLUDE_FED_TAXES + FEDERAL_TAXES
+FEDERAL_TAXES                                    |               CONSOLIDATED_TAX_ADJUSTMENT = FEDERAL_TAXES
+FEDERAL_TAXES                                    |     +                                 - CONSOLIDATED_FEDERAL_TAXES
+FEDERAL_TAXES                                    |     +                                 - CONSOLIDATED_FEDERAL_TAXES_PAID !CONSOLIDATED_FEDERAL_TAXES
+FEDERAL_TAXES                                    |               BTL_FEDERAL_TAXES = FEDERAL_TAXES - ATL_FEDERAL_TAXES
+FEDERAL_TAXES                                    |               BTL_INCOME_TAXES = BTL_STATE_TAXES + BTL_FEDERAL_TAXES
+FEDERAL_TAXES                                    |      +                                    + ATL_FEDERAL_TAXES
+FEDERAL_TAXES_ACCRUAL_ADJ                        |  R_FEDERAL_TAXES_ACCRUAL_ADJ
+FEDERAL_TAXES_ACCRUAL_ADJ                        |  9/29/02            FEDERAL_TAXES_ACCRUAL_ADJ = FEDERAL_TAXES_ACCRUAL_ADJ
+FEDERAL_TAX_ON_CAPITAL                           |      +                                    + FEDERAL_TAX_ON_CAPITAL
+FED_DEFERRED_TAXES_FROM_NOL                      |     +                          + FED_DEFERRED_TAXES_FROM_NOL
+FED_TAX_CREDIT_PASSED_UP                         |                CONSOLD_AVAIL_FED_TAX_CREDIT = FED_TAX_CREDIT_PASSED_UP
+FE_Intra_Company_Utility_Sales                   |      +                                + FE_Intra_Company_Utility_Sales
+FE_Intra_Company_Utility_Sales                   |      +                       + FE_Intra_Company_Utility_Sales
+FILE_EXISTS                                      |          LOGICAL (KIND=4) :: FILE_EXISTS
+FILE_EXISTS                                      |       SAVE PATH_FILE_EXISTS
+FILE_EXISTS                                      |       TRANS_HYDRO = YES_RUN_MULTIAREA_TRANSACT() .AND. TF_FILE_EXISTS
+FILE_EXISTS                                      |      LOGICAL*4 REPORT_FILE_EXISTS
+FILE_NAME                                        |          R_TEMP_NAME = SAVE_BASE_FILE_NAME
+FILE_NAME                                        |             WRITE(6,1010) BASE_FILE_NAME
+FILE_SOURCE_INDEX                                |  083009. CHANGED TO FILE_SOURCE_INDEX
+FILE_TYPE                                        |       WRITE(6,1010) FILE_TYPE
+FILL_OPTIONS_ACTIVE                              |       SAVE FILL_OPTIONS_ACTIVE
+FINANCIAL_SIMULATION_YEARS                       |          DO YR = 1, FINANCIAL_SIMULATION_YEARS
+FINANCIAL_SIMULATION_YEARS                       |                   DO J = 1, FINANCIAL_SIMULATION_YEARS
+FINANCIAL_SIMULATION_YEARS                       |               DO YR1 = 1, FINANCIAL_SIMULATION_YEARS
+FINANCIAL_SIMULATION_YEARS                       |       SAVE FINANCIAL_SIMULATION_YEARS
+FINANCIAL_SIMULATION_YEARS                       |      +     FINANCIAL_SIMULATION_YEARS
+FINA_DA                                          |      WRITE(4,'(" ",5I4)') IUNIT,DAY1,DURA_DA,INIT_DA,FINA_DA
+FIN_DERIVATIVES_FIX_EXPENSE                      |      +                                 + FIN_DERIVATIVES_FIX_EXPENSE
+FIN_DERIVATIVES_FIX_REVENUE                      |      +                                 + FIN_DERIVATIVES_FIX_REVENUE
+FIN_DERIVATIVES_VAR_EXPENSE                      |      +                                 + FIN_DERIVATIVES_VAR_EXPENSE
+FIRST_BLOCK_DISP_SWITCH                          |       ENTRY FIRST_BLOCK_DISP_SWITCH
+FIRST_BLOCK_DISP_SWITCH_ACTIVE                   |          FIRST_BLOCK_DISP_SWITCH = FIRST_BLOCK_DISP_SWITCH_ACTIVE
+FIRST_EVENT_IN_HOUR                              |  IDENTIFY FIRST_EVENT_IN_HOUR
+FIRST_YEAR_CAPACITY                              |         EL_CAPACITY_PLANNING_ADDITIONS = FIRST_YEAR_CAPACITY
+FIXED_EXPENSE                                    |                FIXED_EXPENSE = EXP_FILE_FIXED_EXPENSE
+FORECAST_LOADS                                   |       COMMON/FRC1/ FORECAST_LOADS
+FT_COAL                                          |             result=FT_COAL
+FT_NUCLEAR                                       |             result=FT_NUCLEAR
+FT_OIL                                           |             result=FT_OIL
+FT_OTHER                                         |             result=FT_OTHER
+FT_WATER                                         |             result=FT_WATER
+FT_Wholesale_Purchases                           |             result=FT_Wholesale_Purchases
+FT_Wholesale_Sales                               |             result=FT_Wholesale_Sales
+FUEL_CHARGE_RATE                                 |      +               TRANS_VAR_MWH, ! FUEL_CHARGE_RATE
+FUEL_COST                                        |          ANNUAL_MD_FUEL_CHARGE(I) = ANNUAL_MD_FUEL_CHARGE(I) + FUEL_COST
+FUEL_EXPENSE                                     |               DEFERRED_FUEL_EXPENSE = DEFERRED_FUEL_EXPENSE
+FUEL_EXPENSE                                     |     +                                DEFERRED_FUEL_EXPENSE
+FUEL_EXPENSE                                     |      +                                  - DEFERRED_FUEL_EXPENSE
+FUEL_INDEX                                       |             REGIONAL_INDEX = TG*FUEL_INDEX
+FUEL_INDEX                                       |             REGIONAL_INDEX = TG*R_FUEL_INDEX
+FUEL_OWNERSHIP                                   |       SAVE FUEL_OWNERSHIP
+FUEL_PRICE                                       |                READ(666,REC=IREC) MONTH,FUEL_PRICE
+FUEL_PRICE_FROM_NF_FILE                          |       SAVE MONTHLY_UNIT_CAPACITY,FUEL_PRICE_FROM_NF_FILE
+FUEL_TRACKER                                     |      +               0.  ! FUEL_TRACKER
+FUEL_TYPE                                        |      SUBROUTINE DO_EMISSIONS_BY_FUEL_TYPE
+FUEL_USE                                         |      +                           ANNUAL_SUPPLY_QUANTITY(I)/FUEL_USE
+FUNDS_4_CONSTRUCTION                             |          VARIABLE(368) = NOT_AVAIL ! FUNDS_4_CONSTRUCTION
+FUNDS_CONSOLIDATING_ADJUSTMENT                   |     +                                    FUNDS_CONSOLIDATING_ADJUSTMENT
+FUNDS_CONSOLIDATING_ADJUSTMENT                   |  9/29/02     +                                 CONSOLIDATED_TAX_LIB_ADJUSTMENT ! FUNDS_CONSOLIDATING_ADJUSTMENT
+FUNDS_FROM_OPERATIONS                            |          GROSS_CASH_FLOW = FUNDS_FROM_OPERATIONS
+FUTURE_ASSETS_FILES                              |          DO FILE_ID = 0, FUTURE_ASSETS_FILES
+FUTURE_ASSET_REPORT                              |      +                                               FUTURE_ASSET_REPORT
+GAS_DEMAND_BASE_NAME                             |          BASE_FILE_NAME = GAS_DEMAND_BASE_NAME
+GAS_DEMAND_FORECAST                              |          GAS_DEMAND_FORECAST_FILE = GAS_DEMAND_FORECAST
+GAS_GROUP                                        |                GET_GAS_NODE_STATE_PROVINCE = R_GAS_GROUP
+GAS_GROUP                                        |                M = GAS_GROUP_ID_POSITION(J) ! RETURNS GAS_GROUP
+GAS_GROUPS                                       |                   ASSET_CLASS_2_GN(AC) = NUMBER_OF_ACTIVE_GAS_GROUPS
+GAS_GROUPS_DATA                                  |       SAVE      GAS_GROUPS_DATA
+GAS_HOUR_MULT                                    |  GAS_HOUR_MULT
+GAS_LINKS                                        |          MAX_IN_GAS_LINKS = 2 * MAX_IN_GAS_LINKS
+GAS_LINKS                                        |      MAINTAINS LIST OF FROM/TO GAS_LINKS AS WELL AS MW LOADING ON GAS_LINKS
+GAS_OBJT                                         |  GAS_OBJT
+GAS_PRICING_ROUTINE                              |       SUBROUTINE GAS_PRICING_ROUTINE
+GAS_REGIONS                                      |   072106. BIG DIMENSIONING CHANGE: GAS_GROUPS AGGREGATE TO GAS_REGIONS
+GAS_STORAGE                                      |      MAINTAINS LIST OF FROM/TO GAS_STORAGE AS WELL AS MW LOADING ON GAS_STORAGE
+GENERATION_BY_INSERVICE_YEAR                     |       SAVE ID_POINTER,GENERATION_BY_INSERVICE_YEAR
+GENERATION_BY_SEGMENT                            |  NOTE: REASSIGNMENT OF GENERATION_BY_SEGMENT
+GENERIC_DEMAND_READ_DATA                         |  GENERIC_DEMAND_READ_DATA
+GET_COALACTION_GROUP_NAME                        |          GET_COALACTION_GROUP_NAME = R_GET_COALACTION_GROUP_NAME
+GET_DAILY_PUMPING_MULT                           |      +                  ' CHARGE CAP ',GET_DAILY_PUMPING_MULT
+GET_DATA_BASE                                    |      INTEGER*2 GET_DATA_BASE
+GET_ENV_COM_OL                                   |       ENTRY GET_ENV_COM_OL
+GET_GASACTION_GROUP_NAME                         |          GET_GASACTION_GROUP_NAME = R_GET_GASACTION_GROUP_NAME
+GET_HOURLY_PRICE_NAME                            |          GET_HOURLY_PRICE_NAME = R_GET_HOURLY_PRICE_NAME
+GET_LAGGED_HH_PRICE                              |       ENTRY GET_LAGGED_HH_PRICE
+GET_MRX_PLANNING_RESERVE_MARGIN                  |      +     GET_MRX_PLANNING_RESERVE_MARGIN
+GET_SCENAME                                      |       CHARACTER (LEN=256) :: GET_SCENAME
+GET_SERVI_FUEL_TRACKER_INDEX                     |      +               GET_SERVI_FUEL_TRACKER_INDEX
+GET_SUPPLY_COST_CAPACITY_CURVES                  |  100509. THIS SECTION MOVED INTO GET_SUPPLY_COST_CAPACITY_CURVES
+GET_TRANS_GROUP_INDEX                            |      +               GET_TRANS_GROUP_INDEX
+GMDR_CFRA_OUT                                    |     +      GBEG_DD(GMDR_JPAIR),GEND_DD(GMDR_JPAIR),' GMDR' ! ,GMDR_CFRA_OUT
+GROUP_NAME                                       |          GET_COALACTION_GROUP_NAME = R_GET_COALACTION_GROUP_NAME
+GROUP_NAME                                       |          GET_GASACTION_GROUP_NAME = R_GET_GASACTION_GROUP_NAME
+GRX_RPS                                          |  GRX_RPS
+GRX_RPS_MODULE_ACTIVE                            |  080120. RPS ONLY MUTUALLY EXCLUSIVE FROM GRX_RPS_MODULE_ACTIVE
+GRX_UPDATES_CO2_PRICES                           |      +           GRX_UPDATES_CO2_PRICES
+GS_OBJECT                                        |  070606. SUBSTANTIALLY CRIBBED FROM GS_OBJECT
+GW_INDEX                                         |       SAVE GW_LOAD,GW_INDEX
+HANDLE_ANNUAL_TRANS_REPORT                       |  TODO: EXTRACT_METHOD HANDLE_ANNUAL_TRANS_REPORT
+HAVE_READ_LM_INPUT                               |      LOGICAL*1 HAVE_READ_LM_INPUT
+HEC_DAILY_RES                                    |                      HEC_DAILY_RES
+HEC_GEN_BOUGHT                                   |                      HEC_GEN_BOUGHT
+HEC_GEN_SOLD                                     |                      HEC_GEN_SOLD
+HEC_MARKET_GEN                                   |                      HEC_MARKET_GEN
+HEC_NATIVE_LOAD                                  |                      HEC_NATIVE_LOAD
+HELP_MSG                                         |             CHARACTER (LEN=256) :: HELP_MSG
+HIGHEST_BEFORE_DSM_PEAK                          |      REAL HIGHEST_BEFORE_DSM_PEAK
+HOURLY_AFTER_DSM                                 |         2/14/93. GAT. ADDED FOR HOURLY_AFTER_DSM
+HOURLY_CHAR                                      |      CHARACTER*2 HOURLY_CHAR
+HOURLY_CHAR                                      |      CHARACTER*2 HOURLY_CHAR
+HOURLY_DUMP_USED                                 |                TEMP_TRANSACTION = TEMP_TRANSACTION + HOURLY_DUMP_USED
+HOURLY_FORWARD_CONTRACT_ENERGY                   |      +      HOURLY_FORWARD_CONTRACT_ENERGY
+HOURLY_HYDRO                                     |                write(4,*) HOURLY_HYDRO
+HOURLY_IN                                        |  2/14/93. GAT. ADDED DAY_* FOR KCPL. 3/3/93. GAT. ALTERED FOR HOURLY_IN
+HOURLY_LF_CAPACITY                               |  THE CONTRA TRANSACTION OCCURS WITHIN HOURLY_LF_CAPACITY
+HOURLY_MARKET_PRICE                              |      +                                               HOURLY_MARKET_PRICE
+HOURLY_PRICE_NAME                                |          GET_HOURLY_PRICE_NAME = R_GET_HOURLY_PRICE_NAME
+HOURLY_REFERENCE_NUMBER                          |      +                  HOURLY_REFERENCE_NUMBER
+HOURS_IN_MONTH                                   |                WRITE(6,*) TG,LOCAL_HOUR,SAVE_HOURS_IN_MONTH
+HOURS_IN_MONTH                                   |      +                                                  R_HOURS_IN_MONTH
+HOURS_IN_MONTH                                   |  IPL_FAC_DB(4) = SUM(MIN_LOAD_MW*SERVICE_HOURS)/HOURS_IN_MONTH
+HOURS_IN_PERIOD                                  |                write(4,*) LOAD_HOURS_IN_PERIOD
+HOURS_IN_PERIOD                                  |       DO HOUR_IN_THE_SEASON = 1, LOAD_HOURS_IN_PERIOD
+HOURS_STRUCK                                     |      +                         MONTHLY_TRANS_HOURS(IND,0) + HOURS_STRUCK
+HOURS_STRUCK                                     |      +                       MONTHLY_PRODUCT_HOURS(IND,0) + HOURS_STRUCK
+HOUR_END_OF_MONTH                                |                      TEMP_I2 = HOUR_END_OF_MONTH
+HOUR_IN_MONTH                                    |                   CHRONOLOGICAL_HOUR(HOUR_IN_FCLOD) =  HOUR_IN_MONTH
+HOUR_IN_WEEK                                     |          SAVE_HOUR_IN_WEEK = R_HOUR_IN_WEEK
+HYBRID_MARKET_ANNUAL_CHARGE                      |      +                                       HYBRID_MARKET_ANNUAL_CHARGE
+HYDRO_ASSET_CLASS_POINTER                        |       ALLOCATABLE :: HYDRO_ASSET_CLASS_POINTER
+HYDRO_UNITS                                      |          DO I = 1, HYDRO_UNITS
+Half_Point                                       |         ! recompute Slope at the latest Half_Point
+Half_Point                                       |         Start=Half_Point
+I2_ZERO                                          |       NumStrikes=I2_ZERO
+I2_ZERO                                          |       StrikeMMHHH=I2_ZERO
+I4_n                                             |        integer*4 I4_nBinRow,I4_n
+IGNORE_NON_UTILITY                               |       ENTRY IGNORE_NON_UTILITY
+IGNORE_NON_UTILITY_CHR                           |          IGNORE_NON_UTILITY = IGNORE_NON_UTILITY_CHR
+INCOME_TAX_TIMING_ADJS                           |     +                                     + INCOME_TAX_TIMING_ADJS
+INCOME_TAX_TIMING_ADJS                           |     +                            + INCOME_TAX_TIMING_ADJS
+INDEP_EMIS_COST                                  | !     +                                             INDEP_EMIS_COST
+INITIALIZE_CLASS_SPLITS                          |       LOGICAL*1 INITIALIZE_CLASS_SPLITS
+INIT_ASSET_CLASS_INFO                            |         CALL INIT_ASSET_CLASS_INFO
+INIT_ASSET_CLASS_INFO                            |  SOLD CHECKING ON PARENT BL 2543 INIT_ASSET_CLASS_INFO
+INIT_PLANNING_PEAK                               |     +         PLANNING_PEAK_AFTER_FEEDBACK,INIT_PLANNING_PEAK
+INTEREST_DIVIDENDS_ACCRUDED                      |      +                                 + INTEREST_DIVIDENDS_ACCRUDED
+INTEREST_ON_LONG_TERM_DEBT                       |      +                                INTEREST_ON_LONG_TERM_DEBT
+INTEREST_ON_LONG_TERM_DEBT                       |      +                                    + INTEREST_ON_LONG_TERM_DEBT
+INTEREST_ON_SHORT_TERM_DEBT                      |      +                                    + INTEREST_ON_SHORT_TERM_DEBT
+INTRA_COMPANY_REVENUE                            |     +                                           + INTRA_COMPANY_REVENUE
+INT_CAP                                          |             INT_CAP = DBLE_INT_CAP
+INT_CAP                                          |             INT_PROB = INTERCEPT + SLOPE * INT_CAP
+INVESTMENT_INCOME_RECEIVABLE                     |      +                                   + INVESTMENT_INCOME_RECEIVABLE
+IN_GEN                                           |  INDEPENDENT CONSTRAINED HOURLY GENERATION: IN_GEN
+IREC_OFFSET                                      |                IREC = IREC + IREC_OFFSET
+ISSUE_EXPENSE_BALANCE                            |               ISSUE_EXPENSE_BAL(12,0) = ISSUE_EXPENSE_BALANCE
+ISSUE_EXPENSE_BALANCE                            |               ISSUE_EXPENSE_BAL(ISSMO,I) = ISSUE_EXPENSE_BALANCE
+ISSUE_EXPENSE_BALANCE                            |      +                                          ISSUE_EXPENSE_BALANCE
+IS_A_VALID_RPS_PM                                |         LOGICAL (kind=1) ::   IS_A_VALID_RPS_PM
+I_AVAILABLE_CAPACITY                             |      +                                              I_AVAILABLE_CAPACITY
+J_F                                              |                     L_F = HOUR_IN_DAY + J_F
+KEPCO_WC_CURENT_MAINT_ENRG_COST                  |      +                                  KEPCO_WC_CURENT_MAINT_ENRG_COST
+KEPCO_WC_CURENT_MAINT_ENRG_COST                  |     +                                   KEPCO_WC_CURENT_MAINT_ENRG_COST
+KEPCO_WC_DEF_MAINT_ENRG_AMORT                    |                                                             KEPCO_WC_DEF_MAINT_ENRG_AMORT
+LAGGED_HH_PRICE                                  |       ENTRY GET_LAGGED_HH_PRICE
+LAST_AVAILABLE_MONTHLY_YEAR                      |        INTEGER*2 LAST_AVAILABLE_MONTHLY_YEAR
+LAST_DEMAND_VOLUME                               |                 XD(2) = LAST_DEMAND_VOLUME
+LAST_HOUR_SELL                                   |          MAX_HOURLY_IMPORT,MAX_HOURLY_EXPORT,HOURLY_TRANSACTION,LAST_HOUR_SELL
+LAST_INCOME_LINE                                 |                 DO RI = 1, LAST_INCOME_LINE
+LAST_INCOME_LINE                                 |                  DO DATA_POS = 1, LAST_INCOME_LINE
+LAST_POINT                                       |          DO NEW_POINT = 1, TEMP_LAST_POINT
+LAST_REFERENCE_LOADS                             |       SAVE LAST_REFERENCE_LOADS
+LAST_SEASON                                      |             DO CURRENT_MONTH = 1, LAST_SEASON
+LAST_SEASON                                      |             FISCAL_SEASON = LAST_SEASON
+LAST_SEASON                                      |          DO I = 1, LAST_SEASON
+LAST_SEASON                                      |      +                                              CAPACITY/LAST_SEASON
+LAST_VAR_NUM                                     |  TO ADD VARIABLES TO THE MAKEBIN AND MAKEOVL FUNCTIONS SET LAST_VAR_NUM
+LDE_FILE_DIRECTORY                               |      +              LDE_FILE_DIRECTORY
+LEAP_YEAR_DAY_SHIFT                              |      +                                               LEAP_YEAR_DAY_SHIFT
+LEASE_PRINCIPAL_PAYMENTS                         |      +                     + LEASE_PRINCIPAL_PAYMENTS
+LEASOR_MARK_UP                                   |       SAVE NUC_FUEL_COST,ANNUAL_LEASOR_MARK_UP
+LEASOR_MARK_UP                                   |      +     LEASOR_MARK_UP
+LEASOR_NF_BOOK_DEPRECIATION                      |      +     LEASOR_NF_BOOK_DEPRECIATION
+LENGYR_DA                                        | Lib              J=K+1 ! MOD is never needed here; both cycles start @DAY1<=LENGYR_DA
+LENGYR_DA                                        |        DO IDA=FINA_DA+1,LENGYR_DA
+LF_MAKEBIN                                       |       CALL LF_MAKEBIN
+LG_MAKEBIN                                       |       CALL LG_MAKEBIN
+LH_GLOBAL                                        |  LH_GLOBAL
+LIABS_NEC_BAL_ADJ                                |      +                         + LIABS_NEC_BAL_ADJ
+LINKED_BETTERMENT_OPTION                         |  062006. SPCAPEX ADDITION LINKED_BETTERMENT_OPTION
+LINKED_LEVEL                                     |                DO I = 1, MAX_LINKED_LEVEL
+LIST_OF_COMBINATIONS                             |      +     LIST_OF_COMBINATIONS
+LM_CAPACITY_PLANNING_ADDITIONS                   |      DECLARATION FOR LM_CAPACITY_PLANNING_ADDITIONS
+LOAD_ACCUM                                       |          incorporate days of prescheduled maintenance in LOAD_ACCUM
+LOAD_FACTOR_CALCU                                | !      SUBROUTINE LOAD_FACTOR_CALCU
+LOAD_FILE_CHAR_EXT                               |       CHARACTER*2 LOAD_FILE_CHAR_EXT
+LOAD_HOURS_IN_PERIOD                             |                write(4,*) LOAD_HOURS_IN_PERIOD
+LOAD_HOURS_IN_PERIOD                             |       DO HOUR_IN_THE_SEASON = 1, LOAD_HOURS_IN_PERIOD
+LOAD_POINTS                                      |          LOAD_POINTS = R_LOAD_POINTS
+LOCAL_ACTIVE_TRANSACTIONS                        |             DO TRANS = 1, LOCAL_ACTIVE_TRANSACTIONS
+LOCAL_ACTIVE_TRANSACTIONS                        |       DO TRANS = 1, LOCAL_ACTIVE_TRANSACTIONS
+LOCAL_CHRONO_MW_USAGE                            |          HYBRID_MARKET_MW_USAGE = LOCAL_CHRONO_MW_USAGE
+LOCAL_DEPTH_PRICE                                |                   R_DEPTH_PRICE = LOCAL_DEPTH_PRICE
+LOCAL_DEPTH_PRICE                                |                R_DEPTH_PRICE = LOCAL_DEPTH_PRICE
+LOCAL_DEPTH_PROFIT                               |                   MAX_DEPTH_PROFIT = LOCAL_DEPTH_PROFIT
+LOCAL_DEPTH_QUANTITY                             |                   R_DEPTH_QUANTITY = LOCAL_DEPTH_QUANTITY
+LOCAL_DEPTH_QUANTITY                             |                R_DEPTH_QUANTITY = LOCAL_DEPTH_QUANTITY
+LOCAL_DEPTH_QUANTITY                             |      +                          LOCAL_DEPTH_PRICE * LOCAL_DEPTH_QUANTITY
+LOCAL_HOUR                                       |             WRITE(SCREEN_MESSAGES,'(I4)') LOCAL_HOUR
+LOCAL_HYBRID_PROFIT                              |             R_ANNUAL_HYBRID_PROFIT = LOCAL_HYBRID_PROFIT
+LOCAL_NAME                                       |                   WRITE(4,*) "NAME= ",LOCAL_NAME
+LOCAL_PATH_NUMBER                                |      +                                                 LOCAL_PATH_NUMBER
+LOCAL_PRICE                                      |                   WRITE(4,*) "LOCAL_PRICE",LOCAL_PRICE
+LOCAL_TAXES                                      |      +                                    + LOCAL_TAXES
+LOCAL_WHEEL_MULT                                 |      +                                                  LOCAL_WHEEL_MULT
+LOCAL_X_COEFFICIENT                              |                   WRITE(4,*) "LOCAL_X_COEFFICIENT",LOCAL_X_COEFFICIENT
+LOCATION_OF_BEST_PLAN                            |       SAVE DEPTH_BEST_PLAN_FOUND,LOCATION_OF_BEST_PLAN
+LONG_SHORT                                       |      +                                       DAILY_MW(HOUR) * LONG_SHORT
+LONG_SHORT                                       |      +               LONG_SHORT = -LONG_SHORT
+LONG_TERM_DEBT                                   |      +                                INTEREST_ON_LONG_TERM_DEBT
+LONG_TERM_DEBT                                   |      +                                    + INTEREST_ON_LONG_TERM_DEBT
+LONG_TERM_DEBT_IN_CAP                            |          VARIABLE(365) = NOT_AVAIL ! LONG_TERM_DEBT_IN_CAP
+LONG_TERM_DEBT_ISSUED                            |      +                                   LONG_TERM_DEBT_ISSUED
+LONG_TERM_DEBT_RETIREMENTS                       |     +                                        LONG_TERM_DEBT_RETIREMENTS
+LONG_TERM_DEBT_RETIREMENTS                       |     +                 + LONG_TERM_DEBT_RETIREMENTS
+LONG_TERM_INVESTMENTS                            |     +                                   CHANGE_IN_LONG_TERM_INVESTMENTS
+LOWER_48_BASIN_ADD                               |      +                                                LOWER_48_BASIN_ADD
+LOWEST_COST                                      |         (4) THE NEXT CL UNIT IS LOWEST_COST
+LS_MAKEBIN                                       |       CALL LS_MAKEBIN
+LTD_ADDEM_INTEREST                               |     +                                + LTD_ADDEM_INTEREST
+LTD_BAL                                          |                        LTDRET(I) = LTDRET(I) + LTD_BAL
+LTD_ISSUING_AMORT                                |                  LTD_PREM_AMORT = LTD_PREM_AMORT - LTD_ISSUING_AMORT
+LTD_ISSUING_AMORT                                |            LTD_PREM_AMORT = LTD_PREM_AMORT - LTD_ISSUING_AMORT
+LTD_ISSUING_BAL                                  |      +                                    + LTD_ISSUING_BAL
+LTD_ISSUING_BAL                                  |      +                                                 + LTD_ISSUING_BAL
+LTD_ISSUING_BAL                                  |      +                                                + LTD_ISSUING_BAL
+LTD_ISSUING_BAL                                  |      +                                  + LTD_ISSUING_BAL
+LTD_ISSUING_BAL                                  |      +                                 + LTD_ISSUING_BAL
+LTD_ISSUING_BAL                                  |      +                         + LTD_ISSUING_BAL
+LTD_PS_DEFERRED_TAX_CR                           |      +                          + LTD_PS_DEFERRED_TAX_CR
+LTD_PS_DEFERRED_TAX_CR                           |     +                                     + LTD_PS_DEFERRED_TAX_CR
+LTD_RETIREMENTS                                  |             CURRENT_PORTION_OF_LTD(0) = LTD_RETIREMENTS
+LTD_ROLLOVER                                     |     +                                                  LTD_ROLLOVER
+LTD_ROLLOVER_INTEREST                            |     +                                   - LTD_ROLLOVER_INTEREST
+L_BUYER                                          |  ASSUMES THAT L_SELLER > L_LP AND L_LP > L_BUYER
+L_SELLER                                         |                      L_SELLER = L_SELLER
+MARKET_AREA_ACTIVE                               |  07/24/03. MOVED OUT OF THE CONDITIONAL ON MARKET_AREA_ACTIVE
+MARKET_DURATION_REC                              |       SAVE MARKET_DURATION_NO,MARKET_DURATION_REC
+MARKET_GROUPS                                    |  MARKET_GROUPS
+MARKET_ID                                        |  112820. NEW MARKET_ID
+MARKET_PRICE                                     |      +                                               HOURLY_MARKET_PRICE
+MARKET_PRICE_SCALAR                              |      +                             AREA_PRICE_MULT * MARKET_PRICE_SCALAR
+MARKET_PRICE_SCALAR                              |      +                      SCENARIO_ELECTRIC_MULT * MARKET_PRICE_SCALAR
+MARKET_PRICE_SCALAR                              |      +                                               MARKET_PRICE_SCALAR
+MARKET_TG                                        |             TG = MARKET_TG
+MAXIMUM_CONTRACT_ENERGY                          |      B PLUS CONTRACT_CAPACITY, OR UNTIL MAXIMUM_CONTRACT_ENERGY
+MAXIMUM_ENERGY                                   |          ENRG_ONLY_ENRG_USED = AREA - MAXIMUM_ENERGY
+MAXIMUM_ENERGY                                   |       ENERGY = MAXIMUM_ENERGY
+MAX_ASSET_CLASS_GROUPS                           |                   ASSET_CLASS_GROUPS_INDEX(AC) = MAX_ASSET_CLASS_GROUPS
+MAX_ASSET_CLASS_NUM                              |       SAVE ASSET_CLASS_POINTER,MAX_ASSET_CLASS_NUM
+MAX_ASSET_CLASS_NUM                              |       SAVE ASSET_CLASS_POINTER,NUM_OF_ASSET_CLASSES,MAX_ASSET_CLASS_NUM
+MAX_ASSET_CLASS_NUM                              |       SAVE MAX_ASSET_CLASS_NUM
+MAX_ASSET_CLASS_NUM                              |      +     NUM_OF_ASSET_CLASSES,MAX_ASSET_CLASS_NUM
+MAX_BAD_PLANS                                    |      +     MAX_BAD_PLANS
+MAX_BC_CLASS_ID_NUM                              |             R_MAX_CLASS_NUM = MAX_BC_CLASS_ID_NUM
+MAX_BC_EXPENSE_CLASS_ID_NUM                      |                DO I = 1, MAX_BC_EXPENSE_CLASS_ID_NUM
+MAX_BC_EXPENSE_CLASS_ID_NUM                      |             DO I = 1, MAX_BC_EXPENSE_CLASS_ID_NUM
+MAX_BC_EXPENSE_CLASS_ID_NUM                      |             R_MAX_EXPENSE_CLASS_NUM = MAX_BC_EXPENSE_CLASS_ID_NUM
+MAX_BC_INIT_CLASS_ID_NUM                         |             DO I = 1, MAX_BC_INIT_CLASS_ID_NUM
+MAX_BC_PAYABLES_CLASS_ID_NUM                     |            R_MAX_PAYABLES_CLASS_NUM = MAX_BC_PAYABLES_CLASS_ID_NUM
+MAX_CAP                                          |     +         DBLE_MAX_CAP
+MAX_CAP                                          |       IF(MIN_PROB .NE. MAX_PROB .AND. MIN_CAP .NE. MAX_CAP
+MAX_CLASS_NUM                                    |       SAVE NUM_OF_CLASSES,MAX_CLASS_NUM
+MAX_CLASS_NUM                                    |      +     BASE_CASE_MAX_CLASS_NUM
+MAX_CONSTRAINTS                                  |      +     MAX_CONSTRAINTS
+MAX_CUST_CLASS_GROUPS                            |                DO J = 1,  MAX_CUST_CLASS_GROUPS
+MAX_DATA_BASES                                   |       SAVE_MAX_DATA_BASES = MAX_DATA_BASES
+MAX_EVENTS_IN_MONTH                              |             DO J = 1, MAX_EVENTS_IN_MONTH
+MAX_HYDRO_CLASS_ID_NUM                           |          DO I = 1, MAX_HYDRO_CLASS_ID_NUM
+MAX_HYDRO_CLASS_ID_NUM                           |       SAVE        MAX_HYDRO_CLASS_ID_NUM
+MAX_IN_GAS_LINKS                                 |          MAX_IN_GAS_LINKS = 2 * MAX_IN_GAS_LINKS
+MAX_LINKED_LEVEL                                 |                DO I = 1, MAX_LINKED_LEVEL
+MAX_LOAD_CLASSES                                 |             DO CLASS = 1, MAX_LOAD_CLASSES
+MAX_LOAD_CLASSES                                 | !           DO CLASS = 1, MAX_LOAD_CLASSES
+MAX_NODES                                        |          DO I = 1, R_MAX_NODES
+MAX_OL_CLASS_ID_NUM                              |             R_MAX_CLASS_NUM = MAX_OL_CLASS_ID_NUM
+MAX_OL_EXPENSE_CLASS_ID_NUM                      |             DO I = 1, MAX_OL_EXPENSE_CLASS_ID_NUM
+MAX_OL_EXPENSE_CLASS_ID_NUM                      |             R_MAX_EXPENSE_CLASS_NUM = MAX_OL_EXPENSE_CLASS_ID_NUM
+MAX_OL_EXPENSE_CLASS_ID_NUM                      |          DO I = 1, MAX_OL_EXPENSE_CLASS_ID_NUM
+MAX_OL_INIT_CLASS_ID_NUM                         |             DO I = 1, MAX_OL_INIT_CLASS_ID_NUM
+MAX_OL_PAYABLES_CLASS_ID_NUM                     |            R_MAX_PAYABLES_CLASS_NUM = MAX_OL_PAYABLES_CLASS_ID_NUM
+MAX_OUTAGE_BLOCKS                                |                   DO I = 1, MAX_OUTAGE_BLOCKS
+MAX_OUT_REC                                      |      +                                                       MAX_OUT_REC
+MAX_PATHS                                        |                WRITE(SCREEN_MESSAGES,*) 'INVALID MAX_PATHS',MAX_PATHS
+MAX_POINTS_IN_GS                                 |             DO J = 1, MAX_POINTS_IN_GS
+MAX_PRICE                                        | unused                    SELLER_INTERCEPT = MAX_PRICE
+MAX_PROB                                         |          INT_CAP = MIN_CAP + (MAXIMUM_ENERGY-ENERGY)/MAX_PROB
+MAX_RECOVERY_OF_SU_COST                          |  032115. NEED TO MODIFIY THIS TO IMPROVE MAX_RECOVERY_OF_SU_COST
+MAX_SHORT_TERM_INVESTMENT                        |            LIQUID_INVESTMENTS(2,R_CLASS_POS)=MAX_SHORT_TERM_INVESTMENT
+MAX_TIE_GROUPS                                   |          MAX_TABLE = 3 + MAX_TIE_GROUPS
+MAX_TRANS_LOAD_GROUPS                            |          DO I = 1, R_MAX_TRANS_LOAD_GROUPS
+MAX_TRANS_WITHIN_HOUR                            |          LAST_TWH = MAX_TRANS_WITHIN_HOUR
+MAX_TRANS_WITHIN_HOUR                            |                DO I = K, MAX_TRANS_WITHIN_HOUR
+MAX_WHEELS                                       |          R_WHEELS = MAX_WHEELS
+MAX_YEAR                                         |      DETERMINE LOCAL_MAX_NUM_MARKET_AREAS, MIN_YEAR, MAX_YEAR
+MAX_YEARS                                        |      +          ENDYR,MAX_YEARS
+MAX_YEARS                                        |      +          MAX_YEARS
+MAX_YEARS                                        |       INTEGER (KIND=2) :: MAX_YEARS
+MINIMIZED_OBJECT_FUNCTION                        |      +     MINIMIZED_OBJECT_FUNCTION
+MINIMUM_INTERVAL                                 |             LOCAL_INTERVAL = MINIMUM_INTERVAL
+MIN_CAP                                          |          INTERCEPT = MAX_PROB - SLOPE * DBLE_MIN_CAP
+MIN_CAP                                          |          INT_CAP = MIN_CAP
+MIN_PROB                                         |          INT_PROB = MIN_PROB
+MIN_SPIN_CAP                                     |  10/21/03. SECOND BLOCK TAGGED UNITS WITH AVAILABLE CAPACITY AND MIN_SPIN_CAP
+MIN_ST_INVESTMENTS                               |     +                 + MIN_ST_INVESTMENTS
+MONTHLY_ACTIVE                                   |       SAVE MONTHLY_ACTIVE
+MONTHLY_ACTIVE_ENERGY_PRODUCTS                   |          SAVE_MONTHLY_PRODUCTS_STATUS = MONTHLY_ACTIVE_ENERGY_PRODUCTS
+MONTHLY_ACTIVE_TRANSACTIONS                      |          DO IND = 1, MONTHLY_ACTIVE_TRANSACTIONS
+MONTHLY_ACTIVE_TRANSACTIONS                      |          DO TRANS = 1, MONTHLY_ACTIVE_TRANSACTIONS
+MONTHLY_ADDITIONS                                |                  ADDITIONS_BALANCE=ADDITIONS_BALANCE+MONTHLY_ADDITIONS
+MONTHLY_ECONOMY_REVENUE                          |      +                                         R_MONTHLY_ECONOMY_REVENUE
+MONTHLY_EMISSIONS_COST                           |      +                        + MONTHLY_EMISSIONS_COST
+MONTHLY_FIXED_COST                               |      +                                                MONTHLY_FIXED_COST
+MONTHLY_HH_PRICE                                 |          GET_LAGGED_HH_PRICE = MONTHLY_HH_PRICE
+MONTHLY_INTEREST                                 |               CUSTOMER_DEPOSITS_INTR_PAYABLE = MONTHLY_INTEREST
+MONTHLY_STARTS                                   |               1. MONTHLY_STARTS
+MONTHLY_STOPS                                    |               2. MONTHLY_STOPS
+MONTHLY_TRANSACTION_LOADS                        |  9/28/98. GAT. MOVED THIS CODE FROM MONTHLY_TRANSACTION_LOADS
+MONTHLY_TRANS_LOAD_HYDRO_MW                      |      +     MONTHLY_TRANS_LOAD_HYDRO_MW
+MONTH_CAPACITY                                   |      +            MONTH_CAPACITY
+MONTH_EVENT_COUNTER                              |         UNLIMITED NUMBER OF CHARACTERISTICS IN THE MONTH_EVENT_COUNTER
+MONTH_NAME                                       |      CHARACTER*20 MONTH_NAME
+MONTH_NAMES_LONG                                 |             MONTH_NAMES_LONG = SRP_MONTH_NAMES_LONG
+MONTH_NAMES_SHORT                                |             MONTH_NAMES_SHORT = SRP_MONTH_NAMES_SHORT
+MON_NU_TRANS_UNIT_NO                             |  TODO: Determine whether three writes to MON_NU_TRANS_UNIT_NO
+MORNING_CONSEC                                   |  NEED TO TAKE NEXT_DAY_OPTIONALITY OUT OF POS_CONSEC AND INTO MORNING_CONSEC
+MTG_DEBT_RETIREMENTS                             |     +                 + MTG_DEBT_RETIREMENTS
+MULTI_AREA_NAME                                  |                   TEMP_TWO_DIGIT_NAME = R_MULTI_AREA_NAME
+MULTI_AREA_NAME                                  |  092806. ADDED TEMP_MULTI_AREA_NAME
+MUNI_PF_MAKEBIN                                  |          CALL MUNI_PF_MAKEBIN
+MW_AFTER_MAINTENANCE                             |      +                                              MW_AFTER_MAINTENANCE
+MX_HOURS                                         |  FIND THE CUM_REVENUE/CUM_HOURS INTERVAL THAT CONTAINS MX_HOURS
+NEMS_DEFLATOR                                    |      +                                                  NEMS_DEFLATOR
+NEMS_DEFLATOR                                    |      +                        SUPPLY_BASIS_DIFFERENTIAL(I)/NEMS_DEFLATOR
+NET_DD                                           |      +                    NET_DD
+NET_DD_WRITE_OFF_BALANCE                         |      +                       + NET_DD_WRITE_OFF_BALANCE
+NET_DEFERRED_CASH_ADJ                            |      +                       + NET_DEFERRED_CASH_ADJ
+NET_DEFERRED_CASH_VALUE                          |       REAL*4 NET_DEFERRED_CASH_VALUE
+NET_DERIVATIVES_INCOME                           |      +                        + NET_DERIVATIVES_INCOME
+NET_DERIVATIVES_INCOME                           |      +                       + NET_DERIVATIVES_INCOME
+NET_INCOME                                       |               ESTIMATE NET_INCOME
+NET_OF_TAX_NUCL_FUND_RETURN                      |      +                                     - NET_OF_TAX_NUCL_FUND_RETURN
+NET_OF_TAX_NUCL_FUND_RETURN                      |      +                                  + VARIABLE(235) ! NET_OF_TAX_NUCL_FUND_RETURN
+NET_OF_TAX_NUCL_FUND_RETURN                      |      +                               + VARIABLE(235) ! NET_OF_TAX_NUCL_FUND_RETURN
+NET_OF_TAX_NUCL_FUND_RETURN                      |     +                                       NET_OF_TAX_NUCL_FUND_RETURN
+NET_OF_TAX_NUCL_FUND_RETURN                      |      +                                        + SUBSIDARY_VARIABLES(235) ! NET_OF_TAX_NUCL_FUND_RETURN
+NET_OF_TAX_NUCL_FUND_RETURN                      |      +                                    + SBU_VARIABLES(235) ! NET_OF_TAX_NUCL_FUND_RETURN
+NEW_POINT                                        |                 GLBonPointWithTMC(J,I,TEMP_I1)=NEW_POINT
+NEW_POINT                                        |             DO TEMP_I1=1,3 ! update indexing arrays to NEW_POINT
+NEW_POINT                                        |  NEW_POINT
+NEW_SUB_INVESTMENT                               |     +                     NEW_SUB_INVESTMENT
+NF_BOOK_DEPRECIATION                             |      +     LEASOR_NF_BOOK_DEPRECIATION
+NF_BOOK_DEPRECIATION                             |      +     NF_BOOK_DEPRECIATION
+NF_CAPITIALIZED_INTEREST                         |     +                                 + NF_CAPITIALIZED_INTEREST
+NF_DEFERRED_TAXES_CR                             |      +                              + NF_DEFERRED_TAXES_CR
+NF_DEFERRED_TAXES_CR                             |      +                          + NF_DEFERRED_TAXES_CR
+NF_DEFERRED_TAX_BASIS                            |             DEFERRED_TAX_BASIS=DEFERRED_TAX_BASIS+NF_DEFERRED_TAX_BASIS
+NF_MAKEBIN                                       |       CALL NF_MAKEBIN
+NF_NON_CASH_EXPENSE                              |     +                                           SBU_NF_NON_CASH_EXPENSE
+NF_SL_TAX_DEPRECIATION                           |       SAVE NF_SL_TAX_DEPRECIATION
+NF_TAX_EXPENSE                                   |     +                            VARIABLE_VALUE(227))   ! NF_TAX_EXPENSE
+NON_CASH_ATL_REVENUES                            |                 FUNDS = FUNDS + NUCL_FUND_RETURN ! 6/29/04 ADDED TO NON_CASH_ATL_REVENUES
+NON_INCOME_TAXES_ACCRUAL_ADJ                     |  NON_INCOME_TAXES_ACCRUAL_ADJ
+NOTES_PAYABLE_BALANCE                            |      +                 + NOTES_PAYABLE_BALANCE
+NOT_AVAIL                                        |         VARIABLE_VALUE(261) = NOT_AVAIL
+NOT_AVAIL                                        |         VARIABLE_VALUE(262) = NOT_AVAIL
+NOT_AVAIL                                        |         VARIABLE_VALUE(263) = NOT_AVAIL
+NOT_AVAIL                                        |          R_VARIABLES() = NOT_AVAIL
+NOT_AVAIL                                        |         VARIABLE_VALUE(254) = NOT_AVAIL
+NOT_AVAIL                                        |         VARIABLE_VALUE(255) = NOT_AVAIL
+NOT_AVAIL                                        |         VARIABLE_VALUE(256) = NOT_AVAIL
+NOT_AVAIL                                        |         VARIABLE_VALUE(257) = NOT_AVAIL
+NOT_AVAIL                                        |         VARIABLE_VALUE(258) = NOT_AVAIL
+NOT_AVAIL                                        |         VARIABLE_VALUE(259) = NOT_AVAIL
+NOT_AVAIL                                        |         VARIABLE_VALUE(260) = NOT_AVAIL
+NOT_AVAIL                                        |         VARIABLE_VALUE(264) = NOT_AVAIL
+NO_UNIQUE_INTERVALS                              |                   INTERVAL_INDEX(K) = NO_UNIQUE_INTERVALS
+NO_UNIQUE_INTERVALS                              |             DO K = 1,  NO_UNIQUE_INTERVALS
+NUCL_DECOM_FUND                                  |                         VARIABLE(117) = VARIABLE(117)   ! NUCL_DECOM_FUND
+NUCL_DECOM_FUND                                  |                      VARIABLE(117) = VARIABLE(117)   ! NUCL_DECOM_FUND
+NUCL_DECOM_FUND                                  |                      SBU_VARIABLES(117) = SBU_VARIABLES(117)   ! NUCL_DECOM_FUND
+NUCL_DECOM_FUND                                  |                      SUBSIDARY_VARIABLES(117) = SUBSIDARY_VARIABLES(117)   ! NUCL_DECOM_FUND
+NUCL_FUND_RETURN                                 |            CLASS_BTL_REVENUES = CLASS_BTL_REVENUES + NUCL_FUND_RETURN
+NUCL_FUND_RETURN                                 |      +                                     - NET_OF_TAX_NUCL_FUND_RETURN
+NUCL_FUND_RETURN                                 |      +                                  + VARIABLE(235) ! NET_OF_TAX_NUCL_FUND_RETURN
+NUCL_FUND_RETURN                                 |      +                               + VARIABLE(235) ! NET_OF_TAX_NUCL_FUND_RETURN
+NUCL_FUND_RETURN                                 |     +                                       NET_OF_TAX_NUCL_FUND_RETURN
+NUCL_FUND_RETURN                                 |     +                                  + NUCL_FUND_RETURN
+NUCL_FUND_RETURN                                 |     +                             + NUCL_FUND_RETURN
+NUCL_FUND_RETURN                                 |      +                                        + SUBSIDARY_VARIABLES(235) ! NET_OF_TAX_NUCL_FUND_RETURN
+NUCL_FUND_RETURN                                 |      +                                    + SBU_VARIABLES(235) ! NET_OF_TAX_NUCL_FUND_RETURN
+NUC_DECOMMISSIONING_COST                         |     +                         + NUC_DECOMMISSIONING_COST
+NUC_DECOMMISSIONING_COST                         |     +                      + NUC_DECOMMISSIONING_COST
+NUC_FUEL_BURN_YEARS                              |       SAVE NUC_FUEL_BURN_YEARS
+NUC_FUEL_REPORTING                               |       SAVE NUC_REPORTING_UNIT,NUC_FUEL_REPORTING
+NUC_FUEL_TOTAL_BURN                              |     +                              NUC_FUEL_TOTAL_BURN
+NUC_REPORTING_REC                                |       SAVE NUC_REPORTING_REC
+NUC_UNITS_FOUND                                  |       SAVE NUC_UNITS_FOUND
+NUMBER_OF_ACTIVE_GAS_GROUPS                      |                   ASSET_CLASS_2_GN(AC) = NUMBER_OF_ACTIVE_GAS_GROUPS
+NUMBER_OF_ACTIVE_GROUPS                          |          DO I =1, NUMBER_OF_ACTIVE_GROUPS
+NUMBER_OF_ACTIVE_GROUPS                          |      +                                           NUMBER_OF_ACTIVE_GROUPS
+NUMBER_OF_AREAS                                  |                DO AREA = LAST_AREA+1, NUMBER_OF_AREAS
+NUMBER_OF_BC_EXPENSE_CLASSES                     |             R_NUM_OF_EXPENSE_CLASSES = NUMBER_OF_BC_EXPENSE_CLASSES
+NUMBER_OF_BC_PAYABLES_CLASSES                    |            R_NUM_OF_PAYABLES_CLASSES = NUMBER_OF_BC_PAYABLES_CLASSES
+NUMBER_OF_DATA_FILES                             |                   DO I = 1, NUMBER_OF_DATA_FILES
+NUMBER_OF_DEFINITIONS                            |             READ(10,*) DELETE,NUMBER_OF_DEFINITIONS
+NUMBER_OF_EMISSION_TYPES                         |                   DO EMIS_TYPE = 1, NUMBER_OF_EMISSION_TYPES
+NUMBER_OF_OL_EXPENSE_CLASSES                     |             R_NUM_OF_EXPENSE_CLASSES = NUMBER_OF_OL_EXPENSE_CLASSES
+NUMBER_OF_OL_PAYABLES_CLASSES                    |            R_NUM_OF_PAYABLES_CLASSES = NUMBER_OF_OL_PAYABLES_CLASSES
+NUMBER_OF_WHEELS                                 |      +     NUMBER_OF_WHEELS
+NUM_ACTIVE_VARIABLES                             |          DO I = 0, NUM_ACTIVE_VARIABLES
+NUM_ACTIVE_VARIABLES                             |       SAVE NUM_ACTIVE_VARIABLES
+NUM_OF_BC_ASSET_CLASSES                          |             R_NUM_OF_CLASSES = NUM_OF_BC_ASSET_CLASSES
+NUM_OF_NUC_UNITS                                 |       SAVE NUM_OF_NUC_UNITS
+NUM_OF_OL_ASSET_CLASSES                          |             R_NUM_OF_CLASSES = NUM_OF_OL_ASSET_CLASSES
+NUM_OF_TRANS_CLASSES                             |          DO K = 1, NUM_OF_TRANS_CLASSES
+NUM_OF_TRANS_CLASSES                             |       DO TRANS_GROUP = 1, NUM_OF_TRANS_CLASSES
+NUM_STORAGE_NODES                                |          DO I = 1, NUM_STORAGE_NODES
+NUM_TRANS_GROUPS                                 |             DO J = -1, NUM_TRANS_GROUPS
+NUM_TRANS_GROUPS                                 |          DO I = -1, NUM_TRANS_GROUPS
+NUM_TRANS_GROUPS                                 |          DO J = 1, NUM_TRANS_GROUPS
+N_ACTIVE_UNITS                                   |      DO K2=1,N_ACTIVE_UNITS
+Newgen_capsize                                   |  TODO: Newgen_capsize
+OBJECTIVE_FUNCTION_VALUE                         |          WRITE(6,"('&',F9.1/)")  OBJECTIVE_FUNCTION_VALUE
+OFFSET_MAINTENANCE_ACTIVE                        |       SAVE OFFSET_MAINTENANCE_ACTIVE
+OFF_LOAD_ENRG                                    |             ENERGY = ENERGY - OFF_LOAD_ENRG
+OFF_LOAD_ENRG                                    |             ENRG_ONLY_ENRG_USED = OFF_LOAD_ENRG
+OFF_LOAD_ENRG                                    |      +                                    OFF_LOAD_ENRG
+OIL_HOUR_MULT                                    |  OIL_HOUR_MULT
+OL_ASSET_CLASS_POINTER                           |          ALLOCATE(EXPENSE_OL_ASSET_CLASS_POINTER
+OL_ASSET_CLASS_POINTER                           |     +     PAYABLES_OL_ASSET_CLASS_POINTER
+ON_LINE                                          |     +            ONLINE,ON_LINE
+OPENING_INVESTMENT_BALANCE                       |       SAVE OPENING_INVESTMENT_BALANCE
+OPERATE_ON_VECTOR                                |      +     OPERATE_ON_VECTOR
+OPERATING_ASSETS_YEAR_END                        |  BASE YEAR OPERATING_ASSETS_YEAR_END
+OPERATING_ASSETS_YEAR_START                      |     +                                                          OPERATING_ASSETS_YEAR_START
+OPERATING_METHOD_ROLLUP                          |      +                           + OPERATING_METHOD_ROLLUP
+OPTION_NAME                                      |       CHARACTER*40 OUTPUT_OPTION_NAME
+OPTION_NAME                                      |                  WRITE(6,*) 'Correct account ',OPTION_NAME
+OTHER_INCOME_AFILLIATES                          |      +                                           OTHER_INCOME_AFILLIATES
+OTHER_PAYMENTS_TO_TRUST_FUNDS                    |      +                     + OTHER_PAYMENTS_TO_TRUST_FUNDS
+OTHER_PURCHASE_POWER_EXPENSE                     |      +                                 OTHER_PURCHASE_POWER_EXPENSE
+OTHER_REVENUES_NOT_IN_RATES                      |      +     OTHER_REVENUES_NOT_IN_RATES
+OTHER_TAXES                                      |      +                       + CLASS_ADDENDUM_2_OTHER_TAXES
+OTHER_TAXES                                      |       SAVE BTL_AMORTIZATION_IN_EXPENSES,OTHER_TAXES
+OTHER_TAXES                                      |      +                                    + OTHER_TAXES
+OUTAGE_CAPACITY                                  |                   OUTAGE_CAPACITY = OUTAGE_CAPACITY
+OUTAGE_OWNER                                     |      +            OUTAGE_OWNER
+OUTPUT_OPTION_NAME                               |       CHARACTER*40 OUTPUT_OPTION_NAME
+OUT_REC                                          |      +                                                       MAX_OUT_REC
+PARENT_AVERAGE_EQUITY                            |                  SUBSIDARY_VARIABLES(59) = PARENT_AVERAGE_EQUITY
+PARENT_CLASS_ID_NUM                              |               SUBs_LINKED_TO_PARENT(1) = PARENT_CLASS_ID_NUM
+PARENT_COMMON_STOCK_ISSUED                       |                  SUBSIDARY_VARIABLES(101) = PARENT_COMMON_STOCK_ISSUED
+PARENT_MARKET_TO_BOOK                            |      +                                             PARENT_MARKET_TO_BOOK
+PASS_THROUGH_VALUES                              |       SAVE PASS_THROUGH_VALUES
+PATHS_N_CURVES                                   |  032907. RECALC ON PATHS_N_CURVES
+PATH_FILE_EXISTS                                 |       SAVE PATH_FILE_EXISTS
+PAYABLES_BC_ASSET_CLASS_POINTER                  |            ALLOCATE(PAYABLES_BC_ASSET_CLASS_POINTER
+PAYABLES_OL_ASSET_CLASS_POINTER                  |     +     PAYABLES_OL_ASSET_CLASS_POINTER
+PEAK_AFTER_EL                                    |       MONTHLY_TRANS_PEAK(R_TRANS_GROUP) = PEAK_AFTER_EL
+PENSION_EXPENSE_CASH                             |      +                                - PENSION_EXPENSE_CASH
+PENSION_EXPENSE_CASH                             |      +                     + PENSION_EXPENSE_CASH
+PERIOD_EMERGENCY_ENERGY                          |     +                                           PERIOD_EMERGENCY_ENERGY
+PF_MAKEBIN                                       |          CALL MUNI_PF_MAKEBIN
+PF_MAKEBIN                                       |          CALL PF_MAKEBIN
+PHYS_DERIVATIVES_FIX_EXPENSE                     |      +                                 + PHYS_DERIVATIVES_FIX_EXPENSE
+PHYS_DERIVATIVES_FIX_REVENUE                     |      +                                 + PHYS_DERIVATIVES_FIX_REVENUE
+PHYS_DERIVATIVES_VAR_EXPENSE                     |             TOTAL_DERIVATIVE_EXPENSE = PHYS_DERIVATIVES_VAR_EXPENSE
+PHYS_DERIVATIVES_VAR_REVENUE                     |             TOTAL_DERIVATIVE_REVENUE = PHYS_DERIVATIVES_VAR_REVENUE
+PLANNING_PEAK                                    |      +     COAL_DEMAND_PLANNING_PEAK
+PLANNING_PEAK                                    |      +     TF_PLANNING_PEAK
+PLANNING_PEAK                                    |     +         PLANNING_PEAK_AFTER_FEEDBACK,INIT_PLANNING_PEAK
+PLANNING_RESERVE_MARGIN                          |      +     GET_MRX_PLANNING_RESERVE_MARGIN
+PLANNING_TRIGGER                                 |       ENTRY PLANNING_TRIGGER
+PLANNING_YEAR                                    |             WRITE(6,"('&',I4/)") BASE_YEAR + CURRENT_PLANNING_YEAR
+PLANT_DEMAND_READ_DATA                           |  PLANT_DEMAND_READ_DATA
+PLAN_NUMBER                                      |                WRITE(6,"('&',I4/)") PLAN_NUMBER
+POINTS_IN_CURRENT_CURVE                          |         SAVE POINTS_IN_CURRENT_CURVE
+POINTS_IN_LOAD_CURVE                             |         INTEGER*2 POINTS_IN_CURRENT_CURVE,POINTS_IN_LOAD_CURVE
+POINTS_IN_LOAD_CURVE                             |         SAVE POINTS_IN_LOAD_CURVE
+POS_OF_HOURLY_FILE                               |       SAVE POS_OF_HOURLY_FILE
+POWER_PURCHASED_MWH                              |      +                              POWER_PURCHASED_MWH
+POWER_SOLD_MWH                                   |      +                                                  - POWER_SOLD_MWH
+PREFERRED_DIVIDENDS                              |      +                                    + PREFERRED_DIVIDENDS
+PREFERRED_STOCK_ANNUALIZED_DIVS                  |                                                 PREFERRED_STOCK_ANNUALIZED_DIVS
+PREFERRED_STOCK_IN_CAP                           |          VARIABLE(364) = NOT_AVAIL ! PREFERRED_STOCK_IN_CAP
+PREFERRED_STOCK_RETIREMENTS                      |     +                                       PREFERRED_STOCK_RETIREMENTS
+PREFERRED_STOCK_RETIREMENTS                      |     +                 + PREFERRED_STOCK_RETIREMENTS
+PREM_DISC_BALANCE                                |                      PREMIUM_DISCOUNT_EXP = PREM_DISC_BALANCE
+PREM_DISC_BALANCE                                |                PREMIUM_BAL(ISSMO,I) = PREM_DISC_BALANCE
+PREM_DISC_BALANCE                                |             IF(ISSYR <= BASE_YR) PREMIUM_BAL(12,0) = PREM_DISC_BALANCE
+PRICE_INDEX_ACTIVE                               |      +      PRICE_INDEX_ACTIVE
+PRICE_POINTS_2                                   |  NOTE PRICE_POINTS NOT PRICE_POINTS_2
+PRINCIPAL_PAYMENT                                |      +                                    + PRINCIPAL_PAYMENT
+PRINCIPAL_PAYMENT                                |      +                                    - PRINCIPAL_PAYMENT
+PRINCIPAL_PAYMENT                                |      +                                   + PRINCIPAL_PAYMENT
+PRODUCTION_METHOD_TITLE                          |       ENTRY PRODUCTION_METHOD_TITLE
+PS_DIVIDEND_CASH_PAYMENTS                        |  last variable used 658-659 9/28/98 MSG CASH CS DIVIDENDS,PS_DIVIDEND_CASH_PAYMENTS
+PS_ISSUING_AMORT                                 |                  PS_PREM_AMORT = PS_PREM_AMORT - PS_ISSUING_AMORT
+PS_ISSUING_BAL                                   |      +                                    + PS_ISSUING_BAL
+PS_ISSUING_BAL                                   |      +                                  + PS_ISSUING_BAL
+PS_ISSUING_BAL                                   |      +                                 + PS_ISSUING_BAL
+PS_ISSUING_BAL                                   |      +                         + PS_ISSUING_BAL
+PS_PREM_ISSUE_EXP_AMORT                          |     +                                 + PS_PREM_ISSUE_EXP_AMORT
+PS_ROLLOVER                                      |     +                                                   PS_ROLLOVER
+PS_ROLLOVER_DIVIVEND                             |     +                                    - PS_ROLLOVER_DIVIVEND
+PURCHASE_AREA                                    |             PURCHASE_ENERGY_OUT = PURCHASE_AREA
+PURCHASE_ASSET_ALLOC_VECTOR                      |      +     PURCHASE_ASSET_ALLOC_VECTOR
+PURCHASE_POWER_AMORT                             |      +     PURCHASE_POWER_AMORT
+PURCHASE_POWER_COST                              |      +                              PURCHASE_POWER_COST
+PURCHASE_POWER_EXPENSE                           |                EXP_PURCHASE_POWER_EXPENSE = EXP_PURCHASE_POWER_EXPENSE
+PURCHASE_POWER_EXPENSE                           |      +                                 + AFILIATE_PURCHASE_POWER_EXPENSE
+PURCHASE_POWER_EXPENSE                           |      +                                 OTHER_PURCHASE_POWER_EXPENSE
+PURCHASE_POWER_EXPENSE                           |     +                                        EXP_PURCHASE_POWER_EXPENSE
+PUR_POWER_EXPENSE_PLUS_AMORT                     |          OTHER_PURCHASE_POWER_EXPENSE = PUR_POWER_EXPENSE_PLUS_AMORT
+P_PUR_ENRG                                       |  5/13/92 SURPLUS SALE LOGIC: AFTER CONTRACT LOOP FOR P_PUR_ENRG
+Payroll_Taxes                                    |      +                      + Payroll_Taxes
+RATE_ASSET_CLASS_POINTER                         |      +     RATE_ASSET_CLASS_POINTER
+READ_CLASS_INITIALIZATION_FILE                   |         CALL READ_CLASS_INITIALIZATION_FILE
+READ_EXPENSE_BASE_CASE                           |          CALL READ_EXPENSE_BASE_CASE
+READ_MARKET_DATA                                 |  10/22/98. GAT. MOVED OUT OF READ_MARKET_DATA
+READ_PLANT_CONT_DEMAND_LINK_DTA                  |      +                    READ_PLANT_CONT_DEMAND_LINK_DTA
+REAL4_ONE                                        |  121306. Changed escalated_monthly_value reference to include: REAL4_ONE
+REAL8_ZERO                                       |       HOURLY_HYDRO = REAL8_ZERO
+RECORDS_IN_BASE_FILE                             |         IREC = RECORDS_IN_BASE_FILE
+REGIONAL_AREA_PRICE                              |  090806. ADDED REGIONAL_AREA_PRICE
+REGIONAL_OUTAGES_MAKEBIN                         |       CALL REGIONAL_OUTAGES_MAKEBIN
+REGIONAL_PARAMETER_MAKEBIN                       |       CALL REGIONAL_PARAMETER_MAKEBIN
+REG_ASSESTS_ADJUSTMENT                           |                   CLASS_REGULATORY_ASSETS = REG_ASSESTS_ADJUSTMENT
+REMAINING_                                       |      CONDITION IS REACHED.  THEN, THE RIGHT BOUNDARY, REMAINING_
+REMAINING_ENERGY                                 |      CL_DISPATCH_COST AND REMAINING_ENERGY
+REMOVE_NIGHTIME_SCARCITY                         |       ENTRY REMOVE_NIGHTIME_SCARCITY
+REMOVE_NIGHTIME_SCARCITY_CHR                     |          REMOVE_NIGHTIME_SCARCITY = REMOVE_NIGHTIME_SCARCITY_CHR
+REPORTING_REC                                    |       SAVE NUC_REPORTING_REC
+REPORTING_REC                                    |       SAVE REPORTING_UNIT,REPORTING_REC
+REPORTING_UNIT                                   |      INTEGER*2 EA_REPORTING_UNIT
+REPORTING_VARIABLES                              |       SAVE REPORTING_VARIABLES
+REPORT_ALL_ACCOUNTS                              |     +                                          .OR. REPORT_ALL_ACCOUNTS
+REPORT_FILE_EXISTS                               |      LOGICAL*4 REPORT_FILE_EXISTS
+REPORT_THIS_GROUP                                |      +                                            TEMP_REPORT_THIS_GROUP
+RESERVE_APP_PERCENT                              |      +                                           RESERVE_APP_PERCENT
+RESET_FA_BASE_RECORDS                            |      CALL RESET_FA_BASE_RECORDS
+RESET_FISCAL_MONTHLY_GROUP                       |      ENTRY RESET_FISCAL_MONTHLY_GROUP
+RESET_REGIONAL_OUTAGES_OL                        |          CALL RESET_REGIONAL_OUTAGES_OL
+RESET_REGIONAL_PARAMETER_OL                      |          CALL RESET_REGIONAL_PARAMETER_OL
+RESET_SCENARIO_MAKER_OL                          |       ENTRY RESET_SCENARIO_MAKER_OL
+RESOURCE_ID                                      |       INTEGER*2 EL_RESOURCE_ID
+RESULTS_DIRECTORY                                |             SHB_FILE_DIRECTORY = RESULTS_DIRECTORY
+RESULTS_DIRECTORY                                |          BASE_FILE_DIRECTORY = RESULTS_DIRECTORY
+RETAINED_EARNINGS                                |               SUBSIDARY_VARIABLES(78)=EXCLUDE_SUB_RETAINED_EARNINGS
+RETAINED_EARNINGS                                |     +                                +    EXCLUDE_SUB_RETAINED_EARNINGS
+RETURN_HEAT_BY_FUEL                              |      ENTRY RETURN_HEAT_BY_FUEL
+RETURN_P_SALES_REVENUE_ENERGY                    |      ENTRY RETURN_P_SALES_REVENUE_ENERGY
+RETURN_THE_VALUE_FOR                             |      REAL RETURN_THE_VALUE_FOR
+RETURN_UNIT_EMISSIONS                            |      ENTRY RETURN_UNIT_EMISSIONS
+RETURN_VALUE                                     |         RETURN_THE_VALUE_FOR = RETURN_VALUE
+RM_ASSET_CLASS_ID                                |       INTEGER*2 RM_ASSET_CLASS_ID
+RPS_REVENUE                                      |  021819. TEST ADDING RPS_REVENUE
+RR_COST                                          |      +                               TEMP_BUY_ENERGY*RR_COST
+RR_ENERGY_TO_SELL                                |                      TEMP_SELL_ENERGY = RR_ENERGY_TO_SELL
+RR_OFPEAK_ENRG                                   |                   ENRG2 = ENRG2 + RR_OFPEAK_ENRG
+RR_PEAK_ENRG                                     |                   ENRG2 = ENRG2 - RR_PEAK_ENRG
+RS_MAKEBIN                                       |      CALL RS_MAKEBIN
+RTEMP_FIXED_COST                                 |             ENRGCT = ENRGCT + RTEMP_VARCST + RTEMP_FIXED_COST
+RUB_mult                                         | Dbg +    '=mills RoutQty/RoutUB ',RoutQty(j),RoutUB(j) ! /RUB_mult
+RUN_DATE                                         |          RUN_DATE = STORED_RUN_DATE
+RUN_DATE                                         |       ENTRY RUN_DATE
+RUN_TIME                                         |          RUN_TIME = STORED_RUN_TIME
+RUN_TIME                                         |       ENTRY RUN_TIME
+R_ANNUAL_HYBRID_MARKET_ENERGY                    |          TEST_CAP = R_ANNUAL_HYBRID_MARKET_ENERGY
+R_ASSET_CLASS                                    |            ASSET_CLASS_LIST(1) = R_ASSET_CLASS
+R_ASSET_CLASS                                    |         ASSET_CLASS = R_ASSET_CLASS
+R_ASSET_CLASS                                    |         ASSET_CLASS_LIST(1) = R_ASSET_CLASS
+R_ASSET_CLASS                                    |      ASSET_CLASS = R_ASSET_CLASS
+R_ASSET_CLASS                                    |         ASSET_CLASS_LIST(1) = R_ASSET_CLASS
+R_BASECASE_MARKET_AREA_ID                        |             LOCAL_NAME = R_BASECASE_MARKET_AREA_ID
+R_CAPACITY                                       |         EL_CAPACITY_PLANNING_ADDITIONS = FIRST_YEAR_CAPACITY
+R_CG                                             |                   WRITE(4,*) "CUSTOMER GROUP = ",R_CG
+R_COMPANY                                        |       INTEGER*2 R_COMPANY
+R_CURRENT_LTD_RETIRE                             |                R_CURRENT_LTD_RETIRE = R_CURRENT_LTD_RETIRE
+R_DATA_BASES                                     |             R_DATA_BASES = R_DATA_BASES
+R_DAY                                            |                R_DAY = R_DAY
+R_DEF_TAXES_AMT_CREDITS                          |       DEF_TAXES_AMT_CREDITS = R_DEF_TAXES_AMT_CREDITS
+R_DELIVERY_INDEX_1                               |          DELIVERY_COST_1 = R_DELIVERY_INDEX_1
+R_DELIVERY_INDEX_2                               |          DELIVERY_COST_2 = R_DELIVERY_INDEX_2
+R_DELIVERY_INDEX_3                               |          DELIVERY_COST_3 = R_DELIVERY_INDEX_3
+R_DEPTH_MARGINAL_COST                            |             TEMP_R = R_DEPTH_MARGINAL_COST
+R_DEPTH_MARGINAL_COST                            |      +                                             R_DEPTH_MARGINAL_COST
+R_DEPTH_PRICE                                    |             TEMP_R = R_DEPTH_PRICE
+R_DEPTH_PRICE                                    |      +                     DEPTH_MONTH_PRICE(J,INTERVAL) + R_DEPTH_PRICE
+R_ENRG                                           |  5/13/92 SURPLUS SALE LOGIC: AFTER CONTRACT LOOP FOR P_PUR_ENRG
+R_EP_YEARS                                       |          THIS_YEAR = R_START_YEAR + BASE_YEAR + R_EP_YEARS
+R_EXTRACT_RATE                                   |                R_HARD_EXTRACT_RATE = 1.05*R_EXTRACT_RATE
+R_FEDERAL_TAXES_ACCRUAL_ADJ                      |  R_FEDERAL_TAXES_ACCRUAL_ADJ
+R_FED_TAX_RATE                                   |         PARM_TABLE_FED_TAX_RATE = 35. ! R_FED_TAX_RATE
+R_FUEL_INDEX                                     |             REGIONAL_INDEX = TG*R_FUEL_INDEX
+R_GAS_GROUP                                      |                GET_GAS_NODE_STATE_PROVINCE = R_GAS_GROUP
+R_GET_COALACTION_GROUP_NAME                      |          GET_COALACTION_GROUP_NAME = R_GET_COALACTION_GROUP_NAME
+R_GET_GASACTION_GROUP_NAME                       |          GET_GASACTION_GROUP_NAME = R_GET_GASACTION_GROUP_NAME
+R_GET_HOURLY_PRICE_NAME                          |          GET_HOURLY_PRICE_NAME = R_GET_HOURLY_PRICE_NAME
+R_HOURS_IN_MONTH                                 |      +                                                  R_HOURS_IN_MONTH
+R_HOUR_IN_WEEK                                   |          SAVE_HOUR_IN_WEEK = R_HOUR_IN_WEEK
+R_ISEAS                                          |      +                                              " In month ",R_ISEAS
+R_LOAD_POINTS                                    |          LOAD_POINTS = R_LOAD_POINTS
+R_MAX_HYDRO_LOAD_GROUPS                          |          DO I = 1, R_MAX_HYDRO_LOAD_GROUPS
+R_MAX_NODES                                      |          DO I = 1, R_MAX_NODES
+R_MAX_TRANS_LOAD_GROUPS                          |          DO I = 1, R_MAX_TRANS_LOAD_GROUPS
+R_MONTH                                          |                      R_MONTH = R_MONTH
+R_MONTH                                          |             CAL_DAYS_PER_MONTH = DAYS_PER_MONTH
+R_MONTH                                          |             R_MONTH = R_MONTH
+R_MONTH                                          |                   WRITE(4,*) "HOUR = ",HR,"  MONTH = ",R_MONTH
+R_MONTHLY_ECONOMY_REVENUE                        |      +                                         R_MONTHLY_ECONOMY_REVENUE
+R_MULTI_AREA_NAME                                |                   TEMP_TWO_DIGIT_NAME = R_MULTI_AREA_NAME
+R_Margin_Cost                                    |       do ! search for zero error w.r.t. target R_Margin_Cost
+R_NUMBER_OF_TRANS_GROUPS                         |             DO I = 0, R_NUMBER_OF_TRANS_GROUPS
+R_NUMBER_OF_TRANS_GROUPS                         |             DO TRANS = 1, R_NUMBER_OF_TRANS_GROUPS
+R_NUMBER_OF_TRANS_GROUPS                         |          DO TRANS = 1, R_NUMBER_OF_TRANS_GROUPS
+R_PARENT_CLASS_ID                                |      INTEGER*2 R_PARENT_CLASS_ID
+R_PEAK                                           |          PLANNING_PEAK(R_YR) = R_PEAK
+R_STATE_TAXES_ACCRUAL_ADJ                        |  R_STATE_TAXES_ACCRUAL_ADJ
+R_TEMP_12                                        |          MONTHLY_HH_PRICE(:) = R_TEMP_12
+R_TG                                             |                   WRITE(4,*) "TRANS GROUP = ",R_TG
+R_TRANS                                          |          DO I = 1, 2 ! WILL BE INDEXED FOR R_TRANS
+R_TRANS_GROUP                                    |                   MIN_ITER_B4_LONG_PATH = 3 * UPPER_TRANS_GROUP
+R_TRANS_GROUP                                    |      LOOP OVER MULTIPLE OCCURRENCES FOR A GIVEN R_TRANS_GROUP
+R_VALUE                                          |          PLANNING_TRIGGER = CAPACITY_PLANNING_TRIGGER_VALUE
+R_YEAR                                           |                   WRITE(4,*) "R_YEAR",R_YEAR
+R_YEAR                                           |                DO K = 1, SEASONS_PER_YEAR
+R_YEAR                                           |          K = R_YEAR
+R_YEAR                                           |          YR = R_YEAR
+SAVE_ACTIVE_TRANSACTIONS                         |             DO TRANS = 1, SAVE_ACTIVE_TRANSACTIONS
+SAVE_ACTIVE_TRANSACTIONS                         |          I = SAVE_ACTIVE_TRANSACTIONS
+SAVE_BASE_FILE_NAME                              |          R_TEMP_NAME = SAVE_BASE_FILE_NAME
+SAVE_CLASS_NAME                                  |         SAVE SAVE_CLASS_NAME
+SAVE_EMISSIONS_BY_BLOCK                          |      ENTRY SAVE_EMISSIONS_BY_BLOCK
+SAVE_HOURS_IN_MONTH                              |                WRITE(6,*) TG,LOCAL_HOUR,SAVE_HOURS_IN_MONTH
+SAVE_HrInYr                                      |            ContigHour  (SAVE_HrInYr)=SAVE_HrInYr
+SAVE_OUTAGE_BLOCKS                               |                UNIT_TO_OUTAGE_BLOCK(U,B) = SAVE_OUTAGE_BLOCKS
+SAVE_OUTAGE_BLOCKS                               |             DO OUTAGE_BLOCK = 1, SAVE_OUTAGE_BLOCKS
+SAVE_OUTAGE_BLOCKS                               |          DO OUTAGE_BLOCK = 1, SAVE_OUTAGE_BLOCKS
+SAVE_RR_FILE_USED                                |          R_RR_FILE_USED = SAVE_RR_FILE_USED
+SBU_COMMON_STOCK_BOUGHT                          |     +                 + SBU_COMMON_STOCK_BOUGHT
+SBU_NF_NON_CASH_EXPENSE                          |     +                                           SBU_NF_NON_CASH_EXPENSE
+SCENARIO_MAKER                                   |          SCENARIO_MAKER_FILE = SCENARIO_MAKER
+SCENARIO_MAKER_FILE                              |     ENTRY SCENARIO_MAKER_FILE
+SCENARIO_MAKER_OL                                |       ENTRY RESET_SCENARIO_MAKER_OL
+SEASONS_PER_YEAR                                 |                DO K = 1, SEASONS_PER_YEAR
+SEAS_HOURS                                       |          CT_LOSSES = LOSSES(I) * SALES_MULT * SEAS_HOURS
+SECONDARY_SALES_REVENUES                         |                SECONDARY_SALES_REVENUES = SECONDARY_SALES_REVENUES
+SECONDARY_SALES_REVENUES                         |             SECONDARY_SALES_REVENUES = SECONDARY_SALES_REVENUES
+SECOND_SCR_RATE_CHANGE_MONTH                     |      +            SECOND_SCR_RATE_CHANGE_MONTH
+SECOND_SCR_RATE_CHANGE_YEAR                      |      +          SECOND_SCR_RATE_CHANGE_YEAR
+SEC_29_CREDITS_PASSED_UP                         |                CONSOLID_FED_SEC_29_TAX_CREDITS=SEC_29_CREDITS_PASSED_UP
+SEC_42_CREDITS_PASSED_UP                         |                CONSOLID_FED_SEC_42_TAX_CREDITS=SEC_42_CREDITS_PASSED_UP
+SEGMENT_ENERGY_UNUSED                            |                      TEMP_SELL_ENERGY = SEGMENT_ENERGY_UNUSED
+SELLERS_COST                                     |                            MIN_PRICE = SELLERS_COST
+SET_ALL_OUTPUT_VARIABLES                         |               CALL SET_ALL_OUTPUT_VARIABLES
+SET_ASTOLOL_OL                                   |      CALL SET_ASTOLOL_OL
+SET_FUASTOL_TO_OL                                |       ENTRY SET_FUASTOL_TO_OL
+SET_TAX_ARRAYS                                   |         CALL SET_TAX_ARRAYS
+SHORT_TERM_DEBT                                  |      +                                    + INTEREST_ON_SHORT_TERM_DEBT
+SHORT_TERM_DEBT_IN_CAP                           |          VARIABLE(367) = NOT_AVAIL ! SHORT_TERM_DEBT_IN_CAP
+SHORT_TERM_DEBT_ISSUED                           |                  SBU_STD_ELIM = SBU_STD_ELIM + SHORT_TERM_DEBT_ISSUED
+SHRINKAGE_COST                                   |      +                                                    SHRINKAGE_COST
+SM_UNITS_S5                                      |          R_BASE_FILE_NAMES(5) = SM_UNITS_S5
+SM_UNITS_S6                                      |          R_BASE_FILE_NAMES(6) = SM_UNITS_S6
+SM_UNITS_S7                                      |          R_BASE_FILE_NAMES(7) = SM_UNITS_S7
+SM_UNITS_S8                                      |          R_BASE_FILE_NAMES(8) = SM_UNITS_S8
+SM_UNITS_S9                                      |          R_BASE_FILE_NAMES(9) = SM_UNITS_S9
+SO_END_MODA                                      |      SO_BEG_MODA,SO_END_MODA
+SP_COAL_MODEL                                    |  SP_COAL_MODEL
+SP_GAS_MODEL                                     |  SP_GAS_MODEL
+SRP_MONTH_NAMES_LONG                             |             MONTH_NAMES_LONG = SRP_MONTH_NAMES_LONG
+SRP_MONTH_NAMES_SHORT                            |             MONTH_NAMES_SHORT = SRP_MONTH_NAMES_SHORT
+START_YR                                         |       INTEGER (KIND=2) :: START_YR
+STATE_ID_LOOKUP                                  |  012308. RESET FOR EUROPE. NEED TO EXTEND THE STATE_ID_LOOKUP
+STATE_RPS_EXEMPTION                              |  NOTE: REDEFINE STATE_RPS_EXEMPTION
+STATE_TAXES                                      |               BTL_STATE_TAXES = STATE_TAXES - ATL_STATE_TAXES
+STATE_TAXES                                      |      +                                    + ATL_STATE_TAXES
+STATE_TAX_ON_CAPITAL                             |      +                                    + STATE_TAX_ON_CAPITAL
+STD_INTEREST                                     |                   STD_INTEREST_CASH_PAYMENT = STD_INTEREST
+STD_INTEREST                                     |     +                           REPORTING_VARIABLES(40)   ! STD_INTEREST
+STI_CHANGE_IN_CASH                               |     +                               STI_CHANGE_IN_CASH
+STORAGE_PREMIUM                                  |                R_COST_CURVE = ANNUAL_SUPPLY_PRICE(GS) + STORAGE_PREMIUM
+STORED_RUN_DATE                                  |          RUN_DATE = STORED_RUN_DATE
+STORED_RUN_TIME                                  |          RUN_TIME = STORED_RUN_TIME
+STORE_CS_SCARCITY_INFO                           |       STORE_CS_SCARCITY_INFO
+STORE_GN_SCARCITY_INFO                           |       STORE_GN_SCARCITY_INFO
+STORE_GS_SCARCITY_INFO                           |       STORE_GS_SCARCITY_INFO
+STORM_EXPENSE_CASH                               |      +                     + STORM_EXPENSE_CASH
+STORM_EXPENSE_NON_CASH                           |      +                              - STORM_EXPENSE_NON_CASH
+STRIKE_PRICE                                     |          STRIKE_PRICE
+STRIKE_PRICE                                     |  03/05/04. BIG DEFINITIONAL CHANGE FOR STRIKE_PRICE
+STRIKE_VALUEs                                    |               failing the last condition above allows negative STRIKE_VALUEs
+STUDY_BASE_YEAR                                  |      +                                                  STUDY_BASE_YEAR
+STUDY_BASE_YEAR                                  |      +                                                 STUDY_BASE_YEAR
+STUDY_BASE_YEAR                                  |      +                                              STUDY_BASE_YEAR
+STUDY_BASE_YEAR                                  |      +                                                 STUDY_BASE_YEAR
+ST_JOE_BASE_ELECTRIC_REVENEUS                    |          R_BASE_ELECTRIC_REVENEUS = ST_JOE_BASE_ELECTRIC_REVENEUS
+ST_TG                                            |  ACCUMULATE FOR EACH ST_TG
+SUBSIDIARY_INCOME                                |     +                 + SUBSIDIARY_INCOME
+SUB_STATE_TAX_PAYMENTS_2_PARENT                  |      +                                   + SUB_STATE_TAX_PAYMENTS_2_PARENT
+SUB_STATE_TAX_PAYMENTS_2_PARENT                  |      +                                 + SUB_STATE_TAX_PAYMENTS_2_PARENT
+SUM_QTY_COST                                     |      +            MONTHLY_ENERGY_COST(IND,0) + SUM_QTY_COST
+SUM_QUANTITY                                     |      +                              MONTHLY_ENERGY(IND,0) + SUM_QUANTITY
+SYSTEM_BALANCE                                   |                   SYSTEM_BALANCE = SYSTEM_BALANCE
+SYSTEM_CLASS_NUM                                 |       DO CLASS = 1, SYSTEM_CLASS_NUM
+SYSTEM_LOSSES                                    |      +     CUSTOMER_ALLOCATOR,SYSTEM_LOSSES
+S_DUKE_WHEELING_RATE                             |       SAVE S_DUKE_WHEELING_RATE
+Supply_Cost_By_Year                              |       MineFunc(1:nCCSegs,1,1:nSNod)=Supply_Cost_By_Year
+Supply_Production_By_Year                        |       MineFunc(1:nCCSegs,0,1:nSNod)=Supply_Production_By_Year
+TAKE_BONUS_TAX_DEPRECIATION                      |      +         TAKE_BONUS_TAX_DEPRECIATION
+TAX_TIMING_CLASSIFICATION                        |       SAVE TAX_TIMING_CLASSIFICATION
+TAX_VALUES                                       |       SAVE ACTUAL_TAX_VALUES
+TEMP_ASSET_CLASS_POINTER                         |      +               TEMP_ASSET_CLASS_POINTER
+TEMP_ASSET_CLASS_POINTER                         |     +               TEMP_ASSET_CLASS_POINTER
+TEMP_B                                           |      +            TEMP_U,TEMP_B
+TEMP_BASE_FILE_DEF                               |             BASE_FILE_DEFINITION = TEMP_BASE_FILE_DEF
+TEMP_BUY_ENERGY                                  |      +                                                   TEMP_BUY_ENERGY
+TEMP_CAP                                         |             HUNT FOR THE INTERVAL ABOVE THE THIRD_CAP THAT CONTAINS TEMP_CAP
+TEMP_CAP                                         |  01/29/03. CHANGED LOCAL_QUANTITY(1) TO TEMP_CAP
+TEMP_COST                                        |      +                            TEMP_LOAD*TEMP_COST
+TEMP_CWIP                                        |            CEP(I)   = MIN(CEP(I),1.) * TEMP_CWIP
+TEMP_CWIP                                        |     +                                                         TEMP_CWIP
+TEMP_HOURS                                       |      +                                                        TEMP_HOURS
+TEMP_I                                           | !!!                  WRITE(TEMP_STR,'(I3.3)') TEMP_I
+TEMP_L                                           |                   TEMP_L = TEMP_L
+TEMP_LAST_POINT                                  |          DO NEW_POINT = 1, TEMP_LAST_POINT
+TEMP_LOAD                                        |                   TEMP_LOAD = TEMP_LOAD
+TEMP_LOAD_BEFORE_EL                              |      +                          TEMP_LOAD_AFTER_EL - TEMP_LOAD_BEFORE_EL
+TEMP_MULTI_AREA_NAME                             |  092806. ADDED TEMP_MULTI_AREA_NAME
+TEMP_R                                           |                      GS_SUPPLY_CAPACITY_CURVE(L,I) = TEMP_R
+TEMP_R                                           |                   CS_SUPPLY_COST_CURVE(L,I) = TEMP_R
+TEMP_R                                           |                   JDA_GENERATION(L,1) = JDA_GENERATION(L,1) + TEMP_R
+TEMP_R                                           |                   WRITE(4,*) "LOCAL QUANTITY",TEMP_R
+TEMP_R                                           |                GET_GAS_TRANSPORT_RATE = TEMP_R
+TEMP_R                                           |                TEMP_R = TEMP_R
+TEMP_R                                           |      +                       HOUR_TIE_LOADING(L2,L1) - TEMP_R
+TEMP_R1                                          |          R_MONTHLY_PRICE(iHr)=TEMP_R1
+TEMP_R4                                          |                      LOCAL_EXTRACT_IN_DAY(GS) = TEMP_R4
+TEMP_R4                                          |      +                                                           TEMP_R4
+TEMP_REPORT_THIS_GROUP                           |      +                                            TEMP_REPORT_THIS_GROUP
+TEMP_SELL_ENERGY                                 |      +                                             TEMP_SELL_ENERGY
+TEMP_STORAGE                                     |      +                     DAILY_NODE_VOLUME(L_K) + TEMP_STORAGE
+TEMP_STRIKES                                     |      +                       MONTHLY_STRIKES(IND,MONTH) + TEMP_STRIKES
+TEMP_TL_PEAK                                     |             TOTAL_NON_COIN_PEAK = TOTAL_NON_COIN_PEAK + TEMP_TL_PEAK
+TEMP_TRANSACTION                                 |                            TEMP_SELLER_TRANSACTION = TEMP_TRANSACTION
+TEMP_TRANSACTION                                 |                   BUYERS_LOAD = BUYERS_LOAD + TEMP_TRANSACTION
+TEMP_TRANSACTION                                 |      +              TEST_HOUR_TIE_LIMIT(SELLER,BUYER) - TEMP_TRANSACTION
+TEMP_TRANSPORTED                                 |      +                                              TEMP_TRANSPORTED
+TEMP_TRANSPORTED                                 |     +                                               TEMP_TRANSPORTED
+TEST_DEPTH_2_ADVANCE                             |       LOGICAL*1 TEST_DEPTH_2_ADVANCE
+TEST_DEPTH_2_ADVANCE                             |       ENTRY TEST_DEPTH_2_ADVANCE
+TEST_PEAK                                        |                           CURRENT_CAPACITY_RATIO=TEST_ANN_CAP/TEST_PEAK
+TEST_PEAK                                        |                      CURRENT_CAPACITY_RATIO = TEST_ANN_CAP/TEST_PEAK
+TF_FILE_EXISTS                                   |       TRANS_HYDRO = YES_RUN_MULTIAREA_TRANSACT() .AND. TF_FILE_EXISTS
+TF_OBJT                                          |  TF_OBJT
+TF_PLANNING_PEAK                                 |      +     TF_PLANNING_PEAK
+TF_YEAR                                          |      +                               TF_YEAR
+TG_2_HYDRO_WEEK                                  |       SAVE WEEK_HYDRO_VARIABLE,TG_2_HYDRO_WEEK
+TG_OBJECT                                        |  070606. SUBSTANTIALLY CRIBBED FROM TG_OBJECT
+THIS_WIDTH                                       |              WRITE(4,'("&",2I4)') J1,THIS_WIDTH
+THIS_WIDTH                                       |     +                  OPT_PAIRJ0,OPT_PAIRJ1,DAY2,OPT_NWKSX7,THIS_WIDTH
+TIER_TARGET                                      |      +     TIER_TARGET
+TIE_COST_OF_BEST_MARGIN                          |      +                                          + TIE_COST_OF_BEST_MARGIN
+TIE_POWER                                        |      +                                   HOURLY_MARKET_PRICE * TIE_POWER
+TIME_FRAME                                       |       ENTRY TRANS_TIME_FRAME
+TOP_PROB                                         |                         RIGHT_HEAT(U) = TOP_PROB
+TOP_PROB                                         |                        LEFT_HEAT(U) = TOP_PROB
+TOP_PROB                                         |                        RIGHT_HEAT(U) = TOP_PROB
+TOTAL_ACTIVE_OPTIONS                             |  7/28/00. FROM TOTAL_ALL_OPTIONS TO TOTAL_ACTIVE_OPTIONS
+TOTAL_ALL_COSTS                                  |      +               (TRANS_VAR_EXP+TRANS_FIX_EXP)/1000., ! TOTAL_ALL_COSTS
+TOTAL_AVAILABLE_CONTRACT_ENRG                    |          B = A + TOTAL_AVAILABLE_CONTRACT_ENRG
+TOTAL_AVAILABLE_CONTRACT_ENRG                    |          ENERGY = TOTAL_AVAILABLE_CONTRACT_ENRG
+TOTAL_BASE_RATES_REVENUES                        |      +                                - TOTAL_BASE_RATES_REVENUES
+TOTAL_BASE_RATES_REVENUES                        |            REFERENCE_BASE_REVENUES = TOTAL_BASE_RATES_REVENUES
+TOTAL_CAPITAL                                    |       SAVE TOTAL_CAPITAL
+TOTAL_CAPITAL_SERVICE                            |         R_VARIABLE_VALUE(117) = REPORTING_VARIABLES(301) ! TOTAL_CAPITAL_SERVICE
+TOTAL_EXPENSE_AND_TAXES                          |     +                                           TOTAL_EXPENSE_AND_TAXES
+TOTAL_PARTICIPANT_COSTS                          |                   INC_NON_UTIL_COSTS = TOTAL_PARTICIPANT_COSTS
+TOTAL_PATHS_FOR_SYSTEM                           |                      P = TOTAL_PATHS_FOR_SYSTEM
+TOTAL_PATHS_FOR_SYSTEM                           |             J_PATH(TOTAL_PATHS_FOR_I) = TOTAL_PATHS_FOR_SYSTEM
+TOTAL_PRICE_SCALAR                               |      +                                                TOTAL_PRICE_SCALAR
+TOTAL_PRICE_SCALAR                               |     +                                                TOTAL_PRICE_SCALAR
+TOTAL_R8_ENERGY                                  |       SAVE TOTAL_DEMAND_AFTER_EL,TOTAL_I4_ENERGY,TOTAL_R8_ENERGY
+TOTAL_RETAINED_CAP_BASE                          |      +                                          TOTAL_RETAINED_CAP_BASE
+TOTAL_START_UP_UNITS                             |                DO A = 1, TOTAL_START_UP_UNITS
+TOTAL_SUB_INVESTMENT                             |                   SUBSIDARY_VARIABLES(91) = TOTAL_SUB_INVESTMENT
+TO_AREA                                          |      +     TO_AREA
+TRANSACT_GROUP_RESERVE                           |  09/27/03. MOVED INTO TRANSACT_GROUP_RESERVE
+TRANSACT_MARKET_PURCHASES                        |      +                                      - TRANSACT_MARKET_PURCHASES
+TRANSACT_MARKET_PURCHASES                        |      +                                  - TRANSACT_MARKET_PURCHASES
+TRANSACT_MARKET_REVENUES                         |      +                                 + TRANSACT_MARKET_REVENUES
+TRANS_CLASSES                                    |          DO K = 1, NUM_OF_TRANS_CLASSES
+TRANS_CLASSES                                    |       DO TRANS_GROUP = 1, NUM_OF_TRANS_CLASSES
+TRANS_CLASS_SUM_REC                              |       SAVE TRANS_CLASS_SUM_REC
+TRANS_CLASS_SUM_UNIT                             |       SAVE CL_MONTH_NAME,TRANS_CLASS_SUM_UNIT
+TRANS_CONSTRAINT_DATA                            |      SAVE        TRANS_CONSTRAINT_DATA
+TRANS_EL_CAPACITY                                |                write(4,*) TRANS_EL_CAPACITY
+TRANS_EL_CAPACITY                                |       MONTHLY_TRANS_LOAD_HYDRO_MW(R_TRANS_GROUP) = TRANS_EL_CAPACITY
+TRANS_EL_GENERATION                              |                write(4,*) TRANS_EL_GENERATION
+TRANS_EL_GENERATION                              |       MONTHLY_TRANS_LOAD_HYDRO_MWH(R_TRANS_GROUP) = TRANS_EL_GENERATION
+TRANS_GROUP                                      |                   MIN_ITER_B4_LONG_PATH = 3 * UPPER_TRANS_GROUP
+TRANS_GROUP                                      |      LOOP OVER MULTIPLE OCCURRENCES FOR A GIVEN R_TRANS_GROUP
+TRANS_GROUPS                                     |             DO I = 0, R_NUMBER_OF_TRANS_GROUPS
+TRANS_GROUPS                                     |             DO J = -1, NUM_TRANS_GROUPS
+TRANS_GROUPS                                     |             DO TRANS = 1, R_NUMBER_OF_TRANS_GROUPS
+TRANS_GROUPS                                     |          DO I = -1, NUM_TRANS_GROUPS
+TRANS_GROUPS                                     |          DO J = 1, NUM_TRANS_GROUPS
+TRANS_GROUPS                                     |          DO TRANS = 1, R_NUMBER_OF_TRANS_GROUPS
+TRANS_GROUPS_DATA                                |       SAVE      TRANS_GROUPS_DATA
+TRANS_GROUP_INDEX                                |      +               GET_TRANS_GROUP_INDEX
+TRANS_GROUP_POSITION                             |      +     TRANS_GROUP_POSITION
+TRANS_REPRESENTATION                             |       ENTRY TRANS_REPRESENTATION
+TRANS_REPRESENTATION_CHR                         |          TRANS_REPRESENTATION = TRANS_REPRESENTATION_CHR
+TRANS_TIME_FRAME                                 |       ENTRY TRANS_TIME_FRAME
+TRANS_TIME_FRAME_CHR                             |          TRANS_TIME_FRAME = TRANS_TIME_FRAME_CHR
+TRAN_EXPS                                        |      MAINTAINS LIST OF FROM/TO TRAN_EXPS AS WELL AS MW LOADING ON TRAN_EXPS
+TREND_NORM                                       |      REAL*4 TREND_NORM
+TREND_NORM                                       |     +                                     TREND_NORM
+TRIGGER_METHOD_VALUE                             |         PLANNING_TRIGGER = TRIGGER_METHOD_VALUE
+TWO_AREAS                                        |      ATTEMPT TO ADJUST USING TWO_AREAS
+Trans_Group_Points                               |           Half_Point=Trans_Group_Points
+UNBILLED_REVENUES                                |      +                             - UNBILLED_REVENUES
+UNIT_AVAIL                                       |                            DAILY_MW(HOUR) = TEMP_QUANTITY*UNIT_AVAIL
+UNIT_CAPACITY                                    |             ANNUAL_MD_MAX_PURCHASED_CAP(I) = UNIT_CAPACITY
+UNIT_CAPACITY                                    |      +                                                     UNIT_CAPACITY
+UNIT_CAPACITY_AFTER_LOSSES                       |             ANNUAL_MD_MAX_DISPATCHED_CAP(I)= UNIT_CAPACITY_AFTER_LOSSES
+UNIT_CAPACITY_AFTER_LOSSES                       |      +                                        UNIT_CAPACITY_AFTER_LOSSES
+UNIT_EMISSIONS                                   |      ENTRY RETURN_UNIT_EMISSIONS
+UNIT_EMISSIONS_COST                              |           ! is appropriate. UNIT_EMISSIONS, UNIT_EMISSIONS_COST
+UNIT_NO                                          |  TODO: Determine whether three writes to MON_NU_TRANS_UNIT_NO
+UNIT_UP_LAST_HOUR                                |      +               UNIT_UP_LAST_HOUR
+UNUSED_ENRG                                      |                   RR_OFPEAK_ENRG = + RR_OFPEAK_ENRG + UNUSED_ENRG
+UNUSED_ENRG                                      |       REAL*8 UNUSED_ENRG
+UN_GEN                                           |  UNCONSTRAINED HOURLY GENERATION: UN_GEN
+UPDATE_REFERENCE_LOADS                           |       CALL UPDATE_REFERENCE_LOADS
+UPPER_TRANS_GROUP                                |                   MIN_ITER_B4_LONG_PATH = 3 * UPPER_TRANS_GROUP
+USER_DAY_DATA                                    |       SAVE      USER_DAY_DATA
+USER_DAY_MULT                                    |                TEMP_QUANTITY = TEMP_QUANTITY * USER_DAY_MULT
+USER_DURATION_REC                                |       SAVE USER_DURATION_NO,USER_DURATION_REC
+USE_ALL_FED_TAX_BENEFITS                         |      LOGICAL*1 USE_ALL_FED_TAX_BENEFITS
+USE_RETAIN_POST_RETIREMENT_EARNINGS              |      +                               USE_RETAIN_POST_RETIREMENT_EARNINGS
+USE_SEC_FUEL                                     |  6/15/93. GAT. MOVED ABOVE UNITS LOOP TO TRAP FOR USE_SEC_FUEL
+USE_STATE_TAX_BENEFITS_NOW                       |      LOGICAL*1 USE_STATE_TAX_BENEFITS_NOW
+USE_STATE_TAX_BENEFITS_NOW                       |     +                                        USE_STATE_TAX_BENEFITS_NOW
+VACATION_PAY_CASH                                |      +                              + VACATION_PAY_CASH
+VACATION_PAY_CASH                                |      +                     + VACATION_PAY_CASH
+VACATION_PAY_NON_CASH                            |      +                              - VACATION_PAY_NON_CASH
+VARIABLE_EXPENSE                                 |                VARIABLE_EXPENSE = EXP_FILE_VARIABLE_EXPENSE
+VARIABLE_EXPENSE                                 |      +                          (CLASS_NON_VARIABLE_EXPENSE
+VARIABLE_OM_CHARGE                               |      +                                                VARIABLE_OM_CHARGE
+VARIABLE_OM_CHARGE                               |      +                                              VARIABLE_OM_CHARGE
+VARIABLE_OM_CHARGE                               |      +                     VARIABLE_OM_CHARGE
+VARS_2_PASS                                      |                DO I = 0, VARS_2_PASS
+VAR_NUM                                          |  TO ADD VARIABLES TO THE MAKEBIN AND MAKEOVL FUNCTIONS SET LAST_VAR_NUM
+VECTOR_VALUES                                    |  SAME AS ESCALATED_MONTHLY_VALUE, EXCEPT ACTIVE_VECTOR_VALUES REPLACE WITH VECTOR_VALUES
+VLI_COUNT                                        |                VLI(B_ID,A_ID) = VLI_COUNT
+WD_INDEX                                         |       SAVE WD_LOAD,WD_INDEX
+WHEELING_RATE                                    |       SAVE S_DUKE_WHEELING_RATE
+WIN95_VERSION                                    |       INTEGER ALL_VERSIONS,LF77_VERSION,LF95_VERSION,WIN95_VERSION
+WINDOW_NAME                                      | HARACTER (LEN=256):: WINDOW_NAME
+WORKORDER_NAME                                   |      +                                     TEMP_STR//' '//WORKORDER_NAME
+WRAP_EOY                                         | Lib          IF(DayOnMt(LENGYR_DA-1)>0) J=-1 ! block start on WRAP_EOY
+WRAP_EOY                                         |      LOGICAL*1 WRAP_EOY
+WRITE_DAY_OF_WEEK                                |      +               WRITE_DAY_OF_WEEK
+WRITE_MONTHLY_GROUP_REPORT                       |      SUBROUTINE WRITE_MONTHLY_GROUP_REPORT
+WVPA_EMISSIONS_EXPENSE                           |      +                               + WVPA_EMISSIONS_EXPENSE
+WVPA_MEMBER_COST_OF_POWER                        |      +                                 + WVPA_MEMBER_COST_OF_POWER
+WVPA_MEMBER_COST_OF_POWER                        |      +                            + WVPA_MEMBER_COST_OF_POWER
+WVPA_NON_MEMBER_COST_OF_POWER                    |      +                                 + WVPA_NON_MEMBER_COST_OF_POWER
+WVPA_NON_MEMBER_COST_OF_POWER                    |     +                            + WVPA_NON_MEMBER_COST_OF_POWER
+WVPA_PROPERTY_TAXES_IN_POWER_COSTS               |      +                              + WVPA_PROPERTY_TAXES_IN_POWER_COSTS
+YEARS_TO_RUN                                     |  SEE ABOVE DEFINITION OF YEARS_TO_RUN
+YEAR_END_UNUSED_CREDIT_BAL                       |     +                           + YEAR_END_UNUSED_CREDIT_BAL
+YEAR_LOOP                                        |                WRITE(6,"('&',I4/)") BASE_YEAR + YEAR_LOOP
+YEAR_START                                       |     +                                                          OPERATING_ASSETS_YEAR_START
+ZONE_B_GAMS_ID                                   |      +                     ZONE_B_GAMS_ID
+accumulate_production_costs                      |  TODO: EXTRACT_METHOD accumulate_production_costs
+cal_mar_monthly_energy_routine                   |  USED TO VERIFY GENERATION IN cal_mar_monthly_energy_routine
+capacity_options_fixed_variables                 | 	Changed USE capacity_options_fixed_variables
+capacity_options_fixed_vars                      | 	to      USE capacity_options_fixed_vars
+co2_market_abatement_curves                      |         USE co2_market_abatement_curves
+collect_emissions_costs                          |  TODO: EXTRACT_METHOD collect_emissions_costs
+collect_fuel_data                                |  TODO: EXTRACT_METHOD collect_fuel_data
+collect_group_data                               |  TODO: EXTRACT_METHOD collect_group_data
+collect_nox_data                                 |  TODO: EXTRACT_METHOD collect_nox_data
+conversion_routines                              |       USE conversion_routines
+dr_booth_modules                                 |      use dr_booth_modules
+end_so_date                                      |        WRITE(4,'(4i5)') IPRE_SO,j,beg_so_date,end_so_date
+file_existence                                   |  Last commit as EPA-8977module file_existence
+get_base_file_directory                          | HARACTER(len=256) :: BASE_FILE_DIRECTORY, get_base_file_directory
+get_ilb_filename                                 | HARACTER(len=256) :: directory_for_base_files, WVPA_ACTUAL_PURCHASES, get_ilb_filename
+get_results_dir                                  | HARACTER(len=256) :: GET_RESULTS_DIRECTORY, get_results_dir
+get_scenario_name                                | HARACTER(len=5) :: GET_SCENAME, get_scenario_name
+grx_qual_gen_db                                  |  TODO:  Add qualifying_gen_db, grx_qual_gen_db, save_grx_qual_gen_db
+handle_annual_output_report                      |  TODO: EXTRACT_METHOD handle_annual_output_report
+handle_block_and_summary_report_items            |  TODO: EXTRACT_METHOD handle_block_and_summary_report_items
+handle_capacity_enrg_and_emissions               |  TODO: EXTRACT_METHOD handle_capacity_enrg_and_emissions
+handle_contracts                                 |  TODO: EXTRACT_METHOD handle_contracts
+handle_fiscal_reporting_for_season               |  TODO: EXTRACT_METHOD handle_fiscal_reporting_for_season
+handle_monthly_pw_report                         |  TODO: EXTRACT_METHOD handle_monthly_pw_report
+handle_monthly_trans_report                      |  TODO: EXTRACT_METHOD handle_monthly_trans_report
+handle_transact_fuel_report                      |  TODO: EXTRACT_METHOD handle_transact_fuel_report
+ignore_plant_SO2UB                               | define ignore_plant_SO2UB
+lengyr_da                                        |     +      duration,ida,jda,lengyr_da,ida-lengyr_da,jda-lengyr_da
+max_fuel_types_tfo                               |                         TEMP_I = NO_START_UP_UNITS + max_fuel_types_tfo
+monthly_current_assets                           |   monthly_current_assets
+monthly_customer_deposits                        |  CALCULATE monthly_customer_deposits
+monthly_net_dfrd_debits                          |  monthly_net_dfrd_debits
+monthly_trans_report                             |  TODO: EXTRACT_METHOD handle_monthly_trans_report
+mthy_state_atl_incm_tax_pd                       |  mthy_state_atl_incm_tax_pd
+prepare_annual_output_report                     |  TODO: EXTRACT_METHOD prepare_annual_output_report
+prepare_icap_summary_report                      |  TODO: EXTRACT_METHOD prepare_icap_summary_report
+promote_pm                                       |  todo: promote_pm
+return_value                                     |     IsPmDirect=return_value
+return_value                                     |     IsPmIndirect=return_value
+return_value                                     | logical :: IsPmDirect, return_value
+return_value                                     | logical :: IsPmIndirect, return_value
+save_grx_qual_gen_db                             |  TODO:  Add qualifying_gen_db, grx_qual_gen_db, save_grx_qual_gen_db
+set_emission_report_titles                       |  TODO: EXTRACT_METHOD set_emission_report_titles
+tf_objt2                                         |   19 in clreport; 18 in MARGNOBJ; 24 in tf_objt2
+this_width                                       |        WRITE(4,'(1x,4i4)') i,maint_presch_da,day0-1,this_width
+variable_number_dsex                             |         ! it's unclear whether that's appropriate. Ask Greg. variable_number_dsex
