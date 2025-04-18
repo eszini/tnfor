@@ -1,9 +1,0 @@
-(01) sl sv       forecast.f90                   |allocate(loda(12,31,24))|
-(01) sl sv       forecast.f90                   |allocate( &|
-(01) sl sv       forecast.f90                   |allocate(class_coincident_peak(max_load_classes), &|
-(01) sl sv       forecast.f90                   |allocate(split_day_type_energy(2,12,max_load_classes), &|
-(01) sl sv       forecast.f90                   |allocate(overlay_type(max_load_classes), &|
-(01) sl sv       forecast.f90                   |allocate(asset_class_pointer(max_rate_class_id_num))|
-(01) sl sv       forecast.f90                   |allocate(rate_class_enrg_revenues(0:number_of_rate_classes), &|
-(01) sl sv       forecast.f90                   |allocate(asset_class_list(avail_data_years), &|
-(01) sl sv       forecast.f90                   |allocate(forecast_energy(2,12,max_load_classes), &|
