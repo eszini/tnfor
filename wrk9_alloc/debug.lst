@@ -15,7 +15,7 @@
 0,chg_alloc_g09
 0,chg_alloc_g02
 0,chg_alloc_g05
-0,chg_alloc_g15
+1,chg_alloc_g15
 0,busco_use_miscmod
 0,busco_pri_l
 0,busco_ult_l
@@ -33,3 +33,4 @@
 0,tiene_amper
 0,tiene_end
 0,tiene_use_allocate
+0,quitar_blancos_molestos
