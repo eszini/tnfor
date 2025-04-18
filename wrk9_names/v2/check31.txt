@@ -1,0 +1,12 @@
+/home/123-D56SW/wrk/Midas/ABBICAP/GAS_objt.for:            REVENUE_CLASS_CUST = 'Customer Revenues'
+/home/123-D56SW/wrk/Midas/ABBICAP/coal_obj.for:            REVENUE_CLASS_CUST = 'Customer Revenues'
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmexprevcash.f90:               'Customer Revenues','Customer Revenue')
+/home/123-D56SW/wrk/Midas/ABBICAP/namescom.mon:      integer(kind=2),parameter:: Customer Revenues=10
+/home/123-D56SW/wrk/Midas/ABBICAP/tf_objt.for:            REVENUE_CLASS_CUST = 'Customer Revenues'
+/home/123-D56SW/wrk/Midas/ABBICAP/tf_objt.for:     +                                             Customer Revenues,1)
+/home/123-D56SW/wrk/Midas/ABBICAP/tf_objt.for:                  MONTH_VARS(MO,Customer Revenues) =
+/home/123-D56SW/wrk/Midas/ABBICAP/tf_objt.for:     +               MONTH_VARS(MO,Customer Revenues) + .000001 *
+/home/123-D56SW/wrk/Midas/ABBICAP/tf_objt.for:                     MONTH_VARS(MO,Customer Revenues) =
+/home/123-D56SW/wrk/Midas/ABBICAP/tf_objt.for:     +                MONTH_VARS(MO,Customer Revenues) + .000001 *
+/home/123-D56SW/wrk/Midas/ABBICAP/tf_objt.for:     +                                             Customer Revenues,1)                
+/home/123-D56SW/wrk/Midas/ABBICAP/tf_objt.for:     +                                             Customer Revenues,1)                

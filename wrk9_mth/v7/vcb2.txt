@@ -1,0 +1,49 @@
+|Monthly Lease BTL Amort Expense|
+|Monthly State Tax on Capital|
+|Monthly Federal Tax on Capital|
+|Monthly Income Tax Deferrals Dr|
+|BTL Monthly NoTax Other Income|
+|Monthly Unused Fed Tax Credits|
+|WVPA Member Rates with SDI|
+|WVPA Member Rates without SDI|
+|Cash Prior Years Method Adj|
+|Cash Prior level Method Adj|
+|Cash From Trust Fund Earnings|
+|Monthly Nuclear Fuel Expense|
+|Monthly Lease Interest Expense|
+|Monthly FASB 143 Amort|
+|Monthly Other Debit Amort|
+|BTL Monthly STInvestmet Income|
+|BTL Monthly Income Taxes|
+|Monthly LTD Cash Interest|
+|Monthly LTD Amort Interest|
+|Monthly Regular PS Dividends|
+|Monthly Total Taxes Expense|
+|Monthly INCOME BEFORE INTEREST|
+|Monthly INCOME AFTER INTEREST|
+|Monthly Earnings 2 Common|
+|Monthly Earnings per Share|
+|Quarterly Earnings per Share|
+|Monthly Booked PS Dividends|
+|WVPA Member Energy Sales|
+|WVPA SDI Energy Sales|
+|WVPA Non Member Margin|
+|IMPA Depreciation Add Back|
+|Cash TOTAL OPERATING RECEIPTS|
+|Cash TOTAL EXPENSE PAYMENTS|
+|Cash ATL Lease Cash|
+|Price of Issued Shares|
+|Monthly CIAC Amort|
+|BTL Monthly Expenses|
+|Monthly Extraordinary Items|
+|Monthly Common Dividends|
+|Monthly MIPS Dividends|
+|Monthly Op Income|
+|Monthly Net Income|
+|Monthly RETAINED EARNINGS|
+|Monthly Shares Outstanding|
+|WVPA Member Margin|
+|Monthly Strom Reserve|
+|Monthly Other|
+|Monthly EBITAD|
+|Monthly EBIT|

@@ -1,0 +1,336 @@
+         UNALLOCATED_AMOUNT(BTL Monthly Expenses) =
+     +                     INCOME_VARIABLES(0,BTL Monthly Expenses))
+     +          - INCOME_VARIABLES(MO,BTL Monthly Expenses)
+     +                         INCOME_VARIABLES(MO,BTL Monthly Expenses)
+     +          - INCOME_VARIABLES(MO,BTL Monthly Expenses)              ! 58
+      integer(kind=2),parameter
+         INCOME_VARIABLES(0,BTL Monthly Income Taxes) = ANNUAL_VARS(36)
+               INCOME_VARIABLES(MO,BTL Monthly Income Taxes) =
+            INCOME_VARIABLES(
+                  IF(VARIABLE == BTL Monthly Income Taxes) CYCLE
+               IF(VARIABLE == BTL Monthly Income Taxes) THEN
+                  INCOME_VARIABLES(
+     +          - INCOME_VARIABLES(MO,BTL Monthly Income Taxes)
+     +         + INCOME_VARIABLES(
+      integer(kind=2),parameter
+     +                                   BTL Monthly NoTax Other Income) ! 16
+     +                                  BTL Monthly NoTax Other Income), ! 27
+     +                                  BTL Monthly NoTax Other Income), ! 27
+     +          + INCOME_VARIABLES(MO,BTL Monthly NoTax Other Income)
+      integer(kind=2),parameter
+         INCOME_VARIABLES(
+     +              INCOME_VARIABLES(
+            INCOME_VARIABLES(
+     +              INCOME_VARIABLES(
+     +          + INCOME_VARIABLES(
+     +                                   BTL Monthly STInvestmet Income)
+                  IF(VARIABLE == BTL Monthly STInvestmet Income) CYCLE
+     +           + INCOME_VARIABLES(
+     +                                   BTL Monthly STInvestmet Income)
+     +              INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)
+     +                                   BTL Monthly STInvestmet Income) ! 36
+     +          + INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)
+     +          + INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)
+     +                                   BTL Monthly STInvestmet Income)
+     +          + INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)
+     +             + INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)
+     +                                   BTL Monthly STInvestmet Income)
+     +                                   BTL Monthly STInvestmet Income)
+     +              INCOME_VARIABLES(MO,BTL Monthly STInvestmet Income)
+      integer(kind=2),parameter
+      integer(kind=2),parameter
+      integer(kind=2),parameter
+            CASH_VARIABLES(MO,Cash Prior Years Method Adj) =
+     +                  + CASH_VARIABLES(MO,Cash Prior Years Method Adj)
+                     ELSEIF(VARIABLE==Cash Prior Years Method Adj .AND.
+     +            + CASH_VARIABLES(MO,Cash Prior Years Method Adj)
+      integer(kind=2),parameter
+     +                  + CASH_VARIABLES(MO,Cash Prior level Method Adj)
+                     IF(VARIABLE == Cash Prior level Method Adj .AND.
+     +            + CASH_VARIABLES(MO,Cash Prior level Method Adj)
+      integer(kind=2),parameter
+            CASH_VARIABLES(MO,Cash TOTAL EXPENSE PAYMENTS) =
+     +                CASH_VARIABLES(MO,Cash TOTAL EXPENSE PAYMENTS)
+               CASH_VARIABLES(MO,Cash TOTAL EXPENSE PAYMENTS) =
+     +                CASH_VARIABLES(MO,Cash TOTAL EXPENSE PAYMENTS)
+      integer(kind=2),parameter
+            CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS) =
+            CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS) =
+     +                  CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS)
+     +                CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS) -
+               CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS) =
+     +                CASH_VARIABLES(MO,Cash TOTAL OPERATING RECEIPTS) -
+      integer(kind=2),parameter
+            INCOME_VARIABLES(MO,IMPA Depreciation Add Back) =
+      integer(kind=2),parameter
+            INCOME_VARIABLES(0,Monthly Booked PS Dividends) =
+            INCOME_VARIABLES(0,Monthly Booked PS Dividends) =
+            INCOME_VARIABLES(MO,Monthly Booked PS Dividends) =
+     +               + INCOME_VARIABLES(MO,Monthly Booked PS Dividends)
+     +               + INCOME_VARIABLES(MO,Monthly Booked PS Dividends)
+     +               + INCOME_VARIABLES(MO,Monthly Booked PS Dividends)
+     +                                     Monthly Booked PS Dividends),
+     +                  INCOME_VARIABLES(MO,Monthly Booked PS Dividends)
+     +                                     Monthly Booked PS Dividends),
+     +                  INCOME_VARIABLES(MO,Monthly Booked PS Dividends)
+      integer(kind=2),parameter
+            ELSEIF(VARIABLE == Monthly CIAC Amort) THEN
+     +           - INCOME_VARIABLES(0,Monthly CIAC Amort)
+     +           - INCOME_VARIABLES(MO,Monthly CIAC Amort)
+      integer(kind=2),parameter
+            INCOME_VARIABLES(
+            INCOME_VARIABLES(0,Monthly Common Dividends) =
+               INCOME_VARIABLES(MO,Monthly Common Dividends) =
+     +                   + INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +                     INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +                     INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +                     INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +                     INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +                     INCOME_VARIABLES(MO,Monthly Common Dividends)
+            INCOME_VARIABLES(0,Monthly Common Dividends) = 
+                  INCOME_VARIABLES(MO,Monthly Common Dividends) = 0.
+                     INCOME_VARIABLES(MO,Monthly Common Dividends) =
+     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+                     INCOME_VARIABLES(MO,Monthly Common Dividends) =
+     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+     +                                    QUARTERY_CS_DIVIDENDS(QUARTER) ! INCOME_VARIABLES(0,Monthly Common Dividends)/4.
+                     INCOME_VARIABLES(MO,Monthly Common Dividends) = 0.
+         INCOME_VARIABLES(0,Monthly Common Dividends) =
+     +                SUM(INCOME_VARIABLES(1
+     +          INCOME_VARIABLES(0,Monthly Common Dividends)
+     +                    - INCOME_VARIABLES(0,Monthly Common Dividends)
+     +                   - INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +                  + INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +               + INCOME_VARIABLES(MO,Monthly Common Dividends)
+                  IF(VARIABLE == Monthly Common Dividends) CYCLE
+     +                      INCOME_VARIABLES(
+               IF(VARIABLE == Monthly Common Dividends) THEN
+                  INCOME_VARIABLES(
+     +               + INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +                  INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +                  INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +          - INCOME_VARIABLES(MO,Monthly Common Dividends)
+     +                 - INCOME_VARIABLES(MO,Monthly Common Dividends)
+      integer(kind=2),parameter
+         INCOME_VARIABLES(
+         INCOME_VARIABLES(
+     +                   INCOME_VARIABLES(
+      integer(kind=2),parameter
+      integer(kind=2),parameter
+         INCOME_VARIABLES(
+      integer(kind=2),parameter
+         INCOME_VARIABLES(0,Monthly Earnings 2 Common) = 
+     +          INCOME_VARIABLES(0,Monthly Earnings 2 Common) -
+         INCOME_VARIABLES(0,Monthly Earnings 2 Common) = 
+     +                    INCOME_VARIABLES(0,Monthly Earnings 2 Common)
+            INCOME_VARIABLES(MO,Monthly Earnings 2 Common) = 
+     +                   INCOME_VARIABLES(MO,Monthly Earnings 2 Common)
+                  IF(VARIABLE == Monthly Earnings 2 Common) THEN
+     +                                        Monthly Earnings 2 Common)
+C    +          Monthly Earnings 2 Common,
+     +                   INCOME_VARIABLES(MO,Monthly Earnings 2 Common),
+     +                    INCOME_VARIABLES(MO,Monthly Earnings 2 Common)
+            INCOME_VARIABLES(MO,Monthly Earnings 2 Common) = 
+     +          INCOME_VARIABLES(MO,Monthly Earnings 2 Common)
+            INCOME_VARIABLES(MO,Monthly Earnings 2 Common) = 
+     +                 INCOME_VARIABLES(MO,Monthly Earnings 2 Common)
+      integer(kind=2),parameter
+                INCOME_VARIABLES(MO,Monthly Earnings per Share) =
+     +                   INCOME_VARIABLES(MO,Monthly Earnings per Share)
+      integer(kind=2),parameter
+         INCOME_VARIABLES(0,Monthly Extraordinary Items) =
+            INCOME_VARIABLES(MO,Monthly Extraordinary Items) =
+     +           INCOME_VARIABLES(0,Monthly Extraordinary Items)/12.
+     +             - INCOME_VARIABLES(MO,Monthly Extraordinary Items)
+      integer(kind=2),parameter
+         INCOME_VARIABLES(
+     +           + INCOME_VARIABLES(0,Monthly FASB 143 Amort)
+     +           + INCOME_VARIABLES(MO,Monthly FASB 143 Amort)
+      integer(kind=2),parameter
+         INCOME_VARIABLES(0,Monthly Federal Tax on Capital) =
+            INCOME_VARIABLES(MO,Monthly Federal Tax on Capital) =
+     +            INCOME_VARIABLES(0,Monthly Federal Tax on Capital)/12.
+     +               INCOME_VARIABLES(0,Monthly Federal Tax on Capital),
+     +              + INCOME_VARIABLES(0,Monthly Federal Tax on Capital)
+     +                                   Monthly Federal Tax on Capital)
+     +                                   Monthly Federal Tax on Capital)
+     +                VARIABLE == Monthly Federal Tax on Capital)) CYCLE
+     +                                   Monthly Federal Tax on Capital)
+     +             + INCOME_VARIABLES(MO,Monthly Federal Tax on Capital)
+     +             + INCOME_VARIABLES(MO,Monthly Federal Tax on Capital)
+     +          INCOME_VARIABLES(MO,Monthly Federal Tax on Capital) -
+     +          + INCOME_VARIABLES(MO,Monthly Federal Tax on Capital)
+     +         + INCOME_VARIABLES(
+      integer(kind=2),parameter
+         INCOME_VARIABLES(0,Monthly INCOME AFTER INTEREST) = 
+         INCOME_VARIABLES(0,Monthly INCOME AFTER INTEREST) = 
+            INCOME_VARIABLES(MO,Monthly INCOME AFTER INTEREST) = 
+            INCOME_VARIABLES(MO,Monthly INCOME AFTER INTEREST) = 
+     +             INCOME_VARIABLES(MO,Monthly INCOME AFTER INTEREST)
+      integer(kind=2),parameter
+         INCOME_VARIABLES(MO,Monthly INCOME BEFORE INTEREST) = 
+         INCOME_VARIABLES(0,Monthly INCOME BEFORE INTEREST) = 
+            INCOME_VARIABLES(MO,Monthly INCOME BEFORE INTEREST) = 
+            INCOME_VARIABLES(MO,Monthly INCOME BEFORE INTEREST) = 
+     +          INCOME_VARIABLES(MO,Monthly INCOME BEFORE INTEREST)
+     +         INCOME_VARIABLES(
+      integer(kind=2),parameter
+         INCOME_VARIABLES(0,Monthly Income Tax Deferrals Dr) =
+          INCOME_VARIABLES(1
+     +           INCOME_VARIABLES(0,Monthly Income Tax Deferrals Dr)/12.
+     +               INCOME_VARIABLES(0,Monthly Income Tax Deferrals Dr)
+                  INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Dr) =
+                  INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Dr) =
+     +          INCOME_VARIABLES(0,Monthly Income Tax Deferrals Dr))
+     +                                  Monthly Income Tax Deferrals Dr)
+     +                                  Monthly Income Tax Deferrals Dr)
+     +                                  Monthly Income Tax Deferrals Dr)
+               IF(VARIABLE == Monthly Income Tax Deferrals Dr) THEN
+                  INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Dr) =
+     +                                  Monthly Income Tax Deferrals Dr)
+     +                                  Monthly Income Tax Deferrals Dr)
+     +                                  Monthly Income Tax Deferrals Dr) ! 89
+     +                                 Monthly Income Tax Deferrals Dr), ! 28
+     +                                 Monthly Income Tax Deferrals Dr) 
+     +          + INCOME_VARIABLES(MO,Monthly Income Tax Deferrals Dr)
+     +         + INCOME_VARIABLES(
+      integer(kind=2),parameter
+c                  INCOME_VARIABLES(MO,Monthly LTD Amort Interest) =
+c     +                   INCOME_VARIABLES(MO,Monthly LTD Amort Interest)
+               INCOME_VARIABLES(
+               INCOME_VARIABLES(0,Monthly LTD Amort Interest) =
+     +              SUM(INCOME_VARIABLES(1
+            IF(VARIABLE == Monthly LTD Amort Interest) CYCLE 
+     +                 + INCOME_VARIABLES(MO,Monthly LTD Amort Interest)
+     +               - INCOME_VARIABLES(MO,Monthly LTD Amort Interest),  ! 84
+     +               INCOME_VARIABLES(MO,Monthly LTD Amort Interest),    ! 89
+     +               - INCOME_VARIABLES(MO,Monthly LTD Amort Interest),  ! 84
+     +               INCOME_VARIABLES(MO,Monthly LTD Amort Interest),    ! 89
+     +                   INCOME_VARIABLES(MO,Monthly LTD Amort Interest)
+     +               + INCOME_VARIABLES(MO,Monthly LTD Amort Interest)
+     +               + INCOME_VARIABLES(MO,Monthly LTD Amort Interest)
+     +                 - INCOME_VARIABLES(MO,Monthly LTD Amort Interest)
+      integer(kind=2),parameter
+      integer(kind=2),parameter
+     +               INCOME_VARIABLES(0,Monthly Lease BTL Amort Expense)
+     +            + INCOME_VARIABLES(MO,Monthly Lease BTL Amort Expense)
+     +                                  Monthly Lease BTL Amort Expense)
+      integer(kind=2),parameter
+     +              INCOME_VARIABLES(MO,Monthly Lease Interest Expense), ! 71
+     +              INCOME_VARIABLES(MO,Monthly Lease Interest Expense), ! 71
+     +           + INCOME_VARIABLES(MO,Monthly Lease Interest Expense)
+      integer(kind=2),parameter
+      integer(kind=2),parameter
+         INCOME_VARIABLES(0,Monthly Net Income) = 
+     +          INCOME_VARIABLES(0,Monthly Net Income) -
+         INCOME_VARIABLES(0,Monthly Net Income) = 
+     +                 INCOME_VARIABLES(MO,Monthly Net Income)
+            INCOME_VARIABLES(MO,Monthly Net Income) = 
+     +          INCOME_VARIABLES(MO,Monthly Net Income) -
+     +                       INCOME_VARIABLES(MO,Monthly Net Income) ! 25
+     +               INCOME_VARIABLES(MO,Monthly Net Income),            ! 25
+     +               INCOME_VARIABLES(MO,Monthly Net Income),            ! 25
+            INCOME_VARIABLES(MO,Monthly Net Income) = 
+     +          INCOME_VARIABLES(MO,Monthly Net Income)
+            INCOME_VARIABLES(MO,Monthly Net Income) =
+     +               INCOME_VARIABLES(MO,Monthly Net Income)  
+     +               INCOME_VARIABLES(MO,Monthly Net Income)
+     +            1. + INCOME_VARIABLES(MO,Monthly Net Income)/
+      integer(kind=2),parameter
+     +                  INCOME_VARIABLES(
+            INCOME_VARIABLES(
+     +                                     Monthly Nuclear Fuel Expense)
+     +            - INCOME_VARIABLES(MO,Monthly Nuclear Fuel Expense)
+     +                 INCOME_VARIABLES(MO,Monthly Nuclear Fuel Expense)
+     +           + INCOME_VARIABLES(MO,Monthly Nuclear Fuel Expense)
+      integer(kind=2),parameter
+         INCOME_VARIABLES(0,Monthly Op Income) = 
+         INCOME_VARIABLES(0,Monthly Op Income) = 
+            INCOME_VARIABLES(MO,Monthly Op Income) = 
+            INCOME_VARIABLES(MO,Monthly Op Income) = 
+     +          INCOME_VARIABLES(MO,Monthly Op Income)
+      integer(kind=2),parameter
+               INCOME_VARIABLES(MO,Monthly Other Debit Amort) =
+      integer(kind=2),parameter
+               INCOME_VARIABLES(MO,Monthly Other Debit Amort) =
+     +               INCOME_VARIABLES(MO,Monthly Other),
+     +           + INCOME_VARIABLES(MO,Monthly Other)
+      integer(kind=2),parameter
+      integer(kind=2),parameter
+         INCOME_VARIABLES(0,Monthly RETAINED EARNINGS) = 
+         INCOME_VARIABLES(0,Monthly RETAINED EARNINGS) = 
+             INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS) =
+     +                + INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS)
+     +                  + INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS)
+            INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS) = 
+            INCOME_VARIABLES(MO,Monthly RETAINED EARNINGS) =
+      integer(kind=2),parameter
+      integer(kind=2),parameter
+            INCOME_VARIABLES(0,Monthly Shares Outstanding) =
+               INCOME_VARIABLES(MO,Monthly Shares Outstanding) =
+     +                 INCOME_VARIABLES(MO-1,Monthly Shares Outstanding)
+                  IF(VARIABLE == Monthly Shares Outstanding) CYCLE
+                  IF(VARIABLE == Monthly Shares Outstanding) CYCLE
+            INCOME_VARIABLES(0,Monthly Shares Outstanding) =
+     +          SUM(INCOME_VARIABLES(1
+     +                  INCOME_VARIABLES(MO,Monthly Shares Outstanding))
+     +                  INCOME_VARIABLES(MO,Monthly Shares Outstanding))
+      integer(kind=2),parameter
+         INCOME_VARIABLES(0,Monthly State Tax on Capital) =
+            INCOME_VARIABLES(MO,Monthly State Tax on Capital) =
+     +              INCOME_VARIABLES(0,Monthly State Tax on Capital)/12.
+C Monthly State Tax on Capital
+     +                INCOME_VARIABLES(0,Monthly State Tax on Capital),
+     +              + INCOME_VARIABLES(0,Monthly State Tax on Capital)
+     +               + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
+     +               + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
+     +               (VARIABLE == Monthly State Tax on Capital .OR.
+     +               + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
+     +             + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
+     +               INCOME_VARIABLES(MO,Monthly State Tax on Capital),  ! 88
+     +             + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
+     +               INCOME_VARIABLES(MO,Monthly State Tax on Capital),  ! 88
+     +          INCOME_VARIABLES(MO,Monthly State Tax on Capital) -
+     +              + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
+     +              + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
+     +          + INCOME_VARIABLES(MO,Monthly State Tax on Capital)
+     +         + INCOME_VARIABLES(
+      integer(kind=2),parameter
+               BALANCE_SHEET_VARIABLES(0,Monthly Strom Reserve) =
+               BALANCE_SHEET_VARIABLES(MO,Monthly Strom Reserve) =
+     +               BALANCE_SHEET_VARIABLES(MO-1,Monthly Strom Reserve)
+      integer(kind=2),parameter
+         INCOME_VARIABLES(0,Monthly Total Taxes Expense) =
+     +          INCOME_VARIABLES(0,Monthly Total Taxes Expense)
+            IF(INCOME_VARIABLES(0,Monthly Total Taxes Expense)/=0.) THEN
+     +                   INCOME_VARIABLES(0,Monthly Total Taxes Expense)
+               INCOME_VARIABLES(MO,Monthly Total Taxes Expense) =
+     +                  INCOME_VARIABLES(MO,Monthly Total Taxes Expense)
+     +                + INCOME_VARIABLES(MO,Monthly Total Taxes Expense)
+         INCOME_VARIABLES(0,Monthly Total Taxes Expense) =
+     +                 - INCOME_VARIABLES(0,Monthly Total Taxes Expense)
+     +                - INCOME_VARIABLES(MO,Monthly Total Taxes Expense)
+            INCOME_VARIABLES(0,Monthly Total Taxes Expense) =
+               INCOME_VARIABLES(MO,Monthly Total Taxes Expense) =
+            INCOME_VARIABLES(MO,Monthly Total Taxes Expense) =
+     +          - INCOME_VARIABLES(MO,Monthly Total Taxes Expense)
+      integer(kind=2),parameter
+     +             + INCOME_VARIABLES(MO,Monthly Unused Fed Tax Credits)
+      integer(kind=2),parameter
+                  CASH_VARIABLES(MO,Price of Issued Shares) =
+                  CASH_VARIABLES(MO,Price of Issued Shares) = 0.
+      integer(kind=2),parameter
+                  INCOME_VARIABLES(MO,Quarterly Earnings per Share) =
+                     INCOME_VARIABLES(MO,Quarterly Earnings per Share) =
+     +                         Quarterly Earnings per Share) = NOT_AVAIL
+      integer(kind=2),parameter
+      integer(kind=2),parameter
+      integer(kind=2),parameter
+      integer(kind=2),parameter
+      integer(kind=2),parameter
+      integer(kind=2),parameter
+      integer(kind=2),parameter

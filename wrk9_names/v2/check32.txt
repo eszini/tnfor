@@ -1,0 +1,46 @@
+/home/123-D56SW/wrk/Midas/ABBICAP/GAS_objt.for:     +          RETURN_MONTH_CUSTOMER_REVENUES,
+/home/123-D56SW/wrk/Midas/ABBICAP/coal_obj.for:     +          RETURN_MONTH_CUSTOMER_REVENUES,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmexprevcash.f90:                RETURN_MONTH_CUSTOMER_REVENUES
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmexprevcash.f90:         VOID_INT2 = RETURN_MONTH_CUSTOMER_REVENUES(R_CLASS,MONTH_VARS)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmexprevcash.f90:            VOID_INT2=RETURN_MONTH_CUSTOMER_REVENUES(R_CLASS,MONTH_VARS)
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +     RATE_CLASS_CUSTOMER_REVENUES,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                     RATE_CLASS_CUSTOMER_REVENUES,
+/home/123-D56SW/wrk/Midas/ABBICAP/msgmmsb6.for:     +                                      RATE_CLASS_CUSTOMER_REVENUES
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +     R_MARKET_CUSTOMER_REVENUES,
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +                                    R_MARKET_CUSTOMER_REVENUES,
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:         R_MARKET_CUSTOMER_REVENUES = MARKET_CUSTOMER_BASE_REVENUES
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +     R_CLASS_CUSTOMER_REVENUES(MAX_LOAD_CLASSES)
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +     CLASS_CUSTOMER_REVENUES(:)
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +               CLASS_CUSTOMER_REVENUES,
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +     R_RATE_CLASS_CUSTOMER_REVENUES,
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +     RATE_CLASS_CUSTOMER_REVENUES(:),
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +               RATE_CLASS_CUSTOMER_REVENUES,
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +              CLASS_CUSTOMER_REVENUES,
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +         CLASS_CUSTOMER_REVENUES(MAX_LOAD_CLASSES),
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:            CLASS_CUSTOMER_REVENUES(CLASS) = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:               CLASS_CUSTOMER_REVENUES(CLASS) = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:               CLASS_CUSTOMER_REVENUES(CLASS) =
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:           CLASS_CUSTOMER_REVENUES(CLASS) = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:            CLASS_CUSTOMER_REVENUES(CLASS) = CLASS_CUSTOMER_RATE(CLASS)*
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +                                RATE_CLASS_CUSTOMER_REVENUES,
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +           RATE_CLASS_CUSTOMER_REVENUES(0:NUMBER_OF_RATE_CLASSES),
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:         RATE_CLASS_CUSTOMER_REVENUES = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:               RATE_CLASS_CUSTOMER_REVENUES(ASSET_CLASS) =
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +                       RATE_CLASS_CUSTOMER_REVENUES(ASSET_CLASS) +
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +                  ASSET_ALLOCATOR * CLASS_CUSTOMER_REVENUES(CLASS)
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:               RATE_CLASS_CUSTOMER_REVENUES(0) =
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +                         RATE_CLASS_CUSTOMER_REVENUES(0) +
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +                         RATE_CLASS_CUSTOMER_REVENUES(ASSET_CLASS)
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +                                 R_RATE_CLASS_CUSTOMER_REVENUES,
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:         R_RATE_CLASS_CUSTOMER_REVENUES = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:               R_RATE_CLASS_CUSTOMER_REVENUES =
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +                         RATE_CLASS_CUSTOMER_REVENUES(ASSET_CLASS)
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +                                  + CLASS_CUSTOMER_REVENUES(CLASS)
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +                                 R_CLASS_CUSTOMER_REVENUES)
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:               R_CLASS_CUSTOMER_REVENUES(CLASS) =
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +                                    CLASS_CUSTOMER_REVENUES(CLASS)
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:            R_CLASS_CUSTOMER_REVENUES(1:MAX_LOAD_CLASSES) = 0.
+/home/123-D56SW/wrk/Midas/ABBICAP/newfred2.for:     +                            CLASS_CUSTOMER_REVENUES(CLASS)
+/home/123-D56SW/wrk/Midas/ABBICAP/tf_objt.for:     +          RETURN_MONTH_CUSTOMER_REVENUES,
+/home/123-D56SW/wrk/Midas/ABBICAP/tf_objt.for:      ENTRY RETURN_MONTH_CUSTOMER_REVENUES(R_CLASS,MONTH_VARS)
+/home/123-D56SW/wrk/Midas/ABBICAP/tf_objt.for:         RETURN_MONTH_CUSTOMER_REVENUES = 1

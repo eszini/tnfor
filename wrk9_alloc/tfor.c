@@ -975,9 +975,6 @@ int	hacer_lugar_itz(int,int,int,int,int);
 int	hacer_lugar_mf(int,int);
 
 
-#if 0
-int	compare_vcb(char *, char *);
-#endif
 
 
 int	es_integer2(char *s);		/* ojo. especificas de pro_exec5 */
@@ -998,7 +995,7 @@ void v_pars(char *, int *, int *, char **, int *, DictionaryEntry *, int );
 
 void v_pars(char *, int *, int *, char **);
 
-#define	MAX_VARS	100
+#define	MAX_VARS	200
 
 int	n_var;
 int	v_size[MAX_VARS];
@@ -6002,7 +5999,7 @@ mprintf (z,"e_name: b3 |%s| \n",b3);
 	if (f_sig)
 	{
 		for (i=0; i<l2; i++)
-			if (!strncmp(b3+i,"for",3))
+			if (!strncmp(b3+i,".for",4))
 			{
 				strcpy(b2,"for");
 				f_sig = 0;
@@ -6012,7 +6009,7 @@ mprintf (z,"e_name: b3 |%s| \n",b3);
 	if (f_sig)
 	{
 		for (i=0; i<l2; i++)
-			if (!strncmp(b3+i,"f90",3))
+			if (!strncmp(b3+i,".f90",4))
 			{
 				strcpy(b2,"f90");
 				f_sig = 0;
@@ -7653,6 +7650,7 @@ int	pro_exec9()
 		printf ("\n");
 	}
 
+#if 0
 	if (gp_fverbose("d3"))
 	{
 		printf ("\n\nComprobando integridad de la carga: \n\n");
@@ -7665,6 +7663,8 @@ int	pro_exec9()
 
 		printf ("\n");
 	}
+#endif
+	printf ("\n");
 
 
 	/*
@@ -9141,9 +9141,12 @@ printf ("Trabajo con ... (%s) |%s|\n",exte_name,prog_name);
 		}
 
 
+printf ("PPP: [%02d] |%-30.30s|  (%4d)  |%s| \n",f_proceso,prog_name,i,(*fnp[i]).l);
+
 		/* solo proceso lineas que no son comentario ni vacias */
 		if (f_proceso)
 		{	
+
 
 			if (tiene_allocate(b1))
 			{
@@ -10117,6 +10120,11 @@ mprintf (z,"..... \n\n");
 		i++;
 		if (i >= qf_src)
 			f_keep = 0;
+
+printf ("RRR i       %4d \n",i);
+printf ("RRR qf_src  %4d \n",qf_src);
+printf ("RRR f_keep  %4d \n",f_keep);
+
 
 	} /* for .. while ... principal */
 
@@ -14771,7 +14779,8 @@ mprintf (z,"b0[p2]      |%c| \n",b0[p2]);
 		      b0[i] == '=' ||						/* por lineas con el bendito stat= */
                       b0[i] == ' ' || b0[i] == ':' || b0[i] == ',' || 
                       b0[i] == '-' || b0[i] == '(' || b0[i] == ')' || 
-	              b0[i] == '_' || b0[i] == '*' || b0[i] == '+'    )  )
+	              b0[i] == '_' || b0[i] == '*' || b0[i] == '+' ||
+		      b0[i] == '%'   )  )					/* por la bendita estructura   texto%texto ... */
 		{
 			st3 = 0;
 		}
@@ -16358,9 +16367,12 @@ int	f_act;
 
 		grabar_mapa(3,0,(*fnp[pri_l]).l,0,lne(pri_l),0);
 
+printf ("XXX 1 \n");
+
 		if (!busco_ult_l(pf,uf,nf_alloc,&ult_l,mod_type))
 			error(9002);
 
+printf ("XXX 2 \n");
 		grabar_mapa(4,0,(*fnp[ult_l]).l,0,0,lne(ult_l));
 
 
@@ -17587,7 +17599,8 @@ mprintf (z,"b0[p2]      |%c| \n",b0[p2]);
 		      b0[i] == '=' ||						/* por lineas con el bendito stat= */
 		      b0[i] == ' ' || b0[i] == ':' || b0[i] == ',' || 
 		      b0[i] == '-' || b0[i] == '(' || b0[i] == ')' || 
-		      b0[i] == '_' || b0[i] == '*' || b0[i] == '+'    )  )
+		      b0[i] == '_' || b0[i] == '*' || b0[i] == '+' ||
+		      b0[i] == '%'   )  )					/* por el bendito  calificador%variable ... */
 		{
 			st3 = 0;
 		}
@@ -23988,8 +24001,11 @@ int	*l1;
 				}
 
 
+#if 0
 			if (gp_fverbose("d3"))
 				printf ("%3d |%s|\n",ql,b1);
+#endif
+
 
 			q1[ql] = (fnptr  ) malloc (sizeof (node));
 			if ( q1[ql] == NULL)
@@ -33564,770 +33580,12 @@ int main()
 
 
 
-#if 0
 
-		if (f4)
-		{	
-			f5 = 1;
-			while ( f5 )
-			{
-				strcpy(b2,b1);
 
-				f5 = 0;
-				if (p1 = es_cadena_int_src3(b1,&m1))
-				{	f5 = 1;
 
-					memset(d1,0,MAXR);
-					strncpy(d1,b1+p1,m1);
-
-		printf ("XXX1: |%s| \n",d1);
-						memset (d2,0,MAXR);
-						strcpy(d2,d1);
-						d2[0] = '=';
-						d2[m1-1] = ' ';
-						sq_vinit_simple++;
-		printf ("XXX2: |%s| \n",d2);
-
-					strncpy(b1+p1,d2,m1);
-
-					sprintf (b4,"f:%-30.30s l:%06d c:%4d|%s| \n", (*tb[fl_n]).n,lne(j),sq_vinit_simple,b2 );
-					sprintf (b5,"f:%-30.30s l:%06d c:%4d|%s| \n", (*tb[fl_n]).n,lne(j),sq_vinit_simple,b1 );
-					
-					if (gp_fverbose("d3"))
-					{
-						printf ("TTTX\n");
-						printf ("TTTX%s",b4);
-						printf ("TTTX%s",b5);
-						printf ("TTTX\n");
-					}
-
-#if 1
-					if (fflog)
-					{
-						fprintf (hflog,"%s",b4);
-						fprintf (hflog,"%s",b5);
-						fprintf (hflog,"%s","\n");
-					}
-#endif
-				}
-			}
-		}	
-
-
-#endif
-
-
-
-
-
-
-#if 0
-
-#include <stdio.h>
-#include <ctype.h>
-#include <stdlib.h>
-#include <string.h>
-
-int rutina_v(char string[1024], int *nro, char **vector_ptr) {
-    int count = 0;
-    char *token;
-    char *separators = " _"; // Separadores permitidos (blancos y '_')
-    char *temp_string = strdup(string); // Hacemos una copia temporal del string
-    char *str_ptr = temp_string;
-
-    // Tokenizamos el string de acuerdo con los separadores
-    while ((token = strtok(str_ptr, separators)) != NULL) {
-	str_ptr = NULL; // Para continuar tokenizando el string original
-	
-	// Validamos la sintaxis de str1 (debe comenzar con una letra y puede seguir con letras o números)
-	if (isalpha(token[0])) {
-	    int valid = 1;
-	    for (int i = 1; i < strlen(token); i++) {
-		if (!isalnum(token[i])) {
-		    valid = 0; // No válido si tiene algo que no sea letra o número
-		    break;
-		}
-	    }
-	    if (valid) {
-		vector_ptr[count] = token; // Guardamos el puntero al token válido
-		count++;
-	    }
-	}
-    }
-
-    // Liberamos la memoria temporal
-    free(temp_string);
-    
-    *nro = count; // Guardamos el número de variables encontradas
-    return 0;     // Retornamos 0 en caso de éxito
-}
-
-int main() {
-    char string[1024] = "str1 str2 str2_str2";
-    int nro = 0;
-    char *vector[100]; // Vector para almacenar punteros a las variables encontradas
-
-    // Llamada a la rutina
-    rutina_v(string, &nro, vector);
-
-    // Imprimimos los resultados
-    printf("Variables encontradas: %d\n", nro);
-    for (int i = 0; i < nro; i++) {
-	printf("Variable %d: %s\n", i + 1, vector[i]);
-    }
-
-    return 0;
-}
-
-
-
-#endif
-
-
-#if 0
-
-#include <stdio.h>
-#include <stdlib.h>
-
-// Comparison function for qsort
-int compare(const void* a, const void* b) {
-    return (*(int*)a - *(int*)b);
-}
-
-// Function to remove duplicates from a sorted array
-int remove_duplicates(int* arr, int n) {
-    if (n == 0) return 0;
-
-    int j = 0;
-    for (int i = 1; i < n; i++) {
-	if (arr[j] != arr[i]) {
-	    j++;
-	    arr[j] = arr[i];
-	}
-    }
-    return j + 1; // New length of array without duplicates
-}
-
-int main() {
-    int arr[] = {4, 2, 9, 2, 4, 6, 9, 3};
-    int n = sizeof(arr) / sizeof(arr[0]);
-
-    // Sorting the array
-    qsort(arr, n, sizeof(int), compare);
-
-    // Removing duplicates
-    int new_len = remove_duplicates(arr, n);
-
-    // Printing the unique elements
-    printf("Unique elements: ");
-    for (int i = 0; i < new_len; i++) {
-	printf("%d ", arr[i]);
-    }
-    printf("\n");
-
-    return 0;
-}
-
-
-#endif
-
-
-
-#if 0
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#define MAX_LINES 100
-#define MAX_LENGTH 1024
-
-char vcb_o[MAX_LINES][MAX_LENGTH];
-int qv1;
-
-int compare(const void *a, const void *b) {
-    return strcmp(*(const char **)a, *(const char **)b);
-}
-
-int main() {
-    // Suponiendo que qv1 ya está definido y vcb_o está lleno con datos
-
-    // Crear un array de punteros a las cadenas en vcb_o
-    char *pointers[MAX_LINES];
-    for (int i = 0; i < qv1; ++i) {
-	pointers[i] = vcb_o[i];
-    }
-
-    // Ordenar el array de punteros
-    qsort(pointers, qv1, sizeof(char *), compare);
-
-    // Copiar las cadenas ordenadas de vuelta a vcb_o
-    for (int i = 0; i < qv1; ++i) {
-	strcpy(vcb_o[i], pointers[i]);
-    }
-
-    // Imprimir el resultado
-    for (int i = 0; i < qv1; ++i) {
-	printf("%s\n", vcb_o[i]);
-    }
-
-    return 0;
-}
-
-
-#endif
-
-
-
-
-#if 0
-
-int compare_vcb(const void *a, const void *b) 
-{
-    // Hacemos un cast a char * porque sabemos que estamos ordenando strings
-    const char *ia = *(const char **)a;
-    const char *ib = *(const char **)b;
-
-    return strcmp(ia, ib);
-}
-
-#endif
-
-
-
-
-
-
-
-
-#if 0
-/*
- * esto vino de copilot !
- * lo hizo mejor que chatgpt
- *
- * encuentra variables en fuentes fortran exactas !! 
- * ademas de otras cosas, pero bueh va ...
- *
- */
-
-
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-
-#define MAX_VARS 100
-#define MAX_LINE_LENGTH 1024
-
-typedef struct 
-{
-    char word[50];
-    int value;
-}   DictionaryEntry;
-
-
-void rutina_x(char *, int *, int *, char **, int *, DictionaryEntry *, int );
-
-
-
-#if 0
-void rutina_x(char s[MAX_LINE_LENGHT], int *n, int vn[MAX_VARS], char *vp[MAX_VARS], int k[MAX_VARS], DictionaryEntry dict[], int dict_size) 
-#endif
-
-void rutina_x(s, n, vn, vp, k, dict, dict_size) 
-char	*s;
-int	*n;
-int	*vn;
-char	**vp;
-int	*k;
-DictionaryEntry *dict;
-int	dict_size;
-{
-
-    int start;
-    int len;
-    int i;
-
-    // Inicializar el contador de variables
-    *n = 0; 
-    len = strlen(s);
-    i = 0;
-
-    while (i < len) 
-    {
-	// Saltar espacios en blanco
-	while (i < len && isspace(s[i])) 
-	{
-	    i++;
-	}
-
-	// Si encontramos una letra, es el inicio de una variable
-	if (i < len && isalpha(s[i])) 
-	{
-	    // Guardar el puntero al inicio de la variable
-	    vp[*n] = &s[i]; 
-	    start = i;
-
-	    // Avanzar hasta el final de la variable
-	    while (i < len && (isalnum(s[i]) || s[i] == ' ' || s[i] == '_')) 
-	    {
-		i++;
-	    }
-
-	    // Guardar la longitud de la variable
-	    vn[*n] = i - start; 
-
-	    // Verificar si la variable está en el diccionario
-	    k[*n] = 0; 
-	    for (int j = 0; j < dict_size; j++) 
-	    {
-		if (strncmp(vp[*n], dict[j].word, vn[*n]) == 0 && strlen(dict[j].word) == vn[*n]) 
-		{
-		    k[*n] = dict[j].value;
-		    break;
-		}
-	    }
-
-	    (*n)++; 
-	} 
-	else 
-	{
-	    i++;
-	}
-    }
-}
-
-int main(int argc, char *argv[]) 
-{
-    DictionaryEntry dict[MAX_VARS];
-
-    if (argc != 4) 
-    {
-	fprintf(stderr, "Uso: %s <archivo_diccionario> <archivo_entrada> <archivo_salida>\n", argv[0]);
-	return 1;
-    }
-
-    // Leer el archivo de diccionario
-    FILE *file_dict = fopen(argv[1], "r");
-    if (file_dict == NULL) 
-    {
-	perror("Error al abrir el archivo de diccionario");
-	return 1;
-    }
-
-    int dict_size = 0;
-    while (fscanf(file_dict, "%49[^,],%d\n", dict[dict_size].word, &dict[dict_size].value) == 2) {
-	dict_size++;
-    }
-    fclose(file_dict);
-
-    // Leer el archivo de entrada
-    FILE *file_in = fopen(argv[2], "r");
-    if (file_in == NULL) {
-	perror("Error al abrir el archivo de entrada");
-	return 1;
-    }
-
-    // Abrir el archivo de salida
-    FILE *file_out = fopen(argv[3], "w");
-    if (file_out == NULL) {
-	perror("Error al abrir el archivo de salida");
-	fclose(file_in);
-	return 1;
-    }
-
-    char line[MAX_LINE_LENGTH];
-    while (fgets(line, sizeof(line), file_in)) {
-	int n;
-	int vn[MAX_VARS];
-	char *vp[MAX_VARS];
-	int k[MAX_VARS];
-
-	// Escribir la línea original en el archivo de salida
-	fprintf(file_out, "Línea: %s", line);
-
-	// Procesar la línea para encontrar variables
-	rutina_x(line, &n, vn, vp, k, dict, dict_size);
-
-	// Escribir las variables encontradas en el archivo de salida
-	for (int i = 0; i < n; i++) {
-	    fprintf(file_out, "%d (%2d) %d |%-*.*s|\n", i + 1, vn[i], k[i], vn[i], vn[i], vp[i]);
-	}
-	fprintf(file_out, "\n");
-    }
-
-    fclose(file_in);
-    fclose(file_out);
-    return 0;
-}
-
-
-
-
-
-
-
-
-
-#endif
-
-
-
-
-#if 0
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-
-#define MAXB 1024
-
-// Función auxiliar para convertir una cadena a minúsculas
-char *pasar_a_minusc(char *s) {
-    char *ptr = s;
-    while (*ptr) {
-	*ptr = tolower(*ptr);
-	ptr++;
-    }
-    return s;
-}
-
-// Subrutina que verifica la combinación "= nombre_valido ( ... )"
-int tiene_funcion_a_entry(char *linea, char *nombre_valido) {
-    char b1[MAXB];
-    strcpy(b1, pasar_a_minusc(linea));
-
-    char *ptr = b1;
-    char *igual_pos = strstr(ptr, "=");
-
-    if (!igual_pos)
-	return 0; // No hay "=" en la línea
-
-    ptr = igual_pos + 1; // Avanzar después de "="
-    while (*ptr && isspace(*ptr)) // Saltar espacios en blanco
-	ptr++;
-
-    // Verificar si el nombre válido coincide después de "="
-    if (strncmp(ptr, nombre_valido, strlen(nombre_valido)) == 0) {
-	ptr += strlen(nombre_valido);
-	while (*ptr && isspace(*ptr)) // Saltar espacios en blanco después de nombre_valido
-	    ptr++;
-
-	if (*ptr == '(') {
-	    ptr++; // Avanzar después de "("
-	    while (*ptr && *ptr != ')') // Ignorar contenido entre paréntesis
-		ptr++;
-
-	    if (*ptr == ')') // Verificar si hay un paréntesis de cierre
-		return 1;
-	}
-    }
-
-    return 0; // No se cumple la condición
-}
-
-#endif
-
-
-#if 0
-
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-
-#define MAXB 1024
-
-// Función auxiliar para convertir una cadena a minúsculas
-char *pasar_a_minusc(char *s) {
-    char *ptr = s;
-    while (*ptr) {
-	*ptr = tolower(*ptr);
-	ptr++;
-    }
-    return s;
-}
-
-// Subrutina que verifica si "nombre_valido" es invocada como función en la línea
-int tiene_funcion_a_entry(char *linea, char *nombre_valido) {
-    char b1[MAXB];
-    strcpy(b1, pasar_a_minusc(linea));
-
-    char *ptr = b1;
-    char *func_pos = strstr(ptr, nombre_valido);
-
-    while (func_pos) {
-	ptr = func_pos + strlen(nombre_valido);
-
-	// Saltar espacios en blanco después del nombre de la función
-	while (*ptr && isspace(*ptr))
-	    ptr++;
-
-	// Verificar si está seguido de un paréntesis de apertura
-	if (*ptr == '(') {
-	    ptr++; // Avanzar después de "("
-	    int paren_count = 1;
-
-	    // Verificar el contenido dentro de los paréntesis
-	    while (*ptr && paren_count > 0) {
-		if (*ptr == '(')
-		    paren_count++;
-		else if (*ptr == ')')
-		    paren_count--;
-		ptr++;
-	    }
-
-	    // Si se cerraron todos los paréntesis, es una invocación válida
-	    if (paren_count == 0)
-		return 1;
-	}
-
-	// Buscar la próxima aparición de nombre_valido
-	func_pos = strstr(func_pos + 1, nombre_valido);
-    }
-
-    return 0; // No se encontró una invocación válida
-}
-
-
-
-
-#endif
-
-#if 0
-
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-
-#define TRUE 1
-#define FALSE 0
-
-int tiene_entry(const char *linea) {
-    const char *ptr = linea;
-
-    // Convertir a minúsculas para hacer la búsqueda insensible a mayúsculas
-    char buffer[1024];
-    int i = 0;
-    while (*ptr && i < 1023) {
-	buffer[i++] = tolower(*ptr++);
-    }
-    buffer[i] = '\0';
-
-    // Buscar "entry" en el string
-    char *entry_pos = strstr(buffer, "entry");
-    while (entry_pos) {
-	// Verificar que "entry" no esté precedido ni seguido por caracteres alfanuméricos o guiones bajos
-	if ((entry_pos == buffer || !isalnum(*(entry_pos - 1)) && *(entry_pos - 1) != '_') &&
-	    isspace(*(entry_pos + 5))) {
-	    return TRUE;
-	}
-	// Buscar la próxima aparición de "entry"
-	entry_pos = strstr(entry_pos + 1, "entry");
-    }
-
-    return FALSE;
-}
-
-
-
-#endif
 
 
 /* end of file  */
-/* end of file  */
-/* end of file  */
-
-
-
-/* exploration */
-
-
-
-#if 0
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-
-#define MAX_VARS 100
-#define MAX_LEN 256
-#endif
-
-int	extract_allocated_variables(const char *input, char output[MAX_VARS][MAX_LEN], char var_names[MAX_VARS][MAX_LEN], int *count) 
-{
-    const char *start = strstr(input, "allocate(");
-    if (!start) return;
-    
-    start += 9; // Avanzar después de "allocate("
-    const char *end = strrchr(start, ')');
-    if (!end) return;
-    
-    char buffer[MAX_LEN];
-    strncpy(buffer, start, end - start);
-    buffer[end - start] = '\0';
-    
-    const char *ptr = buffer;
-    *count = 0;
-    
-    while (*ptr) {
-        while (isspace(*ptr) || *ptr == ',') ptr++; // Saltar espacios y comas
-        
-        const char *var_start = ptr;
-        char *paren_start = strchr(var_start, '(');
-        if (!paren_start) break;
-        
-        // Buscar el cierre de los paréntesis correctamente
-        char *paren_end = paren_start;
-        int paren_count = 1;
-        while (*paren_end && paren_count > 0) {
-            paren_end++;
-            if (*paren_end == '(') paren_count++;
-            if (*paren_end == ')') paren_count--;
-        }
-        if (paren_count != 0) break; // Manejo de errores en paréntesis
-        
-        int len = paren_end - var_start + 1;
-        strncpy(output[*count], var_start, len);
-        output[*count][len] = '\0';
-        
-        int var_name_len = paren_start - var_start;
-        strncpy(var_names[*count], var_start, var_name_len);
-        var_names[*count][var_name_len] = '\0';
-        
-        (*count)++;
-        
-        ptr = paren_end + 1;
-        while (*ptr == ',' || isspace(*ptr)) ptr++; // Moverse a la siguiente variable
-    }
-}
-
-void process_allocate_and_write(FILE *input_file, FILE *output_file) {
-    char line[MAX_LEN];
-    int alloc_counter = 1;
-    
-    while (fgets(line, MAX_LEN, input_file)) {
-        char vars[MAX_VARS][MAX_LEN];
-        char var_names[MAX_VARS][MAX_LEN];
-        int count = 0;
-        
-        extract_allocated_variables(line, vars, var_names, &count);
-        
-        for (int i = 0; i < count; i++) {
-            fprintf(output_file, "allocate(%s)\n", vars[i]);
-            fprintf(output_file, "call check_alloc(\"%04d\", \"%s\", stv_er)\n", alloc_counter, var_names[i]);
-            alloc_counter++;
-        }
-    }
-}
-
-#if 0
-int main() {
-    FILE *input_file = fopen("allocate_input.txt", "r");
-    FILE *output_file = fopen("allocate_output.txt", "w");
-    
-    if (!input_file || !output_file) {
-        perror("Error al abrir el archivo");
-        return 1;
-    }
-    
-    process_allocate_and_write(input_file, output_file);
-    
-    fclose(input_file);
-    fclose(output_file);
-    
-    return 0;
-}
-
-#endif
-
-
-#if 0
-
-#include <stdio.h>
-#include <stdarg.h>
-
-void mi_printf(const char *first_arg, const char *fmt, ...) 
-{
-    va_list args;
-    va_start(args, fmt);
-
-    // Imprimir el primer argumento con el formato fijo
-    printf("%-20.20s ", first_arg);
-
-    // Imprimir el resto de los argumentos usando `vprintf`
-    vprintf(fmt, args);
-
-    va_end(args);
-}
-
-int main() 
-{
-    mi_printf("DEBUG", "Value1: %5d, Text: %-10s, Float: %.2f\n", 42, "Test", 3.1415);
-    mi_printf("INFO", "Aligned: %-10d | Precision: %.3f | String: %s\n", 7, 1.234567, "Hello");
-
-    return 0;
-}
-
-
-
-#endif
-
-
-
-
-
-
-
-#if 0
-
-
-#include <stdio.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <errno.h>
-
-int main() 
-{
-    const char *dir = "./repo4";
-    struct stat st = {0};
-
-    // Verificar si el directorio ya existe
-    if (stat(dir, &st) == 0 && S_ISDIR(st.st_mode)) 
-    {
-        printf("El directorio ya existe: %s\n", dir);
-    } 
-    else 
-    {
-        char respuesta;
-        printf("El directorio %s no existe. ¿Deseas crearlo? (s/n): ", dir);
-        scanf(" %c", &respuesta);
-
-        if (respuesta == 's' || respuesta == 'S') 
-        {
-            // Intentar crear el directorio
-            if (mkdir(dir, 0755) == 0) 
-            {
-                printf("Directorio creado: %s\n", dir);
-            } 
-            else 
-            {
-                perror("Error al crear el directorio");
-            }
-        } 
-        else 
-        {
-            printf("No se creó el directorio.\n");
-        }
-    }
-
-    return 0;
-}
-
-
-
-
-
-#endif
-
 /* end of file  */
 /* end of file  */
 /* end of file  */

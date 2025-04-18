@@ -1,0 +1,65 @@
+msgmmout.for                  ,|BTL Monthly Expenses|
+msgmmout.for                  ,|BTL Monthly Income Taxes|
+msgmmout.for                  ,|BTL Monthly NoTax Other Income|
+msgmmout.for                  ,|BTL Monthly STInvestmet Income|
+msgmmout.for                  ,|Cash Prior Years Method Adj|
+msgmmout.for                  ,|Cash Prior level Method Adj|
+msgmmout.for                  ,|Cash TOTAL EXPENSE PAYMENTS|
+msgmmout.for                  ,|Cash TOTAL OPERATING RECEIPTS|
+msgmmout.for                  ,|IMPA Depreciation Add Back|
+msgmmout.for                  ,|Monthly Booked PS Dividends|
+msgmmout.for                  ,|Monthly CIAC Amort|
+msgmmout.for                  ,|Monthly Earnings 2 Common|
+msgmmout.for                  ,|Monthly Earnings per Share|
+msgmmout.for                  ,|Monthly Extraordinary Items|
+msgmmout.for                  ,|Monthly FASB 143 Amort|
+msgmmout.for                  ,|Monthly Federal Tax on Capital|
+msgmmout.for                  ,|Monthly INCOME BEFORE INTEREST|
+msgmmout.for                  ,|Monthly Income Tax Deferrals Dr|
+msgmmout.for                  ,|Monthly LTD Amort Interest|
+msgmmout.for                  ,|Monthly Lease BTL Amort Expense|
+msgmmout.for                  ,|Monthly Lease Interest Expense|
+msgmmout.for                  ,|Monthly Nuclear Fuel Expense|
+msgmmout.for                  ,|Monthly Op Income|
+msgmmout.for                  ,|Monthly Other Debit Amort|
+msgmmout.for                  ,|Monthly Shares Outstanding|
+msgmmout.for                  ,|Monthly State Tax on Capital|
+msgmmout.for                  ,|Monthly Strom Reserve|
+msgmmout.for                  ,|Monthly Total Taxes Expense|
+msgmmout.for                  ,|Monthly Unused Fed Tax Credits|
+msgmmout.for                  ,|Price of Issued Shares|
+mthnmcom.mon                  ,|BTL Monthly Expenses|
+mthnmcom.mon                  ,|BTL Monthly Income Taxes|
+mthnmcom.mon                  ,|BTL Monthly NoTax Other Income|
+mthnmcom.mon                  ,|BTL Monthly STInvestmet Income|
+mthnmcom.mon                  ,|Cash ATL Lease Cash|
+mthnmcom.mon                  ,|Cash From Trust Fund Earnings|
+mthnmcom.mon                  ,|Cash Prior Years Method Adj|
+mthnmcom.mon                  ,|Cash Prior level Method Adj|
+mthnmcom.mon                  ,|Cash TOTAL EXPENSE PAYMENTS|
+mthnmcom.mon                  ,|Cash TOTAL OPERATING RECEIPTS|
+mthnmcom.mon                  ,|IMPA Depreciation Add Back|
+mthnmcom.mon                  ,|Monthly Booked PS Dividends|
+mthnmcom.mon                  ,|Monthly CIAC Amort|
+mthnmcom.mon                  ,|Monthly Earnings 2 Common|
+mthnmcom.mon                  ,|Monthly Earnings per Share|
+mthnmcom.mon                  ,|Monthly Extraordinary Items|
+mthnmcom.mon                  ,|Monthly FASB 143 Amort|
+mthnmcom.mon                  ,|Monthly Federal Tax on Capital|
+mthnmcom.mon                  ,|Monthly INCOME BEFORE INTEREST|
+mthnmcom.mon                  ,|Monthly Income Tax Deferrals Dr|
+mthnmcom.mon                  ,|Monthly LTD Amort Interest|
+mthnmcom.mon                  ,|Monthly LTD Cash Interest|
+mthnmcom.mon                  ,|Monthly Lease BTL Amort Expense|
+mthnmcom.mon                  ,|Monthly Lease Interest Expense|
+mthnmcom.mon                  ,|Monthly MIPS Dividends|
+mthnmcom.mon                  ,|Monthly Nuclear Fuel Expense|
+mthnmcom.mon                  ,|Monthly Op Income|
+mthnmcom.mon                  ,|Monthly Other Debit Amort|
+mthnmcom.mon                  ,|Monthly Regular PS Dividends|
+mthnmcom.mon                  ,|Monthly Shares Outstanding|
+mthnmcom.mon                  ,|Monthly State Tax on Capital|
+mthnmcom.mon                  ,|Monthly Strom Reserve|
+mthnmcom.mon                  ,|Monthly Total Taxes Expense|
+mthnmcom.mon                  ,|Monthly Unused Fed Tax Credits|
+mthnmcom.mon                  ,|Price of Issued Shares|

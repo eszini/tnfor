@@ -1,0 +1,85 @@
+|BTL Monthly Interest Income|
+|BTL Monthly Total Other Income|
+|Cash Interest on Notes Payable|
+|IPL Monthy OandM Expenses|
+|IPL Operating Income|
+|IPL Total Operating Expenses|
+|Monthly Dividend 70 Earnings|
+|Monthly ITC Amortization|
+|Monthly Investment Earnings|
+|Monthly Issue Expense Amorts|
+|Monthly LTD Booked Interest|
+|Monthly LTD Premium Amort|
+|Monthly LTD Total Interest|
+|Monthly Operating Revenue Tax|
+|Monthly PS Amort Dividends|
+|Monthly PS Premium Amort|
+|Monthly Property Taxes|
+|Monthly Total PS Dividends|
+#|Monthly Lease BTL Amort Expense|
+#|Monthly State Tax on Capital|
+#|Monthly Federal Tax on Capital|
+#|Monthly Income Tax Deferrals Dr|
+#|BTL Monthly Total Other Income|
+#|BTL Monthly NoTax Other Income|
+#|Monthly Unused Fed Tax Credits|
+#|WVPA Member Rates with SDI|
+#|WVPA Member Rates without SDI|
+#|Cash Prior Years Method Adj|
+#|Cash Prior level Method Adj|
+#|Cash From Trust Fund Earnings|
+#|Cash Interest on Notes Payable|
+#|Monthly Nuclear Fuel Expense|
+#|Monthly Lease Interest Expense|
+#|Monthly FASB 143 Amort|
+#|Monthly Other Debit Amort|
+#|Monthly Operating Revenue Tax|
+#|BTL Monthly Interest Income|
+#|Monthly Dividend 70 Earnings|
+#|BTL Monthly STInvestmet Income|
+#|BTL Monthly Income Taxes|
+#|Monthly LTD Total Interest|
+#|Monthly LTD Cash Interest|
+#|Monthly LTD Amort Interest|
+#|Monthly Total PS Dividends|
+#|Monthly Regular PS Dividends|
+#|Monthly Total Taxes Expense|
+#|Monthly INCOME BEFORE INTEREST|
+#|Monthly INCOME AFTER INTEREST|
+#|Monthly Earnings 2 Common|
+#|Monthly Earnings per Share|
+#|Quarterly Earnings per Share|
+#|Monthly LTD Booked Interest|
+#|Monthly Booked PS Dividends|
+#|Monthly Issue Expense Amorts|
+#|Monthly PS Amort Dividends|
+#|Monthly LTD Premium Amort|
+#|Monthly PS Premium Amort|
+#|IPL Monthy OandM Expenses|
+#|IPL Total Operating Expenses|
+#|WVPA Member Energy Sales|
+#|WVPA SDI Energy Sales|
+#|WVPA Non Member Margin|
+#|IMPA Depreciation Add Back|
+#|Cash TOTAL OPERATING RECEIPTS|
+#|Cash TOTAL EXPENSE PAYMENTS|
+#|Cash ATL Lease Cash|
+#|Price of Issued Shares|
+#|Monthly CIAC Amort|
+#|Monthly Property Taxes|
+#|Monthly ITC Amortization|
+#|Monthly Investment Earnings|
+#|BTL Monthly Expenses|
+#|Monthly Extraordinary Items|
+#|Monthly Common Dividends|
+#|Monthly MIPS Dividends|
+#|Monthly Op Income|
+#|Monthly Net Income|
+#|Monthly RETAINED EARNINGS|
+#|Monthly Shares Outstanding|
+#|IPL Operating Income|
+#|WVPA Member Margin|
+#|Monthly Strom Reserve|
+#|Monthly Other|
+#|Monthly EBITAD|
+#|Monthly EBIT|
